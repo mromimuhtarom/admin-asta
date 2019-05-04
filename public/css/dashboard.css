@@ -1,0 +1,342 @@
+.title-table {
+    border: 2px solid #4b4b4b;
+    border-radius: 5px;
+    padding-left: 1%;
+    display:table;
+}
+.font-title {
+    width: 100%;
+    height: 100%;
+    color: #4d4f5c;
+    font-size: 20px;
+    font-weight: bold;
+}
+.content-table {
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
+}
+.size1 {
+    width: 75%;
+    height: 8%;
+}
+.size2 {
+    width: 75%;
+    height: 60%;
+}
+.size3 {
+    height: 8%;
+    width: 100%;
+}
+.size4 {
+    width: 100%;
+    height: 80%;
+}
+.size5 {
+    width: 100%;
+    height: 10%;
+}
+.size6 {
+    width: 100%;
+    height: 90%;    
+}
+.size7 {
+    width: 100%;
+    height: 5%;
+}
+.size8 {
+    width: 100%;
+    height: 5%;    
+}
+.size9 {
+    width: 100%;
+    height: 4%;
+}
+/* .size7 {
+    width: 
+} */
+/* .total-player {
+    float: left;
+    border: 5px solid black;
+    height: 100%;;
+    width: 100%;
+}
+.total-device {
+    float: left;
+} */
+
+/* .title-table2 {
+    border: 2px solid #4b4b4b;
+    border-radius: 5px;
+    padding-left:3%;
+    display:table;
+}
+.content-table2 {
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
+    padding-left:3%;
+} */
+.tab {
+    padding-top: 3%;
+    padding-bottom: 5%;
+}
+#svg {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-top: 10%;
+}
+#svg-description {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-top: 15%;
+}
+#svg-description-text {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-top: 15%;
+}
+.color-description {
+    margin-top: 80%;
+}
+
+.text-description {
+    margin-top: 5%;
+    width: 100%;
+    font-weight: bold;
+    /* border: 1px solid black; */
+    text-align: left;
+}
+.total-player{
+    height: 100%;
+    width: 35%;
+    /* border: 2px solid black; */
+    float: left;
+    margin-right: 2%;
+}
+.total-played {
+    width: 50%;
+    float: left;
+    margin-right: 2%;
+    height: 80%;
+}
+.content-game {
+    width: 45%;
+    height: 20%;
+    border: 1px solid #d9dbe1;
+    border-radius: 5px;
+    margin: 2%;
+}
+.font-player-total{
+    font-size: 100%;
+    font-weight: bold;
+    color: #757575;
+    /* border: 1px solid black; */
+    width: 50%;
+    margin-top: 10%;
+    float: left;
+    margin-left: 10%;
+}
+.font-game-name {
+    font-size: 100%;
+    font-weight: bold;
+    /* border: 1px solid black; */
+    width: 50%;
+    padding-top: 0;
+    color: #000000; 
+    margin-top: 10%;
+    margin-left: 10%;   
+}
+.img-gamelogo{
+    font-size: 100%;
+    height: 80%;
+    float: right;
+    font-weight: bold;
+    /* border: 1px solid black; */
+    /* background: url() url('/images/asset/poker.png') no-repeat; */
+    width: 30%;
+    color: #000000; 
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-right: 8%;   
+
+}
+.total-countryplay{
+    float: left;
+    height: 100%;
+    width: 45%;    
+}
+.map {
+    width: 80%;
+    height: 40%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-bottom: 1px solid black;
+    margin-bottom: 10%;
+}
+.countryplayer-description{
+    width: 90%;
+    height: 50%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 2%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#total {
+    height: 500px;
+    /* border: 1px solid black; */
+    width: 100%;
+}
+#total1 {
+    height: 900px;
+    /* border: 1px solid black; */
+    width: 100%;
+}
+.total-device {
+    float: left;
+    height: 70%;
+    width: 45%;
+}
+.chart-bar{
+    width: 100%;
+    height: 45%;
+    border-top: 1px solid #4b4b4b;
+    border-bottom: 1px solid #4b4b4b;
+    margin-top: 10%;
+}
+.chart-horzontal div {
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+    width: 100%;
+    /* margin-top: 7%; */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  /* .margin-spacing{
+      margin-top: 10%;
+  } */
+.chart-middle {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 100%;
+    border-right: 1px solid #4b4b4b;
+}
+.gridline {
+    width: 100%;
+    /* margin-top: 0%; */
+    height: 100%;
+    background-size: 87px 100%;
+    background-image: linear-gradient(to right,
+                                      black 0%,
+                                      transparent 5%,
+                                      transparent 100%);
+}
+.explanation {
+    width: 100%;
+    height: 100%;
+
+}
+.dot1 {
+    height: 25px;
+    width: 25px;
+    background-color: #000000;
+    border-radius: 50%;
+    border: 5px solid #4072ee;
+    display: inline-block;
+  }
+  .dot2 {
+    height: 25px;
+    width: 25px;
+    background-color: #000000;
+    border-radius: 50%;
+    border: 5px solid #b558f6;
+    display: inline-block;
+  }
+  .dot3 {
+    height: 25px;
+    width: 25px;
+    background-color: #000000;
+    border-radius: 50%;
+    border: 5px solid #fec400;
+    display: inline-block;
+  }
+  .dot4 {
+    height: 25px;
+    width: 25px;
+    background-color: #000000;
+    border-radius: 50%;
+    border: 5px solid #29cb97;
+    display: inline-block;
+  }
+
+  .ios {
+     border-left: 6px solid #ff4e5a;
+     height: 10%;
+     width: 10%;
+  }
+  
+  .android {
+    border-left: 6px solid #46bbff;
+    height: 10%;
+    width: 10%;
+  }
+
+  .desktop {
+    border-left: 6px solid #d9d42c;
+    height: 10%;
+    width: 10%;
+  }
+  .home {
+      width:100%;
+      height: 100%;
+  }
+  #total3 {
+      width: 100%;
+      height: 1000px;
+  }
+
+  .campaign-slide{
+    height: 90%;
+    width: 35%;
+    /* border: 2px solid black; */
+    float: left;
+    margin-right: 2%;      
+  }
+  .total-dailygift {
+    float: left;
+    height: 40%;
+    width: 45%;    
+  }
+
+  .content-slidebanner {
+      width: 100%;
+      height: 80%;
+  }
+
+  .chip {
+    border-left: 6px solid #007d2a;
+    height: 10%;
+    width: 10%;
+  }
+  .gold{
+    border-left: 6px solid #FEC400;
+    height: 10%;
+    width: 10%;
+  }
+.total-table {
+    width: 50%;
+    float: left;
+    margin-right: 2%;
+    height: 100%;    
+}
+#table {
+    width: 100%;
+    height: 800px;
+}

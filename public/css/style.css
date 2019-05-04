@@ -1,0 +1,422 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+.aii-content {
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 90%;
+    scroll-behavior: smooth;
+    overflow: auto;
+}
+
+.topnav-admin {
+    width: 100%;
+    height: 8%;
+    background-color: #4477b2; 
+}
+.search {
+    margin-left: 5%;
+    margin-top: 2%;
+}
+.search input[type=text] {
+    border: none;
+    margin-left: 1%;
+    width: 30%;
+    border-bottom: 2px solid #a2bbd9;
+    outline: none;
+    color: #ffffff;
+    background: transparent;
+}
+.search input[type=text]::placeholder {
+    color: #ffffff;
+    font-style: italic;
+}
+.profile {
+    margin-top: 5px;
+}
+.username-profile {
+    padding-top: 1.5%;
+    font-family: 'source sans pro';
+    color: #ffffff;
+}
+.line-right {
+    width: 1%;
+    border: none;
+    height: 90%;
+    border-right: 2px solid #ebebf2;
+}
+.img-profile {
+    width: 15%;
+    border: none;
+    padding-top: 0.5%;
+    padding-bottom: 1.5%;
+    height: 100%;
+}
+.aii-img-profile {
+    margin-right: 30%;
+}
+.aii-date {
+    padding-left: 3%;
+}
+.date-now {
+    font-family:  ' montserrat';
+    font-weight: bold;
+    color: #ffffff;
+}
+.time-now {
+    font-family: 'montserrat';
+    font-size: 25px;
+    color: #ffffff;
+}
+.logout {
+    padding-left: 2%;
+    /* margin-top: 2%; */
+    width: 5%;
+    height: 100%;
+}
+.logoutgambar {
+    width: 100%;
+    height: 100%;
+    /* margin: 0; */
+    background: url('/images/asset/logout.png');
+    background-repeat: no-repeat;
+    background-size: 70% 50%;
+    background-position: right;
+}
+/* menu */
+.topnav-menu {
+    width: 100%;
+    padding-top: 5%;
+    height: 10%;
+    padding-top: 1%;
+    padding-left: 2%;
+}
+.menu-icon {
+    border: none;
+    border-bottom: 1px solid #bebebe;
+    width: 90%;
+    margin-left: 2%;
+    margin-right: 2%;   
+}
+.nav {
+    height: 100%;
+    width: 100%;
+}
+.nav-item {
+    width: 8.9%;
+    height: 100%;
+}
+
+/* icon */
+.menu1 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Admin 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu1:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Admin_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu1.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Admin_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu2 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Transactions 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu2:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Transactions 2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu2.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Transactions 2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu3 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Players 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu3:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Players2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu3.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Players2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu4 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/slide banner 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu4:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/slide banner2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu4.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/slide banner2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu5 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/daily Gift 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu5:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/daily Gift2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu5.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/daily Gift2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu6 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Game 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu6:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Game2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu6.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Game2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu7 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Store 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu7:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Store2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu7.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Store2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu8 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Notifications 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu8:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Notifications2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu8.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/Notifications2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu9 {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/settings 2.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu9:hover {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/settings2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+.menu9.active {
+    width: 100%;
+    height: 90%;
+    background: url('/images/asset/settings2_hover.png');
+    background-repeat: no-repeat;
+    background-size: 40% 80%;
+    background-position: bottom;
+}
+/* end icon */
+/* end menu */
+
+/* table */
+.bordered {
+    border: 1px solid #CCCCCC;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 1px 1px #CCCCCC;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 600px;
+    margin: 30px;
+}        
+.bordered th:first-child {
+    border-radius: 10px 0 0 0;
+    -moz-border-radius: 10px 0 0 0;
+    -webkit-border-radius: 10px 0 0 0;
+}
+
+.bordered th:last-child {
+    border-radius: 0 10px 0 0;
+    -moz-border-radius: 0 10px 0 0;
+    -webkit-border-radius: 0 10px 0 0;
+}
+
+.bordered td:first-child, .bordered th:first-child {
+    border-left: medium none;
+}
+
+.bordered th {
+    background-color: #DCE9F9;
+    border-top: medium none;
+}
+
+.bordered td, .bordered th {
+    border-left: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    padding: 10px;
+    text-align: left;
+}
+/* end table */
+
+/* sidebar */
+.sidebar {
+    width: 10%;
+    height: 100%;
+}
+.menu-name {
+    border: none;
+    /* border-bottom: 1px solid #bebebe; */
+    color: #4477b2;
+    font-weight: bold;
+    font-style:  'montserrat';
+    padding-top: 15%;
+    width: 100%;
+    height: 10%;
+    font-size: 20px;
+    
+    padding-left: 15%;
+}
+.sidebar-menu {
+    margin-top: 15%;
+}
+.sidebar-nav {
+    list-style-type: none;
+    color: #bebebe;
+}
+.sidebar-nav {
+    color: #000000;
+    font-weight: bold;
+}
+.sidebar-item a{
+    color: #000000;
+    font-weight: bold;
+}
+.sidebar-item .active a {
+    color: #648ebf;
+    font-weight: bold;
+}
+.sidebar-item {
+    padding-top: 10%;
+}
+/* endsidebar */
+
+/* content */
+.content-aii {
+    width: 90%;
+    height: 100%;
+}
+
+/* end content */
