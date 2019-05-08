@@ -1,41 +1,38 @@
 @extends('index')
 
+
 @section('sidebarmenu')
-    @include('menu.menuadmin')
+@include('menu.menustore')    
 @endsection
 
+
 @section('content')
-<link rel="stylesheet" href="/css/admin.css">
     <div class="table-aii">
         <div class="table-header">
-                User Admin
+                Slide Banner
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th></th>
-                <th class="th-sm">Image</th>
-                <th class="th-sm">Username</th>
-                <th class="th-sm">Full Name</th>
-                <th class="th-sm">Role Type</th>
                 <th class="th-sm"></th>
+                <th class="th-sm">Image</th>
+                <th class="th-sm">Caption</th>
+                <th class="th-sm">Action</th>
+                <th class="th-sm">Active</th>
               </tr>
             </thead>
             <tbody>
-                @foreach($admin as $adm)
+                {{-- @foreach($guests as $gs) --}}
                 <tr>
                     <td></td>
                     <td></td>
-                    <td>{{ $adm->username }}</td>
-                    <td>{{ $adm->fullname }}</td>
-                    <td>{{ $adm->name }}</td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                 </tr>
-                @endforeach
+                {{-- @endforeach --}}
             </tbody>
           </table>
          
-      </div>      
-
-      
+    </div>
 @endsection

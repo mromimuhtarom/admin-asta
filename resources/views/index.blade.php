@@ -59,6 +59,11 @@
     <script type="text/javascript" src="/js/datatables/addons/datatables.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
     <script src="/js/horizontal-chart.js"></script>
+    <script>
+            $(document).ready(function() {
+            $('table.display').DataTable();
+            } );
+    </script>
 
     <script>
         $('#dt-material-checkbox').dataTable({

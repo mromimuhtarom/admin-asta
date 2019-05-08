@@ -14,12 +14,9 @@
             <thead>
               <tr>
                 <th></th>
-                <th class="th-sm">Image
-                </th>
-                <th class="th-sm">Role
-                </th>
-                <th class="th-sm">Action
-                </th>
+                <th class="th-sm">Image</th>
+                <th class="th-sm">Role</th>
+                <th class="th-sm">Action</th>
                 <th style="width:2px;"></th>
               </tr>
             </thead>

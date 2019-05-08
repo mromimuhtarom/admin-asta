@@ -1,41 +1,42 @@
 @extends('index')
 
 @section('sidebarmenu')
-    @include('menu.menuadmin')
+@include('menu.menugame')
 @endsection
 
+
 @section('content')
-<link rel="stylesheet" href="/css/admin.css">
+<div class="menugame">
+  @include('menu.nama_game')
+</div>
     <div class="table-aii">
         <div class="table-header">
-                User Admin
+                Jackpot Paytable
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
                 <th></th>
-                <th class="th-sm">Image</th>
-                <th class="th-sm">Username</th>
-                <th class="th-sm">Full Name</th>
-                <th class="th-sm">Role Type</th>
-                <th class="th-sm"></th>
+                <th class="th-sm">Title</th>
+                <th class="th-sm">Multiplier</th>
+                <th class="th-sm">Win Type</th>
+                <th class="th-sm">Action</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-                @foreach($admin as $adm)
+                @foreach ($jackpot_paytable as $pay)
                 <tr>
                     <td></td>
-                    <td></td>
-                    <td>{{ $adm->username }}</td>
-                    <td>{{ $adm->fullname }}</td>
-                    <td>{{ $adm->name }}</td>
+                    <td>{{ $pay->title }}</td>
+                    <td>{{ $pay->multiplier }}</td>
+                    <td>{{ $pay->key }}</td>
+                    <td>Delete</td>
                     <td></td>
                 </tr>
                 @endforeach
             </tbody>
           </table>
          
-      </div>      
-
-      
+    </div>   
 @endsection
