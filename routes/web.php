@@ -83,21 +83,82 @@ Route::middleware('authenticated')->group(function(){
     Route::group(['prefix'  =>  'Game-Asta-Poker'], function() {
         Route::group(['prefix'  => 'Table'], function() {
             Route::get('Table-view', 'TableController@index')->name('Table-view');
+            Route::post('Table-update', 'TableController@update')->name('Table-update');
         });
         Route::group(['prefix'  => 'Category'], function() {
             Route::get('Category-view', 'CategoryController@index')->name('Category-view');
+            Route::post('Category-update', 'CategoryController@update')->name('Category-update');
         });
         Route::group(['prefix'  => 'Season'], function() {
             Route::get('Season-view', 'SeasonController@index')->name('Season-view');
         });
         Route::group(['prefix'  => 'SeasonReward'], function() {
             Route::get('SeasonReward-view', 'SeasonRewardController@index')->name('SeasonReward-view');
+            Route::post('SeasonReward-update', 'SeasonRewardController@update')->name('SeasonReward-update');
         });
         Route::group(['prefix'  => 'Tournament'], function() {
             Route::get('Tournament-view', 'TournamentController@index')->name('Tournament-view');
+            Route::post('Tournament-update', 'TournamentController@update')->name('Tournament-update');
         });
         Route::group(['prefix'  => 'Jackpot-Paytable'], function() {
             Route::get('JackpotPaytable-view', 'JackpotPaytableController@index')->name('JackpotPaytable-view');
+            Route::post('JackpotPaytable-update', 'JackpotPaytableController@update')->name('JackpotPaytable-update');
+        });
+        Route::group(['prefix'  => 'Find-Room'], function() {
+            Route::get('FindRoom-view', 'FindRoomController@index')->name('FindRoom-view');
+            Route::post('FindRoom-update', 'FindRoomController@update')->name('FindRoom-update');
+        });
+    });
+
+    Route::group(['prefix' => 'store'], function() {
+        Route::group(['prefix'  =>  'Best-Offer'], function() {
+            Route::get('BestOffer-view', 'BestOfferController@index')->name('BestOffer-view');
+        });
+        Route::group(['prefix'  =>  'Chip-Store'], function() {
+            Route::get('ChipStore-view', 'ChipStoreController@index')->name('ChipStore-view');
+        });
+        Route::group(['prefix'  =>  'Gold-Store'], function() {
+            Route::get('GoldStore-view', 'GoldStoreController@index')->name('GoldStore-view');
+        });
+        Route::group(['prefix'  =>  'Goods-Store'], function() {
+            Route::get('GoodsStore-view', 'GoodsStoreController@index')->name('GoodsStore-view');
+        });
+        Route::group(['prefix'  =>  'Gift-Store'], function() {
+            Route::get('GiftStore-view', 'GiftStoreController@index')->name('GiftStore-view');
+            Route::post('GiftStore-update', 'GiftStoreController@update')->name('GiftStore-update');
+        });
+        Route::group(['prefix'  =>  'Transaction-Store'], function() {
+            Route::get('TransactionStore-view', 'TransactionStoreController@index')->name('TransactionStore-view');
+        });
+        Route::group(['prefix'  =>  'Payment-Store'], function() {
+            Route::get('PaymentStore-view', 'PaymentStoreController@index')->name('PaymentStore-view');
+        });
+        Route::group(['prefix'  =>  'Report-Store'], function() {
+            Route::get('ReportStore-view', 'ReportStoreController@index')->name('ReportStore-view');
+        });
+    });
+
+    Route::group(['prefix'  =>  'Notification'], function() {
+        Route::group(['prefix'  =>  'Push-Notification'], function() {
+            Route::get('PushNotification-view', 'PushNotificationController@index')->name('PushNotification-view');
+            Route::post('PushNotification-update', 'PushNotificationController@update')->name('PushNotification-update');
+        });
+        Route::group(['prefix'  =>  'Email-Notification'], function() {
+            Route::get('EmailNotification-view', 'EmailNotificationController@index')->name('EmailNotification-view');
+            Route::post('EmailNotification-update', 'EmailNotificationController@update')->name('EmailNotification-update');
+        });
+    });
+
+    Route::group(['prefix'  =>  'Settings'], function() {
+        Route::group(['prefix'  =>  'General-Setting'], function() {
+            Route::get('GeneralSetting-view', 'GeneralSettingController@index')->name('GeneralSetting-view');
+        });
+        Route::group(['prefix'  =>  'Game-Setting'], function() {
+            Route::get('GameSetting-view', 'GameSettingController@index')->name('GameSetting-view');
+        });
+        Route::group(['prefix'  =>  'Admin-Setting'], function() {
+            Route::get('AdminSetting-view', 'AdminSettingController@index')->name('AdminSetting-view');
+            Route::post('AdminSetting-update', 'AdminSettingController@update')->name('AdminSetting-update');
         });
     });
 });

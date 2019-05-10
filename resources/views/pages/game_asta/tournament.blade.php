@@ -38,17 +38,17 @@
                 @foreach($tournaments as $tournament)
                 <tr>
                     <td></td>
-                    <td>{{ $tournament->title }}</td>
-                    <td>{{ $tournament->strGameType() }}</td>
+                    <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $tournament->tournamentId }}" data-type="text" data-url="{{ route('Tournament-update') }}">{{ $tournament->title }}</a></td>
+                    <td><a href="#" class="gametype" data-title="Type" data-name="gameType" data-pk="{{ $tournament->tournamentId }}" data-type="select" data-url="{{ route('Tournament-update') }}">{{ $tournament->strGameType() }}</td>
                     <td>{{ $tournament->timeLabel }}</td>
-                    <td>{{ $tournament->buyIn }}</td>
-                    <td>{{ $tournament->entryFee }}</td>
-                    <td>{{ $tournament->minPlayers }}</td>
-                    <td>{{ $tournament->maxPlayers }}</td>
-                    <td>{{ $tournament->rebuys }}</td>
-                    <td>{{ $tournament->lateEntry }}</td>
-                    <td>{{ $tournament->structureId }}</td>
-                    <td>{{ $tournament->strStatus }}</td>
+                    <td><a href="#" class="usertext" data-title="Buy In" data-name="buyIn" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->buyIn }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Entry Fee" data-name="entryFee" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->entryFee }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Players" data-name="minPlayers" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->minPlayers }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Players" data-name="maxPlayers" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->maxPlayers }}</a></td>
+                    <td><a href="#" class="usertext" data-title="rebuys" data-name="rebuys" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->rebuys }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Late Entry" data-name="lateEntry" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->lateEntry }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Late Entry" data-name="structureId" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->structureId }}</a></td>
+                    <td><a href="#" class="status" data-title="Status" data-name="status" data-pk="{{ $tournament->tournamentId }}" data-type="select" data-url="{{ route('Tournament-update') }}" data-value="{{ $tournament->status }}">{{ $tournament->strStatus }}</a></td>
                     <td>{{ $tournament->registeredPlayers }}</td>
                     <td>{{ $tournament->activePlayers }}</td>
                     <td>view detail</td>
@@ -58,5 +58,42 @@
             </tbody>
           </table>
          
-    </div>   
+    </div> 
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+  
+         
+          $('.usertext').editable({
+              mode :'popup'
+          });
+
+          $('.gametype').editable({
+            mode :'inline',
+            value: 'POT',
+            source: [
+                  {value: 'NL', text: 'No Limit'},
+                  {value: 'POT', text: 'Pot Limit'}
+               ]
+          });
+
+          $('.status').editable({
+            mode: 'inline',
+            value: 0,
+            source: [
+                  {value: 'A', text: 'Announced'},
+                  {value: 'R', text: 'Registering'},
+                  {value: 'P', text: 'Playing'},
+                  {value: 'F', text: 'Finished'},
+                  {value: 'C', text: 'Cancelled'}
+               ]
+          });
+  
+  
+      });
+  </script>   
 @endsection

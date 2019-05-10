@@ -38,20 +38,20 @@
         </li>
 
         <li class="nav-item">
-            <a href="#" class="h-100 w-100">
-                <div class="menu7"></div>
+            <a href="{{ route('BestOffer-view') }}" class="h-100 w-100">
+                <div class="menu7 {{ Request::is('store/*') ? 'menu7 active' : null }}"></div>
             </a>
         </li>
 
         <li class="nav-item">
-            <a href="#">
-                <div class="menu8"></div>
+            <a href="{{ route('PushNotification-view') }}" style="height:100%;">
+                <div class="menu8 {{ Request::is('Notification/*') ? 'menu8 active' : null }}"></div>
             </a>
         </li>
 
         <li class="nav-item">
-            <a href="#">
-                <div class="menu9"></div>
+            <a href="{{ route('GeneralSetting-view') }}" style="height:100%;">
+                <div class="menu9 {{ Request::is('Settings/*') ? 'menu9 active' : null }}"></div>
             </a>
         </li>
     </ul>

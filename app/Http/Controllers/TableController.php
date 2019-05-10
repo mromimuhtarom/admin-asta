@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Table;
+use App\Log;
+use Session;
+use Carbon\Carbon;
 
 class TableController extends Controller
 {
@@ -68,9 +71,77 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+  
+  
+        Table::where('gameID', '=', $pk)->update([
+          $name => $value
+        ]);
+  
+        switch ($name) {
+            case "tablename":
+                $name = "Table Name";
+                break;
+            case "tabletype":
+                $name = "Table Type";
+                break;
+            case "botsAllowed":
+                $name = "Bots";
+                break;
+            case "rakeRate":
+                $name = "Rake";
+                break;
+            case "levelLimit":
+                $name = "Level";
+                break;
+            case "seats":
+                $name = "Seats";
+                break;
+            case "speed":
+                $name = "Speed";
+                break;
+            case "sb":
+                $name = "Small Blind";
+                break;
+            case "bb":
+                $name = "Big Blind";
+                break;
+            case "baseSB":
+                $name = "Small Blind";
+                break;
+            case "baseBB":
+                $name = "Big Blind";
+                break;
+            case "tablelow":
+                $name = "Min Buy";
+                break;
+            case "tablelimit":
+                $name = "Max Buy";
+                break;
+            case "jackpotLow":
+                $name = "Jackpot Low";
+                break;
+            case "jackpotMed":
+                $name = "Jackpot Med";
+                break;
+            case "jackpotHi":
+                $name = "Jackpot Hi";
+                break;
+            default:
+              "";
+        }
+  
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '14',
+          'action_id'   => '2',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Edit '.$name.' gameID '.$pk.' to '. $value
+        ]);
     }
 
     /**

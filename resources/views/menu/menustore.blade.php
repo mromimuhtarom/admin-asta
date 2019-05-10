@@ -5,28 +5,28 @@
 <div class="sidebar-menu">
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="{{ route('Active-view') }}">Best Offer</a>
+            <a href="{{ route('BestOffer-view') }}">Best Offer</a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('HighRoller-view') }}">Chip Store</a>
+            <a href="{{ route('ChipStore-view') }}">Chip Store</a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('RegisteredPlayer-view') }}">Gold Store</a>
+            <a href="{{ route('GoldStore-view') }}">Gold Store</a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('Guest-view') }}">Goods Store</a>
+            <a href="{{ route('GoodsStore-view') }}">Goods Store</a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('Bots-view') }}">Gift</a>
+            <a href="{{ route('GiftStore-view') }}">Gift</a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('Report-view') }}">Transaction Store</a>
+            <a href="{{ route('TransactionStore-view') }}">Transaction Store</a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('Chip-view') }}">Payments Store</a>
+            <a href="{{ route('PaymentStore-view') }}">Payments Store</a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('Gold-view') }}">Report Store</a>
+            <a href="{{ route('ReportStore-view') }}">Report Store</a>
         </li>
     </ul>
 </div>

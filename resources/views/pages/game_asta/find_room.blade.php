@@ -17,9 +17,14 @@
             <thead>
               <tr>
                 <th></th>
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Multiplier</th>
-                <th class="th-sm">Win Type</th>
+                <th class="th-sm">Table Name</th>
+                <th class="th-sm">Originated</th>
+                <th class="th-sm">Game Type</th>
+                <th class="th-sm">Category</th>
+                <th class="th-sm">Min Buy</th>
+                <th class="th-sm">Max Buy</th>
+                <th class="th-sm">Seat</th>
+                <th class="th-sm">Speed</th>
                 <th class="th-sm">Action</th>
                 <th></th>
               </tr>
@@ -27,6 +32,11 @@
             <tbody>
                 {{-- @foreach ($jackpot_paytable as $pay) --}}
                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

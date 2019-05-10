@@ -68,9 +68,15 @@ class SeasonRewardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+  
+        SR::where('id', '=', $pk)->update([
+          $name => $value
+        ]);
     }
 
     /**

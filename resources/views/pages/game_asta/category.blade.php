@@ -29,10 +29,10 @@
                 @foreach($category as $kt)
                 <tr>
                     <td></td>
-                    <td>{{ $kt->name }}</td>
-                    <td>{{ $kt->tablelow }}</td>
-                    <td>{{ $kt->tablelimit }}</td>
-                    <td>{{ $kt->percentGroupFee() }}</td>
+                    <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->id }}" data-type="text" data-url="{{ route('Category-update')}}">{{ $kt->name }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="tablelow" data-pk="{{ $kt->id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->tablelow }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="tablelimit" data-pk="{{ $kt->id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->tablelimit }}</a></td>
+                    <td><a href="#" class="usertext" data-name="fee" data-pk="{{ $kt->id }}" data-type="text" data-url="{{ route('Category-update') }}">{{ $kt->percentGroupFee() }}</a></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -40,5 +40,21 @@
             </tbody>
           </table>
          
-    </div>   
+    </div> 
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+  
+         
+          $('.usertext').editable({
+              mode :'popup'
+          });
+  
+  
+      });
+  </script>  
 @endsection
