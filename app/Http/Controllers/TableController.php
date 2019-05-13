@@ -39,7 +39,20 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Table::create([
+            'dealerid'  => Session::get('dealerId'),
+            'tablename' => $request->tableName,
+            'tabletype' => $request->tabletype,
+            'startTime' => Carbon::now('GMT+7')->timestamp
+          ]);
+
+          Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '14',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Table with name '.$request->tableName
+          ]);
     }
 
     /**

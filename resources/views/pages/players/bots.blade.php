@@ -5,9 +5,54 @@
 @endsection
 
 @section('content')
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="margin-top:5%;">
+          <h5 class="modal-title" id="exampleModalLabel">Create Bot</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{ route('Bots-create') }}" method="POST">
+          {{  csrf_field() }}
+        <div class="modal-body">
+          <input type="text" name="username" placeholder="username" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+ 
+  @if(\Session::has('alert'))
+  <div class="alert alert-danger">
+    <div>{{Session::get('alert')}}</div>
+  </div>
+@endif
+@if(\Session::has('alert-success'))
+  <div class="alert alert-success">
+    <div>{{Session::get('alert-success')}}</div>
+  </div>
+@endif
+  
+
+
+
 <div class="table-aii">
     <div class="table-header">
-            Bots
+            Bots <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+                    <i class="fas fa-plus-circle"></i>Create Bots
+                 </button>
     </div>
      <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
         <thead>
@@ -25,7 +70,7 @@
             <tr>
                 <td></td>
                 <td>{{ $bot->username }}</td>
-                <td>{{ $bot->chip }}</td>
+                <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $bot->user_id }}" data-type="text" data-url="{{ route('Bots-update') }}">{{ $bot->chip }}</td>
                 <td>{{ $bot->rank_id}}</td>
                 <td>{{ $bot->gold }}</td>
                 <td>{{ $bot->name }}</td>
@@ -34,5 +79,21 @@
         </tbody>
       </table>
      
-</div>  
+</div> 
+<script type="text/javascript">
+  $(document).ready(function() {
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+     
+      $('.usertext').editable({
+          mode :'popup'
+      });
+
+
+  });
+</script> 
 @endsection

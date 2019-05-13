@@ -41,24 +41,16 @@
             <thead>
               <tr>
                 <th class="th-sm"></th>
-                <th class="th-sm">Item</th>
-                <th class="th-sm">Best Offers</th>
-                <th class="th-sm">Chip</th>
-                <th class="th-sm">Gold</th>
-                <th class="th-sm">Goods</th>
-                <th class="th-sm">Transaction</th>
-                <th class="th-sm">Payment</th>
-                <th class="th-.">Timestamp</th>
+                <th class="th-sm">Title</th>
+                <th class="th-sm">Type Payment</th>
+                <th class="th-sm">Type Transaction</th>
+                <th class="th-sm">Active</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
                 {{-- @foreach($items as $itm) --}}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

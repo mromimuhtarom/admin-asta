@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Log;
+use App\Stat;
+use Session;
+use Carbon\Carbon;
+use App\Player;
 
 class PlayersController extends Controller
 {
@@ -99,6 +104,81 @@ class PlayersController extends Controller
         //
     }
 
+    public function storeBots(Request $request)
+    {
+        $botName   = $request->username;
+        $botId     = DB::table('user_random')->where([['isused', 0],['user_type', '3']])->first();
+        $username   = clean($botName);
+        $deviceId  = "";
+        $sql       = DB::table('country')->select('code')->get();
+        $countries = $sql->toArray();
+      //   $countries = array("Australia","Japan","Mexico","United States","Italia","Greece","France","Hungary","Estados Unidos","Deutschland","United Kingdom");
+        $country        = $countries[rand(1,count($countries) - 1)];
+        $winpot         = 100000;
+        $securePassword = 'NOACCESSS887722030201';
+        $avatar         = 'avatar'.rand(1,12).'.jpg';
+        $time           = Carbon::now('GMT+7');
+
+
+        $createbot = Player::insert([
+            'user_id'         => $botId->user_id,
+            'status'          => '1',
+            'user_type'       => '3',
+            'username'        => $username,
+            'email'           => $username."@na.com",
+            'last_date'       => $time,
+            'join_date'       => $time,
+            'lang_code'       => 'en',
+            'last_ip'         => '0',
+            'timetag'         => '0',
+            'last_move'       => '0',
+            'avatar'          => $avatar,
+            'device_id'       => $deviceId,
+            'facebook_id'     => '',
+            'country_code'    => $country->code,
+            'userpass'        => md5($securePassword)
+        ]);
+
+        if($createbot){
+          Stat::create([
+            'user_id'     => $botId->user_id,
+          //   'player' => $botName,
+            'chip'        => $winpot,
+            'point'       =>  '0.00',
+            'gold'        =>  '0',
+            'rank_id'     =>  '0',
+            'poker_round' =>  '0',
+            'experience'  =>  '0'
+          ]);
+
+          DB::table('tpk_stat')->insert([
+              'user_id'             => $botId->user_id,
+              'game_played'         =>  '0',
+              'tournament_played'   =>  '0',
+              'tournament_won'      =>  '0',
+              'round_played'        =>  '0',
+              'round_won'           =>  '0',
+              'win_streak'          =>  '0',
+              'best_hand'           =>  '0'
+
+          ]);
+
+          DB::table('user_random')->where('user_id', $botId->user_id)->update([
+            'isused' => '1'
+          ]);
+        }
+
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '8',
+          'action_id'   => '3',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Create new Bot with username '. $username
+        ]);
+
+        return redirect()->route('Bots-view')->with('success','Data Added');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -131,6 +211,35 @@ class PlayersController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function updateBot(Request $request, Stat $stat)
+    {
+      $pk = $request->pk;
+      $name = $request->name;
+      $value = $request->value;
+
+      Stat::where('user_id', $pk)->update([
+        $name => $value
+      ]);
+
+      switch ($name) {
+        case "chip":
+            $name = "chip";
+            break;
+        default:
+          "";
+    }
+
+
+    Log::create([
+      'operator_id' => Session::get('userId'),
+      'menu_id' => '8',
+      'action_id' => '2',
+      'date' => Carbon::now('GMT+7'),
+      'description' => 'Edit '.$name.' ID '.$pk.' to '. $value
+    ]);
+
     }
 
     /**

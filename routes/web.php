@@ -56,15 +56,20 @@ Route::middleware('authenticated')->group(function(){
         });
         Route::group(['prefix'  =>  'Bots'], function() {
             Route::get('Bots-view', 'PlayersController@indexBots')->name('Bots-view');
+            Route::post('Bots-update', 'PlayersController@updateBot')->name('Bots-update');
+            Route::post('Bots-create', 'PlayersController@storeBots')->name('Bots-create');
         });
         Route::group(['prefix'  =>  'Report'], function() {
             Route::get('Report-view', 'ReportController@index')->name('Report-view');
+            Route::get('Report-search', 'ReportController@search')->name('Report-search');
         });
         Route::group(['prefix'  =>  'Chip-Player'], function() {
             Route::get('Chip-view', 'ChipController@index')->name('Chip-view');
+            Route::get('Chip-search', 'ChipController@search')->name('Chip-search');
         });
         Route::group(['prefix'  =>  'Gold-Player'], function() {
             Route::get('Gold-view', 'GoldController@index')->name('Gold-view');
+            Route::get('Gold-search', 'GoldController@search')->name('Gold-search');
         });
     });
 
@@ -84,6 +89,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  => 'Table'], function() {
             Route::get('Table-view', 'TableController@index')->name('Table-view');
             Route::post('Table-update', 'TableController@update')->name('Table-update');
+            Route::post('Table-create', 'TableController@store')->name('Table-create');
         });
         Route::group(['prefix'  => 'Category'], function() {
             Route::get('Category-view', 'CategoryController@index')->name('Category-view');

@@ -9,10 +9,48 @@
 <div class="menugame">
   @include('menu.nama_game')
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="margin-top:5%;">
+          <h5 class="modal-title" id="exampleModalLabel">Create Table</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{ route('Table-create') }}" method="POST">
+          {{  csrf_field() }}
+        <div class="modal-body">
+          <input type="text" name="tableName" placeholder="username"><br>
+          <select name="type" name="tabletype">
+            <option>Select Type</option>
+            <option value=""></option>
+          </select> <br>
+          <select name="category" id="">
+            <option>Select Category</option>
+            <option value=""></option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
     <div class="table-aii">
         <div class="table-header">
-                Table
+                Table <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+                        <i class="fas fa-plus-circle"></i>Create Table
+                      </button>
         </div>
+
+
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
