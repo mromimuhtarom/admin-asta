@@ -80,7 +80,7 @@
     </script>
 
     <script>
-        $('#dt-material-checkbox').dataTable({
+table = $('#dt-material-checkbox').dataTable({
 
         columnDefs: [{
         orderable: false,

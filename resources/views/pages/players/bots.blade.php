@@ -95,12 +95,10 @@
           }
       });
 
-     
+
       $('.usertext').editable({
-          mode :'popup'
+        mode :'popup'
       });
-
-
   });
 </script> 
 @endsection

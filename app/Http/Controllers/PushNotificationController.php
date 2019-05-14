@@ -20,7 +20,7 @@ class PushNotificationController extends Controller
     {
         $tables        = DB::select('SELECT * FROM poker, push_notifications WHERE poker.gameID = push_notifications.gameId ');
         $notifications = PushNotification::all();
-        $table         = Table::where('dealerId', '=', Session::get('dealerId'))->where('tabletype', '!=', 'm')->where('clubId', '=', 0)->where('seasonId', '=', 0)->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
+        // $table         = Table::where('dealerId', '=', Session::get('dealerId'))->where('tabletype', '!=', 'm')->where('clubId', '=', 0)->where('seasonId', '=', 0)->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
         return view('pages.notification.push_notification', compact('notifications','tables', 'table'));
     }
 
