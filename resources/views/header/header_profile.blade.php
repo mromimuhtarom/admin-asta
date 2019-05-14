@@ -6,16 +6,16 @@
 </div>
 <div class="col h-100 d-flex flex-row justify-content-end profile" align="right">
     <div class="row w-100 h-100">
-        <div class="col username-profile">
+        <div class="col-6 username-profile">
             <div class="">
                 {{ Session::get('fullname') }}
             </div>
         </div>
-        <div class="col-1 h-100 d-flex flex-row img-profile">
-            <img src="/images/profile/avatar.png" alt="" class="rounded-circle img-fluid aii-img-profile" width="60px" height="40px">
+        <div class="col-2 h-100 d-flex flex-row img-profile">
+            <img src="/images/profile/avatar.png" alt="" class="rounded-circle img-fluid aii-img-profile" width="60px" height="60px">
             <div class="line-right"></div>
         </div>
-        <div class="col-2 aii-date d-flex flex-column" align="left">
+        <div class="col-3 aii-date d-flex flex-column" align="left">
             <div class="date-now">
                 17-02-2018
             </div>

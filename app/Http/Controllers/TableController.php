@@ -17,7 +17,8 @@ class TableController extends Controller
      */
     public function index()
     {
-        $tables = Table::select()->where([['tabletype', '!=','m'],['clubId','=','0'],['seasonId', '=', '0']])->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
+        // $tables = Table::select()->where([['tabletype', '!=','m'],['clubId','=','0'],['seasonId', '=', '0']])->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
+        $tables = Table::join('tpk_room', 'tpk_room.roomid', '=', 'tpk_table.roomid')->select('tpk_room.name as roomname', 'tpk_table.*')->get();
         return view('pages.game_asta.table', compact('tables'));
     }
 
@@ -53,6 +54,8 @@ class TableController extends Controller
             'date'        => Carbon::now('GMT+7'),
             'description' => 'Create new Table with name '.$request->tableName
           ]);
+
+          return redirect()->route('Table-view')->with('success','Data Added');
     }
 
     /**

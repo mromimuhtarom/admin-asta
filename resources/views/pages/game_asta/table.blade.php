@@ -6,7 +6,7 @@
 
 
 @section('content')
-<div class="menugame">
+<div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
 </div>
 
@@ -23,25 +23,49 @@
         </div>
         <form action="{{ route('Table-create') }}" method="POST">
           {{  csrf_field() }}
-        <div class="modal-body">
-          <input type="text" name="tableName" placeholder="username"><br>
-          <select name="type" name="tabletype">
-            <option>Select Type</option>
-            <option value=""></option>
-          </select> <br>
-          <select name="category" id="">
-            <option>Select Category</option>
-            <option value=""></option>
-          </select>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
+          <div class="modal-body">
+            <input type="text" name="tableName" placeholder="username"><br>
+            <select name="tabletype">
+              <option>Select Type</option>
+              <option value="s">Cash Game</option>
+              <option value="t">Sit N Go</option>
+            </select> <br>
+            {{-- <select name="category" id="">
+              <option>Select Category</option>
+              <option value=""></option>
+            </select> --}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
+
+
+
+  @if (count($errors) > 0)
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all as $error)
+          <li>{{$error}}</li>  
+          @endforeach
+      </ul>
+  </div>
+      
+  @endif
+  
+  @if (\Session::has('success'))
+      <div class="alert alert-success">
+          <p>{{\Session::get('success')}}</p>
+      </div>
+      
+  @endif
+
+
+
 
     <div class="table-aii">
         <div class="table-header">
@@ -68,7 +92,6 @@
                 <th class="th-sm">Jackpot Low</th>
                 <th class="th-sm">Jackpot Med</th>
                 <th class="th-sm">Jackpot High</th>
-                <th class="th-sm">In Find Room</th>
                 <th></th>
               </tr>
             </thead>
@@ -76,9 +99,9 @@
                 @foreach($tables as $tb)
                 <tr>
                     <td></td>
-                    <td><a href="#" class="usertext" data-title="Table Name" data-name="tablename" data-pk="{{ $tb->gameID }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->tablename }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Table Name" data-name="tablename" data-pk="{{ $tb->gameID }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="tabletype" data-title="Type Table" data-name="tabletype" data-pk="{{ $tb->gameID }}" data-type="select" data-url="{{ route('Table-update') }}">{{ $tb->strTableType() }}</a></td>
-                    <td></td>
+                    <td>{{ $tb->roomname }}</td>
                     <td><a href="#" class="usertext" data-title="Level" data-name="levellimit" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->levelLimit }}</a></td>
                     <td><a href="#" class="seat" data-title="Seat" data-name="seats" data-pk="{{ $tb->gameID }}" data-type="select" data-url="{{ route('Table-update') }}">{{ $tb->seats }}</a></td>
                     <td><a href="#" class="speed" data-name="speed" data-type="select" data-value="{{ $tb->speed }}" data-pk="{{ $tb->gameID }}" data-url="{{ route('Table-update') }}" data-title="Select speed">{{ $tb->strTableSpeed() }}</a></td>
@@ -95,7 +118,6 @@
                     <td><a href="#" class="usertext" data-title="Jackpot Low" data-name="jackpotLow" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpotLow }}</a></td>
                     <td><a href="#" class="usertext" data-title="Jackpot Medium" data-name="jackpotMed" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpotMed }}</a></td>
                     <td><a href="#" class="usertext" data-title="Jackpot High" data-name="jackpotHi" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpotHi }}</a></td>
-                    <td></td>
                     <td></td>
                 </tr>
                 @endforeach
