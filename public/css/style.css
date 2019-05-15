@@ -594,3 +594,8 @@ input[type="text"] {
 input[type="number"] {
     width: 100px;
 }
+
+.sidebaritem .active {
+    color: #4477b2;
+    font-weight: bold;
+}

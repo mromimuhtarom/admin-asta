@@ -32,7 +32,7 @@
 
     <div class="table-aii">
         <div class="table-header">
-                Payment Store
+                Gold Player
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>

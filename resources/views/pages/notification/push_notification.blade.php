@@ -67,7 +67,7 @@
 
     <div class="table-aii">
         <div class="table-header">
-                Gold Store  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+                Push Notification  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                                 <i class="fas fa-plus-circle"></i>Create Push Notification
                             </button>
         </div>
