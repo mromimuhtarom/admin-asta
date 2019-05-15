@@ -99,33 +99,5 @@
           </table>
          
     </div>
-
-    <script type="text/javascript">
-      $(document).ready(function() {
-          $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-          });
-
-
-          $('.usertext').editable({
-              mode :'popup'
-          });
-
-          $('.category').editable({
-            //value: 'drink',
-            source: [
-              {value: 'drink', text: 'Drink'},
-              {value: 'food', text: 'Food'},
-              {value: 'emoji', text: 'Emoji'},
-            ]
-          });    
-  
-  
-      });
-      
-    </script> 
-
     
 @endsection

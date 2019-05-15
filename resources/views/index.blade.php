@@ -73,25 +73,6 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> --}}
     <script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
     <script src="/js/horizontal-chart.js"></script>
-    <script>
-            $(document).ready(function() {
-            $('table.display').DataTable();
-            } );
-    </script>
-
-    <script>
-table = $('#dt-material-checkbox').dataTable({
-
-        columnDefs: [{
-        orderable: false,
-        className: 'select-checkbox',
-        targets: 0
-        }],
-        select: {
-        style: 'os',
-        selector: 'td:first-child'
-        },
-        });
-    </script>
+    <script src="/js/classeditable.js"></script>
 </body>
 </html>
