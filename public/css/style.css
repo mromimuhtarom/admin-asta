@@ -423,6 +423,24 @@ table {
 
 /* end content */
 
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2em;
+    margin: 2% 0;
+}
+
+.cards .card {
+    padding: 5%;
+    background-color: #d6d6d8;
+    box-shadow: none;
+
+}
+
+.cards .card .search-table {
+    padding-left: 0;
+}
+
 .table-aii
 {
     width: 100%;
