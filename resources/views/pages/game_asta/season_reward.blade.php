@@ -6,7 +6,7 @@
 
 
 @section('content')
-<div class="menugame">
+<div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
 </div>
 
@@ -24,7 +24,9 @@
         <form action="" method="POST">
           {{  csrf_field() }}
         <div class="modal-body">
-          <input type="text" name="username" placeholder="username" required>
+          <input type="number" name="from" placeholder="From" required style="width:95px;"> - <input type="number" name="to" placeholder="To" required style="width:95px;"> <br>
+          <input type="text" name="rewardchip" placeholder="Reward Chip"><br>
+          <input type="text" name="rewardgold" placeholder="Reward Gold">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

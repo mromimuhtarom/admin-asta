@@ -24,7 +24,16 @@
           <form action="" method="POST">
             {{  csrf_field() }}
           <div class="modal-body">
-            <input type="text" name="username" placeholder="username" required>
+            <input type="text" name="title" placeholder="title" required><br>
+            <textarea name="message" cols="30" rows="5" placeholder="Please Enter The Message"></textarea><br>
+            <select name="game">
+                <option>Select Game</option>
+                <option value=""></option>
+            </select><br>
+            <select name="type">
+                <option>Select Type</option>
+                <option value=""></option>
+            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -80,9 +89,9 @@
                     <td></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->title }}</a></td>
                     <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->message }}</a></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}"></a></td>
+                    <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}"></a></td>
+                    <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}"></a></td>
                     <td></td>
                 </tr>
                 @endforeach

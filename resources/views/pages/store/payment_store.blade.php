@@ -24,7 +24,15 @@
         <form action="" method="POST">
           {{  csrf_field() }}
         <div class="modal-body">
-          <input type="text" name="username" placeholder="username" required>
+          <input type="text" name="username" placeholder="username" required><br>
+          <select name="category">
+            <option>Select category</option><br>
+            <option value=""></option>
+          </select><br>
+          <select name="transaction">
+            <option>Type Transaction</option><br>
+            <option value=""></option>
+          </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

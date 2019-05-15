@@ -25,7 +25,19 @@
           <form action="" method="POST">
             {{  csrf_field() }}
           <div class="modal-body">
-            <input type="text" name="username" placeholder="username" required>
+            <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" /><br><br>
+            <input type='file' onchange="readURL(this);" /><br><br>
+            <input type="text" name="subject" placeholder="Subject" required><br>
+            <textarea name="message" cols="30" rows="5" placeholder="Please Enter The Message" required></textarea><br>
+            <select name="from" required>
+              <option>Select From</option>
+              <option value=""></option>
+            </select><br>
+            <input type="email" name="email" placeholder="From Email" required><br>
+            <select name="type" required>
+              <option>Select Type</option>
+              <option value=""></option>
+            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

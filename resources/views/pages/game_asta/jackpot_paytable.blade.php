@@ -6,12 +6,9 @@
 
 
 @section('content')
-<div class="menugame">
+<div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
 </div>
-
-
-
 
   <!-- Modal -->
   <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -27,7 +24,12 @@
         <form action="" method="POST">
           {{  csrf_field() }}
         <div class="modal-body">
-          <input type="text" name="username" placeholder="username" required>
+          <input type="text" name="username" placeholder="title" required><br>
+          <input type="text" name="multiplier" placeholder="Multiplier" required><br>
+          <select name="win">
+            <option>Win Type</option>
+            <option value=""></option>
+          </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

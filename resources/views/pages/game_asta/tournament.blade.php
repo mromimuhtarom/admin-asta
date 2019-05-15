@@ -6,7 +6,7 @@
 
 
 @section('content')
-<div class="menugame">
+<div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
 </div>
 
@@ -26,7 +26,12 @@
         <form action="" method="POST">
           {{  csrf_field() }}
         <div class="modal-body">
-          <input type="text" name="username" placeholder="username" required>
+          <input type="text" name="title" placeholder="Title Tournament" required><br>
+          <select name="type">
+            <option>Pilih Type</option>
+            <option value=""></option>
+          </select><br>
+          <input type="date" name="starttime">  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

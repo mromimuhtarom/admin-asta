@@ -22,7 +22,15 @@
           <form action="" method="POST">
             {{  csrf_field() }}
           <div class="modal-body">
-            <input type="text" name="username" placeholder="username" required>
+            <input type='file' onchange="readURL(this);" /><br><br>
+            <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" /><br><br>
+            {{-- <input type="text" name="username" placeholder="username" required><br> --}}
+            <textarea name="caption" cols="30" rows="5" placeholder="caption"></textarea><br>
+            <select name="action">
+              <option>Pilih Action</option>
+              <option value=""></option>
+            </select>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -82,4 +90,19 @@
           </table>
          
     </div>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

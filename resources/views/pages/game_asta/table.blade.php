@@ -30,10 +30,10 @@
               <option value="s">Cash Game</option>
               <option value="t">Sit N Go</option>
             </select> <br>
-            {{-- <select name="category" id="">
+            <select name="category" id="">
               <option>Select Category</option>
               <option value=""></option>
-            </select> --}}
+            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -21,7 +21,7 @@
       <form action="" method="POST">
         {{  csrf_field() }}
       <div class="modal-body">
-        <input type="text" name="username" placeholder="username" required>
+        <input type="text" name="rolename" placeholder="Role Name" required>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -6,7 +6,7 @@
 
 
 @section('content')
-<div class="menugame">
+<div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
 </div>
 

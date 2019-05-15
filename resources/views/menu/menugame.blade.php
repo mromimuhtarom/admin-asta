@@ -22,8 +22,8 @@
         <li class="sidebar-item">
             <a href="{{ route('JackpotPaytable-view') }}">Jackpot Paytable</a>
         </li>
-        <li class="sidebar-item">
+        {{-- <li class="sidebar-item">
             <a href="{{ route('FindRoom-view') }}">Find Room</a>
-        </li>
+        </li> --}}
     </ul>
 </div>
