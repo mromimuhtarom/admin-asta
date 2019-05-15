@@ -158,6 +158,7 @@ Route::middleware('authenticated')->group(function(){
     Route::group(['prefix'  =>  'Settings'], function() {
         Route::group(['prefix'  =>  'General-Setting'], function() {
             Route::get('GeneralSetting-view', 'GeneralSettingController@index')->name('GeneralSetting-view');
+            Route::post('GeneralSetting-update', 'GeneralSettingController@update')->name('GeneralSetting-update');
         });
         Route::group(['prefix'  =>  'Game-Setting'], function() {
             Route::get('GameSetting-view', 'GameSettingController@index')->name('GameSetting-view');

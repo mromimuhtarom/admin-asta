@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class GeneralSettingController extends Controller
 {
@@ -13,7 +14,29 @@ class GeneralSettingController extends Controller
      */
     public function index()
     {
-        return view('pages.settings.general_setting');
+        // system settings
+        $getMaintenance     = DB::table('config')->where('id', '=', '101')->first();
+        $getPointExpired    = DB::table('config')->where('id', '=', '102')->first();
+
+        // Bank Settings
+
+        // Info Settings
+        $getPrivacyPolicy   = DB::table('config')->where('id', '=', '2')->first();
+        $getTermOfService   = DB::table('config')->where('id', '=', '3')->first();
+        $getAbout           = DB::table('config')->where('id', '=', '4')->first();
+        $getPokerWeb        = DB::table('config')->where('id', '=', '5')->first();
+
+        // CS & Legal Settings
+        $getFb              = DB::table('config')->where('id', '=', '901')->first();
+        $getTwitter         = DB::table('config')->where('id', '=', '902')->first();
+        $getIg              = DB::table('config')->where('id', '=', '903')->first();
+
+        // dummy
+        $getDummy = array("satu", "dua", "tiga", "4", "5", "6", "7", "8", "9", "10", "11");
+
+        return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
+                                                                'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
+                                                                'getAbout', 'getPokerWeb', "getDummy"));
     }
 
     /**
@@ -66,9 +89,15 @@ class GeneralSettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk    = $request->pk; //get data-pk
+        $name  = $request->name; //get data-name
+        $value = $request->value; //get data-value
+
+        DB::table('config')->where('id', '=', $pk)->update([
+            $name => $value
+        ]);
     }
 
     /**
