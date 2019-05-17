@@ -19,6 +19,7 @@ class GeneralSettingController extends Controller
         $getPointExpired    = DB::table('config')->where('id', '=', '102')->first();
 
         // Bank Settings
+        $getBank            = DB::table('config')->where('id', '=', '201')->first();
 
         // Info Settings
         $getPrivacyPolicy   = DB::table('config')->where('id', '=', '2')->first();
@@ -31,12 +32,9 @@ class GeneralSettingController extends Controller
         $getTwitter         = DB::table('config')->where('id', '=', '902')->first();
         $getIg              = DB::table('config')->where('id', '=', '903')->first();
 
-        // dummy
-        $getDummy = array("satu", "dua", "tiga", "4", "5", "6", "7", "8", "9", "10", "11");
-
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
-                                                                'getAbout', 'getPokerWeb', "getDummy"));
+                                                                'getAbout', 'getPokerWeb', "getBank"));
     }
 
     /**

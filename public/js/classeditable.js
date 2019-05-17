@@ -1,7 +1,6 @@
 $(document).ready(function() {
-    $('table.display').DataTable({
-        responsive: true,
-    });
+    $('table.display').DataTable();
+
 } );
 table = $('#dt-material-checkbox').dataTable({
 

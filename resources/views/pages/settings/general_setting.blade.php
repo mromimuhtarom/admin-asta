@@ -17,7 +17,7 @@
         <tr>
           <th class="th-sm"></th>
           <th class="th-sm">Name</th>
-          <th class="th-sm">Value</th>
+          <th class="th-sm">Settings</th>
           <th></th>
         </tr>
       </thead>
@@ -54,19 +54,17 @@
         <tr>
           <th class="th-sm"></th>
           <th class="th-sm">Name</th>
-          <th class="th-sm">Setting</th>
+          <th class="th-sm">Value</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        @foreach($getDummy as $dummy)
-          <tr>
-            <td></td>
-            <td>{{ $dummy }}</td>
-            <td></td>
-            <td></td>
-          </tr>
-        @endforeach
+        <tr>
+          <td></td>
+          <td>BCA</td>
+          <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="value" data-pk="{{ $getBank->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getBank->value }}</a></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -150,44 +148,38 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-
-      // table handler
-      $('table.table').dataTable({
-        pageLength : 5,
-        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
-        columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-        }],
-        select: {
-          style: 'os',
-          selector: 'td:first-child'
-        },
-      });
-
-      
-      $('.inlineSetting').editable({
-          mode :'popup'
-      });
-
-      $('.popUpSetting').editable({
-        value: 0,
-        source: [
-          {value: 0, text: 'Off'},
-          {value: 1, text: 'On'}
-        ]
-      });
-
+<script>
+  $('table.table').dataTable({
+    pageLength : 2,
+    lengthMenu: [[2, 10, 20, -1], [5, 10, 20, 'All']],
+    columnDefs: [{
+      orderable: false,
+      className: 'select-checkbox',
+      targets: 0
+    }],
+    select: {
+      style: 'os',
+      selector: 'td:first-child'
+    },
+    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+  
+        $('.inlineSetting').editable({
+            mode :'popup'
+        });
+  
+        $('.popUpSetting').editable({
+          value: 0,
+          source: [
+            {value: 0, text: 'Off'},
+            {value: 1, text: 'On'}
+          ]
+        });
+    }
   });
-
 </script>
-    
 @endsection
