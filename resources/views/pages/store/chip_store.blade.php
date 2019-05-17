@@ -68,7 +68,7 @@
                               <i class="fas fa-plus-circle"></i>Create Chip Store
                             </button>
         </div>
-         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
+          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
                 <th class="th-sm"></th>

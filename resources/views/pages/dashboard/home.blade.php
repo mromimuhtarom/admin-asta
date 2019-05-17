@@ -18,8 +18,8 @@
     
     </div>
     <div class="content-table size2">
-        <div class="row">
-            <div class="col">
+        <div class="row no-gutters"  style="padding-left:10%; text-align:center">
+            <div class="col" valign="middle">
                 <div class="row h-100 w-100">
                     <div class="col-6" id="svg"> 
                         <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@
                             <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="150"/>{{--ygdipakai--}}
                         </svg>
                     </div>
-                    <div class="col-1 d-flex flex-column" id="svg-description">
+                    {{-- <div class="col-1 d-flex flex-column" id="svg-description">
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#007d2a" />  
                         </svg> 
@@ -46,18 +46,37 @@
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#ff6600" />  
                         </svg> 
-                    </div>
-                    <div class="col d-flex flex-column align-left" align="left" id="svg-description-text">
-                        <div class="text-description">Chip</div>
+                    </div> --}}
+                    <div class="col" align="left" id="svg-description-text">
+                        {{-- <div class="text-description">Chip</div>
                         <div class="text-description">Gold</div>
                         <div class="text-description">Goods</div>
-                        <div class="text-description">Best Offer</div>
+                        <div class="text-description">Best Offer</div> --}}
+                        <div class="row" style="margin-bottom:2%; width:100%; height:70%;">
+                            <div class="col"><div class="circle-chip rounded-circle"></div></div>
+                            <div class="col">Chip</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-gold rounded-circle"></div></div>
+                            <div class="col">Gold</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-goods rounded-circle"></div></div>
+                            <div class="col">Goods</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" style="margin-bottom:2%;"> --}}
+                            <div class="col"><div class="circle-bestoffers rounded-circle"></div></div>
+                            <div class="col">Best Offers</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col">
-                <div class="row">
+                <div class="row h-100 w-100">
                     <div class="col-6" id="svg">
                         <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
@@ -70,7 +89,7 @@
                             <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="150"/>{{--ygdipakai--}}
                         </svg>
                     </div>
-                    <div class="col-1 d-flex flex-column" id="svg-description">
+                    {{-- <div class="col-1 d-flex flex-column" id="svg-description">
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#000000" />  
                         </svg> 
@@ -83,12 +102,31 @@
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#ff6600" />  
                         </svg> 
-                    </div>
-                    <div class="col d-flex flex-column align-left" align="left" id="svg-description-text">
-                        <div class="text-description">Player</div>
+                    </div> --}}
+                    <div class="col" align="left" id="svg-description-text">
+                        {{-- <div class="text-description">Player</div>
                         <div class="text-description">Gold</div>
                         <div class="text-description">Goods</div>
-                        <div class="text-description">Best Offer</div>
+                        <div class="text-description">Best Offer</div> --}}
+                        <div class="row" style="margin-bottom:2%; width:100%; height:70%;">
+                            <div class="col"><div class="circle-players rounded-circle"></div></div>
+                            <div class="col">Players</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-gold rounded-circle"></div></div>
+                            <div class="col">Gold</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-goods rounded-circle"></div></div>
+                            <div class="col">Goods</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" style="margin-bottom:2%;"> --}}
+                            <div class="col"><div class="circle-bestoffers rounded-circle"></div></div>
+                            <div class="col">Best Offers</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,26 +161,26 @@
 
                         </div>
                         <div class="explanation">
-                            <table width="100%">
+                            <table width="100%" >
                                 <tr>
-                                    <td width="10%"><span class="dot1"></span></td>
-                                    <td width="60%">Terdaftar</td>
-                                    <td width="30%">123</td>
+                                    <td width="5%"><span class="dot1"></span></td>
+                                    <td width="10%">Terdaftar</td>
+                                    <td width="20%">123</td>
                                 </tr>
                                 <tr>
-                                    <td width="10%"><span class="dot2"></span></td>
-                                    <td width="60%">Guest</td>
-                                    <td width="30%">123</td>
+                                    <td width="5%"><span class="dot2"></span></td>
+                                    <td width="10%">Guest</td>
+                                    <td width="20%">123</td>
                                 </tr>
                                 <tr>
-                                    <td width="10%"><span class="dot3"></span></td>
-                                    <td width="60%">Online</td>
-                                    <td width="30%">123</td>
+                                    <td width="5%"><span class="dot3"></span></td>
+                                    <td width="10%">Online</td>
+                                    <td width="20%">123</td>
                                 </tr>
                                 <tr>
-                                    <td width="10%"><span class="dot4"></span></td>
-                                    <td width="60%">Ofline</td>
-                                    <td width="30%">123</td>
+                                    <td width="5%"><span class="dot4"></span></td>
+                                    <td width="10%">Ofline</td>
+                                    <td width="20%">123</td>
                                 </tr>
                             </table>                            
                         </div>
@@ -396,9 +434,9 @@
     
     </div>
     <div class="content-table size2">
-        <div class="row">
+        <div class="row border w-100 h-100" style="padding-left:10%; text-align:center; margin-left:0%;">
             <div class="col">
-                <div class="row h-100 w-100">
+                <div class="row h-100 w-100 no-gutters">
                     <div class="col-6" id="svg"> 
                         <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
@@ -411,7 +449,7 @@
                             <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="150"/>{{--ygdipakai--}}
                         </svg>
                     </div>
-                    <div class="col-1 d-flex flex-column" id="svg-description">
+                    {{-- <div class="col-1 d-flex flex-column" id="svg-description">
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#007d2a" />  
                         </svg> 
@@ -424,18 +462,37 @@
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#ff6600" />  
                         </svg> 
-                    </div>
-                    <div class="col d-flex flex-column align-left" align="left" id="svg-description-text">
-                        <div class="text-description">Chip</div>
+                    </div> --}}
+                    <div class="col" align="left" id="svg-description-text">
+                        {{-- <div class="text-description">Chip</div>
                         <div class="text-description">Gold</div>
                         <div class="text-description">Goods</div>
-                        <div class="text-description">Best Offer</div>
+                        <div class="text-description">Best Offer</div> --}}
+                        <div class="row" style="margin-bottom:2%; width:100%; height:70%; margin-left:1%;">
+                            <div class="col"><div class="circle-chip rounded-circle"></div></div>
+                            <div class="col">Chip</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-gold rounded-circle"></div></div>
+                            <div class="col">Gold</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-goods rounded-circle"></div></div>
+                            <div class="col">Goods</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" style="margin-bottom:2%;"> --}}
+                            <div class="col"><div class="circle-bestoffers rounded-circle"></div></div>
+                            <div class="col">Best Offers</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col">
-                <div class="row">
+                <div class="row h-100 w-100 no-gutters">
                     <div class="col-6" id="svg">
                         <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
@@ -448,7 +505,7 @@
                             <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="150"/>{{--ygdipakai--}}
                         </svg>
                     </div>
-                    <div class="col-1 d-flex flex-column" id="svg-description">
+                    {{-- <div class="col-1 d-flex flex-column" id="svg-description">
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#000000" />  
                         </svg> 
@@ -461,12 +518,31 @@
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#ff6600" />  
                         </svg> 
-                    </div>
-                    <div class="col d-flex flex-column align-left" align="left" id="svg-description-text">
-                        <div class="text-description">Player</div>
+                    </div> --}}
+                    <div class="col" align="left" id="svg-description-text">
+                        {{-- <div class="text-description">Player</div>
                         <div class="text-description">Gold</div>
                         <div class="text-description">Goods</div>
-                        <div class="text-description">Best Offer</div>
+                        <div class="text-description">Best Offer</div> --}}
+                        <div class="row" style="margin-bottom:2%; width:100%; height:70%;  margin-left:1%;">
+                            <div class="col"><div class="circle-players rounded-circle"></div></div>
+                            <div class="col">Players</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-gold rounded-circle"></div></div>
+                            <div class="col">Gold</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+                            <div class="col"><div class="circle-goods rounded-circle"></div></div>
+                            <div class="col">Goods</div>
+                            <div class="w-100"></div>
+                        {{-- </div>
+                        <div class="row border border-dark" style="margin-bottom:2%;"> --}}
+                            <div class="col"><div class="circle-bestoffers rounded-circle"></div></div>
+                            <div class="col">Best Offers</div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -6,9 +6,7 @@
 
 
 @section('content')
-<div class="menugame border-bottom border-dark">
-  @include('menu.nama_game')
-</div>
+
 
   <!-- Modal -->
   <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -44,8 +42,6 @@
     </div>
   </div>
 
-
-
   @if (count($errors) > 0)
   <div class="alert alert-danger">
       <ul>
@@ -67,7 +63,7 @@
 
 
 
-    <div class="table-aii">
+    <div class="table-aii" style=" display: table; width: auto;">
         <div class="table-header">
                 Table <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                         <i class="fas fa-plus-circle"></i>Create Table
@@ -75,10 +71,10 @@
         </div>
 
 
-         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
+         <table id="dt-material-checkbox" class="table table-striped responsive nowrap" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th></th>
+                <th class="th-sm"></th>
                 <th class="th-sm">Nama Table</th>
                 <th class="th-sm">Type Table</th>
                 <th class="th-sm">Group</th>
@@ -92,9 +88,9 @@
                 <th class="th-sm">Jackpot Low</th>
                 <th class="th-sm">Jackpot Med</th>
                 <th class="th-sm">Jackpot High</th>
-                <th></th>
+                <th class="th-sm"></th>
               </tr>
-            </thead>
+            </thead>   
             <tbody>
                 @foreach($tables as $tb)
                 <tr>
@@ -111,7 +107,6 @@
                     @else
                     <td><a href="#" class="usertext" data-title="Small Blind" data-name="baseSB" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->baseSB }}</a></td>
                     <td><a href="#" class="usertext" data-title="Big Blind" data-name="baseBB" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->baseBB }}</a></td>
-
                     @endif
                     <td><a href="#" class="usertext" data-title="Min Buy" data-name="tablelow" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->tablelow }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="tablelimit" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->tablelimit }}</a></td>

@@ -1,10 +1,13 @@
 $(document).ready(function() {
-    $('table.display').DataTable();
+    $('table.display').DataTable({
+        responsive: true,
+    });
 } );
 table = $('#dt-material-checkbox').dataTable({
 
     columnDefs: [{
     orderable: false,
+    responsive: true,
     className: 'select-checkbox',
     targets: 0
     }],
@@ -18,9 +21,11 @@ table = $('#dt-material-checkbox').dataTable({
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $('.usertext').editable({
             mode :'popup'
         });
+
         $('.category').editable({
             //value: 'drink',
             source: [

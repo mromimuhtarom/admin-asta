@@ -48,7 +48,7 @@
                 <th class="th-sm">Goods</th>
                 <th class="th-sm">Transaction</th>
                 <th class="th-sm">Payment</th>
-                <th class="th-.">Timestamp</th>
+                <th class="th-sm">Timestamp</th>
                 <th></th>
               </tr>
             </thead>

@@ -79,29 +79,39 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td>{{ $adm->username }}</td>
-                    <td>{{ $adm->fullname }}</td>
-                    <td>{{ $adm->name }}</td>
+                    <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
+                    <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
+                    <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
                     <td></td>
                 </tr>
                 @endforeach
             </tbody>
           </table>
          
-      </div>      
-
-      <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#blah')
-                        .attr('src', e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-      </script>
+      </div>    
+      
+      <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    
+           
+            $('.role').editable({
+            value: 2,
+            source: [
+                @php
+                    $roles = DB::table('adm_role')->get();
+                    foreach($roles as $role) {
+                            echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+                    }
+                    @endphp
+               ]
+            });
+    
+    
+        });
+    </script>
 @endsection

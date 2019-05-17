@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Datatables;
+// use Datatables;
 // use Yajra\Datatables\Facades\Datatables;
 use DB;
 use App\User;
+use App\Log;
+use Session;
+use Carbon\Carbon;
 
 class UserAdminController extends Controller
 {
@@ -71,9 +74,38 @@ class UserAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      $pk = $request->pk;
+      $name = $request->name;
+      $value = $request->value;
+
+      User::where('operator_id', '=', $pk)->update([
+        $name => $value
+      ]);
+
+      switch ($name) {
+          case "firstName":
+              $name = "First Name";
+              break;
+          case "lastName":
+              $name = "Last Name";
+              break;
+          case "roleId":
+              $name = "Role";
+              break;
+          default:
+            "";
+      }
+
+
+      Log::create([
+        'operator_id' => Session::get('userId'),
+        'menu_id'     => '3',
+        'action_id'   => '2',
+        'date'        => Carbon::now('GMT+7'),
+        'description' => 'Edit '.$name.' UserId '.$pk.' to '. $value
+      ]);
     }
 
     /**

@@ -383,7 +383,7 @@ table {
     /* border-bottom: 1px solid #bebebe; */
     color: #4477b2;
     font-weight: bold;
-    font-style:  'montserrat';
+    font-style:  'sans-serif';
     padding-top: 15%;
     width: 100%;
     height: 10%;
@@ -463,35 +463,36 @@ table {
 }
 
 
-@media only screen and (min-width : 1200px) {
-/* menu game asta poker */
-.menugame{
-    width: 100%;
-    height: 9%;
-    margin-bottom: 10%;
-    text-align: center;
-    padding-bottom:1%;
-}
-}
+
 @media(min-width:320px){
 /* menu game asta poker */
 .menugame{
     width: 100%;
-    height: 9%;
+    height: 12%;
     margin-bottom: 10%;
     text-align: center;
-    padding-bottom:1%;
+    padding-bottom:5%;
 }
 }
 @media(min-width:768px){
-/* menu game asta poker */
-.menugame{
-    width: 100%;
-    height: 9%;
-    margin-bottom: 10%;
-    text-align: center;
-    padding-bottom:1%;
+    /* menu game asta poker */
+    .menugame{
+        width: 100%;
+        height: 12%;
+        margin-bottom: 10%;
+        text-align: center;
+        padding-bottom:5%;
+    }
 }
+@media only screen and (min-width : 1200px) {
+    /* menu game asta poker */
+    .menugame{
+        width: 100%;
+        height: 9%;
+        margin-bottom: 10%;
+        text-align: center;
+        padding-bottom:1%;
+    }
 }
 
 
@@ -617,3 +618,45 @@ input[type="number"] {
     color: #4477b2;
     font-weight: bold;
 }
+
+.image-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.circle-chip {
+    background: #007d2a;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-gold {
+    background: #FFAA01;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-goods {
+    background: #0019FF;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-bestoffers {
+    background: #ff6600;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-players{
+    background: #000000;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;  
+}
+

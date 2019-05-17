@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="col-2 h-100 d-flex flex-row img-profile">
-            <img src="/images/profile/avatar.png" alt="" class="rounded-circle img-fluid aii-img-profile" width="50px" height="40px">
+            <img src="/images/profile/avatar.png" alt="" class="rounded-circle img-fluid aii-img-profile image-responsive" width="50px" height="40px">
             <div class="line-right"></div>
         </div>
         <div class="col-3 aii-date d-flex flex-column" align="left">
