@@ -6,9 +6,9 @@
 
 
 @section('content')
-<div class="menugame border-bottom border-dark">
+{{-- <div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
-</div>
+</div> --}}
 
   <!-- Modal -->
   <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

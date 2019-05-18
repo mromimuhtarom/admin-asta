@@ -35,7 +35,7 @@
         </div>
     </div>     
     
-        <div class="table-aii">
+        <div class="table-aii" style=" display: table; width: auto;">
             <div class="table-header">
                     Report
             </div>

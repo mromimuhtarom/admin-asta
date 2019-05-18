@@ -6,9 +6,9 @@
 
 
 @section('content')
-<div class="menugame border-bottom border-dark">
+{{-- <div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
-</div>
+</div> --}}
     <div class="table-aii">
         <div class="table-header">
                 Find Room

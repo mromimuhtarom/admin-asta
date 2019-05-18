@@ -12,7 +12,7 @@
     <div class="table-header">
       System Settings
     </div>
-    <table class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
+    <table class="table table-striped" style="margin-left:1px; display: table; width: auto;" cellspacing="0" width="100%">
       <thead>
         <tr>
           <th class="th-sm"></th>
@@ -46,7 +46,7 @@
   </div>
 
   <div class="card">
-    <div class="table-header">
+    <div class="table-header" style=" display: table; width: auto;">
       Bank Settings
     </div>
     <table class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
@@ -112,7 +112,7 @@
   </div>
 
   <div class="card">
-    <div class="table-header">
+    <div class="table-header" style=" display: table; width: auto;">
       CS & Legal Settings
     </div>
     <table class="table display" style="margin-left:1px;" cellspacing="0" width="100%">

@@ -5,15 +5,14 @@ $(document).ready(function() {
 table = $('#dt-material-checkbox').dataTable({
 
     columnDefs: [{
-    orderable: false,
-    responsive: true,
-    className: 'select-checkbox',
-    targets: 0
-    }],
-    select: {
-    style: 'os',
-    selector: 'td:first-child'
-    },
+        orderable: false,
+        className: 'select-checkbox',
+        targets: 0
+        }],
+        select: {
+        style: 'os',
+        selector: 'td:first-child'
+        },
     "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         $.ajaxSetup({
             headers: {
@@ -33,5 +32,6 @@ table = $('#dt-material-checkbox').dataTable({
               {value: 'emoji', text: 'Emoji'},
             ]
         }); 
+        
     }
     });

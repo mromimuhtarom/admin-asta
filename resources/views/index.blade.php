@@ -56,7 +56,7 @@
                     <div class="menugame border-bottom border-dark" style="display: table; width:100%;">
                         @include('menu.nama_game')
                     </div>
-                    <div class="aii-content">
+                    <div class="aii-content-game">
                         @yield('content')
                     </div>  
                 @else 
@@ -75,6 +75,7 @@
     {{-- <script src="/js/datatables/jquery-3.4.0.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
     {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --}}
     {{-- TE<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
      <!-- MDB core JavaScript -->

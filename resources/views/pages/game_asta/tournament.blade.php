@@ -6,9 +6,9 @@
 
 
 @section('content')
-<div class="menugame border-bottom border-dark">
+{{-- <div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
-</div>
+</div> --}}
 
 
 
@@ -62,7 +62,7 @@
 
 
 
-    <div class="table-aii">
+    <div class="table-aii" style=" display: table; width: auto;">
         <div class="table-header">
                 Tournament  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                               <i class="fas fa-plus-circle"></i>Create Tournament

@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
     <div class="col">
-        <div class="table-aii">
+        <div class="table-aii" style=" display: table; width: auto;">
           <div class="table-header">
               Players Online
           </div>
@@ -64,7 +64,7 @@
         </div>      
     </div>
     <div class="col">
-        <div class="table-aii">
+        <div class="table-aii" style=" display: table; width: auto;">
           <div class="table-header">
               Players Offline
           </div>

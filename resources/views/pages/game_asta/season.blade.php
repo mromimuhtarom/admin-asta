@@ -6,10 +6,10 @@
 
 
 @section('content')
-<div class="menugame border-bottom border-dark">
+{{-- <div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
-</div>
-    <div class="table-aii">
+</div> --}}
+    <div class="table-aii" style=" display: table; width: auto;">
         <div class="table-header">
                 Season
         </div>
