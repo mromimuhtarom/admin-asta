@@ -32,6 +32,7 @@ table = $('#dt-material-checkbox').dataTable({
             mode :'popup'
         });
 
+
         $('.category').editable({
             //value: 'drink',
             source: [

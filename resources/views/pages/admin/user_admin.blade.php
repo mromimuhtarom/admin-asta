@@ -168,17 +168,17 @@
 			      // });
     
            
-            $('.role').editable({
-            value: 2,
-            source: [
-                @php
-                    $roles = DB::table('adm_role')->get();
-                    foreach($roles as $role) {
-                            echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
-                    }
-                    @endphp
-               ]
-            });
+            // $('.role').editable({
+            // value: 2,
+            // source: [
+            //     @php
+            //         $roles = DB::table('adm_role')->get();
+            //         foreach($roles as $role) {
+            //                 echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+            //         }
+            //     @endphp
+            //    ]
+            // });
     
     
         });
