@@ -96,10 +96,10 @@
                               <i class="fas fa-plus-circle"></i>Create Admin
                             </button>
         </div>
-         <table id="dt-material-checkbox" class="display table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
+         <table class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th><input type="checkbox" id="selecctall"></th>
+                <th></th>
                 <th>Image</th>
                 <th>Username</th>
                 <th>Full Name</th>
@@ -110,13 +110,13 @@
             <tbody>
                 @foreach($admin as $adm)
                 <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission"></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->operator_id }}"></td>
                     <td></td>
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
                     {{-- <td><a href="{{ route('UserAdmin-delete', $adm->operator_id) }}" style="color:red;" onclick="return confirm('Are you sure?')"><i class="fas fa-times"></i></a></td> --}}
-                    <td><a href="#" class="deleteuseradmin" id="deleteuseradmin" data-pk="{{ $adm->operator_id }}" style="color:red;" data-toggle="modal" data-target="#deleteuseradmin"><i class="fas fa-times"></i></a></td>
+                    <td><a href="#" style="color:red;" class="deleteuseradmin{{ $adm->operator_id }}" id="deleteuseradmin" data-pk="{{ $adm->operator_id }}" data-toggle="modal" data-target="#deleteuseradmin"><i class="fas fa-times"></i></a></td>
 
                 </tr>
                 @endforeach
@@ -127,60 +127,111 @@
       
       <script type="text/javascript">
         $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
+
+        //     // $('#deleteuseradmin').on('show.bs.modal', function (event) {
+        //     //   var button = $(event.relatedTarget) 
+        //     //   var userid = $(this).data('userid')
+        //     //   // var user_id = '2'
+        //     //   var modal = $(this)
+        //     //   alert(userid);
+
+        //     //   modal.find('.modal-body #userid').val(userid);
+        //     // });
+
+
+
+        //     // $(".delete").click(function(e) {
+			  //     //   e.preventDefault();
+
+			  //     //   $("#btnDeleteGroup").attr('data-pk',$(this).data('pk'));
+				//     //   $("#deleteGroup").modal('show');
+
+        //     // });    
+        
+        // $('.role').editable({
+        //             value: 2,
+        //             source: [
+        //                 @php
+        //                 $roles = DB::table('adm_role')->get();
+        //                 foreach($roles as $role) {
+        //                     echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+        //                 }
+        //                 @endphp
+        //             ]
+        //         });
+      });
+
+
+
+        $('table.table-striped').dataTable({
+              // pageLength : 5,
+              // lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+              // columnDefs: [{
+              //   orderable: false,
+              //   className: 'select-checkbox',
+              //   targets: 0
+              // }],
+              columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+              }],
+              select: {
+                style: 'os',
+                selector: 'td:first-child'
+              },
+              "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $.ajaxSetup({
+                  headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $('#selecctall').click(function(event) { 
-              if(this.checked) { // check select status
-                $('.deletepermission').each(function() { 
-                  this.checked = true;  //select all 
+                  }
                 });
-              }else{
-                $('.deletepermission').each(function() { 
-                  this.checked = false; //deselect all             
-                });        
+
+                @php
+                  foreach($admin as $adm) {
+                    echo'$(".deleteuseradmin'.$adm->operator_id.'").hide();';
+                    echo'$(".deletepermission'.$adm->operator_id.'").on("click", function() {';
+                      echo 'if($( ".deletepermission'.$adm->operator_id.':checked" ).length > 0)';
+                      echo '{';
+                        echo '$(".deleteuseradmin'.$adm->operator_id.'").show();';
+                      echo'}';
+                      echo'else';
+                      echo'{';
+                        echo'$(".deleteuseradmin'.$adm->operator_id.'").hide();';
+                      echo'}';
+          
+                    echo '});';
+
+                
+
+
+
+                  echo'$(".deleteuseradmin'.$adm->operator_id.'").click(function(e) {';
+                    echo'e.preventDefault();';
+
+                    echo"var id = $(this).attr('data-pk');";
+                    echo'var test = $("#userid").val(id);';
+                  echo'});';
+                }
+                @endphp
+                
+
+                $('.role').editable({
+                    value: 2,
+                    source: [
+                        @php
+                        $roles = DB::table('adm_role')->get();
+                        foreach($roles as $role) {
+                            echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+                        }
+                        @endphp
+                    ]
+                });
+
+                $('.usertext').editable({
+                  mode :'popup'
+                });
               }
-            });
-
-
-
-            // $('#deleteuseradmin').on('show.bs.modal', function (event) {
-            //   var button = $(event.relatedTarget) 
-            //   var userid = $(this).data('userid')
-            //   // var user_id = '2'
-            //   var modal = $(this)
-            //   alert(userid);
-
-            //   modal.find('.modal-body #userid').val(userid);
-            // });
-
-
-
-            // $(".delete").click(function(e) {
-			      //   e.preventDefault();
-
-			      //   $("#btnDeleteGroup").attr('data-pk',$(this).data('pk'));
-				    //   $("#deleteGroup").modal('show');
-
-			      // });
-    
-           
-            // $('.role').editable({
-            // value: 2,
-            // source: [
-            //     @php
-            //         $roles = DB::table('adm_role')->get();
-            //         foreach($roles as $role) {
-            //                 echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
-            //         }
-            //     @endphp
-            //    ]
-            // });
-    
-    
         });
     </script>
 @endsection
