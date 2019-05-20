@@ -24,6 +24,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix' => 'User-Admin'], function() {
             Route::get('/Admin-view', 'UserAdminController@index')->name('UserAdmin-view');
             Route::post('/Admin-update', 'UserAdminController@update')->name('UserAdmin-update');
+            Route::delete('/Admin-delete', 'UserAdminController@destroy')->name('UserAdmin-delete');
         });
         Route::group(['prefix' => 'Role-Admin'], function() {
             Route::get('/Role-view', 'RoleController@index')->name('Role-view');

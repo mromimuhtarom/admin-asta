@@ -20,6 +20,14 @@ table = $('#dt-material-checkbox').dataTable({
             }
         });
 
+        $(".deleteuseradmin").click(function(e) {
+            e.preventDefault();
+
+              // $("#btnDeleteGroup").attr('data-pk',$(this).data('pk'));
+            var id = $(this).attr('data-pk');
+            var test = $("#userid").val(id);
+        });
+
         $('.usertext').editable({
             mode :'popup'
         });

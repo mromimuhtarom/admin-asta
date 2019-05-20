@@ -52,6 +52,30 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="margin-top:5%;">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are You Sure Want To Delete It
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="button_example-yes">Yes</button>
+          <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    {{-- end delete notification --}}
+
+
+
 
     <div class="table-aii">
         <div class="table-header">
@@ -62,7 +86,7 @@
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th></th>
+                <th><input type="checkbox" id="selecctall"></th>
                 <th class="th-sm">Image</th>
                 <th class="th-sm">Role</th>
                 <th class="th-sm">Action</th>
@@ -72,11 +96,11 @@
             <tbody>
                 @foreach($roles as $role)
                 <tr>
-                    <td></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission"></td>
                     <td></td>
                     <td>{{ $role->name }}</td>
                     <td><a href="#" class="myButton">View & Edit</a></td>
-                    <td></td>
+                    <td><a href="#" style="color:red;"  data-toggle="modal" data-target="#exampleModal1"><i class="fas fa-times"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -97,6 +121,29 @@
           </table>
          
       </div>    
+
+      <script>
+      $(document).ready(function() {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+
+        $('#selecctall').click(function(event) { 
+              if(this.checked) { // check select status
+                $('.deletepermission').each(function() { 
+                  this.checked = true;  //select all 
+                });
+              }else{
+                $('.deletepermission').each(function() { 
+                  this.checked = false; //deselect all             
+                });        
+              }
+        });
+      
+      });
+      </script>
 
       
 @endsection

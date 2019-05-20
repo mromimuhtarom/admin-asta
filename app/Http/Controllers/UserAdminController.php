@@ -114,8 +114,14 @@ class UserAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $userid = $request->userid;
+        if($userid != '')
+        {
+            DB::table('operator')->where('operator_id', '=', $userid)->delete();
+            return redirect()->route('UserAdmin-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('UserAdmin-view')->with('success','Somethong wrong');                
     }
 }

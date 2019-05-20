@@ -61,7 +61,7 @@
   <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal modal-danger fade" id="deleteuseradmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="margin-top:5%;">
@@ -72,15 +72,24 @@
       </div>
       <div class="modal-body">
         Are You Sure Want To Delete It
+
+        <form action="{{ route('UserAdmin-delete') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userid" id="userid" value="">
+        
       </div>
       <div class="modal-footer">
-          <button type="button" class="button_example-yes">Yes</button>
+          <button type="submit" class="button_example-yes">Yes</button>
         <button type="button" class="button_example-no" data-dismiss="modal">No</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
   {{-- end delete notification --}}
+
+
     <div class="table-aii">
         <div class="table-header">
                 User Admin  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
@@ -106,8 +115,8 @@
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
-                    {{-- <td><a href="#" style="color:red;" onclick="return confirm('Are you sure?')"><i class="fas fa-times"></i></a></td> --}}
-                    <td><a href="#" style="color:red;"  data-toggle="modal" data-target="#exampleModal1"><i class="fas fa-times"></i></a></td>
+                    {{-- <td><a href="{{ route('UserAdmin-delete', $adm->operator_id) }}" style="color:red;" onclick="return confirm('Are you sure?')"><i class="fas fa-times"></i></a></td> --}}
+                    <td><a href="#" class="deleteuseradmin" id="deleteuseradmin" data-pk="{{ $adm->operator_id }}" style="color:red;" data-toggle="modal" data-target="#deleteuseradmin"><i class="fas fa-times"></i></a></td>
 
                 </tr>
                 @endforeach
@@ -135,6 +144,28 @@
                 });        
               }
             });
+
+
+
+            // $('#deleteuseradmin').on('show.bs.modal', function (event) {
+            //   var button = $(event.relatedTarget) 
+            //   var userid = $(this).data('userid')
+            //   // var user_id = '2'
+            //   var modal = $(this)
+            //   alert(userid);
+
+            //   modal.find('.modal-body #userid').val(userid);
+            // });
+
+
+
+            // $(".delete").click(function(e) {
+			      //   e.preventDefault();
+
+			      //   $("#btnDeleteGroup").attr('data-pk',$(this).data('pk'));
+				    //   $("#deleteGroup").modal('show');
+
+			      // });
     
            
             $('.role').editable({
