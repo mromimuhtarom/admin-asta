@@ -126,37 +126,54 @@
               headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
-          });
-  
-         
-          $('.usertext').editable({
-              mode :'popup'
-          });
+          });  
+      });
+      table = $('#dt-material-checkbox').dataTable({
+          columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+          }],
+          select: {
+          style: 'os',
+          selector: 'td:first-child'
+          },
+          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
+              
 
-          $('.tabletype').editable({
-  				value: 's',
-  				source: [
-  					  {value: 's', text: 'Cash Game'},
-  					  {value: 't', text: 'Sit & Go'}
-  				   ]
-  			  });
+              $('.usertext').editable({
+                mode :'popup'
+              });
+              
+              $('.tabletype').editable({
+  				      value: 's',
+  				      source: [
+  					      {value: 's', text: 'Cash Game'},
+  					      {value: 't', text: 'Sit & Go'}
+  				      ]
+  			      });
 
-          $('.seat').editable({
-  				value: 9,
-  				source: [
-  					  {value: 5, text: '5'},
-  					  {value: 9, text: '9'}
-  				   ]
-  			  }); 
+              $('.seat').editable({
+  				      value: 9,
+  				      source: [
+  					      {value: 5, text: '5'},
+  					      {value: 9, text: '9'}
+  				      ]
+  			      }); 
 
-          $('.speed').editable({
-  				value: 15,
-  				source: [
-  					  {value: 10, text: 'Normal'},
-  					  {value: 15, text: 'Fast'}
-  				   ]
-  			  }); 
-  
+              $('.speed').editable({
+  				      value: 15,
+  				      source: [
+  					      {value: 10, text: 'Normal'},
+  					      {value: 15, text: 'Fast'}
+  				      ]
+  			      });
+          }
       });
   </script>
 @endsection
