@@ -473,9 +473,9 @@ table {
     border: 1px solid black;
     padding-top: 0.5%;
     padding-bottom:0.5%;
-    padding-left: 2%;
+    padding-left: 0.5%;
     border-radius: 10px;
-    padding-right: 2%;
+    padding-right: 0.5%;
     margin-top: 2%;
 }
 .table-header
@@ -559,7 +559,12 @@ table {
 
 
 /* menu game asta poker */
-
+.add{
+    transform: translate(100%,-100%);
+}
+.add-btn{
+    transform: translate(20%,80%);
+}
 .asta-poker {
     width: 100%;
     height: 70%;
@@ -573,7 +578,7 @@ table {
     height: 70%;
     background: url('/images/asset/poker_hover.png');
     background-repeat: no-repeat;
-    background-size: 40% 80%;
+    background-size: 40% 100%;
     background-position: bottom;
 }
 .asta-poker.active {
@@ -663,8 +668,8 @@ table {
 }
 .footer-table {
     background: #4477b2;
+    height: 100px;
     border-radius: 5px;
-    transform: translate(0.6%);
 }
 /* table.dataTable thead {
     background-color:blue;
@@ -697,7 +702,9 @@ table {
 .view-pager{
     background: #4477b2;
     border-radius: 10px;
-    transform: translate(0.6%);
+    margin-left: 2%;
+    margin-right:2%;
+    transform: translate(2%);
 }
 
 .paginate_button:before{
