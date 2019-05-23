@@ -6,9 +6,9 @@
 
 
 @section('content')
-<div class="menugame border-bottom border-dark">
+{{-- <div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
-</div>
+</div> --}}
 
 
 
@@ -62,7 +62,7 @@
 
 
 
-    <div class="table-aii">
+    <div class="table-aii" style=" display: table; width: auto;">
         <div class="table-header">
                 Tournament  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                               <i class="fas fa-plus-circle"></i>Create Tournament
@@ -120,35 +120,53 @@
               headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
-          });
+          }); 
   
-         
-          $('.usertext').editable({
-              mode :'popup'
-          });
+      });
+      table = $('#dt-material-checkbox').dataTable({
+          columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+          }],
+          select: {
+          style: 'os',
+          selector: 'td:first-child'
+          },
+          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
 
-          $('.gametype').editable({
-            mode :'inline',
-            value: 'POT',
-            source: [
+              $('.usertext').editable({
+                mode :'popup'
+              });
+
+
+              $('.gametype').editable({
+                mode :'inline',
+                value: 'POT',
+                source: [
                   {value: 'NL', text: 'No Limit'},
                   {value: 'POT', text: 'Pot Limit'}
-               ]
-          });
+                ]
+              });
 
-          $('.status').editable({
-            mode: 'inline',
-            value: 0,
-            source: [
+              $('.status').editable({
+                mode: 'inline',
+                value: 0,
+                source: [
                   {value: 'A', text: 'Announced'},
                   {value: 'R', text: 'Registering'},
                   {value: 'P', text: 'Playing'},
                   {value: 'F', text: 'Finished'},
                   {value: 'C', text: 'Cancelled'}
                ]
-          });
-  
-  
+              });
+    
+          }
       });
   </script>   
 @endsection

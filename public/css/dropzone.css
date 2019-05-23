@@ -2,7 +2,7 @@
  * The MIT License
  * Copyright (c) 2012 Matias Meno <m@tias.me>
  */
-@-webkit-keyframes passing-through {
+ @-webkit-keyframes passing-through {
   0% {
     opacity: 0;
     -webkit-transform: translateY(40px);

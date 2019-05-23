@@ -6,9 +6,9 @@
 
 
 @section('content')
-<div class="menugame border-bottom border-dark">
+{{-- <div class="menugame border-bottom border-dark">
   @include('menu.nama_game')
-</div>
+</div> --}}
 
   <!-- Modal -->
   <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -102,31 +102,57 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
           });
-  
-         
-          $('.usertext').editable({
-              mode :'inline'
-          });
+      });
+      table = $('#dt-material-checkbox').dataTable({
+          columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+          }],
+          select: {
+          style: 'os',
+          selector: 'td:first-child'
+          },
+          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
+
+              $('.usertext').editable({
+                mode :'popup'
+              });
+              
+              
+              $('.key').editable({
+				        value: 0,
+				        source: [
+					        {value: 'WIN_HIGHCARD', text: 'High Card'},
+					        {value: 'WIN_PAIR', text: 'Pair'},
+					        {value: 'WIN_2PAIR', text: '2 pair'},
+					        {value: 'WIN_SETOF3', text: 'Three of a kind'},
+					        {value: 'WIN_LOW_STRAIGHT', text: 'Low Straight'},
+					        {value: 'WIN_STRAIGHT', text: 'Straight'},
+					        {value: 'WIN_FLUSH', text: 'Flush'},
+					        {value: 'WIN_FULLHOUSE', text: 'Full House'},
+					        {value: 'WIN_SETOF4', text: 'Four of a kind'},
+					        {value: 'WIN_STRAIGHT_FLUSH', text: 'Straight Flush'},
+					        {value: 'WIN_ROYALFLUSH', text: 'Royal Flush'}
+				        ]
+			        });
 
 
-          $('.key').editable({
-				      value: 0,
-				      source: [
-					      {value: 'WIN_HIGHCARD', text: 'High Card'},
-					      {value: 'WIN_PAIR', text: 'Pair'},
-					      {value: 'WIN_2PAIR', text: '2 pair'},
-					      {value: 'WIN_SETOF3', text: 'Three of a kind'},
-					      {value: 'WIN_LOW_STRAIGHT', text: 'Low Straight'},
-					      {value: 'WIN_STRAIGHT', text: 'Straight'},
-					      {value: 'WIN_FLUSH', text: 'Flush'},
-					      {value: 'WIN_FULLHOUSE', text: 'Full House'},
-					      {value: 'WIN_SETOF4', text: 'Four of a kind'},
-					      {value: 'WIN_STRAIGHT_FLUSH', text: 'Straight Flush'},
-					      {value: 'WIN_ROYALFLUSH', text: 'Royal Flush'}
-				      ]
-			    });
-  
-  
+              $('.category').editable({
+                //value: 'drink',
+                source: [
+                  {value: 'drink', text: 'Drink'},
+                  {value: 'food', text: 'Food'},
+                  {value: 'emoji', text: 'Emoji'},
+                ]
+              }); 
+    
+          }
       });
   </script>
 @endsection

@@ -114,28 +114,44 @@
               headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
-          });
-  
-         
-          $('.usertext').editable({
-              mode :'popup'
-          });
+          });  
+      });
+      table = $('#dt-material-checkbox').dataTable({
+          columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+          }],
+          select: {
+          style: 'os',
+          selector: 'td:first-child'
+          },
+          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
 
-          $('.typenotif').editable({
-            value: 'Pilih Type',
-            source: [
-              {value: 'deposit_received', text: 'Deposit Received'},
-              {value: 'new_device', text: 'New Device'},
-              {value: 'withdrawal_requested', text: 'Withdrawal Requested'},
-              {value: 'withdrawal_declined', text: 'Withdrawal Declined'},
-              {value: 'withdrawal_approved', text: 'Withdrawal Approved'},
-              {value: 'login', text: 'Login'},
-              {value: 'forgot', text: 'Forgot Password'},
-              {value: 'welcome', text: 'Account Creation'},
-            ]
-          });
-  
-  
+              $('.usertext').editable({
+                mode :'popup'
+              });
+
+              $('.typenotif').editable({
+                value: 'Pilih Type',
+                source: [
+                  {value: 'deposit_received', text: 'Deposit Received'},
+                  {value: 'new_device', text: 'New Device'},
+                  {value: 'withdrawal_requested', text: 'Withdrawal Requested'},
+                  {value: 'withdrawal_declined', text: 'Withdrawal Declined'},
+                  {value: 'withdrawal_approved', text: 'Withdrawal Approved'},
+                  {value: 'login', text: 'Login'},
+                  {value: 'forgot', text: 'Forgot Password'},
+                  {value: 'welcome', text: 'Account Creation'},
+                ]
+              });
+    
+          }
       });
   </script>
 @endsection

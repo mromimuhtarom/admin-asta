@@ -7,6 +7,7 @@ use App\Gift;
 use App\Log;
 use Session;
 use Carbon\Carbon;
+use DB;
 
 class GiftStoreController extends Controller
 {
@@ -71,6 +72,51 @@ class GiftStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+    public function updateimage(Request $request)
+    {
+        $pk = $request->pk;
+        $id = DB::table('gifts')->where('id', '=', $pk)->first();
+        $file = $request->file('file');
+        $bcrypt = bcrypt($request->password);
+        $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
+        $nama = $_FILES['file']['name'];
+        $x = explode('.', $nama);
+        $ekstensi = strtolower(end($x));
+        $ukuran = $_FILES['file']['size'];
+        $filename           = $id->id;
+        $nama_file_unik = $filename.'.'.$ekstensi; 
+
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        {
+            if($ukuran < 1044070)
+            {           
+                if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
+                {
+                    Gift::where('id', '=', $pk)->update([
+                        'imageUrl' => $nama_file_unik
+                    ]);
+                    return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
+            
+                }
+                else
+                {
+                    echo "Gagal Upload File";
+                }
+            }
+            else
+            {       
+                echo 'Ukuran file terlalu besar';
+            }
+        }
+        else
+        {       
+            echo 'Ekstensi file tidak di perbolehkan';
+        }
+    }
+
+    
     public function update(Request $request)
     {
         $pk    = $request->pk;

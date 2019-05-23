@@ -8,7 +8,7 @@
 @section('content')
 <div class="row">
     <div class="col">
-        <div class="table-aii">
+        <div class="table-aii" style=" display: table; width: auto;">
           <div class="table-header">
               Players Online
           </div>
@@ -64,7 +64,7 @@
         </div>      
     </div>
     <div class="col">
-        <div class="table-aii">
+        <div class="table-aii" style=" display: table; width: auto;">
           <div class="table-header">
               Players Offline
           </div>
@@ -118,5 +118,29 @@
         </div> 
     </div>
 </div>
+<script>
+      table = $('table.table').dataTable({
+          columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+          }],
+          select: {
+          style: 'os',
+          selector: 'td:first-child'
+          },
+          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
+
+              $('.usertext').editable({
+                mode :'popup'
+              });
     
+          }
+      });
+</script>    
 @endsection

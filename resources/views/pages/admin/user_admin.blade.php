@@ -57,32 +57,69 @@
       
   @endif
 
+  {{-- notification delete --}}
+  <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal modal-danger fade" id="deleteuseradmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="margin-top:5%;">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete It
+
+        <form action="{{ route('UserAdmin-delete') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userid" id="userid" value="">
+        
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="button_example-yes">Yes</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+  {{-- end delete notification --}}
+
+
     <div class="table-aii">
-        <div class="table-header">
+        {{-- <div class="table-header">
                 User Admin  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                               <i class="fas fa-plus-circle"></i>Create Admin
                             </button>
-        </div>
-         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
+        </div> --}}
+         <table class="table" style="margin-left:1px;" cellspacing="0" width="100%">
+          <div class="th-table">
             <thead>
               <tr>
                 <th></th>
-                <th class="th-sm">Image</th>
-                <th class="th-sm">Username</th>
-                <th class="th-sm">Full Name</th>
-                <th class="th-sm">Role Type</th>
-                <th class="th-sm"></th>
+                <th>Image</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Role Type</th>
+                <th></th>
               </tr>
             </thead>
+          </div>
             <tbody>
                 @foreach($admin as $adm)
                 <tr>
-                    <td></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->operator_id }}"></td>
                     <td></td>
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
-                    <td></td>
+                    {{-- <td><a href="{{ route('UserAdmin-delete', $adm->operator_id) }}" style="color:red;" onclick="return confirm('Are you sure?')"><i class="fas fa-times"></i></a></td> --}}
+                    <td><a href="#" style="color:red;" class="deleteuseradmin{{ $adm->operator_id }}" id="deleteuseradmin" data-pk="{{ $adm->operator_id }}" data-toggle="modal" data-target="#deleteuseradmin"><i class="fas fa-times"></i></a></td>
+
                 </tr>
                 @endforeach
             </tbody>
@@ -92,26 +129,114 @@
       
       <script type="text/javascript">
         $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
+
+        //     // $('#deleteuseradmin').on('show.bs.modal', function (event) {
+        //     //   var button = $(event.relatedTarget) 
+        //     //   var userid = $(this).data('userid')
+        //     //   // var user_id = '2'
+        //     //   var modal = $(this)
+        //     //   alert(userid);
+
+        //     //   modal.find('.modal-body #userid').val(userid);
+        //     // });
+
+
+
+        //     // $(".delete").click(function(e) {
+			  //     //   e.preventDefault();
+
+			  //     //   $("#btnDeleteGroup").attr('data-pk',$(this).data('pk'));
+				//     //   $("#deleteGroup").modal('show');
+
+        //     // });    
+        
+        // $('.role').editable({
+        //             value: 2,
+        //             source: [
+        //                 @php
+        //                 $roles = DB::table('adm_role')->get();
+        //                 foreach($roles as $role) {
+        //                     echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+        //                 }
+        //                 @endphp
+        //             ]
+        //         });
+      });
+
+
+
+        $('table.table').dataTable({
+              // pageLength : 5,
+              // lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+              // columnDefs: [{
+              //   orderable: false,
+              //   className: 'select-checkbox',
+              //   targets: 0
+              // }],
+              columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+              }],
+              select: {
+                style: 'os',
+                selector: 'td:first-child'
+              },
+              "pagingType": "full_numbers",
+              "bInfo" : false,
+              "sDom": '<"row footer-table view-filter"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
+              "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $.ajaxSetup({
+                  headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-    
-           
-            $('.role').editable({
-            value: 2,
-            source: [
+                  }
+                });
+
                 @php
-                    $roles = DB::table('adm_role')->get();
-                    foreach($roles as $role) {
+                  foreach($admin as $adm) {
+                    echo'$(".deleteuseradmin'.$adm->operator_id.'").hide();';
+                    echo'$(".deletepermission'.$adm->operator_id.'").on("click", function() {';
+                      echo 'if($( ".deletepermission'.$adm->operator_id.':checked" ).length > 0)';
+                      echo '{';
+                        echo '$(".deleteuseradmin'.$adm->operator_id.'").show();';
+                      echo'}';
+                      echo'else';
+                      echo'{';
+                        echo'$(".deleteuseradmin'.$adm->operator_id.'").hide();';
+                      echo'}';
+          
+                    echo '});';
+
+                
+
+
+
+                  echo'$(".deleteuseradmin'.$adm->operator_id.'").click(function(e) {';
+                    echo'e.preventDefault();';
+
+                    echo"var id = $(this).attr('data-pk');";
+                    echo'var test = $("#userid").val(id);';
+                  echo'});';
+                }
+                @endphp
+                
+
+                $('.role').editable({
+                    value: 2,
+                    source: [
+                        @php
+                        $roles = DB::table('adm_role')->get();
+                        foreach($roles as $role) {
                             echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
-                    }
-                    @endphp
-               ]
-            });
-    
-    
+                        }
+                        @endphp
+                    ]
+                });
+
+                $('.usertext').editable({
+                  mode :'popup'
+                });
+              }
         });
     </script>
 @endsection

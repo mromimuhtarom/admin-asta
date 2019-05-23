@@ -22,15 +22,12 @@
         <form action="{{ route('Table-create') }}" method="POST">
           {{  csrf_field() }}
           <div class="modal-body">
-            <input type="text" name="tableName" placeholder="username"><br>
-            <select name="tabletype">
-              <option>Select Type</option>
-              <option value="s">Cash Game</option>
-              <option value="t">Sit N Go</option>
-            </select> <br>
-            <select name="category" id="">
+            <input type="text" name="tableName" placeholder="Table Name"><br>
+            <select name="category">
               <option>Select Category</option>
-              <option value=""></option>
+              @foreach ($category as $ct)
+              <option value="{{ $ct->roomid }}">{{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
+              @endforeach
             </select>
           </div>
           <div class="modal-footer">
@@ -62,8 +59,37 @@
 
 
 
+  <!-- Modal -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="margin-top:5%;">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete It
+        <form action="{{ route('Table-delete') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="tableid" id="tableid" value="">
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="button_example-yes">Yes</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+  {{-- end delete notification --}}
 
-    <div class="table-aii" style=" display: table; width: auto;">
+
+
+
+    <div class="table-aii">
         <div class="table-header">
                 Table <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                         <i class="fas fa-plus-circle"></i>Create Table
@@ -71,49 +97,30 @@
         </div>
 
 
-         <table id="dt-material-checkbox" class="table table-striped responsive nowrap" style="margin-left:1px;" cellspacing="0" width="100%">
+          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th class="th-sm"></th>
+                <th></th>
                 <th class="th-sm">Nama Table</th>
-                <th class="th-sm">Type Table</th>
                 <th class="th-sm">Group</th>
-                <th class="th-sm">Level</th>
-                <th class="th-sm">Seats</th>
-                <th class="th-sm">Speed</th>
+                <th class="th-sm">Max Player</th>
                 <th class="th-sm">Small Blind</th>
-                <th class="th-sm">Max Blind</th>
-                <th class="th-sm">Min Buy</th>
-                <th class="th-sm">Max Buy</th>
-                <th class="th-sm">Jackpot Low</th>
-                <th class="th-sm">Jackpot Med</th>
-                <th class="th-sm">Jackpot High</th>
-                <th class="th-sm"></th>
+                <th class="th-sm">Big Blind</th>
+                <th class="th-sm">Jackpot</th>
+                <th></th>
               </tr>
             </thead>   
             <tbody>
                 @foreach($tables as $tb)
                 <tr>
-                    <td></td>
-                    <td><a href="#" class="usertext" data-title="Table Name" data-name="tablename" data-pk="{{ $tb->gameID }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
-                    <td><a href="#" class="tabletype" data-title="Type Table" data-name="tabletype" data-pk="{{ $tb->gameID }}" data-type="select" data-url="{{ route('Table-update') }}">{{ $tb->strTableType() }}</a></td>
-                    <td>{{ $tb->roomname }}</td>
-                    <td><a href="#" class="usertext" data-title="Level" data-name="levellimit" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->levelLimit }}</a></td>
-                    <td><a href="#" class="seat" data-title="Seat" data-name="seats" data-pk="{{ $tb->gameID }}" data-type="select" data-url="{{ route('Table-update') }}">{{ $tb->seats }}</a></td>
-                    <td><a href="#" class="speed" data-name="speed" data-type="select" data-value="{{ $tb->speed }}" data-pk="{{ $tb->gameID }}" data-url="{{ route('Table-update') }}" data-title="Select speed">{{ $tb->strTableSpeed() }}</a></td>
-                    @if($tb->tabletype == 's')
-                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="sb" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->sb }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="bb" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->bb }}</a></td>
-                    @else
-                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="baseSB" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->baseSB }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="baseBB" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->baseBB }}</a></td>
-                    @endif
-                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="tablelow" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->tablelow }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="tablelimit" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->tablelimit }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Jackpot Low" data-name="jackpotLow" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpotLow }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Jackpot Medium" data-name="jackpotMed" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpotMed }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Jackpot High" data-name="jackpotHi" data-pk="{{ $tb->gameID }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpotHi }}</a></td>
-                    <td></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $tb->tableid }}"></td>
+                    <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->tableid }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
+                    <td><a href="#" class="room" data-title="Table Name" data-name="roomid" data-pk="{{ $tb->tableid }}" data-type="select" data-url="{{ route('Table-update')}}">{{ $tb->roomname }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update')}}">{{ $tb->max_player }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpot }}</a></td>
+                    <td><a href="#" style="color:red;" class="delete{{ $tb->tableid }}" id="delete" data-pk="{{ $tb->tableid }}" data-toggle="modal" data-target="#delete"><i class="fas fa-times"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -126,37 +133,76 @@
               headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
-          });
-  
-         
-          $('.usertext').editable({
-              mode :'popup'
-          });
+          });  
+      });
+      table = $('#dt-material-checkbox').dataTable({
+          columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+          }],
+          select: {
+          style: 'os',
+          selector: 'td:first-child'
+          },
+          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
 
-          $('.tabletype').editable({
-  				value: 's',
-  				source: [
-  					  {value: 's', text: 'Cash Game'},
-  					  {value: 't', text: 'Sit & Go'}
-  				   ]
-  			  });
+              @php
+                  foreach($tables as $tb) {
+                    echo'$(".delete'.$tb->tableid.'").hide();';
+                    echo'$(".deletepermission'.$tb->tableid.'").on("click", function() {';
+                      echo 'if($( ".deletepermission'.$tb->tableid.':checked" ).length > 0)';
+                      echo '{';
+                        echo '$(".delete'.$tb->tableid.'").show();';
+                      echo'}';
+                      echo'else';
+                      echo'{';
+                        echo'$(".delete'.$tb->tableid.'").hide();';
+                      echo'}';
+          
+                    echo '});';
+                
+                  echo'$(".delete'.$tb->tableid.'").click(function(e) {';
+                    echo'e.preventDefault();';
 
-          $('.seat').editable({
-  				value: 9,
-  				source: [
-  					  {value: 5, text: '5'},
-  					  {value: 9, text: '9'}
-  				   ]
-  			  }); 
+                    echo"var id = $(this).attr('data-pk');";
+                    echo'var test = $("#tableid").val(id);';
+                  echo'});';
+                }
+              @endphp              
 
-          $('.speed').editable({
-  				value: 15,
-  				source: [
-  					  {value: 10, text: 'Normal'},
-  					  {value: 15, text: 'Fast'}
-  				   ]
-  			  }); 
-  
+              $('.usertext').editable({
+                mode :'popup'
+              });
+              
+              $('.room').editable({
+  				      value: '',
+  				      source: [
+                  {value: '', text: 'Choose Category'},
+                  @php
+                  foreach($category as $ct) {
+                  echo '{value:"'.$ct->roomid.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';
+                  }
+                  @endphp
+  				      ]
+              });
+              // $('.role').editable({
+              //       value: 2,
+              //       source: [
+              //           @php
+              //           $roles = DB::table('adm_role')->get();
+              //           foreach($roles as $role) {
+              //               echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+              //           }
+              //           @endphp
+              //       ]
+              //   });
+          }
       });
   </script>
 @endsection
