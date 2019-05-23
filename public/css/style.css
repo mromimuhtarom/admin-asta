@@ -105,8 +105,24 @@ html, body {
     width: 100%;
 }
 .nav-item {
-    width: 7%;
-    height: 100%;
+    width: 6%;
+    /* border: 1px solid black; */
+    height: 80%;
+}
+.nav-item4 {
+    width: 10%;
+    /* border: 1px solid black; */
+    height: 80%;
+}
+.nav-item5 {
+    width: 8%;
+    /* border: 1px solid black; */
+    height: 80%;
+}
+.nav-item7 {
+    width: 8%;
+    /* border: 1px solid black; */
+    height: 80%;
 }
 
 /* icon */

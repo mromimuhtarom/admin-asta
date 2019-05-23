@@ -13,7 +13,7 @@
 	position: relative;
 	display: inline-block;
 	margin: auto;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   border: 1px solid black;
 	overflow: hidden;
 	width: 100%;
@@ -51,7 +51,7 @@
 		}
 	.media-object {}
 		.img-object {
-			border-radius: 50%;
+			/* border-radius: 50%; */
 			width: 100%;
 			height: 100%;
 			display: block;
