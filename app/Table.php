@@ -13,4 +13,8 @@ class Table extends Model
     protected $guarded = [];
     protected $primaryKey = 'tableid';
 
+    public function room(){
+        return $this->belongsTo(Room::class);
+    }
+
 }

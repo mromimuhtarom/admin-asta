@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Table;
 use App\Log;
 use Session;
+use DB;
 use Carbon\Carbon;
+use App\Room;
 
 class TableController extends Controller
 {
@@ -18,8 +20,14 @@ class TableController extends Controller
     public function index()
     {
         // $tables = Table::select()->where([['tabletype', '!=','m'],['clubId','=','0'],['seasonId', '=', '0']])->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
-        $tables = Table::join('tpk_room', 'tpk_room.roomid', '=', 'tpk_table.roomid')->select('tpk_room.name as roomname', 'tpk_table.*')->get();
-        return view('pages.game_asta.table', compact('tables'));
+        $tables = Table::join('tpk_room', 'tpk_room.roomid', '=', 'tpk_table.roomid')
+                  ->select(
+                      'tpk_room.name as roomname',
+                      'tpk_table.*'
+                  )
+                  ->get();
+        $category = Room::all();
+        return view('pages.game_asta.table', compact('tables', 'category'));
     }
 
     /**
@@ -41,11 +49,13 @@ class TableController extends Controller
     public function store(Request $request)
     {
         Table::create([
-            'dealerid'  => Session::get('dealerId'),
-            'tablename' => $request->tableName,
-            'tabletype' => $request->tabletype,
-            'startTime' => Carbon::now('GMT+7')->timestamp
-          ]);
+            'name' => $request->tableName,
+            'roomid'    => $request->category,
+            'max_player'    =>  '0',
+            'small_blind'   =>  '0',
+            'big_blind'     =>  '0',
+            'jackpot'       =>  '0'
+        ]);
 
           Log::create([
             'operator_id' => Session::get('userId'),
@@ -94,58 +104,28 @@ class TableController extends Controller
         $value = $request->value;
   
   
-        Table::where('gameID', '=', $pk)->update([
+        Table::where('tableid', '=', $pk)->update([
           $name => $value
         ]);
   
         switch ($name) {
-            case "tablename":
+            case "name":
                 $name = "Table Name";
                 break;
-            case "tabletype":
-                $name = "Table Type";
+            case "roomid":
+                $name = "room id";
                 break;
-            case "botsAllowed":
-                $name = "Bots";
+            case "max_player":
+                $name = "Max Player";
                 break;
-            case "rakeRate":
-                $name = "Rake";
-                break;
-            case "levelLimit":
-                $name = "Level";
-                break;
-            case "seats":
-                $name = "Seats";
-                break;
-            case "speed":
-                $name = "Speed";
-                break;
-            case "sb":
+            case "small_blind":
                 $name = "Small Blind";
                 break;
-            case "bb":
+            case "big_blind":
                 $name = "Big Blind";
                 break;
-            case "baseSB":
-                $name = "Small Blind";
-                break;
-            case "baseBB":
-                $name = "Big Blind";
-                break;
-            case "tablelow":
-                $name = "Min Buy";
-                break;
-            case "tablelimit":
-                $name = "Max Buy";
-                break;
-            case "jackpotLow":
-                $name = "Jackpot Low";
-                break;
-            case "jackpotMed":
-                $name = "Jackpot Med";
-                break;
-            case "jackpotHi":
-                $name = "Jackpot Hi";
+            case "jackpot":
+                $name = "Jackpot";
                 break;
             default:
               "";
@@ -166,8 +146,14 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $tableid = $request->tableid;
+        if($tableid != '')
+        {
+            DB::table('tpk_table')->where('tableid', '=', $tableid)->delete();
+            return redirect()->route('Table-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('Table-view')->with('success','Something wrong');                
     }
 }

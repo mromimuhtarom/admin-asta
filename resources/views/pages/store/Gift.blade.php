@@ -8,6 +8,77 @@
 
 @section('content')
 
+<style>
+.media-container {
+	position: relative;
+	display: inline-block;
+	margin: auto;
+  border-radius: 50%;
+  border: 1px solid black;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	/* vertical-align: middle */
+}
+	.media-overlay {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(180, 180, 180, 0.6);
+  }
+		#media-input {
+			display: block;
+			width: 100%;
+			height: 100%;
+			line-height: 100%;
+			opacity: 0;
+			position: relative;
+			z-index: 9;
+		}
+		.media-icon {
+			/* display: sticky; */
+      transform: translate(-1%,-90%);
+			color: #ffffff;
+			font-size: 2em;
+			height: 100%;
+			line-height: 100px;
+			position: absolute;
+			z-index: 0;
+			width: 100%;
+			text-align: center;
+		}
+	.media-object {}
+		.img-object {
+			border-radius: 50%;
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+.media-control {
+	margin-top: 30px;
+}
+	.edit-profile {}
+	.save-profile {}
+
+</style>
+
+<script type="text/javascript">
+
+  @php
+  foreach($gifts as $gf) {
+echo 'function Upload'.$gf->id.'() {';
+  echo 'var cc1'.$gf->id.' = document.getElementById("can'.$gf->id.'");';
+  echo'var fileinput'.$gf->id.' = document.getElementById("finput'.$gf->id.'");';
+  echo 'var image = new SimpleImage(fileinput'.$gf->id.');';
+  echo 'image.drawTo(cc1'.$gf->id.');';
+  echo '}';
+  }
+@endphp
+</script>
+
 
 
   <!-- Modal -->
@@ -61,11 +132,9 @@
   @endif
 
 
-
-
     <div class="table-aii">
         <div class="table-header">
-                Gold Store  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+                Gift Store  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                               <i class="fas fa-plus-circle"></i>Create Gift
                             </button>
         </div>
@@ -73,11 +142,11 @@
             <thead>
               <tr>
                 <th class="th-sm"></th>
-                <th class="th-sm">Image</th>
+                <th width="10px">Image</th>
                 <th class="th-sm">Title Gift</th>
-                <th class="th-sm">Chip Price</th>
-                <th class="th-sm">Gold Price</th>
-                <th class="th-sm">Expire</th>
+                <th class="th-sm">Price</th>
+                {{-- <th class="th-sm">Gold Price</th>
+                <th class="th-sm">Expire</th> --}}
                 <th class="th-sm">Category</th>
                 <th></th>
               </tr>
@@ -86,11 +155,39 @@
                 @foreach($gifts as $gf)
                 <tr>
                     <td></td>
-                    <td></td>
+                    <td >
+                      {{-- <form method="post" action="" enctype="multipart/form-data" id="myform"> --}}
+                          {{-- <div class='preview'>
+                            <img src="/images/gifts/{{ $gf->imageUrl	 }}" id="img" width="100" height="100">
+                          </div><br>
+                          <div >
+                              <input type="file" id="file" name="file" /><br><br>
+                              <input type="button" class="button" value="Upload" id="but_upload">
+                          </div> --}}
+                          <div class="media-container">
+                            <form method="POST" action="{{ route('GiftStore-updateimage') }}" enctype="multipart/form-data">
+                              {{  csrf_field() }}
+                              <span class="media-overlay med-ovlay{{ $gf->id }}">
+                                <input type="hidden" name="pk" value="{{ $gf->id }}">
+                                <input type="file" name="file" id="media-input" class="upload{{ $gf->id }}" accept="image/*">
+                                {{-- <i class="glyphicon glyphicon-edit media-icon"></i> --}}
+                                <i class="fas fa-edit media-icon"></i>
+                              </span>
+                              <figure class="media-object">
+                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->imageUrl }}">
+                              </figure>
+                            </div>
+                            <div class="media-control">
+                              <button class="save-profile{{ $gf->id }}">Save Gift</button>
+                            </form>
+                              <button class="edit-profile{{ $gf->id }}">Edit Gift</button>
+                            </div>
+                      {{-- </form> --}}
+                    </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('GiftStore-update') }}">{{ $gf->name }}</a></td>
                     <td><a href="#" class="usertext" data-name="chipsPrice" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->chipsPrice }}</a></td>
-                    <td><a href="#" class="usertext" data-name="diamondPrice" data-title="Gold Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->diamondPrice }}</a></td>
-                    <td><a href="#" class="usertext" data-name="expire" data-title="expire" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->expire }}</a></td>
+                    {{-- <td><a href="#" class="usertext" data-name="diamondPrice" data-title="Gold Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->diamondPrice }}</a></td>
+                    <td><a href="#" class="usertext" data-name="expire" data-title="expire" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->expire }}</a></td> --}}
                     <td><a href="#" class="category" data-name="category" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->category }}</a></td>
                     <td></td>
                 </tr>
@@ -120,6 +217,38 @@
               $('.usertext').editable({
                 mode :'popup'
               });
+
+
+              
+            @php
+              foreach($gifts as $gf) {
+                echo'$(".save-profile'.$gf->id.'").hide(0);';
+                  echo'$(".med-ovlay'.$gf->id.'").hide(0);';
+
+                  echo'$(".edit-profile'.$gf->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$gf->id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$gf->id.'").fadeIn(300);';
+                  echo'});';
+                  echo'$(".save-profile'.$gf->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$gf->id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$gf->id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".upload'.$gf->id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+		
+                      echo'reader.onload = function(e) {';
+                        echo'$(".imgupload'.$gf->id.'").attr("src", e.target.result);';
+                      echo'};';
+		
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+              }
+            @endphp
     
           }
       });

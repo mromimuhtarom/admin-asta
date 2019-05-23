@@ -8,9 +8,12 @@
     
 
     <!-- Bootstrap CSS -->
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css"> --}}
+    {{-- <link href="/css/dropzone.css" rel="stylesheet"> --}}
+
     <!-- Bootstrap core CSS -->
     <link href="/css/datatables/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
@@ -24,6 +27,7 @@
     <link rel="stylesheet" href="/css/x-editable.css">
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> 
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>  
+    {{-- <script src="/js/dropzone.js"></script> --}}
 
     <!-- x-editable (bootstrap version) -->
     <script type="text/javascript" src="/js/datatables/addons/datatables.min.js"></script>
@@ -32,6 +36,20 @@
 
     {{-- js dropzone --}}
     {{-- <script src="/js/dropzone.js"></script> --}}
+    <script>
+         function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
     <title>Document</title>
 </head>

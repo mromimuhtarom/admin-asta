@@ -7,6 +7,7 @@ use App\Group;
 use App\Log;
 use Session;
 use Carbon\Carbon;
+use App\Room;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Group::select()->orderBy('tablelimit')->get();
+        $category = Room::all();
         return view('pages.game_asta.category', compact('category'));
     }
 
@@ -39,7 +40,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $categoryname = $request->categoryName;
+        $minbuy = $request->minbuy;
+        $maxbuy = $request->maxbuy;
+        
+
+        Room::create([
+            'name' => $categoryname,
+            'min_buy'    => $minbuy,
+            'max_buy'    =>  $maxbuy,
+            'stake'      =>  '0',
+            'timer'      =>  '0'
+        ]);
+
+          return redirect()->route('Category-view')->with('success','Data Added');
+
+
     }
 
     /**
@@ -77,32 +94,26 @@ class CategoryController extends Controller
         $name  = $request->name;
         $value = $request->value;
   
-        if ($name != 'fee'){
   
-          Group::where('id', '=', $pk)->update([
-            $name => $value
-          ]);
-  
-        } else {
-  
-          Group::where('id', '=', $pk)->update([
-            $name => $value / 100
-          ]);
-  
-        }
+        Room::where('roomid', '=', $pk)->update([
+            $name => $value 
+        ]);
   
         switch ($name) {
             case "name":
-                $name = "Group Name";
+                $name = "Room Name";
                 break;
-            case "tablelow":
+            case "min_buy":
                 $name = "Min Buy";
                 break;
-            case "tablelimit":
+            case "max_buy":
                 $name = "Max Buy";
                 break;
-            case "fee":
-                $name = "Rake";
+            case "stake":
+                $name = "stake";
+                break;
+            case "timer":
+                $name = "timer";
                 break;
             default:
               "";
@@ -123,8 +134,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $roomid = $request->categoryid;
+        if($roomid != '')
+        {
+            Room::where('roomid', '=', $roomid)->delete();
+            return redirect()->route('Category-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('Category-view')->with('success','Something wrong');      
     }
 }

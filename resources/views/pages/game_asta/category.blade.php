@@ -21,7 +21,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{ route('Table-create') }}" method="POST">
+        <form action="{{ route('Category-create') }}" method="POST">
           {{  csrf_field() }}
           <div class="modal-body">
             <input type="text" name="categoryName" placeholder="Category Name"><br>
@@ -63,7 +63,7 @@
 
 
 
-  <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -75,13 +75,13 @@
         </div>
         <div class="modal-body">
           Are You Sure Want To Delete It
-          <form action="{{ route('UserAdmin-delete') }}" method="post">
+          <form action="{{ route('Category-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
-            <input type="hidden" name="category" id="category" value="">
+            <input type="hidden" name="categoryid" id="categoryid" value="">
         </div>
         <div class="modal-footer">
-            <button type="button" class="button_example-yes">Yes</button>
+            <button type="submit" class="button_example-yes">Yes</button>
           <button type="button" class="button_example-no" data-dismiss="modal">No</button>
         </div>
           </form>
@@ -106,21 +106,21 @@
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Min Buy</th>
                 <th class="th-sm">Max Buy</th>
-                <th class="th-sm">Fee</th>
-                <th class="th-sm">Action</th>
+                <th class="th-sm">Blind</th>
+                <th class="th-sm">Timer</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
                 @foreach($category as $kt)
                 <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->id }}"></td>
-                    <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->id }}" data-type="text" data-url="{{ route('Category-update')}}">{{ $kt->name }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="tablelow" data-pk="{{ $kt->id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->tablelow }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="tablelimit" data-pk="{{ $kt->id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->tablelimit }}</a></td>
-                    <td><a href="#" class="usertext" data-name="fee" data-pk="{{ $kt->id }}" data-type="text" data-url="{{ route('Category-update') }}">{{ $kt->percentGroupFee() }}</a></td>
-                    <td></td>
-                    <td><a href="#" style="color:red;" class="delete{{ $kt->id }}" id="delete" data-pk="{{ $kt->id }}" data-toggle="modal" data-target="#delete"><i class="fas fa-times"></i></a></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td>
+                    <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->roomid }}" data-type="text" data-url="{{ route('Category-update')}}">{{ $kt->name }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->min_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->max_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Blind" data-name="stake" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->stake }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->timer }}</a></td>
+                    <td><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete"><i class="fas fa-times"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -154,24 +154,24 @@
 
               @php
                   foreach($category as $kt) {
-                    echo'$(".delete'.$kt->id.'").hide();';
-                    echo'$(".deletepermission'.$kt->id.'").on("click", function() {';
-                      echo 'if($( ".deletepermission'.$kt->id.':checked" ).length > 0)';
+                    echo'$(".delete'.$kt->roomid.'").hide();';
+                    echo'$(".deletepermission'.$kt->roomid.'").on("click", function() {';
+                      echo 'if($( ".deletepermission'.$kt->roomid.':checked" ).length > 0)';
                       echo '{';
-                        echo '$(".delete'.$kt->id.'").show();';
+                        echo '$(".delete'.$kt->roomid.'").show();';
                       echo'}';
                       echo'else';
                       echo'{';
-                        echo'$(".delete'.$kt->id.'").hide();';
+                        echo'$(".delete'.$kt->roomid.'").hide();';
                       echo'}';
           
                     echo '});';
                 
-                  echo'$(".delete'.$kt->id.'").click(function(e) {';
+                  echo'$(".delete'.$kt->roomid.'").click(function(e) {';
                     echo'e.preventDefault();';
 
                     echo"var id = $(this).attr('data-pk');";
-                    echo'var test = $("#category").val(id);';
+                    echo'var test = $("#categoryid").val(id);';
                   echo'});';
                 }
               @endphp

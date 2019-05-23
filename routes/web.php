@@ -92,10 +92,13 @@ Route::middleware('authenticated')->group(function(){
             Route::get('Table-view', 'TableController@index')->name('Table-view');
             Route::post('Table-update', 'TableController@update')->name('Table-update');
             Route::post('Table-create', 'TableController@store')->name('Table-create');
+            Route::delete('Table-delete', 'TableController@destroy')->name('Table-delete');
         });
         Route::group(['prefix'  => 'Category'], function() {
             Route::get('Category-view', 'CategoryController@index')->name('Category-view');
+            Route::post('Category-create', 'CategoryController@store')->name('Category-create');
             Route::post('Category-update', 'CategoryController@update')->name('Category-update');
+            Route::delete('Category-delete', 'CategoryController@destroy')->name('Category-delete');
         });
         Route::group(['prefix'  => 'Season'], function() {
             Route::get('Season-view', 'SeasonController@index')->name('Season-view');
@@ -134,6 +137,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Gift-Store'], function() {
             Route::get('GiftStore-view', 'GiftStoreController@index')->name('GiftStore-view');
             Route::post('GiftStore-update', 'GiftStoreController@update')->name('GiftStore-update');
+            Route::post('GiftStore-updateimage', 'GiftStoreController@updateimage')->name('GiftStore-updateimage');
         });
         Route::group(['prefix'  =>  'Transaction-Store'], function() {
             Route::get('TransactionStore-view', 'TransactionStoreController@index')->name('TransactionStore-view');
