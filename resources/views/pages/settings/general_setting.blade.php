@@ -150,8 +150,8 @@
 
 <script>
   $('table.table').dataTable({
-    pageLength : 2,
-    lengthMenu: [[2, 10, 20, -1], [5, 10, 20, 'All']],
+    pageLength : 5,
+    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     columnDefs: [{
       orderable: false,
       className: 'select-checkbox',
