@@ -1,13 +1,13 @@
 
 <div class="menu-icon">
     <ul class="nav">
-        <li class="nav-item">
+        <li class="nav-item1">
             <a href="{{ route('UserAdmin-view') }}" class="h-100 w-100">
                 <div class="menu1 {{ Request::is('Admin/*') ? 'menu1 active' : null }}"></div>
             </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item2">
             <a href="{{ route('Banking-view') }}" class="h-100 w-100">
                 <div class="menu2 {{ Request::is('Transaction/*') ? 'menu2 active' : null }}"></div>
             </a>
@@ -44,13 +44,13 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('PushNotification-view') }}" style="height:100%;">
+            <a href="{{ route('PushNotification-view') }}" style="height:100%;margin-bottom:3%;">
                 <div class="menu8 {{ Request::is('Notification/*') ? 'menu8 active' : null }}"></div>
             </a>
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('GeneralSetting-view') }}" style="height:100%;">
+            <a href="{{ route('GeneralSetting-view') }}" style="height:100%; margin-bottom:3%;">
                 <div class="menu9 {{ Request::is('Settings/*') ? 'menu9 active' : null }}"></div>
             </a>
         </li>

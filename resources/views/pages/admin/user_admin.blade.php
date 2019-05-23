@@ -91,12 +91,13 @@
 
 
     <div class="table-aii">
-        <div class="table-header">
+        {{-- <div class="table-header">
                 User Admin  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
                               <i class="fas fa-plus-circle"></i>Create Admin
                             </button>
-        </div>
-         <table class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
+        </div> --}}
+         <table class="table" style="margin-left:1px;" cellspacing="0" width="100%">
+          <div class="th-table">
             <thead>
               <tr>
                 <th></th>
@@ -107,6 +108,7 @@
                 <th></th>
               </tr>
             </thead>
+          </div>
             <tbody>
                 @foreach($admin as $adm)
                 <tr>
@@ -163,7 +165,7 @@
 
 
 
-        $('table.table-striped').dataTable({
+        $('table.table').dataTable({
               // pageLength : 5,
               // lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
               // columnDefs: [{
@@ -180,6 +182,9 @@
                 style: 'os',
                 selector: 'td:first-child'
               },
+              "pagingType": "full_numbers",
+              "bInfo" : false,
+              "sDom": '<"row footer-table view-filter"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
               "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 $.ajaxSetup({
                   headers: {
