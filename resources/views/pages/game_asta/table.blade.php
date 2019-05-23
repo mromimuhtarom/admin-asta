@@ -91,9 +91,10 @@
 
     <div class="table-aii">
         <div class="table-header">
-                Table <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-                        <i class="fas fa-plus-circle"></i>Create Table
-                      </button>
+          <span>Table</span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+            <i class="fas fa-plus-circle"></i><span>Create Table</span>
+          </button>
         </div>
 
 
