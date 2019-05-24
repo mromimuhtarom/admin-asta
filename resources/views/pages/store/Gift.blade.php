@@ -13,11 +13,11 @@
 	position: relative;
 	display: inline-block;
 	margin: auto;
-  /* border-radius: 50%; */
+  border-radius: 50%;
   border: 1px solid black;
 	overflow: hidden;
-	width: 100%;
-	height: 100%;
+	width: 100px;
+	height: 100px;
 	/* vertical-align: middle */
 }
 	.media-overlay {
@@ -44,16 +44,17 @@
 			font-size: 2em;
 			height: 100%;
 			line-height: 100px;
-			position: absolute;
+      position: absolute;
 			z-index: 0;
 			width: 100%;
 			text-align: center;
 		}
 	.media-object {}
 		.img-object {
-			/* border-radius: 50%; */
-			width: 100%;
-			height: 100%;
+      border: 1px solid black;
+			border-radius: 50%;
+			width: 100px;
+			height: 100px;
 			display: block;
 		}
 
@@ -174,7 +175,7 @@ echo 'function Upload'.$gf->id.'() {';
                                 <i class="fas fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_Url }}">
+                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_url }}">
                               </figure>
                             </div>
                             <div class="media-control">
@@ -188,7 +189,7 @@ echo 'function Upload'.$gf->id.'() {';
                     <td><a href="#" class="usertext" data-name="chipsPrice" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->chipsPrice }}</a></td>
                     {{-- <td><a href="#" class="usertext" data-name="diamondPrice" data-title="Gold Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->diamondPrice }}</a></td>
                     <td><a href="#" class="usertext" data-name="expire" data-title="expire" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->expire }}</a></td> --}}
-                    <td><a href="#" class="category" data-name="category" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->category_id }}</a></td>
+                    <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
                     <td></td>
                 </tr>
                 @endforeach
@@ -224,9 +225,9 @@ echo 'function Upload'.$gf->id.'() {';
               $('.category').editable({
                 value: 0,
 				        source: [
-					        {value: 'WIN_HIGHCARD', text: 'High Card'},
-					        {value: 'WIN_PAIR', text: 'Pair'},
-					        {value: 'WIN_2PAIR', text: '2 pair'},
+					        {value: '1', text: 'Makanan'},
+					        {value: '2', text: 'Minuman'},
+					        {value: '3', text: 'Item'},
                 ]
               });
 
