@@ -58,10 +58,18 @@
 
 
     <div class="table-aii">
+        <div class="footer-table">
+                             <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
+                                <i class="fas fa-plus-circle"></i>Create Admin
+                              </button>
+        </div>
+         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
+            <thead class="th-table">
               <tr>
                 <th></th>
                 <th class="th-sm">Position (From - To)</th>
                 <th class="th-sm">Reward Chip</th>
+                <th class="th-sm">Reward Gold</th>
                 <th class="th-sm">Reward Point</th>
                 <th></th>
               </tr>

@@ -120,7 +120,6 @@
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
                     {{-- <td><a href="{{ route('UserAdmin-delete', $adm->operator_id) }}" style="color:red;" onclick="return confirm('Are you sure?')"><i class="fas fa-times"></i></a></td> --}}
                     <td><a href="#" style="color:red;" class="deleteuseradmin{{ $adm->operator_id }}" id="deleteuseradmin" data-pk="{{ $adm->operator_id }}" data-toggle="modal" data-target="#deleteuseradmin"><i class="fas fa-times"></i></a></td>
-
                 </tr>
                 @endforeach
             </tbody>

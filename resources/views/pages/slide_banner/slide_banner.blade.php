@@ -61,18 +61,10 @@
 
 
     <div class="table-aii">
-<<<<<<< HEAD
-        <div class="table-header">
-          <span>Slide Banner</span>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-            <i class="fas fa-plus-circle"></i><span>Create Slide Banner</span>
-          </button>
-=======
         <div class="footer-table">
                               <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
                                 <i class="fas fa-plus-circle"></i>Create Slide Banners
                               </button>
->>>>>>> 81d53fe56c04fbf3a1a3be404692a013ef2f6f4e
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
             <thead class="th-table">

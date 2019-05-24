@@ -478,7 +478,7 @@ table {
     background-color: #ffffff;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 2%;
+    padding: 1%;
     margin: 2%;
 }
 
@@ -519,6 +519,23 @@ table {
     padding-bottom:5%;
     border-bottom: 1px solid black;
 }
+.media-profile-reward {
+    position: relative;
+	display: inline-block;
+	margin: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+	overflow: hidden;
+	width: 30px;
+	height: 30px;
+}
+.img-profile-reward{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: block;
+}
 .aii-content-game {
     padding-left: 4%;
     padding-right: 5%;
@@ -535,6 +552,23 @@ table {
         margin-bottom: 2%;
         text-align: center;
         padding-bottom:5%;
+    }
+    .media-profile-reward {
+        position: relative;
+        display: inline-block;
+        margin: auto;
+        border-radius: 50%;
+        border: 1px solid black;
+        overflow: hidden;
+        width: 50px;
+        height: 50px;
+    }
+    .img-profile-reward{
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: block;
     }
     .pagination {
         /* border: 1px solid black; */
@@ -558,6 +592,23 @@ table {
         margin-bottom: 2%;
         padding-bottom: 1%;
     }
+    .media-profile-reward {
+        position: relative;
+        display: inline-block;
+        margin: auto;
+        border-radius: 50%;
+        border: 1px solid black;
+        overflow: hidden;
+        width: 80px;
+        height: 80px;
+    }
+    .img-profile-reward{
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        display: block;
+    }
     .pagination {
         /* border: 1px solid black; */
         width: 70%;
@@ -574,7 +625,26 @@ table {
 .smt-aii {
     width: 65%;
 }
-
+/* user bank transaction */
+.detail-banktransaction {
+    background: #000000;
+    width: 100%;
+    color: #ffffff;
+    border-radius: 10px;
+}
+.decline-banktransaction {
+    background: #ff0000;
+    width: 100%;
+    color: #ffffff;
+    border-radius: 10px;    
+}
+.approve-banktransaction {
+    background: #00855b;
+    width: 100%;
+    color: #ffffff;
+    border-radius: 10px; 
+}
+/* end user bank transaction */
 
 /* menu game asta poker */
 .add{
@@ -587,7 +657,7 @@ table {
     transform: translate(20%,80%);
 }
 .add-btn-smt{
-    transform: translate(2%,80%);
+    transform: translate(1.5%,80%);
     font-weight: bold;
     color: #ffffff;
     font-size: 100%;
@@ -703,10 +773,18 @@ table {
     border-radius: 10px;
 } */
 .th-table {
-    border-radius: 10px;
+    border-radius: 100px;
     width: 100%;
+    color: #ffffff;
     background: #4477b2;
 }
+table th:first-child{
+    border-radius:5px 0 0 5px;
+  }
+  
+  table th:last-child{
+    border-radius:0 5px 5px 0;
+  }
 
 .margin-left {
     margin-left: 1%;
