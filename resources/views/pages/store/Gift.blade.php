@@ -174,7 +174,7 @@ echo 'function Upload'.$gf->id.'() {';
                                 <i class="fas fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->imageUrl }}">
+                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_Url }}">
                               </figure>
                             </div>
                             <div class="media-control">
@@ -188,7 +188,7 @@ echo 'function Upload'.$gf->id.'() {';
                     <td><a href="#" class="usertext" data-name="chipsPrice" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->chipsPrice }}</a></td>
                     {{-- <td><a href="#" class="usertext" data-name="diamondPrice" data-title="Gold Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->diamondPrice }}</a></td>
                     <td><a href="#" class="usertext" data-name="expire" data-title="expire" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->expire }}</a></td> --}}
-                    <td><a href="#" class="category" data-name="category" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->category }}</a></td>
+                    <td><a href="#" class="category" data-name="category" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->category_id }}</a></td>
                     <td></td>
                 </tr>
                 @endforeach
@@ -221,8 +221,15 @@ echo 'function Upload'.$gf->id.'() {';
                 mode :'popup'
               });
 
+              $('.category').editable({
+                value: 0,
+				        source: [
+					        {value: 'WIN_HIGHCARD', text: 'High Card'},
+					        {value: 'WIN_PAIR', text: 'Pair'},
+					        {value: 'WIN_2PAIR', text: '2 pair'},
+                ]
+              });
 
-              
             @php
               foreach($gifts as $gf) {
                 echo'$(".save-profile'.$gf->id.'").hide(0);';
