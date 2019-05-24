@@ -5,7 +5,7 @@
 <div class="sidebar-menu">
     <ul class="sidebar-nav">
         <li class="sidebar-item {{ Request::is('Admin/User-Admin/*') ? 'sidebaritem active' : null }}">
-            <a href="{{ route('UserAdmin-view') }}" class="{{ Request::is('Admin/User-Admin/*') ? 'sidebaritem active' : null }}">User Admin</a>
+            <a href="{{ route('UserAdmin-view') }}" class="{{ Request::is('Admin/User-Admin/*') ? 'sidebaritem active' : null }} h-100 w-100">User Admin</a>
         </li>
         <li class="sidebar-item {{ Request::is('Admin/Role-Admin/*') ? 'sidebaritem active' : null }}">
             <a href="{{ route('Role-view') }}" class="{{ Request::is('Admin/Role-Admin/*') ? 'sidebaritem active' : null }}">Role Admin</a>

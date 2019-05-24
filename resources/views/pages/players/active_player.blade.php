@@ -8,12 +8,14 @@
 @section('content')
 <div class="row">
     <div class="col">
-        <div class="table-aii" style=" display: table; width: auto;">
-          <div class="table-header">
+        <div class="table-aii">
+          <div class="footer-table">
+            <div class="add-btn-smt">
               Players Online
+            </div>
           </div>
-          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
-            <thead>
+          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
+            <thead class="th-table">
               <tr>
                 <th></th>
                 <th class="th-sm">User Player</th>
@@ -64,12 +66,14 @@
         </div>      
     </div>
     <div class="col">
-        <div class="table-aii" style=" display: table; width: auto;">
-          <div class="table-header">
-              Players Offline
+        <div class="table-aii">
+          <div class="footer-table">
+            <div class="add-btn-smt">
+                Players Offline
+            </div>
           </div>
-          <table id="dt-material-checkbox" class="table display" style="margin-left:1px;" cellspacing="0" width="100%">
-            <thead>
+          <table id="dt-material-checkbox" class="table display" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
+            <thead class="th-table">
               <tr>
                 <th></th>
                 <th class="th-sm">User Player</th>
@@ -125,6 +129,9 @@
           className: 'select-checkbox',
           targets: 0
           }],
+          "pagingType": "full_numbers",
+          "bInfo" : false,
+          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
           select: {
           style: 'os',
           selector: 'td:first-child'

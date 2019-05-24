@@ -8,12 +8,14 @@
 @section('content')
 
 <div class="cards">
-  <div class="card">
-    <div class="table-header">
-      System Settings
+  <div class="table-aii">
+    <div class="footer-table">
+      <div class="add-btn-smt">
+        System Settings
+      </div>
     </div>
-    <table class="table table-striped" style="margin-left:1px; display: table; width: auto;" cellspacing="0" width="100%">
-      <thead>
+    <table class="table table-striped" style="margin-left:1px; display: table; width: auto;margin-top:-9%; " cellspacing="0" width="100%">
+      <thead class="th-table">
         <tr>
           <th class="th-sm"></th>
           <th class="th-sm">Name</th>
@@ -45,12 +47,14 @@
     </table>
   </div>
 
-  <div class="card">
-    <div class="table-header" style=" display: table; width: auto;">
-      Bank Settings
+  <div class="table-aii"> 
+    <div class="footer-table">
+      <div class="add-btn-smt">
+        Bank Settings
+      </div>
     </div>
-    <table class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
-      <thead>
+    <table class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+      <thead class="th-table">
         <tr>
           <th class="th-sm"></th>
           <th class="th-sm">Name</th>
@@ -69,12 +73,14 @@
     </table>
   </div>
 
-  <div class="card">
-      <div class="table-header">
+  <div class="table-aii">
+      <div class="footer-table">
+        <div class="add-btn-smt">
           Info Settings
+        </div>
     </div>
-    <table class="table display" style="margin-left:1px;" cellspacing="0" width="100%">
-      <thead>
+    <table class="table display" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+      <thead class="th-table">
         <tr>
           <th class="th-sm"></th>
           <th class="th-sm">Name</th>
@@ -111,12 +117,14 @@
     </table>
   </div>
 
-  <div class="card">
-    <div class="table-header" style=" display: table; width: auto;">
-      CS & Legal Settings
+  <div class="table-aii">
+    <div class="footer-table">
+      <div class="add-btn-smt">
+        CS & Legal Settings
+      </div>
     </div>
-    <table class="table display" style="margin-left:1px;" cellspacing="0" width="100%">
-      <thead>
+    <table class="table display" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
+      <thead class="th-table">
         <tr>
           <th class="th-sm"></th>
           <th class="th-sm">Name</th>
@@ -157,6 +165,9 @@
       className: 'select-checkbox',
       targets: 0
     }],
+    "pagingType": "full_numbers",
+    "bInfo" : false,
+    "sDom": '<"row view-filter smt-aii add-smt"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager-smt"<"col-sm-12"<"bottom"p>>>',
     select: {
       style: 'os',
       selector: 'td:first-child'
