@@ -84,9 +84,10 @@
 
     <div class="table-aii">
         <div class="table-header">
-                User Admin  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-                                <i class="fas fa-plus-circle"></i>Create Role Admin
-                            </button>
+          <span>User Admin</span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+            <i class="fas fa-plus-circle"></i><span>Create Role Admin</span>
+          </button>
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>

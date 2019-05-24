@@ -95,9 +95,10 @@
 
     <div class="table-aii">
         <div class="table-header">
-                Category  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-                            <i class="fas fa-plus-circle"></i>Create Category
-                          </button>
+          <span>Category</span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+            <i class="fas fa-plus-circle"></i><span>Create Category</span>
+          </button>
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>

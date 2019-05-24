@@ -64,9 +64,10 @@
 
     <div class="table-aii" style=" display: table; width: auto;">
         <div class="table-header">
-                Tournament  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-                              <i class="fas fa-plus-circle"></i>Create Tournament
-                            </button>
+          <span>Tournament</span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+            <i class="fas fa-plus-circle"></i><span>Create Tournament</span>
+          </button>
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
             <thead>
