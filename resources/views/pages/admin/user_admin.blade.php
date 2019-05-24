@@ -183,15 +183,6 @@
                 style: 'os',
                 selector: 'td:first-child'
               },
-              dom: 'Bfrtip',
-              buttons: [
-                {
-                  text: 'My button',
-                  action: function ( e, dt, node, config ) {
-                    alert( 'Button activated' );
-                  }
-                }
-              ],
               "pagingType": "full_numbers",
               "bInfo" : false,
               "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',

@@ -9,11 +9,13 @@
     <div class="row">
         <div class="col">
             <div class="table-aii">
-                <div class="table-header">
-                    Money Transactions
+                <div class="footer-table">
+                    <div class="add-btn-smt">
+                        Money Transactions
+                    </div>
                 </div>
-                <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
-                    <thead>
+                <table id="dt-material-checkbox" class="table display" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+                    <thead class="th-table">
                     <tr>
                         <th></th>
                         <th class="th-sm">Best Offers</th>
@@ -40,11 +42,13 @@
         </div>
         <div class="col">
             <div class="table-aii">
-                <div class="table-header">
-                    Player Transactions
+                <div class="footer-table">
+                    <div class="add-btn-smt">
+                        Player Transactions
+                    </div>
                 </div>
-                <table id="dt-material-checkbox" class="table display" style="margin-left:1px;" cellspacing="0" width="100%">
-                    <thead>
+                <table id="dt-material-checkbox" class="table display" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+                    <thead class="th-table">
                     <tr>
                         <th></th>
                         <th class="th-sm">Best Offers</th>
@@ -73,11 +77,13 @@
     <div class="row">
         <div class="col">
             <div class="table-aii">
-                <div class="table-header">
-                    Daily Gift Transaction
+                <div class="footer-table">
+                    <div class="add-btn-smt">
+                        Daily Gift Transaction
+                    </div>
                 </div>
-                <table id="dt-material-checkbox" class="table display" style="margin-left:1px;" cellspacing="0" width="100%">
-                    <thead>
+                <table id="dt-material-checkbox" class="table big" style="margin-left:1px; margin-top:-5%;" cellspacing="0" width="100%">
+                    <thead class="th-table">
                     <tr>
                         <th></th>
                         <th class="th-sm">Best Offers</th>
@@ -104,12 +110,41 @@
         </div>
     </div>
 <script>
-      table = $('table.table').dataTable({
+      table = $('table.big').dataTable({
           columnDefs: [{
           orderable: false,
           className: 'select-checkbox',
           targets: 0
           }],
+          "pagingType": "full_numbers",
+          "bInfo" : false,
+          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
+          select: {
+          style: 'os',
+          selector: 'td:first-child'
+          },
+          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
+
+              $('.usertext').editable({
+                mode :'popup'
+              });
+    
+          }
+      });
+      table = $('table.display').dataTable({
+          columnDefs: [{
+          orderable: false,
+          className: 'select-checkbox',
+          targets: 0
+          }],
+          "pagingType": "full_numbers",
+          "bInfo" : false,
+          "sDom": '<"row view-filter smt-aii add-smt"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager-smt"<"col-sm-12"<"bottom"p>>>',
           select: {
           style: 'os',
           selector: 'td:first-child'

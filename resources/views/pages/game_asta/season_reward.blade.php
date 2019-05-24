@@ -58,19 +58,10 @@
 
 
     <div class="table-aii">
-        <div class="table-header">
-          <span>Season Reward</span>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-            <i class="fas fa-plus-circle"></i><span>Create Admin</span>
-          </button>
-        </div>
-         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
-            <thead>
               <tr>
                 <th></th>
                 <th class="th-sm">Position (From - To)</th>
                 <th class="th-sm">Reward Chip</th>
-                <th class="th-sm">Reward Gold</th>
                 <th class="th-sm">Reward Point</th>
                 <th></th>
               </tr>
@@ -108,6 +99,9 @@
           className: 'select-checkbox',
           targets: 0
           }],
+          "pagingType": "full_numbers",
+          "bInfo" : false,
+          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
           select: {
           style: 'os',
           selector: 'td:first-child'

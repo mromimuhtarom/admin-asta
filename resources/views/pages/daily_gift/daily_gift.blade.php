@@ -59,14 +59,13 @@
 
 
 <div class="table-aii">
-    <div class="table-header">
-      <span>Daily Gift</span>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-        <i class="fas fa-plus-circle"></i><span>Create Daily Gift</span>
-      </button>
+    <div class="footer-table">
+                        <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
+                          <i class="fas fa-plus-circle"></i>Create Daily Gift
+                        </button>
     </div>
-     <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
-        <thead>
+     <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
+        <thead class="th-table">
           <tr>
             <th></th>
             <th class="th-sm">Title Gift</th>
@@ -96,6 +95,9 @@
           className: 'select-checkbox',
           targets: 0
           }],
+          "pagingType": "full_numbers",
+          "bInfo" : false,
+          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
           select: {
           style: 'os',
           selector: 'td:first-child'

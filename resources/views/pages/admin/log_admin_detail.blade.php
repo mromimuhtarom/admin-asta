@@ -168,30 +168,6 @@
                 }
               });
 
-              @php
-                  foreach($roles as $role) {
-                    echo'$(".delete'.$role->role_id.'").hide();';
-                    echo'$(".deletepermission'.$role->role_id.'").on("click", function() {';
-                      echo 'if($( ".deletepermission'.$role->role_id.':checked" ).length > 0)';
-                      echo '{';
-                        echo '$(".delete'.$role->role_id.'").show();';
-                      echo'}';
-                      echo'else';
-                      echo'{';
-                        echo'$(".delete'.$role->role_id.'").hide();';
-                      echo'}';
-          
-                    echo '});';
-                
-                  echo'$(".delete'.$role->role_id.'").click(function(e) {';
-                    echo'e.preventDefault();';
-
-                    echo"var id = $(this).attr('data-pk');";
-                    echo'var test = $("#roleid").val(id);';
-                  echo'});';
-                }
-              @endphp
-
               $('.usertext').editable({
                 mode :'popup'
               });
