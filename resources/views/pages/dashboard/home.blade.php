@@ -252,21 +252,27 @@
         </div>
     </div>
     <div id="total1">
-        <div class="row h-100 w-100">
-            <div class="col">
-
-                <div class="total-played">
-                    <div class="title-table size7 font-title">
+            <div class="dashboard-games">
+                <div class="game-title">
+                    <h3>
                         Total game played
-                    </div>
-                    <div class="content-table size4">
-
-                        <div class="content-game">
-                            <div class="font-player-total">63 Player</div>
-                            <div class="img-gamelogo"><img src="/images/asset/poker.png" width="100%" height="90%" alt=""></div>
-                            <div class="font-game-name">Asta Poker</div>
-                        </div>                        
-                    </div>
+                    </h3>
+                </div>
+                <div class="game-table">
+                    @foreach ($gameName as $game)
+                        <div class="game-table-detail">
+                            {{-- <div class="font-player-total">63 Player</div> --}}
+                            <div>
+                                @foreach ($rooms as $room)
+                                    <p>name : {{$room->harga}} | rooms : {{$room->room_id}}</p>
+                                @endforeach
+                            </div>
+                            <div>
+                                <div class="img-gamelogo"><img src="/images/games/{{$game->id}}.png" width="100%" height="90%" alt=""></div>
+                                <h4>Asta {{ $game->name }}</h4>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
 
                 {{-- <div class="total-countryplay">
@@ -301,7 +307,6 @@
 
 
             </div>
-        </div>
     </div>
 </div>
 

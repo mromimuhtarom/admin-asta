@@ -189,11 +189,48 @@
     /* border: 1px solid black; */
     width: 100%;
 }
+
 #total1 {
-    height: 900px;
-    /* border: 1px solid black; */
     width: 100%;
 }
+
+.dashboard-games .game-title {
+    padding: 1em;
+    border: 1px solid black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: none;
+}
+
+.game-table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid black;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 2%;
+}
+
+.game-table .game-table-detail {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+.game-table .game-table-detail div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-table .game-table-detail p {
+    font-size: 1em;
+    text-align: left;
+}
+
 .total-device {
     float: left;
     height: 70%;

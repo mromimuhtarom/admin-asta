@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -13,7 +14,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.home');
+        $gameName   = DB::table('game')->get();
+        $rooms      = DB::table('dmq_table')->join('dmq_room', 'dmq_room.roomid', '=', 'dmq_table.roomid')
+                        ->select(DB::raw('count("dmq_table.roomid") as room_id'), 'dmq_room.name as harga')
+                        ->groupBy('dmq_table.roomid')->get();
+                    
+        return view('pages.dashboard.home', compact('gameName', 'rooms'));
     }
 
     /**
