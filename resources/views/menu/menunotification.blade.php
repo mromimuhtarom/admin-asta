@@ -19,10 +19,10 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Notification/Push-Notification/*') ? 'active' : null }}">
         <a   href="{{ route('PushNotification-view') }}" title="Push Notification"> Push Notification </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Notification/Email-Notification/*') ? 'active' : null }}">
         <a   href="{{ route('EmailNotification-view') }}" title="Email Notification"> Email Notification </a>
     </li>
 </ul>

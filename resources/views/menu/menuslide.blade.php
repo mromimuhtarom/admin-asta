@@ -16,7 +16,7 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Slide-Banner/SlideBanner/*') ? 'active' : null }}">
         <a   href="{{ route('SlideBanner-view') }}" title="Slide Banner"> Slide Banner </a>
     </li>
 </ul>

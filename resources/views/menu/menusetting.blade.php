@@ -19,10 +19,10 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Settings/General-Setting/*') ? 'active' : null }}">
         <a   href="{{ route('GeneralSetting-view') }}" title="General Settings"> General Settings </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Settings/Game-Setting/*') ? 'active' : null }}">
         <a   href="{{ route('GeneralSetting-view') }}" title="Game Settings"> Game Settings </a>
     </li>
 </ul>

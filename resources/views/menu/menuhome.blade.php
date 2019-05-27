@@ -19,7 +19,7 @@
     </a>
     <ul aria-expanded="true" class="sa-sub-nav collapse">
         <!-- second-level -->
-        <li class="active">
+        <li class="{{ Request::is('Dashboard/home') ? 'active' : null }}">
             <a   href="{{ route('home') }}" title="Analytics Dashboard"> Analytics Dashboard </a>
     
         </li><!-- second-level -->

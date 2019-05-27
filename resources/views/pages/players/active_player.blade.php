@@ -1,7 +1,7 @@
 @extends('index')
 
-@section('sidebarmenu')
-    @include('menu.menuplayer')
+@section('namepages')
+<h1 class="page-header"><i class="fa-fw fa fa-home"></i>  Players <span>> Active Players</span></h1>
 @endsection
 
 

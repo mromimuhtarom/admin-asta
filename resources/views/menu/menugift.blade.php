@@ -16,7 +16,7 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Daily-Gift/Daily-Gift/*') ? 'active' : null }}">
         <a   href="{{ route('DailyGift-view') }}" title="Daily Gift"> Daily Gift </a>
     </li>
 </ul>

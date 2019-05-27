@@ -31,22 +31,22 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Game-Asta-Poker/Table/*') ? 'active' : null }}">
         <a   href="{{ route('Table-view') }}" title="Table"> Table </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Game-Asta-Poker/Category/*') ? 'active' : null }}">
         <a   href="{{ route('Category-view') }}" title="Category"> Category </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
         <a   href="{{ route('Season-view') }}" title="Season"> Season </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
         <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"> Season Reward </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Game-Asta-Poker/Tournament/*') ? 'active' : null }}">
         <a   href="{{ route('Tournament-view') }}" title="Tournament"> Tournament </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
         <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"> Jackpot Paytable </a>
     </li>
 </ul>

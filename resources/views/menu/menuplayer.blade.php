@@ -37,28 +37,28 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Players/Active-Players/*') ? 'active' : null }}">
         <a   href="{{ route('Active-view') }}" title="Active Player"> Active Player </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Players/High-Roller/*') ? 'active' : null }}">
         <a   href="{{ route('HighRoller-view') }}" title="High Rollers"> High Rollers </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Players/Registered-Player/*') ? 'active' : null }}">
         <a   href="{{ route('RegisteredPlayer-view') }}" title="Registered Player"> Registered Player </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Players/Guest/*') ? 'active' : null }}">
         <a   href="{{ route('Guest-view') }}" title="Guest"> Guest </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Players/Bots/*') ? 'active' : null }}">
         <a   href="{{ route('Bots-view') }}" title="Bots"> Bots </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Players/Report/*') ? 'active' : null }}">
         <a   href="{{ route('Report-view') }}" title="Report"> Report </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Players/Chip-Player/*') ? 'active' : null }}">
         <a   href="{{ route('Chip-view') }}" title="Chip Player"> Chip Player </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Players/Gold-Player/*') ? 'active' : null }}">
         <a   href="{{ route('Gold-view') }}" title="Gold Player"> Gold Player </a>
     </li>
 </ul>
