@@ -97,7 +97,7 @@
             @include('menu.menusetting')
         </li>
 
-        <li class="top-menu-invisible "><!-- first-level -->
+        {{-- <li class="top-menu-invisible "><!-- first-level -->
 <a class="has-arrow"   href="layouts.html" title="SmartAdmin Intel"><span class="fa fa-lg fa-fw fa-cube text-blue"></span> <span class="menu-item-parent">SmartAdmin Intel</span> 
 <b class="collapse-sign">
     <em class="fa fa-plus-square-o"></em>
@@ -529,9 +529,9 @@
     <em class="fa fa-plus-square-o"></em>
     <em class="fa fa-minus-square-o"></em>
 </b>
-</a>
+</a> --}}
 
-<ul class="chat-users-dropdown">
+{{-- <ul class="chat-users-dropdown">
 <li>
 <div class="display-users">
     <input class="form-control chat-user-filter" placeholder="Filter" type="text">
@@ -670,6 +670,6 @@
     <a href="chat.html" class="btn btn-xs sa-btn-dark btn-block chat-learnmore-btn">About the API</a>                    
 </div>
 </li>
-</ul>
+</ul> --}}
 </li>  
 </ul>

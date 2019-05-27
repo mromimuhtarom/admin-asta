@@ -209,8 +209,10 @@
 			<div>
 				<h1 class="page-header"><i class="fa-fw fa fa-home"></i>  Dashboard <span>> My Dashboard</span></h1>				
 			</div>
-			@yield('content')
-		</div>
+        </div>
+        <div>
+            @yield('content')
+        </div>
         </div>
 
 
