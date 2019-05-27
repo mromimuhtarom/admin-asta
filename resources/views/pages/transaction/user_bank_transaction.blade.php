@@ -40,13 +40,40 @@
                 </thead>
                 <tbody>
                         @foreach ($rewardRequest as $reward)
-                        {{-- @if($reward->status == 0) --}}
-                    <tr>
-                        <td></td>
-                        <td>
-
-                            <!-- Modal -->
+                        <!-- Modal -->
                             <div class="modal fade" id="view-detail{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="margin-top:5%;">
+                                            <h5 class="modal-title" id="exampleModalLabel">Create Gift</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="" method="POST">
+                                            {{  csrf_field() }}
+                                        <div class="modal-body">
+                                            {{-- <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" /><br><br>
+                                            <input type='file' onchange="readURL(this);" /><br><br>
+                                            <input type="text" name="title" placeholder="Title Gift" required><br>
+                                            <input type="number" name="expire" placeholder="expire" required><br>
+                                            <select name="transaction">
+                                                <option>Category</option>
+                                                <option value=""></option>
+                                            </select> --}}
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {{-- @if($reward->status == 0) --}}
+                            <!-- Modal -->
+                            <div class="modal fade" id="decline{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header" style="margin-top:5%;">
@@ -75,6 +102,39 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="approve{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="margin-top:5%;">
+                                            <h5 class="modal-title" id="exampleModalLabel">Create Gift</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="" method="POST">
+                                            {{  csrf_field() }}
+                                        <div class="modal-body">
+                                            <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" /><br><br>
+                                            <input type='file' onchange="readURL(this);" /><br><br>
+                                            <input type="text" name="title" placeholder="Title Gift" required><br>
+                                            <input type="number" name="expire" placeholder="expire" required><br>
+                                            <select name="transaction">
+                                                <option>Category</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    <tr>
+                        <td></td>
+                        <td>
 
 
                             <div class="row">
@@ -98,8 +158,8 @@
                             </div>
                             <div class="row no-gutters">
                                 <div class="col-2"><input type="button" value="View Detail" class="detail-banktransaction" data-toggle="modal" data-target="#view-detail{{ $reward->id }}"></div>
-                                <div class="col-2"><input type="button" value="Decline" class="decline-banktransaction"></div>
-                                <div class="col-2"><input type="button" value="Approve" class="approve-banktransaction"></div>
+                                <div class="col-2"><input type="button" value="Decline" class="decline-banktransaction" data-toggle="modal" data-target="#decline{{ $reward->id }}"></div>
+                                <div class="col-2"><input type="button" value="Approve" class="approve-banktransaction" data-toggle="modal" data-target="#approve{{ $reward->id }}""></div>
                                 <div class="col" align="right">Pending</div>
                             </div>
                         </td>
