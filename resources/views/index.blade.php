@@ -10,7 +10,8 @@
   <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" media="screen, print" href="/assets/vendors/vendors.bundle.css">
-  <link rel="stylesheet" media="screen, print" href="/assets/app/app.bundle.css">
+	<link rel="stylesheet" media="screen, print" href="/assets/app/app.bundle.css">
+	<link rel="stylesheet" type="text/css" href="/assets/pages/datatables.css">
 	<link rel="stylesheet" type="text/css" href="/assets/pages/homepage.css">
 
 </head>
@@ -279,7 +280,9 @@
   <!-- END .sa-wrapper -->
 
   <script src="/assets/vendors/vendors.bundle.js"></script>
-  <script src="/assets/app/app.bundle.js"></script>
+	<script src="/assets/app/app.bundle.js"></script>
+	
+	@yield('script')
   
 <script>
   $(function () {

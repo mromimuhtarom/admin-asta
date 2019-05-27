@@ -1,14 +1,8 @@
 @extends('index')
 
-@section('sidebarmenu')
-@include('menu.menuplayer')    
-@endsection
-
 @section('content')
 
 <!-- Button trigger modal -->
-
-  
   <!-- Modal -->
   <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -113,7 +107,9 @@
         </tbody>
       </table>
      
-</div> 
+</div>
+
+
 <script type="text/javascript">
   $(document).ready(function() {
       $.ajaxSetup({
