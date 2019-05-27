@@ -13,6 +13,7 @@
   <link rel="stylesheet" media="screen, print" href="/assets/app/app.bundle.css">
   <link rel="stylesheet" type="text/css" href="/assets/pages/homepage.css">
   <link rel="stylesheet" type="text/css" href="/assets/pages/datatables.css">
+  <link rel="stylesheet" href="/css/style1.css">
   <script src="/assets/vendors/vendors.bundle.js"></script>
   <script src="/assets/app/app.bundle.js"></script>
 
