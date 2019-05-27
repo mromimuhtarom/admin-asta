@@ -39,7 +39,7 @@
       <header>
         <div class="widget-header">	
           <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-          <h2>Hide / Show Columns </h2>
+          <h2>High Rollers</h2>
         </div>
 
         <div class="widget-toolbar">

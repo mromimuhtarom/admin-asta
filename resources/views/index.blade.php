@@ -284,7 +284,8 @@
   </div>
   <!-- END .sa-wrapper -->
 
- 
+  <script src="/assets/vendors/vendors.bundle.js"></script>
+	<script src="/assets/app/app.bundle.js"></script>
   
 <script>
   $(function () {
