@@ -16,6 +16,9 @@ Route::get('/', function () {
 })->middleware('home');
 Route::post('login', 'LoginController@login')->name('login');
 
+Route::get('/datatables', function () {
+    return view('design.datatables');
+});
 Route::middleware('authenticated')->group(function(){
     Route::group(['prefix' => 'Dashboard'], function() {
         Route::get('/home', 'DashboardController@index')->name('home');

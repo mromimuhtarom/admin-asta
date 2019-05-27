@@ -1,9 +1,8 @@
 @extends('index')
 
-@section('sidebarmenu')
-    @include('menu.menuhome')
-@endsection
-
+@section('namepages')
+<h1 class="page-header"><i class="fa-fw fa fa-home"></i>  Dashboard <span>> My Dashboard</span></h1>
+@endsection	
 @section('content')
 <link rel="stylesheet" href="/css/dashboard.css">
 <link rel="stylesheet" href="/css/ring_chart.css">

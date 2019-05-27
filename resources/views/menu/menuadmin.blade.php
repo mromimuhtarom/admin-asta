@@ -22,13 +22,13 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Admin/User-Admin/*') ? 'active' : null }}">
         <a   href="{{ route('UserAdmin-view') }}" title="User Admin"> User Admin </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Admin/Role-Admin/*') ? 'active' : null }}">
         <a   href="{{ route('Role-view') }}" title="Role Admin"> Role Admin </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Admin/Log-Admin/*') ? 'active' : null }}">
         <a   href="{{ route('Log-view') }}" title="Log Admin"> Log Admin </a>
     </li>
 </ul>

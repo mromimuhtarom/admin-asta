@@ -19,10 +19,10 @@
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    <li class="">
+    <li class="{{ Request::is('Transaction/Banking_Transaction/*') ? 'active' : null }}">
         <a   href="{{ route('Banking-view') }}" title="Banking Transaction"> Banking Transaction </a>
     </li>
-    <li class="">
+    <li class="{{ Request::is('Transaction/User_Banking_Transaction/*') ? 'active' : null }}">
         <a   href="{{ route('UserBank-view') }}" title="User Bank Transaction"> User Bank Transaction </a>
     </li>
 </ul>
