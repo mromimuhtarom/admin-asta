@@ -1,4 +1,4 @@
-<div class="menu-name">
+{{-- <div class="menu-name">
         STORE
         <hr>
 </div>
@@ -29,4 +29,36 @@
             <a href="{{ route('ReportStore-view') }}" class="{{ Request::is('store/Report-Store/*') ? 'sidebaritem active' : null }}">Report Store</a>
         </li>
     </ul>
-</div>
+</div> --}}
+<a class="has-arrow"   href="index.html" title="Store"><span class="fa fa-lg fa-fw fa-cubes"></span> <span class="menu-item-parent">Store</span> 
+    <b class="collapse-sign">
+        <em class="fa fa-plus-square-o"></em>
+        <em class="fa fa-minus-square-o"></em>
+    </b>
+</a>
+<ul aria-expanded="true" class="sa-sub-nav collapse">
+    <li class="">
+        <a   href="{{ route('BestOffer-view') }}" title="Best Offer"> Best Offer </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('ChipStore-view') }}" title="Chip Store"> Chip Store </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('GoldStore-view') }}" title="Gold Store"> Gold Store </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('GoodsStore-view') }}" title="Goods Store"> Goods Store </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('GiftStore-view') }}" title="Gift"> Gift </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('TransactionStore-view') }}" title="Transaction Store"> Transaction Store </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('PaymentStore-view') }}" title="Payment Store"> Payment Store </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('ReportStore-view') }}" title="Report Store"> Report Store </a>
+    </li>
+</ul>

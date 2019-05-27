@@ -1,4 +1,4 @@
-<div class="menu-name">
+{{-- <div class="menu-name">
         PLAYERS
         <hr>
 </div>
@@ -29,4 +29,36 @@
             <a href="{{ route('Gold-view') }}" class="{{ Request::is('Players/Gold-Player/*') ? 'sidebaritem active' : null }}">Gold Player</a>
         </li>
     </ul>
-</div>
+</div> --}}
+<a class="has-arrow"   href="index.html" title="Players"><span class="fa fa-lg fa-fw fa-group"></span> <span class="menu-item-parent">Players</span> 
+    <b class="collapse-sign">
+        <em class="fa fa-plus-square-o"></em>
+        <em class="fa fa-minus-square-o"></em>
+    </b>
+</a>
+<ul aria-expanded="true" class="sa-sub-nav collapse">
+    <li class="">
+        <a   href="{{ route('Active-view') }}" title="Active Player"> Active Player </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('HighRoller-view') }}" title="High Rollers"> High Rollers </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('RegisteredPlayer-view') }}" title="Registered Player"> Registered Player </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Guest-view') }}" title="Guest"> Guest </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Bots-view') }}" title="Bots"> Bots </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Report-view') }}" title="Report"> Report </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Chip-view') }}" title="Chip Player"> Chip Player </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Gold-view') }}" title="Gold Player"> Gold Player </a>
+    </li>
+</ul>

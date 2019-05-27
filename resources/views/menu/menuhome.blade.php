@@ -1,26 +1,34 @@
-<div class="menu-name">
-        DASHBOARD
-        <hr>
-</div>
-<div class="sidebar-menu">
-    <ul class="sidebar-nav">
-        <li class="sidebar-item">
-            <a href="#banking">Banking</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#player">Players</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#slide-banner">Slide Banner</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#slide-banner">Daily Gift</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#game">Game</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#store">Store</a>
-        </li>
+    {{-- <!-- second-level -->
+    <li class="active">
+        <a   href="index.html" title="Analytics Dashboard"> Analytics Dashboard </a>
+
+    </li><!-- second-level -->
+    <li class="">
+        <a   href="dashboard-marketing.html" title="Marketing Dashboard"> Marketing Dashboard </a>
+
+    </li><!-- second-level -->
+    <li class="">
+        <a   href="dashboard-social.html" title="Social Wall"> Social Wall </a>
+
+    </li>  --}}
+    <a class="has-arrow"   href="index.html" title="Dashboard"><span class="fa fa-lg fa-fw fa-home"></span> <span class="menu-item-parent">Dashboard</span> 
+        <b class="collapse-sign">
+            <em class="fa fa-plus-square-o"></em>
+            <em class="fa fa-minus-square-o"></em>
+        </b>
+    </a>
+    <ul aria-expanded="true" class="sa-sub-nav collapse">
+        <!-- second-level -->
+        <li class="active">
+            <a   href="index.html" title="Analytics Dashboard"> Analytics Dashboard </a>
+    
+        </li><!-- second-level -->
+        <li class="">
+            <a   href="dashboard-marketing.html" title="Marketing Dashboard"> Marketing Dashboard </a>
+    
+        </li><!-- second-level -->
+        <li class="">
+            <a   href="dashboard-social.html" title="Social Wall"> Social Wall </a>
+    
+        </li>      
     </ul>
-</div>
