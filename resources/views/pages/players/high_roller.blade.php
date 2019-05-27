@@ -1,16 +1,16 @@
 @extends('index')
-
-@section('sidebarmenu')
-    @include('menu.menuplayer')
+@section('namepages')
+<h1 class="page-header"><i class="fa-fw fa fa-home"></i>  Players <span>> High Rollers</span></h1>
 @endsection
+
 
 @section('content')
   <div class="table-aii">
-    <div class="footer-table">
+    {{-- <div class="footer-table">
       <div class="add-btn-smt">
         Hight Roller
       </div>
-    </div>
+    </div> --}}
      <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
         <thead class="th-table">
           <tr>

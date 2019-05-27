@@ -207,8 +207,8 @@
         <div class="sa-content">
 		<div class="d-flex w-100 home-header">
 			<div>
-				<h1 class="page-header"><i class="fa-fw fa fa-home"></i>  Dashboard <span>> My Dashboard</span></h1>				
-			</div>
+                @yield('namepages')				
+            </div>
         </div>
         <div>
             @yield('content')
