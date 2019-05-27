@@ -1,4 +1,4 @@
-<div class="menu-name">
+{{-- <div class="menu-name">
     SETTINGS
     <hr>
 </div>
@@ -10,8 +10,19 @@
     <li class="sidebar-item {{ Request::is('Settings/Game-Setting/*') ? 'sidebaritem active' : null }}">
         <a href="{{ route('GameSetting-view') }}" class="{{ Request::is('Settings/Game-Setting/*') ? 'sidebaritem active' : null }}">Game Settings</a>
     </li>
-    {{-- <li class="sidebar-item {{ Request::is('Settings/Admin-Setting/*') ? 'sidebaritem active' : null }}">
-        <a href="{{ route('AdminSetting-view') }}" class="{{ Request::is('Settings/Admin-Setting/*') ? 'sidebaritem active' : null }}">Admin Settings</a>
-    </li> --}}
 </ul>
-</div>
+</div> --}}
+<a class="has-arrow"   href="index.html" title="Setting"><span class="fa fa-lg fa-fw fa-gears"></span> <span class="menu-item-parent">Settings</span> 
+    <b class="collapse-sign">
+        <em class="fa fa-plus-square-o"></em>
+        <em class="fa fa-minus-square-o"></em>
+    </b>
+</a>
+<ul aria-expanded="true" class="sa-sub-nav collapse">
+    <li class="">
+        <a   href="{{ route('GeneralSetting-view') }}" title="General Settings"> General Settings </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('GeneralSetting-view') }}" title="Game Settings"> Game Settings </a>
+    </li>
+</ul>

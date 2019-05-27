@@ -1,4 +1,4 @@
-<div class="menu-name">
+{{-- <div class="menu-name">
         NOTIFICATION
         <hr>
 </div>
@@ -11,4 +11,18 @@
             <a href="{{ route('EmailNotification-view') }}" class="{{ Request::is('Notification/Email-Notification/*') ? 'sidebaritem active' : null }}">Email Notifications</a>
         </li>
     </ul>
-</div>
+</div> --}}
+<a class="has-arrow"   href="index.html" title="Notification"><span class="fa fa-lg fa-fw fa-bell-o"></span> <span class="menu-item-parent">Notification</span> 
+    <b class="collapse-sign">
+        <em class="fa fa-plus-square-o"></em>
+        <em class="fa fa-minus-square-o"></em>
+    </b>
+</a>
+<ul aria-expanded="true" class="sa-sub-nav collapse">
+    <li class="">
+        <a   href="{{ route('PushNotification-view') }}" title="Push Notification"> Push Notification </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('EmailNotification-view') }}" title="Email Notification"> Email Notification </a>
+    </li>
+</ul>

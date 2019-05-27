@@ -1,4 +1,4 @@
-<div class="menu-name">
+{{-- <div class="menu-name">
         GAME Asta Poker
         <hr>
 </div>
@@ -22,8 +22,31 @@
         <li class="sidebar-item {{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'sidebaritem active' : null }}">
             <a href="{{ route('JackpotPaytable-view') }}" class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'sidebaritem active' : null }}">Jackpot Paytable</a>
         </li>
-        {{-- <li class="sidebar-item">
-            <a href="{{ route('FindRoom-view') }}">Find Room</a>
-        </li> --}}
     </ul>
-</div>
+</div> --}}
+<a class="has-arrow"   href="index.html" title="Games"><span class="fa fa-lg fa-fw fa-gamepad"></span> <span class="menu-item-parent">Games</span> 
+    <b class="collapse-sign">
+        <em class="fa fa-plus-square-o"></em>
+        <em class="fa fa-minus-square-o"></em>
+    </b>
+</a>
+<ul aria-expanded="true" class="sa-sub-nav collapse">
+    <li class="">
+        <a   href="{{ route('Table-view') }}" title="Table"> Table </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Category-view') }}" title="Category"> Category </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Season-view') }}" title="Season"> Season </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"> Season Reward </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('Tournament-view') }}" title="Tournament"> Tournament </a>
+    </li>
+    <li class="">
+        <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"> Jackpot Paytable </a>
+    </li>
+</ul>
