@@ -63,6 +63,7 @@ Route::middleware('authenticated')->group(function(){
             Route::get('Bots-view', 'PlayersController@indexBots')->name('Bots-view');
             Route::post('Bots-update', 'PlayersController@updateBot')->name('Bots-update');
             Route::post('Bots-create', 'PlayersController@storeBots')->name('Bots-create');
+            Route::delete('Bots-delete', 'PlayersController@destroyBots')->name('Bots-delete');
         });
         Route::group(['prefix'  =>  'Report'], function() {
             Route::get('Report-view', 'ReportController@index')->name('Report-view');

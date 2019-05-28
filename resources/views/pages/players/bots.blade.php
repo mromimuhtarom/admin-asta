@@ -194,7 +194,7 @@
         </div>
         <div class="modal-body">
           Are You Sure Want To Delete It
-          <form action="{{ route('UserAdmin-delete') }}" method="post">
+          <form action="{{ route('Bots-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
             <input type="hidden" name="userid" id="userid" value="">

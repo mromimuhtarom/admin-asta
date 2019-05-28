@@ -248,8 +248,15 @@ class PlayersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyBots(Request $request)
     {
-        //
+      $userid = $request->userid;
+      if($userid != '')
+      {
+          DB::table('user')->where('user_id', '=', $userid)->delete();
+          DB::table('user_stat')->where('user_id', '=', $userid)->delete();
+          return redirect()->route('Bots-view')->with('success','Data Deleted');
+      }
+      return redirect()->route('Bots-view')->with('success','Something wrong');   
     }
 }
