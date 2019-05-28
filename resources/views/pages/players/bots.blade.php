@@ -316,8 +316,6 @@
 
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
-    // <"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-    // "sDOM": "f"+"<'test'>",
     "autoWidth" : true,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"

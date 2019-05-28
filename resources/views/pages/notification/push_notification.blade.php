@@ -255,7 +255,7 @@
       -->
     <header>
       <div class="widget-header">	
-        <h2><strong>Fixed</strong> <i>Height</i></h2>				
+        <h2><strong>Push Notification</strong></h2>				
       </div>
     </header>
   
@@ -267,15 +267,14 @@
         
       </div>
       
-      <div class="widget-body">
+      <div class="widget-body" style="overflow-y: scroll;">
         <div class="widget-body-toolbar">
           
           <div class="row">
             
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input class="form-control" id="prepend" placeholder="Filter" type="text">
+                
               </div>
             </div>
             <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
@@ -295,7 +294,7 @@
   
         </div>
         
-        <div class="custom-scroll table-responsive" style="height:290px; overflow-y: scroll;">
+        <div class="custom-scroll table-responsive" style="height:400px;">
           
           <div class="table-outer">
             <table class="table table-bordered">
@@ -339,86 +338,6 @@
       </div>
     </div>
   </div>
-  
-  {{-- <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Create Bot</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×
-          </button>
-        </div>
-        <form action="{{ route('Bots-create') }}" method="post">
-          @csrf
-          <div class="modal-body">
-    
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="username" placeholder="Bot Name" required="">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-default" data-dismiss="modal">
-              Cancel
-            </button>
-            <button type="submit" class="btn sa-btn-primary">
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div> --}}
-  <!-- End Modal -->
-  
-  
-  <!-- Button trigger modal -->
-    <!-- Modal -->
-    {{-- <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header" style="margin-top:5%;">
-            <h5 class="modal-title" id="exampleModalLabel">Create Bot</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form action="{{ route('Bots-create') }}" method="POST">
-            {{  csrf_field() }}
-          <div class="modal-body">
-            <input type="text" name="username" placeholder="username" required>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div> --}}
-   
-    {{-- @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all as $error)
-            <li>{{$error}}</li>  
-            @endforeach
-        </ul>
-    </div>  
-    @endif
-    
-    @if (\Session::has('success'))
-      <div class="alert alert-success">
-        <p>{{\Session::get('success')}}</p>
-      </div>
-    @endif --}}
-    
   <!-- Modal -->
   <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -444,17 +363,16 @@
         </div>
       </div>
     </div>
+      
     <script type="text/javascript">
-    	$(document).ready(function() {
+      $(document).ready(function() {
         $('table.table').dataTable( {
           "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
         });
       });
-
+    
       table = $('table.table').dataTable({
-        pageLength : 5,
-        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
-        "sDom": "t"+"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+        "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
         "autoWidth" : true,
         "classes": {
           "sWrapper": "dataTables_wrapper dt-bootstrap4"
@@ -473,6 +391,7 @@
             mode :'inline'
           });
     
+          // delete bots
           @php
             foreach($notifications as $notification) {
               echo'$(".delete'.$notification->id.'").hide();';
