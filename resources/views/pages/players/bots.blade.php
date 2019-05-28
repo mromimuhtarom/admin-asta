@@ -64,21 +64,33 @@
           <table class="table table-bordered">
             <thead>
               <tr>
+                <th></th>
                 <th class="th-sm">Username</th>
                 <th class="th-sm">Bank Account</th>
                 <th class="th-sm">Rank</th>
                 <th class="th-sm">Gold</th>
                 <th class="th-sm">Country</th>
+                <th class="th-sm">Action</th>
               </tr>
             </thead>
             <tbody>
               @foreach($bots as $bot)
               <tr>
+                  <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $bot->user_id }}"></td>
                   <td>{{ $bot->username }}</td>
                   <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $bot->user_id }}" data-type="text" data-url="{{ route('Bots-update') }}">{{ $bot->chip }}</td>
                   <td>{{ $bot->rank_id}}</td>
                   <td>{{ $bot->gold }}</td>
                   <td>{{ $bot->name }}</td>
+                  <td>
+                    <a href="#" style="color:red;" class="delete{{ $bot->user_id }}" 
+                    id="delete" 
+                    data-pk="{{ $bot->user_id }}" 
+                    data-toggle="modal" 
+                    data-target="#delete-modal">
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </td>
               </tr>
               @endforeach
             </tbody>
@@ -154,32 +166,30 @@
     </div>
   </div> --}}
  
-  {{-- @if (count($errors) > 0)
+  @if (count($errors) > 0)
   <div class="alert alert-danger">
       <ul>
           @foreach ($errors->all as $error)
           <li>{{$error}}</li>  
           @endforeach
       </ul>
-  </div>
-      
+  </div>  
   @endif
   
   @if (\Session::has('success'))
-      <div class="alert alert-success">
-          <p>{{\Session::get('success')}}</p>
-      </div>
-      
-  @endif --}}
+    <div class="alert alert-success">
+      <p>{{\Session::get('success')}}</p>
+    </div>
+  @endif
   
 <!-- Modal -->
-{{-- <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="margin-top:5%;">
           <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            × 
           </button>
         </div>
         <div class="modal-body">
@@ -190,7 +200,7 @@
             <input type="hidden" name="userid" id="userid" value="">
         </div>
         <div class="modal-footer">
-            <button type="button" class="button_example-yes">Yes</button>
+          <button type="submit" class="button_example-yes">Yes</button>
           <button type="button" class="button_example-no" data-dismiss="modal">No</button>
         </div>
           </form>
@@ -199,7 +209,7 @@
   </div>
 
 
-<div class="table-aii">
+{{-- <div class="table-aii">
     <div class="footer-table">
                  <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
                     <i class="fas fa-plus-circle"></i>Create Bots
@@ -317,6 +327,30 @@
       $('.usertext').editable({
         mode :'popup'
       });
+
+      @php
+        foreach($bots as $bot) {
+          echo'$(".delete'.$bot->user_id.'").hide();';
+          echo'$(".deletepermission'.$bot->user_id.'").on("click", function() {';
+            echo 'if($( ".deletepermission'.$bot->user_id.':checked" ).length > 0)';
+            echo '{';
+              echo '$(".delete'.$bot->user_id.'").show();';
+            echo'}';
+            echo'else';
+            echo'{';
+              echo'$(".delete'.$bot->user_id.'").hide();';
+            echo'}';
+
+          echo '});';
+        
+          echo'$(".delete'.$bot->user_id.'").click(function(e) {';
+            echo'e.preventDefault();';
+
+            echo"var id = $(this).attr('data-pk');";
+            echo'var test = $("#userid").val(id);';
+          echo'});';
+        }
+      @endphp
     },
     responsive: true
   });
