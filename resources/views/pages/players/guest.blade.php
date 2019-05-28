@@ -150,7 +150,7 @@
                       tablet : 1024,
                       phone : 480
                   };
-        $('#datatable_col_reorder').dataTable({
+              $('#datatable_col_reorder').dataTable({
                   "sDom": "<'dt-toolbar d-flex align-items-center'<f><'hidden-xs ml-auto'B>r>"+
                           "t"+
                           "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",

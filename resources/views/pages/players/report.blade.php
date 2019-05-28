@@ -6,10 +6,10 @@
 
 
 @section('content')
-    <div class="table-aii">
-        <div class="table-header">
+    <div class="search bg-teal">
+        <div class="table-header w-100 h-100">
             <form action="{{ route('Report-search') }}" method="get" role="search">
-                <div class="row">
+                <div class="row h-100 w-100">
                     <div class="col">
                         <input type="text" name="inputPlayer" placeholder="username">
                     </div>
