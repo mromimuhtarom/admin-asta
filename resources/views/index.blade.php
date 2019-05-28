@@ -306,12 +306,6 @@
 	$(".alert").fadeTo(2000, 500).slideUp(500, function(){
     $(".alert").slideUp(500);
 	});
-
-	$(document).ready(function() {
-    $('table.table').dataTable( {
-      "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
-    });
-  });
 </script>
 
 	<script type="text/javascript">

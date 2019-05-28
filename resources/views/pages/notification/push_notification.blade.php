@@ -445,6 +445,11 @@
       </div>
     </div>
     <script type="text/javascript">
+    	$(document).ready(function() {
+        $('table.table').dataTable( {
+          "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+        });
+      });
 
       table = $('table.table').dataTable({
         pageLength : 5,
