@@ -2,7 +2,23 @@
 
 @section('content')
 
-<div class="jarviswidget jarviswidget-color-green-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+@if (count($errors) > 0)
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all as $error)
+          <li>{{$error}}</li>  
+          @endforeach
+      </ul>
+  </div>  
+@endif
+  
+@if (\Session::has('success'))
+  <div class="alert alert-success">
+    <p>{{\Session::get('success')}}</p>
+  </div>
+@endif
+
+<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <!-- widget options:
       usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
       
@@ -18,7 +34,7 @@
     -->
   <header>
     <div class="widget-header">	
-      <h2><strong>Fixed</strong> <i>Height</i></h2>				
+      <h2><strong>Bots</strong></h2>				
     </div>
   </header>
 
@@ -166,21 +182,6 @@
     </div>
   </div> --}}
  
-  @if (count($errors) > 0)
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all as $error)
-          <li>{{$error}}</li>  
-          @endforeach
-      </ul>
-  </div>  
-  @endif
-  
-  @if (\Session::has('success'))
-    <div class="alert alert-success">
-      <p>{{\Session::get('success')}}</p>
-    </div>
-  @endif
   
 <!-- Modal -->
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -308,8 +309,11 @@
 
 <script type="text/javascript">
 
+
   table = $('table.table').dataTable({
-    "sDom": "t"+"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+    "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
+    // <"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
+    // "sDOM": "f"+"<'test'>",
     "autoWidth" : true,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
@@ -325,9 +329,10 @@
       });
 
       $('.usertext').editable({
-        mode :'popup'
+        mode :'inline'
       });
 
+      // delete bots
       @php
         foreach($bots as $bot) {
           echo'$(".delete'.$bot->user_id.'").hide();';
