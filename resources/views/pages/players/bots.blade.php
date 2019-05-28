@@ -69,19 +69,16 @@
                 <th class="th-sm">Rank</th>
                 <th class="th-sm">Gold</th>
                 <th class="th-sm">Country</th>
-                <th class="th-sm">Action</th>
               </tr>
             </thead>
             <tbody>
               @foreach($bots as $bot)
               <tr>
-                  <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $bot->user_id }}"></td>
                   <td>{{ $bot->username }}</td>
                   <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $bot->user_id }}" data-type="text" data-url="{{ route('Bots-update') }}">{{ $bot->chip }}</td>
                   <td>{{ $bot->rank_id}}</td>
                   <td>{{ $bot->gold }}</td>
                   <td>{{ $bot->name }}</td>
-                  <td><a href="#" style="color:red;" class="delete{{ $bot->user_id }}" id="delete" data-pk="{{ $bot->user_id }}" data-toggle="modal" data-target="#delete"><i class="fa fa-times"></i></a></td>
               </tr>
               @endforeach
             </tbody>
@@ -123,34 +120,6 @@
           <button type="submit" class="btn sa-btn-primary">
             Save
           </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- End Modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Delete Bot</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-          ×
-        </button>
-      </div>
-      Are You Sure Want To Delete It
-      <form action="{{ route('UserAdmin-delete') }}" method="post">
-        <div class="modal-body">
-          {{ method_field('delete')}}
-          @csrf
-          <input type="hidden" name="userid" id="userid" value="">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="button_example-yes">Yes</button>
-          <button type="button" class="button_example-no" data-dismiss="modal">No</button>
         </div>
       </form>
     </div>
@@ -329,10 +298,6 @@
 
 <script type="text/javascript">
 
-  function addBots() {
-    console.log("asdafs")
-  }
-
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
     "autoWidth" : true,
@@ -352,30 +317,6 @@
       $('.usertext').editable({
         mode :'popup'
       });
-
-      @php
-        foreach($bots as $bot) {
-          echo'$(".delete'.$bot->user_id.'").hide();';
-          echo'$(".deletepermission'.$bot->user_id.'").on("click", function() {';
-            echo 'if($( ".deletepermission'.$bot->user_id.':checked" ).length > 0)';
-            echo '{';
-              echo '$(".delete'.$bot->user_id.'").show();';
-            echo'}';
-            echo'else';
-            echo'{';
-              echo'$(".delete'.$bot->user_id.'").hide();';
-            echo'}';
-
-          echo '});';
-        
-          echo'$(".delete'.$bot->user_id.'").click(function(e) {';
-            echo'e.preventDefault();';
-
-            echo"var id = $(this).attr('data-pk');";
-            echo'var test = $("#userid").val(id);';
-          echo'});';
-        }
-      @endphp
     },
     responsive: true
   });
