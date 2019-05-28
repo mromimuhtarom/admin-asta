@@ -2,9 +2,135 @@
 
 @section('content')
 
+<div class="jarviswidget jarviswidget-color-green-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+    <!-- widget options:
+      usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+      
+      data-widget-colorbutton="false"	
+      data-widget-editbutton="false"
+      data-widget-togglebutton="false"
+      data-widget-deletebutton="false"
+      data-widget-fullscreenbutton="false"
+      data-widget-custombutton="false"
+      data-widget-collapsed="true" 
+      data-widget-sortable="false"
+      
+    -->
+  <header>
+    <div class="widget-header">	
+      <h2><strong>Fixed</strong> <i>Height</i></h2>				
+    </div>
+  </header>
+
+  <div>
+    
+    <div class="jarviswidget-editbox">
+      <input class="form-control" type="text">
+      <span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>
+      
+    </div>
+    
+    <div class="widget-body">
+      <div class="widget-body-toolbar">
+        
+        <div class="row">
+          
+          <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              <input class="form-control" id="prepend" placeholder="Filter" type="text">
+            </div>
+          </div>
+          <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
+            
+            {{-- <button class="btn sa-btn-success">
+              <i onclick="addBots()" class="fa fa-plus"></i> <span class="hidden-mobile">Add New Row</span>
+            </button> --}}
+            <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+              <i class="fa fa-plus"></i>
+            </button>
+            
+          </div>
+          
+        </div>
+        
+          
+
+      </div>
+      
+      <div class="custom-scroll table-responsive" style="height:290px; overflow-y: scroll;">
+        
+        <div class="table-outer">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="th-sm">Username</th>
+                <th class="th-sm">Bank Account</th>
+                <th class="th-sm">Rank</th>
+                <th class="th-sm">Gold</th>
+                <th class="th-sm">Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($bots as $bot)
+              <tr>
+                  <td>{{ $bot->username }}</td>
+                  <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $bot->user_id }}" data-type="text" data-url="{{ route('Bots-update') }}">{{ $bot->chip }}</td>
+                  <td>{{ $bot->rank_id}}</td>
+                  <td>{{ $bot->gold }}</td>
+                  <td>{{ $bot->name }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Create Bot</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          ×
+        </button>
+      </div>
+      <form action="{{ route('Bots-create') }}" method="post">
+        @csrf
+        <div class="modal-body">
+  
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Bot Name" required="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn sa-btn-primary">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
 <!-- Button trigger modal -->
   <!-- Modal -->
-  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  {{-- <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -26,9 +152,9 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> --}}
  
-  @if (count($errors) > 0)
+  {{-- @if (count($errors) > 0)
   <div class="alert alert-danger">
       <ul>
           @foreach ($errors->all as $error)
@@ -44,10 +170,10 @@
           <p>{{\Session::get('success')}}</p>
       </div>
       
-  @endif
+  @endif --}}
   
 <!-- Modal -->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="margin-top:5%;">
@@ -71,7 +197,6 @@
       </div>
     </div>
   </div>
-  {{-- end delete notification --}}
 
 
 <div class="table-aii">
@@ -107,10 +232,10 @@
         </tbody>
       </table>
      
-</div>
+</div> --}}
 
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
   $(document).ready(function() {
       $.ajaxSetup({
           headers: {
@@ -168,5 +293,33 @@
     
           }
   });
-</script> 
+</script>  --}}
+
+
+<script type="text/javascript">
+
+  table = $('table.table').dataTable({
+    "sDom": "t"+"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+    "autoWidth" : true,
+    "classes": {
+      "sWrapper": "dataTables_wrapper dt-bootstrap4"
+    },
+    "oLanguage": {
+      "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+    },
+    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+      $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $('.usertext').editable({
+        mode :'popup'
+      });
+    },
+    responsive: true
+  });
+
+</script>
 @endsection

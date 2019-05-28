@@ -69,7 +69,7 @@
 
 
 
-    <div class="table-aii">
+    {{-- <div class="table-aii">
         <div class="footer-table">
                                     <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
                                       <i class="fas fa-plus-circle"></i>Create Email Notification
@@ -85,7 +85,7 @@
                 <th class="th-sm">From</th>
                 <th class="th-sm">From Email</th>
                 <th class="th-sm">Type</th>
-                {{-- <th class="th-sm">Action</th> --}}
+                <th class="th-sm">Action</th>
                 <th></th>
               </tr>
             </thead>
@@ -99,7 +99,7 @@
                     <td><a href="#" class="usertext" data-title="From" data-name="fromName" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->fromName }}</a></td>
                     <td><a href="#" class="usertext" data-title="From Email" data-name="fromEmail" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->fromEmail }}</td>
                     <td><a href="#" class="typenotif" data-title="Type" data-name="type" data-pk="{{ $notification->id }}" data-type="select" data-url="{{ route('EmailNotification-update')}}">{{ $notification->type }}</a></td>
-                    {{-- <td></td> --}}
+                    <td></td>
                     <td></td>
                 </tr>
                 @endforeach
@@ -156,5 +156,122 @@
     
           }
       });
-  </script>
+  </script> --}}
+  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-2" data-widget-editbutton="false">
+    <header>
+      <div class="widget-header">	
+        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+        <h2>High Rollers</h2>
+      </div>
+
+      <div class="widget-toolbar">
+        <!-- add: non-hidden - to disable auto hide -->
+      </div>
+    </header>
+
+    <!-- widget div-->
+    <div>
+
+      <!-- widget edit box -->
+      <div class="jarviswidget-editbox">
+        <!-- This area used as dropdown edit box -->
+
+      </div>
+      <!-- end widget edit box -->
+
+      <!-- widget content -->
+      <div class="widget-body p-0">
+        
+        <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+          <thead>
+            <tr>
+              <th data-hide="phone">title</th>
+              <th data-hide="phone,tablet">Subject</th>
+              <th data-hide="phone,tablet">Message</th>
+              <th data-hide="phone,tablet">From</th>
+              <th data-hide="phone,tablet">From Email</th>
+              <th data-hide="phone,tablet">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($notifications as $notification)
+            <tr>
+                <td></td>
+                <td><a href="#" class="usertext" data-title="Subject" data-name="subject" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->subject }}</a></td>
+                <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="textarea" data-url="{{ route('EmailNotification-update')}}">{{ $notification->message }}</a></td>
+                <td><a href="#" class="usertext" data-title="From" data-name="fromName" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->fromName }}</a></td>
+                <td><a href="#" class="usertext" data-title="From Email" data-name="fromEmail" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->fromEmail }}</td>
+                <td><a href="#" class="typenotif" data-title="Type" data-name="type" data-pk="{{ $notification->id }}" data-type="select" data-url="{{ route('EmailNotification-update')}}">{{ $notification->type }}</a></td>
+            </tr>
+
+
+            @endforeach
+          </tbody>
+        </table>
+      
+      </div>
+      <!-- end widget content -->
+
+    </div>
+    <!-- end widget div -->
+
+  </div>
+
+<script>
+
+      var responsiveHelper_datatable_col_reorder = responsiveHelper_datatable_col_reorder || undefined;
+      
+      var breakpointDefinition = {
+        tablet : 1024,
+        phone : 480
+      };
+    $('#datatable_col_reorder').dataTable({
+      "sDom": "<'dt-toolbar d-flex align-items-center'<f><'hidden-xs ml-auto'B>r>"+
+          "t"+
+          "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+      "autoWidth" : true,
+      "classes": {
+        "sWrapper":      "dataTables_wrapper dt-bootstrap4"
+      },
+      "oLanguage": {
+        "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+      },
+      "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
+
+              $('.usertext').editable({
+                mode :'popup'
+              });
+
+              $('.typenotif').editable({
+                value: 'Pilih Type',
+                source: [
+                  {value: 'deposit_received', text: 'Deposit Received'},
+                  {value: 'new_device', text: 'New Device'},
+                  {value: 'withdrawal_requested', text: 'Withdrawal Requested'},
+                  {value: 'withdrawal_declined', text: 'Withdrawal Declined'},
+                  {value: 'withdrawal_approved', text: 'Withdrawal Approved'},
+                  {value: 'login', text: 'Login'},
+                  {value: 'forgot', text: 'Forgot Password'},
+                  {value: 'welcome', text: 'Account Creation'},
+                ]
+              });
+    
+      },
+        buttons: [ {
+            extend: 'colvis',
+            text: 'Show / hide columns',
+            className: 'btn btn-default',
+            columnText: function ( dt, idx, title ) {
+                return title;
+            }			        
+        } ],
+        
+      responsive: true
+    });
+</script>    
 @endsection
