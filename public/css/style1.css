@@ -6,3 +6,30 @@
     margin-left:20%;
     border-radius: 5px;
 }
+
+.table-outer {
+  margin: 1%;
+}
+
+.searching {
+    width: 50%;
+    margin: 2% auto;
+    padding: 3%;
+    border-radius: 5px;
+
+}
+
+.form  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.form div:not(:last-child) {
+    margin-right: 2%;
+}
+
+.form div:last-child button {
+    padding-left: 4em;
+    padding-right: 4em;
+}

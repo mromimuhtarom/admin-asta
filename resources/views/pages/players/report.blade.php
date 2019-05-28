@@ -6,7 +6,7 @@
 
 
 @section('content')
-    <div class="search bg-teal">
+    <div class="search bg-blue-dark">
         <div class="table-header w-100 h-100">
             <form action="{{ route('Report-search') }}" method="get" role="search">
                 <div class="row h-100 w-100">
