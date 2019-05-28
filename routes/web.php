@@ -158,6 +158,8 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Push-Notification'], function() {
             Route::get('PushNotification-view', 'PushNotificationController@index')->name('PushNotification-view');
             Route::post('PushNotification-update', 'PushNotificationController@update')->name('PushNotification-update');
+            Route::post('PushNotification-create', 'PushNotificationControlle@store')->name('PushNotification-create');
+            Route::delete('PushNotification-delete', 'PushNotificationController@destroy')->name('PushNotification-delete');
         });
         Route::group(['prefix'  =>  'Email-Notification'], function() {
             Route::get('EmailNotification-view', 'EmailNotificationController@index')->name('EmailNotification-view');

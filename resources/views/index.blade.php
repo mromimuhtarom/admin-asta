@@ -12,7 +12,7 @@
   <link rel="icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" media="screen, print" href="/assets/vendors/vendors.bundle.css">
   <link rel="stylesheet" media="screen, print" href="/assets/app/app.bundle.css">
-  <link rel="stylesheet" type="text/css" href="/assets/pages/homepage.css">
+	<link rel="stylesheet" type="text/css" href="/assets/pages/homepage.css">
   <link rel="stylesheet" type="text/css" href="/assets/pages/datatables.css">
   <link rel="stylesheet" href="/css/style1.css">
   <script src="/assets/vendors/vendors.bundle.js"></script>

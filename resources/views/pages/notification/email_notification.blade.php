@@ -161,7 +161,7 @@
     <header>
       <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-        <h2>High Rollers</h2>
+        <h2>Email Notification</h2>
       </div>
 
       <div class="widget-toolbar">
@@ -203,14 +203,6 @@
                 <td><a href="#" class="usertext" data-title="From Email" data-name="fromEmail" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->fromEmail }}</td>
                 <td><a href="#" class="typenotif" data-title="Type" data-name="type" data-pk="{{ $notification->id }}" data-type="select" data-url="{{ route('EmailNotification-update')}}">{{ $notification->type }}</a></td>
             </tr>
-            {{-- <tr>
-              <td>{{ $notification->subject }}</td>
-              <td>{{ $notification->message }}</td>
-              <td>{{ $notification->fromName }}</td>
-              <td>{{ $notification->fromEmail }}</td>
-              <td>{{ $notification->type }}</td>
-              <td>{{ $notification->cdn }}</td>
-            </tr> --}}
 
             @endforeach
           </tbody>
@@ -223,63 +215,7 @@
     <!-- end widget div -->
 
   </div>
-  <script>
-            $(document).ready(function() {
-              $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
-
-              $('.usertext').editable({
-                mode :'popup'
-              });
-
-              $('.typenotif').editable({
-                value: 'Pilih Type',
-                source: [
-                  {value: 'deposit_received', text: 'Deposit Received'},
-                  {value: 'new_device', text: 'New Device'},
-                  {value: 'withdrawal_requested', text: 'Withdrawal Requested'},
-                  {value: 'withdrawal_declined', text: 'Withdrawal Declined'},
-                  {value: 'withdrawal_approved', text: 'Withdrawal Approved'},
-                  {value: 'login', text: 'Login'},
-                  {value: 'forgot', text: 'Forgot Password'},
-                  {value: 'welcome', text: 'Account Creation'},
-                ]
-              });
-            });
-  
-  </script>
 <script>
-    // table = $('#dt-material-checkbox').dataTable({
-    //     columnDefs: [{
-    //     orderable: false,
-    //     className: 'select-checkbox',
-    //     targets: 0
-    //     }],
-    //     "pagingType": "full_numbers",
-    //     "bInfo" : false,
-    //     "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-    //     select: {
-    //     style: 'os',
-    //     selector: 'td:first-child'
-    //     },
-    //     "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-    //         $.ajaxSetup({
-    //           headers: {
-    //           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //           }
-    //         });
-
-    //         $('.usertext').editable({
-    //           mode :'popup'
-    //         });
-  
-    //     }
-    // });
-    // var responsiveHelper_dt_basic = responsiveHelper_dt_basic || undefined;
-    // 	var responsiveHelper_datatable_fixed_column = responsiveHelper_datatable_fixed_column || undefined;
       var responsiveHelper_datatable_col_reorder = responsiveHelper_datatable_col_reorder || undefined;
       // var responsiveHelper_datatable_tabletools = responsiveHelper_datatable_tabletools ||undefined;
       
@@ -306,11 +242,12 @@
               });
 
               $('.usertext').editable({
-                mode :'popup'
+                mode :'inline'
               });
 
               $('.typenotif').editable({
                 value: 'Pilih Type',
+                mode :'inline',
                 source: [
                   {value: 'deposit_received', text: 'Deposit Received'},
                   {value: 'new_device', text: 'New Device'},
