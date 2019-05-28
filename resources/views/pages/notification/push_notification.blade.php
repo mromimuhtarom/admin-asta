@@ -128,11 +128,12 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
               });
+              
 
               $('.usertext').editable({
                 mode :'popup'
               });
-    
+              console.log(mode);
           }
       });
   </script>

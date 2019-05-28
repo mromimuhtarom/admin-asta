@@ -5,7 +5,8 @@
   <title>Dashboard | Smart Admin 2.0</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,500,700">
   <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
@@ -15,7 +16,15 @@
   <link rel="stylesheet" type="text/css" href="/assets/pages/datatables.css">
   <link rel="stylesheet" href="/css/style1.css">
   <script src="/assets/vendors/vendors.bundle.js"></script>
-  <script src="/assets/app/app.bundle.js"></script>
+	<script src="/assets/app/app.bundle.js"></script>
+   {{-- <!-- bootstrap -->
+	 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+	 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> 
+	 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>  
+
+	 <!-- x-editable (bootstrap version) -->
+	 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+	 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js"></script> --}}
 
 </head>
 <body class="   smart-style-0">
