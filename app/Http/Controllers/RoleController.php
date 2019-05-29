@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Log;
+use App\Role;
+use Session;
+use Carbon\Carbon;
 
 class RoleController extends Controller
 {
@@ -14,7 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = DB::table('adm_role')->get();
+        $roles = Role::all();
         return view('pages.admin.role_admin', compact('roles'));
     }
 
@@ -36,7 +40,22 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = $request->rolename;
+        if($role != ''){
+            $user = Role::create([
+                'name' => $role
+              ]);
+      
+              Log::create([
+                  'operator_id' => Session::get('userId'),
+                  'menu_id' => '3',
+                  'action_id' => '3',
+                  'date' => Carbon::now('GMT+7'),
+                  'description' => 'Create new Role with Role Name '. $user->name
+              ]);
+              return redirect()->route('Role-view')->with('success','Data Insert Successfull');  
+        }
+        return redirect()->route('Role-view')->with('alert','Role Name is Null');
     }
 
     /**
@@ -68,9 +87,26 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk = $request->pk;
+        $name = $request->name;
+        $value = $request->value;
+  
+    
+        Role::where('role_id', '=', $pk)->update([
+          $name => $value
+        ]);
+        
+  
+  
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '3',
+          'action_id'   => '2',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Edit password UserId '.$pk.' to '. $value
+        ]);
     }
 
     /**
@@ -79,8 +115,14 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $userid = $request->id;
+        if($userid != '')
+        {
+            DB::table('adm_role')->where('role_id', '=', $userid)->delete();
+            return redirect()->route('Role-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('Role-view')->with('alert','Something wrong'); 
     }
 }
