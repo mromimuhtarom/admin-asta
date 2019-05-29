@@ -220,7 +220,7 @@
         <div class="sa-content">
 		<div class="d-flex w-100 home-header">
 			<div>
-                @yield('namepages')				
+							@yield('namepages')				
             </div>
         </div>
         <div>

@@ -34,6 +34,9 @@
           <thead>
             <tr>
               <th class="th-sm">Username</th>
+              <th class="th-sm">Chip</th>
+              <th class="th-sm">Point</th>
+              <th class="th-sm">Gold</th>
               <th class="th-sm">Date Created</th>
               <th class="th-sm">Register From</th>
               <th class="th-sm">Device</th>
@@ -44,6 +47,9 @@
             @foreach($registered as $regis)
             <tr>
                 <td>{{ $regis->username }}</td>
+                <td>{{ $regis->chip }}</td>
+                <td>{{ $regis->point }}</td>
+                <td>{{ $regis->gold }}</td>
                 <td>{{ $regis->join_date }}</td>
                 @php
                     if($regis->facebook_id !== ''){

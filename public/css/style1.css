@@ -33,3 +33,11 @@
     padding-left: 4em;
     padding-right: 4em;
 }
+
+
+/* SETTINGS MENU LAYOUT */
+.settings-table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1%;
+}

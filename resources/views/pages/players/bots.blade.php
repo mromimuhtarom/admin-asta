@@ -58,10 +58,6 @@
             </div>
           </div>
           <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
-            
-            {{-- <button class="btn sa-btn-success">
-              <i onclick="addBots()" class="fa fa-plus"></i> <span class="hidden-mobile">Add New Row</span>
-            </button> --}}
             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
               <i class="fa fa-plus"></i>
             </button>
@@ -74,7 +70,7 @@
 
       </div>
       
-      <div class="custom-scroll table-responsive" style="height:290px; overflow-y: scroll;">
+      <div class="custom-scroll table-responsive" style="height:350px;">
         
         <div class="table-outer">
           <table class="table table-bordered">
