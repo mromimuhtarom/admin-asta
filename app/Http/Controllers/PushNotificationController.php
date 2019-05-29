@@ -18,10 +18,10 @@ class PushNotificationController extends Controller
      */
     public function index()
     {
-        $tables        = DB::select('SELECT * FROM poker, push_notifications WHERE poker.gameID = push_notifications.gameId ');
-        $notifications = PushNotification::all();
+        $notifications = PushNotification::join('game', 'game.id', '=', 'push_notifications.gameId')->select('game.name as gamename', 'push_notifications.*')->get();
+        $game = DB::table('game')->get();
         // $table         = Table::where('dealerId', '=', Session::get('dealerId'))->where('tabletype', '!=', 'm')->where('clubId', '=', 0)->where('seasonId', '=', 0)->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
-        return view('pages.notification.push_notification', compact('notifications','tables', 'table'));
+        return view('pages.notification.push_notification', compact('notifications','tables', 'table', 'game'));
     }
 
     /**
@@ -42,7 +42,21 @@ class PushNotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        PushNotification::create([
+            'title' => $request->title, 
+            'message'    => $request->message,
+            'gameId'    =>  $request->game
+        ]);
+
+          Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '14',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Push Notification with title '.$request->title
+          ]);
+
+          return redirect()->route('PushNotification-view')->with('success','Data Added');
     }
 
     /**
@@ -114,8 +128,14 @@ class PushNotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        if($id != '')
+        {
+            DB::table('push_notifications')->where('id', '=', $id)->delete();
+            return redirect()->route('PushNotification-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('PushNotification-view')->with('success','Something wrong');   
     }
 }
