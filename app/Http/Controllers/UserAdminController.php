@@ -21,7 +21,8 @@ class UserAdminController extends Controller
     public function index()
     {
         $admin = DB::table('operator')->join('adm_role', 'adm_role.role_id', '=', 'operator.role_id')->get();
-        return view('pages.admin.user_admin', compact('admin'));
+        $role = DB::table('adm_role')->get();
+        return view('pages.admin.user_admin', compact('admin', 'role'));
     }
 
     /**
@@ -42,7 +43,21 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create([
+            'username' => $request->username,
+            'role_id' => $request->role,
+            'password' => bcrypt(Session::get('dealerId').$request->username),
+            'fullname' => $request->fullname
+          ]);
+  
+          Log::create([
+              'operator_id' => Session::get('userId'),
+              'menu_id' => '3',
+              'action_id' => '3',
+              'date' => Carbon::now('GMT+7'),
+              'description' => 'Create new User with Username '. $user->username
+          ]);
+          return redirect()->route('UserAdmin-view')->with('success','Data Insert Successfull');
     }
 
     /**
@@ -106,6 +121,29 @@ class UserAdminController extends Controller
         'date'        => Carbon::now('GMT+7'),
         'description' => 'Edit '.$name.' UserId '.$pk.' to '. $value
       ]);
+    }
+    public function updatepassword(Request $request) 
+    {
+        $pk = $request->userid;
+        $password = $request->password;
+        
+        if($password != '') {
+        User::where('operator_id', '=', $pk)->update([
+          'password' => bcrypt($password)
+        ]);
+        
+  
+  
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '3',
+          'action_id'   => '2',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Edit password UserId '.$pk.' to '. $password
+        ]);
+        return redirect()->route('UserAdmin-view')->with('success','Reset Password Successfully');
+        }
+        return redirect()->route('UserAdmin-view')->with('alert','Password is Null');
     }
 
     /**

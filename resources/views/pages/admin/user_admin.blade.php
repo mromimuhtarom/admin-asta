@@ -6,111 +6,126 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+    
+    @if (\Session::has('alert'))
+    <div class="alert alert-danger">
+        <div class="alert alert-danger">
+            <div>{{Session::get('alert')}}</div>
+        </div>
+    </div>
+        
+    @endif
+    
+    @if (\Session::has('success'))
+        <div class="alert alert-success">
+            <p>{{\Session::get('success')}}</p>
+        </div>
+        
+    @endif
 
   <!-- Modal -->
-  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header" style="margin-top:5%;">
-          <h5 class="modal-title" id="exampleModalLabel">Create User Admin</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Create User Admin</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
           </button>
         </div>
-        <form action="" method="POST">
-          {{  csrf_field() }}
-        <div class="modal-body">
-          <input type="text" name="username" placeholder="username" required><br>
-          <input type="text" name="fullname" placeholder="Full Name" required><br>
-          <select name="role" required>
-            <option>Pilih Role</option>
-            <option value=""></option>
-          </select>
-          <input type='file' onchange="readURL(this);" /><br><br>
-          <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
+        <form action="{{ route('UserAdmin-create') }}" method="post">
+          @csrf
+          <div class="modal-body">
+    
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="username" placeholder="username" required><br>
+                  <input type="text" class="form-control" name="fullname" placeholder="Full Name" required><br>
+                  <select name="role" class="form-control" required>
+                    <option>Pilih Role</option>
+                    @foreach($role as $rl)
+                    <option value="{{ $rl->role_id}}">{{ $rl->name}}</option>
+                    @endforeach
+                  </select><br>
+                  {{-- <input type='file' onchange="readURL(this);" /><br><br>
+                  <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" /> --}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="submit" class="btn sa-btn-primary">
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </div>
   </div>
- 
-  @if (count($errors) > 0)
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all as $error)
-          <li>{{$error}}</li>  
-          @endforeach
-      </ul>
-  </div>
-      
-  @endif
+  {{-- end create --}}
+
+
+  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+    <header>
+      <div class="widget-header">	
+        <h2><strong>User Admin</strong></h2>				
+      </div>
+    </header>
   
-  @if (\Session::has('success'))
-      <div class="alert alert-success">
-          <p>{{\Session::get('success')}}</p>
+    <div>
+      
+      <div class="jarviswidget-editbox">
+        <input class="form-control" type="text">
+        <span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>
+        
       </div>
       
-  @endif
-
-  {{-- notification delete --}}
-  <!-- Button trigger modal -->
-
-<!-- Modal -->
-<div class="modal modal-danger fade" id="deleteuseradmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="margin-top:5%;">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are You Sure Want To Delete It
-
-        <form action="{{ route('UserAdmin-delete') }}" method="post">
-          {{ method_field('delete')}}
-          {{ csrf_field() }}
-          <input type="hidden" name="userid" id="userid" value="">
+      <div class="widget-body">
+        <div class="widget-body-toolbar">
+          
+          <div class="row">
+            
+            <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+              <div class="input-group">
+                  <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                      <i class="fa fa-plus"></i>
+                  </button>
+              </div>
+            </div>
+            <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
+              
+              {{-- <button class="btn sa-btn-success">
+                <i onclick="addBots()" class="fa fa-plus"></i> <span class="hidden-mobile">Add New Row</span>
+              </button> --}}
+              
+            </div>
+            
+          </div>
+          
+            
+  
+        </div>
         
-      </div>
-      <div class="modal-footer">
-          <button type="submit" class="button_example-yes">Yes</button>
-        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-  {{-- end delete notification --}}
-
-  {{-- User Admin  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-      <i class="fas fa-plus-circle"></i>Create Admin
-    </button> --}}
-    <div class="table-aii">
-      <div class="footer-table">
-                 <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
-                              <i class="fas fa-plus-circle"></i>Create Admin
-                 </button>
-      </div>
-        
-         <table class="table table" style="margin-left:1px; margin-top:-5%;" cellspacing="0" width="100%">
-            <thead class="th-table">
-              <tr>
-                <th></th>
-                <th>Image</th>
-                <th>Username</th>
-                <th>Full Name</th>
-                <th>Role Type</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
+        <div class="custom-scroll table-responsive" style="height:800px;">
+          
+          <div class="table-outer">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th class="th-sm"></th>
+                    <th class="th-sm">Image</th>
+                    <th class="th-sm">Username</th>
+                    <th class="th-sm">Full Name</th>
+                    <th class="th-sm">Role Type</th>
+                    <th class="th-sm">Reset Password</th>
+                    <th></th>
+                </tr>
+              </thead>
+              <tbody>                      
                 @foreach($admin as $adm)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->operator_id }}"></td>
@@ -118,110 +133,112 @@
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
-                    {{-- <td><a href="{{ route('UserAdmin-delete', $adm->operator_id) }}" style="color:red;" onclick="return confirm('Are you sure?')"><i class="fas fa-times"></i></a></td> --}}
-                    <td><a href="#" style="color:red;" class="deleteuseradmin{{ $adm->operator_id }}" id="deleteuseradmin" data-pk="{{ $adm->operator_id }}" data-toggle="modal" data-target="#deleteuseradmin"><i class="fas fa-times"></i></a></td>
+                    <td><a href="#" class="password{{ $adm->operator_id }} btn btn-primary" id="password" data-pk="{{ $adm->operator_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
+                    <td> 
+                      <a href="#" style="color:red;" class="delete{{ $adm->operator_id }}" 
+                        id="delete" 
+                        data-pk="{{ $adm->operator_id }}" 
+                        data-toggle="modal" 
+                        data-target="#delete-modal">
+                          <i class="fa fa-times"></i>
+                        </td>
                 </tr>
                 @endforeach
-            </tbody>
-          </table>
-         
-      </div>    
-      
-      <script type="text/javascript">
-        $(document).ready(function() {
-
-        //     // $('#deleteuseradmin').on('show.bs.modal', function (event) {
-        //     //   var button = $(event.relatedTarget) 
-        //     //   var userid = $(this).data('userid')
-        //     //   // var user_id = '2'
-        //     //   var modal = $(this)
-        //     //   alert(userid);
-
-        //     //   modal.find('.modal-body #userid').val(userid);
-        //     // });
-
-
-
-        //     // $(".delete").click(function(e) {
-			  //     //   e.preventDefault();
-
-			  //     //   $("#btnDeleteGroup").attr('data-pk',$(this).data('pk'));
-				//     //   $("#deleteGroup").modal('show');
-
-        //     // });    
+              </tbody>
+            </table>
+          </div>
         
-        // $('.role').editable({
-        //             value: 2,
-        //             source: [
-        //                 @php
-        //                 $roles = DB::table('adm_role')->get();
-        //                 foreach($roles as $role) {
-        //                     echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
-        //                 }
-        //                 @endphp
-        //             ]
-        //         });
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+      <!-- Modal -->
+  <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="margin-top:5%;">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              × 
+            </button>
+          </div>
+          <div class="modal-body">
+            Are You Sure Want To Delete It
+            <form action="{{ route('UserAdmin-delete') }}" method="post">
+              {{ method_field('delete')}}
+              {{ csrf_field() }}
+              <input type="hidden" name="userid" id="id" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="button_example-yes">Yes</button>
+            <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+          </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+
+  {{-- reset password --}}
+  <div class="modal fade" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="margin-top:5%;">
+            <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              × 
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ route('UserAdmin-updatepassword') }}" method="post">
+              {{ csrf_field() }}
+              <input type="hidden" name="userid" id="userid" value="">
+              <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="button_example-yes">Reset Password</button>
+            <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+          </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+  
+  {{-- end reset password --}}
+      
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('table.table').dataTable( {
+          "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        });
       });
+    
+      table = $('table.table').dataTable({
+        "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
+        "paging": false,
+        "autoWidth" : true,
+        "classes": {
+          "sWrapper": "dataTables_wrapper dt-bootstrap4"
+        },
+        "oLanguage": {
+          "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+        },
+        "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+          $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+    
+          $('.usertext').editable({
+            mode :'inline'
+          });
 
-
-
-        $('table.table').dataTable({
-              // pageLength : 5,
-              // lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
-              // columnDefs: [{
-              //   orderable: false,
-              //   className: 'select-checkbox',
-              //   targets: 0
-              // }],
-              columnDefs: [{
-                orderable: false,
-                className: 'select-checkbox',
-                targets: 0
-              }],
-              select: {
-                style: 'os',
-                selector: 'td:first-child'
-              },
-              "pagingType": "full_numbers",
-              "bInfo" : false,
-              "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-              "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                $.ajaxSetup({
-                  headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-                });
-
-                @php
-                  foreach($admin as $adm) {
-                    echo'$(".deleteuseradmin'.$adm->operator_id.'").hide();';
-                    echo'$(".deletepermission'.$adm->operator_id.'").on("click", function() {';
-                      echo 'if($( ".deletepermission'.$adm->operator_id.':checked" ).length > 0)';
-                      echo '{';
-                        echo '$(".deleteuseradmin'.$adm->operator_id.'").show();';
-                      echo'}';
-                      echo'else';
-                      echo'{';
-                        echo'$(".deleteuseradmin'.$adm->operator_id.'").hide();';
-                      echo'}';
-          
-                    echo '});';
-
-                
-
-
-
-                  echo'$(".deleteuseradmin'.$adm->operator_id.'").click(function(e) {';
-                    echo'e.preventDefault();';
-
-                    echo"var id = $(this).attr('data-pk');";
-                    echo'var test = $("#userid").val(id);';
-                  echo'});';
-                }
-                @endphp
-                
-
-                $('.role').editable({
+          $('.role').editable({
+                    mode:'inline',
                     value: 2,
                     source: [
                         @php
@@ -231,12 +248,46 @@
                         }
                         @endphp
                     ]
-                });
+          });
 
-                $('.usertext').editable({
-                  mode :'popup'
-                });
-              }
-        });
+          @php
+              foreach($admin as $adm) {            
+              echo'$(".password'.$adm->operator_id.'").click(function(e) {';
+                echo'e.preventDefault();';
+    
+                echo"var id = $(this).attr('data-pk');";
+                echo'var test = $("#userid").val(id);';
+              echo'});';
+            }
+          @endphp
+
+          @php
+              foreach($admin as $adm) {
+              echo'$(".delete'.$adm->operator_id.'").hide();';
+              echo'$(".deletepermission'.$adm->operator_id.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$adm->operator_id.':checked" ).length > 0)';
+                echo '{';
+                  echo '$(".delete'.$adm->operator_id.'").show();';
+                echo'}';
+                echo'else';
+                echo'{';
+                  echo'$(".delete'.$adm->operator_id.'").hide();';
+                echo'}';
+    
+              echo '});';
+            
+              echo'$(".delete'.$adm->operator_id.'").click(function(e) {';
+                echo'e.preventDefault();';
+    
+                echo"var id = $(this).attr('data-pk');";
+                echo'var test = $("#id").val(id);';
+              echo'});';
+            }
+          @endphp
+          
+        },
+        responsive: true
+      });
+    
     </script>
 @endsection

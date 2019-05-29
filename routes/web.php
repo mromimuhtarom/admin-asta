@@ -27,6 +27,8 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix' => 'User-Admin'], function() {
             Route::get('/Admin-view', 'UserAdminController@index')->name('UserAdmin-view');
             Route::post('/Admin-update', 'UserAdminController@update')->name('UserAdmin-update');
+            Route::post('/Admin-updatepassword', 'UserAdminController@updatepassword')->name('UserAdmin-updatepassword');
+            Route::post('/Admin-create', 'UserAdminController@store')->name('UserAdmin-create');
             Route::delete('/Admin-delete', 'UserAdminController@destroy')->name('UserAdmin-delete');
         });
         Route::group(['prefix' => 'Role-Admin'], function() {
@@ -172,6 +174,7 @@ Route::middleware('authenticated')->group(function(){
             Route::post('EmailNotification-update', 'EmailNotificationController@update')->name('EmailNotification-update');
             Route::delete('EmailNotification-delete', 'EmailNotificationController@destroy')->name('EmailNotification-delete');
             Route::post('EmailNotification-create', 'EmailNotificationController@store')->name('EmailNotification-create');
+            Route::post('EmailNotification-updateimage', 'EmailNotificationController@updateimage')->name('EmailNotification-updateimage');
         });
     });
 
