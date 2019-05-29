@@ -30,7 +30,7 @@
 
       <!-- widget content -->
       <div class="widget-body p-0">
-        <div class="custom-scroll table-responsive" style="height: 600px;">
+        <div class="custom-scroll table-responsive" style="max-height: 600px;">
           <div class="table-outer">
         
             <table id="online-players" class="table table-striped table-bordered table-hover" width="100%">

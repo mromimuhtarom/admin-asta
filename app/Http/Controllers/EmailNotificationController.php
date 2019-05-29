@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\EmailNotification;
 use App\Log;
+use DB;
 use Session;
 use Carbon\Carbon;
 
@@ -17,8 +18,8 @@ class EmailNotificationController extends Controller
      */
     public function index()
     {
-        $notifications = EmailNotification::all();
-        return view('pages.notification.email_notification', compact('notifications'));
+        $emailnotifications = EmailNotification::all();
+        return view('pages.notification.email_notification', compact('emailnotifications'));
     }
 
     /**
@@ -39,7 +40,62 @@ class EmailNotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        
+        $file = $request->file('file');
+        $bcrypt = bcrypt($request->password);
+        $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
+        $nama = $_FILES['file']['name'];
+        $x = explode('.', $nama);
+        $ekstensi = strtolower(end($x));
+        $ukuran = $_FILES['file']['size'];
+        $acak           = rand(1,99);
+        $nama_file_unik = 'notification'.$acak.'.'.$ekstensi; 
+
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        {
+            if($ukuran < 1044070)
+            {           
+                if ($file->move(public_path('../public/images/EmailNotification'), $nama_file_unik))
+                {
+                    // Gift::where('id', '=', $pk)->update([
+                    //     'imageUrl' => $nama_file_unik
+                    // ]);
+                    $notification = EmailNotification::create([
+                        'dealerId'  =>  '1',
+                        'subject'   =>  $request->subject,
+                        'imageUrl'  => $nama_file_unik,
+                        'message'   =>  $request->message,
+                        'fromName'  =>  'Engine Poker',
+                        'fromEmail' =>  $request->email,
+                        'type'      =>  $request->type
+                    ]);
+            
+                    Log::create([
+                      'operator_id' => Session::get('userId'),
+                      'menu_id' => '18',
+                      'action_id' => '3',
+                      'date' => Carbon::now('GMT+7'),
+                      'description' => 'Create new Email Notification with title '. $notification->subject
+                    ]);
+                    return redirect()->route('EmailNotification-view')->with('success','Insert Data successfull');
+            
+                }
+                else
+                {
+                    echo "Gagal Upload File";
+                }
+            }
+            else
+            {       
+                echo 'Ukuran file terlalu besar';
+            }
+        }
+        else
+        {       
+            echo 'Ekstensi file tidak di perbolehkan';
+        }
+
     }
 
     /**
