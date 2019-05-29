@@ -7,6 +7,71 @@
 
 
 @section('content')
+<style>
+.dropzone {
+width: 100px;
+height: 50px;
+min-height: 0px !important;
+}   
+.text-center {
+  transform: translate(-2%,-100%);
+}
+.media-container {
+	position: relative;
+	display: inline-block;
+	margin: auto;
+  border-radius: 50%;
+  border: 1px solid black;
+	overflow: hidden;
+	width: 100px;
+	height: 100px;
+	/* vertical-align: middle */
+}
+	.media-overlay {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(180, 180, 180, 0.6);
+  }
+		#media-input {
+			display: block;
+			width: 100%;
+			height: 100%;
+			line-height: 100%;
+			opacity: 0;
+			position: relative;
+			z-index: 9;
+		}
+		.media-icon {
+			/* display: sticky; */
+      transform: translate(-1%,-90%);
+			color: #ffffff;
+			font-size: 2em;
+			height: 100%;
+			line-height: 100px;
+      position: absolute;
+			z-index: 0;
+			width: 100%;
+			text-align: center;
+		}
+	.media-object {}
+		.img-object {
+      border: 1px solid black;
+			border-radius: 50%;
+			width: 100px;
+			height: 100px;
+			display: block;
+		}
+
+.media-control {
+	margin-top: 30px;
+}
+	.edit-profile {}
+	.save-profile {}
+
+</style>
 
 <script>
   function readURL(input) {
@@ -22,8 +87,6 @@
      }
  }
 </script>
-
-
 
   
       <!-- Modal -->
@@ -142,7 +205,7 @@
               <thead>
                 <tr>
                     <th class="th-sm"></th>
-                    {{-- <th class="th-sm">title</th> --}}
+                    <th class="th-sm">title</th>
                     <th class="th-sm">Subject</th>
                     <th class="th-sm">Message</th>
                     <th class="th-sm">From</th>
@@ -155,7 +218,31 @@
                 @foreach($emailnotifications as $notification)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
-                    {{-- <td></td> --}}
+                    <td>
+                        {{-- <form action="upload.php" class="dropzone" id="mydropzone" >
+                            {{ csrf_field() }}
+                            <img src="/images/EmailNotification/{{ $notification->imageUrl }}'))" alt="">
+                            <input type="hidden" name="tournamentId" value="{{ $notification->id }}">
+                        </form> --}}
+                        <div class="media-container">
+                            <form method="POST" action="{{ route('EmailNotification-updateimage') }}" enctype="multipart/form-data">
+                              {{  csrf_field() }}
+                              <span class="media-overlay med-ovlay{{ $notification->id }}">
+                                <input type="hidden" name="pk" value="{{ $notification->id }}">
+                                <input type="file" name="file" id="media-input" class="upload{{ $notification->id }}" accept="image/*">
+                                {{-- <i class="glyphicon glyphicon-edit media-icon"></i> --}}
+                                <i class="fa fa-edit media-icon"></i>
+                              </span>
+                              <figure class="media-object">
+                                <img class="img-object imgupload{{ $notification->id }}" src="/images/EmailNotification/{{ $notification->imageUrl }}">
+                              </figure>
+                            </div>
+                            <div class="media-control">
+                              <button class="save-profile{{ $notification->id }}">Save Gift</button>
+                            </form>
+                              <button class="edit-profile{{ $notification->id }}">Edit Gift</button>
+                        </div>
+                    </td>
                     <td><a href="#" class="usertext" data-title="Subject" data-name="subject" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->subject }}</a></td>
                     <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="textarea" data-url="{{ route('EmailNotification-update')}}">{{ $notification->message }}</a></td>
                     <td><a href="#" class="usertext" data-title="From" data-name="fromName" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->fromName }}</a></td>
@@ -210,8 +297,7 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('table.table').dataTable( {
-          // "pageLength": 50,
-          // "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]]
         });
       });
     
@@ -280,9 +366,74 @@
               echo'});';
             }
           @endphp
+          @php
+          foreach($emailnotifications as $notification) {
+                echo'$(".save-profile'.$notification->id.'").hide(0);';
+                  echo'$(".med-ovlay'.$notification->id.'").hide(0);';
+
+                  echo'$(".edit-profile'.$notification->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$notification->id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$notification->id.'").fadeIn(300);';
+                  echo'});';
+                  echo'$(".save-profile'.$notification->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$notification->id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$notification->id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".upload'.$notification->id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+		
+                      echo'reader.onload = function(e) {';
+                        echo'$(".imgupload'.$notification->id.'").attr("src", e.target.result);';
+                      echo'};';
+		
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+              }
+          @endphp
         },
         responsive: true
       });
     
+    </script>
+    <script>
+
+        // Dropzone.options.myDropzone = {
+        //   init: function() {
+        
+        //       this.on('queuecomplete', function () {
+        //         location.reload();
+        //     });
+        
+        //   }
+        // };
+        $(".dropzone").dropzone({
+			//url: "/file/post",
+			addRemoveLinks : true,
+			maxFilesize: 0.5,
+			dictDefaultMessage: '<div class="text-center">Drop file</div>',
+			dictResponseError: 'Error uploading file!',
+      init: function() {
+
+        this.on('queuecomplete', function () {
+          location.reload();
+        });
+
+      }
+      // maxFiles: 1,
+      // accept: function(file, done) {
+      //   console.log("uploaded");
+      //   done();
+      // },
+      // init: function() {
+      //   this.on("maxfilesexceeded", function(file){
+      //     alert("No more files please!");
+      //   });
+      // }
+		});
     </script>
 @endsection

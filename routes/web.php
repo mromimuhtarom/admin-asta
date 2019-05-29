@@ -166,6 +166,7 @@ Route::middleware('authenticated')->group(function(){
             Route::post('EmailNotification-update', 'EmailNotificationController@update')->name('EmailNotification-update');
             Route::delete('EmailNotification-delete', 'EmailNotificationController@destroy')->name('EmailNotification-delete');
             Route::post('EmailNotification-create', 'EmailNotificationController@store')->name('EmailNotification-create');
+            Route::post('EmailNotification-updateimage', 'EmailNotificationController@updateimage')->name('EmailNotification-updateimage');
         });
     });
 

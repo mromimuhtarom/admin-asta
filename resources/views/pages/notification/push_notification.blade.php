@@ -196,6 +196,7 @@
     
       table = $('table.table').dataTable({
         "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
+        "paging": false,
         "autoWidth" : true,
         "classes": {
           "sWrapper": "dataTables_wrapper dt-bootstrap4"

@@ -120,6 +120,47 @@ class EmailNotificationController extends Controller
         //
     }
 
+    public function updateimage(Request $request)
+    {
+        $pk = $request->pk;
+        $file = $request->file('file');
+        $bcrypt = bcrypt($request->password);
+        $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
+        $nama = $_FILES['file']['name'];
+        $x = explode('.', $nama);
+        $ekstensi = strtolower(end($x));
+        $ukuran = $_FILES['file']['size'];
+        $acak           = rand(1,99);
+        $nama_file_unik = 'notification'.$acak.'.'.$ekstensi; 
+
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        {
+            if($ukuran < 1044070)
+            {           
+                if ($file->move(public_path('../public/images/EmailNotification'), $nama_file_unik))
+                {
+                    EmailNotification::where('id', '=', $pk)->update([
+                        'imageUrl' => $nama_file_unik
+                    ]);
+                    return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
+            
+                }
+                else
+                {
+                    echo "Gagal Upload File";
+                }
+            }
+            else
+            {       
+                echo 'Ukuran file terlalu besar';
+            }
+        }
+        else
+        {       
+            echo 'Ekstensi file tidak di perbolehkan';
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -183,8 +224,15 @@ class EmailNotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        if($id != '')
+        {
+            DB::table('notifications')->where('id', '=', $id)->delete();
+            return redirect()->route('EmailNotification-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('EmailNotification-view')->with('success','Something wrong');   
     }
+    
 }
