@@ -19,9 +19,12 @@ class PlayersController extends Controller
      */
     public function indexActive()
     {
-        $online = DB::table('user_active')->join('user', 'user.user_id', '=', 'user_active.user_id')->join('user_device', 'user_active.user_id', '=', 'user_device.user_id')->join('game', 'game.id', '=', 'user_active.game_id')->join('user_stat', 'user_stat.user_id', '=', 'user_active.user_id')->select('user_device.name as devicename', 'user.*', 'user_stat.*', 'game.name as game_name', 'user_active.*')->get();
-        $offline = DB::table('user')->leftJoin('user_active', 'user_active.user_id', '=', 'user.user_id')->join('user_stat', 'user_stat.user_id', '=', 'user.user_id')->join('user_device', 'user_device.device_id', '=', 'user.device_id')->whereNull('user_active.user_id')->get();
-        return view('pages.players.active_player', compact('online', 'offline'));
+        $online = DB::table('user_active')->join('user', 'user.user_id', '=', 'user_active.user_id')
+        ->join('game', 'game.id', '=', 'user_active.game_id')
+        ->join('user_stat', 'user_stat.user_id', '=', 'user_active.user_id')
+        ->select('user.*', 'user_stat.*', 'game.name as game_name', 'user_active.*')
+        ->where('user.user_type', '!=', '3')->get();
+        return view('pages.players.active_player', compact('online'));
     }
     public function indexHighRoller()
     {
@@ -59,7 +62,8 @@ class PlayersController extends Controller
         $registered = DB::table('user_device')
                     ->join('user', 'user.user_id', '=', 'user_device.user_id')
                     ->join('country', 'user.country_code', '=', 'country.code')
-                    ->select('user_device.name as devicename', 'user_device.join_date', 'user.*', 'country.name as countryname')
+                    ->join('user_stat', 'user_stat.user_id', '=', 'user_device.user_id')
+                    ->select('user_device.name as devicename', 'user_device.join_date', 'user.*', 'country.name as countryname', 'user_stat.chip as chip', 'user_stat.point as point', 'user_stat.gold as gold')
                     ->where('user_device.join_date', '!=', '')
                     ->get();
         return view('pages.players.registered_player', compact('registered'));

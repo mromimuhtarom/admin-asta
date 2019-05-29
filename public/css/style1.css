@@ -9,7 +9,6 @@
 
 .table-outer {
   margin: 1%;
-  padding-right:5%;
 }
 
 .searching {
@@ -33,4 +32,12 @@
 .form div:last-child button {
     padding-left: 4em;
     padding-right: 4em;
+}
+
+
+/* SETTINGS MENU LAYOUT */
+.settings-table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1%;
 }

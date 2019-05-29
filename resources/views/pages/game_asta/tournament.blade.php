@@ -6,9 +6,150 @@
 
 
 @section('content')
-{{-- <div class="menugame border-bottom border-dark">
-  @include('menu.nama_game')
-</div> --}}
+
+  <!-- Response Status -->
+  @if (count($errors) > 0)
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all as $error)
+          <li>{{$error}}</li>  
+          @endforeach
+      </ul>
+  </div>
+  @endif
+
+  @if (\Session::has('success'))
+    <div class="alert alert-success">
+        <p>{{\Session::get('success')}}</p>
+    </div>
+    
+  @endif
+  <!-- End Response Status -->
+
+  <!-- Form Tournament -->
+  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+    <header>
+      <div class="widget-header">	
+        <h2><strong>Asta Poker Tournament</strong></h2>				
+      </div>
+    </header>
+
+    <div>
+      
+      <div class="widget-body">
+        <div class="widget-body-toolbar">
+          <div class="row">
+            <!-- Button tambah data baru -->
+            <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+              <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-plus"><span> Create New Tournament</span></i>
+              </button>
+            </div>
+            <!-- End Button tambah data baru -->
+          </div>
+        </div>
+        
+        <div class="custom-scroll table-responsive" style="max-height:600px;">
+          <div class="table-outer">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="th-sm"></th>
+                  <th class="th-sm">Title</th>
+                  <th class="th-sm">Type</th>
+                  <th class="th-sm">Start Time</th>
+                  <th class="th-sm">Buy In</th>
+                  <th class="th-sm">Entry fee</th>
+                  <th class="th-sm">Min Players</th>
+                  <th class="th-sm">Max Players</th>
+                  <th class="th-sm">Rebuys</th>
+                  <th class="th-sm">Late Entry</th>
+                  <th class="th-sm">Structure</th>
+                  <th class="th-sm">Status</th>
+                  <th class="th-sm">Registered</th>
+                  <th class="th-sm">Playing</th>
+                  <th class="th-sm">Action</th>
+                  <th class="th-sm"></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($tournaments as $tournament)
+                <tr>
+                    <td></td>
+                    <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $tournament->tournamentId }}" data-type="text" data-url="{{ route('Tournament-update') }}">{{ $tournament->title }}</a></td>
+                    <td><a href="#" class="gametype" data-title="Type" data-name="gameType" data-pk="{{ $tournament->tournamentId }}" data-type="select" data-url="{{ route('Tournament-update') }}">{{ $tournament->strGameType() }}</td>
+                    <td>{{ $tournament->timeLabel }}</td>
+                    <td><a href="#" class="usertext" data-title="Buy In" data-name="buyIn" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->buyIn }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Entry Fee" data-name="entryFee" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->entryFee }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Players" data-name="minPlayers" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->minPlayers }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Players" data-name="maxPlayers" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->maxPlayers }}</a></td>
+                    <td><a href="#" class="usertext" data-title="rebuys" data-name="rebuys" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->rebuys }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Late Entry" data-name="lateEntry" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->lateEntry }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Late Entry" data-name="structureId" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->structureId }}</a></td>
+                    <td><a href="#" class="status" data-title="Status" data-name="status" data-pk="{{ $tournament->tournamentId }}" data-type="select" data-url="{{ route('Tournament-update') }}" data-value="{{ $tournament->status }}">{{ $tournament->strStatus }}</a></td>
+                    <td>{{ $tournament->registeredPlayers }}</td>
+                    <td>{{ $tournament->activePlayers }}</td>
+                    <td>view detail</td>
+                    <td></td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  <!-- End Form Season -->
+
+  <!-- Modal create data -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Create New Tournament</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
+          </button>
+        </div>
+        <form action="{{ route('Tournament-create') }}" method="post">
+          @csrf
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="titleTournament" placeholder="Title Tournamen" required>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-10">
+                    <select class="form-control" name="category">
+                      <option>Select Category</option>
+                      <option value="Pot Limit">Pot Limit</option>
+                      <option value="No Limit">No Limit</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="date" class="form-control" name="startTime" placeholder="Start TIme" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="submit" class="btn sa-btn-primary">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
 
 
 
@@ -42,78 +183,6 @@
     </div>
   </div>
  
-  @if (count($errors) > 0)
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all as $error)
-          <li>{{$error}}</li>  
-          @endforeach
-      </ul>
-  </div>
-      
-  @endif
-  
-  @if (\Session::has('success'))
-      <div class="alert alert-success">
-          <p>{{\Session::get('success')}}</p>
-      </div>
-      
-  @endif
-
-
-
-    <div class="table-aii" style=" display: table; width: auto;">
-        <div class="footer-table">
-                            <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
-                              <i class="fas fa-plus-circle"></i>Create Tournament
-                            </button>
-        </div>
-         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
-            <thead class="th-table">
-              <tr>
-                <th></th>
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Type</th>
-                <th class="th-sm">Start Time</th>
-                <th class="th-sm">Buy In</th>
-                <th class="th-sm">Entry fee</th>
-                <th class="th-sm">Min Players</th>
-                <th class="th-sm">Max Players</th>
-                <th class="th-sm">Rebuys</th>
-                <th class="th-sm">Late Entry</th>
-                <th class="th-sm">Structure</th>
-                <th class="th-sm">Status</th>
-                <th class="th-sm">Registered</th>
-                <th class="th-sm">Playing</th>
-                <th class="th-sm">Action</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach($tournaments as $tournament)
-                <tr>
-                    <td></td>
-                    <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $tournament->tournamentId }}" data-type="text" data-url="{{ route('Tournament-update') }}">{{ $tournament->title }}</a></td>
-                    <td><a href="#" class="gametype" data-title="Type" data-name="gameType" data-pk="{{ $tournament->tournamentId }}" data-type="select" data-url="{{ route('Tournament-update') }}">{{ $tournament->strGameType() }}</td>
-                    <td>{{ $tournament->timeLabel }}</td>
-                    <td><a href="#" class="usertext" data-title="Buy In" data-name="buyIn" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->buyIn }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Entry Fee" data-name="entryFee" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->entryFee }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Min Players" data-name="minPlayers" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->minPlayers }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Players" data-name="maxPlayers" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->maxPlayers }}</a></td>
-                    <td><a href="#" class="usertext" data-title="rebuys" data-name="rebuys" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->rebuys }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Late Entry" data-name="lateEntry" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->lateEntry }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Late Entry" data-name="structureId" data-pk="{{ $tournament->tournamentId }}" data-type="number" data-url="{{ route('Tournament-update') }}">{{ $tournament->structureId }}</a></td>
-                    <td><a href="#" class="status" data-title="Status" data-name="status" data-pk="{{ $tournament->tournamentId }}" data-type="select" data-url="{{ route('Tournament-update') }}" data-value="{{ $tournament->status }}">{{ $tournament->strStatus }}</a></td>
-                    <td>{{ $tournament->registeredPlayers }}</td>
-                    <td>{{ $tournament->activePlayers }}</td>
-                    <td>view detail</td>
-                    <td></td>
-                </tr>
-                @endforeach
-            </tbody>
-          </table>
-         
-    </div> 
     <script type="text/javascript">
       $(document).ready(function() {
           $.ajaxSetup({

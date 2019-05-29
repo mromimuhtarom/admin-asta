@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SeasonReward as SR;
+use DB;
 
 class SeasonRewardController extends Controller
 {
@@ -36,7 +37,18 @@ class SeasonRewardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $from       = $request->rewardFrom;
+        $to         = $request->rewardTo;
+        $rewardChip = $request->rewardchip;
+        $rewardGold = $request->rewardgold;
+
+        DB::table('season_reward')->insert([
+            'positionFrom'  => $from,
+            'positionTo'    => $to,
+            'winpotReward'  => $rewardChip,
+            'goldReward'    => $rewardGold
+        ]);
+        return redirect()->route('SeasonReward-view')->with('success','Data Added');
     }
 
     /**
@@ -85,8 +97,14 @@ class SeasonRewardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $sRewardId = $request->sRewardId;
+        if($sRewardId != '')
+        {
+            DB::table('season_reward')->where('id', '=', $sRewardId)->delete();
+            return redirect()->route('SeasonReward-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('SeasonReward-view')->with('success','Something wrong');  
     }
 }

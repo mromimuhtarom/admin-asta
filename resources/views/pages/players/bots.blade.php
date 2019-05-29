@@ -39,42 +39,26 @@
   </header>
 
   <div>
-    
-    <div class="jarviswidget-editbox">
-      <input class="form-control" type="text">
-      <span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>
-      
-    </div>
-    
     <div class="widget-body">
       <div class="widget-body-toolbar">
         
         <div class="row">
           
+          <!-- Button tambah bot baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-                <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                    <i class="fa fa-plus"></i>
-                  </button>
-              
+              <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-plus"></i>
+              </button>
             </div>
           </div>
-          <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
-            
-            {{-- <button class="btn sa-btn-success">
-              <i onclick="addBots()" class="fa fa-plus"></i> <span class="hidden-mobile">Add New Row</span>
-            </button> --}}
-            
-            
-          </div>
-          
+          <!-- End Button tambah bot baru -->
+
         </div>
-        
-          
 
       </div>
       
-      <div class="custom-scroll table-responsive" style="height:290px; overflow-y: scroll;">
+      <div class="custom-scroll table-responsive" style="max-height:600px;">
         
         <div class="table-outer">
           <table class="table table-bordered">
@@ -191,6 +175,7 @@
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
     "autoWidth" : true,
+    "paging": false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },

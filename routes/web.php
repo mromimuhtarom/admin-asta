@@ -111,13 +111,19 @@ Route::middleware('authenticated')->group(function(){
         });
         Route::group(['prefix'  => 'Season'], function() {
             Route::get('Season-view', 'SeasonController@index')->name('Season-view');
+            Route::post('Season-create', 'SeasonController@store')->name('Season-create');
+            Route::post('Season-update', 'SeasonController@update')->name('Season-update');
+            Route::delete('Season-delete', 'SeasonController@destroy')->name('Season-delete');
         });
         Route::group(['prefix'  => 'SeasonReward'], function() {
             Route::get('SeasonReward-view', 'SeasonRewardController@index')->name('SeasonReward-view');
+            Route::post('SeasonReward-create', 'SeasonRewardController@store')->name('SeasonReward-create');
             Route::post('SeasonReward-update', 'SeasonRewardController@update')->name('SeasonReward-update');
+            Route::delete('SeasonReward-delete', 'SeasonRewardController@destroy')->name('SeasonReward-delete');
         });
         Route::group(['prefix'  => 'Tournament'], function() {
             Route::get('Tournament-view', 'TournamentController@index')->name('Tournament-view');
+            Route::post('Tournament-create', 'TournamentController@store')->name('Tournament-create');
             Route::post('Tournament-update', 'TournamentController@update')->name('Tournament-update');
         });
         Route::group(['prefix'  => 'Jackpot-Paytable'], function() {

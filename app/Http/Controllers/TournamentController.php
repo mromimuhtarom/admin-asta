@@ -49,37 +49,37 @@ class TournamentController extends Controller
      */
     public function store(Request $request)
     {
-
-        if ($request->ajax()) {
-          if($request->tournamentName == ''){
-            return json_encode([
-            "status"  => "Failed",
-            "message" => "Tournament Name Must Be Filled"
-            ]);
-            exit;
-          }
-
-            $tournament = Tournament::create([
-              'dealerId'    => Session::get('dealerId'),   //manual
-              'title'       => $request->tournamentName,
-              'structureId' => '1',
-              'status'      => 'C'
-            ]);
-
-            Log::create([
-              'operator_id' => Session::get('userId'),
-              'menu_id'     => '13',
-              'action_id'   => '3',
-              'date'        => Carbon::now('GMT+7'),
-              'description' => 'Create new Tournament with title'. $tournament->title
-            ]);
-
-            return json_encode([
-              'status' => 'OK',
-              'message' => 'New tournament created',
-              'tournamentId' => $tournament->tournamentId
-            ]);
+      
+      if ($request->ajax()) {
+        if($request->tournamentName == ''){
+          return json_encode([
+          "status"  => "Failed",
+          "message" => "Tournament Name Must Be Filled"
+          ]);
+          exit;
         }
+
+          $tournament = Tournament::create([
+            'dealerId'    => Session::get('dealerId'),   //manual
+            'title'       => $request->tournamentName,
+            'structureId' => '1',
+            'status'      => 'C'
+          ]);
+
+          Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '13',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Tournament with title'. $tournament->title
+          ]);
+
+          return json_encode([
+            'status' => 'OK',
+            'message' => 'New tournament created',
+            'tournamentId' => $tournament->tournamentId
+          ]);
+      }
     }
 
     /**

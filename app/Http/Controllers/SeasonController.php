@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Log;
 
 class SeasonController extends Controller
 {
@@ -36,7 +37,16 @@ class SeasonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $seasonName = $request->seasonName;
+        $startTime = $request->startTime;
+        $finishTime = $request->finishTime;
+
+        DB::table('seasons')->insert([
+            'title'         => $seasonName,
+            'startTime'     => strtotime($startTime),
+            'finishTime'    => strtotime($finishTime),
+        ]);
+        return redirect()->route('Season-view')->with('success','Data Added');
     }
 
     /**
@@ -68,9 +78,15 @@ class SeasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+  
+        DB::table('seasons')->where('seasonId', '=', $pk)->update([
+            $name => $value 
+        ]);
     }
 
     /**
@@ -79,8 +95,14 @@ class SeasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $seasonId = $request->seasonId;
+        if($seasonId != '')
+        {
+            DB::table('seasons')->where('seasonId', '=', $seasonId)->delete();
+            return redirect()->route('Season-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('Season-view')->with('success','Something wrong');  
     }
 }
