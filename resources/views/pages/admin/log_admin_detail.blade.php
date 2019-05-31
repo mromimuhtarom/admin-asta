@@ -1,189 +1,128 @@
 @extends('index')
 
 @section('sidebarmenu')
-    @include('menu.menuadmin')
+@include('menu.menuplayer')    
 @endsection
 
+
 @section('content')
-    <link rel="stylesheet" href="/css/admin.css">
-
-      <!-- Modal -->
-  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="margin-top:5%;">
-        <h5 class="modal-title" id="exampleModalLabel">Create Role Admin</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="" method="POST">
-        {{  csrf_field() }}
-      <div class="modal-body">
-        <input type="text" name="rolename" placeholder="Role Name" required>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-      </form>
+<div class="search bg-blue-dark">
+    <div class="table-header w-100 h-100">
+        <form action="">
+            <div class="row h-100 w-100">
+                <div class="col">
+                    <input type="text" name="username" placeholder="username">
+                </div>
+                <div class="col">
+                    <select name="action" id="">
+                        <option>Choose Action</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="date" name="dari">
+                </div>
+                <div class="col">
+                    <input type="date" name="sampai">
+                </div>
+                <div class="col">
+                    <button class="myButton" type="submit">Cari</button>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
-</div>
-
-@if (count($errors) > 0)
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all as $error)
-        <li>{{$error}}</li>  
-        @endforeach
-    </ul>
 </div>
     
-@endif
+        
+</script> --}}
+<!-- Widget ID (each widget will need unique ID)-->
+<div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
 
-@if (\Session::has('success'))
-    <div class="alert alert-success">
-        <p>{{\Session::get('success')}}</p>
-    </div>
+    <header>
+        <div class="widget-header">	
+            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+            <h2>Standard Data Tables </h2>
+        </div>
     
-@endif
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header" style="margin-top:5%;">
-          <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="widget-toolbar">
+            <!-- add: non-hidden - to disable auto hide -->
         </div>
-        <div class="modal-body">
-          Are You Sure Want To Delete It
-          <form action="{{ route('UserAdmin-delete') }}" method="post">
-            {{ method_field('delete')}}
-            {{ csrf_field() }}
-            <input type="hidden" name="roleid" id="roleid" value="">
+    </header>
+    <div>
+                    
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
         </div>
-        <div class="modal-footer">
-            <button type="button" class="button_example-yes">Yes</button>
-          <button type="button" class="button_example-no" data-dismiss="modal">No</button>
-        </div>
-          </form>
-      </div>
-    </div>
-  </div>
-    {{-- end delete notification --}}
-
-
-
-
-    <div class="table-aii">
-        <div class="footer-table">
-              <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
-                  <i class="fas fa-plus-circle"></i>Create Role Admin
-              </button>
-        </div>
-         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
-            <thead class="th-table">
-              <tr>
-                <th></th>
-                <th class="th-sm">Image</th>
-                <th class="th-sm">Role</th>
-                <th class="th-sm">Action</th>
-                <th style="width:2px;"></th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach($roles as $role)
-                <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
-                    <td></td>
-                    <td>{{ $role->name }}</td>
-                    <td><a href="#" class="myButton">View & Edit</a></td>
-                    <td><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete"><i class="fas fa-times"></i></a></td>
-                </tr>
-                @endforeach
-            </tbody>
-            {{-- <tfoot>
-                <tr>
-                    <th>Name
-                    </th>
-                    <th>Position
-                    </th>
-                    <th>Office
-                    </th>
-                    <th colspan="2">Age
-                    </th>
-                    <th colspan="2">Start date
-                    </th>
-                </tr>
-            </tfoot> --}}
-          </table>
-         
-      </div>    
-
-      <script>
-      $(document).ready(function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-
-        // $('#selecctall').click(function(event) { 
-        //       if(this.checked) { // check select status
-        //         $('.deletepermission').each(function() { 
-        //           this.checked = true;  //select all 
-        //         });
-        //       }else{
-        //         $('.deletepermission').each(function() { 
-        //           this.checked = false; //deselect all             
-        //         });        
-        //       }
-        // });
-      
-      });
-      table = $('#dt-material-checkbox').dataTable({
-          columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-          }],
-          "pagingType": "full_numbers",
-          "bInfo" : false,
-          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-          select: {
-          style: 'os',
-          selector: 'td:first-child'
-          },
-          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-              $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
-
-              $('.usertext').editable({
-                mode :'popup'
-              });
-             
-              $('.category').editable({
-                //value: 'drink',
-                source: [
-                  {value: 'drink', text: 'Drink'},
-                  {value: 'food', text: 'Food'},
-                  {value: 'emoji', text: 'Emoji'},
-                ]
-              }); 
+        <!-- end widget edit box -->
+                    
+        <!-- widget content -->
+        <div class="widget-body p-0">
+                    
+            <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                <thead>			                
+                    <tr>
+                        <th data-hide="phone">Username</th>
+                        <th data-class="expand">Playing Game</th>
+                        <th data-hide="phone">Table</th>
+                        <th>Seat</th>
+                        <th data-hide="phone,tablet">Card</th>
+                        <th data-hide="phone,tablet">Table Card</th>
+                        <th data-hide="phone,tablet">Bet</th>
+                        <th data-hide="phone,tablet">Win Amount</th>
+                        <th data-hide="phone,tablet">Status</th>
+                        <th data-hide="phone,tablet">Time Stamp</th>
+                        <th data-hide="phone,tablet">Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach ($player_history as $history)
+                        <tr>
+                          <td></td>
+                          <td>{{ $history->username }}</td>
+                          <td>{{ $history->gamename }}</td>
+                          <td>{{ $history->tablename }}</td>
+                          <td>{{ $history->seat }}</td>
+                          <td>{{ $history->cards }}</td>
+                          <td>{{ $history->tablecards }}</td>
+                          <td>{{ $history->bet }}</td>
+                          <td>{{ $history->winAmount }}</td>
+                          <td>{{ $history->status }}</td>
+                          <td>{{ $history->ts }}</td>
+                          <td>{{ $history->countryname }}</td>
+                          <td></td>
+                        </tr>
+                        @endforeach
+                </tbody>
+            </table>
     
-          }
-      });
+        </div>
+        <!-- end widget content -->
+                    
+    </div>
+    <!-- end widget div -->
+                    
+</div>
+    <!-- end widget -->
+<script>
+    var responsiveHelper_dt_basic = responsiveHelper_dt_basic || undefined;
+			
+	var breakpointDefinition = {
+	    tablet : 1024,
+		phone : 480
+	};
+	
+	$('#dt_basic').dataTable({
+	    "sDom": "<'dt-toolbar d-flex'<f><'ml-auto hidden-xs show-control'l>r>"+
+		    "t"+
+			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+			"autoWidth" : true,
+			"oLanguage": {
+			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+		},
+		classes: {
+		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
+		},
+		responsive: true
+	});
 </script>
-
-      
 @endsection

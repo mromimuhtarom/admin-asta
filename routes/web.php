@@ -46,6 +46,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix' => 'Log-Admin'], function() {
             Route::middleware('page_denied:Log Admin')->group(function(){
                 Route::get('/Log-view', 'LogController@index')->name('Log-view');
+                Route::get('/Log-search', 'LogController@search')->name('Log-search');
             });
         });
     });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class LogController extends Controller
 {
@@ -13,8 +14,22 @@ class LogController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.log_admin');
+        $logs = DB::table('action')
+                ->select('action')
+                ->groupBy('action')
+                ->get();
+        return view('pages.admin.log_admin', compact('logs'));
     }
+
+
+
+    public function search(Request $request)
+    {
+
+
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
