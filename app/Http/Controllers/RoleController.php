@@ -45,14 +45,20 @@ class RoleController extends Controller
             $user = Role::create([
                 'name' => $role
               ]);
+              $lastValue = DB::table('adm_role')->orderBy('role_id', 'desc')->first();
+              $menu = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->orderby('menu_id', 'desc')->first();
+              $menuarray = DB::select('SELECT menu_id from adm_menu where webid = 1');
+              $menufirst = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->first();
+
+              for ($i=$menufirst->menu_id; $i < $menu->menu_id; $i++) {
+                $menuId[] = [
+                  'role_id' => $lastValue->role_id,
+                  'menu_id' => $i,
+                  'type'    => '2'
+                ];
+              }
       
-              Log::create([
-                  'operator_id' => Session::get('userId'),
-                  'menu_id' => '3',
-                  'action_id' => '3',
-                  'date' => Carbon::now('GMT+7'),
-                  'description' => 'Create new Role with Role Name '. $user->name
-              ]);
+              DB::table('adm_access')->insert($menuId);
               return redirect()->route('Role-view')->with('success','Data Insert Successfull');  
         }
         return redirect()->route('Role-view')->with('alert','Role Name is Null');
@@ -78,6 +84,13 @@ class RoleController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function menu(Role $role)
+    {
+        $roles = DB::table('adm_access')->join('adm_menu', 'adm_menu.menu_id', '=', 'adm_access.menu_id')->where('adm_access.role_id', '=', $role->role_id)->get();
+        $roles = $roles->toArray();
+        return view('pages.admin.role_edit', compact('roles'));
     }
 
     /**
@@ -106,6 +119,19 @@ class RoleController extends Controller
           'action_id'   => '2',
           'date'        => Carbon::now('GMT+7'),
           'description' => 'Edit password UserId '.$pk.' to '. $value
+        ]);
+    }
+
+
+    public function menuupdate(Request $request, Role $role)
+    {
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+
+
+        DB::table('adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
+          $name => $value
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 
 class BestOfferController extends Controller
 {
@@ -13,7 +14,8 @@ class BestOfferController extends Controller
      */
     public function index()
     {
-        return view('pages.store.best_offer');
+        $menu  = MenuClass::menuName('Best Offer');
+        return view('pages.store.best_offer', '$menu');
     }
 
     /**

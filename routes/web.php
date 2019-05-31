@@ -35,6 +35,8 @@ Route::middleware('authenticated')->group(function(){
             Route::get('/Role-view', 'RoleController@index')->name('Role-view');
             Route::post('/Role-update', 'RoleController@update')->name('Role-update');
             Route::post('/Role-create', 'RoleController@store')->name('Role-create');
+            Route::get('/Role-menu/{role}', 'RoleController@menu')->name('Role-menu');
+            Route::post('/Role-menu/{role}/edit', 'RoleController@menuupdate')->name('Role-menu-edit');
             Route::delete('/Role-delete', 'RoleController@destroy')->name('Role-delete');
         });
         Route::group(['prefix' => 'Log-Admin'], function() {

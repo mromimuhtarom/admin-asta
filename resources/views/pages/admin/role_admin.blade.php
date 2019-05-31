@@ -117,19 +117,9 @@
             <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
                 <td></td>
-                {{-- <td>{{ $role->name }}</td> --}}
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $role->role_id }}" data-type="text" data-url="{{ route('Role-update') }}">{{ $role->name }}</a></td>
-                <td><a href="#" class="myButton">View & Edit</a></td>
+                <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton">View & Edit</a></td>
                 <td><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>
-                {{-- <td>
-                  <a href="#" style="color:red;" class="delete{{ $notification->id }}" 
-                  id="delete" 
-                  data-pk="{{ $notification->id }}" 
-                  data-toggle="modal" 
-                  data-target="#delete-modal">
-                    <i class="fa fa-times"></i>
-                  </a>
-                </td> --}}
             </tr>
             @endforeach
           </tbody>

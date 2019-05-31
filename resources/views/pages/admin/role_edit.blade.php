@@ -23,7 +23,7 @@
         <header>
             <div class="widget-header">	
                 <span class="widget-icon"> <i class="fa fa-arrows-v"></i> </span>
-                <h2 class="font-md"><strong>Collapsable</strong> <i>Widget</i></h2>				
+                <h2 class="font-md"><strong>Role Menu</strong></h2>				
             </div>
         </header>
 
@@ -40,10 +40,33 @@
             <!-- widget content -->
             <div class="widget-body">
                 
-                <h2 class="alert alert-warning"> This widget is opened by default </h2>
-                <code>data-widget-togglebutton</code>
-                <br><br>
-                <p>Notice the header text size slightly larger than other widget headers</p>
+                    @foreach(array_chunk($roles, 2) as $chunk)
+                    <table border="0" align="center" width="1680px">
+
+                        <tr>
+
+                          @foreach($chunk as $c )
+                          <td width="600px" rowspan="22">
+                            <table border="1">
+                              <tr>
+                                <td height="30px" width="200px">
+                                  <font color="black">{{ ucFirst($c->name) }}</font>
+                                </td>
+                                <td height="30px" width="500px">
+                                  <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $c->type }}" data-pk="{{ $c->menu_id }}" data-url="{{ route('Role-menu-edit', $c->role_id) }}">{{ strMenuType($c->type) }}</a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                          
+                          <td width="100px;"></td>
+                          @endforeach
+
+                        </tr>
+                      </table>
+                      @endforeach
+                      
+
                 
             </div>
             <!-- end widget content -->
@@ -53,4 +76,25 @@
         
     </div>
     <!-- end widget -->
+
+
+    <script type="text/javascript">
+          $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+              // $.fn.editable.defaults.mode = 'inline';
+
+
+          $('.type').editable({
+            mode: 'inline',
+            value: 0,
+            source: [
+                {value: 0, text: 'The Menu Can\'t be Accessed and can\'t be edited '},
+                {value: 1, text: 'The Menu Can be Accessed and can\'t be edited '},
+                {value: 2, text: 'The Menu Can be Accessed and edited '}
+               ]
+          });
+        </script>
 @endsection

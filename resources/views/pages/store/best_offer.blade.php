@@ -92,6 +92,7 @@
             </thead>
             <tbody>
                 {{-- @foreach($guests as $gs) --}}
+                @if($menu)
                 <tr>
                     <td></td>
                     <td></td>
@@ -103,6 +104,19 @@
                     <td></td>
                     <td></td>
                 </tr>
+                @else 
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @endif
                 {{-- @endforeach --}}
             </tbody>
           </table>
