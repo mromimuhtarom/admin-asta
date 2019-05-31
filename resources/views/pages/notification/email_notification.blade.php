@@ -342,7 +342,7 @@ min-height: 0px !important;
             mode :'inline'
           });          
     
-          // delete bots
+       
           @php
             foreach($emailnotifications as $notification) {
               echo'$(".delete'.$notification->id.'").hide();';
