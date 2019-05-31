@@ -180,6 +180,88 @@ Route::middleware('authenticated')->group(function(){
         });
     });
 
+    // Game Asta Domino Susun
+    Route::group(['prefix'  =>  'Game-Asta-DominoSusun'], function() {
+        Route::group(['prefix'  => 'Table'], function() {
+            Route::get('DominoSTable-view', 'TableController@DominoSusunindex')->name('DominoSTable-view');
+            Route::post('DominoSTable-update', 'TableController@DominoSusunupdate')->name('DominoSTable-update');
+            Route::post('DominoSTable-create', 'TableController@DominoSusunstore')->name('DominoSTable-create');
+            Route::delete('DominoSTable-delete', 'TableController@DominoSusundestroy')->name('DominoSTable-delete');
+        });
+        Route::group(['prefix'  => 'Category'], function() {
+            Route::get('DominoSCategory-view', 'CategoryController@DominoSusunindex')->name('DominoSCategory-view');
+            Route::post('DominoSCategory-create', 'CategoryController@DominoSusunstore')->name('DominoSCategory-create');
+            Route::post('DominoSCategory-update', 'CategoryController@DominoSusunupdate')->name('DominoSCategory-update');
+            Route::delete('DominoSCategory-delete', 'CategoryController@DominoSusundestroy')->name('DominoSCategory-delete');
+        });
+        Route::group(['prefix'  => 'Season'], function() {
+            Route::get('DominoSSeason-view', 'SeasonController@BigTwoindex')->name('DominoSSeason-view');
+            Route::post('DominoSSeason-create', 'SeasonController@BigTwostore')->name('DominoSSeason-create');
+            Route::post('DominoSSeason-update', 'SeasonController@BigTwoupdate')->name('DominoSSeason-update');
+            Route::delete('DominoSSeason-delete', 'SeasonController@BigTwodestroy')->name('DominoSSeason-delete');
+        });
+        Route::group(['prefix'  => 'SeasonReward'], function() {
+            Route::get('DominoSSeasonReward-view', 'SeasonRewardController@BigTwoindex')->name('DominoSSeasonReward-view');
+            Route::post('DominoSSeasonReward-create', 'SeasonRewardController@BigTwostore')->name('DominoSSeasonReward-create');
+            Route::post('DominoSSeasonReward-update', 'SeasonRewardController@BigTwoupdate')->name('DominoSSeasonReward-update');
+            Route::delete('DominoSSeasonReward-delete', 'SeasonRewardController@BigTwodestroy')->name('DominoSSeasonReward-delete');
+        });
+        Route::group(['prefix'  => 'Tournament'], function() {
+            Route::get('DominoSTournament-view', 'TournamentController@BigTwoindex')->name('DominoSTournament-view');
+            Route::post('DominoSTournament-create', 'TournamentController@BigTwostore')->name('DominoSTournament-create');
+            Route::post('DominoSTournament-update', 'TournamentController@BigTwoupdate')->name('DominoSTournament-update');
+        });
+        Route::group(['prefix'  => 'Jackpot-Paytable'], function() {
+            Route::get('DominoSJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('DominoSJackpotPaytable-view');
+            Route::post('DominoSJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('DominoSJackpotPaytable-update');
+        });
+        Route::group(['prefix'  => 'Find-Room'], function() {
+            Route::get('DominoSFindRoom-view', 'FindRoomController@BigTwoindex')->name('DominoSFindRoom-view');
+            Route::post('DominoSFindRoom-update', 'FindRoomController@BigTwoupdate')->name('DominoSFindRoom-update');
+        });
+    });
+
+    // Game Asta Domino QQ
+    Route::group(['prefix'  =>  'Game-Asta-DominoQQ'], function() {
+        Route::group(['prefix'  => 'Table'], function() {
+            Route::get('DominoQTable-view', 'TableController@DominoQindex')->name('DominoQTable-view');
+            Route::post('DominoQTable-update', 'TableController@DominoQupdate')->name('DominoQTable-update');
+            Route::post('DominoQTable-create', 'TableController@DominoQstore')->name('DominoQTable-create');
+            Route::delete('DominoQTable-delete', 'TableController@DominoQdestroy')->name('DominoQTable-delete');
+        });
+        Route::group(['prefix'  => 'Category'], function() {
+            Route::get('DominoQCategory-view', 'CategoryController@DominoQindex')->name('DominoQCategory-view');
+            Route::post('DominoQCategory-create', 'CategoryController@DominoQstore')->name('DominoQCategory-create');
+            Route::post('DominoQCategory-update', 'CategoryController@DominoQupdate')->name('DominoQCategory-update');
+            Route::delete('DominoQCategory-delete', 'CategoryController@DominoQdestroy')->name('DominoQCategory-delete');
+        });
+        Route::group(['prefix'  => 'Season'], function() {
+            Route::get('DominoQSeason-view', 'SeasonController@DominoQindex')->name('DominoQSeason-view');
+            Route::post('DominoQSeason-create', 'SeasonController@DominoQstore')->name('DominoQSeason-create');
+            Route::post('DominoQSeason-update', 'SeasonController@DominoQupdate')->name('DominoQSeason-update');
+            Route::delete('DominoQSeason-delete', 'SeasonController@DominoQdestroy')->name('DominoQSeason-delete');
+        });
+        Route::group(['prefix'  => 'SeasonReward'], function() {
+            Route::get('DominoQSeasonReward-view', 'SeasonRewardController@DominoQindex')->name('DominoQSeasonReward-view');
+            Route::post('DominoQSeasonReward-create', 'SeasonRewardController@DominoQstore')->name('DominoQSeasonReward-create');
+            Route::post('DominoQSeasonReward-update', 'SeasonRewardController@DominoQupdate')->name('DominoQSeasonReward-update');
+            Route::delete('DominoQSeasonReward-delete', 'SeasonRewardController@DominoQdestroy')->name('DominoQSeasonReward-delete');
+        });
+        Route::group(['prefix'  => 'Tournament'], function() {
+            Route::get('DominoQTournament-view', 'TournamentController@DominoQindex')->name('DominoQTournament-view');
+            Route::post('DominoQTournament-create', 'TournamentController@DominoQstore')->name('DominoQTournament-create');
+            Route::post('DominoQTournament-update', 'TournamentController@DominoQupdate')->name('DominoQTournament-update');
+        });
+        Route::group(['prefix'  => 'Jackpot-Paytable'], function() {
+            Route::get('DominoQJackpotPaytable-view', 'JackpotPaytableController@DominoQindex')->name('DominoQJackpotPaytable-view');
+            Route::post('DominoQJackpotPaytable-update', 'JackpotPaytableController@DominoQupdate')->name('DominoQJackpotPaytable-update');
+        });
+        Route::group(['prefix'  => 'Find-Room'], function() {
+            Route::get('DominoQFindRoom-view', 'FindRoomController@DominoQindex')->name('DominoQFindRoom-view');
+            Route::post('DominoQFindRoom-update', 'FindRoomController@DominoQupdate')->name('DominoQFindRoom-update');
+        });
+    });
+
     Route::group(['prefix' => 'store'], function() {
         Route::group(['prefix'  =>  'Best-Offer'], function() {
             Route::get('BestOffer-view', 'BestOfferController@index')->name('BestOffer-view');

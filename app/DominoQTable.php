@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BigTwoTable extends Model
+class DominoQTable extends Model
 {
     public $timestamps      = false;
 
-    protected $table        = 'bgt_table';
+    protected $table        = 'dmq_table';
     protected $guarded      = [];
     protected $primaryKey   = 'tableid';
 
     public function room() {
-        return $this->belongsTo(BigTwoRoom::class);
+        return $this->belongsTo(DominoQRoom::class);
     }
 }

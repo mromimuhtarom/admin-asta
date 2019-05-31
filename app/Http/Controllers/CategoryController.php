@@ -14,6 +14,12 @@ use App\Room;
 // asta big two model
 use App\BigTwoRoom;
 
+// asta domino susun model
+use App\DominoSusunRoom;
+
+// asta domino QQ model
+use App\DominoQRoom;
+
 class CategoryController extends Controller
 {
     /**
@@ -34,11 +40,35 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      * asta big two index
      */
-     public function BigTwoindex()
-     {
-         $category = BigTwoRoom::all();
-         return view('pages.game_asta.bigTwoCategory', compact('category'));
-     }
+    public function BigTwoindex()
+    {
+        $category = BigTwoRoom::all();
+        return view('pages.game_asta.bigTwoCategory', compact('category'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     * asta big domino susun index
+     */
+    public function DominoSusunindex()
+    {
+        $category = DominoSusunRoom::all();
+        return view('pages.game_asta.dominoSusunCategory', compact('category'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     * asta big domino QQ index
+     */
+    public function DominoQindex()
+    {
+        $category = DominoQRoom::all();
+        return view('pages.game_asta.dominoQCategory', compact('category'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -84,8 +114,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      * asta big two store
      */
-     public function BigTwostore(Request $request)
-     {
+    public function BigTwostore(Request $request)
+    {
         $categoryname   = $request->categoryName;
         $minbuy         = $request->minbuy;
         $maxbuy         = $request->maxbuy;
@@ -98,8 +128,63 @@ class CategoryController extends Controller
             'timer'     => '0'
         ]);
  
-           return redirect()->route('BigTwoCategory-view')->with('success','Data Added');
-     }
+        return redirect()->route('BigTwoCategory-view')->with('success','Data Added');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     * asta domino susun store
+     */
+    public function DominoSusunstore(Request $request)
+    {
+
+        $categoryname   = $request->categoryName;
+        $minbuy         = $request->minbuy;
+        $maxbuy         = $request->maxbuy;
+        
+
+        DominoSusunRoom::create([
+            'name'          => $categoryname,
+            'min_buy'       => $minbuy,
+            'max_buy'       => $maxbuy,
+            'stake'         => '0',
+            'stake_pass'    => '0',
+            'timer'         => '0'
+        ]);
+
+        return redirect()->route('DominoSCategory-view')->with('success','Data Added');
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     * asta domino QQ store
+     */
+    public function DominoQstore(Request $request)
+    {
+
+        $categoryname   = $request->categoryName;
+        $minbuy         = $request->minbuy;
+        $maxbuy         = $request->maxbuy;
+        
+
+        DominoQRoom::create([
+            'name'          => $categoryname,
+            'min_buy'       => $minbuy,
+            'max_buy'       => $maxbuy,
+            'stake'         => '0',
+            'timer'         => '0'
+        ]);
+
+        return redirect()->route('DominoQCategory-view')->with('success','Data Added');
+
+    }
 
     /**
      * Display the specified resource.
@@ -223,6 +308,105 @@ class CategoryController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * asta domino susun update
+     */
+    public function DominoSusunupdate(Request $request)
+    {
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+  
+  
+        DominoSusunRoom::where('roomid', '=', $pk)->update([
+            $name => $value 
+        ]);
+  
+        switch ($name) {
+            case "name":
+                $name = "Room Name";
+                break;
+            case "stake":
+                $name = "Stake";
+                break;
+            case "stake_pass":
+                $name = "Stake Pass";
+                break;
+            case "min_buy":
+                $name = "Min Buy";
+                break;
+            case "max_buy":
+                $name = "Max Buy";
+                break;
+            case "timer":
+                $name = "Timer";
+                break;
+            default:
+              "";
+        }
+  
+        // Log::create([
+        //   'operator_id' => Session::get('userId'),
+        //   'menu_id'     => '15',
+        //   'action_id'   => '2',
+        //   'date'        => Carbon::now('GMT+7'),
+        //   'description' => 'Edit '.$name.' groupID '.$pk.' to '. $value
+        // ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * asta domino QQ update
+     */
+    public function DominoQupdate(Request $request)
+    {
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+  
+  
+        DominoQRoom::where('roomid', '=', $pk)->update([
+            $name => $value 
+        ]);
+  
+        switch ($name) {
+            case "name":
+                $name = "Room Name";
+                break;
+            case "stake":
+                $name = "Stake";
+                break;
+            case "min_buy":
+                $name = "Min Buy";
+                break;
+            case "max_buy":
+                $name = "Max Buy";
+                break;
+            case "timer":
+                $name = "Timer";
+                break;
+            default:
+              "";
+        }
+  
+        // Log::create([
+        //   'operator_id' => Session::get('userId'),
+        //   'menu_id'     => '15',
+        //   'action_id'   => '2',
+        //   'date'        => Carbon::now('GMT+7'),
+        //   'description' => 'Edit '.$name.' groupID '.$pk.' to '. $value
+        // ]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -256,5 +440,41 @@ class CategoryController extends Controller
             return redirect()->route('BigTwoCategory-view')->with('success','Data Deleted');
         }
         return redirect()->route('BigTwoCategory-view')->with('success','Something wrong');      
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * asta domino susun destroy 
+     */
+    public function DominoSusundestroy(Request $request)
+    {
+        $roomid = $request->categoryid;
+        if($roomid != '')
+        {
+            DominoSusunRoom::where('roomid', '=', $roomid)->delete();
+            return redirect()->route('DominoSCategory-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('DominoSCategory-view')->with('success','Something wrong');      
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * asta domino QQ destroy 
+     */
+    public function DominoQdestroy(Request $request)
+    {
+        $roomid = $request->categoryid;
+        if($roomid != '')
+        {
+            DominoQRoom::where('roomid', '=', $roomid)->delete();
+            return redirect()->route('DominoQCategory-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('DominoQCategory-view')->with('success','Something wrong');      
     }
 }

@@ -12,7 +12,7 @@ class Room extends Model
     protected $guarded = [];
     protected $primaryKey = 'roomid';
 
-    public function table(){
-        return $this->belongsTo(Table::class);
+    public function tables(){
+        return $this->hasMany(Table::class);
     }
 }
