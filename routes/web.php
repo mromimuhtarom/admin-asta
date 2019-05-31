@@ -140,7 +140,9 @@ Route::middleware('authenticated')->group(function(){
 
     Route::group(['prefix' => 'store'], function() {
         Route::group(['prefix'  =>  'Best-Offer'], function() {
-            Route::get('BestOffer-view', 'BestOfferController@index')->name('BestOffer-view');
+            Route::middleware('page_denied:Best Offer')->group(function(){
+                Route::get('BestOffer-view', 'BestOfferController@index')->name('BestOffer-view');
+            });
         });
         Route::group(['prefix'  =>  'Chip-Store'], function() {
             Route::get('ChipStore-view', 'ChipStoreController@index')->name('ChipStore-view');

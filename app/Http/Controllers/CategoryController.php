@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 use App\Group;
 use App\Log;
 use Session;
@@ -19,7 +20,8 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Room::all();
-        return view('pages.game_asta.category', compact('category'));
+        $menu  = MenuClass::menuName('Category Asta Poker');
+        return view('pages.game_asta.category', compact('category', 'menu'));
     }
 
     /**
