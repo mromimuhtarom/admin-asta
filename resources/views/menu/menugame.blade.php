@@ -162,8 +162,8 @@ $menu = new RolesClass;
                 $role_acces15 = $menu->RoleType2($Table_Domino_Susun);
             @endphp
             @if($role_access15 || $role_acces15)
-            <li class="{{ Request::is('Game-Asta-Poker/Table/*') ? 'active' : null }}">
-                <a   href="{{ route('Table-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
+            <li class="{{ Request::is('Game-Asta-DominoSusun/Table/*') ? 'active' : null }}">
+                <a   href="{{ route('DominoSTable-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
             </li>
             @endif
             @php
@@ -172,8 +172,8 @@ $menu = new RolesClass;
                 $role_acces16 = $menu->RoleType2($Category_Domino_Susun);
             @endphp
             @if($role_access16 || $role_acces16)
-            <li class="{{ Request::is('Game-Asta-Poker/Category/*') ? 'active' : null }}">
-                <a   href="{{ route('Category-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+            <li class="{{ Request::is('Game-Asta-DominoSusun/Category/*') ? 'active' : null }}">
+                <a   href="{{ route('DominoSCategory-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
             </li>
             @endif
             {{-- @php
@@ -234,8 +234,8 @@ $menu = new RolesClass;
                 $role_acces21 = $menu->RoleType2($Table_Domino_QQ);
             @endphp
             @if($role_access21 || $role_acces21)
-            <li class="{{ Request::is('Game-Asta-Poker/Table/*') ? 'active' : null }}">
-                <a   href="{{ route('Table-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
+            <li class="{{ Request::is('Game-Asta-DominoQQ/Table/*') ? 'active' : null }}">
+                <a   href="{{ route('DominoQTable-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
             </li>
             @endif
             @php
@@ -244,8 +244,8 @@ $menu = new RolesClass;
                 $role_acces22 = $menu->RoleType2($Category_Domino_QQ);
             @endphp
             @if($role_access22 || $role_acces22)
-            <li class="{{ Request::is('Game-Asta-Poker/Category/*') ? 'active' : null }}">
-                <a   href="{{ route('Category-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+            <li class="{{ Request::is('Game-Asta-DominoQQ/Category/*') ? 'active' : null }}">
+                <a   href="{{ route('DominoQCategory-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
             </li>
             @endif
             {{-- @php
