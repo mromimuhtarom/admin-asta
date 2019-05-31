@@ -225,11 +225,11 @@
         <div>
                 <div class="alert alert-danger alert-block">
 						<a class="close" data-dismiss="alert" href="#">×</a>
-						<h4 class="alert-heading">Error!</h4>
+						<h4 class="alert-heading">Access Denied!</h4>
 						You can't access this page with your current roles
 						<p class="text-align-left">
 							<br>
-							<a href="javascript:void(0);" class="btn btn-sm btn-default"><strong>Action Button</strong></a>
+							{{-- <a href="javascript:void(0);" class="btn btn-sm btn-default"><strong>Action Button</strong></a> --}}
 						</p>
 			   </div>		
         </div>

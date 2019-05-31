@@ -15,7 +15,7 @@ class BestOfferController extends Controller
     public function index()
     {
         $menu  = MenuClass::menuName('Best Offer');
-        return view('pages.store.best_offer', '$menu');
+        return view('pages.store.best_offer', compact('menu'));
     }
 
     /**

@@ -10,7 +10,6 @@ class RolesClass {
                 ->join('adm_access','adm_menu.menu_id', '=', 'adm_access.menu_id')
                 ->where('role_id', Session::get('roleId'))
                 ->where('name', '=', $menu)
-                ->where('adm_menu.webid', '=', '1')
                 ->where('type', '=', '2')
                 ->first();
       return $menus1;
@@ -22,7 +21,6 @@ class RolesClass {
                 ->join('adm_access','adm_menu.menu_id', '=', 'adm_access.menu_id')
                 ->where('role_id', Session::get('roleId'))
                 ->where('name', '=', $menu)
-                ->where('adm_menu.webid', '=', '1')
                 ->where('type', '=', '1')
                 ->first();
       return $menus1;
@@ -34,7 +32,6 @@ class RolesClass {
                       ->join('adm_access','adm_menu.menu_id', '=', 'adm_access.menu_id')
                       ->where('role_id', Session::get('roleId'))
                       ->where('name', '=', $menu)
-                      ->where('adm_menu.webid', '=', '1')
                       ->where('type', '=', '0')
                       ->first();
       return $type0;
