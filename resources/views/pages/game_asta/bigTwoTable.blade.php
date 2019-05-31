@@ -41,9 +41,11 @@
           <div class="row">
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+              @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"> Create New Table</i>
               </button>
+              @endif
             </div>
             <!-- End Button tambah data baru -->
           </div>
@@ -54,17 +56,22 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                  @if($menu)
                   <th></th>
+                  @endif
                   <th class="th-sm">Nama Table</th>
                   <th class="th-sm">Group</th>
                   <th class="th-sm">Max Player</th>
                   <th class="th-sm">Turn</th>
                   <th class="th-sm">Total Bet</th>
+                  @if($menu)
                   <th class="th-sm">action</th>
+                  @endif
                 </tr>
               </thead>
               <tbody>
                 @foreach($tables as $tb)
+                @if($menu)
                   <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $tb->tableid }}"></td>
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->tableid }}" data-type="text" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->name }}</a></td>
@@ -74,6 +81,15 @@
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->total_bet }}</a></td>
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $tb->tableid }}" id="delete" data-pk="{{ $tb->tableid }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
+                  @else 
+                  <tr>
+                      <td>{{ $tb->name }}</td>
+                      <td>{{ $tb->roomname }}</td>
+                      <td>{{ $tb->max_player }}</td>
+                      <td>{{ $tb->turn }}</td>
+                      <td>{{ $tb->total_bet }}</td>
+                  </tr>
+                  @endif
                 @endforeach
               </tbody>
             </table>

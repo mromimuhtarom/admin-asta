@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 
 class SlideBannerController extends Controller
 {
@@ -13,6 +14,7 @@ class SlideBannerController extends Controller
      */
     public function index()
     {
+         // $menu  = MenuClass::menuName('Slide Banner');
         return view('pages.slide_banner.slide_banner');
     }
 

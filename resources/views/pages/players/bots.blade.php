@@ -47,9 +47,11 @@
           <!-- Button tambah bot baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
+              @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"></i>
               </button>
+              @endif
             </div>
           </div>
           <!-- End Button tambah bot baru -->
@@ -64,17 +66,22 @@
           <table class="table table-bordered">
             <thead>
               <tr>
+                @if($menu)
                 <th></th>
+                @endif
                 <th class="th-sm">Username</th>
                 <th class="th-sm">Bank Account</th>
                 <th class="th-sm">Rank</th>
                 <th class="th-sm">Gold</th>
                 <th class="th-sm">Country</th>
+                @if($menu)
                 <th class="th-sm">Action</th>
+                @endif
               </tr>
             </thead>
             <tbody>
               @foreach($bots as $bot)
+              @if($menu)
               <tr>
                   <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $bot->user_id }}"></td>
                   <td>{{ $bot->username }}</td>
@@ -92,6 +99,15 @@
                     </a>
                   </td>
               </tr>
+              @else 
+              <tr>
+                  <td>{{ $bot->username }}</td>
+                  <td>{{ $bot->chip }}</td>
+                  <td>{{ $bot->rank_id}}</td>
+                  <td>{{ $bot->gold }}</td>
+                  <td>{{ $bot->name }}</td>
+              </tr>
+              @endif
               @endforeach
             </tbody>
           </table>

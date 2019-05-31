@@ -10,6 +10,7 @@ use App\User;
 use App\Log;
 use Session;
 use Carbon\Carbon;
+use App\Classes\MenucLass;
 
 class UserAdminController extends Controller
 {
@@ -20,9 +21,10 @@ class UserAdminController extends Controller
      */
     public function index()
     {
+        $menu  = MenuClass::menuName('User Admin');
         $admin = DB::table('operator')->join('adm_role', 'adm_role.role_id', '=', 'operator.role_id')->get();
         $role = DB::table('adm_role')->get();
-        return view('pages.admin.user_admin', compact('admin', 'role'));
+        return view('pages.admin.user_admin', compact('admin', 'role', 'menu'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 use DB;
 use App\Log;
 use App\Stat;
@@ -79,12 +80,13 @@ class PlayersController extends Controller
 
     public function indexBots()
     {
+        $menu  = MenuClass::menuName('Bots');
         $bots = DB::table('user_stat')
                 ->join('user', 'user.user_id', '=', 'user_stat.user_id')
                 ->join('country', 'country.code', '=', 'user.country_code')
                 ->where('user.user_type', '=', '3')
                 ->get();
-        return view('pages.players.bots', compact('bots'));
+        return view('pages.players.bots', compact('bots', 'menu'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 use DB;
 use App\Log;
 
@@ -16,6 +17,7 @@ class SeasonController extends Controller
      */
     public function index()
     {
+        // $menu  = MenuClass::menuName('Role Admin');
         $season = DB::table('seasons')->get();
         return view('pages.game_asta.season', compact('season'));
     }

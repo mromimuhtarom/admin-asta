@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 
 class GoodsStoreController extends Controller
 {
@@ -13,7 +14,8 @@ class GoodsStoreController extends Controller
      */
     public function index()
     {
-        return view('pages.store.goods_store');
+        $menu  = MenuClass::menuName('Gold Store');
+        return view('pages.store.goods_store', compact('menu'));
     }
 
     /**

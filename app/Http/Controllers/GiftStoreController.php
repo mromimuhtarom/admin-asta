@@ -8,6 +8,7 @@ use App\Log;
 use Session;
 use Carbon\Carbon;
 use DB;
+use App\Classes\MenuClass;
 
 class GiftStoreController extends Controller
 {
@@ -19,7 +20,8 @@ class GiftStoreController extends Controller
     public function index()
     {
         $gifts = Gift::all();
-        return view('pages.store.Gift', compact('gifts'));
+        $menu  = MenuClass::menuName('Gift');
+        return view('pages.store.Gift', compact('gifts', 'menu'));
     }
 
     /**

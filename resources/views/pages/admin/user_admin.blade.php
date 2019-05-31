@@ -91,9 +91,11 @@
             
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
+                @if($menu)
                   <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                       <i class="fa fa-plus"></i>
                   </button>
+                  @endif
               </div>
             </div>
             <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
@@ -116,17 +118,22 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                    @if($menu)
                     <th class="th-sm"></th>
+                    @endif
                     <th class="th-sm">Image</th>
                     <th class="th-sm">Username</th>
                     <th class="th-sm">Full Name</th>
                     <th class="th-sm">Role Type</th>
+                    @if($menu)
                     <th class="th-sm">Reset Password</th>
                     <th></th>
+                    @endif
                 </tr>
               </thead>
               <tbody>                      
                 @foreach($admin as $adm)
+                @if($menu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->operator_id }}"></td>
                     <td></td>
@@ -143,6 +150,14 @@
                           <i class="fa fa-times"></i>
                         </td>
                 </tr>
+                @else 
+                <tr>
+                    <td></td>
+                    <td>{{ $adm->username }}</td>
+                    <td>{{ $adm->fullname }}</td>
+                    <td>{{ $adm->name }}</td>
+                </tr>
+                @endif
                 @endforeach
               </tbody>
             </table>

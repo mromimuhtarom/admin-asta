@@ -39,6 +39,7 @@
                 <tbody>
                   <tr>
                     <td>Maintenance</td>
+                    @if($menu)
                     <td>
                       <a href="#" class="popUpSetting" data-title="Maintenance" data-name="value" data-value="{{ $getMaintenance->value }}" data-pk="{{ $getMaintenance->id }}" data-type="select" data-url="{{ route('GeneralSetting-update') }}">
                         @if ($getMaintenance->value == 1)
@@ -48,12 +49,25 @@
                         @endif
                       </a>
                     </td>
+                    @else 
+                    <td>
+                      @if ($getMaintenance->value == 1)
+                        On
+                      @else
+                        Off
+                      @endif
+                    </td>
+                    @endif
                   </tr>
                   <tr>
                     <td>Point Expired</td>
+                    @if($menu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span> (hari)</span>
                     </td>
+                    @else
+                    <td>{{ $getPointExpired->value }} (hari)</td>
+                    @endif
                   </tr>
                 </tbody>
               </table>
@@ -97,9 +111,13 @@
                 <tbody>
                   <tr>
                     <td>BCA</td>
+                    @if($menu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Twitter" data-name="value" data-pk="{{ $getBank->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getBank->value }}</a>
                     </td>
+                    @else 
+                    <td>{{ $getBank->value }}</td>
+                    @endif
                   </tr>
                 </tbody>
               </table>
@@ -143,19 +161,35 @@
                   <tbody>
                     <tr>
                       <td>Privacy Policy</td>
+                      @if($menu)
                       <td><a href="#" class="inlineSetting" data-title="Facebook" data-name="value" data-pk="{{ $getPrivacyPolicy->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getPrivacyPolicy->value }}</a></td>
+                      @else 
+                      <td>{{ $getPrivacyPolicy->value }}</td>
+                      @endif
                     </tr>
                     <tr>
                       <td>Term Of Service</td>
+                      @if($menu)
                       <td><a href="#" class="inlineSetting" data-title="Term Of Service" data-name="value" data-pk="{{ $getTermOfService->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getTermOfService->value }}</a></td>
+                      @else 
+                      <td>{{ $getTermOfService->value }}</td>
+                      @endif
                     </tr>
                     <tr>
                       <td>Term Of Service</td>
+                      @if($menu)
                       <td><a href="#" class="inlineSetting" data-title="About" data-name="value" data-pk="{{ $getAbout->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getAbout->value }}</a></td>
+                      @else 
+                      <td>{{ $getAbout->value }}</td>
+                      @endif
                     </tr>
                     <tr>
                       <td>PokerWeb</td>
+                      @if($menu)
                       <td><a href="#" class="inlineSetting" data-title="About" data-name="value" data-pk="{{ $getPokerWeb->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getPokerWeb->value }}</a></td>
+                      @else 
+                      <td>{{ $getPokerWeb->value }}</td>
+                      @endif
                     </tr>
                   </tbody>
                 </table>
@@ -199,15 +233,27 @@
                 <tbody>
                   <tr>
                     <td>Facebook</td>
+                    @if($menu)
                     <td><a href="#" class="inlineSetting" data-title="Facebook" data-name="value" data-pk="{{ $getFb->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getFb->value }}</a></td>
+                    @else 
+                    <td>{{ $getFb->value }}</td>
+                    @endif
                   </tr>
                   <tr>
                     <td>Twitter</td>
+                    @if($menu)
                     <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="value" data-pk="{{ $getTwitter->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getTwitter->value }}</a></td>
+                    @else 
+                    <td>{{ $getTwitter->value }}</td>
+                    @endif
                   </tr>
                   <tr>
                     <td>Instagram</td>
+                    @if($menu)
                     <td><a href="#" class="inlineSetting" data-title="Instagram" data-name="value" data-pk="{{ $getIg->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getIg->value }}</a></td>
+                    @else 
+                    <td>{{ $getIg->value }}</td>
+                    @endif
                   </tr>
                 </tbody>
               </table>
@@ -251,15 +297,27 @@
                 <tbody>
                   <tr>
                     <td>Facebook</td>
+                    @if($menu)
                     <td><a href="#" class="inlineSetting" data-title="Facebook" data-name="value" data-pk="{{ $getFb->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getFb->value }}</a></td>
+                    @else 
+                    <td>{{ $getFb->value }}</td>
+                    @endif
                   </tr>
                   <tr>
                     <td>Twitter</td>
+                    @if($menu)
                     <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="value" data-pk="{{ $getTwitter->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getTwitter->value }}</a></td>
+                    @else 
+                    <td>{{ $getTwitter->value }}</td>
+                    @endif
                   </tr>
                   <tr>
                     <td>Instagram</td>
+                    @if($menu)
                     <td><a href="#" class="inlineSetting" data-title="Instagram" data-name="value" data-pk="{{ $getIg->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getIg->value }}</a></td>
+                    @else 
+                    <td>{{ $getIg->value }}</td>
+                    @endif
                   </tr>
                 </tbody>
               </table>
