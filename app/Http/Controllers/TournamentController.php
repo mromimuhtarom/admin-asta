@@ -20,6 +20,7 @@ class TournamentController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * asta poker index
      */
     public function index(Dealer $dealer)
     {
@@ -29,6 +30,18 @@ class TournamentController extends Controller
         $menus1 = MenuClass::menuName('Tournaments');
 
         return view('pages.game_asta.tournament', compact('tournaments', 'menus1'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     * big two index
+     */
+    public function BigTwoindex(Dealer $dealer)
+    {
+      $season = 'This page under construction';
+      return view('pages.game_asta.BigTwoTournament', compact('season'));
     }
 
     /**

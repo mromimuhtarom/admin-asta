@@ -26,8 +26,10 @@
   @endif
   <!-- End Response Status -->
 
+  <h1>{{ $season }}</h1>
+
   <!-- Form Season -->
-  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+  {{-- <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
         <h2><strong>Asta Poker Season</strong></h2>				
@@ -115,11 +117,11 @@
       
       </div>
     </div>
-  </div>
+  </div> --}}
   <!-- End Form Season -->
 
   <!-- Modal create data -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  {{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -159,11 +161,11 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> --}}
   <!-- End Modal -->
 
   <!-- Modal delete data -->
-  <div class="modal fade" id="delete-season" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  {{-- <div class="modal fade" id="delete-season" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="margin-top:5%;">
@@ -186,11 +188,11 @@
           </form>
       </div>
     </div>
-  </div>
+  </div> --}}
   <!-- End Modal delete data -->
 
   <!-- Script -->
-  <script>
+  {{-- <script>
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
@@ -244,6 +246,6 @@
       },
       responsive: true
     });
-  </script>
+  </script> --}}
   <!-- End Script -->
 @endsection

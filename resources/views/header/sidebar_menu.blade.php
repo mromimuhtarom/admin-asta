@@ -81,7 +81,7 @@
             @include('menu.menugift')
         </li>
 
-        <li class="{{ Request::is('Game-Asta-Poker/*') ? 'active' : null }}">
+        <li class="{{ Request::is('Game-Asta-Poker/*', 'Game-Asta-BigTwo/*') ? 'active' : null }}">
             @include('menu.menugame')
         </li>
 

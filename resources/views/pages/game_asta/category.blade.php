@@ -61,19 +61,19 @@
                   <th class="th-sm">Max Buy</th>
                   <th class="th-sm">Blind</th>
                   <th class="th-sm">Timer</th>
-                  <th class="th-sm"></th>
+                  <th class="th-sm">Action</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($category as $kt)
                 <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->roomid }}" data-type="text" data-url="{{ route('Category-update')}}">{{ $kt->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->min_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->max_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Blind" data-name="stake" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->stake }}</a></td>
                     <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->timer }}</a></td>
-                    <td><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
+                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
                 </tr>
                 @endforeach
               </tbody>

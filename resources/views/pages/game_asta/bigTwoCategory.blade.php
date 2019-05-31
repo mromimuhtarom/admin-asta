@@ -9,27 +9,29 @@
 
   <!-- Response Status -->
   @if (count($errors) > 0)
-    <div class="alert alert-danger">
+  <div class="alert alert-danger">
       <ul>
-        @foreach ($errors->all as $error)
-        <li>{{$error}}</li>  
-        @endforeach
+          @foreach ($errors->all as $error)
+          <li>{{$error}}</li>  
+          @endforeach
       </ul>
-    </div>
+  </div>
+      
   @endif
 
   @if (\Session::has('success'))
-    <div class="alert alert-success">
-      <p>{{\Session::get('success')}}</p>
-    </div>
+      <div class="alert alert-success">
+          <p>{{\Session::get('success')}}</p>
+      </div>
+      
   @endif
   <!-- End Response Status -->
 
-<!-- Form Season -->
-<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+  <!-- Form Category -->
+  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong>Asta Poker Season</strong></h2>				
+        <h2><strong>Asta Big Two Table</strong></h2>				
       </div>
     </header>
 
@@ -41,7 +43,7 @@
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"><span> Create New Season</span></i>
+                <i class="fa fa-plus"><span> Create New Category</span></i>
               </button>
             </div>
             <!-- End Button tambah data baru -->
@@ -53,27 +55,26 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th class="th-sm"></th>
-                  <th class="th-sm">Position (From - To)</th>
-                  <th class="th-sm">Reward Chip</th>
-                  <th class="th-sm">Reward Gold</th>
-                  <th class="th-sm">Reward Point</th>
+                  <th></th>
+                  <th class="th-sm">Title</th>
+                  <th class="th-sm">Stake</th>
+                  <th class="th-sm">Min Buy</th>
+                  <th class="th-sm">Max Buy</th>
+                  <th class="th-sm">Timer</th>
                   <th class="th-sm">Action</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($reward as $rd)
-                  <tr>
-                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $rd->id }}"></td>
-                    <td>
-                      <a href="#" class="usertext" data-name="positionFrom" data-title="From" data-pk="{{ $rd->id }}" data-type="number" data-url="{{ route('SeasonReward-update') }}">{{ $rd->positionFrom }}</a> - 
-                      <a href="#" class="usertext" data-name="positionTo" Data-title="To" data-pk="{{ $rd->id }}" data-type="number" data-url="{{ route('SeasonReward-update') }}">{{ $rd->positionTo }}</a>
-                    </td>
-                    <td><a href="#" class="usertext" data-title="Reward Chip" data-name="winpotReward" Data-title="Reward Chip" data-pk="{{ $rd->id }}" data-type="number" data-url="{{ route('SeasonReward-update') }}">{{ $rd->winpotReward }}</a></td>
-                    <td><a href="#" class="usertext" data-name="goldReward" Data-title="Reward Gold" data-pk="{{ $rd->id }}" data-type="number" data-url="{{ route('SeasonReward-update') }}">{{ $rd->goldReward}}</a></td>
-                    <td><a href="#" class="usertext" data-name="pointReward" Data-title="Reward Point" data-pk="{{ $rd->id }}" data-type="number" data-url="{{ route('SeasonReward-update') }}">{{ $rd->pointReward }}</a></td>
-                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $rd->id }}" id="delete" data-pk="{{ $rd->id }}" data-toggle="modal" data-target="#delete-sReward"><i class="fa fa-times"></i></a></td>
-                  </tr>
+                @foreach($category as $kt)
+                <tr>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td>
+                    <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->roomid }}" data-type="text" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->name }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->stake }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->min_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->max_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('BigTwoCategory-update') }}">{{ $kt->timer }}</a></td>
+                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
+                </tr>
                 @endforeach
               </tbody>
             </table>
@@ -83,32 +84,32 @@
       </div>
     </div>
   </div>
-  <!-- End Form Season -->
+  <!-- End Form Category -->
 
   <!-- Modal create data -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Create Season Reward</h4>
+          <h4 class="modal-title" id="myModalLabel">Create Category</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             ×
           </button>
         </div>
-        <form action="{{ route('SeasonReward-create') }}" method="post">
+        <form action="{{ route('BigTwoCategory-create') }}" method="post">
           @csrf
           <div class="modal-body">
 
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <input class="form-control" type="number" name="rewardFrom" placeholder="From" style="width: 49%; display: inline-block;" required> - <input class="form-control" type="number" name="rewardTo" placeholder="To" style="width: 49%; display: inline-block;" required>
+                  <input type="text" class="form-control" name="categoryName" placeholder="Name Category" required="">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="rewardchip" placeholder="Reward Chip">
+                  <input type="number" class="form-control" name="minbuy" placeholder="Min Buy" required="">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" name="rewardgold" placeholder="Reward Gold">
+                  <input type="number" class="form-control" name="maxbuy" placeholder="Max Buy" required="">
                 </div>
               </div>
             </div>
@@ -128,7 +129,7 @@
   <!-- End Modal -->
 
   <!-- Modal delete data -->
-  <div class="modal fade" id="delete-sReward" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="delete-category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="margin-top:5%;">
@@ -139,10 +140,10 @@
         </div>
         <div class="modal-body">
           Are You Sure Want To Delete It
-          <form action="{{ route('SeasonReward-delete') }}" method="post">
+          <form action="{{ route('BigTwoCategory-delete') }}" method="post">
             {{ method_field('delete')}}
             @csrf
-            <input type="hidden" name="sRewardId" id="sRewardId" value="">
+            <input type="hidden" name="categoryid" id="categoryid" value="">
         </div>
         <div class="modal-footer">
           <button type="submit" class="button_example-yes">Yes</button>
@@ -180,25 +181,25 @@
         });
 
         @php
-          foreach($reward as $rd) {
-            echo'$(".delete'.$rd->id.'").hide();';
-            echo'$(".deletepermission'.$rd->id.'").on("click", function() {';
-              echo 'if($( ".deletepermission'.$rd->id.':checked" ).length > 0)';
+          foreach($category as $kt) {
+            echo'$(".delete'.$kt->roomid.'").hide();';
+            echo'$(".deletepermission'.$kt->roomid.'").on("click", function() {';
+              echo 'if($( ".deletepermission'.$kt->roomid.':checked" ).length > 0)';
               echo '{';
-                echo '$(".delete'.$rd->id.'").show();';
+                echo '$(".delete'.$kt->roomid.'").show();';
               echo'}';
               echo'else';
               echo'{';
-                echo'$(".delete'.$rd->id.'").hide();';
+                echo'$(".delete'.$kt->roomid.'").hide();';
               echo'}';
   
             echo '});';
         
-            echo'$(".delete'.$rd->id.'").click(function(e) {';
+            echo'$(".delete'.$kt->roomid.'").click(function(e) {';
               echo'e.preventDefault();';
 
               echo"var id = $(this).attr('data-pk');";
-              echo'var test = $("#sRewardId").val(id);';
+              echo'var test = $("#categoryid").val(id);';
             echo'});';
           }
         @endphp
@@ -209,6 +210,7 @@
       },
       responsive: true
     });
-  </script> 
+  </script>  
   <!-- End Script -->
+
 @endsection
