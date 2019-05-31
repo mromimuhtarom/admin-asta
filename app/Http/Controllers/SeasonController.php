@@ -12,11 +12,24 @@ class SeasonController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * asta poker index
      */
     public function index()
     {
         $season = DB::table('seasons')->get();
         return view('pages.game_asta.season', compact('season'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     * asta big two index
+     */
+    public function BigTwoindex()
+    {
+        $season = 'This page under construction';
+        return view('pages.game_asta.BigTwoSeason', compact('season'));
     }
 
     /**

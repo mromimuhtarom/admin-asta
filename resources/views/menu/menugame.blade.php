@@ -30,9 +30,71 @@
         <em class="fa fa-minus-square-o"></em>
     </b>
 </a>
+
 <ul aria-expanded="true" class="sa-sub-nav collapse">
+    <!-- GAME ASTA POKER -->
+    <li class="{{ Request::is('Game-Asta-Poker/*') ? 'active' : null }}">
+        <a   href="" title="Asta Poker"> Asta Poker 
+            <b class="collapse-sign">
+                <em class="fa fa-plus-square-o"></em>
+                <em class="fa fa-minus-square-o"></em>
+            </b>
+        </a>
+        <ul aria-expanded="true" class="sa-sub-nav-second-level collapse">
+            <li class="{{ Request::is('Game-Asta-Poker/Table/*') ? 'active' : null }}">
+                <a   href="{{ route('Table-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/Category/*') ? 'active' : null }}">
+                <a   href="{{ route('Category-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
+                <a   href="{{ route('Season-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
+                <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/Tournament/*') ? 'active' : null }}">
+                <a   href="{{ route('Tournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
+                <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
+            </li>
+        </ul>
+    </li>
+
+    <!-- GAME BIG 2 -->
+    <li class="{{ Request::is('Game-Asta-BigTwo/*') ? 'active' : null }}">
+        <a   href="" title="Asta Big 2"> Asta Big 2 
+            <b class="collapse-sign">
+                <em class="fa fa-plus-square-o"></em>
+                <em class="fa fa-minus-square-o"></em>
+            </b>
+        </a>
+        <ul aria-expanded="true" class="sa-sub-nav-second-level">
+            <li class="{{ Request::is('Game-Asta-BigTwo/Table/*') ? 'active' : null }}">
+                <a   href="{{ route('BigTwoTable-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-BigTwo/Category/*') ? 'active' : null }}">
+                <a   href="{{ route('BigTwoCategory-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-BigTwo/Season/*') ? 'active' : null }}">
+                <a   href="{{ route('BigTwoSeason-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-BigTwo/SeasonReward/*') ? 'active' : null }}">
+                <a   href="{{ route('BigTwoSeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-BigTwo/Tournament/*') ? 'active' : null }}">
+                <a   href="{{ route('BigTwoTournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-BigTwo/Jackpot-Paytable/*') ? 'active' : null }}">
+                <a   href="{{ route('BigTwoJackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
+            </li>
+        </ul>
+    </li>
+
+    <!-- GAME DOMINO SUSUN -->
     <li class="">
-        <a   href="" title="Table"> Table 
+        <a   href="" title="Domino Susun"> Domino Susun 
             <b class="collapse-sign">
                 <em class="fa fa-plus-square-o"></em>
                 <em class="fa fa-minus-square-o"></em>
@@ -40,126 +102,52 @@
         </a>
         <ul aria-expanded="true" class="sa-sub-nav-second-level">
             <li class="{{ Request::is('Game-Asta-Poker/Table/*') ? 'active' : null }}">
-                <a   href="{{ route('Table-view') }}" title="Asta Poker"><span class="fa fa-gamepad"></span> Asta Poker </a>
+                <a   href="{{ route('Table-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
             </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Asta Big 2 </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino Susun </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino QQ </a>
-            </li>
-        </ul>
-    </li>
-    <li class="">
-        <a   href="" title="Category"> Category 
-            <b class="collapse-sign">
-                <em class="fa fa-plus-square-o"></em>
-                <em class="fa fa-minus-square-o"></em>
-            </b>
-        </a>
-        <ul aria-expanded="true" class="sa-sub-nav-second-level">
             <li class="{{ Request::is('Game-Asta-Poker/Category/*') ? 'active' : null }}">
-                <a   href="{{ route('Category-view') }}" title="Asta Poker"><span class="fa fa-gamepad"></span> Asta Poker </a>
+                <a   href="{{ route('Category-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
             </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Asta Big 2 </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino Susun </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino QQ </a>
-            </li>
-        </ul>
-    </li>
-    <li class="">
-        <a   href="" title="Season"> Season 
-            <b class="collapse-sign">
-                <em class="fa fa-plus-square-o"></em>
-                <em class="fa fa-minus-square-o"></em>
-            </b>
-        </a>
-        <ul aria-expanded="true" class="sa-sub-nav-second-level">
             <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
-                <a   href="{{ route('Season-view') }}" title="Asta Poker"><span class="fa fa-gamepad"></span> Asta Poker </a>
+                <a   href="{{ route('Season-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
             </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Asta Big 2 </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino Susun </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino QQ </a>
-            </li>
-        </ul>
-    </li>
-    <li class="">
-        <a   href="" title="Season Reward"> Season Reward 
-            <b class="collapse-sign">
-                <em class="fa fa-plus-square-o"></em>
-                <em class="fa fa-minus-square-o"></em>
-            </b>
-        </a>
-        <ul aria-expanded="true" class="sa-sub-nav-second-level">
             <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
-                <a   href="{{ route('SeasonReward-view') }}" title="Asta Poker"><span class="fa fa-gamepad"></span> Asta Poker </a>
+                <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
             </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Asta Big 2 </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino Susun </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino QQ </a>
-            </li>
-        </ul>
-    </li>
-    <li class="">
-        <a   href="" title="Tournament"> Tournament 
-            <b class="collapse-sign">
-                <em class="fa fa-plus-square-o"></em>
-                <em class="fa fa-minus-square-o"></em>
-            </b>
-        </a>
-        <ul aria-expanded="true" class="sa-sub-nav-second-level">
             <li class="{{ Request::is('Game-Asta-Poker/Tournament/*') ? 'active' : null }}">
-                <a   href="{{ route('Tournament-view') }}" title="Asta Poker"><span class="fa fa-gamepad"></span> Asta Poker </a>
+                <a   href="{{ route('Tournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
             </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Asta Big 2 </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino Susun </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino QQ </a>
+            <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
+                <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
             </li>
         </ul>
     </li>
+
+    <!-- GAME DOMINO QQ -->
     <li class="">
-        <a   href="" title="Jackpot Paytable"> Jackpot Paytable 
+        <a   href="" title="Domino QQ"> Domino QQ 
             <b class="collapse-sign">
                 <em class="fa fa-plus-square-o"></em>
                 <em class="fa fa-minus-square-o"></em>
             </b>
         </a>
         <ul aria-expanded="true" class="sa-sub-nav-second-level">
+            <li class="{{ Request::is('Game-Asta-Poker/Table/*') ? 'active' : null }}">
+                <a   href="{{ route('Table-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/Category/*') ? 'active' : null }}">
+                <a   href="{{ route('Category-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
+                <a   href="{{ route('Season-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
+                <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
+            </li>
+            <li class="{{ Request::is('Game-Asta-Poker/Tournament/*') ? 'active' : null }}">
+                <a   href="{{ route('Tournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
+            </li>
             <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
-                <a   href="{{ route('JackpotPaytable-view') }}" title="Asta Poker"><span class="fa fa-gamepad"></span> Asta Poker </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Asta Big 2 </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino Susun </a>
-            </li>
-            <li class=" ">
-                <a   href="#" title="Flags"><span class="fa fa-gamepad"></span> Domino QQ </a>
+                <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
             </li>
         </ul>
     </li>

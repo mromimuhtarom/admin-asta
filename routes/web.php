@@ -93,6 +93,7 @@ Route::middleware('authenticated')->group(function(){
         });
     });
 
+    // Game Asta Poker
     Route::group(['prefix'  =>  'Game-Asta-Poker'], function() {
         Route::group(['prefix'  => 'Table'], function() {
             Route::get('Table-view', 'TableController@index')->name('Table-view');
@@ -130,6 +131,47 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  => 'Find-Room'], function() {
             Route::get('FindRoom-view', 'FindRoomController@index')->name('FindRoom-view');
             Route::post('FindRoom-update', 'FindRoomController@update')->name('FindRoom-update');
+        });
+    });
+
+    // Game Asta Big 2
+    Route::group(['prefix'  =>  'Game-Asta-BigTwo'], function() {
+        Route::group(['prefix'  => 'Table'], function() {
+            Route::get('BigTwoTable-view', 'TableController@BigTwoindex')->name('BigTwoTable-view');
+            Route::post('BigTwoTable-update', 'TableController@BigTwoupdate')->name('BigTwoTable-update');
+            Route::post('BigTwoTable-create', 'TableController@BigTwostore')->name('BigTwoTable-create');
+            Route::delete('BigTwoTable-delete', 'TableController@BigTwodestroy')->name('BigTwoTable-delete');
+        });
+        Route::group(['prefix'  => 'Category'], function() {
+            Route::get('BigTwoCategory-view', 'CategoryController@BigTwoindex')->name('BigTwoCategory-view');
+            Route::post('BigTwoCategory-create', 'CategoryController@BigTwostore')->name('BigTwoCategory-create');
+            Route::post('BigTwoCategory-update', 'CategoryController@BigTwoupdate')->name('BigTwoCategory-update');
+            Route::delete('BigTwoCategory-delete', 'CategoryController@BigTwodestroy')->name('BigTwoCategory-delete');
+        });
+        Route::group(['prefix'  => 'Season'], function() {
+            Route::get('BigTwoSeason-view', 'SeasonController@BigTwoindex')->name('BigTwoSeason-view');
+            Route::post('BigTwoSeason-create', 'SeasonController@BigTwostore')->name('BigTwoSeason-create');
+            Route::post('BigTwoSeason-update', 'SeasonController@BigTwoupdate')->name('BigTwoSeason-update');
+            Route::delete('BigTwoSeason-delete', 'SeasonController@BigTwodestroy')->name('BigTwoSeason-delete');
+        });
+        Route::group(['prefix'  => 'SeasonReward'], function() {
+            Route::get('BigTwoSeasonReward-view', 'SeasonRewardController@BigTwoindex')->name('BigTwoSeasonReward-view');
+            Route::post('BigTwoSeasonReward-create', 'SeasonRewardController@BigTwostore')->name('BigTwoSeasonReward-create');
+            Route::post('BigTwoSeasonReward-update', 'SeasonRewardController@BigTwoupdate')->name('BigTwoSeasonReward-update');
+            Route::delete('BigTwoSeasonReward-delete', 'SeasonRewardController@BigTwodestroy')->name('BigTwoSeasonReward-delete');
+        });
+        Route::group(['prefix'  => 'Tournament'], function() {
+            Route::get('BigTwoTournament-view', 'TournamentController@BigTwoindex')->name('BigTwoTournament-view');
+            Route::post('BigTwoTournament-create', 'TournamentController@BigTwostore')->name('BigTwoTournament-create');
+            Route::post('BigTwoTournament-update', 'TournamentController@BigTwoupdate')->name('BigTwoTournament-update');
+        });
+        Route::group(['prefix'  => 'Jackpot-Paytable'], function() {
+            Route::get('BigTwoJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('BigTwoJackpotPaytable-view');
+            Route::post('BigTwoJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('BigTwoJackpotPaytable-update');
+        });
+        Route::group(['prefix'  => 'Find-Room'], function() {
+            Route::get('BigTwoFindRoom-view', 'FindRoomController@BigTwoindex')->name('BigTwoFindRoom-view');
+            Route::post('BigTwoFindRoom-update', 'FindRoomController@BigTwoupdate')->name('BigTwoFindRoom-update');
         });
     });
 

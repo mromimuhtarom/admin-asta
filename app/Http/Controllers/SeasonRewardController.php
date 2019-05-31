@@ -12,11 +12,24 @@ class SeasonRewardController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * asta poker index
      */
     public function index()
     {
         $reward = SR::all();
         return view('pages.game_asta.season_reward', compact('reward'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     * asta big two index
+     */
+    public function BigTwoindex()
+    {
+        $season = 'This page under construction';
+        return view('pages.game_asta.BigTwoSeason_reward', compact('season'));
     }
 
     /**

@@ -28,22 +28,9 @@
 
   <!-- Form Table -->
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
-    <!-- widget options:
-      usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-      
-      data-widget-colorbutton="false"	
-      data-widget-editbutton="false"
-      data-widget-togglebutton="false"
-      data-widget-deletebutton="false"
-      data-widget-fullscreenbutton="false"
-      data-widget-custombutton="false"
-      data-widget-collapsed="true" 
-      data-widget-sortable="false"
-      
-    -->
     <header>
       <div class="widget-header">	
-        <h2><strong>Asta Poker Table</strong></h2>				
+        <h2><strong>Asta Big Two Table</strong></h2>				
       </div>
     </header>
 
@@ -71,9 +58,8 @@
                   <th class="th-sm">Nama Table</th>
                   <th class="th-sm">Group</th>
                   <th class="th-sm">Max Player</th>
-                  <th class="th-sm">Small Blind</th>
-                  <th class="th-sm">Big Blind</th>
-                  <th class="th-sm">Jackpot</th>
+                  <th class="th-sm">Turn</th>
+                  <th class="th-sm">Total Bet</th>
                   <th class="th-sm">action</th>
                 </tr>
               </thead>
@@ -81,12 +67,11 @@
                 @foreach($tables as $tb)
                   <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $tb->tableid }}"></td>
-                    <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->tableid }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
-                    <td><a href="#" class="room" data-title="Table Name" data-name="roomid" data-pk="{{ $tb->tableid }}" data-type="select" data-url="{{ route('Table-update')}}">{{ $tb->roomname }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update')}}">{{ $tb->max_player }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpot }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->tableid }}" data-type="text" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->name }}</a></td>
+                    <td><a href="#" class="room" data-title="Room name" data-name="roomid" data-pk="{{ $tb->tableid }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->roomname }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->turn }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->total_bet }}</a></td>
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $tb->tableid }}" id="delete" data-pk="{{ $tb->tableid }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
                 @endforeach
@@ -110,7 +95,7 @@
             ×
           </button>
         </div>
-        <form action="{{ route('Table-create') }}" method="post">
+        <form action="{{ route('BigTwoTable-create') }}" method="post">
           @csrf
           <div class="modal-body">
 
@@ -124,9 +109,11 @@
                   <div class="col-md-10">
                     <select class="form-control" name="category">
                       <option>Select Category</option>
-                        @foreach ($category as $ct)
-                      <option value="{{ $ct->roomid }}">{{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
-                        @endforeach
+                      @foreach ($category as $ct)
+                      <option value="{{ $ct->roomid }}">
+                        {{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
@@ -159,7 +146,7 @@
         </div>
         <div class="modal-body">
           Are You Sure Want To Delete It
-          <form action="{{ route('Table-delete') }}" method="post">
+          <form action="{{ route('BigTwoTable-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
             <input type="hidden" name="tableid" id="tableid" value="">
