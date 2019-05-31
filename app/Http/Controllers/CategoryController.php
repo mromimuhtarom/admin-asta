@@ -39,7 +39,8 @@ class CategoryController extends Controller
      public function BigTwoindex()
      {
          $category = BigTwoRoom::all();
-         return view('pages.game_asta.bigTwoCategory', compact('category'));
+         $menu  = MenuClass::menuName('Category Asta Big Two');
+         return view('pages.game_asta.bigTwoCategory', compact('category', 'menu'));
      }
 
     /**

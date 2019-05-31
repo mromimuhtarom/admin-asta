@@ -39,7 +39,10 @@
             
             <!-- widget content -->
             <div class="widget-body">
-                
+                @php
+                $roleid = Session::get('roleId');
+                echo $roleid;    
+                @endphp
                     @foreach(array_chunk($roles, 2) as $chunk)
                     <table border="0" align="center" width="1680px">
 
