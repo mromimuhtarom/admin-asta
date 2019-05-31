@@ -135,25 +135,32 @@ echo 'function Upload'.$gf->id.'() {';
 
     <div class="table-aii">
         <div class="footer-table">
+                          @if($menu)
                             <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
                               <i class="fas fa-plus-circle"></i>Create Gift
                             </button>
+                          @endif
         </div>
          <table id="dt-material-checkbox" class="table table-striped data-table" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
             <thead class="th-table">
               <tr>
+                @if($menu)
                 <th class="th-sm"></th>
+                @endif
                 <th width="10px">Image</th>
                 <th class="th-sm">Title Gift</th>
                 <th class="th-sm">Price</th>
                 {{-- <th class="th-sm">Gold Price</th>
                 <th class="th-sm">Expire</th> --}}
                 <th class="th-sm">Category</th>
+                @if($menu)
                 <th></th>
+                @endif
               </tr>
             </thead>
             <tbody>
                 @foreach($gifts as $gf)
+                @if($menu)
                 <tr>
                     <td></td>
                     <td >
@@ -192,6 +199,43 @@ echo 'function Upload'.$gf->id.'() {';
                     <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
                     <td></td>
                 </tr>
+                @else
+                <tr>
+                    <td >
+                      {{-- <form method="post" action="" enctype="multipart/form-data" id="myform"> --}}
+                          {{-- <div class='preview'>
+                            <img src="/images/gifts/{{ $gf->imageUrl	 }}" id="img" width="100" height="100">
+                          </div><br>
+                          <div >
+                              <input type="file" id="file" name="file" /><br><br>
+                              <input type="button" class="button" value="Upload" id="but_upload">
+                          </div> --}}
+                          <div class="media-container">
+                            {{-- <form method="POST" action="{{ route('GiftStore-updateimage') }}" enctype="multipart/form-data">
+                              {{  csrf_field() }}
+                              <span class="media-overlay med-ovlay{{ $gf->id }}">
+                                <input type="hidden" name="pk" value="{{ $gf->id }}">
+                                <input type="file" name="file" id="media-input" class="upload{{ $gf->id }}" accept="image/*">
+                                <i class="fas fa-edit media-icon"></i>
+                              </span> --}}
+                              <figure class="media-object">
+                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_url }}">
+                              </figure>
+                            {{-- </div>
+                            <div class="media-control">
+                              <button class="save-profile{{ $gf->id }}">Save Gift</button>
+                            </form>
+                              <button class="edit-profile{{ $gf->id }}">Edit Gift</button> --}}
+                            </div>
+                      {{-- </form> --}}
+                    </td>
+                    <td>{{ $gf->name }}</td>
+                    <td>{{ $gf->price }}</td>
+                    {{-- <td><a href="#" class="usertext" data-name="diamondPrice" data-title="Gold Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->diamondPrice }}</a></td>
+                    <td><a href="#" class="usertext" data-name="expire" data-title="expire" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->expire }}</a></td> --}}
+                    <td>{{ $gf->strCategory() }}</td>
+                </tr> 
+                @endif
                 @endforeach
             </tbody>
           </table>

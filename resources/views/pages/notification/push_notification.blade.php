@@ -98,9 +98,11 @@
             
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
+                @if($menu)
                   <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                       <i class="fa fa-plus"></i>
                   </button>
+                  @endif
               </div>
             </div>
             <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
@@ -123,17 +125,22 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                    @if($menu)
                     <th class="th-sm"></th>
+                    @endif
                     <th class="th-sm">Title</th>
                     <th class="th-sm">Message</th>
                     <th class="th-sm">Game</th>
                     <th class="th-sm">Type</th>
                     <th class="th-sm">Action</th>
+                    @if($menu)
                     <th></th>
+                    @endif
                 </tr>
               </thead>
               <tbody>                      
                 @foreach($notifications as $notification)
+                @if($menu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->title }}</a></td>
@@ -151,6 +158,15 @@
                       </a>
                     </td>
                 </tr>
+                @else
+                <tr>
+                    <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->title }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->message }}</a></td>
+                    <td><a href="#" class="game" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="select" data-url="{{ route('PushNotification-update')}}">{{ $notification->gamename }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}"></a></td>
+                    <td></td>
+                </tr>
+                @endif
                 @endforeach
               </tbody>
             </table>

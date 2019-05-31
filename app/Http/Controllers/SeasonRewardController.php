@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SeasonReward as SR;
+use App\Classes\MenuClass;
 use DB;
 
 class SeasonRewardController extends Controller
@@ -16,6 +17,7 @@ class SeasonRewardController extends Controller
      */
     public function index()
     {
+        // $menu  = MenuClass::menuName('Role Admin');
         $reward = SR::all();
         return view('pages.game_asta.season_reward', compact('reward'));
     }

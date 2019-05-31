@@ -7,6 +7,7 @@ use App\Log;
 use Session;
 use DB;
 use Carbon\Carbon;
+use App\Classes\MenuClass;
 
 // asta poker model
 use App\Table;
@@ -26,6 +27,7 @@ class TableController extends Controller
      */
     public function index()
     {
+        $menu  = MenuClass::menuName('Table Asta Poker');
         // $tables = Table::select()->where([['tabletype', '!=','m'],['clubId','=','0'],['seasonId', '=', '0']])->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
         $tables = Table::join('tpk_room', 'tpk_room.roomid', '=', 'tpk_table.roomid')
                   ->select(
@@ -34,7 +36,7 @@ class TableController extends Controller
                   )
                   ->get();
         $category = Room::all();
-        return view('pages.game_asta.table', compact('tables', 'category'));
+        return view('pages.game_asta.table', compact('tables', 'category', 'menu'));
     }
 
     /**
@@ -45,6 +47,7 @@ class TableController extends Controller
      */
     public function BigTwoindex()
     {
+        $menu  = MenuClass::menuName('Table Asta Big Two');
         $tables = BigTwoTable::join('bgt_room', 'bgt_room.roomid', '=', 'bgt_table.roomid')
                 ->select(
                     'bgt_room.name as roomname',
@@ -52,7 +55,7 @@ class TableController extends Controller
                 )
                 ->get();
         $category = BigTwoRoom::all();
-        return view('pages.game_asta.bigTwoTable', compact('tables', 'category'));
+        return view('pages.game_asta.bigTwoTable', compact('tables', 'category', 'menu'));
     }
 
     /**

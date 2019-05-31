@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\EmailNotification;
+use App\Classes\MenuClass;
 use App\Log;
 use DB;
 use Session;
@@ -18,8 +19,9 @@ class EmailNotificationController extends Controller
      */
     public function index()
     {
+        $menu  = MenuClass::menuName('Email Notification');
         $emailnotifications = EmailNotification::all();
-        return view('pages.notification.email_notification', compact('emailnotifications'));
+        return view('pages.notification.email_notification', compact('emailnotifications', 'menu'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenucLass;
 
 class TransactionStoreController extends Controller
 {
@@ -13,6 +14,7 @@ class TransactionStoreController extends Controller
      */
     public function index()
     {
+        // $menu  = MenuClass::menuName('Table Asta Big Two');
         return view('pages.store.transaction_store');
     }
 

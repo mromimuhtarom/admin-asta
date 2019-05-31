@@ -64,24 +64,31 @@
 
     <div class="table-aii">
         <div class="footer-table">
+                @if($menu)
                            <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
                               <i class="fas fa-plus-circle"></i>Create Chip Store
                             </button>
+                @endif
         </div>
           <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
             <thead class="th-table">
               <tr>
+                @if($menu)
                 <th class="th-sm"></th>
+                @endif
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Category</th>
                 <th class="th-sm">Chip Awarded</th>
                 <th class="th-sm">Gold Cost</th>
                 <th class="th-sm">Active</th>
+                @if($menu)
                 <th></th>
+                @endif
               </tr>
             </thead>
             <tbody>
                 @foreach($items as $itm)
+                @if($menu)
                 <tr>
                     <td></td>
                     <td>{{ $itm->name }}</td>
@@ -91,6 +98,15 @@
                     <td>{{ strEnabledDisabled($itm->active) }}</td>
                     <td></td>
                 </tr>
+                @else 
+                <tr>
+                    <td>{{ $itm->name }}</td>
+                    <td>{{ $itm->category }}</td>
+                    <td>{{ $itm->chipAwarded }}</td>
+                    <td>{{ $itm->goldCost }}</td>
+                    <td>{{ strEnabledDisabled($itm->active) }}</td>\
+                </tr>
+                @endif
                 @endforeach
             </tbody>
           </table>

@@ -10,6 +10,7 @@ use App\Log;
 use Carbon\Carbon;
 use Session;
 
+
 class GoldStoreController extends Controller
 {
     /**
@@ -19,8 +20,9 @@ class GoldStoreController extends Controller
      */
     public function index()
     {
+        $menu  = MenuClass::menuName('Gold Store');        
         // $items = ItemsGold::where('category', '=', 'Chip')->get();
-        return view('pages.store.gold_store');
+        return view('pages.store.gold_store', compact('menu'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 use DB;
 
 class GeneralSettingController extends Controller
@@ -14,6 +15,7 @@ class GeneralSettingController extends Controller
      */
     public function index()
     {
+        $menu  = MenuClass::menuName('General Settings');
         // system settings
         $getMaintenance     = DB::table('config')->where('id', '=', '101')->first();
         $getPointExpired    = DB::table('config')->where('id', '=', '102')->first();
@@ -34,7 +36,7 @@ class GeneralSettingController extends Controller
 
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
-                                                                'getAbout', 'getPokerWeb', "getBank"));
+                                                                'getAbout', 'getPokerWeb', "getBank", 'menu'));
     }
 
     /**

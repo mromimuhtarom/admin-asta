@@ -32,16 +32,16 @@ $menu = new RolesClass;
                 <a   href="{{ route('Category-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
             </li>
             @endif
-            @php
+            {{-- @php
                 $category_asta_big_two = 'Category Asta Big Two';
                 $role_access5 = $menu->RoleType1($category_asta_big_two);
                 $role_acces5 = $menu->RoleType2($category_asta_big_two);
             @endphp
-            @if($role_access5 || $role_acces5)
+            @if($role_access5 || $role_acces5) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
                 <a   href="{{ route('Season-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
             </li>
-            @endif
+            {{-- @endif --}}
             {{-- @php
                 $category_asta_big_two = 'Category Asta Big Two';
                 $role_access6 = $menu->RoleType1($category_asta_big_two);
@@ -51,7 +51,7 @@ $menu = new RolesClass;
             <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
                 <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
             </li>
-            @endif
+            {{-- @endif --}}
             {{-- @php
                 $category_asta_big_two = 'Category Asta Big Two';
                 $role_access7 = $menu->RoleType1($category_asta_big_two);
@@ -215,7 +215,7 @@ $menu = new RolesClass;
             <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
                 <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
             </li>
-            @endif
+            {{-- @endif --}}
         </ul>
     </li>
 
@@ -267,7 +267,7 @@ $menu = new RolesClass;
             <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
                 <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
             </li>
-            @endif
+            {{-- @endif --}}
             @php
                 $Category_Domino_QQ = 'Category Domino QQ';
                 $role_access25 = $menu->RoleType1($Category_Domino_QQ);

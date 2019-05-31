@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 use DB;
 use App\Log;
 use App\Role;
@@ -18,8 +19,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $menu  = MenuClass::menuName('Role Admin');
         $roles = Role::all();
-        return view('pages.admin.role_admin', compact('roles'));
+        return view('pages.admin.role_admin', compact('roles', 'menu'));
     }
 
     /**

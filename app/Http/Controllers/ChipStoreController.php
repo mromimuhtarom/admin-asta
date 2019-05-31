@@ -19,8 +19,9 @@ class ChipStoreController extends Controller
      */
     public function index()
     {
+        $menu  = MenuClass::menuName('Chip Store');
         $items = ItemsGold::where('category', '=', 'Chip')->get();
-        return view('pages.store.chip_store', compact('items'));
+        return view('pages.store.chip_store', compact('items', 'menu'));
     }
 
     /**

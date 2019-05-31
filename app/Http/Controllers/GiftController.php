@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 
 class GiftController extends Controller
 {
@@ -13,7 +14,8 @@ class GiftController extends Controller
      */
     public function index()
     {
-        return view('pages.daily_gift.daily_gift');
+        $menu  = MenuClass::menuName('Daily Gift');
+        return view('pages.daily_gift.daily_gift', compact('menu'));
     }
 
     /**

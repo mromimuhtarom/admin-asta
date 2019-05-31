@@ -179,9 +179,11 @@ min-height: 0px !important;
             
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
+                @if($menu)
                   <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                       <i class="fa fa-plus"></i>
                   </button>
+                  @endif
               </div>
             </div>
             <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
@@ -204,18 +206,23 @@ min-height: 0px !important;
             <table class="table table-bordered">
               <thead>
                 <tr>
+                    @if($menu)
                     <th class="th-sm"></th>
+                    @endif
                     <th class="th-sm">title</th>
                     <th class="th-sm">Subject</th>
                     <th class="th-sm">Message</th>
                     <th class="th-sm">From</th>
                     <th class="th-sm">From Email</th>
                     <th class="th-sm">Type</th>
+                    @if($menu)
                     <th></th>
+                    @endif
                 </tr>
               </thead>
               <tbody>                      
                 @foreach($emailnotifications as $notification)
+                @if($menu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
                     <td>
@@ -258,6 +265,35 @@ min-height: 0px !important;
                       </a>
                     </td>
                 </tr>
+                @else 
+                <tr>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
+                    <td>
+                        <div class="media-container">
+                            {{-- <form method="POST" action="{{ route('EmailNotification-updateimage') }}" enctype="multipart/form-data">
+                              {{  csrf_field() }}
+                              <span class="media-overlay med-ovlay{{ $notification->id }}">
+                                <input type="hidden" name="pk" value="{{ $notification->id }}">
+                                <input type="file" name="file" id="media-input" class="upload{{ $notification->id }}" accept="image/*">
+                                <i class="fa fa-edit media-icon"></i>
+                              </span> --}}
+                              <figure class="media-object">
+                                <img class="img-object imgupload{{ $notification->id }}" src="/images/EmailNotification/{{ $notification->imageUrl }}">
+                              </figure>
+                            </div>
+                            {{-- <div class="media-control">
+                              <button class="save-profile{{ $notification->id }}">Save Gift</button>
+                            </form>
+                              <button class="edit-profile{{ $notification->id }}">Edit Gift</button> --}}
+                        </div>
+                    </td>
+                    <td>{{ $notification->subject }}</td>
+                    <td>{{ $notification->message }}</td>
+                    <td>{{ $notification->fromName }}</td>
+                    <td>{{ $notification->fromEmail }}</td>
+                    <td>{{ $notification->type }}</td>
+                </tr>
+                @endif
                 @endforeach
               </tbody>
             </table>

@@ -40,6 +40,7 @@ class TournamentController extends Controller
      */
     public function BigTwoindex(Dealer $dealer)
     {
+      // $menu  = MenuClass::menuName('Table Asta Big Two');
       $season = 'This page under construction';
       return view('pages.game_asta.BigTwoTournament', compact('season'));
     }

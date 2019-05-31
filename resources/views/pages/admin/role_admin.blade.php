@@ -80,9 +80,11 @@
         
         <div class="col-9 col-sm-5 col-md-5 col-lg-5">
           <div class="input-group">
+            @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-plus"></i>
               </button>
+            @endif
           </div>
         </div>
         <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
@@ -105,15 +107,20 @@
         <table class="table table-bordered">
           <thead>
             <tr>
+                @if($menu)
                 <th></th>
+                @endif
                 <th class="th-sm">Image</th>
                 <th class="th-sm">Role</th>
+                @if($menu)
                 <th class="th-sm">Action</th>
                 <th style="width:2px;"></th>
+                @endif
             </tr>
           </thead>
           <tbody>                      
             @foreach($roles as $role)
+            @if($menu)
             <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
                 <td></td>
@@ -121,6 +128,14 @@
                 <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton">View & Edit</a></td>
                 <td><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>
             </tr>
+            @else 
+            <tr>
+                <td></td>
+                <td>{{ $role->name }}</td>
+                <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton">View & Edit</a></td>
+                <td><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>
+            </tr>
+            @endif
             @endforeach
           </tbody>
         </table>
