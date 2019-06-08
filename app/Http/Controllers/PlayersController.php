@@ -21,10 +21,11 @@ class PlayersController extends Controller
     public function indexActive()
     {
         $online = DB::table('user_active')->join('user', 'user.user_id', '=', 'user_active.user_id')
-        ->join('game', 'game.id', '=', 'user_active.game_id')
-        ->join('user_stat', 'user_stat.user_id', '=', 'user_active.user_id')
-        ->select('user.*', 'user_stat.*', 'game.name as game_name', 'user_active.*')
-        ->where('user.user_type', '!=', '3')->get();
+                  ->join('game', 'game.id', '=', 'user_active.game_id')
+                  ->join('user_stat', 'user_stat.user_id', '=', 'user_active.user_id')
+                  ->select('user.*', 'user_stat.*', 'game.name as game_name', 'user_active.*')
+                  ->where('user.user_type', '!=', '3')
+                  ->get();
         return view('pages.players.active_player', compact('online'));
     }
     public function indexHighRoller()
@@ -114,7 +115,7 @@ class PlayersController extends Controller
     {
         $botName   = $request->username;
         $botId     = DB::table('user_random')->where([['isused', 0],['user_type', '3']])->first();
-        $username   = clean($botName);
+        $username  = clean($botName);
         $deviceId  = "";
         $sql       = DB::table('country')->select('code')->get();
         $countries = $sql->toArray();
@@ -221,8 +222,8 @@ class PlayersController extends Controller
 
     public function updateBot(Request $request, Stat $stat)
     {
-      $pk = $request->pk;
-      $name = $request->name;
+      $pk    = $request->pk;
+      $name  = $request->name;
       $value = $request->value;
 
       Stat::where('user_id', $pk)->update([
@@ -240,9 +241,9 @@ class PlayersController extends Controller
 
     Log::create([
       'operator_id' => Session::get('userId'),
-      'menu_id' => '51',
-      'action_id' => '2',
-      'date' => Carbon::now('GMT+7'),
+      'menu_id'     => '51',
+      'action_id'   => '2',
+      'date'        => Carbon::now('GMT+7'),
       'description' => 'Edit '.$name.' ID '.$pk.' to '. $value
     ]);
 

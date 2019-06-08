@@ -23,7 +23,7 @@ class UserAdminController extends Controller
     {
         $menu  = MenuClass::menuName('User Admin');
         $admin = DB::table('operator')->join('adm_role', 'adm_role.role_id', '=', 'operator.role_id')->get();
-        $role = DB::table('adm_role')->get();
+        $role  = DB::table('adm_role')->get();
         return view('pages.admin.user_admin', compact('admin', 'role', 'menu'));
     }
 
@@ -54,9 +54,9 @@ class UserAdminController extends Controller
   
           Log::create([
               'operator_id' => Session::get('userId'),
-              'menu_id' => '42',
-              'action_id' => '3',
-              'date' => Carbon::now('GMT+7'),
+              'menu_id'     => '42',
+              'action_id'   => '3',
+              'date'        => Carbon::now('GMT+7'),
               'description' => 'Create new User with Username '. $user->username
           ]);
           return redirect()->route('UserAdmin-view')->with('success','Data Insert Successfull');
@@ -93,8 +93,8 @@ class UserAdminController extends Controller
      */
     public function update(Request $request)
     {
-      $pk = $request->pk;
-      $name = $request->name;
+      $pk    = $request->pk;
+      $name  = $request->name;
       $value = $request->value;
 
       User::where('operator_id', '=', $pk)->update([

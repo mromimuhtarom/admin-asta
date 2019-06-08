@@ -20,6 +20,16 @@ $menu = new RolesClass;
     </li>
     @endif
     @php
+        $High_Rollers	 = 'Report Player';
+        $role_access31 = $menu->RoleType1($High_Rollers);
+        $role_acces31 = $menu->RoleType2($High_Rollers);
+    @endphp
+    @if($role_access31 || $role_acces31)
+    <li class="{{ Request::is('Players/Report-Player/*') ? 'active' : null }}">
+        <a   href="{{ route('ReportPlayer-view') }}" title="High Rollers"> Report Player </a>
+    </li>
+    @endif
+    @php
         $High_Rollers	 = 'High Rollers';
         $role_access31 = $menu->RoleType1($High_Rollers);
         $role_acces31 = $menu->RoleType2($High_Rollers);
@@ -60,13 +70,13 @@ $menu = new RolesClass;
     </li>
     @endif
     @php
-        $Report	 = 'Report';
+        $Report	 = 'Play Report';
         $role_access35 = $menu->RoleType1($Report);
         $role_acces35 = $menu->RoleType2($Report);
     @endphp
     @if($role_access35 || $role_acces35)
-    <li class="{{ Request::is('Players/Report/*') ? 'active' : null }}">
-        <a   href="{{ route('Report-view') }}" title="Report"> Report </a>
+    <li class="{{ Request::is('Players/PlayReport/*') ? 'active' : null }}">
+        <a   href="{{ route('PlayReport-view') }}" title="Report">Play Report </a>
     </li>
     @endif
     @php

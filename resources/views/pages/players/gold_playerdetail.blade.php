@@ -107,16 +107,12 @@
                 <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                     <thead>			                
                         <tr>
-                            <th data-hide="phone">Username</th>
-                            <th data-class="expand">Action</th>
-                            <th data-hide="phone">Debit</th>
+                            <th>Username</th>
+                            <th>Action</th>
+                            <th>Debit</th>
                             <th>Credit</th>
-                            <th data-hide="phone,tablet">Card</th>
-                            <th data-hide="phone,tablet">Total</th>
-                            <th data-hide="phone,tablet">Timestamp</th>
-                            <th data-hide="phone,tablet">Win Amount</th>
-                            <th data-hide="phone,tablet">Status</th>
-                            <th data-hide="phone,tablet">Time Stamp</th>
+                            <th>Total</th>
+                            <th>Timestamp</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -150,7 +146,7 @@
         };
         
         $('#dt_basic').dataTable({
-            "sDom": "<'dt-toolbar d-flex'<f><'ml-auto hidden-xs show-control'l>r>"+
+            "sDom": "<'dt-toolbar d-flex'<'ml-auto hidden-xs show-control'l>r>"+
                 "t"+
                 "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
                 "autoWidth" : true,

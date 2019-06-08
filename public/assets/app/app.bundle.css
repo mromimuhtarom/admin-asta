@@ -8640,7 +8640,8 @@ img {
 } */
 .table-outer {
   max-width: 100%;
-  overflow-y: auto; }
+  overflow-y: auto;
+  padding-right: 2%; }
 
 .project-members > a {
   display: inline-block;

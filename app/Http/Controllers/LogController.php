@@ -119,14 +119,14 @@ class LogController extends Controller
   
         }else if($inputUser != NULL &&  $inputAction != NULL) {
           $logs = DB::table('admin_log')
-             ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-             ->join('action', 'admin_log.action_id','=', 'action.id')
-             ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-             ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-             ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-             ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-             ->orderBy('admin_log.date', 'desc')
-             ->get();
+                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
+                  ->join('action', 'admin_log.action_id','=', 'action.id')
+                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
+                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
+                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->where('action.action', 'LIKE', '%'.$inputAction.'%')
+                  ->orderBy('admin_log.date', 'desc')
+                  ->get();
 
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputMinDate != NULL &&  $inputAction != NULL) {
@@ -157,14 +157,14 @@ class LogController extends Controller
                 return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputUser != NULL && $inputMinDate != NULL ) {
           $logs = DB::table('admin_log')
-                 ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                 ->join('action', 'admin_log.action_id','=', 'action.id')
-                 ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                 ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                 ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                 ->WHERE('admin_log.date', '>=', $inputMinDate." 00:00:00")
-                 ->orderBy('admin_log.date', 'desc')
-                 ->get();
+                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
+                  ->join('action', 'admin_log.action_id','=', 'action.id')
+                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
+                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
+                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->WHERE('admin_log.date', '>=', $inputMinDate." 00:00:00")
+                  ->orderBy('admin_log.date', 'desc')
+                  ->get();
   
   
          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
