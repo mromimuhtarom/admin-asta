@@ -103,7 +103,7 @@
     
     <div class="custom-scroll table-responsive" style="height:800px;">
       
-      <div class="table-outer">
+      <div class="table-outer" style=" padding-right:10%;">
         <table class="table table-bordered">
           <thead>
             <tr>
