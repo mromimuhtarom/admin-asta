@@ -103,7 +103,7 @@
     
     <div class="custom-scroll table-responsive" style="height:800px;">
       
-      <div class="table-outer">
+      <div class="table-outer" style=" padding-right:10%;">
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -132,8 +132,6 @@
             <tr>
                 <td></td>
                 <td>{{ $role->name }}</td>
-                <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton">View & Edit</a></td>
-                <td><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>
             </tr>
             @endif
             @endforeach

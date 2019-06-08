@@ -54,7 +54,7 @@ class UserAdminController extends Controller
   
           Log::create([
               'operator_id' => Session::get('userId'),
-              'menu_id' => '3',
+              'menu_id' => '42',
               'action_id' => '3',
               'date' => Carbon::now('GMT+7'),
               'description' => 'Create new User with Username '. $user->username
@@ -118,7 +118,7 @@ class UserAdminController extends Controller
 
       Log::create([
         'operator_id' => Session::get('userId'),
-        'menu_id'     => '3',
+        'menu_id'     => '42',
         'action_id'   => '2',
         'date'        => Carbon::now('GMT+7'),
         'description' => 'Edit '.$name.' UserId '.$pk.' to '. $value
@@ -138,8 +138,8 @@ class UserAdminController extends Controller
   
         Log::create([
           'operator_id' => Session::get('userId'),
-          'menu_id'     => '3',
-          'action_id'   => '2',
+          'menu_id'     => '42',
+          'action_id'   => '1',
           'date'        => Carbon::now('GMT+7'),
           'description' => 'Edit password UserId '.$pk.' to '. $password
         ]);
@@ -160,6 +160,14 @@ class UserAdminController extends Controller
         if($userid != '')
         {
             DB::table('operator')->where('operator_id', '=', $userid)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '42',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete user with user ID '.$userid
+            ]);
             return redirect()->route('UserAdmin-view')->with('success','Data Deleted');
         }
         return redirect()->route('UserAdmin-view')->with('success','Somethong wrong');                

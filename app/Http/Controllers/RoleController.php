@@ -61,6 +61,13 @@ class RoleController extends Controller
               }
       
               DB::table('adm_access')->insert($menuId);
+              Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '43',
+                'action_id'   => '3',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Create new Role with Role Name '.$role
+              ]);
               return redirect()->route('Role-view')->with('success','Data Insert Successfull');  
         }
         return redirect()->route('Role-view')->with('alert','Role Name is Null');
@@ -92,6 +99,7 @@ class RoleController extends Controller
     {
         $roles = DB::table('adm_access')->join('adm_menu', 'adm_menu.menu_id', '=', 'adm_access.menu_id')->where('adm_access.role_id', '=', $role->role_id)->get();
         $roles = $roles->toArray();
+
         return view('pages.admin.role_edit', compact('roles'));
     }
 
@@ -111,16 +119,15 @@ class RoleController extends Controller
     
         Role::where('role_id', '=', $pk)->update([
           $name => $value
-        ]);
-        
+        ]);      
   
   
         Log::create([
           'operator_id' => Session::get('userId'),
-          'menu_id'     => '3',
+          'menu_id'     => '43',
           'action_id'   => '2',
           'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit password UserId '.$pk.' to '. $value
+          'description' => 'Edit '.$name.' with Role Id'.$pk.' to '. $value
         ]);
     }
 
@@ -134,6 +141,14 @@ class RoleController extends Controller
 
         DB::table('adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
           $name => $value
+        ]);
+
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '43',
+          'action_id'   => '2',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Edit menu with menu Id'.$pk.' to '. $value
         ]);
     }
 
@@ -149,6 +164,14 @@ class RoleController extends Controller
         if($userid != '')
         {
             DB::table('adm_role')->where('role_id', '=', $userid)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '43',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Role ID '.$id
+            ]);
             return redirect()->route('Role-view')->with('success','Data Deleted');
         }
         return redirect()->route('Role-view')->with('alert','Something wrong'); 

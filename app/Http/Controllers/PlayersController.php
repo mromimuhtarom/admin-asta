@@ -176,7 +176,7 @@ class PlayersController extends Controller
 
         Log::create([
           'operator_id' => Session::get('userId'),
-          'menu_id'     => '8',
+          'menu_id'     => '51',
           'action_id'   => '3',
           'date'        => Carbon::now('GMT+7'),
           'description' => 'Create new Bot with username '. $username
@@ -240,7 +240,7 @@ class PlayersController extends Controller
 
     Log::create([
       'operator_id' => Session::get('userId'),
-      'menu_id' => '8',
+      'menu_id' => '51',
       'action_id' => '2',
       'date' => Carbon::now('GMT+7'),
       'description' => 'Edit '.$name.' ID '.$pk.' to '. $value
@@ -261,6 +261,14 @@ class PlayersController extends Controller
       {
           DB::table('user')->where('user_id', '=', $userid)->delete();
           DB::table('user_stat')->where('user_id', '=', $userid)->delete();
+
+          Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '51',
+            'action_id'   => '4',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Delete Bots ID '.$userid
+          ]);
           return redirect()->route('Bots-view')->with('success','Data Deleted');
       }
       return redirect()->route('Bots-view')->with('success','Something wrong');   

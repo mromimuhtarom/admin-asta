@@ -17,7 +17,7 @@ class Authenticated
      */
     public function handle($request, Closure $next)
     {
-        if(Session::get('login')) {
+        if(Session::get('login1')) {
 
         return $next($request);
 

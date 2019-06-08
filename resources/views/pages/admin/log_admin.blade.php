@@ -6,16 +6,19 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
-<div class="table-aii">
-    <div class="table-header">
-        <form action="">
-            <div class="row">
+<div class="search bg-blue-dark">
+    <div class="table-header w-100 h-100">
+        <form action="{{ route('Log-search') }}">
+            <div class="row h-100 w-100">
                 <div class="col">
                     <input type="text" name="username" placeholder="username">
                 </div>
                 <div class="col">
                     <select name="action" id="">
-                        <option>Choose Action</option>
+                        <option value="">Choose Action</option>
+                        @foreach($logs as $log)
+                        <option value="{{ $log->action }}">{{ $log->action}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col">

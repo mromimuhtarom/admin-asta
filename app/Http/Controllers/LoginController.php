@@ -21,7 +21,7 @@ class LoginController extends Controller
             Session::put('username',Auth::user()->username);
             Session::put('fullname',Auth::user()->fullname);
             Session::put('roleId',Auth::user()->role_id);
-            Session::put('login',TRUE);
+            Session::put('login1',TRUE);
   
             return redirect(route('home'));
   

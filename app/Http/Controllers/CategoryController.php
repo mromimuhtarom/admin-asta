@@ -98,12 +98,19 @@ class CategoryController extends Controller
         $maxbuy         = $request->maxbuy;
         
 
-        Room::create([
+        $tpk_category =  Room::create([
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
             'max_buy'   => $maxbuy,
             'stake'     => '0',
             'timer'     => '0'
+        ]);
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '61',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Category Asta Poker'. $tpk_category->name
         ]);
 
         return redirect()->route('Category-view')->with('success','Data Added');
@@ -123,12 +130,20 @@ class CategoryController extends Controller
         $minbuy         = $request->minbuy;
         $maxbuy         = $request->maxbuy;
 
-        BigTwoRoom::create([
+        $bgt_category = BigTwoRoom::create([
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
             'max_buy'   => $maxbuy,
             'stake'     => '0',
             'timer'     => '0'
+        ]);
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '62',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Category Asta Big Two'. $bgt_category->name
         ]);
  
         return redirect()->route('BigTwoCategory-view')->with('success','Data Added');
@@ -149,13 +164,21 @@ class CategoryController extends Controller
         $maxbuy         = $request->maxbuy;
         
 
-        DominoSusunRoom::create([
+        $dms_category = DominoSusunRoom::create([
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
             'max_buy'       => $maxbuy,
             'stake'         => '0',
             'stake_pass'    => '0',
             'timer'         => '0'
+        ]);
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '62',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Category Domino Susun'. $dms_category->name
         ]);
 
         return redirect()->route('DominoSCategory-view')->with('success','Data Added');
@@ -177,12 +200,21 @@ class CategoryController extends Controller
         $maxbuy         = $request->maxbuy;
         
 
-        DominoQRoom::create([
+        $dmq_category = DominoQRoom::create([
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
             'max_buy'       => $maxbuy,
             'stake'         => '0',
             'timer'         => '0'
+        ]);
+
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '64',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Category Domino QQ'. $dmq_category->name
         ]);
 
         return redirect()->route('DominoQCategory-view')->with('success','Data Added');
@@ -252,10 +284,10 @@ class CategoryController extends Controller
   
         Log::create([
           'operator_id' => Session::get('userId'),
-          'menu_id'     => '15',
+          'menu_id'     => '61',
           'action_id'   => '2',
           'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit '.$name.' groupID '.$pk.' to '. $value
+          'description' => 'Edit '.$name.' roomid '.$pk.' to '. $value
         ]);
     }
 
@@ -301,13 +333,13 @@ class CategoryController extends Controller
               "";
         }
   
-        // Log::create([
-        //   'operator_id' => Session::get('userId'),
-        //   'menu_id'     => '15',
-        //   'action_id'   => '2',
-        //   'date'        => Carbon::now('GMT+7'),
-        //   'description' => 'Edit '.$name.' groupID '.$pk.' to '. $value
-        // ]);
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '62',
+          'action_id'   => '2',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Edit '.$name.' roomid '.$pk.' to '. $value
+        ]);
     }
 
     /**
@@ -352,13 +384,13 @@ class CategoryController extends Controller
               "";
         }
   
-        // Log::create([
-        //   'operator_id' => Session::get('userId'),
-        //   'menu_id'     => '15',
-        //   'action_id'   => '2',
-        //   'date'        => Carbon::now('GMT+7'),
-        //   'description' => 'Edit '.$name.' groupID '.$pk.' to '. $value
-        // ]);
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '63',
+          'action_id'   => '2',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Edit '.$name.' roomid '.$pk.' to '. $value
+        ]);
     }
 
     /**
@@ -400,13 +432,13 @@ class CategoryController extends Controller
               "";
         }
   
-        // Log::create([
-        //   'operator_id' => Session::get('userId'),
-        //   'menu_id'     => '15',
-        //   'action_id'   => '2',
-        //   'date'        => Carbon::now('GMT+7'),
-        //   'description' => 'Edit '.$name.' groupID '.$pk.' to '. $value
-        // ]);
+        Log::create([
+          'operator_id' => Session::get('userId'),
+          'menu_id'     => '64',
+          'action_id'   => '2',
+          'date'        => Carbon::now('GMT+7'),
+          'description' => 'Edit '.$name.' roomid '.$pk.' to '. $value
+        ]);
     }
 
     /**
@@ -422,6 +454,15 @@ class CategoryController extends Controller
         if($roomid != '')
         {
             Room::where('roomid', '=', $roomid)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '61',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Category Asta Poker Room ID '.$roomid
+            ]);
+
             return redirect()->route('Category-view')->with('success','Data Deleted');
         }
         return redirect()->route('Category-view')->with('success','Something wrong');      
@@ -440,6 +481,14 @@ class CategoryController extends Controller
         if($roomid != '')
         {
             BigTwoRoom::where('roomid', '=', $roomid)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '62',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Category Asta Big Two Room ID '.$roomid
+            ]);
             return redirect()->route('BigTwoCategory-view')->with('success','Data Deleted');
         }
         return redirect()->route('BigTwoCategory-view')->with('success','Something wrong');      
@@ -458,6 +507,14 @@ class CategoryController extends Controller
         if($roomid != '')
         {
             DominoSusunRoom::where('roomid', '=', $roomid)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '63',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Category Domino Susun Room ID '.$roomid
+            ]);
             return redirect()->route('DominoSCategory-view')->with('success','Data Deleted');
         }
         return redirect()->route('DominoSCategory-view')->with('success','Something wrong');      
@@ -476,6 +533,14 @@ class CategoryController extends Controller
         if($roomid != '')
         {
             DominoQRoom::where('roomid', '=', $roomid)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '64',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Category Domino QQ Room ID '.$roomid
+            ]);
             return redirect()->route('DominoQCategory-view')->with('success','Data Deleted');
         }
         return redirect()->route('DominoQCategory-view')->with('success','Something wrong');      
