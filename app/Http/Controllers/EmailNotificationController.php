@@ -75,7 +75,7 @@ class EmailNotificationController extends Controller
             
                     Log::create([
                       'operator_id' => Session::get('userId'),
-                      'menu_id' => '18',
+                      'menu_id' => '74',
                       'action_id' => '3',
                       'date' => Carbon::now('GMT+7'),
                       'description' => 'Create new Email Notification with title '. $notification->subject
@@ -143,6 +143,14 @@ class EmailNotificationController extends Controller
                 {
                     EmailNotification::where('id', '=', $pk)->update([
                         'imageUrl' => $nama_file_unik
+                    ]);
+
+                    Log::create([
+                        'operator_id' => Session::get('userId'),
+                        'menu_id' => '74',
+                        'action_id' => '2',
+                        'date' => Carbon::now('GMT+7'),
+                        'description' => 'Edit imageUrl Email Notification ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
             
@@ -213,7 +221,7 @@ class EmailNotificationController extends Controller
   
           Log::create([
             'operator_id' => Session::get('userId'),
-            'menu_id'     => '18',
+            'menu_id'     => '74',
             'action_id'   => '2',
             'date'        => Carbon::now('GMT+7'),
             'description' => 'Edit '.$name.' Email Notification Id '.$pk.' to '. $value
@@ -232,6 +240,15 @@ class EmailNotificationController extends Controller
         if($id != '')
         {
             DB::table('notifications')->where('id', '=', $id)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '74',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Email Notification ID '.$id
+            ]);
+            
             return redirect()->route('EmailNotification-view')->with('success','Data Deleted');
         }
         return redirect()->route('EmailNotification-view')->with('success','Something wrong');   

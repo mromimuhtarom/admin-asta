@@ -52,7 +52,7 @@ class PushNotificationController extends Controller
 
           Log::create([
             'operator_id' => Session::get('userId'),
-            'menu_id'     => '14',
+            'menu_id'     => '73',
             'action_id'   => '3',
             'date'        => Carbon::now('GMT+7'),
             'description' => 'Create new Push Notification with title '.$request->title
@@ -117,7 +117,7 @@ class PushNotificationController extends Controller
   
       Log::create([
         'operator_id' => Session::get('userId'),
-        'menu_id'     => '17',
+        'menu_id'     => '73',
         'action_id'   => '2',
         'date'        => Carbon::now('GMT+7'),
         'description' => 'Edit '.$name.' Push Notification Id '.$pk.' to '. $value
@@ -136,6 +136,14 @@ class PushNotificationController extends Controller
         if($id != '')
         {
             DB::table('push_notifications')->where('id', '=', $id)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '73',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Push Notification ID '.$id
+              ]);
             return redirect()->route('PushNotification-view')->with('success','Data Deleted');
         }
         return redirect()->route('PushNotification-view')->with('success','Something wrong');   

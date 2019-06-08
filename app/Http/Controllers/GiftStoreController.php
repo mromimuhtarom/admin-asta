@@ -99,6 +99,14 @@ class GiftStoreController extends Controller
                     Gift::where('id', '=', $pk)->update([
                         'imageUrl' => $nama_file_unik
                     ]);
+
+                    Log::create([
+                        'operator_id' => Session::get('userId'),
+                        'menu_id' => '69',
+                        'action_id' => '2',
+                        'date' => Carbon::now('GMT+7'),
+                        'description' => 'Edit image_url Gift Store ID '.$pk.' to '. $nama_file_unik
+                    ]);
                     return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
             
                 }
@@ -156,10 +164,10 @@ class GiftStoreController extends Controller
   
       Log::create([
         'operator_id' => Session::get('userId'),
-        'menu_id'     => '19',
+        'menu_id'     => '69',
         'action_id'   => '2',
         'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' Gift Id '.$pk.' to '. $value
+        'description' => 'Edit '.$name.' Gift Store Id '.$pk.' to '. $value
       ]);
     }
 

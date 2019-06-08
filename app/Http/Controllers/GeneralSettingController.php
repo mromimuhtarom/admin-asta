@@ -98,6 +98,23 @@ class GeneralSettingController extends Controller
         DB::table('config')->where('id', '=', $pk)->update([
             $name => $value
         ]);
+
+        switch ($name) {
+            case "value":
+                $name = "Value";
+                break;
+            default:
+              "";
+        }
+
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '75',
+            'action_id'   => '2',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Edit '.$name.' General Setting with Config Id '.$pk.' to '. $value
+        ]);
     }
 
     /**
