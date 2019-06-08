@@ -6,16 +6,20 @@
 
 
 @section('content')
+<link rel="stylesheet" href="/css/admin.css">
 <div class="search bg-blue-dark">
     <div class="table-header w-100 h-100">
-        <form action="">
+        <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
                     <input type="text" name="username" placeholder="username">
                 </div>
                 <div class="col">
                     <select name="action" id="">
-                        <option>Choose Action</option>
+                        <option value="">Choose Action</option>
+                        @foreach($actionSearch as $action)
+                        <option value="{{ $action->action }}">{{ $action->action}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col">
@@ -33,7 +37,7 @@
 </div>
     
         
-</script> --}}
+
 <!-- Widget ID (each widget will need unique ID)-->
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
 
@@ -61,37 +65,23 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th data-hide="phone">Username</th>
-                        <th data-class="expand">Playing Game</th>
-                        <th data-hide="phone">Table</th>
-                        <th>Seat</th>
-                        <th data-hide="phone,tablet">Card</th>
-                        <th data-hide="phone,tablet">Table Card</th>
-                        <th data-hide="phone,tablet">Bet</th>
-                        <th data-hide="phone,tablet">Win Amount</th>
-                        <th data-hide="phone,tablet">Status</th>
-                        <th data-hide="phone,tablet">Time Stamp</th>
-                        <th data-hide="phone,tablet">Country</th>
+                        <th>Username</th>
+                        <th>Menu</th>
+                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach ($player_history as $history)
-                        <tr>
-                          <td></td>
-                          <td>{{ $history->username }}</td>
-                          <td>{{ $history->gamename }}</td>
-                          <td>{{ $history->tablename }}</td>
-                          <td>{{ $history->seat }}</td>
-                          <td>{{ $history->cards }}</td>
-                          <td>{{ $history->tablecards }}</td>
-                          <td>{{ $history->bet }}</td>
-                          <td>{{ $history->winAmount }}</td>
-                          <td>{{ $history->status }}</td>
-                          <td>{{ $history->ts }}</td>
-                          <td>{{ $history->countryname }}</td>
-                          <td></td>
-                        </tr>
-                        @endforeach
+                    @foreach($logs as $log)
+                    <tr>
+                        <td>{{ $log->username }}</td>
+                        <td>{{ $log->name }}</td>
+                        <td>{{ $log->action }}</td>
+                        <td>{{ $log->date }}</td>
+                        <td>{{ $log->description }}</td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
     
