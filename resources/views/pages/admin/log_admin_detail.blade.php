@@ -7,7 +7,7 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
-<div class="search bg-blue-dark">
+<div class="search bg-blue-dark" style="margin-bottom:3%;">
     <div class="table-header w-100 h-100">
         <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
@@ -44,7 +44,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Standard Data Tables </h2>
+            <h2>Log Admin </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -102,7 +102,7 @@
 	};
 	
 	$('#dt_basic').dataTable({
-	    "sDom": "<'dt-toolbar d-flex'<f><'ml-auto hidden-xs show-control'l>r>"+
+	    "sDom": "<'dt-toolbar d-flex'<'ml-auto hidden-xs show-control'l>r>"+
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
 			"autoWidth" : true,
