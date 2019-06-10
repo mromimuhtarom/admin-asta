@@ -36,8 +36,128 @@
 
 
 /* SETTINGS MENU LAYOUT */
-.settings-table {
+.settings-table, .game-settings {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1%;
+    grid-gap: 20px;
+    padding-right: 1.5%;
+    align-items: center;
+}
+
+.settings-table .jarviswidget {
+    margin: 0;
+}
+
+.game-settings .jarviswidget {
+    margin: 0;
+}
+
+
+.settings-table div .custom-scroll {
+    height: 270px;
+}
+
+/* BANK TRANSACTIONS */
+.bank-transactions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 20px;
+    padding-right: 1.5%;
+    align-items: center;
+}
+
+.bank-transactions .jarviswidget {
+    margin: 0;
+}
+
+/* USER TRANSACTIONS */
+.user-transactions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    padding-right: 1.5%;
+}
+
+@media only screen and (max-width: 1024px) {
+    .user-transactions {
+        grid-template-columns: 1fr;
+    }
+  }
+
+.user-transaction-dates {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-transaction-users {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-transaction-users div:first-child img {
+    width: 30%;
+}
+
+.user-transaction-users h3 {
+    margin: 0;
+}
+
+.transactions-user-button {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.transactions-user-button div:not(:last-child) {
+    margin-right: 10px;
+}
+
+
+.transaction-user-approve {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    align-items: center;
+}
+
+.user-transaction-approve div:last-child p {
+    margin: 0;
+
+}
+
+/* modal detail transaction */
+.modal-transaction-user-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-transaction-user-detail .modal-transaction-user-detail-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 10px;
+}
+
+.modal-transaction-user-detail .modal-transaction-user-detail-top div:first-child img {
+    width: 70%;
+    border-radius: 50%;
+}
+
+.modal-transaction-user-detail-bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: start;
+    margin-top: 10px;
+
+}
+
+.modal-transaction-user-detail-bottom div:not(:last-child) {
+    margin-right: 20px;
 }

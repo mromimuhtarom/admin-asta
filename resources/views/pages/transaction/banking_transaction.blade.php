@@ -6,161 +6,194 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col">
-            <div class="table-aii">
-                <div class="footer-table">
-                    <div class="add-btn-smt">
-                        Money Transactions
-                    </div>
-                </div>
-                <table id="dt-material-checkbox" class="table display" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
-                    <thead class="th-table">
-                    <tr>
-                        <th></th>
-                        <th class="th-sm">Best Offers</th>
-                        <th class="th-sm">Gold</th>
-                        <th class="th-sm">Chips</th>
-                        <th class="th-sm">Goods</th>
-                        <th class="th-sm"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach($admin as $adm) --}}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        {{-- @endforeach --}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col">
-            <div class="table-aii">
-                <div class="footer-table">
-                    <div class="add-btn-smt">
-                        Player Transactions
-                    </div>
-                </div>
-                <table id="dt-material-checkbox" class="table display" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
-                    <thead class="th-table">
-                    <tr>
-                        <th></th>
-                        <th class="th-sm">Best Offers</th>
-                        <th class="th-sm">Gold</th>
-                        <th class="th-sm">Chips</th>
-                        <th class="th-sm">Goods</th>
-                        <th class="th-sm"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach($admin as $adm) --}}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        {{-- @endforeach --}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="table-aii">
-                <div class="footer-table">
-                    <div class="add-btn-smt">
-                        Daily Gift Transaction
-                    </div>
-                </div>
-                <table id="dt-material-checkbox" class="table big" style="margin-left:1px; margin-top:-5%;" cellspacing="0" width="100%">
-                    <thead class="th-table">
-                    <tr>
-                        <th></th>
-                        <th class="th-sm">Best Offers</th>
-                        <th class="th-sm">Gold</th>
-                        <th class="th-sm">Chips</th>
-                        <th class="th-sm">Goods</th>
-                        <th class="th-sm"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach($admin as $adm) --}}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        {{-- @endforeach --}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div class="bank-transactions">
+
+	<!-- Money transactions -->
+	<div>
+		<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+			
+			<header>
+				<div class="widget-header">	
+					<h2><strong>Money Transactions</strong></h2>				
+				</div>
+			</header>
+		
+			<div>
+				<div class="widget-body">
+					<div class="custom-scroll table-responsive">
+						
+						<div class="table-outer">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th></th>
+										<th class="th-sm">Best Offers</th>
+										<th class="th-sm">Gold</th>
+										<th class="th-sm">Chips</th>
+										<th class="th-sm">Goods</th>
+										<th class="th-sm"></th>
+									</tr>
+								</thead>
+								<tbody>
+									{{-- @foreach($admin as $adm) --}}
+									<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+									</tr>
+									{{-- @endforeach --}}
+								</tbody>
+							</table>
+						</div>
+				
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Money transactions -->
+
+	<!-- Player transactions -->
+	<div>
+		<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+			
+			<header>
+				<div class="widget-header">	
+					<h2><strong>Player Transactions</strong></h2>				
+				</div>
+			</header>
+		
+			<div>
+				<div class="widget-body">
+					<div class="custom-scroll table-responsive">
+						
+						<div class="table-outer">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th></th>
+										<th class="th-sm">Best Offers</th>
+										<th class="th-sm">Gold</th>
+										<th class="th-sm">Chips</th>
+										<th class="th-sm">Goods</th>
+										<th class="th-sm"></th>
+									</tr>
+								</thead>
+								<tbody>
+									{{-- @foreach($admin as $adm) --}}
+									<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+									</tr>
+									{{-- @endforeach --}}
+								</tbody>
+							</table>
+						</div>
+				
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Player transactions -->
+
+</div>
+
+<!-- Daily gift transactions -->
+<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+			
+	<header>
+		<div class="widget-header">	
+			<h2><strong>Daily Gift Transactions</strong></h2>				
+		</div>
+	</header>
+
+	<div>
+		<div class="widget-body">
+			<div class="custom-scroll table-responsive">
+				
+				<div class="table-outer">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th></th>
+								<th class="th-sm">Best Offers</th>
+								<th class="th-sm">Gold</th>
+								<th class="th-sm">Chips</th>
+								<th class="th-sm">Goods</th>
+								<th class="th-sm"></th>
+							</tr>
+						</thead>
+						<tbody>
+							{{-- @foreach($admin as $adm) --}}
+							<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+							</tr>
+							{{-- @endforeach --}}
+						</tbody>
+					</table>
+				</div>
+		
+			</div>
+		
+		</div>
+	</div>
+</div>
+<!-- End daily gift transactions -->
+
 <script>
-      table = $('table.big').dataTable({
-          columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-          }],
-          "pagingType": "full_numbers",
-          "bInfo" : false,
-          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-          select: {
-          style: 'os',
-          selector: 'td:first-child'
-          },
-          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-              $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
+	$(document).ready(function() {
+    $('table.table').dataTable( {
+      "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+    });
+  });
 
-              $('.usertext').editable({
-                mode :'popup'
-              });
-    
-          }
+  table = $('table.table').dataTable({
+    "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
+    "autoWidth" : true,
+    "paging": false,
+    "classes": {
+      "sWrapper": "dataTables_wrapper dt-bootstrap4"
+    },
+    "oLanguage": {
+      "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+    },
+    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+      $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
-      table = $('table.display').dataTable({
-          columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-          }],
-          "pagingType": "full_numbers",
-          "bInfo" : false,
-          "sDom": '<"row view-filter smt-aii add-smt"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager-smt"<"col-sm-12"<"bottom"p>>>',
-          select: {
-          style: 'os',
-          selector: 'td:first-child'
-          },
-          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-              $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
 
-              $('.usertext').editable({
-                mode :'popup'
-              });
-    
-          }
+      $('.inlineSetting').editable({
+            mode :'inline'
+        });
+
+      $('.popUpSetting').editable({
+        mode: 'inline',
+        value: 0,
+        source: [
+          {value: 0, text: 'Off'},
+          {value: 1, text: 'On'}
+        ]
       });
+     
+    },
+    responsive: true
+  });
 </script>
 @endsection

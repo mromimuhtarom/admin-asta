@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classes\MenuClass;
+use Session;
+use Carbon\Carbon;
 use DB;
+
+// Log Model
+use App\Log;
 
 class GeneralSettingController extends Controller
 {

@@ -23,7 +23,377 @@
     </div>
     
 @endif
-<div class="row">
+
+<div class="user-transactions">
+	
+	<!-- Table 1 -->
+	<div>
+		<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+		
+			<header>
+				<div class="widget-header">	
+					<h2><strong>Request Transactions</strong></h2>				
+				</div>
+			</header>
+		
+			<div>
+				<div class="widget-body">
+					<div class="custom-scroll table-responsive">
+						
+						<div class="table-outer">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th class="th-sm">User</th>
+										<th class="th-sm">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach ($rewardRequest as $reward)
+									<tr>
+											<td>
+												<div class="user-transaction-dates">
+													<div>
+														<p>Date {{ $reward->date_buy }}</p> 
+													</div>
+													<div>
+														<p>Buy in Best Offer</p>
+													</div>
+												</div>
+												<div class="user-transaction-users">
+													<div>
+														<img src="/images/gifts/41.png" alt="" class="img-profile-reward">
+													</div>
+													<div class="user-transaction-user-name">
+														<div>
+															<h3>{{ $reward->username }}</h3>
+														</div>
+														<div>
+															<h5>Buy {{ $reward->qty }} {{ $reward->reward_name }} Using Bank Transfer</h5>
+														</div>
+													</div>
+												</div>
+												<div class="transactions-user-button">
+													<div>
+														<input type="button" value="View Detail" class="btn btn-xs btn-info" data-toggle="modal" data-target="#view-detail{{ $reward->id }}">
+													</div>
+													<div>
+														<input type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $reward->id }}">
+													</div>
+													<div>
+														<input type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $reward->id }}">
+													</div>
+												</div>
+
+											</td>
+											<td>
+												<div class="user-transaction-status">
+													<p>Pending</p>
+												</div>
+											</td>
+
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+				
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Table 1 -->
+
+
+	<!-- Table 2 -->
+	<div>
+		<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+		
+			<header>
+				<div class="widget-header">	
+					<h2><strong>Approved Transactions</strong></h2>				
+				</div>
+			</header>
+		
+			<div>
+				<div class="widget-body">
+					<div class="custom-scroll table-responsive">
+						
+						<div class="table-outer">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th class="th-sm">User</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{-- @foreach ($rewardRequest as $reward) --}}
+									<tr>
+											<td>
+												<div class="user-transaction-dates">
+													<div>
+														<p>Date 14-03-2019 03:36:10</p> 
+													</div>
+													<div>
+														<p>Buy in Best Offer</p>
+													</div>
+												</div>
+												<div class="user-transaction-users">
+													<div>
+														<img src="/images/gifts/41.png" alt="" class="img-profile-reward">
+													</div>
+													<div class="user-transaction-user-name">
+														<div>
+															<h3>Elliot</h3>
+														</div>
+														<div>
+															<h5>Buy 300 Gold Coins Using Bank Transfer</h5>
+														</div>
+													</div>
+												</div>
+												<div class="transaction-user-approve">
+													<div class="transactions-user-button">
+														<div>
+															<input type="button" value="View Detail" class="btn btn-xs btn-info" data-toggle="modal" data-target="#view-detail-approved{{ $reward->id }}">
+														</div>
+														<div>
+															<input type="button" value="Completed" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $reward->id }}">
+														</div>
+													</div>
+													<div>
+														<p>Approved by Perkasa</p>
+													</div>
+												</div>
+
+											</td>
+
+									</tr>
+									{{-- @endforeach --}}
+								</tbody>
+							</table>
+						</div>
+				
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Table 2 -->
+</div>
+
+<!-- Modal before approved -->
+@foreach ($rewardRequest as $reward)
+<div class="modal fade" id="view-detail{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="margin-top:5%;">
+				<h5 class="modal-title" id="exampleModalLabel">Detail Information</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					× 
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="modal-transaction-user-detail">
+					<div class="modal-transaction-user-detail-top">
+						<div>
+								<img src="/images/gifts/41.png" alt="image" class="img-profile-reward">
+						</div>
+						<div>
+							<h3><strong>JOHN DOE</strong></p>
+							<em>johndoe123321</em>
+							<p>JohnDoe@gmail.com</p>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>From</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Best Offer</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Date</p>
+						</div>
+						<div>
+							<strong>: &nbsp; 14-03-2019 / 03:36:10</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Buying</p>
+						</div>
+						<div>
+							<strong>: &nbsp; 300 Coin Gold</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Price</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Rp 990.000</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Payment</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Bank Transfer</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Status</p>
+						</div>
+						<div>
+							<strong>: &nbsp; <span style="color:#1e90ff;"> Sukses Transfer Bank BCA</span></strong>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+<!-- End Modal before approved -->
+
+<!-- Modal approved -->
+@foreach ($rewardRequest as $reward)
+<div class="modal fade" id="view-detail-approved{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="margin-top:5%;">
+				<h5 class="modal-title" id="exampleModalLabel">Detail Information</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					× 
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="modal-transaction-user-detail">
+					<div class="modal-transaction-user-detail-top">
+						<div>
+								<img src="/images/gifts/41.png" alt="image" class="img-profile-reward">
+						</div>
+						<div>
+							<h3><strong>JOHN DOE</strong></p>
+							<em>johndoe123321</em>
+							<p>JohnDoe@gmail.com</p>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>From</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Best Offer</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Date</p>
+						</div>
+						<div>
+							<strong>: &nbsp; 14-03-2019 / 03:36:10</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Buying</p>
+						</div>
+						<div>
+							<strong>: &nbsp; 300 Coin Gold</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Price</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Rp 990.000</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Payment</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Bank Transfer</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Status</p>
+						</div>
+						<div>
+							<strong>: &nbsp; <span style="color:#1e90ff;"> Sukses Transfer Bank BCA</span></strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Approved</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Admin Satu</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Completed</p>
+						</div>
+						<div>
+							<strong>: &nbsp; Admin Dua</strong>
+						</div>
+					</div>
+					<div class="modal-transaction-user-detail-bottom">
+						<div>
+							<p>Decline</p>
+						</div>
+						<div>
+							<strong>: &nbsp; -</strong>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+<!-- End Modal approved -->
+
+<!-- Modal -->
+{{-- <div class="modal fade" id="view-decline" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="margin-top:5%;">
+				<h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					× 
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="#" method="post">
+					@csrf
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="button_example-no" data-dismiss="modal">Close</button>
+				<button type="submit" class="button_example-yes">Save Changes</button>
+			</div>
+				</form>
+		</div>
+	</div>
+</div> --}}
+<!-- End Modal -->
+
+
+{{-- <div class="row">
     <div class="col">
         <div class="table-aii">
             <div class="footer-table">
@@ -53,14 +423,6 @@
                                         <form action="" method="POST">
                                             {{  csrf_field() }}
                                         <div class="modal-body">
-                                            {{-- <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" /><br><br>
-                                            <input type='file' onchange="readURL(this);" /><br><br>
-                                            <input type="text" name="title" placeholder="Title Gift" required><br>
-                                            <input type="number" name="expire" placeholder="expire" required><br>
-                                            <select name="transaction">
-                                                <option>Category</option>
-                                                <option value=""></option>
-                                            </select> --}}
                                             
                                         </div>
                                         <div class="modal-footer">
@@ -71,7 +433,6 @@
                                     </div>
                                 </div>
                             </div>
-                        {{-- @if($reward->status == 0) --}}
                             <!-- Modal -->
                             <div class="modal fade" id="decline{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -164,7 +525,6 @@
                             </div>
                         </td>
                     </tr>
-                    {{-- @endif --}}
                     @endforeach
                 </tbody>
             </table>
@@ -187,14 +547,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach($admin as $adm) --}}
                         <tr>
                             <td></td>
                             <td>
-                                    {{-- @foreach ($rewardRequest as $reward)
-                                    @if($reward->status == 0)
-                                    @endif
-                                    @endforeach --}}
                                     <div class="row">
                                         <div class="col">14-03-2019  03:36:10</div>
                                         <div class="col" align="right">Buy in Best Offer</div>
@@ -222,38 +577,78 @@
         
                             </td>
                         </tr>
-                        {{-- @endforeach --}}
                     </tbody>
                 </table>
             </div>
     </div>
-</div>
-<script>
-      table = $('table.table').dataTable({
-          columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-          }],
-          "pagingType": "full_numbers",
-          "bInfo" : false,
-          "sDom": '<"row view-filter smt-aii add-smt"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager-smt"<"col-sm-12"<"bottom"p>>>',
-          select: {
-          style: 'os',
-          selector: 'td:first-child'
-          },
-          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-              $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
+</div> --}}
 
-              $('.usertext').editable({
-                mode :'popup'
-              });
-    
-          }
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="margin-top:5%;">
+				<h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					× 
+				</button>
+			</div>
+			<div class="modal-body">
+				Are You Sure Want To Delete It
+				<form action="{{ route('Bots-delete') }}" method="post">
+					{{ method_field('delete')}}
+					{{ csrf_field() }}
+					<input type="hidden" name="userid" id="userid" value="">
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="button_example-yes">Yes</button>
+				<button type="button" class="button_example-no" data-dismiss="modal">No</button>
+			</div>
+				</form>
+		</div>
+	</div>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    $('table.table').dataTable( {
+      "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+    });
+  });
+
+  table = $('table.table').dataTable({
+    "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
+    "autoWidth" : true,
+    "paging": false,
+    "classes": {
+      "sWrapper": "dataTables_wrapper dt-bootstrap4"
+    },
+    "oLanguage": {
+      "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+    },
+    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+      $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
+
+      $('.inlineSetting').editable({
+            mode :'inline'
+        });
+
+      $('.popUpSetting').editable({
+        mode: 'inline',
+        value: 0,
+        source: [
+          {value: 0, text: 'Off'},
+          {value: 1, text: 'On'}
+        ]
+      });
+     
+    },
+    responsive: true
+  });
 </script>
 @endsection

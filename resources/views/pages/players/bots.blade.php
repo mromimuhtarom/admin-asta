@@ -157,29 +157,29 @@
   
 <!-- Modal -->
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header" style="margin-top:5%;">
-          <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            × 
-          </button>
-        </div>
-        <div class="modal-body">
-          Are You Sure Want To Delete It
-          <form action="{{ route('Bots-delete') }}" method="post">
-            {{ method_field('delete')}}
-            {{ csrf_field() }}
-            <input type="hidden" name="userid" id="userid" value="">
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="button_example-yes">Yes</button>
-          <button type="button" class="button_example-no" data-dismiss="modal">No</button>
-        </div>
-          </form>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="margin-top:5%;">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          × 
+        </button>
       </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete It
+        <form action="{{ route('Bots-delete') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userid" id="userid" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes">Yes</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      </div>
+        </form>
     </div>
   </div>
+</div>
 
 <script type="text/javascript">
 	$(document).ready(function() {
