@@ -19,9 +19,9 @@ class PushNotificationController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('Push Notification');
+        $menu          = MenuClass::menuName('Push Notification');
         $notifications = PushNotification::join('game', 'game.id', '=', 'push_notifications.gameId')->select('game.name as gamename', 'push_notifications.*')->get();
-        $game = DB::table('game')->get();
+        $game          = DB::table('game')->get();
         // $table         = Table::where('dealerId', '=', Session::get('dealerId'))->where('tabletype', '!=', 'm')->where('clubId', '=', 0)->where('seasonId', '=', 0)->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
         return view('pages.notification.push_notification', compact('notifications','tables', 'table', 'game', 'menu'));
     }
@@ -45,9 +45,9 @@ class PushNotificationController extends Controller
     public function store(Request $request)
     {
         PushNotification::create([
-            'title' => $request->title, 
-            'message'    => $request->message,
-            'gameId'    =>  $request->game
+            'title'   => $request->title,
+            'message' => $request->message,
+            'gameId'  => $request->game
         ]);
 
           Log::create([

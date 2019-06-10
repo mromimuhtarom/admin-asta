@@ -19,7 +19,7 @@ class EmailNotificationController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('Email Notification');
+        $menu               = MenuClass::menuName('Email Notification');
         $emailnotifications = EmailNotification::all();
         return view('pages.notification.email_notification', compact('emailnotifications', 'menu'));
     }
@@ -44,15 +44,15 @@ class EmailNotificationController extends Controller
     {
 
         
-        $file = $request->file('file');
-        $bcrypt = bcrypt($request->password);
+        $file                   = $request->file('file');
+        $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
-        $nama = $_FILES['file']['name'];
-        $x = explode('.', $nama);
-        $ekstensi = strtolower(end($x));
-        $ukuran = $_FILES['file']['size'];
-        $acak           = rand(1,99);
-        $nama_file_unik = 'notification'.$acak.'.'.$ekstensi; 
+        $nama                   = $_FILES['file']['name'];
+        $x                      = explode('.', $nama);
+        $ekstensi               = strtolower(end($x));
+        $ukuran                 = $_FILES['file']['size'];
+        $acak                   = rand(1,99);
+        $nama_file_unik         = 'notification'.$acak.'.'.$ekstensi;
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
@@ -75,9 +75,9 @@ class EmailNotificationController extends Controller
             
                     Log::create([
                       'operator_id' => Session::get('userId'),
-                      'menu_id' => '74',
-                      'action_id' => '3',
-                      'date' => Carbon::now('GMT+7'),
+                      'menu_id'     => '74',
+                      'action_id'   => '3',
+                      'date'        => Carbon::now('GMT+7'),
                       'description' => 'Create new Email Notification with title '. $notification->subject
                     ]);
                     return redirect()->route('EmailNotification-view')->with('success','Insert Data successfull');
@@ -124,16 +124,16 @@ class EmailNotificationController extends Controller
 
     public function updateimage(Request $request)
     {
-        $pk = $request->pk;
-        $file = $request->file('file');
-        $bcrypt = bcrypt($request->password);
+        $pk                     = $request->pk;
+        $file                   = $request->file('file');
+        $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
-        $nama = $_FILES['file']['name'];
-        $x = explode('.', $nama);
-        $ekstensi = strtolower(end($x));
-        $ukuran = $_FILES['file']['size'];
-        $acak           = rand(1,99);
-        $nama_file_unik = 'notification'.$acak.'.'.$ekstensi; 
+        $nama                   = $_FILES['file']['name'];
+        $x                      = explode('.', $nama);
+        $ekstensi               = strtolower(end($x));
+        $ukuran                 = $_FILES['file']['size'];
+        $acak                   = rand(1,99);
+        $nama_file_unik         = 'notification'.$acak.'.'.$ekstensi;
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
@@ -147,9 +147,9 @@ class EmailNotificationController extends Controller
 
                     Log::create([
                         'operator_id' => Session::get('userId'),
-                        'menu_id' => '74',
-                        'action_id' => '2',
-                        'date' => Carbon::now('GMT+7'),
+                        'menu_id'     => '74',
+                        'action_id'   => '2',
+                        'date'        => Carbon::now('GMT+7'),
                         'description' => 'Edit imageUrl Email Notification ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
@@ -190,28 +190,28 @@ class EmailNotificationController extends Controller
           ]);
   
           switch ($name) {
-              case "subject":
+              case "subject": 
                   $name = "Subject";
                   break;
-              case "message":
+              case "message": 
                   $name = "Message";
                   break;
-              case "fromName":
+              case "fromName": 
                   $name = "fromName";
                   break;
-              case "fromEmail":
+              case "fromEmail": 
                   $name = "From Email";
                   break;
-              case "type":
+              case "type": 
                   $name = "Type";
                   break;
-              case "cdn":
+              case "cdn": 
                   $name = "cdn";
                   break;
-              case "codeKey":
+              case "codeKey": 
                   $name = "Code Key";
                   break;
-              case "codeKey":
+              case "codeKey": 
                   $name = "Code Key";
                   break;
               default:
@@ -248,7 +248,7 @@ class EmailNotificationController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Email Notification ID '.$id
             ]);
-            
+
             return redirect()->route('EmailNotification-view')->with('success','Data Deleted');
         }
         return redirect()->route('EmailNotification-view')->with('success','Something wrong');   

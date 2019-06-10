@@ -8,14 +8,14 @@
 @section('content')
     <div class="search bg-blue-dark">
         <div class="table-header w-100 h-100">
-            <form action="{{ route('Report-search') }}" method="get" role="search">
+            <form action="{{ route('PlayReport-search') }}" method="get" role="search">
                 <div class="row h-100 w-100">
                     <div class="col">
                         <input type="text" name="inputPlayer" placeholder="username">
                     </div>
                     <div class="col">
                         <select name="inputGame">
-                            <option>Choose Game</option>
+                            <option value="">Choose Game</option>
                             @foreach ($game as $gm)
                             <option value="{{ $gm->id }}">{{ $gm->name }}</option>
                             @endforeach

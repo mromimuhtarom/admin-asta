@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Classes\MenuClass;
 
-class ReportController extends Controller
+class PlayReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class ReportController extends Controller
     public function index()
     {
         $game = DB::table('game')->get();
-        return view('pages.players.report', compact('game'));
+        return view('pages.players.playreport', compact('game'));
     }
 
 
@@ -50,7 +50,7 @@ class ReportController extends Controller
                             ->orderBy('player_history.ts', 'asc')
                             ->paginate(12);
         $player_history->appends($request->all());
-        return view('pages.players.report_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
       } else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
       $player_history = DB::table('player_history')
                           ->join('user', 'user.user_id', '=', 'player_history.player')
@@ -68,7 +68,7 @@ class ReportController extends Controller
                           ->orderBy('player_history.ts', 'asc')
                           ->paginate(12);
       $player_history->appends($request->all());
-      return view('pages.players.report_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
         $player_history = DB::table('player_history')
                            ->join('user', 'user.user_id', '=', 'player_history.player')
@@ -87,7 +87,7 @@ class ReportController extends Controller
                            ->orderBy('player_history.ts', 'asc')
                            ->paginate(12);
        $player_history->appends($request->all());
-       return view('pages.players.report_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
        $player_history = DB::table('player_history')
                           ->join('user', 'user.user_id', '=', 'player_history.player')
@@ -105,7 +105,7 @@ class ReportController extends Controller
                           ->orderBy('player_history.ts', 'asc')
                           ->paginate(12);
       $player_history->appends($request->all());
-      return view('pages.players.report_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
         $player_history = DB::table('player_history')
                               ->join('user', 'user.user_id', '=', 'player_history.player')
@@ -124,7 +124,7 @@ class ReportController extends Controller
                               ->orderBy('player_history.ts', 'desc')
                               ->paginate(12);
             $player_history->appends($request->all());
-          return view('pages.players.report_detail', compact('player_history', 'menus1', 'game'));
+          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
     $player_history = DB::table('player_history')
                           ->join('user', 'user.user_id', '=', 'player_history.player')
@@ -142,7 +142,7 @@ class ReportController extends Controller
                           ->orderBy('player_history.ts', 'desc')
                           ->paginate(12);
         $player_history->appends($request->all());
-      return view('pages.players.report_detail', compact('player_history', 'menus1', 'game'));
+      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL && $inputGame != NULL) {
         $player_history =  DB::table('player_history')
                           ->join('user', 'user.user_id', '=', 'player_history.player')
@@ -160,7 +160,7 @@ class ReportController extends Controller
                           ->orderBy('player_history.ts', 'asc')
                           ->paginate(12);
         $player_history->appends($request->all());
-          return view('pages.players.report_detail', compact('player_history', 'menus1', 'game'));
+          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL) {
         $player_history =  DB::table('player_history')
                           ->join('user', 'user.user_id', '=', 'player_history.player')
@@ -177,7 +177,7 @@ class ReportController extends Controller
                           ->orderBy('player_history.ts', 'asc')
                           ->paginate(12);
         $player_history->appends($request->all());
-          return view('pages.players.report_detail', compact('player_history', 'menus1', 'game'));
+          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } 
 
   }

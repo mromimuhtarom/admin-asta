@@ -48,7 +48,7 @@ class RoleController extends Controller
                 'name' => $role
               ]);
               $lastValue = DB::table('adm_role')->orderBy('role_id', 'desc')->first();
-              $menu = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->orderby('menu_id', 'desc')->first();
+              $menu      = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->orderby('menu_id', 'desc')->first();
               $menuarray = DB::select('SELECT menu_id from adm_menu where webid = 1');
               $menufirst = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->first();
 
@@ -112,8 +112,8 @@ class RoleController extends Controller
      */
     public function update(Request $request)
     {
-        $pk = $request->pk;
-        $name = $request->name;
+        $pk    = $request->pk;
+        $name  = $request->name;
         $value = $request->value;
   
     

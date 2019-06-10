@@ -6,16 +6,16 @@
 
 
 @section('content')
-<div class="search bg-blue-dark">
+<div class="search bg-blue-dark" style="margin-bottom: 2%;">
         <div class="table-header w-100 h-100">
-            <form action="{{ route('Report-search') }}" method="get" role="search">
+            <form action="{{ route('PlayReport-search') }}" method="get" role="search">
                 <div class="row h-100 w-100">
                     <div class="col">
                         <input type="text" name="inputPlayer" placeholder="username">
                     </div>
                     <div class="col">
                         <select name="inputGame">
-                            <option>Choose Game</option>
+                            <option value="">Choose Game</option>
                             @foreach ($game as $gm)
                             <option value="{{ $gm->id }}">{{ $gm->name }}</option>
                             @endforeach
@@ -98,7 +98,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Standard Data Tables </h2>
+            <h2>Player Report </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -119,23 +119,22 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th data-hide="phone">Username</th>
-                        <th data-class="expand">Playing Game</th>
-                        <th data-hide="phone">Table</th>
+                        <th>Username</th>
+                        <th>Playing Game</th>
+                        <th>Table</th>
                         <th>Seat</th>
-                        <th data-hide="phone,tablet">Card</th>
-                        <th data-hide="phone,tablet">Table Card</th>
-                        <th data-hide="phone,tablet">Bet</th>
-                        <th data-hide="phone,tablet">Win Amount</th>
-                        <th data-hide="phone,tablet">Status</th>
-                        <th data-hide="phone,tablet">Time Stamp</th>
-                        <th data-hide="phone,tablet">Country</th>
+                        <th>Card</th>
+                        <th>Table Card</th>
+                        <th>Bet</th>
+                        <th>Win Amount</th>
+                        <th>Status</th>
+                        <th>Time Stamp</th>
+                        <th>Country</th>
                     </tr>
                 </thead>
                 <tbody>
                         @foreach ($player_history as $history)
                         <tr>
-                          <td></td>
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
                           <td>{{ $history->tablename }}</td>
@@ -147,7 +146,6 @@
                           <td>{{ $history->status }}</td>
                           <td>{{ $history->ts }}</td>
                           <td>{{ $history->countryname }}</td>
-                          <td></td>
                         </tr>
                         @endforeach
                 </tbody>
@@ -170,7 +168,7 @@
 	};
 	
 	$('#dt_basic').dataTable({
-	    "sDom": "<'dt-toolbar d-flex'<f><'ml-auto hidden-xs show-control'l>r>"+
+	    "sDom": "<'dt-toolbar d-flex'<'ml-auto hidden-xs show-control'l>r>"+
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
 			"autoWidth" : true,

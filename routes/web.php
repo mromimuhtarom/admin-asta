@@ -70,6 +70,11 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('Active-view', 'PlayersController@indexActive')->name('Active-view');
             });
         });
+        Route::group(['prefix'  =>  'Report-Player'], function() {
+            Route::middleware('page_denied:Report Player')->group(function(){
+                Route::get('ReportPlayer-view', 'ReportPlayerController@index')->name('ReportPlayer-view');
+            });
+        });
         Route::group(['prefix'  =>  'High-Roller'], function() {
             Route::middleware('page_denied:High Rollers')->group(function(){
                 Route::get('HighRoller-view', 'PlayersController@indexHighRoller')->name('HighRoller-view');
@@ -93,10 +98,10 @@ Route::middleware('authenticated')->group(function(){
                 Route::delete('Bots-delete', 'PlayersController@destroyBots')->name('Bots-delete');
             });
         });
-        Route::group(['prefix'  =>  'Report'], function() {
+        Route::group(['prefix'  =>  'PlayReport'], function() {
             Route::middleware('page_denied:Report')->group(function(){
-                Route::get('Report-view', 'ReportController@index')->name('Report-view');
-                Route::get('Report-search', 'ReportController@search')->name('Report-search');
+                Route::get('PlayReport-view', 'PlayReportController@index')->name('PlayReport-view');
+                Route::get('PlayReport-search', 'PlayReportController@search')->name('PlayReport-search');
             });
         });
         Route::group(['prefix'  =>  'Chip-Player'], function() {

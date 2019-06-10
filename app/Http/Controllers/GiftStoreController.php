@@ -78,17 +78,17 @@ class GiftStoreController extends Controller
 
     public function updateimage(Request $request)
     {
-        $pk = $request->pk;
-        $id = DB::table('gifts')->where('id', '=', $pk)->first();
-        $file = $request->file('file');
-        $bcrypt = bcrypt($request->password);
+        $pk                     = $request->pk;
+        $id                     = DB::table('gifts')->where('id', '=', $pk)->first();
+        $file                   = $request->file('file');
+        $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
-        $nama = $_FILES['file']['name'];
-        $x = explode('.', $nama);
-        $ekstensi = strtolower(end($x));
-        $ukuran = $_FILES['file']['size'];
-        $filename           = $id->id;
-        $nama_file_unik = $filename.'.'.$ekstensi; 
+        $nama                   = $_FILES['file']['name'];
+        $x                      = explode('.', $nama);
+        $ekstensi               = strtolower(end($x));
+        $ukuran                 = $_FILES['file']['size'];
+        $filename               = $id->id;
+        $nama_file_unik         = $filename.'.'.$ekstensi;
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
@@ -102,9 +102,9 @@ class GiftStoreController extends Controller
 
                     Log::create([
                         'operator_id' => Session::get('userId'),
-                        'menu_id' => '69',
-                        'action_id' => '2',
-                        'date' => Carbon::now('GMT+7'),
+                        'menu_id'     => '69',
+                        'action_id'   => '2',
+                        'date'        => Carbon::now('GMT+7'),
                         'description' => 'Edit image_url Gift Store ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
