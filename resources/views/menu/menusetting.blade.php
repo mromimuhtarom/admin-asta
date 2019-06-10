@@ -26,7 +26,7 @@ $menu = new RolesClass;
     @endphp
     @if($role_access39 || $role_acces39) --}}
     <li class="{{ Request::is('Settings/Game-Setting/*') ? 'active' : null }}">
-        <a   href="{{ route('GeneralSetting-view') }}" title="Game Settings"> Game Settings </a>
+        <a   href="{{ route('GameSetting-view') }}" title="Game Settings"> Game Settings </a>
     </li>
     {{-- @endif --}}
 </ul>
