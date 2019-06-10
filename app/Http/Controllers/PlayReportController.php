@@ -33,150 +33,782 @@ class PlayReportController extends Controller
       $menus1 = MenuClass::menuName('Report');
       $game = DB::table('game')->get();
       if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
-        $player_history = DB::table('player_history')
-                            ->join('user', 'user.user_id', '=', 'player_history.player')
-                            ->join('country', 'user.country_code', '=', 'country.code')
-                            ->join('game', 'game.id', '=', 'player_history.gameId')
-                            ->select(
-                              'player_history.*',
-                              'user.username',
-                              'user.user_id',
-                              'game.name as gamename',
-                              'country.name as countryname'
-                            )
-                            ->where('username', 'LIKE', '%'.$inputName.'%')
-                            ->where('game.id', '=', $inputGame)
-                            ->wherebetween('player_history.ts' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-                            ->orderBy('player_history.ts', 'asc')
-                            ->paginate(12);
-        $player_history->appends($request->all());
+        // $player_history = DB::table('player_history')
+        //                     ->join('user', 'user.user_id', '=', 'player_history.player')
+        //                     ->join('country', 'user.country_code', '=', 'country.code')
+        //                     ->join('game', 'game.id', '=', 'player_history.gameId')
+        //                     ->select(
+        //                       'player_history.*',
+        //                       'user.username',
+        //                       'user.user_id',
+        //                       'game.name as gamename',
+        //                       'country.name as countryname'
+        //                     )
+        //                     ->where('username', 'LIKE', '%'.$inputName.'%')
+        //                     ->where('game.id', '=', $inputGame)
+        //                     ->wherebetween('player_history.ts' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+        //                     ->orderBy('player_history.ts', 'asc')
+        //                     ->paginate(12);
+        // $player_history = DB::table()
+        if($inputGame == 'Domino QQ') {
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%')
+              ->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+              ->get();
+        } else if($inputGame == 'Domino susun') {
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+               ->get();
+        } else if($inputGame == 'Texas Poker') {
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+               ->get();
+        } else if ($inputGame == 'Big Two') {
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          ->wherebetween('bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                          // ->union($dmq)
+                          // ->union($dms)
+                          // ->union($tpk)
+                          ->get();
+        }
+
+        // $player_history->appends($request->all());
         return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
       } else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
-      $player_history = DB::table('player_history')
-                          ->join('user', 'user.user_id', '=', 'player_history.player')
-                          ->join('country', 'user.country_code', '=', 'country.code')
-                          ->join('game', 'game.id', '=', 'player_history.gameId')
-                          ->select(
-                            'player_history.*',
-                            'user.username',
-                            'user.user_id',
-                            'game.name as gamename',
-                            'country.name as countryname'
-                          )
-                          ->where('username', 'LIKE', '%'.$inputName.'%')
-                          ->wherebetween('player_history.ts' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-                          ->orderBy('player_history.ts', 'asc')
-                          ->paginate(12);
-      $player_history->appends($request->all());
+      // $player_history = DB::table('player_history')
+      //                     ->join('user', 'user.user_id', '=', 'player_history.player')
+      //                     ->join('country', 'user.country_code', '=', 'country.code')
+      //                     ->join('game', 'game.id', '=', 'player_history.gameId')
+      //                     ->select(
+      //                       'player_history.*',
+      //                       'user.username',
+      //                       'user.user_id',
+      //                       'game.name as gamename',
+      //                       'country.name as countryname'
+      //                     )
+      //                     ->where('username', 'LIKE', '%'.$inputName.'%')
+      //                     ->wherebetween('player_history.ts' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+      //                     ->orderBy('player_history.ts', 'asc')
+      //                     ->paginate(12);
+
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%')
+              ->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          ->wherebetween('bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                          ->union($dmq)
+                          ->union($dms)
+                          ->union($tpk)
+                          ->get();
+      // $player_history->appends($request->all());
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
-        $player_history = DB::table('player_history')
-                           ->join('user', 'user.user_id', '=', 'player_history.player')
-                           ->join('country', 'user.country_code', '=', 'country.code')
-                           ->join('game', 'game.id', '=', 'player_history.gameId')
-                           ->select(
-                             'player_history.*',
-                             'user.username',
-                             'user.user_id',
-                             'game.name as gamename',
-                             'country.name as countryname'
-                           )
-                           ->where('username', $inputName)
-                           ->where('game.id', '=', $inputGame)
-                           ->WHERE('player_history.ts', '>=', $inputMinDate." 00:00:00")
-                           ->orderBy('player_history.ts', 'asc')
-                           ->paginate(12);
-       $player_history->appends($request->all());
+      //   $player_history = DB::table('player_history')
+      //                      ->join('user', 'user.user_id', '=', 'player_history.player')
+      //                      ->join('country', 'user.country_code', '=', 'country.code')
+      //                      ->join('game', 'game.id', '=', 'player_history.gameId')
+      //                      ->select(
+      //                        'player_history.*',
+      //                        'user.username',
+      //                        'user.user_id',
+      //                        'game.name as gamename',
+      //                        'country.name as countryname'
+      //                      )
+      //                      ->where('username', $inputName)
+      //                      ->where('game.id', '=', $inputGame)
+      //                      ->WHERE('player_history.ts', '>=', $inputMinDate." 00:00:00")
+      //                      ->orderBy('player_history.ts', 'asc')
+      //                      ->paginate(12);
+      //  $player_history->appends($request->all());
+        if($inputGame == 'Domino QQ') {
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%')
+              ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
+              ->get();
+        } else if($inputGame == 'Domino susun') {
+
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
+               ->get();
+        } else if($inputGame == 'Texas Poker') {
+
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
+               ->get();
+        } else if($inputGame == 'Big Two') {
+
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
+                          // ->union($dmq)
+                          // ->union($dms)
+                          // ->union($tpk)
+                          ->get();
+        }
        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
-       $player_history = DB::table('player_history')
-                          ->join('user', 'user.user_id', '=', 'player_history.player')
-                          ->join('country', 'user.country_code', '=', 'country.code')
-                          ->join('game', 'game.id', '=', 'player_history.gameId')
-                          ->select(
-                            'player_history.*',
-                            'user.username',
-                            'user.user_id',
-                            'game.name as gamename',
-                            'country.name as countryname'
-                          )
-                          ->where('username', $inputName)
-                          ->WHERE('player_history.ts', '>=', $inputMinDate." 00:00:00")
-                          ->orderBy('player_history.ts', 'asc')
-                          ->paginate(12);
-      $player_history->appends($request->all());
+      //  $player_history = DB::table('player_history')
+      //                     ->join('user', 'user.user_id', '=', 'player_history.player')
+      //                     ->join('country', 'user.country_code', '=', 'country.code')
+      //                     ->join('game', 'game.id', '=', 'player_history.gameId')
+      //                     ->select(
+      //                       'player_history.*',
+      //                       'user.username',
+      //                       'user.user_id',
+      //                       'game.name as gamename',
+      //                       'country.name as countryname'
+      //                     )
+      //                     ->where('username', $inputName)
+      //                     ->WHERE('player_history.ts', '>=', $inputMinDate." 00:00:00")
+      //                     ->orderBy('player_history.ts', 'asc')
+      //                     ->paginate(12);
+      // $player_history->appends($request->all());
+
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%')
+              ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
+
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
+
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
+
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
+                          ->union($dmq)
+                          ->union($dms)
+                          ->union($tpk)
+                          ->get();
+
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
-        $player_history = DB::table('player_history')
-                              ->join('user', 'user.user_id', '=', 'player_history.player')
-                              ->join('country', 'user.country_code', '=', 'country.code')
-                              ->join('game', 'game.id', '=', 'player_history.gameId')
-                              ->select(
-                                'player_history.*',
-                                'user.username',
-                                'user.user_id',
-                                'game.name as gamename',
-                                'country.name as countryname'
-                              )
-                              ->where('username', 'LIKE', '%'.$inputName.'%')
-                              ->where('game.id', '=', $inputGame)
-                              ->where('player_history.ts', '<=', $inputMaxDate." 23:59:59")
-                              ->orderBy('player_history.ts', 'desc')
-                              ->paginate(12);
-            $player_history->appends($request->all());
+        // $player_history = DB::table('player_history')
+        //                       ->join('user', 'user.user_id', '=', 'player_history.player')
+        //                       ->join('country', 'user.country_code', '=', 'country.code')
+        //                       ->join('game', 'game.id', '=', 'player_history.gameId')
+        //                       ->select(
+        //                         'player_history.*',
+        //                         'user.username',
+        //                         'user.user_id',
+        //                         'game.name as gamename',
+        //                         'country.name as countryname'
+        //                       )
+        //                       ->where('username', 'LIKE', '%'.$inputName.'%')
+        //                       ->where('game.id', '=', $inputGame)
+        //                       ->where('player_history.ts', '<=', $inputMaxDate." 23:59:59")
+        //                       ->orderBy('player_history.ts', 'desc')
+        //                       ->paginate(12);
+        //     $player_history->appends($request->all());
+
+        if($inputGame == 'Domino QQ') {
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%')
+              ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
+              ->get();
+        } else if($inputGame == 'Domino susun') {
+
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
+               ->get();
+        } else if($inputGame == 'Texas Poker') {
+
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
+               ->get();
+        } else if($inputGame == 'Big Two') {
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
+                          // ->union($dmq)
+                          // ->union($dms)
+                          // ->union($tpk)
+                          ->get();
+        }
+
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
-    $player_history = DB::table('player_history')
-                          ->join('user', 'user.user_id', '=', 'player_history.player')
-                          ->join('country', 'user.country_code', '=', 'country.code')
-                          ->join('game', 'game.id', '=', 'player_history.gameId')
-                          ->select(
-                            'player_history.*',
-                            'user.username',
-                            'user.user_id',
-                            'game.name as gamename',
-                            'country.name as countryname'
-                          )
-                          ->where('username', 'LIKE', '%'.$inputName.'%')
-                          ->where('player_history.ts', '<=', $inputMaxDate." 23:59:59")
-                          ->orderBy('player_history.ts', 'desc')
-                          ->paginate(12);
-        $player_history->appends($request->all());
+    // $player_history = DB::table('player_history')
+    //                       ->join('user', 'user.user_id', '=', 'player_history.player')
+    //                       ->join('country', 'user.country_code', '=', 'country.code')
+    //                       ->join('game', 'game.id', '=', 'player_history.gameId')
+    //                       ->select(
+    //                         'player_history.*',
+    //                         'user.username',
+    //                         'user.user_id',
+    //                         'game.name as gamename',
+    //                         'country.name as countryname'
+    //                       )
+    //                       ->where('username', 'LIKE', '%'.$inputName.'%')
+    //                       ->where('player_history.ts', '<=', $inputMaxDate." 23:59:59")
+    //                       ->orderBy('player_history.ts', 'desc')
+    //                       ->paginate(12);
+    //     $player_history->appends($request->all());
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%')
+              ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
+
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
+
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
+
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
+                          ->union($dmq)
+                          ->union($dms)
+                          ->union($tpk)
+                          ->get();
+
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL && $inputGame != NULL) {
-        $player_history =  DB::table('player_history')
-                          ->join('user', 'user.user_id', '=', 'player_history.player')
-                          ->join('country', 'user.country_code', '=', 'country.code')
-                          ->join('game', 'game.id', '=', 'player_history.gameId')
-                          ->select(
-                            'player_history.*',
-                            'user.username',
-                            'user.user_id',
-                            'game.name as gamename',
-                            'country.name as countryname'
-                          )
-                          ->where('username', 'LIKE', '%'.$inputName.'%')
-                          ->where('game.id', '=', $inputGame)
-                          ->orderBy('player_history.ts', 'asc')
-                          ->paginate(12);
-        $player_history->appends($request->all());
+        // $player_history =  DB::table('player_history')
+        //                   ->join('user', 'user.user_id', '=', 'player_history.player')
+        //                   ->join('country', 'user.country_code', '=', 'country.code')
+        //                   ->join('game', 'game.id', '=', 'player_history.gameId')
+        //                   ->select(
+        //                     'player_history.*',
+        //                     'user.username',
+        //                     'user.user_id',
+        //                     'game.name as gamename',
+        //                     'country.name as countryname'
+        //                   )
+        //                   ->where('username', 'LIKE', '%'.$inputName.'%')
+        //                   ->where('game.id', '=', $inputGame)
+        //                   ->orderBy('player_history.ts', 'asc')
+        //                   ->paginate(12);
+        // $player_history->appends($request->all());
+
+
+        if($inputGame == 'Domino QQ') {
+        $player_history = DB::table('dmq_round')
+                // DB::table(DB::raw('dmq_round FORCE INDEX (dmq_round.roundid)'))
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%')
+              ->get();
+        } else if($inputGame == 'Domino susun') {
+        $player_history = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%')
+               ->get();
+        } else if($inputGame == 'Texas Poker') {
+        $player_history  = DB::table('tpk_round')
+                           ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+                           ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+                           ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+                           ->select('tpk_round.gameplay_log',
+                                    'tpk_round.date',
+                                    'tpk_table.name AS tablename',
+                                    'tpk_round_player.bet',
+                                    'tpk_round_player.win_lose',
+                                    'tpk_round_player.status',
+                                    'tpk_round_player.hand_card',
+                                    'tpk_round_player.seatid',
+                                    'user.username',
+                                    DB::raw("'Texas Poker' AS gamename")
+                                   )
+                           ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                           ->get();
+        } else if($inputGame == 'Big Two') {
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          // ->union($dmq)
+                          // ->union($dms)
+                          // ->union($tpk)
+                          ->get();
+        }
+
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL) {
-        $player_history =  DB::table('player_history')
-                          ->join('user', 'user.user_id', '=', 'player_history.player')
-                          ->join('country', 'user.country_code', '=', 'country.code')
-                          ->join('game', 'game.id', '=', 'player_history.gameId')
-                          ->select(
-                            'player_history.*',
-                            'user.username',
-                            'user.user_id',
-                            'game.name as gamename',
-                            'country.name as countryname'
-                          )
-                          ->where('username', 'LIKE', '%'.$inputName.'%')
-                          ->orderBy('player_history.ts', 'asc')
-                          ->paginate(12);
-        $player_history->appends($request->all());
+        // $player_history =  DB::table('player_history')
+        //                   ->join('user', 'user.user_id', '=', 'player_history.player')
+        //                   ->join('country', 'user.country_code', '=', 'country.code')
+        //                   ->join('game', 'game.id', '=', 'player_history.gameId')
+        //                   ->select(
+        //                     'player_history.*',
+        //                     'user.username',
+        //                     'user.user_id',
+        //                     'game.name as gamename',
+        //                     'country.name as countryname'
+        //                   )
+        //                   ->where('username', 'LIKE', '%'.$inputName.'%')
+        //                   ->orderBy('player_history.ts', 'asc')
+        //                   ->paginate(12);
+                          
+        // $player_history->appends($request->all());
+
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+              ->where('user.username', 'LIKE', '%'.$inputName.'%');
+
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%');
+
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->where('user.username', 'LIKE', '%'.$inputName.'%');
+
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->where('user.username', 'LIKE', '%'.$inputName.'%')
+                          ->union($dmq)
+                          ->union($dms)
+                          ->union($tpk)
+                          ->get();
+
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } 
 

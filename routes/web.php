@@ -348,6 +348,8 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('GiftStore-view', 'GiftStoreController@index')->name('GiftStore-view');
                 Route::post('GiftStore-update', 'GiftStoreController@update')->name('GiftStore-update');
                 Route::post('GiftStore-updateimage', 'GiftStoreController@updateimage')->name('GiftStore-updateimage');
+                Route::delete('GiftStore-delete', 'GiftStoreController@destroy')->name('GiftStore-delete');
+                Route::post('GiftStore-create', 'GiftStoreController@store')->name('GiftStore-create');
             });
         });
         Route::group(['prefix'  =>  'Transaction-Store'], function() {

@@ -41,9 +41,7 @@ class EmailNotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-
-        
+    {  
         $file                   = $request->file('file');
         $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');

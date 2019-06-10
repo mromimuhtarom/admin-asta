@@ -42,7 +42,56 @@ class GiftStoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file                   = $request->file('file');
+        $bcrypt                 = bcrypt($request->password);
+        $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
+        $nama                   = $_FILES['file']['name'];
+        $x                      = explode('.', $nama);
+        $ekstensi               = strtolower(end($x));
+        $ukuran                 = $_FILES['file']['size'];
+        $acak                   = rand(1,99);
+        $nama_file_unik         = 'notification'.$acak.'.'.$ekstensi;
+        list($width, $height)   = getimagesize($file);
+
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        {
+            if($ukuran < 1044070)
+            {           
+                if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
+                {
+                    $gift = Gift::create([
+                        'name'        => $request->title,
+                        'price'       => $request->price,
+                        'category_id' => $request->category,
+                        'width'       => $width,
+                        'height'      => $height,
+                        'image_url'   => $nama_file_unik
+                    ]);
+            
+                    Log::create([
+                      'operator_id' => Session::get('userId'),
+                      'menu_id'     => '69',
+                      'action_id'   => '3',
+                      'date'        => Carbon::now('GMT+7'),
+                      'description' => 'Create new Gift Store with title '. $gift->subject
+                    ]);
+                    return redirect()->route('GiftStore-view')->with('success','Insert Data successfull');
+            
+                }
+                else
+                {
+                    echo "Gagal Upload File";
+                }
+            }
+            else
+            {       
+                echo 'Ukuran file terlalu besar';
+            }
+        }
+        else
+        {       
+            echo 'Ekstensi file tidak di perbolehkan';
+        }
     }
 
     /**
@@ -177,8 +226,23 @@ class GiftStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        if($id != '')
+        {
+            DB::table('gift')->where('id', '=', $id)->delete();
+
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '69',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Gift Store ID '.$id
+            ]);
+
+            return redirect()->route('GiftStore-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('GiftStore-view')->with('success','Something wrong');   
     }
 }

@@ -6,6 +6,7 @@
 
 
 @section('content')
+<link rel="stylesheet" href="/css/admin.css">
     <div class="search bg-blue-dark">
         <div class="table-header w-100 h-100">
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
@@ -17,7 +18,7 @@
                         <select name="inputGame">
                             <option value="">Choose Game</option>
                             @foreach ($game as $gm)
-                            <option value="{{ $gm->id }}">{{ $gm->name }}</option>
+                            <option value="{{ $gm->desc }}">{{ $gm->desc }}</option>
                             @endforeach
                         </select>
                     </div>
