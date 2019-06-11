@@ -73,6 +73,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Report-Player'], function() {
             Route::middleware('page_denied:Report Player')->group(function(){
                 Route::get('ReportPlayer-view', 'ReportPlayerController@index')->name('ReportPlayer-view');
+                Route::get('ReportPlayer-search', 'ReportPlayerController@search')->name('ReportPlayer-search');
             });
         });
         Route::group(['prefix'  =>  'High-Roller'], function() {
