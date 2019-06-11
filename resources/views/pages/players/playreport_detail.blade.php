@@ -6,6 +6,7 @@
 
 
 @section('content')
+<link rel="stylesheet" href="/css/admin.css">
 <div class="search bg-blue-dark" style="margin-bottom: 2%;">
         <div class="table-header w-100 h-100">
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
@@ -17,7 +18,7 @@
                         <select name="inputGame">
                             <option value="">Choose Game</option>
                             @foreach ($game as $gm)
-                            <option value="{{ $gm->id }}">{{ $gm->name }}</option>
+                            <option value="{{ $gm->name }}">{{ $gm->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -123,13 +124,13 @@
                         <th>Playing Game</th>
                         <th>Table</th>
                         <th>Seat</th>
-                        <th>Card</th>
-                        <th>Table Card</th>
+                        <th>Hand Card</th>
+                        <th>Table Name</th>
                         <th>Bet</th>
-                        <th>Win Amount</th>
+                        <th>Win Lose</th>
                         <th>Status</th>
                         <th>Time Stamp</th>
-                        <th>Country</th>
+                        {{-- <th>Country</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -138,14 +139,23 @@
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
                           <td>{{ $history->tablename }}</td>
-                          <td>{{ $history->seat }}</td>
-                          <td>{{ $history->cards }}</td>
-                          <td>{{ $history->tablecards }}</td>
+                          <td>{{ $history->seatid }}</td>
+                          <td>{{ $history->hand_card }}</td>
+                          <td>{{ $history->tablename }}</td>
                           <td>{{ $history->bet }}</td>
-                          <td>{{ $history->winAmount }}</td>
-                          <td>{{ $history->status }}</td>
-                          <td>{{ $history->ts }}</td>
-                          <td>{{ $history->countryname }}</td>
+                          <td>{{ $history->win_lose }}</td>
+                          @php
+                          if($history->status === 0) {
+                              $status = 'Lose';
+                          } else if($history->status === 1) {
+                              $status = 'Win';
+                          } else if($history->status === 2) {
+                              $status = 'Draw';
+                          }
+                          @endphp
+                          <td>{{ $status }}</td>
+                          <td>{{ $history->date }}</td>
+                          {{-- <td>{{ $history->countryname }}</td> --}}
                         </tr>
                         @endforeach
                 </tbody>
@@ -175,6 +185,7 @@
 			"oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
 		},
+        "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
 		},
