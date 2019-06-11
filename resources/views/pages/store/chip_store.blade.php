@@ -78,13 +78,21 @@
               @foreach($items as $itm)
                 @if($menu)
                   <tr>
-                    <td></td>
-                    <td>{{ $itm->name }}</td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->id }}"></td>
+                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
                     <td>{{ $itm->category }}</td>
-                    <td>{{ $itm->chipAwarded }}</td>
-                    <td>{{ $itm->goldCost }}</td>
-                    <td>{{ strEnabledDisabled($itm->active) }}</td>
-                    <td></td>
+                    <td><a href="#" class="usertext" data-name="chipAwarded" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->chipAwarded }}</a></td>
+                    <td><a href="#" class="usertext" data-name="goldCost" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->goldCost }}</a></td>
+                    <td><a href="#" class="stractive" data-name="active" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->active) }}</a></td>
+                    <td>
+                      <a href="#" style="color:red;" class="delete{{ $itm->id }}" 
+                        id="delete" 
+                        data-pk="{{ $itm->id }}" 
+                        data-toggle="modal" 
+                        data-target="#delete-modal">
+                          <i class="fa fa-times"></i>
+                      </a>
+                    </td>
                   </tr>
                 @else 
                   <tr>
@@ -92,7 +100,7 @@
                     <td>{{ $itm->category }}</td>
                     <td>{{ $itm->chipAwarded }}</td>
                     <td>{{ $itm->goldCost }}</td>
-                    <td>{{ strEnabledDisabled($itm->active) }}</td>\
+                    <td>{{ strEnabledDisabled($itm->active) }}</td>
                   </tr>
                 @endif
               @endforeach
@@ -107,35 +115,60 @@
 </div>
 <!-- end Table -->
 
+
+
+
+      <!-- Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              × 
+            </button>
+          </div>
+          <div class="modal-body">
+            Are You Sure Want To Delete It
+            <form action="{{ route('ChipStore-delete') }}" method="post">
+              {{ method_field('delete')}}
+              {{ csrf_field() }}
+              <input type="hidden" name="id" id="id" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="button_example-yes">Yes</button>
+            <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+          </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="createChipStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Create New Chip</h4>
+        <h4 class="modal-title" id="myModalLabel">Create New Chip Store</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
           ×
         </button>
       </div>
-      <form action="#" method="post">
+      <form action="{{ route('ChipStore-create') }}" method="post">
         @csrf
         <div class="modal-body">
           <div class="form-group">
-            <input type="text" class="form-control" id="basic-url" placeholder="title">
+            <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <select class="custom-select">
-              <option selected>Select Category</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
+            <input type="number" name="chipawarded" class="form-control" id="basic-url" placeholder="chip awarded">
           </div>
-          <div class="form-group">
-            <input type="number" class="form-control" id="basic-url" placeholder="chip awarded">
-          </div>
-          <div class="form-group">
-            <input type="number" class="form-control" id="basic-url" placeholder="gold cost">
+          <div class="form-grsoup">
+            <input type="number" name="goldcost" class="form-control" id="basic-url" placeholder="gold cost">
           </div>
         </div>
         <div class="modal-footer">
@@ -180,6 +213,42 @@
       $('.usertext').editable({
         mode :'inline'
       });
+
+      $('.stractive').editable({
+        value: '',
+        mode :'inline',
+				source: [
+                  {value: '', text: 'choose for activation'},
+				          {value: '1', text: 'Enabled'},
+					        {value: '0', text: 'Disabled'},
+        ]
+      });
+
+
+      @php
+          foreach($items as $itm) {
+              echo'$(".delete'.$itm->id.'").hide();';
+              echo'$(".deletepermission'.$itm->id.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$itm->id.':checked" ).length > 0)';
+                echo '{';
+                  echo '$(".delete'.$itm->id.'").show();';
+                echo'}';
+                echo'else';
+                echo'{';
+                  echo'$(".delete'.$itm->id.'").hide();';
+                echo'}';
+    
+              echo '});';
+            
+              echo'$(".delete'.$itm->id.'").click(function(e) {';
+                echo'e.preventDefault();';
+    
+                echo"var id = $(this).attr('data-pk');";
+                echo'var test = $("#id").val(id);';
+              echo'});';
+          }
+      @endphp
+
     },
     responsive: true
   });

@@ -25,7 +25,7 @@ class ReportPlayerController extends Controller
 
     public function search(Request $request)
     {
-        $player = $request->inputPlayer;
+        $player  = $request->inputPlayer;
         $minDate = $request->inputMinDate;
         $maxDate = $request->inputMaxDate;
         $logtype = $request->logType;

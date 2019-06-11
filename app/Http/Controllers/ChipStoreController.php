@@ -42,7 +42,23 @@ class ChipStoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $chip = ItemsGold::create([
+            'name'        => $request->title,
+            'category'    => 'Chip',
+            'goldCost'    => $request->goldcost,
+            'chipAwarded' => $request->chipawarded,
+            'image'       => 'Chips',
+            'active'      => 0
+          ]);
+  
+          Log::create([
+              'operator_id' => Session::get('userId'),
+              'menu_id'     => '66',
+              'action_id'   => '3',
+              'date'        => Carbon::now('GMT+7'),
+              'description' => 'Create new Chip Store with Title '. $chip->name
+          ]);
+          return redirect()->route('ChipStore-view')->with('success','Data Insert Successfull');
     }
 
     /**
@@ -74,9 +90,41 @@ class ChipStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk = $request->pk;
+        $name = $request->name;
+        $value = $request->value;
+
+        ItemsGold::where('id', '=', $pk)->update([
+            $name =>$value
+        ]);
+  
+        switch ($name) {
+          case "name":
+              $name = "Name Chip";
+              break;
+          case "chipAwarded":
+              $name = "Chip Awarded";
+              break;
+          case "goldCost":
+              $name = "Gold Cost";
+              break;
+          case "active":
+              $name = "active";
+              break;
+          default:
+            "";
+      }
+  
+  
+      Log::create([
+        'operator_id' => Session::get('userId'),
+        'menu_id'     => '66',
+        'action_id'   => '2',
+        'date'        => Carbon::now('GMT+7'),
+        'description' => 'Edit '.$name.' Chip Store Id '.$pk.' to '. $value
+      ]);
     }
 
     /**
@@ -85,8 +133,22 @@ class ChipStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        if($id != '')
+        {
+            DB::table('items_gold')->where('id', '=', $id)->delete();   
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '66',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Chip Store ID '.$id
+            ]);
+
+            return redirect()->route('ChipStore-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('ChipStore-view')->with('success','Something wrong');   
     }
 }

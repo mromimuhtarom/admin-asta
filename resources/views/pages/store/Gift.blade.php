@@ -350,7 +350,8 @@
                               <span class="media-overlay med-ovlay{{ $gf->id }}">
                                 <input type="hidden" name="pk" value="{{ $gf->id }}">
                                 <input type="file" name="file" id="media-input" class="upload{{ $gf->id }}" accept="image/*">
-                                <i class="fas fa-edit media-icon"></i>
+                                {{-- <i class="fas fa-edit media-icon"></i> --}}
+                                <i class="fa fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
                                 <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_url }}">
