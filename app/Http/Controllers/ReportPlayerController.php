@@ -28,14 +28,80 @@ class ReportPlayerController extends Controller
         $player = $request->inputPlayer;
         $minDate = $request->inputMinDate;
         $maxDate = $request->inputMaxDate;
+        $logtype = $request->logType;
 
-
-        if($player != NULL && $minDate != NULL && $maxDate != NULL)
+        if($player != NULL && $minDate != NULL && $maxDate != NULL && $logtype != NULL)
         {
             $log_login = DB::table('log_user_login')
                          ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
                          ->where('user.username', 'Like', '%'.$player.'%')
-                         ->whereBetween('log_user_login' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->where('log_user_login.log_type', '=', $logtype)
+                         ->whereBetween('log_user_login.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->get();
+
+            return view('pages.players.report_player_detail', compact('log_login'));
+        } else if($player != NULL && $minDate != NULL && $logtype != NULL )
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->where('user.username', 'Like', '%'.$player.'%')
+                         ->where('log_user_login.log_type', '=', $logtype)
+                         ->where('log_user_login.datetime', '>=', $minDate)
+                         ->get();
+
+            return view('pages.players.report_player_detail', compact('log_login'));
+        } else if($player != NULL && $maxDate != NULL && $logtype != NULL)
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->where('user.username', 'Like', '%'.$player.'%')
+                         ->where('log_user_login.log_type', '=', $logtype)
+                         ->where('log_user_login.datetime', '<=', $maxDate)
+                         ->get();
+
+            return view('pages.players.report_player_detail', compact('log_login'));
+        } else if($player != NULL && $logtype != NULL) 
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->where('user.username', 'Like', '%'.$player.'%')
+                         ->where('log_user_login.log_type', '=', $logtype)
+                         ->get();
+
+            return view('pages.players.report_player_detail', compact('log_login'));
+        } else if ($minDate != NULL && $logtype != NULL)
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->where('log_user_login.datetime', '>=', $minDate)
+                         ->where('log_user_login.log_type', '=', $logtype)
+                         ->get();
+
+            return view('pages.players.report_player_detail', compact('log_login'));
+        } else if($maxDate != NULL && $logtype != NULL)
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->where('log_user_login.datetime', '<=', $maxDate)
+                         ->where('log_user_login.log_type', '=', $logtype)
+                         ->get();
+
+            return view('pages.players.report_player_detail', compact('log_login'));
+        }
+        else if($player != NULL && $minDate != NULL && $maxDate != NULL)
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->where('user.username', 'Like', '%'.$player.'%')
+                         ->whereBetween('log_user_login.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->get();
+
+            return view('pages.players.report_player_detail', compact('log_login'));
+        } else if ($minDate != NULL && $maxDate != NULL)
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->whereBetween('log_user_login.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
                          ->get();
 
             return view('pages.players.report_player_detail', compact('log_login'));
@@ -44,7 +110,7 @@ class ReportPlayerController extends Controller
             $log_login = DB::table('log_user_login')
                          ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
                          ->where('user.username', 'Like', '%'.$player.'%')
-                         ->where('log_user_login.', '>=', $minDate)
+                         ->where('log_user_login.datetime', '>=', $minDate)
                          ->get();
 
             return view('pages.players.report_player_detail', compact('log_login'));
@@ -53,7 +119,7 @@ class ReportPlayerController extends Controller
             $log_login = DB::table('log_user_login')
                          ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
                          ->where('user.username', 'Like', '%'.$player.'%')
-                         ->where('log_user_login.', '<=', $maxDate)
+                         ->where('log_user_login.datetime', '<=', $maxDate)
                          ->get();
 
             return view('pages.players.report_player_detail', compact('log_login'));
@@ -61,7 +127,7 @@ class ReportPlayerController extends Controller
         {
             $log_login = DB::table('log_user_login')
                          ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
-                         ->where('log_user_login.', '>=', $minDate)
+                         ->where('log_user_login.datetime', '>=', $minDate)
                          ->get();
 
             return view('pages.players.report_player_detail', compact('log_login'));
@@ -69,9 +135,17 @@ class ReportPlayerController extends Controller
         {
             $log_login = DB::table('log_user_login')
                          ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
-                         ->where('log_user_login.', '<=', $maxDate)
+                         ->where('log_user_login.datetime', '<=', $maxDate)
                          ->get();
 
+            return view('pages.players.report_player_detail', compact('log_login'));
+        } else if ($logtype != NULL)
+        {
+            $log_login = DB::table('log_user_login')
+                         ->join('user', 'user.user_id', '=', 'log_user_login.user_id')
+                         ->where('log_user_login.log_type', '=', $logtype)
+                         ->get();
+            
             return view('pages.players.report_player_detail', compact('log_login'));
         } else if($player != NULL)
         {
@@ -82,7 +156,7 @@ class ReportPlayerController extends Controller
             
             return view('pages.players.report_player_detail', compact('log_login'));
         } else {
-            return redirect()->route('ReportPlayer-view')->with('alert','Data Not Found');   
+            return redirect()->route('ReportPlayer-view');
         }
     }
 
