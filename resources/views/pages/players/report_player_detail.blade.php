@@ -9,19 +9,18 @@
 <link rel="stylesheet" href="/css/admin.css">
 <div class="search bg-blue-dark" style="margin-bottom: 2%;">
         <div class="table-header w-100 h-100">
-            <form action="{{ route('PlayReport-search') }}" method="get" role="search">
+            <form action="{{ route('ReportPlayer-search') }}" method="get" role="search">
                 <div class="row h-100 w-100">
                     <div class="col">
                         <input type="text" name="inputPlayer" placeholder="username">
                     </div>
-                    {{-- <div class="col">
-                        <select name="inputGame">
-                            <option value="">Choose Game</option>
-                            @foreach ($game as $gm)
-                            <option value="{{ $gm->name }}">{{ $gm->name }}</option>
-                            @endforeach
+                    <div class="col">
+                        <select name="logType">
+                            <option value="">Choose Log Type</option>
+                            <option value="1">Login</option>
+                            <option value="2">Log Out</option>
                         </select>
-                    </div> --}}
+                    </div>
                     <div class="col">
                         <input type="date" name="inputMinDate">
                     </div>

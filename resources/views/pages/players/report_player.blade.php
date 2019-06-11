@@ -14,14 +14,13 @@
                     <div class="col">
                         <input type="text" name="inputPlayer" placeholder="username">
                     </div>
-                    {{-- <div class="col">
-                        <select name="inputGame">
-                            <option value="">Choose Game</option>
-                            @foreach ($game as $gm)
-                            <option value="{{ $gm->desc }}">{{ $gm->desc }}</option>
-                            @endforeach
+                    <div class="col">
+                        <select name="logType">
+                            <option value="">Choose Log Type</option>
+                            <option value="1">Login</option>
+                            <option value="2">Log Out</option>
                         </select>
-                    </div> --}}
+                    </div>
                     <div class="col">
                         <input type="date" name="inputMinDate">
                     </div>
