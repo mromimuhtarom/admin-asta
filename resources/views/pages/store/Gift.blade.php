@@ -277,14 +277,13 @@
 
 
 
-@if (count($errors) > 0)
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all as $error)
-          <li>{{$error}}</li>  
-          @endforeach
-      </ul>
-  </div>  
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+    {{-- <div class="alert alert-danger"> --}}
+        <div>{{Session::get('alert')}}</div>
+    {{-- </div> --}}
+</div>
+    
 @endif
   
 @if (\Session::has('success'))
@@ -292,7 +291,6 @@
     <p>{{\Session::get('success')}}</p>
   </div>
 @endif
-
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">	
@@ -329,14 +327,14 @@
             <thead>
               <tr>
                 @if($menu)
-                <th class="th-sm"></th>
+                <th style="width:10px;"></th>
                 @endif
-                <th class="th-sm">Image</th>
+                <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Price</th>
                 <th class="th-sm">Rank</th>
                 @if($menu)
-                <th></th>
+                <th style="width:10px;"></th>
                 @endif
               </tr>
             </thead>
@@ -358,7 +356,7 @@
                                 <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_url }}">
                               </figure>
                             </div>
-                            <div class="media-control">
+                            <div class="media-control" align="center" style="margin-top:-1%">
                               <button class="save-profile{{ $gf->id }}">Save Gift</button>
                             </form>
                               <button class="edit-profile{{ $gf->id }}">Edit Gift</button>
@@ -421,8 +419,8 @@
               <div class="form-group" align="center">
                   <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" class="rounded-circle" /><br><br>
                   <input type='file' name="file" onchange="readURL(this);"/><br><br>
-                  <input type="text" class="form-control" name="title" placeholder="Name" required><br>
-                  <input type="number" class="form-control" name="price" placeholder="Price" required><br>
+                  <input type="text" class="form-control" name="title" placeholder="Name"><br>
+                  <input type="number" class="form-control" name="price" placeholder="Price"><br>
                   <select name="category" class="form-control">
                     <option>Category</option>
                     <option value="1">Makanan</option>

@@ -8,6 +8,7 @@ use App\Log;
 use Session;
 use Carbon\Carbon;
 use DB;
+use File;
 use App\Classes\MenuClass;
 
 class GiftStoreController extends Controller
@@ -21,7 +22,7 @@ class GiftStoreController extends Controller
     {
         $gifts = Gift::all();
         $menu  = MenuClass::menuName('Gift');
-        return view('pages.store.Gift', compact('gifts', 'menu'));
+        return view('pages.store.Gift', compact('gifts', 'menu', 'dbgift'));
     }
 
     /**
@@ -42,6 +43,9 @@ class GiftStoreController extends Controller
      */
     public function store(Request $request)
     {
+        $id                     = DB::table('gift')->orderBy('id', 'desc')->first();
+        $id_last                = $id->id;
+        $id_new                 = $id_last + 1;
         $file                   = $request->file('file');
         $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
@@ -50,7 +54,7 @@ class GiftStoreController extends Controller
         $ekstensi               = strtolower(end($x));
         $ukuran                 = $_FILES['file']['size'];
         $acak                   = rand(1,99);
-        $nama_file_unik         = 'notification'.$acak.'.'.$ekstensi;
+        $nama_file_unik         = $id_new.'.'.$ekstensi;
         list($width, $height)   = getimagesize($file);
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
@@ -59,38 +63,49 @@ class GiftStoreController extends Controller
             {           
                 if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
                 {
-                    $gift = Gift::create([
-                        'name'        => $request->title,
-                        'price'       => $request->price,
-                        'category_id' => $request->category,
-                        'width'       => $width,
-                        'height'      => $height,
-                        'image_url'   => $nama_file_unik
-                    ]);
+                    if($request->title == NULL){
+                        return redirect()->route('GiftStore-view')->with('alert','Name can\'t be NULL ');
+                    } else if($request->price == NULL) {
+                        return redirect()->route('GiftStore-view')->with('alert','Price can\'t be NULL ');
+                    } else if($request->category == NULL) {
+                        return redirect()->route('GiftStore-view')->with('alert','Category can\'t be NULL ');
+                    } else {
+                        $gift = Gift::create([
+                            'id'          => $id_new,
+                            'name'        => $request->title,
+                            'price'       => $request->price,
+                            'category_id' => $request->category,
+                            'width'       => $width,
+                            'height'      => $height,
+                            'image_url'   => $nama_file_unik
+                        ]);
             
-                    Log::create([
-                      'operator_id' => Session::get('userId'),
-                      'menu_id'     => '69',
-                      'action_id'   => '3',
-                      'date'        => Carbon::now('GMT+7'),
-                      'description' => 'Create new Gift Store with title '. $gift->subject
-                    ]);
-                    return redirect()->route('GiftStore-view')->with('success','Insert Data successfull');
-            
+                        Log::create([
+                            'operator_id' => Session::get('userId'),
+                            'menu_id'     => '69',
+                            'action_id'   => '3',
+                            'date'        => Carbon::now('GMT+7'),
+                            'description' => 'Create new Gift Store with title '. $gift->subject
+                        ]);
+                        return redirect()->route('GiftStore-view')->with('success','Insert Data successfull');
+                    }
                 }
                 else
                 {
-                    echo "Gagal Upload File";
+                    return redirect()->route('GiftStore-view')->with('alert','Gagal Upload File');
+                    // echo "Gagal Upload File";
                 }
             }
             else
             {       
-                echo 'Ukuran file terlalu besar';
+                return redirect()->route('GiftStore-view')->with('alert','Ukuran file terlalu besar');
+                // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {       
-            echo 'Ekstensi file tidak di perbolehkan';
+            return redirect()->route('GiftStore-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
 
@@ -146,7 +161,7 @@ class GiftStoreController extends Controller
                 if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
                 {
                     Gift::where('id', '=', $pk)->update([
-                        'imageUrl' => $nama_file_unik
+                        'image_url' => $nama_file_unik
                     ]);
 
                     Log::create([
@@ -161,17 +176,20 @@ class GiftStoreController extends Controller
                 }
                 else
                 {
-                    echo "Gagal Upload File";
+                    return redirect()->route('GiftStore-view')->with('alert','Gagal Upload File');
+                    // echo "Gagal Upload File";
                 }
             }
             else
-            {       
-                echo 'Ukuran file terlalu besar';
+            {   
+                return redirect()->route('GiftStore-view')->with('alert','Ukuran file terlalu besar');
+                // echo 'Ukuran file terlalu besar';
             }
         }
         else
-        {       
-            echo 'Ekstensi file tidak di perbolehkan';
+        {   
+            return redirect()->route('GiftStore-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
 
@@ -229,10 +247,12 @@ class GiftStoreController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
+        $gifts = Gift::where('id', '=', $id)->first();
         if($id != '')
         {
             DB::table('gift')->where('id', '=', $id)->delete();
-
+            $path = '../public/images/gifts/'.$gifts->image_url;
+            File::delete($path);            
             Log::create([
                 'operator_id' => Session::get('userId'),
                 'menu_id'     => '69',
