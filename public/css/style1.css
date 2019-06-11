@@ -22,7 +22,6 @@
 .form  {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
 }
 
 .form div:not(:last-child) {
