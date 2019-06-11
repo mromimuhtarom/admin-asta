@@ -332,6 +332,9 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Chip-Store'], function() {
             Route::middleware('page_denied:Chip Store')->group(function(){
                 Route::get('ChipStore-view', 'ChipStoreController@index')->name('ChipStore-view');
+                Route::post('ChipStore-update', 'ChipStoreController@update')->name('ChipStore-update');
+                Route::post('ChipStore-create', 'ChipStoreController@store')->name('ChipStore-create');
+                Route::delete('ChipStore-delete', 'ChipStoreController@destroy')->name('ChipStore-delete');
             });
         });
         Route::group(['prefix'  =>  'Gold-Store'], function() {

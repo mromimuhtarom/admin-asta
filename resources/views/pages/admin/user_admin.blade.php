@@ -148,6 +148,7 @@
                         data-toggle="modal" 
                         data-target="#delete-modal">
                           <i class="fa fa-times"></i>
+                      </a>
                         </td>
                 </tr>
                 @else 
