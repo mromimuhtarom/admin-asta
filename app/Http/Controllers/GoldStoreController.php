@@ -10,7 +10,6 @@ use App\Log;
 use Carbon\Carbon;
 use Session;
 
-
 class GoldStoreController extends Controller
 {
     /**
@@ -21,8 +20,9 @@ class GoldStoreController extends Controller
     public function index()
     {
         $menu  = MenuClass::menuName('Gold Store');        
-        // $items = ItemsGold::where('category', '=', 'Chip')->get();
-        return view('pages.store.gold_store', compact('menu'));
+        $getGolds = DB::table('items_cash')->orderBy('id', 'desc')->get();
+
+        return view('pages.store.gold_store', compact('menu', 'getGolds'));
     }
 
     /**
@@ -43,7 +43,19 @@ class GoldStoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $title          = $request->title;
+        $goldAwarded    = $request->goldAwarded;
+        $priceCash      = $request->priceCash;
+        $googleKey      = $request->googleKey;
+
+        DB::table('items_cash')->insert([
+            'name'          => $title,
+            'goldAwarded'   => $goldAwarded,
+            'price'         => $priceCash,
+            'google_key'    => $googleKey,
+        ]);
+
+        return redirect()->route('GoldStore-view')->with('success','Data Added');
     }
 
     /**
@@ -75,9 +87,46 @@ class GoldStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+
+        DB::table('items_cash')->where('id', '=', $pk)->update([
+            $name => $value
+        ]);
+
+        switch ($name) {
+            case "name":
+                $name = "Name";
+                break;
+            case "goldAwarded":
+                $name = "Gold Awarded";
+                break;
+            case "price":
+                $name = "Price";
+                break;
+            case "shop_type":
+                $name = "Shop Type";
+                break;
+            case "google_key":
+                $name = "Google Key";
+                break;
+            case "active":
+                $name = "Active";
+                break;
+            default:
+            "";
+        }
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '57',
+            'action_id'   => '2',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Edit '.$name.' gameID '.$pk.' to '. $value
+        ]);
     }
 
     /**
@@ -86,8 +135,14 @@ class GoldStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $getGoldId = $request->userid;
+        if($getGoldId != '')
+        {
+            DB::table('items_cash')->where('id', '=', $getGoldId)->delete();
+            return redirect()->route('GoldStore-view')->with('success','Data Deleted');
+        }
+        return redirect()->route('GoldStore-view')->with('success','Something wrong');  
     }
 }

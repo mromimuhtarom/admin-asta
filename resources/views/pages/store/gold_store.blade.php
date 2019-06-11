@@ -66,27 +66,39 @@
                   <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Title</th>
-                <th class="th-sm">Category</th>
-                <th class="th-sm">Chip Awarded</th>
-                <th class="th-sm">Gold Cost</th>
+                <th class="th-sm">Gold Awarded</th>
+                <th class="th-sm">Price Cash</th>
+                <th class="th-sm">Pay Transaction</th>
+                <th class="th-sm">Shop Type</th>
+                <th class="th-sm">Google Key</th>
                 <th class="th-sm">Active</th>
                 @if($menu)
-                  <th></th>
+                  <th>Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
-              {{-- @foreach($items as $itm) --}}
+              @foreach($getGolds as $gold)
               <tr>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->id }}"></td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</td>
+                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="goldAwarded" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->goldAwarded }}</td>
+                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><a href="#" class="usertext" data-title="Shop Type" data-name="shop_type" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->shop_type }}</td>
+                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</td>
+                <td><a href="#" class="usertext" data-title="Active" data-name="active" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->active }}</td>
+                <td style="text-align:center;">
+                  <a href="#" style="color:red;" class="delete{{ $gold->id }}" 
+                    id="delete" 
+                    data-pk="{{ $gold->id }}" 
+                    data-toggle="modal" 
+                    data-target="#delete-modal">
+                    <i class="fa fa-times"></i>
+                  </a>
+                </td>
               </tr>
-              {{-- @endforeach --}}
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -108,34 +120,29 @@
           ×
         </button>
       </div>
-      <form action="#" method="post">
+      <form action="{{ route('GoldStore-create') }}" method="post">
         @csrf
         <div class="modal-body">
           <div class="form-group">
-            <input type="text" class="form-control" id="basic-url" placeholder="title">
+            <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <select class="custom-select">
-              <option selected>Select Category</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
+            <input type="number" name="goldAwarded" class="form-control" id="basic-url" placeholder="gold awarded">
           </div>
           <div class="form-group">
-            <input type="number" class="form-control" id="basic-url" placeholder="gold awarded">
+            <input type="number" name="priceCash" class="form-control" id="basic-url" placeholder="price cash">
           </div>
           <div class="form-group">
-            <input type="number" class="form-control" id="basic-url" placeholder="price cash">
+            <input type="text" name="googleKey" class="form-control" id="basic-url" placeholder="google key">
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <select class="custom-select">
               <option selected>Payment method</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
             </select>
-          </div>
+          </div> --}}
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal">
@@ -150,6 +157,33 @@
   </div>
 </div>
 <!-- end Modal -->
+
+<!-- delete Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="margin-top:5%;">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          × 
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete It
+        <form action="{{ route('GoldStore-delete') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userid" id="userid" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes">Yes</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+<!-- End delete Modal -->
 
 <!-- script -->
 <script>
@@ -179,6 +213,31 @@
       $('.usertext').editable({
         mode :'inline'
       });
+
+      // delete gold store
+      @php
+        foreach($getGolds as $gold) {
+          echo'$(".delete'.$gold->id.'").hide();';
+          echo'$(".deletepermission'.$gold->id.'").on("click", function() {';
+            echo 'if($( ".deletepermission'.$gold->id.':checked" ).length > 0)';
+            echo '{';
+              echo '$(".delete'.$gold->id.'").show();';
+            echo'}';
+            echo'else';
+            echo'{';
+              echo'$(".delete'.$gold->id.'").hide();';
+            echo'}';
+
+          echo '});';
+        
+          echo'$(".delete'.$gold->id.'").click(function(e) {';
+            echo'e.preventDefault();';
+
+            echo"var id = $(this).attr('data-pk');";
+            echo'var test = $("#userid").val(id);';
+          echo'});';
+        }
+      @endphp
     },
     responsive: true
   });

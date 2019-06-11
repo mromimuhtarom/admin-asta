@@ -337,6 +337,9 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Gold-Store'], function() {
             Route::middleware('page_denied:Gold Store')->group(function(){
                 Route::get('GoldStore-view', 'GoldStoreController@index')->name('GoldStore-view');
+                Route::post('GoldStore-create', 'GoldStoreController@store')->name('GoldStore-create');
+                Route::post('GoldStore-update', 'GoldStoreController@update')->name('GoldStore-update');
+                Route::delete('GoldStore-delete', 'GoldStoreController@destroy')->name('GoldStore-delete');
             });
         });
         Route::group(['prefix'  =>  'Goods-Store'], function() {
