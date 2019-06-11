@@ -72,10 +72,19 @@
                 <tbody>
                         @foreach ($log_login as $login)
                         <tr>
-                          <td>{{ $history->username }}</td>
-                          <td>{{ $history->gamename }}</td>
-                          <td>{{ $history->tablename }}</td>
-                          <td>{{ $history->seatid }}</td>
+                          <td>{{ $login->username }}</td>
+                          @php
+                          if($login->log_type === 1)
+                          {
+                              $status = "Login";
+                          } else if($login->log_type === 2)
+                          {
+                              $status = "Log Out";
+                          }
+                          @endphp
+                          <td>{{ $status }}</td>
+                          <td>{{ $login->datetime }}</td>
+                          <td>{{ $login->user_ip }}</td>
                         </tr>
                         @endforeach
                 </tbody>
