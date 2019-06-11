@@ -159,7 +159,7 @@
 															<input type="button" value="View Detail" class="btn btn-xs btn-info" data-toggle="modal" data-target="#view-detail-approved{{ $reward->id }}">
 														</div>
 														<div>
-															<input type="button" value="Completed" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $reward->id }}">
+															<input type="button" value="Completed" class="btn btn-xs btn-success" data-toggle="modal" data-target="#completed{{ $reward->id }}">
 														</div>
 													</div>
 													<div>
@@ -264,6 +264,55 @@
 @endforeach
 <!-- End Modal before approved -->
 
+<!-- Modal decline -->
+@foreach ($rewardRequest as $reward)
+<div class="modal fade" id="decline{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="margin-top:5%;">
+				<h5 class="modal-title" id="exampleModalLabel">Decline Transaction</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					× 
+				</button>
+			</div>
+			<div class="modal-body">
+				Are you sure want to Decline this Transaction ?
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Yes</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+<!-- End Modal decline -->
+
+<!-- Modal approve transaction -->
+@foreach ($rewardRequest as $reward)
+<div class="modal fade" id="approve{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="margin-top:5%;">
+				<h5 class="modal-title" id="exampleModalLabel">Decline Transaction</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					× 
+				</button>
+			</div>
+			<div class="modal-body">
+				Are you sure want to Approve this Transaction ?
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Yes</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+<!-- End Modal approve transaction -->
+
+
 <!-- Modal approved -->
 @foreach ($rewardRequest as $reward)
 <div class="modal fade" id="view-detail-approved{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -367,6 +416,30 @@
 </div>
 @endforeach
 <!-- End Modal approved -->
+
+<!-- Modal approve transaction -->
+@foreach ($rewardRequest as $reward)
+<div class="modal fade" id="completed{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="margin-top:5%;">
+				<h5 class="modal-title" id="exampleModalLabel">Completed Transaction</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					× 
+				</button>
+			</div>
+			<div class="modal-body">
+				Is this Transaction is Completed?
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Yes</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+<!-- End Modal approve transaction -->
 
 <!-- Modal -->
 {{-- <div class="modal fade" id="view-decline" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -584,7 +657,7 @@
 </div> --}}
 
 <!-- Modal -->
-<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="margin-top:5%;">
@@ -607,7 +680,7 @@
 				</form>
 		</div>
 	</div>
-</div>
+</div> --}}
 
 
 <script>

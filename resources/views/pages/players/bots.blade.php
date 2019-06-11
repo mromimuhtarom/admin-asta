@@ -180,6 +180,8 @@
     </div>
   </div>
 </div>
+<!-- End Modal -->
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
