@@ -8,73 +8,61 @@
 
 @section('content')
 
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header" style="margin-top:5%;">
-          <h5 class="modal-title" id="exampleModalLabel">Create Chip Store</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="" method="POST">
-          {{  csrf_field() }}
-        <div class="modal-body">
-          <input type="text" name="title" placeholder="title" required><br>
-          <select name="category">
-            <option>Select Category</option>
-            <option value=""></option>
-          </select><br>
-          <input type="number" name="chipawarded" placeholder="Chip Awarded"><br>
-          <input type="number" name="goldcost" placeholder="Gold Cost">
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
- 
-  @if (count($errors) > 0)
+@if (count($errors) > 0)
   <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all as $error)
-          <li>{{$error}}</li>  
-          @endforeach
-      </ul>
+    <ul>
+      @foreach ($errors->all as $error)
+        <li>{{$error}}</li>  
+      @endforeach
+    </ul>
   </div>
-      
-  @endif
+@endif
   
-  @if (\Session::has('success'))
-      <div class="alert alert-success">
-          <p>{{\Session::get('success')}}</p>
+@if (\Session::has('success'))
+  <div class="alert alert-success">
+    <p>{{\Session::get('success')}}</p>
+  </div>
+@endif
+
+<!-- Table -->
+<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+
+  <header>
+    <div class="widget-header">	
+      <h2><strong>Chip Store</strong></h2>				
+    </div>
+  </header>
+
+  <div>
+    <div class="widget-body">
+      <div class="widget-body-toolbar">
+        
+        <div class="row">
+          
+          <!-- Button tambah chip store baru -->
+          <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+            <div class="input-group">
+              @if($menu)
+              <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createChipStore">
+                <i class="fa fa-plus"></i>
+              </button>
+              @endif
+            </div>
+          </div>
+          <!-- End Button tambah chip store baru -->
+
+        </div>
+
       </div>
       
-  @endif
-
-
-
-    <div class="table-aii">
-        <div class="footer-table">
-                @if($menu)
-                           <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
-                              <i class="fas fa-plus-circle"></i>Create Chip Store
-                            </button>
-                @endif
-        </div>
-          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
-            <thead class="th-table">
+      <div class="custom-scroll table-responsive" style="max-height:600px;">
+        
+        <div class="table-outer">
+          <table class="table table-bordered">
+            <thead>
               <tr>
                 @if($menu)
-                <th class="th-sm"></th>
+                  <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Category</th>
@@ -82,14 +70,14 @@
                 <th class="th-sm">Gold Cost</th>
                 <th class="th-sm">Active</th>
                 @if($menu)
-                <th></th>
+                  <th></th>
                 @endif
               </tr>
             </thead>
             <tbody>
-                @foreach($items as $itm)
+              @foreach($items as $itm)
                 @if($menu)
-                <tr>
+                  <tr>
                     <td></td>
                     <td>{{ $itm->name }}</td>
                     <td>{{ $itm->category }}</td>
@@ -97,47 +85,104 @@
                     <td>{{ $itm->goldCost }}</td>
                     <td>{{ strEnabledDisabled($itm->active) }}</td>
                     <td></td>
-                </tr>
+                  </tr>
                 @else 
-                <tr>
+                  <tr>
                     <td>{{ $itm->name }}</td>
                     <td>{{ $itm->category }}</td>
                     <td>{{ $itm->chipAwarded }}</td>
                     <td>{{ $itm->goldCost }}</td>
                     <td>{{ strEnabledDisabled($itm->active) }}</td>\
-                </tr>
+                  </tr>
                 @endif
-                @endforeach
+              @endforeach
             </tbody>
           </table>
-         
-    </div>
-<script>
-      table = $('#dt-material-checkbox').dataTable({
-          columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-          }],
-          "pagingType": "full_numbers",
-          "bInfo" : false,
-          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-          select: {
-          style: 'os',
-          selector: 'td:first-child'
-          },
-          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-              $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
-
-              $('.usertext').editable({
-                mode :'popup'
-              });
+        </div>
+      
+      </div>
     
-          }
+    </div>
+  </div>
+</div>
+<!-- end Table -->
+
+<!-- Modal -->
+<div class="modal fade" id="createChipStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Create New Chip</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          ×
+        </button>
+      </div>
+      <form action="#" method="post">
+        @csrf
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="form-control" id="basic-url" placeholder="title">
+          </div>
+          <div class="form-group">
+            <select class="custom-select">
+              <option selected>Select Category</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" id="basic-url" placeholder="chip awarded">
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" id="basic-url" placeholder="gold cost">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn sa-btn-primary">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end Modal -->
+
+<!-- Script -->
+<script>
+  $(document).ready(function() {
+    $('table.table').dataTable( {
+      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+    });
+  });
+
+  table = $('table.table').dataTable({
+    "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
+    "autoWidth" : true,
+    "paging": false,
+    "classes": {
+      "sWrapper": "dataTables_wrapper dt-bootstrap4"
+    },
+    "oLanguage": {
+      "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+    },
+    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+      $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
+
+      $('.usertext').editable({
+        mode :'inline'
+      });
+    },
+    responsive: true
+  });
 </script>
+<!-- end Script -->
 @endsection
