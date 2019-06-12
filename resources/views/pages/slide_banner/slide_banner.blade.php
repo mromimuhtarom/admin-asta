@@ -117,6 +117,64 @@
 </script> --}}
 
 
+<style>
+  .media-container {
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid black;
+    overflow: hidden;
+    width: 200px;
+    height: 100px;
+    /* vertical-align: middle */
+  }
+    .media-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(180, 180, 180, 0.6);
+    }
+      #media-input {
+        display: block;
+        width: 100%;
+        height: 100%;
+        line-height: 100%;
+        opacity: 0;
+        position: relative;
+        z-index: 9;
+      }
+      .media-icon {
+        /* display: sticky; */
+        transform: translate(-1%,-90%);
+        color: #ffffff;
+        font-size: 2em;
+        height: 100%;
+        line-height: 100px;
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        text-align: center;
+      }
+    .media-object {}
+      .img-object {
+        border: 1px solid black;
+        border-radius: 10px;
+        width: 200px;
+        height: 100px;
+        display: block;
+      }
+  
+  .media-control {
+    margin-top: 30px;
+  }
+    .edit-profile {}
+    .save-profile {}
+  
+  </style>
+
 
 @if (count($errors) > 0)
   <div class="alert alert-danger">
@@ -174,7 +232,7 @@
                 @if($menu)
                   <th class="th-sm"></th>
                 @endif
-                <th class="th-sm">Image</th>
+                <th style="width:10px;">Image</th>
                 <th class="th-sm">Caption</th>
                 <th class="th-sm">Action</th>
                 <th class="th-sm">Active</th>
@@ -184,18 +242,37 @@
               </tr>
             </thead>
             <tbody>
-              {{-- @foreach($items as $itm) --}}
+              @foreach($slide_banner as $banner)
                 @if($menu)
                   <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission nanti"></td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url=""></a></td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url=""></a></td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url=""></a></td>
-                    <td><a href="#" class="stractive" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url=""></a></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $banner->id }}"></td>
                     <td>
-                      <a href="#" style="color:red;" class="delete nanti" 
+                      <div class="media-container">
+                        <form method="POST" action="" enctype="multipart/form-data">
+                          {{  csrf_field() }}
+                          <span class="media-overlay med-ovlay{{ $banner->id }}">
+                            <input type="hidden" name="pk" value="{{ $banner->id }}">
+                            <input type="file" name="file" id="media-input" class="upload{{ $banner->id }}" accept="image/*">
+                            {{-- <i class="fas fa-edit media-icon"></i> --}}
+                            <i class="fa fa-edit media-icon"></i>
+                          </span>
+                          <figure class="media-object">
+                            <img class="img-object imgupload{{ $banner->id }}" src="/images/gifts/{{ $banner->image }}">
+                          </figure>
+                        </div>
+                        <div class="media-control" align="center" style="margin-top:-1%">
+                          <button class="save-profile{{ $banner->id }}">Save Gift</button>
+                        </form>
+                          <button class="edit-profile{{ $banner->id }}">Edit Gift</button>
+                        </div>
+                    </td>
+                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ $banner->caption }}</a></td>
+                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ $banner->url }}</a></td>
+                    <td><a href="#" class="stractive" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ strEnabledDisabled($banner->active) }}</a></td>
+                    <td>
+                    <a href="#" style="color:red;" class="delete{{ $banner->id }}" 
                         id="delete" 
-                        data-pk="nanti" 
+                        data-pk="{{ $banner->id }}" 
                         data-toggle="modal" 
                         data-target="#delete-modal">
                           <i class="fa fa-times"></i>
@@ -204,13 +281,13 @@
                   </tr>
                 @else 
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $banner->image }}</td>
+                    <td>{{ $banner->caption }}</td>
+                    <td>{{ $banner->url }}</td>
+                    <td>{{ strEnabledDisabled($banner->active) }}</td>
                   </tr>
                 @endif
-              {{-- @endforeach --}}
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -332,29 +409,58 @@
       });
 
 
-      // @php
-      //     foreach($items as $itm) {
-      //         echo'$(".delete'.$itm->id.'").hide();';
-      //         echo'$(".deletepermission'.$itm->id.'").on("click", function() {';
-      //           echo 'if($( ".deletepermission'.$itm->id.':checked" ).length > 0)';
-      //           echo '{';
-      //             echo '$(".delete'.$itm->id.'").show();';
-      //           echo'}';
-      //           echo'else';
-      //           echo'{';
-      //             echo'$(".delete'.$itm->id.'").hide();';
-      //           echo'}';
+      @php
+          foreach($slide_banner as $banner) {
+              echo'$(".delete'.$banner->id.'").hide();';
+              echo'$(".deletepermission'.$banner->id.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$banner->id.':checked" ).length > 0)';
+                echo '{';
+                  echo '$(".delete'.$banner->id.'").show();';
+                echo'}';
+                echo'else';
+                echo'{';
+                  echo'$(".delete'.$banner->id.'").hide();';
+                echo'}';
     
-      //         echo '});';
+              echo '});';
             
-      //         echo'$(".delete'.$itm->id.'").click(function(e) {';
-      //           echo'e.preventDefault();';
+              echo'$(".delete'.$banner->id.'").click(function(e) {';
+                echo'e.preventDefault();';
     
-      //           echo"var id = $(this).attr('data-pk');";
-      //           echo'var test = $("#id").val(id);';
-      //         echo'});';
-      //     }
-      // @endphp
+                echo"var id = $(this).attr('data-pk');";
+                echo'var test = $("#id").val(id);';
+              echo'});';
+          }
+      @endphp
+      @php
+              foreach($slide_banner as $banner) {
+                echo'$(".save-profile'.$banner->id.'").hide(0);';
+                  echo'$(".med-ovlay'.$banner->id.'").hide(0);';
+
+                  echo'$(".edit-profile'.$banner->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$banner->id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$banner->id.'").fadeIn(300);';
+                  echo'});';
+                  echo'$(".save-profile'.$banner->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$banner->id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$banner->id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".upload'.$banner->id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+		
+                      echo'reader.onload = function(e) {';
+                        echo'$(".imgupload'.$banner->id.'").attr("src", e.target.result);';
+                      echo'};';
+		
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+              }
+            @endphp
 
     },
     responsive: true

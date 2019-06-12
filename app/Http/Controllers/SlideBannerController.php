@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\SlideBanner;
 use App\Classes\MenuClass;
 
 class SlideBannerController extends Controller
@@ -15,7 +17,8 @@ class SlideBannerController extends Controller
     public function index()
     {
          $menu  = MenuClass::menuName('Slide Banner');
-        return view('pages.slide_banner.slide_banner', compact('menu'));
+         $slide_banner = SlideBanner::all();
+        return view('pages.slide_banner.slide_banner', compact('menu', 'slide_banner'));
     }
 
     /**
@@ -68,9 +71,16 @@ class SlideBannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pk = $request->pk;
+        $name = $request->name;
+        $value = $request->value;
+
+        SlideBanner::where('id', '=', $pk)->update([
+            $name => $value
+        ]);
+
     }
 
     /**

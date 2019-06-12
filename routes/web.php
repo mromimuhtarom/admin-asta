@@ -123,6 +123,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  => 'SlideBanner'], function() {
             Route::middleware('page_denied:Slide Banner')->group(function(){
                 Route::get('SlideBanner-view', 'SlideBannerController@index')->name('SlideBanner-view');
+                Route::get('SlideBanner-update', 'SlideBannerController@update')->name('SlideBanner-update');
             });
         });
     });
