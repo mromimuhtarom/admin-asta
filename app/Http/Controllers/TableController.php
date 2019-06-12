@@ -8,6 +8,7 @@ use Session;
 use DB;
 use Carbon\Carbon;
 use App\Classes\MenuClass;
+use Validator;
 
 // asta poker model
 use App\Table;
@@ -122,9 +123,21 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'tableName'     => 'required',
+            'category'      => 'required',
+            
+        ], [
+            'category.integer'  => 'category is required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
         Table::create([
-            'name' => $request->tableName,
-            'roomid'    => $request->category,
+            'name'          => $request->tableName,
+            'roomid'        => $request->category,
             'max_player'    =>  '0',
             'small_blind'   =>  '0',
             'big_blind'     =>  '0',
@@ -151,21 +164,33 @@ class TableController extends Controller
      */
      public function BigTwostore(Request $request)
      {
-         BigTwoTable::create([
-             'name'         => $request->tableName,
-             'roomid'       => $request->category,
-             'max_player'   =>  '0',
-             'turn'         =>  '0',
-             'total_bet'    =>  '0',
-         ]);
- 
-           Log::create([
-             'operator_id' => Session::get('userId'),
-             'menu_id'     => '58',
-             'action_id'   => '3',
-             'date'        => Carbon::now('GMT+7'),
-             'description' => 'Create new Big Two Table with name '.$request->tableName
-           ]);
+        $validator = Validator::make($request->all(),[
+            'tableName'     => 'required',
+            'category'      => 'required',
+            
+        ], [
+            'category.integer'  => 'category is required'
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        BigTwoTable::create([
+            'name'         => $request->tableName,
+            'roomid'       => $request->category,
+            'max_player'   =>  '0',
+            'turn'         =>  '0',
+            'total_bet'    =>  '0',
+        ]);
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '58',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Big Two Table with name '.$request->tableName
+        ]);
  
         return redirect()->route('BigTwoTable-view')->with('success','Data Added');
      }
@@ -179,6 +204,18 @@ class TableController extends Controller
      */
     public function DominoSusunstore(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'tableName'     => 'required',
+            'category'      => 'required|integer',
+            
+        ], [
+            'category.integer'  => 'category is required'
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
         DominoSusunTable::create([
             'name'                  => $request->tableName,
             'roomid'                => $request->category,
@@ -208,6 +245,18 @@ class TableController extends Controller
      */
     public function DominoQstore(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'tableName'     => 'required',
+            'category'      => 'required|integer',
+            
+        ], [
+            'category.integer'  => 'category is required'
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
         DominoQTable::create([
             'name'                  => $request->tableName,
             'roomid'                => $request->category,

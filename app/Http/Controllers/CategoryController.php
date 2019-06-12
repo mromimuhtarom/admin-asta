@@ -8,6 +8,7 @@ use App\Group;
 use App\Log;
 use Session;
 use Carbon\Carbon;
+use Validator;
 
 // asta poker model
 use App\Room;
@@ -92,6 +93,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'categoryName'  => 'required',
+            'minbuy'        => 'required|integer',
+            'maxbuy'        => 'required|integer',
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
 
         $categoryname   = $request->categoryName;
         $minbuy         = $request->minbuy;
@@ -126,6 +136,16 @@ class CategoryController extends Controller
      */
     public function BigTwostore(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'categoryName'  => 'required',
+            'minbuy'        => 'required|integer',
+            'maxbuy'        => 'required|integer',
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
         $categoryname   = $request->categoryName;
         $minbuy         = $request->minbuy;
         $maxbuy         = $request->maxbuy;
@@ -158,6 +178,15 @@ class CategoryController extends Controller
      */
     public function DominoSusunstore(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'categoryName'  => 'required',
+            'minbuy'        => 'required|integer',
+            'maxbuy'        => 'required|integer',
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
 
         $categoryname   = $request->categoryName;
         $minbuy         = $request->minbuy;
@@ -194,6 +223,15 @@ class CategoryController extends Controller
      */
     public function DominoQstore(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'categoryName'  => 'required',
+            'minbuy'        => 'required|integer',
+            'maxbuy'        => 'required|integer',
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
 
         $categoryname   = $request->categoryName;
         $minbuy         = $request->minbuy;

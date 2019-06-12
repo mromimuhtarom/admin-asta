@@ -131,6 +131,9 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  => 'Daily-Gift'], function() {
             Route::middleware('page_denied:Daily Gift')->group(function(){
                 Route::get('DailyGift-view', 'GiftController@index')->name('DailyGift-view');
+                Route::post('DailyGift-update', 'GiftController@update')->name('DailyGift-update');
+                Route::post('DailyGift-create', 'GiftController@store')->name('DailyGift-create');
+                Route::delete('DailyGift-delete', 'GiftController@destroy')->name('DailyGift-delete');
             });
         });
     });

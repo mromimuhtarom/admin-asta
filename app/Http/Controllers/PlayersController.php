@@ -10,6 +10,7 @@ use App\Stat;
 use Session;
 use Carbon\Carbon;
 use App\Player;
+use Validator;
 
 class PlayersController extends Controller
 {
@@ -125,6 +126,13 @@ class PlayersController extends Controller
         $securePassword = 'NOACCESSS887722030201';
         $avatar         = 'avatar'.rand(1,12).'.jpg';
         $time           = Carbon::now('GMT+7');
+
+        $validator = Validator::make($request->all(),[
+          'username'    => 'required',
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
 
 
         $createbot = Player::insert([

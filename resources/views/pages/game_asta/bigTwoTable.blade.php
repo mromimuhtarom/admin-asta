@@ -9,14 +9,15 @@
 
   <!-- Response Status -->
   @if (count($errors) > 0)
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all as $error)
-          <li>{{$error}}</li>  
+    <div class="error-val">
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>  
           @endforeach
-      </ul>
-  </div>
-      
+        </ul>
+      </div>
+    </div>
   @endif
 
   @if (\Session::has('success'))
@@ -120,18 +121,13 @@
                 <div class="form-group">
                   <input type="text" class="form-control" name="tableName" placeholder="Table Name" required="">
                 </div>
-
-                <div class="form-group row">
-                  <div class="col-md-10">
-                    <select class="form-control" name="category">
-                      <option>Select Category</option>
-                      @foreach ($category as $ct)
-                      <option value="{{ $ct->roomid }}">
-                        {{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}
-                      </option>
-                      @endforeach
-                    </select>
-                  </div>
+                <div class="form-group">
+                  <select class="custom-select" name="category">
+                    <option selected>Select Category</option>
+                    @foreach ($category as $ct)
+                      <option value="{{ $ct->roomid }}">{{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
             </div>
