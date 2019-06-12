@@ -173,17 +173,31 @@
     .edit-profile {}
     .save-profile {}
   
-  </style>
+</style>
+<script>
+  function readURL(input) {
+     if (input.files && input.files[0]) {
+         var reader = new FileReader();
+
+         reader.onload = function (e) {
+             $('#blah')
+                 .attr('src', e.target.result);
+         };
+
+         reader.readAsDataURL(input.files[0]);
+     }
+ }
+</script>
 
 
-@if (count($errors) > 0)
-  <div class="alert alert-danger">
-    <ul>
-      @foreach ($errors->all as $error)
-        <li>{{$error}}</li>  
-      @endforeach
-    </ul>
-  </div>
+
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+    {{-- <div class="alert alert-danger"> --}}
+        <div>{{Session::get('alert')}}</div>
+    {{-- </div> --}}
+</div>
+    
 @endif
   
 @if (\Session::has('success'))
@@ -248,7 +262,7 @@
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $banner->id }}"></td>
                     <td>
                       <div class="media-container">
-                        <form method="POST" action="" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('SlideBanner-updateimage') }}" enctype="multipart/form-data">
                           {{  csrf_field() }}
                           <span class="media-overlay med-ovlay{{ $banner->id }}">
                             <input type="hidden" name="pk" value="{{ $banner->id }}">
@@ -257,7 +271,7 @@
                             <i class="fa fa-edit media-icon"></i>
                           </span>
                           <figure class="media-object">
-                            <img class="img-object imgupload{{ $banner->id }}" src="/images/gifts/{{ $banner->image }}">
+                            <img class="img-object imgupload{{ $banner->id }}" src="/images/SlideBanner/{{ $banner->image }}">
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
@@ -266,9 +280,9 @@
                           <button class="edit-profile{{ $banner->id }}">Edit Gift</button>
                         </div>
                     </td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ $banner->caption }}</a></td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ $banner->url }}</a></td>
-                    <td><a href="#" class="stractive" data-name="name" data-title="Title Chip" data-pk="" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ strEnabledDisabled($banner->active) }}</a></td>
+                    <td><a href="#" class="usertext" data-name="caption" data-pk="{{ $banner->id }}" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ $banner->caption }}</a></td>
+                    <td><a href="#" class="usertext" data-name="url" data-pk="{{ $banner->id }}" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ $banner->url }}</a></td>
+                    <td><a href="#" class="stractive" data-name="active" data-pk="{{ $banner->id }}" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ strEnabledDisabled($banner->active) }}</a></td>
                     <td>
                     <a href="#" style="color:red;" class="delete{{ $banner->id }}" 
                         id="delete" 
@@ -314,7 +328,7 @@
           </div>
           <div class="modal-body">
             Are You Sure Want To Delete It
-            <form action="" method="post">
+            <form action="{{ route('SlideBanner-delete') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
               <input type="hidden" name="id" id="id" value="">
@@ -342,17 +356,18 @@
           ×
         </button>
       </div>
-      <form action="" method="post">
+      <form action="{{ route('SlideBanner-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
-          <div class="form-group">
-            <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
+          <div class="form-group" align="center">
+            <img id="blah" src="http://placehold.it/180" alt="your image" width="200" height="100" style="border-radius:10px;border:1px solid black;" /><br><br>
+            <input type='file' name="file" onchange="readURL(this);"/>
           </div>
           <div class="form-group">
-            <input type="number" name="chipawarded" class="form-control" id="basic-url" placeholder="chip awarded">
+            <textarea name="caption" id="" rows="10" class="form-control" placeholder="Caption"></textarea>
           </div>
           <div class="form-grsoup">
-            <input type="number" name="goldcost" class="form-control" id="basic-url" placeholder="gold cost">
+            <input type="text" name="url" class="form-control" id="basic-url" placeholder="Action">
           </div>
         </div>
         <div class="modal-footer">
