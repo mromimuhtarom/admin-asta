@@ -112,19 +112,19 @@
             <input type="text" class="form-control" id="basic-url" placeholder="username">
           </div>
           <div class="form-group">
-            <select class="custom-select">
-              <option selected>Select Category</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
+            <input type="text" class="form-control" id="basic-url" placeholder="payment type">
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option selected>Payment method</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <option selected>Transaction type</option>
+              <option value="{{$test}}">Bank Transfer</option>
+              <option value="2">Internet Banking</option>
+              <option value="3">Cash Digital</option>
+              <option value="4">Toko</option>
+              <option value="5">Akulaku</option>
+              <option value="6">Credit Card</option>
+              <option value="7">Manual Transfer</option>
+              <option value="8">Google Play</option>
             </select>
           </div>
         </div>

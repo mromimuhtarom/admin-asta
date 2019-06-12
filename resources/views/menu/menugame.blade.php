@@ -20,7 +20,7 @@ $menu = new RolesClass;
         </a>
         <ul aria-expanded="true" class="sa-sub-nav-second-level collapse">
             <li class="{{ Request::is('Game-Asta-Poker/Table/*') ? 'active' : null }}">
-                <a   href="{{ route('Table-view') }}" title="Table"><span class="fa fa-table"></span> Table </a>
+                <a   href="{{ route('Table-view') }}" title="Table"> Table </a>
             </li>
             @php
                 $category_asta_poker = 'Category Asta Poker';
@@ -29,7 +29,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access4 || $role_acces4)
             <li class="{{ Request::is('Game-Asta-Poker/Category/*') ? 'active' : null }}">
-                <a   href="{{ route('Category-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+                <a   href="{{ route('Category-view') }}" title="Category"> Category </a>
             </li>
             @endif
             {{-- @php
@@ -39,7 +39,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access5 || $role_acces5) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
-                <a   href="{{ route('Season-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
+                <a   href="{{ route('Season-view') }}" title="Season"> Season </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -49,7 +49,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access6 || $role_acces6) --}}
             <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
-                <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
+                <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"> Season Reward </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -59,7 +59,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access7 || $role_acces7) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Tournament/*') ? 'active' : null }}">
-                <a   href="{{ route('Tournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
+                <a   href="{{ route('Tournament-view') }}" title="Tournament"> Tournament </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -69,7 +69,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access8 || $role_acces8) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
-                <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
+                <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"> Jackpot Paytable </a>
             </li>
             {{-- @endif --}}
         </ul>
@@ -91,7 +91,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access9 || $role_acces9)
             <li class="{{ Request::is('Game-Asta-BigTwo/Table/*') ? 'active' : null }}">
-                <a   href="{{ route('BigTwoTable-view') }}" title="Table"><span class="fa fa-table"></span> Table </a>
+                <a   href="{{ route('BigTwoTable-view') }}" title="Table"> Table </a>
             </li>
             @endif
             @php
@@ -101,7 +101,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access10 || $role_acces10)
             <li class="{{ Request::is('Game-Asta-BigTwo/Category/*') ? 'active' : null }}">
-                <a   href="{{ route('BigTwoCategory-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+                <a   href="{{ route('BigTwoCategory-view') }}" title="Category"> Category </a>
             </li>
             @endif
             @php
@@ -111,7 +111,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access11 || $role_acces11)
             <li class="{{ Request::is('Game-Asta-BigTwo/Season/*') ? 'active' : null }}">
-                <a   href="{{ route('BigTwoSeason-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
+                <a   href="{{ route('BigTwoSeason-view') }}" title="Season"> Season </a>
             </li>
             @endif
             {{-- @php
@@ -121,7 +121,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access12 || $role_acces12) --}}
             <li class="{{ Request::is('Game-Asta-BigTwo/SeasonReward/*') ? 'active' : null }}">
-                <a   href="{{ route('BigTwoSeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
+                <a   href="{{ route('BigTwoSeasonReward-view') }}" title="Season Reward"> Season Reward </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -131,7 +131,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access13 || $role_acces13) --}}
             <li class="{{ Request::is('Game-Asta-BigTwo/Tournament/*') ? 'active' : null }}">
-                <a   href="{{ route('BigTwoTournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
+                <a   href="{{ route('BigTwoTournament-view') }}" title="Tournament"> Tournament </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -141,7 +141,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access14 || $role_acces14) --}}
             <li class="{{ Request::is('Game-Asta-BigTwo/Jackpot-Paytable/*') ? 'active' : null }}">
-                <a   href="{{ route('BigTwoJackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
+                <a   href="{{ route('BigTwoJackpotPaytable-view') }}" title="Jackpot Paytable"> Jackpot Paytable </a>
             </li>
             {{-- @endif --}}
         </ul>
@@ -163,7 +163,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access15 || $role_acces15)
             <li class="{{ Request::is('Game-Asta-DominoSusun/Table/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoSTable-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
+                <a   href="{{ route('DominoSTable-view') }}" title="Table"> Table </a>
             </li>
             @endif
             @php
@@ -173,7 +173,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access16 || $role_acces16)
             <li class="{{ Request::is('Game-Asta-DominoSusun/Category/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoSCategory-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+                <a   href="{{ route('DominoSCategory-view') }}" title="Category"> Category </a>
             </li>
             @endif
             {{-- @php
@@ -183,7 +183,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access17 || $role_acces17) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoSSeason-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
+                <a   href="{{ route('DominoSSeason-view') }}" title="Season"> Season </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -193,7 +193,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access18 || $role_acces18) --}}
             <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoSSeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
+                <a   href="{{ route('DominoSSeasonReward-view') }}" title="Season Reward"> Season Reward </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -203,7 +203,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access19 || $role_acces19) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Tournament/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoSTournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
+                <a   href="{{ route('DominoSTournament-view') }}" title="Tournament"> Tournament </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -213,7 +213,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access20 || $role_acces20) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoSJackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
+                <a   href="{{ route('DominoSJackpotPaytable-view') }}" title="Jackpot Paytable"> Jackpot Paytable </a>
             </li>
             {{-- @endif --}}
         </ul>
@@ -235,7 +235,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access21 || $role_acces21)
             <li class="{{ Request::is('Game-Asta-DominoQQ/Table/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoQTable-view') }}" title="Table"><span class="fa fa-gamepad"></span> Table </a>
+                <a   href="{{ route('DominoQTable-view') }}" title="Table"> Table </a>
             </li>
             @endif
             @php
@@ -245,7 +245,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access22 || $role_acces22)
             <li class="{{ Request::is('Game-Asta-DominoQQ/Category/*') ? 'active' : null }}">
-                <a   href="{{ route('DominoQCategory-view') }}" title="Category"><span class="fa fa-gamepad"></span> Category </a>
+                <a   href="{{ route('DominoQCategory-view') }}" title="Category"> Category </a>
             </li>
             @endif
             {{-- @php
@@ -255,7 +255,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access23 || $role_acces23) --}}
             <li class="{{ Request::is('Game-Asta-Poker/Season/*') ? 'active' : null }}">
-                <a   href="{{ route('Season-view') }}" title="Season"><span class="fa fa-gamepad"></span> Season </a>
+                <a   href="{{ route('Season-view') }}" title="Season"> Season </a>
             </li>
             {{-- @endif --}}
             {{-- @php
@@ -265,7 +265,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access24 || $role_acces24) --}}
             <li class="{{ Request::is('Game-Asta-Poker/SeasonReward/*') ? 'active' : null }}">
-                <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"><span class="fa fa-gamepad"></span> Season Reward </a>
+                <a   href="{{ route('SeasonReward-view') }}" title="Season Reward"> Season Reward </a>
             </li>
             {{-- @endif --}}
             @php
@@ -275,7 +275,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access25 || $role_acces25)
             <li class="{{ Request::is('Game-Asta-Poker/Tournament/*') ? 'active' : null }}">
-                <a   href="{{ route('Tournament-view') }}" title="Tournament"><span class="fa fa-gamepad"></span> Tournament </a>
+                <a   href="{{ route('Tournament-view') }}" title="Tournament"> Tournament </a>
             </li>
             @endif
             @php
@@ -285,7 +285,7 @@ $menu = new RolesClass;
             @endphp
             @if($role_access26 || $role_acces26)
             <li class="{{ Request::is('Game-Asta-Poker/Jackpot-Paytable/*') ? 'active' : null }}">
-                <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"><span class="fa fa-gamepad"></span> Jackpot Paytable </a>
+                <a   href="{{ route('JackpotPaytable-view') }}" title="Jackpot Paytable"> Jackpot Paytable </a>
             </li>
             @endif
         </ul>

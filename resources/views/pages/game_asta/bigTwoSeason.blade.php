@@ -26,10 +26,9 @@
   @endif
   <!-- End Response Status -->
 
-  <h1>{{ $season }}</h1>
 
   <!-- Form Season -->
-  {{-- <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
         <h2><strong>Asta Poker Season</strong></h2>				
@@ -75,7 +74,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($season as $sn)
+                {{-- @foreach($season as $sn)
                 @php
                     //  $dt = new DateTime('UTC');//asli
                     $dt = new DateTime($sn->timezone);
@@ -90,9 +89,9 @@
                     //  $dtf->setTimeZone(new DateTimeZone($season->timezone));//asli
                     $dtf->setTimeZone(new DateTimeZone($sn->timezone));
                     //  $dtf = new DateTime('UTC');//asli
-                @endphp
+                @endphp --}}
                 <tr>
-                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $sn->seasonId }}"></td>
+                    {{-- <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $sn->seasonId }}"></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $sn->seasonId }}" data-type="text" data-url="{{ route('Season-update')}}">{{ $sn->title }}</a></td>
                     <td>{{ $sn->timezone }}</td>
                     <td><a href="#" class="usertext" data-title="Entry Fee" data-name="entryfee" data-pk="{{ $sn->seasonId }}" data-type="number" data-url="{{ route('Season-update')}}">{{ $sn->entryFee }}</a></td>
@@ -107,9 +106,9 @@
                     <td>{{ $sn->handLose }}</td>
                     <td>{{ $sn->disconnectWin }}</td>
                     <td>{{ $sn->disconnectLose}}</td>
-                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $sn->seasonId }}" id="delete" data-pk="{{ $sn->seasonId }}" data-toggle="modal" data-target="#delete-season"><i class="fa fa-times"></i></a></td>
+                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $sn->seasonId }}" id="delete" data-pk="{{ $sn->seasonId }}" data-toggle="modal" data-target="#delete-season"><i class="fa fa-times"></i></a></td> --}}
                 </tr>
-                @endforeach
+                {{-- @endforeach --}}
               </tbody>
             </table>
           </div>
@@ -117,11 +116,11 @@
       
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Form Season -->
 
   <!-- Modal create data -->
-  {{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -130,7 +129,7 @@
             ×
           </button>
         </div>
-        <form action="{{ route('Season-create') }}" method="post">
+        {{-- <form action="{{ route('Season-create') }}" method="post">
           @csrf
           <div class="modal-body">
 
@@ -158,14 +157,14 @@
               Save
             </button>
           </div>
-        </form>
+        </form> --}}
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Modal -->
 
   <!-- Modal delete data -->
-  {{-- <div class="modal fade" id="delete-season" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="delete-season" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="margin-top:5%;">
@@ -176,7 +175,7 @@
         </div>
         <div class="modal-body">
           Are You Sure Want To Delete It
-          <form action="{{ route('Season-delete') }}" method="post">
+          {{-- <form action="{{ route('Season-delete') }}" method="post">
             {{ method_field('delete')}}
             @csrf
             <input type="hidden" name="seasonId" id="seasonId" value="">
@@ -185,14 +184,14 @@
           <button type="submit" class="button_example-yes">Yes</button>
           <button type="button" class="button_example-no" data-dismiss="modal">No</button>
         </div>
-          </form>
+          </form> --}}
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Modal delete data -->
 
   <!-- Script -->
-  {{-- <script>
+  <script>
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
@@ -216,29 +215,29 @@
           }
         });
 
-        @php
-          foreach($season as $sn) {
-            echo'$(".delete'.$sn->seasonId.'").hide();';
-            echo'$(".deletepermission'.$sn->seasonId.'").on("click", function() {';
-              echo 'if($( ".deletepermission'.$sn->seasonId.':checked" ).length > 0)';
-              echo '{';
-                echo '$(".delete'.$sn->seasonId.'").show();';
-              echo'}';
-              echo'else';
-              echo'{';
-                echo'$(".delete'.$sn->seasonId.'").hide();';
-              echo'}';
+        // @php
+        //   foreach($season as $sn) {
+        //     echo'$(".delete'.$sn->seasonId.'").hide();';
+        //     echo'$(".deletepermission'.$sn->seasonId.'").on("click", function() {';
+        //       echo 'if($( ".deletepermission'.$sn->seasonId.':checked" ).length > 0)';
+        //       echo '{';
+        //         echo '$(".delete'.$sn->seasonId.'").show();';
+        //       echo'}';
+        //       echo'else';
+        //       echo'{';
+        //         echo'$(".delete'.$sn->seasonId.'").hide();';
+        //       echo'}';
   
-            echo '});';
+        //     echo '});';
         
-            echo'$(".delete'.$sn->seasonId.'").click(function(e) {';
-              echo'e.preventDefault();';
+        //     echo'$(".delete'.$sn->seasonId.'").click(function(e) {';
+        //       echo'e.preventDefault();';
 
-              echo"var id = $(this).attr('data-pk');";
-              echo'var test = $("#seasonId").val(id);';
-            echo'});';
-          }
-        @endphp
+        //       echo"var id = $(this).attr('data-pk');";
+        //       echo'var test = $("#seasonId").val(id);';
+        //     echo'});';
+        //   }
+        // @endphp
 
         $('.usertext').editable({
           mode : 'inline'
@@ -246,6 +245,6 @@
       },
       responsive: true
     });
-  </script> --}}
+  </script>
   <!-- End Script -->
 @endsection

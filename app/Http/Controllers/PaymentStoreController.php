@@ -15,7 +15,9 @@ class PaymentStoreController extends Controller
     public function index()
     {
         $menu  = MenuClass::menuName('Payment Store');
-        return view('pages.store.payment_store', compact('menu'));
+
+        $test = 1;
+        return view('pages.store.payment_store', compact('menu', 'test'));
     }
 
     /**
