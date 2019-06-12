@@ -26,10 +26,10 @@
   @endif
   <!-- End Response Status -->
 
-  <h1>{{ $season }}</h1>
+  {{-- <h1>{{ $season }}</h1> --}}
 
   <!-- Form Tournament -->
-  {{-- <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
         <h2><strong>Asta Poker Tournament</strong></h2>				
@@ -75,7 +75,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($tournaments as $tournament)
+                {{-- @foreach($tournaments as $tournament)
                 <tr>
                     <td></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $tournament->tournamentId }}" data-type="text" data-url="{{ route('Tournament-update') }}">{{ $tournament->title }}</a></td>
@@ -94,7 +94,7 @@
                     <td>view detail</td>
                     <td></td>
                 </tr>
-                @endforeach
+                @endforeach --}}
               </tbody>
             </table>
           </div>
@@ -102,11 +102,11 @@
       
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Form Season -->
 
   <!-- Modal create data -->
-  {{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -115,7 +115,7 @@
             ×
           </button>
         </div>
-        <form action="{{ route('Tournament-create') }}" method="post">
+        {{-- <form action="{{ route('Tournament-create') }}" method="post">
           @csrf
           <div class="modal-body">
 
@@ -147,16 +147,16 @@
               Save
             </button>
           </div>
-        </form>
+        </form> --}}
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Modal -->
 
 
 
   <!-- Modal -->
-  {{-- <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -166,7 +166,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="" method="POST">
+        {{-- <form action="" method="POST">
           {{  csrf_field() }}
         <div class="modal-body">
           <input type="text" name="title" placeholder="Title Tournament" required><br>
@@ -180,12 +180,12 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
-        </form>
+        </form> --}}
       </div>
     </div>
-  </div> --}}
+  </div>
  
-  {{-- <script type="text/javascript">
+  <script type="text/javascript">
       $(document).ready(function() {
           $.ajaxSetup({
               headers: {
@@ -242,5 +242,5 @@
     
           }
       });
-  </script>    --}}
+  </script>   
 @endsection

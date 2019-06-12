@@ -25,10 +25,10 @@
   @endif
   <!-- End Response Status -->
 
-  <h1>{{ $season }}</h1>
+  {{-- <h1>{{ $season }}</h1> --}}
 
 <!-- Form Season -->
-{{-- <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
         <h2><strong>Asta Poker Season</strong></h2>				
@@ -43,7 +43,7 @@
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"><span> Create New Season</span></i>
+                <i class="fa fa-plus"><span> Create New Season Reward</span></i>
               </button>
             </div>
             <!-- End Button tambah data baru -->
@@ -64,7 +64,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($reward as $rd)
+                {{-- @foreach($reward as $rd)
                   <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $rd->id }}"></td>
                     <td>
@@ -76,7 +76,7 @@
                     <td><a href="#" class="usertext" data-name="pointReward" Data-title="Reward Point" data-pk="{{ $rd->id }}" data-type="number" data-url="{{ route('SeasonReward-update') }}">{{ $rd->pointReward }}</a></td>
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $rd->id }}" id="delete" data-pk="{{ $rd->id }}" data-toggle="modal" data-target="#delete-sReward"><i class="fa fa-times"></i></a></td>
                   </tr>
-                @endforeach
+                @endforeach --}}
               </tbody>
             </table>
           </div>
@@ -84,11 +84,11 @@
       
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Form Season -->
 
   <!-- Modal create data -->
-  {{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -97,7 +97,7 @@
             ×
           </button>
         </div>
-        <form action="{{ route('SeasonReward-create') }}" method="post">
+        {{-- <form action="{{ route('SeasonReward-create') }}" method="post">
           @csrf
           <div class="modal-body">
 
@@ -123,14 +123,14 @@
               Save
             </button>
           </div>
-        </form>
+        </form> --}}
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Modal -->
 
   <!-- Modal delete data -->
-  {{-- <div class="modal fade" id="delete-sReward" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="delete-sReward" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="margin-top:5%;">
@@ -141,7 +141,7 @@
         </div>
         <div class="modal-body">
           Are You Sure Want To Delete It
-          <form action="{{ route('SeasonReward-delete') }}" method="post">
+          {{-- <form action="{{ route('SeasonReward-delete') }}" method="post">
             {{ method_field('delete')}}
             @csrf
             <input type="hidden" name="sRewardId" id="sRewardId" value="">
@@ -150,14 +150,14 @@
           <button type="submit" class="button_example-yes">Yes</button>
           <button type="button" class="button_example-no" data-dismiss="modal">No</button>
         </div>
-          </form>
+          </form> --}}
       </div>
     </div>
-  </div> --}}
+  </div>
   <!-- End Modal delete data -->
 
   <!-- Script -->
-  {{-- <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
@@ -181,29 +181,29 @@
           }
         });
 
-        @php
-          foreach($reward as $rd) {
-            echo'$(".delete'.$rd->id.'").hide();';
-            echo'$(".deletepermission'.$rd->id.'").on("click", function() {';
-              echo 'if($( ".deletepermission'.$rd->id.':checked" ).length > 0)';
-              echo '{';
-                echo '$(".delete'.$rd->id.'").show();';
-              echo'}';
-              echo'else';
-              echo'{';
-                echo'$(".delete'.$rd->id.'").hide();';
-              echo'}';
+        // @php
+        //   foreach($reward as $rd) {
+        //     echo'$(".delete'.$rd->id.'").hide();';
+        //     echo'$(".deletepermission'.$rd->id.'").on("click", function() {';
+        //       echo 'if($( ".deletepermission'.$rd->id.':checked" ).length > 0)';
+        //       echo '{';
+        //         echo '$(".delete'.$rd->id.'").show();';
+        //       echo'}';
+        //       echo'else';
+        //       echo'{';
+        //         echo'$(".delete'.$rd->id.'").hide();';
+        //       echo'}';
   
-            echo '});';
+        //     echo '});';
         
-            echo'$(".delete'.$rd->id.'").click(function(e) {';
-              echo'e.preventDefault();';
+        //     echo'$(".delete'.$rd->id.'").click(function(e) {';
+        //       echo'e.preventDefault();';
 
-              echo"var id = $(this).attr('data-pk');";
-              echo'var test = $("#sRewardId").val(id);';
-            echo'});';
-          }
-        @endphp
+        //       echo"var id = $(this).attr('data-pk');";
+        //       echo'var test = $("#sRewardId").val(id);';
+        //     echo'});';
+        //   }
+        // @endphp
 
         $('.usertext').editable({
           mode : 'inline'
@@ -211,6 +211,6 @@
       },
       responsive: true
     });
-  </script>  --}}
+  </script> 
   <!-- End Script -->
 @endsection
