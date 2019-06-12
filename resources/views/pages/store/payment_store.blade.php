@@ -76,7 +76,7 @@
             <tbody>
               {{-- @foreach($items as $itm) --}}
               <tr>
-                <td></td>
+                <td>{{--<a href="" class="usertext" data-name="name"></a>--}}</td>
                 <td></td>
                 <td></td>
                 <td></td>

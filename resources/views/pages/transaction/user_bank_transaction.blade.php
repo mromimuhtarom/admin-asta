@@ -50,6 +50,7 @@
 								</thead>
 								<tbody>
 									@foreach ($rewardRequest as $reward)
+									
 									<tr>
 											<td>
 												<div class="user-transaction-dates">
@@ -189,7 +190,7 @@
 <div class="modal fade" id="view-detail{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header" style="margin-top:5%;">
+			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Detail Information</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					× 
@@ -318,7 +319,7 @@
 <div class="modal fade" id="view-detail-approved{{ $reward->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header" style="margin-top:5%;">
+			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Detail Information</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					× 

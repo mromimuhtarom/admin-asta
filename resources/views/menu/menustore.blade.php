@@ -60,7 +60,7 @@ $menu = new RolesClass;
     </li>
     @endif
     @php
-        $Transaction_Store = 'Transaction_Store';
+        $Transaction_Store = 'Transaction Store';
         $role_access46 = $menu->RoleType1($Transaction_Store);
         $role_acces46 = $menu->RoleType2($Transaction_Store);
     @endphp
@@ -76,7 +76,7 @@ $menu = new RolesClass;
     @endphp
     @if($role_access47 || $role_acces47)
     <li class="{{ Request::is('store/Payment-Store/*') ? 'active' : null }}">
-        <a   href="{{ route('PaymentStore-view') }}" title="Payment Store"> Payment Store </a>
+        <a href="{{ route('PaymentStore-view') }}" title="Payment Store"> Payment Store </a>
     </li>
     @endif
     @php

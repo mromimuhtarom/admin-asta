@@ -20,7 +20,7 @@ class GoldStoreController extends Controller
     public function index()
     {
         $menu  = MenuClass::menuName('Gold Store');        
-        $getGolds = DB::table('items_cash')->orderBy('id', 'desc')->get();
+        $getGolds = DB::table('items_cash')->where('shop_type', '=', 1)->orderBy('id', 'desc')->get();
 
         return view('pages.store.gold_store', compact('menu', 'getGolds'));
     }

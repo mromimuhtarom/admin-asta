@@ -69,7 +69,6 @@
                 <th class="th-sm">Gold Awarded</th>
                 <th class="th-sm">Price Cash</th>
                 <th class="th-sm">Pay Transaction</th>
-                <th class="th-sm">Shop Type</th>
                 <th class="th-sm">Google Key</th>
                 <th class="th-sm">Active</th>
                 @if($menu)
@@ -84,10 +83,9 @@
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</td>
                 <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="goldAwarded" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->goldAwarded }}</td>
                 <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</td>
-                <td></td>
-                <td><a href="#" class="usertext" data-title="Shop Type" data-name="shop_type" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->shop_type }}</td>
+                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->transaction_type) }}</a></td>
                 <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</td>
-                <td><a href="#" class="usertext" data-title="Active" data-name="active" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->active }}</td>
+                <td><a href="#" class="enable" data-title="Active" data-name="active" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->active) }}</td>
                 <td style="text-align:center;">
                   <a href="#" style="color:red;" class="delete{{ $gold->id }}" 
                     id="delete" 
