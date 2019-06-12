@@ -12,11 +12,10 @@
   <div class="alert alert-danger">
     <ul>
       @foreach ($errors->all as $error)
-      <li>{{$error}}</li>  
+        <li>{{$error}}</li>  
       @endforeach
     </ul>
   </div>
-      
 @endif
   
 @if (\Session::has('success'))
@@ -78,14 +77,15 @@
             </thead>
             <tbody>
               @foreach($getGolds as $gold)
+              @if($menu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->id }}"></td>
-                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</td>
-                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="goldAwarded" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->goldAwarded }}</td>
-                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</td>
-                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->transaction_type) }}</a></td>
-                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</td>
-                <td><a href="#" class="enable" data-title="Active" data-name="active" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->active) }}</td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
+                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="goldAwarded" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->goldAwarded }}</a></td>
+                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
+                <td><a href="#" class="transactionType" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->transaction_type) }}</a></td>
+                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</a></td>
+                <td><a href="#" class="strEnable" data-title="Active" data-name="active" data-pk="{{ $gold->id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->active) }}</a></td>
                 <td style="text-align:center;">
                   <a href="#" style="color:red;" class="delete{{ $gold->id }}" 
                     id="delete" 
@@ -96,6 +96,16 @@
                   </a>
                 </td>
               </tr>
+              @else 
+              <tr>
+                <td>{{ $gold->name }}</td>
+                <td>{{ $gold->goldAwarded }}</td>
+                <td>{{ $gold->price }}</td>
+                <td>{{ strTypeTransaction($gold->transaction_type) }}</td>
+                <td>{{ $gold->google_key }}</td>
+                <td>{{ strEnabledDisabled($gold->active) }}</td>
+              </tr>
+              @endif
               @endforeach
             </tbody>
           </table>
@@ -160,7 +170,7 @@
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header" style="margin-top:5%;">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           × 
@@ -211,6 +221,31 @@
       $('.usertext').editable({
         mode :'inline'
       });
+
+      $('.strEnable').editable({
+        mode: 'inline',
+        value: '',
+        source: [
+          {value: '', text: 'Choose For Activation'},
+          {value: 0, text: 'Disabled'},
+          {value: 1, text: 'Enabled'}
+        ]
+      });
+
+      $('.transactionType').editable({
+				value: '',
+        mode: 'inline',
+				source: [
+            {value: '', text: 'Choose For Transaction Type'},
+					  {value: 1, text: 'Bank Transfer'},
+					  {value: 2, text: 'Internet Banking'},
+					  {value: 3, text: 'Cash Digital'},
+					  {value: 4, text: 'Toko'},
+					  {value: 5, text: 'Akulaku'},
+					  {value: 6, text: 'Credit Card'},
+					  {value: 7, text: 'Google Play'}
+				   ]
+			});
 
       // delete gold store
       @php

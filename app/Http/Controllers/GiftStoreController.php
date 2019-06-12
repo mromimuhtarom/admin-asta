@@ -44,16 +44,21 @@ class GiftStoreController extends Controller
     public function store(Request $request)
     {
         $id                     = DB::table('gift')->orderBy('id', 'desc')->first();
-        $id_last                = $id->id;
+        // $id_last                = $id->id;
+        if($id === NULL )
+        {
+            $id_last = 0;
+        } else {
+            $id_last = $id->id;
+        }
         $id_new                 = $id_last + 1;
         $file                   = $request->file('file');
-        $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
         $ukuran                 = $_FILES['file']['size'];
-        $acak                   = rand(1,99);
+        // $acak                   = rand(1,99);
         $nama_file_unik         = $id_new.'.'.$ekstensi;
         list($width, $height)   = getimagesize($file);
 

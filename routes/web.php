@@ -123,6 +123,10 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  => 'SlideBanner'], function() {
             Route::middleware('page_denied:Slide Banner')->group(function(){
                 Route::get('SlideBanner-view', 'SlideBannerController@index')->name('SlideBanner-view');
+                Route::post('SlideBanner-update', 'SlideBannerController@update')->name('SlideBanner-update');
+                Route::post('SlideBanner-updateimage', 'SlideBannerController@updateimage')->name('SlideBanner-updateimage');
+                Route::delete('SlideBanner-delete', 'SlideBannerController@destroy')->name('SlideBanner-delete');
+                Route::post('SlideBanner-create', 'SlideBannerController@store')->name('SlideBanner-create');
             });
         });
     });

@@ -253,5 +253,4 @@
     responsive: true
   });
 </script>
-<!-- end Script -->
 @endsection
