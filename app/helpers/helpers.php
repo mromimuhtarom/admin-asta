@@ -94,6 +94,26 @@ function transactionStatus($val){
   }
 }
 
+function strTypeTransaction($val){
+  if($val == 1) {
+    return 'Bank Transfer';
+  } else if ($val == 2) {
+    return 'Internet Banking';
+  } else if ($val == 3) {
+    return 'Cash Digital';
+  } else if ($val == 4) {
+    return 'Toko';
+  } else if ($val == 5) {
+    return 'Akulaku';
+  } else if ($val == 6) {
+    return 'Credit Card';
+  } else if($val == 7) {
+    return 'Manual Transfer';
+  } else if($val == 8) {
+    return 'Google Play';
+  }
+}
+
 function bankTransactionStatus($val){
   if($val == 1){
     return "pending";
