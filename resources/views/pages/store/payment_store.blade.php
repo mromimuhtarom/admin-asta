@@ -9,12 +9,14 @@
 @section('content')
 
 @if (count($errors) > 0)
-  <div class="alert alert-danger">
-    <ul>
-      @foreach ($errors->all as $error)
-        <li>{{$error}}</li>  
-      @endforeach
-    </ul>
+  <div class="error-val">
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{$error}}</li>  
+        @endforeach
+      </ul>
+    </div>
   </div>
 @endif
   
@@ -64,26 +66,36 @@
                 @if($menu)
                   <th class="th-sm"></th>
                 @endif
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Type Payment</th>
-                <th class="th-sm">Type Transaction</th>
-                <th class="th-sm">Active</th>
+                <th class="th-sm">Name</th>
+                <th class="th-sm">Payment Type</th>
+                <th class="th-sm">Transaction Type</th>
+                <th class="th-sm">image</th>
+                <th class="th-sm">status</th>
                 @if($menu)
-                  <th></th>
+                  <th>Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
-              {{-- @foreach($items as $itm) --}}
+              @foreach($getPayments as $payment)
               <tr>
-                <td>{{--<a href="" class="usertext" data-name="name"></a>--}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $payment->id }}"></td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>
+                <td><a href="#" class="usertext" data-title="Payment Type" data-name="payment_type" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->payment_type }}</td>
+                <td><a href="#" class="usertext" data-title="Transaction Type" data-name="transaction_type" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->transaction_type }}</td>
+                <td><a href="#" class="usertext" data-title="Image" data-name="image" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->image }}</td>
+                <td><a href="#" class="usertext" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->status }}</td>
+                <td style="text-align:center;">
+                  <a href="#" style="color:red;" class="delete{{ $payment->id }}" 
+                    id="delete" 
+                    data-pk="{{ $payment->id }}" 
+                    data-toggle="modal" 
+                    data-target="#delete-modal">
+                    <i class="fa fa-times"></i>
+                  </a>
+                </td>
               </tr>
-              {{-- @endforeach --}}
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -105,19 +117,19 @@
           ×
         </button>
       </div>
-      <form action="#" method="post">
+      <form action="{{ route('PaymentStore-create') }}" method="post">
         @csrf
         <div class="modal-body">
           <div class="form-group">
-            <input type="text" class="form-control" id="basic-url" placeholder="username">
+            <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="basic-url" placeholder="payment type">
+            <input type="text" name="paymentType" class="form-control" id="basic-url" placeholder="payment type">
           </div>
           <div class="form-group">
-            <select class="custom-select">
+            <select class="custom-select" name="transactionType">
               <option selected>Transaction type</option>
-              <option value="{{$test}}">Bank Transfer</option>
+              <option value="1">Bank Transfer</option>
               <option value="2">Internet Banking</option>
               <option value="3">Cash Digital</option>
               <option value="4">Toko</option>
@@ -141,6 +153,33 @@
   </div>
 </div>
 <!-- end Modal -->
+
+<!-- delete Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="margin-top:5%;">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          × 
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete It
+        <form action="{{ route('PaymentStore-delete') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userid" id="userid" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes">Yes</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+<!-- End delete Modal -->
 
 <!-- script -->
 <script>
@@ -170,6 +209,31 @@
       $('.usertext').editable({
         mode :'inline'
       });
+
+      // delete Payment store
+      @php
+        foreach($getPayments as $payment) {
+          echo'$(".delete'.$payment->id.'").hide();';
+          echo'$(".deletepermission'.$payment->id.'").on("click", function() {';
+            echo 'if($( ".deletepermission'.$payment->id.':checked" ).length > 0)';
+            echo '{';
+              echo '$(".delete'.$payment->id.'").show();';
+            echo'}';
+            echo'else';
+            echo'{';
+              echo'$(".delete'.$payment->id.'").hide();';
+            echo'}';
+
+          echo '});';
+        
+          echo'$(".delete'.$payment->id.'").click(function(e) {';
+            echo'e.preventDefault();';
+
+            echo"var id = $(this).attr('data-pk');";
+            echo'var test = $("#userid").val(id);';
+          echo'});';
+        }
+      @endphp
     },
     responsive: true
   });

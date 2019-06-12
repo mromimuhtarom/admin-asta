@@ -367,6 +367,9 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Payment-Store'], function() {
             Route::middleware('page_denied:Payment Store')->group(function(){
                 Route::get('PaymentStore-view', 'PaymentStoreController@index')->name('PaymentStore-view');
+                Route::post('PaymentStore-update', 'PaymentStoreController@update')->name('PaymentStore-update');
+                Route::post('PaymentStore-create', 'PaymentStoreController@store')->name('PaymentStore-create');
+                Route::delete('PaymentStore-delete', 'PaymentStoreController@destroy')->name('PaymentStore-delete');
             });
         });
         Route::group(['prefix'  =>  'Report-Store'], function() {
