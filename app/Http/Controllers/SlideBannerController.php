@@ -14,8 +14,8 @@ class SlideBannerController extends Controller
      */
     public function index()
     {
-         // $menu  = MenuClass::menuName('Slide Banner');
-        return view('pages.slide_banner.slide_banner');
+         $menu  = MenuClass::menuName('Slide Banner');
+        return view('pages.slide_banner.slide_banner', compact('menu'));
     }
 
     /**
