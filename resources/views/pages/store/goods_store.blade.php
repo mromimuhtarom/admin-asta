@@ -151,6 +151,7 @@
             </thead>
             <tbody>
               @foreach($itemGood as $goods)
+              @if($menu)
               <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->id }}"></td>
                 <td>
@@ -175,9 +176,9 @@
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
                 <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
                 <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
-                <td><a href="#" class="usertext" data-name="transaction_type" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->transaction_type }}</a></td>
+                <td><a href="#" class="transactionType" data-name="transaction_type" data-pk="{{ $goods->id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->transaction_type) }}</a></td>
                 <td><a href="#" class="usertext" data-name="google_key" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->google_key }}</a></td>
-                <td><a href="#" class="usertext" data-name="active" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->active }}</a></td>
+                <td><a href="#" class="strEnable" data-name="active" data-pk="{{ $goods->id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->active) }}</a></td>
                 <td>
                   <a href="#" style="color:red;" class="delete{{ $goods->id }}" 
                     id="delete" 
@@ -188,6 +189,23 @@
                   </a>
                 </td>
               </tr>
+              @else 
+              <tr>
+                  <td>
+                      <div class="media-container">
+                        <figure class="media-object">
+                          <img class="img-object imgupload{{ $goods->id }}" src="/images/Goods/{{ $goods->image }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                        </figure>
+                      </div>
+                  </td>
+                  <td>{{ $goods->name }}</td>
+                  <td>{{ $goods->price }}</td>
+                  <td>{{ $goods->qty }}</td>
+                  <td>{{  strTypeTransaction($goods->transaction_type) }}</td>
+                  <td>{{ $goods->google_key }}</td>
+                  <td>{{ strEnabledDisabled($goods->active) }}</td>
+                </tr>
+              @endif
               @endforeach
             </tbody>
           </table>
@@ -328,6 +346,31 @@
       $('.usertext').editable({
         mode :'inline'
       });
+
+      $('.strEnable').editable({
+        mode: 'inline',
+        value: '',
+        source: [
+          {value: '', text: 'Choose For Activation'},
+          {value: 0, text: 'Disabled'},
+          {value: 1, text: 'Enabled'}
+        ]
+      });
+
+      $('.transactionType').editable({
+				value: '',
+        mode: 'inline',
+				source: [
+            {value: '', text: 'Choose For Transaction Type'},
+					  {value: 1, text: 'Bank Transfer'},
+					  {value: 2, text: 'Internet Banking'},
+					  {value: 3, text: 'Cash Digital'},
+					  {value: 4, text: 'Toko'},
+					  {value: 5, text: 'Akulaku'},
+					  {value: 6, text: 'Credit Card'},
+					  {value: 7, text: 'Google Play'}
+				   ]
+			});
 
 
       @php

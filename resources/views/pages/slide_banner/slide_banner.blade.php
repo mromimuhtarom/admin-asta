@@ -294,7 +294,13 @@
                   </tr>
                 @else 
                   <tr>
-                    <td>{{ $banner->image }}</td>
+                    <td>
+                        <div class="media-container">
+                              <figure class="media-object">
+                                <img class="img-object imgupload{{ $banner->id }}" src="/images/SlideBanner/{{ $banner->image }}" style="display: block;margin-left: auto;margin-right: auto;">
+                              </figure>
+                        </div>
+                    </td>
                     <td>{{ $banner->caption }}</td>
                     <td>{{ $banner->url }}</td>
                     <td>{{ strEnabledDisabled($banner->active) }}</td>
