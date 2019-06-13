@@ -160,9 +160,8 @@
       }
     .media-object {}
       .img-object {
-        border: 1px solid black;
         border-radius: 10px;
-        width: 200px;
+        width: auto;
         height: 100px;
         display: block;
       }
@@ -266,12 +265,12 @@
                           {{  csrf_field() }}
                           <span class="media-overlay med-ovlay{{ $banner->id }}">
                             <input type="hidden" name="pk" value="{{ $banner->id }}">
-                            <input type="file" name="file" id="media-input" class="upload{{ $banner->id }}" accept="image/*">
+                            <input type="file" name="file" id="media-input" class="upload{{ $banner->id }}" accept="image/*" >
                             {{-- <i class="fas fa-edit media-icon"></i> --}}
                             <i class="fa fa-edit media-icon"></i>
                           </span>
                           <figure class="media-object">
-                            <img class="img-object imgupload{{ $banner->id }}" src="/images/SlideBanner/{{ $banner->image }}">
+                            <img class="img-object imgupload{{ $banner->id }}" src="/images/SlideBanner/{{ $banner->image }}" style="display: block;margin-left: auto;margin-right: auto;">
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
@@ -360,7 +359,9 @@
         @csrf
         <div class="modal-body">
           <div class="form-group" align="center">
-            <img id="blah" src="http://placehold.it/180" alt="your image" width="200" height="100" style="border-radius:10px;border:1px solid black;" /><br><br>
+            <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+              <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" width="auto" height="98px" style="border-radius:10px;" />
+            </div><br><br>
             <input type='file' name="file" onchange="readURL(this);"/>
           </div>
           <div class="form-group">

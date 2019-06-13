@@ -8,70 +8,61 @@
 
 @section('content')
 <style>
-.dropzone {
-width: 100px;
-height: 50px;
-min-height: 0px !important;
-}   
-.text-center {
-  transform: translate(-2%,-100%);
-}
-.media-container {
-	position: relative;
-	display: inline-block;
-	margin: auto;
-  border-radius: 50%;
-  border: 1px solid black;
-	overflow: hidden;
-	width: 100px;
-	height: 100px;
-	/* vertical-align: middle */
-}
-	.media-overlay {
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(180, 180, 180, 0.6);
-  }
-		#media-input {
-			display: block;
-			width: 100%;
-			height: 100%;
-			line-height: 100%;
-			opacity: 0;
-			position: relative;
-			z-index: 9;
-		}
-		.media-icon {
-			/* display: sticky; */
-      transform: translate(-1%,-90%);
-			color: #ffffff;
-			font-size: 2em;
-			height: 100%;
-			line-height: 100px;
-      position: absolute;
-			z-index: 0;
-			width: 100%;
-			text-align: center;
-		}
-	.media-object {}
-		.img-object {
+    .media-container {
+      position: relative;
+      display: inline-block;
+      margin: auto;
+      border-radius: 10px;
       border: 1px solid black;
-			border-radius: 50%;
-			width: 100px;
-			height: 100px;
-			display: block;
-		}
-
-.media-control {
-	margin-top: 30px;
-}
-	.edit-profile {}
-	.save-profile {}
-
-</style>
+      overflow: hidden;
+      width: 200px;
+      height: 100px;
+      /* vertical-align: middle */
+    }
+      .media-overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(180, 180, 180, 0.6);
+      }
+        #media-input {
+          display: block;
+          width: 100%;
+          height: 100%;
+          line-height: 100%;
+          opacity: 0;
+          position: relative;
+          z-index: 9;
+        }
+        .media-icon {
+          /* display: sticky; */
+          transform: translate(-1%,-90%);
+          color: #ffffff;
+          font-size: 2em;
+          height: 100%;
+          line-height: 100px;
+          position: absolute;
+          z-index: 0;
+          width: 100%;
+          text-align: center;
+        }
+      .media-object {}
+        .img-object {
+          border-radius: 10px;
+          width: auto;
+          height: 100px;
+          display: block;
+        }
+    
+    .media-control {
+      margin-top: 30px;
+    }
+      .edit-profile {}
+      .save-profile {}
+    
+    </style>
 
 <script>
   function readURL(input) {
@@ -236,15 +227,14 @@ min-height: 0px !important;
                               {{  csrf_field() }}
                               <span class="media-overlay med-ovlay{{ $notification->id }}">
                                 <input type="hidden" name="pk" value="{{ $notification->id }}">
-                                <input type="file" name="file" id="media-input" class="upload{{ $notification->id }}" accept="image/*">
-                                {{-- <i class="glyphicon glyphicon-edit media-icon"></i> --}}
+                                <input type="file" name="file" id="media-input" class="upload{{ $notification->id }}" accept="image/*" style="  display: block;margin-left: auto;margin-right: auto;">
                                 <i class="fa fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
                                 <img class="img-object imgupload{{ $notification->id }}" src="/images/EmailNotification/{{ $notification->imageUrl }}">
                               </figure>
                             </div>
-                            <div class="media-control">
+                            <div class="media-control" align="center" style="margin-top:-1%">
                               <button class="save-profile{{ $notification->id }}">Save Gift</button>
                             </form>
                               <button class="edit-profile{{ $notification->id }}">Edit Gift</button>

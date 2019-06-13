@@ -13,10 +13,10 @@
 	position: relative;
 	display: inline-block;
 	margin: auto;
-  border-radius: 50%;
+  border-radius: 10px;
   border: 1px solid black;
 	overflow: hidden;
-	width: 100px;
+	width: 200px;
 	height: 100px;
 	/* vertical-align: middle */
 }
@@ -51,9 +51,8 @@
 		}
 	.media-object {}
 		.img-object {
-      border: 1px solid black;
-			border-radius: 50%;
-			width: 100px;
+			border-radius: 10px;
+			width: auto;
 			height: 100px;
 			display: block;
 		}
@@ -158,7 +157,7 @@
                                 <i class="fa fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_url }}">
+                                <img class="img-object imgupload{{ $gf->id }}" src="/images/gifts/{{ $gf->image_url }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
@@ -222,7 +221,9 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group" align="center">
-                  <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" class="rounded-circle" /><br><br>
+                <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+                  <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                </div><br>
                   <input type='file' name="file" onchange="readURL(this);"/><br><br>
                   <input type="text" class="form-control" name="title" placeholder="Name"><br>
                   <input type="number" class="form-control" name="price" placeholder="Price"><br>
