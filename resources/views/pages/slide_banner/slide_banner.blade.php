@@ -246,9 +246,9 @@
                   <th class="th-sm"></th>
                 @endif
                 <th style="width:10px;">Image</th>
-                <th class="th-sm">Caption</th>
-                <th class="th-sm">Action</th>
-                <th class="th-sm">Active</th>
+                <th>Caption</th>
+                <th>Action</th>
+                <th>Active</th>
                 @if($menu)
                   <th></th>
                 @endif

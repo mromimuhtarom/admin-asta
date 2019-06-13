@@ -92,8 +92,10 @@
         </div>
       <form action="{{ route('EmailNotification-create') }}" method="POST" enctype="multipart/form-data">
             {{  csrf_field() }}
-          <div class="modal-body">
-            <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" class="rounded-circle" /><br><br>
+          <div class="modal-body" align="center">
+            <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+              <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" width="auto" height="98px" style="display: block;border-radius:10px;"/>
+            </div><br>
             <input type='file' name="file" onchange="readURL(this);" /><br><br>
             <input type="text" name="subject" class="form-control" placeholder="Subject" required><br>
             <textarea name="message" cols="30" class="form-control" rows="5" placeholder="Please Enter The Message" required></textarea><br>
@@ -231,7 +233,7 @@
                                 <i class="fa fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $notification->id }}" src="/images/EmailNotification/{{ $notification->imageUrl }}">
+                                <img class="img-object imgupload{{ $notification->id }}" src="/images/EmailNotification/{{ $notification->imageUrl }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
