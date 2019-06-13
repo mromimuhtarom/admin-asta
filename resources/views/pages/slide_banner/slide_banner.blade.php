@@ -388,7 +388,7 @@
 <script>
   $(document).ready(function() {
     $('table.table').dataTable( {
-      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+      "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
     });
   });
 

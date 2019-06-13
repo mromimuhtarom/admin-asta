@@ -150,7 +150,6 @@ class GiftStoreController extends Controller
         $pk                     = $request->pk;
         $id                     = DB::table('gifts')->where('id', '=', $pk)->first();
         $file                   = $request->file('file');
-        $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);

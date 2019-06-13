@@ -50,42 +50,19 @@ class PaymentStoreController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        DB::table('payments')->insert([
+        $payment = DB::table('payments')->insert([
             'name'              => $title,
             'payment_type'      => $pType,
             'transaction_type'  => $tType,
         ]);
 
-        // switch ($name) {
-        //     case "name":
-        //         $name = "Name";
-        //         break;
-        //     case "goldAwarded":
-        //         $name = "Gold Awarded";
-        //         break;
-        //     case "price":
-        //         $name = "Price";
-        //         break;
-        //     case "shop_type":
-        //         $name = "Shop Type";
-        //         break;
-        //     case "google_key":
-        //         $name = "Google Key";
-        //         break;
-        //     case "active":
-        //         $name = "Active";
-        //         break;
-        //     default:
-        //     "";
-        // }
-
-        // Log::create([
-        //     'operator_id' => Session::get('userId'),
-        //     'menu_id'     => '57',
-        //     'action_id'   => '2',
-        //     'date'        => Carbon::now('GMT+7'),
-        //     'description' => 'Edit '.$name.' gameID '.$pk.' to '. $value
-        // ]);
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '71',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Payment Store with Name '. $payment->name
+        ]);
 
         return redirect()->route('PaymentStore-view')->with('success','Data Added');
     }
@@ -128,6 +105,34 @@ class PaymentStoreController extends Controller
         DB::table('payments')->where('id', '=', $pk)->update([
             $name => $value
         ]);
+
+        switch ($name) {
+            case "name":
+                $name = "Name";
+                break;
+            case "payment_type":
+                $name = "Payment Type";
+                break;
+            case "transaction_type":
+                $name = "Transaction Type";
+                break;
+            case "image":
+                $name = "Image";
+                break;
+            case "status":
+                $name = "Status";
+                break;
+            default:
+            "";
+        }
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '71',
+            'action_id'   => '2',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Edit '.$name.' Payment Store ID '.$pk.' to '. $value
+        ]);
     }
 
     /**
@@ -142,6 +147,13 @@ class PaymentStoreController extends Controller
         if($getPaymentId != '')
         {
             DB::table('payments')->where('id', '=', $getPaymentId)->delete();
+            Log::create([
+                'operator_id' => Session::get('userId'),
+                'menu_id'     => '71',
+                'action_id'   => '4',
+                'date'        => Carbon::now('GMT+7'),
+                'description' => 'Delete Payment Store ID '.$getPaymentId
+            ]);
             return redirect()->route('PaymentStore-view')->with('success','Data Deleted');
         }
         return redirect()->route('PaymentStore-view')->with('success','Something wrong');  

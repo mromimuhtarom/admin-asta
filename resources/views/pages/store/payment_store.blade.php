@@ -78,13 +78,14 @@
             </thead>
             <tbody>
               @foreach($getPayments as $payment)
+              @if($menu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $payment->id }}"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>
                 <td><a href="#" class="usertext" data-title="Payment Type" data-name="payment_type" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->payment_type }}</td>
-                <td><a href="#" class="usertext" data-title="Transaction Type" data-name="transaction_type" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->transaction_type }}</td>
+                <td><a href="#" class="usertext" data-title="Transaction Type" data-name="transaction_type" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->transaction_type) }}</td>
                 <td><a href="#" class="usertext" data-title="Image" data-name="image" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->image }}</td>
-                <td><a href="#" class="usertext" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->status }}</td>
+                <td><a href="#" class="stractive" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td>
                 <td style="text-align:center;">
                   <a href="#" style="color:red;" class="delete{{ $payment->id }}" 
                     id="delete" 
@@ -95,6 +96,15 @@
                   </a>
                 </td>
               </tr>
+              @else 
+              <tr>
+                <td>{{ $payment->name }}</td>
+                <td>{{ $payment->payment_type }}</td>
+                <td>{{ strTypeTransaction($payment->transaction_type) }}</td>
+                <td>{{ $payment->image }}</td>
+                <td>{{ strEnabledDisabled($payment->status) }}</td>
+              </tr>
+              @endif
               @endforeach
             </tbody>
           </table>
@@ -208,6 +218,16 @@
 
       $('.usertext').editable({
         mode :'inline'
+      });
+
+      $('.stractive').editable({
+        value: '',
+        mode :'inline',
+				source: [
+                  {value: '', text: 'choose for activation'},
+				          {value: '1', text: 'Enabled'},
+					        {value: '0', text: 'Disabled'},
+        ]
       });
 
       // delete Payment store

@@ -76,11 +76,11 @@ class SlideBannerController extends Controller
                         return redirect()->route('SlideBanner-view')->with('alert','Url can\'t be NULL ');
                     } else {
                         $slide_banner = SlideBanner::create([
-                            'id'          => $id_new,
-                            'caption'        => $request->caption,
-                            'url'       => $request->url,
-                            'active' => '1',
-                            'image'       => $nama_file_unik
+                            'id'      => $id_new,
+                            'caption' => $request->caption,
+                            'url'     => $request->url,
+                            'active'  => '1',
+                            'image'   => $nama_file_unik
                         ]);
             
                         Log::create([

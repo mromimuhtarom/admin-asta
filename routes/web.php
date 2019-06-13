@@ -355,6 +355,10 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Goods-Store'], function() {
             Route::middleware('page_denied:Goods Store')->group(function(){
                 Route::get('GoodsStore-view', 'GoodsStoreController@index')->name('GoodsStore-view');
+                Route::post('GoodsStore-update', 'GoodsStoreController@update')->name('GoodsStore-update');
+                Route::post('GoodsStore-updateimage', 'GoodsStoreController@updateimage')->name('GoodsStore-updateimage');
+                Route::delete('GoodsStore-delete', 'GoodsStoreController@destroy')->name('GoodsStore-delete');
+                Route::post('GoodsStore-create', 'GoodsStoreController@store')->name('GoodsStore-create');
             });
         });
         Route::group(['prefix'  =>  'Gift-Store'], function() {

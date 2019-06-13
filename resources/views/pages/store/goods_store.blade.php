@@ -8,6 +8,79 @@
 
 @section('content')
 
+<style>
+  .media-container {
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid black;
+    overflow: hidden;
+    width: 200px;
+    height: 100px;
+    /* vertical-align: middle */
+  }
+    .media-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(180, 180, 180, 0.6);
+    }
+      #media-input {
+        display: block;
+        width: 100%;
+        height: 100%;
+        line-height: 100%;
+        opacity: 0;
+        position: relative;
+        z-index: 9;
+      }
+      .media-icon {
+        /* display: sticky; */
+        transform: translate(-1%,-90%);
+        color: #ffffff;
+        font-size: 2em;
+        height: 100%;
+        line-height: 100px;
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        text-align: center;
+      }
+    .media-object {}
+      .img-object {
+        border-radius: 10px;
+        width: auto;
+        height: 100px;
+        display: block;
+      }
+  
+  .media-control {
+    margin-top: 30px;
+  }
+    .edit-profile {}
+    .save-profile {}
+  
+</style>
+<script>
+  function readURL(input) {
+     if (input.files && input.files[0]) {
+         var reader = new FileReader();
+
+         reader.onload = function (e) {
+             $('#blah')
+                 .attr('src', e.target.result);
+         };
+
+         reader.readAsDataURL(input.files[0]);
+     }
+ }
+</script>
+
+
+
 @if (count($errors) > 0)
 <div class="alert alert-danger">
   <ul>
@@ -64,28 +137,58 @@
                 @if ($menu)
                   <th class="th-sm"></th>
                 @endif
-                <th class="th-sm">Image</th>
+                <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Price Cash</th>
                 <th class="th-sm">Quantity</th>
                 <th class="th-sm">Pay Transaction</th>
+                <th class="th-sm">Google Key</th>
+                <th class="th-sm">Active</th>
                 @if ($menu)
                   <th class="th-sm">Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
-              {{-- @foreach($items as $itm) --}}
+              @foreach($itemGood as $goods)
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->id }}"></td>
+                <td>
+                  <div class="media-container">
+                    <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
+                      {{  csrf_field() }}
+                      <span class="media-overlay med-ovlay{{ $goods->id }}">
+                        <input type="hidden" name="pk" value="{{ $goods->id }}">
+                        <input type="file" name="file" id="media-input" class="upload{{ $goods->id }}" accept="image/*">
+                        <i class="fa fa-edit media-icon"></i>
+                      </span>
+                      <figure class="media-object">
+                        <img class="img-object imgupload{{ $goods->id }}" src="/images/Goods/{{ $goods->image }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                      </figure>
+                    </div>
+                    <div class="media-control" align="center" style="margin-top:-1%">
+                      <button class="save-profile{{ $goods->id }}">Save Gift</button>
+                    </form>
+                      <button class="edit-profile{{ $goods->id }}">Edit Gift</button>
+                    </div>
+                </td>
+                <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
+                <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
+                <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
+                <td><a href="#" class="usertext" data-name="transaction_type" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->transaction_type }}</a></td>
+                <td><a href="#" class="usertext" data-name="google_key" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->google_key }}</a></td>
+                <td><a href="#" class="usertext" data-name="active" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->active }}</a></td>
+                <td>
+                  <a href="#" style="color:red;" class="delete{{ $goods->id }}" 
+                    id="delete" 
+                    data-pk="{{ $goods->id }}" 
+                    data-toggle="modal" 
+                    data-target="#delete-modal">
+                      <i class="fa fa-times"></i>
+                  </a>
+                </td>
               </tr>
-              {{-- @endforeach --}}
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -107,28 +210,38 @@
           ×
         </button>
       </div>
-      <form action="#" method="post">
+      <form action="{{ route('GoodsStore-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
           <div class="form-group" align="center">
-              <img id="imgPreview" src="http://placehold.it/180" alt="your image" width="100" height="100" class="rounded-circle" /><br><br>
+            <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+              <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+            </div><br>
               <input type='file' name="file" onchange="readURL(this);"/><br><br>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="basic-url" placeholder="title">
+            <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="number" class="form-control" id="basic-url" placeholder="price">
+            <input type="number" name="price" class="form-control" id="basic-url" placeholder="price">
           </div>
           <div class="form-group">
-            <input type="number" class="form-control" id="basic-url" placeholder="quantity">
+              <input type="text" name="google_key" class="form-control" id="basic-url" placeholder="Google Key">
           </div>
           <div class="form-group">
-            <select class="custom-select">
-              <option selected>Payment method</option>
-              <option value="1">1 Day</option>
-              <option value="2">2 Day</option>
-              <option value="3">3 Day</option>
+            <input type="number" name="qty" class="form-control" id="basic-url" placeholder="Quantity">
+          </div>
+          <div class="form-group">
+            <select class="custom-select" name="transaction_type">
+              <option value="">Pay Transaction</option>
+              <option value="1">Bank Transfer</option>
+              <option value="2">Internet Banking</option>
+              <option value="3">Cash Digital</option>
+              <option value="4">Toko</option>
+              <option value="5">Akulaku</option>
+              <option value="6">Credit Card</option>
+              <option value="7">Manual Transfer</option>
+              <option value="8">Google Play</option>
             </select>
           </div>
         </div>
@@ -145,6 +258,33 @@
   </div>
 </div>
 <!-- end Modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          × 
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete It
+        <form action="{{ route('GoodsStore-delete') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="id" id="id" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes">Yes</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
 
 <!-- script -->
 <script>
@@ -164,7 +304,7 @@
 
   $(document).ready(function() {
     $('table.table').dataTable( {
-      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+      "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
     });
   });
 
@@ -188,9 +328,65 @@
       $('.usertext').editable({
         mode :'inline'
       });
+
+
+      @php
+          foreach($itemGood as $goods) {
+              echo'$(".delete'.$goods->id.'").hide();';
+              echo'$(".deletepermission'.$goods->id.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$goods->id.':checked" ).length > 0)';
+                echo '{';
+                  echo '$(".delete'.$goods->id.'").show();';
+                echo'}';
+                echo'else';
+                echo'{';
+                  echo'$(".delete'.$goods->id.'").hide();';
+                echo'}';
+    
+              echo '});';
+            
+              echo'$(".delete'.$goods->id.'").click(function(e) {';
+                echo'e.preventDefault();';
+    
+                echo"var id = $(this).attr('data-pk');";
+                echo'var test = $("#id").val(id);';
+              echo'});';
+          }
+      @endphp
+      @php
+              foreach($itemGood as $goods) {
+                echo'$(".save-profile'.$goods->id.'").hide(0);';
+                  echo'$(".med-ovlay'.$goods->id.'").hide(0);';
+
+                  echo'$(".edit-profile'.$goods->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$goods->id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$goods->id.'").fadeIn(300);';
+                  echo'});';
+                  echo'$(".save-profile'.$goods->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$goods->id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$goods->id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".upload'.$goods->id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+		
+                      echo'reader.onload = function(e) {';
+                        echo'$(".imgupload'.$goods->id.'").attr("src", e.target.result);';
+                      echo'};';
+		
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+              }
+      @endphp
+
+
+
     },
     responsive: true
   });
 </script>
-<!-- end script -->
 @endsection
