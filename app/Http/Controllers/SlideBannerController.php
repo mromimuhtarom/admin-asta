@@ -10,6 +10,7 @@ use Session;
 use File;
 use Carbon\Carbon;
 use App\Classes\MenuClass;
+use Validator;
 
 class SlideBannerController extends Controller
 {
@@ -75,6 +76,14 @@ class SlideBannerController extends Controller
                     } else if($request->url == NULL) {
                         return redirect()->route('SlideBanner-view')->with('alert','Url can\'t be NULL ');
                     } else {
+                        $validator = Validator::make($request->all(),[
+                            'caption' => 'required',
+                            'url'   =>  'required',
+                        ]);
+                    
+                        if ($validator->fails()) {
+                            return back()->withErrors($validator->errors());
+                        }
                         $slide_banner = SlideBanner::create([
                             'id'      => $id_new,
                             'caption' => $request->caption,

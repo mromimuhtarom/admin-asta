@@ -10,6 +10,8 @@ use App\Table;
 use Session;
 use Carbon\Carbon;
 use App\Log;
+use Validator;
+
 class PushNotificationController extends Controller
 {
     /**
@@ -44,6 +46,16 @@ class PushNotificationController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'title' => 'required',
+            'message'   =>  'required',
+            'game'  =>  'required|integer|',
+        ]);
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
         PushNotification::create([
             'title'   => $request->title,
             'message' => $request->message,

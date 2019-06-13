@@ -9,6 +9,7 @@ use App\Log;
 use DB;
 use Session;
 use Carbon\Carbon;
+use Validator;
 
 class EmailNotificationController extends Controller
 {
@@ -61,6 +62,17 @@ class EmailNotificationController extends Controller
                     // Gift::where('id', '=', $pk)->update([
                     //     'imageUrl' => $nama_file_unik
                     // ]);
+                    $validator = Validator::make($request->all(),[
+                        'subject' => 'required',
+                        'message' => 'required',
+                        'email'   => 'required|email',
+                        'type'    => 'required',
+                    ]);
+                
+                    if ($validator->fails()) {
+                        return back()->withErrors($validator->errors());
+                    }
+        
                     $notification = EmailNotification::create([
                         'dealerId'  =>  '1',
                         'subject'   =>  $request->subject,

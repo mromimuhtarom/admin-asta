@@ -9,6 +9,7 @@ use App\Log;
 use App\Role;
 use Session;
 use Carbon\Carbon;
+use Validator;
 
 class RoleController extends Controller
 {
@@ -44,6 +45,16 @@ class RoleController extends Controller
     {
         $role = $request->rolename;
         if($role != ''){
+
+            $validator = Validator::make($request->all(),[
+                'rolename' => 'required',
+            ]);
+        
+            if ($validator->fails()) {
+                return back()->withErrors($validator->errors());
+            }
+
+
             $user = Role::create([
                 'name' => $role
               ]);

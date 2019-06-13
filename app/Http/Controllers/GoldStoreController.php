@@ -9,6 +9,7 @@ use App\Classes\MenuClass;
 use App\Log;
 use Carbon\Carbon;
 use Session;
+use Validator;
 
 class GoldStoreController extends Controller
 {
@@ -48,11 +49,30 @@ class GoldStoreController extends Controller
         $priceCash      = $request->priceCash;
         $googleKey      = $request->googleKey;
 
-        DB::table('items_cash')->insert([
+        $validator = Validator::make($request->all(),[
+            'title'    => 'required',
+            'goldAwarded'    => 'required|integer',
+            'priceCash' => 'required|integer',
+            'googleKey' =>  'required',
+        ]);
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        $gold = DB::table('items_cash')->insert([
             'name'          => $title,
             'goldAwarded'   => $goldAwarded,
             'price'         => $priceCash,
             'google_key'    => $googleKey,
+        ]);
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '57',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Gold Store with title '. $gold->name
         ]);
 
         return redirect()->route('GoldStore-view')->with('success','Data Added');

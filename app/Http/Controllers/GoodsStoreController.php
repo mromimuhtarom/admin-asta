@@ -10,6 +10,7 @@ use Session;
 use DB;
 use File;
 use Carbon\Carbon;
+use Validator;
 
 class GoodsStoreController extends Controller
 {
@@ -81,17 +82,30 @@ class GoodsStoreController extends Controller
                     } else if($request->qty == NULL) {
                         return redirect()->route('GoodsStore-view')->with('alert','Quantity can\'t be NULL ');
                     } else {
+
+                        $validator = Validator::make($request->all(),[
+                            'title'            => 'required',
+                            'transaction_type' => 'required|integer|between:1,8',
+                            'price'            => 'required|integer',
+                            'google_key'       => 'required',
+                            'qty'              => 'required',
+                        ]);
+                    
+                        if ($validator->fails()) {
+                            return back()->withErrors($validator->errors());
+                        }
+
                         $goods = ItemGoods::create([
-                            'id'      => $id_new,
-                            'name' => $request->title,
-                            'transaction_type'     => $request->transaction_type,
-                            'storeId'  => '1',
-                            'price'   => $request->price,
-                            'active'   => '1',
-                            'shop_type' =>  '1',
-                            'google_key'    => $request->google_key,
-                            'image' =>  $nama_file_unik,
-                            'qty'   =>  $request->qty
+                            'id'               => $id_new,
+                            'name'             => $request->title,
+                            'transaction_type' => $request->transaction_type,
+                            'storeId'          => '1',
+                            'price'            => $request->price,
+                            'active'           => '1',
+                            'shop_type'        => '1',
+                            'google_key'       => $request->google_key,
+                            'image'            => $nama_file_unik,
+                            'qty'              => $request->qty
                         ]);
             
                         Log::create([

@@ -9,6 +9,7 @@ use App\Classes\MenuClass;
 use App\Log;
 use Carbon\Carbon;
 use Session;
+use Validator;
 
 class ChipStoreController extends Controller
 {
@@ -42,7 +43,17 @@ class ChipStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $chip = ItemsGold::create([
+          $validator = Validator::make($request->all(),[
+            'title'       => 'required',
+            'goldcost'    => 'required|integer',
+            'chipawarded' => 'required|integer'
+          ]);
+    
+          if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+          }
+
+          $chip = ItemsGold::create([
             'name'        => $request->title,
             'category'    => 'Chip',
             'goldCost'    => $request->goldcost,

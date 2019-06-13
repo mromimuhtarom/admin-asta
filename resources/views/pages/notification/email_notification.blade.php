@@ -128,16 +128,17 @@
     </div>
   </div>
     
-    @if (count($errors) > 0)
-    <div class="alert alert-danger">
+  @if (count($errors) > 0)
+    <div class="error-val">
+      <div class="alert alert-danger">
         <ul>
-            @foreach ($errors->all as $error)
+          @foreach ($errors->all() as $error)
             <li>{{$error}}</li>  
-            @endforeach
+          @endforeach
         </ul>
+      </div>
     </div>
-        
-    @endif
+  @endif
     
     @if (\Session::has('success'))
         <div class="alert alert-success">

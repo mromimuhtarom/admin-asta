@@ -21,19 +21,6 @@
 @endif
 
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
-    <!-- widget options:
-      usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-      
-      data-widget-colorbutton="false"	
-      data-widget-editbutton="false"
-      data-widget-togglebutton="false"
-      data-widget-deletebutton="false"
-      data-widget-fullscreenbutton="false"
-      data-widget-custombutton="false"
-      data-widget-collapsed="true" 
-      data-widget-sortable="false"
-      
-    -->
   <header>
     <div class="widget-header">	
       <h2><strong>Bots</strong></h2>				

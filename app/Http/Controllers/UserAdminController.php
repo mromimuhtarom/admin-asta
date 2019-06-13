@@ -11,6 +11,7 @@ use App\Log;
 use Session;
 use Carbon\Carbon;
 use App\Classes\MenucLass;
+use Validator;
 
 class UserAdminController extends Controller
 {
@@ -45,6 +46,15 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'username' => 'required',
+            'role'     => 'required|integer',
+            'fullname' => 'required',
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         $user = User::create([
             'username' => $request->username,
             'role_id' => $request->role,

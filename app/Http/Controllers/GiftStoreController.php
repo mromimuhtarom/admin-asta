@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use DB;
 use File;
 use App\Classes\MenuClass;
+use Validator;
 
 class GiftStoreController extends Controller
 {
@@ -75,6 +76,18 @@ class GiftStoreController extends Controller
                     } else if($request->category == NULL) {
                         return redirect()->route('GiftStore-view')->with('alert','Category can\'t be NULL ');
                     } else {
+
+                        $validator = Validator::make($request->all(),[
+                            'title'    => 'required',
+                            'price'    => 'required|integer',
+                            'category' => 'required|integer|between:1,3',
+                        ]);
+                    
+                        if ($validator->fails()) {
+                            return back()->withErrors($validator->errors());
+                        }
+
+
                         $gift = Gift::create([
                             'id'          => $id_new,
                             'name'        => $request->title,
