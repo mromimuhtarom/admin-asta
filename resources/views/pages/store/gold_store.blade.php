@@ -60,7 +60,7 @@
 
       </div>
       
-      <div class="custom-scroll table-responsive" style="max-height:600px;">
+      <div class="custom-scroll table-responsive" style="max-height:700px;">
         
         <div class="table-outer">
           <table class="table table-bordered">
@@ -148,14 +148,7 @@
           <div class="form-group">
             <input type="text" name="googleKey" class="form-control" id="basic-url" placeholder="google key">
           </div>
-          {{-- <div class="form-group">
-            <select class="custom-select">
-              <option selected>Payment method</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </div> --}}
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal">
