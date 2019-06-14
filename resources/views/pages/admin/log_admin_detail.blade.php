@@ -18,10 +18,10 @@
         <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" placeholder="username">
+                    <input type="text" name="username" class="form-control" placeholder="username">
                 </div>
                 <div class="col">
-                    <select name="action" id="">
+                    <select name="action" id="" class="form-control">
                         <option value="">Choose Action</option>
                         @foreach($actionSearch as $action)
                         <option value="{{ $action->action }}">{{ $action->action}}</option>
@@ -29,10 +29,10 @@
                     </select>
                 </div>
                 <div class="col">
-                    <input type="date" name="dari">
+                    <input type="date" class="form-control" name="dari">
                 </div>
                 <div class="col">
-                    <input type="date" name="sampai">
+                    <input type="date" class="form-control" name="sampai">
                 </div>
                 <div class="col">
                     <button class="myButton" type="submit">Cari</button>
@@ -108,7 +108,7 @@
 	};
 	
 	$('#dt_basic').dataTable({
-	    "sDom": "<'dt-toolbar d-flex'<'ml-auto hidden-xs show-control'l>r>"+
+	    "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
 			"autoWidth" : true,

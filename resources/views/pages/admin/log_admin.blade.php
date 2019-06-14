@@ -17,10 +17,10 @@
         <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" placeholder="username">
+                    <input type="text" name="username" class="form-control" placeholder="username">
                 </div>
                 <div class="col">
-                    <select name="action" id="">
+                    <select name="action" id="" class="form-control">
                         <option value="">Choose Action</option>
                         @foreach($logs as $log)
                         <option value="{{ $log->action }}">{{ $log->action}}</option>
@@ -28,10 +28,10 @@
                     </select>
                 </div>
                 <div class="col">
-                    <input type="date" name="dari">
+                    <input type="date" class="form-control" name="dari">
                 </div>
                 <div class="col">
-                    <input type="date" name="sampai">
+                    <input type="date" class="form-control" name="sampai">
                 </div>
                 <div class="col">
                     <button class="myButton" type="submit">Cari</button>
