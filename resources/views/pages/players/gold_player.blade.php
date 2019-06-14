@@ -1,33 +1,34 @@
 @extends('index')
 
 
-@section('sidebarmenu')
-@include('menu.menuplayer');
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('Gold-view') }}">Players</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Gold-view') }}">Gold Player</a></li>
 @endsection
 
 
 @section('content')
-    <div class="searching bg-blue-dark">
-        <!-- widget content -->
-        <div class="widget-body">
+<link rel="stylesheet" href="/css/admin.css">
 
-            <form class="form" action="{{ route('Gold-search') }}" method="get" role="search">
-                <div class="btn-input-group">
-                    <input type="text" name="inputPlayer" class="form-control" placeholder="username">
-                </div>
-                <div class="btn-input-group">
-                    <input type="date" name="inputMinDate" class="form-control">
-                </div>
-                <div class="btn-input-group">
-                    <input type="date" name="inputMaxDate" class="form-control">
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary">Cari</button>
-                </div>
-
-            </form>
-
-        </div>
-        <!-- end widget content -->
-    </div>
+    <div class="search bg-blue-dark">
+            <div class="table-header w-100 h-100" style="padding-right:2%;">
+                <form action="{{ route('Gold-search') }}" method="get" role="search">
+                    <div class="row h-100 w-100 no-gutters">
+                        <div class="col" align="left">
+                            <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+                        </div>
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <input type="date" name="inputMinDate" class="form-control">
+                        </div>
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <input type="date" name="inputMaxDate" class="form-control">
+                        </div>
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <button class="myButton" type="submit">Cari</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>    
 @endsection

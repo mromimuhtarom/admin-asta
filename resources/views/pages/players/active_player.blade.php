@@ -1,7 +1,9 @@
 @extends('index')
 
-@section('namepages')
-<h1 class="page-header"><i class="fa-fw fa fa-home"></i>  Players <span>> Active Players</span></h1>
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('Active-view') }}">Players</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Active-view') }}">Active Player</a></li>
 @endsection
 
 
@@ -42,8 +44,6 @@
                   <th data-hide="phone">Gold Coins</th>
                   <th data-hide="phone">From</th>
                   <th data-hide="phone">Playing Games</th>
-                  <th data-hide="phone,tablet">Table</th>
-                  <th data-hide="phone,tablet">Device</th>
                   <th data-hide="phone,tablet">timestamp</th>
                 </tr>
               </thead>
@@ -63,8 +63,6 @@
                     @endphp
                     <td>{{ $user_type }}</td>
                     <td>{{ $ol->game_name }}</td>
-                    <td></td>
-                    <td></td>
                     <td>{{ $ol->date_login}}</td>
                 </tr>
                 @endforeach
@@ -81,9 +79,10 @@
 
 <script type="text/javascript">
   table = $('table.table').dataTable({
-    "sDom": "<'dt-toolbar d-flex align-items-center'<f><'hidden-xs ml-auto'B>r>"+
-        "t"+
-        "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+    "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'f>r>"+
+						"t"+
+						"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+    "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
     "autoWidth" : true,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"

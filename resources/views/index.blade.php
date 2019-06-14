@@ -35,12 +35,7 @@
         
         <div class="sa-shortcuts-section">
         	<ul>
-        		<li><a class="bg-blue" href="inbox.html"><span class="fa fa-envelope fa-4x"></span><span class="box-caption">Mail</span><em class="counter">14</em></a></li>
-        		<li><a class="bg-orange-dark" href="calendar.html"><span class="fa fa-calendar fa-4x"></span><span class="box-caption">Calendar</span><em class="counter"></em></a></li>
-        		<li><a class="bg-purple" href="gmap-xml.html"><span class="fa fa-map-marker fa-4x"></span><span class="box-caption">Maps</span><em class="counter"></em></a></li>
-        		<li><a class="bg-blue-dark" href="invoice.html"><span class="fa fa-book fa-4x"></span><span class="box-caption">Invoice</span><em class="counter"></em></a></li>
-        		<li><a class="bg-green-light" href="gallery.html"><span class="fa fa-picture-o fa-4x"></span><span class="box-caption">Gallery</span><em class="counter">99</em></a></li>
-        		<li><a class="bg-pink-dark selected" href="profile.html"><span class="fa fa-user fa-4x"></span><span class="box-caption">My Profile</span><em class="counter"></em></a></li>
+							@include('menu.menutop')
         	</ul>
         </div>
         <!-- END .sa-shortcuts -->
@@ -154,8 +149,12 @@
       <div class="sa-aside-left">
       
           <a href="javascript:void(0)"  onclick="SAtoggleClass(this, 'body', 'sa-shortcuts-expanded')" class="sa-sidebar-shortcut-toggle">
-              <img src="/assets/img/avatars/sunny.png" alt="" class="online">
-              <span>John.Doe <span class="fa fa-angle-down"></span></span>
+							<img src="/assets/img/avatars/sunny.png" alt="" class="online">
+							@php
+							$operator_id = Session::get('userId');
+							$username = DB::table('operator')->where('operator_id', '=', $operator_id)->first();		
+							@endphp
+              <span>{{ ucwords($username->fullname) }} <span class="fa fa-angle-down"></span></span>
           </a>
           <div class="sa-left-menu-outer">
             @include('header.sidebar_menu')
@@ -173,10 +172,7 @@
           
           <!-- BEGIN .sa-page-breadcrumb -->
           <ol class="align-items-center sa-page-ribbon breadcrumb" aria-label="breadcrumb" role="navigation">
-          	<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-          		<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-          				<li class="breadcrumb-item"><a href="index.html">Analytics Dashboard</a></li>
-          	
+						@yield('page')        	
           </ol>
           
           <div class="sa-theme-settings">

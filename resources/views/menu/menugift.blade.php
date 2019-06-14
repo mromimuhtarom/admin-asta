@@ -2,7 +2,7 @@
 use App\Classes\RolesClass;
 $menu = new RolesClass;
 @endphp
-<a class="has-arrow"   href="index.html" title="Daily Gift"><span class="fa fa-lg fa-fw fa-gift"></span> <span class="menu-item-parent">Daily Gift</span> 
+<a class="has-arrow"   href="index.html" title="Daily Gift"><span class="fa fa-lg fa-fw fa-gift"></span> <span class="menu-item-parent">Daily Reward</span> 
     <b class="collapse-sign">
         <em class="fa fa-plus-square-o"></em>
         <em class="fa fa-minus-square-o"></em>
@@ -16,7 +16,7 @@ $menu = new RolesClass;
     @endphp
     @if($role_access27 || $role_acces27)
     <li class="{{ Request::is('Daily-Gift/Daily-Gift/*') ? 'active' : null }}">
-        <a   href="{{ route('DailyGift-view') }}" title="Daily Gift"> Daily Gift </a>
+        <a   href="{{ route('DailyGift-view') }}" title="Daily Gift"> Daily Reward </a>
     </li>
     @endif
 </ul>

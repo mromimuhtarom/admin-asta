@@ -4,22 +4,16 @@
     @include('menu.menuadmin')
 @endsection
 
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('Role-view') }}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Role-view') }}">Role Admin</a></li>
+@endsection
+
 @section('content')
 <!-- Widget ID (each widget will need unique ID)-->
 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
-        <!-- widget options:
-            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-            
-            data-widget-colorbutton="false"	
-            data-widget-editbutton="false"
-            data-widget-togglebutton="false"
-            data-widget-deletebutton="false"
-            data-widget-fullscreenbutton="false"
-            data-widget-custombutton="false"
-            data-widget-collapsed="true" 
-            data-widget-sortable="false"
-            
-        -->
+
         <header>
             <div class="widget-header">	
                 <span class="widget-icon"> <i class="fa fa-arrows-v"></i> </span>

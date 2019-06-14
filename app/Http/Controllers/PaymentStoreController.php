@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Classes\MenuClass;
 use DB;
+use App\Log;
+use Session;
+use Carbon\Carbon;
 use Validator;
 
 class PaymentStoreController extends Controller
@@ -51,9 +54,9 @@ class PaymentStoreController extends Controller
         }
 
         $payment = DB::table('payments')->insert([
-            'name'              => $title,
-            'payment_type'      => $pType,
-            'transaction_type'  => $tType,
+            'name'              => $request->title,
+            'payment_type'      => $request->paymentType,
+            'transaction_type'  => $request->transactionType,
         ]);
 
         Log::create([
@@ -61,7 +64,7 @@ class PaymentStoreController extends Controller
             'menu_id'     => '71',
             'action_id'   => '3',
             'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Payment Store with Name '. $payment->name
+            'description' => 'Create new Payment Store with Name '. $request->title
         ]);
 
         return redirect()->route('PaymentStore-view')->with('success','Data Added');

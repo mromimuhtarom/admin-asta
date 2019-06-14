@@ -4,6 +4,12 @@
     @include('menu.menuadmin')
 @endsection
 
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('Role-view') }}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Role-view') }}">Role Admin</a></li>
+@endsection
+
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
   <!-- Response Status -->
@@ -124,7 +130,6 @@
                 @if($menu)
                 <th></th>
                 @endif
-                <th class="th-sm">Image</th>
                 <th class="th-sm">Role</th>
                 @if($menu)
                 <th class="th-sm">Action</th>
@@ -137,7 +142,6 @@
             @if($menu)
             <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
-                <td></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $role->role_id }}" data-type="text" data-url="{{ route('Role-update') }}">{{ $role->name }}</a></td>
                 <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton">View & Edit</a></td>
                 <td><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>

@@ -1,8 +1,10 @@
 @extends('index')
 
 
-@section('sidebarmenu')
-@include('menu.menustore')    
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('PaymentStore-view') }}">Store</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('PaymentStore-view') }}">Payment Store</a></li>
 @endsection
 
 
@@ -168,7 +170,7 @@
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header" style="margin-top:5%;">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           × 

@@ -5,6 +5,12 @@
 @include('menu.menunotification')    
 @endsection
 
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('EmailNotification-view') }}">Notification</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('EmailNotification-view') }}">Email Notification</a></li>
+@endsection
+
 
 @section('content')
 <style>

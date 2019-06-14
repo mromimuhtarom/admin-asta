@@ -4,6 +4,12 @@
 @include('menu.menuplayer')    
 @endsection
 
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('Log-view') }}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Log-view') }}">Log Admin</a></li>
+@endsection
+
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">

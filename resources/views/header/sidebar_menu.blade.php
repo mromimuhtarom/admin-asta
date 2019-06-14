@@ -38,6 +38,11 @@
         <li class="{{ Request::is('Settings/*') ? 'active' : null }}">
             @include('menu.menusetting')
         </li>
+
+        <li class="{{ Request::is('reseller/*') ? 'active' : null }}">
+            @include('menu.menureseller')
+        </li>
+
         <li class="{{ Request::is('Settings/*') ? ' active' : null }}">
             <a class="has-arrow"   href="{{ route('logout') }}" title="Log Out"><span class="fa fa-lg fa-fw fa-power-off"></span> <span class="menu-item-parent">Log Out</span> 
                 {{-- <b class="collapse-sign">

@@ -4,6 +4,12 @@
 @include('menu.menugame')
 @endsection
 
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('Table-view') }}">Games > Asta Poker</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Table-view') }}">Table</a></li>
+@endsection
+
 
 @section('content')
 
@@ -29,19 +35,7 @@
 
   <!-- Form Table -->
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
-    <!-- widget options:
-      usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-      
-      data-widget-colorbutton="false"	
-      data-widget-editbutton="false"
-      data-widget-togglebutton="false"
-      data-widget-deletebutton="false"
-      data-widget-fullscreenbutton="false"
-      data-widget-custombutton="false"
-      data-widget-collapsed="true" 
-      data-widget-sortable="false"
-      
-    -->
+
     <header>
       <div class="widget-header">	
         <h2><strong>Asta Poker Table</strong></h2>				

@@ -6,6 +6,13 @@
 @endsection
 
 
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('PushNotification-view') }}">Notification</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('PushNotification-view') }}">Push Notification</a></li>
+@endsection
+
+
 @section('content')
 
   <!-- Response Status -->
@@ -21,7 +28,6 @@
     </div>
   @endif
         
-    @endif
     
     @if (\Session::has('success'))
         <div class="alert alert-success">

@@ -111,7 +111,7 @@ class RoleController extends Controller
         $roles = DB::table('adm_access')->join('adm_menu', 'adm_menu.menu_id', '=', 'adm_access.menu_id')->where('adm_access.role_id', '=', $role->role_id)->get();
         $roles = $roles->toArray();
 
-        return view('pages.admin.role_edit', compact('roles'));
+        return view('pages.admin.role_edit', compact('roles', 'role'));
     }
 
     /**

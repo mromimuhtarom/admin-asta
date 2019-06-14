@@ -4,6 +4,14 @@
     @include('menu.menuadmin')
 @endsection
 
+
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('UserAdmin-view') }}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('UserAdmin-view') }}">User Admin</a></li>
+@endsection
+
+
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
   <!-- Response Status -->
@@ -133,7 +141,6 @@
                     @if($menu)
                     <th class="th-sm"></th>
                     @endif
-                    <th class="th-sm">Image</th>
                     <th class="th-sm">Username</th>
                     <th class="th-sm">Full Name</th>
                     <th class="th-sm">Role Type</th>
@@ -148,7 +155,6 @@
                 @if($menu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->operator_id }}"></td>
-                    <td></td>
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>

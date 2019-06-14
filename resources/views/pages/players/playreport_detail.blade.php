@@ -1,7 +1,9 @@
 @extends('index')
 
-@section('sidebarmenu')
-@include('menu.menuplayer')    
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('PlayReport-view') }}">Players</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('PlayReport-view') }}">Play Report</a></li>
 @endsection
 
 
@@ -10,89 +12,32 @@
 <div class="search bg-blue-dark" style="margin-bottom: 2%;">
         <div class="table-header w-100 h-100">
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
-                <div class="row h-100 w-100">
+                <div class="row h-100 w-100 no-gutters">
                     <div class="col">
-                        <input type="text" name="inputPlayer" placeholder="username">
+                        <input type="text" class="form-control" name="inputPlayer" placeholder="username">
                     </div>
-                    <div class="col">
-                        <select name="inputGame">
+                    <div class="col" style="padding-left:1%;">
+                        <select name="inputGame" class="form-control">
                             <option value="">Choose Game</option>
                             @foreach ($game as $gm)
                             <option value="{{ $gm->name }}">{{ $gm->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col">
-                        <input type="date" name="inputMinDate">
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMinDate">
                     </div>
-                    <div class="col">
-                        <input type="date" name="inputMaxDate">
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMaxDate">
                     </div>
-                    <div class="col">
+                    <div class="col" style="padding-left:1%;">
                         <button class="myButton" type="submit">Cari</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>    
-    
-        {{-- <div class="table-aii" style=" display: table; width: auto;">
-            <div class="table-header">
-                    Report
-            </div>
-             <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;" cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th class="th-sm"></th>
-                    <th class="th-sm">Username</th>
-                    <th class="th-sm">Playing Game</th>
-                    <th class="th-sm">Table</th>
-                    <th class="th-sm">Seat</th>
-                    <th class="th-sm">Card</th>
-                    <th class="th-sm">Table Card</th>
-                    <th class="th-sm">Bet</th>
-                    <th class="th-sm">Win Amount</th>
-                    <th class="th-sm">Status</th>
-                    <th class="th-sm">Time Stamp</th>
-                    <th class="th-sm">Country</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                    @foreach ($player_history as $history)
-                    <tr>
-                      <td></td>
-                      <td>{{ $history->username }}</td>
-                      <td>{{ $history->gamename }}</td>
-                      <td>{{ $history->tablename }}</td>
-                      <td>{{ $history->seat }}</td>
-                      <td>{{ $history->cards }}</td>
-                      <td>{{ $history->tablecards }}</td>
-                      <td>{{ $history->bet }}</td>
-                      <td>{{ $history->winAmount }}</td>
-                      <td>{{ $history->status }}</td>
-                      <td>{{ $history->ts }}</td>
-                      <td>{{ $history->countryname }}</td>
-                      <td></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-              </table>
-             
-        </div>
-<script>
-      table = $('#dt-material-checkbox').dataTable({
-          columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-          }],
-          select: {
-          style: 'os',
-          selector: 'td:first-child'
-          },
-      });
-</script> --}}
+
 <!-- Widget ID (each widget will need unique ID)-->
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
 
@@ -178,7 +123,7 @@
 	};
 	
 	$('#dt_basic').dataTable({
-	    "sDom": "<'dt-toolbar d-flex'<'ml-auto hidden-xs show-control'l>r>"+
+	    "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
 			"autoWidth" : true,

@@ -20,9 +20,16 @@ Route::get('/datatables', function () {
     return view('design.datatables');
 });
 Route::middleware('authenticated')->group(function(){
+    Route::group(['prefix' => 'Edit-Profile'], function(){
+        Route::get('/profile', 'ProfileController@index')->name('profile-view');
+        Route::post('/profile-password', 'ProfileController@password')->name('profile-password');
+        Route::post('/Profile-update', 'ProfileController@update')->name('profile-update');
+    });
+    
     Route::group(['prefix' => 'Dashboard'], function() {
         Route::get('/home', 'DashboardController@index')->name('home');
     });
+
     Route::group(['prefix' => 'Admin'], function() {
         Route::group(['prefix' => 'User-Admin'], function() {
             Route::middleware('page_denied:User Admin')->group(function(){

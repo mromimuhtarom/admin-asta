@@ -1,35 +1,36 @@
 @extends('index')
 
 
-@section('sidebarmenu')
-@include('menu.menuplayer');
+@section('page')
+<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item"><a href="{{ route('Gold-view') }}">Players</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Gold-view') }}">Gold Player</a></li>
 @endsection
 
 
+
 @section('content')
-<div class="searching bg-blue-dark">
-    <!-- widget content -->
-    <div class="widget-body">
-
-        <form class="form" action="{{ route('Gold-search') }}" method="get" role="search">
-            <div class="btn-input-group">
-                <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+<link rel="stylesheet" href="/css/admin.css">
+        <div class="search bg-blue-dark" style="margin-bottom:2%;">
+            <div class="table-header w-100 h-100" style="padding-right:2%;">
+                <form action="{{ route('Gold-search') }}" method="get" role="search">
+                    <div class="row h-100 w-100 no-gutters">
+                        <div class="col" align="left">
+                            <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+                        </div>
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <input type="date" name="inputMinDate" class="form-control">
+                        </div>
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <input type="date" name="inputMaxDate" class="form-control">
+                        </div>
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <button class="myButton" type="submit">Cari</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="btn-input-group">
-                <input type="date" name="inputMinDate" class="form-control">
-            </div>
-            <div class="btn-input-group">
-                <input type="date" name="inputMaxDate" class="form-control">
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary">Cari</button>
-            </div>
-
-        </form>
-
-    </div>
-    <!-- end widget content -->
-</div>
+        </div>  
     
     
 <!-- Widget ID (each widget will need unique ID)-->
@@ -98,13 +99,14 @@
         };
         
         $('#dt_basic').dataTable({
-            "sDom": "<'dt-toolbar d-flex'<'ml-auto hidden-xs show-control'l>r>"+
+            "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
                 "t"+
                 "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
                 "autoWidth" : true,
                 "oLanguage": {
                     "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
             },
+            "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
             classes: {
                 sWrapper:      "dataTables_wrapper dt-bootstrap4"
             },
