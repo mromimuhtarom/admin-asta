@@ -434,6 +434,30 @@ Route::middleware('authenticated')->group(function(){
         //     Route::post('AdminSetting-update', 'AdminSettingController@update')->name('AdminSetting-update');
         // });
     });
+
+
+    Route::group(['prefix' => 'Reseller'], function() {
+        Route::group(['prefix'  =>  'List-Reseller'], function() {
+            Route::middleware('page_denied:List Reseller')->group(function(){
+                Route::get('List-Reseller-view', 'ResellerController@index')->name('ListReseller-view');
+                Route::post('List-Reseller-update', 'ResellerController@update')->name('ListReseller-update');
+                Route::delete('List-Reseller-delete', 'ResellerController@destroy')->name('ListReseller-delete');
+                Route::post('List-Reseller-Password-update', 'ResellerController@PasswordUpdate')->name('ListResellerPassword-update');
+            });
+        });
+
+        Route::group(['prefix'  =>  'Reseller-Rank'], function() {
+            Route::middleware('page_denied:Reseller Rank')->group(function(){
+                Route::get('ResellerRank-view', 'ResellerController@ResellerRank')->name('ResellerRank-view');
+                Route::post('ResellerRank-update', 'ResellerController@updateRank')->name('ResellerRank-update');
+                Route::delete('ResellerRank-delete', 'ResellerController@destroyRank')->name('ResellerRank-delete');
+                Route::post('ResellerRank-create', 'ResellerController@storeRankReseller')->name('ResellerRank-create');
+            });
+        });
+
+    });
+
+
 });
 
  //logout

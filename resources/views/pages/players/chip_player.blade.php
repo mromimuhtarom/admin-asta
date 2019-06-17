@@ -8,8 +8,8 @@
 
 
 @section('content')
-
-    <div class="searching bg-blue-dark">
+<link rel="stylesheet" href="/css/admin.css">
+    {{-- <div class="searching bg-blue-dark">
     
         <!-- widget content -->
         <div class="widget-body">
@@ -32,6 +32,27 @@
     
         </div>
         <!-- end widget content -->
-    </div>
+    </div> --}}
+
+    <div class="search bg-blue-dark">
+        <div class="table-header w-100 h-100">
+            <form action="{{ route('Chip-search') }}" method="get" role="search">
+                <div class="row h-100 w-100 no-gutters">
+                    <div class="col" style="padding-left:1%;">
+                        <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" name="inputMinDate" class="form-control">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" name="inputMaxDate" class="form-control">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <button class="myButton" type="submit">Cari</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> 
 
 @endsection

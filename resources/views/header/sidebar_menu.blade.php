@@ -39,7 +39,7 @@
             @include('menu.menusetting')
         </li>
 
-        <li class="{{ Request::is('reseller/*') ? 'active' : null }}">
+        <li class="{{ Request::is('Reseller/*') ? 'active' : null }}">
             @include('menu.menureseller')
         </li>
 

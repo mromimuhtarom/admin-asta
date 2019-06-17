@@ -9,36 +9,36 @@ $menu = new RolesClass;
     </b>
 </a>
 <ul aria-expanded="true" class="sa-sub-nav collapse">
-    {{-- @php
-        $Banking_transaction = 'Banking transaction';
-        $role_access49 = $menu->RoleType1($Banking_transaction);
-        $role_acces49 = $menu->RoleType2($Banking_transaction);
-    @endphp
-    @if($role_access49 || $role_acces49) --}}
-    <li class="{{ Request::is('Transaction/Banking_Transaction/*') ? 'active' : null }}">
-        <a   href="{{ route('Banking-view') }}" title="Banking Transaction"> Reseller </a>
-    </li>
-    {{-- @endif
     @php
+        $list_reseller = 'List Reseller';
+        $role_access51 = $menu->RoleType1($list_reseller);
+        $role_acces51 = $menu->RoleType2($list_reseller);
+    @endphp
+    @if($role_access51 || $role_acces51)
+    <li class="{{ Request::is('Reseller/List-Reseller/*') ? 'active' : null }}">
+        <a href="{{ route('ListReseller-view') }}" title="List Reseller"> Reseller </a>
+    </li>
+    @endif
+    {{-- @php
         $User_Bank_Transaction = 'User Bank Transaction';
         $role_access50 = $menu->RoleType1($User_Bank_Transaction);
         $role_acces50 = $menu->RoleType2($User_Bank_Transaction);
     @endphp
     @if($role_access50 || $role_acces50) --}}
     <li class="{{ Request::is('Transaction/User_Banking_Transaction/*') ? 'active' : null }}">
-        <a   href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Reseller Transaction </a>
+        <a href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Reseller Transaction </a>
     </li>
     {{-- @endif --}}
-    {{--@php
-    $User_Bank_Transaction = 'User Bank Transaction';
-    $role_access50 = $menu->RoleType1($User_Bank_Transaction);
-    $role_acces50 = $menu->RoleType2($User_Bank_Transaction);
+    @php
+    $reseller_rank = 'Reseller Rank';
+    $role_access53 = $menu->RoleType1($reseller_rank);
+    $role_acces53 = $menu->RoleType2($reseller_rank);
     @endphp
-    @if($role_access50 || $role_acces50) --}}
-    <li class="{{ Request::is('Transaction/User_Banking_Transaction/*') ? 'active' : null }}">
-        <a   href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Reseller Rank </a>
+    @if($role_access53 || $role_acces53)
+    <li class="{{ Request::is('Reseller/Reseller-Rank/*') ? 'active' : null }}">
+        <a href="{{ route('ResellerRank-view') }}" title="User Bank Transaction"> Reseller Rank </a>
     </li>
-    {{-- @endif --}}
+    @endif
         {{--@php
     $User_Bank_Transaction = 'User Bank Transaction';
     $role_access50 = $menu->RoleType1($User_Bank_Transaction);
@@ -46,7 +46,7 @@ $menu = new RolesClass;
     @endphp
     @if($role_access50 || $role_acces50) --}}
     <li class="{{ Request::is('Transaction/User_Banking_Transaction/*') ? 'active' : null }}">
-        <a   href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Balance Reseller </a>
+        <a href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Balance Reseller </a>
     </li>
     {{-- @endif --}}
            {{--@php
@@ -56,7 +56,7 @@ $menu = new RolesClass;
     @endphp
     @if($role_access50 || $role_acces50) --}}
     <li class="{{ Request::is('Transaction/User_Banking_Transaction/*') ? 'active' : null }}">
-        <a   href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Register Reseller </a>
+        <a href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Register Reseller </a>
     </li>
     {{-- @endif --}}
 </ul>
