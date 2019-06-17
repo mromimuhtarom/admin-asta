@@ -1,11 +1,23 @@
 .profile {
     width:58%;
     height: 200px;
-    padding-top:1.5%;
+	padding-top:1.5%;
 	padding-left:3%;
 	padding-right:3%;
 	margin-left:20%;
 	margin-top: 10%;
+    border-radius: 5px;
+}
+
+.input-insert {
+	width: 58%;
+	height: auto;
+	padding-top:1.5%;
+	padding-bottom:1.5%;
+	padding-left:3%;
+	padding-right:3%;
+	margin-left:20%;
+	margin-top: 2%;
     border-radius: 5px;
 }
 

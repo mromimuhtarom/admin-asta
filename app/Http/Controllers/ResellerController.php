@@ -43,6 +43,12 @@ class ResellerController extends Controller
         return view('pages.reseller.balance_reseller');
     }
 
+    public function RegisterReseller()
+    {
+        $menu  = MenuClass::menuName('Register Reseller');
+        return view('pages.reseller.register_reseller', compact('menu'));
+    }
+
     public function searchBalance(Request $request)
     {
       $searchUsername      = $request->inputUsername;
@@ -184,7 +190,43 @@ class ResellerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $validate = [
+          'username' => 'unique:reseller,username',
+          'phone'    => 'unique:reseller,phone',
+          'email'    => 'unique:reseller,email',
+          'idcard'   => 'unique:reseller,ktp'
+        ];
+  
+        $validator = Validator::make($data,$validate);
+  
+        if($validator->fails())
+        {
+  
+          return back()->withInput()->with('alert', $validator->errors()->first());
+  
+        }
+  
+        Reseller::insertData([
+          'username' => $request->username,
+          'password' => bcrypt($request->password),
+          'name'     => $request->name,
+          'phone'    => $request->phone,
+          'email'    => $request->email,
+          'ktp'      => $request->idcard,
+          'address'  => $request->address,
+          'guid'     => bcrypt($request->username.$request->email.$request->idcard)
+        ]);
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '83',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Register Reseller with username '. $request->username
+        ]);
+  
+        return back()->with('alert','REGISTER SUCCESSFULL');
     }
 
     public function storeRankReseller(Request $request)

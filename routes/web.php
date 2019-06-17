@@ -470,6 +470,13 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
+        Route::group(['prefix'  =>  'Register-Reseller'], function() {
+            Route::middleware('page_denied:Register Reseller')->group(function(){
+                Route::get('RegisterReseller-view', 'ResellerController@RegisterReseller')->name('RegisterReseller-view');
+                Route::post('RegisterReseller-create', 'ResellerController@store')->name('RegisterReseller-create');
+            });
+        });
+
     });
 
 

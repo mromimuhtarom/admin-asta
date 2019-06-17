@@ -49,14 +49,14 @@ $menu = new RolesClass;
         <a href="{{ route('BalanceReseller-view') }}" title="Balance Reseller"> Balance Reseller </a>
     </li>
     @endif
-           {{--@php
-    $User_Bank_Transaction = 'User Bank Transaction';
-    $role_access50 = $menu->RoleType1($User_Bank_Transaction);
-    $role_acces50 = $menu->RoleType2($User_Bank_Transaction);
+    @php
+    $register_reseller = 'Register Reseller';
+    $role_access55 = $menu->RoleType1($register_reseller);
+    $role_acces55 = $menu->RoleType2($register_reseller);
     @endphp
-    @if($role_access50 || $role_acces50) --}}
-    <li class="{{ Request::is('Transaction/User_Banking_Transaction/*') ? 'active' : null }}">
-        <a href="{{ route('UserBank-view') }}" title="User Bank Transaction"> Register Reseller </a>
+    @if($role_access55 || $role_acces55)
+    <li class="{{ Request::is('Reseller/Register-Reseller/*') ? 'active' : null }}">
+        <a href="{{ route('RegisterReseller-view') }}" title="User Bank Transaction"> Register Reseller </a>
     </li>
-    {{-- @endif --}}
+    @endif
 </ul>

@@ -93,32 +93,6 @@
                     </a>
                 </td>
             </tr>
-            {{-- <tr>
-                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $bot->user_id }}"></td>
-                <td>{{ $bot->username }}</td>
-                <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $bot->user_id }}" data-type="text" data-url="{{ route('Bots-update') }}">{{ $bot->chip }}</td>
-                <td>{{ $bot->rank_id}}</td>
-                <td>{{ $bot->gold }}</td>
-                <td>{{ $bot->name }}</td>
-                <td>
-                  <a href="#" style="color:red;" class="delete{{ $bot->user_id }}" 
-                  id="delete" 
-                  data-pk="{{ $bot->user_id }}" 
-                  data-toggle="modal" 
-                  data-target="#delete-modal">
-                    <i class="fa fa-times"></i>
-                  </a>
-                </td>
-            </tr>
-            @else 
-            <tr>
-                <td>{{ $bot->username }}</td>
-                <td>{{ $bot->chip }}</td>
-                <td>{{ $bot->rank_id}}</td>
-                <td>{{ $bot->gold }}</td>
-                <td>{{ $bot->name }}</td>
-            </tr> --}}
-            {{-- @endif --}}
             @else 
             <td>{{ $rk->order_id}}</td>
             <td>{{ $rk->name }}</td>
