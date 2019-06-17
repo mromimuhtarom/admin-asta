@@ -2,15 +2,15 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('ResellerTransaction-view') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('ResellerTransaction-view') }}">Reseller Transaction</a></li>
+<li class="breadcrumb-item"><a href="{{ route('BalanceReseller-view') }}">Reseller</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('BalanceReseller-view') }}">Balance Reseller</a></li>
 @endsection
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
 <div class="search bg-blue-dark" style="margin-bottom: 2%;">
     <div class="table-header w-100 h-100">
-        <form action="{{ route('ResellerTransaction-search') }}" method="get" role="search">
+        <form action="{{ route('BalanceReseller-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
                     <input type="text" name="inputUsername" class="form-control" placeholder="username" required>
@@ -27,8 +27,7 @@
             </div>
         </form>
     </div>
-</div>    
-
+</div>   
 
 
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
@@ -36,7 +35,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Reseller Transaction </h2>
+            <h2>Balance Reseller</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -57,15 +56,23 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Date</th>
-                        <th>Gold</th>
+                        <th>Username</th>
+                        <th>Action</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
+                        <th>Total</th>
+                        <th>Timestamp</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($transactions as $tr)
+                    @foreach($balancedetails as $bd)
                     <tr>
-                        <td><a href="{{ route('detailResellerTransaction', [$tr->monthnumber,$tr->year]) }}">{{ $tr->monthname }} {{ $tr->year }}</a></td>
-                        <td>{{ $tr->totalgold }}</td>
+                        <td>{{ $bd->username }}</td>
+                        <td>{{ $bd->action }}</td>
+                        <td>{{ $bd->debit }}</td>
+                        <td>{{ $bd->credit }}</td>
+                        <td>{{ $bd->total }}</td>
+                        <td>{{ $bd->timestamp }}</td>
                     </tr>
                     @endforeach
                 </tbody>

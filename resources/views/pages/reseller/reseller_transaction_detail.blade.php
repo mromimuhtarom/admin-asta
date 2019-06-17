@@ -13,7 +13,7 @@
         <form action="{{ route('ResellerTransaction-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
-                    <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+                    <input type="text" name="inputUsername" class="form-control" placeholder="username" required>
                 </div>
                 <div class="col" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMinDate">
@@ -36,7 +36,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Player Report </h2>
+            <h2>Reseller Transaction</h2>
         </div>
     
         <div class="widget-toolbar">

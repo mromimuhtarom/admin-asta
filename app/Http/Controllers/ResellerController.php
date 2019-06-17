@@ -38,6 +38,131 @@ class ResellerController extends Controller
         return view('pages.reseller.reseller_transaction', compact('transactions'));
     }
 
+    public function BalanceReseller()
+    {
+        return view('pages.reseller.balance_reseller');
+    }
+
+    public function searchBalance(Request $request)
+    {
+      $searchUsername      = $request->inputUsername;
+      $startDate           = $request->inputMinDate;
+      $endDate             = $request->inputMaxDate;
+      $startDateComparison = Carbon::parse($startDate)->timestamp;
+      $endDateComparison   = Carbon::parse($endDate)->timestamp;
+
+      if($endDateComparison < $startDateComparison){
+        return back()->with('alert','alert');
+      }
+
+      if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
+
+        $balancedetails = DB::table('balance_reseller')
+                          ->select('balance_reseller.*', 'reseller.username')
+                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
+                          ->WHERE('reseller.username', $searchUsername)
+                          ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                          ->orderBy('timestamp', 'asc')
+                          ->get();
+
+        // $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+
+      }else if ($searchUsername != NULL && $startDate != NULL) {
+
+        $balancedetails = DB::table('balance_reseller')
+                          ->select('balance_reseller.*', 'reseller.username')
+                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
+                          ->WHERE('reseller.username', $searchUsername)
+                          ->WHERE('timestamp', '>=', $startDate." 00:00:00")
+                          ->orderBy('timestamp', 'asc')
+                          ->get();
+
+        // $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+
+      }else if ($searchUsername != NULL && $endDate != NULL) {
+        $balancedetails = DB::table('balance_reseller')
+                          ->select('balance_reseller.*', 'reseller.username')
+                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
+                          ->WHERE('reseller.username', $searchUsername)
+                          ->WHERE('timestamp', '<=', $endDate." 23:59:59")
+                          ->orderBy('timestamp', 'desc')
+                          ->get();
+
+        // $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+      }else if($searchUsername != NULL) {
+        $balancedetails = DB::table('balance_reseller')
+                        ->select('balance_reseller.*', 'reseller.username')
+                        ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
+                        ->WHERE('reseller.username', $searchUsername)
+                        ->get();
+
+        // $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+      }
+    }
+
+    public function searchTransaction(Request $request)
+    {
+        $searchUsername = $request->inputUsername;
+        $startDate      = $request->inputMinDate;
+        $endDate        = $request->inputMaxDate;
+  
+        if($endDate < $startDate){
+          return back()->with('alert','alert');
+        }
+  
+        if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
+  
+          $transactions = DB::table('reseller_history')
+                            ->select('reseller_history.*', 'reseller.username')
+                            ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
+                            ->WHERE('reseller.username', $searchUsername)
+                            ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                            ->orderBy('timestamp', 'asc')
+                            ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+  
+        }else if ($searchUsername != NULL && $startDate != NULL) {
+  
+          $transactions = DB::table('reseller_history')
+                            ->select('reseller_history.*', 'reseller.username')
+                            ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
+                            ->WHERE('reseller.username', $searchUsername)
+                            ->WHERE('timestamp', '>=', $startDate." 00:00:00")
+                            ->orderBy('timestamp', 'asc')
+                            ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+  
+        }else if ($searchUsername != NULL && $endDate != NULL) {
+          $transactions = DB::table('reseller_history')
+                            ->select('reseller_history.*', 'reseller.username')
+                            ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
+                            ->WHERE('reseller.username', $searchUsername)
+                            ->WHERE('timestamp', '<=', $endDate." 23:59:59")
+                            ->orderBy('timestamp', 'desc')
+                            ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+        }else if($searchUsername != NULL) {
+          $transactions = DB::table('reseller_history')
+                          ->select('reseller_history.*', 'reseller.username')
+                          ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
+                          ->WHERE('reseller.username', $searchUsername)
+                          ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+        }
+    }
+
     public function detailTransaction($month, $year)
     {
         $transactions = DB::table('reseller_history')
