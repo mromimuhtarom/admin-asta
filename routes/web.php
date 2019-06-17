@@ -446,12 +446,27 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
+        Route::group(['prefix'  =>  'Reseller-Transaction'], function() {
+            Route::middleware('page_denied:Reseller Transaction')->group(function(){
+                Route::get('ResellerTransaction-view', 'ResellerController@ResellerTransaction')->name('ResellerTransaction-view');
+                Route::get('ResellerTransaction-search', 'ResellerController@searchTransaction')->name('ResellerTransaction-search');
+                Route::get('ResellerTransaction-search/{month}/{year}/detail', 'ResellerController@detailTransaction')->name('detailResellerTransaction');
+            });
+        });
+
         Route::group(['prefix'  =>  'Reseller-Rank'], function() {
             Route::middleware('page_denied:Reseller Rank')->group(function(){
                 Route::get('ResellerRank-view', 'ResellerController@ResellerRank')->name('ResellerRank-view');
                 Route::post('ResellerRank-update', 'ResellerController@updateRank')->name('ResellerRank-update');
                 Route::delete('ResellerRank-delete', 'ResellerController@destroyRank')->name('ResellerRank-delete');
                 Route::post('ResellerRank-create', 'ResellerController@storeRankReseller')->name('ResellerRank-create');
+            });
+        });
+
+        Route::group(['prefix'  =>  'Balance-Reseller'], function() {
+            Route::middleware('page_denied:Balance Reseller')->group(function(){
+                Route::get('BalanceReseller-view', 'ResellerController@BalanceReseller')->name('BalanceReseller-view');
+                Route::get('BalanceReseller-search', 'ResellerController@searchBalance')->name('BalanceReseller-search');
             });
         });
 

@@ -63,7 +63,7 @@ class RoleController extends Controller
               $menuarray = DB::select('SELECT menu_id from adm_menu where webid = 1');
               $menufirst = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->first();
 
-              for ($i=$menufirst->menu_id; $i < $menu->menu_id; $i++) {
+              for ($i=$menufirst->menu_id; $i <= $menu->menu_id; $i++) {
                 $menuId[] = [
                   'role_id' => $lastValue->role_id,
                   'menu_id' => $i,

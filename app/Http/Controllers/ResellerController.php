@@ -32,14 +32,23 @@ class ResellerController extends Controller
         return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function ResellerTransaction()
     {
-        //
+        $transactions = DB::select('SELECT year(timestamp) as year, month(timestamp) as monthnumber,monthname(timestamp) as monthname, sum(gold) as totalgold FROM reseller_history GROUP BY year,monthname');
+        return view('pages.reseller.reseller_transaction', compact('transactions'));
+    }
+
+    public function detailTransaction($month, $year)
+    {
+        $transactions = DB::table('reseller_history')
+                        ->select('reseller_history.*', 'reseller.username')
+                        ->join('reseller','reseller_history.reseller_id','=','reseller.id')
+                        ->whereYear('timestamp', $year)
+                        ->whereMonth('timestamp', $month)
+                        ->orderby('timestamp', 'ASC')
+                        ->get();
+
+        return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
     }
 
     /**
