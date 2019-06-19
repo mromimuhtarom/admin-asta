@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Providers;
+use View;
+use DB;
+use App\MenuName;
+use App\Classes\MenuClass;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $adm_menu = MenuName::where('status', '=', 1)->where('parent_id', '=', 0)->get();
+        view::share('adm_menu', $adm_menu);
     }
 }
