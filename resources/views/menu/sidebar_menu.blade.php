@@ -59,7 +59,7 @@ $adm_menu = DB::table('asta_db.adm_menu')->where('status', '=', 1)->where('paren
              
         </li> 
     @else 
-    <li class="{{ Request::is('Settings/*') ? ' active' : null }}">
+    <li class="{{ Request::is($mnu->route.'/*') ? ' active' : null }}">
         <a class="has-arrow" href="{{ route($mnu->route) }}" title="Admin"><span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ $mnu->name }}</span>  </a>
     </li>
     @endif

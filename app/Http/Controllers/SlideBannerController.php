@@ -72,9 +72,9 @@ class SlideBannerController extends Controller
                 if ($file->move(public_path('../public/images/SlideBanner'), $nama_file_unik))
                 {
                     if($request->caption== NULL){
-                        return redirect()->route('SlideBanner-view')->with('alert','Caption can\'t be NULL ');
+                        return redirect()->route('Slide_Banner')->with('alert','Caption can\'t be NULL ');
                     } else if($request->url == NULL) {
-                        return redirect()->route('SlideBanner-view')->with('alert','Url can\'t be NULL ');
+                        return redirect()->route('Slide_Banner')->with('alert','Url can\'t be NULL ');
                     } else {
                         $validator = Validator::make($request->all(),[
                             'caption' => 'required',
@@ -99,24 +99,24 @@ class SlideBannerController extends Controller
                             'date'        => Carbon::now('GMT+7'),
                             'description' => 'Create new Slide Banner with caption '. $slide_banner->caption
                         ]);
-                        return redirect()->route('SlideBanner-view')->with('success','Insert Data successfull');
+                        return redirect()->route('Slide_Banner')->with('success','Insert Data successfull');
                     }
                 }
                 else
                 {
-                    return redirect()->route('SlideBanner-view')->with('alert','Gagal Upload File');
+                    return redirect()->route('Slide_Banner')->with('alert','Gagal Upload File');
                     // echo "Gagal Upload File";
                 }
             }
             else
             {       
-                return redirect()->route('SlideBanner-view')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Slide_Banner')->with('alert','Ukuran file terlalu besar');
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {       
-            return redirect()->route('SlideBanner-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Slide_Banner')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -216,24 +216,24 @@ class SlideBannerController extends Controller
                         'date'        => Carbon::now('GMT+7'),
                         'description' => 'Edit image Slide Banner ID '.$pk.' to '. $nama_file_unik
                     ]);
-                    return redirect()->route('SlideBanner-view')->with('success','Update Image successfull');
+                    return redirect()->route('Slide_Banner')->with('success','Update Image successfull');
             
                 }
                 else
                 {
-                    return redirect()->route('SlideBanner-view')->with('alert','Gagal Upload File');
+                    return redirect()->route('Slide_Banner')->with('alert','Gagal Upload File');
                     // echo "Gagal Upload File";
                 }
             }
             else
             {   
-                return redirect()->route('SlideBanner-view')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Slide_Banner')->with('alert','Ukuran file terlalu besar');
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {   
-            return redirect()->route('SlideBanner-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Slide_Banner')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -260,8 +260,8 @@ class SlideBannerController extends Controller
                 'date'  =>  Carbon::now('GMT+7'),
                 'description'   =>  'Delete Slide Banner ID'.$id
             ]);
-            return redirect()->route('SlideBanner-view')->with('success','Data Deleted');
+            return redirect()->route('Slide_Banner')->with('success','Data Deleted');
         }
-        return redirect()->route('SlideBanner-view')->with('success','Something wrong');
+        return redirect()->route('Slide_Banner')->with('success','Something wrong');
     }
 }
