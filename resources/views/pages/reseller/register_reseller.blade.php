@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('ResellerRank-view') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('ResellerRank-view') }}">Register Reseller</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Register_Reseller') }}">Reseller</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Register_Reseller') }}">Register Reseller</a></li>
 @endsection
 
 
@@ -28,7 +28,7 @@
         <div class="col">
             <div class="table-header w-100 h-100">
                 <form action="{{ route('RegisterReseller-create')}}" method="post">
-                    {{ csrf_field() }}
+                    @csrf
                     {{-- <div class="row h-100 w-100 no-gutters">
                         <div class="col" style="padding-left:1%;width:25%;">Username</div>
                         <div class="col" style="padding-left:1%;">

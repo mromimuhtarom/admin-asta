@@ -1,13 +1,10 @@
 @extends('index')
 
-@section('sidebarmenu')
-@include('menu.menugame')
-@endsection
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('DominoSCategory-view') }}">Games > Domino Susun</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('DominoSCategory-view') }}">Category</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Category_Domino_Susun') }}">Games > Domino Susun</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Category_Domino_Susun') }}">Category</a></li>
 @endsection
 
 

@@ -23,7 +23,7 @@ class LoginController extends Controller
             Session::put('roleId',Auth::user()->role_id);
             Session::put('login1',TRUE);
   
-            return redirect(route('home'));
+            return redirect(route('Dashboard'));
   
          } else {
             return redirect('/')->with('alert','Username or Password are wrong!!');

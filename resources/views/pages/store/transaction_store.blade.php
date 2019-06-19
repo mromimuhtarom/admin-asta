@@ -1,9 +1,6 @@
 @extends('index')
 
 
-@section('sidebarmenu')
-@include('menu.menustore')    
-@endsection
 
 
 @section('content')

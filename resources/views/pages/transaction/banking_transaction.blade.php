@@ -1,10 +1,6 @@
 @extends('index')
 
 
-@section('sidebarmenu')
-@include('menu.menutransaction')    
-@endsection
-
 @section('content')
 <div class="bank-transactions">
 

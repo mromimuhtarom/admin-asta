@@ -75,7 +75,7 @@ class GoldStoreController extends Controller
             'description' => 'Create new Gold Store with title '. $gold->name
         ]);
 
-        return redirect()->route('GoldStore-view')->with('success','Data Added');
+        return redirect()->route('Chip_Store')->with('success','Data Added');
     }
 
     /**
@@ -161,8 +161,8 @@ class GoldStoreController extends Controller
         if($getGoldId != '')
         {
             DB::table('items_cash')->where('id', '=', $getGoldId)->delete();
-            return redirect()->route('GoldStore-view')->with('success','Data Deleted');
+            return redirect()->route('Chip_Store')->with('success','Data Deleted');
         }
-        return redirect()->route('GoldStore-view')->with('success','Something wrong');  
+        return redirect()->route('Chip_Store')->with('success','Something wrong');  
     }
 }

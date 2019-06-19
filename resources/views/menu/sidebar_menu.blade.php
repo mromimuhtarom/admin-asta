@@ -69,3 +69,53 @@ $adm_menu = DB::table('asta_db.adm_menu')->where('status', '=', 1)->where('paren
 
 
 
+{{-- <ul class="metismenu sa-left-menu" id="menu1">
+        <li class="{{ Request::is('Dashboard/*') ? 'active' : null }}"><!-- first-level -->
+             @include('menu.menuhome')
+        </li>
+
+        <li class="{{ Request::is('Admin/*') ? 'active' : null }}">
+            @include('menu.menuadmin')										
+        </li>
+        Transaction<li class="{{ Request::is('Transaction/*') ? 'active' : null }}">
+            @include('menu.menutransaction')                    
+        </li> 
+        <li class="{{ Request::is('Players/*') ? 'active' : null }}">
+            @include('menu.menuplayer')										
+        </li>
+
+        <li class="{{ Request::is('Slide_Banner/*') ? 'active' : null }}">
+            @include('menu.menuslide')
+        </li>
+
+        <li class="{{ Request::is('Daily-Gift/*') ? 'active' : null }}">
+            @include('menu.menugift')
+        </li>
+
+        <li class="{{ Request::is('Game/*', 'Game-Asta-BigTwo/*', 'Game-Asta-DominoSusun/*','Game-Asta-DominoQQ/*') ? 'active' : null }}">
+            @include('menu.menugame')
+        </li>
+
+        <li class="{{ Request::is('Store/*') ? 'active' : null }}">
+            @include('menu.menustore')
+        </li>
+
+        <li class="{{ Request::is('Notification/*') ? 'active' : null }}">
+            @include('menu.menunotification')
+        </li>
+
+        <li class="{{ Request::is('Settings/*') ? 'active' : null }}">
+            @include('menu.menusetting')
+        </li>
+
+        <li class="{{ Request::is('Reseller/*') ? 'active' : null }}">
+            @include('menu.menureseller')
+        </li>
+
+        <li class="{{ Request::is('Settings/*') ? ' active' : null }}">
+            <a class="has-arrow"   href="{{ route('logout') }}" title="Log Out"><span class="fa fa-lg fa-fw fa-power-off"></span> <span class="menu-item-parent">Log Out</span> 
+
+            </a>
+        </li>
+</li>  
+</ul> --}}

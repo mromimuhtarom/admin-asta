@@ -1,8 +1,5 @@
 @extends('index')
 
-@section('sidebarmenu')
-@include('menu.menugame')
-@endsection
 
 
 @section('content')

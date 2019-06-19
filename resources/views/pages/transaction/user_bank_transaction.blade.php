@@ -1,10 +1,6 @@
 @extends('index')
 
 
-@section('sidebarmenu')
-@include('menu.menutransaction')    
-@endsection
-
 @section('content')
 @if (count($errors) > 0)
 <div class="alert alert-danger">

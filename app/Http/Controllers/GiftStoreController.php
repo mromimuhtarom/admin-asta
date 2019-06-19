@@ -70,11 +70,11 @@ class GiftStoreController extends Controller
                 if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
                 {
                     if($request->title == NULL){
-                        return redirect()->route('GiftStore-view')->with('alert','Name can\'t be NULL ');
+                        return redirect()->route('Gift_Store')->with('alert','Name can\'t be NULL ');
                     } else if($request->price == NULL) {
-                        return redirect()->route('GiftStore-view')->with('alert','Price can\'t be NULL ');
+                        return redirect()->route('Gift_Store')->with('alert','Price can\'t be NULL ');
                     } else if($request->category == NULL) {
-                        return redirect()->route('GiftStore-view')->with('alert','Category can\'t be NULL ');
+                        return redirect()->route('Gift_Store')->with('alert','Category can\'t be NULL ');
                     } else {
 
                         $validator = Validator::make($request->all(),[
@@ -105,24 +105,24 @@ class GiftStoreController extends Controller
                             'date'        => Carbon::now('GMT+7'),
                             'description' => 'Create new Gift Store with title '. $gift->subject
                         ]);
-                        return redirect()->route('GiftStore-view')->with('success','Insert Data successfull');
+                        return redirect()->route('Gift_Store')->with('success','Insert Data successfull');
                     }
                 }
                 else
                 {
-                    return redirect()->route('GiftStore-view')->with('alert','Gagal Upload File');
+                    return redirect()->route('Gift_Store')->with('alert','Gagal Upload File');
                     // echo "Gagal Upload File";
                 }
             }
             else
             {       
-                return redirect()->route('GiftStore-view')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Gift_Store')->with('alert','Ukuran file terlalu besar');
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {       
-            return redirect()->route('GiftStore-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Gift_Store')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -188,24 +188,24 @@ class GiftStoreController extends Controller
                         'date'        => Carbon::now('GMT+7'),
                         'description' => 'Edit image_url Gift Store ID '.$pk.' to '. $nama_file_unik
                     ]);
-                    return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
+                    return redirect()->route('Gift_Store')->with('success','Update Image successfull');
             
                 }
                 else
                 {
-                    return redirect()->route('GiftStore-view')->with('alert','Gagal Upload File');
+                    return redirect()->route('Gift_Store')->with('alert','Gagal Upload File');
                     // echo "Gagal Upload File";
                 }
             }
             else
             {   
-                return redirect()->route('GiftStore-view')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Gift_Store')->with('alert','Ukuran file terlalu besar');
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {   
-            return redirect()->route('GiftStore-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Gift_Store')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -278,8 +278,8 @@ class GiftStoreController extends Controller
                 'description' => 'Delete Gift Store ID '.$id
             ]);
 
-            return redirect()->route('GiftStore-view')->with('success','Data Deleted');
+            return redirect()->route('Gift_Store')->with('success','Data Deleted');
         }
-        return redirect()->route('GiftStore-view')->with('success','Something wrong');   
+        return redirect()->route('Gift_Store')->with('success','Something wrong');   
     }
 }

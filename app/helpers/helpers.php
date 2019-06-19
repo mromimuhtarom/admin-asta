@@ -49,6 +49,16 @@ function strYesNo ($val) {
 	}
 }
 
+function strIcon ($val) {
+	if($val == 1) {
+		return 'fa-home';
+	} else if($val == 2) {
+		return 'fa-gamepad';
+	} else if($val == 3) {
+    return '';
+  }
+}
+
 function generateID($digits = 4){
   $i = 0;
   $pin = "";

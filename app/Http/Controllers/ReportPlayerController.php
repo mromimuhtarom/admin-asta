@@ -156,7 +156,7 @@ class ReportPlayerController extends Controller
             
             return view('pages.players.report_player_detail', compact('log_login'));
         } else {
-            return redirect()->route('ReportPlayer-view');
+            return redirect()->route('Report_Players');
         }
     }
 

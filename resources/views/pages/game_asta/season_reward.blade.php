@@ -1,13 +1,9 @@
 @extends('index')
 
-@section('sidebarmenu')
-@include('menu.menugame')
-@endsection
-
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('SeasonReward-view') }}">Games > Asta Poker</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('SeasonReward-view') }}">Season Reward</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Season_Reward_Asta_Poker') }}">Games > Asta Poker</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Season_Reward_Asta_Poker') }}">Season Reward</a></li>
 @endsection
 
 

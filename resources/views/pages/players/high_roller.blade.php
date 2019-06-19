@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('HighRoller-view') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('HighRoller-view') }}">High Roller</a></li>
+<li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">Players</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">High Roller</a></li>
 @endsection
 
 

@@ -257,7 +257,7 @@ class ResellerController extends Controller
             'description' => 'Create new Reseller Rank with Rank Name '. $rankname
         ]);
 
-        return redirect()->route('ResellerRank-view')->with('success','Data Added');
+        return redirect()->route('Reseller_Rank')->with('success','Data Added');
     }
 
     /**
@@ -360,9 +360,9 @@ class ResellerController extends Controller
                 'description' => 'Edit password ResellerId '.$pk.' to '. $password
             ]);
 
-            return redirect()->route('ListReseller-view')->with('success','Reset Password Successfully');
+            return redirect()->route('List_Reseller')->with('success','Reset Password Successfully');
         }
-        return redirect()->route('ListReseller-view')->with('alert','Password is Null');
+        return redirect()->route('List_Reseller')->with('alert','Password is Null');
     }
 
 
@@ -431,9 +431,9 @@ class ResellerController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete reseller with reseller ID '.$userid
             ]);
-            return redirect()->route('ListReseller-view')->with('success','Data Deleted');
+            return redirect()->route('List_Reseller')->with('success','Data Deleted');
         }
-        return redirect()->route('ListReseller-view')->with('success','Somethong wrong');                
+        return redirect()->route('List_Reseller')->with('success','Somethong wrong');                
     }
 
 
@@ -451,8 +451,8 @@ class ResellerController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Reseller Rank with reseller ID '.$id
             ]);
-            return redirect()->route('ResellerRank-view')->with('success','Data Deleted');
+            return redirect()->route('Reseller_Rank')->with('success','Data Deleted');
         }
-        return redirect()->route('ResellerRank-view')->with('success','Somethong wrong');  
+        return redirect()->route('Reseller_Rank')->with('success','Somethong wrong');  
     }
 }

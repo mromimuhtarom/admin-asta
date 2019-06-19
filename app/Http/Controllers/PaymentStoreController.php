@@ -67,7 +67,7 @@ class PaymentStoreController extends Controller
             'description' => 'Create new Payment Store with Name '. $request->title
         ]);
 
-        return redirect()->route('PaymentStore-view')->with('success','Data Added');
+        return redirect()->route('Payment_Store')->with('success','Data Added');
     }
 
     /**
@@ -157,8 +157,8 @@ class PaymentStoreController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Payment Store ID '.$getPaymentId
             ]);
-            return redirect()->route('PaymentStore-view')->with('success','Data Deleted');
+            return redirect()->route('Payment_Store')->with('success','Data Deleted');
         }
-        return redirect()->route('PaymentStore-view')->with('success','Something wrong');  
+        return redirect()->route('Payment_Store')->with('success','Something wrong');  
     }
 }

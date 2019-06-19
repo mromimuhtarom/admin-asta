@@ -72,15 +72,15 @@ class GoodsStoreController extends Controller
                 if ($file->move(public_path('../public/images/Goods'), $nama_file_unik))
                 {
                     if($request->title== NULL){
-                        return redirect()->route('GoodsStore-view')->with('alert','Title can\'t be NULL ');
+                        return redirect()->route('Goods_Store')->with('alert','Title can\'t be NULL ');
                     } else if($request->transaction_type == NULL) {
-                        return redirect()->route('GoodsStore-view')->with('alert','Transaction Type can\'t be NULL ');
+                        return redirect()->route('Goods_Store')->with('alert','Transaction Type can\'t be NULL ');
                     } else if ($request->price == NULL) {
-                        return redirect()->route('GoodsStore-view')->with('alert','Price can\'t be NULL ');
+                        return redirect()->route('Goods_Store')->with('alert','Price can\'t be NULL ');
                     } else if($request->google_key == NULL) {
-                        return redirect()->route('GoodsStore-view')->with('alert','Google Key can\'t be NULL ');
+                        return redirect()->route('Goods_Store')->with('alert','Google Key can\'t be NULL ');
                     } else if($request->qty == NULL) {
-                        return redirect()->route('GoodsStore-view')->with('alert','Quantity can\'t be NULL ');
+                        return redirect()->route('Goods_Store')->with('alert','Quantity can\'t be NULL ');
                     } else {
 
                         $validator = Validator::make($request->all(),[
@@ -115,24 +115,24 @@ class GoodsStoreController extends Controller
                             'date'        => Carbon::now('GMT+7'),
                             'description' => 'Create new Goods Store with name '. $goods->name
                         ]);
-                        return redirect()->route('GoodsStore-view')->with('success','Insert Data successfull');
+                        return redirect()->route('Goods_Store')->with('success','Insert Data successfull');
                     }
                 }
                 else
                 {
-                    return redirect()->route('GoodsStore-view')->with('alert','Gagal Upload File');
+                    return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                     // echo "Gagal Upload File";
                 }
             }
             else
             {       
-                return redirect()->route('GoodsStore-view')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Goods_Store')->with('alert','Ukuran file terlalu besar');
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {       
-            return redirect()->route('GoodsStore-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Goods_Store')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -239,22 +239,22 @@ class GoodsStoreController extends Controller
                         'date'          =>  Carbon::now('GMT+7'),
                         'description'   =>  'Edit Image Goods Store with ID '.$pk.' to '.$nama_file_unik
                     ]);
-                    return redirect()->route('GoodsStore-view')->with('success','Update Image successfull');
+                    return redirect()->route('Goods_Store')->with('success','Update Image successfull');
                 }
                 else 
                 {
-                    return redirect()->route('GoodsStore-view')->with('alert','Gagal Upload File');
+                    return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }
 
             }
             else 
             {
-                return redirect()->route('GoodsStore-view')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Goods_Store')->with('alert','Ukuran file terlalu besar');
             }
         }
         else 
         {
-            return redirect()->route('GoodsStore-view')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Goods_Store')->with('alert','Ekstensi file tidak di perbolehkan');
         }
 
     }
@@ -282,8 +282,8 @@ class GoodsStoreController extends Controller
                 'description' => 'Delete Goods Store ID '.$id
             ]);
 
-            return redirect()->route('GoodsStore-view')->with('success','Data Deleted');
+            return redirect()->route('Goods_Store')->with('success','Data Deleted');
         }
-        return redirect()->route('GoodsStore-view')->with('success','Something wrong');  
+        return redirect()->route('Goods_Store')->with('success','Something wrong');  
     }
 }

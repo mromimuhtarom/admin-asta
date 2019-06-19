@@ -90,7 +90,7 @@ class EmailNotificationController extends Controller
                       'date'        => Carbon::now('GMT+7'),
                       'description' => 'Create new Email Notification with title '. $notification->subject
                     ]);
-                    return redirect()->route('EmailNotification-view')->with('success','Insert Data successfull');
+                    return redirect()->route('Email_Notification')->with('success','Insert Data successfull');
             
                 }
                 else
@@ -162,7 +162,7 @@ class EmailNotificationController extends Controller
                         'date'        => Carbon::now('GMT+7'),
                         'description' => 'Edit imageUrl Email Notification ID '.$pk.' to '. $nama_file_unik
                     ]);
-                    return redirect()->route('GiftStore-view')->with('success','Update Image successfull');
+                    return redirect()->route('Email_Notification')->with('success','Update Image successfull');
             
                 }
                 else
@@ -259,9 +259,9 @@ class EmailNotificationController extends Controller
                 'description' => 'Delete Email Notification ID '.$id
             ]);
 
-            return redirect()->route('EmailNotification-view')->with('success','Data Deleted');
+            return redirect()->route('Email_Notification')->with('success','Data Deleted');
         }
-        return redirect()->route('EmailNotification-view')->with('success','Something wrong');   
+        return redirect()->route('Email_Notification')->with('success','Something wrong');   
     }
     
 }

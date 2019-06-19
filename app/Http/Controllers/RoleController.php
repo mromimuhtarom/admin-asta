@@ -79,9 +79,9 @@ class RoleController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Create new Role with Role Name '.$role
               ]);
-              return redirect()->route('Role-view')->with('success','Data Insert Successfull');  
+              return redirect()->route('Role_Admin')->with('success','Data Insert Successfull');  
         }
-        return redirect()->route('Role-view')->with('alert','Role Name is Null');
+        return redirect()->route('Role_Admin')->with('alert','Role Name is Null');
     }
 
     /**
@@ -183,8 +183,8 @@ class RoleController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Role ID '.$id
             ]);
-            return redirect()->route('Role-view')->with('success','Data Deleted');
+            return redirect()->route('Role_Admin')->with('success','Data Deleted');
         }
-        return redirect()->route('Role-view')->with('alert','Something wrong'); 
+        return redirect()->route('Role_Admin')->with('alert','Something wrong'); 
     }
 }

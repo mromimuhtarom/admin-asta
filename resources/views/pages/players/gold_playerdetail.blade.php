@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Gold-view') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Gold-view') }}">Gold Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">Players</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">Gold Player</a></li>
 @endsection
 
 

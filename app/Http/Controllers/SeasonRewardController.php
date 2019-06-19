@@ -63,7 +63,7 @@ class SeasonRewardController extends Controller
             'winpotReward'  => $rewardChip,
             'goldReward'    => $rewardGold
         ]);
-        return redirect()->route('SeasonReward-view')->with('success','Data Added');
+        return redirect()->route('Season_Reward_Asta_Poker')->with('success','Data Added');
     }
 
     /**
@@ -118,8 +118,8 @@ class SeasonRewardController extends Controller
         if($sRewardId != '')
         {
             DB::table('season_reward')->where('id', '=', $sRewardId)->delete();
-            return redirect()->route('SeasonReward-view')->with('success','Data Deleted');
+            return redirect()->route('Season_Reward_Asta_Poker')->with('success','Data Deleted');
         }
-        return redirect()->route('SeasonReward-view')->with('success','Something wrong');  
+        return redirect()->route('Season_Reward_Asta_Poker')->with('success','Something wrong');  
     }
 }

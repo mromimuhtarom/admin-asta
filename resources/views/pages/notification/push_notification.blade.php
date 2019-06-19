@@ -1,15 +1,12 @@
 @extends('index')
 
 
-@section('sidebarmenu')
-@include('menu.menunotification')    
-@endsection
 
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('PushNotification-view') }}">Notification</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('PushNotification-view') }}">Push Notification</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Push_Notification') }}">Notification</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Push_Notification') }}">Push Notification</a></li>
 @endsection
 
 

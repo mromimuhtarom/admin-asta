@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('GameSetting-view') }}">Settings</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('GameSetting-view') }}">Game Setting</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">Settings</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">Game Setting</a></li>
 @endsection
 
 

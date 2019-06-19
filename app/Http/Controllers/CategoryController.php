@@ -166,7 +166,7 @@ class CategoryController extends Controller
             'description' => 'Create new Category Asta Big Two'. $bgt_category->name
         ]);
  
-        return redirect()->route('BigTwoCategory-view')->with('success','Data Added');
+        return redirect()->route('Table_Big_Two')->with('success','Data Added');
     }
 
     /**
@@ -210,7 +210,7 @@ class CategoryController extends Controller
             'description' => 'Create new Category Domino Susun'. $dms_category->name
         ]);
 
-        return redirect()->route('DominoSCategory-view')->with('success','Data Added');
+        return redirect()->route('Category_Domino_Susun')->with('success','Data Added');
 
     }
 
@@ -255,7 +255,7 @@ class CategoryController extends Controller
             'description' => 'Create new Category Domino QQ'. $dmq_category->name
         ]);
 
-        return redirect()->route('DominoQCategory-view')->with('success','Data Added');
+        return redirect()->route('Category_Domino_QQ')->with('success','Data Added');
 
     }
 
@@ -527,9 +527,9 @@ class CategoryController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Category Asta Big Two Room ID '.$roomid
             ]);
-            return redirect()->route('BigTwoCategory-view')->with('success','Data Deleted');
+            return redirect()->route('Table_Big_Two')->with('success','Data Deleted');
         }
-        return redirect()->route('BigTwoCategory-view')->with('success','Something wrong');      
+        return redirect()->route('Table_Big_Two')->with('success','Something wrong');      
     }
 
     /**
@@ -553,9 +553,9 @@ class CategoryController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Category Domino Susun Room ID '.$roomid
             ]);
-            return redirect()->route('DominoSCategory-view')->with('success','Data Deleted');
+            return redirect()->route('Category_Domino_Susun')->with('success','Data Deleted');
         }
-        return redirect()->route('DominoSCategory-view')->with('success','Something wrong');      
+        return redirect()->route('Category_Domino_Susun')->with('success','Something wrong');      
     }
 
     /**
@@ -579,8 +579,8 @@ class CategoryController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Category Domino QQ Room ID '.$roomid
             ]);
-            return redirect()->route('DominoQCategory-view')->with('success','Data Deleted');
+            return redirect()->route('Category_Domino_QQ')->with('success','Data Deleted');
         }
-        return redirect()->route('DominoQCategory-view')->with('success','Something wrong');      
+        return redirect()->route('Category_Domino_QQ')->with('success','Something wrong');      
     }
 }

@@ -70,7 +70,7 @@ class PushNotificationController extends Controller
             'description' => 'Create new Push Notification with title '.$request->title
           ]);
 
-          return redirect()->route('PushNotification-view')->with('success','Data Added');
+          return redirect()->route('Push_Notification')->with('success','Data Added');
     }
 
     /**
@@ -156,8 +156,8 @@ class PushNotificationController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Push Notification ID '.$id
               ]);
-            return redirect()->route('PushNotification-view')->with('success','Data Deleted');
+            return redirect()->route('Push_Notification')->with('success','Data Deleted');
         }
-        return redirect()->route('PushNotification-view')->with('success','Something wrong');   
+        return redirect()->route('Push_Notification')->with('success','Something wrong');   
     }
 }

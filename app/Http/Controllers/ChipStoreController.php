@@ -69,7 +69,7 @@ class ChipStoreController extends Controller
               'date'        => Carbon::now('GMT+7'),
               'description' => 'Create new Chip Store with Title '. $chip->name
           ]);
-          return redirect()->route('ChipStore-view')->with('success','Data Insert Successfull');
+          return redirect()->route('Chip_Store')->with('success','Data Insert Successfull');
     }
 
     /**
@@ -158,8 +158,8 @@ class ChipStoreController extends Controller
                 'description' => 'Delete Chip Store ID '.$id
             ]);
 
-            return redirect()->route('ChipStore-view')->with('success','Data Deleted');
+            return redirect()->route('Chip_Store')->with('success','Data Deleted');
         }
-        return redirect()->route('ChipStore-view')->with('success','Something wrong');   
+        return redirect()->route('Chip_Store')->with('success','Something wrong');   
     }
 }

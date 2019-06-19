@@ -1,13 +1,11 @@
 @extends('index')
 
-@section('sidebarmenu')
-@include('menu.menugame')
-@endsection
+
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('BigTwoSeasonReward-view') }}">Games > Big Two</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('BigTwoSeasonReward-view') }}">Season Reward</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Season_Reward_Big_Two') }}">Games > Big Two</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Season_Reward_Big_Two') }}">Season Reward</a></li>
 @endsection
 
 

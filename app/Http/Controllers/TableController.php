@@ -152,7 +152,7 @@ class TableController extends Controller
         'description' => 'Create new Asta Poker Table with name '.$request->tableName
         ]);
 
-        return redirect()->route('Table-view')->with('success','Data Added');
+        return redirect()->route('Table_Asta_Poker')->with('success','Data Added');
     }
 
     /**
@@ -192,7 +192,7 @@ class TableController extends Controller
             'description' => 'Create new Big Two Table with name '.$request->tableName
         ]);
  
-        return redirect()->route('BigTwoTable-view')->with('success','Data Added');
+        return redirect()->route('Table_Big_Two')->with('success','Data Added');
      }
 
      /**
@@ -233,7 +233,7 @@ class TableController extends Controller
             'description' => 'Create new Domino Susun Table  with name '.$request->tableName
           ]);
 
-       return redirect()->route('DominoSTable-view')->with('success','Data Added');
+       return redirect()->route('Table_Domino_Susun')->with('success','Data Added');
     }
 
      /**
@@ -274,7 +274,7 @@ class TableController extends Controller
             'description' => 'Create new Domino QQ Table with name '.$request->tableName
           ]);
 
-       return redirect()->route('DominoQTable-view')->with('success','Data Added');
+       return redirect()->route('Table_Domino_QQ')->with('success','Data Added');
     }
 
     /**
@@ -517,9 +517,9 @@ class TableController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Asta Poker Table with room ID '.$tableid
             ]);
-            return redirect()->route('Table-view')->with('success','Data Deleted');
+            return redirect()->route('Table_Asta_Poker')->with('success','Data Deleted');
         }
-        return redirect()->route('Table-view')->with('success','Something wrong');                
+        return redirect()->route('Table_Asta_Poker')->with('success','Something wrong');                
     }
 
     /**
@@ -542,9 +542,9 @@ class TableController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Asta Big Two Table with room ID '.$tableid
             ]);
-            return redirect()->route('BigTwoTable-view')->with('success','Data Deleted');
+            return redirect()->route('Table_Big_Two')->with('success','Data Deleted');
         }
-        return redirect()->route('BigTwoTable-view')->with('success','Something wrong');                
+        return redirect()->route('Table_Big_Two')->with('success','Something wrong');                
     }
 
     /**
@@ -568,9 +568,9 @@ class TableController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Domino Susun Table with room ID '.$tableid
             ]);
-            return redirect()->route('DominoSTable-view')->with('success','Data Deleted');
+            return redirect()->route('Table_Domino_Susun')->with('success','Data Deleted');
         }
-        return redirect()->route('DominoSTable-view')->with('success','Something wrong');                
+        return redirect()->route('Table_Domino_Susun')->with('success','Something wrong');                
     }
 
     /**
@@ -594,8 +594,8 @@ class TableController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete Domino QQ Table with room ID '.$tableid
             ]);
-            return redirect()->route('DominoQTable-view')->with('success','Data Deleted');
+            return redirect()->route('Table_Domino_QQ')->with('success','Data Deleted');
         }
-        return redirect()->route('DominoQTable-view')->with('success','Something wrong');                
+        return redirect()->route('Table_Domino_QQ')->with('success','Something wrong');                
     }
 }

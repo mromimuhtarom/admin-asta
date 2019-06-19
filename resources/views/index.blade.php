@@ -157,7 +157,7 @@
               <span>{{ ucwords($username->fullname) }} <span class="fa fa-angle-down"></span></span>
           </a>
           <div class="sa-left-menu-outer">
-            @include('header.sidebar_menu')
+            @include('menu.sidebar_menu')
           </div>
           <a href="javascript:void(0)" class="minifyme" onclick="SAtoggleClass(this, 'body', 'minified')"> 
               <i class="fa fa-arrow-circle-left hit"></i> 

@@ -191,7 +191,7 @@ class PlayersController extends Controller
           'description' => 'Create new Bot with username '. $username
         ]);
 
-        return redirect()->route('Bots-view')->with('success','Data Added');
+        return redirect()->route('Bots')->with('success','Data Added');
     }
 
     /**
@@ -278,8 +278,8 @@ class PlayersController extends Controller
             'date'        => Carbon::now('GMT+7'),
             'description' => 'Delete Bots ID '.$userid
           ]);
-          return redirect()->route('Bots-view')->with('success','Data Deleted');
+          return redirect()->route('Bots')->with('success','Data Deleted');
       }
-      return redirect()->route('Bots-view')->with('success','Something wrong');   
+      return redirect()->route('Bots')->with('success','Something wrong');   
     }
 }

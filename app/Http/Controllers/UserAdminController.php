@@ -69,7 +69,7 @@ class UserAdminController extends Controller
               'date'        => Carbon::now('GMT+7'),
               'description' => 'Create new User with Username '. $user->username
           ]);
-          return redirect()->route('UserAdmin-view')->with('success','Data Insert Successfull');
+          return redirect()->route('User_Admin')->with('success','Data Insert Successfull');
     }
 
     /**
@@ -153,9 +153,9 @@ class UserAdminController extends Controller
           'date'        => Carbon::now('GMT+7'),
           'description' => 'Edit password UserId '.$pk.' to '. $password
         ]);
-        return redirect()->route('UserAdmin-view')->with('success','Reset Password Successfully');
+        return redirect()->route('User_Admin')->with('success','Reset Password Successfully');
         }
-        return redirect()->route('UserAdmin-view')->with('alert','Password is Null');
+        return redirect()->route('User_Admin')->with('alert','Password is Null');
     }
 
     /**
@@ -178,8 +178,8 @@ class UserAdminController extends Controller
                 'date'        => Carbon::now('GMT+7'),
                 'description' => 'Delete user with user ID '.$userid
             ]);
-            return redirect()->route('UserAdmin-view')->with('success','Data Deleted');
+            return redirect()->route('User_Admin')->with('success','Data Deleted');
         }
-        return redirect()->route('UserAdmin-view')->with('success','Somethong wrong');                
+        return redirect()->route('User_Admin')->with('success','Somethong wrong');                
     }
 }
