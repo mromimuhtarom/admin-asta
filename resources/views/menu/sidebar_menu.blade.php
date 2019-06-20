@@ -15,6 +15,7 @@
                     @foreach (DB::table('asta_db.adm_menu')->where('parent_id', '=', $mnu->menu_id)->where('status', '=', 1)->get() as $sb)
 
                         @if (DB::table('asta_db.adm_menu')->where('parent_id', '=', $sb->menu_id)->where('status', '=', 1)->first())
+                        
                             <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
                                 <a href="" title="{{ $sb->name }}"> {{ $sb->name }}
                                     <b class="collapse-sign">
@@ -32,12 +33,14 @@
                                     </ul>                    
                                     @endforeach
                             </li>
+
                         @else 
     
                         {{-- tidak memiliki submenu kedua --}}
                             <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
                                 <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> {{ $sb->name }}</a>                         
                             </li>
+
                         @endif
                     @endforeach
                 </ul>

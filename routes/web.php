@@ -489,10 +489,18 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
-        Route::group(['prefix'  =>  'Gold-Store-Reseller'], function() {
+        Route::group(['prefix'  =>  'Gold_Store_Reseller'], function() {
             Route::middleware('page_denied:Gold Store Reseller')->group(function(){
-                Route::get('GoldStoreReseller-view', 'ResellerController@GoldStoreReseller')->name('GoldStoreReseller-view');
-                Route::post('GoldStoreReseller-create', 'ResellerController@GoldResellerstore')->name('GoldStoreReseller-create');
+                Route::get('GoldStoreReseller-view', 'GoldStoreController@GoldStoreReseller')->name('Gold_Store_Reseller');
+                Route::post('GoldStoreReseller-create', 'GoldStoreController@GoldResellerstore')->name('GoldStoreReseller-create');
+            });
+        });
+
+        Route::group(['prefix'  =>  'Reseller_Bank_Transaction'], function() {
+            Route::middleware('page_denied:Gold Store Reseller')->group(function(){
+                Route::get('ResellerBankTransaction-view', 'ResellerController@ResellerBankTransaction')->name('Reseller_Bank_Transaction');
+                Route::post('ResellerBankTransaction-approve', 'ResellerController@ResellerBankTransactionApprove')->name('ResellerBankTransaction-Approve');
+                Route::post('ResellerBankTransaction-decline', 'ResellerController@ResellerBankTransactionDecline')->name('ResellerBankTransaction-Decline');
             });
         });
 

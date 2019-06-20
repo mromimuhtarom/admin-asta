@@ -1,8 +1,5 @@
 @extends('index')
 
-@section('sidebarmenu')
-    @include('menu.menuadmin')
-@endsection
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>

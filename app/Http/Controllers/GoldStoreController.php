@@ -26,6 +26,12 @@ class GoldStoreController extends Controller
         return view('pages.store.gold_store', compact('menu', 'getGolds'));
     }
 
+    public function GoldStoreReseller()
+    {
+        $gold_store = DB::table('items_cash')->where('shop_type', '=', 2)->get();
+        return view('pages.reseller.gold_store_reseller', compact('gold_store'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -64,6 +70,7 @@ class GoldStoreController extends Controller
             'name'          => $title,
             'goldAwarded'   => $goldAwarded,
             'price'         => $priceCash,
+            'shop_type'     =>  1,
             'google_key'    => $googleKey,
         ]);
 
@@ -78,15 +85,42 @@ class GoldStoreController extends Controller
         return redirect()->route('Chip_Store')->with('success','Data Added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function GoldResellerstore(Request $request)
     {
-        //
+        $title          = $request->title;
+        $goldAwarded    = $request->goldAwarded;
+        $priceCash      = $request->priceCash;
+        $googleKey      = $request->googleKey;
+
+        $validator = Validator::make($request->all(),[
+            'title'    => 'required',
+            'goldAwarded'    => 'required|integer',
+            'priceCash' => 'required|integer',
+            'googleKey' =>  'required',
+        ]);
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        $gold = DB::table('items_cash')->insert([
+            'name'          => $title,
+            'goldAwarded'   => $goldAwarded,
+            'price'         => $priceCash,
+            'shop_type'     =>  2,
+            'google_key'    => $googleKey,
+        ]);
+
+        Log::create([
+            'operator_id' => Session::get('userId'),
+            'menu_id'     => '57',
+            'action_id'   => '3',
+            'date'        => Carbon::now('GMT+7'),
+            'description' => 'Create new Gold Store with title '. $request->title
+        ]);
+
+        return redirect()->route('Gold_Store_Reseller')->with('success','Data Added');
     }
 
     /**
@@ -158,11 +192,22 @@ class GoldStoreController extends Controller
     public function destroy(Request $request)
     {
         $getGoldId = $request->userid;
+        $goldreseller = $request->id;
         if($getGoldId != '')
         {
             DB::table('items_cash')->where('id', '=', $getGoldId)->delete();
             return redirect()->route('Chip_Store')->with('success','Data Deleted');
+        } else if($goldreseller != '') 
+        {
+            DB::table('items_cash')->where('id', '=', $goldreseller)->delete();
+            return redirect()->route('Gold_Store_Reseller')->with('success','Data Deleted');
+        } else if ($getGoldId == NULL)
+        {
+            return redirect()->route('Chip_Store')->with('alert','ID must be Fill');  
+        } else if($goldreseller == NULL )
+        {
+            return redirect()->route('Gold_Store_Reseller')->with('alert','ID must be Fill'); 
         }
-        return redirect()->route('Chip_Store')->with('success','Something wrong');  
+        
     }
 }

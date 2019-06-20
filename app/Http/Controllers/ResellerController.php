@@ -49,6 +49,66 @@ class ResellerController extends Controller
         return view('pages.reseller.register_reseller', compact('menu'));
     }
 
+    public function ResellerBankTransaction()
+    {
+        $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
+        return view('pages.reseller.reseller_bank_transaction', compact('transactions'));
+    }
+
+    public function ResellerBankTransactionApprove(Request $request)
+    {
+        $approveOrderId = $request->approveId;
+        $resellerId  = $request->resellerId;
+        $goldAwarded = $request->goldAwarded;
+        $amount = $request->price;
+
+        DB::table('reseller_history')->insert([
+            'reseller_id' => $resellerId,
+            'price'       => $amount,
+            'gold'        => $goldAwarded,
+            'timestamp'   => Carbon::now('GMT+7')
+          ]);
+  
+          $checkTotalGold = DB::table('reseller')->select('gold')->where('id', '=', $resellerId)->first();
+  
+          DB::table('balance_reseller')->insert([
+            'reseller_id' => $resellerId,
+            'action'   => 'Buy Gold',
+            'debit'    => $goldAwarded,
+            'credit'   => 0,
+            'total'    => $checkTotalGold->gold,
+            'timestamp'=> Carbon::now('GMT+7')
+          ]);
+  
+          DB::table('reseller_transaction')->where('order_id', $approveOrderId)->update([
+            'status' => '2',
+            'timestamp' => Carbon::now('GMT+7')
+          ]);
+
+        //   Log::create([
+        //     'operator_id' => Session::get('userId'),
+        //     'menu_id'     => '80',
+        //     'action_id'   => '3',
+        //     'date'        => Carbon::now('GMT+7'),
+        //     'description' => 'Create new Reseller Rank with Rank Name '. $rankname
+        //   ]);
+
+          return back()->with('success','Approved Succesful');
+    }
+
+
+    public function ResellerBankTransactionDecline(Request $request)
+    {
+        $declineOrderId = $request->declineId;
+        DB::table('reseller_transaction')->where('order_id', $declineOrderId)->update([
+            'status' => '0',
+            'timestamp' => Carbon::now('GMT+7')
+        ]);
+        return back()->with('success','Declined Succesful');
+    }
+
+
+
     public function searchBalance(Request $request)
     {
       $searchUsername      = $request->inputUsername;
@@ -266,10 +326,7 @@ class ResellerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
