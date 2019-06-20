@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $table = 'adm_role';
+    protected $table = 'asta_db.adm_role';
     protected $fillable = ['name'];
     protected $primaryKey = 'role_id';
   

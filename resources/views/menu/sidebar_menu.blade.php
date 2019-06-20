@@ -1,7 +1,7 @@
 <ul class="metismenu sa-left-menu" id="menu1">
         @foreach( $adm_menu as $mnu)    
         {{-- menu  --}}
-        @if (DB::table('asta_db.adm_menu')->where('parent_id', '=', $mnu->menu_id)->where('status', '=', 1)->first())
+        @if (!$mnu['children']->isEMPTY())
             <li class="{{ Request::is($mnu->route.'/*') ? 'active' : null }}"><!-- first-level -->
                 <a class="has-arrow"   href="" title="Admin"><span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ $mnu->name }}</span> 
                     <b class="collapse-sign">
@@ -12,9 +12,9 @@
     
                 {{-- submenu --}}
                 <ul aria-expanded="true" class="sa-sub-nav collapse">
-                    @foreach (DB::table('asta_db.adm_menu')->where('parent_id', '=', $mnu->menu_id)->where('status', '=', 1)->get() as $sb)
+                    @foreach ($mnu['children'] as $sb)
 
-                        @if (DB::table('asta_db.adm_menu')->where('parent_id', '=', $sb->menu_id)->where('status', '=', 1)->first())
+                        @if (!$sb['children']->isEMPTY())
                         
                             <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
                                 <a href="" title="{{ $sb->name }}"> {{ $sb->name }}
@@ -25,7 +25,7 @@
                                 </a>
                                     
                                     {{-- submenu kedua --}}
-                                    @foreach (DB::table('asta_db.adm_menu')->where('parent_id', '=', $sb->menu_id)->where('status', '=', 1)->get() as $smk)
+                                    @foreach ($sb['children'] as $smk)
                                     <ul aria-expanded="true" class="sa-sub-nav-second-level">                    
                                         <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/*') ? 'active' : null }}">
                                             <a   href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ $smk->name }} </a>
@@ -50,7 +50,7 @@
         
         {{-- tidak memiliki submenu --}}
         <li class="{{ Request::is($mnu->route.'/*') ? ' active' : null }}">
-            <a class="has-arrow" href="{{ route($mnu->route) }}" title="Admin"><span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ $mnu->name }}</span>  </a>
+            <a class="has-arrow" href="{{ route($mnu->route)}}" title="Admin"><span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ $mnu->name }}</span>  </a>
         </li>
         @endif
         @endforeach

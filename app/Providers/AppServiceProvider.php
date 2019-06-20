@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $adm_menu = DB::table('asta_db.adm_menu')->where('status', '=', 1)->where('parent_id', '=', 0)->get();
+        // $adm_menu = DB::table('asta_db.adm_menu')->where('status', '=', 1)->where('parent_id', '=', 0)->get();
+        // $adm_menu = MenuName::where('status', '=', 1)->where('parent_id', '=', 0)->get();
+        $adm_menu = MenuName::where('status', '=', 1)->where('parent_id', '=', 0)->get();
         view::share('adm_menu', $adm_menu);
     }
 }

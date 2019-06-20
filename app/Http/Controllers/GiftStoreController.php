@@ -178,7 +178,8 @@ class GiftStoreController extends Controller
                 if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
                 {
                     Gift::where('id', '=', $pk)->update([
-                        'image_url' => $nama_file_unik
+                        'image_url' => $nama_file_unik,
+                        'date_img'  =>  Carbon::now('GMT+7')
                     ]);
 
                     Log::create([
