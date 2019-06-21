@@ -59,7 +59,8 @@ class CategoryController extends Controller
     public function DominoSusunindex()
     {
         $category = DominoSusunRoom::all();
-        return view('pages.game_asta.dominoSusunCategory', compact('category'));
+        $menu     = MenuClass::menuName('Category Domino Susun');
+        return view('pages.game_asta.dominoSusunCategory', compact('category', 'menu'));
     }
 
     /**
@@ -71,7 +72,8 @@ class CategoryController extends Controller
     public function DominoQindex()
     {
         $category = DominoQRoom::all();
-        return view('pages.game_asta.dominoQCategory', compact('category'));
+        $menu     = MenuClass::menuName('Category Domino QQ');
+        return view('pages.game_asta.dominoQCategory', compact('category', 'menu'));
     }
 
     /**

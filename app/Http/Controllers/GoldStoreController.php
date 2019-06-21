@@ -29,7 +29,8 @@ class GoldStoreController extends Controller
     public function GoldStoreReseller()
     {
         $gold_store = DB::table('items_cash')->where('shop_type', '=', 2)->get();
-        return view('pages.reseller.gold_store_reseller', compact('gold_store'));
+        $menu  = MenuClass::menuName('Gold Store Reseller'); 
+        return view('pages.reseller.gold_store_reseller', compact('gold_store', 'menu'));
     }
 
     /**

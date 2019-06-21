@@ -52,7 +52,8 @@ class ResellerController extends Controller
     public function ResellerBankTransaction()
     {
         $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
-        return view('pages.reseller.reseller_bank_transaction', compact('transactions'));
+        $menu = MenuClass::menuName('Reseller Bank Transaction');
+        return view('pages.reseller.reseller_bank_transaction', compact('transactions', 'menu'));
     }
 
     public function ResellerBankTransactionApprove(Request $request)

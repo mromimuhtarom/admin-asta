@@ -47,9 +47,11 @@
           <div class="row">
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+              @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"><span> Create New Category</span></i>
               </button>
+              @endif
             </div>
             <!-- End Button tambah data baru -->
           </div>
@@ -60,17 +62,22 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                  @if($menu)
                   <th></th>
+                  @endif
                   <th class="th-sm">Room Name</th>
                   <th class="th-sm">Stake</th>
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
                   <th class="th-sm">Timer</th>
+                  @if($menu)
                   <th class="th-sm">Action</th>
+                  @endif
                 </tr>
               </thead>
               <tbody>
                 @foreach($category as $kt)
+                @if($menu)
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td>
                     <td><a href="#" class="usertext" data-title="Room Name" data-name="name" data-pk="{{ $kt->roomid }}" data-type="text" data-url="{{ route('DominoQCategory-update')}}">{{ $kt->name }}</a></td>
@@ -80,6 +87,15 @@
                     <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('DominoQCategory-update') }}">{{ $kt->timer }}</a></td>
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
                 </tr>
+                @else 
+                <tr>
+                    <td><{{ $kt->name }}</td>
+                    <td>{{ $kt->stake }}</td>
+                    <td>{{ $kt->min_buy }}</td>
+                    <td>{{ $kt->max_buy }}</td>
+                    <td>{{ $kt->timer }}</td>
+                </tr>
+                @endif
                 @endforeach
               </tbody>
             </table>

@@ -67,7 +67,7 @@
 												</div>
 												<div class="user-transaction-users">
 													<div>
-														<img src="/images/gifts/41.png" alt="" class="img-profile-reward">
+														<img src="/upload/gifts/41.png" alt="" class="img-profile-reward">
 													</div>
 													<div class="user-transaction-user-name">
 														<div>
@@ -82,12 +82,14 @@
 													{{-- <div>
 														<input type="button" value="View Detail" class="btn btn-xs btn-info" data-toggle="modal" data-target="#view-detail{{ $reward->id }}">
 													</div> --}}
+													@if($menu)
 													<div>
 														<input type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $transaction->order_id }}">
 													</div>
 													<div>
 														<input type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $transaction->order_id }}">
 													</div>
+													@endif
 												</div>
 
 											</td>

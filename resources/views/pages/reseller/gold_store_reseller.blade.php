@@ -46,11 +46,11 @@
           <!-- Button tambah chip store baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              {{-- @if($menu) --}}
+              @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoldStore">
                 <i class="fa fa-plus"></i>
               </button>
-              {{-- @endif --}}
+              @endif
             </div>
           </div>
           <!-- End Button tambah chip store baru -->
@@ -65,23 +65,23 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                {{-- @if($menu) --}}
+                @if($menu)
                   <th class="th-sm"></th>
-                {{-- @endif --}}
+                @endif
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Gold Awarded</th>
                 <th class="th-sm">Price Cash</th>
                 <th class="th-sm">Pay Transaction</th>
                 <th class="th-sm">Google Key</th>
                 <th class="th-sm">Active</th>
-                {{-- @if($menu) --}}
+                @if($menu)
                   <th>Action</th>
-                {{-- @endif --}}
+                @endif
               </tr>
             </thead>
             <tbody>
               @foreach($gold_store as $gold)
-              {{-- @if($menu) --}}
+              @if($menu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->id }}"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
@@ -100,7 +100,7 @@
                   </a>
                 </td>
               </tr>
-              {{-- @else 
+              @else 
               <tr>
                 <td>{{ $gold->name }}</td>
                 <td>{{ $gold->goldAwarded }}</td>
@@ -109,7 +109,7 @@
                 <td>{{ $gold->google_key }}</td>
                 <td>{{ strEnabledDisabled($gold->active) }}</td>
               </tr>
-              @endif --}}
+              @endif
               @endforeach
             </tbody>
           </table>

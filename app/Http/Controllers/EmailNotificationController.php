@@ -57,7 +57,7 @@ class EmailNotificationController extends Controller
         {
             if($ukuran < 1044070)
             {           
-                if ($file->move(public_path('../public/images/EmailNotification'), $nama_file_unik))
+                if ($file->move(public_path('../public/upload/EmailNotification'), $nama_file_unik))
                 {
                     // Gift::where('id', '=', $pk)->update([
                     //     'imageUrl' => $nama_file_unik
@@ -148,7 +148,7 @@ class EmailNotificationController extends Controller
         {
             if($ukuran < 1044070)
             {           
-                if ($file->move(public_path('../public/images/EmailNotification'), $nama_file_unik))
+                if ($file->move(public_path('../public/upload/EmailNotification'), $nama_file_unik))
                 {
                     EmailNotification::where('id', '=', $pk)->update([
                         'imageUrl' => $nama_file_unik
