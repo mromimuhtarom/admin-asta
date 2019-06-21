@@ -149,7 +149,8 @@
                 <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Price</th>
-                <th class="th-sm">Rank</th>
+                <th class="th-sm">Category</th>
+                <th class="th-sm">Status</th>
                 @if($menu)
                 <th style="width:10px;"></th>
                 @endif
@@ -183,6 +184,7 @@
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('GiftStore-update') }}">{{ $gf->name }}</a></td>
                     <td><a href="#" class="usertext" data-name="chipsPrice" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->price }}</a></td>
                     <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
+                    <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ strEnabledDisabled($gf->status)}}</a></td>
                     <td>
                         <a href="#" style="color:red;" class="delete{{ $gf->id }}" 
                             id="delete" 
@@ -320,11 +322,22 @@
       });
 
       $('.category').editable({
+        mode :'inline',
         value: 0,
 				source: [
 				          {value: '1', text: 'Makanan'},
 					        {value: '2', text: 'Minuman'},
 					        {value: '3', text: 'Item'},
+        ]
+      });
+
+      $('.status').editable({
+        mode :'inline',
+        value: '',
+				source: [
+                  {value: '', text: 'Choose for activation'},
+				          {value: '1', text: 'Disabled'},
+					        {value: '2', text: 'Enabled'},
         ]
       });
 

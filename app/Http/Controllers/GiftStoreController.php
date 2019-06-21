@@ -95,7 +95,9 @@ class GiftStoreController extends Controller
                             'category_id' => $request->category,
                             'width'       => $width,
                             'height'      => $height,
-                            'image_url'   => $nama_file_unik
+                            'image_url'   => $nama_file_unik,
+                            'date_img'    => Carbon::now('GMT+7'),
+                            'status'      => 1
                         ]);
             
                         Log::create([
