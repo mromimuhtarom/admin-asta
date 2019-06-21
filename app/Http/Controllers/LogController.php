@@ -36,185 +36,171 @@ class LogController extends Controller
                          ->get();
   
         if($inputUser != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputAction != NULL) {
-          $logs = DB::table('admin_log')
-                 ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                 ->join('action', 'admin_log.action_id','=', 'action.id')
-                 ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                 ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                 ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                 ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                 ->wherebetween('admin_log.date', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-                 ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                 ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                 ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                 ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+                 ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                 ->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                 ->orderBy('asta_db.log_operator.date', 'desc')
                  ->get();
                  
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL) {
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('admin_log.date', '>=', $inputMinDate." 00:00:00")
-                  ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
                   
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL && $inputAction != NULL &&  $inputMaxDate != NULL) {
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('admin_log.date', '<=', $inputMaxDate." 23:59:59")
-                  ->orderBy('admin_log.date', 'asc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+                  ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
                   
   
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputMinDate != NULL && $inputMaxDate != NULL &&  $inputAction != NULL) {
-          $logs = DB::table('admin_log')
-                 ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                 ->join('action', 'admin_log.action_id','=', 'action.id')
-                 ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                 ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                 ->wherebetween('admin_log.date', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-                 ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                 ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                 ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                 ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                 ->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                 ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                 ->orderBy('asta_db.log_operator.datetime', 'desc')
                  ->get();
   
                  
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
        }else if ($inputMinDate != NULL && $inputMaxDate != NULL){
-         $logs = DB::table('admin_log')
-                 ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                 ->join('action', 'admin_log.action_id','=', 'action.id')
-                 ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                 ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                 ->wherebetween('admin_log.date', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-                 ->orderBy('admin_log.date', 'asc')
+         $logs = DB::table('asta_db.log_operator')
+                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                 ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                 ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                 ->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                 ->orderBy('asta_db.log_operator.datetime', 'asc')
                  ->get();
   
                  
          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
        }else if ($inputUser != NULL && $inputMaxDate != NULL){
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('admin_log.date', '<=', $inputMaxDate." 23:59:59")
-                  ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL &&  $inputAction != NULL) {
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                  ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
 
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputMinDate != NULL &&  $inputAction != NULL) {
-               $logs = DB::table('admin_log')
-                       ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                       ->join('action', 'admin_log.action_id','=', 'action.id')
-                       ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                       ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                       ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                       ->WHERE('admin_log.date', '>=', $inputMinDate." 00:00:00")
-                       ->orderBy('admin_log.date', 'desc')
+               $logs = DB::table('asta_db.log_operator')
+                       ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                       ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                       ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                       ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                       ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+                       ->orderBy('asta_db.log_operator.datetime', 'desc')
                        ->get();
   
   
                 return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputMaxDate != NULL &&  $inputAction != NULL) {
-                $logs = DB::table('admin_log')
-                        ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                        ->join('action', 'admin_log.action_id','=', 'action.id')
-                        ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                        ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                        ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                        ->WHERE('admin_log.date', '<=', $inputMaxDate." 23:59:59")
-                        ->orderBy('admin_log.date', 'desc')
+                $logs = DB::table('asta_db.log_operator')
+                        ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                        ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                        ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                        ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                        ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+                        ->orderBy('asta_db.log_operator.datetime', 'desc')
                         ->get();
   
   
                 return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputUser != NULL && $inputMinDate != NULL ) {
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('admin_log.date', '>=', $inputMinDate." 00:00:00")
-                  ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
   
          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
        }else if ($inputMinDate != NULL){
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->WHERE('admin_log.date', '>=', $inputMinDate." 00:00:00")
-                  ->orderBy('admin_log.date', 'asc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+                  ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
   
   
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if ($inputMaxDate != NULL){
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator ', 'admin_log.operator_id', '=', 'operator .operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->WHERE('admin_log.date', '<=', $inputMaxDate." 23:59:59")
-                  ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator ', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
   
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL ){
-          $logs = DB::table('admin_log')
-                  ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                  ->join('action', 'admin_log.action_id','=', 'action.id')
-                  ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                  ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                  ->where('operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
   
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputAction != NULL) {
-          $logs = DB::table('admin_log')
-                 ->select('admin_log.*', 'action.action', 'operator.username', 'adm_menu.name')
-                 ->join('action', 'admin_log.action_id','=', 'action.id')
-                 ->join('operator', 'admin_log.operator_id', '=', 'operator.operator_id')
-                 ->join('adm_menu', 'admin_log.menu_id','=', 'adm_menu.menu_id')
-                 ->where('action.action', 'LIKE', '%'.$inputAction.'%')
-                 ->orderBy('admin_log.date', 'desc')
+          $logs = DB::table('asta_db.log_operator')
+                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                 ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
+                 ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
+                 ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
+                 ->orderBy('asta_db.log_operator.datetime', 'desc')
                  ->get();
   
   

@@ -69,7 +69,6 @@
                 <thead>			                
                     <tr>
                         <th>Username</th>
-                        <th>Menu</th>
                         <th>Action</th>
                         <th>Date</th>
                         <th>Description</th>
@@ -79,10 +78,9 @@
                     @foreach($logs as $log)
                     <tr>
                         <td>{{ $log->username }}</td>
-                        <td>{{ $log->name }}</td>
                         <td>{{ $log->action }}</td>
-                        <td>{{ $log->date }}</td>
-                        <td>{{ $log->description }}</td>
+                        <td>{{ $log->datetime }}</td>
+                        <td>{{ $log->desc }}</td>
                     </tr>
                     @endforeach
                 </tbody>
