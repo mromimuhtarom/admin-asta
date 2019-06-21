@@ -22,7 +22,7 @@ class GiftStoreController extends Controller
     public function index()
     {
         $gifts = Gift::all();
-        $menu  = MenuClass::menuName('Gift');
+        $menu  = MenuClass::menuName('Gift Store');
         return view('pages.store.Gift', compact('gifts', 'menu', 'dbgift'));
     }
 

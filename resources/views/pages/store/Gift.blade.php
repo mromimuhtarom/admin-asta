@@ -198,7 +198,7 @@
                     <td >
                           <div class="media-container">
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->image_url }}">
+                                <img class="img-object imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->image_url }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
                             </div>
                     </td>
