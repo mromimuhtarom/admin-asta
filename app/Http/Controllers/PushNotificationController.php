@@ -63,11 +63,10 @@ class PushNotificationController extends Controller
         ]);
 
           Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '73',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Push Notification with title '.$request->title
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Push Notification with title '.$request->title
           ]);
 
           return redirect()->route('Push_Notification')->with('success','Data Added');
@@ -128,11 +127,10 @@ class PushNotificationController extends Controller
   
   
       Log::create([
-        'operator_id' => Session::get('userId'),
-        'menu_id'     => '73',
-        'action_id'   => '2',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' Push Notification Id '.$pk.' to '. $value
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' in menu Push Notification with Id '.$pk.' to '. $value
       ]);
     }
 
@@ -150,11 +148,10 @@ class PushNotificationController extends Controller
             DB::table('push_notifications')->where('id', '=', $id)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '73',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Push Notification ID '.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Push Notification with ID '.$id
               ]);
             return redirect()->route('Push_Notification')->with('success','Data Deleted');
         }

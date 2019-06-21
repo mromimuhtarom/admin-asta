@@ -151,15 +151,15 @@
                 @foreach($admin as $adm)
                 @if($menu)
                 <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->operator_id }}"></td>
-                    <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
-                    <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->operator_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
-                    <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->operator_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
-                    <td><a href="#" class="password{{ $adm->operator_id }} btn btn-primary" id="password" data-pk="{{ $adm->operator_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->op_id }}"></td>
+                    <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
+                    <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
+                    <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->op_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
+                    <td><a href="#" class="password{{ $adm->op_id }} btn btn-primary" id="password" data-pk="{{ $adm->op_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
                     <td> 
-                      <a href="#" style="color:red;" class="delete{{ $adm->operator_id }}" 
+                      <a href="#" style="color:red;" class="delete{{ $adm->op_id }}" 
                         id="delete" 
-                        data-pk="{{ $adm->operator_id }}" 
+                        data-pk="{{ $adm->op_id }}" 
                         data-toggle="modal" 
                         data-target="#delete-modal">
                           <i class="fa fa-times"></i>
@@ -168,7 +168,6 @@
                 </tr>
                 @else 
                 <tr>
-                    <td></td>
                     <td>{{ $adm->username }}</td>
                     <td>{{ $adm->fullname }}</td>
                     <td>{{ $adm->name }}</td>
@@ -283,7 +282,7 @@
 
           @php
               foreach($admin as $adm) {            
-              echo'$(".password'.$adm->operator_id.'").click(function(e) {';
+              echo'$(".password'.$adm->op_id.'").click(function(e) {';
                 echo'e.preventDefault();';
     
                 echo"var id = $(this).attr('data-pk');";
@@ -294,20 +293,20 @@
 
           @php
               foreach($admin as $adm) {
-              echo'$(".delete'.$adm->operator_id.'").hide();';
-              echo'$(".deletepermission'.$adm->operator_id.'").on("click", function() {';
-                echo 'if($( ".deletepermission'.$adm->operator_id.':checked" ).length > 0)';
+              echo'$(".delete'.$adm->op_id.'").hide();';
+              echo'$(".deletepermission'.$adm->op_id.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$adm->op_id.':checked" ).length > 0)';
                 echo '{';
-                  echo '$(".delete'.$adm->operator_id.'").show();';
+                  echo '$(".delete'.$adm->op_id.'").show();';
                 echo'}';
                 echo'else';
                 echo'{';
-                  echo'$(".delete'.$adm->operator_id.'").hide();';
+                  echo'$(".delete'.$adm->op_id.'").hide();';
                 echo'}';
     
               echo '});';
             
-              echo'$(".delete'.$adm->operator_id.'").click(function(e) {';
+              echo'$(".delete'.$adm->op_id.'").click(function(e) {';
                 echo'e.preventDefault();';
     
                 echo"var id = $(this).attr('data-pk');";

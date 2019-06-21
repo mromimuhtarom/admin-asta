@@ -183,11 +183,10 @@ class GiftStoreController extends Controller
                     ]);
 
                     Log::create([
-                        'operator_id' => Session::get('userId'),
-                        'menu_id'     => '69',
-                        'action_id'   => '2',
-                        'date'        => Carbon::now('GMT+7'),
-                        'description' => 'Edit image_url Gift Store ID '.$pk.' to '. $nama_file_unik
+                        'op_id'     => Session::get('userId'),
+                        'action_id' => '2',
+                        'datetime'  => Carbon::now('GMT+7'),
+                        'desc'      => 'Edit image_url in menu Gift Store with ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('Gift_Store')->with('success','Update Image successfull');
             
@@ -248,11 +247,10 @@ class GiftStoreController extends Controller
   
   
       Log::create([
-        'operator_id' => Session::get('userId'),
-        'menu_id'     => '69',
-        'action_id'   => '2',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' Gift Store Id '.$pk.' to '. $value
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' in menu Gift Store with Id '.$pk.' to '. $value
       ]);
     }
 
@@ -272,11 +270,10 @@ class GiftStoreController extends Controller
             $path = '../public/images/gifts/'.$gifts->image_url;
             File::delete($path);            
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '69',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Gift Store ID '.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Gift Store with ID '.$id
             ]);
 
             return redirect()->route('Gift_Store')->with('success','Data Deleted');

@@ -23,8 +23,8 @@ class UserAdminController extends Controller
     public function index()
     {
         $menu  = MenuClass::menuName('User Admin');
-        $admin = DB::table('operator')->join('adm_role', 'adm_role.role_id', '=', 'operator.role_id')->get();
-        $role  = DB::table('adm_role')->get();
+        $admin = DB::table('asta_db.operator')->join('adm_role', 'adm_role.role_id', '=', 'operator.role_id')->get();
+        $role  = DB::table('asta_db.adm_role')->get();
         return view('pages.admin.user_admin', compact('admin', 'role', 'menu'));
     }
 
@@ -63,11 +63,10 @@ class UserAdminController extends Controller
           ]);
   
           Log::create([
-              'operator_id' => Session::get('userId'),
-              'menu_id'     => '42',
-              'action_id'   => '3',
-              'date'        => Carbon::now('GMT+7'),
-              'description' => 'Create new User with Username '. $user->username
+              'op_id'     => Session::get('userId'),
+              'action_id' => '3',
+              'datetime'  => Carbon::now('GMT+7'),
+              'desc'      => 'Create new in menu User Admin with Username '. $user->username
           ]);
           return redirect()->route('User_Admin')->with('success','Data Insert Successfull');
     }
@@ -127,11 +126,10 @@ class UserAdminController extends Controller
 
 
       Log::create([
-        'operator_id' => Session::get('userId'),
-        'menu_id'     => '42',
-        'action_id'   => '2',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' UserId '.$pk.' to '. $value
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' in menu User Admin with UserId '.$pk.' to '. $value
       ]);
     }
     public function updatepassword(Request $request) 
@@ -147,11 +145,10 @@ class UserAdminController extends Controller
   
   
         Log::create([
-          'operator_id' => Session::get('userId'),
-          'menu_id'     => '42',
-          'action_id'   => '1',
-          'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit password UserId '.$pk.' to '. $password
+          'op_id'     => Session::get('userId'),
+          'action_id' => '1',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Edit password in menu User Admin with UserId '.$pk.' to '. $password
         ]);
         return redirect()->route('User_Admin')->with('success','Reset Password Successfully');
         }
@@ -172,11 +169,10 @@ class UserAdminController extends Controller
             DB::table('operator')->where('operator_id', '=', $userid)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '42',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete user with user ID '.$userid
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu User Admin with user ID '.$userid
             ]);
             return redirect()->route('User_Admin')->with('success','Data Deleted');
         }

@@ -210,11 +210,10 @@ class SlideBannerController extends Controller
                     ]);
 
                     Log::create([
-                        'operator_id' => Session::get('userId'),
-                        'menu_id'     => '55',
-                        'action_id'   => '2',
-                        'date'        => Carbon::now('GMT+7'),
-                        'description' => 'Edit image Slide Banner ID '.$pk.' to '. $nama_file_unik
+                        'op_id'     => Session::get('userId'),
+                        'action_id' => '2',
+                        'datetime'  => Carbon::now('GMT+7'),
+                        'desc'      => 'Edit image in menu Slide Banner with ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('Slide_Banner')->with('success','Update Image successfull');
             
@@ -254,11 +253,10 @@ class SlideBannerController extends Controller
             $path = '../public/images/SlideBanner/'.$slide_banner->image;
             File::delete($path);
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'   =>  '55',
-                'action_id' =>  '4',
-                'date'  =>  Carbon::now('GMT+7'),
-                'description'   =>  'Delete Slide Banner ID'.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Slide Banner with ID'.$id
             ]);
             return redirect()->route('Slide_Banner')->with('success','Data Deleted');
         }

@@ -184,11 +184,10 @@ class PlayersController extends Controller
         }
 
         Log::create([
-          'operator_id' => Session::get('userId'),
-          'menu_id'     => '51',
-          'action_id'   => '3',
-          'date'        => Carbon::now('GMT+7'),
-          'description' => 'Create new Bot with username '. $username
+          'op_id'     => Session::get('userId'),
+          'action_id' => '3',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Create new in menu Bot with username '. $username
         ]);
 
         return redirect()->route('Bots')->with('success','Data Added');
@@ -248,11 +247,10 @@ class PlayersController extends Controller
 
 
     Log::create([
-      'operator_id' => Session::get('userId'),
-      'menu_id'     => '51',
-      'action_id'   => '2',
-      'date'        => Carbon::now('GMT+7'),
-      'description' => 'Edit '.$name.' ID '.$pk.' to '. $value
+      'op_id'     => Session::get('userId'),
+      'action_id' => '2',
+      'datetime'  => Carbon::now('GMT+7'),
+      'desc'      => 'Edit '.$name.' in menu Bots with ID '.$pk.' to '. $value
     ]);
 
     }
@@ -272,11 +270,10 @@ class PlayersController extends Controller
           DB::table('user_stat')->where('user_id', '=', $userid)->delete();
 
           Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '51',
-            'action_id'   => '4',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Delete Bots ID '.$userid
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Delete in menu Bots with ID '.$userid
           ]);
           return redirect()->route('Bots')->with('success','Data Deleted');
       }

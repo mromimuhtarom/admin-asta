@@ -75,11 +75,10 @@ class GoldStoreController extends Controller
         ]);
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '57',
+            'op_id' => Session::get('userId'),
             'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Gold Store with title '. $gold->name
+            'datetime'        => Carbon::now('GMT+7'),
+            'desc' => 'Create new in menu Gold Store with title '. $gold->name
         ]);
 
         return redirect()->route('Chip_Store')->with('success','Data Added');
@@ -113,11 +112,10 @@ class GoldStoreController extends Controller
         ]);
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '57',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Gold Store with title '. $request->title
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Gold Store Reseller with title '. $request->title
         ]);
 
         return redirect()->route('Gold_Store_Reseller')->with('success','Data Added');
@@ -175,11 +173,10 @@ class GoldStoreController extends Controller
         }
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '57',
-            'action_id'   => '2',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Edit '.$name.' gameID '.$pk.' to '. $value
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Edit '.$name.' in menu Gold Store with ID '.$pk.' to '. $value
         ]);
     }
 
@@ -196,10 +193,22 @@ class GoldStoreController extends Controller
         if($getGoldId != '')
         {
             DB::table('items_cash')->where('id', '=', $getGoldId)->delete();
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Gift Store with ID '.$getGoldId
+            ]);
             return redirect()->route('Chip_Store')->with('success','Data Deleted');
         } else if($goldreseller != '') 
         {
             DB::table('items_cash')->where('id', '=', $goldreseller)->delete();
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Gift Store Reseller with ID '.$goldreseller
+            ]);
             return redirect()->route('Gold_Store_Reseller')->with('success','Data Deleted');
         } else if ($getGoldId == NULL)
         {

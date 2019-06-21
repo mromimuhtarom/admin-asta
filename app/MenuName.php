@@ -32,7 +32,13 @@ class MenuName extends Model
     
       public function children() {
 
-            return $this->hasMany(MenuName::class, 'parent_id', 'menu_id');
+            return $this->hasMany(MenuName::class, 'parent_id', 'menu_id')->where('status', '=', 1);
+
+      } 
+
+      public function access() {
+
+            return $this->hasMany(Adm_Access::class, 'menu_id', 'menu_id')->where('status', '=', 1)->where('type', '=', 1)->orwhere('type', '=', 2);
 
       } 
 

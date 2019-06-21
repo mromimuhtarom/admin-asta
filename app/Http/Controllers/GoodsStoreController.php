@@ -109,11 +109,10 @@ class GoodsStoreController extends Controller
                         ]);
             
                         Log::create([
-                            'operator_id' => Session::get('userId'),
-                            'menu_id'     => '68',
-                            'action_id'   => '3',
-                            'date'        => Carbon::now('GMT+7'),
-                            'description' => 'Create new Goods Store with name '. $goods->name
+                            'op_id'     => Session::get('userId'),
+                            'action_id' => '3',
+                            'datetime'  => Carbon::now('GMT+7'),
+                            'desc'      => 'Create new in menu Goods Store with name '. $goods->name
                         ]);
                         return redirect()->route('Goods_Store')->with('success','Insert Data successfull');
                     }
@@ -201,11 +200,10 @@ class GoodsStoreController extends Controller
         }
 
         Log::create([
-            'operator_id'   =>  Session::get('userId'),
-            'menu_id'       =>  '68',
-            'action_id'     =>  '2',
-            'date'          =>  Carbon::now('GMT+7'),
-            'description'   =>  'Edit '.$name.'Goods Store ID '.$pk.' to '.$value
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Edit '.$name.'in menu Goods Store with ID '.$pk.' to '.$value
         ]);
     }
 
@@ -233,11 +231,10 @@ class GoodsStoreController extends Controller
                     ]);
     
                     Log::create([
-                        'operator_id'   =>  Session::get('userId'),
-                        'menu_id'       =>  '68',
-                        'action_id'     =>  '2',
-                        'date'          =>  Carbon::now('GMT+7'),
-                        'description'   =>  'Edit Image Goods Store with ID '.$pk.' to '.$nama_file_unik
+                        'op_id'     => Session::get('userId'),
+                        'action_id' => '2',
+                        'datetime'  => Carbon::now('GMT+7'),
+                        'desc'      => 'Edit Image in menu Goods Store with ID '.$pk.' to '.$nama_file_unik
                     ]);
                     return redirect()->route('Goods_Store')->with('success','Update Image successfull');
                 }
@@ -275,11 +272,10 @@ class GoodsStoreController extends Controller
             $path = '../public/images/Goods/'.$goods->image;
             File::delete($path);            
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '68',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Goods Store ID '.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Goods Store with ID '.$id
             ]);
 
             return redirect()->route('Goods_Store')->with('success','Data Deleted');

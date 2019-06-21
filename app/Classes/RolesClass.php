@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Session;
 class RolesClass {
     public static function RoleType2($menu)
     {
-      $menus1 = DB::table('adm_menu')
-                ->join('adm_access','adm_menu.menu_id', '=', 'adm_access.menu_id')
+      $menus1 = DB::table('asta_db.adm_menu')
+                ->join('asta_db.adm_access','asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')
                 ->where('role_id', Session::get('roleId'))
                 ->where('name', '=', $menu)
                 ->where('type', '=', '2')
@@ -17,8 +17,8 @@ class RolesClass {
 
     public static function RoleType1($menu)
     {
-      $menus1 = DB::table('adm_menu')
-                ->join('adm_access','adm_menu.menu_id', '=', 'adm_access.menu_id')
+      $menus1 = DB::table('asta_db.adm_menu')
+                ->join('asta_db.adm_access','asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')
                 ->where('role_id', Session::get('roleId'))
                 ->where('name', '=', $menu)
                 ->where('type', '=', '1')
@@ -28,8 +28,8 @@ class RolesClass {
 
     public static function RoleType0($menu)
     {
-      $type0 = DB::table('adm_menu')
-                      ->join('adm_access','adm_menu.menu_id', '=', 'adm_access.menu_id')
+      $type0 = DB::table('asta_db.adm_menu')
+                      ->join('asta_db.adm_access','asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')
                       ->where('role_id', Session::get('roleId'))
                       ->where('name', '=', $menu)
                       ->where('type', '=', '0')

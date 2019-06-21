@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $table = 'operator';
+    protected $table = 'asta_db.operator';
     public $timestamps = false;
 
     /**
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'password', 'role_id', 'fullname', 'operator_id'
+        'username', 'userpass', 'role_id', 'fullname', 'op_id'
     ];
 
     /**
@@ -26,9 +26,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'userpass', 'remember_token',
     ];
 
+    public function getAuthPassword()
+    {
+
+        return $this->userpass;
+
+    }
     /**
      * The attributes that should be cast to native types.
      *

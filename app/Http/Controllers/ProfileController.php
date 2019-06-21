@@ -49,11 +49,10 @@ class ProfileController extends Controller
   
   
         Log::create([
-          'operator_id' => Session::get('userId'),
-          'menu_id'     => '78',
-          'action_id'   => '1',
-          'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit password UserId '.$user.' to '. $password
+          'op_id'     => Session::get('userId'),
+          'action_id' => '1',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Edit password with UserId '.$user.' to '. $password
         ]);
         return redirect()->route('profile-view')->with('success','Reset Password Successfully');
         }
@@ -130,11 +129,10 @@ class ProfileController extends Controller
   
   
         Log::create([
-          'operator_id' => Session::get('userId'),
-          'menu_id'     => '78',
-          'action_id'   => '2',
-          'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit '.$name.' UserId '.$pk.' to '. $value
+          'op_id'     => Session::get('userId'),
+          'action_id' => '2',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Edit '.$name.' with UserId '.$pk.' to '. $value
         ]);
     }
 

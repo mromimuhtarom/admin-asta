@@ -73,11 +73,11 @@ class ResellerController extends Controller
   
           DB::table('balance_reseller')->insert([
             'reseller_id' => $resellerId,
-            'action'   => 'Buy Gold',
-            'debit'    => $goldAwarded,
-            'credit'   => 0,
-            'total'    => $checkTotalGold->gold,
-            'timestamp'=> Carbon::now('GMT+7')
+            'action'      => 'Buy Gold',
+            'debit'       => $goldAwarded,
+            'credit'      => 0,
+            'total'       => $checkTotalGold->gold,
+            'timestamp'   => Carbon::now('GMT+7')
           ]);
   
           DB::table('reseller_transaction')->where('order_id', $approveOrderId)->update([
@@ -85,13 +85,12 @@ class ResellerController extends Controller
             'timestamp' => Carbon::now('GMT+7')
           ]);
 
-        //   Log::create([
-        //     'operator_id' => Session::get('userId'),
-        //     'menu_id'     => '80',
-        //     'action_id'   => '3',
-        //     'date'        => Carbon::now('GMT+7'),
-        //     'description' => 'Create new Reseller Rank with Rank Name '. $rankname
-        //   ]);
+          Log::create([
+            'op_id' => Session::get('userId'),
+            'action_id'   => '3',
+            'datetime'        => Carbon::now('GMT+7'),
+            'desc' => 'Create new in menu Reseller Bank Transaction with Rank Name '. $rankname
+          ]);
 
           return back()->with('success','Approved Succesful');
     }

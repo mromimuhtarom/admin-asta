@@ -84,11 +84,10 @@ class EmailNotificationController extends Controller
                     ]);
             
                     Log::create([
-                      'operator_id' => Session::get('userId'),
-                      'menu_id'     => '74',
-                      'action_id'   => '3',
-                      'date'        => Carbon::now('GMT+7'),
-                      'description' => 'Create new Email Notification with title '. $notification->subject
+                      'op_id'     => Session::get('userId'),
+                      'action_id' => '3',
+                      'datetime'  => Carbon::now('GMT+7'),
+                      'desc'      => 'Create new in menu Email Notification with title '. $notification->subject
                     ]);
                     return redirect()->route('Email_Notification')->with('success','Insert Data successfull');
             
@@ -156,11 +155,10 @@ class EmailNotificationController extends Controller
                     ]);
 
                     Log::create([
-                        'operator_id' => Session::get('userId'),
-                        'menu_id'     => '74',
-                        'action_id'   => '2',
-                        'date'        => Carbon::now('GMT+7'),
-                        'description' => 'Edit imageUrl Email Notification ID '.$pk.' to '. $nama_file_unik
+                        'op_id'     => Session::get('userId'),
+                        'action_id' => '2',
+                        'datetime'  => Carbon::now('GMT+7'),
+                        'desc'      => 'Edit imageUrl in menu Email Notification with ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('Email_Notification')->with('success','Update Image successfull');
             
@@ -230,11 +228,10 @@ class EmailNotificationController extends Controller
   
   
           Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '74',
-            'action_id'   => '2',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Edit '.$name.' Email Notification Id '.$pk.' to '. $value
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Edit '.$name.' in menu Email Notification with Id '.$pk.' to '. $value
           ]);
     }
 
@@ -252,11 +249,10 @@ class EmailNotificationController extends Controller
             DB::table('notifications')->where('id', '=', $id)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '74',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Email Notification ID '.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Email Notification with ID '.$id
             ]);
 
             return redirect()->route('Email_Notification')->with('success','Data Deleted');

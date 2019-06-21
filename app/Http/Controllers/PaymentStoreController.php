@@ -60,11 +60,10 @@ class PaymentStoreController extends Controller
         ]);
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '71',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Payment Store with Name '. $request->title
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Payment Store with Name '. $request->title
         ]);
 
         return redirect()->route('Payment_Store')->with('success','Data Added');
@@ -130,11 +129,10 @@ class PaymentStoreController extends Controller
         }
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '71',
-            'action_id'   => '2',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Edit '.$name.' Payment Store ID '.$pk.' to '. $value
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Edit '.$name.' in menu Payment Store with ID '.$pk.' to '. $value
         ]);
     }
 
@@ -151,11 +149,10 @@ class PaymentStoreController extends Controller
         {
             DB::table('payments')->where('id', '=', $getPaymentId)->delete();
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '71',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Payment Store ID '.$getPaymentId
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Payment Store with ID '.$getPaymentId
             ]);
             return redirect()->route('Payment_Store')->with('success','Data Deleted');
         }

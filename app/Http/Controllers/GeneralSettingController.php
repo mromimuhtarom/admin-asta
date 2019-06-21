@@ -114,11 +114,10 @@ class GeneralSettingController extends Controller
 
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '75',
-            'action_id'   => '2',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Edit '.$name.' General Setting with Config Id '.$pk.' to '. $value
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Edit '.$name.' in menu General Setting with Config Id '.$pk.' to '. $value
         ]);
     }
 

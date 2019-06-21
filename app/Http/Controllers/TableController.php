@@ -145,11 +145,10 @@ class TableController extends Controller
         ]);
 
         Log::create([
-        'operator_id' => Session::get('userId'),
-        'menu_id'     => '57',
-        'action_id'   => '3',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Create new Asta Poker Table with name '.$request->tableName
+        'op_id'     => Session::get('userId'),
+        'action_id' => '3',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Create new in menu Asta Poker Table with name '.$request->tableName
         ]);
 
         return redirect()->route('Table_Asta_Poker')->with('success','Data Added');
@@ -185,11 +184,10 @@ class TableController extends Controller
         ]);
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '58',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Big Two Table with name '.$request->tableName
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Big Two Table with name '.$request->tableName
         ]);
  
         return redirect()->route('Table_Big_Two')->with('success','Data Added');
@@ -226,11 +224,10 @@ class TableController extends Controller
         ]);
 
           Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '59',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Domino Susun Table  with name '.$request->tableName
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Domino Susun Table  with name '.$request->tableName
           ]);
 
        return redirect()->route('Table_Domino_Susun')->with('success','Data Added');
@@ -267,11 +264,10 @@ class TableController extends Controller
         ]);
 
           Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '60',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Domino QQ Table with name '.$request->tableName
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Domino QQ Table with name '.$request->tableName
           ]);
 
        return redirect()->route('Table_Domino_QQ')->with('success','Data Added');
@@ -342,11 +338,10 @@ class TableController extends Controller
         }
   
         Log::create([
-          'operator_id' => Session::get('userId'),
-          'menu_id'     => '57',
-          'action_id'   => '2',
-          'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit '.$name.' gameID '.$pk.' to '. $value
+          'op_id'     => Session::get('userId'),
+          'action_id' => '2',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Edit '.$name.' in menu Table Asta Poker with gameID '.$pk.' to '. $value
         ]);
     }
 
@@ -387,11 +382,10 @@ class TableController extends Controller
         }
 
     Log::create([
-        'operator_id' => Session::get('userId'),
-        'menu_id'     => '58',
+        'op_id' => Session::get('userId'),
         'action_id'   => '2',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' roomID '.$pk.' to '. $value
+        'datetime'        => Carbon::now('GMT+7'),
+        'desc' => 'Edit '.$name.' in menu Table Big Two with roomID '.$pk.' to '. $value
     ]);
     }
 
@@ -438,11 +432,10 @@ class TableController extends Controller
         }
 
     Log::create([
-        'operator_id' => Session::get('userId'),
-        'menu_id'     => '59',
+        'op_id' => Session::get('userId'),
         'action_id'   => '2',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' roomID '.$pk.' to '. $value
+        'datetime'        => Carbon::now('GMT+7'),
+        'desc' => 'Edit '.$name.' in menu Table Domino Susun with roomID '.$pk.' to '. $value
     ]);
     }
 
@@ -489,11 +482,10 @@ class TableController extends Controller
         }
 
     Log::create([
-        'operator_id' => Session::get('userId'),
-        'menu_id'     => '60',
-        'action_id'   => '2',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' roomID '.$pk.' to '. $value
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' in menu table Domino QQ with roomID '.$pk.' to '. $value
     ]);
     }
 
@@ -511,11 +503,10 @@ class TableController extends Controller
         {
             DB::table('tpk_table')->where('tableid', '=', $tableid)->delete();
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '57',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Asta Poker Table with room ID '.$tableid
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Table Asta Poker with room ID '.$tableid
             ]);
             return redirect()->route('Table_Asta_Poker')->with('success','Data Deleted');
         }
@@ -536,11 +527,10 @@ class TableController extends Controller
         {
             DB::table('bgt_table')->where('tableid', '=', $tableid)->delete();
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '58',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Asta Big Two Table with room ID '.$tableid
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu table Big Two with room ID '.$tableid
             ]);
             return redirect()->route('Table_Big_Two')->with('success','Data Deleted');
         }
@@ -562,11 +552,10 @@ class TableController extends Controller
             DB::table('dms_table')->where('tableid', '=', $tableid)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '59',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Domino Susun Table with room ID '.$tableid
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete Domino Susun Table with room ID '.$tableid
             ]);
             return redirect()->route('Table_Domino_Susun')->with('success','Data Deleted');
         }
@@ -588,11 +577,10 @@ class TableController extends Controller
             DB::table('dmq_table')->where('tableid', '=', $tableid)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '60',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Domino QQ Table with room ID '.$tableid
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu table Domino QQ with room ID '.$tableid
             ]);
             return redirect()->route('Table_Domino_QQ')->with('success','Data Deleted');
         }

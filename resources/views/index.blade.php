@@ -152,7 +152,7 @@
 							<img src="/assets/img/avatars/sunny.png" alt="" class="online">
 							@php
 							$operator_id = Session::get('userId');
-							$username = DB::table('operator')->where('operator_id', '=', $operator_id)->first();		
+							$username = DB::table('asta_db.operator')->where('op_id', '=', $operator_id)->first();		
 							@endphp
               <span>{{ ucwords($username->fullname) }} <span class="fa fa-angle-down"></span></span>
           </a>

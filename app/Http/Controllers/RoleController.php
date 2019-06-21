@@ -71,13 +71,12 @@ class RoleController extends Controller
                 ];
               }
       
-              DB::table('adm_access')->insert($menuId);
+              DB::table('asta_db.adm_access')->insert($menuId);
               Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '43',
-                'action_id'   => '3',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Create new Role with Role Name '.$role
+                'op_id'     => Session::get('userId'),
+                'action_id' => '3',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Create new Role in Menu Role Admin with Role Name '.$role
               ]);
               return redirect()->route('Role_Admin')->with('success','Data Insert Successfull');  
         }
@@ -108,10 +107,11 @@ class RoleController extends Controller
 
     public function menu(Role $role)
     {
-        $roles = DB::table('adm_access')->join('adm_menu', 'adm_menu.menu_id', '=', 'adm_access.menu_id')->where('adm_access.role_id', '=', $role->role_id)->get();
+        $roles = DB::table('asta_db.adm_access')->join('asta_db.adm_menu', 'asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')->where('asta_db.adm_access.role_id', '=', $role->role_id)->get();
         $roles = $roles->toArray();
+        $menu  = MenuClass::menuName('Role Admin');
 
-        return view('pages.admin.role_edit', compact('roles', 'role'));
+        return view('pages.admin.role_edit', compact('roles', 'role', 'menu'));
     }
 
     /**
@@ -134,11 +134,10 @@ class RoleController extends Controller
   
   
         Log::create([
-          'operator_id' => Session::get('userId'),
-          'menu_id'     => '43',
-          'action_id'   => '2',
-          'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit '.$name.' with Role Id'.$pk.' to '. $value
+          'op_id'     => Session::get('userId'),
+          'action_id' => '2',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Edit '.$name.' in Menu Role Admin with Role Id'.$pk.' to '. $value
         ]);
     }
 
@@ -150,16 +149,15 @@ class RoleController extends Controller
         $value = $request->value;
 
 
-        DB::table('adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
+        DB::table('asta_db.adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
           $name => $value
         ]);
 
         Log::create([
-          'operator_id' => Session::get('userId'),
-          'menu_id'     => '43',
-          'action_id'   => '2',
-          'date'        => Carbon::now('GMT+7'),
-          'description' => 'Edit menu with menu Id'.$pk.' to '. $value
+          'op_id'     => Session::get('userId'),
+          'action_id' => '2',
+          'datetime'      => Carbon::now('GMT+7'),
+          'desc'      => 'Edit Type Of Role Access in menu Role Admin with menu Id'.$pk.' to '. $value
         ]);
     }
 
@@ -174,14 +172,14 @@ class RoleController extends Controller
         $userid = $request->id;
         if($userid != '')
         {
-            DB::table('adm_role')->where('role_id', '=', $userid)->delete();
+            DB::table('asta_db.adm_role')->where('role_id', '=', $userid)->delete();
+            DB::table('asta_db.adm_access')->where('role_id', '=', $userid)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '43',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Role ID '.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Role Admin with Role ID '.$id
             ]);
             return redirect()->route('Role_Admin')->with('success','Data Deleted');
         }

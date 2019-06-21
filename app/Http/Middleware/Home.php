@@ -18,7 +18,7 @@ class Home
     {
         if(Session::get('login1')) {
 
-            return redirect(route('home'));
+            return redirect(route('Dashboard'));
     
         }else{
     

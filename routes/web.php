@@ -27,7 +27,9 @@ Route::middleware('authenticated')->group(function(){
     });
     
     Route::group(['prefix' => 'Dashboard'], function() {
-        Route::get('/home', 'DashboardController@index')->name('Dashboard');
+        Route::middleware('page_denied:Dashboard')->group(function(){
+            Route::get('/home', 'DashboardController@index')->name('Dashboard');
+        });
     });
 
     Route::group(['prefix' => 'Admin'], function() {
@@ -51,25 +53,25 @@ Route::middleware('authenticated')->group(function(){
             });
         });
         Route::group(['prefix' => 'Log_Admin'], function() {
-            Route::middleware('page_denied:Log_Admin')->group(function(){
+            Route::middleware('page_denied:Log Admin')->group(function(){
                 Route::get('/Log-view', 'LogController@index')->name('Log_Admin');
                 Route::get('/Log-search', 'LogController@search')->name('Log-search');
             });
         });
     });
 
-    Route::group(['prefix'  =>  'Transaction'], function() {
-        Route::group(['prefix'  =>  'Banking_Transaction'], function() {
-            Route::middleware('page_denied:Banking transaction')->group(function(){
-                Route::get('Banking-view', 'Banking_TransactionController@index')->name('Banking-view');
-            });
-        });
-        Route::group(['prefix'  =>  'User_Banking_Transaction'], function() {
-            Route::middleware('page_denied:User Bank Transaction')->group(function(){
-                Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('UserBank-view');
-            });
-        });
-    });
+    // Route::group(['prefix'  =>  'Transaction'], function() {
+    //     Route::group(['prefix'  =>  'Banking_Transaction'], function() {
+    //         Route::middleware('page_denied:Banking transaction')->group(function(){
+    //             Route::get('Banking-view', 'Banking_TransactionController@index')->name('Banking-view');
+    //         });
+    //     });
+    //     Route::group(['prefix'  =>  'User_Banking_Transaction'], function() {
+    //         Route::middleware('page_denied:User Bank Transaction')->group(function(){
+    //             Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('UserBank-view');
+    //         });
+    //     });
+    // });
 
     Route::group(['prefix'  =>  'Players'], function() {
         Route::group(['prefix'  =>  'Active_Players'], function() {
@@ -178,27 +180,27 @@ Route::middleware('authenticated')->group(function(){
             });
 
             Route::group(['prefix'  => 'Season_Reward_Asta_Poker'], function() {
-                // Route::middleware('page_denied:Category Asta Poker')->group(function(){
+                Route::middleware('page_denied:Season Reward Asta Poker')->group(function(){
                     Route::get('SeasonReward-view', 'SeasonRewardController@index')->name('Season_Reward_Asta_Poker');
                     Route::post('SeasonReward-create', 'SeasonRewardController@store')->name('SeasonReward-create');
                     Route::post('SeasonReward-update', 'SeasonRewardController@update')->name('SeasonReward-update');
                     Route::delete('SeasonReward-delete', 'SeasonRewardController@destroy')->name('SeasonReward-delete');
-                // });
+                });
             });
 
             Route::group(['prefix'  => 'Tournament_Asta_Poker'], function() {
-                // Route::middleware('page_denied:Category Asta Poker')->group(function(){
+                Route::middleware('page_denied:Tournament Asta Poker')->group(function(){
                     Route::get('Tournament-view', 'TournamentController@index')->name('Tournament_Asta_Poker');
                     Route::post('Tournament-create', 'TournamentController@store')->name('Tournament-create');
                     Route::post('Tournament-update', 'TournamentController@update')->name('Tournament-update');
-                // });
+                });
             });
 
             Route::group(['prefix'  => 'Jackpot_Paytable_Asta_Poker'], function() {
-                // Route::middleware('page_denied:Category Asta Poker')->group(function(){
-                Route::get('JackpotPaytable-view', 'JackpotPaytableController@index')->name('Jackpot_Paytable_Asta_Poker');
-                Route::post('JackpotPaytable-update', 'JackpotPaytableController@update')->name('JackpotPaytable-update');
-                // });
+                Route::middleware('page_denied:Jackpot Paytable Asta Poker')->group(function(){
+                    Route::get('JackpotPaytable-view', 'JackpotPaytableController@index')->name('Jackpot_Paytable_Asta_Poker');
+                    Route::post('JackpotPaytable-update', 'JackpotPaytableController@update')->name('JackpotPaytable-update');
+                });
             });
         });
 
@@ -216,7 +218,7 @@ Route::middleware('authenticated')->group(function(){
             });
 
             Route::group(['prefix'  => 'Category_Big_Two'], function() {
-                Route::middleware('page_denied:Category Asta Big Two')->group(function(){
+                Route::middleware('page_denied:Category Big Two')->group(function(){
                     Route::get('BigTwoCategory-view', 'CategoryController@BigTwoindex')->name('Category_Big_Two');
                     Route::post('BigTwoCategory-create', 'CategoryController@BigTwostore')->name('BigTwoCategory-create');
                     Route::post('BigTwoCategory-update', 'CategoryController@BigTwoupdate')->name('BigTwoCategory-update');
@@ -225,124 +227,144 @@ Route::middleware('authenticated')->group(function(){
             });
 
             Route::group(['prefix'  => 'Season_Big_Two'], function() {
-                // Route::middleware('page_denied:Category Asta Big Two')->group(function(){
+                Route::middleware('page_denied:Season Big Two')->group(function(){
                     Route::get('BigTwoSeason-view', 'SeasonController@BigTwoindex')->name('Season_Big_Two');
                     Route::post('BigTwoSeason-create', 'SeasonController@BigTwostore')->name('BigTwoSeason-create');
                     Route::post('BigTwoSeason-update', 'SeasonController@BigTwoupdate')->name('BigTwoSeason-update');
                     Route::delete('BigTwoSeason-delete', 'SeasonController@BigTwodestroy')->name('BigTwoSeason-delete');
-                // });
+                });
             });
 
             Route::group(['prefix'  => 'Season_Reward_Big_Two'], function() {
-                // Route::middleware('page_denied:Category Asta Big Two')->group(function(){
-                Route::get('BigTwoSeasonReward-view', 'SeasonRewardController@BigTwoindex')->name('Season_Reward_Big_Two');
-                Route::post('BigTwoSeasonReward-create', 'SeasonRewardController@BigTwostore')->name('BigTwoSeasonReward-create');
-                Route::post('BigTwoSeasonReward-update', 'SeasonRewardController@BigTwoupdate')->name('BigTwoSeasonReward-update');
-                Route::delete('BigTwoSeasonReward-delete', 'SeasonRewardController@BigTwodestroy')->name('BigTwoSeasonReward-delete');
-                // });
+                Route::middleware('page_denied:Season Reward Big Two')->group(function(){
+                    Route::get('BigTwoSeasonReward-view', 'SeasonRewardController@BigTwoindex')->name('Season_Reward_Big_Two');
+                    Route::post('BigTwoSeasonReward-create', 'SeasonRewardController@BigTwostore')->name('BigTwoSeasonReward-create');
+                    Route::post('BigTwoSeasonReward-update', 'SeasonRewardController@BigTwoupdate')->name('BigTwoSeasonReward-update');
+                    Route::delete('BigTwoSeasonReward-delete', 'SeasonRewardController@BigTwodestroy')->name('BigTwoSeasonReward-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Tournament_Big_Two'], function() {
-                // Route::middleware('page_denied:Category Asta Big Two')->group(function(){
-                Route::get('BigTwoTournament-view', 'TournamentController@BigTwoindex')->name('Tournament_Big_Two');
-                Route::post('BigTwoTournament-create', 'TournamentController@BigTwostore')->name('BigTwoTournament-create');
-                Route::post('BigTwoTournament-update', 'TournamentController@BigTwoupdate')->name('BigTwoTournament-update');
-                // });
+                Route::middleware('page_denied:Tournament Big Two')->group(function(){
+                    Route::get('BigTwoTournament-view', 'TournamentController@BigTwoindex')->name('Tournament_Big_Two');
+                    Route::post('BigTwoTournament-create', 'TournamentController@BigTwostore')->name('BigTwoTournament-create');
+                    Route::post('BigTwoTournament-update', 'TournamentController@BigTwoupdate')->name('BigTwoTournament-update');
+                });
             });
 
             Route::group(['prefix'  => 'Jackpot_Paytable_Big_Two'], function() {
-                // Route::middleware('page_denied:Category Asta Big Two')->group(function(){
-                Route::get('BigTwoJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('Jackpot_Paytable_Big_Two');
-                Route::post('BigTwoJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('BigTwoJackpotPaytable-update');
-                // });
+                Route::middleware('page_denied:Jackpot Paytable Big Two')->group(function(){
+                    Route::get('BigTwoJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('Jackpot_Paytable_Big_Two');
+                    Route::post('BigTwoJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('BigTwoJackpotPaytable-update');
+                });
             });
         });
 
         // Game Asta Domino Susun
         Route::group(['prefix'  =>  'Domino-Susun'], function() {
             Route::group(['prefix'  => 'Table_Domino_Susun'], function() {
-                Route::get('DominoSTable-view', 'TableController@DominoSusunindex')->name('Table_Domino_Susun');
-                Route::post('DominoSTable-update', 'TableController@DominoSusunupdate')->name('DominoSTable-update');
-                Route::post('DominoSTable-create', 'TableController@DominoSusunstore')->name('DominoSTable-create');
-                Route::delete('DominoSTable-delete', 'TableController@DominoSusundestroy')->name('DominoSTable-delete');
+                Route::middleware('page_denied:Table Domino Susun')->group(function(){
+                    Route::get('DominoSTable-view', 'TableController@DominoSusunindex')->name('Table_Domino_Susun');
+                    Route::post('DominoSTable-update', 'TableController@DominoSusunupdate')->name('DominoSTable-update');
+                    Route::post('DominoSTable-create', 'TableController@DominoSusunstore')->name('DominoSTable-create');
+                    Route::delete('DominoSTable-delete', 'TableController@DominoSusundestroy')->name('DominoSTable-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Category_Domino_Susun'], function() {
-                Route::get('DominoSCategory-view', 'CategoryController@DominoSusunindex')->name('Category_Domino_Susun');
-                Route::post('DominoSCategory-create', 'CategoryController@DominoSusunstore')->name('DominoSCategory-create');
-                Route::post('DominoSCategory-update', 'CategoryController@DominoSusunupdate')->name('DominoSCategory-update');
-                Route::delete('DominoSCategory-delete', 'CategoryController@DominoSusundestroy')->name('DominoSCategory-delete');
+                Route::middleware('page_denied:Category Domino Susun')->group(function(){
+                    Route::get('DominoSCategory-view', 'CategoryController@DominoSusunindex')->name('Category_Domino_Susun');
+                    Route::post('DominoSCategory-create', 'CategoryController@DominoSusunstore')->name('DominoSCategory-create');
+                    Route::post('DominoSCategory-update', 'CategoryController@DominoSusunupdate')->name('DominoSCategory-update');
+                    Route::delete('DominoSCategory-delete', 'CategoryController@DominoSusundestroy')->name('DominoSCategory-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Season_Domino_Susun'], function() {
-                Route::get('DominoSSeason-view', 'SeasonController@BigTwoindex')->name('Season_Domino_Susun');
-                Route::post('DominoSSeason-create', 'SeasonController@BigTwostore')->name('DominoSSeason-create');
-                Route::post('DominoSSeason-update', 'SeasonController@BigTwoupdate')->name('DominoSSeason-update');
-                Route::delete('DominoSSeason-delete', 'SeasonController@BigTwodestroy')->name('DominoSSeason-delete');
+                Route::middleware('page_denied:Season Domino Susun')->group(function(){
+                    Route::get('DominoSSeason-view', 'SeasonController@BigTwoindex')->name('Season_Domino_Susun');
+                    Route::post('DominoSSeason-create', 'SeasonController@BigTwostore')->name('DominoSSeason-create');
+                    Route::post('DominoSSeason-update', 'SeasonController@BigTwoupdate')->name('DominoSSeason-update');
+                    Route::delete('DominoSSeason-delete', 'SeasonController@BigTwodestroy')->name('DominoSSeason-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Season_Reward_Domino_Susun'], function() {
-                Route::get('DominoSSeasonReward-view', 'SeasonRewardController@BigTwoindex')->name('Season_Reward_Domino_Susun');
-                Route::post('DominoSSeasonReward-create', 'SeasonRewardController@BigTwostore')->name('DominoSSeasonReward-create');
-                Route::post('DominoSSeasonReward-update', 'SeasonRewardController@BigTwoupdate')->name('DominoSSeasonReward-update');
-                Route::delete('DominoSSeasonReward-delete', 'SeasonRewardController@BigTwodestroy')->name('DominoSSeasonReward-delete');
+                Route::middleware('page_denied:Season Reward Domino Susun')->group(function(){
+                    Route::get('DominoSSeasonReward-view', 'SeasonRewardController@BigTwoindex')->name('Season_Reward_Domino_Susun');
+                    Route::post('DominoSSeasonReward-create', 'SeasonRewardController@BigTwostore')->name('DominoSSeasonReward-create');
+                    Route::post('DominoSSeasonReward-update', 'SeasonRewardController@BigTwoupdate')->name('DominoSSeasonReward-update');
+                    Route::delete('DominoSSeasonReward-delete', 'SeasonRewardController@BigTwodestroy')->name('DominoSSeasonReward-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Tournament_Domino_Susun'], function() {
-                Route::get('DominoSTournament-view', 'TournamentController@BigTwoindex')->name('Tournament_Domino_Susun');
-                Route::post('DominoSTournament-create', 'TournamentController@BigTwostore')->name('DominoSTournament-create');
-                Route::post('DominoSTournament-update', 'TournamentController@BigTwoupdate')->name('DominoSTournament-update');
+                Route::middleware('page_denied:Tournament Domino Susun')->group(function(){
+                    Route::get('DominoSTournament-view', 'TournamentController@BigTwoindex')->name('Tournament_Domino_Susun');
+                    Route::post('DominoSTournament-create', 'TournamentController@BigTwostore')->name('DominoSTournament-create');
+                    Route::post('DominoSTournament-update', 'TournamentController@BigTwoupdate')->name('DominoSTournament-update');
+                });
             });
 
             Route::group(['prefix'  => 'Jackpot_Paytable_Domino_Susun'], function() {
-                Route::get('DominoSJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('Jackpot_Paytable_Domino_Susun');
-                Route::post('DominoSJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('DominoSJackpotPaytable-update');
-            });
-            Route::group(['prefix'  => 'Find-Room'], function() {
-                Route::get('DominoSFindRoom-view', 'FindRoomController@BigTwoindex')->name('DominoSFindRoom-view');
-                Route::post('DominoSFindRoom-update', 'FindRoomController@BigTwoupdate')->name('DominoSFindRoom-update');
+                Route::middleware('page_denied:Jackpot Paytable Domino Susun')->group(function(){
+                    Route::get('DominoSJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('Jackpot_Paytable_Domino_Susun');
+                    Route::post('DominoSJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('DominoSJackpotPaytable-update');
+                });
             });
         });
 
         // Game Asta Domino QQ
         Route::group(['prefix'  =>  'Domino-QQ'], function() {
             Route::group(['prefix'  => 'Table_Domino_QQ'], function() {
-                Route::get('DominoQTable-view', 'TableController@DominoQindex')->name('Table_Domino_QQ');
-                Route::post('DominoQTable-update', 'TableController@DominoQupdate')->name('DominoQTable-update');
-                Route::post('DominoQTable-create', 'TableController@DominoQstore')->name('DominoQTable-create');
-                Route::delete('DominoQTable-delete', 'TableController@DominoQdestroy')->name('DominoQTable-delete');
+                Route::middleware('page_denied:Table Domino QQ')->group(function(){
+                    Route::get('DominoQTable-view', 'TableController@DominoQindex')->name('Table_Domino_QQ');
+                    Route::post('DominoQTable-update', 'TableController@DominoQupdate')->name('DominoQTable-update');
+                    Route::post('DominoQTable-create', 'TableController@DominoQstore')->name('DominoQTable-create');
+                    Route::delete('DominoQTable-delete', 'TableController@DominoQdestroy')->name('DominoQTable-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Category_Domino_QQ'], function() {
-                Route::get('DominoQCategory-view', 'CategoryController@DominoQindex')->name('Category_Domino_QQ');
-                Route::post('DominoQCategory-create', 'CategoryController@DominoQstore')->name('DominoQCategory-create');
-                Route::post('DominoQCategory-update', 'CategoryController@DominoQupdate')->name('DominoQCategory-update');
-                Route::delete('DominoQCategory-delete', 'CategoryController@DominoQdestroy')->name('DominoQCategory-delete');
+                Route::middleware('page_denied:Category Domino QQ')->group(function(){
+                    Route::get('DominoQCategory-view', 'CategoryController@DominoQindex')->name('Category_Domino_QQ');
+                    Route::post('DominoQCategory-create', 'CategoryController@DominoQstore')->name('DominoQCategory-create');
+                    Route::post('DominoQCategory-update', 'CategoryController@DominoQupdate')->name('DominoQCategory-update');
+                    Route::delete('DominoQCategory-delete', 'CategoryController@DominoQdestroy')->name('DominoQCategory-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Season_Domino_QQ'], function() {
-                Route::get('DominoQSeason-view', 'SeasonController@DominoQindex')->name('Season_Domino_QQ');
-                Route::post('DominoQSeason-create', 'SeasonController@DominoQstore')->name('DominoQSeason-create');
-                Route::post('DominoQSeason-update', 'SeasonController@DominoQupdate')->name('DominoQSeason-update');
-                Route::delete('DominoQSeason-delete', 'SeasonController@DominoQdestroy')->name('DominoQSeason-delete');
+                Route::middleware('page_denied:Season Domino QQ')->group(function(){
+                    Route::get('DominoQSeason-view', 'SeasonController@DominoQindex')->name('Season_Domino_QQ');
+                    Route::post('DominoQSeason-create', 'SeasonController@DominoQstore')->name('DominoQSeason-create');
+                    Route::post('DominoQSeason-update', 'SeasonController@DominoQupdate')->name('DominoQSeason-update');
+                    Route::delete('DominoQSeason-delete', 'SeasonController@DominoQdestroy')->name('DominoQSeason-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Season_Reward_Domino_QQ'], function() {
-                Route::get('DominoQSeasonReward-view', 'SeasonRewardController@DominoQindex')->name('Season_Reward_Domino_QQ');
-                Route::post('DominoQSeasonReward-create', 'SeasonRewardController@DominoQstore')->name('DominoQSeasonReward-create');
-                Route::post('DominoQSeasonReward-update', 'SeasonRewardController@DominoQupdate')->name('DominoQSeasonReward-update');
-                Route::delete('DominoQSeasonReward-delete', 'SeasonRewardController@DominoQdestroy')->name('DominoQSeasonReward-delete');
+                Route::middleware('page_denied:Season Reward Domino QQ')->group(function(){
+                    Route::get('DominoQSeasonReward-view', 'SeasonRewardController@DominoQindex')->name('Season_Reward_Domino_QQ');
+                    Route::post('DominoQSeasonReward-create', 'SeasonRewardController@DominoQstore')->name('DominoQSeasonReward-create');
+                    Route::post('DominoQSeasonReward-update', 'SeasonRewardController@DominoQupdate')->name('DominoQSeasonReward-update');
+                    Route::delete('DominoQSeasonReward-delete', 'SeasonRewardController@DominoQdestroy')->name('DominoQSeasonReward-delete');
+                });
             });
 
             Route::group(['prefix'  => 'Tournament_Domino_QQ'], function() {
-                Route::get('DominoQTournament-view', 'TournamentController@DominoQindex')->name('Tournament_Domino_QQ');
-                Route::post('DominoQTournament-create', 'TournamentController@DominoQstore')->name('DominoQTournament-create');
-                Route::post('DominoQTournament-update', 'TournamentController@DominoQupdate')->name('DominoQTournament-update');
+                Route::middleware('page_denied:Tournament Domino QQ')->group(function(){
+                    Route::get('DominoQTournament-view', 'TournamentController@DominoQindex')->name('Tournament_Domino_QQ');
+                    Route::post('DominoQTournament-create', 'TournamentController@DominoQstore')->name('DominoQTournament-create');
+                    Route::post('DominoQTournament-update', 'TournamentController@DominoQupdate')->name('DominoQTournament-update');
+                });
             });
 
             Route::group(['prefix'  => 'Jackpot_Paytable_Domino_QQ'], function() {
-                Route::get('DominoQJackpotPaytable-view', 'JackpotPaytableController@DominoQindex')->name('Jackpot_Paytable_Domino_QQ');
-                Route::post('DominoQJackpotPaytable-update', 'JackpotPaytableController@DominoQupdate')->name('DominoQJackpotPaytable-update');
+                Route::middleware('page_denied:Jackpot Paytable Domino QQ')->group(function(){
+                    Route::get('DominoQJackpotPaytable-view', 'JackpotPaytableController@DominoQindex')->name('Jackpot_Paytable_Domino_QQ');
+                    Route::post('DominoQJackpotPaytable-update', 'JackpotPaytableController@DominoQupdate')->name('DominoQJackpotPaytable-update');
+                });
             });
             
         });
@@ -381,7 +403,7 @@ Route::middleware('authenticated')->group(function(){
             });
         });
         Route::group(['prefix'  =>  'Gift_Store'], function() {
-            Route::middleware('page_denied:Gift')->group(function(){
+            Route::middleware('page_denied:Gift Store')->group(function(){
                 Route::get('GiftStore-view', 'GiftStoreController@index')->name('Gift_Store');
                 Route::post('GiftStore-update', 'GiftStoreController@update')->name('GiftStore-update');
                 Route::post('GiftStore-updateimage', 'GiftStoreController@updateimage')->name('GiftStore-updateimage');
@@ -389,11 +411,11 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('GiftStore-create', 'GiftStoreController@store')->name('GiftStore-create');
             });
         });
-        Route::group(['prefix'  =>  'Transaction-Store'], function() {
-            Route::middleware('page_denied:Transaction Store')->group(function(){
-                Route::get('TransactionStore-view', 'TransactionStoreController@index')->name('TransactionStore-view');
-            });
-        });
+        // Route::group(['prefix'  =>  'Transaction-Store'], function() {
+        //     Route::middleware('page_denied:Transaction Store')->group(function(){
+        //         Route::get('TransactionStore-view', 'TransactionStoreController@index')->name('TransactionStore-view');
+        //     });
+        // });
         Route::group(['prefix'  =>  'Payment_Store'], function() {
             Route::middleware('page_denied:Payment Store')->group(function(){
                 Route::get('PaymentStore-view', 'PaymentStoreController@index')->name('Payment_Store');
@@ -431,15 +453,15 @@ Route::middleware('authenticated')->group(function(){
 
     Route::group(['prefix'  =>  'Settings'], function() {
         Route::group(['prefix'  =>  'General_Setting'], function() {
-            Route::middleware('page_denied:General Settings')->group(function(){
+            Route::middleware('page_denied:General Setting')->group(function(){
                 Route::get('GeneralSetting-view', 'GeneralSettingController@index')->name('General_Setting');
                 Route::post('GeneralSetting-update', 'GeneralSettingController@update')->name('GeneralSetting-update');
             });
         });
         Route::group(['prefix'  =>  'Game_Setting'], function() {
-            // Route::middleware('page_denied:General Settings')->group(function(){
+            Route::middleware('page_denied:Game Setting')->group(function(){
                 Route::get('GameSetting-view', 'GameSettingController@index')->name('Game_Setting');
-            // });
+            });
         });
         // Route::group(['prefix'  =>  'Admin-Setting'], function() {
         //     Route::get('AdminSetting-view', 'AdminSettingController@index')->name('AdminSetting-view');
@@ -497,7 +519,7 @@ Route::middleware('authenticated')->group(function(){
         });
 
         Route::group(['prefix'  =>  'Reseller_Bank_Transaction'], function() {
-            Route::middleware('page_denied:Gold Store Reseller')->group(function(){
+            Route::middleware('page_denied:Reseller Bank Transaction')->group(function(){
                 Route::get('ResellerBankTransaction-view', 'ResellerController@ResellerBankTransaction')->name('Reseller_Bank_Transaction');
                 Route::post('ResellerBankTransaction-approve', 'ResellerController@ResellerBankTransactionApprove')->name('ResellerBankTransaction-Approve');
                 Route::post('ResellerBankTransaction-decline', 'ResellerController@ResellerBankTransactionDecline')->name('ResellerBankTransaction-Decline');

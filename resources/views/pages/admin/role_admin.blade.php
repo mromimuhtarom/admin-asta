@@ -127,7 +127,7 @@
                 @if($menu)
                 <th></th>
                 @endif
-                <th class="th-sm">Role</th>
+                <th class="th-sm">Role Name</th>
                 @if($menu)
                 <th class="th-sm">Action</th>
                 <th style="width:2px;"></th>
@@ -145,7 +145,6 @@
             </tr>
             @else 
             <tr>
-                <td></td>
                 <td>{{ $role->name }}</td>
             </tr>
             @endif
