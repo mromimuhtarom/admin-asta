@@ -31,6 +31,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">	
+      <span class="widget-icon"> <i class="fa fa-table"></i> </span>
       <h2><strong>Bots</strong></h2>				
     </div>
   </header>
@@ -46,7 +47,7 @@
             <div class="input-group">
               @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-plus"></i> Create New Bots
               </button>
               @endif
             </div>

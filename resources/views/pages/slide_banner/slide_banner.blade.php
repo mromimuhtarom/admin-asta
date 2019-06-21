@@ -130,7 +130,7 @@
             <div class="input-group">
               @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createChipStore">
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-plus"></i> Create New Slide Banner
               </button>
               @endif
             </div>

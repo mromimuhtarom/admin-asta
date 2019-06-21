@@ -121,7 +121,7 @@
             <div class="input-group">
               @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoods">
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-plus"></i> Create New Good Store
               </button>
               @endif
             </div>
