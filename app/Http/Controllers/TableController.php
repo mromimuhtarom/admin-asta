@@ -57,7 +57,7 @@ class TableController extends Controller
      */
     public function BigTwoindex()
     {
-        $menu  = MenuClass::menuName('Table Asta Big Two');
+        $menu  = MenuClass::menuName('Table Big Two');
         $tables = BigTwoTable::join('bgt_room', 'bgt_room.roomid', '=', 'bgt_table.roomid')
                 ->select(
                     'bgt_room.name as roomname',
@@ -76,6 +76,7 @@ class TableController extends Controller
      */
     public function DominoSusunindex()
     {
+        $menu  = MenuClass::menuName('Table Domino Susun');
         $tables = DominoSusunTable::join('dms_room', 'dms_room.roomid', '=', 'dms_table.roomid')
                 ->select(
                     'dms_room.name as roomname',
@@ -83,7 +84,7 @@ class TableController extends Controller
                 )
                 ->get();
         $category = DominoSusunRoom::all();
-        return view('pages.game_asta.dominoSusunTable', compact('tables', 'category'));
+        return view('pages.game_asta.dominoSusunTable', compact('tables', 'category', 'menu'));
     }
 
     /**
@@ -94,6 +95,7 @@ class TableController extends Controller
      */
     public function DominoQindex()
     {
+        $menu  = MenuClass::menuName('Table Domino QQ');
         $tables = DominoQTable::join('dmq_room', 'dmq_room.roomid', '=', 'dmq_table.roomid')
                 ->select(
                     'dmq_room.name as roomname',
@@ -101,7 +103,7 @@ class TableController extends Controller
                 )
                 ->get();
         $category = DominoQRoom::all();
-        return view('pages.game_asta.dominoQTable', compact('tables', 'category'));
+        return view('pages.game_asta.dominoQTable', compact('tables', 'category', 'menu'));
     }
 
     /**

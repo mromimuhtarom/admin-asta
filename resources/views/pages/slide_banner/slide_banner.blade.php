@@ -175,7 +175,7 @@
                             <i class="fa fa-edit media-icon"></i>
                           </span>
                           <figure class="media-object">
-                            <img class="img-object imgupload{{ $banner->id }}" src="/images/SlideBanner/{{ $banner->image }}" style="display: block;margin-left: auto;margin-right: auto;">
+                            <img class="img-object imgupload{{ $banner->id }}" src="/upload/SlideBanner/{{ $banner->image }}" style="display: block;margin-left: auto;margin-right: auto;">
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
@@ -202,7 +202,7 @@
                     <td>
                         <div class="media-container">
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $banner->id }}" src="/images/SlideBanner/{{ $banner->image }}" style="display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object imgupload{{ $banner->id }}" src="/upload/SlideBanner/{{ $banner->image }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
                         </div>
                     </td>

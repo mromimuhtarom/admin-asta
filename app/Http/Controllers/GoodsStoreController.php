@@ -69,7 +69,7 @@ class GoodsStoreController extends Controller
         {
             if($ukuran < 1044070)
             {           
-                if ($file->move(public_path('../public/images/Goods'), $nama_file_unik))
+                if ($file->move(public_path('../public/upload/Goods'), $nama_file_unik))
                 {
                     if($request->title== NULL){
                         return redirect()->route('Goods_Store')->with('alert','Title can\'t be NULL ');
@@ -224,7 +224,7 @@ class GoodsStoreController extends Controller
         {
             if($ukuran < 1044070)
             {
-                if($file->move(public_path('../public/images/Goods'), $nama_file_unik))
+                if($file->move(public_path('../public/upload/Goods'), $nama_file_unik))
                 {
                     ItemGoods::where('id', '=', $pk)->update([
                         'image' =>  $nama_file_unik
@@ -269,7 +269,7 @@ class GoodsStoreController extends Controller
         if($id != '')
         {
             DB::table('item_good')->where('id', '=', $id)->delete();
-            $path = '../public/images/Goods/'.$goods->image;
+            $path = '../public/upload/Goods/'.$goods->image;
             File::delete($path);            
             Log::create([
                 'op_id'     => Session::get('userId'),

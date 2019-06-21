@@ -69,7 +69,7 @@ class SlideBannerController extends Controller
         {
             if($ukuran < 1044070)
             {           
-                if ($file->move(public_path('../public/images/SlideBanner'), $nama_file_unik))
+                if ($file->move(public_path('../public/upload/SlideBanner'), $nama_file_unik))
                 {
                     if($request->caption== NULL){
                         return redirect()->route('Slide_Banner')->with('alert','Caption can\'t be NULL ');
@@ -203,7 +203,7 @@ class SlideBannerController extends Controller
         {
             if($ukuran < 1044070)
             {           
-                if ($file->move(public_path('../public/images/SlideBanner'), $nama_file_unik))
+                if ($file->move(public_path('../public/upload/SlideBanner'), $nama_file_unik))
                 {
                     SlideBanner::where('id', '=', $pk)->update([
                         'image' => $nama_file_unik
@@ -250,7 +250,7 @@ class SlideBannerController extends Controller
         if($id != NULL)
         {
             DB::table('slide_banner')->where('id', '=', $id)->delete();
-            $path = '../public/images/SlideBanner/'.$slide_banner->image;
+            $path = '../public/upload/SlideBanner/'.$slide_banner->image;
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),

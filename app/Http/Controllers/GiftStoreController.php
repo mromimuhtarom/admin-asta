@@ -67,7 +67,7 @@ class GiftStoreController extends Controller
         {
             if($ukuran < 1044070)
             {           
-                if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
+                if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
                 {
                     if($request->title == NULL){
                         return redirect()->route('Gift_Store')->with('alert','Name can\'t be NULL ');
@@ -175,7 +175,7 @@ class GiftStoreController extends Controller
         {
             if($ukuran < 1044070)
             {           
-                if ($file->move(public_path('../public/images/gifts'), $nama_file_unik))
+                if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
                 {
                     Gift::where('id', '=', $pk)->update([
                         'image_url' => $nama_file_unik,
@@ -267,7 +267,7 @@ class GiftStoreController extends Controller
         if($id != '')
         {
             DB::table('gift')->where('id', '=', $id)->delete();
-            $path = '../public/images/gifts/'.$gifts->image_url;
+            $path = '../public/upload/gifts/'.$gifts->image_url;
             File::delete($path);            
             Log::create([
                 'op_id'     => Session::get('userId'),

@@ -41,11 +41,6 @@
           <!-- Button tambah bot baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              {{-- @if($menu)
-              <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"></i>
-              </button>
-              @endif --}}
             </div>
           </div>
           <!-- End Button tambah bot baru -->

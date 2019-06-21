@@ -223,11 +223,6 @@
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
                     <td>
-                        {{-- <form action="upload.php" class="dropzone" id="mydropzone" >
-                            {{ csrf_field() }}
-                            <img src="/images/EmailNotification/{{ $notification->imageUrl }}'))" alt="">
-                            <input type="hidden" name="tournamentId" value="{{ $notification->id }}">
-                        </form> --}}
                         <div class="media-container">
                             <form method="POST" action="{{ route('EmailNotification-updateimage') }}" enctype="multipart/form-data">
                               {{  csrf_field() }}
@@ -237,7 +232,7 @@
                                 <i class="fa fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $notification->id }}" src="/images/EmailNotification/{{ $notification->imageUrl }}" style="display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object imgupload{{ $notification->id }}" src="/upload/EmailNotification/{{ $notification->imageUrl }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
@@ -274,7 +269,7 @@
                                 <i class="fa fa-edit media-icon"></i>
                               </span> --}}
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $notification->id }}" src="/images/EmailNotification/{{ $notification->imageUrl }}">
+                                <img class="img-object imgupload{{ $notification->id }}" src="/upload/EmailNotification/{{ $notification->imageUrl }}">
                               </figure>
                             </div>
                             {{-- <div class="media-control">
