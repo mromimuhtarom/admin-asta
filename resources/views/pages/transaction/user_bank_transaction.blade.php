@@ -684,6 +684,7 @@
   $(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+	  "pagingType": "full_numbers",
     });
   });
 

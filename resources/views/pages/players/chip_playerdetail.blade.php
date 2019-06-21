@@ -105,6 +105,7 @@
             "oLanguage": {
                 "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
         },
+        "pagingType": "full_numbers",
         classes: {
             sWrapper:      "dataTables_wrapper dt-bootstrap4"
         },

@@ -182,6 +182,7 @@
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        "pagingType": "full_numbers",
       });
     });
 
@@ -232,68 +233,6 @@
       },
       responsive: true
     });
-
-
-    
-    // table = $('#dt-material-checkbox').dataTable({
-    //     columnDefs: [{
-    //     orderable: false,
-    //     className: 'select-checkbox',
-    //     targets: 0
-    //     }],
-    //     "pagingType": "full_numbers",
-    //     "bInfo" : false,
-    //     "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-    //     select: {
-    //     style: 'os',
-    //     selector: 'td:first-child'
-    //     },
-    //     "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-    //         $.ajaxSetup({
-    //           headers: {
-    //           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //           }
-    //         });
-
-    //         @php
-    //             foreach($category as $kt) {
-    //               echo'$(".delete'.$kt->roomid.'").hide();';
-    //               echo'$(".deletepermission'.$kt->roomid.'").on("click", function() {';
-    //                 echo 'if($( ".deletepermission'.$kt->roomid.':checked" ).length > 0)';
-    //                 echo '{';
-    //                   echo '$(".delete'.$kt->roomid.'").show();';
-    //                 echo'}';
-    //                 echo'else';
-    //                 echo'{';
-    //                   echo'$(".delete'.$kt->roomid.'").hide();';
-    //                 echo'}';
-        
-    //               echo '});';
-              
-    //             echo'$(".delete'.$kt->roomid.'").click(function(e) {';
-    //               echo'e.preventDefault();';
-
-    //               echo"var id = $(this).attr('data-pk');";
-    //               echo'var test = $("#categoryid").val(id);';
-    //             echo'});';
-    //           }
-    //         @endphp
-
-    //         $('.usertext').editable({
-    //           mode :'popup'
-    //         });
-            
-    //         $('.category').editable({
-    //           //value: 'drink',
-    //           source: [
-    //             {value: 'drink', text: 'Drink'},
-    //             {value: 'food', text: 'Food'},
-    //             {value: 'emoji', text: 'Emoji'},
-    //           ]
-    //         }); 
-  
-    //     }
-    // });
   </script>  
   <!-- End Script -->
 

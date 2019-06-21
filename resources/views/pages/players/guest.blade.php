@@ -75,6 +75,7 @@
 						              "t"+
 						              "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
                   "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+                  "pagingType": "full_numbers",
                   "autoWidth" : true,
                   "classes": {
                       "sWrapper":      "dataTables_wrapper dt-bootstrap4"

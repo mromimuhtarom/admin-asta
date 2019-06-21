@@ -103,6 +103,7 @@
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
 		},
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        "pagingType": "full_numbers",
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
 		},
