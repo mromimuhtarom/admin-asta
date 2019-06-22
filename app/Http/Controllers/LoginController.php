@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Validator;
 use DB;
 use App\Log;
+use App\LogOnline;
 use Carbon\Carbon;
 
 use App\User;
@@ -33,6 +34,14 @@ class LoginController extends Controller
                 'action_id' => 7,
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Login with username '.$username
+            ]);
+            LogOnline::create([
+                'user_id'   =>  $login->op_id,
+                'action_id' =>  9,
+                'desc'      =>  'user'.$login->username.'Login in web Admin',
+                'datetime'  => Carbon::now('GMT+7'),
+                'ip'        => request()->ip(),
+                'type'      => 1
             ]);
   
             return redirect(route('Dashboard'));
