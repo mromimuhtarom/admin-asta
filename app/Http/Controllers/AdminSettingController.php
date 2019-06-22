@@ -116,7 +116,7 @@ class AdminSettingController extends Controller
         $value  = $request->value;
         $bcrypt = bcrypt($request->get('password'));
 
-        DB::table('operator')->where('operator_id', '=', $pk)->update([
+        DB::table('operator')->where('op_id', '=', $pk)->update([
             $name => $bcrypt
         ]);
 

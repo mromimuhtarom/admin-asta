@@ -129,10 +129,10 @@ class ChipStoreController extends Controller
   
   
       Log::create([
-        'operator_id' => Session::get('userId'),
-        'action_id'   => '2',
-        'date'        => Carbon::now('GMT+7'),
-        'description' => 'Edit '.$name.' in menu Chip Store with Id '.$pk.' to '. $value
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' in menu Chip Store with Id '.$pk.' to '. $value
       ]);
     }
 
@@ -149,11 +149,10 @@ class ChipStoreController extends Controller
         {
             DB::table('items_gold')->where('id', '=', $id)->delete();   
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '66',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete in menu Chip Store with ID '.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Chip Store with ID '.$id
             ]);
 
             return redirect()->route('Chip_Store')->with('success','Data Deleted');

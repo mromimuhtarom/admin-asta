@@ -9,9 +9,12 @@ class MenuClass {
         return $menus1;
     }
 
-    public static function DBMenuName($dbmenuname)
+    public static function DBMenuStatus($dbmenuname)
     {
-        $menu = DB::table('asta_db.adm_menu')->where('parent_id', '=', $dbmenuname)->select('name')->first();
+        $menu = DB::table('asta_db.adm_menu')
+                ->where('name', '=', $dbmenuname)
+                ->where('status', '=', 0)
+                ->first();
         return $menu;
     }
 

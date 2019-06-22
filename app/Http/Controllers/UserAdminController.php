@@ -106,7 +106,7 @@ class UserAdminController extends Controller
       $name  = $request->name;
       $value = $request->value;
 
-      User::where('operator_id', '=', $pk)->update([
+      User::where('op_id', '=', $pk)->update([
         $name => $value
       ]);
 
@@ -138,8 +138,8 @@ class UserAdminController extends Controller
         $password = $request->password;
         
         if($password != '') {
-        User::where('operator_id', '=', $pk)->update([
-          'password' => bcrypt($password)
+        User::where('op_id', '=', $pk)->update([
+          'userpass' => bcrypt($password)
         ]);
         
   
@@ -166,7 +166,7 @@ class UserAdminController extends Controller
         $userid = $request->userid;
         if($userid != '')
         {
-            DB::table('operator')->where('operator_id', '=', $userid)->delete();
+            DB::table('asta_db.operator')->where('op_id', '=', $userid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
