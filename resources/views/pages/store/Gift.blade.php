@@ -71,12 +71,12 @@
     function readURL(input) {
        if (input.files && input.files[0]) {
            var reader = new FileReader();
-  
+
            reader.onload = function (e) {
                $('#blah')
                    .attr('src', e.target.result);
            };
-  
+
            reader.readAsDataURL(input.files[0]);
        }
    }
@@ -87,7 +87,7 @@
   <div class="alert alert-danger">
     <ul>
       @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>  
+        <li>{{$error}}</li>
       @endforeach
     </ul>
   </div>
@@ -100,9 +100,9 @@
         <div>{{Session::get('alert')}}</div>
     {{-- </div> --}}
 </div>
-    
+
 @endif
-  
+
 @if (\Session::has('success'))
   <div class="alert alert-success">
     <p>{{\Session::get('success')}}</p>
@@ -110,17 +110,17 @@
 @endif
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
-    <div class="widget-header">	
-      <h2><strong>Gift Store</strong></h2>				
+    <div class="widget-header">
+      <h2><strong>Gift Store</strong></h2>
     </div>
   </header>
 
   <div>
     <div class="widget-body">
       <div class="widget-body-toolbar">
-        
+
         <div class="row">
-          
+
           <!-- Button tambah bot baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
@@ -136,9 +136,9 @@
         </div>
 
       </div>
-      
+
       <div class="custom-scroll table-responsive" style="max-height:600px;">
-        
+
         <div class="table-outer">
           <table class="table table-bordered">
             <thead>
@@ -186,10 +186,10 @@
                     <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
                     <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ strEnabledDisabled($gf->status)}}</a></td>
                     <td>
-                        <a href="#" style="color:red;" class="delete{{ $gf->id }}" 
-                            id="delete" 
-                            data-pk="{{ $gf->id }}" 
-                            data-toggle="modal" 
+                        <a href="#" style="color:red;" class="delete{{ $gf->id }}"
+                            id="delete"
+                            data-pk="{{ $gf->id }}"
+                            data-toggle="modal"
                             data-target="#delete-modal">
                               <i class="fa fa-times"></i>
                         </a>
@@ -207,15 +207,15 @@
                     <td>{{ $gf->name }}</td>
                     <td>{{ $gf->price }}</td>
                     <td>{{ $gf->strCategory() }}</td>
-                </tr> 
+                </tr>
                 @endif
                 @endforeach
             </tbody>
           </table>
         </div>
-      
+
       </div>
-    
+
     </div>
   </div>
 </div>
@@ -233,7 +233,7 @@
       <form action="{{ route('GiftStore-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
-  
+
           <div class="row">
             <div class="col-12">
               <div class="form-group" align="center">
@@ -265,8 +265,8 @@
     </div>
   </div>
 </div>
- 
-  
+
+
 <!-- Modal -->
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -274,7 +274,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            × 
+            ×
           </button>
         </div>
         <div class="modal-body">
@@ -354,12 +354,12 @@
                 echo'{';
                   echo'$(".delete'.$gf->id.'").hide();';
                 echo'}';
-    
+
               echo '});';
-            
+
               echo'$(".delete'.$gf->id.'").click(function(e) {';
                 echo'e.preventDefault();';
-    
+
                 echo"var id = $(this).attr('data-pk');";
                 echo'var test = $("#id").val(id);';
               echo'});';
@@ -385,11 +385,11 @@
                   echo'$(".upload'.$gf->id.'").change(function() {';
                     echo'if (this.files && this.files[0]) {';
                       echo'var reader = new FileReader();';
-		
+
                       echo'reader.onload = function(e) {';
                         echo'$(".imgupload'.$gf->id.'").attr("src", e.target.result);';
                       echo'};';
-		
+
                       echo'reader.readAsDataURL(this.files[0]);';
                   echo'}';
                 echo'});';
