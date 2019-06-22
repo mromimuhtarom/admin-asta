@@ -38,7 +38,7 @@ class LoginController extends Controller
             LogOnline::create([
                 'user_id'   =>  $login->op_id,
                 'action_id' =>  9,
-                'desc'      =>  'user'.$login->username.'Login in web Admin',
+                'desc'      =>  'user '.$login->username.' Login in web Admin',
                 'datetime'  => Carbon::now('GMT+7'),
                 'ip'        => request()->ip(),
                 'type'      => 1
@@ -54,7 +54,17 @@ class LoginController extends Controller
   
     public function logout()
     {
+        $op_id = Session::get('userId');
+        $login = DB::table('asta_db.operator')->where('op_id', '=', $op_id)->first();
         Session::flush();
+        LogOnline::create([
+            'user_id'   =>  $login->op_id,
+            'action_id' =>  10,
+            'desc'      =>  'user '.$login->username.' Logout in web Admin',
+            'datetime'  => Carbon::now('GMT+7'),
+            'ip'        => request()->ip(),
+            'type'      => 1
+        ]);
         return redirect('/')->with('alert','You are already Log Out');
     }
 }
