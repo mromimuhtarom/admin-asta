@@ -66,7 +66,7 @@ class GiftStoreController extends Controller
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
-            {           
+            {
                 if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
                 {
                     if($request->title == NULL){
@@ -82,7 +82,7 @@ class GiftStoreController extends Controller
                             'price'    => 'required|integer',
                             'category' => 'required|integer|between:1,3',
                         ]);
-                    
+
                         if ($validator->fails()) {
                             return back()->withErrors($validator->errors());
                         }
@@ -99,7 +99,7 @@ class GiftStoreController extends Controller
                             'date_img'    => Carbon::now('GMT+7'),
                             'status'      => 1
                         ]);
-            
+
                         Log::create([
                             'operator_id' => Session::get('userId'),
                             'menu_id'     => '69',
@@ -117,13 +117,13 @@ class GiftStoreController extends Controller
                 }
             }
             else
-            {       
+            {
                 return redirect()->route('Gift_Store')->with('alert','Ukuran file terlalu besar');
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
-        {       
+        {
             return redirect()->route('Gift_Store')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
@@ -176,7 +176,7 @@ class GiftStoreController extends Controller
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
-            {           
+            {
                 if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
                 {
                     Gift::where('id', '=', $pk)->update([
@@ -191,7 +191,7 @@ class GiftStoreController extends Controller
                         'desc'      => 'Edit image_url in menu Gift Store with ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('Gift_Store')->with('success','Update Image successfull');
-            
+
                 }
                 else
                 {
@@ -200,30 +200,30 @@ class GiftStoreController extends Controller
                 }
             }
             else
-            {   
+            {
                 return redirect()->route('Gift_Store')->with('alert','Ukuran file terlalu besar');
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
-        {   
+        {
             return redirect()->route('Gift_Store')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
 
-    
+
     public function update(Request $request)
     {
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
-  
-  
+
+
         Gift::where('id', '=', $pk)->update([
           $name => $value
         ]);
-  
+
         switch ($name) {
           case "name":
               $name = "Name";
@@ -246,8 +246,8 @@ class GiftStoreController extends Controller
           default:
             "";
       }
-  
-  
+
+
       Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
@@ -270,7 +270,7 @@ class GiftStoreController extends Controller
         {
             DB::table('gift')->where('id', '=', $id)->delete();
             $path = '../public/upload/gifts/'.$gifts->image_url;
-            File::delete($path);            
+            File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
@@ -280,6 +280,6 @@ class GiftStoreController extends Controller
 
             return redirect()->route('Gift_Store')->with('success','Data Deleted');
         }
-        return redirect()->route('Gift_Store')->with('success','Something wrong');   
+        return redirect()->route('Gift_Store')->with('success','Something wrong');
     }
 }
