@@ -101,11 +101,10 @@ class GiftStoreController extends Controller
                         ]);
             
                         Log::create([
-                            'operator_id' => Session::get('userId'),
-                            'menu_id'     => '69',
-                            'action_id'   => '3',
-                            'date'        => Carbon::now('GMT+7'),
-                            'description' => 'Create new Gift Store with title '. $gift->subject
+                            'op_id'     => Session::get('userId'),
+                            'action_id' => '3',
+                            'datetime'  => Carbon::now('GMT+7'),
+                            'desc'      => 'Create new in menu Gift Store with title '. $gift->subject
                         ]);
                         return redirect()->route('Gift_Store')->with('success','Insert Data successfull');
                     }
@@ -163,7 +162,7 @@ class GiftStoreController extends Controller
     public function updateimage(Request $request)
     {
         $pk                     = $request->pk;
-        $id                     = DB::table('gifts')->where('id', '=', $pk)->first();
+        $id                     = DB::table('gift')->where('id', '=', $pk)->first();
         $file                   = $request->file('file');
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
         $nama                   = $_FILES['file']['name'];
@@ -175,6 +174,7 @@ class GiftStoreController extends Controller
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
+
             if($ukuran < 1044070)
             {           
                 if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))

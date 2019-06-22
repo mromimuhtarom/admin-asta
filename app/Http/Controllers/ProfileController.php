@@ -18,9 +18,9 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Session::get('userId');
-        $profile = User::where('operator_id', '=', $user)
-                   ->join('adm_role', 'adm_role.role_id', '=', 'operator.role_id')
-                   ->select('adm_role.name as rolename', 'operator.*')
+        $profile = User::where('op_id', '=', $user)
+                   ->join('asta_db.adm_role', 'asta_db.adm_role.role_id', '=', 'asta_db.operator.role_id')
+                   ->select('asta_db.adm_role.name as rolename', 'asta_db.operator.*')
                    ->first();
 
         return view('pages.profile.user_profile', compact('profile'));
@@ -42,8 +42,8 @@ class ProfileController extends Controller
         }
         
         if($password != '') {
-        User::where('operator_id', '=', $pk)->update([
-          'password' => bcrypt($password)
+        User::where('op_id', '=', $pk)->update([
+          'userpass' => bcrypt($password)
         ]);
         
   
@@ -115,7 +115,7 @@ class ProfileController extends Controller
         $name  = $request->name;
         $value = $request->value;
   
-        User::where('operator_id', '=', $pk)->update([
+        User::where('op_id', '=', $pk)->update([
           $name => $value
         ]);
   

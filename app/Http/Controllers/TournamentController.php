@@ -348,7 +348,7 @@ class TournamentController extends Controller
         'op_id' => Session::get('userId'),
         'action_id'   => '2',
         'datetime'        => Carbon::now('GMT+7'),
-        'desc' => 'Edit '.$name.' TournamentId '.$pk.' to '. $value
+        'desc' => 'Edit '.$name.' in menu TournamentId '.$pk.' to '. $value
       ]);
 
     }

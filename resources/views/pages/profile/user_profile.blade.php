@@ -59,12 +59,12 @@
                 <tr>
                     <td>Full Name</td>
                     <td align="center">:</td>
-                    <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $profile->operator_id }}" data-type="text" data-url="{{ route('profile-update') }}">{{ $profile->fullname}}</a></td>
+                    <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $profile->op_id }}" data-type="text" data-url="{{ route('profile-update') }}">{{ $profile->fullname}}</a></td>
                 </tr>
                 <tr>
                     <td>Password</td>
                     <td align="center">:</td>
-                    <td><a href="#" class="password btn btn-primary" id="password" data-pk="{{ $profile->operator_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
+                    <td><a href="#" class="password btn btn-primary" id="password" data-pk="{{ $profile->op_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
                 </tr>
             </table>
         </form>

@@ -279,11 +279,10 @@ class ResellerController extends Controller
         ]);
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '83',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Register Reseller with username '. $request->username
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Register Reseller with username '. $request->username
         ]);
   
         return back()->with('alert','REGISTER SUCCESSFULL');
@@ -310,11 +309,10 @@ class ResellerController extends Controller
         ]);
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '80',
-            'action_id'   => '3',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Create new Reseller Rank with Rank Name '. $rankname
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Reseller Rank with Rank Name '. $rankname
         ]);
 
         return redirect()->route('Reseller_Rank')->with('success','Data Added');
@@ -387,11 +385,10 @@ class ResellerController extends Controller
 
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '79',
+            'op_id' => Session::get('userId'),
             'action_id'   => '2',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Edit'.$name.' Reseller ID '.$pk.' To '.$value
+            'datetime'        => Carbon::now('GMT+7'),
+            'desc' => 'Edit'.$name.' in menu List Reseller with ID '.$pk.' To '.$value
         ]);
     }
 
@@ -410,11 +407,10 @@ class ResellerController extends Controller
   
   
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '79',
-                'action_id'   => '1',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Edit password ResellerId '.$pk.' to '. $password
+                'op_id'     => Session::get('userId'),
+                'action_id' => '1',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Edit password in menu List Reseller with ResellerId '.$pk.' to '. $password
             ]);
 
             return redirect()->route('List_Reseller')->with('success','Reset Password Successfully');
@@ -460,11 +456,10 @@ class ResellerController extends Controller
 
 
         Log::create([
-            'operator_id' => Session::get('userId'),
-            'menu_id'     => '80',
+            'op_id' => Session::get('userId'),
             'action_id'   => '2',
-            'date'        => Carbon::now('GMT+7'),
-            'description' => 'Edit'.$name.' Reseller Rank Order ID '.$pk.' To '.$value
+            'datetime'        => Carbon::now('GMT+7'),
+            'desc' => 'Edit'.$name.' in menu Reseller Rank with Order ID '.$pk.' To '.$value
         ]);
     }
 
@@ -482,11 +477,10 @@ class ResellerController extends Controller
             DB::table('reseller')->where('id', '=', $userid)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '79',
+                'op_id' => Session::get('userId'),
                 'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete reseller with reseller ID '.$userid
+                'datetime'        => Carbon::now('GMT+7'),
+                'desc' => 'Deletein menu List Reseller with reseller ID '.$userid
             ]);
             return redirect()->route('List_Reseller')->with('success','Data Deleted');
         }
@@ -502,11 +496,10 @@ class ResellerController extends Controller
             DB::table('reseller_rank')->where('order_id', '=', $id)->delete();
 
             Log::create([
-                'operator_id' => Session::get('userId'),
-                'menu_id'     => '80',
-                'action_id'   => '4',
-                'date'        => Carbon::now('GMT+7'),
-                'description' => 'Delete Reseller Rank with reseller ID '.$id
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Reseller Rank with reseller ID '.$id
             ]);
             return redirect()->route('Reseller_Rank')->with('success','Data Deleted');
         }
