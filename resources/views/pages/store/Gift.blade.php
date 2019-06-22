@@ -186,7 +186,7 @@
                     <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
                     <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ strEnabledDisabled($gf->status)}}</a></td>
                     <td>
-                        <a href="#" style="color:red;" class="delete{{ $gf->id }}"
+                        <a href="#" style="color:red;" class="delete{{ $gf->id }}" 
                             id="delete"
                             data-pk="{{ $gf->id }}"
                             data-toggle="modal"
