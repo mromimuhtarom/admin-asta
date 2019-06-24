@@ -57,8 +57,8 @@ class UserAdminController extends Controller
         }
         $user = User::create([
             'username' => $request->username,
-            'role_id' => $request->role,
-            'password' => bcrypt(Session::get('dealerId').$request->username),
+            'role_id'  => $request->role,
+            'userpass' => bcrypt(Session::get('dealerId').$request->username),
             'fullname' => $request->fullname
           ]);
   
