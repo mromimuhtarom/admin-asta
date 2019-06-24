@@ -21,6 +21,15 @@
     border-radius: 5px;
 }
 
+.searchonoff {
+	width:70%;
+    height: 80px;
+    padding-top:1.5%;
+    padding-left:3%;
+    margin-left:15%;
+    border-radius: 5px;
+}
+
 /* button blue */
 .myButton {
 	-moz-box-shadow:inset 0px -3px 7px 0px #29bbff;

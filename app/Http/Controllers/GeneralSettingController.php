@@ -20,7 +20,7 @@ class GeneralSettingController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('General Settings');
+        $menu  = MenuClass::menuName('General Setting');
         // system settings
         $getMaintenance     = DB::table('config')->where('id', '=', '101')->first();
         $getPointExpired    = DB::table('config')->where('id', '=', '102')->first();

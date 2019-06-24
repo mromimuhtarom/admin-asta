@@ -126,6 +126,13 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('Gold-search', 'GoldController@search')->name('Gold-search');
             });
         });
+
+        Route::group(['prefix'  =>  'Log_Players'], function() {
+            Route::middleware('page_denied:Log Player')->group(function(){
+                Route::get('LogPlayer-view', 'LogPlayerController@index')->name('Log_Players');
+                Route::get('LogPlayer', 'LogPlayerController@search')->name('LogPlayer-search');
+            });
+        });
     });
 
     Route::group(['prefix'  =>  'Slide_Banner'], function() {
@@ -526,6 +533,13 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
+    });
+
+    Route::group(['prefix' => 'Log_Online_Offline_User'], function() {
+        Route::middleware('page_denied:Log Online & Offline')->group(function() {
+            Route::get('LogOnlineOfflineUser-view', 'LogOnlineOfflineController@LogOnlineOffline')->name('Log_Online_Offline_User');
+            Route::get('LogOnlineOfflineUser-search', 'LogOnlineOfflineController@Search')->name('LogOnlineOfflineUser-search');
+        });
     });
 
 

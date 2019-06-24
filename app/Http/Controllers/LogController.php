@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Action;
 
 class LogController extends Controller
 {
@@ -14,10 +15,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = DB::table('action')
-                ->select('action')
-                ->groupBy('action')
-                ->get();
+        $logs = Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
         return view('pages.admin.log_admin', compact('logs'));
     }
 
@@ -30,10 +28,7 @@ class LogController extends Controller
         $inputMaxDate = $request->sampai;
         $inputAction  = $request->action;
   
-        $actionSearch =  DB::table('action')
-                         ->select('action')
-                         ->groupBy('action')
-                         ->get();
+        $actionSearch =  Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
   
         if($inputUser != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputAction != NULL) {
           $logs = DB::table('asta_db.log_operator')
@@ -43,7 +38,7 @@ class LogController extends Controller
                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
                  ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
                  ->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-                 ->orderBy('asta_db.log_operator.date', 'desc')
+                 ->orderBy('asta_db.log_operator.datetime', 'desc')
                  ->get();
                  
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
@@ -166,7 +161,6 @@ class LogController extends Controller
                   ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
                   ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
-  
   
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   

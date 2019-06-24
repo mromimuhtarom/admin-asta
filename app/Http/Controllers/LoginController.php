@@ -29,15 +29,9 @@ class LoginController extends Controller
             $username = $request->username;
             $password = $request->password;
             $login = DB::table('asta_db.operator')->where('username', '=', $username)->first();
-            Log::create([
-                'op_id'     => $login->op_id,
-                'action_id' => 7,
-                'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Login with username '.$username
-            ]);
             LogOnline::create([
                 'user_id'   =>  $login->op_id,
-                'action_id' =>  9,
+                'action_id' =>  7,
                 'desc'      =>  'user '.$login->username.' Login in web Admin',
                 'datetime'  => Carbon::now('GMT+7'),
                 'ip'        => request()->ip(),
@@ -59,7 +53,7 @@ class LoginController extends Controller
         Session::flush();
         LogOnline::create([
             'user_id'   =>  $login->op_id,
-            'action_id' =>  10,
+            'action_id' =>  8,
             'desc'      =>  'user '.$login->username.' Logout in web Admin',
             'datetime'  => Carbon::now('GMT+7'),
             'ip'        => request()->ip(),
