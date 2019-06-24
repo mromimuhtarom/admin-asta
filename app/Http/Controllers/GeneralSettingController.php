@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Classes\MenuClass;
 use Session;
 use Carbon\Carbon;
+use App\Config;
 use DB;
 
 // Log Model
@@ -22,22 +23,22 @@ class GeneralSettingController extends Controller
     {
         $menu  = MenuClass::menuName('General Setting');
         // system settings
-        $getMaintenance     = DB::table('config')->where('id', '=', '101')->first();
-        $getPointExpired    = DB::table('config')->where('id', '=', '102')->first();
+        $getMaintenance     = Config::where('id', '=', '101')->first();
+        $getPointExpired    = Config::where('id', '=', '102')->first();
 
         // Bank Settings
-        $getBank            = DB::table('config')->where('id', '=', '201')->first();
+        $getBank            = Config::where('id', '=', '201')->first();
 
         // Info Settings
-        $getPrivacyPolicy   = DB::table('config')->where('id', '=', '2')->first();
-        $getTermOfService   = DB::table('config')->where('id', '=', '3')->first();
-        $getAbout           = DB::table('config')->where('id', '=', '4')->first();
-        $getPokerWeb        = DB::table('config')->where('id', '=', '5')->first();
+        $getPrivacyPolicy   = Config::where('id', '=', '2')->first();
+        $getTermOfService   = Config::where('id', '=', '3')->first();
+        $getAbout           = Config::where('id', '=', '4')->first();
+        $getPokerWeb        = Config::where('id', '=', '5')->first();
 
         // CS & Legal Settings
-        $getFb              = DB::table('config')->where('id', '=', '901')->first();
-        $getTwitter         = DB::table('config')->where('id', '=', '902')->first();
-        $getIg              = DB::table('config')->where('id', '=', '903')->first();
+        $getFb              = Config::where('id', '=', '901')->first();
+        $getTwitter         = Config::where('id', '=', '902')->first();
+        $getIg              = Config::where('id', '=', '903')->first();
 
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
@@ -100,7 +101,7 @@ class GeneralSettingController extends Controller
         $name  = $request->name; //get data-name
         $value = $request->value; //get data-value
 
-        DB::table('config')->where('id', '=', $pk)->update([
+        Config::where('id', '=', $pk)->update([
             $name => $value
         ]);
 
