@@ -58,6 +58,11 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('/Log-search', 'LogController@search')->name('Log-search');
             });
         });
+        Route::group(['prefix' => 'Active_Admin'], function() {
+            Route::middleware('page_denied:Active Admin')->group(function(){
+                Route::get('ActiveAdmin-view', 'ActiveAdminController@index')->name('Active_Admin');
+            });
+        });
     });
 
     // Route::group(['prefix'  =>  'Transaction'], function() {
