@@ -34,7 +34,6 @@ class LoginController extends Controller
     
     public function login(Request $request)
     {
-        // dd($request->all());
         if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
 
             Session::put('userId', Auth::user()->op_id);
@@ -93,21 +92,20 @@ class LoginController extends Controller
         $op_idcache = Cache::get('op_key');
         $session_id = Cache::get('session_id');
         $op_idsession = Session::get('userId');
-        // dd($session_id);
         $adminactive = OperatorActive::where('session_id', '=', $session_id)->first();
 
         if($adminactive)
         {
             if($session_id)
             {
-                $login = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
+                $logout = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
                          ->where('asta_db.operator_active.session_id', '=', $session_id)
                          ->first();
                 OperatorActive::where('session_id', '=', $session_id)->delete();
                 LogOnline::create([
-                    'user_id'   =>  $login->op_id,
+                    'user_id'   =>  $logout->op_id,
                     'action_id' =>  8,
-                    'desc'      =>  'user '.$login->username.' Logout in web Admin',
+                    'desc'      =>  'user '.$logout->username.' Logout in web Admin',
                     'datetime'  => Carbon::now('GMT+7'),
                     'ip'        => request()->ip(),
                     'type'      => 1
@@ -115,6 +113,10 @@ class LoginController extends Controller
 
             } 
 
+        }
+        if($session_id)
+        {
+            OperatorActive::where('session_id', '=', $session_id)->delete();
         }
         Session::flush();
         Cache::flush();

@@ -38,6 +38,7 @@
                 <tr>
                   <th>User Admin</th>
                   <th>Date Login</th>
+                  <th>Ip</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,6 +46,7 @@
                 <tr>
                     <td>{{ $ol->username }}</td>
                     <td>{{ $ol->date_login }}</td>
+                    <td>{{ $ol->ip }}</td>
                 </tr>
                 @endforeach
               </tbody>

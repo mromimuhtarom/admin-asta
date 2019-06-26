@@ -26,7 +26,7 @@ class Authenticated
         $op_idcache = Cache::get('op_key');
         $session_id = Cache::get('session_id');
         $logout = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
-                 ->where('asta_db.operator_active.op_id', '=', $op_idcache)
+                 ->where('asta_db.operator_active.session_id', '=', $session_id)
                  ->first();
         if(Session::get('login1')) {
             $op = Session::get('userId');
@@ -50,7 +50,22 @@ class Authenticated
             }
             return $next($request);
         } 
-            return redirect()->route('logout')->with('alert','Please Login First');
+
+
+        if($logout)
+        {
+            LogOnline::create([
+                'user_id'   =>  $logout->op_id,
+                'action_id' =>  8,
+                'desc'      =>  'user '.$logout->username.' Logout in web Admin',
+                'datetime'  => Carbon::now('GMT+7'),
+                'ip'        => request()->ip(),
+                'type'      => 1
+            ]);
+        }
+        OperatorActive::where('session_id', '=', $session_id)->delete();
+        Cache::flush();
+        return redirect()->route('logout')->with('alert','Please Login First');
           
          
         
