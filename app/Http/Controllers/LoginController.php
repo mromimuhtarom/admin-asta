@@ -105,6 +105,7 @@ class LoginController extends Controller
                 $login = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
                          ->where('asta_db.operator_active.session_id', '=', $session_id)
                          ->first();
+                OperatorActive::where('session_id', '=', $session_id)->delete();
                 LogOnline::create([
                     'user_id'   =>  $login->op_id,
                     'action_id' =>  8,
