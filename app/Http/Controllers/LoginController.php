@@ -65,7 +65,6 @@ class LoginController extends Controller
                 OperatorActive::create([
                     'op_id'       => $login->op_id,
                     'session_id'  => session()->getId(),
-                    'op_key'      => 5,
                     'date_login'  => Carbon::now('GMT+7'),
                     'date_update' => Carbon::now('GMT+7'),
                     'ip'          => request()->ip()
@@ -74,7 +73,6 @@ class LoginController extends Controller
                 OperatorActive::create([
                     'op_id'       => $login->op_id,
                     'session_id'  => session()->getId(),
-                    'op_key'      => 5,
                     'date_login'  => Carbon::now('GMT+7'),
                     'date_update' => Carbon::now('GMT+7'),
                     'ip'          => request()->ip()
