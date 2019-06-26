@@ -101,7 +101,7 @@ class LoginController extends Controller
                 $logout = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
                          ->where('asta_db.operator_active.session_id', '=', $session_id)
                          ->first();
-                OperatorActive::where('session_id', '=', $session_id)->delete();
+                OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
                 LogOnline::create([
                     'user_id'   =>  $logout->op_id,
                     'action_id' =>  8,
@@ -116,7 +116,7 @@ class LoginController extends Controller
         }
         if($session_id)
         {
-            OperatorActive::where('session_id', '=', $session_id)->delete();
+            OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
         }
         Session::flush();
         Cache::flush();

@@ -63,7 +63,7 @@ class Authenticated
                 'type'      => 1
             ]);
         }
-        OperatorActive::where('session_id', '=', $session_id)->delete();
+        OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
         Cache::flush();
         return redirect()->route('logout')->with('alert','Please Login First');
           

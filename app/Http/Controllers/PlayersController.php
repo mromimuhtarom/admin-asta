@@ -11,6 +11,7 @@ use Session;
 use Carbon\Carbon;
 use App\Player;
 use Validator;
+use App\PlayerActive;
 
 class PlayersController extends Controller
 {
@@ -21,7 +22,7 @@ class PlayersController extends Controller
      */
     public function indexActive()
     {
-        $online = DB::table('user_active')->join('user', 'user.user_id', '=', 'user_active.user_id')
+        $online = PlayerActive::join('user', 'user.user_id', '=', 'user_active.user_id')
                   ->join('game', 'game.id', '=', 'user_active.game_id')
                   ->join('user_stat', 'user_stat.user_id', '=', 'user_active.user_id')
                   ->select('user.*', 'user_stat.*', 'game.name as game_name', 'user_active.*')
@@ -29,6 +30,8 @@ class PlayersController extends Controller
                   ->get();
         return view('pages.players.active_player', compact('online'));
     }
+
+    
     public function indexHighRoller()
     {
         // $activeUsers = DB::select("SELECT user_active.user_id, user.username FROM user_active JOIN user ON user.user_id = user_active.user_id WHERE user_active.game_id != ''");
