@@ -36,27 +36,15 @@
             <table id="online-players" class="table table-striped table-bordered table-hover" width="100%">
               <thead>
                 <tr>
-                  <th data-hide="phone">User Admin</th>
-                  <th data-hide="phone,tablet">timestamp</th>
+                  <th>User Admin</th>
+                  <th>Date Login</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($online as $ol)
+                @foreach($active as $ol)
                 <tr>
                     <td>{{ $ol->username }}</td>
-                    <td>{{ $ol->rank_id }}</td>
-                    <td>{{ $ol->chip }}</td>
-                    <td>{{ $ol->gold }}</td>
-                    @php
-                    if($ol->user_type === 2) {
-                        $user_type = 'Guest';
-                    } else if($ol->user_type === 1){
-                        $user_type = 'Player';
-                    } 
-                    @endphp
-                    <td>{{ $user_type }}</td>
-                    <td>{{ $ol->game_name }}</td>
-                    <td>{{ $ol->date_login}}</td>
+                    <td>{{ $ol->date_login }}</td>
                 </tr>
                 @endforeach
               </tbody>

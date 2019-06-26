@@ -86,12 +86,12 @@ class ResellerController extends Controller
             'timestamp' => Carbon::now('GMT+7')
           ]);
 
-          Log::create([
-            'op_id' => Session::get('userId'),
-            'action_id'   => '3',
-            'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Create new in menu Reseller Bank Transaction with Rank Name '. $rankname
-          ]);
+        //   Log::create([
+        //     'op_id' => Session::get('userId'),
+        //     'action_id'   => '3',
+        //     'datetime'        => Carbon::now('GMT+7'),
+        //     'desc' => 'Create new in menu Reseller Bank$ranknam Transaction with Rank Name '. $rankname
+        //   ]);
 
           return back()->with('success','Approved Succesful');
     }
@@ -308,12 +308,12 @@ class ResellerController extends Controller
             'bonus'           => '0'
         ]);
 
-        Log::create([
-            'op_id'     => Session::get('userId'),
-            'action_id' => '3',
-            'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Reseller Rank with Rank Name '. $rankname
-        ]);
+        // Log::create([
+        //     'op_id'     => Session::get('userId'),
+        //     'action_id' => '3',
+        //     'datetime'  => Carbon::now('GMT+7'),
+        //     'desc'      => 'Create new in menu Reseller Rank with Rank Name '. $rankname
+        // ]);
 
         return redirect()->route('Reseller_Rank')->with('success','Data Added');
     }

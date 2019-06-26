@@ -192,6 +192,7 @@ class PlayersController extends Controller
 
         return redirect()->route('Bots')->with('success','Data Added');
     }
+    
 
     /**
      * Display the specified resource.
@@ -278,5 +279,15 @@ class PlayersController extends Controller
           return redirect()->route('Bots')->with('success','Data Deleted');
       }
       return redirect()->route('Bots')->with('success','Something wrong');   
+    }
+
+
+    public function avatar($avatar)
+    {
+
+      // //
+      $path = public_path().'\\upload\\avatars\\'.$avatar;
+      // return Image::make($path)->response();
+        return response()->file($path);
     }
 }

@@ -270,10 +270,10 @@
 
           $('.role').editable({
                     mode:'inline',
-                    value: 2,
+                    // value: 0,
                     source: [
                         @php
-                        $roles = DB::table('adm_role')->get();
+                        $roles = DB::table('asta_db.adm_role')->get();
                         foreach($roles as $role) {
                             echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
                         }
@@ -281,7 +281,7 @@
                     ]
           });
 
-          @php
+          @php 
               foreach($admin as $adm) {            
               echo'$(".password'.$adm->op_id.'").click(function(e) {';
                 echo'e.preventDefault();';

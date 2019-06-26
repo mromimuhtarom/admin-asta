@@ -36,6 +36,7 @@
   Alert.render ("{{Session::get('alert-success')}}");
 <script>
 @endif
+
     <div class="d-flex flex-row w-100 h-100">
         <div class="d-flex flex-column my-aii-login">
 

@@ -10,11 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('login');
-})->middleware('home');
+// return view('login');
+// Route::get('/', function () {    })->middleware('home');
+// Route::middleware('')
+Route::get('/', ['uses' => 'LoginController@loginbefore', 'middleware' => 'home'])->name('login');
 Route::post('login', 'LoginController@login')->name('login');
+Route::get('/avatars/{avatar}', 'PlayersController@avatar')->name('imageAvatar');
 
 Route::get('/datatables', function () {
     return view('design.datatables');

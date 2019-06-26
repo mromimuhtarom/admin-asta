@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Session;
+use Cache;
+use Carbon\Carbon;
+use App\OperatorActive;
 
 class Home
 {
