@@ -25,11 +25,11 @@ class Authenticated
     {
         $op_idcache = Cache::get('op_key');
         $session_id = Cache::get('session_id');
-        $logout = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
-                 ->where('asta_db.operator_active.session_id', '=', $session_id)
-                 ->first();
+        $logout     = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
+                      ->where('asta_db.operator_active.session_id', '=', $session_id)
+                      ->first();
         if(Session::get('login1')) {
-            $op = Session::get('userId');
+            $op              = Session::get('userId');
             $operator_active = OperatorActive::where('op_id', '=', $op)->first();
             if ($operator_active)
             {
@@ -40,14 +40,15 @@ class Authenticated
                     'ip'          => request()->ip()
                 ]);
             } else {
-                OperatorActive::create([
+                OperatorActive::update([
                     'op_id'       => $op,
                     'session_id'  => $session_id,
-                    'date_login'  => Carbon::now('GMT+7'),
                     'date_update' => Carbon::now('GMT+7'),
                     'ip'          => request()->ip()
                 ]);
             }
+            Cache::put('op_key', $operator_active->op_id);
+            Cache::put('session_id', $session_id);
             return $next($request);
         } 
 
@@ -66,9 +67,5 @@ class Authenticated
         OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
         Cache::flush();
         return redirect()->route('logout')->with('alert','Please Login First');
-          
-         
-        
-
     }
 }

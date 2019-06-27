@@ -21,7 +21,7 @@ class GoodsStoreController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('Gold Store');
+        $menu     = MenuClass::menuName('Gold Store');
         $itemGood = ItemGoods::where('shop_type', '=', 1)->get();
         return view('pages.store.goods_store', compact('menu', 'itemGood'));
     }

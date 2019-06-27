@@ -20,7 +20,7 @@ class ResellerController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('List Reseller');
+        $menu     = MenuClass::menuName('List Reseller');
         $reseller = Reseller::getAllData();
         return view('pages.reseller.listreseller', compact('menu', 'reseller'));
     }
@@ -28,7 +28,7 @@ class ResellerController extends Controller
     public function ResellerRank()
     {
         $rank = DB::table('reseller_rank')->get();
-        $menu  = MenuClass::menuName('Reseller Rank');
+        $menu = MenuClass::menuName('Reseller Rank');
         return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
     }
 
@@ -52,16 +52,16 @@ class ResellerController extends Controller
     public function ResellerBankTransaction()
     {
         $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
-        $menu = MenuClass::menuName('Reseller Bank Transaction');
+        $menu         = MenuClass::menuName('Reseller Bank Transaction');
         return view('pages.reseller.reseller_bank_transaction', compact('transactions', 'menu'));
     }
 
     public function ResellerBankTransactionApprove(Request $request)
     {
         $approveOrderId = $request->approveId;
-        $resellerId  = $request->resellerId;
-        $goldAwarded = $request->goldAwarded;
-        $amount = $request->price;
+        $resellerId     = $request->resellerId;
+        $goldAwarded    = $request->goldAwarded;
+        $amount         = $request->price;
 
         DB::table('reseller_history')->insert([
             'reseller_id' => $resellerId,
@@ -101,7 +101,7 @@ class ResellerController extends Controller
     {
         $declineOrderId = $request->declineId;
         DB::table('reseller_transaction')->where('order_id', $declineOrderId)->update([
-            'status' => '0',
+            'status'    => '0',
             'timestamp' => Carbon::now('GMT+7')
         ]);
         return back()->with('success','Declined Succesful');
@@ -160,10 +160,10 @@ class ResellerController extends Controller
         return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
       }else if($searchUsername != NULL) {
         $balancedetails = DB::table('balance_reseller')
-                        ->select('balance_reseller.*', 'reseller.username')
-                        ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
-                        ->WHERE('reseller.username', $searchUsername)
-                        ->get();
+                          ->select('balance_reseller.*', 'reseller.username')
+                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
+                          ->WHERE('reseller.username', $searchUsername)
+                          ->get();
 
         // $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));

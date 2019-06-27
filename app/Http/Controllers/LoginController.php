@@ -18,16 +18,6 @@ class LoginController extends Controller
 {
     public function loginbefore()
     {
-        // $op_idcache = Cache::get('op_key');
-        // if($op_idcache)
-        // {
-        //     $login = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
-        //              ->where('asta_db.operator_active.op_id', '=', $op_idcache)
-        //              ->first();
-        //     OperatorActive::where('op_id', '=', $login->op_id)->delete();
-        // }
-        // Session::flush();
-        // Cache::flush();
         return view('login');
     }
 
@@ -49,9 +39,9 @@ class LoginController extends Controller
             Cache::put('op_key', $login->op_id);
             Cache::put('session_id', $session_id);
             LogOnline::create([
-                'user_id'   =>  $login->op_id,
-                'action_id' =>  7,
-                'desc'      =>  'user '.$login->username.' Login in web Admin',
+                'user_id'   => $login->op_id,
+                'action_id' => 7,
+                'desc'      => 'user '.$login->username.' Login in web Admin',
                 'datetime'  => Carbon::now('GMT+7'),
                 'ip'        => request()->ip(),
                 'type'      => 1
@@ -99,8 +89,8 @@ class LoginController extends Controller
             if($session_id)
             {
                 $logout = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
-                         ->where('asta_db.operator_active.session_id', '=', $session_id)
-                         ->first();
+                          ->where('asta_db.operator_active.session_id', '=', $session_id)
+                          ->first();
                 OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
                 LogOnline::create([
                     'user_id'   =>  $logout->op_id,

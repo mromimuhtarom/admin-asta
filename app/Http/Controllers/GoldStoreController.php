@@ -20,16 +20,21 @@ class GoldStoreController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('Gold Store');        
-        $getGolds = DB::table('items_cash')->where('shop_type', '=', 1)->orderBy('id', 'desc')->get();
+        $menu     = MenuClass::menuName('Gold Store');
+        $getGolds = DB::table('items_cash')
+                    ->where('shop_type', '=', 1)
+                    ->orderBy('id', 'desc')
+                    ->get();
 
         return view('pages.store.gold_store', compact('menu', 'getGolds'));
     }
 
     public function GoldStoreReseller()
     {
-        $gold_store = DB::table('items_cash')->where('shop_type', '=', 2)->get();
-        $menu  = MenuClass::menuName('Gold Store Reseller'); 
+        $gold_store = DB::table('items_cash')
+                      ->where('shop_type', '=', 2)
+                      ->get();
+        $menu       = MenuClass::menuName('Gold Store Reseller');
         return view('pages.reseller.gold_store_reseller', compact('gold_store', 'menu'));
     }
 
@@ -189,7 +194,7 @@ class GoldStoreController extends Controller
      */
     public function destroy(Request $request)
     {
-        $getGoldId = $request->userid;
+        $getGoldId    = $request->userid;
         $goldreseller = $request->id;
         if($getGoldId != '')
         {

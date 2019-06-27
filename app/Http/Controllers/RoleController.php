@@ -156,7 +156,7 @@ class RoleController extends Controller
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
-          'datetime'      => Carbon::now('GMT+7'),
+          'datetime'  => Carbon::now('GMT+7'),
           'desc'      => 'Edit Type Of Role Access in menu Role Admin with menu Id'.$pk.' to '. $value
         ]);
     }

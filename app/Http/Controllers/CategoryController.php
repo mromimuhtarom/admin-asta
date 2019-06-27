@@ -33,7 +33,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Room::all();
-        $menu  = MenuClass::menuName('Category Asta Poker');
+        $menu     = MenuClass::menuName('Category Asta Poker');
         return view('pages.game_asta.category', compact('category', 'menu'));
     }
 

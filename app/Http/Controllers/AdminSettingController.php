@@ -100,10 +100,10 @@ class AdminSettingController extends Controller
 
 
       Log::create([
-        'op_id' => Session::get('userId'),
-        'action_id'   => '2',
-        'datetime'        => Carbon::now('GMT+7'),
-        'desc' => 'Edit '.$name.' UserId '.$pk.' to '. $value
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' UserId '.$pk.' to '. $value
       ]);
 
     }

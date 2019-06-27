@@ -97,11 +97,11 @@ class TableController extends Controller
     {
         $menu  = MenuClass::menuName('Table Domino QQ');
         $tables = DominoQTable::join('dmq_room', 'dmq_room.roomid', '=', 'dmq_table.roomid')
-                ->select(
+                  ->select(
                     'dmq_room.name as roomname',
                     'dmq_table.*'
-                )
-                ->get();
+                  )
+                  ->get();
         $category = DominoQRoom::all();
         return view('pages.game_asta.dominoQTable', compact('tables', 'category', 'menu'));
     }

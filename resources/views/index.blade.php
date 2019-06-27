@@ -212,16 +212,16 @@
           </div>
           
           <!-- END .sa-page-breadcrumb -->
-        
+        <div>
         <div class="sa-content">
-		<div class="d-flex w-100 home-header">
-			<div>
+					<div class="d-flex w-100 home-header">
+						<div>
 							@yield('namepages')				
             </div>
-        </div>
-        <div>
+        	</div>
+        	<div>
             @yield('content')
-        </div>
+        	</div>
         </div>
 
 
@@ -276,7 +276,8 @@
               </div>
 
           </footer>
-          <!-- END .sa-page-footer -->
+					<!-- END .sa-page-footer -->
+				</div>
 
       
       </div>

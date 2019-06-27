@@ -53,7 +53,7 @@ class SeasonController extends Controller
     public function store(Request $request)
     {
         $seasonName = $request->seasonName;
-        $startTime = $request->startTime;
+        $startTime  = $request->startTime;
         $finishTime = $request->finishTime;
 
         DB::table('seasons')->insert([

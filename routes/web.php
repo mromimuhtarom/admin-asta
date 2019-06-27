@@ -99,6 +99,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Registered_Players'], function() {
             Route::middleware('page_denied:Registered Player')->group(function(){
                 Route::get('RegisteredPlayer-view', 'PlayersController@indexRegisteredPlayer')->name('Registered_Players');
+                Route::get('RegisteredPlayer-search/{userId}/detail', 'PlayersController@detailRegistered')->name('RegisteredPlayer-detaildevice');
             });
         });
         Route::group(['prefix'  =>  'Guest'], function() {

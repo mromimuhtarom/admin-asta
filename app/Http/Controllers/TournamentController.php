@@ -114,8 +114,8 @@ class TournamentController extends Controller
     public function update(Request $request, Tournament $tournament)
     {
 
-        $pk = $request->pk;
-        $name = $request->name;
+        $pk    = $request->pk;
+        $name  = $request->name;
         $value = $request->value;
 
 

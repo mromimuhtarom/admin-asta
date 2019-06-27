@@ -49,6 +49,7 @@ function strYesNo ($val) {
 	}
 }
 
+
 function strIcon ($val) {
 	if($val == 1) {
 		return 'fa-home';

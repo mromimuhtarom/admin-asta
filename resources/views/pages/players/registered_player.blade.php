@@ -41,14 +41,14 @@
               <th class="th-sm">Gold</th>
               <th class="th-sm">Date Created</th>
               <th class="th-sm">Register From</th>
-              <th class="th-sm">Device</th>
+              {{-- <th class="th-sm">Device</th> --}}
               <th class="th-sm">Country</th>
             </tr>
           </thead>
           <tbody>
             @foreach($registered as $regis)
             <tr>
-                <td>{{ $regis->username }}</td>
+                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->username }}</a></td>
                 <td>{{ $regis->chip }}</td>
                 <td>{{ $regis->point }}</td>
                 <td>{{ $regis->gold }}</td>
@@ -61,7 +61,7 @@
                     }
                 @endphp
                 <td>{{ $user_type }}</td>
-                <td>{{ $regis->devicename}}</td>
+                {{-- <td>{{ $regis->devicename}}</td> --}}
                 <td>{{ $regis->countryname }}</td>
             </tr>
             @endforeach
