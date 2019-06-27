@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-{{-- <img src="/upload/avatars/{{ $username->avatar }}" alt=""> --}}
 
 <div class="d-flex w-100" style="margin-left:7%;">
 <div class="well well-sm">
@@ -29,24 +28,11 @@
                     </div>
 
 
-                    {{-- <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                    </ol> --}}
                     <div class="carousel-inner" style="height:100%">
                         <!-- Slide 1 -->
                         <div class="carousel-item active" style="height:100%">	
                             <img src="/upload/img/demo/s1.jpg" width="100%" height="100%"alt="demo user">
                         </div>
-                        {{-- <!-- Slide 2 -->
-                        <div class="carousel-item">
-                            <img src="/upload/img/demo/s2.jpg" width="100%" height="5%" alt="demo user">
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="carousel-item">
-                            <img src="/upload/img/demo/m3.jpg" width="100%" height="5%" alt="demo user">
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -56,7 +42,16 @@
                 <div class="row">
 
                     <div class="col-sm-2 col-2 profile-pic">
-                        <img src="/upload/avatars/{{ $username->avatar}}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
+                            @php
+
+                                if (is_numeric($username->avatar)) {
+                                    $avatar = "https://graph.facebook.com/".$username->avatar."/picture?type=large";
+                                } else {
+                                    $avatar = "/upload/avatars/".$username->avatar;
+                                }
+
+                            @endphp
+                        <img src="{{ $avatar}}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
                          
                         </div>
                         <div class="col-sm-6 col-8">
@@ -91,20 +86,6 @@
                                     </p>
                                 </li>
                             </ul>
-                            {{-- <br> --}}
-                            {{-- <p class="font-md">
-                                <i>A little about me...</i>
-                            </p> --}}
-                            {{-- <p>
-
-                                Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
-                                cumque nihil impedit quo minus id quod maxime placeat facere
-
-                            </p>
-                            <br>
-                            <a href="javascript:void(0);" class="btn btn-default btn-xs"><i class="fa fa-envelope-o"></i> Send Message</a> --}}
-                            {{-- <br>
-                            <br> --}}
 
                         </div>
 
@@ -193,7 +174,7 @@
     "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'f>r>"+
 						"t"+
 						"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
-    "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+    "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
     "pagingType": "full_numbers",
     "autoWidth" : true,
     "classes": {
