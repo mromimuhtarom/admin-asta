@@ -38,9 +38,9 @@ class PlayersController extends Controller
 
 
         $avgBank = 0;
-        $player1 = DB::table('asta_db.user')
-                   ->join('user_stat', 'asta_db.user.user_id', '=', 'user_stat.user_id')
-                  ->join('country', 'asta_db.user.country_code', '=', 'country.code')
+        $player1 = DB::table('user')
+                   ->join('user_stat', 'user.user_id', '=', 'user_stat.user_id')
+                  ->join('country', 'user.country_code', '=', 'country.code')
                    ->select(DB::raw("sum(chip) / count(*) As avgBank"))
                    ->where('user_type', '=', '1')
                    ->where('user_type', '=', '2')
@@ -55,9 +55,9 @@ class PlayersController extends Controller
         if($avgBank == "")
 
         $avgBank = 0;
-        $player  = DB::table('asta_db.user')
-                  ->join('user_stat', 'user_stat.user_id', '=', 'asta_db.user.user_id')
-                  ->join('country', 'asta_db.user.country_code', '=', 'country.code')
+        $player  = DB::table('user')
+                  ->join('user_stat', 'user_stat.user_id', '=', 'user.user_id')
+                  ->join('country', 'user.country_code', '=', 'country.code')
                   ->where('chip', '>', $avgBank)->orderBy('chip', 'DESC')
                   ->limit('100')
                   ->get();
@@ -65,27 +65,12 @@ class PlayersController extends Controller
     }
 
     public function indexRegisteredPlayer() {
-      // $device = DB::table('user')
-      //           ->leftJoin('user_device', 'user_device.user_id', '=', 'user.user_id')
-      //           ->get();
-      // if(!$device)
-      // {
         $registered = DB::table('user')
                       ->join('country', 'user.country_code', '=', 'country.code')
                       ->join('user_stat', 'user_stat.user_id', '=', 'user.user_id')
                       ->select('user.*', 'country.name as countryname', 'user_stat.chip as chip', 'user_stat.point as point', 'user_stat.gold as gold')                      
                       ->where('user_type', '=', 1)
                       ->get();
-      // } else {
-        // $registered = DB::table('user')
-        //               ->leftjoin('user_device', 'user_device.user_id', '=', 'user.user_id')
-        //               ->join('country', 'user.country_code', '=', 'country.code')
-        //               ->join('user_stat', 'user_stat.user_id', '=', 'user.user_id')
-        //               ->select('user_device.name as devicename', 'user_device.join_date', 'user.*', 'country.name as countryname', 'user_stat.chip as chip', 'user_stat.point as point', 'user_stat.gold as gold')
-        //               ->select('user.*', 'country.name as countryname', 'user_stat.chip as chip', 'user_stat.point as point', 'user_stat.gold as gold')                      
-        //               ->where('user_device.join_date', '!=', '')
-        //               ->get();
-      // }
 
               
         return view('pages.players.registered_player', compact('registered'));
@@ -106,6 +91,39 @@ class PlayersController extends Controller
       $datenow = Carbon::now('GMT+7');
                 
       return view('pages.players.register_player_detail', compact('device', 'username', 'country', 'datenow'));
+    }
+
+    public function updateRegisteredPlayer(Request $request)
+    {
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+
+        Stat::where('user_id', '=', $pk)->update([
+          $name => $value
+        ]);
+
+        switch ($name) {
+          case "chip":
+              $name = "Chip";
+              break;
+          case "point":
+              $name = "Point";
+              break;
+          case "gold":
+              $name = "Gold";
+              break;
+          default:
+            "";
+        }
+
+
+        Log::create([
+          'op_id'     => Session::get('userId'),
+          'action_id' => '2',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Edit '.$name.' in menu Registered Player with ID '.$pk.' to '. $value
+        ]);
     }
 
 

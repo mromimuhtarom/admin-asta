@@ -49,9 +49,9 @@
             @foreach($registered as $regis)
             <tr>
                 <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->username }}</a></td>
-                <td>{{ $regis->chip }}</td>
-                <td>{{ $regis->point }}</td>
-                <td>{{ $regis->gold }}</td>
+                <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->chip }}</a></td>
+                <td><a href="#" class="usertext" data-title="Bank Account" data-name="point" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->point }}</a></td>
+                <td><a href="#" class="usertext" data-title="Bank Account" data-name="gold" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->gold }}</a></td>
                 <td>{{ $regis->join_date }}</td>
                 @php
                     if($regis->facebook_id !== ''){
@@ -77,13 +77,17 @@
   </div>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+    $('table.table').dataTable( {
+      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+      "pagingType": "full_numbers",
+    });
+  });
+  
   table = $('table.table').dataTable({
-    "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'f>r>"+
-						"t"+
-						"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
-    "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
-    "pagingType": "full_numbers",
+    "sDom": "<'dt-toolbar d-flex'<><'ml-auto hidden-xs show-control'>>",
     "autoWidth" : true,
+    "paging": false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },
@@ -103,6 +107,10 @@
           headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
+        });
+
+        $('.usertext').editable({
+          mode :'inline'
         });
       },
     responsive: true

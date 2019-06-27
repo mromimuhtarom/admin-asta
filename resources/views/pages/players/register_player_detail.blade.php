@@ -9,7 +9,7 @@
 @section('content')
 {{-- <img src="/upload/avatars/{{ $username->avatar }}" alt=""> --}}
 
-<div class="d-flex w-100" style="margin-left:10%;">
+<div class="d-flex w-100" style="margin-left:7%;">
 <div class="well well-sm">
         
 <div class="row">
@@ -25,7 +25,7 @@
                         <a href="javascript:void(0);" class="btn text-white bg-teal btn-sm"><i class="fa fa-check"></i> Profile</a>&nbsp; 
                     </div>
                     <div class="air air-top-left padding-10">
-                        <h4 class="text-white font-md">{{ date(' F d, Y', strtotime($datenow)) }}</h4>
+                        <h4 class="text-white font-md">Register In {{ date(' F d, Y', strtotime($username->join_date)) }}</h4>
                     </div>
 
 
@@ -56,7 +56,7 @@
                 <div class="row">
 
                     <div class="col-sm-2 col-2 profile-pic">
-                        <img src="/upload/avatars/{{ $username->avatar}}" alt="demo user" style="margin-left:2%; margin-top:-30%;">
+                        <img src="/upload/avatars/{{ $username->avatar}}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
                          
                         </div>
                         <div class="col-sm-6 col-8">
