@@ -31,7 +31,7 @@
                     <input type="date" class="form-control" name="sampai">
                 </div>
                 <div class="col">
-                    <button class="myButton" type="submit">Cari</button>
+                    <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
             </div>
         </form>

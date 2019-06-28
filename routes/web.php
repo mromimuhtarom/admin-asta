@@ -59,6 +59,15 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('/Log-search', 'LogController@search')->name('Log-search');
             });
         });
+
+        Route::group(['prefix' => 'Report_Admin'], function() {
+            Route::middleware('page_denied:Report Admin')->group(function() {
+                Route::get('ReportAdmin-view', 'ReportAdminController@index')->name('Report_Admin');
+                Route::get('ReportAdmin-search', 'ReportAdminController@Search')->name('ReportAdmin-search');
+            });
+        });
+
+
         Route::group(['prefix' => 'Active_Admin'], function() {
             Route::middleware('page_denied:Active Admin')->group(function(){
                 Route::get('ActiveAdmin-view', 'ActiveAdminController@index')->name('Active_Admin');
@@ -543,12 +552,7 @@ Route::middleware('authenticated')->group(function(){
 
     });
 
-    Route::group(['prefix' => 'Log_Online_Offline_User'], function() {
-        Route::middleware('page_denied:Log Online & Offline')->group(function() {
-            Route::get('LogOnlineOfflineUser-view', 'LogOnlineOfflineController@LogOnlineOffline')->name('Log_Online_Offline_User');
-            Route::get('LogOnlineOfflineUser-search', 'LogOnlineOfflineController@Search')->name('LogOnlineOfflineUser-search');
-        });
-    });
+
 
 
 });

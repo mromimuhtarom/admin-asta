@@ -2,50 +2,47 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">Log Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">Report Admin</a></li>
 @endsection
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
-<div class="search bg-blue-dark" style="margin-bottom:3%;">
-    <div class="table-header w-100 h-100">
-        <form action="{{ route('LogPlayer-search') }}">
-            <div class="row h-100 w-100">
-                <div class="col">
-                    <input type="text" name="username" class="form-control" placeholder="username">
+<div class="search bg-blue-dark" style="margin-bottom: 2%;">
+        <div class="table-header w-100 h-100">
+            <form action="{{ route('ReportAdmin-search') }}" method="get" role="search">
+               <div class="row h-100 w-100 no-gutters">
+                    <div class="col">
+                        <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <select name="logType" class="form-control">
+                            <option value="">Choose Log Type</option>
+                            <option value="1">Login</option>
+                            <option value="2">Log Out</option>
+                        </select>
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMinDate">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMaxDate">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    </div>
                 </div>
-                <div class="col">
-                    <select name="action" id="" class="form-control">
-                        <option value="">Choose Action</option>
-                        @foreach($action as $ac)
-                        <option value="{{ $ac->id }}">{{ $ac->action}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col">
-                    <input type="date" class="form-control" name="dari">
-                </div>
-                <div class="col">
-                    <input type="date" class="form-control" name="sampai">
-                </div>
-                <div class="col">
-                    <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+            </form>
+        </div>
+    </div>    
 
 
-
-<!-- Widget ID (each widget will need unique ID)-->
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
 
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Log Player </h2>
+            <h2>Admin Report </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -67,20 +64,20 @@
                 <thead>			                
                     <tr>
                         <th>Username</th>
-                        <th>Action</th>
-                        <th>Desc</th>
-                        <th>TimeStamp</th>
+                        <th>Status</th>
+                        <th>Time Stamp</th>
+                        <th>IP</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($logplayer  as $log)
-                    <tr>
-                        <td>{{ $log->username }}</td>
-                        <td>{{ $log->action }}</td>
-                        <td>{{ $log->desc }}</td>
-                        <td>{{ $log->datetime }}</td>
-                    </tr>
-                    @endforeach
+                        @foreach ($log_login as $login)
+                        <tr>
+                          <td>{{ $login->username }}</td>
+                          <td>{{ $login->action }}</td>
+                          <td>{{ $login->datetime }}</td>
+                          <td>{{ $login->ip }}</td>
+                        </tr>
+                        @endforeach
                 </tbody>
             </table>
     

@@ -32,7 +32,7 @@
           <input type="date" name="endDate" class="form-control">
         </div>
         <div>
-          <button type="submit" class="btn btn-primary">Cari</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Cari</button>
         </div>
 
       </form>
