@@ -18,8 +18,8 @@
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
                             <option value="">Choose Log Type</option>
-                            <option value="1">Login</option>
-                            <option value="2">Log Out</option>
+                            <option value="7">Login</option>
+                            <option value="8">Log Out</option>
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
