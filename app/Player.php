@@ -8,7 +8,7 @@ class Player extends Model
 {
     protected $guarded = [];
 
-    protected $table = 'user';
+    protected $table = 'asta_db.user';
     // const CREATED_AT = NULL;
     // const UPDATED_AT = NULL;
     public $timestamps = false;

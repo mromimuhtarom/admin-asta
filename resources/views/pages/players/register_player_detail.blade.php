@@ -139,20 +139,22 @@
         <table id="registered-players" class="table table-striped table-bordered table-hover" width="100%">
           <thead>
             <tr>
+              <th class="th-sm">Device ID</th>
               <th class="th-sm">Device Name</th>
-              <th class="th-sm">Join Date</th>
+              <th class="th-sm">Date In</th>
             </tr>
           </thead>
           <tbody>
             @foreach($device as $dvc)
             <tr>
+                <td>{{ $dvc->device}}</td>
                 <td>{{ $dvc->name }}</td>
                 @php
-                if($dvc->join_date == NULL)
+                if($dvc->date == NULL)
                 {
                     $join_date = 'NULL';
                 } else {
-                    $join_date = $dvc->join_date;
+                    $join_date = $dvc->date;
                 }
                 @endphp
                 <td>{{ $join_date }}</td>

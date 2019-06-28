@@ -74,18 +74,9 @@
                         @foreach ($log_login as $login)
                         <tr>
                           <td>{{ $login->username }}</td>
-                          @php
-                          if($login->log_type === 1)
-                          {
-                              $status = "Login";
-                          } else if($login->log_type === 2)
-                          {
-                              $status = "Log Out";
-                          }
-                          @endphp
-                          <td>{{ $status }}</td>
+                          <td>{{ $login->action }}</td>
                           <td>{{ $login->datetime }}</td>
-                          <td>{{ $login->user_ip }}</td>
+                          <td>{{ $login->ip }}</td>
                         </tr>
                         @endforeach
                 </tbody>

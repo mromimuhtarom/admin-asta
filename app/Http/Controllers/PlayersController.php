@@ -10,37 +10,35 @@ use App\Stat;
 use Session;
 use Carbon\Carbon;
 use App\Player;
+use App\Device;
 use Validator;
 use App\PlayerActive;
 
 class PlayersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//****************************************** Menu Player Active ******************************************//
+  // ----------- Index Active Player ----------- //
     public function indexActive()
     {
         $online = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
-                  ->join('game', 'game.id', '=', 'user_active.game_id')
-                  ->join('user_stat', 'user_stat.user_id', '=', 'asta_db.user_active.user_id')
-                  ->select('asta_db.user.*', 'user_stat.*', 'game.name as game_name', 'asta_db.user_active.*')
+                  ->join('game', 'game.id', '=', 'asta_db.user_active.game_id')
+                  ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
+                  ->select('asta_db.user.*', 'asta_db.user_stat.*', 'game.name as game_name', 'asta_db.user_active.*')
                   ->where('asta_db.user.user_type', '!=', '3')
                   ->get();
         return view('pages.players.active_player', compact('online'));
     }
+  // ----------- End Active Player ----------- //
+//****************************************** End Menu Player Active ******************************************//
 
-    
+
+//****************************************** Menu High Rollers ******************************************//
+  // ----------- Index High Roller ----------- //
     public function indexHighRoller()
     {
-        // $activeUsers = DB::select("SELECT user_active.user_id, user.username FROM user_active JOIN user ON user.user_id = user_active.user_id WHERE user_active.game_id != ''");
-
-
         $avgBank = 0;
-        $player1 = DB::table('user')
-                   ->join('user_stat', 'user.user_id', '=', 'user_stat.user_id')
-                  ->join('country', 'user.country_code', '=', 'country.code')
+        $player1 = Player::join('asta_db.user_stat', 'asta_db.user.user_id', '=', 'asta_db.user_stat.user_id')
+                  ->join('country', 'asta_db.user.country_code', '=', 'country.code')
                    ->select(DB::raw("sum(chip) / count(*) As avgBank"))
                    ->where('user_type', '=', '1')
                    ->where('user_type', '=', '2')
@@ -55,35 +53,40 @@ class PlayersController extends Controller
         if($avgBank == "")
 
         $avgBank = 0;
-        $player  = DB::table('user')
-                  ->join('user_stat', 'user_stat.user_id', '=', 'user.user_id')
-                  ->join('country', 'user.country_code', '=', 'country.code')
+        $player  = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
+                  ->join('country', 'asta_db.user.country_code', '=', 'country.code')
                   ->where('chip', '>', $avgBank)->orderBy('chip', 'DESC')
                   ->limit('100')
                   ->get();
         return view('pages.players.high_roller', compact('player'));
     }
+  // ----------- End High Roller ----------- //
+//****************************************** End Menu High Rollers ******************************************//
 
+
+
+//****************************************** Menu Registered Player ******************************************//
+  // ----------- Index Registered Player ----------- //
     public function indexRegisteredPlayer() {
-        $registered = DB::table('user')
-                      ->join('country', 'user.country_code', '=', 'country.code')
-                      ->join('user_stat', 'user_stat.user_id', '=', 'user.user_id')
-                      ->select('user.*', 'country.name as countryname', 'user_stat.chip as chip', 'user_stat.point as point', 'user_stat.gold as gold')                      
+        $registered = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+                      ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
+                      ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                       ->where('user_type', '=', 1)
                       ->get();
 
               
         return view('pages.players.registered_player', compact('registered'));
     }
+  // ----------- End Index Registered Player ----------- //
 
+
+
+  // ----------- Detail Registered Player ----------- //
     public function detailRegistered($userId)
     {
-      $device = DB::table('user_device')
-                ->where('user_id', '=', $userId)
-                ->get();
-      $username = DB::table('user')
-                  ->join('user_stat', 'user_stat.user_id', '=', 'user.user_id')
-                  ->where('user.user_id', '=', $userId)
+      $device = Device::where('user_id', '=', $userId)->get();
+      $username = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
+                  ->where('asta_db.user.user_id', '=', $userId)
                   ->first();
       $country = DB::table('country')
                  ->where('iso_code_2', '=', $username->country_code)
@@ -92,7 +95,10 @@ class PlayersController extends Controller
                 
       return view('pages.players.register_player_detail', compact('device', 'username', 'country', 'datenow'));
     }
+ // ----------- End Detail Registered Player ----------- //
 
+
+ // ----------- Update Registered Player ----------- //
     public function updateRegisteredPlayer(Request $request)
     {
         $pk    = $request->pk;
@@ -125,47 +131,38 @@ class PlayersController extends Controller
           'desc'      => 'Edit '.$name.' in menu Registered Player with ID '.$pk.' to '. $value
         ]);
     }
+  // ----------- End Update Registered Player ----------- //
+//****************************************** End Menu Registered Player ******************************************//
 
 
+
+//****************************************** Menu Guest ******************************************//
+  // ----------- Index Guest ----------- //
     public function indexGuest() {
         $guests = DB::table('user_guest')
-                  ->join('user', 'user.user_id', '=', 'user_guest.user_id')
+                  ->join('asta_db.user', 'asta_db.user.user_id', '=', 'user_guest.user_id')
                   ->get();
         return view('pages.players.guest', compact('guests'));
     }
+  // ----------- End Index Guest ----------- //
+//****************************************** End Menu Guest ******************************************//
 
+
+//****************************************** Menu Bots ******************************************//
+  // ----------- Index Bots ----------- //
     public function indexBots()
     {
         $menu  = MenuClass::menuName('Bots');
-        $bots = DB::table('user_stat')
-                ->join('user', 'user.user_id', '=', 'user_stat.user_id')
-                ->join('country', 'country.code', '=', 'user.country_code')
-                ->where('user.user_type', '=', '3')
+        $bots = Stat::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_stat.user_id')
+                ->join('country', 'country.code', '=', 'asta_db.user.country_code')
+                ->where('asta_db.user.user_type', '=', '3')
                 ->get();
         return view('pages.players.bots', compact('bots', 'menu'));
     }
+  // ----------- End Index Bots ----------- //
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
+  // ----------- Insert Bots ----------- //
     public function storeBots(Request $request)
     {
         $botName   = $request->username;
@@ -232,7 +229,7 @@ class PlayersController extends Controller
 
           ]);
 
-          DB::table('user_random')->where('user_id', $botId->user_id)->update([
+          DB::table('asta_db.user_random')->where('user_id', $botId->user_id)->update([
             'isused' => '1'
           ]);
         }
@@ -246,6 +243,84 @@ class PlayersController extends Controller
 
         return redirect()->route('Bots')->with('success','Data Added');
     }
+  // ----------- End Insert Bots ----------- //
+
+
+  // ----------- Update Bots ----------- //
+    public function updateBot(Request $request, Stat $stat)
+    {
+      $pk    = $request->pk;
+      $name  = $request->name;
+      $value = $request->value;
+
+      Stat::where('user_id', $pk)->update([
+        $name => $value
+      ]);
+
+      switch ($name) {
+        case "chip":
+            $name = "chip";
+            break;
+        default:
+          "";
+      }
+
+
+      Log::create([
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' in menu Bots with ID '.$pk.' to '. $value
+      ]);
+
+    }
+  // ----------- End Update Bots ----------- //
+
+
+  // ----------- Delete Bots ----------- //
+    public function destroyBots(Request $request)
+    {
+      $userid = $request->userid;
+      if($userid != '')
+      {
+          DB::table('asta_db.user')->where('user_id', '=', $userid)->delete();
+          DB::table('asta_db.user_stat')->where('user_id', '=', $userid)->delete();
+
+          Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Delete in menu Bots with ID '.$userid
+          ]);
+          return redirect()->route('Bots')->with('success','Data Deleted');
+      }
+      return redirect()->route('Bots')->with('success','Something wrong');   
+    }
+  // ----------- End Delete Bots ----------- //
+//****************************************** End Menu Bots ******************************************//  
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+
     
 
     /**
@@ -282,33 +357,7 @@ class PlayersController extends Controller
         //
     }
 
-    public function updateBot(Request $request, Stat $stat)
-    {
-      $pk    = $request->pk;
-      $name  = $request->name;
-      $value = $request->value;
 
-      Stat::where('user_id', $pk)->update([
-        $name => $value
-      ]);
-
-      switch ($name) {
-        case "chip":
-            $name = "chip";
-            break;
-        default:
-          "";
-    }
-
-
-    Log::create([
-      'op_id'     => Session::get('userId'),
-      'action_id' => '2',
-      'datetime'  => Carbon::now('GMT+7'),
-      'desc'      => 'Edit '.$name.' in menu Bots with ID '.$pk.' to '. $value
-    ]);
-
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -316,25 +365,6 @@ class PlayersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyBots(Request $request)
-    {
-      $userid = $request->userid;
-      if($userid != '')
-      {
-          DB::table('user')->where('user_id', '=', $userid)->delete();
-          DB::table('user_stat')->where('user_id', '=', $userid)->delete();
-
-          Log::create([
-            'op_id'     => Session::get('userId'),
-            'action_id' => '4',
-            'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Delete in menu Bots with ID '.$userid
-          ]);
-          return redirect()->route('Bots')->with('success','Data Deleted');
-      }
-      return redirect()->route('Bots')->with('success','Something wrong');   
-    }
-
 
     public function avatar($avatar)
     {

@@ -18,6 +18,7 @@ class ResellerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+//****************************************** Menu List Reseller ******************************************//
     public function index()
     {
         $menu     = MenuClass::menuName('List Reseller');
@@ -25,6 +26,104 @@ class ResellerController extends Controller
         return view('pages.reseller.listreseller', compact('menu', 'reseller'));
     }
 
+
+    public function update(Request $request)
+    {
+        $pk = $request->pk;
+        $name = $request->name;
+        $value = $request->value;
+
+        Reseller::where('id', '=', $pk)->update([
+            $name => $value
+        ]);
+
+        switch($name) {
+            case "username":
+                $name = 'Username';
+                break;
+            
+            case "name":
+                $name = "Name";
+                break;
+            
+            case "phone":
+                $name = "Phone";
+                break;
+            
+            case "email":
+                $name = "Email";
+                break;
+
+            case "gold":
+                $name = "Gold";
+                break;
+
+            case "rank_id":
+                $name = "Rank ID";
+                break;
+            
+            default:
+                "";
+        }
+
+
+        Log::create([
+            'op_id' => Session::get('userId'),
+            'action_id'   => '2',
+            'datetime'        => Carbon::now('GMT+7'),
+            'desc' => 'Edit'.$name.' in menu List Reseller with ID '.$pk.' To '.$value
+        ]);
+    }
+
+
+
+    public function PasswordUpdate(Request $request)
+    {
+        $pk = $request->userid;
+        $password = $request->password;
+        
+        if($password != '') {
+            Reseller::where('id', '=', $pk)->update([
+                'password' => bcrypt($password)
+            ]);
+        
+  
+  
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '1',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Edit password in menu List Reseller with ResellerId '.$pk.' to '. $password
+            ]);
+
+            return redirect()->route('List_Reseller')->with('success','Reset Password Successfully');
+        }
+        return redirect()->route('List_Reseller')->with('alert','Password is Null');
+    }
+
+
+
+    public function destroy(Request $request)
+    {
+        $userid = $request->id;
+        if($userid != '')
+        {
+            DB::table('reseller')->where('id', '=', $userid)->delete();
+
+            Log::create([
+                'op_id' => Session::get('userId'),
+                'action_id'   => '4',
+                'datetime'        => Carbon::now('GMT+7'),
+                'desc' => 'Deletein menu List Reseller with reseller ID '.$userid
+            ]);
+            return redirect()->route('List_Reseller')->with('success','Data Deleted');
+        }
+        return redirect()->route('List_Reseller')->with('success','Somethong wrong');                
+    }
+//****************************************** End Menu List Reseller ******************************************//
+
+
+//****************************************** Menu Reseller Rank ******************************************//
     public function ResellerRank()
     {
         $rank = DB::table('reseller_rank')->get();
@@ -32,12 +131,112 @@ class ResellerController extends Controller
         return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
     }
 
+
+    public function storeRankReseller(Request $request)
+    {
+        $id   = $request->id;
+        $rankname = $request->rankname;
+        $validator = Validator::make($request->all(),[
+            'id'    => 'required|integer',
+            'rankname'    => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        $rank = DB::table('reseller_rank')->insert([
+            'order_id'        => $id,
+            'name'            => $rankname,
+            'accumulate_type' => '0',
+            'bonus'           => '0'
+        ]);
+
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Reseller Rank with Rank Name '. $rankname
+        ]);
+
+        return redirect()->route('Reseller_Rank')->with('success','Data Added');
+    }
+
+
+
+    public function updateRank(Request $request)
+    {
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+    
+        DB::table('reseller_rank')->where('order_id', '=', $pk)->update([
+          $name => $value
+        ]);
+        
+        switch($name) {
+            case "order_id":
+                $name = 'Order ID';
+                break;
+            
+            case "name":
+                $name = "Name";
+                break;
+            
+            case "gold_group":
+                $name = "Gold Group";
+                break;
+            
+            case "accumulate_type":
+                $name = "Accumulate Type";
+                break;
+
+            case "bonus":
+                $name = "Bonus";
+                break;
+            
+            default:
+                "";
+        }
+
+
+        Log::create([
+            'op_id' => Session::get('userId'),
+            'action_id'   => '2',
+            'datetime'        => Carbon::now('GMT+7'),
+            'desc' => 'Edit'.$name.' in menu Reseller Rank with Order ID '.$pk.' To '.$value
+        ]);
+    }
+
+
+    public function destroyRank(Request $request)
+    {
+        $id = $request->id;
+        if($id != '')
+        {
+            DB::table('reseller_rank')->where('order_id', '=', $id)->delete();
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Reseller Rank with reseller ID '.$id
+            ]);
+            return redirect()->route('Reseller_Rank')->with('success','Data Deleted');
+        }
+        return redirect()->route('Reseller_Rank')->with('success','Somethong wrong');  
+    }
+//****************************************** End Menu Reseller Rank ******************************************//
+
+
+
+//****************************************** End Menu Reseller Transaction ******************************************//
     public function ResellerTransaction()
     {
         $transactions = DB::select('SELECT year(timestamp) as year, month(timestamp) as monthnumber,monthname(timestamp) as monthname, sum(gold) as totalgold FROM reseller_history GROUP BY year,monthname');
         return view('pages.reseller.reseller_transaction', compact('transactions'));
     }
-
+///****************************************** End Menu Reseller Transaction ******************************************//
     public function BalanceReseller()
     {
         return view('pages.reseller.balance_reseller');
@@ -288,35 +487,7 @@ class ResellerController extends Controller
         return back()->with('alert','REGISTER SUCCESSFULL');
     }
 
-    public function storeRankReseller(Request $request)
-    {
-        $id   = $request->id;
-        $rankname = $request->rankname;
-        $validator = Validator::make($request->all(),[
-            'id'    => 'required|integer',
-            'rankname'    => 'required',
-        ]);
-    
-        if ($validator->fails()) {
-            return back()->withErrors($validator->errors());
-        }
 
-        $rank = DB::table('reseller_rank')->insert([
-            'order_id'        => $id,
-            'name'            => $rankname,
-            'accumulate_type' => '0',
-            'bonus'           => '0'
-        ]);
-
-        // Log::create([
-        //     'op_id'     => Session::get('userId'),
-        //     'action_id' => '3',
-        //     'datetime'  => Carbon::now('GMT+7'),
-        //     'desc'      => 'Create new in menu Reseller Rank with Rank Name '. $rankname
-        // ]);
-
-        return redirect()->route('Reseller_Rank')->with('success','Data Added');
-    }
 
     /**
      * Display the specified resource.
@@ -343,125 +514,7 @@ class ResellerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $pk = $request->pk;
-        $name = $request->name;
-        $value = $request->value;
-
-        Reseller::where('id', '=', $pk)->update([
-            $name => $value
-        ]);
-
-        switch($name) {
-            case "username":
-                $name = 'Username';
-                break;
-            
-            case "name":
-                $name = "Name";
-                break;
-            
-            case "phone":
-                $name = "Phone";
-                break;
-            
-            case "email":
-                $name = "Email";
-                break;
-
-            case "gold":
-                $name = "Gold";
-                break;
-
-            case "rank_id":
-                $name = "Rank ID";
-                break;
-            
-            default:
-                "";
-        }
-
-
-        Log::create([
-            'op_id' => Session::get('userId'),
-            'action_id'   => '2',
-            'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit'.$name.' in menu List Reseller with ID '.$pk.' To '.$value
-        ]);
-    }
-
-
-
-    public function PasswordUpdate(Request $request)
-    {
-        $pk = $request->userid;
-        $password = $request->password;
-        
-        if($password != '') {
-            Reseller::where('id', '=', $pk)->update([
-                'password' => bcrypt($password)
-            ]);
-        
-  
-  
-            Log::create([
-                'op_id'     => Session::get('userId'),
-                'action_id' => '1',
-                'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit password in menu List Reseller with ResellerId '.$pk.' to '. $password
-            ]);
-
-            return redirect()->route('List_Reseller')->with('success','Reset Password Successfully');
-        }
-        return redirect()->route('List_Reseller')->with('alert','Password is Null');
-    }
-
-
-    public function updateRank(Request $request)
-    {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
-    
-        DB::table('reseller_rank')->where('order_id', '=', $pk)->update([
-          $name => $value
-        ]);
-        
-        switch($name) {
-            case "order_id":
-                $name = 'Order ID';
-                break;
-            
-            case "name":
-                $name = "Name";
-                break;
-            
-            case "gold_group":
-                $name = "Gold Group";
-                break;
-            
-            case "accumulate_type":
-                $name = "Accumulate Type";
-                break;
-
-            case "bonus":
-                $name = "Bonus";
-                break;
-            
-            default:
-                "";
-        }
-
-
-        Log::create([
-            'op_id' => Session::get('userId'),
-            'action_id'   => '2',
-            'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit'.$name.' in menu Reseller Rank with Order ID '.$pk.' To '.$value
-        ]);
-    }
+     */ 
 
     /**
      * Remove the specified resource from storage.
@@ -469,40 +522,4 @@ class ResellerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
-    {
-        $userid = $request->id;
-        if($userid != '')
-        {
-            DB::table('reseller')->where('id', '=', $userid)->delete();
-
-            Log::create([
-                'op_id' => Session::get('userId'),
-                'action_id'   => '4',
-                'datetime'        => Carbon::now('GMT+7'),
-                'desc' => 'Deletein menu List Reseller with reseller ID '.$userid
-            ]);
-            return redirect()->route('List_Reseller')->with('success','Data Deleted');
-        }
-        return redirect()->route('List_Reseller')->with('success','Somethong wrong');                
-    }
-
-
-    public function destroyRank(Request $request)
-    {
-        $id = $request->id;
-        if($id != '')
-        {
-            DB::table('reseller_rank')->where('order_id', '=', $id)->delete();
-
-            Log::create([
-                'op_id'     => Session::get('userId'),
-                'action_id' => '4',
-                'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Reseller Rank with reseller ID '.$id
-            ]);
-            return redirect()->route('Reseller_Rank')->with('success','Data Deleted');
-        }
-        return redirect()->route('Reseller_Rank')->with('success','Somethong wrong');  
-    }
 }

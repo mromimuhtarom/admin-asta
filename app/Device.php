@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
 {
-    protected $table = 'user_device';
+    protected $table = 'asta_db.user_device';
     protected $guarded = [];
 
     public $timestamps = false;

@@ -8,7 +8,7 @@ class Stat extends Model
 {
     protected $guarded =[] ;
     
-    protected $table = 'user_stat';
+    protected $table = 'asta_db.user_stat';
     // const CREATED_AT = 'ts';
     // const UPDATED_AT = NULL;
     public $timestamps = false;

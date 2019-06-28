@@ -33,23 +33,6 @@ class PlayReportController extends Controller
       $menus1 = MenuClass::menuName('Report');
       $game = DB::table('game')->get();
       if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
-        // $player_history = DB::table('player_history')
-        //                     ->join('user', 'user.user_id', '=', 'player_history.player')
-        //                     ->join('country', 'user.country_code', '=', 'country.code')
-        //                     ->join('game', 'game.id', '=', 'player_history.gameId')
-        //                     ->select(
-        //                       'player_history.*',
-        //                       'user.username',
-        //                       'user.user_id',
-        //                       'game.name as gamename',
-        //                       'country.name as countryname'
-        //                     )
-        //                     ->where('username', 'LIKE', '%'.$inputName.'%')
-        //                     ->where('game.id', '=', $inputGame)
-        //                     ->wherebetween('player_history.ts' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-        //                     ->orderBy('player_history.ts', 'asc')
-        //                     ->paginate(12);
-        // $player_history = DB::table()
         if($inputGame == 'Domino QQ') {
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
@@ -125,31 +108,11 @@ class PlayReportController extends Controller
                                   )
                           ->where('user.username', 'LIKE', '%'.$inputName.'%')
                           ->wherebetween('bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-                          // ->union($dmq)
-                          // ->union($dms)
-                          // ->union($tpk)
                           ->get();
         }
 
-        // $player_history->appends($request->all());
         return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
       } else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
-      // $player_history = DB::table('player_history')
-      //                     ->join('user', 'user.user_id', '=', 'player_history.player')
-      //                     ->join('country', 'user.country_code', '=', 'country.code')
-      //                     ->join('game', 'game.id', '=', 'player_history.gameId')
-      //                     ->select(
-      //                       'player_history.*',
-      //                       'user.username',
-      //                       'user.user_id',
-      //                       'game.name as gamename',
-      //                       'country.name as countryname'
-      //                     )
-      //                     ->where('username', 'LIKE', '%'.$inputName.'%')
-      //                     ->wherebetween('player_history.ts' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
-      //                     ->orderBy('player_history.ts', 'asc')
-      //                     ->paginate(12);
-
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
@@ -225,26 +188,9 @@ class PlayReportController extends Controller
                           ->union($dms)
                           ->union($tpk)
                           ->get();
-      // $player_history->appends($request->all());
+
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
-      //   $player_history = DB::table('player_history')
-      //                      ->join('user', 'user.user_id', '=', 'player_history.player')
-      //                      ->join('country', 'user.country_code', '=', 'country.code')
-      //                      ->join('game', 'game.id', '=', 'player_history.gameId')
-      //                      ->select(
-      //                        'player_history.*',
-      //                        'user.username',
-      //                        'user.user_id',
-      //                        'game.name as gamename',
-      //                        'country.name as countryname'
-      //                      )
-      //                      ->where('username', $inputName)
-      //                      ->where('game.id', '=', $inputGame)
-      //                      ->WHERE('player_history.ts', '>=', $inputMinDate." 00:00:00")
-      //                      ->orderBy('player_history.ts', 'asc')
-      //                      ->paginate(12);
-      //  $player_history->appends($request->all());
         if($inputGame == 'Domino QQ') {
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
@@ -323,30 +269,10 @@ class PlayReportController extends Controller
                                   )
                           ->where('user.username', 'LIKE', '%'.$inputName.'%')
                           ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
-                          // ->union($dmq)
-                          // ->union($dms)
-                          // ->union($tpk)
                           ->get();
         }
        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
-      //  $player_history = DB::table('player_history')
-      //                     ->join('user', 'user.user_id', '=', 'player_history.player')
-      //                     ->join('country', 'user.country_code', '=', 'country.code')
-      //                     ->join('game', 'game.id', '=', 'player_history.gameId')
-      //                     ->select(
-      //                       'player_history.*',
-      //                       'user.username',
-      //                       'user.user_id',
-      //                       'game.name as gamename',
-      //                       'country.name as countryname'
-      //                     )
-      //                     ->where('username', $inputName)
-      //                     ->WHERE('player_history.ts', '>=', $inputMinDate." 00:00:00")
-      //                     ->orderBy('player_history.ts', 'asc')
-      //                     ->paginate(12);
-      // $player_history->appends($request->all());
-
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
@@ -425,23 +351,6 @@ class PlayReportController extends Controller
 
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
-        // $player_history = DB::table('player_history')
-        //                       ->join('user', 'user.user_id', '=', 'player_history.player')
-        //                       ->join('country', 'user.country_code', '=', 'country.code')
-        //                       ->join('game', 'game.id', '=', 'player_history.gameId')
-        //                       ->select(
-        //                         'player_history.*',
-        //                         'user.username',
-        //                         'user.user_id',
-        //                         'game.name as gamename',
-        //                         'country.name as countryname'
-        //                       )
-        //                       ->where('username', 'LIKE', '%'.$inputName.'%')
-        //                       ->where('game.id', '=', $inputGame)
-        //                       ->where('player_history.ts', '<=', $inputMaxDate." 23:59:59")
-        //                       ->orderBy('player_history.ts', 'desc')
-        //                       ->paginate(12);
-        //     $player_history->appends($request->all());
 
         if($inputGame == 'Domino QQ') {
         $dmq = DB::table('dmq_round')
@@ -520,30 +429,11 @@ class PlayReportController extends Controller
                                   )
                           ->where('user.username', 'LIKE', '%'.$inputName.'%')
                           ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
-                          // ->union($dmq)
-                          // ->union($dms)
-                          // ->union($tpk)
                           ->get();
         }
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
-    // $player_history = DB::table('player_history')
-    //                       ->join('user', 'user.user_id', '=', 'player_history.player')
-    //                       ->join('country', 'user.country_code', '=', 'country.code')
-    //                       ->join('game', 'game.id', '=', 'player_history.gameId')
-    //                       ->select(
-    //                         'player_history.*',
-    //                         'user.username',
-    //                         'user.user_id',
-    //                         'game.name as gamename',
-    //                         'country.name as countryname'
-    //                       )
-    //                       ->where('username', 'LIKE', '%'.$inputName.'%')
-    //                       ->where('player_history.ts', '<=', $inputMaxDate." 23:59:59")
-    //                       ->orderBy('player_history.ts', 'desc')
-    //                       ->paginate(12);
-    //     $player_history->appends($request->all());
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
@@ -622,27 +512,10 @@ class PlayReportController extends Controller
 
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL && $inputGame != NULL) {
-        // $player_history =  DB::table('player_history')
-        //                   ->join('user', 'user.user_id', '=', 'player_history.player')
-        //                   ->join('country', 'user.country_code', '=', 'country.code')
-        //                   ->join('game', 'game.id', '=', 'player_history.gameId')
-        //                   ->select(
-        //                     'player_history.*',
-        //                     'user.username',
-        //                     'user.user_id',
-        //                     'game.name as gamename',
-        //                     'country.name as countryname'
-        //                   )
-        //                   ->where('username', 'LIKE', '%'.$inputName.'%')
-        //                   ->where('game.id', '=', $inputGame)
-        //                   ->orderBy('player_history.ts', 'asc')
-        //                   ->paginate(12);
-        // $player_history->appends($request->all());
 
 
         if($inputGame == 'Domino QQ') {
         $player_history = DB::table('dmq_round')
-                // DB::table(DB::raw('dmq_round FORCE INDEX (dmq_round.roundid)'))
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
@@ -712,30 +585,11 @@ class PlayReportController extends Controller
                                    DB:: raw("'Big Two' AS gamename")
                                   )
                           ->where('user.username', 'LIKE', '%'.$inputName.'%')
-                          // ->union($dmq)
-                          // ->union($dms)
-                          // ->union($tpk)
                           ->get();
         }
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
     } else if($inputName != NULL) {
-        // $player_history =  DB::table('player_history')
-        //                   ->join('user', 'user.user_id', '=', 'player_history.player')
-        //                   ->join('country', 'user.country_code', '=', 'country.code')
-        //                   ->join('game', 'game.id', '=', 'player_history.gameId')
-        //                   ->select(
-        //                     'player_history.*',
-        //                     'user.username',
-        //                     'user.user_id',
-        //                     'game.name as gamename',
-        //                     'country.name as countryname'
-        //                   )
-        //                   ->where('username', 'LIKE', '%'.$inputName.'%')
-        //                   ->orderBy('player_history.ts', 'asc')
-        //                   ->paginate(12);
-                          
-        // $player_history->appends($request->all());
 
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
