@@ -24,10 +24,10 @@
                     </select>
                 </div>
                 <div class="col">
-                    <input type="date" class="form-control" name="dari">
+                    <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
-                    <input type="date" class="form-control" name="sampai">
+                    <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
                     <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
+
 
 class ReportPlayerController extends Controller
 {
@@ -14,7 +16,8 @@ class ReportPlayerController extends Controller
      */
     public function index()
     {
-        return view('pages.players.report_player');
+        $datenow = Carbon::now('GMT+7');
+        return view('pages.players.report_player', compact('datenow'));
     }
 
     /**
@@ -29,6 +32,7 @@ class ReportPlayerController extends Controller
         $minDate = $request->inputMinDate;
         $maxDate = $request->inputMaxDate;
         $logtype = $request->logType;
+        $datenow = Carbon::now('GMT+7');
 
         if($player != NULL && $minDate != NULL && $maxDate != NULL && $logtype != NULL)
         {
@@ -41,7 +45,7 @@ class ReportPlayerController extends Controller
                          ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $minDate != NULL && $logtype != NULL )
         {
             $log_login = DB::table('asta_db.log_online')
@@ -53,7 +57,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $maxDate != NULL && $logtype != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -65,7 +69,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $logtype != NULL) 
         {
             $log_login = DB::table('asta_db.log_online')
@@ -76,7 +80,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if ($minDate != NULL && $logtype != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -87,7 +91,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($maxDate != NULL && $logtype != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -98,7 +102,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         }
         else if($player != NULL && $minDate != NULL && $maxDate != NULL)
         {
@@ -110,7 +114,7 @@ class ReportPlayerController extends Controller
                          ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if ($minDate != NULL && $maxDate != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -120,7 +124,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.type', '=', 0)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $minDate != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -131,7 +135,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if ($player != NULL && $maxDate != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -142,7 +146,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($minDate != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -152,7 +156,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.type', '=', 0)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($maxDate != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -162,7 +166,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.type', '=', 0)
                          ->get();
 
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if ($logtype != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -172,7 +176,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.type', '=', 0)
                          ->get();
             
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else if($player != NULL)
         {
             $log_login = DB::table('asta_db.log_online')
@@ -182,7 +186,7 @@ class ReportPlayerController extends Controller
                          ->where('asta_db.log_online.type', '=', 0)
                          ->get();
             
-            return view('pages.players.report_player_detail', compact('log_login'));
+            return view('pages.players.report_player_detail', compact('log_login', 'datenow'));
         } else {
             return redirect()->route('Report_Players');
         }

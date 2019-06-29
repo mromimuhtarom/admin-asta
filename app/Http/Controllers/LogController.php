@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Log;
+use Carbon\Carbon;
 use App\Action;
 
 class LogController extends Controller
@@ -17,7 +18,8 @@ class LogController extends Controller
     public function index()
     {
         $logs = Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
-        return view('pages.admin.log_admin', compact('logs'));
+        $datenow = Carbon::now('GMT+7');
+        return view('pages.admin.log_admin', compact('logs', 'datenow'));
     }
 
 
@@ -30,7 +32,8 @@ class LogController extends Controller
         $inputAction  = $request->action;
   
         $actionSearch =  Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
-  
+        $datenow = Carbon::now('GMT+7');
+
         if($inputUser != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputAction != NULL) {
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
@@ -41,7 +44,7 @@ class LogController extends Controller
                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                  ->get();
                  
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL) {
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -53,7 +56,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
                   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL && $inputAction != NULL &&  $inputMaxDate != NULL) {
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -66,7 +69,7 @@ class LogController extends Controller
                   ->get();
                   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputMinDate != NULL && $inputMaxDate != NULL &&  $inputAction != NULL) {
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -78,7 +81,7 @@ class LogController extends Controller
                  ->get();
   
                  
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
        }else if ($inputMinDate != NULL && $inputMaxDate != NULL){
          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
@@ -88,7 +91,7 @@ class LogController extends Controller
                  ->get();
   
                  
-         return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+         return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
        }else if ($inputUser != NULL && $inputMaxDate != NULL){
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -99,7 +102,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL &&  $inputAction != NULL) {
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -110,7 +113,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
 
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
         }else if($inputMinDate != NULL &&  $inputAction != NULL) {
                $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                        ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
@@ -121,7 +124,7 @@ class LogController extends Controller
                        ->get();
   
   
-                return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+                return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
         }else if($inputMaxDate != NULL &&  $inputAction != NULL) {
                 $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                         ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
@@ -132,7 +135,7 @@ class LogController extends Controller
                         ->get();
   
   
-                return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+                return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
         }else if($inputUser != NULL && $inputMinDate != NULL ) {
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
@@ -143,7 +146,7 @@ class LogController extends Controller
                   ->get();
   
   
-         return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+         return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
        }else if ($inputMinDate != NULL){
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
@@ -152,7 +155,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
         }else if ($inputMaxDate != NULL){
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -163,7 +166,7 @@ class LogController extends Controller
                   ->get();
   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL ){
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -174,7 +177,7 @@ class LogController extends Controller
                   ->get();
   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputAction != NULL) {
           $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
@@ -185,7 +188,7 @@ class LogController extends Controller
                  ->get();
   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
+          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
         }else{
           return self::index();
         }

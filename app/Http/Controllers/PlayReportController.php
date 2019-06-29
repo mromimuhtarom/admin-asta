@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 use App\Classes\MenuClass;
 
 class PlayReportController extends Controller
@@ -16,7 +17,8 @@ class PlayReportController extends Controller
     public function index()
     {
         $game = DB::table('game')->get();
-        return view('pages.players.playreport', compact('game'));
+        $datenow = Carbon::now('GMT+7');
+        return view('pages.players.playreport', compact('game', 'datenow'));
     }
 
 
@@ -29,6 +31,7 @@ class PlayReportController extends Controller
       $inputMinDate = $request->inputMinDate;
       $inputGame    = $request->inputGame;
       $inputMaxDate = $request->inputMaxDate;
+      $datenow = Carbon::now('GMT+7');
 
       $menus1 = MenuClass::menuName('Report');
       $game = DB::table('game')->get();
@@ -111,7 +114,7 @@ class PlayReportController extends Controller
                           ->get();
         }
 
-        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
       } else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
@@ -189,7 +192,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ') {
         $dmq = DB::table('dmq_round')
@@ -271,7 +274,7 @@ class PlayReportController extends Controller
                           ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
                           ->get();
         }
-       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
@@ -349,7 +352,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game'));
+      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
 
         if($inputGame == 'Domino QQ') {
@@ -432,7 +435,7 @@ class PlayReportController extends Controller
                           ->get();
         }
 
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
+          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
         $dmq = DB::table('dmq_round')
                ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
@@ -510,7 +513,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
+      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputGame != NULL) {
 
 
@@ -588,7 +591,81 @@ class PlayReportController extends Controller
                           ->get();
         }
 
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
+          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+    } else if ($inputMinDate != NULL && $inputMaxDate != NULL) {
+        $dmq = DB::table('dmq_round')
+               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
+               ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
+               ->select('dmq_round.gameplay_log',
+                        'dmq_round.date', 
+                        'dmq_table.name as tablename', 
+                        'dmq_round_player.bet', 
+                        'dmq_round_player.win_lose', 
+                        'dmq_round_player.status', 
+                        'dmq_round_player.hand_card',
+                        'dmq_round_player.seatid', 
+                        'user.username',
+                        DB::raw("'Domino QQ' AS gamename") 
+                        )
+               ->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+
+        $dms = DB::table('dms_round')
+               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+               ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
+               ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
+               ->select('dms_round.gameplay_log',
+                        'dms_round.date',
+                        'dms_table.name AS tablename',
+                        'dms_round_player.bet',
+                        'dms_round_player.win_lose',
+                        'dms_round_player.status',
+                        'dms_round_player.hand_card',
+                        'dms_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Domino susun' AS gamename")
+                       )
+               ->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+
+        $tpk = DB::table('tpk_round')
+               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+               ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
+               ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
+               ->select('tpk_round.gameplay_log',
+                        'tpk_round.date',
+                        'tpk_table.name AS tablename',
+                        'tpk_round_player.bet',
+                        'tpk_round_player.win_lose',
+                        'tpk_round_player.status',
+                        'tpk_round_player.hand_card',
+                        'tpk_round_player.seatid',
+                        'user.username',
+                        DB::raw("'Texas Poker' AS gamename")
+                       )
+               ->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+
+        $player_history = DB::table('bgt_round')
+                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+                          ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
+                          ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
+                          ->select('bgt_round.gameplay_log',
+                                   'bgt_round.date',
+                                   'bgt_table.name AS tablename',
+                                   'bgt_round_player.bet',
+                                   'bgt_round_player.win_lose',
+                                   'bgt_round_player.status',
+                                   'bgt_round_player.hand_card',
+                                   'bgt_round_player.seatid',
+                                   'user.username',
+                                   DB:: raw("'Big Two' AS gamename")
+                                  )
+                          ->wherebetween('bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                          ->union($dmq)
+                          ->union($dms)
+                          ->union($tpk)
+                          ->get();
+
+          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL) {
 
         $dmq = DB::table('dmq_round')
@@ -663,7 +740,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game'));
+          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } 
 
   }

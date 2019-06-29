@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BalanceChip;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 use App\Classes\MenuClass;
 
 class ChipController extends Controller
@@ -16,7 +17,8 @@ class ChipController extends Controller
      */
     public function index()
     {
-        return view('pages.players.chip_player');
+      $datenow = Carbon::now('GMT+7');
+        return view('pages.players.chip_player', compact('datenow'));
     }
 
     /**
@@ -31,6 +33,7 @@ class ChipController extends Controller
         $startDate    = $request->inputMinDate;
         $endDate      = $request->inputMaxDate;
         $menus1       = MenuClass::menuName('Balance Chip');
+        $datenow      = Carbon::now('GMT+7');
 
         if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
 
@@ -41,7 +44,7 @@ class ChipController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
         }else if ($searchPlayer != NULL && $startDate != NULL){
 
           $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
@@ -51,7 +54,7 @@ class ChipController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
 
         }else if ($searchPlayer != NULL && $endDate != NULL){
 
@@ -62,7 +65,7 @@ class ChipController extends Controller
                             ->orderBy('timestamp', 'desc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
 
         }else if ($startDate != NULL && $endDate != NULL){
 
@@ -72,7 +75,7 @@ class ChipController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
 
         }else if ($searchPlayer != NULL){
 
@@ -81,7 +84,7 @@ class ChipController extends Controller
                             ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
 
         }else if ($startDate != NULL){
 
@@ -91,7 +94,7 @@ class ChipController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
 
         }else if ($endDate != NULL){
 
@@ -101,7 +104,7 @@ class ChipController extends Controller
                             ->orderBy('timestamp', 'desc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
 
 
         }

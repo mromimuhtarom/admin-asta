@@ -19,10 +19,10 @@
                             <input type="text" name="inputPlayer" class="form-control" placeholder="username">
                         </div>
                         <div class="col" align="left" style="padding-left:1%;">
-                            <input type="date" name="inputMinDate" class="form-control">
+                            <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
                         </div>
                         <div class="col" align="left" style="padding-left:1%;">
-                            <input type="date" name="inputMaxDate" class="form-control">
+                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
                         </div>
                         <div class="col" align="left" style="padding-left:1%;">
                             <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>

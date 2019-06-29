@@ -234,12 +234,14 @@ class ResellerController extends Controller
     public function ResellerTransaction()
     {
         $transactions = DB::select('SELECT year(timestamp) as year, month(timestamp) as monthnumber,monthname(timestamp) as monthname, sum(gold) as totalgold FROM reseller_history GROUP BY year,monthname');
-        return view('pages.reseller.reseller_transaction', compact('transactions'));
+        $datenow = Carbon::now('GMT+7');
+        return view('pages.reseller.reseller_transaction', compact('transactions', 'datenow'));
     }
 ///****************************************** End Menu Reseller Transaction ******************************************//
     public function BalanceReseller()
     {
-        return view('pages.reseller.balance_reseller');
+        $datenow = Carbon::now('GMT+7');
+        return view('pages.reseller.balance_reseller', compact('datenow'));
     }
 
     public function RegisterReseller()
@@ -315,6 +317,7 @@ class ResellerController extends Controller
       $endDate             = $request->inputMaxDate;
       $startDateComparison = Carbon::parse($startDate)->timestamp;
       $endDateComparison   = Carbon::parse($endDate)->timestamp;
+      $datenow             = Carbon::now('GMT+7');
 
       if($endDateComparison < $startDateComparison){
         return back()->with('alert','alert');
@@ -330,8 +333,7 @@ class ResellerController extends Controller
                           ->orderBy('timestamp', 'asc')
                           ->get();
 
-        // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $startDate != NULL) {
 
@@ -344,7 +346,7 @@ class ResellerController extends Controller
                           ->get();
 
         // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
         $balancedetails = DB::table('balance_reseller')
@@ -356,7 +358,7 @@ class ResellerController extends Controller
                           ->get();
 
         // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
       }else if($searchUsername != NULL) {
         $balancedetails = DB::table('balance_reseller')
                           ->select('balance_reseller.*', 'reseller.username')
@@ -365,7 +367,7 @@ class ResellerController extends Controller
                           ->get();
 
         // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails'));
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
       }
     }
 
@@ -374,6 +376,7 @@ class ResellerController extends Controller
         $searchUsername = $request->inputUsername;
         $startDate      = $request->inputMinDate;
         $endDate        = $request->inputMaxDate;
+        $datenow        = Carbon::now('GMT+7');
   
         if($endDate < $startDate){
           return back()->with('alert','alert');
@@ -390,7 +393,7 @@ class ResellerController extends Controller
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
   
         }else if ($searchUsername != NULL && $startDate != NULL) {
   
@@ -403,7 +406,7 @@ class ResellerController extends Controller
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
   
         }else if ($searchUsername != NULL && $endDate != NULL) {
           $transactions = DB::table('reseller_history')
@@ -415,7 +418,7 @@ class ResellerController extends Controller
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
         }else if($searchUsername != NULL) {
           $transactions = DB::table('reseller_history')
                           ->select('reseller_history.*', 'reseller.username')
@@ -424,7 +427,7 @@ class ResellerController extends Controller
                           ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
         }
     }
 
@@ -438,7 +441,7 @@ class ResellerController extends Controller
                         ->orderby('timestamp', 'ASC')
                         ->get();
 
-        return view('pages.reseller.reseller_transaction_detail', compact('transactions'));
+        return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
     }
 
     /**

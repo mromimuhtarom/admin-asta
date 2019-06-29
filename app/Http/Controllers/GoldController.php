@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
+use App\BalanceGold;
 use App\Classes\MenuClass;
 
 class GoldController extends Controller
@@ -15,7 +17,8 @@ class GoldController extends Controller
      */
     public function index()
     {
-        return view('pages.players.gold_player');
+      $datenow = Carbon::now('GMT+7');
+        return view('pages.players.gold_player', compact('datenow'));
     }
 
     public function search(Request $request) 
@@ -24,6 +27,7 @@ class GoldController extends Controller
         $startDate    = $request->inputMinDate;
         $endDate      = $request->inputMaxDate;
         $menus1       = MenuClass::menuName('Balance Gold');
+        $datenow      = Carbon::now('GMT+7');
         if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
 
           $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
@@ -33,7 +37,7 @@ class GoldController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1','datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL && $startDate != NULL){
@@ -45,7 +49,7 @@ class GoldController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL && $endDate != NULL){
@@ -57,7 +61,7 @@ class GoldController extends Controller
                             ->orderBy('timestamp', 'desc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($startDate != NULL && $endDate != NULL){
@@ -68,7 +72,7 @@ class GoldController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL){
@@ -78,7 +82,7 @@ class GoldController extends Controller
                             ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($startDate != NULL){
@@ -89,7 +93,7 @@ class GoldController extends Controller
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($endDate != NULL){
@@ -100,7 +104,7 @@ class GoldController extends Controller
                             ->orderBy('timestamp', 'desc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1'));
+          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
 
