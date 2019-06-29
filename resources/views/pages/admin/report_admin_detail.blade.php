@@ -23,10 +23,10 @@
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMinDate">
+                        <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMaxDate">
+                        <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
@@ -49,7 +49,7 @@
             <!-- add: non-hidden - to disable auto hide -->
         </div>
     </header>
-    <div>
+    <div> 
                     
         <!-- widget edit box -->
         <div class="jarviswidget-editbox">

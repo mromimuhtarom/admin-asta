@@ -37,7 +37,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 1)
-                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->get();
 
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
@@ -101,25 +101,26 @@ class ReportAdminController extends Controller
         }
         else if($player != NULL && $minDate != NULL && $maxDate != NULL)
         {
+            
             $log_login = DB::table('asta_db.log_online')
                          ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
                          ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
                          ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 1)
-                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->get();
 
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if ($minDate != NULL && $maxDate != NULL)
         {
-            // dd($maxDate);
+            
             $log_login = DB::table('asta_db.log_online')
                          ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
                          ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
-
+        
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $minDate != NULL)
         {

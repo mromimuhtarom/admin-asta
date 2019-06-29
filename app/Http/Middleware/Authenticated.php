@@ -49,18 +49,12 @@ class Authenticated
                         'date_update' => Carbon::now('GMT+7'),
                         'ip'          => request()->ip()
                     ]);
-                }
-                else 
-                {
-                    OperatorActive::create([
-                        'op_id'       => $op,
-                        'session_id'  => $session_id,
-                        'date_login'  => Carbon::now('GMT+7'),
-                        'date_update' => Carbon::now('GMT+7'),
-                        'ip'          => request()->ip()
-                    ]);
-                }
-
+                } else {
+                    OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
+                    Cache::flush();
+                    return redirect()->route('logout')->with('alert','Please Login First');
+                } 
+                
             }
             Cache::put('op_key', $op);
             Cache::put('session_id', $session_id);
