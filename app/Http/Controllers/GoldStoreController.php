@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ItemsGold;
+use App\ItemsCash;
 use Illuminate\Support\Facades\DB;
 use App\Classes\MenuClass;
 use App\Log;
@@ -21,8 +21,7 @@ class GoldStoreController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('Gold Store');
-        $getGolds = DB::table('items_cash')
-                    ->where('shop_type', '=', 1)
+        $getGolds = ItemsCash::where('shop_type', '=', 1)
                     ->orderBy('id', 'desc')
                     ->get();
 
@@ -31,8 +30,7 @@ class GoldStoreController extends Controller
 
     public function GoldStoreReseller()
     {
-        $gold_store = DB::table('items_cash')
-                      ->where('shop_type', '=', 2)
+        $gold_store = ItemsCash::where('shop_type', '=', 2)
                       ->get();
         $menu       = MenuClass::menuName('Gold Store Reseller');
         return view('pages.reseller.gold_store_reseller', compact('gold_store', 'menu'));
@@ -72,7 +70,7 @@ class GoldStoreController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $gold = DB::table('items_cash')->insert([
+        $gold = ItemsCash::create([
             'name'          => $title,
             'goldAwarded'   => $goldAwarded,
             'price'         => $priceCash,
@@ -109,7 +107,7 @@ class GoldStoreController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $gold = DB::table('items_cash')->insert([
+        $gold = ItemsCash::create([
             'name'          => $title,
             'goldAwarded'   => $goldAwarded,
             'price'         => $priceCash,
@@ -151,7 +149,7 @@ class GoldStoreController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        DB::table('items_cash')->where('id', '=', $pk)->update([
+        ItemsCash::where('id', '=', $pk)->update([
             $name => $value
         ]);
 
@@ -198,7 +196,7 @@ class GoldStoreController extends Controller
         $goldreseller = $request->id;
         if($getGoldId != '')
         {
-            DB::table('items_cash')->where('id', '=', $getGoldId)->delete();
+            ItemsCash::where('id', '=', $getGoldId)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
@@ -208,7 +206,7 @@ class GoldStoreController extends Controller
             return redirect()->route('Chip_Store')->with('success','Data Deleted');
         } else if($goldreseller != '') 
         {
-            DB::table('items_cash')->where('id', '=', $goldreseller)->delete();
+            ItemsCash::where('id', '=', $goldreseller)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',

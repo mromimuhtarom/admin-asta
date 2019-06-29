@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Log;
 use App\Action;
 
 class LogController extends Controller
@@ -31,8 +32,7 @@ class LogController extends Controller
         $actionSearch =  Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
   
         if($inputUser != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputAction != NULL) {
-          $logs = DB::table('asta_db.log_operator')
-                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -44,8 +44,7 @@ class LogController extends Controller
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL) {
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
@@ -57,8 +56,7 @@ class LogController extends Controller
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL && $inputAction != NULL &&  $inputMaxDate != NULL) {
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
@@ -71,8 +69,7 @@ class LogController extends Controller
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputMinDate != NULL && $inputMaxDate != NULL &&  $inputAction != NULL) {
-          $logs = DB::table('asta_db.log_operator')
-                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                  ->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
@@ -83,8 +80,7 @@ class LogController extends Controller
                  
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
        }else if ($inputMinDate != NULL && $inputMaxDate != NULL){
-         $logs = DB::table('asta_db.log_operator')
-                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+         $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                  ->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
@@ -95,8 +91,7 @@ class LogController extends Controller
          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
        }else if ($inputUser != NULL && $inputMaxDate != NULL){
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -107,8 +102,7 @@ class LogController extends Controller
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL &&  $inputAction != NULL) {
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -118,8 +112,7 @@ class LogController extends Controller
 
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputMinDate != NULL &&  $inputAction != NULL) {
-               $logs = DB::table('asta_db.log_operator')
-                       ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+               $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                        ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                        ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                        ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
@@ -130,8 +123,7 @@ class LogController extends Controller
   
                 return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputMaxDate != NULL &&  $inputAction != NULL) {
-                $logs = DB::table('asta_db.log_operator')
-                        ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+                $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                         ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                         ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                         ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
@@ -142,8 +134,7 @@ class LogController extends Controller
   
                 return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
         }else if($inputUser != NULL && $inputMinDate != NULL ) {
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -154,8 +145,7 @@ class LogController extends Controller
   
          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
        }else if ($inputMinDate != NULL){
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
@@ -165,8 +155,7 @@ class LogController extends Controller
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if ($inputMaxDate != NULL){
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator ', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
@@ -177,8 +166,7 @@ class LogController extends Controller
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputUser != NULL ){
-          $logs = DB::table('asta_db.log_operator')
-                  ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                   ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                   ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                   ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -189,8 +177,7 @@ class LogController extends Controller
           return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch'));
   
         }else if($inputAction != NULL) {
-          $logs = DB::table('asta_db.log_operator')
-                 ->select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+          $logs = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
                  ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                  ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id')
                  ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')

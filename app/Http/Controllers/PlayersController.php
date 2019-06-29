@@ -10,6 +10,7 @@ use App\Stat;
 use Session;
 use Carbon\Carbon;
 use App\Player;
+use App\UserGuest;
 use App\Device;
 use Validator;
 use App\PlayerActive;
@@ -139,8 +140,7 @@ class PlayersController extends Controller
 //****************************************** Menu Guest ******************************************//
   // ----------- Index Guest ----------- //
     public function indexGuest() {
-        $guests = DB::table('user_guest')
-                  ->join('asta_db.user', 'asta_db.user.user_id', '=', 'user_guest.user_id')
+        $guests = UserGuest::join('asta_db.user', 'asta_db.user.user_id', '=', 'user_guest.user_id')
                   ->get();
         return view('pages.players.guest', compact('guests'));
     }

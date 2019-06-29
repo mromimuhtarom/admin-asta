@@ -246,7 +246,7 @@ class EmailNotificationController extends Controller
         $id = $request->id;
         if($id != '')
         {
-            DB::table('notifications')->where('id', '=', $id)->delete();
+            EmailNotification::where('id', '=', $id)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),

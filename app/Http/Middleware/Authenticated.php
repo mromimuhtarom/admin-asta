@@ -31,6 +31,7 @@ class Authenticated
         if(Session::get('login1')) {
             $op              = Session::get('userId');
             $operator_active = OperatorActive::where('op_id', '=', $op)->first();
+            $cahce_op = OperatorActive::where('op_id', '=', $op_idcache)->first();
             if ($operator_active)
             {
                 OperatorActive::where('op_id', '=', $op)->update([
@@ -40,13 +41,27 @@ class Authenticated
                     'ip'          => request()->ip()
                 ]);
             } else {
-                OperatorActive::create([
-                    'op_id'       => $op,
-                    'session_id'  => $session_id,
-                    'date_login'  => Carbon::now('GMT+7'),
-                    'date_update' => Carbon::now('GMT+7'),
-                    'ip'          => request()->ip()
-                ]);
+                if($cahce_op)
+                {
+                    OperatorActive::update([
+                        'op_id'       => $op,
+                        'session_id'  => $session_id,
+                        'date_login'  => Carbon::now('GMT+7'),
+                        'date_update' => Carbon::now('GMT+7'),
+                        'ip'          => request()->ip()
+                    ]);
+                }
+                else 
+                {
+                    OperatorActive::create([
+                        'op_id'       => $op,
+                        'session_id'  => $session_id,
+                        'date_login'  => Carbon::now('GMT+7'),
+                        'date_update' => Carbon::now('GMT+7'),
+                        'ip'          => request()->ip()
+                    ]);
+                }
+
             }
             Cache::put('op_key', $op);
             Cache::put('session_id', $session_id);

@@ -268,7 +268,7 @@ class GiftStoreController extends Controller
         $gifts = Gift::where('id', '=', $id)->first();
         if($id != '')
         {
-            DB::table('gift')->where('id', '=', $id)->delete();
+            Gift::where('id', '=', $id)->delete();
             $path = '../public/upload/gifts/'.$gifts->image_url;
             File::delete($path);
             Log::create([

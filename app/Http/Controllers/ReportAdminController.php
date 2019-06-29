@@ -109,6 +109,7 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login'));
         } else if ($minDate != NULL && $maxDate != NULL)
         {
+            // dd($maxDate);
             $log_login = DB::table('asta_db.log_online')
                          ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
                          ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')

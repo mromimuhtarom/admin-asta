@@ -44,7 +44,7 @@ class GoodsStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $id = DB::table('item_good')->where('shop_type', '=', '1')->orderBy('id', 'desc')->first();
+        $id = ItemGoods::where('shop_type', '=', '1')->orderBy('id', 'desc')->first();
 
 
 
@@ -268,7 +268,7 @@ class GoodsStoreController extends Controller
         $goods = ItemGoods::where('id', '=', $id)->first();
         if($id != '')
         {
-            DB::table('item_good')->where('id', '=', $id)->delete();
+            ItemGoods::where('id', '=', $id)->delete();
             $path = '../public/upload/Goods/'.$goods->image;
             File::delete($path);            
             Log::create([

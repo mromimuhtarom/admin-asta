@@ -147,7 +147,7 @@ class ChipStoreController extends Controller
         $id = $request->id;
         if($id != '')
         {
-            DB::table('items_gold')->where('id', '=', $id)->delete();   
+            ItemsGold::where('id', '=', $id)->delete();   
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Classes\MenuClass;
 use DB;
 use App\Log;
+use App\Payment;
 use Session;
 use Carbon\Carbon;
 use Validator;
@@ -20,7 +21,7 @@ class PaymentStoreController extends Controller
     public function index()
     {
         $menu           = MenuClass::menuName('Payment Store');
-        $getPayments    = DB::table('payments')->orderBy('id', 'desc')->get();
+        $getPayments    = Payment::orderBy('id', 'desc')->get();
 
         return view('pages.store.payment_store', compact('menu', 'getPayments'));
     }
@@ -53,7 +54,7 @@ class PaymentStoreController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $payment = DB::table('payments')->insert([
+        $payment = Payment::create([
             'name'              => $request->title,
             'payment_type'      => $request->paymentType,
             'transaction_type'  => $request->transactionType,
@@ -104,7 +105,7 @@ class PaymentStoreController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        DB::table('payments')->where('id', '=', $pk)->update([
+        Payment::where('id', '=', $pk)->update([
             $name => $value
         ]);
 
@@ -147,7 +148,7 @@ class PaymentStoreController extends Controller
         $getPaymentId = $request->userid;
         if($getPaymentId != '')
         {
-            DB::table('payments')->where('id', '=', $getPaymentId)->delete();
+            Payment::where('id', '=', $getPaymentId)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',

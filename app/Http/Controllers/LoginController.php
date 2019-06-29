@@ -34,7 +34,7 @@ class LoginController extends Controller
             Session::put('login1',TRUE);
             $username = $request->username;
             $password = $request->password;
-            $login = DB::table('asta_db.operator')->where('username', '=', $username)->first();
+            $login = User::where('username', '=', $username)->first();
             $session_id = session()->getId();
             Cache::put('op_key', $login->op_id);
             Cache::put('session_id', $session_id);
