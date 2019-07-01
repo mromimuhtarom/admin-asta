@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use App\DmqRound;
+use App\DmsRound;
+use App\TpkRound;
+use App\BgtRound;
 use App\Classes\MenuClass;
 
 class PlayReportController extends Controller
@@ -31,14 +35,13 @@ class PlayReportController extends Controller
       $inputMinDate = $request->inputMinDate;
       $inputGame    = $request->inputGame;
       $inputMaxDate = $request->inputMaxDate;
-      $datenow = Carbon::now('GMT+7');
+      $datenow      = Carbon::now('GMT+7');
+      $menus1       = MenuClass::menuName('Report');
+      $game         = DB::table('game')->get();
 
-      $menus1 = MenuClass::menuName('Report');
-      $game = DB::table('game')->get();
       if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ') {
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -56,8 +59,7 @@ class PlayReportController extends Controller
               ->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
               ->get();
         } else if($inputGame == 'Domino susun') {
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -75,8 +77,7 @@ class PlayReportController extends Controller
                ->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                ->get();
         } else if($inputGame == 'Texas Poker') {
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -94,8 +95,7 @@ class PlayReportController extends Controller
                ->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                ->get();
         } else if ($inputGame == 'Big Two') {
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -116,8 +116,7 @@ class PlayReportController extends Controller
 
         return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
       } else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -134,8 +133,7 @@ class PlayReportController extends Controller
               ->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -152,8 +150,7 @@ class PlayReportController extends Controller
                ->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -170,8 +167,7 @@ class PlayReportController extends Controller
                ->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -195,8 +191,7 @@ class PlayReportController extends Controller
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ') {
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -215,8 +210,7 @@ class PlayReportController extends Controller
               ->get();
         } else if($inputGame == 'Domino susun') {
 
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -235,8 +229,7 @@ class PlayReportController extends Controller
                ->get();
         } else if($inputGame == 'Texas Poker') {
 
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -255,8 +248,7 @@ class PlayReportController extends Controller
                ->get();
         } else if($inputGame == 'Big Two') {
 
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -276,8 +268,7 @@ class PlayReportController extends Controller
         }
        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -294,8 +285,7 @@ class PlayReportController extends Controller
               ->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -312,8 +302,7 @@ class PlayReportController extends Controller
                ->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -330,8 +319,7 @@ class PlayReportController extends Controller
                ->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -356,8 +344,7 @@ class PlayReportController extends Controller
     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
 
         if($inputGame == 'Domino QQ') {
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -376,8 +363,7 @@ class PlayReportController extends Controller
               ->get();
         } else if($inputGame == 'Domino susun') {
 
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -396,8 +382,7 @@ class PlayReportController extends Controller
                ->get();
         } else if($inputGame == 'Texas Poker') {
 
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -415,8 +400,7 @@ class PlayReportController extends Controller
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
                ->get();
         } else if($inputGame == 'Big Two') {
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -437,8 +421,7 @@ class PlayReportController extends Controller
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -455,8 +438,7 @@ class PlayReportController extends Controller
               ->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -473,8 +455,7 @@ class PlayReportController extends Controller
                ->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -491,8 +472,7 @@ class PlayReportController extends Controller
                ->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -518,8 +498,7 @@ class PlayReportController extends Controller
 
 
         if($inputGame == 'Domino QQ') {
-        $player_history = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $player_history = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -536,8 +515,7 @@ class PlayReportController extends Controller
               ->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->get();
         } else if($inputGame == 'Domino susun') {
-        $player_history = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $player_history = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -554,8 +532,7 @@ class PlayReportController extends Controller
                ->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->get();
         } else if($inputGame == 'Texas Poker') {
-        $player_history  = DB::table('tpk_round')
-                           ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $player_history  = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                            ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                            ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                            ->select('tpk_round.gameplay_log',
@@ -572,8 +549,7 @@ class PlayReportController extends Controller
                            ->where('user.username', 'LIKE', '%'.$inputName.'%')
                            ->get();
         } else if($inputGame == 'Big Two') {
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -593,8 +569,7 @@ class PlayReportController extends Controller
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if ($inputMinDate != NULL && $inputMaxDate != NULL) {
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -610,8 +585,7 @@ class PlayReportController extends Controller
                         )
                ->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -627,8 +601,7 @@ class PlayReportController extends Controller
                        )
                ->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -644,8 +617,7 @@ class PlayReportController extends Controller
                        )
                ->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',
@@ -668,8 +640,7 @@ class PlayReportController extends Controller
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL) {
 
-        $dmq = DB::table('dmq_round')
-               ->join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
+        $dmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')
                ->select('dmq_round.gameplay_log',
@@ -685,8 +656,7 @@ class PlayReportController extends Controller
                         )
               ->where('user.username', 'LIKE', '%'.$inputName.'%');
 
-        $dms = DB::table('dms_round')
-               ->join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
+        $dms = DmsRound::join('dms_round_player', 'dms_round_player.roundid', '=', 'dms_round.roundid')
                ->join('user', 'user.user_id', '=', 'dms_round_player.user_id')
                ->join('dms_table', 'dms_table.tableid', '=', 'dms_round.tableid')
                ->select('dms_round.gameplay_log',
@@ -702,8 +672,7 @@ class PlayReportController extends Controller
                        )
                ->where('user.username', 'LIKE', '%'.$inputName.'%');
 
-        $tpk = DB::table('tpk_round')
-               ->join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
+        $tpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
                ->join('tpk_table', 'tpk_table.tableid', '=', 'tpk_round.tableid')
                ->select('tpk_round.gameplay_log',
@@ -719,8 +688,7 @@ class PlayReportController extends Controller
                        )
                ->where('user.username', 'LIKE', '%'.$inputName.'%');
 
-        $player_history = DB::table('bgt_round')
-                          ->join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
+        $player_history = BgtRound::join('bgt_round_player', 'bgt_round_player.roundid', '=', 'bgt_round.roundid')
                           ->join('user', 'user.user_id', '=', 'bgt_round_player.user_id')
                           ->join('bgt_table', 'bgt_table.tableid', '=', 'bgt_round.tableid')
                           ->select('bgt_round.gameplay_log',

@@ -50,6 +50,14 @@ class Authenticated
                         'ip'          => request()->ip()
                     ]);
                 } else {
+                    LogOnline::create([
+                        'user_id'   =>  $logout->op_id,
+                        'action_id' =>  8,
+                        'desc'      =>  'user '.$logout->username.' Logout in web Admin',
+                        'datetime'  => Carbon::now('GMT+7'),
+                        'ip'        => request()->ip(),
+                        'type'      => 1
+                    ]);
                     OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
                     Cache::flush();
                     return redirect()->route('logout')->with('alert','Please Login First');

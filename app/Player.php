@@ -13,6 +13,15 @@ class Player extends Model
     // const UPDATED_AT = NULL;
     public $timestamps = false;
 
+    public $statusUser = [
+        '1' => 'Approve',
+        '2' => 'Banned',
+        '3' => 'Problem',
+    ];
+
+    public function strStatus() {
+        return $this->statusUser[$this->status];
+    }
 
     public function stat(){
       return $this->belongsTo(Stat::class);
