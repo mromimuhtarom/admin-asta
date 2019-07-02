@@ -24,7 +24,7 @@
                     <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col" style="padding-left:1%;">
-                    <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
             </div>
         </form>

@@ -61,6 +61,8 @@ input[type=text].left{
 	padding:7px 20px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #263666;
+}
+.myButton.searchbtn {
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
 }

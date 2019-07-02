@@ -30,7 +30,7 @@
                     <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
-                    <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
             </div>
         </form>
