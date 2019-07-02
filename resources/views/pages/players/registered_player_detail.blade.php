@@ -33,10 +33,10 @@
                       </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                        <input type="date" name="inputMinDate" class="form-control">
                     </div>
                     <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                        <input type="date" name="inputMaxDate" class="form-control">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton" type="submit" style="border-top-right-radius: 50px;border-bottom-right-radius: 50px;"><i class="fa fa-search"></i> Cari</button>
@@ -108,7 +108,7 @@
             </tr>   
             @else
             <tr>
-                <td>{{ $regis->username }}</td>
+                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->username }}</a></td>
                 <td>{{ $regis->chip }}</td>
                 <td>{{ $regis->point }}</td>
                 <td>{{ $regis->gold }}</td>

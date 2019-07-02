@@ -9,6 +9,7 @@ use App\DmqRound;
 use App\DmsRound;
 use App\TpkRound;
 use App\BgtRound;
+use App\Game;
 use App\Classes\MenuClass;
 
 class PlayReportController extends Controller
@@ -20,7 +21,7 @@ class PlayReportController extends Controller
      */
     public function index()
     {
-        $game = DB::table('game')->get();
+        $game = Game::all();
         $datenow = Carbon::now('GMT+7');
         return view('pages.players.playreport', compact('game', 'datenow'));
     }
@@ -37,7 +38,7 @@ class PlayReportController extends Controller
       $inputMaxDate = $request->inputMaxDate;
       $datenow      = Carbon::now('GMT+7');
       $menus1       = MenuClass::menuName('Report');
-      $game         = DB::table('game')->get();
+      $game         = Game::all();
 
       if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ') {

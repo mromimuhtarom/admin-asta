@@ -10,6 +10,7 @@ use App\Table;
 use Session;
 use Carbon\Carbon;
 use App\Log;
+use App\Game;
 use Validator;
 
 class PushNotificationController extends Controller
@@ -22,8 +23,8 @@ class PushNotificationController extends Controller
     public function index()
     {
         $menu          = MenuClass::menuName('Push Notification');
-        $notifications = PushNotification::join('game', 'game.id', '=', 'push_notifications.gameId')->select('game.name as gamename', 'push_notifications.*')->get();
-        $game          = DB::table('game')->get();
+        $notifications = PushNotification::join('asta_db.game', 'game.id', '=', 'push_notifications.gameId')->select('asta_db.game.name as gamename', 'push_notifications.*')->get();
+        $game          = Game::all();
         // $table         = Table::where('dealerId', '=', Session::get('dealerId'))->where('tabletype', '!=', 'm')->where('clubId', '=', 0)->where('seasonId', '=', 0)->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
         return view('pages.notification.push_notification', compact('notifications','tables', 'table', 'game', 'menu'));
     }

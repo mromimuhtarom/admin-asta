@@ -22,9 +22,9 @@ class PlayersController extends Controller
     public function indexActive()
     {
         $online = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
-                  ->join('game', 'game.id', '=', 'asta_db.user_active.game_id')
+                  ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
                   ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
-                  ->select('asta_db.user.*', 'asta_db.user_stat.*', 'game.name as game_name', 'asta_db.user_active.*')
+                  ->select('asta_db.user.*', 'asta_db.user_stat.*', 'asta_db.game.name as game_name', 'asta_db.user_active.*')
                   ->where('asta_db.user.user_type', '!=', '3')
                   ->get();
         return view('pages.players.active_player', compact('online'));
@@ -69,14 +69,8 @@ class PlayersController extends Controller
 //****************************************** Menu Registered Player ******************************************//
   // ----------- Index Registered Player ----------- //
     public function indexRegisteredPlayer() {
-        // $registered = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
-        //               ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-        //               ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
-        //               ->where('user_type', '=', 1)
-        //               ->get();
-        $datenow = Carbon::now('GMT+7');
 
-        return view('pages.players.registered_player', compact('registered', 'datenow'));
+        return view('pages.players.registered_player', compact('registered'));
     }
   // ----------- End Index Registered Player ----------- //
 
@@ -92,9 +86,8 @@ class PlayersController extends Controller
       $country = DB::table('country')
                  ->where('iso_code_2', '=', $username->country_code)
                  ->first();
-      $datenow = Carbon::now('GMT+7');
                 
-      return view('pages.players.register_player_profile', compact('device', 'username', 'country', 'datenow'));
+      return view('pages.players.register_player_profile', compact('device', 'username', 'country'));
     }
  // ----------- End Detail Registered Player ----------- //
 
@@ -107,7 +100,6 @@ class PlayersController extends Controller
         $mindate  = $request->inputMinDate;
         $maxdate  = $request->inputMaxDate;
         $menu  = MenuClass::menuName('Registered Player');
-        $datenow = Carbon::now('GMT+7');
 
         if($username != NULL && $status != NULL && $mindate != NULL && $maxdate != NULL)
         {
@@ -121,7 +113,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL && $status != NULL && $mindate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -134,7 +126,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL && $status != NULL && $maxdate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -147,7 +139,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
 
         } else if($username != NULL && $status != NULL)
         {
@@ -160,7 +152,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($status != NULL && $mindate != NULL && $maxdate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -172,7 +164,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($status != NULL && $mindate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -184,7 +176,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($status != NULL && $maxdate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -196,7 +188,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL  && $mindate != NULL && $maxdate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -208,7 +200,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL  && $mindate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -220,7 +212,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL  && $maxdate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -232,7 +224,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -243,7 +235,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($status != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -254,7 +246,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         }else if($mindate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -265,7 +257,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($maxdate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
@@ -276,7 +268,7 @@ class PlayersController extends Controller
                             ->get();
 
           // $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'datenow'));
+          return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         }
     }
 
@@ -408,24 +400,24 @@ class PlayersController extends Controller
             'lang_code'       => 'en',
             'last_ip'         => '0',
             'timetag'         => '0',
-            'last_move'       => '0',
             'avatar'          => $avatar,
             'device_id'       => $deviceId,
-            'facebook_id'     => '',
             'country_code'    => $country->code,
             'userpass'        => md5($securePassword)
         ]);
 
         if($createbot){
           Stat::create([
-            'user_id'     => $botId->user_id,
-          //   'player' => $botName,
-            'chip'        => $winpot,
-            'point'       =>  '0.00',
-            'gold'        =>  '0',
-            'rank_id'     =>  '0',
-            'poker_round' =>  '0',
-            'experience'  =>  '0'
+            'user_id'   => $botId->user_id,
+            'chip'      => $winpot,
+            'point'     => '0.00',
+            'gold'      => '0',
+            'rank_id'   => '0',
+            'tpk_round' => '0',
+            'bgt_round' => '0',
+            'dmq_round' => '0',
+            'dms_round' => '0',
+            'exp'       => '0'
           ]);
 
           DB::table('tpk_stat')->insert([
