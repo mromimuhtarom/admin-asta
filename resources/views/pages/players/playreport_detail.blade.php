@@ -9,7 +9,7 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
-<div class="search bg-blue-dark" style="margin-bottom: 2%;">
+    <div class="search bg-blue-dark" style="margin-bottom: 2%;">
         <div class="table-header w-100 h-100">
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">

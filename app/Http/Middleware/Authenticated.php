@@ -36,7 +36,6 @@ class Authenticated
             {
                 OperatorActive::where('op_id', '=', $op)->update([
                     'op_id'       => $op,
-                    'session_id'  => $session_id,
                     'date_update' => Carbon::now('GMT+7'),
                     'ip'          => request()->ip()
                 ]);
@@ -45,7 +44,6 @@ class Authenticated
                 {
                     OperatorActive::update([
                         'op_id'       => $op,
-                        'session_id'  => $session_id,
                         'date_update' => Carbon::now('GMT+7'),
                         'ip'          => request()->ip()
                     ]);

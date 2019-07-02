@@ -18,6 +18,7 @@ class LoginController extends Controller
 {
     public function loginbefore()
     {
+        Cache::flush();
         return view('login');
     }
 
@@ -82,7 +83,7 @@ class LoginController extends Controller
         $op_idcache = Cache::get('op_key');
         $session_id = Cache::get('session_id');
         $op_idsession = Session::get('userId');
-        $adminactive = OperatorActive::where('session_id', '=', $session_id)->first();
+        $adminactive = OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->first();
 
         if($adminactive)
         {
@@ -104,7 +105,7 @@ class LoginController extends Controller
             } 
 
         }
-        if($session_id)
+        if($adminactive)
         {
             OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
         }
