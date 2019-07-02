@@ -25,9 +25,12 @@ class Authenticated
     {
         $op_idcache = Cache::get('op_key');
         $session_id = Cache::get('session_id');
-        $logout     = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
-                      ->where('asta_db.operator_active.session_id', '=', $session_id)
+        $operatorActive = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id');
+        $logout     = $operatorActive->where('asta_db.operator_active.session_id', '=', $session_id)
                       ->first();
+        $offline =  $operatorActive->where('asta_db.operator_active.op_id', '=', $op_idcache)
+                    ->where('asta_db.operator_active.date_update', '>=', Carbon::now('GMT+7'))
+                    ->first();
         if(Session::get('login1')) {
             $op              = Session::get('userId');
             $operator_active = OperatorActive::where('op_id', '=', $op)->first();
@@ -64,6 +67,8 @@ class Authenticated
                 } 
                 
             }
+            
+
             Cache::put('op_key', $op);
             Cache::put('session_id', $session_id);
             return $next($request);

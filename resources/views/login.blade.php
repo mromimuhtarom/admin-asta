@@ -25,6 +25,8 @@
     <div id="dialogboxfoot"></div>
   </div>
 </div>
+{{ Session::get('userId') }}
+{{ Cache::get('op_key') }}
 
 @if(\Session::has('alert'))
 <script>
