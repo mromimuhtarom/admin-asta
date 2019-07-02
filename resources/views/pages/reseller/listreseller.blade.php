@@ -58,6 +58,7 @@
                 @if($menu)
                 <th></th>
                 @endif
+                <th class="th-sm">ID Reseller</th>
                 <th class="th-sm">Username</th>
                 <th class="th-sm">Name</th>
                 <th class="th-sm">Phone</th>
@@ -75,12 +76,13 @@
               @if($menu)
               <tr>
                   <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rsl->id }}"></td>
+                  <td>{{ $rsl->id }}</td>
                   <td><a href="#" class="usertext" data-name="username" data-pk="{{ $rsl->id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->username }}</a></td>
                   <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rsl->id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->name }}</a></td>
                   <td><a href="#" class="usertext" data-name="phone" data-pk="{{ $rsl->id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->phone }}</a></td>
                   <td><a href="#" class="usertext" data-name="email" data-pk="{{ $rsl->id }}" data-type="email" data-url="{{ route('ListReseller-update') }}">{{ $rsl->email }}</a></td>
                   <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->gold }}</a></td>
-                  <td><a href="#" class="usertext" data-name="rank_id" data-pk="{{ $rsl->id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rank_id }}</a></td>
+                  <td><a href="#" class="rank" data-name="rank_id" data-value="{{ $rsl->rank_id }}" data-pk="{{ $rsl->id }}" data-type="select" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rankname }}</a></td>
                   <td><a href="#" class="password{{ $rsl->id }} btn btn-primary" id="password" data-pk="{{ $rsl->id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
                   <td>
                     <a href="#" style="color:red;" class="delete{{ $rsl->id }}" 
@@ -198,6 +200,20 @@
       $('.usertext').editable({
         mode :'inline'
       });
+
+
+          $('.rank').editable({
+                mode:'inline',
+  				      value: '',
+  				      source: [
+                  {value:"", text: "Choose Rank" },
+                  @php
+                  foreach($rank as $rk) {
+                  echo '{value:"'.$rk->order_id.'", text: "'.$rk->name.'" },';
+                  }
+                  @endphp
+  				      ]
+          });
 
       @php
         foreach($reseller as $rsl) {

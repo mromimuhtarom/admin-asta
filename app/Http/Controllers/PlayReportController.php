@@ -281,7 +281,19 @@ class PlayReportController extends Controller
                           ->get();
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
-    } 
+    } else if($inputGame != NULL) {
+        if($inputGame == 'Domino QQ') {
+        $player_history = $tbdmq->get();
+        } else if($inputGame == 'Domino Susun') {
+        $player_history = $tbdms->get();
+        } else if($inputGame == 'Texas Poker') {
+        $player_history  = $tbtpk->get();
+        } else if($inputGame == 'Big Two') {
+        $player_history = $tbbgt->get();
+        }
+
+         return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+   } 
 
   }
 

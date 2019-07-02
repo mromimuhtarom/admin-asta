@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reseller extends Model
 {
-    protected $table = 'reseller';
+    protected $table = 'asta_db.reseller';
     protected $guarded = [];
     public $timestamps = false;
 

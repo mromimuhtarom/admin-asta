@@ -22,8 +22,9 @@ class ResellerController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('List Reseller');
-        $reseller = Reseller::getAllData();
-        return view('pages.reseller.listreseller', compact('menu', 'reseller'));
+        $rank     = DB::table('asta_db.reseller_rank')->get();
+        $reseller = Reseller::join('asta_db.reseller_rank', 'reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'reseller.*')->get();
+        return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank'));
     }
 
 
