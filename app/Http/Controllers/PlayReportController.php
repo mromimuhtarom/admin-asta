@@ -66,7 +66,7 @@ class PlayReportController extends Controller
                          'dms_round_player.hand_card',
                          'dms_round_player.seatid',
                          'user.username',
-                         DB::raw("'Domino susun' AS gamename")
+                         DB::raw("'Domino Susun' AS gamename")
                      );
        $tbtpk = TpkRound::join('tpk_round_player', 'tpk_round_player.roundid', '=', 'tpk_round.roundid')
                 ->join('user', 'user.user_id', '=', 'tpk_round_player.user_id')
@@ -99,17 +99,17 @@ class PlayReportController extends Controller
                         );
 
       if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
-       dd($inputGame);
+       
         if($inputGame == 'Domino QQ') {
-        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
               ->get();
-        } else if($inputGame == 'Domino susun') {
-        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
+        } else if($inputGame == 'Domino Susun') {
+        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                ->get();
         } else if($inputGame == 'Texas Poker') {
-        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                ->get();
         } else if ($inputGame == 'Big Two') {
@@ -140,17 +140,17 @@ class PlayReportController extends Controller
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
        dd($inputGame);
         if($inputGame == 'Domino QQ') {
-        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
               ->get();
-        } else if($inputGame == 'Domino susun') {
+        } else if($inputGame == 'Domino Susun') {
 
-        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
                ->get();
         } else if($inputGame == 'Texas Poker') {
 
-        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00")
                ->get();
         } else if($inputGame == 'Big Two') {
@@ -161,14 +161,13 @@ class PlayReportController extends Controller
         }
        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
-       dd($inputGame);
-        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
-        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
-        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
         $player_history = $tbbgt->where('user.username', 'LIKE', '%'.$inputName.'%')
@@ -180,19 +179,18 @@ class PlayReportController extends Controller
 
       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
-       dd($inputGame);
         if($inputGame == 'Domino QQ') {
-        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
               ->get();
-        } else if($inputGame == 'Domino susun') {
+        } else if($inputGame == 'Domino Susun') {
 
-        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
                ->get();
         } else if($inputGame == 'Texas Poker') {
 
-        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59")
                ->get();
         } else if($inputGame == 'Big Two') {
@@ -203,14 +201,13 @@ class PlayReportController extends Controller
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
-       dd($inputGame);
-        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
-        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
-        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
         $player_history = $tbbgt->where('user.username', 'LIKE', '%'.$inputName.'%')
@@ -227,7 +224,7 @@ class PlayReportController extends Controller
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
                           ->get();
-        } else if($inputGame == 'Domino susun') {
+        } else if($inputGame == 'Domino Susun') {
         $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                           ->get();
         } else if($inputGame == 'Texas Poker') {
@@ -257,11 +254,11 @@ class PlayReportController extends Controller
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     }
     else if ($inputMinDate != NULL && $inputMaxDate != NULL) {
-        $dmq = $tbdmq->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+        $player_history = $tbdmq->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $dms = $tbdms->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+        $player_history = $tbdms->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $tpk = $tbtpk->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+        $player_history = $tbtpk->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
         $player_history = $tbbgt->wherebetween('bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                           ->union($dmq)
@@ -271,11 +268,11 @@ class PlayReportController extends Controller
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL) {
-        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%');
+        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%');
 
-        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%');
+        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%');
 
-        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%');
+        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%');
 
         $player_history = $tbbgt->where('user.username', 'LIKE', '%'.$inputName.'%')
                           ->union($dmq)

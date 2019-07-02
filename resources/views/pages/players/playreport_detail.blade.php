@@ -20,7 +20,7 @@
                         <select name="inputGame" class="form-control">
                             <option value="">Choose Game</option>
                             @foreach ($game as $gm)
-                            <option value="{{ $gm->desc }}">{{ $gm->name }}</option>
+                            <option value="{{ $gm->desc }}">{{ $gm->desc }}</option>
                             @endforeach
                         </select>
                     </div>
