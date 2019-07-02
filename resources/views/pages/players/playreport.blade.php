@@ -14,7 +14,7 @@
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     <div class="col">
-                        <input type="text" class="form-control" name="inputPlayer" placeholder="username">
+                        <input type="text" class="left" name="inputPlayer" placeholder="username">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="inputGame" class="form-control">

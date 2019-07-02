@@ -269,6 +269,8 @@ class PlayersController extends Controller
 
           // $registerPlayer->appends($request->all());
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
+        } else {
+          return $this->indexRegisteredPlayer();
         }
     }
 

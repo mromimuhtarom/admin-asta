@@ -14,7 +14,7 @@
             <form action="{{ route('ReportPlayer-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     <div class="col">
-                        <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+                        <input type="text" name="inputPlayer" class="left" placeholder="username">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">

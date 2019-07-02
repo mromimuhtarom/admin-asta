@@ -13,7 +13,7 @@
         <form action="{{ route('LogPlayer-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" class="form-control" placeholder="username">
+                    <input type="text" name="username" class="left" placeholder="username">
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">

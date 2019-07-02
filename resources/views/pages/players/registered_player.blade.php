@@ -8,14 +8,6 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
-<style>
- input[type=text].left{
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  padding-left: 10%;
-  height: 90%;
-}
-</style>
     <div class="search bg-blue-dark " style="margin-bottom:2%;">
         <div class="table-header w-100 h-100">
             <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
@@ -38,7 +30,7 @@
                         <input type="date" name="inputMaxDate" class="form-control">
                     </div>
                     <div class="col" style="padding-left:1%;">
-                        <button class="myButton" type="submit" style="border-top-right-radius: 50px;border-bottom-right-radius: 50px;"><i class="fa fa-search"></i> Cari</button>
+                        <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
                     </div>
                 </div>
             </form>

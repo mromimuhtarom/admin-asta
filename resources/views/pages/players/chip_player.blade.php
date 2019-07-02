@@ -12,11 +12,11 @@
     <div class="search bg-blue-dark">
         <div class="table-header w-100 h-100">
             <form action="{{ route('Chip-search') }}" method="get" role="search">
-                <div class="row h-100 w-100 no-gutters">
-                    <div class="col" style="padding-left:1%;">
-                        <input type="text" name="inputPlayer" class="form-control" placeholder="username">
+                <div class="row border border border-dark h-100 w-100 no-gutters">
+                    <div class="col" style="padding-right:-10%">
+                        <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username">
                     </div>
-                    <div class="col" style="padding-left:1%;">
+                    <div class="col" >
                         <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
