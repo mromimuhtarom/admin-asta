@@ -8,7 +8,7 @@
 
 
 @section('content')
-
+  <link rel="stylesheet" href="/css/admin.css">
   <!-- Response Status -->
   @if (count($errors) > 0)
     <div class="error-val">
@@ -22,40 +22,69 @@
     </div>
   @endif
 
-  @if (\Session::has('success'))
-      <div class="alert alert-success">
-          <p>{{\Session::get('success')}}</p>
-      </div>
-  @endif
-  <!-- End Response Status -->
+    @if (\Session::has('alert'))
+    <div class="alert alert-danger">
+        <div class="alert alert-danger">
+            <div>{{Session::get('alert')}}</div>
+        </div>
+    </div>
+        
+    @endif
+    
+    @if (\Session::has('success'))
+        <div class="alert alert-success">
+            <p>{{\Session::get('success')}}</p>
+        </div>
+        
+    @endif
+    
+  <!-- Modal -->
 
-  <!-- Form Table -->
+  {{-- end create --}}
+
+
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
-
     <header>
       <div class="widget-header">	
-        <h2><strong>Asta Poker Table</strong></h2>				
+        <h2><strong>Table Player</strong></h2>				
       </div>
     </header>
-
+  
     <div>
+      
+      <div class="jarviswidget-editbox">
+        <input class="form-control" type="text">
+        <span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>
+        
+      </div>
       
       <div class="widget-body">
         <div class="widget-body-toolbar">
+          
           <div class="row">
-            <!-- Button tambah data baru -->
+            
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-              @if($menu)
-              <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"> Create New Table</i>
-              </button>
-              @endif
+              <div class="input-group">
+                @if($menu)
+                <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-plus"> Create New Table</i>
+                </button>
+                @endif
+              </div>
             </div>
-            <!-- End Button tambah data baru -->
+            <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
+              
+              
+            </div>
+            
           </div>
+          
+            
+  
         </div>
         
-        <div class="custom-scroll table-responsive" style="max-height:600px;">
+        <div class="custom-scroll table-responsive" style="height:800px;">
+          
           <div class="table-outer">
             <table class="table table-bordered">
               <thead>
@@ -74,7 +103,7 @@
                   @endif
                 </tr>
               </thead>
-              <tbody>
+              <tbody>                      
                 @foreach($tables as $tb)
                 @if($menu)
                   <tr>
@@ -85,7 +114,7 @@
                     <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
                     <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td>
                     <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpot }}</a></td>
-                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $tb->tableid }}" id="delete" data-pk="{{ $tb->tableid }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
+                    <td><a href="#" style="color:red;" class="delete{{ $tb->tableid }}" id="delete" data-pk="{{ $tb->tableid }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
                   @else 
                   <tr>
@@ -101,12 +130,12 @@
               </tbody>
             </table>
           </div>
+        
         </div>
       
       </div>
     </div>
   </div>
-  <!-- End Form Table -->
 
   <!-- Modal create data -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -156,7 +185,7 @@
   <div class="modal fade" id="delete-table" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header" style="margin-top:5%;">
+        <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             ×
@@ -178,35 +207,33 @@
     </div>
   </div>
   <!-- End Modal delete data -->
-
-  <!-- Script -->
-  <script type="text/javascript">
-
-    $(document).ready(function() {
+      
+    <script type="text/javascript">
+      $(document).ready(function() {
         $('table.table').dataTable( {
           "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
           "pagingType": "full_numbers",
         });
       });
+    
+      table = $('table.table').dataTable({
+        "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
+        "paging": false,
+        "autoWidth" : true,
+        "classes": {
+          "sWrapper": "dataTables_wrapper dt-bootstrap4"
+        },
+        "oLanguage": {
+          "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+        },
+        "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+          $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
 
-    table = $('table.table').dataTable({
-      "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
-      "autoWidth" : true,
-      "paging": false,
-      "classes": {
-        "sWrapper": "dataTables_wrapper dt-bootstrap4"
-      },
-      "oLanguage": {
-        "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
-      },
-      "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-        $.ajaxSetup({
-          headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-
-        @php
+          @php
           foreach($tables as $tb) {
             echo'$(".delete'.$tb->tableid.'").hide();';
             echo'$(".deletepermission'.$tb->tableid.'").on("click", function() {';
@@ -245,10 +272,12 @@
             }
             @endphp
           ]
-        });
-      },
-      responsive: true
-    });
+        });    
+
+          
+        },
+        responsive: true
+      });
     
-  </script>
+    </script>
 @endsection

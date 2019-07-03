@@ -75,19 +75,19 @@
               @foreach($reseller as $rsl)
               @if($menu)
               <tr>
-                  <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rsl->id }}"></td>
+                  <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rsl->reseller_id }}"></td>
                   <td>{{ $rsl->id }}</td>
-                  <td><a href="#" class="usertext" data-name="username" data-pk="{{ $rsl->id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->username }}</a></td>
-                  <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rsl->id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->name }}</a></td>
-                  <td><a href="#" class="usertext" data-name="phone" data-pk="{{ $rsl->id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->phone }}</a></td>
-                  <td><a href="#" class="usertext" data-name="email" data-pk="{{ $rsl->id }}" data-type="email" data-url="{{ route('ListReseller-update') }}">{{ $rsl->email }}</a></td>
-                  <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->gold }}</a></td>
-                  <td><a href="#" class="rank" data-name="rank_id" data-value="{{ $rsl->rank_id }}" data-pk="{{ $rsl->id }}" data-type="select" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rankname }}</a></td>
+                  <td><a href="#" class="usertext" data-name="username" data-pk="{{ $rsl->reseller_id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->username }}</a></td>
+                  <td><a href="#" class="usertext" data-name="fullname" data-pk="{{ $rsl->reseller_id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->fullname }}</a></td>
+                  <td><a href="#" class="usertext" data-name="phone" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->phone }}</a></td>
+                  <td><a href="#" class="usertext" data-name="email" data-pk="{{ $rsl->reseller_id }}" data-type="email" data-url="{{ route('ListReseller-update') }}">{{ $rsl->email }}</a></td>
+                  <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->gold }}</a></td>
+                  <td><a href="#" class="rank" data-name="rank_id" data-value="{{ $rsl->rank_id }}" data-pk="{{ $rsl->reseller_id }}" data-type="select" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rankname }}</a></td>
                   <td><a href="#" class="password{{ $rsl->id }} btn btn-primary" id="password" data-pk="{{ $rsl->id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
                   <td>
-                    <a href="#" style="color:red;" class="delete{{ $rsl->id }}" 
+                    <a href="#" style="color:red;" class="delete{{ $rsl->reseller_id }}" 
                       id="delete" 
-                      data-pk="{{ $rsl->id }}" 
+                      data-pk="{{ $rsl->reseller_id }}" 
                       data-toggle="modal" 
                       data-target="#delete-modal">
                         <i class="fa fa-times"></i>
@@ -97,11 +97,11 @@
               @else 
               <tr>
                 <td>{{ $rsl->username }}</td>
-                <td>{{ $rsl->name }}</td>
+                <td>{{ $rsl->fullname }}</td>
                 <td>{{ $rsl->phone }}</td>
                 <td>{{ $rsl->email }}</td>
                 <td>{{ $rsl->gold }}</td>
-                <td>{{ $rsl->rank_id }}</td>
+                <td>{{ $rsl->rankname }}</td>
               </tr>
               @endif
               @endforeach
@@ -217,20 +217,20 @@
 
       @php
         foreach($reseller as $rsl) {
-          echo'$(".delete'.$rsl->id.'").hide();';
-          echo'$(".deletepermission'.$rsl->id.'").on("click", function() {';
-            echo 'if($( ".deletepermission'.$rsl->id.':checked" ).length > 0)';
+          echo'$(".delete'.$rsl->reseller_id.'").hide();';
+          echo'$(".deletepermission'.$rsl->reseller_id.'").on("click", function() {';
+            echo 'if($( ".deletepermission'.$rsl->reseller_id.':checked" ).length > 0)';
             echo '{';
-              echo '$(".delete'.$rsl->id.'").show();';
+              echo '$(".delete'.$rsl->reseller_id.'").show();';
             echo'}';
             echo'else';
             echo'{';
-              echo'$(".delete'.$rsl->id.'").hide();';
+              echo'$(".delete'.$rsl->reseller_id.'").hide();';
             echo'}';
 
           echo '});';
         
-          echo'$(".delete'.$rsl->id.'").click(function(e) {';
+          echo'$(".delete'.$rsl->reseller_id.'").click(function(e) {';
             echo'e.preventDefault();';
 
             echo"var id = $(this).attr('data-pk');";

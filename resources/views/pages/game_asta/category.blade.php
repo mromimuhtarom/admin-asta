@@ -9,7 +9,7 @@
 
 
 @section('content')
-
+<link rel="stylesheet" href="/css/admin.css">
   <!-- Response Status -->
   @if (count($errors) > 0)
     <div class="error-val">
@@ -55,8 +55,10 @@
             <!-- End Button tambah data baru -->
           </div>
         </div>
+
         
-        <div class="custom-scroll table-responsive" style="max-height:600px;">
+        
+        <div class="custom-scroll table-responsive" style="height:800px;">
           <div class="table-outer">
             <table class="table table-bordered">
               <thead>

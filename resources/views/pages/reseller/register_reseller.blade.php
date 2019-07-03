@@ -50,57 +50,61 @@
                         </div>
                     </div> --}}
                     <table border="0" width="100%" height="100%" style="color:white">
+                        <tr>
+                            <td>Full Name<p>&nbsp;</p></td>
+                            <td>
+                                    <input type="text" name="firstName" class="form-control" placeholder="First Name" value="{{ old('fullname') }}" required>
+                                    <p>&nbsp;</p>
+                            </td>
+                            <td>
+                                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" value="{{ old('fullname') }}" required>
+                                    <p>&nbsp;</p>
+                            </td>
+                        </tr>
                         <tr style="">
                             <td>Username</td>
-                            <td>
+                            <td colspan="2">
                                     <input type="text" name="username" class="form-control" value="{{ old('username') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td>
+                            <td colspan="2">
                                     <input type="text" name="password" class="form-control" value="{{ generateID(6) }}" readonly>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td>Name</td>
-                            <td>
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
-                                    <p>&nbsp;</p>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Phone</td>
-                            <td>
+                            <td colspan="2">
                                     <input type="number" name="phone" class="form-control" value="{{ old('phone') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>
+                            <td colspan="2">
                                     <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Identity Card</td>
-                            <td>
+                            <td colspan="2">
                                     <input type="text" name="idcard" class="form-control"value="{{ old('identitycard') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Address</td>
-                            <td>
+                            <td colspan="2">
                                     <textarea name="address" rows="5" class="form-control">{{ old('idcard') }}</textarea>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="center"><button class="myButton" type="submit">Submit</button></td>
+                            <td colspan="3" align="center"><button class="myButton" type="submit">Submit</button></td>
                         </tr>
                     </table>
                 </form>

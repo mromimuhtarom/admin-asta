@@ -23,7 +23,7 @@ class ResellerController extends Controller
     {
         $menu     = MenuClass::menuName('List Reseller');
         $rank     = DB::table('asta_db.reseller_rank')->get();
-        $reseller = Reseller::join('asta_db.reseller_rank', 'reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'reseller.*')->get();
+        $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'reseller.*')->get();
         return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank'));
     }
 
@@ -34,7 +34,7 @@ class ResellerController extends Controller
         $name = $request->name;
         $value = $request->value;
 
-        Reseller::where('id', '=', $pk)->update([
+        Reseller::where('reseller_id', '=', $pk)->update([
             $name => $value
         ]);
 
@@ -84,8 +84,8 @@ class ResellerController extends Controller
         $password = $request->password;
         
         if($password != '') {
-            Reseller::where('id', '=', $pk)->update([
-                'password' => bcrypt($password)
+            Reseller::where('reseller_id', '=', $pk)->update([
+                'userpass' => bcrypt($password)
             ]);
         
   
@@ -109,7 +109,7 @@ class ResellerController extends Controller
         $userid = $request->id;
         if($userid != '')
         {
-            DB::table('reseller')->where('id', '=', $userid)->delete();
+            Reseller::where('reseller_id', '=', $userid)->delete();
 
             Log::create([
                 'op_id' => Session::get('userId'),
@@ -473,7 +473,7 @@ class ResellerController extends Controller
         Reseller::insertData([
           'username' => $request->username,
           'password' => bcrypt($request->password),
-          'name'     => $request->name,
+          'fullname' => $request->name,
           'phone'    => $request->phone,
           'email'    => $request->email,
           'ktp'      => $request->idcard,
