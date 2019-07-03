@@ -76,8 +76,8 @@
               </thead>
               <tbody>
                 @foreach($category as $kt)
+                @if($menu)
                 <tr>
-                    @if($menu)
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->roomid }}" data-type="text" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->stake }}</a></td>
@@ -85,14 +85,16 @@
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->max_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('BigTwoCategory-update') }}">{{ $kt->timer }}</a></td>
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
-                    @else 
+                </tr>
+                @else 
+                <tr>
                     <td>{{ $kt->name }}</td>
                     <td>{{ $kt->stake }}</td>
                     <td>{{ $kt->min_buy }}</td>
                     <td>{{ $kt->max_buy }}</td>
                     <td>{{ $kt->timer }}</td>
-                    @endif
                 </tr>
+                @endif
                 @endforeach
               </tbody>
             </table>

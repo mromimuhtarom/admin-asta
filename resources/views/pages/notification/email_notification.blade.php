@@ -197,7 +197,7 @@
   
         </div>
         
-        <div class="custom-scroll table-responsive" style="height:800px;">
+        <div class="custom-scroll table-responsive" style="height:870px;">
           
           <div class="table-outer">
             <table class="table table-bordered">
