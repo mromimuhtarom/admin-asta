@@ -44,7 +44,7 @@
         <form action="" method="post">
             <table style="color:white" border="1" width="100%" height="100%">
                 <tr>
-                    <td colspan="3" align="center" style="font-size: 200%;">My Profile</td>
+                    <td colspan="3" align="center" style="font-size: 200%;">My Profile <i class="fa fa-user"></i></td>
                 </tr>
                 <tr>
                     <td>Username</td>
@@ -64,7 +64,7 @@
                 <tr>
                     <td>Password</td>
                     <td align="center">:</td>
-                    <td><a href="#" class="password btn btn-primary" id="password" data-pk="{{ $profile->op_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
+                    <td><a href="#" class="password btn btn-primary" id="password" data-pk="{{ $profile->op_id }}" data-toggle="modal" data-target="#reset-password"><i class="fa fa-key"></i> Reset Password</a></td>
                 </tr>
             </table>
         </form>
@@ -77,9 +77,9 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            × 
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-key"></i> Reset Password</h5>
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
@@ -89,8 +89,8 @@
             <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes">Reset Password</button>
-          <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+          <button type="submit" class="button_example-yes btn sa-btn-primary"><i class="fa fa-key"></i> Reset Password</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
         </div>
           </form>
       </div>

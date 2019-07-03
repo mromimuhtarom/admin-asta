@@ -124,9 +124,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Create New Payment Store</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create New Payment Store</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-          ×
+          <i class="fa fa-remove"></i>
         </button>
       </div>
       <form action="{{ route('PaymentStore-create') }}" method="post">
@@ -154,10 +154,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary">
-            Save
+            <i class="fa fa-save"></i> Save
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            Cancel
+            <i class="fa fa-remove"></i> Cancel
           </button>
         </div>
       </form>
@@ -171,9 +171,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          × 
+          <i class="fa fa-remove"></i> 
         </button>
       </div>
       <div class="modal-body">
@@ -184,8 +184,8 @@
           <input type="hidden" name="userid" id="userid" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success">Yes</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal">No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
       </div>
         </form>
     </div>

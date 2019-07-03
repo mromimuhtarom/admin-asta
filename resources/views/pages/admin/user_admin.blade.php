@@ -45,7 +45,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Create User Admin</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create User Admin</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -155,7 +155,7 @@
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->op_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
-                    <td><a href="#" class="password{{ $adm->op_id }} btn btn-primary" id="password" data-pk="{{ $adm->op_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
+                    <td><a href="#" class="password{{ $adm->op_id }} btn btn-primary" id="password" data-pk="{{ $adm->op_id }}" data-toggle="modal" data-target="#reset-password"><i class="fa fa-key"></i> Reset Password</a></td>
                     <td> 
                       <a href="#" style="color:red;" class="delete{{ $adm->op_id }}" 
                         id="delete" 
@@ -189,7 +189,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
@@ -202,8 +202,8 @@
               <input type="hidden" name="userid" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success">Yes</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal">No</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
           </div>
             </form>
         </div>
@@ -216,9 +216,9 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              × 
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-key"></i> Reset Password</h5>
+            <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
@@ -228,8 +228,8 @@
               <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes">Reset Password</button>
-            <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+            <button type="submit" class="button_example-yes btn sa-btn-primary"><i class="fa fa-key"></i> Reset Password</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
           </div>
             </form>
         </div>
