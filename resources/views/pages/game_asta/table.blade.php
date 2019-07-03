@@ -143,7 +143,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Create Table</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             ×
           </button>
         </div>
@@ -168,11 +168,11 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-default" data-dismiss="modal">
-              Cancel
-            </button>
             <button type="submit" class="btn sa-btn-primary">
               Save
+            </button>
+            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+              Cancel
             </button>
           </div>
         </form>
@@ -187,7 +187,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             ×
           </button>
         </div>
@@ -198,9 +198,9 @@
             {{ csrf_field() }}
             <input type="hidden" name="tableid" id="tableid" value="">
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="button_example-yes">Yes</button>
-          <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+        <div class="modal-footer"> 
+          <button type="submit" class="button_example-yes btn sa-btn-success">Yes</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal">No</button>
         </div>
           </form>
       </div>

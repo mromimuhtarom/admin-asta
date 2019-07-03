@@ -46,8 +46,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Create User Admin</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            ×
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <i class="fa fa-remove"></i>
           </button>
         </div>
         <form action="{{ route('UserAdmin-create') }}" method="post">
@@ -72,11 +72,11 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-default" data-dismiss="modal">
-              Cancel
-            </button>
             <button type="submit" class="btn sa-btn-primary">
-              Save
+              <i class="fa fa-save"></i> Save
+            </button>
+            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+              <i class="fa fa-remove"></i> Cancel
             </button>
           </div>
         </form>
@@ -190,8 +190,8 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              × 
+            <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
@@ -202,8 +202,8 @@
               <input type="hidden" name="userid" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes">Yes</button>
-            <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success">Yes</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal">No</button>
           </div>
             </form>
         </div>
