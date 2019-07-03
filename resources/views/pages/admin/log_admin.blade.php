@@ -14,7 +14,7 @@
         <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" class="form-control" placeholder="username">
+                    <input type="text" name="username" class="left" placeholder="username">
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
@@ -31,7 +31,7 @@
                     <input type="date" class="form-control" name="sampai"  value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
-                    <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
             </div>
         </form>
