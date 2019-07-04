@@ -85,7 +85,7 @@
               @if($menu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->id }}"></td>
-                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
                 <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="goldAwarded" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->goldAwarded }}</a></td>
                 <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
                 <td><a href="#" class="transactionType" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->transaction_type) }}</a></td>

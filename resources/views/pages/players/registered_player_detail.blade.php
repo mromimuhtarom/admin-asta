@@ -114,13 +114,6 @@
                 <td>{{ $regis->gold }}</td>
                 <td>{{ $regis->strStatus() }}</td>
                 <td>{{ $regis->join_date }}</td>
-                @php
-                    if($regis->facebook_id !== ''){
-                        $user_type = 'Facebook';
-                    } else if($regis->user_type === 1) {
-                        $user_type = 'Asta';
-                    }
-                @endphp
                 <td>{{ $user_type }}</td>
                 {{-- <td>{{ $regis->devicename}}</td> --}}
                 <td>{{ $regis->countryname }}</td>
