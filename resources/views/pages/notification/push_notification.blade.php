@@ -137,7 +137,7 @@
                     <th class="th-sm">Message</th>
                     <th class="th-sm">Game</th>
                     <th class="th-sm">Type</th>
-                    <th class="th-sm">Action</th>
+                    {{-- <th class="th-sm">Action</th> --}}
                     @if($menu)
                     <th></th>
                     @endif
@@ -152,7 +152,7 @@
                     <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->message }}</a></td>
                     <td><a href="#" class="game" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="select" data-url="{{ route('PushNotification-update')}}">{{ $notification->gamename }}</a></td>
                     <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}"></a></td>
-                    <td></td>
+                    {{-- <td></td> --}}
                     <td>
                       <a href="#" style="color:red;" class="delete{{ $notification->id }}" 
                       id="delete" 
@@ -165,9 +165,9 @@
                 </tr>
                 @else
                 <tr>
-                    <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->title }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->message }}</a></td>
-                    <td><a href="#" class="game" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="select" data-url="{{ route('PushNotification-update')}}">{{ $notification->gamename }}</a></td>
+                    <td>{{ $notification->title }}</td>
+                    <td>{{ $notification->message }}</td>
+                    <td>{{ $notification->gamename }}</td>
                     <td><a href="#" class="usertext" data-title="Message" data-name="message" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}"></a></td>
                     <td></td>
                 </tr>

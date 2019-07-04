@@ -207,6 +207,7 @@
                     <td>{{ $gf->name }}</td>
                     <td>{{ $gf->price }}</td>
                     <td>{{ $gf->strCategory() }}</td>
+                    <td>{{ strEnabledDisabled($gf->status) }}</td>
                 </tr>
                 @endif
                 @endforeach
@@ -337,8 +338,18 @@
         value: '',
 				source: [
                   {value: '', text: 'Choose for activation'},
-				          {value: '1', text: 'Disabled'},
-					        {value: '2', text: 'Enabled'},
+				          // {value: '1', text: 'Disabled'},
+					        // {value: '2', text: 'Enabled'},
+                  @php
+                      $active = DB::table('asta_db.config_text')->where('id', '=', 4)->get();
+                      foreach($active as $atv) {
+                        $value = str_replace(':', ',', $atv->value);
+                        $endis = explode(",", $value);
+                        // $endis = preg_split( "/ :|, /", $atv->value );
+                      echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
+                      echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                    }
+                  @endphp
         ]
       });
 

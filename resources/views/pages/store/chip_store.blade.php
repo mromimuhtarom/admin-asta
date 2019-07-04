@@ -224,8 +224,16 @@
         mode :'inline',
 				source: [
                   {value: '', text: 'choose for activation'},
-				          {value: '1', text: 'Enabled'},
-					        {value: '0', text: 'Disabled'},
+				          // {value: '1', text: 'Enabled'},
+                  @php
+                      $active = DB::table('asta_db.config_text')->where('id', '=', 4)->first();
+                      
+                        $value = str_replace(':', ',', $active->value);
+                        $endis = explode(",", $value);
+                        // $endis = preg_split( "/ :|, /", $atv->value );
+                      echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
+                      echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                  @endphp
         ]
       });
 
