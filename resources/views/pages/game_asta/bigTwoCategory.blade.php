@@ -33,7 +33,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong>Asta Big Two Table</strong></h2>				
+        <h2><strong><i class="fa fa-puzzle-piece"></i> Asta Big Two Table</strong></h2>				
       </div>
     </header>
 

@@ -38,7 +38,7 @@
     <div class="table-aii">
         <div class="footer-table">
             <div class="add-btn-smt">
-                Payment Store
+                <i class="fa fa-history"></i> Payment Store
             </div>
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">

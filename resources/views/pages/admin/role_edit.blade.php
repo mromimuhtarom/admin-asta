@@ -15,7 +15,7 @@
         <header>
             <div class="widget-header">	
                 <span class="widget-icon"> <i class="fa fa-arrows-v"></i> </span>
-                <h2 class="font-md"><strong>Role Menu</strong></h2>				
+                <h2 class="font-md"><strong><i class="fa fa-list"></i> Role Menu</strong></h2>				
             </div>
         </header>
 

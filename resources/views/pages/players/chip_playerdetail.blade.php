@@ -35,7 +35,7 @@
 
     <header>
         <div class="widget-header">	
-            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+            <span class="widget-icon"> <i class="fa fa-database"></i> </span>
             <h2>Chip Players </h2>
         </div>
     

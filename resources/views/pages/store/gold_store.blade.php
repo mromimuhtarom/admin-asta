@@ -34,7 +34,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong>Gold Store</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i> Gold Store</strong></h2>				
     </div>
   </header>
 

@@ -115,7 +115,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong>Slide Banner</strong></h2>				
+      <h2><strong><i class="fa fa-flag"></i> Slide Banner</strong></h2>				
     </div>
   </header>
 

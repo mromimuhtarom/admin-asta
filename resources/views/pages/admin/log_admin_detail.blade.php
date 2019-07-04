@@ -46,8 +46,8 @@
 
     <header>
         <div class="widget-header">	
-            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Log Admin </h2>
+            <span class="widget-icon"> <i class="fa fa-history"></i> </span>
+            <h2> Log Admin </h2>
         </div>
     
         <div class="widget-toolbar">

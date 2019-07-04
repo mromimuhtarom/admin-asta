@@ -33,7 +33,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong>Chip Store</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i> Chip Store</strong></h2>				
     </div>
   </header>
 

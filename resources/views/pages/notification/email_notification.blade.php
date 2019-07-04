@@ -157,7 +157,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong>Push Notification</strong></h2>				
+        <h2><strong><i class="fa fa-sitemap"></i> Email Notification</strong></h2>				
       </div>
     </header>
   

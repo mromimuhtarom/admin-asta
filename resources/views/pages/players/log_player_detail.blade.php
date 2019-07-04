@@ -44,7 +44,7 @@
 
     <header>
         <div class="widget-header">	
-            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+            <span class="widget-icon"> <i class="fa fa-history"></i> </span>
             <h2>Log Player </h2>
         </div>
     

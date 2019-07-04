@@ -38,7 +38,7 @@
 
         <header>
             <div class="widget-header">	
-                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <span class="widget-icon"> <i class="fa fa-cubes"></i> </span>
                 <h2>Standard Data Tables </h2>
             </div>
         

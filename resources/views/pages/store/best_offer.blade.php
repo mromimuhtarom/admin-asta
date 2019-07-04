@@ -26,7 +26,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong>Best Offers</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i> Best Offers</strong></h2>				
     </div>
   </header>
 
