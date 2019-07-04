@@ -34,12 +34,12 @@ class ChipController extends Controller
         $endDate      = $request->inputMaxDate;
         $menus1       = MenuClass::menuName('Balance Chip');
         $datenow      = Carbon::now('GMT+7');
+        $balanceChip  = BalanceChip::select('balance_chip.*', 'user.username')
+                        ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id');
 
         if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
 
-          $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
-                            ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
+          $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
                             ->orderBy('timestamp', 'asc')
                             ->get();
@@ -47,9 +47,7 @@ class ChipController extends Controller
           return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
         }else if ($searchPlayer != NULL && $startDate != NULL){
 
-          $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
-                            ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
+          $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->WHERE('timestamp', '>=', $startDate." 00:00:00")
                             ->orderBy('timestamp', 'asc')
                             ->get();
@@ -58,9 +56,7 @@ class ChipController extends Controller
 
         }else if ($searchPlayer != NULL && $endDate != NULL){
 
-          $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
-                            ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
+          $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->WHERE('timestamp', '<=', $endDate." 23:59:59")
                             ->orderBy('timestamp', 'desc')
                             ->get();
@@ -69,9 +65,7 @@ class ChipController extends Controller
 
         }else if ($startDate != NULL && $endDate != NULL){
 
-          $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
-                            ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id')
-                            ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
+          $balancedetails = $balanceChip->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
@@ -79,18 +73,14 @@ class ChipController extends Controller
 
         }else if ($searchPlayer != NULL){
 
-          $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
-                            ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
+          $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->get();
 
           return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
 
         }else if ($startDate != NULL){
 
-          $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
-                            ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id')
-                            ->WHERE('timestamp', '>=', $startDate." 00:00:00")
+          $balancedetails = $balanceChip->WHERE('timestamp', '>=', $startDate." 00:00:00")
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
@@ -98,9 +88,7 @@ class ChipController extends Controller
 
         }else if ($endDate != NULL){
 
-          $balancedetails = BalanceChip::select('balance_chip.*', 'user.username')
-                            ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id')
-                            ->WHERE('timestamp', '<=', $endDate." 23:59:59")
+          $balancedetails = $balanceChip->WHERE('timestamp', '<=', $endDate." 23:59:59")
                             ->orderBy('timestamp', 'desc')
                             ->get();
 

@@ -28,11 +28,11 @@ class GoldController extends Controller
         $endDate      = $request->inputMaxDate;
         $menus1       = MenuClass::menuName('Balance Gold');
         $datenow      = Carbon::now('GMT+7');
+        $balanceGold  = BalanceGold::select('balance_gold.*', 'user.username')
+                        ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id');
         if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
 
-          $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
-                            ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
+          $balancedetails = $balanceGold->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
                             ->orderBy('timestamp', 'asc')
                             ->get();
@@ -42,9 +42,7 @@ class GoldController extends Controller
 
         }else if ($searchPlayer != NULL && $startDate != NULL){
 
-          $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
-                            ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%')
+          $balancedetails = $balanceGold->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%')
                             ->WHERE('timestamp', '>=', $startDate." 00:00:00")
                             ->orderBy('timestamp', 'asc')
                             ->get();
@@ -54,9 +52,7 @@ class GoldController extends Controller
 
         }else if ($searchPlayer != NULL && $endDate != NULL){
 
-          $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
-                            ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%')
+          $balancedetails = $balanceGold->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%')
                             ->WHERE('timestamp', '<=', $endDate." 23:59:59")
                             ->orderBy('timestamp', 'desc')
                             ->get();
@@ -66,9 +62,7 @@ class GoldController extends Controller
 
         }else if ($startDate != NULL && $endDate != NULL){
 
-          $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
-                            ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id')
-                            ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
+          $balancedetails = $balanceGold->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
@@ -77,9 +71,7 @@ class GoldController extends Controller
 
         }else if ($searchPlayer != NULL){
 
-          $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
-                            ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id')
-                            ->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%')
+          $balancedetails = $balanceGold->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%')
                             ->get();
 
           return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
@@ -87,9 +79,7 @@ class GoldController extends Controller
 
         }else if ($startDate != NULL){
 
-          $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
-                            ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id')
-                            ->WHERE('timestamp', '>=', $startDate." 00:00:00")
+          $balancedetails = $balanceGold->WHERE('timestamp', '>=', $startDate." 00:00:00")
                             ->orderBy('timestamp', 'asc')
                             ->get();
 
@@ -98,9 +88,7 @@ class GoldController extends Controller
 
         }else if ($endDate != NULL){
 
-          $balancedetails = BalanceGold::select('balance_gold.*', 'user.username')
-                            ->JOIN('user', 'balance_gold.playerId', '=', 'user.user_id')
-                            ->WHERE('timestamp', '<=', $endDate." 23:59:59")
+          $balancedetails = $balanceGold->WHERE('timestamp', '<=', $endDate." 23:59:59")
                             ->orderBy('timestamp', 'desc')
                             ->get();
 

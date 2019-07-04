@@ -23,18 +23,18 @@ class ReportAdminController extends Controller
 
     public function search(Request $request)
     {
-        $player  = $request->inputPlayer;
-        $minDate = $request->inputMinDate;
-        $maxDate = $request->inputMaxDate;
-        $logtype = $request->logType;
-        $datenow = Carbon::now('GMT+7');
+        $player    = $request->inputPlayer;
+        $minDate   = $request->inputMinDate;
+        $maxDate   = $request->inputMaxDate;
+        $logtype   = $request->logType;
+        $datenow   = Carbon::now('GMT+7');
+        $logOnline = DB::table('asta_db.log_online')
+                     ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'log_online.user_id')
+                     ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id');
 
         if($player != NULL && $minDate != NULL && $maxDate != NULL && $logtype != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
@@ -43,10 +43,7 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $minDate != NULL && $logtype != NULL )
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.log_type', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
@@ -55,10 +52,7 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $maxDate != NULL && $logtype != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
@@ -67,10 +61,7 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $logtype != NULL) 
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 1)
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
@@ -78,10 +69,7 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if ($minDate != NULL && $logtype != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.log_online.datetime', '>=', $minDate)
+            $log_login = $logOnline->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
@@ -89,10 +77,7 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($maxDate != NULL && $logtype != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.log_online.datetime', '<=', $maxDate)
+            $log_login = $logOnline->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
@@ -102,10 +87,7 @@ class ReportAdminController extends Controller
         else if($player != NULL && $minDate != NULL && $maxDate != NULL)
         {
             
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 1)
                          ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->get();
@@ -114,20 +96,14 @@ class ReportAdminController extends Controller
         } else if ($minDate != NULL && $maxDate != NULL)
         {
             
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
+            $log_login = $logOnline->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
         
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($player != NULL && $minDate != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 1)
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->get();
@@ -135,10 +111,7 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if ($player != NULL && $maxDate != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 1)
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->get();
@@ -146,40 +119,28 @@ class ReportAdminController extends Controller
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($minDate != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.log_online.datetime', '>=', $minDate)
+            $log_login = $logOnline->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
 
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($maxDate != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.log_online.datetime', '<=', $maxDate)
+            $log_login = $logOnline->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
 
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if ($logtype != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.log_online.action_id', '=', $logtype)
+            $log_login = $logOnline->where('asta_db.log_online.action_id', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
             
             return view('pages.admin.report_admin_detail', compact('log_login', 'datenow'));
         } else if($player != NULL)
         {
-            $log_login = DB::table('asta_db.log_online')
-                         ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.log_online.user_id')
-                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
-                         ->where('asta_db.operator.username', 'Like', '%'.$player.'%')
+            $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
             
