@@ -6,6 +6,7 @@ use App\BalanceChip;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use App\Game;
 use App\Classes\MenuClass;
 
 class ChipController extends Controller
@@ -18,7 +19,8 @@ class ChipController extends Controller
     public function index()
     {
       $datenow = Carbon::now('GMT+7');
-        return view('pages.players.chip_player', compact('datenow'));
+      $game = Game::all();
+        return view('pages.players.chip_player', compact('datenow', 'game'));
     }
 
     /**
@@ -32,67 +34,122 @@ class ChipController extends Controller
         $searchPlayer = $request->inputPlayer;
         $startDate    = $request->inputMinDate;
         $endDate      = $request->inputMaxDate;
+        $gameName     = $request->inputGame;
         $menus1       = MenuClass::menuName('Balance Chip');
+        $game         = Game::all();
         $datenow      = Carbon::now('GMT+7');
-        $balanceChip  = BalanceChip::select('balance_chip.*', 'user.username')
-                        ->JOIN('user', 'balance_chip.playerId', '=', 'user.user_id');
+        $balanceChip  = BalanceChip::select('asta_db.balance_chip.*', 'asta_db.user.username', 'asta_db.game.name as gamename', 'asta_db.action.action as actionname')
+                        ->JOIN('asta_db.user', 'asta_db.balance_chip.user_id', '=', 'asta_db.user.user_id')
+                        ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.balance_chip.action_id')
+                        ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id');
 
-        if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
-
-          $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
-                            ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                            ->orderBy('timestamp', 'asc')
+        if($searchPlayer != NULL && $gameName != NULL && $startDate != NULL && $endDate != NULL){
+          $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
+                            ->where('asta_db.balance_chip.game_id', '=', $gameName)
+                            ->wherebetween('asta_db.balance_chip.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
+        } else if($searchPlayer != NULL && $gameName != NULL && $startDate != NULL){
+          $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
+                            ->where('asta_db.balance_chip.game_id', '=', $gameName)
+                            ->WHERE('asta_db.balance_chip.datetime', '>=', $startDate." 00:00:00")
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
+                            ->get();
+
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
+        } else if($searchPlayer != NULL && $gameName != NULL && $endDate != NULL) {
+          $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
+                            ->where('asta_db.balance_chip.game_id', '=', $gameName)
+                            ->WHERE('asta_db.balance_chip.datetime', '<=', $endDate." 23:59:59")
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
+                            ->get();
+
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
+        } else if($searchPlayer != NULL && $gameName != NULL) {
+          $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
+                            ->where('asta_db.balance_chip.game_id', '=', $gameName)
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
+                            ->get();
+
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
+        } else if($gameName != NULL && $startDate != NULL) {
+          $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '>=', $startDate." 00:00:00")
+                            ->where('asta_db.balance_chip.game_id', '=', $gameName)
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
+                            ->get();
+
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
+        } else if($gameName != NULL && $endDate != NULL) {
+          $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '<=', $endDate." 23:59:59")
+                            ->where('asta_db.balance_chip.game_id', '=', $gameName)
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
+                            ->get();
+
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
+        } else if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
+
+          $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
+                            ->wherebetween('asta_db.balance_chip.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
+                            ->get();
+
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
         }else if ($searchPlayer != NULL && $startDate != NULL){
 
-          $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
-                            ->WHERE('timestamp', '>=', $startDate." 00:00:00")
-                            ->orderBy('timestamp', 'asc')
+          $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
+                            ->WHERE('asta_db.balance_chip.datetime', '>=', $startDate." 00:00:00")
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow','game'));
 
         }else if ($searchPlayer != NULL && $endDate != NULL){
 
           $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
-                            ->WHERE('timestamp', '<=', $endDate." 23:59:59")
-                            ->orderBy('timestamp', 'desc')
+                            ->WHERE('asta_db.balance_chip.datetime', '<=', $endDate." 23:59:59")
+                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow','game'));
 
         }else if ($startDate != NULL && $endDate != NULL){
 
-          $balancedetails = $balanceChip->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                            ->orderBy('timestamp', 'asc')
+          $balancedetails = $balanceChip->wherebetween('asta_db.balance_chip.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow','game'));
 
         }else if ($searchPlayer != NULL){
 
-          $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchPlayer.'%' )
+          $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow','game'));
 
-        }else if ($startDate != NULL){
-
-          $balancedetails = $balanceChip->WHERE('timestamp', '>=', $startDate." 00:00:00")
-                            ->orderBy('timestamp', 'asc')
+        } else if($gameName != NULL) {
+          $balancedetails = $balanceChip->where('asta_db.balance_chip.game_id', '=', $gameName)
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow', 'game'));
+        } else if ($startDate != NULL){
+
+          $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '>=', $startDate." 00:00:00")
+                            ->orderBy('asta_db.balance_chip.datetime', 'asc')
+                            ->get();
+
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow','game'));
 
         }else if ($endDate != NULL){
 
-          $balancedetails = $balanceChip->WHERE('timestamp', '<=', $endDate." 23:59:59")
-                            ->orderBy('timestamp', 'desc')
+          $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '<=', $endDate." 23:59:59")
+                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
                             ->get();
 
-          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.chip_playerdetail', compact('balancedetails', 'menus1', 'datenow','game'));
 
 
         }

@@ -8,6 +8,11 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+@if (\Session::has('alert'))
+  <div class="alert alert-danger">
+    <p>{{\Session::get('alert')}}</p>
+  </div>
+@endif
 <div class="search bg-blue-dark" style="margin-bottom: 2%;">
     <div class="table-header w-100 h-100">
         <form action="{{ route('BalanceReseller-search') }}" method="get" role="search">
@@ -56,23 +61,27 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
+                        <th>ID Reseller</th>
                         <th>Username</th>
-                        <th>Action</th>
+                        <th>Description</th>
                         <th>Debit</th>
                         <th>Credit</th>
-                        <th>Total</th>
+                        <th>Balance</th>
+                        <th>Category</th>
                         <th>Timestamp</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($balancedetails as $bd)
                     <tr>
+                        <td>{{ $bd->reseller_id }}</td>
                         <td>{{ $bd->username }}</td>
-                        <td>{{ $bd->action }}</td>
-                        <td>{{ $bd->debit }}</td>
+                        <td></td>
+                        <td>{{ $bd->debet }}</td>
                         <td>{{ $bd->credit }}</td>
-                        <td>{{ $bd->total }}</td>
-                        <td>{{ $bd->timestamp }}</td>
+                        <td>{{ $bd->balance }}</td>
+                        <td></td> 
+                        <td>{{ $bd->datetime }}</td>
                     </tr>
                     @endforeach
                 </tbody>

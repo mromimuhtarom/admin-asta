@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BalanceGold extends Model
 {
-    protected $table = 'balance_gold';
+    protected $table = 'asta_db.balance_gold';
 
     public $timestamps = false;
 }

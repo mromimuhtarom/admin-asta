@@ -28,7 +28,7 @@
   </div>
 @endif
 
-<div class="user-transactions">
+{{-- <div class="user-transactions"> --}}
 	
 	<!-- Table 1 -->
 	<div>
@@ -48,7 +48,14 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th class="th-sm">User</th>
+										<th class="th-sm">Time Stamp</th>
+										<th class="th-sm">Username</th>
+										<th class="th-sm">Item</th>
+										<th class="th-sm">Quantity</th>
+										<th class="th-sm">Price</th>
+										<th class="th-sm">Detail Information</th>
+										<th class="th-sm">Status Payment</th>
+										<th class="th-sm">Confirm request</th>
 										<th class="th-sm">Status</th>
 									</tr>
 								</thead>
@@ -56,48 +63,26 @@
 									@foreach ($transactions as $transaction)
 									
 									<tr>
-											<td>
-												<div class="user-transaction-dates">
-													<div>
-														<p>Date {{ $transaction->timestamp }}</p> 
-													</div>
-													{{-- <div>
-														<p>Buy in Best Offer</p>
-													</div> --}}
-												</div>
-												<div class="user-transaction-users">
-													<div>
-														<img src="/upload/gifts/41.png" alt="" class="img-profile-reward">
-													</div>
-													<div class="user-transaction-user-name">
-														<div>
-															<h3>{{ $transaction->username }}</h3>
-														</div>
-														<div>
-															<h5>{{ $transaction->username }} Buy {{ $transaction->item_name }} Using {{ strtoupper($transaction->bank_name) }} Manual Transfer</h5>
-														</div>
-													</div>
-												</div>
-												<div class="transactions-user-button">
-													{{-- <div>
-														<input type="button" value="View Detail" class="btn btn-xs btn-info" data-toggle="modal" data-target="#view-detail{{ $reward->id }}">
-													</div> --}}
-													@if($menu)
-													<div>
-														<input type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $transaction->order_id }}">
-													</div>
-													<div>
-														<input type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $transaction->order_id }}">
-													</div>
-													@endif
-												</div>
-
-											</td>
-											<td>
-												<div class="user-transaction-status">
-													<p>Pending</p>
-												</div>
-											</td>
+										<td>{{ $transaction->datetime }}</td>
+										<td>{{ $transaction->username }}</td>
+										<td></td>
+										<td>{{ $transaction->quantity }}</td>
+										<td>{{ $transaction->item_price }}</td>
+										<td>{{ $transaction->desc }}</td>
+										<td>{{ $transaction->bankname }} Bank Manual Transfer</td>
+										<td>
+											<div>
+												<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $transaction->id }}"><i class="fa fa-remove"></i> Decline</button>
+										  {{-- </div>
+											<div> --}}
+												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $transaction->id }}"><i class="fa fa-check"></i> Approve</button>
+											</div>
+										</td>
+										<td>
+											<div class="user-transaction-status">
+												<p>Pending</p>
+											</div>
+										</td>
 
 									</tr>
 									@endforeach
@@ -115,12 +100,12 @@
 
 
 	{{-- yg hilang --}}
-</div>
+{{-- </div> --}}
 
 
 <!-- Modal decline -->
 @foreach ($transactions as $transaction)
-<div class="modal fade" id="decline{{ $transaction->order_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="decline{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -129,12 +114,20 @@
 					× 
 				</button>
             </div>
-            <form action="{{ route('ResellerBankTransaction-Decline')}}" method="POST">
+            <form action="{{ route('RequestTransaction-Decline')}}" method="POST">
             @csrf
                 <div class="modal-body">
                     Are you sure want to Decline this Transaction ?
-                    <input type="hidden" name="declineId" value="{{ $transaction->order_id }}">
-                    <input type="hidden" name="resellerId" value="{{ $transaction->reseller_id }}">
+                    <input type="hidden" name="declineId" value="{{ $transaction->id }}">
+										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
+										<input type="hidden" name="price" value="{{ $transaction->item_price }}">
+										<input type="hidden" name="item_name" value="200Gold">
+										<input type="hidden" name="desc" value="{{ $transaction->desc }}">
+										<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
+										<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
+										<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
+										<input type="hidden" name="user_type" value="{{ $transaction->user_type }}">
+										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
 				    <button type="submit" class="btn btn-primary">Yes</button>
@@ -149,7 +142,7 @@
 
 <!-- Modal approve transaction -->
 @foreach ($transactions as $transaction)
-<div class="modal fade" id="approve{{ $transaction->order_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="approve{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -158,14 +151,24 @@
 					× 
 				</button>
             </div>
-            <form action="{{ route('ResellerBankTransaction-Approve')}}" method="POST">
+            <form action="{{ route('RequestTransaction-Approve')}}" method="POST">
             @csrf
 			    <div class="modal-body">
                     Are you sure want to Approve this Transaction ?
-                    <input type="hidden" name="goldAwarded" value="{{ $transaction->goldAwarded }}">
-                    <input type="hidden" name="approveId" value="{{ $transaction->order_id }}">
+                    {{-- <input type="hidden" name="goldAwarded" value="{{ $transaction->goldAwarded }}">
+                    <input type="hidden" name="approveId" value="{{ $transaction->id }}">
                     <input type="hidden" name="resellerId" value="{{ $transaction->reseller_id }}">
-                    <input type="hidden" name="price" value="{{ $transaction->amount }}">
+										<input type="hidden" name="price" value="nanti"> --}}
+										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
+										<input type="hidden" name="goldbuy" value="190">
+										<input type="hidden" name="price" value="{{ $transaction->item_price }}">
+										<input type="hidden" name="item_name" value="200Gold">
+										<input type="hidden" name="desc" value="{{ $transaction->desc }}">
+										<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
+										<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
+										<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
+										<input type="hidden" name="user_type" value="{{ $transaction->user_type }}">
+										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
 				    <button type="submit" class="btn btn-primary">Yes</button>
@@ -182,7 +185,7 @@
 <script>
   $(document).ready(function() {
     $('table.table').dataTable( {
-      "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
     });
   });

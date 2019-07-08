@@ -2,12 +2,17 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Reseller_Transaction') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Reseller_Transaction') }}">Reseller Transaction</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">Reseller</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">Reseller Transaction</a></li>
 @endsection
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+@if (\Session::has('alert'))
+  <div class="alert alert-danger">
+    <p>{{\Session::get('alert')}}</p>
+  </div>
+@endif
 <div class="search bg-blue-dark" style="margin-bottom: 2%;">
     <div class="table-header w-100 h-100">
         <form action="{{ route('ResellerTransaction-search') }}" method="get" role="search">
@@ -36,7 +41,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Reseller Transaction</h2>
+            <h2>Report Transaction </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -57,21 +62,15 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Username</th>
-                        <th>Price</th>
+                        <th>Date</th>
                         <th>Gold</th>
-                        <th>Gold Bonus</th>
-                        <th>TimeStamp</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($transactions as $tr)
                     <tr>
-                        <td>{{ $tr->username }}</td>
-                        <td>{{ $tr->price }}</td>
-                        <td>{{ $tr->gold }}</td>
-                        <td>{{ $tr->gold_bonus }}</td>
-                        <td>{{ $tr->timestamp }}</td>
+                        <td><a href="{{ route('detailResellerTransaction', [$tr->monthnumber,$tr->year]) }}">{{ $tr->monthname }} {{ $tr->year }}</a></td>
+                        <td>{{ $tr->totalgold }}</td>
                     </tr>
                     @endforeach
                 </tbody>

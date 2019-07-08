@@ -9,6 +9,10 @@ use Session;
 use App\Log;
 use Carbon\Carbon;
 use Validator;
+use App\ResellerTransactionDay;
+use App\ResellerBalance;
+use App\StoreTransactionHist;
+use App\StoreTransaction;
 use App\Classes\MenuClass;
 
 class ResellerController extends Controller
@@ -232,13 +236,15 @@ class ResellerController extends Controller
 
 
 //****************************************** End Menu Reseller Transaction ******************************************//
-    public function ResellerTransaction()
+    public function ReportTransaction()
     {
-        $transactions = DB::select('SELECT year(timestamp) as year, month(timestamp) as monthnumber,monthname(timestamp) as monthname, sum(gold) as totalgold FROM reseller_history GROUP BY year,monthname');
+        $transactions = DB::select('SELECT year(date_created) as year, month(date_created) as monthnumber,monthname(date_created) as monthname, sum(buy_gold) as totalgold FROM asta_db.reseller_transaction_day GROUP BY year,monthname');
+        // $transactions = DB::select('SELECT year(timestamp) as year, month(timestamp) as monthnumber,monthname(timestamp) as monthname, sum(gold) as totalgold FROM reseller_history GROUP BY year,monthname');
         $datenow = Carbon::now('GMT+7');
-        return view('pages.reseller.reseller_transaction', compact('transactions', 'datenow'));
+        return view('pages.reseller.report_transaction', compact('transactions', 'datenow'));
     }
-///****************************************** End Menu Reseller Transaction ******************************************//
+    
+//****************************************** End Menu Reseller Transaction ******************************************//
     public function BalanceReseller()
     {
         $datenow = Carbon::now('GMT+7');
@@ -251,42 +257,90 @@ class ResellerController extends Controller
         return view('pages.reseller.register_reseller', compact('menu'));
     }
 
-    public function ResellerBankTransaction()
+    public function RequestTransaction()
     {
-        $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
-        $menu         = MenuClass::menuName('Reseller Bank Transaction');
-        return view('pages.reseller.reseller_bank_transaction', compact('transactions', 'menu'));
+        // $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
+        $transactions = DB::select("SELECT asta_db.store_transaction.*, asta_db.reseller.reseller_id, asta_db.reseller.username, asta_db.payment.name as bankname, items_cash.goldAwarded, items_cash.name as item_name FROM asta_db.store_transaction JOIN items_cash ON items_cash.id = asta_db.store_transaction.item_id   JOIN asta_db.reseller ON asta_db.reseller.reseller_id = asta_db.store_transaction.user_id JOIN asta_db.payment ON asta_db.payment.id = asta_db.store_transaction.payment_id WHERE asta_db.store_transaction.status = 1 ORDER BY asta_db.store_transaction.datetime ASC");
+        $menu         = MenuClass::menuName('Reseller Bank Transaction'); 
+        return view('pages.reseller.request_transaction', compact('transactions', 'menu'));
     }
 
-    public function ResellerBankTransactionApprove(Request $request)
+    public function RequestTransactionApprove(Request $request)
     {
-        $approveOrderId = $request->approveId;
-        $resellerId     = $request->resellerId;
-        $goldAwarded    = $request->goldAwarded;
-        $amount         = $request->price;
+        // $approveOrderId = $request->approveId;
+        $resellerId  = $request->resellerId;
+        $goldAwarded = $request->goldbuy;
+        $amount      = $request->price;
+        $reseller_id = $request->reseller_id;
+        $item_name   = $request->item_name;
+        $desc        = $request->desc;
+        $quantity    = $request->quantity;
+        $payment_id  = $request->payment_id;
+        $datetime    = $request->datetime;
+        $user_type   = $request->user_type;
+        $item_type   = $request->item_type;
+        $datetimenow = Carbon::now('GMT+7');
+        $datenow     = $datetimenow->toDateString();
+        $reseller_transaction_day = DB::table('asta_db.reseller_transaction_day')
+                                    ->where('reseller_id', '=', $reseller_id)
+                                    ->whereDate('date', '=', $datenow)
+                                    ->first();
 
-        DB::table('reseller_history')->insert([
-            'reseller_id' => $resellerId,
-            'price'       => $amount,
-            'gold'        => $goldAwarded,
-            'timestamp'   => Carbon::now('GMT+7')
-          ]);
+        if($reseller_transaction_day)
+        {
+            $gold = $reseller_transaction_day->buy_gold + $goldAwarded;
+            $amount = $reseller_transaction_day->buy_amount + $amount;
+
+            ResellerTransactionDay::where('reseller_id', '=', $reseller_id)->update([
+                'buy_gold'      => $gold,
+                'buy_amount'    => $amount
+            ]);
+        } else 
+        {
+            ResellerTransactionDay::create([
+                'date'          =>  $datenow,
+                'reseller_id'   =>  $reseller_id,
+                'buy_gold'      =>  $goldAwarded,
+                'buy_amount'    =>  $amount,
+                'sell_gold'     =>  0,
+                'date_created'  =>  $datetimenow
+            ]);
+        }
+        
+
+        StoreTransactionHist::create([
+                'user_id'       => $reseller_id,
+                'item_name'     =>  'nanti',
+                'status'        =>  2,
+                'desc'          =>  $desc,
+                'quantity'      =>  $quantity,
+                'payment_id'    =>  $payment_id,
+                'datetime'      =>  $datetime,
+                'user_type'     =>  $user_type,
+                'item_type'     =>  4,
+                'item_price'    =>  $amount
+        ]);
+
   
-          $checkTotalGold = DB::table('reseller')->select('gold')->where('id', '=', $resellerId)->first();
-  
-          DB::table('balance_reseller')->insert([
-            'reseller_id' => $resellerId,
-            'action'      => 'Buy Gold',
-            'debit'       => $goldAwarded,
+          $checkTotalGold = DB::table('asta_db.reseller')->select('gold')->where('reseller_id', '=', $reseller_id)->first();
+        //   $checkamount = DB::table('rese')
+          ResellerBalance::create([
+            'reseller_id' => $reseller_id,
+            'action_id'   => 2,
             'credit'      => 0,
-            'total'       => $checkTotalGold->gold,
-            'timestamp'   => Carbon::now('GMT+7')
+            'debet'       => $goldAwarded,
+            'balance'     => $checkTotalGold->gold,
+            'datetime'    => Carbon::now('GMT+7')
           ]);
+
   
-          DB::table('reseller_transaction')->where('order_id', $approveOrderId)->update([
-            'status' => '2',
-            'timestamp' => Carbon::now('GMT+7')
-          ]);
+        //   DB::table('reseller_transaction')->where('order_id', $approveOrderId)->update([
+        //     'status' => '2',
+        //     'timestamp' => Carbon::now('GMT+7')
+        //   ]);
+
+        StoreTransaction::where('user_id', '=', $reseller_id)->where('user_type', '=', 4)->delete();
+
 
         //   Log::create([
         //     'op_id' => Session::get('userId'),
@@ -299,13 +353,36 @@ class ResellerController extends Controller
     }
 
 
-    public function ResellerBankTransactionDecline(Request $request)
+    public function RequestTransactionDecline(Request $request)
     {
         $declineOrderId = $request->declineId;
-        DB::table('reseller_transaction')->where('order_id', $declineOrderId)->update([
-            'status'    => '0',
-            'timestamp' => Carbon::now('GMT+7')
+        $goldAwarded    = $request->goldbuy;
+        $amount         = $request->price;
+        $reseller_id    = $request->reseller_id;
+        $item_name      = $request->item_name;
+        $desc           = $request->desc;
+        $quantity       = $request->quantity;
+        $payment_id     = $request->payment_id;
+        $datetime       = $request->datetime;
+        $user_type      = $request->user_type;
+        $item_type      = $request->item_type;
+        // DB::table('reseller_transaction')->where('order_id', $declineOrderId)->update([
+        //     'status'    => '0',
+        //     'timestamp' => Carbon::now('GMT+7')
+        // ]);
+        StoreTransactionHist::create([
+            'user_id'       => $reseller_id,
+            'item_name'     =>  'nanti',
+            'status'        =>  0,
+            'desc'          =>  $desc,
+            'quantity'      =>  $quantity,
+            'payment_id'    =>  $payment_id,
+            'datetime'      =>  $datetime,
+            'user_type'     =>  $user_type,
+            'item_type'     =>  4,
+            'item_price'    =>  $amount
         ]);
+        StoreTransaction::where('user_id', '=', $reseller_id)->where('user_type', '=', 4)->delete();
         return back()->with('success','Declined Succesful');
     }
 
@@ -319,52 +396,43 @@ class ResellerController extends Controller
       $startDateComparison = Carbon::parse($startDate)->timestamp;
       $endDateComparison   = Carbon::parse($endDate)->timestamp;
       $datenow             = Carbon::now('GMT+7');
+      $balanceReseller     = DB::table('asta_db.reseller_balance')
+                             ->select('asta_db.reseller_balance.*', 'asta_db.reseller.username')
+                             ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id');
 
       if($endDateComparison < $startDateComparison){
-        return back()->with('alert','alert');
+        return back()->with('alert','End Date can\'t be less than start date');
       }
 
       if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
 
-        $balancedetails = DB::table('balance_reseller')
-                          ->select('balance_reseller.*', 'reseller.username')
-                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
-                          ->WHERE('reseller.username', $searchUsername)
-                          ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                          ->orderBy('timestamp', 'asc')
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
+                          ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
                           ->get();
 
         return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $startDate != NULL) {
 
-        $balancedetails = DB::table('balance_reseller')
-                          ->select('balance_reseller.*', 'reseller.username')
-                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
-                          ->WHERE('reseller.username', $searchUsername)
-                          ->WHERE('timestamp', '>=', $startDate." 00:00:00")
-                          ->orderBy('timestamp', 'asc')
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
+                          ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
+                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
                           ->get();
 
         // $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
-        $balancedetails = DB::table('balance_reseller')
-                          ->select('balance_reseller.*', 'reseller.username')
-                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
-                          ->WHERE('reseller.username', $searchUsername)
-                          ->WHERE('timestamp', '<=', $endDate." 23:59:59")
-                          ->orderBy('timestamp', 'desc')
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
+                          ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
+                          ->orderBy('asta_db.reseller_balance.datetime', 'desc')
                           ->get();
 
         // $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
       }else if($searchUsername != NULL) {
-        $balancedetails = DB::table('balance_reseller')
-                          ->select('balance_reseller.*', 'reseller.username')
-                          ->JOIN('reseller', 'balance_reseller.reseller_id', '=', 'reseller.id')
-                          ->WHERE('reseller.username', $searchUsername)
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
                           ->get();
 
         // $balancedetails->appends($request->all());
@@ -372,77 +440,70 @@ class ResellerController extends Controller
       }
     }
 
-    public function searchTransaction(Request $request)
+    public function searchReportTransaction(Request $request)
     {
-        $searchUsername = $request->inputUsername;
-        $startDate      = $request->inputMinDate;
-        $endDate        = $request->inputMaxDate;
-        $datenow        = Carbon::now('GMT+7');
+        $searchUsername    = $request->inputUsername;
+        $startDate         = $request->inputMinDate;
+        $endDate           = $request->inputMaxDate;
+        $datenow           = Carbon::now('GMT+7');
+        $reportTransaction = DB::table('asta_db.store_transaction_hist')
+                             ->select('asta_db.store_transaction_hist.*', 'asta_db.reseller.username')
+                             ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id');
   
         if($endDate < $startDate){
-          return back()->with('alert','alert');
+          return back()->with('alert','End Date can\'t be more than start date');
         }
   
         if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
   
-          $transactions = DB::table('reseller_history')
-                            ->select('reseller_history.*', 'reseller.username')
-                            ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
-                            ->WHERE('reseller.username', $searchUsername)
-                            ->wherebetween('timestamp', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                            ->orderBy('timestamp', 'asc')
+          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                            ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                            ->orderBy('asta_db.store_transaction_hist.datetime', 'asc')
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
   
         }else if ($searchUsername != NULL && $startDate != NULL) {
   
-          $transactions = DB::table('reseller_history')
-                            ->select('reseller_history.*', 'reseller.username')
-                            ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
-                            ->WHERE('reseller.username', $searchUsername)
-                            ->WHERE('timestamp', '>=', $startDate." 00:00:00")
-                            ->orderBy('timestamp', 'asc')
+          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                            ->WHERE('datetime', '>=', $startDate." 00:00:00")
+                            ->orderBy('datetime', 'asc')
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
   
         }else if ($searchUsername != NULL && $endDate != NULL) {
-          $transactions = DB::table('reseller_history')
-                            ->select('reseller_history.*', 'reseller.username')
-                            ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
-                            ->WHERE('reseller.username', $searchUsername)
-                            ->WHERE('timestamp', '<=', $endDate." 23:59:59")
-                            ->orderBy('timestamp', 'desc')
+          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                            ->WHERE('datetime', '<=', $endDate." 23:59:59")
+                            ->orderBy('datetime', 'desc')
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
         }else if($searchUsername != NULL) {
-          $transactions = DB::table('reseller_history')
-                          ->select('reseller_history.*', 'reseller.username')
-                          ->JOIN('reseller', 'reseller_history.reseller_id', '=', 'reseller.id')
-                          ->WHERE('reseller.username', $searchUsername)
+          $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
                           ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
         }
     }
 
     public function detailTransaction($month, $year)
     {
-        $transactions = DB::table('reseller_history')
-                        ->select('reseller_history.*', 'reseller.username')
-                        ->join('reseller','reseller_history.reseller_id','=','reseller.id')
-                        ->whereYear('timestamp', $year)
-                        ->whereMonth('timestamp', $month)
-                        ->orderby('timestamp', 'ASC')
+        $transactions = DB::table('asta_db.store_transaction_hist')
+                        ->select('asta_db.store_transaction_hist.*', 'asta_db.reseller.username')
+                        ->join('asta_db.reseller','asta_db.store_transaction_hist.user_id','=','asta_db.reseller.reseller_id')
+                        ->whereYear('datetime', $year)
+                        ->whereMonth('datetime', $month)
+                        ->where('user_type', '=', 4)
+                        ->orderby('datetime', 'ASC')
                         ->get();
+        $datenow        = Carbon::now('GMT+7');
 
-        return view('pages.reseller.reseller_transaction_detail', compact('transactions', 'datenow'));
+        return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
     }
 
     /**

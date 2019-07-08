@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BalanceChip extends Model
 {
-    protected $table = 'balance_chip';
+    protected $table = 'asta_db.balance_chip';
 
     public $timestamps = false;
 }

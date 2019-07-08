@@ -145,13 +145,19 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('Gold-search', 'GoldController@search')->name('Gold-search');
             });
         });
-
+        Route::group(['prefix'  =>  'Point_Players'], function() {
+            Route::middleware('page_denied:Point Player')->group(function(){
+                Route::get('Point-view', 'PointController@index')->name('Point_Players');
+                Route::get('Point-search', 'PointController@search')->name('Point-search');
+            });
+        });
         Route::group(['prefix'  =>  'Log_Players'], function() {
             Route::middleware('page_denied:Log Player')->group(function(){
                 Route::get('LogPlayer-view', 'LogPlayerController@index')->name('Log_Players');
                 Route::get('LogPlayer', 'LogPlayerController@search')->name('LogPlayer-search');
             });
         });
+
     });
 
     Route::group(['prefix'  =>  'Slide_Banner'], function() {
@@ -506,11 +512,20 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
-        Route::group(['prefix'  =>  'Reseller_Transaction'], function() {
-            Route::middleware('page_denied:Reseller Transaction')->group(function(){
-                Route::get('ResellerTransaction-view', 'ResellerController@ResellerTransaction')->name('Reseller_Transaction');
-                Route::get('ResellerTransaction-search', 'ResellerController@searchTransaction')->name('ResellerTransaction-search');
-                Route::get('ResellerTransaction-search/{month}/{year}/detail', 'ResellerController@detailTransaction')->name('detailResellerTransaction');
+        Route::group(['prefix' => 'Reseller-Transaction'], function() {
+            Route::group(['prefix' => 'Request_Transaction'], function() {
+                Route::middleware('page_denied:Request Transaction')->group(function() {
+                    Route::get('RequestTransaction-view', 'ResellerController@RequestTransaction')->name('Request_Transaction');
+                    Route::post('RequestTransaction-approve', 'ResellerController@RequestTransactionApprove')->name('RequestTransaction-Approve');
+                    Route::post('RequestTransaction-decline', 'ResellerController@RequestTransactionDecline')->name('RequestTransaction-Decline');
+                });
+            });
+            Route::group(['prefix'  =>  'Report_Transaction'], function() {
+                Route::middleware('page_denied:Report Transaction')->group(function(){
+                    Route::get('ReportTransaction-view', 'ResellerController@ReportTransaction')->name('Report_Transaction');
+                    Route::get('ReportTransaction-search', 'ResellerController@searchReportTransaction')->name('ResellerTransaction-search');
+                    Route::get('ReportTransaction-search/{month}/{year}/detail', 'ResellerController@detailTransaction')->name('detailResellerTransaction');
+                });
             });
         });
 

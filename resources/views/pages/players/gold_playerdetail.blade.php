@@ -72,11 +72,11 @@
                             @foreach ($balancedetails as $bd)
                             <tr>
                                 <td>{{ $bd->username }}</td>
-                                <td>{{ $bd->action }}</td>
+                                <td>{{ $bd->actionname }}</td>
                                 <td>{{ $bd->debit }}</td>
                                 <td>{{ $bd->credit }}</td>
-                                <td>{{ $bd->total }}</td>
-                                <td>{{ $bd->timestamp }}</td>
+                                <td>{{ $bd->balance }}</td>
+                                <td>{{ $bd->datetime }}</td>
                             </tr>
                             @endforeach
                     </tbody>

@@ -63,10 +63,10 @@
                 <th class="th-sm">Name</th>
                 <th class="th-sm">Phone</th>
                 <th class="th-sm">Email</th>
-                <th class="th-sm">Gold</th>
+                <th class="th-sm">Saldo Gold</th>
                 <th class="th-sm">Rank</th>
                 @if($menu)
-                <th class="th-sm">Password</th>
+                <th class="th-sm">Reset Password</th>
                 <th class="th-sm">Action</th>
                 @endif
               </tr>
@@ -76,14 +76,14 @@
               @if($menu)
               <tr>
                   <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rsl->reseller_id }}"></td>
-                  <td>{{ $rsl->id }}</td>
+                  <td>{{ $rsl->reseller_id }}</td>
                   <td><a href="#" class="usertext" data-name="username" data-pk="{{ $rsl->reseller_id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->username }}</a></td>
                   <td><a href="#" class="usertext" data-name="fullname" data-pk="{{ $rsl->reseller_id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->fullname }}</a></td>
                   <td><a href="#" class="usertext" data-name="phone" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->phone }}</a></td>
                   <td><a href="#" class="usertext" data-name="email" data-pk="{{ $rsl->reseller_id }}" data-type="email" data-url="{{ route('ListReseller-update') }}">{{ $rsl->email }}</a></td>
                   <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->gold }}</a></td>
                   <td><a href="#" class="rank" data-name="rank_id" data-value="{{ $rsl->rank_id }}" data-pk="{{ $rsl->reseller_id }}" data-type="select" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rankname }}</a></td>
-                  <td><a href="#" class="password{{ $rsl->id }} btn btn-primary" id="password" data-pk="{{ $rsl->id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
+                  <td><a href="#" class="password{{ $rsl->reseller_id }} btn btn-primary" id="password" data-pk="{{ $rsl->reseller_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
                   <td>
                     <a href="#" style="color:red;" class="delete{{ $rsl->reseller_id }}" 
                       id="delete" 
@@ -209,11 +209,22 @@
                   {value:"", text: "Choose Rank" },
                   @php
                   foreach($rank as $rk) {
-                  echo '{value:"'.$rk->order_id.'", text: "'.$rk->name.'" },';
+                  echo '{value:"'.$rk->id.'", text: "'.$rk->name.'" },';
                   }
                   @endphp
   				      ]
           });
+
+          @php 
+              foreach($reseller as $rsl) {            
+              echo'$(".password'.$rsl->reseller_id.'").click(function(e) {';
+                echo'e.preventDefault();';
+    
+                echo"var id = $(this).attr('data-pk');";
+                echo'var test = $("#userid").val(id);';
+              echo'});';
+            }
+          @endphp
 
       @php
         foreach($reseller as $rsl) {
