@@ -32,6 +32,9 @@ class GoldController extends Controller
                         ->JOIN('asta_db.user', 'asta_db.balance_gold.user_id', '=', 'asta_db.user.user_id')
                         ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.balance_gold.action_id');
 
+        if($endDate < $startDate){
+          return back()->with('alert','End Date can\'t be less than start date');
+        }
 
         if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
 

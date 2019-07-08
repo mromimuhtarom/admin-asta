@@ -38,8 +38,10 @@ class PointController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
-                        
-
+        
+        if($maxDate < $minDate){
+            return back()->with('alert','End Date can\'t be less than start date');
+        }
 
         if($username != NULL && $gameName != NULL && $minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')

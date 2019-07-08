@@ -20,16 +20,16 @@
         <form action="{{ route('BalanceReseller-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
-                    <input type="text" name="inputUsername" class="form-control" placeholder="username" required>
+                    <input type="text" name="inputUsername" class="left" placeholder="username" required>
                 </div>
-                <div class="col" style="padding-left:1%;">
+                <div class="col">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col" style="padding-left:1%;">
+                <div class="col" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col" style="padding-left:1%;">
-                    <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
+                <div class="col" style="padding-left:3%;">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
             </div>
         </form>

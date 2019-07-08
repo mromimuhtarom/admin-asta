@@ -11,6 +11,11 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+  <p>{{\Session::get('alert')}}</p>
+</div>
+@endif
         <div class="search bg-blue-dark" style="margin-bottom:2%;">
             <div class="table-header w-100 h-100" style="padding-right:2%;">
                 <form action="{{ route('Gold-search') }}" method="get" role="search">

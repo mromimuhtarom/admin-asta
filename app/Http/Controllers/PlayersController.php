@@ -101,6 +101,10 @@ class PlayersController extends Controller
         $maxdate  = $request->inputMaxDate;
         $menu  = MenuClass::menuName('Registered Player');
 
+        if($maxdate < $mindate){
+          return back()->with('alert','End Date can\'t be less than start date');
+        }
+
         if($username != NULL && $status != NULL && $mindate != NULL && $maxdate != NULL)
         {
           $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')

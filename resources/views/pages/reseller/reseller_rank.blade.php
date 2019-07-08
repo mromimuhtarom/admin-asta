@@ -94,11 +94,13 @@
                 </td>
             </tr>
             @else 
-            <td>{{ $rk->order_id}}</td>
-            <td>{{ $rk->name }}</td>
-            <td>{{ $rk->gold_group }}</td>
-            <td>{{ $rk->accumulate_type }}</td>
-            <td>{{ $rk->bonus }}</td>
+            <tr>
+              <td>{{ $rk->order_id}}</td>
+              <td>{{ $rk->name }}</td>
+              <td>{{ $rk->gold_group }}</td>
+              <td>{{ $rk->accumulate_type }}</td>
+              <td>{{ $rk->bonus }}</td>
+            </tr>
             @endif
             @endforeach
 

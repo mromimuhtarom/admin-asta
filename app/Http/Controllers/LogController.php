@@ -37,6 +37,10 @@ class LogController extends Controller
                         ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                         ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id');
 
+        if($inputMaxDate < $inputMinDate){
+                return back()->with('alert','End Date can\'t be less than start date');
+        }
+
         if($inputUser != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputAction != NULL) {
           $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
                   ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')

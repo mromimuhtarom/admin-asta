@@ -17,6 +17,11 @@
      height: 90%;
    }
 </style>
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+  <p>{{\Session::get('alert')}}</p>
+</div>
+@endif
     <div class="search bg-blue-dark" style="margin-bottom:2%;">
         <div class="table-header w-100 h-100">
             <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">

@@ -40,6 +40,10 @@ class PlayReportController extends Controller
       $menus1       = MenuClass::menuName('Report');
       $game         = Game::all();
 
+      if($inputMaxDate < $inputMinDate){
+       return back()->with('alert','End Date can\'t be less than start date');
+      }
+
       $tbdmq = DmqRound::join('dmq_round_player', 'dmq_round_player.roundid', '=', 'dmq_round.roundid')
                ->join('user', 'user.user_id', '=', 'dmq_round_player.user_id')
                ->join('dmq_table', 'dmq_table.tableid', '=', 'dmq_round.tableid')

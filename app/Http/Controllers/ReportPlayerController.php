@@ -37,6 +37,9 @@ class ReportPlayerController extends Controller
                      ->join('asta_db.user', 'asta_db.user.user_id', '=', 'log_online.user_id')
                      ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id');
 
+        if($maxDate < $minDate){
+            return back()->with('alert','End Date can\'t be less than start date');
+        }
         if($player != NULL && $minDate != NULL && $maxDate != NULL && $logtype != NULL)
         {
             $log_login = $logOnline->where('asta_db.user.username', 'Like', '%'.$player.'%')

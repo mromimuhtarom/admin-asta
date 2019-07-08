@@ -43,6 +43,10 @@ class ChipController extends Controller
                         ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.balance_chip.action_id')
                         ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id');
 
+        if($endDate < $startDate){
+          return back()->with('alert','End Date can\'t be less than start date');
+        }
+
         if($searchPlayer != NULL && $gameName != NULL && $startDate != NULL && $endDate != NULL){
           $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
                             ->where('asta_db.balance_chip.game_id', '=', $gameName)

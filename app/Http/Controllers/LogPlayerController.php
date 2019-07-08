@@ -35,6 +35,10 @@ class LogPlayerController extends Controller
         $loguser =  LogUser::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.log_user.user_id')
                     ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_user.action_id');
 
+        if($inputMaxDate < $inputMinDate){
+            return back()->with('alert','End Date can\'t be less than start date');
+        }
+
         if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL && $inputMaxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')

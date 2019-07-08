@@ -132,7 +132,7 @@ class ResellerController extends Controller
     public function ResellerRank()
     {
         $rank = DB::table('reseller_rank')->get();
-        $menu = MenuClass::menuName('Reseller Rank');
+        $menu = MenuClass::menuName('Rank Reseller');
         return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
     }
 
