@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Reseller_Bank_Transaction') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Reseller_Bank_Transaction') }}">Reseller Bank Transaction</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">Reseller</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">Reseller Bank Transaction</a></li>
 @endsection
 
 

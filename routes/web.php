@@ -559,14 +559,7 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
-        Route::group(['prefix'  =>  'Reseller_Bank_Transaction'], function() {
-            Route::middleware('page_denied:Reseller Bank Transaction')->group(function(){
-                Route::get('ResellerBankTransaction-view', 'ResellerController@ResellerBankTransaction')->name('Reseller_Bank_Transaction');
-                Route::post('ResellerBankTransaction-approve', 'ResellerController@ResellerBankTransactionApprove')->name('ResellerBankTransaction-Approve');
-                Route::post('ResellerBankTransaction-decline', 'ResellerController@ResellerBankTransactionDecline')->name('ResellerBankTransaction-Decline');
-            });
-        });
-
+        
     });
 
 
