@@ -41,6 +41,7 @@
           <!-- Button tambah bot baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
+              
             </div>
           </div>
           <!-- End Button tambah bot baru -->
@@ -49,7 +50,7 @@
 
       </div>
       
-      <div class="custom-scroll table-responsive" style="max-height:600px;">
+      <div class="custom-scroll table-responsive" style="height:800px;">
         
         <div class="table-outer">
           <table class="table table-bordered">

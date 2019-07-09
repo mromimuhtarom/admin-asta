@@ -49,13 +49,14 @@ class PaymentStoreController extends Controller
             'transactionType'   => 'required|integer|between:1,8'
             
         ]);
+        
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
 
         $payment = Payment::create([
-            'name'              => $request->title,
-            'type'  => $request->transactionType,
+            'name' => $request->title,
+            'type' => $request->transactionType,
         ]);
 
         Log::create([
