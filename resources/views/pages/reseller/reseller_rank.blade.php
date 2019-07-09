@@ -66,7 +66,7 @@
               <th class="th-sm">ID</th>
               <th class="th-sm">Name</th>
               <th class="th-sm">Gold Group</th>
-              <th class="th-sm">Accumulate Type</th>
+              <th class="th-sm">Type</th>
               <th class="th-sm">Bonus</th>
               @if($menu)
               <th class="th-sm">Action</th>
@@ -77,16 +77,16 @@
             @foreach($rank as $rk)
             @if($menu)
             <tr>
-                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rk->order_id }}"></td>
-                <td><a href="#" class="usertext" data-name="order_id" data-pk="{{ $rk->order_id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->order_id }}</a></td>
-                <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rk->order_id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->name }}</a></td>
-                <td><a href="#" class="usertext" data-name="gold_group" data-pk="{{ $rk->order_id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ $rk->gold_group }}</a></td>
-                <td><a href="#" class="usertext" data-name="accumulate_type" data-pk="{{ $rk->order_id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->accumulate_type }}</a></td>
-                <td><a href="#" class="usertext" data-name="bonus" data-pk="{{ $rk->order_id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->bonus }}</a></td>
+                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rk->id }}"></td>
+                <td><a href="#" class="usertext" data-name="id" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->id }}</a></td>
+                <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->name }}</a></td>
+                <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rk->id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ $rk->gold }}</a></td>
+                <td><a href="#" class="usertext" data-name="type" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->type }}</a></td>
+                <td><a href="#" class="usertext" data-name="bonus" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->bonus }}</a></td>
                 <td>
-                    <a href="#" style="color:red;" class="delete{{ $rk->order_id }}" 
+                    <a href="#" style="color:red;" class="delete{{ $rk->id }}" 
                         id="delete" 
-                        data-pk="{{ $rk->order_id }}" 
+                        data-pk="{{ $rk->id }}" 
                         data-toggle="modal" 
                         data-target="#delete-modal">
                           <i class="fa fa-times"></i>
@@ -95,10 +95,10 @@
             </tr>
             @else 
             <tr>
-              <td>{{ $rk->order_id}}</td>
+              <td>{{ $rk->id}}</td>
               <td>{{ $rk->name }}</td>
-              <td>{{ $rk->gold_group }}</td>
-              <td>{{ $rk->accumulate_type }}</td>
+              <td>{{ $rk->gold }}</td>
+              <td>{{ $rk->type }}</td>
               <td>{{ $rk->bonus }}</td>
             </tr>
             @endif
@@ -119,9 +119,9 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel">Create Reseller Rank</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        ×
+      <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Reseller Rank</h4>
+      <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-hidden="true">
+        <i class="fa fa-remove"></i>
       </button>
     </div>
     <form action="{{ route('ResellerRank-create') }}" method="post">
@@ -140,11 +140,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-default" data-dismiss="modal">
-          Cancel
-        </button>
         <button type="submit" class="btn sa-btn-primary">
-          Save
+          <i class="fa fa-save"></i> Save
+        </button>
+        <button type="submit" class="btn btn-danger" data-dismiss="modal">
+          <i class="fa fa-remove"></i> Cancel
         </button>
       </div>
     </form>
@@ -159,8 +159,8 @@
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        × 
+      <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
+        <i class="fa fa-remove"></i>
       </button>
     </div>
     <div class="modal-body">
@@ -171,8 +171,8 @@
         <input type="hidden" name="id" id="id" value="">
     </div>
     <div class="modal-footer">
-      <button type="submit" class="button_example-yes">Yes</button>
-      <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
     </div>
       </form>
   </div>
@@ -212,20 +212,20 @@ table = $('table.table').dataTable({
 
     @php
         foreach($rank as $rk) {
-          echo'$(".delete'.$rk->order_id.'").hide();';
-          echo'$(".deletepermission'.$rk->order_id.'").on("click", function() {';
-            echo 'if($( ".deletepermission'.$rk->order_id.':checked" ).length > 0)';
+          echo'$(".delete'.$rk->id.'").hide();';
+          echo'$(".deletepermission'.$rk->id.'").on("click", function() {';
+            echo 'if($( ".deletepermission'.$rk->id.':checked" ).length > 0)';
             echo '{';
-              echo '$(".delete'.$rk->order_id.'").show();';
+              echo '$(".delete'.$rk->id.'").show();';
             echo'}';
             echo'else';
             echo'{';
-              echo'$(".delete'.$rk->order_id.'").hide();';
+              echo'$(".delete'.$rk->id.'").hide();';
             echo'}';
 
           echo '});';
         
-          echo'$(".delete'.$rk->order_id.'").click(function(e) {';
+          echo'$(".delete'.$rk->id.'").click(function(e) {';
             echo'e.preventDefault();';
 
             echo"var id = $(this).attr('data-pk');";

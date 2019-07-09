@@ -46,7 +46,6 @@ class PaymentStoreController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'title'             => 'required',
-            'paymentType'       => 'required',
             'transactionType'   => 'required|integer|between:1,8'
             
         ]);
@@ -56,8 +55,7 @@ class PaymentStoreController extends Controller
 
         $payment = Payment::create([
             'name'              => $request->title,
-            'payment_type'      => $request->paymentType,
-            'transaction_type'  => $request->transactionType,
+            'type'  => $request->transactionType,
         ]);
 
         Log::create([

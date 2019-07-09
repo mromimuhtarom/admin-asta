@@ -131,7 +131,7 @@ class ResellerController extends Controller
 //****************************************** Menu Reseller Rank ******************************************//
     public function ResellerRank()
     {
-        $rank = DB::table('reseller_rank')->get();
+        $rank = DB::table('asta_db.reseller_rank')->get();
         $menu = MenuClass::menuName('Rank Reseller');
         return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
     }
@@ -150,11 +150,11 @@ class ResellerController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $rank = DB::table('reseller_rank')->insert([
-            'order_id'        => $id,
-            'name'            => $rankname,
-            'accumulate_type' => '0',
-            'bonus'           => '0'
+        $rank = DB::table('asta_db.reseller_rank')->insert([
+            'id'    => $id,
+            'name'  => $rankname,
+            'type'  => '0',
+            'bonus' => '0'
         ]);
 
         Log::create([
@@ -175,7 +175,7 @@ class ResellerController extends Controller
         $name  = $request->name;
         $value = $request->value;
     
-        DB::table('reseller_rank')->where('order_id', '=', $pk)->update([
+        DB::table('asta_db.reseller_rank')->where('id', '=', $pk)->update([
           $name => $value
         ]);
         
@@ -219,7 +219,7 @@ class ResellerController extends Controller
         $id = $request->id;
         if($id != '')
         {
-            DB::table('reseller_rank')->where('order_id', '=', $id)->delete();
+            DB::table('asta_db.reseller_rank')->where('id', '=', $id)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -533,10 +533,8 @@ class ResellerController extends Controller
         $validator = Validator::make($data,$validate);
   
         if($validator->fails())
-        {
-  
+        {  
           return back()->withInput()->with('alert', $validator->errors()->first());
-  
         }
   
         Reseller::insertData([
@@ -550,7 +548,7 @@ class ResellerController extends Controller
           'gold'     => 0,
           'rank_id'  => 1,
           'rank_gold'=> 0,
-          
+
         //   'address'  => $request->address,
         //   'guid'     => bcrypt($request->username.$request->email.$request->idcard)
         ]);

@@ -69,12 +69,11 @@
                   <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Name</th>
-                <th class="th-sm">Payment Type</th>
-                <th class="th-sm">Transaction Type</th>
-                <th class="th-sm">image</th>
+                <th class="th-sm">Type</th>
+                <th class="th-sm">desc</th>
                 <th class="th-sm">status</th>
                 @if($menu)
-                  <th>Action</th>
+                <th>Action</th>
                 @endif
               </tr>
             </thead>
@@ -84,10 +83,10 @@
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $payment->id }}"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>
-                <td><a href="#" class="usertext" data-title="Payment Type" data-name="payment_type" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->payment_type }}</td>
-                <td><a href="#" class="usertext" data-title="Transaction Type" data-name="transaction_type" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->transaction_type) }}</td>
-                <td><a href="#" class="usertext" data-title="Image" data-name="image" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->image }}</td>
-                <td><a href="#" class="stractive" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td>
+                <td><a href="#" class="payment_type" data-title="Payment Type" data-name="type" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->type) }}</td>
+                <td><a href="#" class="usertext" data-title="Transaction Type" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
+                <td><a href="#" class="stractive" data-title="status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td>
+                {{-- <td><a href="#" class="stractive" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td> --}}
                 <td style="text-align:center;">
                   <a href="#" style="color:red;" class="delete{{ $payment->id }}" 
                     id="delete" 
@@ -134,9 +133,6 @@
         <div class="modal-body">
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
-          </div>
-          <div class="form-group">
-            <input type="text" name="paymentType" class="form-control" id="basic-url" placeholder="payment type">
           </div>
           <div class="form-group">
             <select class="custom-select" name="transactionType">
@@ -223,6 +219,22 @@
         mode :'inline'
       });
 
+      $('.payment_type').editable({
+        mode  :'inline',
+        value : '',
+        source: [
+          {value: '', text:'Choose Payment Type'},
+          {value: '1', text:'Bank Transfer'},
+          {value: '2', text:'Internet Banking' },
+          {value: '3', text:'Cash Digital'},
+          {value: '4', text:'Toko'},
+          {value: '5', text:'Akulaku'},
+          {value: '6', text:'Credit Card'},
+          {value: '7', text:'Manual Transfer'},
+          {value: '8', text:'Google play'}
+        ]
+      });
+      
       $('.stractive').editable({
         value: '',
         mode :'inline',
