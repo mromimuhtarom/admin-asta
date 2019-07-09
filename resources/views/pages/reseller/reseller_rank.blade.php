@@ -158,7 +158,7 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
       <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
         <i class="fa fa-remove"></i>
       </button>
