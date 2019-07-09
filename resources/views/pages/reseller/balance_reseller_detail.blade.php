@@ -63,7 +63,7 @@
                     <tr>
                         <th>ID Reseller</th>
                         <th>Username</th>
-                        <th>Description</th>
+                        {{-- <th>Description</th> --}}
                         <th>Debit</th>
                         <th>Credit</th>
                         <th>Balance</th>
@@ -76,11 +76,11 @@
                     <tr>
                         <td>{{ $bd->reseller_id }}</td>
                         <td>{{ $bd->username }}</td>
-                        <td></td>
+                        {{-- <td></td> --}}
                         <td>{{ $bd->debet }}</td>
                         <td>{{ $bd->credit }}</td>
                         <td>{{ $bd->balance }}</td>
-                        <td></td> 
+                        <td>{{ $bd->action }}</td> 
                         <td>{{ $bd->datetime }}</td>
                     </tr>
                     @endforeach

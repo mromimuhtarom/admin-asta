@@ -92,17 +92,17 @@
                         <tr>
                             <td>Identity Card</td>
                             <td colspan="2">
-                                    <input type="text" name="idcard" class="form-control"value="{{ old('identitycard') }}" required>
+                                    <input type="text" name="idcard" class="form-control"value="{{ old('identify') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td>Address</td>
                             <td colspan="2">
                                     <textarea name="address" rows="5" class="form-control">{{ old('idcard') }}</textarea>
                                     <p>&nbsp;</p>
                             </td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td colspan="3" align="center"><button class="myButton" type="submit">Submit</button></td>
                         </tr>

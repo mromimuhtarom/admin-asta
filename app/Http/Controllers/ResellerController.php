@@ -342,12 +342,12 @@ class ResellerController extends Controller
         StoreTransaction::where('user_id', '=', $reseller_id)->where('user_type', '=', 4)->delete();
 
 
-        //   Log::create([
-        //     'op_id' => Session::get('userId'),
-        //     'action_id'   => '3',
-        //     'datetime'        => Carbon::now('GMT+7'),
-        //     'desc' => 'Create new in menu Reseller Bank$ranknam Transaction with Rank Name '. $rankname
-        //   ]);
+          Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '5',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'approve request transaction with reseller id'. $reseller_id
+          ]);
 
           return back()->with('success','Approved Succesful');
     }
@@ -383,6 +383,12 @@ class ResellerController extends Controller
             'item_price'    =>  $amount
         ]);
         StoreTransaction::where('user_id', '=', $reseller_id)->where('user_type', '=', 4)->delete();
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '6',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'decline request transaction with reseller id'. $reseller_id
+        ]);
         return back()->with('success','Declined Succesful');
     }
 
@@ -397,8 +403,9 @@ class ResellerController extends Controller
       $endDateComparison   = Carbon::parse($endDate)->timestamp;
       $datenow             = Carbon::now('GMT+7');
       $balanceReseller     = DB::table('asta_db.reseller_balance')
-                             ->select('asta_db.reseller_balance.*', 'asta_db.reseller.username')
-                             ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id');
+                             ->select('asta_db.reseller_balance.*', 'asta_db.reseller.username', 'asta_db.action.action')
+                             ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id')
+                             ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
 
       if($endDateComparison < $startDateComparison){
         return back()->with('alert','End Date can\'t be less than start date');
@@ -515,11 +522,12 @@ class ResellerController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $datetimenow = Carbon::now('GMT+7');
         $validate = [
           'username' => 'unique:reseller,username',
           'phone'    => 'unique:reseller,phone',
           'email'    => 'unique:reseller,email',
-          'idcard'   => 'unique:reseller,ktp'
+        //   'idcard'   => 'unique:reseller,identify'
         ];
   
         $validator = Validator::make($data,$validate);
@@ -533,13 +541,18 @@ class ResellerController extends Controller
   
         Reseller::insertData([
           'username' => $request->username,
-          'password' => bcrypt($request->password),
-          'fullname' => $request->name,
+          'userpass' => bcrypt($request->password),
+          'fullname' => $request->firstName.' '.$request->lastName,
           'phone'    => $request->phone,
           'email'    => $request->email,
-          'ktp'      => $request->idcard,
-          'address'  => $request->address,
-          'guid'     => bcrypt($request->username.$request->email.$request->idcard)
+          'identify' => $request->idcard,
+          'join_date'=> $datetimenow,
+          'gold'     => 0,
+          'rank_id'  => 1,
+          'rank_gold'=> 0,
+          
+        //   'address'  => $request->address,
+        //   'guid'     => bcrypt($request->username.$request->email.$request->idcard)
         ]);
 
         Log::create([

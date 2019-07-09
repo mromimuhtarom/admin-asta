@@ -110,8 +110,8 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Decline Transaction</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					× 
+				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fa fa-remove"></i>
 				</button>
             </div>
             <form action="{{ route('RequestTransaction-Decline')}}" method="POST">
@@ -130,8 +130,8 @@
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary">Yes</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
                 </div>
             </form>
 		</div>
@@ -147,8 +147,8 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Approve Transaction</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					× 
+				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fa fa-remove"></i>
 				</button>
             </div>
             <form action="{{ route('RequestTransaction-Approve')}}" method="POST">
@@ -171,8 +171,8 @@
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary">Yes</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
                 </div>
             </form>
 		</div>
