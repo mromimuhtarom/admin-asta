@@ -23,32 +23,12 @@
 @if($menu)
 <div class="input-insert bg-blue-dark">
     <div class="row">
-        <div class="col" align="center" style="color:white; font-size:30px; font-weight:bold;">Register Reseller</div>
+        <div class="col" align="center" style="color:white; font-size:30px; font-weight:bold;"><i class="fa fa-plus-square"></i> Register Reseller</div>
         <div class="w-100"><p>&nbsp;</p></div>
         <div class="col">
             <div class="table-header w-100 h-100">
                 <form action="{{ route('RegisterReseller-create')}}" method="post">
                     @csrf
-                    {{-- <div class="row h-100 w-100 no-gutters">
-                        <div class="col" style="padding-left:1%;width:25%;">Username</div>
-                        <div class="col" style="padding-left:1%;">
-                            <input type="text" name="inputUsername" class="form-control" placeholder="username" required>
-                        </div>
-                        <div class="w-100"><p>&nbsp;</p></div>
-                        <div class="col" style="padding-left:1%;">Username</div>
-                        <div class="col" style="padding-left:1%;">
-                            <input type="date" class="form-control" name="inputMinDate">
-                        </div>
-                        <div class="w-100"><p>&nbsp;</p></div>
-                        <div class="col" style="padding-left:1%;">Username</div>
-                        <div class="col" style="padding-left:1%;">
-                            <input type="date" class="form-control" name="inputMaxDate">
-                        </div>
-                        <div class="w-100"><p>&nbsp;</p></div>
-                        <div class="col" style="padding-left:1%;">
-                            <button class="myButton" type="submit">Cari</button>
-                        </div>
-                    </div> --}}
                     <table border="0" width="100%" height="100%" style="color:white">
                         <tr>
                             <td>Full Name<p>&nbsp;</p></td>
@@ -62,35 +42,35 @@
                             </td>
                         </tr>
                         <tr style="">
-                            <td>Username</td>
+                            <td>Username <p>&nbsp;</p> </td>
                             <td colspan="2">
                                     <input type="text" name="username" class="form-control" value="{{ old('username') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td>Password</td>
+                            <td>Password<p>&nbsp;</p></td>
                             <td colspan="2">
                                     <input type="text" name="password" class="form-control" value="{{ generateID(6) }}" readonly>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td>Phone</td>
+                            <td>Phone<p>&nbsp;</p></td>
                             <td colspan="2">
                                     <input type="number" name="phone" class="form-control" value="{{ old('phone') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td>Email</td>
+                            <td>Email<p>&nbsp;</p></td>
                             <td colspan="2">
                                     <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td>Identity Card</td>
+                            <td>Identity Card<p>&nbsp;</p></td>
                             <td colspan="2">
                                     <input type="text" name="idcard" class="form-control"value="{{ old('identify') }}" required>
                                     <p>&nbsp;</p>
@@ -104,7 +84,7 @@
                             </td>
                         </tr> --}}
                         <tr>
-                            <td colspan="3" align="center"><button class="myButton" type="submit">Submit</button></td>
+                            <td colspan="3" align="center"><button class="myButton" type="submit"><i class="fa fa-save"></i> Submit</button></td>
                         </tr>
                     </table>
                 </form>
