@@ -36,6 +36,7 @@
                                     <input type="text" name="firstName" class="form-control" placeholder="First Name" value="{{ old('fullname') }}" required>
                                     <p>&nbsp;</p>
                             </td>
+                            <td>&nbsp;</td>
                             <td>
                                     <input type="text" name="lastName" class="form-control" placeholder="Last Name" value="{{ old('fullname') }}" required>
                                     <p>&nbsp;</p>
@@ -43,48 +44,41 @@
                         </tr>
                         <tr style="">
                             <td>Username <p>&nbsp;</p> </td>
-                            <td colspan="2">
+                            <td colspan="3">
                                     <input type="text" name="username" class="form-control" value="{{ old('username') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Password<p>&nbsp;</p></td>
-                            <td colspan="2">
+                            <td colspan="3">
                                     <input type="text" name="password" class="form-control" value="{{ generateID(6) }}" readonly>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Phone<p>&nbsp;</p></td>
-                            <td colspan="2">
+                            <td colspan="3">
                                     <input type="number" name="phone" class="form-control" value="{{ old('phone') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Email<p>&nbsp;</p></td>
-                            <td colspan="2">
+                            <td colspan="3">
                                     <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
                             <td>Identity Card<p>&nbsp;</p></td>
-                            <td colspan="2">
+                            <td colspan="3">
                                     <input type="text" name="idcard" class="form-control"value="{{ old('identify') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
-                        {{-- <tr>
-                            <td>Address</td>
-                            <td colspan="2">
-                                    <textarea name="address" rows="5" class="form-control">{{ old('idcard') }}</textarea>
-                                    <p>&nbsp;</p>
-                            </td>
-                        </tr> --}}
                         <tr>
-                            <td colspan="3" align="center"><button class="myButton" type="submit"><i class="fa fa-save"></i> Submit</button></td>
+                            <td colspan="4" align="center"><button class="myButton" type="submit"><i class="fa fa-save"></i> Submit</button></td>
                         </tr>
                     </table>
                 </form>
