@@ -401,6 +401,13 @@ Route::middleware('authenticated')->group(function(){
             
         });
 
+        //Game Setting 
+        Route::group(['prefix'  =>  'Game_Setting'], function() {
+            Route::middleware('page_denied:Game Setting')->group(function(){
+                Route::get('GameSetting-view', 'GameSettingController@index')->name('Game_Setting');
+            });
+        });
+
     });
 
     Route::group(['prefix' => 'Store'], function() {
@@ -490,11 +497,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('GeneralSetting-update', 'GeneralSettingController@update')->name('GeneralSetting-update');
             });
         });
-        Route::group(['prefix'  =>  'Game_Setting'], function() {
-            Route::middleware('page_denied:Game Setting')->group(function(){
-                Route::get('GameSetting-view', 'GameSettingController@index')->name('Game_Setting');
-            });
-        });
+
         // Route::group(['prefix'  =>  'Admin-Setting'], function() {
         //     Route::get('AdminSetting-view', 'AdminSettingController@index')->name('AdminSetting-view');
         //     Route::post('AdminSetting-update', 'AdminSettingController@update')->name('AdminSetting-update');

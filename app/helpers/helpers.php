@@ -41,6 +41,14 @@ function strEnabledDisabled ($val) {
 	}
 }
 
+function strTransactionType ($val) {
+  if($val == 1) {
+    return 'Weekly';
+  } else if($val == 2) {
+    return 'Monthly';
+  }
+}
+
 function strYesNo ($val) {
 	if($val == 0) {
 		return 'No';
