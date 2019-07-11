@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gift extends Model
 {
-    protected $table = 'gift';
+    protected $table = 'asta_db.gift';
     public $category = array('1'=> 'Makanan','2'=>'Minuman','3'=>'Item');
     protected $guarded = [];
     public $timestamps = false;

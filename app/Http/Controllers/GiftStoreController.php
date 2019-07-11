@@ -44,7 +44,7 @@ class GiftStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $id                     = DB::table('gift')->orderBy('id', 'desc')->first();
+        $id                     = DB::table('asta_db.gift')->orderBy('id', 'desc')->first();
         // $id_last                = $id->id;
         if($id === NULL )
         {
@@ -162,7 +162,7 @@ class GiftStoreController extends Controller
     public function updateimage(Request $request)
     {
         $pk                     = $request->pk;
-        $id                     = DB::table('gift')->where('id', '=', $pk)->first();
+        $id                     = DB::table('asta_db.gift')->where('id', '=', $pk)->first();
         $file                   = $request->file('file');
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
         $nama                   = $_FILES['file']['name'];

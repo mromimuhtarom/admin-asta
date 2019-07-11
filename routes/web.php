@@ -157,6 +157,12 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('LogPlayer', 'LogPlayerController@search')->name('LogPlayer-search');
             });
         });
+        Route::group(['prefix' => 'Register_Player_ID'], function() {
+            Route::middleware('page_denied:Register Player ID')->group(function(){
+                Route::get('RegisterPlayerID-view', 'RegisterPlayerIdController@index')->name('Register_Player_ID');
+                Route::post('RegisterPlayerID-create', 'RegisterPlayerIdController@store')->name('RegisterPlayerID-create');
+            });
+        });
 
     });
 
@@ -495,6 +501,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:General Setting')->group(function(){
                 Route::get('GeneralSetting-view', 'GeneralSettingController@index')->name('General_Setting');
                 Route::post('GeneralSetting-update', 'GeneralSettingController@update')->name('GeneralSetting-update');
+                Route::post('GeneralSetting-about', 'GeneralSettingController@putAbout')->name('AboutGeneralSetting');
             });
         });
 

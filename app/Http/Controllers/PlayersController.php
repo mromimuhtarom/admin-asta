@@ -39,7 +39,7 @@ class PlayersController extends Controller
     {
         $avgBank = 0;
         $player1 = Player::join('asta_db.user_stat', 'asta_db.user.user_id', '=', 'asta_db.user_stat.user_id')
-                  ->join('country', 'asta_db.user.country_code', '=', 'country.code')
+                  ->join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                    ->select(DB::raw("sum(chip) / count(*) As avgBank"))
                    ->where('user_type', '=', '1')
                    ->where('user_type', '=', '2')
@@ -55,7 +55,7 @@ class PlayersController extends Controller
 
         $avgBank = 0;
         $player  = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                  ->join('country', 'asta_db.user.country_code', '=', 'country.code')
+                  ->join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                   ->where('chip', '>', $avgBank)->orderBy('chip', 'DESC')
                   ->limit('100')
                   ->get();
@@ -83,7 +83,7 @@ class PlayersController extends Controller
       $username = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
                   ->where('asta_db.user.user_id', '=', $userId)
                   ->first();
-      $country = DB::table('country')
+      $country = DB::table('asta_db.country')
                  ->where('iso_code_2', '=', $username->country_code)
                  ->first();
                 
@@ -107,9 +107,9 @@ class PlayersController extends Controller
 
         if($username != NULL && $status != NULL && $mindate != NULL && $maxdate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.username', '=', $username)
                             ->where('asta_db.user.status', '=', $status)
@@ -120,9 +120,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL && $status != NULL && $mindate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.username', '=', $username)
                             ->where('asta_db.user.status', '=', $status)
@@ -133,9 +133,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL && $status != NULL && $maxdate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.username', '=', $username)
                             ->where('asta_db.user.status', '=', $status)
@@ -147,9 +147,9 @@ class PlayersController extends Controller
 
         } else if($username != NULL && $status != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.username', '=', $username)
                             ->where('asta_db.user.status', '=', $status)
@@ -159,9 +159,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($status != NULL && $mindate != NULL && $maxdate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.status', '=', $status)
                             ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
@@ -171,9 +171,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($status != NULL && $mindate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '>=', $mindate)
@@ -183,9 +183,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($status != NULL && $maxdate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '<=', $maxdate)
@@ -195,9 +195,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL  && $mindate != NULL && $maxdate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.username', '=', $username)
                             ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
@@ -207,7 +207,7 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL  && $mindate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
                             ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
@@ -219,9 +219,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL  && $maxdate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.username', '=', $username)
                             ->where('asta_db.user.join_date', '<=', $maxdate)
@@ -231,9 +231,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($username != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.username', '=', $username)
                             ->get();
@@ -253,9 +253,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         }else if($mindate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.join_date', '>=', $mindate)
                             ->get();
@@ -264,9 +264,9 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu'));
         } else if($maxdate != NULL)
         {
-          $registerPlayer = Player::join('country', 'asta_db.user.country_code', '=', 'country.code')
+          $registerPlayer = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                             ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                            ->select('asta_db.user.*', 'country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
+                            ->select('asta_db.user.*', 'asta_db.country.name as countryname', 'asta_db.user_stat.chip as chip', 'asta_db.user_stat.point as point', 'asta_db.user_stat.gold as gold')                      
                             ->where('user_type', '=', 1)
                             ->where('asta_db.user.join_date', '<=', $maxdate)
                             ->get();
@@ -363,7 +363,7 @@ class PlayersController extends Controller
     {
         $menu  = MenuClass::menuName('Bots');
         $bots = Stat::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_stat.user_id')
-                ->join('country', 'country.code', '=', 'asta_db.user.country_code')
+                ->join('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
                 ->where('asta_db.user.user_type', '=', '3')
                 ->get();
         return view('pages.players.bots', compact('bots', 'menu'));
@@ -375,10 +375,10 @@ class PlayersController extends Controller
     public function storeBots(Request $request)
     {
         $botName   = $request->username;
-        $botId     = DB::table('user_random')->where([['isused', 0],['user_type', '3']])->first();
+        $botId     = DB::table('asta_db.user_random')->where([['isused', 0],['user_type', '3']])->first();
         $username  = clean($botName);
         $deviceId  = "";
-        $sql       = DB::table('country')->select('code')->get();
+        $sql       = DB::table('asta_db.country')->select('code')->get();
         $countries = $sql->toArray();
       //   $countries = array("Australia","Japan","Mexico","United States","Italia","Greece","France","Hungary","Estados Unidos","Deutschland","United Kingdom");
         $country        = $countries[rand(1,count($countries) - 1)];

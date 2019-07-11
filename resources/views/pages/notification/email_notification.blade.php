@@ -236,9 +236,9 @@
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $notification->id }}">Save Gift</button>
+                              <button class="save-profile{{ $notification->id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
                             </form>
-                              <button class="edit-profile{{ $notification->id }}">Edit Gift</button>
+                              <button class="edit-profile{{ $notification->id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                         </div>
                     </td>
                     <td><a href="#" class="usertext" data-title="Subject" data-name="subject" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('EmailNotification-update')}}">{{ $notification->subject }}</a></td>

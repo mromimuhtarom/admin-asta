@@ -9,6 +9,18 @@
 
 @section('content')
 
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+  <p>{{\Session::get('alert')}}</p>
+</div>
+@endif
+
+@if (\Session::has('success'))
+<div class="alert alert-success">
+  <p>{{\Session::get('success')}}</p>
+</div>
+@endif
+
 <div class="settings-table">
   <div>
     <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
@@ -21,7 +33,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
@@ -86,7 +98,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
@@ -129,7 +141,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
@@ -140,7 +152,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  {{-- <tr>
                     <td>Privacy Policy</td>
                     @if($menu)
                     <td><a href="#" class="inlineSetting" data-title="Facebook" data-name="value" data-pk="{{ $getPrivacyPolicy->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getPrivacyPolicy->value }}</a></td>
@@ -162,6 +174,60 @@
                     <td><a href="#" class="inlineSetting" data-title="About" data-name="value" data-pk="{{ $getAbout->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getAbout->value }}</a></td>
                     @else 
                     <td>{{ $getAbout->value }}</td>
+                    @endif
+                  </tr> --}}
+                                    <tr>
+                    <td>Privacy Policy</td>
+                    @if($menu)
+                    {{-- <td><a href="#" class="inlineSetting" data-title="Facebook" data-name="value" data-pk="{{ $getPrivacyPolicy->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getPrivacyPolicy->value }}</a></td> --}}
+                    <td>
+                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
+                            <i class="fa fa-edit"></i> Edit Privacy Policy
+                        </button>
+                    </td>
+                    @else 
+                    {{-- <td>{{ $getPrivacyPolicy->value }}</td> --}}
+                    <td>
+                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
+                            <i class="fa fa-edit"></i> Edit Privacy Policy
+                        </button>
+                    </td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Term Of Service</td>
+                    @if($menu)
+                    {{-- <td><a href="#" class="inlineSetting" data-title="Term Of Service" data-name="value" data-pk="{{ $getTermOfService->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getTermOfService->value }}</a></td> --}}
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
+                        <i class="fa fa-edit"></i> Edit Term Of service
+                    </button>
+                    </td>
+                    @else 
+                    {{-- <td>{{ $getTermOfService->value }}</td> --}}
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
+                        <i class="fa fa-edit"></i> Edit Term Of service
+                    </button>
+                    </td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>About</td>
+                    @if($menu)
+                    {{-- <td><a href="#" class="inlineSetting" data-title="About" data-name="value" data-pk="{{ $getAbout->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getAbout->value }}</a></td> --}}
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-edit"></i> Edit About
+                    </button>
+                    </td>
+                    @else 
+                    {{-- <td>{{ $getAbout->value }}</td> --}}
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-edit"></i> Edit About
+                    </button>
+                    </td>
                     @endif
                   </tr>
                   <tr>
@@ -193,7 +259,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
@@ -241,6 +307,127 @@
   
 </div>
 
+
+
+
+
+  <!-- Modal About-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit About</h4>
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+        <form action="{{ route('AboutGeneralSetting') }}" method="post">
+          @csrf
+          <div class="modal-body">
+    
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
+                <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
+                <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn sa-btn-primary">
+              <i class="fa fa-save"></i> Save
+            </button>
+            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+              <i class="fa fa-remove"></i> Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{-- end create --}}
+
+
+    <!-- Modal Term Of Service -->
+    <div class="modal fade" id="myModalTermOfSevice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit Term Of Service</h4>
+            <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              <i class="fa fa-remove"></i>
+            </button>
+          </div>
+          <form action="{{ route('AboutGeneralSetting') }}" method="post">
+            @csrf
+            <div class="modal-body">
+      
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                      <input type="hidden" name="idtermofservice" value="{{ $getTermOfService->id }}">
+                      <input type="text" name="urltermofservice" placeholder="Url" class="form-control" value="{{$getTermOfService->value }}"><br>
+                  <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ $client->get('term-of-service.txt') }}</textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn sa-btn-primary">
+                <i class="fa fa-save"></i> Save
+              </button>
+              <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                <i class="fa fa-remove"></i> Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {{-- end create --}}
+
+
+
+        <!-- Modal Privacy Policy-->
+        <div class="modal fade" id="myModalPrivacyPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit Privacy Policy</h4>
+                  <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-remove"></i>
+                  </button>
+                </div>
+                <form action="{{ route('AboutGeneralSetting') }}" method="post">
+                  @csrf
+                  <div class="modal-body">
+            
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                            <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
+                            <input type="text" name="urlprivacypolicy" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
+                        <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ $client->get('privacy-policy.txt') }}</textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn sa-btn-primary">
+                      <i class="fa fa-save"></i> Save
+                    </button>
+                    <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                      <i class="fa fa-remove"></i> Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {{-- end create --}}
+  
 
 <script>
   $(document).ready(function() {

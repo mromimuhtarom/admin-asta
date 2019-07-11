@@ -111,7 +111,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">
-      <h2><strong>Gift Store</strong></h2>
+      <h2><strong><i class="fa fa-columns"></i> Gift Store</strong></h2>
     </div>
   </header>
 
@@ -126,7 +126,7 @@
             <div class="input-group">
               @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-columns"></i> Create New Gift
+                <i class="fa fa-plus"></i> Create New Gift
               </button>
               @endif
             </div>
@@ -176,9 +176,9 @@
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $gf->id }}">Save Gift</button>
+                              <button class="save-profile{{ $gf->id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
                             </form>
-                              <button class="edit-profile{{ $gf->id }}">Edit Gift</button>
+                              <button class="edit-profile{{ $gf->id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                             </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('GiftStore-update') }}">{{ $gf->name }}</a></td>

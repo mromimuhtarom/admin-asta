@@ -106,7 +106,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong>Goods Store</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i> Goods Store</strong></h2>				
     </div>
   </header>
 
@@ -121,7 +121,7 @@
             <div class="input-group">
               @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoods">
-                <i class="fa fa-columns"></i> Create New Good Store
+                <i class="fa fa-plus"></i> Create New Good Store
               </button>
               @endif
             </div>

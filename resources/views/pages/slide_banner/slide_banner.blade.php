@@ -179,9 +179,9 @@
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
-                          <button class="save-profile{{ $banner->id }}">Save Gift</button>
+                          <button class="save-profile{{ $banner->id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
                         </form>
-                          <button class="edit-profile{{ $banner->id }}">Edit Gift</button>
+                          <button class="edit-profile{{ $banner->id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                         </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="caption" data-pk="{{ $banner->id }}" data-type="text" data-url="{{ route('SlideBanner-update') }}">{{ $banner->caption }}</a></td>

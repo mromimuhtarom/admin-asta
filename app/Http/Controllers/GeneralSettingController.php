@@ -8,6 +8,8 @@ use Session;
 use Carbon\Carbon;
 use App\Config;
 use DB;
+use Storage;
+use File;
 
 // Log Model
 use App\Log;
@@ -39,10 +41,61 @@ class GeneralSettingController extends Controller
         $getFb              = Config::where('id', '=', '901')->first();
         $getTwitter         = Config::where('id', '=', '902')->first();
         $getIg              = Config::where('id', '=', '903')->first();
+        
+        $rootpath = '../../policy/folder policy/db_txt';
+        $client = Storage::createLocalDriver(['root' => $rootpath]);
+        // dd($client);
+        
+
 
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
-                                                                'getAbout', 'getPokerWeb', "getBank", 'menu'));
+                                                                'getAbout', 'getPokerWeb', "getBank", 'menu', 'client'));
+    }
+
+    public function putAbout(Request $request)
+    {
+        $contentabout         = $request->contentabout;
+        $idabout              = $request->idabout;
+        $urlabout             = $request->urlabout;
+        $idtermofservice      = $request->idtermofservice;
+        $urltermofservice     = $request->urltermofservice;
+        $idprivacypolicy     = $request->idprivacypolicy;
+        $urlprivacypolicy     = $request->urlprivacypolicy;
+        $contenttermofservice = $request->contenttermofservice;
+        $contentprivacypolicy = $request->contentprivacypolicy;
+        $rootpath             = '../../policy/folder policy/db_txt';
+        $client               = Storage::createLocalDriver(['root' => $rootpath]);
+
+        if($contentabout)
+        {
+            $client->put('about.txt', $contentabout) ;
+            Config::where('id', '=', $idabout)->update([
+                'value' =>  $urlabout
+            ]);
+            return back()->with('success','Data Updated');
+
+        } else if ($contenttermofservice)
+        {
+            $client->put('term-of-service.txt', $contenttermofservice) ;
+            Config::where('id', '=', $idtermofservice )->update([
+                'value' =>  $urltermofservice
+            ]);
+            return back()->with('success','Data Updated');
+
+        } else if ($contentprivacypolicy)
+        {
+            $client->put('privacy-policy.txt', $contentprivacypolicy) ;
+            Config::where('id', '=', $idprivacypolicy )->update([
+                'value' =>  $urlprivacypolicy
+            ]);
+            return back()->with('success','Data Updated');
+
+        } else 
+        {
+            return back()->with('alert','Update Can\'t Be process');
+        }
+        
     }
 
     /**
