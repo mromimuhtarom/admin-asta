@@ -36,6 +36,8 @@ class Authenticated
             $op              = Session::get('userId');
             $operator_active = OperatorActive::where('op_id', '=', $op)->first();
             $cahce_op = OperatorActive::where('op_id', '=', $op_idcache)->first();
+            $operator = User::where('op_id', '=', $op_idcache)->first();
+
             if ($operator_active)
             {
                 OperatorActive::where('op_id', '=', $op)->update([
@@ -53,9 +55,9 @@ class Authenticated
                     ]);
                 } else {
                     LogOnline::create([
-                        'user_id'   =>  $logout->op_id,
+                        'user_id'   =>  $op_idcache,
                         'action_id' =>  8,
-                        'desc'      =>  'user '.$logout->username.' Logout in web Admin',
+                        'desc'      =>  'user '.$operator->username.' Logout in web Admin',
                         'datetime'  => Carbon::now('GMT+7'),
                         'ip'        => request()->ip(),
                         'type'      => 1
