@@ -102,13 +102,26 @@ class PlayersController extends Controller
     public function detailRegistered($userId)
     {
       $device = Device::where('user_id', '=', $userId)->get();
-      $username = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
+      $profile = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
+                  ->join('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
+                  ->select(
+                    'asta_db.user.avatar',
+                    'asta_db.user.username',
+                    'asta_db.user.email',
+                    'asta_db.user.country_code',
+                    'asta_db.user_stat.gold',
+                    'asta_db.user_stat.chip',
+                    'asta_db.user_stat.point',
+                    'asta_db.country.name',
+                    'asta_db.user.join_date'
+                  )
                   ->where('asta_db.user.user_id', '=', $userId)
                   ->first();
-      $country = Country::where('iso_code_2', '=', $username->country_code)
-                 ->first();
+      // $country = Country::select()
+      //           ->where('code', '=', $username->country_code)
+      //            ->first();
                 
-      return view('pages.players.register_player_profile', compact('device', 'username', 'country'));
+      return view('pages.players.register_player_profile', compact('device', 'profile'));
     }
  // ----------- End Detail Registered Player ----------- //
 
@@ -330,6 +343,10 @@ class PlayersController extends Controller
   // ----------- Index Guest ----------- //
     public function indexGuest() {
         $guests = UserGuest::join('asta_db.user', 'asta_db.user.user_id', '=', 'user_guest.user_id')
+                  ->select(
+                    'asta_db.user.username',
+                    'user_guest.device_id'
+                  )
                   ->get();
         return view('pages.players.guest', compact('guests'));
     }
@@ -363,7 +380,12 @@ class PlayersController extends Controller
     public function storeBots(Request $request)
     {
         $botName   = $request->username;
-        $botId     = UserRandom::select('user_id')->where([['isused', 0],['user_type', '3']])->first();
+        $botId     = UserRandom::select('user_id')
+                     ->where([
+                       ['isused', 0],
+                       ['user_type', '3']
+                     ])
+                     ->first();
         $username  = clean($botName);
         $deviceId  = "";
         $sql       = Country::select('code')->get();

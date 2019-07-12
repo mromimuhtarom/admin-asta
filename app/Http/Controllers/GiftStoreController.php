@@ -22,15 +22,33 @@ class GiftStoreController extends Controller
      */
     public function index()
     {
-        $gifts        = Gift::select('id', 'name', 'price', 'status', 'image_url', 'category_id')->get();
+        $gifts        = Gift::select(
+                            'id', 
+                            'name', 
+                            'price', 
+                            'status', 
+                            'image_url', 
+                            'category_id'
+                        )
+                        ->get();
         $menu         = MenuClass::menuName('Gift Store');
         // ---- untuk gift category -----//
-        $giftcategory = ConfigText::select('name', 'value')->where('id', '=', 7)->first();
+        $giftcategory = ConfigText::select(
+                            'name', 
+                            'value'
+                        )
+                        ->where('id', '=', 7)
+                        ->first();
         $value        = str_replace(':', ',', $giftcategory->value);
         $category     = explode(",", $value);
 
         // ---- untuk enabled disabled ------//
-        $active = ConfigText::select('name', 'value')->where('id', '=', 4)->first();
+        $active = ConfigText::select(
+                    'name', 
+                    'value'
+                  )
+                  ->where('id', '=', 4)
+                  ->first();
         $value = str_replace(':', ',', $active->value);
         $endis = explode(",", $value);
 
@@ -55,7 +73,9 @@ class GiftStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $id                     = Gift::select('id')->orderBy('id', 'desc')->first();
+        $id                     = Gift::select('id')
+                                  ->orderBy('id', 'desc')
+                                  ->first();
         // $id_last                = $id->id;
         if($id === NULL )
         {
@@ -173,7 +193,9 @@ class GiftStoreController extends Controller
     public function updateimage(Request $request)
     {
         $pk                     = $request->pk;
-        $id                     = Gift::select('id')->where('id', '=', $pk)->first();
+        $id                     = Gift::select('id')
+                                  ->where('id', '=', $pk)
+                                  ->first();
         $file                   = $request->file('file');
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
         $nama                   = $_FILES['file']['name'];
@@ -276,7 +298,9 @@ class GiftStoreController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        $gifts = Gift::select('image_url')->where('id', '=', $id)->first();
+        $gifts = Gift::select('image_url')
+                 ->where('id', '=', $id)
+                 ->first();
         if($id != '')
         {
             Gift::where('id', '=', $id)->delete();

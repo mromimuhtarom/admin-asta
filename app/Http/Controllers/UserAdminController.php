@@ -32,7 +32,12 @@ class UserAdminController extends Controller
                      'asta_db.adm_role.name'
                  )
                  ->get();
-        $role  = DB::table('asta_db.adm_role')->get();
+        $role  = DB::table('asta_db.adm_role')
+                 ->select(
+                     'role_id',
+                     'name'
+                 )
+                 ->get();
         return view('pages.admin.user_admin', compact('admin', 'role', 'menu'));
     }
 

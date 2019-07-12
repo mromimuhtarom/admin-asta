@@ -23,8 +23,9 @@
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
                             <option value="">Choose Log Type</option>
-                            <option value="7">Login</option>
-                            <option value="8">Log Out</option>
+                            @foreach($action as $ac)
+                            <option value="{{$ac->id}}">{{ $ac->action }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">

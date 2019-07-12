@@ -22,10 +22,24 @@ class GoldStoreController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('Gold Store');
-        $getGolds = ItemsCash::where('shop_type', '=', 1)
+        $getGolds = ItemsCash::select(
+                        'id',
+                        'name',
+                        'goldAwarded',
+                        'price',
+                        'transaction_type',
+                        'google_key',
+                        'active'
+                    )
+                    ->where('shop_type', '=', 1)
                     ->orderBy('id', 'desc')
                     ->get();
-        $active   = ConfigText::select('name', 'value')->where('id', '=', 4)->first();
+        $active   = ConfigText::select(
+                        'name', 
+                        'value'
+                    )
+                    ->where('id', '=', 4)
+                    ->first();
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
 
@@ -65,10 +79,10 @@ class GoldStoreController extends Controller
         $googleKey      = $request->googleKey;
 
         $validator = Validator::make($request->all(),[
-            'title'    => 'required',
-            'goldAwarded'    => 'required|integer',
-            'priceCash' => 'required|integer',
-            'googleKey' =>  'required',
+            'title'       => 'required',
+            'goldAwarded' => 'required|integer',
+            'priceCash'   => 'required|integer',
+            'googleKey'   => 'required',
         ]);
     
         if ($validator->fails()) {
@@ -85,9 +99,9 @@ class GoldStoreController extends Controller
 
         Log::create([
             'op_id' => Session::get('userId'),
-            'action_id'   => '3',
-            'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Create new in menu Gold Store with title '. $gold->name
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Gold Store with title '. $gold->name
         ]);
 
         return redirect()->route('Chip_Store')->with('success','Data Added');
@@ -102,10 +116,10 @@ class GoldStoreController extends Controller
         $googleKey      = $request->googleKey;
 
         $validator = Validator::make($request->all(),[
-            'title'    => 'required',
-            'goldAwarded'    => 'required|integer',
-            'priceCash' => 'required|integer',
-            'googleKey' =>  'required',
+            'title'       => 'required',
+            'goldAwarded' => 'required|integer',
+            'priceCash'   => 'required|integer',
+            'googleKey'   => 'required',
         ]);
     
         if ($validator->fails()) {

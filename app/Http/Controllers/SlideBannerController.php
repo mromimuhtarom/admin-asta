@@ -24,7 +24,7 @@ class SlideBannerController extends Controller
     {
         $menu         = MenuClass::menuName('Slide Banner');
         $slide_banner = SlideBanner::all();
-        $active       = DB::table('asta_db.config_text')->where('id', '=', 4)->first();
+        $active       = ConfigText::select('name', 'value')->where('id', '=', 4)->first();
         $value        = str_replace(':', ',', $active->value);
         $endis        = explode(",", $value);
         return view('pages.slide_banner.slide_banner', compact('menu', 'slide_banner', 'endis'));
@@ -48,7 +48,10 @@ class SlideBannerController extends Controller
      */
     public function store(Request $request)
     {
-        $id = DB::table('slide_banner')->orderBy('id', 'desc')->first();
+        $id = DB::table('slide_banner')
+              ->select('id')
+              ->orderBy('id', 'desc')
+              ->first();
 
 
 
@@ -192,7 +195,10 @@ class SlideBannerController extends Controller
     public function updateimage(Request $request)
     {
         $pk                     = $request->pk;
-        $id                     = SlideBanner::where('id', '=', $pk)->first();
+        $id                     = SlideBanner::select('id')
+                                  ->where('id', '=', $pk)
+                                  ->first();
+
         $file                   = $request->file('file');
         $bcrypt                 = bcrypt($request->password);
         $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
@@ -250,7 +256,9 @@ class SlideBannerController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        $slide_banner = SlideBanner::where('id', '=', $id)->first();
+        $slide_banner = SlideBanner::select('image')
+                        ->where('id', '=', $id)
+                        ->first();
         if($id != NULL)
         {
             DB::table('slide_banner')->where('id', '=', $id)->delete();

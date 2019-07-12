@@ -23,8 +23,23 @@ class GoodsStoreController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('Gold Store');
-        $itemGood = ItemGoods::where('shop_type', '=', 1)->get();
-        $active   = ConfigText::where('id', '=', 4)->first();
+        $itemGood = ItemGoods::select(
+                        'id',
+                        'name',
+                        'price',
+                        'qty',
+                        'transaction_type',
+                        'google_key',
+                        'active'
+                    )
+                    ->where('shop_type', '=', 1)
+                    ->get();
+        $active   = ConfigText::select(
+                        'name',
+                        'value'
+                    )
+                    ->where('id', '=', 4)
+                    ->first();
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
         return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis'));
@@ -48,7 +63,10 @@ class GoodsStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $id = ItemGoods::where('shop_type', '=', '1')->orderBy('id', 'desc')->first();
+        $id = ItemGoods::select('id')
+              ->where('shop_type', '=', '1')
+              ->orderBy('id', 'desc')
+              ->first();
 
 
 
@@ -171,8 +189,8 @@ class GoodsStoreController extends Controller
      */
     public function update(Request $request)
     {
-        $pk = $request->pk;
-        $name = $request->name;
+        $pk    = $request->pk;
+        $name  = $request->name;
         $value = $request->value;
 
         ItemGoods::where('id', '=', $pk)->update([
@@ -213,16 +231,16 @@ class GoodsStoreController extends Controller
 
     public function updateimage(Request $request)
     {
-        $pk =   $request->pk;
-        $id =   ItemGoods::where('id', '=', $pk)->where('shop_type', '=', 1)->first();
-        $file = $request->file('file');
+        $pk                     = $request->pk;
+        $id                     = ItemGoods::where('id', '=', $pk)->where('shop_type', '=', 1)->first();
+        $file                   = $request->file('file');
         $ekstensi_diperbolehkan = array('png', 'jpg', 'PNG', 'JPG');
-        $nama = $_FILES['file']['name'];
-        $x  = explode('.', $nama);
-        $ekstensi = strtolower(end($x));
-        $ukuran = $_FILES['file']['size'];
-        $filename = $id->id;
-        $nama_file_unik = $filename.'.'.$ekstensi;
+        $nama                   = $_FILES['file']['name'];
+        $x                      = explode('.', $nama);
+        $ekstensi               = strtolower(end($x));
+        $ukuran                 = $_FILES['file']['size'];
+        $filename               = $id->id;
+        $nama_file_unik         = $filename.'.'.$ekstensi;
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
@@ -268,7 +286,7 @@ class GoodsStoreController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->id;
+        $id    = $request->id;
         $goods = ItemGoods::where('id', '=', $id)->first();
         if($id != '')
         {

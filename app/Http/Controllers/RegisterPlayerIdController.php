@@ -17,7 +17,12 @@ class RegisterPlayerIdController extends Controller
     public function index()
     {
         $menu  = MenuClass::menuName('Register Player ID');
-        $usertype = ConfigText::where('id', '=', 1)->first();
+        $usertype = ConfigText::select(
+                        'name', 
+                        'value'
+                    )
+                    ->where('id', '=', 1)
+                    ->first();
         $value = str_replace(':', ',', $usertype->value);
         $type = explode(",", $value);
         return view('pages.players.registerplayerid', compact('type'));
@@ -27,7 +32,7 @@ class RegisterPlayerIdController extends Controller
     {
         $number   = $request->inputcount;
         $usertype = $request->usertype;
-        $data = $request->all();
+        $data     = $request->all();
         $validate = [
         //   'username' => 'unique:reseller,username',
         //   'phone'    => 'unique:reseller,phone',
@@ -43,7 +48,8 @@ class RegisterPlayerIdController extends Controller
         {  
           return back()->withInput()->with('alert', $validator->errors()->first());
         }
-        $last = UserRandom::orderBy('user_id', 'desc')
+        $last = UserRandom::select('user_id')
+                ->orderBy('user_id', 'desc')
                 ->first();
 
         if($number)

@@ -23,8 +23,19 @@ class PushNotificationController extends Controller
     public function index()
     {
         $menu          = MenuClass::menuName('Push Notification');
-        $notifications = PushNotification::join('asta_db.game', 'game.id', '=', 'push_notifications.gameId')->select('asta_db.game.name as gamename', 'push_notifications.*')->get();
-        $game          = Game::all();
+        $notifications = PushNotification::join('asta_db.game', 'game.id', '=', 'push_notifications.gameId')
+                         ->select(
+                             'asta_db.game.name as gamename', 
+                             'push_notifications.title',
+                             'push_notifications.message',
+                             'push_notifications.id'
+                         )
+                         ->get();
+        $game          = Game::select(
+                            'id',
+                            'name'
+                         )
+                         ->get();
         // $table         = Table::where('dealerId', '=', Session::get('dealerId'))->where('tabletype', '!=', 'm')->where('clubId', '=', 0)->where('seasonId', '=', 0)->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
         return view('pages.notification.push_notification', compact('notifications','tables', 'table', 'game', 'menu'));
     }

@@ -24,7 +24,7 @@
                         <a href="javascript:void(0);" class="btn text-white bg-teal btn-sm"><i class="fa fa-check"></i> Profile</a>&nbsp; 
                     </div>
                     <div class="air air-top-left padding-10">
-                        <h4 class="text-white font-md">Register In {{ date(' F d, Y', strtotime($username->join_date)) }}</h4>
+                        <h4 class="text-white font-md">Register In {{ date(' F d, Y', strtotime($profile->join_date)) }}</h4>
                     </div>
 
 
@@ -44,10 +44,10 @@
                     <div class="col-sm-2 col-2 profile-pic">
                             @php
 
-                                if (is_numeric($username->avatar)) {
-                                    $avatar = "https://graph.facebook.com/".$username->avatar."/picture?type=large";
+                                if (is_numeric($profile->avatar)) {
+                                    $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
                                 } else {
-                                    $avatar = "/upload/avatars/".$username->avatar;
+                                    $avatar = "/upload/avatars/".$profile->avatar;
                                 }
 
                             @endphp
@@ -55,34 +55,34 @@
                          
                         </div>
                         <div class="col-sm-6 col-8">
-                            <h1><strong class="text-medium">{{ $username->username }}</strong>
+                            <h1><strong class="text-medium">{{ $profile->username }}</strong>
                             <br>
                             <small> Players </small></h1>
 
                             <ul class="list-unstyled">
                                 <li>
                                     <p class="text-muted">
-                                        Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $username->email }}</a>
+                                        Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $profile->email }}</a>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Country <i class="fa fa-flag-o"></i>&nbsp;&nbsp;<span class="text-darken">{{ $country->name }}</span>
+                                        Country <i class="fa fa-flag-o"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->name }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Gold <i class="fa fa-cubes"></i>&nbsp;&nbsp;<span class="text-darken">{{ $username->gold }}</span>
+                                        Gold <i class="fa fa-cubes"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->gold }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Chip <i class="fa fa-database"></i>&nbsp;&nbsp;<span class="text-darken">{{ $username->chip }}</span>
+                                        Chip <i class="fa fa-database"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->chip }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Point <i class="fa fa-tags"></i>&nbsp;&nbsp;<span class="text-darken">{{ $username->point }}</span>
+                                        Point <i class="fa fa-tags"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->point }}</span>
                                     </p>
                                 </li>
                             </ul>
@@ -115,7 +115,7 @@
     <header>
       <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-        <h2>Device {{ $username->username}} </h2>
+        <h2>Device {{ $profile->username}} </h2>
       </div>
 
       <div class="widget-toolbar">

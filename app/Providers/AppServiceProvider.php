@@ -30,7 +30,15 @@ class AppServiceProvider extends ServiceProvider
     {
         // $adm_menu = DB::table('asta_db.adm_menu')->where('status', '=', 1)->where('parent_id', '=', 0)->get();
         // $adm_menu = MenuName::where('status', '=', 1)->where('parent_id', '=', 0)->get();
-        $adm_menu = MenuName::where('status', '=', 1)->where('parent_id', '=', 0)->get();
+        $adm_menu = MenuName::select(
+                        'name', 
+                        'route', 
+                        'icon',
+                        'menu_id'
+                    )
+                    ->where('status', '=', 1)
+                    ->where('parent_id', '=', 0)
+                    ->get();
         $menuname = new RolesClass;
         // $adm_access = adm_access::all();
         view::share('adm_menu', $adm_menu);

@@ -17,7 +17,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
+        $logs    = Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
         $datenow = Carbon::now('GMT+7');
         return view('pages.admin.log_admin', compact('logs', 'datenow'));
     }
@@ -33,7 +33,12 @@ class LogController extends Controller
   
         $actionSearch = Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
         $datenow      = Carbon::now('GMT+7');
-        $logOperator  = Log::select('asta_db.log_operator.*', 'asta_db.action.action', 'asta_db.operator.username')
+        $logOperator  = Log::select(
+                                'asta_db.log_operator.datetime',
+                                'asta_db.log_operator.desc', 
+                                'asta_db.action.action', 
+                                'asta_db.operator.username'
+                        )
                         ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                         ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id');
 

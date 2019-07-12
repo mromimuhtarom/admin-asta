@@ -425,7 +425,15 @@ class ResellerController extends Controller
       $startDateComparison = Carbon::parse($startDate)->timestamp;
       $endDateComparison   = Carbon::parse($endDate)->timestamp;
       $datenow             = Carbon::now('GMT+7');
-      $balanceReseller     = ResellerBalance::select('asta_db.reseller_balance.*', 'asta_db.reseller.username', 'asta_db.action.action')
+      $balanceReseller     = ResellerBalance::select(
+                                'asta_db.reseller_balance.reseller_id',
+                                'asta_db.reseller_balance.debet',
+                                'asta_db.reseller_balance.credit',
+                                'asta_db.reseller_balance.balance',
+                                'asta_db.reseller_balance.datetime', 
+                                'asta_db.reseller.username', 
+                                'asta_db.action.action'
+                             )
                              ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id')
                              ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
 
@@ -530,7 +538,15 @@ class ResellerController extends Controller
 
     public function detailTransaction($month, $year)
     {
-        $transactions = StoreTransactionHist::select('asta_db.store_transaction_hist.*', 'asta_db.reseller.username')
+        $transactions = StoreTransactionHist::select(
+                            'asta_db.store_transaction_hist.user_id',
+                            'asta_db.store_transaction_hist.item_name',
+                            'asta_db.store_transaction_hist.quantity',
+                            'asta_db.store_transaction_hist.item_price',
+                            'asta_db.store_transaction_hist.status',
+                            'asta_db.store_transaction_hist.datetime', 
+                            'asta_db.reseller.username'
+                        )
                         ->join('asta_db.reseller','asta_db.store_transaction_hist.user_id','=','asta_db.reseller.reseller_id')
                         ->whereYear('datetime', $year)
                         ->whereMonth('datetime', $month)

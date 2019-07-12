@@ -121,7 +121,7 @@ class RoleController extends Controller
                     ->get();
         $roles    = $roles->toArray();
         $menu     = MenuClass::menuName('Role Admin');
-        $roletype = ConfigText::where('id', '=', 6)->first();
+        $roletype = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
         $value    = str_replace(':', ',', $roletype->value);
         $type     = explode(",", $value);
 

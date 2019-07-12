@@ -22,8 +22,22 @@ class ChipStoreController extends Controller
     public function index()
     {
         $menu   = MenuClass::menuName('Chip Store');
-        $items  = ItemsGold::where('category', '=', 'Chip')->get();
-        $active = ConfigText::where('id', '=', 4)->first();
+        $items  = ItemsGold::select(
+                    'name',
+                    'id',
+                    'category',
+                    'chipAwarded',
+                    'goldCost',
+                    'active'
+                  )
+                  ->where('category', '=', 'Chip')
+                  ->get();
+        $active = ConfigText::select(
+                    'name', 
+                    'value'
+                  )
+                  ->where('id', '=', 4)
+                  ->first();
         $value  = str_replace(':', ',', $active->value);
         $endis  = explode(",", $value);
         return view('pages.store.chip_store', compact('items', 'menu', 'endis'));

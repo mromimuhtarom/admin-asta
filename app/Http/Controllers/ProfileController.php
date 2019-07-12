@@ -20,7 +20,12 @@ class ProfileController extends Controller
         $user = Session::get('userId');
         $profile = User::where('op_id', '=', $user)
                    ->join('asta_db.adm_role', 'asta_db.adm_role.role_id', '=', 'asta_db.operator.role_id')
-                   ->select('asta_db.adm_role.name as rolename', 'asta_db.operator.*')
+                   ->select(
+                       'asta_db.adm_role.name as rolename', 
+                       'asta_db.operator.username',
+                       'asta_db.operator.op_id',
+                       'asta_db.operator.fullname'
+                   )
                    ->first();
 
         return view('pages.profile.user_profile', compact('profile'));
