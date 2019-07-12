@@ -23,7 +23,7 @@ class RoleController extends Controller
     public function index()
     {
         $menu  = MenuClass::menuName('Role Admin');
-        $roles = Role::all();
+        $roles = Role::select('role_id', 'name')->get();
         return view('pages.admin.role_admin', compact('roles', 'menu'));
     }
 
@@ -109,7 +109,16 @@ class RoleController extends Controller
 
     public function menu(Role $role)
     {
-        $roles    = DB::table('asta_db.adm_access')->join('asta_db.adm_menu', 'asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')->where('asta_db.adm_access.role_id', '=', $role->role_id)->get();
+        $roles    = DB::table('asta_db.adm_access')
+                    ->join('asta_db.adm_menu', 'asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')
+                    ->select(
+                      'asta_db.adm_menu.name',
+                      'asta_db.adm_access.type',
+                      'asta_db.adm_access.menu_id',
+                      'asta_db.adm_access.role_id'
+                    )
+                    ->where('asta_db.adm_access.role_id', '=', $role->role_id)
+                    ->get();
         $roles    = $roles->toArray();
         $menu     = MenuClass::menuName('Role Admin');
         $roletype = ConfigText::where('id', '=', 6)->first();

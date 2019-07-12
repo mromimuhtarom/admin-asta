@@ -269,7 +269,7 @@ class PlayReportController extends Controller
                           ->union($dms)
                           ->union($tpk)
                           ->get();
-
+       
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL) {
         $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%');

@@ -28,7 +28,7 @@ class ResellerController extends Controller
     {
         $menu     = MenuClass::menuName('List Reseller');
         $rank     = ResellerRank::all();
-        $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'reseller.*')->get();
+        $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
         return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank'));
     }
 
@@ -132,7 +132,7 @@ class ResellerController extends Controller
 //****************************************** Menu Reseller Rank ******************************************//
     public function ResellerRank()
     {
-        $rank = ResellerRank::all();
+        $rank = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
         $menu = MenuClass::menuName('Rank Reseller');
         return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
     }
@@ -261,7 +261,30 @@ class ResellerController extends Controller
     public function RequestTransaction()
     {
         // $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
-        $transactions = DB::select("SELECT asta_db.store_transaction.*, asta_db.reseller.reseller_id, asta_db.reseller.username, asta_db.payment.name as bankname, items_cash.goldAwarded, items_cash.name as item_name FROM asta_db.store_transaction JOIN items_cash ON items_cash.id = asta_db.store_transaction.item_id   JOIN asta_db.reseller ON asta_db.reseller.reseller_id = asta_db.store_transaction.user_id JOIN asta_db.payment ON asta_db.payment.id = asta_db.store_transaction.payment_id WHERE asta_db.store_transaction.status = 1 ORDER BY asta_db.store_transaction.datetime ASC");
+        // $transactions = DB::select("SELECT asta_db.store_transaction.*, asta_db.reseller.reseller_id, asta_db.reseller.username, asta_db.payment.name as bankname, items_cash.goldAwarded, items_cash.name as item_name FROM asta_db.store_transaction JOIN items_cash ON items_cash.id = asta_db.store_transaction.item_id   JOIN asta_db.reseller ON asta_db.reseller.reseller_id = asta_db.store_transaction.user_id JOIN asta_db.payment ON asta_db.payment.id = asta_db.store_transaction.payment_id WHERE asta_db.store_transaction.status = 1 ORDER BY asta_db.store_transaction.datetime ASC");
+        $transactions = DB::table('asta_db.store_transaction')
+                        ->join('items_cash', 'items_cash.id', '=', 'asta_db.store_transaction.item_id')
+                        ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
+                        ->join('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
+                        ->select(
+                            'asta_db.reseller.reseller_id',
+                            'asta_db.reseller.username',
+                            'asta_db.payment.name as bankname',
+                            'items_cash.name as item_name',
+                            'items_cash.goldAwarded',
+                            'asta_db.store_transaction.datetime',
+                            'asta_db.store_transaction.quantity',
+                            'asta_db.store_transaction.item_price',
+                            'asta_db.store_transaction.desc',
+                            'asta_db.store_transaction.id',
+                            'asta_db.store_transaction.user_type',
+                            'asta_db.store_transaction.payment_id',
+                            'asta_db.store_transaction.item_type'
+                        )
+                        ->where('asta_db.store_transaction.status', '=', 1)
+                        ->orderBy('asta_db.store_transaction.datetime', 'ASC')
+                        ->get();
+                        
         $menu         = MenuClass::menuName('Reseller Bank Transaction'); 
         return view('pages.reseller.request_transaction', compact('transactions', 'menu'));
     }
@@ -269,26 +292,26 @@ class ResellerController extends Controller
     public function RequestTransactionApprove(Request $request)
     {
         // $approveOrderId = $request->approveId;
-        $resellerId  = $request->resellerId;
-        $goldAwarded = $request->goldbuy;
-        $amount      = $request->price;
-        $reseller_id = $request->reseller_id;
-        $item_name   = $request->item_name;
-        $desc        = $request->desc;
-        $quantity    = $request->quantity;
-        $payment_id  = $request->payment_id;
-        $datetime    = $request->datetime;
-        $user_type   = $request->user_type;
-        $item_type   = $request->item_type;
-        $datetimenow = Carbon::now('GMT+7');
-        $datenow     = $datetimenow->toDateString();
+        $resellerId               = $request->resellerId;
+        $goldAwarded              = $request->goldbuy;
+        $amount                   = $request->price;
+        $reseller_id              = $request->reseller_id;
+        $item_name                = $request->item_name;
+        $desc                     = $request->desc;
+        $quantity                 = $request->quantity;
+        $payment_id               = $request->payment_id;
+        $datetime                 = $request->datetime;
+        $user_type                = $request->user_type;
+        $item_type                = $request->item_type;
+        $datetimenow              = Carbon::now('GMT+7');
+        $datenow                  = $datetimenow->toDateString();
         $reseller_transaction_day = ResellerTransactionDay::where('reseller_id', '=', $reseller_id)
                                     ->whereDate('date', '=', $datenow)
                                     ->first();
 
         if($reseller_transaction_day)
         {
-            $gold = $reseller_transaction_day->buy_gold + $goldAwarded;
+            $gold   = $reseller_transaction_day->buy_gold + $goldAwarded;
             $amount = $reseller_transaction_day->buy_amount + $amount;
 
             ResellerTransactionDay::where('reseller_id', '=', $reseller_id)->update([
