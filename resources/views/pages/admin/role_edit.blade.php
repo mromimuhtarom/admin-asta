@@ -79,12 +79,15 @@
 
 
           $('.type').editable({
+            value: '',
             mode: 'inline',
-            value: 0,
             source: [
-                {value: 0, text: 'The Menu Can\'t be Accessed and can\'t be edited '},
-                {value: 1, text: 'The Menu Can be Accessed and can\'t be edited '},
-                {value: 2, text: 'The Menu Can be Accessed and edited '}
+                {value:'', text: 'Choose for role type'},
+                @php
+                echo '{value: "'.$type[0].'", text: "'.$type[1].'"},';
+                echo '{value: "'.$type[2].'", text: "'.$type[3].'"},';
+                echo '{value: "'.$type[4].'", text: "'.$type[5].'"}';
+                @endphp
                ]
           });
         </script>

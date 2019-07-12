@@ -9,90 +9,122 @@
 
 
 @section('content')
-    <div class="table-aii">
-        <div class="table-header">
-            <form action="">
-                <div class="row">
-                    <div class="col">
-                        <input type="text" name="username" placeholder="username">
-                    </div>
-                    <div class="col">
-                        <select name="action" id="">
-                            <option>Choose Action</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <input type="date" name="dari">
-                    </div>
-                    <div class="col">
-                        <input type="date" name="sampai">
-                    </div>
-                    <div class="col">
-                        <button class="myButton" type="submit"><i class="fa fa-search"></i> Cari</button>
-                    </div>
+<link rel="stylesheet" href="/css/admin.css">
+<div class="search bg-blue-dark" style="margin-bottom:3%;">
+    <div class="table-header w-100 h-100">
+        <form action="">
+            <div class="row h-100 w-100">
+                <div class="col">
+                    <input type="text" name="username" class="left" placeholder="username">
                 </div>
-            </form>
-        </div>
-    </div> 
-    
-    <div class="table-aii">
-        <div class="footer-table">
-            <div class="add-btn-smt">
-                <i class="fa fa-history"></i> Payment Store
+                <div class="col">
+                    <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                </div>
             </div>
-        </div>
-         <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
-            <thead class="th-table">
-              <tr>
-                <th class="th-sm"></th>
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Type Payment</th>
-                <th class="th-sm">Type Transaction</th>
-                <th class="th-sm">Active</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-                {{-- @foreach($items as $itm) --}}
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                {{-- @endforeach --}}
-            </tbody>
-          </table>
-         
+        </form>
     </div>
-<script>
-      table = $('#dt-material-checkbox').dataTable({
-          columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-          }],
-          "pagingType": "full_numbers",
-          "bInfo" : false,
-          "sDom": '<"row view-filter w-50 add"<"col-sm-12"<"pull-right border-left margin-left"l><"pull-right margin-left"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"bottom"p>>>',
-          select: {
-          style: 'os',
-          selector: 'td:first-child'
-          },
-          "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-              $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
-
-              $('.usertext').editable({
-                mode :'popup'
-              });
+</div>
     
-          }
-      });
+<div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
+
+    <header>
+        <div class="widget-header">	
+            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+            <h2>Report Store</h2>
+        </div>
+    
+        <div class="widget-toolbar">
+            <!-- add: non-hidden - to disable auto hide -->
+        </div>
+    </header>
+    <div>
+                    
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+        </div>
+        <!-- end widget edit box -->
+                    
+        <!-- widget content -->
+        <div class="widget-body p-0">
+                    
+            <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                <thead>			                
+                    <tr>
+                        <th>ID Reseller</th>
+                        <th>Username</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        {{-- <th>Gold</th> --}}
+                        {{-- <th>Gold Bonus</th> --}}
+                        <th>Bonus Item</th>
+                        <th>Status</th>
+                        <th>TimeStamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($transactions as $tr)
+                    <tr>
+                        <td>{{ $tr->user_id }}</td>
+                        <td>{{ $tr->username }}</td>
+                        <td>{{ $tr->item_name }}</td>
+                        <td>{{ $tr->quantity }}</td>
+                        <td>{{ $tr->item_price }}</td>
+                        {{-- <td>{{ $tr->gold }}</td> --}}
+                        <td></td>
+                        @php
+                        if($tr->status == 2)
+                        {
+                            $status = 'Approve';
+                        } else if($tr->status == 0)
+                        {
+                            $status = "Decline";
+                        }
+                        @endphp
+                        <td>{{ $status }}</td>
+                        <td>{{ $tr->datetime }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+    
+        </div>
+        <!-- end widget content -->
+                    
+    </div>
+    <!-- end widget div -->
+                    
+</div>
+    <!-- end widget -->
+<script>
+    var responsiveHelper_dt_basic = responsiveHelper_dt_basic || undefined;
+			
+	var breakpointDefinition = {
+	    tablet : 1024,
+		phone : 480
+	};
+	
+	$('#dt_basic').dataTable({
+	    "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
+		    "t"+
+			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
+			"autoWidth" : true,
+			"oLanguage": {
+			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+		},
+        "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        "pagingType": "full_numbers",
+		classes: {
+		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
+		},
+		responsive: true
+	});
 </script>
 @endsection

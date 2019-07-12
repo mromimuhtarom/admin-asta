@@ -38,7 +38,15 @@ class ChipController extends Controller
         $menus1       = MenuClass::menuName('Balance Chip');
         $game         = Game::all();
         $datenow      = Carbon::now('GMT+7');
-        $balanceChip  = BalanceChip::select('asta_db.balance_chip.*', 'asta_db.user.username', 'asta_db.game.name as gamename', 'asta_db.action.action as actionname')
+        $balanceChip  = BalanceChip::select(
+                          'asta_db.balance_chip.debit',
+                          'asta_db.balance_chip.credit',
+                          'asta_db.balance_chip.balance',
+                          'asta_db.balance_chip.datetime', 
+                          'asta_db.user.username', 
+                          'asta_db.game.name as gamename', 
+                          'asta_db.action.action as actionname'
+                        )
                         ->JOIN('asta_db.user', 'asta_db.balance_chip.user_id', '=', 'asta_db.user.user_id')
                         ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.balance_chip.action_id')
                         ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id');

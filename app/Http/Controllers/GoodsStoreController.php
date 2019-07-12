@@ -11,6 +11,7 @@ use DB;
 use File;
 use Carbon\Carbon;
 use Validator;
+use App\ConfigText;
 
 class GoodsStoreController extends Controller
 {
@@ -23,7 +24,10 @@ class GoodsStoreController extends Controller
     {
         $menu     = MenuClass::menuName('Gold Store');
         $itemGood = ItemGoods::where('shop_type', '=', 1)->get();
-        return view('pages.store.goods_store', compact('menu', 'itemGood'));
+        $active   = ConfigText::where('id', '=', 4)->first();
+        $value    = str_replace(':', ',', $active->value);
+        $endis    = explode(",", $value);
+        return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis'));
     }
 
     /**

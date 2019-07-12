@@ -9,6 +9,7 @@ use App\Classes\MenuClass;
 use App\Log;
 use Carbon\Carbon;
 use Session;
+use App\ConfigText;
 use Validator;
 
 class ChipStoreController extends Controller
@@ -20,9 +21,12 @@ class ChipStoreController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('Chip Store');
-        $items = ItemsGold::where('category', '=', 'Chip')->get();
-        return view('pages.store.chip_store', compact('items', 'menu'));
+        $menu   = MenuClass::menuName('Chip Store');
+        $items  = ItemsGold::where('category', '=', 'Chip')->get();
+        $active = ConfigText::where('id', '=', 4)->first();
+        $value  = str_replace(':', ',', $active->value);
+        $endis  = explode(",", $value);
+        return view('pages.store.chip_store', compact('items', 'menu', 'endis'));
     }
 
     /**

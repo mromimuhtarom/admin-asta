@@ -10,6 +10,7 @@ use App\Payment;
 use Session;
 use Carbon\Carbon;
 use Validator;
+use App\ConfigText;
 
 class PaymentStoreController extends Controller
 {
@@ -20,10 +21,13 @@ class PaymentStoreController extends Controller
      */
     public function index()
     {
-        $menu           = MenuClass::menuName('Payment Store');
-        $getPayments    = Payment::orderBy('id', 'desc')->get();
+        $menu        = MenuClass::menuName('Payment Store');
+        $getPayments = Payment::select('id', 'name', 'payment_type', 'transaction_type', 'image', 'status')->orderBy('id', 'desc')->get();
+        $active      = ConfigText::select('name', 'value')->where('id', '=', 4)->first();
+        $value       = str_replace(':', ',', $active->value);
+        $endis       = explode(",", $value);
 
-        return view('pages.store.payment_store', compact('menu', 'getPayments'));
+        return view('pages.store.payment_store', compact('menu', 'getPayments', 'endis'));
     }
 
     /**

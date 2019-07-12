@@ -35,7 +35,7 @@ class LoginController extends Controller
             Session::put('login1',TRUE);
             $username = $request->username;
             $password = $request->password;
-            $login = User::where('username', '=', $username)->first();
+            $login = User::select('op_id', 'username')->where('username', '=', $username)->first();
             $session_id = session()->getId();
             Cache::put('op_key', $login->op_id);
             Cache::put('session_id', $session_id);
@@ -47,7 +47,7 @@ class LoginController extends Controller
                 'ip'        => request()->ip(),
                 'type'      => 1
             ]);
-            $operator_active = OperatorActive::where('op_id', '=', $login->op_id)->first();
+            $operator_active = OperatorActive::select('op_id')->where('op_id', '=', $login->op_id)->first();
             
             if ($operator_active)
             {
@@ -90,6 +90,10 @@ class LoginController extends Controller
             if($session_id)
             {
                 $logout = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
+                          ->select(
+                              'asta_db.operator_active.op_id', 
+                              'asta_db.operator.username'
+                          )
                           ->where('asta_db.operator_active.session_id', '=', $session_id)
                           ->first();
                 OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();

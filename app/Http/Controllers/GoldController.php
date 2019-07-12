@@ -28,7 +28,14 @@ class GoldController extends Controller
         $endDate      = $request->inputMaxDate;
         $menus1       = MenuClass::menuName('Balance Gold');
         $datenow      = Carbon::now('GMT+7');
-        $balanceGold  = BalanceGold::select('asta_db.balance_gold.*', 'asta_db.user.username', 'asta_db.action.action as actionname')
+        $balanceGold  = BalanceGold::select(
+                          'asta_db.balance_gold.debit',
+                          'asta_db.balance_gold.credit',
+                          'asta_db.balance_gold.balance',
+                          'asta_db.balance_gold.datetime', 
+                          'asta_db.user.username', 
+                          'asta_db.action.action as actionname'
+                        )
                         ->JOIN('asta_db.user', 'asta_db.balance_gold.user_id', '=', 'asta_db.user.user_id')
                         ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.balance_gold.action_id');
 
@@ -104,70 +111,5 @@ class GoldController extends Controller
 
         }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

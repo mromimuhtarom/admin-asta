@@ -334,14 +334,9 @@
 				          // {value: '1', text: 'Enabled'},
 					        // {value: '0', text: 'Disabled'},
                   @php
-                      $active = DB::table('asta_db.config_text')->where('id', '=', 4)->get();
-                      foreach($active as $atv) {
-                        $value = str_replace(':', ',', $atv->value);
-                        $endis = explode(",", $value);
                         // $endis = preg_split( "/ :|, /", $atv->value );
                       echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
                       echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
-                    }
                   @endphp
         ]
       });

@@ -10,6 +10,7 @@ use App\Log;
 use Carbon\Carbon;
 use Session;
 use Validator;
+use App\ConfigText;
 
 class GoldStoreController extends Controller
 {
@@ -24,8 +25,12 @@ class GoldStoreController extends Controller
         $getGolds = ItemsCash::where('shop_type', '=', 1)
                     ->orderBy('id', 'desc')
                     ->get();
+        $active   = ConfigText::select('name', 'value')->where('id', '=', 4)->first();
+        $value    = str_replace(':', ',', $active->value);
+        $endis    = explode(",", $value);
 
-        return view('pages.store.gold_store', compact('menu', 'getGolds'));
+
+        return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis'));
     }
 
     public function GoldStoreReseller()

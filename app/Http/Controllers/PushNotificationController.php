@@ -146,7 +146,7 @@ class PushNotificationController extends Controller
         $id = $request->id;
         if($id != '')
         {
-            DB::table('push_notifications')->where('id', '=', $id)->delete();
+            PushNotification::where('id', '=', $id)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),

@@ -28,7 +28,15 @@ class PointController extends Controller
         $balancePoint = BalancePoint::JOIN('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.balance_point.user_id')
                         ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.balance_point.action_id')
                         ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_point.game_id')
-                        ->select('asta_db.user.username', 'asta_db.action.action as actionname', 'asta_db.game.name as gamename', 'asta_db.balance_point.*');
+                        ->select(
+                            'asta_db.user.username', 
+                            'asta_db.action.action as actionname', 
+                            'asta_db.game.name as gamename', 
+                            'asta_db.balance_point.debit',
+                            'asta_db.balance_point.credit',
+                            'asta_db.balance_point.balance',
+                            'asta_db.balance_point.datetime'
+                        );
         
         $validator = Validator::make($request->all(),[
             'inputMinDate'    => 'required',

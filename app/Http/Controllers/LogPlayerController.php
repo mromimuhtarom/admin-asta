@@ -32,7 +32,13 @@ class LogPlayerController extends Controller
                     ->where('id', '!=', 8)
                     ->get();
 
-        $loguser =  LogUser::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.log_user.user_id')
+        $loguser =  LogUser::select(
+                        'asta_db.user.username',
+                        'asta_db.action.action',
+                        'asta_db.log_user.desc',
+                        'asta_db.log_user.datetime'
+                    )
+                    ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.log_user.user_id')
                     ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_user.action_id');
 
         if($inputMaxDate < $inputMinDate){

@@ -7,7 +7,6 @@ use App\Classes\MenuClass;
 use Session;
 use Carbon\Carbon;
 use App\Config;
-use DB;
 use Storage;
 use File;
 
@@ -25,22 +24,22 @@ class GeneralSettingController extends Controller
     {
         $menu  = MenuClass::menuName('General Setting');
         // system settings
-        $getMaintenance     = Config::where('id', '=', '101')->first();
-        $getPointExpired    = Config::where('id', '=', '102')->first();
+        $getMaintenance     = Config::select('id', 'name', 'value')->where('id', '=', '101')->first();
+        $getPointExpired    = Config::select('id', 'name', 'value')->where('id', '=', '102')->first();
 
         // Bank Settings
-        $getBank            = Config::where('id', '=', '201')->first();
+        $getBank            = Config::select('id', 'name', 'value')->where('id', '=', '201')->first();
 
         // Info Settings
-        $getPrivacyPolicy   = Config::where('id', '=', '2')->first();
-        $getTermOfService   = Config::where('id', '=', '3')->first();
-        $getAbout           = Config::where('id', '=', '4')->first();
-        $getPokerWeb        = Config::where('id', '=', '5')->first();
+        $getPrivacyPolicy   = Config::select('id', 'name', 'value')->where('id', '=', '2')->first();
+        $getTermOfService   = Config::select('id', 'name', 'value')->where('id', '=', '3')->first();
+        $getAbout           = Config::select('id', 'name', 'value')->where('id', '=', '4')->first();
+        $getPokerWeb        = Config::select('id', 'name', 'value')->where('id', '=', '5')->first();
 
         // CS & Legal Settings
-        $getFb              = Config::where('id', '=', '901')->first();
-        $getTwitter         = Config::where('id', '=', '902')->first();
-        $getIg              = Config::where('id', '=', '903')->first();
+        $getFb              = Config::select('id', 'name', 'value')->where('id', '=', '901')->first();
+        $getTwitter         = Config::select('id', 'name', 'value')->where('id', '=', '902')->first();
+        $getIg              = Config::select('id', 'name', 'value')->where('id', '=', '903')->first();
         
         $rootpath = '../../policy/folder policy/db_txt';
         $client = Storage::createLocalDriver(['root' => $rootpath]);

@@ -14,6 +14,7 @@ use App\ResellerBalance;
 use App\StoreTransactionHist;
 use App\StoreTransaction;
 use App\Classes\MenuClass;
+use App\ResellerRank;
 
 class ResellerController extends Controller
 {
@@ -26,7 +27,7 @@ class ResellerController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('List Reseller');
-        $rank     = DB::table('asta_db.reseller_rank')->get();
+        $rank     = ResellerRank::all();
         $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'reseller.*')->get();
         return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank'));
     }
@@ -131,7 +132,7 @@ class ResellerController extends Controller
 //****************************************** Menu Reseller Rank ******************************************//
     public function ResellerRank()
     {
-        $rank = DB::table('asta_db.reseller_rank')->get();
+        $rank = ResellerRank::all();
         $menu = MenuClass::menuName('Rank Reseller');
         return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
     }
@@ -150,7 +151,7 @@ class ResellerController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $rank = DB::table('asta_db.reseller_rank')->insert([
+        $rank = ResellerRank::create([
             'id'    => $id,
             'name'  => $rankname,
             'type'  => '0',
@@ -175,7 +176,7 @@ class ResellerController extends Controller
         $name  = $request->name;
         $value = $request->value;
     
-        DB::table('asta_db.reseller_rank')->where('id', '=', $pk)->update([
+        ResellerRank::where('id', '=', $pk)->update([
           $name => $value
         ]);
         
@@ -219,7 +220,7 @@ class ResellerController extends Controller
         $id = $request->id;
         if($id != '')
         {
-            DB::table('asta_db.reseller_rank')->where('id', '=', $id)->delete();
+            ResellerRank::where('id', '=', $id)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -281,8 +282,7 @@ class ResellerController extends Controller
         $item_type   = $request->item_type;
         $datetimenow = Carbon::now('GMT+7');
         $datenow     = $datetimenow->toDateString();
-        $reseller_transaction_day = DB::table('asta_db.reseller_transaction_day')
-                                    ->where('reseller_id', '=', $reseller_id)
+        $reseller_transaction_day = ResellerTransactionDay::where('reseller_id', '=', $reseller_id)
                                     ->whereDate('date', '=', $datenow)
                                     ->first();
 
@@ -322,7 +322,7 @@ class ResellerController extends Controller
         ]);
 
   
-          $checkTotalGold = DB::table('asta_db.reseller')->select('gold')->where('reseller_id', '=', $reseller_id)->first();
+          $checkTotalGold = Reseller::select('gold')->where('reseller_id', '=', $reseller_id)->first();
         //   $checkamount = DB::table('rese')
           ResellerBalance::create([
             'reseller_id' => $reseller_id,
@@ -402,8 +402,7 @@ class ResellerController extends Controller
       $startDateComparison = Carbon::parse($startDate)->timestamp;
       $endDateComparison   = Carbon::parse($endDate)->timestamp;
       $datenow             = Carbon::now('GMT+7');
-      $balanceReseller     = DB::table('asta_db.reseller_balance')
-                             ->select('asta_db.reseller_balance.*', 'asta_db.reseller.username', 'asta_db.action.action')
+      $balanceReseller     = ResellerBalance::select('asta_db.reseller_balance.*', 'asta_db.reseller.username', 'asta_db.action.action')
                              ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id')
                              ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
 
@@ -454,8 +453,16 @@ class ResellerController extends Controller
         $endDate           = $request->inputMaxDate;
         $datenow           = Carbon::now('GMT+7');
         $reportTransaction = DB::table('asta_db.store_transaction_hist')
-                             ->select('asta_db.store_transaction_hist.*', 'asta_db.reseller.username')
-                             ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id');
+                             ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id')
+                             ->select(
+                                 'asta_db.store_transaction_hist.user_id',
+                                 'asta_db.user.username',
+                                 'asta_db.store_transaction_hist.item_name',
+                                 'asta_db.store_transaction_hist.quantity',
+                                 'asta_db.store_transaction_hist.item_price',
+                                 'asta_db.store_transaction_hist.status',
+                                 'asta_db.store_transaction_hist.datetime'
+                             );
   
         if($endDate < $startDate){
           return back()->with('alert','End Date can\'t be more than start date');
@@ -500,8 +507,7 @@ class ResellerController extends Controller
 
     public function detailTransaction($month, $year)
     {
-        $transactions = DB::table('asta_db.store_transaction_hist')
-                        ->select('asta_db.store_transaction_hist.*', 'asta_db.reseller.username')
+        $transactions = StoreTransactionHist::select('asta_db.store_transaction_hist.*', 'asta_db.reseller.username')
                         ->join('asta_db.reseller','asta_db.store_transaction_hist.user_id','=','asta_db.reseller.reseller_id')
                         ->whereYear('datetime', $year)
                         ->whereMonth('datetime', $month)

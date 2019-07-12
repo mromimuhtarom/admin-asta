@@ -11,6 +11,7 @@ use File;
 use Carbon\Carbon;
 use App\Classes\MenuClass;
 use Validator;
+use App\ConfigText;
 
 class SlideBannerController extends Controller
 {
@@ -23,7 +24,10 @@ class SlideBannerController extends Controller
     {
         $menu         = MenuClass::menuName('Slide Banner');
         $slide_banner = SlideBanner::all();
-        return view('pages.slide_banner.slide_banner', compact('menu', 'slide_banner'));
+        $active       = DB::table('asta_db.config_text')->where('id', '=', 4)->first();
+        $value        = str_replace(':', ',', $active->value);
+        $endis        = explode(",", $value);
+        return view('pages.slide_banner.slide_banner', compact('menu', 'slide_banner', 'endis'));
     }
 
     /**

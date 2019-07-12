@@ -9,7 +9,8 @@
 
 
 @section('content')
-  <div class="searching bg-blue-dark">
+<link rel="stylesheet" href="/css/admin.css">
+  {{-- <div class="searching bg-blue-dark">
     <!-- widget content -->
     <div class="widget-body">
 
@@ -39,5 +40,30 @@
 
     </div>
     <!-- end widget content -->
+  </div> --}}
+  @if (\Session::has('alert'))
+  <div class="alert alert-danger">
+    <p>{{\Session::get('alert')}}</p>
   </div>
+@endif
+  <div class="search bg-blue-dark">
+    <div class="table-header w-100 h-100">
+      <form action="{{ route('ReportStore-search') }}">
+            <div class="row h-100 w-100">
+                <div class="col">
+                    <input type="text" name="username" class="left" placeholder="username">
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

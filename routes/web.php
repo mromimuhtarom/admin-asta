@@ -472,6 +472,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Report_Store'], function() {
             Route::middleware('page_denied:Report Store')->group(function(){
                 Route::get('ReportStore-view', 'ReportStoreController@index')->name('Report_Store');
+                Route::get('ReportStore-search', 'ReportStoreController@search')->name('ReportStore-search');
             });
         });
     });

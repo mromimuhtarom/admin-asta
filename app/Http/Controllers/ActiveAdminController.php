@@ -14,6 +14,10 @@ class ActiveAdminController extends Controller
         $date->modify('-2 minutes');
 
         $active = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
+                  ->select('asta_db.operator', 
+                           'asta_db.operator_active.date_login', 
+                           'asta_db.operator_active.ip'
+                    )
                   ->where('session_id', '!=', '')  
                   ->where('date_update', '>=', $date)
                   ->get();

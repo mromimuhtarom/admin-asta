@@ -7,9 +7,11 @@ use App\Classes\MenuClass;
 use DB;
 use App\Log;
 use App\Role;
+use App\MenuName;
 use Session;
 use Carbon\Carbon;
 use Validator;
+use App\ConfigText;
 
 class RoleController extends Controller
 {
@@ -53,15 +55,15 @@ class RoleController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator->errors());
             }
-
+  
 
             $user = Role::create([
                 'name' => $role
               ]);
-              $lastValue = DB::table('adm_role')->orderBy('role_id', 'desc')->first();
-              $menu      = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->orderby('menu_id', 'desc')->first();
+              $lastValue = Role::orderBy('role_id', 'desc')->first();
+              $menu      = MenuName::select('menu_id')->where('webid', '=', '1')->orderby('menu_id', 'desc')->first();
               $menuarray = DB::select('SELECT menu_id from adm_menu where webid = 1');
-              $menufirst = DB::table('adm_menu')->select('menu_id')->where('webid', '=', '1')->first();
+              $menufirst = MenuName::select('menu_id')->where('webid', '=', '1')->first();
 
               for ($i=$menufirst->menu_id; $i <= $menu->menu_id; $i++) {
                 $menuId[] = [
@@ -107,11 +109,14 @@ class RoleController extends Controller
 
     public function menu(Role $role)
     {
-        $roles = DB::table('asta_db.adm_access')->join('asta_db.adm_menu', 'asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')->where('asta_db.adm_access.role_id', '=', $role->role_id)->get();
-        $roles = $roles->toArray();
-        $menu  = MenuClass::menuName('Role Admin');
+        $roles    = DB::table('asta_db.adm_access')->join('asta_db.adm_menu', 'asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')->where('asta_db.adm_access.role_id', '=', $role->role_id)->get();
+        $roles    = $roles->toArray();
+        $menu     = MenuClass::menuName('Role Admin');
+        $roletype = ConfigText::where('id', '=', 6)->first();
+        $value    = str_replace(':', ',', $roletype->value);
+        $type     = explode(",", $value);
 
-        return view('pages.admin.role_edit', compact('roles', 'role', 'menu'));
+        return view('pages.admin.role_edit', compact('roles', 'role', 'menu', 'type'));
     }
 
     /**

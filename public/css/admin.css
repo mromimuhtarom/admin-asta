@@ -9,6 +9,18 @@
     border-radius: 5px;
 }
 
+.playerId {
+    width:58%;
+    height: 250px;
+	padding-top:1.5%;
+	padding-left:3%;
+	padding-right:3%;
+	margin-left:20%;
+	margin-top: 10%;
+    border-radius: 5px;
+}
+
+
 .input-insert {
 	width: 58%;
 	height: auto;

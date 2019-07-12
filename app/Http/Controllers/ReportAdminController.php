@@ -28,9 +28,14 @@ class ReportAdminController extends Controller
         $maxDate   = $request->inputMaxDate;
         $logtype   = $request->logType;
         $datenow   = Carbon::now('GMT+7');
-        $logOnline = DB::table('asta_db.log_online')
-                     ->join('asta_db.operator', 'asta_db.operator.op_id', '=', 'log_online.user_id')
-                     ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id');
+        $logOnline = LogOnline::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'log_online.user_id')
+                     ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
+                     ->select(
+                        'asta_db.action.action',
+                        'asta_db.operator.username',
+                        'asta_db.log_online.datetime',
+                        'asta_db.log_online.ip'
+                     );
         
         if($maxDate < $minDate){
             return back()->with('alert','End Date can\'t be less than start date');

@@ -39,7 +39,7 @@
 
 
 
-<div class="profile bg-blue-dark">
+<div class="playerId bg-blue-dark">
     <div class="table-header w-100 h-100" style="padding-right:2%;">
         <form action="{{ route('RegisterPlayerID-create') }}" method="post">
             @csrf
@@ -50,7 +50,19 @@
                 <tr>
                     <td width='30%'>Number of inputs filled in Player ID</td>
                     <td align="center"> :</td>
-                    <td><input type="number" name="inputcount" class="form-control"></td>
+                    <td><input type="number" name="inputcount" class="form-control" required>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="30%">User Type</td>
+                    <td align="center"> :</td>
+                    <td>
+                        <select name="usertype" class="form-control" required>
+                            <option value="">Choose User Type</option>
+                            <option value="{{ $type[0] }}">{{ $type[1] }}</option>
+                            <option value="{{ $type[2] }}">{{ $type[3] }}</option>
+                            <option value="{{ $type[4] }}">{{ $type[5] }}</option>
+                        </select>&nbsp;
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="3" align="center"><button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button></td>

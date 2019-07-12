@@ -26,6 +26,10 @@ class Authenticated
         $op_idcache = Cache::get('op_key');
         $session_id = Cache::get('session_id');
         $logout     = OperatorActive::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'asta_db.operator_active.op_id')
+                      ->select(
+                          'asta_db.operator_active.op_id',
+                          'asta_db.operator.username'
+                      )
                       ->where('asta_db.operator_active.session_id', '=', $session_id)
                       ->first();
         if(Session::get('login1')) {
