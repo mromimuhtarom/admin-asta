@@ -165,13 +165,13 @@ class PlayReportController extends Controller
         }
        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
-        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
-        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
-        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
         $player_history = $tbbgt->where('user.username', 'LIKE', '%'.$inputName.'%')
@@ -205,13 +205,13 @@ class PlayReportController extends Controller
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
-        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%')
               ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
-        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
-        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
+        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%')
                ->where('dmq_round.date', '<=', $inputMaxDate." 23:59:59");
 
         $player_history = $tbbgt->where('user.username', 'LIKE', '%'.$inputName.'%')
@@ -258,11 +258,11 @@ class PlayReportController extends Controller
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     }
     else if ($inputMinDate != NULL && $inputMaxDate != NULL) {
-        $player_history = $tbdmq->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+        $dmq = $tbdmq->wherebetween('dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $player_history = $tbdms->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+        $dms = $tbdms->wherebetween('dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
-        $player_history = $tbtpk->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
+        $tpk = $tbtpk->wherebetween('tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
 
         $player_history = $tbbgt->wherebetween('bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                           ->union($dmq)
@@ -272,11 +272,11 @@ class PlayReportController extends Controller
 
           return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL) {
-        $player_history = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%');
+        $dmq = $tbdmq->where('user.username', 'LIKE', '%'.$inputName.'%');
 
-        $player_history = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%');
+        $dms = $tbdms->where('user.username', 'LIKE', '%'.$inputName.'%');
 
-        $player_history = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%');
+        $tpk = $tbtpk->where('user.username', 'LIKE', '%'.$inputName.'%');
 
         $player_history = $tbbgt->where('user.username', 'LIKE', '%'.$inputName.'%')
                           ->union($dmq)
