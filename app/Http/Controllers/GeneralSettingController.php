@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Config;
 use Storage;
 use File;
+use App\ConfigText;
 
 // Log Model
 use App\Log;
@@ -44,12 +45,21 @@ class GeneralSettingController extends Controller
         $rootpath = '../../policy/folder policy/db_txt';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
         // dd($client);
-        
 
+        $onoff = ConfigText::select(
+                    'name', 
+                    'value'
+                 )
+                 ->where('id', '=', 9)
+                 ->first();
+        $converttocomma = str_replace(':', ',', $onoff->value);
+        $maintenaceonoff = explode(',', $converttocomma);
+        
+        
 
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
-                                                                'getAbout', 'getPokerWeb', "getBank", 'menu', 'client'));
+                                                                'getAbout', 'getPokerWeb', "getBank", 'menu', 'client', 'maintenaceonoff'));
     }
 
     public function putAbout(Request $request)

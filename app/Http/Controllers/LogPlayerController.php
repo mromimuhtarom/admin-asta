@@ -41,6 +41,15 @@ class LogPlayerController extends Controller
                     ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.log_user.user_id')
                     ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_user.action_id');
 
+        $validator = Validator::make($request->all(),[
+            'dari'   => 'required|date',
+            'sampai' => 'required|date',
+        ]);
+    
+        if ($validator->fails()) {
+            return self::index()->withErrors($validator->errors());
+        }
+
         if($inputMaxDate < $inputMinDate){
             return back()->with('alert','End Date can\'t be less than start date');
         }

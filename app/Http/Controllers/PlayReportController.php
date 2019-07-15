@@ -11,6 +11,7 @@ use App\TpkRound;
 use App\BgtRound;
 use App\Game;
 use App\Classes\MenuClass;
+use Validator;
 
 class PlayReportController extends Controller
 {
@@ -39,6 +40,15 @@ class PlayReportController extends Controller
       $datenow      = Carbon::now('GMT+7');
       $menus1       = MenuClass::menuName('Report');
       $game         = Game::all();
+      
+       $validator = Validator::make($request->all(),[
+              'inputMinDate' => 'required|date',
+              'inputMaxDate' => 'required|date',
+       ]);
+    
+       if ($validator->fails()) {
+              return self::index()->withErrors($validator->errors());
+       }
 
       if($inputMaxDate < $inputMinDate){
        return back()->with('alert','End Date can\'t be less than start date');

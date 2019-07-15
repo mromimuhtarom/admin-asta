@@ -48,6 +48,14 @@ class ReportAdminController extends Controller
                         'asta_db.log_online.datetime',
                         'asta_db.log_online.ip'
                      );
+        $validator = Validator::make($request->all(),[
+            'inputMinDate'    => 'required|date',
+            'inputMaxDate'    => 'required|date',
+        ]);
+    
+        if ($validator->fails()) {
+            return self::index()->withErrors($validator->errors());
+        }
         
         if($maxDate < $minDate){
             return back()->with('alert','End Date can\'t be less than start date');

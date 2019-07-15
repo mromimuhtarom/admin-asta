@@ -14,6 +14,17 @@
     <p>{{\Session::get('alert')}}</p>
   </div>
 @endif
+@if (count($errors) > 0)
+<div class="error-val">
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{$error}}</li>  
+      @endforeach
+    </ul>
+  </div>
+</div>
+@endif
     <div class="search bg-blue-dark">
         <div class="table-header w-100 h-100">
             <form action="{{ route('ReportPlayer-search') }}" method="get" role="search">
@@ -24,8 +35,9 @@
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
                             <option value="">Choose Log Type</option>
-                            <option value="7">Login</option>
-                            <option value="8">Log Out</option>
+                            @foreach ($action as $act)
+                            <option value="{{ $act->id }}">{{ $act->action }}</option>                                
+                            @endforeach
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">

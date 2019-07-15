@@ -7,6 +7,7 @@ use DB;
 use App\Log;
 use Carbon\Carbon;
 use App\Action;
+use Validator;
 
 class LogController extends Controller
 {
@@ -42,6 +43,14 @@ class LogController extends Controller
                         ->join('asta_db.action', 'asta_db.log_operator.action_id','=', 'asta_db.action.id')
                         ->join('asta_db.operator', 'asta_db.log_operator.op_id', '=', 'asta_db.operator.op_id');
 
+        $validator = Validator::make($request->all(),[
+            'dari'   => 'required|date',
+            'sampai' => 'required|date',
+        ]);
+    
+        if ($validator->fails()) {
+            return self::index()->withErrors($validator->errors());
+        }
         if($inputMaxDate < $inputMinDate){
                 return back()->with('alert','End Date can\'t be less than start date');
         }

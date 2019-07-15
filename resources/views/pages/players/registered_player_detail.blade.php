@@ -32,9 +32,9 @@
                     <div class="col" style="padding-left:1%;">
                       <select name="status" class="form-control">
                         <option value="">Choose Status</option>
-                        <option value="1">Approve</option>
-                        <option value="2">Banned</option>
-                        <option value="3">Problem</option>
+                        <option value="{{ $plyr_status[0]}}">{{ ucwords($plyr_status[1]) }}</option>
+                        <option value="{{ $plyr_status[2]}}">{{ ucwords($plyr_status[3]) }}</option>
+                        <option value="{{ $plyr_status[4]}}">{{ ucwords($plyr_status[5]) }}</option>
                       </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
@@ -174,12 +174,14 @@
         });
         $('.status').editable({
             mode :'inline',
-            value : 0,
+            value : 2,
             source: [
                 {value: '', text: 'Choose For Activation'},
-                {value: '1', text: 'Approve'},
-                {value: '2', text: 'Banned'},
-                {value: '3', text: 'Problem'},
+                @php
+                echo '{value: "'.$plyr_status[0].'", text: "'.$plyr_status[1].'"},';
+                echo '{value: "'.$plyr_status[2].'", text: "'.$plyr_status[3].'"},';
+                echo '{value: "'.$plyr_status[4].'", text: "'.$plyr_status[5].'"},';
+                @endphp
             ]
 
         });

@@ -77,13 +77,13 @@
                 @foreach($tables as $tb)
                 @if($menu)
                   <tr>
-                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $tb->tableid }}"></td>
-                    <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->tableid }}" data-type="text" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->name }}</a></td>
-                    <td><a href="#" class="room" data-title="Room name" data-name="roomid" data-pk="{{ $tb->tableid }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->roomname }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->turn }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->tableid }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->total_bet }}</a></td>
-                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $tb->tableid }}" id="delete" data-pk="{{ $tb->tableid }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $tb->table_id }}"></td>
+                    <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->name }}</a></td>
+                    <td><a href="#" class="room" data-title="Room name" data-name="roomid" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->roomname }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->turn }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->total_bet }}</a></td>
+                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $tb->table_id }}" id="delete" data-pk="{{ $tb->table_id }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
                   @else 
                   <tr>
@@ -205,20 +205,20 @@
 
         @php
           foreach($tables as $tb) {
-            echo'$(".delete'.$tb->tableid.'").hide();';
-            echo'$(".deletepermission'.$tb->tableid.'").on("click", function() {';
-              echo 'if($( ".deletepermission'.$tb->tableid.':checked" ).length > 0)';
+            echo'$(".delete'.$tb->table_id.'").hide();';
+            echo'$(".deletepermission'.$tb->table_id.'").on("click", function() {';
+              echo 'if($( ".deletepermission'.$tb->table_id.':checked" ).length > 0)';
               echo '{';
-                echo '$(".delete'.$tb->tableid.'").show();';
+                echo '$(".delete'.$tb->table_id.'").show();';
               echo'}';
               echo'else';
               echo'{';
-                echo'$(".delete'.$tb->tableid.'").hide();';
+                echo'$(".delete'.$tb->table_id.'").hide();';
               echo'}';
 
             echo '});';
           
-            echo'$(".delete'.$tb->tableid.'").click(function(e) {';
+            echo'$(".delete'.$tb->table_id.'").click(function(e) {';
               echo'e.preventDefault();';
 
               echo"var id = $(this).attr('data-pk');";

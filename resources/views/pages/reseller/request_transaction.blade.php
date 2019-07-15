@@ -211,14 +211,14 @@
             mode :'inline'
         });
 
-      $('.popUpSetting').editable({
-        mode: 'inline',
-        value: 0,
-        source: [
-          {value: 0, text: 'Off'},
-          {value: 1, text: 'On'}
-        ]
-      });
+      // $('.popUpSetting').editable({
+      //   mode: 'inline',
+      //   value: 0,
+      //   source: [
+      //     {value: 0, text: 'Off'},
+      //     {value: 1, text: 'On'}
+      //   ]
+      // });
      
     },
     responsive: true

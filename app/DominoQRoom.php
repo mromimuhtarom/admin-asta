@@ -8,9 +8,9 @@ class DominoQRoom extends Model
 {
     public $timestamps      = false;
 
-    protected $table        = 'dmq_room';
+    protected $table        = 'asta_db.dmq_room';
     protected $guarded      = [];
-    protected $primaryKey   = 'roomid';
+    protected $primaryKey   = 'room_id';
 
     public function tables(){
         return $this->hasMany(DominoQTable::class);

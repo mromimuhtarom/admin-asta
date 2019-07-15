@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Validator;
 
 // asta poker model
-use App\Room;
+use App\TpkRoom;
 
 // asta big two model
 use App\BigTwoRoom;
@@ -32,7 +32,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Room::all();
+        $category = TpkRoom::select(
+                        'name', 
+                        'min_buy', 
+                        'max_buy', 
+                        'stake', 
+                        'timer',
+                        'room_id'
+                    )
+                    ->get();
         $menu     = MenuClass::menuName('Category Asta Poker');
         return view('pages.game_asta.category', compact('category', 'menu'));
     }
@@ -45,7 +53,15 @@ class CategoryController extends Controller
      */
     public function BigTwoindex()
     {
-        $category = BigTwoRoom::all();
+        $category = BigTwoRoom::select(
+                        'name', 
+                        'stake', 
+                        'min_buy', 
+                        'max_buy', 
+                        'timer',
+                        'room_id'
+                    )
+                    ->get();
         $menu     = MenuClass::menuName('Category Big Two');
         return view('pages.game_asta.bigTwoCategory', compact('category', 'menu'));
     }
@@ -58,7 +74,16 @@ class CategoryController extends Controller
      */
     public function DominoSusunindex()
     {
-        $category = DominoSusunRoom::all();
+        $category = DominoSusunRoom::select(
+                        'name',
+                        'stake',
+                        'stake_pass',
+                        'min_buy',
+                        'max_buy',
+                        'timer',
+                        'room_id'
+                    )
+                    ->get();
         $menu     = MenuClass::menuName('Category Domino Susun');
         return view('pages.game_asta.dominoSusunCategory', compact('category', 'menu'));
     }
@@ -71,7 +96,15 @@ class CategoryController extends Controller
      */
     public function DominoQindex()
     {
-        $category = DominoQRoom::all();
+        $category = DominoQRoom::select(
+                        'name',
+                        'stake',
+                        'min_buy',
+                        'max_buy',
+                        'timer',
+                        'room_id'
+                    )
+                    ->get();
         $menu     = MenuClass::menuName('Category Domino QQ');
         return view('pages.game_asta.dominoQCategory', compact('category', 'menu'));
     }
@@ -110,7 +143,7 @@ class CategoryController extends Controller
         $maxbuy         = $request->maxbuy;
         
 
-        $tpk_category =  Room::create([
+        $tpk_category =  TpkRoom::create([
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
             'max_buy'   => $maxbuy,
@@ -294,7 +327,7 @@ class CategoryController extends Controller
         $value = $request->value;
   
   
-        Room::where('roomid', '=', $pk)->update([
+        TpkRoom::where('room_id', '=', $pk)->update([
             $name => $value 
         ]);
   
@@ -341,7 +374,7 @@ class CategoryController extends Controller
         $value = $request->value;
   
   
-        BigTwoRoom::where('roomid', '=', $pk)->update([
+        BigTwoRoom::where('room_id', '=', $pk)->update([
             $name => $value 
         ]);
   
@@ -391,7 +424,7 @@ class CategoryController extends Controller
         $value = $request->value;
   
   
-        DominoSusunRoom::where('roomid', '=', $pk)->update([
+        DominoSusunRoom::where('room_id', '=', $pk)->update([
             $name => $value 
         ]);
   
@@ -441,7 +474,7 @@ class CategoryController extends Controller
         $value = $request->value;
   
   
-        DominoQRoom::where('roomid', '=', $pk)->update([
+        DominoQRoom::where('room_id', '=', $pk)->update([
             $name => $value 
         ]);
   
@@ -485,7 +518,7 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
-            Room::where('roomid', '=', $roomid)->delete();
+            TpkRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -511,7 +544,7 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
-            BigTwoRoom::where('roomid', '=', $roomid)->delete();
+            BigTwoRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -536,7 +569,7 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
-            DominoSusunRoom::where('roomid', '=', $roomid)->delete();
+            DominoSusunRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -561,7 +594,7 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
-            DominoQRoom::where('roomid', '=', $roomid)->delete();
+            DominoQRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),

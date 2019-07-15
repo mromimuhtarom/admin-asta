@@ -11,8 +11,8 @@ use App\Classes\MenuClass;
 use Validator;
 
 // asta poker model
-use App\Table;
-use App\Room;
+use App\TpkTable;
+use App\TpkRoom;
 
 // asta big 2 model
 use App\BigTwoTable;
@@ -39,13 +39,19 @@ class TableController extends Controller
     {
         $menu  = MenuClass::menuName('Table Asta Poker');
         // $tables = Table::select()->where([['tabletype', '!=','m'],['clubId','=','0'],['seasonId', '=', '0']])->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
-        $tables = Table::join('tpk_room', 'tpk_room.roomid', '=', 'tpk_table.roomid')
+        $tables = TpkTable::join('asta_db.tpk_room', 'asta_db.tpk_room.room_id', '=', 'asta_db.tpk_table.room_id')
                   ->select(
-                      'tpk_room.name as roomname',
-                      'tpk_table.*'
+                      'asta_db.tpk_room.name as roomname',
+                      'asta_db.tpk_table.room_id',
+                      'asta_db.tpk_table.name',
+                      'asta_db.tpk_table.max_player',
+                      'asta_db.tpk_table.small_blind',
+                      'asta_db.tpk_table.big_blind',
+                      'asta_db.tpk_table.jackpot',
+                      'asta_db.tpk_table.table_id'
                   )
                   ->get();
-        $category = Room::all();
+        $category = TpkRoom::all();
         return view('pages.game_asta.table', compact('tables', 'category', 'menu'));
     }
 
@@ -58,10 +64,14 @@ class TableController extends Controller
     public function BigTwoindex()
     {
         $menu  = MenuClass::menuName('Table Big Two');
-        $tables = BigTwoTable::join('bgt_room', 'bgt_room.roomid', '=', 'bgt_table.roomid')
+        $tables = BigTwoTable::join('asta_db.bgt_room', 'bgt_room.room_id', '=', 'asta_db.bgt_table.room_id')
                 ->select(
-                    'bgt_room.name as roomname',
-                    'bgt_table.*'
+                    'asta_db.bgt_room.name as roomname',
+                    'asta_db.bgt_table.name',
+                    'asta_db.bgt_table.max_player',
+                    'asta_db.bgt_table.turn', 
+                    'asta_db.bgt_table.total_bet',
+                    'asta_db.bgt_table.table_id'
                 )
                 ->get();
         $category = BigTwoRoom::all();
@@ -77,10 +87,15 @@ class TableController extends Controller
     public function DominoSusunindex()
     {
         $menu  = MenuClass::menuName('Table Domino Susun');
-        $tables = DominoSusunTable::join('dms_room', 'dms_room.roomid', '=', 'dms_table.roomid')
+        $tables = DominoSusunTable::join('asta_db.dms_room', 'asta_db.dms_room.room_id', '=', 'asta_db.dms_table.room_id')
                 ->select(
-                    'dms_room.name as roomname',
-                    'dms_table.*'
+                    'asta_db.dms_room.name as roomname',
+                    'asta_db.dms_table.name',
+                    'asta_db.dms_table.max_player',
+                    'asta_db.dms_table.game_state',
+                    'asta_db.dms_table.current_turn_seat_id',
+                    'asta_db.dms_table.total_bet',
+                    'asta_db.dms_table.table_id'
                 )
                 ->get();
         $category = DominoSusunRoom::all();
@@ -96,10 +111,15 @@ class TableController extends Controller
     public function DominoQindex()
     {
         $menu  = MenuClass::menuName('Table Domino QQ');
-        $tables = DominoQTable::join('dmq_room', 'dmq_room.roomid', '=', 'dmq_table.roomid')
+        $tables = DominoQTable::join('asta_db.dmq_room', 'asta_db.dmq_room.room_id', '=', 'asta_db.dmq_table.room_id')
                   ->select(
-                    'dmq_room.name as roomname',
-                    'dmq_table.*'
+                    'asta_db.dmq_room.name as roomname',
+                    'asta_db.dmq_table.name',
+                    'asta_db.dmq_table.max_player',
+                    'asta_db.dmq_table.game_state',
+                    'asta_db.dmq_table.current_turn_seat_id',
+                    'asta_db.dmq_table.total_bet',
+                    'asta_db.dmq_table.table_id'
                   )
                   ->get();
         $category = DominoQRoom::all();
@@ -137,9 +157,9 @@ class TableController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        Table::create([
+        TpkTable::create([
             'name'          => $request->tableName,
-            'roomid'        => $request->category,
+            'room_id'        => $request->category,
             'max_player'    =>  '0',
             'small_blind'   =>  '0',
             'big_blind'     =>  '0',
@@ -179,7 +199,7 @@ class TableController extends Controller
 
         BigTwoTable::create([
             'name'         => $request->tableName,
-            'roomid'       => $request->category,
+            'room_id'       => $request->category,
             'max_player'   =>  '0',
             'turn'         =>  '0',
             'total_bet'    =>  '0',
@@ -218,7 +238,7 @@ class TableController extends Controller
 
         DominoSusunTable::create([
             'name'                  => $request->tableName,
-            'roomid'                => $request->category,
+            'room_id'                => $request->category,
             'max_player'            =>  '0',
             'game_State'            =>  '0',
             'current_turn_seatid'   =>  '0',
@@ -258,7 +278,7 @@ class TableController extends Controller
 
         DominoQTable::create([
             'name'                  => $request->tableName,
-            'roomid'                => $request->category,
+            'room_id'                => $request->category,
             'max_player'            =>  '0',
             'game_State'            =>  '0',
             'current_turn_seatid'   =>  '0',
@@ -312,7 +332,7 @@ class TableController extends Controller
         $value = $request->value;
   
   
-        Table::where('tableid', '=', $pk)->update([
+        TpkTable::where('table_id', '=', $pk)->update([
           $name => $value
         ]);
   
@@ -362,7 +382,7 @@ class TableController extends Controller
         $value = $request->value;
 
 
-        BigTwoTable::where('tableid', '=', $pk)->update([
+        BigTwoTable::where('table_id', '=', $pk)->update([
         $name => $value
         ]);
 
@@ -406,7 +426,7 @@ class TableController extends Controller
         $value = $request->value;
 
 
-        DominoSusunTable::where('tableid', '=', $pk)->update([
+        DominoSusunTable::where('table_id', '=', $pk)->update([
         $name => $value
         ]);
 
@@ -456,7 +476,7 @@ class TableController extends Controller
         $value = $request->value;
 
 
-        DominoQTable::where('tableid', '=', $pk)->update([
+        DominoQTable::where('table_id', '=', $pk)->update([
         $name => $value
         ]);
 
@@ -503,7 +523,7 @@ class TableController extends Controller
         $tableid = $request->tableid;
         if($tableid != '')
         {
-            DB::table('tpk_table')->where('tableid', '=', $tableid)->delete();
+            TpkTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
@@ -527,7 +547,7 @@ class TableController extends Controller
         $tableid = $request->tableid;
         if($tableid != '')
         {
-            DB::table('bgt_table')->where('tableid', '=', $tableid)->delete();
+            BigTwoTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
@@ -551,7 +571,7 @@ class TableController extends Controller
         $tableid = $request->tableid;
         if($tableid != '')
         {
-            DB::table('dms_table')->where('tableid', '=', $tableid)->delete();
+            DominoSusunTable::where('table_id', '=', $tableid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -576,7 +596,7 @@ class TableController extends Controller
         $tableid = $request->tableid;
         if($tableid != '')
         {
-            DB::table('dmq_table')->where('tableid', '=', $tableid)->delete();
+            DominoQTable::where('table_id', '=', $tableid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),

@@ -436,7 +436,7 @@ class ResellerController extends Controller
                              )
                              ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id')
                              ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
-
+      
       if($endDateComparison < $startDateComparison){
         return back()->with('alert','End Date can\'t be less than start date');
       }

@@ -80,23 +80,23 @@
                 @foreach($category as $kt)
                 @if($menu)
                 <tr>
-                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td>
-                    <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->roomid }}" data-type="text" data-url="{{ route('Category-update')}}">{{ $kt->name }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->min_buy }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->max_buy }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Blind" data-name="stake" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->stake }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->roomid }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->timer }}</a></td>
-                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td>
+                    <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('Category-update')}}">{{ $kt->name }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->min_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->max_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Blind" data-name="stake" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->stake }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->timer }}</a></td>
+                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
                 </tr>
                 @else 
                 <tr>
-                    {{-- <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->roomid }}"></td> --}}
+                    {{-- <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td> --}}
                     <td>{{ $kt->name }}</td>
                     <td>{{ $kt->min_buy }}</td>
                     <td>{{ $kt->max_buy }}</td>
                     <td>{{ $kt->stake }}</td>
                     <td>{{ $kt->timer }}</td>
-                    {{-- <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->roomid }}" id="delete" data-pk="{{ $kt->roomid }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td> --}}
+                    {{-- <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td> --}}
                 </tr>
                 @endif
                 @endforeach
@@ -207,20 +207,20 @@
 
         @php
           foreach($category as $kt) {
-            echo'$(".delete'.$kt->roomid.'").hide();';
-            echo'$(".deletepermission'.$kt->roomid.'").on("click", function() {';
-              echo 'if($( ".deletepermission'.$kt->roomid.':checked" ).length > 0)';
+            echo'$(".delete'.$kt->room_id.'").hide();';
+            echo'$(".deletepermission'.$kt->room_id.'").on("click", function() {';
+              echo 'if($( ".deletepermission'.$kt->room_id.':checked" ).length > 0)';
               echo '{';
-                echo '$(".delete'.$kt->roomid.'").show();';
+                echo '$(".delete'.$kt->room_id.'").show();';
               echo'}';
               echo'else';
               echo'{';
-                echo'$(".delete'.$kt->roomid.'").hide();';
+                echo'$(".delete'.$kt->room_id.'").hide();';
               echo'}';
   
             echo '});';
         
-            echo'$(".delete'.$kt->roomid.'").click(function(e) {';
+            echo'$(".delete'.$kt->room_id.'").click(function(e) {';
               echo'e.preventDefault();';
 
               echo"var id = $(this).attr('data-pk');";

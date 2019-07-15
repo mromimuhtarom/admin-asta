@@ -8,6 +8,7 @@ use DB;
 use Carbon\Carbon;
 use App\Game;
 use App\Classes\MenuClass;
+use Validator;
 
 class ChipController extends Controller
 {
@@ -53,6 +54,14 @@ class ChipController extends Controller
 
         if($endDate < $startDate){
           return back()->with('alert','End Date can\'t be less than start date');
+        }
+        $validator = Validator::make($request->all(),[
+            'inputMinDate'    => 'required|date',
+            'inputMaxDate'    => 'required|date',
+        ]);
+    
+        if ($validator->fails()) {
+            return self::index()->withErrors($validator->errors());
         }
 
         if($searchPlayer != NULL && $gameName != NULL && $startDate != NULL && $endDate != NULL){

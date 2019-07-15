@@ -459,10 +459,11 @@
 
       $('.popUpSetting').editable({
         mode: 'inline',
-        value: 0,
         source: [
-          {value: 0, text: 'Off'},
-          {value: 1, text: 'On'}
+          @php
+          echo '{value: "'.$maintenaceonoff[0].'", text: "'.$maintenaceonoff[1].'"},';
+          echo '{value: "'.$maintenaceonoff[2].'", text: "'.$maintenaceonoff[3].'"}';
+          @endphp
         ]
       });
      

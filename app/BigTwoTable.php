@@ -8,9 +8,9 @@ class BigTwoTable extends Model
 {
     public $timestamps      = false;
 
-    protected $table        = 'bgt_table';
+    protected $table        = 'asta_db.bgt_table';
     protected $guarded      = [];
-    protected $primaryKey   = 'tableid';
+    protected $primaryKey   = 'table_id';
 
     public function room() {
         return $this->belongsTo(BigTwoRoom::class);

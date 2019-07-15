@@ -14,6 +14,17 @@
   <p>{{\Session::get('alert')}}</p>
 </div>
 @endif
+@if (count($errors) > 0)
+<div class="error-val">
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{$error}}</li>  
+      @endforeach
+    </ul>
+  </div>
+</div>
+@endif
     <div class="search bg-blue-dark">
         <div class="table-header w-100 h-100">
             <form action="{{ route('Chip-search') }}" method="get" role="search">

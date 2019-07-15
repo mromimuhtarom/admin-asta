@@ -8,9 +8,9 @@ class DominoSusunRoom extends Model
 {
     public $timestamps      = false;
 
-    protected $table        = 'dms_room';
+    protected $table        = 'asta_db.dms_room';
     protected $guarded      = [];
-    protected $primaryKey   = 'roomid';
+    protected $primaryKey   = 'room_id';
 
     public function tables(){
         return $this->hasMany(DominoSusunTable::class);

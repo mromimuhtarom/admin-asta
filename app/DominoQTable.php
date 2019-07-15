@@ -8,9 +8,9 @@ class DominoQTable extends Model
 {
     public $timestamps      = false;
 
-    protected $table        = 'dmq_table';
+    protected $table        = 'asta_db.dmq_table';
     protected $guarded      = [];
-    protected $primaryKey   = 'tableid';
+    protected $primaryKey   = 'table_id';
 
     public function room() {
         return $this->belongsTo(DominoQRoom::class);
