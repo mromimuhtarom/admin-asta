@@ -25,12 +25,9 @@
   @endif
 
     @if (\Session::has('alert'))
-    <div class="alert alert-danger">
         <div class="alert alert-danger">
             <div>{{Session::get('alert')}}</div>
-        </div>
-    </div>
-        
+        </div>        
     @endif
     
     @if (\Session::has('success'))

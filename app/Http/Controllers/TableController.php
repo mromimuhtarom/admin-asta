@@ -149,14 +149,13 @@ class TableController extends Controller
             'tableName'     => 'required',
             'category'      => 'required',
             
-        ], [
-            'category.integer'  => 'category is required'
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
 
+        
         TpkTable::create([
             'name'          => $request->tableName,
             'room_id'        => $request->category,
@@ -241,7 +240,7 @@ class TableController extends Controller
             'room_id'                => $request->category,
             'max_player'            =>  '0',
             'game_State'            =>  '0',
-            'current_turn_seatid'   =>  '0',
+            'current_turn_seat_id'   =>  '0',
             'total_bet'             =>  '0',
         ]);
 
@@ -281,7 +280,7 @@ class TableController extends Controller
             'room_id'                => $request->category,
             'max_player'            =>  '0',
             'game_State'            =>  '0',
-            'current_turn_seatid'   =>  '0',
+            'current_turn_seat_id'   =>  '0',
             'total_bet'             =>  '0',
         ]);
 
@@ -443,7 +442,7 @@ class TableController extends Controller
             case "game_state":
                 $name = "Game State";
                 break;
-            case "current_turn_seatid":
+            case "current_turn_seat_id":
                 $name = "Current Turn Seat ID";
                 break;
             case "total_bet":
@@ -493,7 +492,7 @@ class TableController extends Controller
             case "game_state":
                 $name = "Game State";
                 break;
-            case "current_turn_seatid":
+            case "current_turn_seat_id":
                 $name = "Current Turn Seat ID";
                 break;
             case "total_bet":

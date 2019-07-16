@@ -69,7 +69,7 @@ class UserAdminController extends Controller
             return back()->withErrors($validator->errors());
         }
         $user = User::create([
-            'username' => $request->username,
+            'username' => strtolower($request->username),
             'role_id'  => $request->role,
             'userpass' => bcrypt(Session::get('dealerId').$request->username),
             'fullname' => $request->fullname
@@ -177,18 +177,24 @@ class UserAdminController extends Controller
     public function destroy(Request $request)
     {
         $userid = $request->userid;
-        if($userid != '')
+        $adminself = Session::get('userId');
+        if($userid != $adminself)
         {
-            DB::table('asta_db.operator')->where('op_id', '=', $userid)->delete();
-
-            Log::create([
-                'op_id'     => Session::get('userId'),
-                'action_id' => '4',
-                'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu User Admin with user ID '.$userid
-            ]);
-            return redirect()->route('User_Admin')->with('success','Data Deleted');
+            if($userid != '')
+            {
+                DB::table('asta_db.operator')->where('op_id', '=', $userid)->delete();
+    
+                Log::create([
+                    'op_id'     => Session::get('userId'),
+                    'action_id' => '4',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Delete in menu User Admin with user ID '.$userid
+                ]);
+                return redirect()->route('User_Admin')->with('success','Data Deleted');
+            }
+            return redirect()->route('User_Admin')->with('success','Somethong wrong');
         }
-        return redirect()->route('User_Admin')->with('success','Somethong wrong');                
+        return back()->with('alert', 'You didn\'t allow to delete your account');
+                        
     }
 }

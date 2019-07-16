@@ -18,7 +18,9 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs    = Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
+        $logs    = Action::select('action')
+                   ->whereBetween('id', [1, 6])
+                   ->get();
         $datenow = Carbon::now('GMT+7');
         return view('pages.admin.log_admin', compact('logs', 'datenow'));
     }
@@ -32,7 +34,9 @@ class LogController extends Controller
         $inputMaxDate = $request->sampai;
         $inputAction  = $request->action;
   
-        $actionSearch = Action::select('action')->where('id', '!=', 7)->where('id', '!=', 8)->get();
+        $actionSearch = Action::select('action')
+                        ->whereBetween('id', [1, 6])
+                        ->get();
         $datenow      = Carbon::now('GMT+7');
         $logOperator  = Log::select(
                                 'asta_db.log_operator.datetime',

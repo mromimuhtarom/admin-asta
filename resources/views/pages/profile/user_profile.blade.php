@@ -111,5 +111,12 @@
     $('.usertext').editable({
       mode: 'inline'
     });
+
+          $(".password").click(function(e) {
+                e.preventDefault();
+    
+                var id = $(this).attr('data-pk');
+                var test = $("#userid").val(id);
+          });
   </script>
 @endsection

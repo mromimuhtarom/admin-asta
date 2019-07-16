@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BgtRound extends Model
 {
-    protected $table = 'bgt_round';
+    protected $table = 'asta_db.bgt_round';
     protected $guarded = [];
     
     public $timestamps = false;

@@ -157,7 +157,7 @@ class CategoryController extends Controller
             'desc'      => 'Create new category Asta Poker in menu Category Asta Poker with name'. $tpk_category->name
         ]);
 
-        return redirect()->route('Category-view')->with('success','Data Added');
+        return redirect()->route('Category_Asta_Poker')->with('success','Data Added');
 
     }
 
@@ -199,7 +199,7 @@ class CategoryController extends Controller
             'desc'      => 'Create new Category Asta Big Two in menu Category Asta Big Two with name '. $bgt_category->name
         ]);
  
-        return redirect()->route('Table_Big_Two')->with('success','Data Added');
+        return redirect()->route('Category_Big_Two')->with('success','Data Added');
     }
 
     /**
@@ -502,7 +502,7 @@ class CategoryController extends Controller
           'op_id'       => Session::get('userId'),
           'action_id'   => '2',
           'datetime'    => Carbon::now('GMT+7'),
-          'description' => 'Edit '.$name.' in menu Category Domino QQ with roomid '.$pk.' to '. $value
+          'desc' => 'Edit '.$name.' in menu Category Domino QQ with roomid '.$pk.' to '. $value
         ]);
     }
 
@@ -527,9 +527,9 @@ class CategoryController extends Controller
                 'desc'      => 'Delete in menu Category Asta Poker with Room ID '.$roomid
             ]);
 
-            return redirect()->route('Category-view')->with('success','Data Deleted');
+            return redirect()->route('Category_Asta_Poker')->with('success','Data Deleted');
         }
-        return redirect()->route('Category-view')->with('success','Something wrong');      
+        return redirect()->route('Category_Asta_Poker')->with('success','Something wrong');      
     }
 
     /**
@@ -552,9 +552,9 @@ class CategoryController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Delete in menu Category Asta Big Two with Room ID '.$roomid
             ]);
-            return redirect()->route('Table_Big_Two')->with('success','Data Deleted');
+            return redirect()->route('Category_Big_Two')->with('success','Data Deleted');
         }
-        return redirect()->route('Table_Big_Two')->with('success','Something wrong');      
+        return redirect()->route('Category_Big_Two')->with('success','Something wrong');      
     }
 
     /**

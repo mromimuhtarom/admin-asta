@@ -7,6 +7,7 @@ use App\User;
 use Session;
 use App\Log;
 use Carbon\Carbon;
+use Validator;
 
 class ProfileController extends Controller
 {
@@ -37,7 +38,7 @@ class ProfileController extends Controller
         $pk = $request->userid;
         $password = $request->password;
         $user = Session::get('userId');
-
+        
         $validator = Validator::make($request->all(),[
             'password'       => 'required'
         ]);
@@ -46,7 +47,7 @@ class ProfileController extends Controller
             return back()->withErrors($validator->errors());
         }
         
-        if($password != '') {
+        if($password != NULL || $pk != NULL) {
         User::where('op_id', '=', $pk)->update([
           'userpass' => bcrypt($password)
         ]);

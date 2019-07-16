@@ -152,9 +152,11 @@ class PlayersController extends Controller
         $converttocomma = str_replace(':', ',', $player_status->value);
         $plyr_status    = explode(",", $converttocomma);
 
-
-        if($maxdate < $mindate){
-          return back()->with('alert','End Date can\'t be less than start date');
+        if($mindate != NULL && $maxdate != NULL)
+        {
+          if($maxdate < $mindate){
+            return back()->with('alert','End Date can\'t be less than start date');
+          }
         }
         $register = Player::join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                     ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
@@ -174,7 +176,7 @@ class PlayersController extends Controller
 
         if($username != NULL && $status != NULL && $mindate != NULL && $maxdate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
                             ->get();
@@ -183,7 +185,7 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'plyr_status'));
         } else if($username != NULL && $status != NULL && $mindate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '>=', $mindate)
                             ->get();
@@ -192,7 +194,7 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'plyr_status'));
         } else if($username != NULL && $status != NULL && $maxdate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '<=', $maxdate)
                             ->get();
@@ -202,7 +204,7 @@ class PlayersController extends Controller
 
         } else if($username != NULL && $status != NULL)
         {
-          $registerPlayer =  $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer =  $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->get();
 
@@ -234,7 +236,7 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'plyr_status'));
         } else if($username != NULL  && $mindate != NULL && $maxdate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
                             ->get();
 
@@ -242,7 +244,7 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'plyr_status'));
         } else if($username != NULL  && $mindate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->where('asta_db.user.join_date', '>=', $mindate)
                             ->get();
 
@@ -250,7 +252,7 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'plyr_status'));
         } else if($username != NULL  && $maxdate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->where('asta_db.user.join_date', '<=', $maxdate)
                             ->get();
 
@@ -258,7 +260,7 @@ class PlayersController extends Controller
           return view('pages.players.registered_player_detail', compact('registerPlayer', 'menu', 'plyr_status'));
         } else if($username != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', '=', $username)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                             ->get();
 
           // $registerPlayer->appends($request->all());
@@ -521,7 +523,7 @@ class PlayersController extends Controller
       if($userid != '')
       {
           Player::where('user_id', '=', $userid)->delete();
-          Stat::swhere('user_id', '=', $userid)->delete();
+          Stat::where('user_id', '=', $userid)->delete();
 
           Log::create([
             'op_id'     => Session::get('userId'),

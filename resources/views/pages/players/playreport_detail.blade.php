@@ -75,7 +75,6 @@
                         <th>Table</th>
                         <th>Seat</th>
                         <th>Hand Card</th>
-                        <th>Table Name</th>
                         <th>Bet</th>
                         <th>Win Lose</th>
                         <th>Status</th>
@@ -89,9 +88,8 @@
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
                           <td>{{ $history->tablename }}</td>
-                          <td>{{ $history->seatid }}</td>
+                          <td>{{ $history->seat_id }}</td>
                           <td>{{ $history->hand_card }}</td>
-                          <td>{{ $history->tablename }}</td>
                           <td>{{ $history->bet }}</td>
                           <td>{{ $history->win_lose }}</td>
                           @php

@@ -487,13 +487,21 @@ class ResellerController extends Controller
                              ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id')
                              ->select(
                                  'asta_db.store_transaction_hist.user_id',
-                                 'asta_db.user.username',
+                                 'asta_db.reseller.username',
                                  'asta_db.store_transaction_hist.item_name',
                                  'asta_db.store_transaction_hist.quantity',
                                  'asta_db.store_transaction_hist.item_price',
                                  'asta_db.store_transaction_hist.status',
                                  'asta_db.store_transaction_hist.datetime'
                              );
+        $validator = Validator::make($request->all(),[
+            'inputMinDate'    => 'required|date',
+            'inputMaxDate'    => 'required|date',
+        ]);
+    
+        if ($validator->fails()) {
+            return self:: ReportTransaction()->withErrors($validator->errors());
+        }
   
         if($endDate < $startDate){
           return back()->with('alert','End Date can\'t be more than start date');

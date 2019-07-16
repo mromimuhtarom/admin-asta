@@ -83,8 +83,8 @@
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $payment->id }}"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>
-                <td><a href="#" class="payment_type" data-title="Payment Type" data-name="type" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->type) }}</td>
-                <td><a href="#" class="usertext" data-title="Transaction Type" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
+                <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->type) }}</td>
+                <td><a href="#" class="usertext" data-title="desc" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
                 <td><a href="#" class="stractive" data-title="status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td>
                 {{-- <td><a href="#" class="stractive" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td> --}}
                 <td style="text-align:center;">

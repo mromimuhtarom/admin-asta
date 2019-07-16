@@ -61,9 +61,9 @@ class RoleController extends Controller
                 'name' => $role
               ]);
               $lastValue = Role::orderBy('role_id', 'desc')->first();
-              $menu      = MenuName::select('menu_id')->where('webid', '=', '1')->orderby('menu_id', 'desc')->first();
-              $menuarray = DB::select('SELECT menu_id from adm_menu where webid = 1');
-              $menufirst = MenuName::select('menu_id')->where('webid', '=', '1')->first();
+              $menu      = MenuName::select('menu_id')->orderby('menu_id', 'desc')->first();
+              $menuarray = DB::select('SELECT menu_id from asta_db.adm_menu ');
+              $menufirst = MenuName::select('menu_id')->first();
 
               for ($i=$menufirst->menu_id; $i <= $menu->menu_id; $i++) {
                 $menuId[] = [
@@ -193,7 +193,7 @@ class RoleController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Role Admin with Role ID '.$id
+                'desc'      => 'Delete in menu Role Admin with Role ID '.$userid
             ]);
             return redirect()->route('Role_Admin')->with('success','Data Deleted');
         }

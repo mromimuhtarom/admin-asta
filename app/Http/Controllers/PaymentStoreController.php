@@ -25,10 +25,9 @@ class PaymentStoreController extends Controller
         $getPayments = Payment::select(
                         'id', 
                         'name', 
-                        'payment_type', 
-                        'transaction_type', 
-                        'image', 
-                        'status'
+                        'type',  
+                        'status',
+                        'desc'
                        )
                        ->orderBy('id', 'desc')
                        ->get();
@@ -129,9 +128,6 @@ class PaymentStoreController extends Controller
         switch ($name) {
             case "name":
                 $name = "Name";
-                break;
-            case "payment_type":
-                $name = "Payment Type";
                 break;
             case "transaction_type":
                 $name = "Transaction Type";

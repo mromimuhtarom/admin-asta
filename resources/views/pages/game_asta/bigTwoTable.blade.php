@@ -79,7 +79,7 @@
                   <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $tb->table_id }}"></td>
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->name }}</a></td>
-                    <td><a href="#" class="room" data-title="Room name" data-name="roomid" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->roomname }}</a></td>
+                    <td><a href="#" class="room" data-title="Room name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->roomname }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
                     <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->turn }}</a></td>
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->total_bet }}</a></td>
@@ -128,7 +128,7 @@
                   <select class="custom-select" name="category">
                     <option selected>Select Category</option>
                     @foreach ($category as $ct)
-                      <option value="{{ $ct->roomid }}">{{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
+                      <option value="{{ $ct->room_id }}">{{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -238,7 +238,7 @@
             {value: '', text: 'Choose Category'},
             @php
             foreach($category as $ct) {
-            echo '{value:"'.$ct->roomid.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';
+            echo '{value:"'.$ct->room_id.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';
             }
             @endphp
           ]
