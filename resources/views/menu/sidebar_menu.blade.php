@@ -1,4 +1,4 @@
-<ul class="metismenu sa-left-menu" id="menu1">
+<ul class="metismenu sa-left-menu" id="menu1" >
         @foreach( $adm_menu as $mnu)    
         {{-- menu  --}}
         @if(!$mnu['children']->isEMPTY())

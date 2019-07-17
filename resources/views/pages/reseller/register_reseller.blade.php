@@ -23,13 +23,13 @@
 @if($menu)
 <div class="input-insert bg-blue-dark">
     <div class="row">
-        <div class="col" align="center" style="color:white; font-size:30px; font-weight:bold;"><i class="fa fa-plus-square"></i> Register Reseller</div>
+        <div class="col" align="center" style="color:white; font-size:30px; font-weight:bold; font-family:Century Gothic;"><i class="fa fa-plus-square"></i> Register Reseller</div>
         <div class="w-100"><p>&nbsp;</p></div>
         <div class="col">
             <div class="table-header w-100 h-100">
                 <form action="{{ route('RegisterReseller-create')}}" method="post">
                     @csrf
-                    <table border="0" width="100%" height="100%" style="color:white">
+                    <table border="0" width="100%" height="100%" style="color:white; font-family:Century Gothic;">
                         <tr>
                             <td>Full Name<p>&nbsp;</p></td>
                             <td>
@@ -78,7 +78,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center"><button class="myButton" type="submit"><i class="fa fa-save"></i> Submit</button></td>
+                            <td colspan="4" align="center"><button class="myButton" type="submit" style="font-family:Century Gothic; font-weight:bold;"><i class="fa fa-save"></i> Submit</button></td>
                         </tr>
                     </table>
                 </form>
