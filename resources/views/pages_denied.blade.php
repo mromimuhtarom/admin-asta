@@ -136,8 +136,12 @@
       <div class="sa-aside-left">
       
           <a href="javascript:void(0)"  onclick="SAtoggleClass(this, 'body', 'sa-shortcuts-expanded')" class="sa-sidebar-shortcut-toggle">
-              <img src="assets/img/avatars/sunny.png" alt="" class="online">
-              <span>John.Doe <span class="fa fa-angle-down"></span></span>
+              <img src="/assets/img/avatars/sunny.png" alt="" class="online">
+							@php
+							$operator_id = Session::get('userId');
+							$username = DB::table('asta_db.operator')->where('op_id', '=', $operator_id)->first();		
+							@endphp
+							<span>{{ ucwords($username->fullname) }}  <span class="fa fa-angle-down"></span></span>
           </a>
           <div class="sa-left-menu-outer">
 						@include('menu.sidebar_menu')
@@ -156,8 +160,8 @@
           <!-- BEGIN .sa-page-breadcrumb -->
           <ol class="align-items-center sa-page-ribbon breadcrumb" aria-label="breadcrumb" role="navigation">
           	<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-          		<li class="breadcrumb-item"><a href="javascript:void(0)">Miscellaneous</a></li>
-          				<li class="breadcrumb-item"><a href="error404.html">Error 404</a></li>
+          		<li class="breadcrumb-item"><a href="javascript:history.go(0)">Miscellaneous</a></li>
+          				<li class="breadcrumb-item"><a href="javascript:history.go(0)">Error 404</a></li>
           	
           </ol>
           
