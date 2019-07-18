@@ -119,13 +119,19 @@ class RoleController extends Controller
                     )
                     ->where('asta_db.adm_access.role_id', '=', $role->role_id)
                     ->get();
+        $mainmenu = MenuName::where('parent_id', '=', 0)
+                    ->join('asta_db.adm_access', 'asta_db.adm_access.menu_id', '=', 'asta_db.adm_menu.menu_id')
+                    ->where('status', '=', 1)
+                    ->where('parent_id', '=', 0)
+                    ->where('asta_db.adm_menu.menu_id', '!=', 72)
+                    ->get();
         $roles    = $roles->toArray();
         $menu     = MenuClass::menuName('Role Admin');
         $roletype = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
         $value    = str_replace(':', ',', $roletype->value);
         $type     = explode(",", $value);
 
-        return view('pages.admin.role_edit', compact('roles', 'role', 'menu', 'type'));
+        return view('pages.admin.role_edit', compact('roles', 'role', 'menu', 'type','mainmenu'));
     }
 
     /**

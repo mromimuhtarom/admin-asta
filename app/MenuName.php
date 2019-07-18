@@ -24,4 +24,10 @@ class MenuName extends Model
 
       } 
 
+      public function rolemenu() {
+
+            return $this->hasMany(MenuName::class, 'parent_id', 'menu_id')->join('asta_db.adm_access', 'asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')->where('status', '=', 1);
+
+      } 
+
 }

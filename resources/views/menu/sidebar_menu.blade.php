@@ -27,10 +27,12 @@
                                     
                                     {{-- submenu kedua --}}
                                     @foreach ($sb['children'] as $smk)
-                                    <ul aria-expanded="true" class="sa-sub-nav-second-level">                    
+                                    <ul aria-expanded="true" class="sa-sub-nav-second-level">   
+                                        @if($menuname->RoleType1($smk->name) || $menuname->RoleType2($smk->name))                 
                                         <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/*') ? 'active' : null }}">
                                             <a   href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ $smk->name }} </a>
                                         </li>
+                                        @endif
                                     </ul>                    
                                     @endforeach
                                     {{-- end sub menu kedua --}}
