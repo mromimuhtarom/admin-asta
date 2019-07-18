@@ -105,7 +105,7 @@
             
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
-                @if($menu)
+                @if($menu && $mainmenu)
                   <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                       <i class="fa fa-plus"></i> Create New User
                   </button>
@@ -132,13 +132,13 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <th class="th-sm"></th>
                     @endif
                     <th class="th-sm">Username</th>
                     <th class="th-sm">Full Name</th>
                     <th class="th-sm">Role Type</th>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <th class="th-sm">Reset Password</th>
                     <th></th>
                     @endif
@@ -146,7 +146,7 @@
               </thead>
               <tbody>                      
                 @foreach($admin as $adm)
-                @if($menu)
+                @if($menu && $mainmenu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->op_id }}"></td>
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>

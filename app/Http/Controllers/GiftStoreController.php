@@ -31,7 +31,8 @@ class GiftStoreController extends Controller
                             'category_id'
                         )
                         ->get();
-        $menu         = MenuClass::menuName('Gift Store');
+        $menu     = MenuClass::menuName('Gift Store');
+        $mainmenu = MenuClass::menuName('Store');
         // ---- untuk gift category -----//
         $giftcategory = ConfigText::select(
                             'name', 
@@ -52,7 +53,7 @@ class GiftStoreController extends Controller
         $value = str_replace(':', ',', $active->value);
         $endis = explode(",", $value);
 
-        return view('pages.store.Gift', compact('gifts', 'menu', 'dbgift', 'category', 'endis'));
+        return view('pages.store.Gift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu'));
     }
 
     /**

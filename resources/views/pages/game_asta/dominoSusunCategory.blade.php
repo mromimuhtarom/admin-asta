@@ -47,7 +47,7 @@
           <div class="row">
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-              @if($menu)
+              @if($menu && $mainmenu && $submenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"><span> Create New Category</span></i>
               </button>
@@ -62,7 +62,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  @if($menu)
+                  @if($menu && $mainmenu && $submenu)
                   <th></th>
                   @endif
                   <th class="th-sm">Room Name</th>
@@ -71,14 +71,14 @@
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
                   <th class="th-sm">Timer</th>
-                  @if($menu)
+                  @if($menu && $mainmenu && $submenu)
                   <th class="th-sm">Action</th>
                   @endif
                 </tr>
               </thead>
               <tbody>
                 @foreach($category as $kt)
-                @if($menu)
+                @if($menu && $mainmenu && $submenu)
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td>
                     <td><a href="#" class="usertext" data-title="Room Name" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('DominoSCategory-update')}}">{{ $kt->name }}</a></td>

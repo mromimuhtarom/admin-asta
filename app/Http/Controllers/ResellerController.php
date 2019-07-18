@@ -27,9 +27,10 @@ class ResellerController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('List Reseller');
+        $mainmenu = MenuClass::menuName('Reseller');
         $rank     = ResellerRank::all();
         $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
-        return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank'));
+        return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank', 'mainmenu'));
     }
 
 
@@ -132,9 +133,10 @@ class ResellerController extends Controller
 //****************************************** Menu Reseller Rank ******************************************//
     public function ResellerRank()
     {
-        $rank = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
-        $menu = MenuClass::menuName('Rank Reseller');
-        return view('pages.reseller.reseller_rank', compact('rank', 'menu'));
+        $rank     = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
+        $menu     = MenuClass::menuName('Rank Reseller');
+        $mainmenu = MenuClass::menuName('Reseller');
+        return view('pages.reseller.reseller_rank', compact('rank', 'menu', 'mainmenu'));
     }
 
 
@@ -255,7 +257,8 @@ class ResellerController extends Controller
     public function RegisterReseller()
     {
         $menu  = MenuClass::menuName('Register Reseller');
-        return view('pages.reseller.register_reseller', compact('menu'));
+        $mainmenu = MenuClass::menuName('Reseller');
+        return view('pages.reseller.register_reseller', compact('menu', 'mainmenu'));
     }
 
     public function RequestTransaction()
@@ -285,8 +288,10 @@ class ResellerController extends Controller
                         ->orderBy('asta_db.store_transaction.datetime', 'ASC')
                         ->get();
                         
-        $menu         = MenuClass::menuName('Reseller Bank Transaction'); 
-        return view('pages.reseller.request_transaction', compact('transactions', 'menu'));
+        $menu     = MenuClass::menuName('Reseller Bank Transaction');
+        $submenu  = MenuClass::menuName('Reseller Transaction');
+        $mainmenu = MenuClass::menuName('Reseller');
+        return view('pages.reseller.request_transaction', compact('transactions', 'menu', 'mainmenu', 'submenu'));
     }
 
     public function RequestTransactionApprove(Request $request)

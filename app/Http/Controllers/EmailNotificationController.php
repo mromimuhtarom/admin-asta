@@ -21,8 +21,9 @@ class EmailNotificationController extends Controller
     public function index()
     {
         $menu               = MenuClass::menuName('Email Notification');
+        $mainmenu           = MenuClass::menuName('Notification');
         $emailnotifications = EmailNotification::all();
-        return view('pages.notification.email_notification', compact('emailnotifications', 'menu'));
+        return view('pages.notification.email_notification', compact('emailnotifications', 'menu', 'mainmenu'));
     }
 
     /**

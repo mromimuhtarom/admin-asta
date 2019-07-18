@@ -176,7 +176,7 @@
             
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
-                @if($menu)
+                @if($menu && $mainmenu)
                   <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                       <i class="fa fa-plus"></i> Create New Email Notification
                   </button>
@@ -203,7 +203,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <th class="th-sm"></th>
                     @endif
                     <th class="th-sm">title</th>
@@ -212,14 +212,14 @@
                     <th class="th-sm">From</th>
                     <th class="th-sm">From Email</th>
                     <th class="th-sm">Type</th>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <th></th>
                     @endif
                 </tr>
               </thead>
               <tbody>                      
                 @foreach($emailnotifications as $notification)
-                @if($menu)
+                @if($menu && $mainmenu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
                     <td>
@@ -258,7 +258,6 @@
                 </tr>
                 @else 
                 <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
                     <td>
                         <div class="media-container">
                             {{-- <form method="POST" action="{{ route('EmailNotification-updateimage') }}" enctype="multipart/form-data">

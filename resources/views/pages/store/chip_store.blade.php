@@ -46,7 +46,7 @@
           <!-- Button tambah chip store baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu)
+              @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createChipStore">
                 <i class="fa fa-plus"></i> Create New Chip Store
               </button>
@@ -65,7 +65,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Title</th>
@@ -73,14 +73,14 @@
                 <th class="th-sm">Chip Awarded</th>
                 <th class="th-sm">Gold Cost</th>
                 <th class="th-sm">Active</th>
-                @if($menu)
+                @if($menu && $mainmenu)
                   <th></th>
                 @endif
               </tr>
             </thead>
             <tbody>
               @foreach($items as $itm)
-                @if($menu)
+                @if($menu && $mainmenu)
                   <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->id }}"></td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>

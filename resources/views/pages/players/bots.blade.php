@@ -45,7 +45,7 @@
           <!-- Button tambah bot baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu)
+              @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"></i> Create New Bots
               </button>
@@ -64,7 +64,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th></th>
                 @endif
                 <th class="th-sm">Username</th>
@@ -72,14 +72,14 @@
                 <th class="th-sm">Rank</th>
                 <th class="th-sm">Gold</th>
                 <th class="th-sm">Country</th>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th class="th-sm">Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
               @foreach($bots as $bot)
-              @if($menu)
+              @if($menu && $mainmenu)
               <tr>
                   <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $bot->user_id }}"></td>
                   <td>{{ $bot->username }}</td>

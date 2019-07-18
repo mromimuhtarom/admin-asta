@@ -97,7 +97,7 @@
         
         <div class="col-9 col-sm-5 col-md-5 col-lg-5">
           <div class="input-group">
-            @if($menu)
+            @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-plus"></i> Create New Role
               </button>
@@ -124,11 +124,11 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th></th>
                 @endif
                 <th class="th-sm">Role Name</th>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th class="th-sm">Action</th>
                 <th style="width:2px;"></th>
                 @endif
@@ -136,7 +136,7 @@
           </thead>
           <tbody>                      
             @foreach($roles as $role)
-            @if($menu)
+            @if($menu && $mainmenu)
             <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $role->role_id }}" data-type="text" data-url="{{ route('Role-update') }}">{{ $role->name }}</a></td>

@@ -46,7 +46,7 @@
                 <tbody>
                   <tr>
                     <td>Maintenance</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="popUpSetting" data-title="Maintenance" data-name="value" data-value="{{ $getMaintenance->value }}" data-pk="{{ $getMaintenance->id }}" data-type="select" data-url="{{ route('GeneralSetting-update') }}">
                         @if ($getMaintenance->value == 1)
@@ -68,7 +68,7 @@
                   </tr>
                   <tr>
                     <td>Point Expired</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span> (hari)</span>
                     </td>
@@ -111,7 +111,7 @@
                 <tbody>
                   <tr>
                     <td>BCA</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Twitter" data-name="value" data-pk="{{ $getBank->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getBank->value }}</a>
                     </td>
@@ -178,7 +178,7 @@
                   </tr> --}}
                                     <tr>
                     <td>Privacy Policy</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     {{-- <td><a href="#" class="inlineSetting" data-title="Facebook" data-name="value" data-pk="{{ $getPrivacyPolicy->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getPrivacyPolicy->value }}</a></td> --}}
                     <td>
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
@@ -187,16 +187,12 @@
                     </td>
                     @else 
                     {{-- <td>{{ $getPrivacyPolicy->value }}</td> --}}
-                    <td>
-                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
-                            <i class="fa fa-edit"></i> Edit Privacy Policy
-                        </button>
-                    </td>
+                    <td>{{ $getPrivacyPolicy->value }}</td>
                     @endif
                   </tr>
                   <tr>
                     <td>Term Of Service</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     {{-- <td><a href="#" class="inlineSetting" data-title="Term Of Service" data-name="value" data-pk="{{ $getTermOfService->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getTermOfService->value }}</a></td> --}}
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
@@ -205,16 +201,12 @@
                     </td>
                     @else 
                     {{-- <td>{{ $getTermOfService->value }}</td> --}}
-                    <td>
-                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
-                        <i class="fa fa-edit"></i> Edit Term Of service
-                    </button>
-                    </td>
+                    <td>{{$getTermOfService->value }}</td>
                     @endif
                   </tr>
                   <tr>
                     <td>About</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     {{-- <td><a href="#" class="inlineSetting" data-title="About" data-name="value" data-pk="{{ $getAbout->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getAbout->value }}</a></td> --}}
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
@@ -223,16 +215,12 @@
                     </td>
                     @else 
                     {{-- <td>{{ $getAbout->value }}</td> --}}
-                    <td>
-                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-edit"></i> Edit About
-                    </button>
-                    </td>
+                    <td>{{$getAbout->value }}</td>
                     @endif
                   </tr>
                   <tr>
                     <td>PokerWeb</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <td><a href="#" class="inlineSetting" data-title="About" data-name="value" data-pk="{{ $getPokerWeb->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getPokerWeb->value }}</a></td>
                     @else 
                     <td>{{ $getPokerWeb->value }}</td>
@@ -272,7 +260,7 @@
                 <tbody>
                   <tr>
                     <td>Facebook</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <td><a href="#" class="inlineSetting" data-title="Facebook" data-name="value" data-pk="{{ $getFb->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getFb->value }}</a></td>
                     @else 
                     <td>{{ $getFb->value }}</td>
@@ -280,7 +268,7 @@
                   </tr>
                   <tr>
                     <td>Twitter</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="value" data-pk="{{ $getTwitter->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getTwitter->value }}</a></td>
                     @else 
                     <td>{{ $getTwitter->value }}</td>
@@ -288,7 +276,7 @@
                   </tr>
                   <tr>
                     <td>Instagram</td>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <td><a href="#" class="inlineSetting" data-title="Instagram" data-name="value" data-pk="{{ $getIg->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getIg->value }}</a></td>
                     @else 
                     <td>{{ $getIg->value }}</td>

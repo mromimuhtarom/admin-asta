@@ -21,7 +21,8 @@ class ChipStoreController extends Controller
      */
     public function index()
     {
-        $menu   = MenuClass::menuName('Chip Store');
+        $menu     = MenuClass::menuName('Chip Store');
+        $mainmenu = MenuClass::menuName('Store');
         $items  = ItemsGold::select(
                     'name',
                     'id',
@@ -40,7 +41,7 @@ class ChipStoreController extends Controller
                   ->first();
         $value  = str_replace(':', ',', $active->value);
         $endis  = explode(",", $value);
-        return view('pages.store.chip_store', compact('items', 'menu', 'endis'));
+        return view('pages.store.chip_store', compact('items', 'menu', 'endis', 'mainmenu'));
     }
 
     /**

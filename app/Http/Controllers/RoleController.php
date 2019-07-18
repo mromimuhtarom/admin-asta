@@ -22,9 +22,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('Role Admin');
-        $roles = Role::select('role_id', 'name')->get();
-        return view('pages.admin.role_admin', compact('roles', 'menu'));
+        $menu     = MenuClass::menuName('Role Admin');
+        $mainmenu = MenuClass::menuName('Admin');
+        $roles    = Role::select('role_id', 'name')->get();
+        return view('pages.admin.role_admin', compact('roles', 'menu', 'mainmenu'));
     }
 
     /**
@@ -125,13 +126,14 @@ class RoleController extends Controller
                     ->where('parent_id', '=', 0)
                     ->where('asta_db.adm_menu.menu_id', '!=', 72)
                     ->get();
-        $roles    = $roles->toArray();
-        $menu     = MenuClass::menuName('Role Admin');
-        $roletype = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
-        $value    = str_replace(':', ',', $roletype->value);
-        $type     = explode(",", $value);
+        $roles          = $roles->toArray();
+        $menu           = MenuClass::menuName('Role Admin');
+        $mainmenuaccess = MenuClass::menuName('Admin');
+        $roletype       = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
+        $value          = str_replace(':', ',', $roletype->value);
+        $type           = explode(",", $value);
 
-        return view('pages.admin.role_edit', compact('roles', 'role', 'menu', 'type','mainmenu'));
+        return view('pages.admin.role_edit', compact('roles', 'role', 'menu', 'type','mainmenu', 'mainmenuaccess'));
     }
 
     /**

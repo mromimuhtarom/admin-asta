@@ -16,7 +16,8 @@ class RegisterPlayerIdController extends Controller
 {
     public function index()
     {
-        $menu  = MenuClass::menuName('Register Player ID');
+        $menu     = MenuClass::menuName('Register Player ID');
+        $mainmenu = MenuClass::menuName('Players');
         $usertype = ConfigText::select(
                         'name', 
                         'value'
@@ -25,7 +26,7 @@ class RegisterPlayerIdController extends Controller
                     ->first();
         $value = str_replace(':', ',', $usertype->value);
         $type = explode(",", $value);
-        return view('pages.players.registerplayerid', compact('type'));
+        return view('pages.players.registerplayerid', compact('type', 'menu', 'mainmenu'));
     }
 
     public function store(Request $request)

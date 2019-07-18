@@ -23,7 +23,8 @@ class GeneralSettingController extends Controller
      */
     public function index()
     {
-        $menu  = MenuClass::menuName('General Setting');
+        $menu     = MenuClass::menuName('General Setting');
+        $mainmenu = MenuClass::menuName('Settings');
         // system settings
         $getMaintenance     = Config::select('id', 'name', 'value')->where('id', '=', '101')->first();
         $getPointExpired    = Config::select('id', 'name', 'value')->where('id', '=', '102')->first();
@@ -59,7 +60,7 @@ class GeneralSettingController extends Controller
 
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
-                                                                'getAbout', 'getPokerWeb', "getBank", 'menu', 'client', 'maintenaceonoff'));
+                                                                'getAbout', 'getPokerWeb', "getBank", 'menu', 'client', 'maintenaceonoff', 'mainmenu'));
     }
 
     public function putAbout(Request $request)

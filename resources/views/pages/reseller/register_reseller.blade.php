@@ -20,7 +20,7 @@
 </div>
 
 @endif
-@if($menu)
+@if($menu && $mainmenu)
 <div class="input-insert bg-blue-dark">
     <div class="row">
         <div class="col" align="center" style="color:white; font-size:30px; font-weight:bold; font-family:Century Gothic;"><i class="fa fa-plus-square"></i> Register Reseller</div>

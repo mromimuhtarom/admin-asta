@@ -22,6 +22,7 @@ class PaymentStoreController extends Controller
     public function index()
     {
         $menu        = MenuClass::menuName('Payment Store');
+        $mainmenu    = MenuClass::menuName('Store');
         $getPayments = Payment::select(
                         'id', 
                         'name', 
@@ -40,7 +41,7 @@ class PaymentStoreController extends Controller
         $value       = str_replace(':', ',', $active->value);
         $endis       = explode(",", $value);
 
-        return view('pages.store.payment_store', compact('menu', 'getPayments', 'endis'));
+        return view('pages.store.payment_store', compact('menu', 'getPayments', 'endis', 'mainmenu'));
     }
 
     /**

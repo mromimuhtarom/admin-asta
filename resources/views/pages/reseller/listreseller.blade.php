@@ -56,7 +56,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th></th>
                 @endif
                 <th class="th-sm">ID Reseller</th>
@@ -66,7 +66,7 @@
                 <th class="th-sm">Email</th>
                 <th class="th-sm">Saldo Gold</th>
                 <th class="th-sm">Rank</th>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th class="th-sm">Reset Password</th>
                 <th class="th-sm">Action</th>
                 @endif
@@ -74,7 +74,7 @@
             </thead>
             <tbody>
               @foreach($reseller as $rsl)
-              @if($menu)
+              @if($menu && $mainmenu)
               <tr>
                   <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rsl->reseller_id }}"></td>
                   <td>{{ $rsl->reseller_id }}</td>

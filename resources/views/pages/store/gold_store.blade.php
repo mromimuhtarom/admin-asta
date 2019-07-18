@@ -47,7 +47,7 @@
           <!-- Button tambah chip store baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu)
+              @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoldStore">
                 <i class="fa fa-plus"></i> Create New Gold Store
               </button>
@@ -66,7 +66,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Title</th>
@@ -75,14 +75,14 @@
                 <th class="th-sm">Pay Transaction</th>
                 <th class="th-sm">Google Key</th>
                 <th class="th-sm">Active</th>
-                @if($menu)
+                @if($menu && $mainmenu)
                   <th>Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
               @foreach($getGolds as $gold)
-              @if($menu)
+              @if($menu && $mainmenu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->id }}"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>

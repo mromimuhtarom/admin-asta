@@ -55,7 +55,9 @@
 										<th class="th-sm">Price</th>
 										<th class="th-sm">Detail Information</th>
 										<th class="th-sm">Status Payment</th>
+										@if ($menu && $mainmenu && $submenu)
 										<th class="th-sm">Confirm request</th>
+										@endif
 										<th class="th-sm">Status</th>
 									</tr>
 								</thead>
@@ -63,6 +65,7 @@
 									@foreach ($transactions as $transaction)
 									
 									<tr>
+										@if ($menu && $mainmenu && $submenu)
 										<td>{{ $transaction->datetime }}</td>
 										<td>{{ $transaction->username }}</td>
 										<td></td>
@@ -83,7 +86,16 @@
 												<p>Pending</p>
 											</div>
 										</td>
-
+										@else
+										<td>{{ $transaction->datetime }}</td>
+										<td>{{ $transaction->username }}</td>
+										<td></td>
+										<td>{{ $transaction->quantity }}</td>
+										<td>{{ $transaction->item_price }}</td>
+										<td>{{ $transaction->desc }}</td>
+										<td>{{ $transaction->bankname }} Bank Manual Transfer</td>
+										<td>Pending</td>
+										@endif
 									</tr>
 									@endforeach
 								</tbody>

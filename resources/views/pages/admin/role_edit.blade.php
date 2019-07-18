@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-@if($menu)
+@if($menu && $mainmenuaccess)
 <!-- Widget ID (each widget will need unique ID)-->
 {{-- <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
 
@@ -80,23 +80,6 @@
           </div>
           
           <div class="widget-body">
-            <div class="widget-body-toolbar">
-              
-              <div class="row">
-                
-                <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
-                  
-                  {{-- <button class="btn sa-btn-success">
-                    <i onclick="addBots()" class="fa fa-plus"></i> <span class="hidden-mobile">Add New Row</span>
-                  </button> --}}
-                  
-                </div>
-                
-              </div>
-              
-                
-        
-            </div>
             
             <div class="custom-scroll table-responsive" style="height:800px;">
               
@@ -104,8 +87,8 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                        <th>Main Menu</th>
-                        <th>Sub Menu</th>
+                        <th width="30%">Main Menu</th>
+                        <th width="70%">Sub Menu</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -115,8 +98,8 @@
                       <td>
                         <div class="namedetail{{ $mnmnu->menu_id }}">Detail ...</div>
                         @if (!$mnmnu['rolemenu']->isEMPTY())
-                        <table border="1" width="100%" class="submenu{{ $mnmnu->menu_id }}" style="display:none;">
-                            <tr>
+                        <table width="100%" class="submenu{{ $mnmnu->menu_id }}" style="display:none; border:1px solid #dee2e6;">
+                            <tr style="background-color:#f5f5f5;">
                               <td width="50%"><b>Menu Name</b></td>
                               <td width="50%"><b>Type</b></td>
                             </tr>
@@ -130,8 +113,8 @@
                                 <td><a href="" class="submenut{{ $sbmnu->menu_id }}">{{ $sbmnu->name }}</a></td>
                                 <td>
                                   <div class="namedetailsub{{ $sbmnu->menu_id }}">Detail ...</div>
-                                  <table border="1" width="100%" class="submenusub{{ $sbmnu->menu_id}}">
-                                    <tr>
+                                  <table width="100%" class="submenusub{{ $sbmnu->menu_id}}" style="border:1px solid #dee2e6;">
+                                    <tr style="background-color:#f5f5f5;">
                                       <td>Menu Name</td>
                                       <td>Type</td>
                                       <tr>
@@ -158,8 +141,8 @@
                             @endforeach
                         </table>
                         @else 
-                        <table border="1" width="50%" class="submenu{{ $mnmnu->menu_id }}" style="display:none;">
-                            <tr>
+                        <table border="1" width="100%" class="submenu{{ $mnmnu->menu_id }}" style="display:none; border:1px solid #dee2e6;">
+                            <tr style="background-color:#f5f5f5;">
                               <td width="50%"><b>Menu Name</b></td>
                               <td width="50%"><b>Type</b></td>
                             </tr>
@@ -213,8 +196,8 @@
               @endphp
 
           $('.type').editable({
-            value: '',
             mode: 'inline',
+            value: '',
             source: [
                 {value:'', text: 'Choose for role type'},
                 @php
@@ -227,8 +210,9 @@
       
           $(document).ready(function() {
             $('table.table').dataTable( {
-              "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+              "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
               "pagingType": "full_numbers",
+              "searching": false,
             });
           });
 

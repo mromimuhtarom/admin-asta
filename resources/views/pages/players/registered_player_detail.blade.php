@@ -92,7 +92,7 @@
           </thead>
           <tbody>
             @foreach($registerPlayer as $regis)
-            @if ($menu)
+            @if ($menu && $mainmenu)
             <tr>
                 <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->username }}</a></td>
                 <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->chip }}</a></td>

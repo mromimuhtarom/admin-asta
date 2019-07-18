@@ -23,6 +23,7 @@ class GoodsStoreController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('Gold Store');
+        $mainmenu = MenuClass::menuName('Store');
         $itemGood = ItemGoods::select(
                         'id',
                         'name',
@@ -42,7 +43,7 @@ class GoodsStoreController extends Controller
                     ->first();
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
-        return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis'));
+        return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis', 'mainmenu'));
     }
 
     /**

@@ -124,7 +124,7 @@
           <!-- Button tambah bot baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu)
+              @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"></i> Create New Gift
               </button>
@@ -143,7 +143,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th style="width:10px;"></th>
                 @endif
                 <th style="width:10px;">Image</th>
@@ -151,14 +151,14 @@
                 <th class="th-sm">Price</th>
                 <th class="th-sm">Category</th>
                 <th class="th-sm">Status</th>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th style="width:10px;"></th>
                 @endif
               </tr>
             </thead>
             <tbody>
                 @foreach($gifts as $gf)
-                @if($menu)
+                @if($menu && $mainmenu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $gf->id }}"></td>
                     <td >

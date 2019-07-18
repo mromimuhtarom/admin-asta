@@ -22,6 +22,7 @@ class GoldStoreController extends Controller
     public function index()
     {
         $menu     = MenuClass::menuName('Gold Store');
+        $mainmenu = MenuClass::menuName('Store');
         $getGolds = ItemsCash::select(
                         'id',
                         'name',
@@ -44,7 +45,7 @@ class GoldStoreController extends Controller
         $endis    = explode(",", $value);
 
 
-        return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis'));
+        return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu'));
     }
 
     public function GoldStoreReseller()

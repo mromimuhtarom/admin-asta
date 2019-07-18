@@ -33,7 +33,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong><i class="fa fa-puzzle-piece"></i> Asta Big Two Table</strong></h2>				
+        <h2><strong><i class="fa fa-puzzle-piece"></i> Asta Big Two Category</strong></h2>				
       </div>
     </header>
 
@@ -44,7 +44,7 @@
           <div class="row">
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-              @if($menu)
+              @if($menu && $mainmenu && $submenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"><span> Create New Category</span></i>
               </button>
@@ -59,7 +59,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  @if($menu)
+                  @if($menu && $mainmenu && $submenu)
                   <th></th>
                   @endif
                   <th class="th-sm">Title</th>
@@ -67,14 +67,14 @@
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
                   <th class="th-sm">Timer</th>
-                  @if($menu)
+                  @if($menu && $mainmenu && $submenu)
                   <th class="th-sm">Action</th>
                   @endif
                 </tr>
               </thead>
               <tbody>
                 @foreach($category as $kt)
-                @if($menu)
+                @if($menu && $mainmenu && $submenu)
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->name }}</a></td>

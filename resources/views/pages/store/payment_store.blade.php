@@ -46,7 +46,7 @@
           <!-- Button tambah chip store baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu)
+              @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createPaymentStore">
                 <i class="fa fa-plus"></i> Create New Payment Store
               </button>
@@ -65,21 +65,21 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Name</th>
                 <th class="th-sm">Type</th>
                 <th class="th-sm">desc</th>
                 <th class="th-sm">status</th>
-                @if($menu)
+                @if($menu && $mainmenu)
                 <th>Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
               @foreach($getPayments as $payment)
-              @if($menu)
+              @if($menu && $mainmenu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $payment->id }}"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>

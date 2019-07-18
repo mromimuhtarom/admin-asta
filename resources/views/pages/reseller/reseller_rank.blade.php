@@ -41,7 +41,7 @@
         <!-- Button tambah bot baru -->
         <div class="col-9 col-sm-5 col-md-5 col-lg-5">
           <div class="input-group">
-            @if($menu)
+            @if($menu && $mainmenu)
             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
               <i class="fa fa-plus"></i> Create New Reseller Rank
             </button>
@@ -60,7 +60,7 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              @if($menu)
+              @if($menu && $mainmenu)
               <th></th>
               @endif
               <th class="th-sm">ID</th>
@@ -68,14 +68,14 @@
               <th class="th-sm">Gold Group</th>
               <th class="th-sm">Type</th>
               <th class="th-sm">Bonus</th>
-              @if($menu)
+              @if($menu && $mainmenu)
               <th class="th-sm">Action</th>
               @endif
             </tr>
           </thead>
           <tbody>
             @foreach($rank as $rk)
-            @if($menu)
+            @if($menu && $mainmenu)
             <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rk->id }}"></td>
                 <td><a href="#" class="usertext" data-name="id" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->id }}</a></td>

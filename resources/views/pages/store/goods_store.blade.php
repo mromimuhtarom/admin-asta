@@ -119,7 +119,7 @@
           <!-- Button tambah best offer baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu)
+              @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoods">
                 <i class="fa fa-plus"></i> Create New Good Store
               </button>
@@ -138,7 +138,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if ($menu)
+                @if ($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
                 <th style="width:10px;">Image</th>
@@ -148,14 +148,14 @@
                 <th class="th-sm">Pay Transaction</th>
                 <th class="th-sm">Google Key</th>
                 <th class="th-sm">Active</th>
-                @if ($menu)
+                @if ($menu && $mainmenu)
                   <th class="th-sm">Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
               @foreach($itemGood as $goods)
-              @if($menu)
+              @if($menu && $mainmenu)
               <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->id }}"></td>
                 <td>

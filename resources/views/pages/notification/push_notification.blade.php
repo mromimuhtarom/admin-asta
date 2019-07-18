@@ -103,7 +103,7 @@
             
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
-                @if($menu)
+                @if($menu && $mainmenu)
                   <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                       <i class="fa fa-plus"></i> Create New Push Notification
                   </button>
@@ -130,7 +130,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <th class="th-sm"></th>
                     @endif
                     <th class="th-sm">Title</th>
@@ -138,14 +138,14 @@
                     <th class="th-sm">Game</th>
                     <th class="th-sm">Type</th>
                     {{-- <th class="th-sm">Action</th> --}}
-                    @if($menu)
+                    @if($menu && $mainmenu)
                     <th></th>
                     @endif
                 </tr>
               </thead>
               <tbody>                      
                 @foreach($notifications as $notification)
-                @if($menu)
+                @if($menu && $mainmenu)
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $notification->id }}"></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="title" data-pk="{{ $notification->id }}" data-type="text" data-url="{{ route('PushNotification-update')}}">{{ $notification->title }}</a></td>
