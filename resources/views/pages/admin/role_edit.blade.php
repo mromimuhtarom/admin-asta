@@ -94,9 +94,9 @@
                   <tbody>
                       @foreach($mainmenu as $mnmnu)                
                     <tr>
-                      <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}">{{ $mnmnu->name }}</a></td>
+                      <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ $mnmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
                       <td>
-                        <div class="namedetail{{ $mnmnu->menu_id }}">Detail ...</div>
+                        <div class="namedetail{{ $mnmnu->menu_id }}" style="color:red;">Detail ... <i class="fa fa-hand-o-down"></i></div>
                         @if (!$mnmnu['rolemenu']->isEMPTY())
                         <table width="100%" class="submenu{{ $mnmnu->menu_id }}" style="display:none; border:1px solid #dee2e6;">
                             <tr style="background-color:#f5f5f5;">
@@ -110,9 +110,9 @@
                             @foreach($mnmnu['rolemenu'] as $sbmnu)
                             @if (!$sbmnu['rolemenu']->isEMPTY())
                               <tr>
-                                <td><a href="" class="submenut{{ $sbmnu->menu_id }}">{{ $sbmnu->name }}</a></td>
+                                <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ $sbmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
                                 <td>
-                                  <div class="namedetailsub{{ $sbmnu->menu_id }}">Detail ...</div>
+                                  <div class="namedetailsub{{ $sbmnu->menu_id }}" style="color:red;">Detail ... <i class="fa fa-hand-o-down"></i></div>
                                   <table width="100%" class="submenusub{{ $sbmnu->menu_id}}" style="border:1px solid #dee2e6;">
                                     <tr style="background-color:#f5f5f5;">
                                       <td>Menu Name</td>
@@ -210,7 +210,7 @@
       
           $(document).ready(function() {
             $('table.table').dataTable( {
-              "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+              "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
               "pagingType": "full_numbers",
               "searching": false,
             });

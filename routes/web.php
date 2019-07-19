@@ -76,18 +76,19 @@ Route::middleware('authenticated')->group(function(){
         });
     });
 
-    // Route::group(['prefix'  =>  'Transaction'], function() {
-    //     Route::group(['prefix'  =>  'Banking_Transaction'], function() {
-    //         Route::middleware('page_denied:Banking transaction')->group(function(){
-    //             Route::get('Banking-view', 'Banking_TransactionController@index')->name('Banking-view');
-    //         });
-    //     });
-    //     Route::group(['prefix'  =>  'User_Banking_Transaction'], function() {
-    //         Route::middleware('page_denied:User Bank Transaction')->group(function(){
-    //             Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('UserBank-view');
-    //         });
-    //     });
-    // });
+    Route::group(['prefix'  =>  'Transaction'], function() {
+        Route::group(['prefix'  =>  'Banking_Transactions'], function() {
+            Route::middleware('page_denied:Banking transaction')->group(function(){
+                Route::get('Banking-view', 'Banking_TransactionController@index')->name('Banking_Transactions');
+                Route::get('Banking-search', 'Banking_TransactionController@search')->name('Banking-search');
+            });
+        });
+        // Route::group(['prefix'  =>  'User_Banking_Transaction'], function() {
+        //     Route::middleware('page_denied:User Bank Transaction')->group(function(){
+        //         Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('UserBank-view');
+        //     });
+        // });
+    });
 
     Route::group(['prefix'  =>  'Players'], function() {
         Route::group(['prefix'  =>  'Active_Players'], function() {

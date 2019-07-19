@@ -124,7 +124,7 @@ class RoleController extends Controller
                     ->join('asta_db.adm_access', 'asta_db.adm_access.menu_id', '=', 'asta_db.adm_menu.menu_id')
                     ->where('status', '=', 1)
                     ->where('parent_id', '=', 0)
-                    ->where('asta_db.adm_menu.menu_id', '!=', 72)
+                    ->where('asta_db.adm_menu.menu_id', '!=', 77)
                     ->get();
         $roles          = $roles->toArray();
         $menu           = MenuClass::menuName('Role Admin');
