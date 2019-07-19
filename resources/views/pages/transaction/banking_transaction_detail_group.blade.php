@@ -64,7 +64,7 @@
                             <tbody>
                                 @foreach($history as $hst)
                                 <tr>
-                                        <td>{{ $hst->minDate }} - {{ $hst->maxDate }}</td>
+                                        <td><a href="{{ route('detailTransactionDay', [$hst->minDate,$hst->maxDate]) }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
                                         <td>{{ $hst->totalWin }}</td>
                                         <td>{{ $hst->totalLose }}</td>
                                         <td>{{ $hst->totalTurnover }}</td>
@@ -89,20 +89,26 @@
         });
       });
 
-  $("#time").click(function(e) {
+$('form input[type="date"]').prop("disabled", true);
+$("#time").click(function(e) {
    e.preventDefault();
-    
+	 
 	 if($(this).val() == 'today'){ 
 		@php
    	echo'var minDate = $("#minDate").val("'.$datenow.'");';
 		echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
 		@endphp
 		$('form input[type="date"]').prop("readonly", true);
+		$('form input[type="date"]').prop("disabled", false);
   } else if($(this).val() == 'week'){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
 	} else if($(this).val() == 'month'){
+		var minDate = $("#minDate").val("");
+		var maxDate = $("#maxDate").val("");
+		$('form input[type="date"]').prop("disabled", true);
+	} else if($(this).val() == ''){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
@@ -112,7 +118,7 @@
 		$('form input[type="date"]').prop("readonly", false);
 		$('form input[type="date"]').prop("disabled", false);
 	}
-  });
+});
     
       table = $('table.table').dataTable({
         "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",

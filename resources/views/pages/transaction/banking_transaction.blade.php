@@ -58,6 +58,7 @@
 // 		$('form input[type="date"]').prop("disabled", true);
 //   }
 // });
+$('form input[type="date"]').prop("disabled", true);
 $("#time").click(function(e) {
    e.preventDefault();
 	 

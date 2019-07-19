@@ -96,5 +96,25 @@ class Banking_TransactionController extends Controller
 
     }
 
+    public function detail($mindate, $maxdate)
+    {
+        $datenow = Carbon::now('GMT+7')->toDateString();
+        $history = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
+                   ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
+                   ->select(
+                    'asta_db.game.desc',
+                    'asta_db.user.username',
+                    'asta_db.transaction_day.date_created',
+                    'asta_db.transaction_day.win',
+                    'asta_db.transaction_day.lose',
+                    'asta_db.transaction_day.turnover',
+                    'asta_db.transaction_day.fee'
+                   )
+                   ->wherebetween('asta_db.transaction_day.date_created', [$mindate." 00:00:00", $maxdate." 23:59:59"])
+                   ->get();
+
+        return view('pages.transaction.banking_transaction_detail', compact('history', 'datenow'));
+    }
+
     
 }

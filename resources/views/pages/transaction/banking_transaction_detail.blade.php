@@ -87,24 +87,30 @@
 <script>
 	$(document).ready(function() {
     $('table.table').dataTable( {
-      "lengthMenu": [[20, 10, 20, -1], [20, 10, 20, "All"]],
+      "lengthMenu": [[20, 10, 20, -1], [, 10, 20, "All"]],
     });
   });
-
+  
+  $('form input[type="date"]').prop("disabled", true);
   $("#time").click(function(e) {
    e.preventDefault();
-    
+	 
 	 if($(this).val() == 'today'){ 
 		@php
    	echo'var minDate = $("#minDate").val("'.$datenow.'");';
 		echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
 		@endphp
 		$('form input[type="date"]').prop("readonly", true);
+		$('form input[type="date"]').prop("disabled", false);
   } else if($(this).val() == 'week'){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
 	} else if($(this).val() == 'month'){
+		var minDate = $("#minDate").val("");
+		var maxDate = $("#maxDate").val("");
+		$('form input[type="date"]').prop("disabled", true);
+	} else if($(this).val() == ''){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
@@ -114,7 +120,7 @@
 		$('form input[type="date"]').prop("readonly", false);
 		$('form input[type="date"]').prop("disabled", false);
 	}
-  });
+   });
 
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
