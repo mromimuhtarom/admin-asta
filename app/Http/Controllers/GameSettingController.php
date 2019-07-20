@@ -13,7 +13,7 @@ class GameSettingController extends Controller
      */
     public function index()
     {
-        return view('pages.settings.game_setting');
+        return view('pages.game_asta.game_setting');
     }
 
     /**

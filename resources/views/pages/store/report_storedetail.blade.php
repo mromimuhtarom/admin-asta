@@ -57,7 +57,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>ID Reseller</th>
+                        <th>ID Player</th>
                         <th>Username</th>
                         <th>Item</th>
                         <th>Quantity</th>
