@@ -85,11 +85,12 @@ Route::middleware('authenticated')->group(function(){
 
             });
         });
-        // Route::group(['prefix'  =>  'User_Banking_Transaction'], function() {
-        //     Route::middleware('page_denied:User Bank Transaction')->group(function(){
-        //         Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('UserBank-view');
-        //     });
-        // });
+
+        Route::group(['prefix'  =>  'User_Bank_Transaction'], function() {
+            Route::middleware('page_denied:User Bank Transaction')->group(function(){
+                Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('User_Bank_Transaction');
+            });
+        });
     });
 
     Route::group(['prefix'  =>  'Players'], function() {

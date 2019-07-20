@@ -288,7 +288,7 @@ class ResellerController extends Controller
                         ->orderBy('asta_db.store_transaction.datetime', 'ASC')
                         ->get();
                         
-        $menu     = MenuClass::menuName('Reseller Bank Transaction');
+        $menu     = MenuClass::menuName('Request Transaction');
         $submenu  = MenuClass::menuName('Reseller Transaction');
         $mainmenu = MenuClass::menuName('Reseller');
         return view('pages.reseller.request_transaction', compact('transactions', 'menu', 'mainmenu', 'submenu'));
