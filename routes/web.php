@@ -192,13 +192,19 @@ Route::middleware('authenticated')->group(function(){
             });
     });
 
-    Route::group(['prefix'  =>  'Daily_Reward'], function() {
-            Route::middleware('page_denied:Daily Reward')->group(function(){
-                Route::get('DailyReward-view', 'GiftController@index')->name('Daily_Reward');
-                Route::post('DailyReward-update', 'GiftController@update')->name('DailyGift-update');
-                Route::post('DailyReward-create', 'GiftController@store')->name('DailyGift-create');
-                Route::delete('DailyReward-delete', 'GiftController@destroy')->name('DailyGift-delete');
+    Route::group(['prefix'  =>  'Item'], function() {
+
+        Route::group(['prefix' => 'Table_Gift'], function() {
+            Route::middleware('page_denied:Table Gift')->group(function(){
+                Route::get('Table_Gift-view', 'GiftController@index')->name('Table_Gift');
+                Route::post('GiftPrice-update', 'GiftController@update')->name('GiftStore-update');
+                Route::post('GiftPrice-updateimage', 'GiftController@updateimage')->name('GiftStore-updateimage');
+                Route::delete('GiftPrice-delete', 'GiftController@destroy')->name('GiftStore-delete');
+                Route::post('GiftPrice-create', 'GiftController@store')->name('GiftStore-create');
             });
+        });
+
+
     });
 
     // Game Asta Poker
@@ -461,15 +467,6 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('GoodsStore-updateimage', 'GoodsStoreController@updateimage')->name('GoodsStore-updateimage');
                 Route::delete('GoodsStore-delete', 'GoodsStoreController@destroy')->name('GoodsStore-delete');
                 Route::post('GoodsStore-create', 'GoodsStoreController@store')->name('GoodsStore-create');
-            });
-        });
-        Route::group(['prefix'  =>  'Gift_Store'], function() {
-            Route::middleware('page_denied:Gift Store')->group(function(){
-                Route::get('GiftStore-view', 'GiftStoreController@index')->name('Gift_Store');
-                Route::post('GiftStore-update', 'GiftStoreController@update')->name('GiftStore-update');
-                Route::post('GiftStore-updateimage', 'GiftStoreController@updateimage')->name('GiftStore-updateimage');
-                Route::delete('GiftStore-delete', 'GiftStoreController@destroy')->name('GiftStore-delete');
-                Route::post('GiftStore-create', 'GiftStoreController@store')->name('GiftStore-create');
             });
         });
         // Route::group(['prefix'  =>  'Transaction-Store'], function() {
