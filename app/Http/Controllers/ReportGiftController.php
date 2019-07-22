@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Game;
 
 class ReportGiftController extends Controller
 {
     public function index()
     {
-        return view('pages.item.reportgift');
+        $game = Game::select('id', 'desc')->get();
+        // $category = 
+        return view('pages.item.reportgift', compact('game'));
     }
 
     public function search()
     {
+        $game = Game::select('id', 'desc')->get();
         return view('pages.item.reportgift_detail');
     }
 }
