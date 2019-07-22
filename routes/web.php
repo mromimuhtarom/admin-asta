@@ -207,7 +207,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix' => 'Report_Gift'], function() {
             Route::middleware('page_denied:Report Gift')->group(function(){
                 Route::get('ReportGift-view', 'ReportGiftController@index')->name('Report_Gift');
-                Route::post('ReportGift-update', 'ReportGiftController@search')->name('ReportGift-search');
+                Route::get('ReportGift-search', 'ReportGiftController@search')->name('ReportGift-search');
             });
         });
 
