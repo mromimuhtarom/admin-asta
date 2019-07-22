@@ -7,7 +7,7 @@
 @endsection
 
 
-@section('index')
+@section('content')
 <link rel="stylesheet" href="/css/admin.css">
 @if (\Session::has('alert'))
   <div class="alert alert-danger">

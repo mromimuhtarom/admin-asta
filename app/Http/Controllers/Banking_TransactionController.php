@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TransactionDay;
 use Carbon\Carbon;
 use DB;
+use Validator;
 
 class Banking_TransactionController extends Controller
 {
@@ -91,6 +92,15 @@ class Banking_TransactionController extends Controller
                            ->get();
      
                 return view('pages.transaction.banking_transaction_detail', compact('history', 'datenow'));
+            }
+        } else {
+            // return self::index()->withErrors($validator->errors());
+            $validator = Validator::make($request->all(),[
+                'time'   => 'required',
+            ]);
+        
+            if ($validator->fails()) {
+                return self::index()->withErrors($validator->errors());
             }
         }
 

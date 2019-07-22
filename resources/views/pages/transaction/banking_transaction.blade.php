@@ -8,10 +8,11 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+
 @if (\Session::has('alert'))
-<div class="alert alert-danger">
-  <p>{{\Session::get('alert')}}</p>
-</div>
+  <div class="alert alert-danger">
+    <p>{{\Session::get('alert')}}</p>
+  </div>
 @endif
 @if (count($errors) > 0)
 <div class="error-val">
