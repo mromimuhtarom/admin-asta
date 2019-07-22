@@ -91,6 +91,12 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('User_Bank_Transaction');
             });
         });
+
+        Route::group(['prefix'  =>  'Reward_Transaction'], function() {
+            Route::middleware('page_denied:Reward Transaction')->group(function(){
+                Route::get('RewardTransaction-view', 'RewardTransactionController@index')->name('Reward_Transaction');
+            });
+        });
     });
 
     Route::group(['prefix'  =>  'Players'], function() {

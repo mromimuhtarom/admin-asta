@@ -20,7 +20,7 @@ class ReportGiftController extends Controller
     public function search()
     {
         $datenow = Carbon::now('GMT+7');
-        $game = Game::select('id', 'desc')->get();
+        $game    = Game::select('id', 'desc')->get();
         return view('pages.item.reportgift_detail', compact('datenow', 'game'));
     }
 }
