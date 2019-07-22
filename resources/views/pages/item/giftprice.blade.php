@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Gift_Store') }}">Store</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Gift_Store') }}">Gift Store</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">Item</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">Table Gift</a></li>
 @endsection
 
 
@@ -111,7 +111,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">
-      <h2><strong><i class="fa fa-columns"></i> Gift Store</strong></h2>
+      <h2><strong><i class="fa fa-columns"></i> Table Gift</strong></h2>
     </div>
   </header>
 
@@ -163,7 +163,7 @@
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $gf->id }}"></td>
                     <td >
                           <div class="media-container">
-                            <form method="POST" action="{{ route('GiftStore-updateimage') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
                               {{  csrf_field() }}
                               <span class="media-overlay med-ovlay{{ $gf->id }}">
                                 <input type="hidden" name="pk" value="{{ $gf->id }}">
@@ -181,10 +181,10 @@
                               <button class="edit-profile{{ $gf->id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                             </div>
                     </td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('GiftStore-update') }}">{{ $gf->name }}</a></td>
-                    <td><a href="#" class="usertext" data-name="chipsPrice" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('GiftStore-update') }}">{{ $gf->price }}</a></td>
-                    <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
-                    <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('GiftStore-update') }}" data-title="Select type">{{ strEnabledDisabled($gf->status)}}</a></td>
+                    <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('TableGift-update') }}">{{ $gf->name }}</a></td>
+                    <td><a href="#" class="usertext" data-name="chipsPrice" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('TableGift-update') }}">{{ $gf->price }}</a></td>
+                    <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
+                    <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ strEnabledDisabled($gf->status)}}</a></td>
                     <td>
                         <a href="#" style="color:red;" class="delete{{ $gf->id }}" 
                             id="delete"
@@ -231,7 +231,7 @@
           <i class="fa fa-remove"></i>
         </button>
       </div>
-      <form action="{{ route('GiftStore-create') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ route('TableGift-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
 
@@ -280,7 +280,7 @@
         </div>
         <div class="modal-body">
           Are You Sure Want To Delete It
-          <form action="{{ route('GiftStore-delete') }}" method="post">
+          <form action="{{ route('TableGift-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
             <input type="hidden" name="id" id="id" value="">

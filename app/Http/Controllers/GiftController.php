@@ -64,7 +64,7 @@ class GiftController extends Controller
         $value = str_replace(':', ',', $active->value);
         $endis = explode(",", $value);
 
-        return view('pages.Gift.GiftPrice', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu'));
+        return view('pages.item.giftprice', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu'));
     }
 
     /**

@@ -196,11 +196,18 @@ Route::middleware('authenticated')->group(function(){
 
         Route::group(['prefix' => 'Table_Gift'], function() {
             Route::middleware('page_denied:Table Gift')->group(function(){
-                Route::get('Table_Gift-view', 'GiftController@index')->name('Table_Gift');
-                Route::post('GiftPrice-update', 'GiftController@update')->name('GiftStore-update');
-                Route::post('GiftPrice-updateimage', 'GiftController@updateimage')->name('GiftStore-updateimage');
-                Route::delete('GiftPrice-delete', 'GiftController@destroy')->name('GiftStore-delete');
-                Route::post('GiftPrice-create', 'GiftController@store')->name('GiftStore-create');
+                Route::get('TableGift-view', 'GiftController@index')->name('Table_Gift');
+                Route::post('TableGift-update', 'GiftController@update')->name('TableGift-update');
+                Route::post('TableGift-updateimage', 'GiftController@updateimage')->name('TableGift-updateimage');
+                Route::delete('TableGift-delete', 'GiftController@destroy')->name('TableGift-delete');
+                Route::post('TableGift-create', 'GiftController@store')->name('TableGift-create');
+            });
+        });
+
+        Route::group(['prefix' => 'Report_Gift'], function() {
+            Route::middleware('page_denied:Report Gift')->group(function(){
+                Route::get('ReportGift-view', 'ReportGiftController@index')->name('Report_Gift');
+                Route::post('ReportGift-update', 'ReportGiftController@search')->name('ReportGift-search');
             });
         });
 
