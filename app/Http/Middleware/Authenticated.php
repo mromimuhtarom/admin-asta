@@ -54,22 +54,23 @@ class Authenticated
                         'ip'          => request()->ip()
                     ]);
                 } else {
-                    LogOnline::create([
-                        'user_id'   =>  $op_idcache,
-                        'action_id' =>  8,
-                        'desc'      =>  'user '.$operator->username.' Logout in web Admin',
-                        'datetime'  => Carbon::now('GMT+7'),
-                        'ip'        => request()->ip(),
-                        'type'      => 1
-                    ]);
+                    if($op_idcache)
+                    {
+                        LogOnline::create([
+                            'user_id'   =>  $op_idcache,
+                            'action_id' =>  8,
+                            'desc'      =>  'user '.$operator->username.' Logout in web Admin',
+                            'datetime'  => Carbon::now('GMT+7'),
+                            'ip'        => request()->ip(),
+                            'type'      => 1
+                        ]);
+                    }
                     OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
                     Cache::flush();
                     return redirect()->route('logout')->with('alert','Please Login First');
                 } 
                 
             }
-            Cache::put('op_key', $op);
-            Cache::put('session_id', $session_id);
             return $next($request);
         } 
 
