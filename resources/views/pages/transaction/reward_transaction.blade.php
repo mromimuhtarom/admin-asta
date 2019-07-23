@@ -47,12 +47,12 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th class="th-sm">Time Stamp</th>
-										<th class="th-sm">Username</th>
+										<th class="th-sm">ID Player</th>
+										<th class="th-sm">username</th>
 										<th class="th-sm">Item</th>
-										<th class="th-sm">Quantity</th>
-										<th class="th-sm">Price</th>
-										<th class="th-sm">Detail Information</th>
+										<th class="th-sm">Awarded</th>
+										<th class="th-sm">Type</th>
+										<th class="th-sm">Status</th>
 										<th class="th-sm">Status Payment</th>
 										{{-- @if ($menu && $mainmenu ) --}}
 										<th class="th-sm">Confirm request</th>

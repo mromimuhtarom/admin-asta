@@ -27,14 +27,35 @@
           <!-- widget edit box -->
           <div class="jarviswidget-editbox">
             <!-- This area used as dropdown edit box -->
+            
   
           </div>
           <!-- end widget edit box -->
   
           <!-- widget content -->
           <div class="widget-body p-0">
+              <div class="widget-body-toolbar">
+        
+                  <div class="row">
+                    
+                    <!-- Button tambah bot baru -->
+                    <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+                      <div class="input-group">
+                        {{-- @if($menu && $mainmenu) --}}
+                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                          <i class="fa fa-plus"></i> Create User Guest ID
+                        </button>
+                        {{-- @endif --}}
+                      </div>
+                    </div>
+                    <!-- End Button tambah bot baru -->
+          
+                  </div>
+          
+                </div>
             
             <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
+              
               <thead>
                 <tr>
                     <th class="th-sm">ID Guest</th>
@@ -54,14 +75,71 @@
                 @endforeach
               </tbody>
             </table>
+            {{-- info --}}
+             <div class="widget-body-toolbar">
+        
+                  <div class="row">
+                    
+                    <!-- Button tambah bot baru -->
+                    <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+                      <div class="input-group" style="color: #969696;font-size: 1rem;font-weight: 700;font-style: italic;">
+                        User Guest Available is = {{ $available->totalguest }} <br>
+                        User Guest Already Used Is = {{ $used->totalguest }}
+                      </div>
+                    </div>
+                    <!-- End Button tambah bot baru -->
           
+                  </div>
+          
+             </div>
+          {{-- end info --}}
           </div>
           <!-- end widget content -->
-  
         </div>
         <!-- end widget div -->
   
       </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Guest ID</h4>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <form action="{{ route('Guest-create') }}" method="post">
+        @csrf
+        <div class="modal-body">
+  
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                  <input type="number" name="inputcount" placeholder="Number of inputs filled in Guest ID" class="form-control" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn sa-btn-primary">
+            <i class="fa fa-save"></i> Save
+          </button>
+          <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+            <i class="fa fa-remove"></i> Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+ 
+  
+<!-- Modal -->
+
+      
   <script>
       
                   var responsiveHelper_datatable_col_reorder = responsiveHelper_datatable_col_reorder || undefined;

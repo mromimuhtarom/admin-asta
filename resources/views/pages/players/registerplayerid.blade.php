@@ -50,13 +50,11 @@
               </tr>
               <tr>
                   <td width='30%'>Number of inputs filled in Player ID</td>
-                  <td align="center"> :</td>
-                  <td><input type="number" name="inputcount" class="form-control" required>&nbsp;</td>
+                  <td colspan="2"><input type="number" name="inputcount" class="form-control" required>&nbsp;</td>
               </tr>
               <tr>
                   <td width="30%">User Type</td>
-                  <td align="center"> :</td>
-                  <td>
+                  <td colspan="2">
                       <select name="usertype" class="form-control" required>
                           <option value="">Choose User Type</option>
                           <option value="{{ $type[0] }}">{{ $type[1] }}</option>
@@ -67,6 +65,21 @@
               </tr>
               <tr>
                   <td colspan="3" align="center"><button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button></td>
+              </tr>
+              <tr>
+                  <td> Player ID used : {{ $playerused->countuserid }}</td>
+                  <td> Guest ID used is: {{ $guestused->countuserid }}</td>
+                  <td> Bot ID used is: {{ $botused->countuserid }}</td>
+              </tr>
+              <tr>
+                  <td>Player ID didn't use : {{ $playernotused->countuserid }}</td>
+                  <td>Guest ID didn't use : {{ $guestnotused->countuserid }} </td>
+                  <td>Bot Id didn't use: {{ $botnotused->countuserid }}</td>
+              </tr>
+              <tr>
+                  <td>Total Player ID : {{ $totalplayer->countuserid }}</td>
+                  <td>Total Guest ID : {{ $totalguest->countuserid }} </td>
+                  <td>Total Bot ID : {{ $totalbot->countuserid }}</td>
               </tr>
           </table>
       </form>

@@ -24,9 +24,19 @@ class RegisterPlayerIdController extends Controller
                     )
                     ->where('id', '=', 1)
                     ->first();
+        $totalplayer   = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 1)->first();
+        $totalguest    = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 2)->first();
+        $totalbot      = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 3)->first();
+        $playernotused = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 1)->where('isused', '=', 0)->first();
+        $guestnotused  = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 2)->where('isused', '=', 0)->first();
+        $botnotused    = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 3)->where('isused', '=', 0)->first();
+        $playerused    = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 1)->where('isused', '=', 1)->first();
+        $guestused     = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 2)->where('isused', '=', 1)->first();
+        $botused       = UserRandom::select(DB::raw('count(user_id) as countuserid'))->where('user_type', '=', 3)->where('isused', '=', 1)->first();
+
         $value = str_replace(':', ',', $usertype->value);
         $type = explode(",", $value);
-        return view('pages.players.registerplayerid', compact('type', 'menu', 'mainmenu'));
+        return view('pages.players.registerplayerid', compact('type', 'menu', 'mainmenu', 'totalplayer', 'totalguest', 'totalbot', 'playernotused', 'guestnotused', 'botnotused', 'playerused', 'guestused', 'botused'));
     }
 
     public function store(Request $request)

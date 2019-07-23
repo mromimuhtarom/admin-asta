@@ -42,7 +42,7 @@
 			
         <header>
             <div class="widget-header">	
-                <h2><strong>Bank Transaction</strong></h2>				
+                <h2><strong>Bank Transaction {{ ucwords($time) }}</strong></h2>				
             </div>
         </header>
     

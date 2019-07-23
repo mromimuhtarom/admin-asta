@@ -132,6 +132,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Guest'], function() {
             Route::middleware('page_denied:Guest')->group(function(){
                 Route::get('Guest-view', 'PlayersController@indexGuest')->name('Guest');
+                Route::post('Guest-create', 'PlayersController@storeGuest')->name('Guest-create');
             });
         });
 

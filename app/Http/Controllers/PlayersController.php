@@ -363,15 +363,57 @@ class PlayersController extends Controller
 //****************************************** Menu Guest ******************************************//
   // ----------- Index Guest ----------- //
     public function indexGuest() {
-        $guests = UserGuest::join('asta_db.user', 'asta_db.user.user_id', '=', 'user_guest.user_id')
+        $guests = UserGuest::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_guest.user_id')
                   ->select(
+                    'asta_db.user_guest.guest_id',
                     'asta_db.user.username',
-                    'user_guest.device_id'
+                    'asta_db.user_guest.device_id'
                   )
                   ->get();
-        return view('pages.players.guest', compact('guests'));
+        $available = UserGuest::select(DB::raw('count(guest_id) as totalguest'))->wherenull('user_id')->first();
+        $used = UserGuest::select(DB::raw('count(guest_id) as totalguest'))->wherenotnull('user_id')->first();
+        return view('pages.players.guest', compact('guests', 'available', 'used'));
     }
   // ----------- End Index Guest ----------- //
+
+  // -----------Insert Guest ------------//
+  public function storeGuest(Request $request)
+  {
+    $number   = $request->inputcount;
+    $data     = $request->all();
+    $validate = [
+        'inputcount' => 'required|integer',
+    ];
+
+    $validator = Validator::make($data,$validate);
+
+    if($validator->fails())
+    {  
+      return back()->withInput()->with('alert', $validator->errors()->first());
+    }
+
+      if($number)
+      {
+        for ($i=1; $i <= $number; $i++) {
+            $a = UserRandom::where('user_type', '=', 2)->where('isused', '=', 0)->first();
+            $guestId[] = [
+              'guest_id'   => $a->user_id,
+            ];
+            $b = UserRandom::where('user_id', '=', $a->user_id)->update(['isused' => 1]);
+        }
+        UserGuest::insert($guestId);
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new user Random with '.$number.' Record'
+        ]);
+
+        return back()->with('success', 'Input Data Successfull with '.$number.' Record');
+      }
+    return back()->with('alert', 'Number of inputs filled in Player ID can\'t be NULL ');
+  }
+  // -----------End Insert Guest ---------------//
 //****************************************** End Menu Guest ******************************************//
 
 
