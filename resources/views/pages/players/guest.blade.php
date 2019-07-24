@@ -77,7 +77,7 @@
         {
             $('#username').prop('readonly', true);
             $('#username').prop('disabled', true);
-            $('#username').val(m);
+            $('#username').val("");
             $('#mindate').prop('readonly', true);
             $('form input[type="date"]').prop("disabled", false);
             var minDate = $("#mindate").val("");
