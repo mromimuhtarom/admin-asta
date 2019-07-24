@@ -370,9 +370,10 @@ class PlayersController extends Controller
                     'asta_db.user_guest.device_id'
                   )
                   ->get();
+        $datenow   = Carbon::now('GMT+7');
         $available = UserGuest::select(DB::raw('count(guest_id) as totalguest'))->wherenull('user_id')->first();
-        $used = UserGuest::select(DB::raw('count(guest_id) as totalguest'))->wherenotnull('user_id')->first();
-        return view('pages.players.guest', compact('guests', 'available', 'used'));
+        $used      = UserGuest::select(DB::raw('count(guest_id) as totalguest'))->wherenotnull('user_id')->first();
+        return view('pages.players.guest', compact('guests', 'available', 'used', 'datenow'));
     }
   // ----------- End Index Guest ----------- //
 
@@ -414,6 +415,64 @@ class PlayersController extends Controller
     return back()->with('alert', 'Number of inputs filled in Player ID can\'t be NULL ');
   }
   // -----------End Insert Guest ---------------//
+
+  // -----------Search Guest -------------- //
+  public function searchGuest(Request $request)
+  {
+    $username = $request->inputPlayer;
+    $status   = $request->inputStatus;
+    $minDate  = $request->inputMinDate;
+    $maxDate  = $request->inputMaxDate;
+  
+
+    if($status == 'nonused' && $minDate == NULL && $maxDate == NULL)
+    {
+        $guests   = UserGuest::select(
+                      'asta_db.user_guest.device_id',
+                      'asta_db.user_guest.guest_id', 
+                      'asta_db.user_guest.device_timer',
+                      'asta_db.user_guest.user_id',
+                      DB::raw("'Non Used' AS status")
+                    )
+                    ->get();   
+      return view('pages.players.guest_detail', compact('guests', 'status'));
+    } else if($username != NULL && $status == 'used' && $minDate!= NULL && $maxDate != NULL)
+    {
+        $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
+                    ->select(
+                      'asta_db.user.username',
+                      'asta_db.user_guest.guest_id',
+                      'asta_db.user_guest.device_id', 
+                      'asta_db.user_guest.device_timer',
+                      'asta_db.user_guest.user_id',
+                      DB::raw("'Used' AS status")
+                    )
+                    ->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+                    ->wherebetween('asta_db.user_guest.device_timer', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                    ->get();   
+       return view('pages.players.guest_detail', compact('guests', 'status'));
+    } else if($status == 'used' && $minDate!= NULL && $maxDate != NULL)
+    {
+        $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
+                    ->select(
+                      'asta_db.user.username',
+                      'asta_db.user_guest.guest_id',
+                      'asta_db.user_guest.device_id', 
+                      'asta_db.user_guest.device_timer',
+                      'asta_db.user_guest.user_id',
+                      DB::raw("'Used' AS status")
+                    )
+                    ->wherebetween('asta_db.user_guest.device_timer', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                    ->get();   
+       return view('pages.players.guest_detail', compact('guests', 'status'));
+    } else if($minDate == NULL || $maxDate == NULL || $minDate == NULL && $maxDate == NULL)
+    {
+      return self::indexGuest()->with('alert', 'You must to Choose Status');
+    }
+
+
+  }
+  // -----------End Search Guest -----------------//
 //****************************************** End Menu Guest ******************************************//
 
 

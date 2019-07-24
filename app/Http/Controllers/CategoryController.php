@@ -189,6 +189,7 @@ class CategoryController extends Controller
         }
 
         $categoryname   = $request->categoryName;
+        $stake          = $request->stake;
         $minbuy         = $request->minbuy;
         $maxbuy         = $request->maxbuy;
 
@@ -196,7 +197,7 @@ class CategoryController extends Controller
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
             'max_buy'   => $maxbuy,
-            'stake'     => '0',
+            'stake'     => $stake,
             'timer'     => '0'
         ]);
 
@@ -381,17 +382,23 @@ class CategoryController extends Controller
         $name  = $request->name;
         $value = $request->value;
   
-  
-        BigTwoRoom::where('room_id', '=', $pk)->update([
-            $name => $value 
-        ]);
+        if($name != 'stake')
+        {
+            BigTwoRoom::where('room_id', '=', $pk)->update([
+                $name => $value 
+            ]);
+        } else if($name == 'stake')
+        {
+            $count = $value * 3 * 13;
+            BigTwoRoom::where('room_id', '=', $pk)->update([
+                'stake'   => $value,
+                'min_buy' => $count
+            ]); 
+        }
   
         switch ($name) {
             case "name":
                 $name = "Room Name";
-                break;
-            case "stake":
-                $name = "Stake";
                 break;
             case "min_buy":
                 $name = "Min Buy";
