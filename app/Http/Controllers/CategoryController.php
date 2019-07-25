@@ -230,17 +230,18 @@ class CategoryController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $categoryname   = $request->categoryName;
-        $minbuy         = $request->minbuy;
-        $maxbuy         = $request->maxbuy;
+        $categoryname = $request->categoryName;
+        $minbuy       = $request->minbuy;
+        $maxbuy       = $request->maxbuy;
+        $stake        = $request->stake;
         
 
         $dms_category = DominoSusunRoom::create([
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
             'max_buy'       => $maxbuy,
-            'stake'         => '0',
-            'stake_pass'    => '0',
+            'stake'         => $stake,
+            'stake_pass'    => $stake,
             'timer'         => '0'
         ]);
 
@@ -438,10 +439,22 @@ class CategoryController extends Controller
         $name  = $request->name;
         $value = $request->value;
   
-  
-        DominoSusunRoom::where('room_id', '=', $pk)->update([
-            $name => $value 
-        ]);
+        if($name != 'stake')
+        {
+            DominoSusunRoom::where('room_id', '=', $pk)->update([
+                $name => $value 
+            ]);
+        } else if($name == 'stake')
+        {
+            $countminbuy = $value * 10;
+            $countmaxbuy = $countminbuy * 4;
+            DominoSusunRoom::where('room_id', '=', $pk)->update([
+                'stake'   => $value,
+                'stake_pass'    => $value,
+                'min_buy' => $countminbuy,
+                'max_buy' => $countmaxbuy
+            ]);
+        }
   
         switch ($name) {
             case "name":
