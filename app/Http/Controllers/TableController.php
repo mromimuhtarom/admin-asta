@@ -153,6 +153,9 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
+        $category = $request->category;
+        $sb       = $request->sb;
+        $bb       = $request->bb;
         $validator = Validator::make($request->all(),[
             'tableName'     => 'required',
             'category'      => 'required',
@@ -162,14 +165,16 @@ class TableController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
-
+        // $findcategory =  TpkRoom::where('room_id', '=', $category)->first();
+        // $bb = $findcategory->min_buy / 5;
+        // $sb = $bb / 2;
         
         TpkTable::create([
             'name'          => $request->tableName,
             'room_id'        => $request->category,
             'max_player'    =>  '0',
-            'small_blind'   =>  '0',
-            'big_blind'     =>  '0',
+            'small_blind'   =>  $sb,
+            'big_blind'     =>  $bb,
             'jackpot'       =>  '0'
         ]);
 
@@ -338,10 +343,23 @@ class TableController extends Controller
         $name  = $request->name;
         $value = $request->value;
   
-  
-        TpkTable::where('table_id', '=', $pk)->update([
-          $name => $value
-        ]);
+        if($name != 'room_id')
+        {
+            TpkTable::where('table_id', '=', $pk)->update([
+                $name => $value
+              ]);
+        } else if($name == 'room_id')
+        {
+            $findcategory = TpkRoom::where('room_id', '=', $value)->first();
+            $bb           = $findcategory->min_buy / 5;
+            $sb           = $bb / 2;
+            
+            TpkTable::where('table_id', '=', $pk)->update([
+                'room_id'     => $value,
+                'small_blind' => $sb,
+                'big_blind'   => $bb
+              ]);
+        }
   
         switch ($name) {
             case "name":
