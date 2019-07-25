@@ -275,16 +275,17 @@ class CategoryController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $categoryname   = $request->categoryName;
-        $minbuy         = $request->minbuy;
-        $maxbuy         = $request->maxbuy;
+        $categoryname = $request->categoryName;
+        $minbuy       = $request->minbuy;
+        $maxbuy       = $request->maxbuy;
+        $stake        = $request->stake;
         
 
         $dmq_category = DominoQRoom::create([
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
             'max_buy'       => $maxbuy,
-            'stake'         => '0',
+            'stake'         => $stake,
             'timer'         => '0'
         ]);
 
@@ -501,10 +502,21 @@ class CategoryController extends Controller
         $name  = $request->name;
         $value = $request->value;
   
-  
-        DominoQRoom::where('room_id', '=', $pk)->update([
-            $name => $value 
-        ]);
+        if($name != 'stake')
+        {
+            DominoQRoom::where('room_id', '=', $pk)->update([
+                $name => $value 
+            ]);
+        } else if($name == 'stake')
+        {
+            $minbuy = $value * 10;
+            $maxbuy = $minbuy *2;
+            DominoQRoom::where('room_id', '=', $pk)->update([
+                'stake'   => $value,
+                'min_buy' => $minbuy,
+                'max_buy' => $maxbuy
+            ]);
+        }
   
         switch ($name) {
             case "name":
