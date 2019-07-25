@@ -27,7 +27,7 @@
 	 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js"></script> --}}
 
 </head>
-<body class="   smart-style-0">
+<body class="smart-style-0">
   
   <!-- BEGIN .sa-wrapper -->
   <div class="sa-wrapper">
@@ -40,8 +40,8 @@
         </div>
         <!-- END .sa-shortcuts -->
         
-        {{-- <header class="sa-page-header">
-          <div class="sa-header-container h-100">
+        <header class="sa-page-header">
+          {{-- <div class="sa-header-container h-100">
             <div class="d-table d-table-fixed h-100 w-100">
               <div class="sa-logo-space d-table-cell h-100">
                 <div class="flex-row d-flex align-items-center h-100">
@@ -138,8 +138,8 @@
               </div>
             </div>
             
-          </div>
-        </header> --}}
+          </div> --}}
+        </header>
         <!-- END .sa-page-header -->
     <div class="sa-page-body">
     
