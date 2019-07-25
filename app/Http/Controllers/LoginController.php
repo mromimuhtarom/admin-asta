@@ -13,11 +13,16 @@ use Carbon\Carbon;
 use App\OperatorActive;
 use App\User;
 use Cache;
+use Artisan;
 
 class LoginController extends Controller
 {
     public function loginbefore()
     {
+        Artisan::call('route:clear');
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
         Cache::flush();
         return view('login');
     }

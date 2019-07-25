@@ -13,7 +13,7 @@ Route::get('/avatars/{avatar}', 'PlayersController@avatar')->name('imageAvatar')
 });
 Route::get('/config-clear', function() {
     $exitCode = Artisan::call('config:clear');
-    return 'Routes cache cleared';
+    return 'config cache cleared';
 });
 
 //Clear config cache:
@@ -34,6 +34,7 @@ Route::get('/view-clear', function() {
     return 'View cache cleared';
 });
 Route::middleware('authenticated')->group(function(){
+
     Route::group(['prefix' => 'Edit-Profile'], function(){
         Route::get('/profile', 'ProfileController@index')->name('profile-view');
         Route::post('/profile-password', 'ProfileController@password')->name('profile-password');

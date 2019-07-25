@@ -11,6 +11,7 @@ use App\User;
 use Session;
 use Cache;
 use DB;
+use Artisan;
 
 class Authenticated
 {
@@ -37,6 +38,10 @@ class Authenticated
             $operator_active = OperatorActive::where('op_id', '=', $op)->first();
             $cahce_op = OperatorActive::where('op_id', '=', $op_idcache)->first();
             $operator = User::where('op_id', '=', $op_idcache)->first();
+            Artisan::call('route:clear');
+            Artisan::call('config:clear');
+            Artisan::call('cache:clear');
+            Artisan::call('view:clear');
 
             if ($operator_active)
             {
