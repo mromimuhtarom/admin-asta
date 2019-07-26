@@ -128,7 +128,7 @@
           <!-- Button tambah chip store baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu && $mainmenu)
+              @if($menu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createChipStore">
                 <i class="fa fa-plus"></i> Create New Slide Banner
               </button>
@@ -147,21 +147,21 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu && $mainmenu)
+                @if($menu)
                   <th class="th-sm"></th>
                 @endif
                 <th style="width:10px;">Image</th>
                 <th>Caption</th>
                 <th>Action</th>
                 <th>Active</th>
-                @if($menu && $mainmenu)
+                @if($menu)
                   <th></th>
                 @endif
               </tr>
             </thead>
             <tbody>
               @foreach($slide_banner as $banner)
-                @if($menu && $mainmenu)
+                @if($menu)
                   <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $banner->id }}"></td>
                     <td>
