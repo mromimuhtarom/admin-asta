@@ -156,6 +156,7 @@ class TableController extends Controller
         $category = $request->category;
         $sb       = $request->sb;
         $bb       = $request->bb;
+        $dbcategory = 
         $validator = Validator::make($request->all(),[
             'tableName'     => 'required',
             'category'      => 'required',
@@ -165,10 +166,17 @@ class TableController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
-        // $findcategory =  TpkRoom::where('room_id', '=', $category)->first();
-        // $bb = $findcategory->min_buy / 5;
-        // $sb = $bb / 2;
-        
+        $findcategory =  TpkRoom::where('room_id', '=', $category)->first();
+        $bbvalidation = $findcategory->min_buy / 10;
+        $sbvalidation = $bbvalidation / 2;
+        if($bb < $bbvalidation)
+        {
+            return back()->with('alert', 'your Big blind can\'t be under Minbuy divided 10 '.$bbvalidation.' ');
+        } else if($sb < $sbvalidation)
+        {
+            return back()->with('alert', 'your Small Blind can\'t be under Big Blind divided 2 '.$sbvalidation.' ');
+        }
+
         TpkTable::create([
             'name'          => $request->tableName,
             'room_id'        => $request->category,
@@ -339,25 +347,42 @@ class TableController extends Controller
      */
     public function update(Request $request)
     {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+        $pk     = $request->pk;
+        $name   = $request->name;
+        $value  = $request->value;
+        $roomid = $request->roomid;
+        $findcategoryid = TpkTable::where('table_id', '=', $pk)->first();
+        $findcategory = TpkRoom::where('room_id', '=', $findcategoryid->room_id)->first();
+        $bbvalidation = $findcategory->min_buy / 10;
+        $sbvalidation = $bbvalidation / 2;
   
-        if($name != 'room_id')
+        if($name == 'big_blind')
+        {
+            if($value < $bbvalidation)
+            {
+                return response()->json("your Small Blind can't be under Big Blind divided 2 or under ".$bbvalidation." ", 400);
+            } else 
+            {
+                TpkTable::where('table_id', '=', $pk)->update([
+                    'big_blind'   => $value
+                  ]);
+            }
+        } else if($name == 'small_blind')
+        {
+
+            if($value < $sbvalidation)
+            {
+                return response()->json("your Small Blind can't be under Big Blind divided 2 or under ".$findcategory->min_buy." ", 400);
+            } else 
+            {
+                TpkTable::where('table_id', '=', $pk)->update([
+                    'small_blind'   => $value
+                  ]);
+            }
+        } else 
         {
             TpkTable::where('table_id', '=', $pk)->update([
                 $name => $value
-              ]);
-        } else if($name == 'room_id')
-        {
-            $findcategory = TpkRoom::where('room_id', '=', $value)->first();
-            $bb           = $findcategory->min_buy / 5;
-            $sb           = $bb / 2;
-            
-            TpkTable::where('table_id', '=', $pk)->update([
-                'room_id'     => $value,
-                'small_blind' => $sb,
-                'big_blind'   => $bb
               ]);
         }
   
@@ -405,7 +430,6 @@ class TableController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
-
 
         BigTwoTable::where('table_id', '=', $pk)->update([
         $name => $value

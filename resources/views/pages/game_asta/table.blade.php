@@ -23,12 +23,9 @@
   @endif
 
     @if (\Session::has('alert'))
-    <div class="alert alert-danger">
         <div class="alert alert-danger">
             <div>{{Session::get('alert')}}</div>
         </div>
-    </div>
-        
     @endif
     
     @if (\Session::has('success'))
@@ -111,10 +108,8 @@
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Table Name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('Table-update')}}">{{ $tb->roomname }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update')}}">{{ $tb->max_player }}</a></td>
-                    {{-- <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td> --}}
-                    <td>{{ $tb->small_blind }}</td>
-                    <td>{{ $tb->big_blind }}</td>
+                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->table_id }}" data-roomid="{{ $tb->room_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->table_id }}" data-roomid="{{ $tb->room_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td>
                     <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpot }}</a></td>
                     <td><a href="#" style="color:red;" class="delete{{ $tb->table_id }}" id="delete" data-pk="{{ $tb->table_id }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
@@ -167,10 +162,10 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="sb" name="sb" placeholder="Small Blind" required="" readonly>
+                  <input type="text" class="form-control" id="sb" name="sb" placeholder="Small Blind" required="">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="bb" name="bb" placeholder="Big Blind" required="" readonly>
+                  <input type="text" class="form-control" id="bb" name="bb" placeholder="Big Blind" required="">
                 </div>
               </div>
             </div>
@@ -224,25 +219,25 @@
         });
       });
 
-      $('#category').click(function(e) {
-        e.preventDefault();
-         @php 
-         foreach($category as $ct)
-         {
-         echo 'if($(this).val() == "'.$ct->room_id.'") {';
-         echo 'var minbuy = '.$ct->min_buy.';';
-         echo 'var countbb = minbuy / 5;';
-         echo 'var countsb = countbb / 2;';
-         echo '$("#sb").val(countsb);';
-         echo '$("#bb").val(countbb);';
-         echo '}';
-         }
-         @endphp
-         else {
-           $('#sb').val("");
-           $('#bb').val("");
-         }
-      })
+      // $('#category').click(function(e) {
+      //   e.preventDefault();
+      //    @php 
+      //    foreach($category as $ct)
+      //    {
+      //    echo 'if($(this).val() == "'.$ct->room_id.'") {';
+      //    echo 'var minbuy = '.$ct->min_buy.';';
+      //    echo 'var countbb = minbuy / 10;';
+      //    echo 'var countsb = countbb / 2;';
+      //    echo '$("#sb").val(countsb);';
+      //    echo '$("#bb").val(countbb);';
+      //    echo '}';
+      //    }
+      //    @endphp
+      //    else {
+      //      $('#sb').val("");
+      //      $('#bb').val("");
+      //    }
+      // })
     
       table = $('table.table').dataTable({
         "sDom": "t"+"<'dt-toolbar-footer d-flex'>",

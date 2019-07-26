@@ -64,6 +64,7 @@ class CategoryController extends Controller
                         'room_id'
                     )
                     ->get();
+        
         $menu     = MenuClass::menuName('Category Big Two');
         $submenu  = MenuClass::menuName('Big Two');
         $mainmenu = MenuClass::menuName('Games');
@@ -183,7 +184,7 @@ class CategoryController extends Controller
             'minbuy'        => 'required|integer',
             'maxbuy'        => 'required|integer',
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
@@ -192,6 +193,12 @@ class CategoryController extends Controller
         $stake          = $request->stake;
         $minbuy         = $request->minbuy;
         $maxbuy         = $request->maxbuy;
+
+        $minbuyvalidation = $stake * 3 * 13;
+        if($minbuy < $minbuyvalidation)
+        {
+            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied 3 multiplied 13');
+        } 
 
         $bgt_category = BigTwoRoom::create([
             'name'      => $categoryname,
@@ -230,11 +237,19 @@ class CategoryController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $categoryname = $request->categoryName;
-        $minbuy       = $request->minbuy;
-        $maxbuy       = $request->maxbuy;
-        $stake        = $request->stake;
-        
+        $categoryname     = $request->categoryName;
+        $minbuy           = $request->minbuy;
+        $maxbuy           = $request->maxbuy;
+        $stake            = $request->stake;
+        $minbuyvalidation = $stake * 10;
+        $maxbuyvalidation = $minbuyvalidation * 4;
+        if($minbuy < $minbuyvalidation)
+        {
+            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied 10 or under '.$minbuyvalidation);
+        }  else if($maxbuy < $maxbuyvalidation)
+        {
+            return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied 4 or under '.$maxbuyvalidation);
+        }
 
         $dms_category = DominoSusunRoom::create([
             'name'          => $categoryname,
@@ -384,17 +399,21 @@ class CategoryController extends Controller
         $name  = $request->name;
         $value = $request->value;
   
-        if($name != 'stake')
+        if($name != 'min_buy')
         {
             BigTwoRoom::where('room_id', '=', $pk)->update([
                 $name => $value 
             ]);
-        } else if($name == 'stake')
+        } else if($name == 'min_buy')
         {
-            $count = $value * 3 * 13;
+            $validasiminbuy = BigTwoRoom::where('room_id', '=', $pk)->first();
+            $count          = $validasiminbuy->stake * 3 * 13;
+            if($count > $value)
+            {
+                return response()->json("Min Buy can't be under Stake multiplied 3 multiplied 13 or under ".$count." ", 400);
+            }
             BigTwoRoom::where('room_id', '=', $pk)->update([
-                'stake'   => $value,
-                'min_buy' => $count
+                'min_buy'   => $value
             ]); 
         }
   
@@ -424,6 +443,8 @@ class CategoryController extends Controller
           'datetime'  => Carbon::now('GMT+7'),
           'desc'      => 'Edit '.$name.' in menu Category Big Two with roomid '.$pk.' to '. $value
         ]);
+
+        
     }
 
     /**
@@ -436,26 +457,48 @@ class CategoryController extends Controller
      */
     public function DominoSusunupdate(Request $request)
     {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+        $pk          = $request->pk;
+        $name        = $request->name;
+        $value       = $request->value;
+        $dmsroom     = DominoSusunRoom::where('room_id', '=', $pk)->first();
+        $countminbuy = $dmsroom->stake * 10;
+        $countmaxbuy = $countminbuy * 4;
   
-        if($name != 'stake')
+        if($name == 'stake')
+        {
+
+            DominoSusunRoom::where('room_id', '=', $pk)->update([
+                'stake'      => $value,
+                'stake_pass' => $value,
+            ]);
+        } else if($name == 'min_buy')
+        {
+            if($value < $countminbuy)
+            {
+                return response()->json("Min Buy can't be under Stake multiplied 10 or under ".$countminbuy." ", 400);
+            } else 
+            {
+                DominoSusunRoom::where('room_id', '=', $pk)->update([
+                    'min_buy' => $value 
+                ]);
+            }
+        } else if($name == 'max_buy')
+        {
+            if($value < $countmaxbuy)
+            {
+                return response()->json("Max Buy can't be under Stake multiplied 4 or under ".$countmaxbuy." ", 400);
+            } else 
+            {
+                DominoSusunRoom::where('room_id', '=', $pk)->update([
+                    'max_buy' => $value 
+                ]);
+            }
+        } else 
         {
             DominoSusunRoom::where('room_id', '=', $pk)->update([
                 $name => $value 
             ]);
-        } else if($name == 'stake')
-        {
-            $countminbuy = $value * 10;
-            $countmaxbuy = $countminbuy * 4;
-            DominoSusunRoom::where('room_id', '=', $pk)->update([
-                'stake'   => $value,
-                'stake_pass'    => $value,
-                'min_buy' => $countminbuy,
-                'max_buy' => $countmaxbuy
-            ]);
-        }
+        } 
   
         switch ($name) {
             case "name":
