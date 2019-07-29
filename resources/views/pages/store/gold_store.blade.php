@@ -72,9 +72,10 @@
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Gold Awarded</th>
                 <th class="th-sm">Price Cash</th>
+                <th class="th-sm">Item Type</th>
                 <th class="th-sm">Pay Transaction</th>
                 <th class="th-sm">Google Key</th>
-                <th class="th-sm">Active</th>
+                <th class="th-sm">Status</th>
                 @if($menu && $mainmenu)
                   <th>Action</th>
                 @endif
@@ -84,17 +85,18 @@
               @foreach($getGolds as $gold)
               @if($menu && $mainmenu)
               <tr>
-                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->id }}"></td>
-                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
-                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="goldAwarded" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->goldAwarded }}</a></td>
-                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
-                <td><a href="#" class="transactionType" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->transaction_type) }}</a></td>
-                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</a></td>
-                <td><a href="#" class="strEnable" data-title="Active" data-name="active" data-pk="{{ $gold->id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->active) }}</a></td>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
+                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->item_get }}</a></td>
+                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
+                <td>{{ $gold->strItemType() }}</td>
+                <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
+                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</a></td>
+                <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
                 <td style="text-align:center;">
-                  <a href="#" style="color:red;" class="delete{{ $gold->id }}" 
+                  <a href="#" style="color:red;" class="delete{{ $gold->item_id }}" 
                     id="delete" 
-                    data-pk="{{ $gold->id }}" 
+                    data-pk="{{ $gold->item_id }}" 
                     data-toggle="modal" 
                     data-target="#delete-modal">
                     <i class="fa fa-times"></i>
@@ -104,8 +106,9 @@
               @else 
               <tr>
                 <td>{{ $gold->name }}</td>
-                <td>{{ $gold->goldAwarded }}</td>
+                <td>{{ $gold->item_get }}</td>
                 <td>{{ $gold->price }}</td>
+                <td>{{ $gold->strItemType() }}</td>
                 <td>{{ strTypeTransaction($gold->transaction_type) }}</td>
                 <td>{{ $gold->google_key }}</td>
                 <td>{{ strEnabledDisabled($gold->active) }}</td>
@@ -254,20 +257,20 @@
       // delete gold store
       @php
         foreach($getGolds as $gold) {
-          echo'$(".delete'.$gold->id.'").hide();';
-          echo'$(".deletepermission'.$gold->id.'").on("click", function() {';
-            echo 'if($( ".deletepermission'.$gold->id.':checked" ).length > 0)';
+          echo'$(".delete'.$gold->item_id.'").hide();';
+          echo'$(".deletepermission'.$gold->item_id.'").on("click", function() {';
+            echo 'if($( ".deletepermission'.$gold->item_id.':checked" ).length > 0)';
             echo '{';
-              echo '$(".delete'.$gold->id.'").show();';
+              echo '$(".delete'.$gold->item_id.'").show();';
             echo'}';
             echo'else';
             echo'{';
-              echo'$(".delete'.$gold->id.'").hide();';
+              echo'$(".delete'.$gold->item_id.'").hide();';
             echo'}';
 
           echo '});';
         
-          echo'$(".delete'.$gold->id.'").click(function(e) {';
+          echo'$(".delete'.$gold->item_id.'").click(function(e) {';
             echo'e.preventDefault();';
 
             echo"var id = $(this).attr('data-pk');";

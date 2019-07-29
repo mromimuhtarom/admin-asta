@@ -605,10 +605,12 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
-        Route::group(['prefix'  =>  'Gold_Store_Reseller'], function() {
-            Route::middleware('page_denied:Gold Store Reseller')->group(function(){
-                Route::get('GoldStoreReseller-view', 'GoldStoreController@GoldStoreReseller')->name('Gold_Store_Reseller');
-                Route::post('GoldStoreReseller-create', 'GoldStoreController@GoldResellerstore')->name('GoldStoreReseller-create');
+        Route::group(['prefix'  =>  'Item_Store_Reseller'], function() {
+            Route::middleware('page_denied:Item Store Reseller')->group(function(){
+                Route::get('ItemStoreReseller-view', 'ResellerController@ItemStoreReseller')->name('Item_Store_Reseller');
+                Route::post('ItemStoreReseller-create', 'ResellerController@ItemResellerstore')->name('ItemStoreReseller-create');
+                Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
+                Route::delete('ItemStore-delete', 'ResellerControllerr@destroyItemStoreReseller')->name('ItemStore-delete');
             });
         });
 

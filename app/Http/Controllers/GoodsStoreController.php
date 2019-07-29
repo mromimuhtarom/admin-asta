@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classes\MenuClass;
-use App\ItemGoods;
+use App\ItemPoint;
 use App\Log;
 use Session;
 use DB;
@@ -24,16 +24,14 @@ class GoodsStoreController extends Controller
     {
         $menu     = MenuClass::menuName('Gold Store');
         $mainmenu = MenuClass::menuName('Store');
-        $itemGood = ItemGoods::select(
-                        'id',
+        $itemGood = ItemPoint::select(
+                        'item_id',
                         'name',
                         'price',
                         'qty',
-                        'transaction_type',
-                        'google_key',
-                        'active'
+                        'trans_type',
+                        'status'
                     )
-                    ->where('shop_type', '=', 1)
                     ->get();
         $active   = ConfigText::select(
                         'name',
@@ -64,9 +62,8 @@ class GoodsStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $id = ItemGoods::select('id')
-              ->where('shop_type', '=', '1')
-              ->orderBy('id', 'desc')
+        $id = ItemPoint::select('item_id')
+              ->orderBy('item_id', 'desc')
               ->first();
 
 
@@ -80,7 +77,7 @@ class GoodsStoreController extends Controller
         
         $id_new                 = $id_lst + 1;
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
+        $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
@@ -100,9 +97,7 @@ class GoodsStoreController extends Controller
                         return redirect()->route('Goods_Store')->with('alert','Transaction Type can\'t be NULL ');
                     } else if ($request->price == NULL) {
                         return redirect()->route('Goods_Store')->with('alert','Price can\'t be NULL ');
-                    } else if($request->google_key == NULL) {
-                        return redirect()->route('Goods_Store')->with('alert','Google Key can\'t be NULL ');
-                    } else if($request->qty == NULL) {
+                    }  else if($request->qty == NULL) {
                         return redirect()->route('Goods_Store')->with('alert','Quantity can\'t be NULL ');
                     } else {
 
@@ -110,7 +105,6 @@ class GoodsStoreController extends Controller
                             'title'            => 'required',
                             'transaction_type' => 'required|integer|between:1,8',
                             'price'            => 'required|integer',
-                            'google_key'       => 'required',
                             'qty'              => 'required',
                         ]);
                     
@@ -118,17 +112,13 @@ class GoodsStoreController extends Controller
                             return back()->withErrors($validator->errors());
                         }
 
-                        $goods = ItemGoods::create([
-                            'id'               => $id_new,
-                            'name'             => $request->title,
-                            'transaction_type' => $request->transaction_type,
-                            'storeId'          => '1',
-                            'price'            => $request->price,
-                            'active'           => '1',
-                            'shop_type'        => '1',
-                            'google_key'       => $request->google_key,
-                            'image'            => $nama_file_unik,
-                            'qty'              => $request->qty
+                        $goods = ItemPoint::create([
+                            'item_id'         => $id_new,
+                            'name'       => $request->title,
+                            'trans_type' => $request->transaction_type,
+                            'price'      => $request->price,
+                            'status'     => '1',
+                            'qty'        => $request->qty
                         ]);
             
                         Log::create([
@@ -154,7 +144,7 @@ class GoodsStoreController extends Controller
         }
         else
         {       
-            return redirect()->route('Goods_Store')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Goods_Store')->with('alert','Image must be in png');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -194,7 +184,7 @@ class GoodsStoreController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        ItemGoods::where('id', '=', $pk)->update([
+        ItemPoint::where('item_id', '=', $pk)->update([
             $name => $value
         ]);
 
@@ -208,14 +198,11 @@ class GoodsStoreController extends Controller
             case 'qty':
                 $name = 'Quantity';
                 break;
-            case 'transaction_type':
+            case 'trans_type':
                 $name = 'Transaction Type';
                 break;
-            case 'google_key':
-                $name = 'Google Key';
-                break;
-            case 'active':
-                $name = 'Active';
+            case 'status':
+                $name = 'Status';
                 break;
             
             default:
@@ -233,15 +220,13 @@ class GoodsStoreController extends Controller
     public function updateimage(Request $request)
     {
         $pk                     = $request->pk;
-        $id                     = ItemGoods::where('id', '=', $pk)->where('shop_type', '=', 1)->first();
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('png', 'jpg', 'PNG', 'JPG');
+        $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
         $ukuran                 = $_FILES['file']['size'];
-        $filename               = $id->id;
-        $nama_file_unik         = $filename.'.'.$ekstensi;
+        $nama_file_unik         = $pk.'.'.$ekstensi;
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
@@ -249,9 +234,6 @@ class GoodsStoreController extends Controller
             {
                 if($file->move(public_path('../public/upload/Goods'), $nama_file_unik))
                 {
-                    ItemGoods::where('id', '=', $pk)->update([
-                        'image' =>  $nama_file_unik
-                    ]);
     
                     Log::create([
                         'op_id'     => Session::get('userId'),
@@ -274,7 +256,7 @@ class GoodsStoreController extends Controller
         }
         else 
         {
-            return redirect()->route('Goods_Store')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Goods_Store')->with('alert', 'Image Must Be png Format');
         }
 
     }
@@ -288,11 +270,11 @@ class GoodsStoreController extends Controller
     public function destroy(Request $request)
     {
         $id    = $request->id;
-        $goods = ItemGoods::where('id', '=', $id)->first();
+        $goods = ItemPoint::where('item_id', '=', $id)->first();
         if($id != '')
         {
-            ItemGoods::where('id', '=', $id)->delete();
-            $path = '../public/upload/Goods/'.$goods->image;
+            ItemPoint::where('item_id', '=', $id)->delete();
+            $path = '../public/upload/Goods/'.$goods->item_id.'.png';
             File::delete($path);            
             Log::create([
                 'op_id'     => Session::get('userId'),

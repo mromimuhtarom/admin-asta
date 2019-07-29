@@ -2,14 +2,13 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Gold_Store_Reseller') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Gold_Store_Reseller') }}">Gold Store Resller</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">Reseller</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">Gold Store Resller</a></li>
 @endsection
 
 
 
 @section('content')
-
 @if (count($errors) > 0)
 <div class="error-val">
   <div class="alert alert-danger">
@@ -33,7 +32,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong>Gold Store</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i> Item Store Reseller</strong></h2>				
     </div>
   </header>
 
@@ -46,9 +45,9 @@
           <!-- Button tambah chip store baru -->
           <div class="col-9 col-sm-5 col-md-5 col-lg-5">
             <div class="input-group">
-              @if($menu)
+              @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoldStore">
-                <i class="fa fa-plus"></i> Create New Gold Store Reseller
+                <i class="fa fa-plus"></i> Create New Item Store Reseller
               </button>
               @endif
             </div>
@@ -59,41 +58,43 @@
 
       </div>
       
-      <div class="custom-scroll table-responsive" style="max-height:700px;">
+      <div class="custom-scroll table-responsive" style="height:800px;">
         
         <div class="table-outer">
           <table class="table table-bordered">
             <thead>
               <tr>
-                @if($menu)
+                @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Gold Awarded</th>
                 <th class="th-sm">Price Cash</th>
+                <th class="th-sm">Item Type</th>
                 <th class="th-sm">Pay Transaction</th>
                 <th class="th-sm">Google Key</th>
-                <th class="th-sm">Active</th>
-                @if($menu)
+                <th class="th-sm">Status</th>
+                @if($menu && $mainmenu)
                   <th>Action</th>
                 @endif
               </tr>
             </thead>
             <tbody>
-              @foreach($gold_store as $gold)
-              @if($menu)
+              @foreach($getItems as $gold)
+              @if($menu && $mainmenu)
               <tr>
-                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->id }}"></td>
-                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
-                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="goldAwarded" data-pk="{{ $gold->id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->goldAwarded }}</a></td>
-                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
-                <td><a href="#" class="transactionType" data-title="Price" data-name="price" data-pk="{{ $gold->id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->transaction_type) }}</a></td>
-                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</a></td>
-                <td><a href="#" class="strEnable" data-title="Active" data-name="active" data-pk="{{ $gold->id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->active) }}</a></td>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
+                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ $gold->item_get }}</a></td>
+                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->price }}</a></td>
+                <td>{{ $gold->strItemType() }}</td>
+                <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
+                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->google_key }}</a></td>
+                <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
                 <td style="text-align:center;">
-                  <a href="#" style="color:red;" class="delete{{ $gold->id }}" 
+                  <a href="#" style="color:red;" class="delete{{ $gold->item_id }}" 
                     id="delete" 
-                    data-pk="{{ $gold->id }}" 
+                    data-pk="{{ $gold->item_id }}" 
                     data-toggle="modal" 
                     data-target="#delete-modal">
                     <i class="fa fa-times"></i>
@@ -103,8 +104,9 @@
               @else 
               <tr>
                 <td>{{ $gold->name }}</td>
-                <td>{{ $gold->goldAwarded }}</td>
+                <td>{{ $gold->item_get }}</td>
                 <td>{{ $gold->price }}</td>
+                <td>{{ $gold->strItemType() }}</td>
                 <td>{{ strTypeTransaction($gold->transaction_type) }}</td>
                 <td>{{ $gold->google_key }}</td>
                 <td>{{ strEnabledDisabled($gold->active) }}</td>
@@ -127,19 +129,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create New Gold Store</h4>
-        <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-hidden="true">
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create New Item Store Reseller</h4>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
       </div>
-      <form action="{{ route('GoldStoreReseller-create') }}" method="post">
+      <form action="{{ route('ItemStoreReseller-create') }}" method="post">
         @csrf
         <div class="modal-body">
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="number" name="goldAwarded" class="form-control" id="basic-url" placeholder="gold awarded">
+            <input type="number" name="goldAwarded" class="form-control" id="basic-url" placeholder="Item awarded">
           </div>
           <div class="form-group">
             <input type="number" name="priceCash" class="form-control" id="basic-url" placeholder="price cash">
@@ -150,10 +152,10 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn sa-btn-primary">
             <i class="fa fa-save"></i> Save
           </button>
-          <button type="submit" class="btn btn-danger" data-dismiss="modal">
+          <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
             <i class="fa fa-remove"></i> Cancel
           </button>
         </div>
@@ -169,20 +171,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
-        <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="fa fa-remove"></i>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i> 
         </button>
       </div>
       <div class="modal-body">
         Are You Sure Want To Delete It
-        <form action="{{ route('GoldStore-delete') }}" method="post">
+        <form action="{{ route('ItemStore-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
-          <input type="hidden" name="id" id="userid" value="">
+          <input type="hidden" name="userid" id="userid" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
-        <button type="button" class="btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
       </div>
         </form>
     </div>
@@ -227,14 +229,10 @@
           {value: '', text: 'Choose For Activation'},
           // {value: 0, text: 'Disabled'},
           // {value: 1, text: 'Enabled'}
-          @php
-            $active = DB::table('asta_db.config_text')->where('id', '=', 4)->get();
-            foreach($active as $atv) {
-              $value = str_replace(':', ',', $atv->value);
-              $endis = explode(",", $value);
+          @php            
+              // $endis = preg_split( "/ :|, /", $atv->value );
               echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
               echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
-            }
           @endphp
         ]
       });
@@ -256,21 +254,21 @@
 
       // delete gold store
       @php
-        foreach($gold_store as $gold) {
-          echo'$(".delete'.$gold->id.'").hide();';
-          echo'$(".deletepermission'.$gold->id.'").on("click", function() {';
-            echo 'if($( ".deletepermission'.$gold->id.':checked" ).length > 0)';
+        foreach($getItems as $gold) {
+          echo'$(".delete'.$gold->item_id.'").hide();';
+          echo'$(".deletepermission'.$gold->item_id.'").on("click", function() {';
+            echo 'if($( ".deletepermission'.$gold->item_id.':checked" ).length > 0)';
             echo '{';
-              echo '$(".delete'.$gold->id.'").show();';
+              echo '$(".delete'.$gold->item_id.'").show();';
             echo'}';
             echo'else';
             echo'{';
-              echo'$(".delete'.$gold->id.'").hide();';
+              echo'$(".delete'.$gold->item_id.'").hide();';
             echo'}';
 
           echo '});';
         
-          echo'$(".delete'.$gold->id.'").click(function(e) {';
+          echo'$(".delete'.$gold->item_id.'").click(function(e) {';
             echo'e.preventDefault();';
 
             echo"var id = $(this).attr('data-pk');";

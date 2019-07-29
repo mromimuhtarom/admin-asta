@@ -101,6 +101,12 @@
   </div>
 @endif
 
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+  <p>{{\Session::get('alert')}}</p>
+</div>
+@endif
+
 <!-- Table -->
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
 
@@ -143,11 +149,10 @@
                 @endif
                 <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
-                <th class="th-sm">Price Cash</th>
+                <th class="th-sm">Price Point</th>
                 <th class="th-sm">Quantity</th>
                 <th class="th-sm">Pay Transaction</th>
-                <th class="th-sm">Google Key</th>
-                <th class="th-sm">Active</th>
+                <th class="th-sm">Status</th>
                 @if ($menu && $mainmenu)
                   <th class="th-sm">Action</th>
                 @endif
@@ -157,36 +162,35 @@
               @foreach($itemGood as $goods)
               @if($menu && $mainmenu)
               <tr>
-                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->id }}"></td>
+                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->item_id }}"></td>
                 <td>
                   <div class="media-container">
                     <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
                       {{  csrf_field() }}
-                      <span class="media-overlay med-ovlay{{ $goods->id }}">
-                        <input type="hidden" name="pk" value="{{ $goods->id }}">
-                        <input type="file" name="file" id="media-input" class="upload{{ $goods->id }}" accept="image/*">
+                      <span class="media-overlay med-ovlay{{ $goods->item_id }}">
+                        <input type="hidden" name="pk" value="{{ $goods->item_id }}">
+                        <input type="file" name="file" id="media-input" class="upload{{ $goods->item_id }}" accept="image/*">
                         <i class="fa fa-edit media-icon"></i>
                       </span>
                       <figure class="media-object">
-                        <img class="img-object imgupload{{ $goods->id }}" src="/upload/Goods/{{ $goods->image }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                        <img class="img-object imgupload{{ $goods->item_id }}" src="/upload/Goods/{{ $goods->item_id }}.png" style="  display: block;margin-left: auto;margin-right: auto;">
                       </figure>
                     </div>
                     <div class="media-control" align="center" style="margin-top:-1%">
-                      <button class="save-profile{{ $goods->id }}">Save Gift</button>
+                      <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
                     </form>
-                      <button class="edit-profile{{ $goods->id }}">Edit Gift</button>
+                      <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                     </div>
                 </td>
-                <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
-                <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
-                <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
-                <td><a href="#" class="transactionType" data-name="transaction_type" data-pk="{{ $goods->id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->transaction_type) }}</a></td>
-                <td><a href="#" class="usertext" data-name="google_key" data-pk="{{ $goods->id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->google_key }}</a></td>
-                <td><a href="#" class="strEnable" data-name="active" data-pk="{{ $goods->id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->active) }}</a></td>
+                <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
+                <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
+                <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
+                <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td>
+                <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
                 <td>
-                  <a href="#" style="color:red;" class="delete{{ $goods->id }}" 
+                  <a href="#" style="color:red;" class="delete{{ $goods->item_id }}" 
                     id="delete" 
-                    data-pk="{{ $goods->id }}" 
+                    data-pk="{{ $goods->item_id }}" 
                     data-toggle="modal" 
                     data-target="#delete-modal">
                       <i class="fa fa-times"></i>
@@ -198,16 +202,15 @@
                   <td>
                       <div class="media-container">
                         <figure class="media-object">
-                          <img class="img-object imgupload{{ $goods->id }}" src="/upload/Goods/{{ $goods->image }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                          <img class="img-object imgupload{{ $goods->item_id }}" src="/upload/Goods/{{ $goods->item_id }}" style="  display: block;margin-left: auto;margin-right: auto;">
                         </figure>
                       </div>
                   </td>
                   <td>{{ $goods->name }}</td>
                   <td>{{ $goods->price }}</td>
                   <td>{{ $goods->qty }}</td>
-                  <td>{{  strTypeTransaction($goods->transaction_type) }}</td>
-                  <td>{{ $goods->google_key }}</td>
-                  <td>{{ strEnabledDisabled($goods->active) }}</td>
+                  <td>{{  strTypeTransaction($goods->trans_type) }}</td>
+                  <td>{{ strEnabledDisabled($goods->status) }}</td>
                 </tr>
               @endif
               @endforeach
@@ -246,9 +249,6 @@
           </div>
           <div class="form-group">
             <input type="number" name="price" class="form-control" id="basic-url" placeholder="price">
-          </div>
-          <div class="form-group">
-              <input type="text" name="google_key" class="form-control" id="basic-url" placeholder="Google Key">
           </div>
           <div class="form-group">
             <input type="number" name="qty" class="form-control" id="basic-url" placeholder="Quantity">
@@ -306,7 +306,7 @@
         </form>
     </div>
   </div>
-</div>
+</div> 
 
 <!-- script -->
 <script>
@@ -382,20 +382,20 @@
 
       @php
           foreach($itemGood as $goods) {
-              echo'$(".delete'.$goods->id.'").hide();';
-              echo'$(".deletepermission'.$goods->id.'").on("click", function() {';
-                echo 'if($( ".deletepermission'.$goods->id.':checked" ).length > 0)';
+              echo'$(".delete'.$goods->item_id.'").hide();';
+              echo'$(".deletepermission'.$goods->item_id.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$goods->item_id.':checked" ).length > 0)';
                 echo '{';
-                  echo '$(".delete'.$goods->id.'").show();';
+                  echo '$(".delete'.$goods->item_id.'").show();';
                 echo'}';
                 echo'else';
                 echo'{';
-                  echo'$(".delete'.$goods->id.'").hide();';
+                  echo'$(".delete'.$goods->item_id.'").hide();';
                 echo'}';
     
               echo '});';
             
-              echo'$(".delete'.$goods->id.'").click(function(e) {';
+              echo'$(".delete'.$goods->item_id.'").click(function(e) {';
                 echo'e.preventDefault();';
     
                 echo"var id = $(this).attr('data-pk');";
@@ -405,26 +405,26 @@
       @endphp
       @php
               foreach($itemGood as $goods) {
-                echo'$(".save-profile'.$goods->id.'").hide(0);';
-                  echo'$(".med-ovlay'.$goods->id.'").hide(0);';
+                echo'$(".save-profile'.$goods->item_id.'").hide(0);';
+                  echo'$(".med-ovlay'.$goods->item_id.'").hide(0);';
 
-                  echo'$(".edit-profile'.$goods->id.'").on("click", function() {';
+                  echo'$(".edit-profile'.$goods->item_id.'").on("click", function() {';
                     echo'$(this).hide(0);';
-                    echo'$(".med-ovlay'.$goods->id.'").fadeIn(300);';
-                    echo'$(".save-profile'.$goods->id.'").fadeIn(300);';
+                    echo'$(".med-ovlay'.$goods->item_id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$goods->item_id.'").fadeIn(300);';
                   echo'});';
-                  echo'$(".save-profile'.$goods->id.'").on("click", function() {';
+                  echo'$(".save-profile'.$goods->item_id.'").on("click", function() {';
                     echo'$(this).hide(0);';
-                    echo'$(".med-ovlay'.$goods->id.'").fadeOut(300);';
-                    echo'$(".edit-profile'.$goods->id.'").fadeIn(300);';
+                    echo'$(".med-ovlay'.$goods->item_id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$goods->item_id.'").fadeIn(300);';
                   echo'});';
 
-                  echo'$(".upload'.$goods->id.'").change(function() {';
+                  echo'$(".upload'.$goods->item_id.'").change(function() {';
                     echo'if (this.files && this.files[0]) {';
                       echo'var reader = new FileReader();';
 		
                       echo'reader.onload = function(e) {';
-                        echo'$(".imgupload'.$goods->id.'").attr("src", e.target.result);';
+                        echo'$(".imgupload'.$goods->item_id.'").attr("src", e.target.result);';
                       echo'};';
 		
                       echo'reader.readAsDataURL(this.files[0]);';

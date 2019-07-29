@@ -15,6 +15,8 @@ use App\StoreTransactionHist;
 use App\StoreTransaction;
 use App\Classes\MenuClass;
 use App\ResellerRank;
+use App\ItemsCash;
+use App\ConfigText;
 
 class ResellerController extends Controller
 {
@@ -620,7 +622,137 @@ class ResellerController extends Controller
   
         return back()->with('alert','REGISTER SUCCESSFULL');
     }
+// ------- Menu Item Store Reseller -------- //
+public function ItemStoreReseller()
+{
+    $menu     = MenuClass::menuName('Item Store Reseller');
+    $mainmenu = MenuClass::menuName('Reseller');
+    $getItems = ItemsCash::select(
+                    'item_id',
+                    'name',
+                    'item_get',
+                    'item_type',
+                    'price',
+                    'trans_type',
+                    'google_key',
+                    'status',
+                    'shop_type'
+                )
+                ->where('shop_type', '=', 4)
+                ->orderBy('item_id', 'desc')
+                ->get();
+    $active   = ConfigText::select(
+                    'name', 
+                    'value'
+                )
+                ->where('id', '=', 4)
+                ->first();
+    $value    = str_replace(':', ',', $active->value);
+    $endis    = explode(",", $value);
+    return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu'));
+}
 
+public function ItemResellerstore(Request $request)
+{
+    $title          = $request->title;
+    $goldAwarded    = $request->goldAwarded;
+    $priceCash      = $request->priceCash;
+    $googleKey      = $request->googleKey;
+
+    $validator = Validator::make($request->all(),[
+        'title'       => 'required',
+        'goldAwarded' => 'required|integer',
+        'priceCash'   => 'required|integer',
+        'googleKey'   => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return back()->withErrors($validator->errors());
+    }
+
+    $gold = ItemsCash::create([
+        'name'       => $title,
+        'item_get'   => $goldAwarded,
+        'price'      => $priceCash,
+        'shop_type'  => 4,
+        'item_type'  => 2,
+        'google_key' => $googleKey,
+    ]);
+
+    Log::create([
+        'op_id'     => Session::get('userId'),
+        'action_id' => '3',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Create new in menu Item Store Reseller with title '. $request->title
+    ]);
+
+    return redirect()->route('Item_Store_Reseller')->with('success','Data Added');
+}
+
+    public function updateItemstoreReseller(Request $request)
+    {
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+
+        ItemsCash::where('item_id', '=', $pk)->update([
+            $name => $value
+        ]);
+
+        switch ($name) {
+            case "name":
+                $name = "Name";
+                break;
+            case "item_get":
+                $name = "Gold Awarded";
+                break;
+            case "price":
+                $name = "Price Cash";
+                break;
+            case "shop_type":
+                $name = "Shop Type";
+                break;
+            case "google_key":
+                $name = "Google Key";
+                break;
+            case "status":
+                $name = "Status";
+                break;
+            case "trans_type":
+                $name = "Pay Transaction";
+                break;
+            default:
+            "";
+        }
+
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Edit '.$name.' in menu Item Store Reseller with ID '.$pk.' to '. $value
+        ]);
+    }
+
+    public function destroyItemStoreReseller(Request $request)
+    {
+        $getItemdId    = $request->userid;
+        if($getItemdId  != '') 
+        {
+            ItemsCash::where('item_id', '=', $goldreseller)->delete();
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Delete in menu Item Store Reseller with ID '.$goldreseller
+            ]);
+            return redirect()->route('Item_Store_Reseller')->with('success','Data Deleted');
+        } else if($getItemdId  == NULL )
+        {
+            return redirect()->route('Item_Store_Reseller')->with('alert','ID must be Fill'); 
+        }
+        
+    }
+// ------- End Menu Item Store Reseller --------//
 
 
     /**

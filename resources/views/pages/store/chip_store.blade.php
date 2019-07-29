@@ -82,16 +82,16 @@
               @foreach($items as $itm)
                 @if($menu && $mainmenu)
                   <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->id }}"></td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
-                    <td>{{ $itm->category }}</td>
-                    <td><a href="#" class="usertext" data-name="chipAwarded" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->chipAwarded }}</a></td>
-                    <td><a href="#" class="usertext" data-name="goldCost" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->goldCost }}</a></td>
-                    <td><a href="#" class="stractive" data-name="active" data-title="Title Chip" data-pk="{{ $itm->id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->active) }}</a></td>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->item_id }}"></td>
+                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
+                    <td>{{ $itm->strItemType() }}</td>
+                    <td><a href="#" class="usertext" data-name="item_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->item_get }}</a></td>
+                    <td><a href="#" class="usertext" data-name="price" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->price }}</a></td>
+                    <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
                     <td>
-                      <a href="#" style="color:red;" class="delete{{ $itm->id }}" 
+                      <a href="#" style="color:red;" class="delete{{ $itm->item_id }}" 
                         id="delete" 
-                        data-pk="{{ $itm->id }}" 
+                        data-pk="{{ $itm->item_id }}" 
                         data-toggle="modal" 
                         data-target="#delete-modal">
                           <i class="fa fa-times"></i>
@@ -101,10 +101,10 @@
                 @else 
                   <tr>
                     <td>{{ $itm->name }}</td>
-                    <td>{{ $itm->category }}</td>
-                    <td>{{ $itm->chipAwarded }}</td>
-                    <td>{{ $itm->goldCost }}</td>
-                    <td>{{ strEnabledDisabled($itm->active) }}</td>
+                    <td>{{ $itm->strItemType() }}</td>
+                    <td>{{ $itm->item_get }}</td>
+                    <td>{{ $itm->price }}</td>
+                    <td>{{ strEnabledDisabled($itm->status) }}</td>
                   </tr>
                 @endif
               @endforeach
@@ -236,20 +236,20 @@
 
       @php
           foreach($items as $itm) {
-              echo'$(".delete'.$itm->id.'").hide();';
-              echo'$(".deletepermission'.$itm->id.'").on("click", function() {';
-                echo 'if($( ".deletepermission'.$itm->id.':checked" ).length > 0)';
+              echo'$(".delete'.$itm->item_id.'").hide();';
+              echo'$(".deletepermission'.$itm->item_id.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$itm->item_id.':checked" ).length > 0)';
                 echo '{';
-                  echo '$(".delete'.$itm->id.'").show();';
+                  echo '$(".delete'.$itm->item_id.'").show();';
                 echo'}';
                 echo'else';
                 echo'{';
-                  echo'$(".delete'.$itm->id.'").hide();';
+                  echo'$(".delete'.$itm->item_id.'").hide();';
                 echo'}';
     
               echo '});';
             
-              echo'$(".delete'.$itm->id.'").click(function(e) {';
+              echo'$(".delete'.$itm->item_id.'").click(function(e) {';
                 echo'e.preventDefault();';
     
                 echo"var id = $(this).attr('data-pk');";

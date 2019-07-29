@@ -24,16 +24,18 @@ class GoldStoreController extends Controller
         $menu     = MenuClass::menuName('Gold Store');
         $mainmenu = MenuClass::menuName('Store');
         $getGolds = ItemsCash::select(
-                        'id',
+                        'item_id',
                         'name',
-                        'goldAwarded',
+                        'item_get',
+                        'item_type',
                         'price',
-                        'transaction_type',
+                        'trans_type',
                         'google_key',
-                        'active'
+                        'status',
+                        'shop_type'
                     )
                     ->where('shop_type', '=', 1)
-                    ->orderBy('id', 'desc')
+                    ->orderBy('item_id', 'desc')
                     ->get();
         $active   = ConfigText::select(
                         'name', 
@@ -46,14 +48,6 @@ class GoldStoreController extends Controller
 
 
         return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu'));
-    }
-
-    public function GoldStoreReseller()
-    {
-        $gold_store = ItemsCash::where('shop_type', '=', 2)
-                      ->get();
-        $menu       = MenuClass::menuName('Gold Store Reseller');
-        return view('pages.reseller.gold_store_reseller', compact('gold_store', 'menu'));
     }
 
     /**
@@ -91,11 +85,13 @@ class GoldStoreController extends Controller
         }
 
         $gold = ItemsCash::create([
-            'name'          => $title,
-            'goldAwarded'   => $goldAwarded,
-            'price'         => $priceCash,
-            'shop_type'     =>  1,
-            'google_key'    => $googleKey,
+            'name'       => $title,
+            'item_get'   => $goldAwarded,
+            'price'      => $priceCash,
+            'shop_type'  => 1,
+            'item_type'  => 2,
+            'status'     => 0,
+            'google_key' => $googleKey,
         ]);
 
         Log::create([
@@ -105,44 +101,7 @@ class GoldStoreController extends Controller
             'desc'      => 'Create new in menu Gold Store with title '. $gold->name
         ]);
 
-        return redirect()->route('Chip_Store')->with('success','Data Added');
-    }
-
-
-    public function GoldResellerstore(Request $request)
-    {
-        $title          = $request->title;
-        $goldAwarded    = $request->goldAwarded;
-        $priceCash      = $request->priceCash;
-        $googleKey      = $request->googleKey;
-
-        $validator = Validator::make($request->all(),[
-            'title'       => 'required',
-            'goldAwarded' => 'required|integer',
-            'priceCash'   => 'required|integer',
-            'googleKey'   => 'required',
-        ]);
-    
-        if ($validator->fails()) {
-            return back()->withErrors($validator->errors());
-        }
-
-        $gold = ItemsCash::create([
-            'name'          => $title,
-            'goldAwarded'   => $goldAwarded,
-            'price'         => $priceCash,
-            'shop_type'     =>  2,
-            'google_key'    => $googleKey,
-        ]);
-
-        Log::create([
-            'op_id'     => Session::get('userId'),
-            'action_id' => '3',
-            'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Gold Store Reseller with title '. $request->title
-        ]);
-
-        return redirect()->route('Gold_Store_Reseller')->with('success','Data Added');
+        return redirect()->route('Gold_Store')->with('success','Data Added');
     }
 
     /**
@@ -169,7 +128,7 @@ class GoldStoreController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        ItemsCash::where('id', '=', $pk)->update([
+        ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
         ]);
 
@@ -177,11 +136,11 @@ class GoldStoreController extends Controller
             case "name":
                 $name = "Name";
                 break;
-            case "goldAwarded":
+            case "item_get":
                 $name = "Gold Awarded";
                 break;
             case "price":
-                $name = "Price";
+                $name = "Price Cash";
                 break;
             case "shop_type":
                 $name = "Shop Type";
@@ -189,8 +148,11 @@ class GoldStoreController extends Controller
             case "google_key":
                 $name = "Google Key";
                 break;
-            case "active":
-                $name = "Active";
+            case "status":
+                $name = "Status";
+                break;
+            case "trans_type":
+                $name = "Pay Transaction";
                 break;
             default:
             "";
@@ -216,17 +178,17 @@ class GoldStoreController extends Controller
         $goldreseller = $request->id;
         if($getGoldId != '')
         {
-            ItemsCash::where('id', '=', $getGoldId)->delete();
+            ItemsCash::where('item_id', '=', $getGoldId)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Delete in menu Gift Store with ID '.$getGoldId
             ]);
-            return redirect()->route('Chip_Store')->with('success','Data Deleted');
+            return redirect()->route('Gold_Store')->with('success','Data Deleted');
         } else if($goldreseller != '') 
         {
-            ItemsCash::where('id', '=', $goldreseller)->delete();
+            ItemsCash::where('item_id', '=', $goldreseller)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
@@ -236,7 +198,7 @@ class GoldStoreController extends Controller
             return redirect()->route('Gold_Store_Reseller')->with('success','Data Deleted');
         } else if ($getGoldId == NULL)
         {
-            return redirect()->route('Chip_Store')->with('alert','ID must be Fill');  
+            return redirect()->route('Gold_Store')->with('alert','ID must be Fill');  
         } else if($goldreseller == NULL )
         {
             return redirect()->route('Gold_Store_Reseller')->with('alert','ID must be Fill'); 

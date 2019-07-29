@@ -24,14 +24,14 @@ class ChipStoreController extends Controller
         $menu     = MenuClass::menuName('Chip Store');
         $mainmenu = MenuClass::menuName('Store');
         $items  = ItemsGold::select(
+                    'item_id',
                     'name',
-                    'id',
-                    'category',
-                    'chipAwarded',
-                    'goldCost',
-                    'active'
+                    'item_type',
+                    'price',
+                    'item_get',
+                    'status'
                   )
-                  ->where('category', '=', 'Chip')
+                  ->where('item_type', '=', 1)
                   ->get();
         $active = ConfigText::select(
                     'name', 
@@ -73,12 +73,11 @@ class ChipStoreController extends Controller
           }
 
           $chip = ItemsGold::create([
-            'name'        => $request->title,
-            'category'    => 'Chip',
-            'goldCost'    => $request->goldcost,
-            'chipAwarded' => $request->chipawarded,
-            'image'       => 'Chips',
-            'active'      => 0
+            'name'      => $request->title,
+            'item_type' => 1,
+            'price'     => $request->goldcost,
+            'item_get'  => $request->chipawarded,
+            'status'    => 0
           ]);
   
           Log::create([
@@ -125,7 +124,7 @@ class ChipStoreController extends Controller
         $name = $request->name;
         $value = $request->value;
 
-        ItemsGold::where('id', '=', $pk)->update([
+        ItemsGold::where('item_id', '=', $pk)->update([
             $name =>$value
         ]);
   
@@ -133,14 +132,14 @@ class ChipStoreController extends Controller
           case "name":
               $name = "Name Chip";
               break;
-          case "chipAwarded":
+          case "item_get":
               $name = "Chip Awarded";
               break;
-          case "goldCost":
-              $name = "Gold Cost";
+          case "price":
+              $name = "Price";
               break;
-          case "active":
-              $name = "active";
+          case "status":
+              $name = "Status";
               break;
           default:
             "";
@@ -166,7 +165,7 @@ class ChipStoreController extends Controller
         $id = $request->id;
         if($id != '')
         {
-            ItemsGold::where('id', '=', $id)->delete();   
+            ItemsGold::where('item_id', '=', $id)->delete();   
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
