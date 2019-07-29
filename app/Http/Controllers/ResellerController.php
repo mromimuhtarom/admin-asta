@@ -738,12 +738,12 @@ public function ItemResellerstore(Request $request)
         $getItemdId    = $request->userid;
         if($getItemdId  != '') 
         {
-            ItemsCash::where('item_id', '=', $goldreseller)->delete();
+            ItemsCash::where('item_id', '=', $getItemdId)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Item Store Reseller with ID '.$goldreseller
+                'desc'      => 'Delete in menu Item Store Reseller with ID '.$getItemdId
             ]);
             return redirect()->route('Item_Store_Reseller')->with('success','Data Deleted');
         } else if($getItemdId  == NULL )

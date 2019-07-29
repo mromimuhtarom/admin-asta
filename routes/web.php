@@ -610,7 +610,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('ItemStoreReseller-view', 'ResellerController@ItemStoreReseller')->name('Item_Store_Reseller');
                 Route::post('ItemStoreReseller-create', 'ResellerController@ItemResellerstore')->name('ItemStoreReseller-create');
                 Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
-                Route::delete('ItemStore-delete', 'ResellerControllerr@destroyItemStoreReseller')->name('ItemStore-delete');
+                Route::delete('ItemStore-delete', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-delete');
             });
         });
 
