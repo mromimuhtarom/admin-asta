@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Action;
 use Carbon\Carbon;
 use App\LogUser;
+use Validator;
 
 class LogPlayerController extends Controller
 {
@@ -64,7 +65,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
             
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
@@ -73,7 +74,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputUser != NULL && $inputAction != NULL && $inputMaxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
@@ -82,7 +83,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputUser != NULL && $inputAction != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
@@ -90,7 +91,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputUser != NULL &&  $inputMinDate != NULL && $inputMaxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
@@ -98,7 +99,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputUser != NULL && $inputMaxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
@@ -106,7 +107,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputUser != NULL && $inputMinDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
@@ -114,7 +115,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputAction != NULL && $inputMinDate != NULL && $inputMaxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
@@ -122,7 +123,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
             
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputAction != NULL && $inputMinDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
@@ -130,7 +131,7 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputAction != NULL && $inputMaxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
@@ -138,42 +139,42 @@ class LogPlayerController extends Controller
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputMinDate != NULL && $inputMaxDate != NULL)
         {
             $logplayer =    $loguser->wherebetween('asta_db.log_user.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputUser != NULL)
         {
             $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
             
-            return view('pages.players.log_player_detail', compact('logplayer', 'action'));
+            return view('pages.players.log_player', compact('logplayer', 'action'));
         } else if($inputAction != NULL )
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
         } else if($inputMinDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.datetime', '>=', $inputMinDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow'));            
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));            
         } else if($inputMaxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.datetime', '<=', $inputMaxDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
-            return view('pages.players.log_player_detail', compact('logplayer', 'action', 'datenow')); 
+            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow')); 
         }
     }
 }

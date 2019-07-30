@@ -68,7 +68,7 @@
                   <th class="th-sm"></th>
                 @endif
                 <th class="th-sm">Title</th>
-                <th class="th-sm">Gold Awarded</th>
+                <th class="th-sm">Item Awarded</th>
                 <th class="th-sm">Price Cash</th>
                 <th class="th-sm">Item Type</th>
                 <th class="th-sm">Pay Transaction</th>
@@ -87,7 +87,7 @@
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                 <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ $gold->item_get }}</a></td>
                 <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->price }}</a></td>
-                <td>{{ $gold->strItemType() }}</td>
+                <td><a href="#" class="itemType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ $gold->strItemType() }}</a></td>
                 <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
                 <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->google_key }}</a></td>
                 <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
@@ -145,6 +145,15 @@
           </div>
           <div class="form-group">
             <input type="number" name="priceCash" class="form-control" id="basic-url" placeholder="price cash">
+          </div>
+          <div class="form-group">
+            {{-- <input type="number" name="priceCash" class="form-control" id="basic-url" placeholder="price cash"> --}}
+            <select name="itemType" class="form-control">
+              <option value="">Choose Item Type</option>
+              <option value="1">Chip</option>
+              <option value="2">Gold</option>
+              <option value="3">Goods</option>
+            </select>
           </div>
           <div class="form-group">
             <input type="text" name="googleKey" class="form-control" id="basic-url" placeholder="google key">
@@ -222,13 +231,23 @@
         mode :'inline'
       });
 
+      $('.itemType').editable({
+        mode :'inline',
+        source: [
+          {value: '', text: 'Choose Item type'},
+          @php 
+          echo '{value:"'.$item[0].'", text: "'.$item[1].'"},';
+          echo '{value:"'.$item[2].'", text: "'.$item[3].'"},';
+          echo '{value:"'.$item[4].'", text: "'.$item[5].'"},';
+          @endphp
+        ]
+      })
+
       $('.strEnable').editable({
         mode: 'inline',
         value: '',
         source: [
           {value: '', text: 'Choose For Activation'},
-          // {value: 0, text: 'Disabled'},
-          // {value: 1, text: 'Enabled'}
           @php            
               // $endis = preg_split( "/ :|, /", $atv->value );
               echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';

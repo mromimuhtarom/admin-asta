@@ -12,7 +12,9 @@ class ItemsCash extends Model
 
     public $itemTypes = [
         '0' => 'None',
-        '2' => 'Gold'
+        '1' => 'Chip',
+        '2' => 'Gold',
+        '3' => 'Goods'
     ];
 
     public function strItemType()

@@ -132,7 +132,7 @@ class PlayReportController extends Controller
                           ->get();
         }
 
-        return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
+        return view('pages.players.playreport', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
       } else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
         $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
               ->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
@@ -150,7 +150,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
+      return view('pages.players.playreport', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
        dd($inputGame);
         if($inputGame == 'Domino QQ') {
@@ -173,7 +173,7 @@ class PlayReportController extends Controller
                           ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00")
                           ->get();
         }
-       return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
+       return view('pages.players.playreport', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
      } else if($inputName != NULL && $inputMinDate != NULL ) {
         $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
               ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00");
@@ -191,7 +191,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
+      return view('pages.players.playreport', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
@@ -213,7 +213,7 @@ class PlayReportController extends Controller
                           ->get();
         }
 
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+          return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMaxDate != NULL) {
         $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
               ->where('asta_db.dmq_round.date', '<=', $inputMaxDate." 23:59:59");
@@ -231,7 +231,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-      return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+      return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputGame != NULL) {
 
        dd($inputGame);
@@ -249,7 +249,7 @@ class PlayReportController extends Controller
                           ->get();
         }
 
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+          return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputGame != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
@@ -265,7 +265,7 @@ class PlayReportController extends Controller
                           ->get();
         }
 
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+          return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
     }
     else if ($inputMinDate != NULL && $inputMaxDate != NULL) {
         $dmq = $tbdmq->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
@@ -280,7 +280,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
        
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+          return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL) {
         $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%');
 
@@ -294,7 +294,7 @@ class PlayReportController extends Controller
                           ->union($tpk)
                           ->get();
 
-          return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+          return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputGame != NULL) {
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->get();
@@ -306,7 +306,7 @@ class PlayReportController extends Controller
         $player_history = $tbbgt->get();
         }
 
-         return view('pages.players.playreport_detail', compact('player_history', 'menus1', 'game', 'datenow'));
+         return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
    } 
 
   }

@@ -64,15 +64,15 @@
 						<tbody>
 							@foreach($history as $hst)
 							<tr>
-                                    <td>{{ $hst->username }}</td>
+                  <td>{{ $hst->username }}</td>
 									<td>{{ $hst->desc }}</td>
 									<td>{{ $hst->win }}</td>
 									<td>{{ $hst->lose }}</td>
 									<td>{{ $hst->turnover }}</td>
-                                    <td>{{ $hst->fee }}</td>
-                                    <td>{{ $hst->date_created }}</td>
+                  <td>{{ $hst->fee }}</td>
+                  <td>{{ $hst->date_created }}</td>
 							</tr>
-                            @endforeach
+              @endforeach
 						</tbody>
 					</table>
 				</div>

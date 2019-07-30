@@ -26,6 +26,7 @@ class ResellerController extends Controller
      * @return \Illuminate\Http\Response
      */
 //****************************************** Menu List Reseller ******************************************//
+//---------- Index List Reseller --------- //
     public function index()
     {
         $menu     = MenuClass::menuName('List Reseller');
@@ -34,8 +35,9 @@ class ResellerController extends Controller
         $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
         return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank', 'mainmenu'));
     }
+//-------- End Index List Reseller ------ //
 
-
+//-------- Update List Reseller ---------//
     public function update(Request $request)
     {
         $pk = $request->pk;
@@ -74,8 +76,6 @@ class ResellerController extends Controller
             default:
                 "";
         }
-
-
         Log::create([
             'op_id' => Session::get('userId'),
             'action_id'   => '2',
@@ -83,9 +83,9 @@ class ResellerController extends Controller
             'desc' => 'Edit'.$name.' in menu List Reseller with ID '.$pk.' To '.$value
         ]);
     }
+//-------- End Update List Reseller --------- //
 
-
-
+// ------- Password Update List Reseller ------- //
     public function PasswordUpdate(Request $request)
     {
         $pk = $request->userid;
@@ -109,9 +109,9 @@ class ResellerController extends Controller
         }
         return redirect()->route('List_Reseller')->with('alert','Password is Null');
     }
+// ------- End Password Update List Reseller ------- //
 
-
-
+// -------Delete List Reseller ------ //
     public function destroy(Request $request)
     {
         $userid = $request->id;
@@ -129,10 +129,13 @@ class ResellerController extends Controller
         }
         return redirect()->route('List_Reseller')->with('success','Somethong wrong');                
     }
+//----- End List Reseller ------//
 //****************************************** End Menu List Reseller ******************************************//
 
 
 //****************************************** Menu Reseller Rank ******************************************//
+
+// ------- Index Reseller Rank ------- //
     public function ResellerRank()
     {
         $rank     = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
@@ -140,8 +143,9 @@ class ResellerController extends Controller
         $mainmenu = MenuClass::menuName('Reseller');
         return view('pages.reseller.reseller_rank', compact('rank', 'menu', 'mainmenu'));
     }
+// ------- End Index Reseller Rank ------- //
 
-
+// ------ Insert Reseller Rank ------ //
     public function storeRankReseller(Request $request)
     {
         $id   = $request->id;
@@ -171,9 +175,9 @@ class ResellerController extends Controller
 
         return redirect()->route('Reseller_Rank')->with('success','Data Added');
     }
+// ------ End Insert Reseller Rank ------ //
 
-
-
+// ----- Update Reseller Rank ------//
     public function updateRank(Request $request)
     {
         $pk    = $request->pk;
@@ -217,8 +221,9 @@ class ResellerController extends Controller
             'desc' => 'Edit'.$name.' in menu Reseller Rank with Order ID '.$pk.' To '.$value
         ]);
     }
+//-------- End Update Reseller Rank ---------//
 
-
+//------- Delete Reseller Rank -------- //
     public function destroyRank(Request $request)
     {
         $id = $request->id;
@@ -236,11 +241,14 @@ class ResellerController extends Controller
         }
         return redirect()->route('Reseller_Rank')->with('success','Somethong wrong');  
     }
+//-------- End Delete Reseller Rank ----------//
 //****************************************** End Menu Reseller Rank ******************************************//
 
 
 
-//****************************************** End Menu Reseller Transaction ******************************************//
+//****************************************** Menu Report Transaction ******************************************//
+
+//------- Index Report Transaction -------//
     public function ReportTransaction()
     {
         $transactions = DB::select('SELECT year(date_created) as year, month(date_created) as monthnumber,monthname(date_created) as monthname, sum(buy_gold) as totalgold FROM asta_db.reseller_transaction_day GROUP BY year,monthname');
@@ -248,21 +256,233 @@ class ResellerController extends Controller
         $datenow = Carbon::now('GMT+7');
         return view('pages.reseller.report_transaction', compact('transactions', 'datenow'));
     }
+//------ End Report Transaction -------//
+
+//------ Search Report Transaction ------//
+    public function searchReportTransaction(Request $request)
+    {
+        $searchUsername    = $request->inputUsername;
+        $startDate         = $request->inputMinDate;
+        $endDate           = $request->inputMaxDate;
+        $datenow           = Carbon::now('GMT+7');
+        $reportTransaction = DB::table('asta_db.store_transaction_hist')
+                             ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id')
+                             ->select(
+                                 'asta_db.store_transaction_hist.user_id',
+                                 'asta_db.reseller.username',
+                                 'asta_db.store_transaction_hist.item_name',
+                                 'asta_db.store_transaction_hist.quantity',
+                                 'asta_db.store_transaction_hist.item_price',
+                                 'asta_db.store_transaction_hist.status',
+                                 'asta_db.store_transaction_hist.datetime'
+                             );
+        $validator = Validator::make($request->all(),[
+            'inputMinDate'    => 'required|date',
+            'inputMaxDate'    => 'required|date',
+        ]);
     
-//****************************************** End Menu Reseller Transaction ******************************************//
+        if ($validator->fails()) {
+            return self:: ReportTransaction()->withErrors($validator->errors());
+        }
+  
+        if($endDate < $startDate){
+          return back()->with('alert','End Date can\'t be more than start date');
+        }
+  
+        if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
+  
+          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                            ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                            ->orderBy('asta_db.store_transaction_hist.datetime', 'asc')
+                            ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+  
+        }else if ($searchUsername != NULL && $startDate != NULL) {
+  
+          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                            ->WHERE('datetime', '>=', $startDate." 00:00:00")
+                            ->orderBy('datetime', 'asc')
+                            ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+  
+        }else if ($searchUsername != NULL && $endDate != NULL) {
+          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                            ->WHERE('datetime', '<=', $endDate." 23:59:59")
+                            ->orderBy('datetime', 'desc')
+                            ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+        }else if($searchUsername != NULL) {
+          $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                          ->get();
+  
+        //   $transactions->appends($request->all());
+          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+        }
+    }
+//------- End Search Report Transaction ------//
+
+//------ Detail Report Transaction ------//
+public function detailTransaction($month, $year)
+{
+    $transactions = StoreTransactionHist::select(
+                        'asta_db.store_transaction_hist.user_id',
+                        'asta_db.store_transaction_hist.item_name',
+                        'asta_db.store_transaction_hist.quantity',
+                        'asta_db.store_transaction_hist.item_price',
+                        'asta_db.store_transaction_hist.status',
+                        'asta_db.store_transaction_hist.datetime', 
+                        'asta_db.reseller.username'
+                    )
+                    ->join('asta_db.reseller','asta_db.store_transaction_hist.user_id','=','asta_db.reseller.reseller_id')
+                    ->whereYear('datetime', $year)
+                    ->whereMonth('datetime', $month)
+                    ->where('user_type', '=', 4)
+                    ->orderby('datetime', 'ASC')
+                    ->get();
+    $datenow        = Carbon::now('GMT+7');
+
+    return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+}
+//------ End Detail Report Transaction ------//
+//****************************************** End Menu Report Transaction ******************************************//
+
+//****************************************** Menu Balance Reseller ******************************************//
+//------ Index Balance Reseller ------//
     public function BalanceReseller()
     {
         $datenow = Carbon::now('GMT+7');
         return view('pages.reseller.balance_reseller', compact('datenow'));
     }
+//----- End Index Balance Reseller -------//
 
+//----- Search Balance Reseller -----//
+    public function searchBalance(Request $request)
+    {
+      $searchUsername      = $request->inputUsername;
+      $startDate           = $request->inputMinDate;
+      $endDate             = $request->inputMaxDate;
+      $startDateComparison = Carbon::parse($startDate)->timestamp;
+      $endDateComparison   = Carbon::parse($endDate)->timestamp;
+      $datenow             = Carbon::now('GMT+7');
+      $balanceReseller     = ResellerBalance::select(
+                                'asta_db.reseller_balance.reseller_id',
+                                'asta_db.reseller_balance.debet',
+                                'asta_db.reseller_balance.credit',
+                                'asta_db.reseller_balance.balance',
+                                'asta_db.reseller_balance.datetime', 
+                                'asta_db.reseller.username', 
+                                'asta_db.action.action'
+                             )
+                             ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id')
+                             ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
+      
+      if($endDateComparison < $startDateComparison){
+        return back()->with('alert','End Date can\'t be less than start date');
+      }
+
+      if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
+
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
+                          ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
+                          ->get();
+
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+
+      }else if ($searchUsername != NULL && $startDate != NULL) {
+
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
+                          ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
+                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
+                          ->get();
+
+        // $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+
+      }else if ($searchUsername != NULL && $endDate != NULL) {
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
+                          ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
+                          ->orderBy('asta_db.reseller_balance.datetime', 'desc')
+                          ->get();
+
+        // $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+      }else if($searchUsername != NULL) {
+        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
+                          ->get();
+
+        // $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+      }
+    }
+//----- End Search Balance Reseller -----//
+//****************************************** End Menu Balance Reseller ******************************************//
+
+//****************************************** Menu Register Reseller ******************************************//
+//------ Index Register Reseller ------//
     public function RegisterReseller()
     {
         $menu  = MenuClass::menuName('Register Reseller');
         $mainmenu = MenuClass::menuName('Reseller');
         return view('pages.reseller.register_reseller', compact('menu', 'mainmenu'));
     }
+//------ End Register Reseller -------//
 
+//------ Insert Register Reseller ------//
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        $datetimenow = Carbon::now('GMT+7');
+        $validate = [
+          'username' => 'unique:reseller,username',
+          'phone'    => 'unique:reseller,phone',
+          'email'    => 'unique:reseller,email',
+        //   'idcard'   => 'unique:reseller,identify'
+        ];
+  
+        $validator = Validator::make($data,$validate);
+  
+        if($validator->fails())
+        {  
+          return back()->withInput()->with('alert', $validator->errors()->first());
+        }
+  
+        Reseller::insertData([
+          'username' => $request->username,
+          'userpass' => bcrypt($request->password),
+          'fullname' => $request->firstName.' '.$request->lastName,
+          'phone'    => $request->phone,
+          'email'    => $request->email,
+          'identify' => $request->idcard,
+          'join_date'=> $datetimenow,
+          'gold'     => 0,
+          'rank_id'  => 1,
+          'rank_gold'=> 0,
+
+        //   'address'  => $request->address,
+        //   'guid'     => bcrypt($request->username.$request->email.$request->idcard)
+        ]);
+
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '3',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Create new in menu Register Reseller with username '. $request->username
+        ]);
+  
+        return back()->with('alert','REGISTER SUCCESSFULL');
+    }
+//------ End Insert Register Reseller ------//
+//****************************************** End Menu Register Reseller ******************************************//
+
+//****************************************** Menu Request Transaction ******************************************//
+//----- Index Request Transaction -----//
     public function RequestTransaction()
     {
         // $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
@@ -295,7 +515,9 @@ class ResellerController extends Controller
         $mainmenu = MenuClass::menuName('Reseller');
         return view('pages.reseller.request_transaction', compact('transactions', 'menu', 'mainmenu', 'submenu'));
     }
+//------ End Index Request Transaction ------//
 
+//------ Request Transaction Approve -------//
     public function RequestTransactionApprove(Request $request)
     {
         // $approveOrderId = $request->approveId;
@@ -381,8 +603,10 @@ class ResellerController extends Controller
 
           return back()->with('success','Approved Succesful');
     }
+//------ End Request Transaction Approve -------//
 
 
+//------ Request Transaction Decline -------//
     public function RequestTransactionDecline(Request $request)
     {
         $declineOrderId = $request->declineId;
@@ -396,10 +620,7 @@ class ResellerController extends Controller
         $datetime       = $request->datetime;
         $user_type      = $request->user_type;
         $item_type      = $request->item_type;
-        // DB::table('reseller_transaction')->where('order_id', $declineOrderId)->update([
-        //     'status'    => '0',
-        //     'timestamp' => Carbon::now('GMT+7')
-        // ]);
+
         StoreTransactionHist::create([
             'user_id'       => $reseller_id,
             'item_name'     =>  'nanti',
@@ -421,274 +642,93 @@ class ResellerController extends Controller
         ]);
         return back()->with('success','Declined Succesful');
     }
+//------ End Request Transaction Decline -------//
+//****************************************** End Menu Request Transaction ******************************************//
 
 
 
-    public function searchBalance(Request $request)
+//****************************************** Menu Item Store Reseller******************************************//
+// ------- index Item Store Reseller -------- //
+    public function ItemStoreReseller()
     {
-      $searchUsername      = $request->inputUsername;
-      $startDate           = $request->inputMinDate;
-      $endDate             = $request->inputMaxDate;
-      $startDateComparison = Carbon::parse($startDate)->timestamp;
-      $endDateComparison   = Carbon::parse($endDate)->timestamp;
-      $datenow             = Carbon::now('GMT+7');
-      $balanceReseller     = ResellerBalance::select(
-                                'asta_db.reseller_balance.reseller_id',
-                                'asta_db.reseller_balance.debet',
-                                'asta_db.reseller_balance.credit',
-                                'asta_db.reseller_balance.balance',
-                                'asta_db.reseller_balance.datetime', 
-                                'asta_db.reseller.username', 
-                                'asta_db.action.action'
-                             )
-                             ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id')
-                             ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
-      
-      if($endDateComparison < $startDateComparison){
-        return back()->with('alert','End Date can\'t be less than start date');
-      }
-
-      if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
-
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                          ->get();
-
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
-
-      }else if ($searchUsername != NULL && $startDate != NULL) {
-
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
-                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                          ->get();
-
-        // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
-
-      }else if ($searchUsername != NULL && $endDate != NULL) {
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
-                          ->orderBy('asta_db.reseller_balance.datetime', 'desc')
-                          ->get();
-
-        // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
-      }else if($searchUsername != NULL) {
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->get();
-
-        // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
-      }
+        $menu     = MenuClass::menuName('Item Store Reseller');
+        $mainmenu = MenuClass::menuName('Reseller');
+        $getItems = ItemsCash::select(
+                        'item_id',
+                        'name',
+                        'item_get',
+                        'item_type',
+                        'price',
+                        'trans_type',
+                        'google_key',
+                        'status',
+                        'shop_type'
+                    )
+                    ->where('shop_type', '=', 4)
+                    ->orderBy('item_id', 'desc')
+                    ->get();
+        $active   = ConfigText::select(
+                        'name', 
+                        'value'
+                    )
+                    ->where('id', '=', 4)
+                    ->first();
+        $itemtype = ConfigText::select(
+                        'name', 
+                        'value'
+                    )
+                    ->where('id', '=', 5)
+                    ->first();
+        $value    = str_replace(':', ',', $active->value);
+        $endis    = explode(",", $value);
+        $valueitem    = str_replace(':', ',', $itemtype->value);
+        $item    = explode(",", $valueitem);
+        return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item'));
     }
+// ------- End index Item Store Reseller -------- //
 
-    public function searchReportTransaction(Request $request)
+// ------- Insert Item Store Reseller -------- //
+    public function ItemResellerstore(Request $request)
     {
-        $searchUsername    = $request->inputUsername;
-        $startDate         = $request->inputMinDate;
-        $endDate           = $request->inputMaxDate;
-        $datenow           = Carbon::now('GMT+7');
-        $reportTransaction = DB::table('asta_db.store_transaction_hist')
-                             ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id')
-                             ->select(
-                                 'asta_db.store_transaction_hist.user_id',
-                                 'asta_db.reseller.username',
-                                 'asta_db.store_transaction_hist.item_name',
-                                 'asta_db.store_transaction_hist.quantity',
-                                 'asta_db.store_transaction_hist.item_price',
-                                 'asta_db.store_transaction_hist.status',
-                                 'asta_db.store_transaction_hist.datetime'
-                             );
+        $title          = $request->title;
+        $goldAwarded    = $request->goldAwarded;
+        $priceCash      = $request->priceCash;
+        $googleKey      = $request->googleKey;
+        $itemType       = $request->itemType;
+
         $validator = Validator::make($request->all(),[
-            'inputMinDate'    => 'required|date',
-            'inputMaxDate'    => 'required|date',
+            'title'       => 'required',
+            'goldAwarded' => 'required|integer',
+            'priceCash'   => 'required|integer',
+            'googleKey'   => 'required',
+            'itemType'    => 'required'
         ]);
-    
+
         if ($validator->fails()) {
-            return self:: ReportTransaction()->withErrors($validator->errors());
+            return back()->withErrors($validator->errors());
         }
-  
-        if($endDate < $startDate){
-          return back()->with('alert','End Date can\'t be more than start date');
-        }
-  
-        if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
-  
-          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                            ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                            ->orderBy('asta_db.store_transaction_hist.datetime', 'asc')
-                            ->get();
-  
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
-  
-        }else if ($searchUsername != NULL && $startDate != NULL) {
-  
-          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                            ->WHERE('datetime', '>=', $startDate." 00:00:00")
-                            ->orderBy('datetime', 'asc')
-                            ->get();
-  
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
-  
-        }else if ($searchUsername != NULL && $endDate != NULL) {
-          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                            ->WHERE('datetime', '<=', $endDate." 23:59:59")
-                            ->orderBy('datetime', 'desc')
-                            ->get();
-  
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
-        }else if($searchUsername != NULL) {
-          $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                          ->get();
-  
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
-        }
-    }
 
-    public function detailTransaction($month, $year)
-    {
-        $transactions = StoreTransactionHist::select(
-                            'asta_db.store_transaction_hist.user_id',
-                            'asta_db.store_transaction_hist.item_name',
-                            'asta_db.store_transaction_hist.quantity',
-                            'asta_db.store_transaction_hist.item_price',
-                            'asta_db.store_transaction_hist.status',
-                            'asta_db.store_transaction_hist.datetime', 
-                            'asta_db.reseller.username'
-                        )
-                        ->join('asta_db.reseller','asta_db.store_transaction_hist.user_id','=','asta_db.reseller.reseller_id')
-                        ->whereYear('datetime', $year)
-                        ->whereMonth('datetime', $month)
-                        ->where('user_type', '=', 4)
-                        ->orderby('datetime', 'ASC')
-                        ->get();
-        $datenow        = Carbon::now('GMT+7');
-
-        return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $data = $request->all();
-        $datetimenow = Carbon::now('GMT+7');
-        $validate = [
-          'username' => 'unique:reseller,username',
-          'phone'    => 'unique:reseller,phone',
-          'email'    => 'unique:reseller,email',
-        //   'idcard'   => 'unique:reseller,identify'
-        ];
-  
-        $validator = Validator::make($data,$validate);
-  
-        if($validator->fails())
-        {  
-          return back()->withInput()->with('alert', $validator->errors()->first());
-        }
-  
-        Reseller::insertData([
-          'username' => $request->username,
-          'userpass' => bcrypt($request->password),
-          'fullname' => $request->firstName.' '.$request->lastName,
-          'phone'    => $request->phone,
-          'email'    => $request->email,
-          'identify' => $request->idcard,
-          'join_date'=> $datetimenow,
-          'gold'     => 0,
-          'rank_id'  => 1,
-          'rank_gold'=> 0,
-
-        //   'address'  => $request->address,
-        //   'guid'     => bcrypt($request->username.$request->email.$request->idcard)
+        $gold = ItemsCash::create([
+            'name'       => $title,
+            'item_get'   => $goldAwarded,
+            'price'      => $priceCash,
+            'shop_type'  => 4,
+            'item_type'  => $itemType,
+            'google_key' => $googleKey,
         ]);
 
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Register Reseller with username '. $request->username
+            'desc'      => 'Create new in menu Item Store Reseller with title '. $request->title
         ]);
-  
-        return back()->with('alert','REGISTER SUCCESSFULL');
+
+        return redirect()->route('Item_Store_Reseller')->with('success','Data Added');
     }
-// ------- Menu Item Store Reseller -------- //
-public function ItemStoreReseller()
-{
-    $menu     = MenuClass::menuName('Item Store Reseller');
-    $mainmenu = MenuClass::menuName('Reseller');
-    $getItems = ItemsCash::select(
-                    'item_id',
-                    'name',
-                    'item_get',
-                    'item_type',
-                    'price',
-                    'trans_type',
-                    'google_key',
-                    'status',
-                    'shop_type'
-                )
-                ->where('shop_type', '=', 4)
-                ->orderBy('item_id', 'desc')
-                ->get();
-    $active   = ConfigText::select(
-                    'name', 
-                    'value'
-                )
-                ->where('id', '=', 4)
-                ->first();
-    $value    = str_replace(':', ',', $active->value);
-    $endis    = explode(",", $value);
-    return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu'));
-}
+// ------- End Insert Item Store Reseller -------- //
 
-public function ItemResellerstore(Request $request)
-{
-    $title          = $request->title;
-    $goldAwarded    = $request->goldAwarded;
-    $priceCash      = $request->priceCash;
-    $googleKey      = $request->googleKey;
-
-    $validator = Validator::make($request->all(),[
-        'title'       => 'required',
-        'goldAwarded' => 'required|integer',
-        'priceCash'   => 'required|integer',
-        'googleKey'   => 'required',
-    ]);
-
-    if ($validator->fails()) {
-        return back()->withErrors($validator->errors());
-    }
-
-    $gold = ItemsCash::create([
-        'name'       => $title,
-        'item_get'   => $goldAwarded,
-        'price'      => $priceCash,
-        'shop_type'  => 4,
-        'item_type'  => 2,
-        'google_key' => $googleKey,
-    ]);
-
-    Log::create([
-        'op_id'     => Session::get('userId'),
-        'action_id' => '3',
-        'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Create new in menu Item Store Reseller with title '. $request->title
-    ]);
-
-    return redirect()->route('Item_Store_Reseller')->with('success','Data Added');
-}
-
+// ------- Update Item Store Reseller -------- //
     public function updateItemstoreReseller(Request $request)
     {
         $pk    = $request->pk;
@@ -732,7 +772,9 @@ public function ItemResellerstore(Request $request)
             'desc'      => 'Edit '.$name.' in menu Item Store Reseller with ID '.$pk.' to '. $value
         ]);
     }
+// ------- End Update Item Store Reseller -------- //
 
+// ------- Delete Item Store Reseller -------- //
     public function destroyItemStoreReseller(Request $request)
     {
         $getItemdId    = $request->userid;
@@ -752,40 +794,6 @@ public function ItemResellerstore(Request $request)
         }
         
     }
-// ------- End Menu Item Store Reseller --------//
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */ 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+// ------- End Delete Item Store Reseller --------//
+//****************************************** Menu Item Store Reseller******************************************//
 }

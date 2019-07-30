@@ -66,7 +66,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
                  
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL) {
           $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
@@ -75,7 +75,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
                   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL && $inputAction != NULL &&  $inputMaxDate != NULL) {
           $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
@@ -85,7 +85,7 @@ class LogController extends Controller
                   ->get();
                   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputMinDate != NULL && $inputMaxDate != NULL &&  $inputAction != NULL) {
           $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
@@ -94,14 +94,14 @@ class LogController extends Controller
                  ->get();
   
                  
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
        }else if ($inputMinDate != NULL && $inputMaxDate != NULL){
          $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                  ->orderBy('asta_db.log_operator.datetime', 'asc')
                  ->get();
   
                  
-         return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+         return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
        }else if ($inputUser != NULL && $inputMaxDate != NULL){
           $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -109,7 +109,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL &&  $inputAction != NULL) {
           $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -117,7 +117,7 @@ class LogController extends Controller
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
 
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
         }else if($inputMinDate != NULL &&  $inputAction != NULL) {
                $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
                        ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
@@ -125,7 +125,7 @@ class LogController extends Controller
                        ->get();
   
   
-                return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+                return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
         }else if($inputMaxDate != NULL &&  $inputAction != NULL) {
                 $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
                         ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
@@ -133,7 +133,7 @@ class LogController extends Controller
                         ->get();
   
   
-                return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+                return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
         }else if($inputUser != NULL && $inputMinDate != NULL ) {
           $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
                   ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
@@ -141,13 +141,13 @@ class LogController extends Controller
                   ->get();
   
   
-         return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+         return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
        }else if ($inputMinDate != NULL){
           $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
                   ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if ($inputMaxDate != NULL){
           $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
@@ -155,7 +155,7 @@ class LogController extends Controller
                   ->get();
   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputUser != NULL ){
           $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
@@ -163,7 +163,7 @@ class LogController extends Controller
                   ->get();
   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($inputAction != NULL) {
           $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
@@ -171,7 +171,7 @@ class LogController extends Controller
                  ->get();
   
   
-          return view('pages.admin.log_admin_detail', compact('logs', 'actionSearch', 'datenow'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
         }else{
           return self::index();
         }

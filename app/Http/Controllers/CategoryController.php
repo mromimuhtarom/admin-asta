@@ -155,9 +155,9 @@ class CategoryController extends Controller
         $tpk_category =  TpkRoom::create([
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
-            'max_buy'   => $maxbuy,
-            'stake'     => '0',
-            'timer'     => '0'
+            'max_buy'   => $maxbuy
+            // 'stake'     => '0',
+            // 'timer'     => '0'
         ]);
         Log::create([
             'op_id'     => Session::get('userId'),
@@ -206,9 +206,9 @@ class CategoryController extends Controller
         $bgt_category = BigTwoRoom::create([
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
-            'max_buy'   => $maxbuy,
-            'stake'     => $stake,
-            'timer'     => '0'
+            'max_buy'   => $maxbuy
+            // 'stake'     => $stake,
+            // 'timer'     => '0'
         ]);
 
         Log::create([
@@ -261,9 +261,9 @@ class CategoryController extends Controller
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
             'max_buy'       => $maxbuy,
-            'stake'         => $stake,
-            'stake_pass'    => $stake,
-            'timer'         => '0'
+            // 'stake'         => $stake,
+            // 'stake_pass'    => $stake,
+            // 'timer'         => '0'
         ]);
 
         Log::create([
@@ -317,9 +317,9 @@ class CategoryController extends Controller
         $dmq_category = DominoQRoom::create([
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
-            'max_buy'       => $maxbuy,
-            'stake'         => $stake,
-            'timer'         => '0'
+            'max_buy'       => $maxbuy
+            // 'stake'         => $stake,
+            // 'timer'         => '0'
         ]);
 
 

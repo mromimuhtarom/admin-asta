@@ -60,7 +60,7 @@ class GoldController extends Controller
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1','datenow'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL && $startDate != NULL){
@@ -70,7 +70,7 @@ class GoldController extends Controller
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL && $endDate != NULL){
@@ -80,7 +80,7 @@ class GoldController extends Controller
                             ->orderBy('asta_db.balance_gold.datetime', 'desc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($startDate != NULL && $endDate != NULL){
@@ -89,7 +89,7 @@ class GoldController extends Controller
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL){
@@ -97,7 +97,7 @@ class GoldController extends Controller
           $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($startDate != NULL){
@@ -106,7 +106,7 @@ class GoldController extends Controller
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($endDate != NULL){
@@ -115,7 +115,7 @@ class GoldController extends Controller
                             ->orderBy('asta_db.balance_gold.datetime', 'desc')
                             ->get();
 
-          return view('pages.players.gold_playerdetail', compact('balancedetails', 'menus1', 'datenow'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow'));
           // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
 
