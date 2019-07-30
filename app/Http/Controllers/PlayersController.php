@@ -302,9 +302,25 @@ class PlayersController extends Controller
         $name  = $request->name;
         $value = $request->value;
         
-        Stat::where('user_id', '=', $pk)->update([
-          $name => $value
-        ]);
+        if($name == 'chip')
+        {
+          Stat::where('user_id', '=', $pk)->update([
+            'chip'      => $value,
+            'chip_val'  => bcrypt($value) 
+          ]);
+        } else if($name == 'point')
+        {
+          Stat::where('user_id', '=', $pk)->update([
+            'point'     => $value,
+            'point_val' => bcrypt($value)
+          ]);
+        } else if($name == 'gold')
+        {
+          Stat::where('user_id', '=', $pk)->update([
+            'gold' => $value,
+            'gold_val' => bcrypt($value)
+          ]);
+        }
 
         switch ($name) {
           case "chip":

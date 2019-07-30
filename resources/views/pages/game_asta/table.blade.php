@@ -95,6 +95,9 @@
                   <th class="th-sm">Small Blind</th>
                   <th class="th-sm">Big Blind</th>
                   <th class="th-sm">Jackpot</th>
+                  <th class="th-sm">Min Buy</th>
+                  <th class="th-sm">Max Buy</th>
+                  <th class="th-sm">Timer</th>
                   @if($menu && $mainmenu && $submenu)
                   <th class="th-sm">action</th>
                   @endif
@@ -108,9 +111,12 @@
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Table Name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('Table-update')}}">{{ $tb->roomname }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update')}}">{{ $tb->max_player }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->table_id }}" data-roomid="{{ $tb->room_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->table_id }}" data-roomid="{{ $tb->room_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td>
                     <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpot }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->min_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->max_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->timer }}</a></td>
                     <td><a href="#" style="color:red;" class="delete{{ $tb->table_id }}" id="delete" data-pk="{{ $tb->table_id }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
                   @else 
@@ -121,6 +127,9 @@
                       <td>{{ $tb->small_blind }}</td>
                       <td>{{ $tb->big_blind }}</td>
                       <td>{{ $tb->jackpot }}</td>
+                      <td>{{ $tb->min_buy }}</td>
+                      <td>{{ $tb->max_buy }}</td>
+                      <td>{{ $tb->timer }}</td>
                   </tr>
                   @endif
                 @endforeach
@@ -157,9 +166,15 @@
                   <select class="custom-select" id="category" name="category">
                     <option>Select Category</option>
                     @foreach ($category as $ct)
-                      <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
+                      <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }}</option>
                     @endforeach
                   </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" id="sb" name="sb" placeholder="Small Blind" required="">

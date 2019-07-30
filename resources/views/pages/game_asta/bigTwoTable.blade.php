@@ -28,6 +28,12 @@
           <p>{{\Session::get('success')}}</p>
       </div>
   @endif
+
+  @if (\Session::has('alert'))
+    <div class="alert alert-danger">
+      <div>{{Session::get('alert')}}</div>
+    </div>
+  @endif
   <!-- End Response Status -->
 
   <!-- Form Table -->
@@ -68,6 +74,10 @@
                   <th class="th-sm">Max Player</th>
                   <th class="th-sm">Turn</th>
                   <th class="th-sm">Total Bet</th>
+                  <th class="th-sm">Stake</th>
+                  <th class="th-sm">Min Buy</th>
+                  <th class="th-sm">Max Buy</th>
+                  <th class="th-sm">Timer</th>
                   @if($menu && $mainmenu && $submenu)
                   <th class="th-sm">action</th>
                   @endif
@@ -83,6 +93,10 @@
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
                     <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->turn }}</a></td>
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->total_bet }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->stake }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->min_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->timer }}</a></td>
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $tb->table_id }}" id="delete" data-pk="{{ $tb->table_id }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
                   @else 
@@ -92,6 +106,10 @@
                       <td>{{ $tb->max_player }}</td>
                       <td>{{ $tb->turn }}</td>
                       <td>{{ $tb->total_bet }}</td>
+                      <td>{{ $tb->stake }}</td>
+                      <td>{{ $tb->min_buy }}</td>
+                      <td>{{ $tb->max_buy }}</td>
+                      <td>{{ $tb->timer }}</td>
                   </tr>
                   @endif
                 @endforeach
@@ -125,10 +143,19 @@
                   <input type="text" class="form-control" name="tableName" placeholder="Table Name" required="">
                 </div>
                 <div class="form-group">
+                  <input type="number" class="form-control" name="stake" placeholder="Stake" required="">
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control" name="minbuy" placeholder="Min Buy" required="">
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control" name="maxbuy" placeholder="Max Buy" required="">
+                </div>
+                <div class="form-group">
                   <select class="custom-select" name="category">
                     <option selected>Select Category</option>
                     @foreach ($category as $ct)
-                      <option value="{{ $ct->room_id }}">{{ $ct->name }} &nbsp; &nbsp; &nbsp; Min-Max Buy {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
+                      <option value="{{ $ct->room_id }}">{{ $ct->name }}</option>
                     @endforeach
                   </select>
                 </div>
