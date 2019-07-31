@@ -62,8 +62,6 @@
                     <option value="{{ $rl->role_id}}">{{ $rl->name}}</option>
                     @endforeach
                   </select><br>
-                  {{-- <input type='file' onchange="readURL(this);" /><br><br>
-                  <img id="blah" src="http://placehold.it/180" alt="your image" width="100" height="100" /> --}}
                 </div>
               </div>
             </div>
@@ -114,9 +112,6 @@
             </div>
             <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
               
-              {{-- <button class="btn sa-btn-success">
-                <i onclick="addBots()" class="fa fa-plus"></i> <span class="hidden-mobile">Add New Row</span>
-              </button> --}}
               
             </div>
             

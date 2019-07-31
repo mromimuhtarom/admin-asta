@@ -47,23 +47,9 @@
                   <tr>
                     <td>Maintenance</td>
                     @if($menu && $mainmenu)
-                    <td>
-                      <a href="#" class="popUpSetting" data-title="Maintenance" data-name="value" data-value="{{ $getMaintenance->value }}" data-pk="{{ $getMaintenance->id }}" data-type="select" data-url="{{ route('GeneralSetting-update') }}">
-                        @if ($getMaintenance->value == 1)
-                          On
-                        @else
-                          Off
-                        @endif
-                      </a>
-                    </td>
+                    <td><a href="#" class="popUpSetting" data-title="Maintenance" data-name="value" data-value="{{ $getMaintenance->value }}" data-pk="{{ $getMaintenance->id }}" data-type="select" data-url="{{ route('GeneralSetting-update') }}">{{ $getMaintenance->strmaintenance() }}</a></td>
                     @else 
-                    <td>
-                      @if ($getMaintenance->value == 1)
-                        On
-                      @else
-                        Off
-                      @endif
-                    </td>
+                    <td>{{ $getMaintenance->strmaintenance() }}</td>
                     @endif
                   </tr>
                   <tr>

@@ -106,10 +106,6 @@
         </div>
         <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
           
-          {{-- <button class="btn sa-btn-success">
-            <i onclick="addBots()" class="fa fa-plus"></i> <span class="hidden-mobile">Add New Row</span>
-          </button> --}}
-          
         </div>
         
       </div>

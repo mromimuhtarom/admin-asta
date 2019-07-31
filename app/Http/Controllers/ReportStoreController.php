@@ -55,13 +55,13 @@ class ReportStoreController extends Controller
                                     ->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                     ->get();
                     
-                    return view('pages.store.report_storedetail', compact('transactions', 'datenow'));
+                    return view('pages.store.report_store', compact('transactions', 'datenow'));
                 } else if($minDate != NULL && $maxDate != NULL)
                 {
                     $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                     ->get();
 
-                    return view('pages.store.report_storedetail', compact('transactions', 'datenow'));
+                    return view('pages.store.report_store', compact('transactions', 'datenow'));
                 } 
             }
         }

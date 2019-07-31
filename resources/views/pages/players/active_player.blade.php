@@ -54,14 +54,7 @@
                     <td>{{ $ol->rank_id }}</td>
                     <td>{{ $ol->chip }}</td>
                     <td>{{ $ol->gold }}</td>
-                    @php
-                    if($ol->user_type === 2) {
-                        $user_type = 'Guest';
-                    } else if($ol->user_type === 1){
-                        $user_type = 'Player';
-                    } 
-                    @endphp
-                    <td>{{ $user_type }}</td>
+                    <td>{{ $ol->strUser_type() }}</td>
                     <td>{{ $ol->game_name }}</td>
                     <td>{{ $ol->date_login}}</td>
                 </tr>

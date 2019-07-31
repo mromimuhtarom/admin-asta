@@ -10,4 +10,15 @@ class StoreTransactionHist extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+    
+    public $statusApdec = [
+        '0' =>  'Decline',
+        '1' =>  'Request',
+        '2' =>  'Decline'
+    ];
+
+    public function strStatus()
+    {
+        return $this->statusApdec[$this->status];
+    }
 }

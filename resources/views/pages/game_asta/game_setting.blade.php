@@ -33,11 +33,8 @@
                 </thead>
                 <tbody>
                     @foreach($tpk as $tpk)
-                    @php 
-                    $name = str_replace('_', ' ', $tpk->name);
-                    @endphp
                     <tr>
-                        <td>{{ ucwords($name)}}</td>
+                        <td>{{ $tpk->strname() }}</td>
                         <td><a href="#" class="inlineSetting" data-type="number" data-name="value" data-pk="{{ $tpk->id }}" data-url="{{ route('GameSetting-updateTpk') }}">{{ $tpk->value }}</a></td>
                     </tr>
                     @endforeach
@@ -75,11 +72,8 @@
                 </thead>
                 <tbody>
                     @foreach($bgt as $bgt)
-                    @php
-                        $bgtname = str_replace('_', ' ', $bgt->name)
-                    @endphp
                     <tr>
-                        <td>{{ ucwords($bgtname) }}</td>
+                        <td>{{ $bgt->strname() }}</td>
                         <td><a href="" class="inlineSetting" data-name="value" data-pk="{{ $bgt->id }}" data-type="number" data-url="{{ route('GameSetting-updateBgt') }}">{{ $bgt->value }}</a></td>
                     </tr>
                     @endforeach
@@ -117,11 +111,8 @@
                 </thead>
                 <tbody>
                     @foreach($dms as $dms)
-                    @php
-                    $dmsname = str_replace('_', ' ', $dms->name);    
-                    @endphp
                     <tr>
-                        <td>{{ ucwords($dmsname) }}</td>
+                        <td>{{ $dms->strname() }}</td>
                         <td><a href="" class="inlineSetting" data-pk="{{ $dms->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDms') }}">{{ $dms->value }}</a></td>
                     </tr>
                     @endforeach
@@ -159,11 +150,8 @@
                 </thead>
                 <tbody>
                     @foreach($dmq as $dmq)
-                    @php
-                        $dmqname = str_replace('_', ' ', $dmq->name);
-                    @endphp
                     <tr>
-                        <td>{{ ucwords($dmqname) }}</td>
+                        <td>{{ $dmq->strname() }}</td>
                         <td><a href=""class="inlineSetting" data-pk="{{ $dmq->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDmq') }}">{{ $dmq->value}}</a></td>
                     </tr>
                     @endforeach

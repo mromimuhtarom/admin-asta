@@ -69,8 +69,6 @@
                   <th class="th-sm">Title</th>
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
-                  {{-- <th class="th-sm">Blind</th>
-                  <th class="th-sm">Timer</th> --}}
                   @if($menu && $mainmenu && $submenu)
                   <th class="th-sm">Action</th>
                   @endif
@@ -84,19 +82,13 @@
                     <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('Category-update')}}">{{ $kt->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->min_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->max_buy }}</a></td>
-                    {{-- <td><a href="#" class="usertext" data-title="Blind" data-name="stake" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->stake }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update') }}">{{ $kt->timer }}</a></td> --}}
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
                 </tr>
                 @else 
                 <tr>
-                    {{-- <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td> --}}
                     <td>{{ $kt->name }}</td>
                     <td>{{ $kt->min_buy }}</td>
                     <td>{{ $kt->max_buy }}</td>
-                    {{-- <td>{{ $kt->stake }}</td> --}}
-                    {{-- <td>{{ $kt->timer }}</td> --}}
-                    {{-- <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td> --}}
                 </tr>
                 @endif
                 @endforeach

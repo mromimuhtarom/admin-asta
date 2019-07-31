@@ -69,10 +69,8 @@
                   <th></th>
                   @endif
                   <th class="th-sm">Title</th>
-                  {{-- <th class="th-sm">Stake</th> --}}
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
-                  {{-- <th class="th-sm">Timer</th> --}}
                   @if($menu && $mainmenu && $submenu)
                   <th class="th-sm">Action</th>
                   @endif
@@ -84,19 +82,15 @@
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td>
                     <td><a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->name }}</a></td>
-                    {{-- <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->stake }}</a></td> --}}
                     <td><a href="#" class="minbuy" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->min_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('BigTwoCategory-update')}}">{{ $kt->max_buy }}</a></td>
-                    {{-- <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('BigTwoCategory-update') }}">{{ $kt->timer }}</a></td> --}}
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
                 </tr>
                 @else 
                 <tr>
                     <td>{{ $kt->name }}</td>
-                    <td>{{ $kt->stake }}</td>
                     <td>{{ $kt->min_buy }}</td>
                     <td>{{ $kt->max_buy }}</td>
-                    <td>{{ $kt->timer }}</td>
                 </tr>
                 @endif
                 @endforeach
@@ -129,9 +123,6 @@
                 <div class="form-group">
                   <input type="text" class="form-control" name="categoryName" placeholder="Name Category" required="">
                 </div>
-                {{-- <div class="form-group">
-                  <input type="number" class="form-control" id="stake" name="stake" placeholder="Stake" required="">
-                </div> --}}
                 <div class="form-group">
                   <input type="number" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
                 </div>

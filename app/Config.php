@@ -10,4 +10,14 @@ class Config extends Model
     protected $guarded = [];
     
     public $timestamps = false;
+    public $maintenace_status = [
+        '1' =>  'On',
+        '2' =>  'Off'
+    ];
+
+    public function strmaintenance()
+    {
+        $maintenance = $this->where('id', '=', 101)->select('value');
+        return $this->maintenance_status[$maintenance];
+    }
 }
