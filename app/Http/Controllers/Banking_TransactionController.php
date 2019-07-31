@@ -55,14 +55,14 @@ class Banking_TransactionController extends Controller
             $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                        ->get();
             
-            return view('pages.transaction.banking_transaction_detail', compact('history', 'datenow', 'time'));
+            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
         } else if($time == "week")
         {
             $history = $transaction_day->selectRaw(' YEARWEEK(asta_db.transaction_day.date_created) AS yearperweek, max(date(asta_db.transaction_day.date_created)) As maxDate, min(date(asta_db.transaction_day.date_created)) As minDate')
                        ->groupBy('yearperweek', DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                        ->get();
  
-            return view('pages.transaction.banking_transaction_detail_group', compact('history', 'datenow', 'time'));
+            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
 
         } else if($time == "month")
         {
@@ -70,7 +70,7 @@ class Banking_TransactionController extends Controller
                        ->groupBy('month', DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                        ->get();
  
-            return view('pages.transaction.banking_transaction_detail_group', compact('history', 'datenow', 'time'));
+            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
         } else if($time == "all time")
         {
 
@@ -79,19 +79,19 @@ class Banking_TransactionController extends Controller
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                            ->get();
      
-                return view('pages.transaction.banking_transaction_detail', compact('history', 'datenow', 'time'));
+                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
             } else if($minDate != NULL)
             {
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '>=', $minDate." 00:00:00")
                            ->get();
      
-                return view('pages.transaction.banking_transaction_detail', compact('history', 'datenow', 'time'));
+                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
             } else if($maxDate != NULL)
             {
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '<=', $maxDate." 23:59:59")
                            ->get();
      
-                return view('pages.transaction.banking_transaction_detail', compact('history', 'datenow', 'time'));
+                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
             }
         } else {
             // return self::index()->withErrors($validator->errors());
@@ -123,7 +123,7 @@ class Banking_TransactionController extends Controller
                    ->wherebetween('asta_db.transaction_day.date_created', [$mindate." 00:00:00", $maxdate." 23:59:59"])
                    ->get();
 
-        return view('pages.transaction.banking_transaction_detail', compact('history', 'datenow', 'time'));
+        return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
     }
 
     

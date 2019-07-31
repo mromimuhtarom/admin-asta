@@ -462,6 +462,10 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Game_Setting'], function() {
             Route::middleware('page_denied:Game Setting')->group(function(){
                 Route::get('GameSetting-view', 'GameSettingController@index')->name('Game_Setting');
+                Route::post('GameSetting-updateTpk', 'GameSettingController@updateTpk')->name('GameSetting-updateTpk');
+                Route::post('GameSetting-updateBgt', 'GameSettingController@updateBgt')->name('GameSetting-updateBgt');
+                Route::post('GameSetting-updateDms', 'GameSettingController@updateDms')->name('GameSetting-updateDms');
+                Route::post('GameSetting-updateDmq', 'GameSettingController@updateDmq')->name('GameSetting-updateDmq');
             });
         });
 

@@ -297,7 +297,7 @@ class ResellerController extends Controller
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
   
         }else if ($searchUsername != NULL && $startDate != NULL) {
   
@@ -307,7 +307,7 @@ class ResellerController extends Controller
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
   
         }else if ($searchUsername != NULL && $endDate != NULL) {
           $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
@@ -316,13 +316,13 @@ class ResellerController extends Controller
                             ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
         }else if($searchUsername != NULL) {
           $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
                           ->get();
   
         //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
         }
     }
 //------- End Search Report Transaction ------//
@@ -347,7 +347,7 @@ public function detailTransaction($month, $year)
                     ->get();
     $datenow        = Carbon::now('GMT+7');
 
-    return view('pages.reseller.report_Transaction_detail', compact('transactions', 'datenow'));
+    return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
 }
 //------ End Detail Report Transaction ------//
 //****************************************** End Menu Report Transaction ******************************************//
@@ -393,7 +393,7 @@ public function detailTransaction($month, $year)
                           ->orderBy('asta_db.reseller_balance.datetime', 'asc')
                           ->get();
 
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $startDate != NULL) {
 
@@ -403,7 +403,7 @@ public function detailTransaction($month, $year)
                           ->get();
 
         // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
         $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
@@ -412,13 +412,13 @@ public function detailTransaction($month, $year)
                           ->get();
 
         // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
       }else if($searchUsername != NULL) {
         $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
                           ->get();
 
         // $balancedetails->appends($request->all());
-        return view('pages.reseller.balance_reseller_detail', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
       }
     }
 //----- End Search Balance Reseller -----//

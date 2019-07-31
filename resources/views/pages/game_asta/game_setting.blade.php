@@ -27,21 +27,20 @@
               <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm"></th>
                     <th class="th-sm">Name</th>
                     <th class="th-sm">Setting</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($items as $itm) --}}
+                    @foreach($tpk as $tpk)
+                    @php 
+                    $name = str_replace('_', ' ', $tpk->name);
+                    @endphp
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ ucwords($name)}}</td>
+                        <td><a href="#" class="inlineSetting" data-type="number" data-name="value" data-pk="{{ $tpk->id }}" data-url="{{ route('GameSetting-updateTpk') }}">{{ $tpk->value }}</a></td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
               </table>
             </div>
@@ -58,7 +57,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>Asta Big 2</strong></h2>				
+          <h2><strong>Asta Big Two</strong></h2>				
         </div>
       </header>
     
@@ -70,21 +69,20 @@
               <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm"></th>
                     <th class="th-sm">Name</th>
                     <th class="th-sm">Setting</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($items as $itm) --}}
+                    @foreach($bgt as $bgt)
+                    @php
+                        $bgtname = str_replace('_', ' ', $bgt->name)
+                    @endphp
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ ucwords($bgtname) }}</td>
+                        <td><a href="" class="inlineSetting" data-name="value" data-pk="{{ $bgt->id }}" data-type="number" data-url="{{ route('GameSetting-updateBgt') }}">{{ $bgt->value }}</a></td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
               </table>
             </div>
@@ -113,21 +111,20 @@
               <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm"></th>
                     <th class="th-sm">Name</th>
                     <th class="th-sm">Setting</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($items as $itm) --}}
+                    @foreach($dms as $dms)
+                    @php
+                    $dmsname = str_replace('_', ' ', $dms->name);    
+                    @endphp
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ ucwords($dmsname) }}</td>
+                        <td><a href="" class="inlineSetting" data-pk="{{ $dms->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDms') }}">{{ $dms->value }}</a></td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
               </table>
             </div>
@@ -156,21 +153,20 @@
               <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm"></th>
                     <th class="th-sm">Name</th>
                     <th class="th-sm">Setting</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($items as $itm) --}}
+                    @foreach($dmq as $dmq)
+                    @php
+                        $dmqname = str_replace('_', ' ', $dmq->name);
+                    @endphp
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ ucwords($dmqname) }}</td>
+                        <td><a href=""class="inlineSetting" data-pk="{{ $dmq->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDmq') }}">{{ $dmq->value}}</a></td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
               </table>
             </div>
@@ -209,7 +205,8 @@
       });
 
       $('.inlineSetting').editable({
-            mode :'inline'
+            mode :'inline',
+            step: 'any'
         });
      
     },
