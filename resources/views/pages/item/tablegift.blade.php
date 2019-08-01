@@ -64,6 +64,33 @@
 }
 	.edit-profile {}
 	.save-profile {}
+  input[type=file] {
+  cursor: pointer;
+  width: 180px;
+  height: 34px;
+  overflow: hidden;
+}
+
+input[type=file]:before {
+  width: 158px;
+  height: 32px;
+  font-size: 16px;
+  margin-top: 2%;
+  line-height: 32px;
+  content: 'Select your file';
+  display: inline-block;
+  background: #3276b1;
+  color: #ffffff;
+  padding: 0 10px;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+  display: none;
+  
+}
 
 </style>
 
@@ -255,7 +282,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary">
+          <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
             <i class="fa fa-save"></i> Save
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -286,7 +313,7 @@
             <input type="hidden" name="id" id="id" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-check"></i> Yes</button>
           <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
         </div>
           </form>

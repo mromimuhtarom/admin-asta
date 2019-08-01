@@ -142,7 +142,7 @@
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+				    <button type="submit" class="btn btn-primary" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-check"></i> Yes</button>
 				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
                 </div>
             </form>
@@ -183,7 +183,7 @@
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
+				    <button type="submit" class="btn btn-primary" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-check"></i> Yes</button>
 				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
                 </div>
             </form>

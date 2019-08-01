@@ -64,7 +64,7 @@
                   </td>
               </tr>
               <tr>
-                  <td colspan="3" align="center"><button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button></td>
+                  <td colspan="3" align="center"><button type="submit" class="btn btn-primary" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-save"></i> Save</button></td>
               </tr>
               <tr>
                   <td> Player ID used : {{ $playerused->countuserid }}</td>

@@ -18,11 +18,11 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs    = Action::select('action')
-                   ->whereBetween('id', [1, 6])
-                   ->get();
+        $actionSearch = Action::select('action')
+                        ->whereBetween('id', [1, 6])
+                        ->get();
         $datenow = Carbon::now('GMT+7');
-        return view('pages.admin.log_admin', compact('logs', 'datenow'));
+        return view('pages.admin.log_admin', compact('actionSearch', 'datenow'));
     }
 
 

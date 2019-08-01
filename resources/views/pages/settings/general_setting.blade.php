@@ -310,7 +310,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary">
+            <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
               <i class="fa fa-save"></i> Save
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -349,7 +349,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn sa-btn-primary">
+              <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
                 <i class="fa fa-save"></i> Save
               </button>
               <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -389,7 +389,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn sa-btn-primary">
+                    <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
                       <i class="fa fa-save"></i> Save
                     </button>
                     <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">

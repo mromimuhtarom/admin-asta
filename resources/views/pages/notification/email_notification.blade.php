@@ -119,7 +119,7 @@
             </select>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary">
+            <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
               <i class="fa fa-save"></i> Save
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -260,21 +260,10 @@
                 <tr>
                     <td>
                         <div class="media-container">
-                            {{-- <form method="POST" action="{{ route('EmailNotification-updateimage') }}" enctype="multipart/form-data">
-                              {{  csrf_field() }}
-                              <span class="media-overlay med-ovlay{{ $notification->id }}">
-                                <input type="hidden" name="pk" value="{{ $notification->id }}">
-                                <input type="file" name="file" id="media-input" class="upload{{ $notification->id }}" accept="image/*">
-                                <i class="fa fa-edit media-icon"></i>
-                              </span> --}}
                               <figure class="media-object">
                                 <img class="img-object imgupload{{ $notification->id }}" src="/upload/EmailNotification/{{ $notification->imageUrl }}">
                               </figure>
                             </div>
-                            {{-- <div class="media-control">
-                              <button class="save-profile{{ $notification->id }}">Save Gift</button>
-                            </form>
-                              <button class="edit-profile{{ $notification->id }}">Edit Gift</button> --}}
                         </div>
                     </td>
                     <td>{{ $notification->subject }}</td>
@@ -312,7 +301,7 @@
               <input type="hidden" name="id" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-check"></i> Yes</button>
             <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
           </div>
             </form>

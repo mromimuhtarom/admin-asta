@@ -35,8 +35,8 @@
                 <div class="col">
                     <select name="action" id="" class="form-control">
                         <option value="">Choose Action</option>
-                        @foreach($logs as $log)
-                        <option value="{{ $log->action }}">{{ $log->action}}</option>
+                        @foreach($actionSearch as $action)
+                        <option value="{{ $action->action }}">{{ $action->action}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -127,6 +127,13 @@
 		},
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+        // "ordering": false,
+        "order": [[ 2, "desc" ]],
+        // "columnDefs": [ {
+        //     "targets": [2],
+        //     "orderable": false, 
+        //     "orderSequence": ["asc"], 
+        // }],
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
 		},

@@ -78,7 +78,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center"><button class="myButton" type="submit" style="font-family:Century Gothic; font-weight:bold;"><i class="fa fa-save"></i> Submit</button></td>
+                            <td colspan="4" align="center"><button class="myButton" type="submit" style="font-family:Century Gothic; font-weight:bold;" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-save"></i> Submit</button></td>
                         </tr>
                     </table>
                 </form>
