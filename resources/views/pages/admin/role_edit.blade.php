@@ -76,12 +76,12 @@
                                 </table>
                               </td>
                             </tr>
-                              @else 
-                                  <tr>
-                                    <td>{{ $sbmnu->name }}</td>
-                                    <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ strMenuType($sbmnu->type) }}</a></td>
-                                  </tr>
-                              @endif
+                            @else 
+                            <tr>
+                              <td>{{ $sbmnu->name }}</td>
+                              <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ strMenuType($sbmnu->type) }}</a></td>
+                            </tr>
+                            @endif
                             @endif
                             @endforeach
                         </table>
@@ -108,7 +108,8 @@
           
           </div>
         </div>
-        </div>
+        
+    </div>
 
 
 
@@ -117,7 +118,7 @@
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }
-              });
+          });
               @php
                 foreach($mainmenu as $mnu) {
                   echo'$(".namedetail'.$mnu->menu_id.'").show();';
