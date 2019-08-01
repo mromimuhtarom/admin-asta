@@ -34,7 +34,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                      @foreach($mainmenu as $mnmnu)                
+                    @foreach($mainmenu as $mnmnu)                
                     <tr>
                       <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ $mnmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
                       <td>
@@ -50,36 +50,39 @@
                               <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ strMenuType($mnmnu->type) }}</a></td>
                             </tr>
                             @foreach($mnmnu['rolemenu'] as $sbmnu)
+                            @if ($sbmnu->role_id == $mnmnu->role_id)
                             @if (!$sbmnu['rolemenu']->isEMPTY())
-                              <tr>
-                                <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ $sbmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
-                                <td>
-                                  <div class="namedetailsub{{ $sbmnu->menu_id }}" style="color:red;">Detail ... <i class="fa fa-hand-o-down"></i></div>
-                                  <table width="100%" class="submenusub{{ $sbmnu->menu_id}}" style="border:1px solid #dee2e6;">
-                                    <tr style="background-color:#f5f5f5;">
-                                      <td>Menu Name</td>
-                                      <td>Type</td>
-                                      <tr>
-                                        <td>{{ $sbmnu->name }}</td>
-                                        <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ strMenuType($sbmnu->type) }}</a></td>
-                                      </tr>
-                                    </tr>
-                                    @foreach ($sbmnu['rolemenu'] as $sbt)
-                                      <tr>
-                                        <td>{{ $sbt->name }}</td>
-                                        <td><a href="#" class="type" id="type" data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ strMenuType($sbt->type) }}</a></td>
-                                      </tr>
-                                    @endforeach
-                                  </table>
-                                </td>
-                              </tr>
-                            @else 
-                              <tr>
-                                <td>{{ $sbmnu->name }}</td>
-                                <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ strMenuType($sbmnu->type) }}</a></td>
-                              </tr>
+                            <tr>
+                              <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ $sbmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                              <td>
+                                <div class="namedetailsub{{ $sbmnu->menu_id }}" style="color:red;">Detail ... <i class="fa fa-hand-o-down"></i></div>
+                                <table width="100%" class="submenusub{{ $sbmnu->menu_id}}" style="border:1px solid #dee2e6;">
+                                  <tr style="background-color:#f5f5f5;">
+                                    <td>Menu Name</td>
+                                    <td>Type</td>
+                                  </tr>
+                                  <tr>
+                                    <td>{{ $sbmnu->name }}</td>
+                                    <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ strMenuType($sbmnu->type) }}</a></td>
+                                  </tr>
+                                  @foreach ($sbmnu['rolemenu'] as $sbt)
+                                  @if ($sbt->role_id == $sbmnu->role_id)
+                                  <tr>
+                                    <td>{{ $sbt->name }}</td>
+                                    <td><a href="#" class="type" id="type" data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ strMenuType($sbt->type) }}</a></td>
+                                  </tr>
+                                  @endif
+                                  @endforeach
+                                </table>
+                              </td>
+                            </tr>
+                              @else 
+                                  <tr>
+                                    <td>{{ $sbmnu->name }}</td>
+                                    <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ strMenuType($sbmnu->type) }}</a></td>
+                                  </tr>
+                              @endif
                             @endif
-
                             @endforeach
                         </table>
                         @else 

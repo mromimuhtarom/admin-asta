@@ -24,8 +24,8 @@ class ReportPlayerController extends Controller
                     'id', 
                     'action'
                   )
-                  ->where('id', '=', 7)
-                  ->orwhere('id', '=', 8)
+                  ->where('id', '=', 23)
+                  ->orwhere('id', '=', 24)
                   ->get();
 
                   
@@ -49,8 +49,8 @@ class ReportPlayerController extends Controller
                     'id', 
                     'action'
                    )
-                   ->where('id', '=', 7)
-                   ->orwhere('id', '=', 8)
+                   ->where('id', '=', 23)
+                   ->orwhere('id', '=', 24)
                    ->get();
         $logOnline = LogOnline::join('asta_db.user', 'asta_db.user.user_id', '=', 'log_online.user_id')
                      ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
