@@ -13,9 +13,7 @@ class LogPlayerController extends Controller
     public function index()
     {
         $action =   Action::select('action', 'id')
-                    // ->where('id', '!=', 7)
-                    // ->where('id', '!=', 8)
-                    ->whereBetween('id', [1, 6])
+                    ->whereBetween('id', [19, 22])
                     ->get();
         $datenow = Carbon::now('GMT+7');
         return view('pages.players.log_player', compact('action', 'datenow'));
@@ -30,9 +28,7 @@ class LogPlayerController extends Controller
         $datenow = Carbon::now('GMT+7');
 
         $action =   Action::select('action', 'id')
-                    // ->where('id', '!=', 7)
-                    // ->where('id', '!=', 8)
-                    ->whereBetween('id', [1, 6])
+                    ->whereBetween('id', [19, 22])
                     ->get();
 
         $loguser =  LogUser::select(
