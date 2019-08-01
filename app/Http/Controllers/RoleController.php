@@ -108,7 +108,7 @@ class RoleController extends Controller
         //
     }
 
-    public function menu(Role $role)
+    public function menu($role)
     {
         $roles    = DB::table('asta_db.adm_access')
                     ->join('asta_db.adm_menu', 'asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')
@@ -118,12 +118,13 @@ class RoleController extends Controller
                       'asta_db.adm_access.menu_id',
                       'asta_db.adm_access.role_id'
                     )
-                    ->where('asta_db.adm_access.role_id', '=', $role->role_id)
+                    ->where('asta_db.adm_access.role_id', '=', $role)
                     ->get();
         $mainmenu = MenuName::where('parent_id', '=', 0)
                     ->join('asta_db.adm_access', 'asta_db.adm_access.menu_id', '=', 'asta_db.adm_menu.menu_id')
                     ->where('status', '=', 1)
                     ->where('parent_id', '=', 0)
+                    ->where('asta_db.adm_access.role_id', '=', $role)
                     ->where('asta_db.adm_menu.menu_id', '!=', 78)
                     ->get();
         $roles          = $roles->toArray();

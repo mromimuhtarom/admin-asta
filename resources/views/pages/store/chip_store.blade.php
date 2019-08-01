@@ -224,9 +224,7 @@
         mode :'inline',
 				source: [
                   {value: '', text: 'choose for activation'},
-				          // {value: '1', text: 'Enabled'},
                   @php
-                        // $endis = preg_split( "/ :|, /", $atv->value );
                       echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
                       echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
                   @endphp
