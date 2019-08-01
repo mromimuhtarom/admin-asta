@@ -57,12 +57,6 @@
                     <option value="{{ $gm->id }}">{{ $gm->name }}</option>
                     @endforeach
                   </select><br>
-                  {{-- <select name="game" class="form-control">
-                      <option value="">Select Type</option>
-                      @foreach ($game as $gm)
-                      <option value="{{ $gm->id }}">{{ $gm->name }}</option>
-                      @endforeach
-                  </select> --}}
                 </div>
               </div>
             </div>

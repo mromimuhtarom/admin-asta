@@ -127,13 +127,7 @@
 		},
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
-        // "ordering": false,
         "order": [[ 2, "desc" ]],
-        // "columnDefs": [ {
-        //     "targets": [2],
-        //     "orderable": false, 
-        //     "orderSequence": ["asc"], 
-        // }],
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
 		},

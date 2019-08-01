@@ -115,7 +115,6 @@
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }
               });
-              // $.fn.editable.defaults.mode = 'inline';
               @php
                 foreach($mainmenu as $mnu) {
                   echo'$(".namedetail'.$mnu->menu_id.'").show();';

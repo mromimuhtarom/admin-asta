@@ -40,7 +40,6 @@
 			z-index: 9;
 		}
 		.media-icon {
-			/* display: sticky; */
       transform: translate(-1%,-90%);
 			color: #ffffff;
 			font-size: 2em;
@@ -73,6 +72,7 @@
 
 input[type=file]:before {
   width: 158px;
+  border-radius: 5px;
   height: 32px;
   font-size: 16px;
   margin-top: 2%;
@@ -123,9 +123,7 @@ input[type=file]::-webkit-file-upload-button {
 
 @if (\Session::has('alert'))
 <div class="alert alert-danger">
-    {{-- <div class="alert alert-danger"> --}}
         <div>{{Session::get('alert')}}</div>
-    {{-- </div> --}}
 </div>
 
 @endif
@@ -195,7 +193,6 @@ input[type=file]::-webkit-file-upload-button {
                               <span class="media-overlay med-ovlay{{ $gf->id }}">
                                 <input type="hidden" name="pk" value="{{ $gf->id }}">
                                 <input type="file" name="file" id="media-input" class="upload{{ $gf->id }}" accept="image/*">
-                                {{-- <i class="fas fa-edit media-icon"></i> --}}
                                 <i class="fa fa-edit media-icon"></i>
                               </span>
                               <figure class="media-object">
@@ -229,7 +226,7 @@ input[type=file]::-webkit-file-upload-button {
                               <figure class="media-object">
                                 <img class="img-object imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->image_url }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
-                            </div>
+                          </div>
                     </td>
                     <td>{{ $gf->name }}</td>
                     <td>{{ $gf->price }}</td>
@@ -282,7 +279,7 @@ input[type=file]::-webkit-file-upload-button {
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
+          <button type="submit" class="btn sa-btn-primary submit-data" >
             <i class="fa fa-save"></i> Save
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -313,7 +310,7 @@ input[type=file]::-webkit-file-upload-button {
             <input type="hidden" name="id" id="id" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-check"></i> Yes</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
           <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
         </div>
           </form>

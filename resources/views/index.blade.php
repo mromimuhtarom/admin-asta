@@ -220,7 +220,12 @@
             </div>
         	</div>
         	<div>
-            @yield('content')
+						@yield('content')
+						<script>
+						  $('form').submit(function() {
+    						$(this).find(".submit-data").prop('disabled',true);
+  						});
+						</script>
         	</div>
         </div>
 

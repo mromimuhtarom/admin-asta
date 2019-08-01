@@ -119,7 +119,7 @@
             </select>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
+            <button type="submit" class="btn sa-btn-primary submit-data">
               <i class="fa fa-save"></i> Save
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -301,7 +301,7 @@
               <input type="hidden" name="id" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success" onClick = "this.style.visibility= 'hidden';"><i class="fa fa-check"></i> Yes</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i> Yes</button>
             <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
           </div>
             </form>

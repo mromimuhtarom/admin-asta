@@ -186,7 +186,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary" onClick = "this.style.visibility= 'hidden';">
+          <button type="submit" class="btn sa-btn-primary submit-data">
             <i class="fa fa-save"></i> Save
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
