@@ -241,8 +241,8 @@
           <div class="form-group" align="center">
             <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
               <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
-            </div><br>
-              <input type='file' name="file" onchange="readURL(this);"/><br><br>
+            </div>
+              <div style="padding-left:18%;"><input type='file' name="file" onchange="readURL(this);"/></div><br><br>
           </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">

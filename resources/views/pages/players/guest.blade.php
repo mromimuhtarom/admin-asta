@@ -29,7 +29,7 @@
 <!--------End Warning Alert ---------->
 
 <!---- Content Search ---->
-    <div class="search bg-blue-dark" style="margin-bottom:3%;">
+    <div class="searchguest bg-blue-dark" style="margin-bottom:3%;">
         <div class="table-header w-100 h-100">
             <form action="{{ route('Guest-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
@@ -43,10 +43,10 @@
                             <option value="nonused">Non Used</option>
                         </select>
                     </div>
-                    <div class="col" style="padding-left:1%;">
+                    <div class="col" style="padding-left:1%;" hidden>
                         <input type="date" id="mindate" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                     </div>
-                    <div class="col" style="padding-left:1%;">
+                    <div class="col" style="padding-left:1%;" hidden>
                         <input type="date" id="maxdate" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;">

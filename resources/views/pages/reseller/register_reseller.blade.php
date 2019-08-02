@@ -18,7 +18,6 @@
 <div class="alert alert-success">
     <p>{{\Session::get('success')}}</p>
 </div>
-
 @endif
 @if($menu && $mainmenu)
 <div class="input-insert bg-blue-dark">

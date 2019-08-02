@@ -2,6 +2,14 @@
     list-style: none;
     font-weight: bold;
 }
+.searchguest {
+    width:40%;
+    height: 80px;
+    padding-top:1.5%;
+    padding-left:7%;
+    margin-left:28%;
+    border-radius: 5px;
+}
 
 .search {
     width:58%;
@@ -11,6 +19,29 @@
     margin-left:20%;
     border-radius: 5px;
 }
+
+input[type=file]:before {
+    width: 158px;
+    border-radius: 5px;
+    height: 32px;
+    font-size: 16px;
+    margin-top: 2%;
+    line-height: 32px;
+    content: 'Select your file';
+    display: inline-block;
+    background: #3276b1;
+    color: #ffffff;
+    padding: 0 10px;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  input[type=file]::-webkit-file-upload-button {
+    visibility: hidden;
+    display: none;
+    
+  }
+
 
 .table-outer {
   margin: 1%;

@@ -460,6 +460,19 @@ class PlayersController extends Controller
                     ->wherebetween('asta_db.user_guest.device_timer', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                     ->get();   
        return view('pages.players.guest', compact('guests', 'status', 'datenow'));
+    } else if($status == 'used' && $minDate == NULL && $maxDate == NULL)
+    {
+        $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
+                      ->select(
+                        'asta_db.user.username', 
+                        'asta_db.user_guest.guest_id',
+                        'asta_db.user_guest.device_id', 
+                        'asta_db.user_guest.device_timer',
+                        'asta_db.user_guest.user_id',
+                        DB::raw("'Used' AS status")
+                      )
+                      ->get();
+        return view('pages.players.guest', compact('guests', 'status', 'datenow'));
     } else if($minDate == NULL || $maxDate == NULL || $minDate == NULL && $maxDate == NULL)
     {
       return self::indexGuest()->with('alert', 'You must to Choose Status');

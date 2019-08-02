@@ -70,27 +70,7 @@
   overflow: hidden;
 }
 
-input[type=file]:before {
-  width: 158px;
-  border-radius: 5px;
-  height: 32px;
-  font-size: 16px;
-  margin-top: 2%;
-  line-height: 32px;
-  content: 'Select your file';
-  display: inline-block;
-  background: #3276b1;
-  color: #ffffff;
-  padding: 0 10px;
-  text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
-}
 
-input[type=file]::-webkit-file-upload-button {
-  visibility: hidden;
-  display: none;
-  
-}
 
 </style>
 

@@ -184,6 +184,8 @@ class ResellerController extends Controller
         $name  = $request->name;
         $value = $request->value;
     
+        
+
         ResellerRank::where('id', '=', $pk)->update([
           $name => $value
         ]);
@@ -191,8 +193,7 @@ class ResellerController extends Controller
         switch($name) {
             case "order_id":
                 $name = 'Order ID';
-                break;
-            
+                break;            
             case "name":
                 $name = "Name";
                 break;
@@ -439,19 +440,19 @@ public function detailTransaction($month, $year)
     {
         $data = $request->all();
         $datetimenow = Carbon::now('GMT+7');
-        $validate = [
-          'username' => 'unique:reseller,username',
-          'phone'    => 'unique:reseller,phone',
-          'email'    => 'unique:reseller,email',
-        //   'idcard'   => 'unique:reseller,identify'
-        ];
+        // $validate = [
+        //   'username' => 'unique:reseller,username',
+        //   'phone'    => 'unique:reseller,phone',
+        //   'email'    => 'unique:reseller,email',
+        // //   'idcard'   => 'unique:reseller,identify'
+        // ];
   
-        $validator = Validator::make($data,$validate);
+        // $validator = Validator::make($data,$validate);
   
-        if($validator->fails())
-        {  
-          return back()->withInput()->with('alert', $validator->errors()->first());
-        }
+        // if($validator->fails())
+        // {  
+        //   return back()->withInput()->with('alert', $validator->errors()->first());
+        // }
   
         Reseller::insertData([
           'username' => $request->username,
@@ -476,7 +477,7 @@ public function detailTransaction($month, $year)
             'desc'      => 'Create new in menu Register Reseller with username '. $request->username
         ]);
   
-        return back()->with('alert','REGISTER SUCCESSFULL');
+        return back()->with('success','REGISTER SUCCESSFULL');
     }
 //------ End Insert Register Reseller ------//
 //****************************************** End Menu Register Reseller ******************************************//

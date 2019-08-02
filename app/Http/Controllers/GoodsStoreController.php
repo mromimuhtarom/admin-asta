@@ -72,7 +72,7 @@ class GoodsStoreController extends Controller
         {
             $id_lst = 0;
         } else {
-            $id_lst = $id->id;
+            $id_lst = $id->item_id;
         }
         
         $id_new                 = $id_lst + 1;
