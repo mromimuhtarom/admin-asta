@@ -34,7 +34,7 @@
 
   <div>
     <div class="widget-body">
-      <div class="widget-body-toolbar">
+      {{-- <div class="widget-body-toolbar">
         
         <div class="row">
           
@@ -48,7 +48,7 @@
 
         </div>
 
-      </div>
+      </div> --}}
       
       <div class="custom-scroll table-responsive" style="height:800px;">
         

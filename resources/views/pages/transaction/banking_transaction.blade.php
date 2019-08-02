@@ -67,7 +67,7 @@
 			<div class="custom-scroll table-responsive">
 				
 				<div class="table-outer">
-					<table class="table table-bordered">
+					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>
 							<tr>
 								@if ($time == "today" || $time == "all time")
@@ -103,11 +103,11 @@
 							@elseif($time == "week" || $time == "month")
 							@foreach($history as $hst)
 							<tr>
-											<td><a href="{{ route('detailTransactionDay', [$hst->minDate,$hst->maxDate]) }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
-											<td>{{ $hst->totalWin }}</td>
-											<td>{{ $hst->totalLose }}</td>
-											<td>{{ $hst->totalTurnover }}</td>
-											<td>{{ $hst->totalFee }}</td>
+								<td><a href="{{ route('detailTransactionDay', [$hst->minDate,$hst->maxDate]) }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
+								<td>{{ $hst->totalWin }}</td>
+								<td>{{ $hst->totalLose }}</td>
+								<td>{{ $hst->totalTurnover }}</td>
+								<td>{{ $hst->totalFee }}</td>
 							</tr>
 							@endforeach
 							@endif

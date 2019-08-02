@@ -24,7 +24,7 @@
           <div class="custom-scroll table-responsive">
             
             <div class="table-outer">
-              <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+              <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">Name</th>
@@ -63,7 +63,7 @@
           <div class="custom-scroll table-responsive">
             
             <div class="table-outer">
-              <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+              <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">Name</th>
@@ -102,7 +102,7 @@
           <div class="custom-scroll table-responsive">
             
             <div class="table-outer">
-              <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+              <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">Name</th>
@@ -141,7 +141,7 @@
           <div class="custom-scroll table-responsive">
             
             <div class="table-outer">
-              <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-9%;" cellspacing="0" width="100%">
+              <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">Name</th>

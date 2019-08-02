@@ -124,6 +124,7 @@
 		},
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+        "order": [[ 2, "desc" ]],
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
 		},
