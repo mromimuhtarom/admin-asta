@@ -398,11 +398,21 @@
       });
 
       $('.inlineSetting').editable({
-            mode :'inline'
+            mode :'inline',
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
         });
 
       $('.popUpSetting').editable({
         mode: 'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
         source: [
           @php
           echo '{value: "'.$maintenaceonoff[0].'", text: "'.$maintenaceonoff[1].'"},';

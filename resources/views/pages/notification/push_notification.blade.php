@@ -228,12 +228,22 @@
           });
     
           $('.usertext').editable({
-            mode :'inline'
+            mode :'inline',
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
           });
 
           $('.game').editable({
                 mode:'inline',
   				      value: '',
+                validate: function(value) {
+                  if($.trim(value) == '') {
+                    return 'This field is required';
+                  }
+                },
   				      source: [
                   @php
                   foreach($game as $gm) {
@@ -241,11 +251,7 @@
                   }
                   @endphp
   				      ]
-          });
-
-          $('.game').editable({
-            mode :'inline'
-          });          
+          });     
     
           // delete bots
           @php

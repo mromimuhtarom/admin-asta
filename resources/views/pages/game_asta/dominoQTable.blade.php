@@ -258,12 +258,22 @@
         @endphp
 
         $('.usertext').editable({
-          mode :'inline'
+          mode :'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          }
         });
 
         $('.room').editable({
           value: '',
           mode: 'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          },
           source: [
             {value: '', text: 'Choose Category'},
             @php

@@ -221,16 +221,24 @@
       });
 
       $('.usertext').editable({
-        mode :'inline'
+        mode :'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        }
       });
 
       $('.strEnable').editable({
         mode: 'inline',
         value: '',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
         source: [
           {value: '', text: 'Choose For Activation'},
-          // {value: 0, text: 'Disabled'},
-          // {value: 1, text: 'Enabled'}
           @php            
               // $endis = preg_split( "/ :|, /", $atv->value );
               echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
@@ -242,6 +250,11 @@
       $('.transactionType').editable({
 				value: '',
         mode: 'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
 				source: [
             {value: '', text: 'Choose For Transaction Type'},
 					  {value: 1, text: 'Bank Transfer'},

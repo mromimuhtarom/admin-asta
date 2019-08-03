@@ -81,7 +81,7 @@
                 <td><a href="#" class="usertext" data-name="id" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->id }}</a></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->name }}</a></td>
                 <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rk->id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ $rk->gold }}</a></td>
-                <td><a href="#" class="usertext" data-name="type" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ strTransactionType($rk->type) }}</a></td>
+                <td><a href="#" class="typeday" data-name="type" data-pk="{{ $rk->id }}" data-type="select" data-url="{{ route('ResellerRank-update') }}">{{ strTransactionType($rk->type) }}</a></td>
                 <td><a href="#" class="usertext" data-name="bonus" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->bonus }}</a></td>
                 <td>
                     <a href="#" style="color:red;" class="delete{{ $rk->id }}" 
@@ -207,8 +207,29 @@ table = $('table.table').dataTable({
     });
 
     $('.usertext').editable({
-      mode :'inline'
+      mode :'inline',
+      validate: function(value) {
+        if($.trim(value) == '') {
+          return 'This field is required';
+        }
+      }
     });
+
+    $('.typeday').editable({
+      mode: 'inline',
+      validate: function(value) {
+        if($.trim(value) == '') {
+          return 'This field is required';
+        }
+      },
+      source: [
+        {value: '', text: 'Choose Type'},
+        @php
+          echo'{value: "'.$explodetype[0].'", text:"'.$explodetype[1].'"},';
+          echo'{value: "'.$explodetype[2].'", text:"'.$explodetype[3].'"}';
+        @endphp
+      ]
+    })
 
     @php
         foreach($rank as $rk) {

@@ -211,7 +211,12 @@
         // @endphp
 
         $('.usertext').editable({
-          mode : 'inline'
+          mode : 'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          }
         });
       },
       responsive: true

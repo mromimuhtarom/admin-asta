@@ -349,12 +349,22 @@
       });
 
       $('.usertext').editable({
-        mode :'inline'
+        mode :'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        }
       });
 
       $('.strEnable').editable({
         mode: 'inline',
         value: '',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
         source: [
           {value: '', text: 'Choose For Activation'},
           @php
@@ -367,6 +377,11 @@
       $('.transactionType').editable({
 				value: '',
         mode: 'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
 				source: [
             {value: '', text: 'Choose For Transaction Type'},
 					  {value: 1, text: 'Bank Transfer'},

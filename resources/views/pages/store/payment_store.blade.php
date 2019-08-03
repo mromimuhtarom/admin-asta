@@ -215,12 +215,22 @@
       });
 
       $('.usertext').editable({
-        mode :'inline'
+        mode :'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        }
       });
 
       $('.payment_type').editable({
         mode  :'inline',
         value : '',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
         source: [
           {value: '', text:'Choose Payment Type'},
           {value: '1', text:'Bank Transfer'},
@@ -237,6 +247,11 @@
       $('.stractive').editable({
         value: '',
         mode :'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
 				source: [
                   {value: '', text: 'choose for activation'},
 				          // {value: '1', text: 'Enabled'},

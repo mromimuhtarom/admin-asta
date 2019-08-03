@@ -324,12 +324,22 @@
       });
 
       $('.usertext').editable({
-        mode :'inline'
+        mode :'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        }
       });
 
       $('.category').editable({
         mode :'inline',
         value: '',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
 				source: [
                 {value: '', text: 'Choose Category Gift'},
                 @php 
@@ -343,11 +353,16 @@
       $('.status').editable({
         mode :'inline',
         value: '',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
 				source: [
                   {value: '', text: 'Choose for activation'},
                   @php
-                      echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                      echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                  echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
+                  echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
                   @endphp
         ]
       });

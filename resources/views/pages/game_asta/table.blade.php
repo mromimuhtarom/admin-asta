@@ -277,7 +277,12 @@
         @endphp
 
         $('.usertext').editable({
-          mode :'inline'
+          mode :'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          }
         });
 
         $('.room').editable({
@@ -290,7 +295,13 @@
             echo '{value:"'.$ct->room_id.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';
             }
             @endphp
-          ]
+          ],
+          validate: function(value) {
+            if($.trim(value) == '')
+            {
+              return 'This field is required';
+            }
+          }
         });    
 
           

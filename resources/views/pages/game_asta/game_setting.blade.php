@@ -194,7 +194,12 @@
 
       $('.inlineSetting').editable({
             mode :'inline',
-            step: 'any'
+            step: 'any',
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
         });
      
     },

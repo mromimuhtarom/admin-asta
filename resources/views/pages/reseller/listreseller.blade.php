@@ -199,21 +199,31 @@
       });
 
       $('.usertext').editable({
-        mode :'inline'
+        mode :'inline',
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        }
       });
 
 
           $('.rank').editable({
-                mode:'inline',
-  				      value: '',
-  				      source: [
-                  {value:"", text: "Choose Rank" },
-                  @php
-                  foreach($rank as $rk) {
+            mode:'inline',
+  				  value: '',
+  				  source: [
+                {value:"", text: "Choose Rank" },
+                @php
+                foreach($rank as $rk) {
                   echo '{value:"'.$rk->id.'", text: "'.$rk->name.'" },';
-                  }
-                  @endphp
-  				      ]
+                }
+                @endphp
+  				  ],
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
           });
 
           @php 

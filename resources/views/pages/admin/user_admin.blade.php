@@ -257,20 +257,30 @@
           });
     
           $('.usertext').editable({
-            mode :'inline'
+            mode :'inline',
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
           });
 
           $('.role').editable({
-                    mode:'inline',
-                    // value: 0,
-                    source: [
-                        @php
-                        $roles = DB::table('asta_db.adm_role')->get();
-                        foreach($roles as $role) {
-                            echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
-                        }
-                        @endphp
-                    ]
+            mode:'inline',
+            source: [
+                  {value: '', text: 'Choose Role Type'},
+                    @php
+                      $roles = DB::table('asta_db.adm_role')->get();
+                      foreach($roles as $role) {
+                        echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+                      }
+                    @endphp
+            ],
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
           });
 
           @php 

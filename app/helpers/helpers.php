@@ -43,9 +43,9 @@ function strEnabledDisabled ($val) {
 
 function strTransactionType ($val) {
   if($val == 1) {
-    return 'Weekly';
-  } else if($val == 2) {
     return 'Monthly';
+  } else if($val == 2) {
+    return 'Weekly';
   }
 }
 

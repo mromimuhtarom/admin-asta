@@ -141,7 +141,11 @@ class ResellerController extends Controller
         $rank     = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
         $menu     = MenuClass::menuName('Rank Reseller');
         $mainmenu = MenuClass::menuName('Reseller');
-        return view('pages.reseller.reseller_rank', compact('rank', 'menu', 'mainmenu'));
+        $configtype = ConfigText::where('id', '=', 10) ->select('value')->first();
+        $replacetype = str_replace(':', ',', $configtype->value);
+        $explodetype = explode(',', $replacetype);
+
+        return view('pages.reseller.reseller_rank', compact('rank', 'menu', 'mainmenu', 'explodetype'));
     }
 // ------- End Index Reseller Rank ------- //
 

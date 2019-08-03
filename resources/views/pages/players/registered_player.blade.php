@@ -167,17 +167,26 @@
         });
 
         $('.usertext').editable({
-          mode :'inline'
+          mode :'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          }
         });
         $('.status').editable({
             mode :'inline',
-            value : 2,
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            },
             source: [
                 {value: '', text: 'Choose For Activation'},
                 @php
-                echo '{value: "'.$plyr_status[0].'", text: "'.$plyr_status[1].'"},';
-                echo '{value: "'.$plyr_status[2].'", text: "'.$plyr_status[3].'"},';
-                echo '{value: "'.$plyr_status[4].'", text: "'.$plyr_status[5].'"},';
+                  echo '{value: "'.$plyr_status[0].'", text: "'.$plyr_status[1].'"},';
+                  echo '{value: "'.$plyr_status[2].'", text: "'.$plyr_status[3].'"},';
+                  echo '{value: "'.$plyr_status[4].'", text: "'.$plyr_status[5].'"},';
                 @endphp
             ]
 

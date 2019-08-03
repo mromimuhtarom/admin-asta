@@ -101,7 +101,12 @@
               });
 
               $('.usertext').editable({
-                mode :'popup'
+                mode :'popup',
+                validate: function(value) {
+                  if($.trim(value) == '') {
+                    return 'This field is required';
+                  }
+                }
               });
     
           }

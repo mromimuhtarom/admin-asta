@@ -335,13 +335,23 @@
           });
     
           $('.usertext').editable({
-            mode :'inline'
+            mode :'inline',
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
           });
 
           
           $('.typenotif').editable({
             value: 'Pilih Type',
             mode :'inline',
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            },
             source: [
               {value: 'deposit_received', text: 'Deposit Received'},
               {value: 'new_device', text: 'New Device'},
@@ -355,7 +365,12 @@
           });        
 
           $('.game').editable({
-            mode :'inline'
+            mode :'inline',
+            validate: function(value) {
+              if($.trim(value) == '') {
+                return 'This field is required';
+              }
+            }
           });          
     
        
