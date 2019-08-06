@@ -33,6 +33,7 @@ class Authenticated
                       )
                       ->where('asta_db.operator_active.session_id', '=', $session_id)
                       ->first();
+        
         if(Session::get('login1')) {
             $op              = Session::get('userId');
             $operator_active = OperatorActive::where('op_id', '=', $op)->first();
@@ -40,9 +41,8 @@ class Authenticated
             $operator = User::where('op_id', '=', $op_idcache)->first();
             Artisan::call('route:clear');
             Artisan::call('config:clear');
-            Artisan::call('cache:clear');
+            // Artisan::call('cache:clear');
             Artisan::call('view:clear');
-
             if ($operator_active)
             {
                 OperatorActive::where('op_id', '=', $op)->update([
@@ -62,9 +62,9 @@ class Authenticated
                     if($op_idcache)
                     {
                         LogOnline::create([
-                            'user_id'   =>  $op_idcache,
-                            'action_id' =>  8,
-                            'desc'      =>  'user '.$operator->username.' Logout in web Admin',
+                            'user_id'   => $op_idcache,
+                            'action_id' => 8,
+                            'desc'      => 'user '.$operator->username.' Logout in web Admin',
                             'datetime'  => Carbon::now('GMT+7'),
                             'ip'        => request()->ip(),
                             'type'      => 1
@@ -78,8 +78,6 @@ class Authenticated
             }
             return $next($request);
         } 
-
-
         if($logout)
         {
             LogOnline::create([

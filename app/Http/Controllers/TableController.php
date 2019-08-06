@@ -29,12 +29,7 @@ use App\DominoQRoom;
 
 class TableController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * index for asta poker
-     */
+    
     public function index()
     {
         $menu     = MenuClass::menuName('Table Asta Poker');
@@ -60,12 +55,6 @@ class TableController extends Controller
         return view('pages.game_asta.table', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * index for big two
-     */
     public function BigTwoindex()
     {
         $menu     = MenuClass::menuName('Table Big Two');
@@ -89,43 +78,33 @@ class TableController extends Controller
         return view('pages.game_asta.bigTwoTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * index for Domino Susun
-     */
+
     public function DominoSusunindex()
     {
         $menu     = MenuClass::menuName('Table Domino Susun');
         $mainmenu = MenuClass::menuName('Games');
         $submenu  = MenuClass::menuName('Domino Susun');
-        $tables = DominoSusunTable::join('asta_db.dms_room', 'asta_db.dms_room.room_id', '=', 'asta_db.dms_table.room_id')
-                ->select(
-                    'asta_db.dms_room.name as roomname',
-                    'asta_db.dms_table.name',
-                    'asta_db.dms_table.max_player',
-                    'asta_db.dms_table.game_state',
-                    'asta_db.dms_table.current_turn_seat_id',
-                    'asta_db.dms_table.total_bet',
-                    'asta_db.dms_table.table_id',
-                    'asta_db.dms_table.stake',
-                    'asta_db.dms_table.min_buy',
-                    'asta_db.dms_table.max_buy',
-                    'asta_db.dms_table.timer',
-                    'asta_db.dms_table.stake_pass'
-                )
-                ->get();
+        $tables   = DominoSusunTable::join('asta_db.dms_room', 'asta_db.dms_room.room_id', '=', 'asta_db.dms_table.room_id')
+                    ->select(
+                        'asta_db.dms_room.name as roomname',
+                        'asta_db.dms_table.name',
+                        'asta_db.dms_table.max_player',
+                        'asta_db.dms_table.game_state',
+                        'asta_db.dms_table.current_turn_seat_id',
+                        'asta_db.dms_table.total_bet',
+                        'asta_db.dms_table.table_id',
+                        'asta_db.dms_table.stake',
+                        'asta_db.dms_table.min_buy',
+                        'asta_db.dms_table.max_buy',
+                        'asta_db.dms_table.timer',
+                        'asta_db.dms_table.stake_pass'
+                    )
+                    ->get();
         $category = DominoSusunRoom::all();
         return view('pages.game_asta.dominoSusunTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * index for Domino Susun
-     */
+
     public function DominoQindex()
     {
         $menu     = MenuClass::menuName('Table Domino QQ');
@@ -150,23 +129,7 @@ class TableController extends Controller
         return view('pages.game_asta.dominoQTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * store for asta poker
-     */
     public function store(Request $request)
     {
         $category = $request->category;
@@ -217,13 +180,7 @@ class TableController extends Controller
         return redirect()->route('Table_Asta_Poker')->with('success','Data Added');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * store for asta poker
-     */
+
      public function BigTwostore(Request $request)
      {
         $validator = Validator::make($request->all(),[
@@ -271,13 +228,6 @@ class TableController extends Controller
         return redirect()->route('Table_Big_Two')->with('success','Data Added');
      }
 
-     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * store for domino susun
-     */
     public function DominoSusunstore(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -331,13 +281,6 @@ class TableController extends Controller
        return redirect()->route('Table_Domino_Susun')->with('success','Data Added');
     }
 
-     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * store for domino QQ
-     */
     public function DominoQstore(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -358,13 +301,14 @@ class TableController extends Controller
         $maxbuyvalidation = $minbuyvalidation * 2;
 
 
-        if($minbuy < $minbuyvalidation)
-        {
-            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
-        }  else if($maxbuy < $maxbuyvalidation)
-        {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 2 or under '.$maxbuyvalidation);
-        } else if($minbuy > $maxbuy)
+        // if($minbuy < $minbuyvalidation)
+        // {
+        //     return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
+        // }  else if($maxbuy < $maxbuyvalidation)
+        // {
+        //     return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 2 or under '.$maxbuyvalidation);
+        // } else 
+        if($minbuy > $maxbuy)
         {
             return back()->with('alert', 'Max Buy can\'t be under Min Buy');
         }
@@ -392,36 +336,8 @@ class TableController extends Controller
        return redirect()->route('Table_Domino_QQ')->with('success','Data Added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * edit for asta poker
-     */
     public function update(Request $request)
     {
         $pk           = $request->pk;
@@ -501,14 +417,7 @@ class TableController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * edit for asta big two
-     */
+
     public function BigTwoupdate(Request $request)
     {
         $pk    = $request->pk;
@@ -579,14 +488,7 @@ class TableController extends Controller
     ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * edit for asta domino susun
-     */
+
     public function DominoSusunupdate(Request $request)
     {
         $pk    = $request->pk;
@@ -678,14 +580,7 @@ class TableController extends Controller
     ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * edit for asta domino susun
-     */
+
     public function DominoQupdate(Request $request)
     {
         $pk          = $request->pk;
@@ -697,32 +592,34 @@ class TableController extends Controller
   
         if($name == 'min_buy')
         {
-            if($value < $countminbuy)
-            {
-                return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
-            } else if($value > $dmqroom->max_buy)
-            {
-                return response()->json("Min Buy can't be up to Max Buy ".$countminbuy." ", 400);
-            } else 
-            {
+            // if($value < $countminbuy)
+            // {
+            //     return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
+            // } else 
+            // if($value > $dmqroom->max_buy)
+            // {
+            //     return response()->json("Min Buy can't be up to Max Buy ".$countminbuy." ", 400);
+            // } else 
+            // {
                 DominoQTable::where('table_id', '=', $pk)->update([
                     'min_buy' => $value 
                 ]);
-            }
+            // }
         } else if($name == 'max_buy')
         {
-            if($value < $countmaxbuy)
-            {
-                return response()->json("Max Buy can't be under Stake multiplied by 2 or under ".$countmaxbuy." ", 400);
-            } else if($value < $dmqroom->min_buy)
-            {
-                return response()->json("Max Buy can't be under Min Buy ", 400);
-            } else 
-            {
+            // if($value < $countmaxbuy)
+            // {
+            //     return response()->json("Max Buy can't be under Stake multiplied by 2 or under ".$countmaxbuy." ", 400);
+            // } else 
+            // if($value < $dmqroom->min_buy)
+            // {
+            //     return response()->json("Max Buy can't be under Min Buy ", 400);
+            // } else 
+            // {
                 DominoQTable::where('table_id', '=', $pk)->update([
                     'max_buy' => $value 
                 ]);
-            }
+            // }
         } else 
         {
             DominoQTable::where('table_id', '=', $pk)->update([
@@ -761,13 +658,7 @@ class TableController extends Controller
     ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * destroy for asta poker
-     */
+
     public function destroy(Request $request)
     {
         $tableid = $request->tableid;
@@ -785,13 +676,7 @@ class TableController extends Controller
         return redirect()->route('Table_Asta_Poker')->with('success','Something wrong');                
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * destroy for asta big two
-     */
+
     public function BigTwodestroy(Request $request)
     {
         $tableid = $request->tableid;
@@ -809,13 +694,7 @@ class TableController extends Controller
         return redirect()->route('Table_Big_Two')->with('success','Something wrong');                
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * destroy for asta domino susun
-     */
+
     public function DominoSusundestroy(Request $request)
     {
         $tableid = $request->tableid;
@@ -834,13 +713,7 @@ class TableController extends Controller
         return redirect()->route('Table_Domino_Susun')->with('success','Something wrong');                
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * destroy for asta domino QQ
-     */
+
     public function DominoQdestroy(Request $request)
     {
         $tableid = $request->tableid;

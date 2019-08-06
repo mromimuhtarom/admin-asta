@@ -148,13 +148,22 @@
       
       <div class="sa-aside-left">
       
-          <a href="javascript:void(0)"  onclick="SAtoggleClass(this, 'body', 'sa-shortcuts-expanded')" class="sa-sidebar-shortcut-toggle">
-							<img src="/assets/img/avatars/sunny.png" alt="" class="online">
+          <a href="javascript:void(0)" class="sa-sidebar-shortcut-toggle" style="color:white;">
+							{{-- <img src="/assets/img/avatars/sunny.png" alt="" class="online"> --}}
+							{{-- Hi
 							@php
 							$operator_id = Session::get('userId');
 							$username = DB::table('asta_db.operator')->where('op_id', '=', $operator_id)->first();		
 							@endphp
-              <span>{{ ucwords($username->fullname) }} <span class="fa fa-angle-down"></span></span>
+							<span>{{ ucwords($username->fullname) }} Welcome To Our Website <span class="fa fa-angle-down"></span></span> --}}
+							<p id="waktu" align="center"></p>
+							<script>
+									var myVar = setInterval(myTimer ,1000);
+									function myTimer() {
+										var d = new Date();
+										document.getElementById("waktu").innerHTML = d.toLocaleTimeString();
+									}
+							</script>
           </a>
           <div class="sa-left-menu-outer">
             @include('menu.sidebar_menu')
@@ -172,6 +181,19 @@
           
           <!-- BEGIN .sa-page-breadcrumb -->
           <ol class="align-items-center sa-page-ribbon breadcrumb" aria-label="breadcrumb" role="navigation">
+						<a href="" style="color:white;">
+							{{-- Hi Admin1 Welcome To Our Website --}}
+								Hi
+							@php
+							$operator_id = Session::get('userId');
+							$username = DB::table('asta_db.operator')->where('op_id', '=', $operator_id)->first();		
+							@endphp
+							<span>{{ ucwords($username->fullname) }} Welcome To Our Website</span>
+						</a>
+						&nbsp;
+						<a href="javascript:void(0)"  onclick="SAtoggleClass(this, 'body', 'sa-shortcuts-expanded')" class="sa-sidebar-shortcut-toggle" style="color:white;">
+							<span class="fa fa-user"></span><span class="fa fa-cogs"></span><span class="fa fa-angle-down"></span>
+						</a>
 						@yield('page')        	
           </ol>
           

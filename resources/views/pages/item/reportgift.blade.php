@@ -40,14 +40,6 @@
                         @endforeach
                     </select>
                 </div>
-                {{-- <div class="col">
-                    <select name="action" id="" class="form-control">
-                        <option value="">Choose Category</option>
-                        @foreach($category as $ct)
-                        <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
-                        @endforeach
-                    </select>
-                </div> --}}
                 <div class="col">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>

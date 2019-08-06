@@ -89,7 +89,6 @@ class LoginController extends Controller
         $session_id = Cache::get('session_id');
         $op_idsession = Session::get('userId');
         $adminactive = OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->first();
-
         if($adminactive)
         {
             if($session_id)
