@@ -41,6 +41,7 @@
         <!-- END .sa-shortcuts -->
         
         <header class="sa-page-header">
+						<button class="btn btn-default sa-btn-icon sa-sidebar-hidden-toggle d-block d-md-block d-lg-block d-xl-none" onclick="SAtoggleClass(this, 'body', 'sa-hidden-menu')" type="button"><span class="fa fa-reorder"></span></button>
           {{-- <div class="sa-header-container h-100">
             <div class="d-table d-table-fixed h-100 w-100">
               <div class="sa-logo-space d-table-cell h-100">
