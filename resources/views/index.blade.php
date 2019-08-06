@@ -185,7 +185,6 @@
 						@yield('page')        	
 						&nbsp;
 						<a href="" style="color:white;margin-left:30%;">
-								{{-- Hi Admin1 Welcome To Our Website --}}
 									Hi
 								@php
 								$operator_id = Session::get('userId');

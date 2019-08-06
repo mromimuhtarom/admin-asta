@@ -301,14 +301,13 @@ class TableController extends Controller
         $maxbuyvalidation = $minbuyvalidation * 2;
 
 
-        // if($minbuy < $minbuyvalidation)
-        // {
-        //     return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
-        // }  else if($maxbuy < $maxbuyvalidation)
-        // {
-        //     return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 2 or under '.$maxbuyvalidation);
-        // } else 
-        if($minbuy > $maxbuy)
+        if($minbuy < $minbuyvalidation)
+        {
+            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
+        }  else if($maxbuy < $maxbuyvalidation)
+        {
+            return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 2 or under '.$maxbuyvalidation);
+        } else if($minbuy > $maxbuy)
         {
             return back()->with('alert', 'Max Buy can\'t be under Min Buy');
         }
@@ -592,34 +591,34 @@ class TableController extends Controller
   
         if($name == 'min_buy')
         {
-            // if($value < $countminbuy)
-            // {
-            //     return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
-            // } else 
-            // if($value > $dmqroom->max_buy)
-            // {
-            //     return response()->json("Min Buy can't be up to Max Buy ".$countminbuy." ", 400);
-            // } else 
-            // {
+            if($value < $countminbuy)
+            {
+                return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
+            } else 
+            if($value > $dmqroom->max_buy)
+            {
+                return response()->json("Min Buy can't be up to Max Buy ".$countminbuy." ", 400);
+            } else 
+            {
                 DominoQTable::where('table_id', '=', $pk)->update([
                     'min_buy' => $value 
                 ]);
-            // }
+            }
         } else if($name == 'max_buy')
         {
-            // if($value < $countmaxbuy)
-            // {
-            //     return response()->json("Max Buy can't be under Stake multiplied by 2 or under ".$countmaxbuy." ", 400);
-            // } else 
-            // if($value < $dmqroom->min_buy)
-            // {
-            //     return response()->json("Max Buy can't be under Min Buy ", 400);
-            // } else 
-            // {
+            if($value < $countmaxbuy)
+            {
+                return response()->json("Max Buy can't be under Stake multiplied by 2 or under ".$countmaxbuy." ", 400);
+            } else 
+            if($value < $dmqroom->min_buy)
+            {
+                return response()->json("Max Buy can't be under Min Buy ", 400);
+            } else 
+            {
                 DominoQTable::where('table_id', '=', $pk)->update([
                     'max_buy' => $value 
                 ]);
-            // }
+            }
         } else 
         {
             DominoQTable::where('table_id', '=', $pk)->update([
