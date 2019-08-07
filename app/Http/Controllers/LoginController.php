@@ -24,6 +24,15 @@ class LoginController extends Controller
         Artisan::call('cache:clear');
         Artisan::call('view:clear');
         Cache::flush();
+        // untuk delete operator jika lebih dari 15 menit
+        $op_active = OperatorActive::where('date_update', '<', DB::raw('DATE_SUB(NOW(),INTERVAL 60 MINUTE)'))->first();
+        // foreach($op_active as $active)
+        // {
+            if($op_active)
+            {
+                OperatorActive::where('date_update', '<', DB::raw('NOW() + INTERVAL 60 MINUTE'))->delete();
+            }
+        // }
         return view('login');
     }
 

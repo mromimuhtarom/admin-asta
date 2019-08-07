@@ -41,8 +41,20 @@ class Authenticated
             $operator = User::where('op_id', '=', $op_idcache)->first();
             Artisan::call('route:clear');
             Artisan::call('config:clear');
-            // Artisan::call('cache:clear');
             Artisan::call('view:clear');
+
+            
+            // untuk delete jika date_update melebihi 15 menit
+            $op_active = OperatorActive::where('date_update', '<', DB::raw('DATE_SUB(NOW(),INTERVAL 60 MINUTE)'))->first();
+            // foreach($op_active as $active)
+            // {
+                if($op_active)
+                {
+                    OperatorActive::where('date_update', '<', DB::raw('NOW() + INTERVAL 60 MINUTE'))->delete();
+                }
+            // }
+            //End untuk delete jika date_update melebihi 15 menit
+
             if ($operator_active)
             {
                 OperatorActive::where('op_id', '=', $op)->update([

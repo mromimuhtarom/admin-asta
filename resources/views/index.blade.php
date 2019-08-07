@@ -151,12 +151,6 @@
       
           <a href="javascript:void(0)" class="sa-sidebar-shortcut-toggle" style="color:white;">
 							{{-- <img src="/assets/img/avatars/sunny.png" alt="" class="online"> --}}
-							{{-- Hi
-							@php
-							$operator_id = Session::get('userId');
-							$username = DB::table('asta_db.operator')->where('op_id', '=', $operator_id)->first();		
-							@endphp
-							<span>{{ ucwords($username->fullname) }} Welcome To Our Website <span class="fa fa-angle-down"></span></span> --}}
 							<p id="waktu" align="center"></p>
 							<script>
 									var myVar = setInterval(myTimer ,1000);
