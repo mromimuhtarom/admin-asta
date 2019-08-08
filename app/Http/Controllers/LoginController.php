@@ -26,13 +26,10 @@ class LoginController extends Controller
         Cache::flush();
         // untuk delete operator jika lebih dari 15 menit
         $op_active = OperatorActive::where('date_update', '<', DB::raw('DATE_SUB(NOW(),INTERVAL 60 MINUTE)'))->first();
-        // foreach($op_active as $active)
-        // {
             if($op_active)
             {
                 OperatorActive::where('date_update', '<', DB::raw('NOW() + INTERVAL 60 MINUTE'))->delete();
             }
-        // }
         return view('login');
     }
 
@@ -94,10 +91,10 @@ class LoginController extends Controller
    
     public function logout()
     {
-        $op_idcache = Cache::get('op_key');
-        $session_id = Cache::get('session_id');
+        $op_idcache   = Cache::get('op_key');
+        $session_id   = Cache::get('session_id');
         $op_idsession = Session::get('userId');
-        $adminactive = OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->first();
+        $adminactive  = OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->first();
         if($adminactive)
         {
             if($session_id)
