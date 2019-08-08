@@ -43,7 +43,7 @@ class GeneralSettingController extends Controller
         $getTwitter         = Config::select('id', 'name', 'value')->where('id', '=', '902')->first();
         $getIg              = Config::select('id', 'name', 'value')->where('id', '=', '903')->first();
         
-        $rootpath = '../../policy/folder policy/db_txt';
+        $rootpath = '../../asta-asset/text/db_txt';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
         // dd($client);
 
@@ -74,7 +74,7 @@ class GeneralSettingController extends Controller
         $urlprivacypolicy     = $request->urlprivacypolicy;
         $contenttermofservice = $request->contenttermofservice;
         $contentprivacypolicy = $request->contentprivacypolicy;
-        $rootpath             = '../../policy/folder policy/db_txt';
+        $rootpath             = '../../asta-asset/text/db_txt';
         $client               = Storage::createLocalDriver(['root' => $rootpath]);
 
         if($contentabout)
