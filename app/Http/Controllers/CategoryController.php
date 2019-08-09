@@ -36,7 +36,6 @@ class CategoryController extends Controller
                         'name', 
                         'min_buy', 
                         'max_buy', 
-                        'stake', 
                         'timer',
                         'room_id'
                     )
@@ -57,7 +56,6 @@ class CategoryController extends Controller
     {
         $category = BigTwoRoom::select(
                         'name', 
-                        'stake', 
                         'min_buy', 
                         'max_buy', 
                         'timer',
@@ -81,8 +79,6 @@ class CategoryController extends Controller
     {
         $category = DominoSusunRoom::select(
                         'name',
-                        'stake',
-                        'stake_pass',
                         'min_buy',
                         'max_buy',
                         'timer',
@@ -105,7 +101,6 @@ class CategoryController extends Controller
     {
         $category = DominoQRoom::select(
                         'name',
-                        'stake',
                         'min_buy',
                         'max_buy',
                         'timer',
@@ -156,8 +151,6 @@ class CategoryController extends Controller
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
             'max_buy'   => $maxbuy
-            // 'stake'     => '0',
-            // 'timer'     => '0'
         ]);
         Log::create([
             'op_id'     => Session::get('userId'),
@@ -190,15 +183,10 @@ class CategoryController extends Controller
         }
 
         $categoryname   = $request->categoryName;
-        $stake          = $request->stake;
         $minbuy         = $request->minbuy;
         $maxbuy         = $request->maxbuy;
 
-        $minbuyvalidation = $stake * 3 * 13;
-        if($minbuy < $minbuyvalidation)
-        {
-            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 3 multiplied 13 or under '.$minbuyvalidation);
-        }  else if($minbuy > $maxbuy)
+        if($minbuy > $maxbuy)
         {
             return back()->with('alert', 'Max Buy can\'t be under Min Buy');
         }
@@ -207,8 +195,6 @@ class CategoryController extends Controller
             'name'      => $categoryname,
             'min_buy'   => $minbuy,
             'max_buy'   => $maxbuy
-            // 'stake'     => $stake,
-            // 'timer'     => '0'
         ]);
 
         Log::create([
@@ -243,27 +229,11 @@ class CategoryController extends Controller
         $categoryname     = $request->categoryName;
         $minbuy           = $request->minbuy;
         $maxbuy           = $request->maxbuy;
-        $stake            = $request->stake;
-        $minbuyvalidation = $stake * 10;
-        $maxbuyvalidation = $minbuyvalidation * 4;
-        if($minbuy < $minbuyvalidation)
-        {
-            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
-        }  else if($maxbuy < $maxbuyvalidation)
-        {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 4 or under '.$maxbuyvalidation);
-        } else if($minbuy > $maxbuy)
-        {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy ');
-        }
 
         $dms_category = DominoSusunRoom::create([
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
             'max_buy'       => $maxbuy,
-            // 'stake'         => $stake,
-            // 'stake_pass'    => $stake,
-            // 'timer'         => '0'
         ]);
 
         Log::create([
@@ -299,27 +269,11 @@ class CategoryController extends Controller
         $categoryname = $request->categoryName;
         $minbuy       = $request->minbuy;
         $maxbuy       = $request->maxbuy;
-        $stake        = $request->stake;
-
-        $minbuyvalidation = $stake * 10;
-        $maxbuyvalidation = $minbuyvalidation * 2;
-        if($minbuy < $minbuyvalidation)
-        {
-            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
-        }  else if($maxbuy < $maxbuyvalidation)
-        {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 4 or under '.$maxbuyvalidation);
-        } else if($minbuy > $maxbuy)
-        {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy');
-        }
 
         $dmq_category = DominoQRoom::create([
             'name'          => $categoryname,
             'min_buy'       => $minbuy,
             'max_buy'       => $maxbuy
-            // 'stake'         => $stake,
-            // 'timer'         => '0'
         ]);
 
 
@@ -385,9 +339,6 @@ class CategoryController extends Controller
             case "max_buy":
                 $name = "Max Buy";
                 break;
-            case "stake":
-                $name = "stake";
-                break;
             case "timer":
                 $name = "timer";
                 break;
@@ -416,37 +367,10 @@ class CategoryController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
-  
-        if($name == 'min_buy')
-        {
-            $validasiminbuy = BigTwoRoom::where('room_id', '=', $pk)->first();
-            $count          = $validasiminbuy->stake * 3 * 13;
-            if($count > $value)
-            {
-                return response()->json("Min Buy can't be under Stake multiplied by 3 multiplied by 13 or under ".$count." ", 400);
-            } else if($value > $validasiminbuy->max_buy)
-            {
-                return response()->json("Min Buy can't be Up To Max Date", 400);
-            }
-            BigTwoRoom::where('room_id', '=', $pk)->update([
-                'min_buy'   => $value
-            ]); 
-        } else if($name == 'max_buy')
-        {
-            $validasimaxbuy = BigTwoRoom::where('room_id', '=', $pk)->first();
-            if($value < $validasimaxbuy->min_buy)
-            {
-                return response()->json("Max Buy can't be under Min Buy", 400);
-            } 
-            BigTwoRoom::where('room_id', '=', $pk)->update([
-                'max_buy'   => $value
-            ]); 
-        } else 
-        {
-            BigTwoRoom::where('room_id', '=', $pk)->update([
-                $name => $value 
-            ]);
-        } 
+
+        BigTwoRoom::where('room_id', '=', $pk)->update([
+            $name => $value 
+        ]);
   
         switch ($name) {
             case "name":
@@ -457,9 +381,6 @@ class CategoryController extends Controller
                 break;
             case "max_buy":
                 $name = "Max Buy";
-                break;
-            case "stake":
-                $name = "Stake";
                 break;
             case "timer":
                 $name = "Timer";
@@ -491,61 +412,14 @@ class CategoryController extends Controller
         $pk          = $request->pk;
         $name        = $request->name;
         $value       = $request->value;
-        $dmsroom     = DominoSusunRoom::where('room_id', '=', $pk)->first();
-        $countminbuy = $dmsroom->stake * 10;
-        $countmaxbuy = $countminbuy * 4;
-  
-        if($name == 'stake')
-        {
 
-            DominoSusunRoom::where('room_id', '=', $pk)->update([
-                'stake'      => $value,
-                'stake_pass' => $value,
-            ]);
-        } else if($name == 'min_buy')
-        {
-            if($value < $countminbuy)
-            {
-                return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
-            } else if($value > $dmsroom->max_buy)
-            {
-                return response()->json("Min Buy can't be up to max date ", 400);
-            } else 
-            {
-                DominoSusunRoom::where('room_id', '=', $pk)->update([
-                    'min_buy' => $value 
-                ]);
-            }
-        } else if($name == 'max_buy')
-        {
-            if($value < $countmaxbuy)
-            {
-                return response()->json("Max Buy can't be under Stake multiplied by 4 or under ".$countmaxbuy." ", 400);
-            } else if($value < $dmsroom->min_buy)
-            {
-                return response()->json("Max Buy can't be under Min Buy", 400);
-            } else 
-            {
-                DominoSusunRoom::where('room_id', '=', $pk)->update([
-                    'max_buy' => $value 
-                ]);
-            }
-        } else 
-        {
-            DominoSusunRoom::where('room_id', '=', $pk)->update([
-                $name => $value 
-            ]);
-        } 
+        DominoSusunRoom::where('room_id', '=', $pk)->update([
+            $name => $value 
+        ]);
   
         switch ($name) {
             case "name":
                 $name = "Room Name";
-                break;
-            case "stake":
-                $name = "Stake";
-                break;
-            case "stake_pass":
-                $name = "Stake Pass";
                 break;
             case "min_buy":
                 $name = "Min Buy";
@@ -581,61 +455,14 @@ class CategoryController extends Controller
         $pk          = $request->pk;
         $name        = $request->name;
         $value       = $request->value;
-        $dmqroom     = DominoQRoom::where('room_id', '=', $pk)->first();
-        $countminbuy = $dmqroom->stake * 10;
-        $countmaxbuy = $countminbuy * 2;
-  
-        if($name == 'stake')
-        {
-            $minbuy = $value * 10;
-            $maxbuy = $minbuy *2;
-            DominoQRoom::where('room_id', '=', $pk)->update([
-                'stake'   => $value,
-                'min_buy' => $minbuy,
-                'max_buy' => $maxbuy
-            ]);
-        } 
-        else if($name == 'min_buy')
-        {
-            if($value < $countminbuy)
-            {
-                return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
-            } else if($value > $dmqroom->max_buy)
-            {
-                return response()->json("Min Buy can't be up to Max Buy ".$countminbuy." ", 400);
-            } else 
-            {
-                DominoQRoom::where('room_id', '=', $pk)->update([
-                    'min_buy' => $value 
-                ]);
-            }
-        } else if($name == 'max_buy')
-        {
-            if($value < $countmaxbuy)
-            {
-                return response()->json("Max Buy can't be under Stake multiplied by 2 or under ".$countmaxbuy." ", 400);
-            } else if($value < $dmqroom->min_buy)
-            {
-                return response()->json("Max Buy can't be under Min Buy ", 400);
-            } else 
-            {
-                DominoQRoom::where('room_id', '=', $pk)->update([
-                    'max_buy' => $value 
-                ]);
-            }
-        } else 
-        {
-            DominoQRoom::where('room_id', '=', $pk)->update([
-                $name => $value 
-            ]);
-        }
+        
+        DominoQRoom::where('room_id', '=', $pk)->update([
+            $name => $value 
+        ]);
   
         switch ($name) {
             case "name":
                 $name = "Room Name";
-                break;
-            case "stake":
-                $name = "Stake";
                 break;
             case "min_buy":
                 $name = "Min Buy";
