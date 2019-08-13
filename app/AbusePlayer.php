@@ -10,4 +10,10 @@ class AbusePlayer extends Model
     protected $table = 'asta_db.abuse_report';
 
     public $timestamps = false;
+
+    public function report() {
+
+        return $this->belongsTo(Player::class, 'user_id', 'report');
+
+  } 
 }
