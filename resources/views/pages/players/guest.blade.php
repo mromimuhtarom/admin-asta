@@ -43,12 +43,12 @@
                             <option value="nonused">Non Used</option>
                         </select>
                     </div>
-                    <div class="col" style="padding-left:1%;" hidden>
+                    {{-- <div class="col" style="padding-left:1%;" hidden>
                         <input type="date" id="mindate" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;" hidden>
                         <input type="date" id="maxdate" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
-                    </div>
+                    </div> --}}
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                     </div>
@@ -125,12 +125,12 @@
                       @if($status == 'used')
                      <td>{{ $gs->username }}</td>
                      @endif
-                     @if ($gs->device_id == NULL)
+                     @if ($gs->device_key == NULL)
                     <td>{{ "Device is Not Connected"}}</td>
                     @else
-                    <td>{{ $gs->device_id }}</td>
+                    <td>{{ $gs->device_key }}</td>
                     @endif
-                    <td>{{ $gs->device_timer }}</td>
+                    <td>{{ $gs->expired_date }}</td>
                     <td>{{ $gs->status }}</td>
                     </tr>
                 @endforeach

@@ -172,7 +172,7 @@ class PlayersController extends Controller
                       'asta_db.user_stat.point as point', 
                       'asta_db.user_stat.gold as gold'
                     )
-                    ->where('user_type', '=', 1);                      
+                    ->whereBetween('user_type', [1, 2]);                      
                             
 
         if($username != NULL && $status != NULL && $mindate != NULL && $maxdate != NULL)
@@ -420,7 +420,7 @@ class PlayersController extends Controller
     $maxDate  = $request->inputMaxDate;
     $datenow  = Carbon::now('GMT+7');
   
-    if($status == 'nonused' && $minDate == NULL && $maxDate == NULL)
+    if($status == 'nonused')
     {
         $guests   = UserGuest::select(
                       'asta_db.user_guest.device_key',
@@ -429,38 +429,43 @@ class PlayersController extends Controller
                       'asta_db.user_guest.user_id',
                       DB::raw("'Non Used' AS status")
                     )
+                    ->whereNull('user_id')
                     ->get();   
       return view('pages.players.guest', compact('guests', 'status', 'datenow'));
-    } else if($username != NULL && $status == 'used' && $minDate!= NULL && $maxDate != NULL)
-    {
-        $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
-                    ->select(
-                      'asta_db.user.username',
-                      'asta_db.user_guest.guest_id',
-                      'asta_db.user_guest.device_key', 
-                      'asta_db.user_guest.expired_date',
-                      'asta_db.user_guest.user_id',
-                      DB::raw("'Used' AS status")
-                    )
-                    ->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                    ->wherebetween('asta_db.user_guest.expired_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                    ->get();   
-       return view('pages.players.guest', compact('guests', 'status', 'datenow'));
-    } else if($status == 'used' && $minDate!= NULL && $maxDate != NULL)
-    {
-        $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
-                    ->select(
-                      'asta_db.user.username',
-                      'asta_db.user_guest.guest_id',
-                      'asta_db.user_guest.device_key', 
-                      'asta_db.user_guest.expired_date',
-                      'asta_db.user_guest.user_id',
-                      DB::raw("'Used' AS status")
-                    )
-                    ->wherebetween('asta_db.user_guest.expired_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                    ->get();   
-       return view('pages.players.guest', compact('guests', 'status', 'datenow'));
-    } else if($status == 'used' && $minDate == NULL && $maxDate == NULL)
+    } 
+    // else if($username != NULL && $status == 'used' && $minDate!= NULL && $maxDate != NULL)
+    // {
+    //     $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
+    //                 ->select(
+    //                   'asta_db.user.username',
+    //                   'asta_db.user_guest.guest_id',
+    //                   'asta_db.user_guest.device_key', 
+    //                   'asta_db.user_guest.expired_date',
+    //                   'asta_db.user_guest.user_id',
+    //                   DB::raw("'Used' AS status")
+    //                 )
+    //                 ->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+    //                 ->wherebetween('asta_db.user_guest.expired_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+    //                 ->get();   
+    //    return view('pages.players.guest', compact('guests', 'status', 'datenow'));
+    // } 
+    // else if($status == 'used' && $minDate!= NULL && $maxDate != NULL)
+    // {
+    //   dd($status);
+    //     $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
+    //                 ->select(
+    //                   'asta_db.user.username',
+    //                   'asta_db.user_guest.guest_id',
+    //                   'asta_db.user_guest.device_key', 
+    //                   'asta_db.user_guest.expired_date',
+    //                   'asta_db.user_guest.user_id',
+    //                   DB::raw("'Used' AS status")
+    //                 )
+    //                 ->wherebetween('asta_db.user_guest.expired_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+    //                 ->get();   
+    //    return view('pages.players.guest', compact('guests', 'status', 'datenow'));
+    // } 
+    else if($username != NULL && $status == 'used')
     {
         $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
                       ->select(
@@ -471,6 +476,22 @@ class PlayersController extends Controller
                         'asta_db.user_guest.user_id',
                         DB::raw("'Used' AS status")
                       )
+                      ->where('username', 'LIKE', '%'.$username.'%')
+                      ->whereNotNull('asta_db.user_guest.user_id')
+                      ->get();
+        return view('pages.players.guest', compact('guests', 'status', 'datenow'));
+    } else if($status == 'used')
+    {
+        $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
+                      ->select(
+                        'asta_db.user.username', 
+                        'asta_db.user_guest.guest_id',
+                        'asta_db.user_guest.device_key', 
+                        'asta_db.user_guest.expired_date',
+                        'asta_db.user_guest.user_id',
+                        DB::raw("'Used' AS status")
+                      )
+                      ->whereNotNull('asta_db.user_guest.user_id')
                       ->get();
         return view('pages.players.guest', compact('guests', 'status', 'datenow'));
     } else if($minDate == NULL || $maxDate == NULL || $minDate == NULL && $maxDate == NULL)
