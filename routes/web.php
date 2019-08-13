@@ -543,6 +543,15 @@ Route::middleware('authenticated')->group(function(){
         });
     });
 
+    Route::group(['prefix'  =>  'FeedBack'], function() {
+        Route::group(['prefix' => 'Report_Abuse_Player'], function(){
+            Route::middleware('page_denied:Report Abuse Player')->group(function(){
+                Route::get('ReportAbusePlayer', 'ReportAbusePlayerController@index')->name('Report_Abuse_Player');
+                Route::get('ReportAbusePlayer-search', 'ReportAbusePlayerController@search')->name('ReportAbusePlayer-search');
+            });
+        });
+    });
+
     Route::group(['prefix'  =>  'Settings'], function() {
         Route::group(['prefix'  =>  'General_Setting'], function() {
             Route::middleware('page_denied:General Setting')->group(function(){
