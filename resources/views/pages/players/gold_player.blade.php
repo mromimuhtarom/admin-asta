@@ -93,7 +93,7 @@
                             @foreach ($balancedetails as $bd)
                             <tr>
                                 <td>{{ $bd->username }}</td>
-                                <td>{{ $bd->actionname }}</td>
+                                <td>{{ $actblnc[$bd->action_id] }}</td>
                                 <td>{{ $bd->debit }}</td>
                                 <td>{{ $bd->credit }}</td>
                                 <td>{{ $bd->balance }}</td>

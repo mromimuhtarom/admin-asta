@@ -7,6 +7,7 @@ use App\BalancePoint;
 use App\Game;
 use Carbon\Carbon;
 use Validator;
+use App\ConfigText;
 
 class PointController extends Controller
 {
@@ -26,11 +27,10 @@ class PointController extends Controller
         $datenow      = Carbon::now('GMT+7');
         $game         = Game::all();
         $balancePoint = BalancePoint::JOIN('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.balance_point.user_id')
-                        ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.balance_point.action_id')
                         ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_point.game_id')
                         ->select(
                             'asta_db.user.username', 
-                            'asta_db.action.action as actionname', 
+                            'asta_db.balance_point.action_id', 
                             'asta_db.game.name as gamename', 
                             'asta_db.balance_point.debit',
                             'asta_db.balance_point.credit',
@@ -42,6 +42,22 @@ class PointController extends Controller
             'inputMinDate'    => 'required',
             'inputMaxDate'    => 'required',
         ]);
+
+        $action      = ConfigText::select(
+                        'name',
+                        'value'
+                       ) 
+                       ->where('id', '=', 11)
+                       ->first();
+        $value               = str_replace(':', ',', $action->value);
+        $actionbalance       = explode(",", $value);
+        $actblnc = [
+          $actionbalance[0]  => $actionbalance[1] ,
+          $actionbalance[2]  => $actionbalance[3] ,
+          $actionbalance[4]  => $actionbalance[5] ,
+          $actionbalance[6]  => $actionbalance[7] ,
+          $actionbalance[8]  => $actionbalance[9] 
+        ];
 
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
@@ -57,24 +73,24 @@ class PointController extends Controller
                               ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                               ->get();
             
-            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game'));
+            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($username != NULL && $minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                               ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                               ->get();
             
-            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game'));
+            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($gameName != NULL && $minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->where('asta_db.balance_point.game_id', '=', $gameName)
                               ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                               ->get();
             
-            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game'));
+            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                               ->get();
             
-            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game'));
+            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else {
             return self::index();            
         }
