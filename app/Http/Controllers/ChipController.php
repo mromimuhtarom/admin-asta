@@ -40,6 +40,12 @@ class ChipController extends Controller
         $menus1       = MenuClass::menuName('Balance Chip');
         $game         = Game::all();
         $datenow      = Carbon::now('GMT+7');
+        $action       = ConfigText::select(
+                          'name',
+                          'value'
+                        ) 
+                        ->where('id', '=', 11)
+                        ->first();
         $balanceChip  = BalanceChip::select(
                           'asta_db.balance_chip.debit',
                           'asta_db.balance_chip.credit',
@@ -51,12 +57,6 @@ class ChipController extends Controller
                         )
                         ->JOIN('asta_db.user', 'asta_db.balance_chip.user_id', '=', 'asta_db.user.user_id')
                         ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id');
-        $action      = ConfigText::select(
-                        'name',
-                        'value'
-                       ) 
-                       ->where('id', '=', 11)
-                       ->first();
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
         $actblnc = [
