@@ -60,6 +60,7 @@ class PlayersController extends Controller
                    )
                    ->where('user_type', '=', '1')
                    ->where('user_type', '=', '2')
+                   ->orderBy('asta_db.user_stat.chip', 'desc')
                    ->get();
 
         if($player1 !== FALSE) {
