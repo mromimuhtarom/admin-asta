@@ -556,6 +556,10 @@ class PlayersController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
+        if($botId == NULL)
+        {
+          return back()->with('alert','Bot ID is Null you must Add Id ot In menu Register Player ID');
+        }
 
 
         $createbot = Player::insert([

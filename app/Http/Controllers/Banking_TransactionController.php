@@ -94,7 +94,6 @@ class Banking_TransactionController extends Controller
                 return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
             }
         } else {
-            // return self::index()->withErrors($validator->errors());
             $validator = Validator::make($request->all(),[
                 'time'   => 'required',
             ]);
