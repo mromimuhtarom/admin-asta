@@ -90,7 +90,7 @@ class TableController extends Controller
                         'asta_db.dms_table.name',
                         'asta_db.dms_table.max_player',
                         'asta_db.dms_table.game_state',
-                        'asta_db.dms_table.current_turn_seat_id',
+                        'asta_db.dms_table.turn',
                         'asta_db.dms_table.total_bet',
                         'asta_db.dms_table.table_id',
                         'asta_db.dms_table.stake',
@@ -116,7 +116,7 @@ class TableController extends Controller
                     'asta_db.dmq_table.name',
                     'asta_db.dmq_table.max_player',
                     'asta_db.dmq_table.game_state',
-                    'asta_db.dmq_table.current_turn_seat_id',
+                    'asta_db.dmq_table.turn',
                     'asta_db.dmq_table.total_bet',
                     'asta_db.dmq_table.table_id',
                     'asta_db.dmq_table.stake',
@@ -285,7 +285,7 @@ class TableController extends Controller
             'room_id'              => $category,
             'max_player'           => '0',
             'game_State'           => '0',
-            'current_turn_seat_id' => '0',
+            'turn'                 => '0',
             'total_bet'            => '0',
             'stake'                => $stake,
             'stake_pass'           => $stake,
@@ -348,7 +348,7 @@ class TableController extends Controller
             'room_id'              => $category,
             'max_player'           => '0',
             'game_State'           => '0',
-            'current_turn_seat_id' => '0',
+            'turn'                 => '0',
             'total_bet'            => '0',
             'stake'                => $stake,
             'min_buy'              => $minbuy,
@@ -617,8 +617,8 @@ class TableController extends Controller
             case "game_state":
                 $name = "Game State";
                 break;
-            case "current_turn_seat_id":
-                $name = "Current Turn Seat ID";
+            case "turn":
+                $name = "Turn";
                 break;
             case "total_bet":
                 $name = "Total Bet";
@@ -711,8 +711,8 @@ class TableController extends Controller
             case "game_state":
                 $name = "Game State";
                 break;
-            case "current_turn_seat_id":
-                $name = "Current Turn Seat ID";
+            case "turn":
+                $name = "Turn";
                 break;
             case "total_bet":
                 $name = "Total Bet";

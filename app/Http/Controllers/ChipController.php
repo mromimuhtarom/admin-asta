@@ -75,7 +75,7 @@ class ChipController extends Controller
         ]);
     
         if ($validator->fails()) {
-            return self::index()->withErrors($validator->errors());
+            return back()->withErrors($validator->errors());
         }
 
         if($searchPlayer != NULL && $gameName != NULL && $startDate != NULL && $endDate != NULL){

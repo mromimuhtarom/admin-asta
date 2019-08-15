@@ -47,7 +47,7 @@ class PlayReportController extends Controller
        ]);
     
        if ($validator->fails()) {
-              return self::index()->withErrors($validator->errors());
+              return back()->withErrors($validator->errors());
        }
 
       if($inputMaxDate < $inputMinDate){
@@ -152,7 +152,7 @@ class PlayReportController extends Controller
 
       return view('pages.players.playreport', compact('player_history', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
     } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
-       dd($inputGame);
+       
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
               ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00")
@@ -234,7 +234,6 @@ class PlayReportController extends Controller
       return view('pages.players.playreport', compact('player_history', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputGame != NULL) {
 
-       dd($inputGame);
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
                           ->get();

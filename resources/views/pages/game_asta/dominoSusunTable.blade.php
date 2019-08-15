@@ -95,7 +95,7 @@
                     <td><a href="#" class="room" data-title="Room name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('DominoSTable-update')}}">{{ $tb->roomname }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->max_player }}</a></td>
                     <td><a href="#" class="usertext" data-title="Game State" data-name="game_state" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->game_state }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Current Turn Seat ID" data-name="current_turn_seat_id" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->current_turn_seat_id }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->turn }}</a></td>
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->total_bet }}</a></td>
                     <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->stake }}</a></td>
                     <td>{{ $tb->stake_pass }}</td>
@@ -110,7 +110,7 @@
                       <td>{{ $tb->roomname }}</td>
                       <td>{{ $tb->max_player }}</td>
                       <td><{{ $tb->game_state }}</td>
-                      <td>{{ $tb->current_turn_seat_id }}</td>
+                      <td>{{ $tb->turn }}</td>
                       <td>{{ $tb->total_bet }}</td>
                       <td>{{ $tb->stake }}</td>
                       <td>{{ $tb->stake_pass }}</td>
@@ -162,7 +162,7 @@
                   <select class="custom-select" name="category">
                     <option selected>Select Category</option>
                     @foreach ($category as $ct)
-                      <option value="{{ $ct->room_id }}">{{ $ct->name }}</option>
+                    <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
                     @endforeach
                   </select>
                 </div>

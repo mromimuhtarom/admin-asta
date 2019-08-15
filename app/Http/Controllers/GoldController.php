@@ -62,7 +62,7 @@ class GoldController extends Controller
         ];
     
         if ($validator->fails()) {
-            return self::index()->withErrors($validator->errors());
+            return back()->withErrors($validator->errors());
         }
         
         if($endDate < $startDate){

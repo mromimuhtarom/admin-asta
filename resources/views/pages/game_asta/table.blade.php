@@ -166,7 +166,7 @@
                   <select class="custom-select" id="category" name="category">
                     <option>Select Category</option>
                     @foreach ($category as $ct)
-                      <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }}</option>
+                    <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
                     @endforeach
                   </select>
                 </div>

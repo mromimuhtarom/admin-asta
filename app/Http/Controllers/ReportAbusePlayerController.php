@@ -67,7 +67,7 @@ class ReportAbusePlayerController extends Controller
                 'inputMaxDate'    => 'required|date',
             ]);
             if ($validator->fails()) {
-                return self::index()->withErrors($validator->errors());
+                return back()->withErrors($validator->errors());
             }
             
         }else {
