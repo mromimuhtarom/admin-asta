@@ -97,6 +97,7 @@
               </tr>
               @else 
               <tr>
+                <td>{{ $rsl->reseller_id }}</td>
                 <td>{{ $rsl->username }}</td>
                 <td>{{ $rsl->fullname }}</td>
                 <td>{{ $rsl->phone }}</td>

@@ -18,6 +18,6 @@ class Config extends Model
     public function strmaintenance()
     {
         $maintenance = $this->where('id', '=', 101)->select('value');
-        return $this->maintenance_status[$maintenance];
+        return $this->maintenance_status[$this->maintenance];
     }
 }

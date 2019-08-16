@@ -35,7 +35,11 @@
                     @foreach($tpk as $tpk)
                     <tr>
                         <td>{{ $tpk->strname() }}</td>
+                        @if($menu && $mainmenu )
                         <td><a href="#" class="inlineSetting" data-type="number" data-name="value" data-pk="{{ $tpk->id }}" data-url="{{ route('GameSetting-updateTpk') }}">{{ $tpk->value }}</a></td>
+                        @else 
+                        <td>{{ $tpk->value }}</td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
@@ -74,7 +78,12 @@
                     @foreach($bgt as $bgt)
                     <tr>
                         <td>{{ $bgt->strname() }}</td>
+                        @if ($menu && $mainmenu)
                         <td><a href="" class="inlineSetting" data-name="value" data-pk="{{ $bgt->id }}" data-type="number" data-url="{{ route('GameSetting-updateBgt') }}">{{ $bgt->value }}</a></td>
+                        @else
+                        <td>{{ $bgt->value }}</td>
+                        @endif
+                        
                     </tr>
                     @endforeach
                 </tbody>
@@ -113,7 +122,11 @@
                     @foreach($dms as $dms)
                     <tr>
                         <td>{{ $dms->strname() }}</td>
+                        @if ($menu && $mainmenu)
                         <td><a href="" class="inlineSetting" data-pk="{{ $dms->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDms') }}">{{ $dms->value }}</a></td>
+                        @else 
+                        <td>{{ $dms->value }}</td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
@@ -152,7 +165,11 @@
                     @foreach($dmq as $dmq)
                     <tr>
                         <td>{{ $dmq->strname() }}</td>
+                        @if ($menu && $mainmenu)
                         <td><a href=""class="inlineSetting" data-pk="{{ $dmq->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDmq') }}">{{ $dmq->value}}</a></td>
+                        @else 
+                        <td>{{ $dmq->value}}</td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

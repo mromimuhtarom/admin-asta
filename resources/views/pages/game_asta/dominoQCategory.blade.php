@@ -72,10 +72,8 @@
                   <th></th>
                   @endif
                   <th class="th-sm">Room Name</th>
-                  {{-- <th class="th-sm">Stake</th> --}}
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
-                  {{-- <th class="th-sm">Timer</th> --}}
                   @if($menu && $mainmenu && $submenu)
                   <th class="th-sm">Action</th>
                   @endif

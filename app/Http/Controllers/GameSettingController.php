@@ -10,6 +10,7 @@ use App\DmsConfig;
 use App\Log;
 use Carbon\Carbon;
 use Session;
+use App\Classes\MenuClass;
 
 class GameSettingController extends Controller
 {
@@ -36,7 +37,9 @@ class GameSettingController extends Controller
         $dmq   = DmqConfig::all();
         // $betpointdmq = DmqConfig::wheere('id', '=', 2)->first();
         // ****End Domino QQ ****//
-        return view('pages.game_asta.game_setting', compact('tpk', 'bgt', 'dms', 'dmq'));
+        $menu     = MenuClass::menuName('Game Setting');
+        $mainmenu = MenuClass::menuName('Games');
+        return view('pages.game_asta.game_setting', compact('tpk', 'bgt', 'dms', 'dmq', 'mainmenu', 'menu'));
     }
 
     public function updateTpk(Request $request)

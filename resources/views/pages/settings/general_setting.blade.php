@@ -49,7 +49,7 @@
                     @if($menu && $mainmenu)
                     <td><a href="#" class="popUpSetting" data-title="Maintenance" data-name="value" data-value="{{ $getMaintenance->value }}" data-pk="{{ $getMaintenance->id }}" data-type="select" data-url="{{ route('GeneralSetting-update') }}">{{ $getMaintenance->strmaintenance() }}</a></td>
                     @else 
-                    <td>{{ $getMaintenance->strmaintenance() }}</td>
+                    <td>{{ strMaintenanceOnOff($getMaintenance->value) }}</td>
                     @endif
                   </tr>
                   <tr>

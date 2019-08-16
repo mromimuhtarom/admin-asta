@@ -49,6 +49,14 @@ function strTransactionType ($val) {
   }
 }
 
+function strMaintenanceOnOff($val) {
+  if($val == 1) {
+    return 'On';
+  } else if($val == 0) {
+    return 'Off';
+  }
+}
+
 function strYesNo ($val) {
 	if($val == 0) {
 		return 'No';

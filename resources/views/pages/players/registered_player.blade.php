@@ -89,6 +89,16 @@
           </thead>
           <tbody>
             @foreach($registerPlayer as $regis)
+            @php
+              // if($regis->facebook_id !== ''){
+              //     $user_type = 'Facebook';
+              // } else 
+              if($regis->user_type === 1) {
+                $user_type = 'Player Asta';
+              } else if($regis->user_type === 2) {
+                $user_type = "Guest Asta";
+              }
+            @endphp
             @if ($menu && $mainmenu)
             <tr>
                 <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->username }}</a></td>
@@ -97,16 +107,6 @@
                 <td><a href="#" class="usertext" data-title="Bank Account" data-name="gold" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->gold }}</a></td>
                 <td><a href="#"class="status" data-title="Bank Account" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td>
                 <td>{{ $regis->join_date }}</td>
-                @php
-                    // if($regis->facebook_id !== ''){
-                    //     $user_type = 'Facebook';
-                    // } else 
-                    if($regis->user_type === 1) {
-                        $user_type = 'Player Asta';
-                    } else if($regis->user_type === 2) {
-                      $user_type = "Guest Asta";
-                    }
-                @endphp
                 <td>{{ $user_type }}</td>
                 {{-- <td>{{ $regis->devicename}}</td> --}}
                 <td>{{ $regis->countryname }}</td>

@@ -83,6 +83,27 @@
               </tr>
           </table>
       </form>
+      @else 
+      <table style="color:white;" border="1" width="100%" height="80%">
+          <tr>
+            <td Colspan="3" align="center">ID player Already Used</td>
+          </tr>
+          <tr>
+              <td> Player ID used : {{ $playerused->countuserid }}</td>
+              <td> Guest ID used is: {{ $guestused->countuserid }}</td>
+              <td> Bot ID used is: {{ $botused->countuserid }}</td>
+          </tr>
+          <tr>
+              <td>Player ID didn't use : {{ $playernotused->countuserid }}</td>
+              <td>Guest ID didn't use : {{ $guestnotused->countuserid }} </td>
+              <td>Bot Id didn't use: {{ $botnotused->countuserid }}</td>
+          </tr>
+          <tr>
+              <td>Total Player ID : {{ $totalplayer->countuserid }}</td>
+              <td>Total Guest ID : {{ $totalguest->countuserid }} </td>
+              <td>Total Bot ID : {{ $totalbot->countuserid }}</td>
+          </tr>
+      </table>
       @endif
     </div>
 </div>
