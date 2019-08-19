@@ -86,7 +86,7 @@
       @else 
       <table style="color:white;" border="1" width="100%" height="80%">
           <tr>
-            <td Colspan="3" align="center">ID player Already Used</td>
+            <td Colspan="3" align="center">ID player Already</td>
           </tr>
           <tr>
               <td> Player ID used : {{ $playerused->countuserid }}</td>

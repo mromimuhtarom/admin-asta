@@ -211,7 +211,7 @@
                   <td>{{ $goods->qty }}</td>
                   <td>{{  strTypeTransaction($goods->trans_type) }}</td>
                   <td>{{ strEnabledDisabled($goods->status) }}</td>
-                </tr>
+              </tr>
               @endif
               @endforeach
             </tbody>

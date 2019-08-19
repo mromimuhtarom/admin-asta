@@ -25,6 +25,13 @@ class ReportAbusePlayerController extends Controller
         $maxdate        = $request->inputMaxDate;
         $datenow        = Carbon::now('GMT+7');
         $abuseplayer    = Player::select('username', 'user_id')->get();
+        $validator = Validator::make($request->all(),[
+            'inputMinDate'    => 'required|date',
+            'inputMaxDate'    => 'required|date',
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
 
         if($reportplayer != NULL && $reportedplayer != NULL && $mindate != NULL && $maxdate != NULL)
         {
@@ -70,8 +77,15 @@ class ReportAbusePlayerController extends Controller
                 return back()->withErrors($validator->errors());
             }
             
-        }else {
-            self::index();
-        }
+        }else
+        {
+            $validator = Validator::make($request->all(),[
+                'inputMinDate'    => 'required|date',
+                'inputMaxDate'    => 'required|date',
+            ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator->errors());
+            }
+        } 
     }
 }
