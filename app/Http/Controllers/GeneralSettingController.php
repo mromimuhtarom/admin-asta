@@ -23,8 +23,8 @@ class GeneralSettingController extends Controller
      */
     public function index()
     {
-        $menu     = MenuClass::menuName('General Setting');
-        $mainmenu = MenuClass::menuName('Settings');
+        $menu               = MenuClass::menuName('General Setting');
+        $mainmenu           = MenuClass::menuName('Settings');
         // system settings
         $getMaintenance     = Config::select('id', 'name', 'value')->where('id', '=', '101')->first();
         $getPointExpired    = Config::select('id', 'name', 'value')->where('id', '=', '102')->first();
@@ -70,7 +70,7 @@ class GeneralSettingController extends Controller
         $urlabout             = $request->urlabout;
         $idtermofservice      = $request->idtermofservice;
         $urltermofservice     = $request->urltermofservice;
-        $idprivacypolicy     = $request->idprivacypolicy;
+        $idprivacypolicy      = $request->idprivacypolicy;
         $urlprivacypolicy     = $request->urlprivacypolicy;
         $contenttermofservice = $request->contenttermofservice;
         $contentprivacypolicy = $request->contentprivacypolicy;

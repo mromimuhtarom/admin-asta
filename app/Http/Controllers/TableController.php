@@ -110,21 +110,21 @@ class TableController extends Controller
         $menu     = MenuClass::menuName('Table Domino QQ');
         $mainmenu = MenuClass::menuName('Games');
         $submenu  = MenuClass::menuName('Domino QQ');
-        $tables = DominoQTable::join('asta_db.dmq_room', 'asta_db.dmq_room.room_id', '=', 'asta_db.dmq_table.room_id')
-                  ->select(
-                    'asta_db.dmq_room.name as roomname',
-                    'asta_db.dmq_table.name',
-                    'asta_db.dmq_table.max_player',
-                    'asta_db.dmq_table.game_state',
-                    'asta_db.dmq_table.turn',
-                    'asta_db.dmq_table.total_bet',
-                    'asta_db.dmq_table.table_id',
-                    'asta_db.dmq_table.stake',
-                    'asta_db.dmq_table.min_buy',
-                    'asta_db.dmq_table.max_buy',
-                    'asta_db.dmq_table.timer'
-                  )
-                  ->get();
+        $tables   = DominoQTable::join('asta_db.dmq_room', 'asta_db.dmq_room.room_id', '=', 'asta_db.dmq_table.room_id')
+                    ->select(
+                        'asta_db.dmq_room.name as roomname',
+                        'asta_db.dmq_table.name',
+                        'asta_db.dmq_table.max_player',
+                        'asta_db.dmq_table.game_state',
+                        'asta_db.dmq_table.turn',
+                        'asta_db.dmq_table.total_bet',
+                        'asta_db.dmq_table.table_id',
+                        'asta_db.dmq_table.stake',
+                        'asta_db.dmq_table.min_buy',
+                        'asta_db.dmq_table.max_buy',
+                        'asta_db.dmq_table.timer'
+                    )
+                    ->get();
         $category = DominoQRoom::all();
         return view('pages.game_asta.dominoQTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
@@ -166,15 +166,15 @@ class TableController extends Controller
         }
 
         TpkTable::create([
-            'name'          => $request->tableName,
-            'room_id'        => $request->category,
-            'max_player'    =>  '0',
-            'small_blind'   =>  $sb,
-            'big_blind'     =>  $bb,
-            'jackpot'       =>  '0',
-            'min_buy'       =>  $minbuy,
-            'max_buy'       =>  $maxbuy,
-            'timer'         =>  '0'
+            'name'        => $request->tableName,
+            'room_id'     => $request->category,
+            'max_player'  => '0',
+            'small_blind' => $sb,
+            'big_blind'   => $bb,
+            'jackpot'     => '0',
+            'min_buy'     => $minbuy,
+            'max_buy'     => $maxbuy,
+            'timer'       => '0'
         ]);
 
         Log::create([
@@ -201,12 +201,12 @@ class TableController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
-        $stake  = $request->stake;
-        $minbuy = $request->minbuy;
-        $maxbuy = $request->maxbuy;
-        $category = $request->category;
+        $stake            = $request->stake;
+        $minbuy           = $request->minbuy;
+        $maxbuy           = $request->maxbuy;
+        $category         = $request->category;
         $minbuyvalidation = $stake * 3 * 13;
-        $room = BigTwoRoom::where('room_id', '=', $category)->first();
+        $room             = BigTwoRoom::where('room_id', '=', $category)->first();
         if($minbuy < $minbuyvalidation)
         {
             return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 3 multiplied 13 or under '.$minbuyvalidation);
@@ -538,10 +538,10 @@ class TableController extends Controller
         }
 
     Log::create([
-        'op_id' => Session::get('userId'),
-        'action_id'   => '2',
-        'datetime'        => Carbon::now('GMT+7'),
-        'desc' => 'Edit '.$name.' in menu Table Big Two with roomID '.$pk.' to '. $value
+        'op_id'     => Session::get('userId'),
+        'action_id' => '2',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Edit '.$name.' in menu Table Big Two with roomID '.$pk.' to '. $value
     ]);
     }
 

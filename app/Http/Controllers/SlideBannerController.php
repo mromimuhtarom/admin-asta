@@ -85,7 +85,7 @@ class SlideBannerController extends Controller
                     } else {
                         $validator = Validator::make($request->all(),[
                             'caption' => 'required',
-                            'url'   =>  'required',
+                            'url'     => 'required',
                         ]);
                     
                         if ($validator->fails()) {

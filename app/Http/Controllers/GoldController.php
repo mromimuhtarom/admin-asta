@@ -77,7 +77,6 @@ class GoldController extends Controller
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1','datenow','actblnc'));
-          // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL && $startDate != NULL){
 
@@ -87,7 +86,6 @@ class GoldController extends Controller
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
-          // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL && $endDate != NULL){
 
@@ -97,7 +95,6 @@ class GoldController extends Controller
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
-          // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($startDate != NULL && $endDate != NULL){
 
@@ -106,7 +103,6 @@ class GoldController extends Controller
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
-          // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($searchPlayer != NULL){
 
@@ -114,7 +110,6 @@ class GoldController extends Controller
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
-          // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($startDate != NULL){
 
@@ -123,7 +118,6 @@ class GoldController extends Controller
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
-          // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
         }else if ($endDate != NULL){
 
@@ -132,7 +126,6 @@ class GoldController extends Controller
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
-          // return view('pages.balancegold_detail', compact('balancedetails', 'menus1','searchPlayer', 'startDate', 'endDate'));
 
 
         }

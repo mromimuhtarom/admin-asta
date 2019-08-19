@@ -152,19 +152,19 @@ class UserAdminController extends Controller
         $password = $request->password;
         
         if($password != '') {
-        User::where('op_id', '=', $pk)->update([
-          'userpass' => bcrypt($password)
-        ]);
+            User::where('op_id', '=', $pk)->update([
+                'userpass' => bcrypt($password)
+            ]);
         
   
   
-        Log::create([
-          'op_id'     => Session::get('userId'),
-          'action_id' => '1',
-          'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit password in menu User Admin with UserId '.$pk.' to '. $password
-        ]);
-        return redirect()->route('User_Admin')->with('success','Reset Password Successfully');
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '1',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Edit password in menu User Admin with UserId '.$pk.' to '. $password
+            ]);
+            return redirect()->route('User_Admin')->with('success','Reset Password Successfully');
         }
         return redirect()->route('User_Admin')->with('alert','Password is Null');
     }

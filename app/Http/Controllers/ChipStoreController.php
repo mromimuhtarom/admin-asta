@@ -23,24 +23,24 @@ class ChipStoreController extends Controller
     {
         $menu     = MenuClass::menuName('Chip Store');
         $mainmenu = MenuClass::menuName('Store');
-        $items  = ItemsGold::select(
-                    'item_id',
-                    'name',
-                    'item_type',
-                    'price',
-                    'item_get',
-                    'status'
-                  )
-                  ->where('item_type', '=', 1)
-                  ->get();
-        $active = ConfigText::select(
-                    'name', 
-                    'value'
-                  )
-                  ->where('id', '=', 4)
-                  ->first();
-        $value  = str_replace(':', ',', $active->value);
-        $endis  = explode(",", $value);
+        $items    = ItemsGold::select(
+                        'item_id',
+                        'name',
+                        'item_type',
+                        'price',
+                        'item_get',
+                        'status'
+                    )
+                    ->where('item_type', '=', 1)
+                    ->get();
+        $active   = ConfigText::select(
+                        'name', 
+                        'value'
+                    )
+                    ->where('id', '=', 4)
+                    ->first();
+        $value    = str_replace(':', ',', $active->value);
+        $endis    = explode(",", $value);
         return view('pages.store.chip_store', compact('items', 'menu', 'endis', 'mainmenu'));
     }
 

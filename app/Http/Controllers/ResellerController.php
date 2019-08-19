@@ -138,10 +138,10 @@ class ResellerController extends Controller
 // ------- Index Reseller Rank ------- //
     public function ResellerRank()
     {
-        $rank     = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
-        $menu     = MenuClass::menuName('Rank Reseller');
-        $mainmenu = MenuClass::menuName('Reseller');
-        $configtype = ConfigText::where('id', '=', 10) ->select('value')->first();
+        $rank        = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
+        $menu        = MenuClass::menuName('Rank Reseller');
+        $mainmenu    = MenuClass::menuName('Reseller');
+        $configtype  = ConfigText::where('id', '=', 10) ->select('value')->first();
         $replacetype = str_replace(':', ',', $configtype->value);
         $explodetype = explode(',', $replacetype);
 
@@ -433,7 +433,7 @@ public function detailTransaction($month, $year)
 //------ Index Register Reseller ------//
     public function RegisterReseller()
     {
-        $menu  = MenuClass::menuName('Register Reseller');
+        $menu     = MenuClass::menuName('Register Reseller');
         $mainmenu = MenuClass::menuName('Reseller');
         return view('pages.reseller.register_reseller', compact('menu', 'mainmenu'));
     }
@@ -444,19 +444,6 @@ public function detailTransaction($month, $year)
     {
         $data = $request->all();
         $datetimenow = Carbon::now('GMT+7');
-        // $validate = [
-        //   'username' => 'unique:reseller,username',
-        //   'phone'    => 'unique:reseller,phone',
-        //   'email'    => 'unique:reseller,email',
-        // //   'idcard'   => 'unique:reseller,identify'
-        // ];
-  
-        // $validator = Validator::make($data,$validate);
-  
-        // if($validator->fails())
-        // {  
-        //   return back()->withInput()->with('alert', $validator->errors()->first());
-        // }
   
         Reseller::insertData([
           'username' => $request->username,
@@ -490,8 +477,6 @@ public function detailTransaction($month, $year)
 //----- Index Request Transaction -----//
     public function RequestTransaction()
     {
-        // $transactions = DB::select("SELECT reseller_transaction.*,  reseller.username, bank_info.bank_name, items_cash.goldAwarded, items_cash.name as item_name FROM reseller_transaction JOIN items_cash ON items_cash.id = reseller_transaction.item_id JOIN bank_info ON bank_info.paymentId = reseller_transaction.payment_id JOIN reseller ON reseller.id = reseller_transaction.reseller_id JOIN payments ON payments.id = reseller_transaction.payment_id WHERE payments.transaction_type = 7 AND reseller_transaction.status = 1 ORDER BY reseller_transaction.timestamp ASC");
-        // $transactions = DB::select("SELECT asta_db.store_transaction.*, asta_db.reseller.reseller_id, asta_db.reseller.username, asta_db.payment.name as bankname, items_cash.goldAwarded, items_cash.name as item_name FROM asta_db.store_transaction JOIN items_cash ON items_cash.id = asta_db.store_transaction.item_id   JOIN asta_db.reseller ON asta_db.reseller.reseller_id = asta_db.store_transaction.user_id JOIN asta_db.payment ON asta_db.payment.id = asta_db.store_transaction.payment_id WHERE asta_db.store_transaction.status = 1 ORDER BY asta_db.store_transaction.datetime ASC");
         $transactions = DB::table('asta_db.store_transaction')
                         ->join('items_cash', 'items_cash.id', '=', 'asta_db.store_transaction.item_id')
                         ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
@@ -525,7 +510,6 @@ public function detailTransaction($month, $year)
 //------ Request Transaction Approve -------//
     public function RequestTransactionApprove(Request $request)
     {
-        // $approveOrderId = $request->approveId;
         $resellerId               = $request->resellerId;
         $goldAwarded              = $request->goldbuy;
         $amount                   = $request->price;
@@ -589,12 +573,6 @@ public function detailTransaction($month, $year)
             'balance'     => $checkTotalGold->gold,
             'datetime'    => Carbon::now('GMT+7')
           ]);
-
-  
-        //   DB::table('reseller_transaction')->where('order_id', $approveOrderId)->update([
-        //     'status' => '2',
-        //     'timestamp' => Carbon::now('GMT+7')
-        //   ]);
 
         StoreTransaction::where('user_id', '=', $reseller_id)->where('user_type', '=', 4)->delete();
 

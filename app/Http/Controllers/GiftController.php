@@ -88,7 +88,6 @@ class GiftController extends Controller
         $id                     = Gift::select('id')
                                   ->orderBy('id', 'desc')
                                   ->first();
-        // $id_last                = $id->id;
         if($id === NULL )
         {
             $id_last = 0;
