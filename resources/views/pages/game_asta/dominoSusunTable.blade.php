@@ -77,7 +77,6 @@
                   <th class="th-sm">Current Turn Seat ID</th>
                   <th class="th-sm">Total Bet</th>
                   <th class="th-sm">Stake</th>
-                  <th class="th-sm"> Stake Pass</th>
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
                   <th class="th-sm">Timer</th>
@@ -98,7 +97,6 @@
                     <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->turn }}</a></td>
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->total_bet }}</a></td>
                     <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->stake }}</a></td>
-                    <td>{{ $tb->stake_pass }}</td>
                     <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->min_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->max_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->timer }}</a></td>
@@ -113,7 +111,6 @@
                       <td>{{ $tb->turn }}</td>
                       <td>{{ $tb->total_bet }}</td>
                       <td>{{ $tb->stake }}</td>
-                      <td>{{ $tb->stake_pass }}</td>
                       <td>{{ $tb->min_buy }}</td>
                       <td>{{ $tb->max_buy }}</td>
                       <td>{{ $tb->timer }}</td>

@@ -96,8 +96,7 @@ class TableController extends Controller
                         'asta_db.dms_table.stake',
                         'asta_db.dms_table.min_buy',
                         'asta_db.dms_table.max_buy',
-                        'asta_db.dms_table.timer',
-                        'asta_db.dms_table.stake_pass'
+                        'asta_db.dms_table.timer'
                     )
                     ->get();
         $category = DominoSusunRoom::all();
@@ -288,7 +287,6 @@ class TableController extends Controller
             'turn'                 => '0',
             'total_bet'            => '0',
             'stake'                => $stake,
-            'stake_pass'           => $stake,
             'min_buy'              => $minbuy,
             'max_buy'              => $maxbuy,
             'timer'                => '0'
@@ -556,14 +554,7 @@ class TableController extends Controller
         $countminbuy = $dmsroom->stake * 10;
         $countmaxbuy = $countminbuy * 4;
   
-        if($name == 'stake')
-        {
-
-            DominoSusunTable::where('table_id', '=', $pk)->update([
-                'stake'      => $value,
-                'stake_pass' => $value,
-            ]);
-        } else if($name == 'min_buy')
+        if($name == 'min_buy')
         {
             if($value < $countminbuy)
             {
