@@ -21,9 +21,9 @@ class LogPlayerController extends Controller
 
     public function search(Request $request)
     {
-        $inputUser    = $request->username;
-        $inputMinDate = $request->dari;
-        $inputMaxDate = $request->sampai;
+        $searchUser    = $request->username;
+        $minDate = $request->dari;
+        $maxDate = $request->sampai;
         $inputAction  = $request->action;
         $datenow = Carbon::now('GMT+7');
 
@@ -49,103 +49,103 @@ class LogPlayerController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        if($inputMaxDate < $inputMinDate){
+        if($maxDate < $minDate){
             return back()->with('alert','End Date can\'t be less than start date');
         }
 
-        if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL && $inputMaxDate != NULL)
+        if($searchUser != NULL && $inputAction != NULL && $minDate != NULL && $maxDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                     ->where('asta_db.log_user.action_id', '=', $inputAction )
-                                    ->wherebetween('asta_db.log_user.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                                    ->wherebetween('asta_db.log_user.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
             
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL)
+        } else if($searchUser != NULL && $inputAction != NULL && $minDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                     ->where('asta_db.log_user.action_id', '=', $inputAction )
-                                    ->where('asta_db.log_user.datetime', '>=', $inputMinDate)
+                                    ->where('asta_db.log_user.datetime', '>=', $minDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputUser != NULL && $inputAction != NULL && $inputMaxDate != NULL)
+        } else if($searchUser != NULL && $inputAction != NULL && $maxDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                     ->where('asta_db.log_user.action_id', '=', $inputAction )
-                                    ->where('asta_db.log_user.datetime', '<=', $inputMaxDate)
+                                    ->where('asta_db.log_user.datetime', '<=', $maxDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputUser != NULL && $inputAction != NULL)
+        } else if($searchUser != NULL && $inputAction != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                     ->where('asta_db.log_user.action_id', '=', $inputAction )
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputUser != NULL &&  $inputMinDate != NULL && $inputMaxDate != NULL)
+        } else if($searchUser != NULL &&  $minDate != NULL && $maxDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
-                                    ->wherebetween('asta_db.log_user.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
+                                    ->wherebetween('asta_db.log_user.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputUser != NULL && $inputMaxDate != NULL)
+        } else if($searchUser != NULL && $maxDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
-                                    ->where('asta_db.log_user.datetime', '<=', $inputMaxDate)
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
+                                    ->where('asta_db.log_user.datetime', '<=', $maxDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputUser != NULL && $inputMinDate != NULL)
+        } else if($searchUser != NULL && $minDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
-                                    ->where('asta_db.log_user.datetime', '>=', $inputMinDate)
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
+                                    ->where('asta_db.log_user.datetime', '>=', $minDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputAction != NULL && $inputMinDate != NULL && $inputMaxDate != NULL)
+        } else if($inputAction != NULL && $minDate != NULL && $maxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
-                                    ->wherebetween('asta_db.log_user.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                                    ->wherebetween('asta_db.log_user.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
             
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputAction != NULL && $inputMinDate != NULL)
+        } else if($inputAction != NULL && $minDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
-                                    ->where('asta_db.log_user.datetime', '>=', $inputMinDate)
+                                    ->where('asta_db.log_user.datetime', '>=', $minDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputAction != NULL && $inputMaxDate != NULL)
+        } else if($inputAction != NULL && $maxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
-                                    ->where('asta_db.log_user.datetime', '<=', $inputMaxDate)
+                                    ->where('asta_db.log_user.datetime', '<=', $maxDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputMinDate != NULL && $inputMaxDate != NULL)
+        } else if($minDate != NULL && $maxDate != NULL)
         {
-            $logplayer =    $loguser->wherebetween('asta_db.log_user.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+            $logplayer =    $loguser->wherebetween('asta_db.log_user.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputUser != NULL)
+        } else if($searchUser != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$inputUser.'%')
+            $logplayer =    $loguser->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
             
@@ -157,16 +157,16 @@ class LogPlayerController extends Controller
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));
-        } else if($inputMinDate != NULL)
+        } else if($minDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.log_user.datetime', '>=', $inputMinDate)
+            $logplayer =    $loguser->where('asta_db.log_user.datetime', '>=', $minDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 
             return view('pages.players.log_player', compact('logplayer', 'action', 'datenow'));            
-        } else if($inputMaxDate != NULL)
+        } else if($maxDate != NULL)
         {
-            $logplayer =    $loguser->where('asta_db.log_user.datetime', '<=', $inputMaxDate)
+            $logplayer =    $loguser->where('asta_db.log_user.datetime', '<=', $maxDate)
                                     ->orderby('asta_db.log_user.datetime', 'desc')
                                     ->get();
 

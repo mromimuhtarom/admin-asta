@@ -29,9 +29,9 @@ class LogController extends Controller
 
     public function search(Request $request)
     {
-        $inputUser    = $request->username;
-        $inputMinDate = $request->dari;
-        $inputMaxDate = $request->sampai;
+        $searchUser    = $request->username;
+        $minDate = $request->dari;
+        $maxDate = $request->sampai;
         $inputAction  = $request->action;
   
         $actionSearch = Action::select('action')
@@ -55,110 +55,110 @@ class LogController extends Controller
         if ($validator->fails()) {
             return self::index()->withErrors($validator->errors());
         }
-        if($inputMaxDate < $inputMinDate){
+        if($maxDate < $minDate){
                 return back()->with('alert','End Date can\'t be less than start date');
         }
 
-        if($inputUser != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputAction != NULL) {
-          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+        if($searchUser != NULL && $minDate != NULL && $maxDate != NULL && $inputAction != NULL) {
+          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
                   ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
-                  ->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+                  ->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
                  
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
-        }else if($inputUser != NULL && $inputAction != NULL && $inputMinDate != NULL) {
+        }else if($searchUser != NULL && $inputAction != NULL && $minDate != NULL) {
           $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
-                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '>=', $minDate." 00:00:00")
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
                   
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
-        }else if($inputUser != NULL && $inputAction != NULL &&  $inputMaxDate != NULL) {
+        }else if($searchUser != NULL && $inputAction != NULL &&  $maxDate != NULL) {
           $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
-                  ->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+                  ->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '<=', $maxDate." 23:59:59")
                   ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
                   
   
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
-        }else if($inputMinDate != NULL && $inputMaxDate != NULL &&  $inputAction != NULL) {
-          $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+        }else if($minDate != NULL && $maxDate != NULL &&  $inputAction != NULL) {
+          $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                  ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                  ->get();
   
                  
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
-       }else if ($inputMinDate != NULL && $inputMaxDate != NULL){
-         $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+       }else if ($minDate != NULL && $maxDate != NULL){
+         $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                  ->orderBy('asta_db.log_operator.datetime', 'asc')
                  ->get();
   
                  
          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
-       }else if ($inputUser != NULL && $inputMaxDate != NULL){
-          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+       }else if ($searchUser != NULL && $maxDate != NULL){
+          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '<=', $maxDate." 23:59:59")
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
-        }else if($inputUser != NULL &&  $inputAction != NULL) {
-          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+        }else if($searchUser != NULL &&  $inputAction != NULL) {
+          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
                   ->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
 
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
-        }else if($inputMinDate != NULL &&  $inputAction != NULL) {
+        }else if($minDate != NULL &&  $inputAction != NULL) {
                $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
-                       ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+                       ->WHERE('asta_db.log_operator.datetime', '>=', $minDate." 00:00:00")
                        ->orderBy('asta_db.log_operator.datetime', 'desc')
                        ->get();
   
   
                 return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
-        }else if($inputMaxDate != NULL &&  $inputAction != NULL) {
+        }else if($maxDate != NULL &&  $inputAction != NULL) {
                 $logs = $logOperator->where('asta_db.action.action', 'LIKE', '%'.$inputAction.'%')
-                        ->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+                        ->WHERE('asta_db.log_operator.datetime', '<=', $maxDate." 23:59:59")
                         ->orderBy('asta_db.log_operator.datetime', 'desc')
                         ->get();
   
   
                 return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
-        }else if($inputUser != NULL && $inputMinDate != NULL ) {
-          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
-                  ->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+        }else if($searchUser != NULL && $minDate != NULL ) {
+          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
+                  ->WHERE('asta_db.log_operator.datetime', '>=', $minDate." 00:00:00")
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
   
          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
-       }else if ($inputMinDate != NULL){
-          $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '>=', $inputMinDate." 00:00:00")
+       }else if ($minDate != NULL){
+          $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '>=', $minDate." 00:00:00")
                   ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
   
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
-        }else if ($inputMaxDate != NULL){
-          $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '<=', $inputMaxDate." 23:59:59")
+        }else if ($maxDate != NULL){
+          $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '<=', $maxDate." 23:59:59")
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   
   
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
-        }else if($inputUser != NULL ){
-          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$inputUser.'%')
+        }else if($searchUser != NULL ){
+          $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
   

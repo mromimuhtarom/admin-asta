@@ -139,10 +139,10 @@ class PlayersController extends Controller
 //  ----------- Search Registered Player ----------//
     public function SearchRegisteredPlayer(Request $request)
     {
-        $username      = $request->inputPlayer;
+        $searhUser      = $request->inputPlayer;
         $status        = $request->status;
-        $mindate       = $request->inputMinDate;
-        $maxdate       = $request->inputMaxDate;
+        $minDate       = $request->inputMinDate;
+        $maxDate       = $request->inputMaxDate;
         $menu          = MenuClass::menuName('Registered Player');
         $mainmenu      = MenuClass::menuName('Players');
         $player_status = ConfigText::where('id', '=', 8)
@@ -154,9 +154,9 @@ class PlayersController extends Controller
         $converttocomma = str_replace(':', ',', $player_status->value);
         $plyr_status    = explode(",", $converttocomma);
 
-        if($mindate != NULL && $maxdate != NULL)
+        if($minDate != NULL && $maxDate != NULL)
         {
-          if($maxdate < $mindate){
+          if($maxDate < $minDate){
             return back()->with('alert','End Date can\'t be less than start date');
           }
         }
@@ -176,9 +176,9 @@ class PlayersController extends Controller
                     ->whereBetween('user_type', [1, 2]);                      
                             
 
-        if($username != NULL && $status != NULL && $mindate != NULL && $maxdate != NULL)
+        if($searhUser != NULL && $status != NULL && $minDate != NULL && $maxDate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
                             ->get();

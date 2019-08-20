@@ -20,7 +20,7 @@ class GoldController extends Controller
     public function index()
     {
       $datenow = Carbon::now('GMT+7');
-        return view('pages.players.gold_player', compact('datenow'));
+      return view('pages.players.gold_player', compact('datenow'));
     }
 
     public function search(Request $request) 

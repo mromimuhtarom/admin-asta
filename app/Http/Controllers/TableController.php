@@ -283,7 +283,7 @@ class TableController extends Controller
         DominoSusunTable::create([
             'name'                 => $request->tableName,
             'room_id'              => $category,
-            'max_player'           => '0',
+            'max_player'           => '4',
             'game_State'           => '0',
             'turn'                 => '0',
             'total_bet'            => '0',
