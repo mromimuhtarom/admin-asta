@@ -262,7 +262,7 @@ class TableController extends Controller
         $minbuyvalidation = $stake * 10;
         $maxbuyvalidation = $minbuyvalidation * 4;
         $room             = DominoSusunRoom::where('room_id', '=', $category)->first();
-        $lastrecord       = DominoSusunTable::where('room_id', '=', $category)->orderby('table_id', 'desc')->first();
+        $lastrecord       = DominoSusunTable::orderby('table_id', 'desc')->first();
         $selisih          = $lastrecord->stake + 250;
         if($minbuy < $minbuyvalidation)
         {
@@ -327,7 +327,7 @@ class TableController extends Controller
         $minbuyvalidation = $stake * 10;
         $maxbuyvalidation = $minbuyvalidation * 2;
         $room             = DominoQRoom::where('room_id', '=', $category)->first();
-        $lastrecord       = DominoQTable::where('room_id', '=', $category)->orderby('table_id', 'desc')->first();
+        $lastrecord       = DominoQTable::orderby('table_id', 'desc')->first();
         $selisih          = $lastrecord->stake + 250;
 
 
@@ -600,7 +600,7 @@ class TableController extends Controller
             }
         } else if($name == 'stake')
         {
-            $lastrecord = DominoSusunTable::where('room_id', '=', $dmsroom->room_id)->where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
+            $lastrecord = DominoSusunTable::where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
             $selisih    = $lastrecord->stake + 250;
             if($value < $selisih)
             {
@@ -706,7 +706,7 @@ class TableController extends Controller
             }
         } else if($name == 'stake')
         {
-            $lastrecord = DominoQTable::where('room_id', '=', $dmqtable->room_id)->where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
+            $lastrecord = DominoQTable::where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
             $selisih = $lastrecord->stake + 250;
             if($value < $selisih)
             {
