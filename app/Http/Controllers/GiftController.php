@@ -96,7 +96,7 @@ class GiftController extends Controller
         }
         $id_new                 = $id_last + 1;
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
+        $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
@@ -137,8 +137,7 @@ class GiftController extends Controller
                             'category_id' => $request->category,
                             'width'       => $width,
                             'height'      => $height,
-                            'image_url'   => $nama_file_unik,
-                            'date_img'    => Carbon::now('GMT+7'),
+                            'img_ver'     => 0,
                             'status'      => 1
                         ]);
 
@@ -207,8 +206,9 @@ class GiftController extends Controller
         $id                     = Gift::select('id')
                                   ->where('id', '=', $pk)
                                   ->first();
+        $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('png','jpg','PNG','JPG');
+        $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
@@ -224,8 +224,7 @@ class GiftController extends Controller
                 if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
                 {
                     Gift::where('id', '=', $pk)->update([
-                        'image_url' => $nama_file_unik,
-                        'date_img'  =>  Carbon::now('GMT+7')
+                        'image_ver' =>  $imageversion
                     ]);
 
                     Log::create([
