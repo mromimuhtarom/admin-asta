@@ -202,8 +202,7 @@ class GiftController extends Controller
     public function updateimage(Request $request)
     {
         $pk                     = $request->pk;
-        $id                     = Gift::select('id')
-                                  ->where('id', '=', $pk)
+        $id                     = Gift::where('id', '=', $pk)
                                   ->first();
         $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
@@ -223,7 +222,7 @@ class GiftController extends Controller
                 if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
                 {
                     Gift::where('id', '=', $pk)->update([
-                        'image_ver' =>  $imageversion
+                        'img_ver' =>  $imageversion 
                     ]);
 
                     Log::create([
