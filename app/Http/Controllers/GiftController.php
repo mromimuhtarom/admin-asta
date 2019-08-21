@@ -38,7 +38,6 @@ class GiftController extends Controller
                             'name', 
                             'price', 
                             'status', 
-                            'image_url', 
                             'category_id'
                         )
                         ->get();
@@ -231,7 +230,7 @@ class GiftController extends Controller
                         'op_id'     => Session::get('userId'),
                         'action_id' => '2',
                         'datetime'  => Carbon::now('GMT+7'),
-                        'desc'      => 'Edit image_url in menu Gift Store with ID '.$pk.' to '. $nama_file_unik
+                        'desc'      => 'Edit image in menu Gift Store with ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('Table_Gift')->with('success','Update Image successfull');
 
@@ -308,13 +307,13 @@ class GiftController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        $gifts = Gift::select('image_url')
+        $gifts = Gift::select('id')
                  ->where('id', '=', $id)
                  ->first();
         if($id != '')
         {
             Gift::where('id', '=', $id)->delete();
-            $path = '../public/upload/gifts/'.$gifts->image_url;
+            $path = '../public/upload/gifts/'.$gifts->id.'.png';
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),
