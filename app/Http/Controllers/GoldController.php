@@ -25,9 +25,9 @@ class GoldController extends Controller
 
     public function search(Request $request) 
     {
-        $searchPlayer = $request->inputPlayer;
-        $startDate    = $request->inputMinDate;
-        $endDate      = $request->inputMaxDate;
+        $searchUser = $request->inputPlayer;
+        $minDate    = $request->inputMinDate;
+        $maxDate     = $request->inputMaxDate;
         $menus1       = MenuClass::menuName('Balance Gold');
         $datenow      = Carbon::now('GMT+7');
         $balanceGold  = BalanceGold::select(
@@ -65,61 +65,61 @@ class GoldController extends Controller
             return back()->withErrors($validator->errors());
         }
         
-        if($endDate < $startDate){
+        if($maxDate< $minDate){
           return back()->with('alert','End Date can\'t be less than start date');
         }
 
-        if ($searchPlayer != NULL && $startDate != NULL && $endDate != NULL){
+        if ($searchUser != NULL && $minDate != NULL && $maxDate!= NULL){
 
-          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%' )
-                            ->wherebetween('asta_db.balance_gold.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
+                            ->wherebetween('asta_db.balance_gold.datetime', [$minDate." 00:00:00", $endDate." 23:59:59"])
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1','datenow','actblnc'));
 
-        }else if ($searchPlayer != NULL && $startDate != NULL){
+        }else if ($searchUser != NULL && $minDate != NULL){
 
-          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%')
-                            ->WHERE('asta_db.balance_gold.datetime', '>=', $startDate." 00:00:00")
+          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
+                            ->WHERE('asta_db.balance_gold.datetime', '>=', $minDate." 00:00:00")
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
 
-        }else if ($searchPlayer != NULL && $endDate != NULL){
+        }else if ($searchUser != NULL && $maxDate!= NULL){
 
-          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%')
+          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                             ->WHERE('asta_db.balance_gold.datetime', '<=', $endDate." 23:59:59")
                             ->orderBy('asta_db.balance_gold.datetime', 'desc')
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
 
-        }else if ($startDate != NULL && $endDate != NULL){
+        }else if ($minDate != NULL && $maxDate!= NULL){
 
-          $balancedetails = $balanceGold->wherebetween('asta_db.balance_gold.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+          $balancedetails = $balanceGold->wherebetween('asta_db.balance_gold.datetime', [$minDate." 00:00:00", $endDate." 23:59:59"])
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
 
-        }else if ($searchPlayer != NULL){
+        }else if ($searchUser != NULL){
 
-          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchPlayer.'%')
+          $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
 
-        }else if ($startDate != NULL){
+        }else if ($minDate != NULL){
 
-          $balancedetails = $balanceGold->WHERE('asta_db.balance_gold.datetime', '>=', $startDate." 00:00:00")
+          $balancedetails = $balanceGold->WHERE('asta_db.balance_gold.datetime', '>=', $minDate." 00:00:00")
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
 
-        }else if ($endDate != NULL){
+        }else if ($maxDate!= NULL){
 
           $balancedetails = $balanceGold->WHERE('asta_db.balance_gold.datetime', '<=', $endDate." 23:59:59")
                             ->orderBy('asta_db.balance_gold.datetime', 'desc')

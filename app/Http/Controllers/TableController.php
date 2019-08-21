@@ -262,6 +262,8 @@ class TableController extends Controller
         $minbuyvalidation = $stake * 10;
         $maxbuyvalidation = $minbuyvalidation * 4;
         $room             = DominoSusunRoom::where('room_id', '=', $category)->first();
+        $lastrecord       = DominoSusunTable::where('room_id', '=', $category)->orderby('table_id', 'desc')->first();
+        $selisih          = $lastrecord->stake + 250;
         if($minbuy < $minbuyvalidation)
         {
             return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
@@ -277,6 +279,9 @@ class TableController extends Controller
         } else if($maxbuy > $room->max_buy)
         {
             return back()->with('alert', 'Max Buy table can\'t be Up to Max Buy room ');
+        } else if($stake < $seleisih)
+        {
+            return back()->with('alert', 'the stake difference must be 250 from the last stake');
         }
 
         DominoSusunTable::create([
@@ -322,6 +327,8 @@ class TableController extends Controller
         $minbuyvalidation = $stake * 10;
         $maxbuyvalidation = $minbuyvalidation * 2;
         $room             = DominoQRoom::where('room_id', '=', $category)->first();
+        $lastrecord       = DominoQTable::where('room_id', '=', $category)->orderby('table_id', 'desc')->first();
+        $selisih          = $lastrecord->stake + 250;
 
 
         if($minbuy < $minbuyvalidation)
@@ -339,6 +346,9 @@ class TableController extends Controller
         } else if($maxbuy > $room->max_buy)
         {
             return back()->with('alert', 'Max Buy table can\'t be under Max Buy room');
+        } else if($stake < $selisih)
+        {
+            return back()->with('alert', 'the stake difference must be 250 from the last stake');
         }
 
         DominoQTable::create([
@@ -588,6 +598,18 @@ class TableController extends Controller
                     'max_buy' => $value 
                 ]);
             }
+        } else if($name == 'stake')
+        {
+            $lastrecord = DominoSusunTable::where('room_id', '=', $dmsroom->room_id)->where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
+            $selisih    = $lastrecord->stake + 250;
+            if($value < $selisih)
+            {
+                return response()->json("the stake difference must be 250 from the last stake", 400);
+            }
+            DominoSusunTable::where('table_id', '=', $pk)->update([
+                $name => $value 
+            ]);
+
         } else 
         {
             DominoSusunTable::where('table_id', '=', $pk)->update([
@@ -682,6 +704,17 @@ class TableController extends Controller
                     'max_buy' => $value 
                 ]);
             }
+        } else if($name == 'stake')
+        {
+            $lastrecord = DominoQTable::where('room_id', '=', $dmqtable->room_id)->where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
+            $selisih = $lastrecord->stake + 250;
+            if($value < $selisih)
+            {
+                return response()->json("the stake difference must be 250 from the last stake", 400);
+            }
+            DominoQTable::where('table_id', '=', $pk)->update([
+                $name => $value 
+            ]);
         } else 
         {
             DominoQTable::where('table_id', '=', $pk)->update([

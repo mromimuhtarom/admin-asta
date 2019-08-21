@@ -180,72 +180,72 @@ class PlayersController extends Controller
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
-                            ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
+                            ->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($username != NULL && $status != NULL && $mindate != NULL)
+        } else if($searhUser != NULL && $status != NULL && $minDate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
-                            ->where('asta_db.user.join_date', '>=', $mindate)
+                            ->where('asta_db.user.join_date', '>=', $minDate)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($username != NULL && $status != NULL && $maxdate != NULL)
+        } else if($searhUser != NULL && $status != NULL && $maxDate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
-                            ->where('asta_db.user.join_date', '<=', $maxdate)
+                            ->where('asta_db.user.join_date', '<=', $maxDate)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
 
-        } else if($username != NULL && $status != NULL)
+        } else if($searhUser != NULL && $status != NULL)
         {
-          $registerPlayer =  $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+          $registerPlayer =  $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($status != NULL && $mindate != NULL && $maxdate != NULL)
+        } else if($status != NULL && $minDate != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
-                            ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
+                            ->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($status != NULL && $mindate != NULL)
+        } else if($status != NULL && $minDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
-                            ->where('asta_db.user.join_date', '>=', $mindate)
+                            ->where('asta_db.user.join_date', '>=', $minDate)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($status != NULL && $maxdate != NULL)
+        } else if($status != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
-                            ->where('asta_db.user.join_date', '<=', $maxdate)
+                            ->where('asta_db.user.join_date', '<=', $maxDate)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($username != NULL  && $mindate != NULL && $maxdate != NULL)
+        } else if($searhUser != NULL  && $minDate != NULL && $maxDate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                            ->wherebetween('asta_db.user.join_date', [$mindate." 00:00:00", $maxdate." 23:59:59"])
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
+                            ->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($username != NULL  && $mindate != NULL)
+        } else if($searhUser != NULL  && $minDate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                            ->where('asta_db.user.join_date', '>=', $mindate)
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
+                            ->where('asta_db.user.join_date', '>=', $minDate)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($username != NULL  && $maxdate != NULL)
+        } else if($searhUser != NULL  && $maxDate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.join_date', '<=', $maxdate)
                             ->get();
 
