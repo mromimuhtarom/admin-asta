@@ -21,7 +21,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
@@ -64,7 +64,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
@@ -108,7 +108,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
@@ -151,7 +151,7 @@
     
       <div>
         <div class="widget-body">
-          <div class="custom-scroll table-responsive">
+          <div class="custom-scroll table-responsive" style="height:350px;">
             
             <div class="table-outer">
               <table class="table table-bordered">
