@@ -51,7 +51,7 @@ class PlayersController extends Controller
         $avgBank = 0;
         $player1 = Player::join('asta_db.user_stat', 'asta_db.user.user_id', '=', 'asta_db.user_stat.user_id')
                   ->join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
-                   ->select(
+                  ->select(
                      DB::raw("sum(chip) / count(*) As avgBank"),
                      'asta_db.user_stat.chip',
                      'asta_db.user.username',
@@ -64,25 +64,25 @@ class PlayersController extends Controller
                    ->get();
 
         if($player1 !== FALSE) {
-            foreach($player1 as $player) {
+          foreach($player1 as $player) {
             $avgBank = $player->avgBank;
-            }
+          }
         }
 
         if($avgBank == "")
 
         $avgBank = 0;
         $player  = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                  ->join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
-                  ->select(
+                   ->join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
+                   ->select(
                     'asta_db.user_stat.chip',
                     'asta_db.user.username',
                     'asta_db.country.name',
                     'asta_db.user_stat.gold'
-                  )
-                  ->where('chip', '>', $avgBank)->orderBy('chip', 'DESC')
-                  ->limit('100')
-                  ->get();
+                   )
+                   ->where('chip', '>', $avgBank)->orderBy('chip', 'DESC')
+                   ->limit('100')
+                   ->get();
         return view('pages.players.high_roller', compact('player'));
     }
   // ----------- End High Roller ----------- //
@@ -434,40 +434,7 @@ class PlayersController extends Controller
                     ->whereNull('user_id')
                     ->get();   
       return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu'));
-    } 
-    // else if($username != NULL && $status == 'used' && $minDate!= NULL && $maxDate != NULL)
-    // {
-    //     $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
-    //                 ->select(
-    //                   'asta_db.user.username',
-    //                   'asta_db.user_guest.guest_id',
-    //                   'asta_db.user_guest.device_key', 
-    //                   'asta_db.user_guest.expired_date',
-    //                   'asta_db.user_guest.user_id',
-    //                   DB::raw("'Used' AS status")
-    //                 )
-    //                 ->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-    //                 ->wherebetween('asta_db.user_guest.expired_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-    //                 ->get();   
-    //    return view('pages.players.guest', compact('guests', 'status', 'datenow'));
-    // } 
-    // else if($status == 'used' && $minDate!= NULL && $maxDate != NULL)
-    // {
-    //   dd($status);
-    //     $guests   = UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
-    //                 ->select(
-    //                   'asta_db.user.username',
-    //                   'asta_db.user_guest.guest_id',
-    //                   'asta_db.user_guest.device_key', 
-    //                   'asta_db.user_guest.expired_date',
-    //                   'asta_db.user_guest.user_id',
-    //                   DB::raw("'Used' AS status")
-    //                 )
-    //                 ->wherebetween('asta_db.user_guest.expired_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-    //                 ->get();   
-    //    return view('pages.players.guest', compact('guests', 'status', 'datenow'));
-    // } 
-    else if($username != NULL && $status == 'used')
+    } else if($username != NULL && $status == 'used')
     {
         $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
                       ->select(

@@ -29,7 +29,6 @@ class Banking_TransactionController extends Controller
         $datenow = Carbon::now('GMT+7')->toDateString();
 
         $transaction_day = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
-                           ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
                            ->select(
                                'asta_db.transaction_day.date_created',
                                DB::raw('sum(asta_db.transaction_day.win) As totalWin'),
@@ -38,9 +37,7 @@ class Banking_TransactionController extends Controller
                                DB::raw('sum(asta_db.transaction_day.turnover) As totalTurnover')
                            );
         $Transaction = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
-                           ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
                            ->select(
-                               'asta_db.game.desc',
                                'asta_db.user.username',
                                'asta_db.transaction_day.date_created',
                                'asta_db.transaction_day.win',
@@ -73,7 +70,6 @@ class Banking_TransactionController extends Controller
             return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
         } else if($time == "all time")
         {
-
             if($minDate != NULL && $maxDate != NULL)
             {
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
@@ -92,6 +88,9 @@ class Banking_TransactionController extends Controller
                            ->get();
      
                 return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
+            } else if($minDate == NULL && $maxDate == NULL)
+            {
+                return back()->with('alert', 'Min Date And Max Date Must be Filled In');
             }
         } else {
             $validator = Validator::make($request->all(),[
@@ -109,9 +108,7 @@ class Banking_TransactionController extends Controller
     {
         $datenow = Carbon::now('GMT+7')->toDateString();
         $history = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
-                   ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
                    ->select(
-                    'asta_db.game.desc',
                     'asta_db.user.username',
                     'asta_db.transaction_day.date_created',
                     'asta_db.transaction_day.win',

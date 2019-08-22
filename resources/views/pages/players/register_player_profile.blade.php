@@ -43,13 +43,12 @@
 
                     <div class="col-sm-2 col-2 profile-pic">
                             @php
-
+                                // belum tau kedepannya
                                 // if (is_numeric($profile->avatar)) {
                                 //     $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
                                 // } else {
                                     $avatar = "/upload/avatars/".$profile->user_id.".png";
                                 // }
-
                             @endphp
                         <img src="{{ $avatar}}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
                          

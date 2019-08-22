@@ -75,9 +75,6 @@
 								@elseif($time == "week" || $time == "month")
 								<th class="th-sm">Date</th>
 								@endif
-								@if ($time == "today" || $time == "all time")
-								<th class="th-sm">Game</th>
-								@endif
 								<th class="th-sm">Win</th>
 								<th class="th-sm">Lose</th>
                 <th class="th-sm">Turn Over</th>
@@ -92,7 +89,6 @@
 							@foreach($history as $hst)
 							<tr>
                   <td>{{ $hst->username }}</td>
-									<td>{{ $hst->desc }}</td>
 									<td>{{ $hst->win }}</td>
 									<td>{{ $hst->lose }}</td>
 									<td>{{ $hst->turnover }}</td>
