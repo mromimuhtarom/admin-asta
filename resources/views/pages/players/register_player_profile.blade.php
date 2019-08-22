@@ -44,11 +44,11 @@
                     <div class="col-sm-2 col-2 profile-pic">
                             @php
 
-                                if (is_numeric($profile->avatar)) {
-                                    $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
-                                } else {
-                                    $avatar = "/upload/avatars/".$profile->avatar;
-                                }
+                                // if (is_numeric($profile->avatar)) {
+                                //     $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
+                                // } else {
+                                    $avatar = "/upload/avatars/".$profile->user_id.".png";
+                                // }
 
                             @endphp
                         <img src="{{ $avatar}}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
@@ -147,8 +147,8 @@
           <tbody>
             @foreach($device as $dvc)
             <tr>
-                <td>{{ $dvc->device}}</td>
-                <td>{{ $dvc->name }}</td>
+                <td>{{ $dvc->device_key}}</td>
+                <td>{{ $dvc->device_name }}</td>
                 @php
                 if($dvc->date == NULL)
                 {

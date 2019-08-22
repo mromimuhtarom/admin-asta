@@ -115,7 +115,6 @@ class PlayersController extends Controller
       $profile = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
                   ->join('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
                   ->select(
-                    'asta_db.user.avatar',
                     'asta_db.user.username',
                     'asta_db.user.email',
                     'asta_db.user.country_code',
