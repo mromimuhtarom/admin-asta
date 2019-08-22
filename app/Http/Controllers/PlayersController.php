@@ -250,9 +250,9 @@ class PlayersController extends Controller
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($username != NULL)
+        } else if($searhUser != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+          $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
