@@ -254,7 +254,7 @@
             <div class="dashboard-games">
                 <div class="game-title">
                     <h3>
-                        Total game played
+                        Total Game Played
                     </h3>
                 </div>
                 <div class="game-table">

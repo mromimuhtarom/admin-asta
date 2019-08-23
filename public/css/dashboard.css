@@ -199,7 +199,9 @@
     border: 1px solid black;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    text-align: center;
     border-bottom: none;
+    width: 70%;
 }
 
 .game-table {
@@ -211,6 +213,7 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 2%;
+    width:70%;
 }
 
 .game-table .game-table-detail {

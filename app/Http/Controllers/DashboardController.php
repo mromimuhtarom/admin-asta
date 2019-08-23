@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $rooms    =     DominoQTable::join('asta_db.dmq_room', 'dmq_room.room_id', '=', 'dmq_table.room_id')
                         ->select(DB::raw('count("asta_db.dmq_table.room_id") as room_id'), 'asta_db.dmq_room.name as harga')
                         ->groupBy('asta_db.dmq_table.room_id')->get();
-                    
+                        
         return view('pages.dashboard.home', compact('gameName', 'rooms'));
     }
 
