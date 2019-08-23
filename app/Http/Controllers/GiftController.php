@@ -95,7 +95,7 @@ class GiftController extends Controller
         }
         $id_new                 = $id_last + 1;
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('png');
+        $ekstensi_diperbolehkan = array('jpg');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
@@ -206,7 +206,7 @@ class GiftController extends Controller
                                   ->first();
         $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('png');
+        $ekstensi_diperbolehkan = array('jpg');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
@@ -312,7 +312,7 @@ class GiftController extends Controller
         if($id != '')
         {
             Gift::where('id', '=', $id)->delete();
-            $path = '../public/upload/gifts/'.$gifts->id.'.png';
+            $path = '../public/upload/gifts/'.$gifts->id.'.jpg';
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),

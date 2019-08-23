@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Game;
+use App\DominoQTable;
 
 class DashboardController extends Controller
 {
@@ -14,10 +16,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $gameName   = DB::table('game')->get();
-        $rooms      = DB::table('dmq_table')->join('dmq_room', 'dmq_room.roomid', '=', 'dmq_table.roomid')
-                        ->select(DB::raw('count("dmq_table.roomid") as room_id'), 'dmq_room.name as harga')
-                        ->groupBy('dmq_table.roomid')->get();
+        $gameName =     Game::all();
+        $rooms    =     DominoQTable::join('asta_db.dmq_room', 'dmq_room.room_id', '=', 'dmq_table.room_id')
+                        ->select(DB::raw('count("asta_db.dmq_table.room_id") as room_id'), 'asta_db.dmq_room.name as harga')
+                        ->groupBy('asta_db.dmq_table.room_id')->get();
                     
         return view('pages.dashboard.home', compact('gameName', 'rooms'));
     }
