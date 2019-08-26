@@ -63,7 +63,6 @@ class Authenticated
                 if($cahce_op)
                 {
                     Db::table('asta_db.operator_active')->update([
-                        'op_id'       => $op,
                         'date_update' => Carbon::now('GMT+7'),
                         'ip'          => request()->ip()
                     ]);
