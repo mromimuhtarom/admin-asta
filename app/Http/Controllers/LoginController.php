@@ -44,9 +44,9 @@ class LoginController extends Controller
             Session::put('fullname',Auth::user()->fullname);
             Session::put('roleId',Auth::user()->role_id);
             Session::put('login1',TRUE);
-            $username = $request->username;
-            $password = $request->password;
-            $login = User::select('op_id', 'username')->where('username', '=', $username)->first();
+            $username   = $request->username;
+            $password   = $request->password;
+            $login      = User::select('op_id', 'username')->where('username', '=', $username)->first();
             $session_id = session()->getId();
             Cache::put('op_key', $login->op_id);
             Cache::put('session_id', $session_id);
@@ -93,7 +93,6 @@ class LoginController extends Controller
     {
         $op_idcache   = Cache::get('op_key');
         $session_id   = Cache::get('session_id');
-        $op_idsession = Session::get('userId');
         $adminactive  = OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->first();
         if($adminactive)
         {

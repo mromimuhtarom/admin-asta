@@ -263,7 +263,7 @@
       @endphp
 
     },
-    responsive: true
+    responsive: false
   });
 
 </script>  

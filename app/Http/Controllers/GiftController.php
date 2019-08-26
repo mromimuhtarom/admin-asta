@@ -15,22 +15,6 @@ use App\ConfigText;
 
 class GiftController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function index()
-    // {
-    //     $menu  = MenuClass::menuName('Daily Gift');
-    //     return view('pages.daily_gift.daily_gift', compact('menu'));
-    // }
-
-        /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $gifts        = Gift::select(
@@ -64,16 +48,6 @@ class GiftController extends Controller
         $endis = explode(",", $value);
 
         return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -166,28 +140,6 @@ class GiftController extends Controller
             return redirect()->route('Table_Gift')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

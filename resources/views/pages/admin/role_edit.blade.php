@@ -184,7 +184,7 @@
             });
                 
           },
-            responsive: true
+            responsive: false
           });
     </script>
 @endif

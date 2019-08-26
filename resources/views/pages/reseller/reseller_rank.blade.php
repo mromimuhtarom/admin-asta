@@ -256,7 +256,7 @@ table = $('table.table').dataTable({
       @endphp
 
   },
-  responsive: true
+  responsive: false
 });
 
 </script>

@@ -131,7 +131,7 @@
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
 		},
-		responsive: true
+		responsive: false
 	});
 </script>
 @endif

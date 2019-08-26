@@ -17,8 +17,20 @@ class ItemsCash extends Model
         '3' => 'Goods'
     ];
 
+    public $shopType = [
+        '1' =>  'User',
+        '2' =>  'Reseller'
+    ];
+
     public function strItemType()
     {
         return $this->itemTypes[$this->item_type];
     }
+
+    public function strShopType()
+    {
+        return $this->shopType[$this->shop_type];
+    }
+
+    
 }

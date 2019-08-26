@@ -27,17 +27,6 @@ class RoleController extends Controller
         $roles    = Role::select('role_id', 'name')->get();
         return view('pages.admin.role_admin', compact('roles', 'menu', 'mainmenu'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -84,28 +73,6 @@ class RoleController extends Controller
               return redirect()->route('Role_Admin')->with('success','Data Insert Successfull');  
         }
         return redirect()->route('Role_Admin')->with('alert','Role Name is Null');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     public function menu($role)

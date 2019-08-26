@@ -118,39 +118,6 @@
             ×
           </button>
         </div>
-        {{-- <form action="{{ route('Tournament-create') }}" method="post">
-          @csrf
-          <div class="modal-body">
-
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="titleTournament" placeholder="Title Tournamen" required>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-10">
-                    <select class="form-control" name="category">
-                      <option>Select Category</option>
-                      <option value="Pot Limit">Pot Limit</option>
-                      <option value="No Limit">No Limit</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="date" class="form-control" name="startTime" placeholder="Start TIme" required>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-default" data-dismiss="modal">
-              Cancel
-            </button>
-            <button type="submit" class="btn sa-btn-primary">
-              Save
-            </button>
-          </div>
-        </form> --}}
       </div>
     </div>
   </div>

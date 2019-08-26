@@ -60,6 +60,7 @@ class Authenticated
                     'ip'          => request()->ip()
                 ]);
             } else {
+                dd($cache_op);
                 if($cahce_op)
                 {
                     OperatorActive::update([

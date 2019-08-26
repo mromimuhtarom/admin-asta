@@ -23,20 +23,20 @@ class GameSettingController extends Controller
     {
         // ****Asta Poker ***//
         $tpk   = TpkConfig::all();
-        // $betpointtpk = TpkConfig::wheere('id', '=', 2)->first();
         // ****End Asta Poker ****//
+
         // ****Big Two ****//
         $bgt   = BgtConfig::all();
-        // $betpointbgt = BgtConfig::wheere('id', '=', 2)->first();
         // ****End Big Two ****//
+
         // ****Domino Susun ****//
         $dms   = DmsConfig::all();
-        // $betpointdms = DmsConfig::wheere('id', '=', 2)->first();
         // ****End Domino Susun ****//
+
         // ****Domino QQ ****//
         $dmq   = DmqConfig::all();
-        // $betpointdmq = DmqConfig::wheere('id', '=', 2)->first();
         // ****End Domino QQ ****//
+        
         $menu     = MenuClass::menuName('Game Setting');
         $mainmenu = MenuClass::menuName('Games');
         return view('pages.game_asta.game_setting', compact('tpk', 'bgt', 'dms', 'dmq', 'mainmenu', 'menu'));

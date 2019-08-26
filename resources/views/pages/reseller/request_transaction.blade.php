@@ -238,7 +238,7 @@
       // });
      
     },
-    responsive: true
+    responsive: false
   });
 </script>
 @endsection

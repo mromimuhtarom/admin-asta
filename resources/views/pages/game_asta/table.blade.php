@@ -80,7 +80,7 @@
   
         </div>
         
-        <div class="custom-scroll table-responsive" style="height:800px;">
+        <div class="custom-scroll table-responsive" style="height:800px; margin-right:1%;">
           
           <div class="table-outer">
             <table class="table table-bordered">
@@ -306,7 +306,7 @@
 
           
         },
-        responsive: true
+        responsive: false
       });
     
     </script>

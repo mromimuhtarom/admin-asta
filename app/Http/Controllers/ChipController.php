@@ -22,7 +22,7 @@ class ChipController extends Controller
     {
       $datenow = Carbon::now('GMT+7');
       $game    = Game::all();
-        return view('pages.players.chip_player', compact('datenow', 'game'));
+      return view('pages.players.chip_player', compact('datenow', 'game'));
     }
 
     /**

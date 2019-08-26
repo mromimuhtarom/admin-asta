@@ -43,21 +43,10 @@ class GoldStoreController extends Controller
                     )
                     ->where('id', '=', 4)
                     ->first();
-        $value    = str_replace(':', ',', $active->value);
-        $endis    = explode(",", $value);
-
+        $value     = str_replace(':', ',', $active->value);
+        $endis     = explode(",", $value);
 
         return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -102,17 +91,6 @@ class GoldStoreController extends Controller
         ]);
 
         return redirect()->route('Gold_Store')->with('success','Data Added');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

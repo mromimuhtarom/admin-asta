@@ -695,7 +695,7 @@ public function detailTransaction($month, $year)
             'name'       => $title,
             'item_get'   => $goldAwarded,
             'price'      => $priceCash,
-            'shop_type'  => 4,
+            'shop_type'  => 2,
             'item_type'  => $itemType,
             'google_key' => $googleKey,
         ]);

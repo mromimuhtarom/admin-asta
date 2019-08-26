@@ -27,16 +27,6 @@ class EmailNotificationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -60,9 +50,6 @@ class EmailNotificationController extends Controller
             {           
                 if ($file->move(public_path('../public/upload/EmailNotification'), $nama_file_unik))
                 {
-                    // Gift::where('id', '=', $pk)->update([
-                    //     'imageUrl' => $nama_file_unik
-                    // ]);
                     $validator = Validator::make($request->all(),[
                         'subject' => 'required',
                         'message' => 'required',

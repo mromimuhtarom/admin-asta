@@ -230,7 +230,7 @@
           }
         });
       },
-      responsive: true
+      responsive: false
     });
   </script>  
   <!-- End Script -->
