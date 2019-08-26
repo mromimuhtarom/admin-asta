@@ -89,6 +89,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
+                        <th>Round ID</th>
                         <th>Username</th>
                         <th>Playing Game</th>
                         <th>Table</th>
@@ -104,6 +105,7 @@
                 <tbody>
                         @foreach ($player_history as $history)
                         <tr>
+                          <td>{{ $history->round_id }}</td>
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
                           <td>{{ $history->tablename }}</td>
