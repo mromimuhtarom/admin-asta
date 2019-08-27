@@ -233,6 +233,15 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
+        Route::group(['prefix' => 'Emoticon'], function() {
+            Route::middleware('page_denied:Emoticon')->group(function(){
+                Route::get('Emoticon-view', 'EmoticonController@index')->name('Emoticon');
+                Route::post('Emoticon-update', 'EmoticonController@update')->name('Emoticon-update');
+                Route::post('Emoticon-UpdateImage', 'EmoticonController@updateimage')->name('Emoticon-updateimage');
+                Route::post('Emoticon-create', 'EmoticonController@store')->name('Emoticon-create');
+                Route::delete('Emoticon-delete', 'EmoticonController@destroy')->name('Emoticon-delete');
+            });
+        });
 
     });
 
