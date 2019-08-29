@@ -46,6 +46,7 @@ class ReportStoreController extends Controller
                                     'asta_db.store_transaction_hist.item_name', 
                                     'asta_db.store_transaction_hist.quantity', 
                                     'asta_db.store_transaction_hist.item_price', 
+                                    'asta_db.store_transaction_hist.datetime',
                                     'asta_db.user.username'
                                 )
                                 ->where('asta_db.user.user_type', '=', 1)
