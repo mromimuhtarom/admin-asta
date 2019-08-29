@@ -57,6 +57,19 @@ function strMaintenanceOnOff($val) {
   }
 }
 
+function strStatusApdec($val) {
+  if($val == 0)
+  {
+    return 'Decline';
+  } else if($val == 1)
+  {
+    return 'Request';
+  } else if($val == 2)
+  {
+    return 'Decline';
+  }
+}
+
 function strYesNo ($val) {
 	if($val == 0) {
 		return 'No';

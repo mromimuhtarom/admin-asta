@@ -48,7 +48,8 @@ class ReportStoreController extends Controller
                                     'asta_db.store_transaction_hist.item_price', 
                                     'asta_db.user.username'
                                 )
-                                ->where('asta_db.store_transaction_hist.user_type', '=', 1);
+                                ->where('asta_db.user.user_type', '=', 1)
+                                ->orWhere('asta_db.user.user_type', '=', 2);
                 if($username != NULL && $minDate != NULL && $maxDate != NULL)
                 {
                     $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')

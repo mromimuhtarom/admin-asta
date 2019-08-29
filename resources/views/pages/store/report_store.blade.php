@@ -94,7 +94,7 @@
                         <td>{{ $tr->quantity }}</td>
                         <td>{{ $tr->item_price }}</td>
                         {{-- <td></td> --}}
-                        <td>{{ $tr->strStatus() }}</td>
+                        <td>{{ strStatusApdec($tr->status) }}</td>
                         <td>{{ $tr->datetime }}</td>
                     </tr>
                     @endforeach
