@@ -24,9 +24,10 @@ class PlayersController extends Controller
   // ----------- Index Active Player ----------- //
     public function indexActive()
     {
-        $online = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
+        $dmq = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
                   ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
                   ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
+                  ->join('asta_db.dmq_table', 'asta_db.user_active.table_id', '=', 'asta_db.dmq_table.table_id')
                   ->select(
                     'asta_db.user.username', 
                     'asta_db.user_stat.rank_id', 
@@ -34,9 +35,61 @@ class PlayersController extends Controller
                     'asta_db.user_stat.gold',
                     'asta_db.user.user_type',
                     'asta_db.game.name as game_name', 
-                    'asta_db.user_active.date_login'
+                    'asta_db.user_active.date_login',
+                    'asta_db.dmq_table.name as tablename'
+                  )
+                  ->where('asta_db.user.user_type', '!=', '3');
+        $dms = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
+                  ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
+                  ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
+                  ->join('asta_db.dms_table', 'asta_db.user_active.table_id', '=', 'asta_db.dms_table.table_id')
+                  ->select(
+                    'asta_db.user.username', 
+                    'asta_db.user_stat.rank_id', 
+                    'asta_db.user_stat.chip', 
+                    'asta_db.user_stat.gold',
+                    'asta_db.user.user_type',
+                    'asta_db.game.name as game_name', 
+                    'asta_db.user_active.date_login',
+                    'asta_db.dms_table.name as tablename'
+                  )
+                  ->where('asta_db.user.user_type', '!=', '3');
+
+          $tpk = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
+                  ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
+                  ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
+                  ->join('asta_db.tpk_table', 'asta_db.user_active.table_id', '=', 'asta_db.tpk_table.table_id')
+                  ->select(
+                    'asta_db.user.username', 
+                    'asta_db.user_stat.rank_id', 
+                    'asta_db.user_stat.chip', 
+                    'asta_db.user_stat.gold',
+                    'asta_db.user.user_type',
+                    'asta_db.game.name as game_name', 
+                    'asta_db.user_active.date_login',
+                    'asta_db.tpk_table.name as tablename'
+                  )
+                  ->where('asta_db.user.user_type', '!=', '3');
+
+
+        $online = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
+                  ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
+                  ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
+                  ->join('asta_db.bgt_table', 'asta_db.user_active.table_id', '=', 'asta_db.bgt_table.table_id')
+                  ->select(
+                    'asta_db.user.username', 
+                    'asta_db.user_stat.rank_id', 
+                    'asta_db.user_stat.chip', 
+                    'asta_db.user_stat.gold',
+                    'asta_db.user.user_type',
+                    'asta_db.game.name as game_name', 
+                    'asta_db.user_active.date_login',
+                    'asta_db.bgt_table.name as tablename'
                   )
                   ->where('asta_db.user.user_type', '!=', '3')
+                  ->union($dmq)
+                  ->union($dms)
+                  ->union($tpk)
                   ->get();
         return view('pages.players.active_player', compact('online'));
     }

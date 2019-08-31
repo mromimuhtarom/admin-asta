@@ -68,7 +68,7 @@ input[type="text"] {
       margin-top: 10%;
       position: relative;
   }
-  .password i {
+  .password .lock {
       position: absolute;
       left: 0;
       top: 8px;

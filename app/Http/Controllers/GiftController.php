@@ -158,7 +158,7 @@ class GiftController extends Controller
                                   ->first();
         $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('jpg');
+        $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
         $x                      = explode('.', $nama);
         $ekstensi               = strtolower(end($x));
@@ -173,6 +173,48 @@ class GiftController extends Controller
             {
                 if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
                 {
+                    // Menetapkan nama thumbnail
+                    $folder = "../public/upload/gifts/";
+                    $thumbnail = $folder."wtm_".$nama_file_unik;
+                    $actual = $folder.$nama_file_unik;
+                    $namagbr="wtm_".$nama_file_unik;
+
+                    // Memuat gambar utama
+                    $uploadgambar=$folder.$nama_file_unik;
+                    $source = imagecreatefrompng($uploadgambar);
+
+                    // Memuat gambar watermark
+                    $watermark = imagecreatefrompng('../public/upload/gifts/33.png');
+
+                    // mendapatkan lebar dan tinggi dari gambar watermark
+                    $water_width = imagesx($watermark);
+                    $water_height = imagesy($watermark);
+
+                    // mendapatkan lebar dan tinggi dari gambar utama
+                    $main_width = imagesx($source);
+                    $main_height = imagesy($source);
+
+                    // Menetapkan posisi gambar watermark
+                    $dime_x = 5;
+                    $dime_y = 5;
+                    // menyalin kedua gambar
+                    // imagecopy($source, $watermark, $dime_x, $dime_y, 0, 0, $water_width, $water_height);
+                    imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
+                    // imagecopymerge(
+                    //     $source,
+                    //     $watermark,
+                    //     $dime_x, 
+                    //     $dime_y,
+                    //     0,
+                    //     0,
+                    //     $water_width,
+                    //     $water_height
+                    // );
+
+                    // pemrosesan akhir, Membuat gambar baru dengan nama file baru
+                    $black = imagecolorallocate($source, 0, 0, 0);
+                    imagecolortransparent($source, $black);
+                    imagepng($source, $thumbnail);
                     Gift::where('id', '=', $pk)->update([
                         'img_ver' =>  $imageversion 
                     ]);

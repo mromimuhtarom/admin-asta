@@ -44,6 +44,7 @@
                   <th data-hide="phone">Gold Coins</th>
                   <th data-hide="phone">From</th>
                   <th data-hide="phone">Playing Games</th>
+                  <th data-hide="phone">Table Name</th>
                   <th data-hide="phone,tablet">timestamp</th>
                 </tr>
               </thead>
@@ -56,6 +57,7 @@
                     <td>{{ $ol->gold }}</td>
                     <td>{{ $ol->strUser_type() }}</td>
                     <td>{{ $ol->game_name }}</td>
+                    <td>{{ $ol->tablename}}</td>
                     <td>{{ $ol->date_login}}</td>
                 </tr>
                 @endforeach
