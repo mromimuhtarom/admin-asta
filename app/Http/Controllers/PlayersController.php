@@ -39,6 +39,7 @@ class PlayersController extends Controller
                     'asta_db.user_active.table_id'
                   )
                   ->where('asta_db.user.user_type', '!=', '3')
+                  ->where('asta_db.user_active.table_id', '!=', 0)
                   ->get();
         return view('pages.players.active_player', compact('online'));
     }
