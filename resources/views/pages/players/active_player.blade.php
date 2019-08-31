@@ -57,7 +57,31 @@
                     <td>{{ $ol->gold }}</td>
                     <td>{{ $ol->strUser_type() }}</td>
                     <td>{{ $ol->game_name }}</td>
-                    <td>{{ $ol->tablename}}</td>
+                    @php
+                    $tpktable = App\TpkTable::where('table_id', '=', $ol->table_id)->select('name as tablename')->first();
+                    $bgttable = App\BigTwoTable::where('table_id', '=', $ol->table_id)->select('name as tablename')->first();
+                    $dmstable = App\DominoSusunTable::where('table_id', '=', $ol->table_id)->select('name as tablename')->first();
+                    $dmqtable = App\DominoQTable::where('table_id', '=', $ol->table_id)->select('name as tablename')->first();
+                    @endphp
+                    @if ($ol->game_id == 101)
+
+                    <td>{{ $tpktable['tablename'] }}</td>
+
+                    @elseif($ol->game_id == 102) 
+
+                    <td>{{ $bgttable['tablename'] }}</td>
+
+                    @elseif($ol->game_id == 103)
+
+                    <td>{{ $dmstable['tablename'] }}</td>
+
+                    @elseif($ol->game_id == 104)   
+
+                    <td>{{ $dmqtable['tablename'] }}</td>
+                    
+                    @else 
+                    <td>Null</td>
+                    @endif
                     <td>{{ $ol->date_login}}</td>
                 </tr>
                 @endforeach

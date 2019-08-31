@@ -19,4 +19,28 @@ class PlayerActive extends Model
     {
         return $this->userType[$this->user_type];
     }
+
+    public function tabledmq() {
+
+        return $this->hasOne(DominoQTable::class, 'table_id', 'table_id');
+
+    } 
+
+    public function tabledms() {
+
+        return $this->hasOne(DominoSusunTable::class, 'table_id', 'table_id');
+
+    } 
+    
+    public function tabletpk() {
+
+        return $this->hasOne(TpkTable::class, 'table_id', 'table_id');
+
+    } 
+
+    public function tableBigTwo() {
+
+        return $this->hasOne(BigTwoTable::class, 'table_id', 'table_id');
+
+    } 
 }
