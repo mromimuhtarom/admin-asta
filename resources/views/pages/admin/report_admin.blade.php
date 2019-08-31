@@ -34,9 +34,8 @@
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
                             <option value="">Choose Log Type</option>
-                            @foreach($action as $ac)
-                            <option value="{{$ac->id}}">{{ $ac->action }}</option>
-                            @endforeach
+                            <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} Admin</option>
+                            <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} Admin</option>
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">

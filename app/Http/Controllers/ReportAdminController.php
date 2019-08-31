@@ -8,6 +8,7 @@ use App\Action;
 use DB;
 use Carbon\Carbon;
 use  Validator;
+use App\ConfigText;
 
 class ReportAdminController extends Controller
 {
@@ -22,7 +23,14 @@ class ReportAdminController extends Controller
                   ->orwhere('id', '=', 8)
                   ->get();
         $datenow = Carbon::now('GMT+7');
-        return view('pages.admin.report_admin', compact('action', 'datenow'));
+        $config_text = ConfigText::select(
+                        'value'
+                       )
+                       ->where('id', '=', 13)
+                       ->first();
+        $replace = str_replace(':', ',', $config_text->value);
+        $logonlinetype = explode(",", $replace);
+        return view('pages.admin.report_admin', compact('action', 'datenow', 'logonlinetype'));
     }
 
     public function search(Request $request)
@@ -39,6 +47,14 @@ class ReportAdminController extends Controller
                      ->where('id', '=', 7)
                      ->orwhere('id', '=', 8)
                      ->get();
+
+        $config_text = ConfigText::select(
+                        'value'
+                       )
+                       ->where('id', '=', 13)
+                       ->first();
+        $replace = str_replace(':', ',', $config_text->value);
+        $logonlinetype = explode(",", $replace);
 
         $logOnline = LogOnline::join('asta_db.operator', 'asta_db.operator.op_id', '=', 'log_online.user_id')
                      ->join('asta_db.action', 'asta_db.action.id', '=', 'asta_db.log_online.action_id')
@@ -69,7 +85,7 @@ class ReportAdminController extends Controller
                          ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($player != NULL && $minDate != NULL && $logtype != NULL )
         {
             $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
@@ -78,7 +94,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($player != NULL && $maxDate != NULL && $logtype != NULL)
         {
             $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
@@ -87,7 +103,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($player != NULL && $logtype != NULL) 
         {
             $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
@@ -95,7 +111,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if ($minDate != NULL && $logtype != NULL)
         {
             $log_login = $logOnline->where('asta_db.log_online.datetime', '>=', $minDate)
@@ -103,7 +119,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($maxDate != NULL && $logtype != NULL)
         {
             $log_login = $logOnline->where('asta_db.log_online.datetime', '<=', $maxDate)
@@ -111,7 +127,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         }
         else if($player != NULL && $minDate != NULL && $maxDate != NULL)
         {
@@ -121,7 +137,7 @@ class ReportAdminController extends Controller
                          ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if ($minDate != NULL && $maxDate != NULL)
         {
             
@@ -129,7 +145,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
         
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($player != NULL && $minDate != NULL)
         {
             $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
@@ -137,7 +153,7 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if ($player != NULL && $maxDate != NULL)
         {
             $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
@@ -145,35 +161,35 @@ class ReportAdminController extends Controller
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($minDate != NULL)
         {
             $log_login = $logOnline->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($maxDate != NULL)
         {
             $log_login = $logOnline->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
 
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if ($logtype != NULL)
         {
             $log_login = $logOnline->where('asta_db.log_online.action_id', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
             
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else if($player != NULL)
         {
             $log_login = $logOnline->where('asta_db.operator.username', 'Like', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 1)
                          ->get();
             
-            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action'));
+            return view('pages.admin.report_admin', compact('log_login', 'datenow', 'action', 'logonlinetype'));
         } else {
             return redirect()->route('Report_Players');
         }
