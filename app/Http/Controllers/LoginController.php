@@ -52,7 +52,7 @@ class LoginController extends Controller
             Cache::put('session_id', $session_id);
             LogOnline::create([
                 'user_id'   => $login->op_id,
-                'action_id' => 7,
+                'action_id' => 1,
                 'desc'      => 'user '.$login->username.' Login in web Admin',
                 'datetime'  => Carbon::now('GMT+7'),
                 'ip'        => request()->ip(),
@@ -108,7 +108,7 @@ class LoginController extends Controller
                 OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
                 LogOnline::create([
                     'user_id'   =>  $logout->op_id,
-                    'action_id' =>  8,
+                    'action_id' =>  2,
                     'desc'      =>  'user '.$logout->username.' Logout in web Admin',
                     'datetime'  => Carbon::now('GMT+7'),
                     'ip'        => request()->ip(),

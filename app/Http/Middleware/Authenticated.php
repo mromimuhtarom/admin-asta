@@ -71,7 +71,7 @@ class Authenticated
                     {
                         LogOnline::create([
                             'user_id'   => $op_idcache,
-                            'action_id' => 8,
+                            'action_id' => 2,
                             'desc'      => 'user '.$operator->username.' Logout in web Admin',
                             'datetime'  => Carbon::now('GMT+7'),
                             'ip'        => request()->ip(),
@@ -90,7 +90,7 @@ class Authenticated
         {
             LogOnline::create([
                 'user_id'   =>  $logout->op_id,
-                'action_id' =>  8,
+                'action_id' =>  2,
                 'desc'      =>  'user '.$logout->username.' Logout in web Admin',
                 'datetime'  => Carbon::now('GMT+7'),
                 'ip'        => request()->ip(),
