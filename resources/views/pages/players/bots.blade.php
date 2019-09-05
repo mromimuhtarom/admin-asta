@@ -72,6 +72,7 @@
                 @if($menu && $mainmenu)
                 <th></th>
                 @endif
+                <th class="th-sm">Bot ID</th>
                 <th class="th-sm">Username</th>
                 <th class="th-sm">Bank Account</th>
                 <th class="th-sm">Rank</th>
@@ -87,6 +88,7 @@
               @if($menu && $mainmenu)
               <tr>
                   <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $bot->user_id }}"></td>
+                  <td>{{ $bot->user_id }}</td>
                   <td>{{ $bot->username }}</td>
                   <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $bot->user_id }}" data-type="text" data-url="{{ route('Bots-update') }}">{{ $bot->chip }}</td>
                   <td>{{ $bot->rank_id}}</td>
@@ -104,6 +106,7 @@
               </tr>
               @else 
               <tr>
+                  <td>{{ $bot->user_id }}</td>
                   <td>{{ $bot->username }}</td>
                   <td>{{ $bot->chip }}</td>
                   <td>{{ $bot->rank_id}}</td>

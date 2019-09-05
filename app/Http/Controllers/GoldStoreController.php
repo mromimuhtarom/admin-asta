@@ -73,24 +73,59 @@ class GoldStoreController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $gold = ItemsCash::create([
-            'name'       => $title,
-            'item_get'   => $goldAwarded,
-            'price'      => $priceCash,
-            'shop_type'  => 1,
-            'item_type'  => 2,
-            'status'     => 0,
-            'google_key' => $googleKey,
-        ]);
 
-        Log::create([
-            'op_id' => Session::get('userId'),
-            'action_id' => '3',
-            'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Gold Store with title '. $gold->name
-        ]);
+          $id = ItemsCash::select('item_id')
+                ->orderBy('item_id', 'desc')
+                ->first();
+          if($id === NULL)
+          {
+              $id_lst = 0;
+          } else {
+              $id_lst = $id->item_id;
+          }
 
-        return redirect()->route('Gold_Store')->with('success','Data Added');
+          $id_new                 = $id_lst + 1;
+          $file                   = $request->file('file');
+          $ekstensi_diperbolehkan = array('png');
+          $nama                   = $_FILES['file']['name'];
+          $x                      = explode('.', $nama);
+          $ekstensi               = strtolower(end($x));
+          $ukuran                 = $_FILES['file']['size'];
+          $nama_file_unik         = $id_new.'.'.$ekstensi;
+          if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+          {
+              if($ukuran < 1044070)
+              {
+                  if($file->move(public_path('../public/upload/Gold'), $nama_file_unik))
+                  {
+                    $gold = ItemsCash::create([
+                        'name'       => $title,
+                        'item_get'   => $goldAwarded,
+                        'price'      => $priceCash,
+                        'shop_type'  => 1,
+                        'item_type'  => 2,
+                        'status'     => 0,
+                        'google_key' => $googleKey,
+                    ]);
+            
+                    Log::create([
+                        'op_id' => Session::get('userId'),
+                        'action_id' => '3',
+                        'datetime'  => Carbon::now('GMT+7'),
+                        'desc'      => 'Create new in menu Gold Store with title '. $gold->name
+                    ]);
+            
+                    return redirect()->route('Gold_Store')->with('success','Data Added');
+                  } else 
+                  {
+                      return redirect()->route('Gold_Store')->with('alert','Upload Image Failed');
+                  }
+              } else {
+                return redirect()->route('Gold_Store')->with('alert',"Size Image it's to Big");
+              }
+          } else {
+            return redirect()->route('Gold_Store')->with('alert','Image must be in png');
+          }
     }
 
     /**
@@ -142,6 +177,41 @@ class GoldStoreController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Edit '.$name.' in menu Gold Store with ID '.$pk.' to '. $value
         ]);
+    }
+
+    public function updateImage(Request $request)
+    {
+        $pk                     = $request->pk;
+        $file                   = $request->file('file');
+        $ekstensi_diperbolehkan = array('png');
+        $nama                   = $_FILES['file']['name'];
+        $x                      = explode('.', $nama);
+        $ekstensi               = strtolower(end($x));
+        $ukuran                 = $_FILES['file']['size'];
+        $nama_file_unik         = $pk.'.'.$ekstensi;
+
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        {
+            if($ukuran < 1044070)
+            {
+                if($file->move(public_path('../public/upload/Gold'), $nama_file_unik))
+                {
+                    Log::create([
+                        'op_id'     => Session::get('userId'),
+                        'action_id' => '2',
+                        'datetime'  => Carbon::now('GMT+7'),
+                        'desc'      => 'Edit Image In menu Gold Store with ID '.$pk.' to '.$nama_file_unik
+                    ]);
+                    return redirect()->route('Gold_Store')->with('success','Update Image Successfull');
+                } else {
+                    return redirect()->route('Gold_Store')->with('alert','Upload Image Failed');
+                }
+            } else  {
+                return redirect()->route('Gold_Store')->with('alert','Size Image is to big');
+            }
+        } else  {
+            return redirect()->route('Gold_Store')->with('alert','Image must be in png format');
+        }
     }
 
     /**

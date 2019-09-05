@@ -11,6 +11,22 @@
 
 @section('content')
 
+<link rel="stylesheet" href="/css/imageinsertedit.css">
+<script>
+    function readURL(input) {
+       if (input.files && input.files[0]) {
+           var reader = new FileReader();
+  
+           reader.onload = function (e) {
+               $('#blah')
+                   .attr('src', e.target.result);
+           };
+  
+           reader.readAsDataURL(input.files[0]);
+       }
+   }
+</script>
+
 @if (count($errors) > 0)
 <div class="error-val">
   <div class="alert alert-danger">
@@ -69,6 +85,7 @@
                 @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
+                <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Gold Awarded</th>
                 <th class="th-sm">Price Cash</th>
@@ -86,6 +103,25 @@
               @if($menu && $mainmenu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
+                <td>
+                    <div class="media-container">
+                        <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
+                          {{  csrf_field() }}
+                          <span class="media-overlay med-ovlay{{ $gold->item_id }}">
+                            <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                            <input type="file" name="file" id="media-input" class="upload{{ $gold->item_id }}" accept="image/*">
+                            <i class="fa fa-edit media-icon"></i>
+                          </span>
+                          <figure class="media-object">
+                            <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png" style="  display: block;margin-left: auto;margin-right: auto;">
+                          </figure>
+                        </div>
+                        <div class="media-control" align="center" style="margin-top:-1%">
+                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
+                        </form>
+                          <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
+                    </div>
+                </td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
                 <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->item_get }}</a></td>
                 <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
@@ -105,6 +141,13 @@
               </tr>
               @else 
               <tr>
+                <td>
+                      <div class="media-container">
+                        <figure class="media-object">
+                          <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                        </figure>
+                      </div>
+                </td>
                 <td>{{ $gold->name }}</td>
                 <td>{{ $gold->item_get }}</td>
                 <td>{{ $gold->price }}</td>
@@ -136,9 +179,15 @@
           <i class="fa fa-remove"></i>
         </button>
       </div>
-      <form action="{{ route('GoldStore-create') }}" method="post">
+      <form action="{{ route('GoldStore-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
+          <div class="form-group" align="center">
+            <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+              <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+            </div><br>
+             <input type='file' name="file" onchange="readURL(this);"/><br><br>
+          </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
@@ -196,6 +245,19 @@
 
 <!-- script -->
 <script>
+  // preview image
+  function readURL(input) {
+    if(input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#imgPreview').attr('src', e.target.result);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  // end preview image 
   $(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
@@ -290,6 +352,37 @@
             echo'var test = $("#userid").val(id);';
           echo'});';
         }
+      @endphp
+
+
+      @php
+      foreach($getGolds as $gold) {
+        echo'$(".save-profile'.$gold->item_id.'").hide(0);';
+        echo'$(".med-ovlay'.$gold->item_id.'").hide(0);';
+
+        echo'$(".edit-profile'.$gold->item_id.'").on("click", function() {';
+          echo'$(this).hide(0);';
+          echo'$(".med-ovlay'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".save-profile'.$gold->item_id.'").fadeIn(300);';
+        echo'});';
+        echo'$(".save-profile'.$gold->item_id.'").on("click", function() {';
+          echo'$(this).hide(0);';
+          echo'$(".med-ovlay'.$gold->item_id.'").fadeOut(300);';
+          echo'$(".edit-profile'.$gold->item_id.'").fadeIn(300);';
+        echo'});';
+
+        echo'$(".upload'.$gold->item_id.'").change(function() {';
+          echo'if (this.files && this.files[0]) {';
+            echo'var reader = new FileReader();';
+		
+            echo'reader.onload = function(e) {';
+              echo'$(".imgupload'.$gold->item_id.'").attr("src", e.target.result);';
+            echo'};';
+		
+            echo'reader.readAsDataURL(this.files[0]);';
+          echo'}';
+        echo'});';
+      }
       @endphp
     },
     responsive: false

@@ -122,7 +122,7 @@ class GoodsStoreController extends Controller
                 }
                 else
                 {
-                    return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
+                    return redirect()->route('Goods_Store')->with('alert','Upload Image Failed');
                     // echo "Gagal Upload File";
                 }
             }

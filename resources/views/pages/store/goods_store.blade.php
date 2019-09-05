@@ -10,62 +10,7 @@
 
 @section('content')
 
-<style>
-  .media-container {
-    position: relative;
-    display: inline-block;
-    margin: auto;
-    border-radius: 10px;
-    border: 1px solid black;
-    overflow: hidden;
-    width: 200px;
-    height: 100px;
-    /* vertical-align: middle */
-  }
-    .media-overlay {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(180, 180, 180, 0.6);
-    }
-      #media-input {
-        display: block;
-        width: 100%;
-        height: 100%;
-        line-height: 100%;
-        opacity: 0;
-        position: relative;
-        z-index: 9;
-      }
-      .media-icon {
-        /* display: sticky; */
-        transform: translate(-1%,-90%);
-        color: #ffffff;
-        font-size: 2em;
-        height: 100%;
-        line-height: 100px;
-        position: absolute;
-        z-index: 0;
-        width: 100%;
-        text-align: center;
-      }
-    .media-object {}
-      .img-object {
-        border-radius: 10px;
-        width: auto;
-        height: 100px;
-        display: block;
-      }
-  
-  .media-control {
-    margin-top: 30px;
-  }
-    .edit-profile {}
-    .save-profile {}
-  
-</style>
+<link rel="stylesheet" href="/css/imageinsertedit.css">
 <script>
   function readURL(input) {
      if (input.files && input.files[0]) {
@@ -241,8 +186,8 @@
           <div class="form-group" align="center">
             <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
               <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
-            </div>
-              <div style="padding-left:18%;"><input type='file' name="file" onchange="readURL(this);"/></div><br><br>
+            </div><br>
+             <input type='file' name="file" onchange="readURL(this);"/><br><br>
           </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">

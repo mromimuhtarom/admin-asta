@@ -9,6 +9,21 @@
 
 
 @section('content')
+<link rel="stylesheet" href="/css/imageinsertedit.css">
+<script>
+    function readURL(input) {
+       if (input.files && input.files[0]) {
+           var reader = new FileReader();
+  
+           reader.onload = function (e) {
+               $('#blah')
+                   .attr('src', e.target.result);
+           };
+  
+           reader.readAsDataURL(input.files[0]);
+       }
+   }
+</script>
 
 @if (count($errors) > 0)
 <div class="error-val">
@@ -68,6 +83,7 @@
                 @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
+                <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Category</th>
                 <th class="th-sm">Chip Awarded</th>
@@ -83,6 +99,25 @@
                 @if($menu && $mainmenu)
                   <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->item_id }}"></td>
+                    <td>
+                        <div class="media-container">
+                            <form method="POST" action="{{ route('ChipStore-updateimage') }}" enctype="multipart/form-data">
+                              {{  csrf_field() }}
+                              <span class="media-overlay med-ovlay{{ $itm->item_id }}">
+                                <input type="hidden" name="pk" value="{{ $itm->item_id }}">
+                                <input type="file" name="file" id="media-input" class="upload{{ $itm->item_id }}" accept="image/*">
+                                <i class="fa fa-edit media-icon"></i>
+                              </span>
+                              <figure class="media-object">
+                                <img class="img-object imgupload{{ $itm->item_id }}" src="/upload/Chip/{{ $itm->item_id }}.png" style="  display: block;margin-left: auto;margin-right: auto;">
+                              </figure>
+                            </div>
+                            <div class="media-control" align="center" style="margin-top:-1%">
+                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
+                            </form>
+                              <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
+                        </div>
+                    </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
                     <td>{{ $itm->strItemType() }}</td>
                     <td><a href="#" class="usertext" data-name="item_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->item_get }}</a></td>
@@ -100,6 +135,13 @@
                   </tr>
                 @else 
                   <tr>
+                    <td>
+                      <div class="media-container">
+                        <figure class="media-object">
+                          <img class="img-object imgupload{{ $itm->item_id }}" src="/upload/Chip/{{ $itm->item_id }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                        </figure>
+                      </div>
+                    </td>
                     <td>{{ $itm->name }}</td>
                     <td>{{ $itm->strItemType() }}</td>
                     <td>{{ $itm->item_get }}</td>
@@ -162,9 +204,15 @@
           <i class="fa fa-remove"></i>
         </button>
       </div>
-      <form action="{{ route('ChipStore-create') }}" method="post">
+      <form action="{{ route('ChipStore-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
+          <div class="form-group" align="center">
+            <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+              <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+            </div><br>
+             <input type='file' name="file" onchange="readURL(this);"/><br><br>
+          </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
@@ -191,6 +239,20 @@
 
 <!-- Script -->
 <script>
+  // preview image
+  function readURL(input) {
+    if(input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#imgPreview').attr('src', e.target.result);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  // end preview image
+
   $(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
@@ -264,6 +326,36 @@
                 echo'var test = $("#id").val(id);';
               echo'});';
           }
+      @endphp
+
+      @php
+              foreach($items as $itm) {
+                echo'$(".save-profile'.$itm->item_id.'").hide(0);';
+                  echo'$(".med-ovlay'.$itm->item_id.'").hide(0);';
+
+                  echo'$(".edit-profile'.$itm->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$itm->item_id.'").fadeIn(300);';
+                  echo'});';
+                  echo'$(".save-profile'.$itm->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$itm->item_id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$itm->item_id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".upload'.$itm->item_id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+		
+                      echo'reader.onload = function(e) {';
+                        echo'$(".imgupload'.$itm->item_id.'").attr("src", e.target.result);';
+                      echo'};';
+		
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+              }
       @endphp
 
     },

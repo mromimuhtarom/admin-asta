@@ -462,6 +462,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Chip Store')->group(function(){
                 Route::get('ChipStore-view', 'ChipStoreController@index')->name('Chip_Store');
                 Route::post('ChipStore-update', 'ChipStoreController@update')->name('ChipStore-update');
+                Route::post('ChipStore-updateimage','ChipStoreController@updateImage')->name('ChipStore-updateimage');
                 Route::post('ChipStore-create', 'ChipStoreController@store')->name('ChipStore-create');
                 Route::delete('ChipStore-delete', 'ChipStoreController@destroy')->name('ChipStore-delete');
             });
@@ -471,6 +472,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('GoldStore-view', 'GoldStoreController@index')->name('Gold_Store');
                 Route::post('GoldStore-create', 'GoldStoreController@store')->name('GoldStore-create');
                 Route::post('GoldStore-update', 'GoldStoreController@update')->name('GoldStore-update');
+                Route::post('GoldStore-updateimage', 'GoldStoreController@updateimage')->name('GoldStore-updateimage');
                 Route::delete('GoldStore-delete', 'GoldStoreController@destroy')->name('GoldStore-delete');
             });
         });
