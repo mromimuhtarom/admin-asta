@@ -175,16 +175,18 @@ class GiftController extends Controller
                 {
                     // Menetapkan nama thumbnail
                     $folder = "../public/upload/gifts/";
-                    $thumbnail = $folder."wtm_".$nama_file_unik;
+                    $thumbnail = $folder."wtm_2".$nama_file_unik;
                     $actual = $folder.$nama_file_unik;
                     $namagbr="wtm_".$nama_file_unik;
 
                     // Memuat gambar utama
                     $uploadgambar=$folder.$nama_file_unik;
+
+                    // Memuat gambar utama
                     $source = imagecreatefrompng($uploadgambar);
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng('../public/upload/gifts/33.png');
+                    $watermark = imagecreatefrompng('../public/upload/gifts/diskon1.png');
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -195,26 +197,18 @@ class GiftController extends Controller
                     $main_height = imagesy($source);
 
                     // Menetapkan posisi gambar watermark
-                    $dime_x = 5;
-                    $dime_y = 5;
+                    $dime_x = -180;
+                    $dime_y = 200;
                     // menyalin kedua gambar
-                    // imagecopy($source, $watermark, $dime_x, $dime_y, 0, 0, $water_width, $water_height);
                     imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
-                    // imagecopymerge(
-                    //     $source,
-                    //     $watermark,
-                    //     $dime_x, 
-                    //     $dime_y,
-                    //     0,
-                    //     0,
-                    //     $water_width,
-                    //     $water_height
-                    // );
 
-                    // pemrosesan akhir, Membuat gambar baru dengan nama file baru
-                    $black = imagecolorallocate($source, 0, 0, 0);
-                    imagecolortransparent($source, $black);
+
+                    imagealphablending($source, false);
+                    imagesavealpha($source, true);
+                    imagecolortransparent($source); 
+
                     imagepng($source, $thumbnail);
+                    imagedestroy($source);
                     Gift::where('id', '=', $pk)->update([
                         'img_ver' =>  $imageversion 
                     ]);
@@ -304,7 +298,7 @@ class GiftController extends Controller
                  ->where('id', '=', $id)
                  ->first();
         if($id != '')
-        {
+        { 
             Gift::where('id', '=', $id)->delete();
             $path = '../public/upload/gifts/'.$gifts->id.'.jpg';
             File::delete($path);

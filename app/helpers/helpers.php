@@ -114,6 +114,14 @@ function rewardStatus($val){
   }
 }
 
+function strPlayerType($val){
+  if($val == 1){
+    return 'Players';
+  } else if($val == 2){
+    return 'Guest';
+  }
+}
+
 function strMenuType ($val) {
     if($val == 0) {
         return 'The Menu Can\'t be Accessed and can\'t be edited';

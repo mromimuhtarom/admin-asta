@@ -27,10 +27,6 @@ class Player extends Model
       return $this->belongsTo(Stat::class);
     }
 
-    public function bank(){
-      return $this->belongsTo(Bank::class);
-    }
-
     public function device(){
       return $this->belongsTo(Device::class);
     }

@@ -43,12 +43,6 @@
                             <option value="nonused">Non Used</option>
                         </select>
                     </div>
-                    {{-- <div class="col" style="padding-left:1%;" hidden>
-                        <input type="date" id="mindate" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;" hidden>
-                        <input type="date" id="maxdate" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
-                    </div> --}}
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                     </div>
@@ -144,8 +138,6 @@
                     <!-- Button tambah bot baru -->
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group" style="color: #969696;font-size: 1rem;font-weight: 700;font-style: italic;">
-                        {{-- User Guest Available is = {{ $available->totalguest }} <br>
-                        User Guest Already Used Is = {{ $used->totalguest }} --}}
                       </div>
                     </div>
                     <!-- End Button tambah bot baru -->

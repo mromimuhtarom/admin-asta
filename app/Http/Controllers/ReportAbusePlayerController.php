@@ -55,7 +55,7 @@ class ReportAbusePlayerController extends Controller
         } else if($mindate != NULL && $maxdate != NULL)
         {
            $problemplayer = AbusePlayer::whereBetween('date', [$mindate.' 00:00:00', $maxdate.' 23:59:59'])
-                             ->get();
+                            ->get();
             return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));    
         } else if($mindate != NULL)
         {

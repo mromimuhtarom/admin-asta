@@ -601,7 +601,13 @@ class TableController extends Controller
         } else if($name == 'stake')
         {
             $lastrecord = DominoSusunTable::where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
-            $selisih    = $lastrecord->stake + 250;
+            if($lastrecord != NULL)
+            {
+                $selisih    = $lastrecord->stake + 250;
+            } else if($lastrecord == NULL)
+            {
+                $selisih    = 0;
+            }
             if($value < $selisih)
             {
                 return response()->json("the stake difference must be 250 from the last stake", 400);
@@ -707,11 +713,19 @@ class TableController extends Controller
         } else if($name == 'stake')
         {
             $lastrecord = DominoQTable::where('table_id', '<', $pk)->orderby('table_id', 'desc')->first();
-            $selisih = $lastrecord->stake + 250;
+            if($lastrecord != NULL)
+            {
+                $selisih = $lastrecord->stake + 250;
+            } else if($lastrecord == NULL)
+            {
+                $selisih = 0;
+            }
+
             if($value < $selisih)
             {
                 return response()->json("the stake difference must be 250 from the last stake", 400);
             }
+            // return response()->json("the stake difference must be 250 from the last stake", 400);
             DominoQTable::where('table_id', '=', $pk)->update([
                 $name => $value 
             ]);

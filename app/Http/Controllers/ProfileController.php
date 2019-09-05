@@ -35,9 +35,9 @@ class ProfileController extends Controller
 
     public function password(Request $request)
     {
-        $pk = $request->userid;
+        $pk       = $request->userid;
         $password = $request->password;
-        $user = Session::get('userId');
+        $user     = Session::get('userId');
         
         $validator = Validator::make($request->all(),[
             'password'       => 'required'

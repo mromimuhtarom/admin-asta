@@ -76,6 +76,7 @@
         <table id="registered-players" class="table table-striped table-bordered table-hover" width="100%">
           <thead>
             <tr>
+              <th class="th-sm">Player ID</th>
               <th class="th-sm">Username</th>
               <th class="th-sm">Chip</th>
               <th class="th-sm">Point</th>
@@ -101,7 +102,8 @@
             @endphp
             @if ($menu && $mainmenu)
             <tr>
-                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->username }}</a></td>
+                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id}}</a></td>
+                <td>{{ $regis->username }}</td>
                 <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->chip }}</a></td>
                 <td><a href="#" class="usertext" data-title="Bank Account" data-name="point" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->point }}</a></td>
                 <td><a href="#" class="usertext" data-title="Bank Account" data-name="gold" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->gold }}</a></td>
@@ -113,7 +115,8 @@
             </tr>   
             @else
             <tr>
-                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->username }}</a></td>
+                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id }}</a></td>
+                <td>{{ $regis->username }}</td>
                 <td>{{ $regis->chip }}</td>
                 <td>{{ $regis->point }}</td>
                 <td>{{ $regis->gold }}</td>

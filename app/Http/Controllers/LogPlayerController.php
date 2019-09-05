@@ -21,11 +21,11 @@ class LogPlayerController extends Controller
 
     public function search(Request $request)
     {
-        $searchUser    = $request->username;
-        $minDate = $request->dari;
-        $maxDate = $request->sampai;
-        $inputAction  = $request->action;
-        $datenow = Carbon::now('GMT+7');
+        $searchUser  = $request->username;
+        $minDate     = $request->dari;
+        $maxDate     = $request->sampai;
+        $inputAction = $request->action;
+        $datenow     = Carbon::now('GMT+7');
 
         $action =   Action::select('action', 'id')
                     ->whereBetween('id', [19, 22])

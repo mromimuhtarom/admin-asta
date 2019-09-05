@@ -124,14 +124,13 @@ class PlayersController extends Controller
                     'asta_db.user_stat.gold',
                     'asta_db.user_stat.chip',
                     'asta_db.user_stat.point',
+                    'asta_db.user.user_type',
+                    'asta_db.user.user_id',
                     'asta_db.country.name',
                     'asta_db.user.join_date'
                   )
                   ->where('asta_db.user.user_id', '=', $userId)
                   ->first();
-      // $country = Country::select()
-      //           ->where('code', '=', $username->country_code)
-      //            ->first();
                 
       return view('pages.players.register_player_profile', compact('device', 'profile'));
     }

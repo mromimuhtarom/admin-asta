@@ -56,9 +56,14 @@
                         <div class="col-sm-6 col-8">
                             <h1><strong class="text-medium">{{ $profile->username }}</strong>
                             <br>
-                            <small> Players </small></h1>
+                            <small> {{ strPlayerType($profile->user_type)}} </small></h1>
 
                             <ul class="list-unstyled">
+                                <li>
+                                    <p class="text-muted">
+                                        Player ID <i class="fa fa-user"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $profile->user_id }}</a>
+                                    </p>
+                                </li>
                                 <li>
                                     <p class="text-muted">
                                         Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $profile->email }}</a>

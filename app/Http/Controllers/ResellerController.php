@@ -407,7 +407,6 @@ public function detailTransaction($month, $year)
                           ->orderBy('asta_db.reseller_balance.datetime', 'asc')
                           ->get();
 
-        // $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
@@ -416,13 +415,11 @@ public function detailTransaction($month, $year)
                           ->orderBy('asta_db.reseller_balance.datetime', 'desc')
                           ->get();
 
-        // $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
       }else if($searchUsername != NULL) {
         $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
                           ->get();
 
-        // $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
       }
     }
@@ -456,9 +453,6 @@ public function detailTransaction($month, $year)
           'gold'     => 0,
           'rank_id'  => 1,
           'rank_gold'=> 0,
-
-        //   'address'  => $request->address,
-        //   'guid'     => bcrypt($request->username.$request->email.$request->idcard)
         ]);
 
         Log::create([

@@ -60,7 +60,7 @@
       </div>
       <!-- end widget div -->
 
-    </div>
+  </div>
 <script>
 				var responsiveHelper_datatable_col_reorder = responsiveHelper_datatable_col_reorder || undefined;
 				
