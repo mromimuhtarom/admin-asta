@@ -484,9 +484,8 @@ public function detailTransaction($month, $year)
                             'asta_db.store_transaction.datetime',
                             'asta_db.store_transaction.quantity',
                             'asta_db.store_transaction.item_price',
-                            'asta_db.store_transaction.desc',
+                            'asta_db.store_transaction.description',
                             'asta_db.store_transaction.id',
-                            'asta_db.store_transaction.user_type',
                             'asta_db.store_transaction.payment_id',
                             'asta_db.store_transaction.item_type'
                         )

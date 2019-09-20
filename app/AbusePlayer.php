@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AbusePlayer extends Model
 {
     protected $guarded = [];
-    protected $table = 'asta_db.abuse_report';
+    protected $table = 'asta_db.report_abuse';
 
     public $timestamps = false;
 

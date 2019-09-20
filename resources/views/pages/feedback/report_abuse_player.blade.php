@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">Feedback</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">Report Abuse Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">Feedback</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">Report Abuse Player</a></li>
 @endsection
 
 @section('content')
@@ -57,19 +57,8 @@
         <span class="widget-icon"> <i class="fa fa-history"></i> </span>
         <h2>Report Abuse Player </h2>
     </div>
-
-    <div class="widget-toolbar">
-        <!-- add: non-hidden - to disable auto hide -->
-    </div>
 </header>
-<div> 
-                
-    <!-- widget edit box -->
-    <div class="jarviswidget-editbox">
-        <!-- This area used as dropdown edit box -->
-    </div>
-    <!-- end widget edit box -->
-                
+<div>           
     <!-- widget content -->
     <div class="widget-body p-0">
                 
@@ -108,13 +97,6 @@
 </div>
 <!-- end widget -->
 <script>
-var responsiveHelper_dt_basic = responsiveHelper_dt_basic || undefined;
-        
-var breakpointDefinition = {
-    tablet : 1024,
-    phone : 480
-};
-
 $('#dt_basic').dataTable({
     "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
         "t"+
@@ -122,14 +104,14 @@ $('#dt_basic').dataTable({
         "autoWidth" : true,
         "oLanguage": {
             "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
-    },
-    "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
-    "pagingType": "full_numbers",
-    "order": [[ 2, "desc" ]],
-    classes: {
-        sWrapper:      "dataTables_wrapper dt-bootstrap4"
-    },
-    responsive: false
+        },
+        "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        "pagingType": "full_numbers",
+        "order": [[ 2, "desc" ]],
+        classes: {
+            sWrapper:      "dataTables_wrapper dt-bootstrap4"
+        },
+        responsive: false
 });
 </script>
 @endif

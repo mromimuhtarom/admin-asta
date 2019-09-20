@@ -124,6 +124,7 @@
                     <div class="media-control" align="center" style="margin-top:-1%">
                       <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
                     </form>
+                      <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
                       <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                     </div>
                 </td>
@@ -367,16 +368,28 @@
               foreach($itemGood as $goods) {
                 echo'$(".save-profile'.$goods->item_id.'").hide(0);';
                   echo'$(".med-ovlay'.$goods->item_id.'").hide(0);';
+                  echo'$(".cancel-upload'.$goods->item_id.'").hide(0);';
 
                   echo'$(".edit-profile'.$goods->item_id.'").on("click", function() {';
                     echo'$(this).hide(0);';
                     echo'$(".med-ovlay'.$goods->item_id.'").fadeIn(300);';
                     echo'$(".save-profile'.$goods->item_id.'").fadeIn(300);';
+                    echo'$(".cancel-upload'.$goods->item_id.'").fadeIn(300);';
                   echo'});';
+
                   echo'$(".save-profile'.$goods->item_id.'").on("click", function() {';
                     echo'$(this).hide(0);';
                     echo'$(".med-ovlay'.$goods->item_id.'").fadeOut(300);';
                     echo'$(".edit-profile'.$goods->item_id.'").fadeIn(300);';
+                    echo'$(".cancel-upload'.$goods->item_id.'").fadeOut(300);';
+                  echo'});';
+
+                  echo'$(".cancel-upload'.$goods->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$goods->item_id.'").fadeOut(300);';
+                    echo'$(".imgupload'.$goods->item_id.'").fadeIn(300);';
+                    echo'$(".edit-profile'.$goods->item_id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$goods->item_id.'").hide(0);';
                   echo'});';
 
                   echo'$(".upload'.$goods->item_id.'").change(function() {';

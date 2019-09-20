@@ -38,7 +38,7 @@ class PlayersController extends Controller
                     'asta_db.user_active.game_id',
                     'asta_db.user_active.table_id'
                   )
-                  ->where('asta_db.user.user_type', '!=', '3')
+                  ->where('asta_db.user.user_type', ' !=', '3')
                   ->where('asta_db.user_active.table_id', '!=', 0)
                   ->get();
         return view('pages.players.active_player', compact('online'));
@@ -84,6 +84,8 @@ class PlayersController extends Controller
                     'asta_db.user_stat.gold'
                    )
                    ->where('chip', '>', $avgBank)->orderBy('chip', 'DESC')
+                   ->where('asta_db.user.user_type', '=', '1')
+                   ->orWhere('asta_db.user.user_type', '=', '2')
                    ->limit('100')
                    ->get();
         return view('pages.players.high_roller', compact('player'));

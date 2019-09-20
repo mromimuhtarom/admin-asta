@@ -529,8 +529,22 @@ Route::middleware('authenticated')->group(function(){
     Route::group(['prefix'  =>  'FeedBack'], function() {
         Route::group(['prefix' => 'Report_Abuse_Player'], function(){
             Route::middleware('page_denied:Report Abuse Player')->group(function(){
-                Route::get('ReportAbusePlayer', 'ReportAbusePlayerController@index')->name('Report_Abuse_Player');
+                Route::get('ReportAbusePlayer-view', 'ReportAbusePlayerController@index')->name('Report_Abuse_Player');
                 Route::get('ReportAbusePlayer-search', 'ReportAbusePlayerController@search')->name('ReportAbusePlayer-search');
+            });
+        });
+
+        Route::group(['prefix' => 'Feedback_Game'], function() {
+            Route::middleware('page_denied:Feedback Game')->group(function(){
+                Route::get('FeedbackGame-view', 'FeedbackGameController@index')->name('Feedback_Game');
+                Route::get('FeedbackGameAll-PDF', 'FeedbackGameController@pdfall')->name('FeedbackGame-PDFall');
+                Route::get('FeedbackGamePersonal-PDF/{feedbackgame}', 'FeedbackGameController@pdfpersonal')->name('FeedbackGame-PDFpersonal');
+            });
+        });
+
+        Route::group(['prefix' => 'Abuse_Transaction_Report'], function(){
+            Route::middleware('page_denied:Abuse Transaction Report')->group(function(){
+                Route::get('AbuseTransactionReport-view', 'AbuseTransactionReportController@index')->name('Abuse_Transaction_Report');
             });
         });
     });

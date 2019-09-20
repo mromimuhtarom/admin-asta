@@ -167,7 +167,7 @@ class TableController extends Controller
         TpkTable::create([
             'name'        => $request->tableName,
             'room_id'     => $request->category,
-            'max_player'  => '0',
+            'max_player'  => '5',
             'small_blind' => $sb,
             'big_blind'   => $bb,
             'jackpot'     => '0',
@@ -223,7 +223,7 @@ class TableController extends Controller
         BigTwoTable::create([
             'name'       => $request->tableName,
             'room_id'    => $category,
-            'max_player' => '0',
+            'max_player' => '4',
             'turn'       => '0',
             'total_bet'  => '0',
             'stake'      => $stake,
@@ -354,7 +354,7 @@ class TableController extends Controller
         DominoQTable::create([
             'name'                 => $request->tableName,
             'room_id'              => $category,
-            'max_player'           => '0',
+            'max_player'           => '4',
             'game_State'           => '0',
             'turn'                 => '0',
             'total_bet'            => '0',

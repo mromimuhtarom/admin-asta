@@ -68,23 +68,28 @@ class EmoticonController extends Controller
         } else {
             $id_last = $id->id;
         }
-        $id_new                 = $id_last + 1;
-        $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('jpg');
-        $nama                   = $_FILES['file']['name'];
-        $x                      = explode('.', $nama);
-        $ekstensi               = strtolower(end($x));
-        $ukuran                 = $_FILES['file']['size'];
+        $id_new                       = $id_last + 1;
+        $file                         = $request->file('file');
+        $file_wtr                     = $request->file('file1');
+        $ekstensi_diperbolehkan       = array('png');
+        $nama                         = $_FILES['file']['name'];
+        $nama_wtr                     = $_FILES['file1']['name'];
+        $x                            = explode('.', $nama);
+        $x_wtr                        = explode('.', $nama_wtr);
+        $ekstensi                     = strtolower(end($x));
+        $ekstensi_wtr                 = strtolower(end($x_wtr));
+        $ukuran                       = $_FILES['file']['size'];
+        $nama_file_unik               = $id_new.'.'.$ekstensi;
+        list($width, $height)         = getimagesize($file);
+        list($width_wtr, $height_wtr) = getimagesize($file_wtr);
         // $acak                   = rand(1,99);
-        $nama_file_unik         = $id_new.'.'.$ekstensi;
-        list($width, $height)   = getimagesize($file);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
             {
-                if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
-                {
+                // if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
+                // {
                     if($request->title == NULL){
                         return redirect()->route('Emoticon')->with('alert','Name can\'t be NULL ');
                     } else if($request->price == NULL) {
@@ -106,7 +111,40 @@ class EmoticonController extends Controller
                         }
 
 
-                        $gift = Emoticon::create([
+                        // watermark image
+                            // Menetapkan nama thumbnail
+                            $folder = "../public/upload/emoticon/";
+                            $thumbnail = $folder."".$nama_file_unik;
+
+
+                            // Memuat gambar utama
+                            $source = imagecreatefrompng($file->move(public_path('../public/upload/emoticon/image1'), $nama_file_unik));
+
+                            // Memuat gambar watermark
+                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/emoticon/image2'), $nama_file_unik));
+
+                            // mendapatkan lebar dan tinggi dari gambar watermark
+                            $water_width = imagesx($watermark);
+                            $water_height = imagesy($watermark);
+
+                            // mendapatkan lebar dan tinggi dari gambar utama
+                            $main_width = imagesx($source);
+                            $main_height = imagesy($source);
+
+                            // Menetapkan posisi gambar watermark
+                            $pos_x = $width - $width_wtr;
+                            $pos_y = $height - $height_wtr;
+                            imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_wtr, $height_wtr);
+                    
+                            imagealphablending($source, false);
+                            imagesavealpha($source, true);
+                            imagecolortransparent($source); 
+
+                            imagepng($source, $thumbnail);
+                            imagedestroy($source);
+                        // end watermark image
+
+                        $emoticon = Emoticon::create([
                             'id'          => $id_new,
                             'name'        => $request->title,
                             'price'       => $request->price,
@@ -119,16 +157,16 @@ class EmoticonController extends Controller
                             'op_id'     => Session::get('userId'),
                             'action_id' => '3',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Create new in menu Emoticon with title '. $gift->subject
+                            'desc'      => 'Create new in menu Emoticon with title '. $emoticon->subject
                         ]);
                         return redirect()->route('Emoticon')->with('success','Insert Data successfull');
                     }
-                }
-                else
-                {
-                    return redirect()->route('Emoticon')->with('alert','Gagal Upload File');
-                    // echo "Gagal Upload File";
-                }
+                // }
+                // else
+                // {
+                //     return redirect()->route('Emoticon')->with('alert','Gagal Upload File');
+                //     // echo "Gagal Upload File";
+                // }
             }
             else
             {
@@ -172,21 +210,58 @@ class EmoticonController extends Controller
                                   ->first();
         $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('jpg');
+        $file_wtr               = $request->file('file1');
+        $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
+        $nama_wtr               = $_FILES['file1']['name'];
         $x                      = explode('.', $nama);
+        $x_wtr                  = explode('.', $nama_wtr);
         $ekstensi               = strtolower(end($x));
+        $ekstensi_wtr           = strtolower(end($x_wtr));
         $ukuran                 = $_FILES['file']['size'];
         $filename               = $id->id;
         $nama_file_unik         = $filename.'.'.$ekstensi;
+        list($width, $height)         = getimagesize($file);
+        list($width_wtr, $height_wtr) = getimagesize($file_wtr);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
         {
 
             if($ukuran < 1044070)
             {
-                if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
-                {
+                // if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
+                // {
+                        // watermark image
+                            // Menetapkan nama thumbnail
+                            $folder = "../public/upload/emoticon/";
+                            $thumbnail = $folder.$nama_file_unik;
+
+                            // Memuat gambar utama
+                            $source = imagecreatefrompng($file->move(public_path('../public/upload/emoticon/image1'), $nama_file_unik));
+
+                            // Memuat gambar watermark
+                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/emoticon/image2'), $nama_file_unik));
+
+                            // mendapatkan lebar dan tinggi dari gambar watermark
+                            $water_width = imagesx($watermark);
+                            $water_height = imagesy($watermark);
+
+                            // mendapatkan lebar dan tinggi dari gambar utama
+                            $main_width = imagesx($source);
+                            $main_height = imagesy($source);
+
+                            // Menetapkan posisi gambar watermark
+                            $pos_x = $width - $width_wtr;
+                            $pos_y = $height - $height_wtr;
+                            imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_wtr, $height_wtr);
+                    
+                            imagealphablending($source, false);
+                            imagesavealpha($source, true);
+                            imagecolortransparent($source); 
+
+                            imagepng($source, $thumbnail);
+                            imagedestroy($source);
+                        // end watermark image
                     Emoticon::where('id', '=', $pk)->update([
                         'img_ver' =>  $imageversion 
                     ]);
@@ -199,12 +274,12 @@ class EmoticonController extends Controller
                     ]);
                     return redirect()->route('Emoticon')->with('success','Update Image successfull');
 
-                }
-                else
-                {
-                    return redirect()->route('Emoticon')->with('alert','Gagal Upload File');
-                    // echo "Gagal Upload File";
-                }
+                // }
+                // else
+                // {
+                //     return redirect()->route('Emoticon')->with('alert','Gagal Upload File');
+                //     // echo "Gagal Upload File";
+                // }
             }
             else
             {

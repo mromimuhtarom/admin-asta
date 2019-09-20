@@ -122,6 +122,11 @@ function strPlayerType($val){
   }
 }
 
+function strFormatMoney($val){
+  $formatrupiah = "Rp" . number_format($val,2,',','.');
+  return $formatrupiah;
+}
+
 function strMenuType ($val) {
     if($val == 0) {
         return 'The Menu Can\'t be Accessed and can\'t be edited';

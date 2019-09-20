@@ -119,6 +119,7 @@
                         <div class="media-control" align="center" style="margin-top:-1%">
                           <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
                         </form>
+                          <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
                           <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                     </div>
                 </td>
@@ -359,16 +360,28 @@
       foreach($getGolds as $gold) {
         echo'$(".save-profile'.$gold->item_id.'").hide(0);';
         echo'$(".med-ovlay'.$gold->item_id.'").hide(0);';
+        echo'$(".cancel-upload'.$gold->item_id.'").hide(0);';
 
         echo'$(".edit-profile'.$gold->item_id.'").on("click", function() {';
           echo'$(this).hide(0);';
           echo'$(".med-ovlay'.$gold->item_id.'").fadeIn(300);';
           echo'$(".save-profile'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".cancel-upload'.$gold->item_id.'").fadeIn(300);';
         echo'});';
+
         echo'$(".save-profile'.$gold->item_id.'").on("click", function() {';
           echo'$(this).hide(0);';
           echo'$(".med-ovlay'.$gold->item_id.'").fadeOut(300);';
           echo'$(".edit-profile'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".cancel-upload'.$gold->item_id.'").fadeOut(300);';
+        echo'});';
+
+        echo'$(".cancel-upload'.$gold->item_id.'").on("click", function() {';
+          echo'$(this).hide(0);';
+          echo'$(".med-ovlay'.$gold->item_id.'").fadeOut(300);';
+          echo'$(".imgupload'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".edit-profile'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".save-profile'.$gold->item_id.'").hide(0);';
         echo'});';
 
         echo'$(".upload'.$gold->item_id.'").change(function() {';

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PushNotification extends Model
 {
-    protected $table = 'push_notifications';
+    protected $table = 'asta_db.msg_notif';
     protected $guarded = [];
 
     public $timestamps = false;

@@ -67,23 +67,25 @@ class GiftController extends Controller
         } else {
             $id_last = $id->id;
         }
-        $id_new                 = $id_last + 1;
-        $file                   = $request->file('file');
-        $ekstensi_diperbolehkan = array('jpg');
-        $nama                   = $_FILES['file']['name'];
-        $x                      = explode('.', $nama);
-        $ekstensi               = strtolower(end($x));
-        $ukuran                 = $_FILES['file']['size'];
-        // $acak                   = rand(1,99);
-        $nama_file_unik         = $id_new.'.'.$ekstensi;
-        list($width, $height)   = getimagesize($file);
+        $id_new                                   = $id_last + 1;
+        $file                                     = $request->file('file');
+        $file_wtr                                 = $request->file('file1');
+        $ekstensi_diperbolehkan                   = array('png');
+        $nama                                     = $_FILES['file']['name'];
+        $nama_wtr                                 = $_FILES['file1']['name'];
+        $x                                        = explode('.', $nama);
+        $x_wtr                                    = explode('.', $nama_wtr);
+        $ekstensi                                 = strtolower(end($x));
+        $ekstensi_wtr                             = strtolower(end($x_wtr));
+        $ukuran                                   = $_FILES['file']['size'];
+        $nama_file_unik                           = $id_new.'.'.$ekstensi;
+        list($width, $height)                     = getimagesize($file);
+        list($width_watermark, $height_watermark) = getimagesize($file_wtr);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
             {
-                if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
-                {
                     if($request->title == NULL){
                         return redirect()->route('Table_Gift')->with('alert','Name can\'t be NULL ');
                     } else if($request->price == NULL) {
@@ -101,6 +103,38 @@ class GiftController extends Controller
                         if ($validator->fails()) {
                             return back()->withErrors($validator->errors());
                         }
+                        // watermark image
+                            // Menetapkan nama thumbnail
+                            $folder = "../public/upload/gifts/";
+                            $thumbnail = $folder.$nama_file_unik;
+
+
+                            // Memuat gambar utama
+                            $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik));
+
+                            // Memuat gambar watermark
+                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/gifts/image2'), $nama_file_unik));
+
+                            // mendapatkan lebar dan tinggi dari gambar watermark
+                            $water_width = imagesx($watermark);
+                            $water_height = imagesy($watermark);
+
+                            // mendapatkan lebar dan tinggi dari gambar utama
+                            $main_width = imagesx($source);
+                            $main_height = imagesy($source);
+
+                            // Menetapkan posisi gambar watermark
+                            $pos_x = $width - $width_watermark;
+                            $pos_y = $height - $height_watermark;
+                            imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
+                            imagealphablending($source, false);
+                            imagesavealpha($source, true);
+                            imagecolortransparent($source); 
+
+                            imagepng($source, $thumbnail);
+                            imagedestroy($source);
+                        // end watermark image
 
 
                         $gift = Gift::create([
@@ -122,12 +156,6 @@ class GiftController extends Controller
                         ]);
                         return redirect()->route('Table_Gift')->with('success','Insert Data successfull');
                     }
-                }
-                else
-                {
-                    return redirect()->route('Table_Gift')->with('alert','Gagal Upload File');
-                    // echo "Gagal Upload File";
-                }
             }
             else
             {
@@ -158,35 +186,34 @@ class GiftController extends Controller
                                   ->first();
         $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
+        $file_wtr               = $request->file('file1');
         $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
+        $nama_wtr               = $_FILES['file1']['name'];
         $x                      = explode('.', $nama);
+        $x_wtr                  = explode('.', $nama_wtr);
         $ekstensi               = strtolower(end($x));
+        $ekstensi_wtr           = strtolower(end($x_wtr));
         $ukuran                 = $_FILES['file']['size'];
         $filename               = $id->id;
         $nama_file_unik         = $filename.'.'.$ekstensi;
+        list($width, $height)   = getimagesize($file);
+        list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
         {
 
             if($ukuran < 1044070)
             {
-                if ($file->move(public_path('../public/upload/gifts'), $nama_file_unik))
-                {
                     // Menetapkan nama thumbnail
                     $folder = "../public/upload/gifts/";
-                    $thumbnail = $folder."wtm_2".$nama_file_unik;
-                    $actual = $folder.$nama_file_unik;
-                    $namagbr="wtm_".$nama_file_unik;
+                    $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $uploadgambar=$folder.$nama_file_unik;
-
-                    // Memuat gambar utama
-                    $source = imagecreatefrompng($uploadgambar);
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik));
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng('../public/upload/gifts/diskon1.png');
+                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/gifts/image2'), $nama_file_unik));
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -197,12 +224,14 @@ class GiftController extends Controller
                     $main_height = imagesy($source);
 
                     // Menetapkan posisi gambar watermark
-                    $dime_x = -180;
-                    $dime_y = 200;
+                    // $dime_x = -180;
+                    // $dime_y = 200;
                     // menyalin kedua gambar
-                    imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
-
-
+                    // imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
+                    $pos_x = $width - $width_watermark;
+                    $pos_y = $height - $height_watermark;
+                    imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
                     imagealphablending($source, false);
                     imagesavealpha($source, true);
                     imagecolortransparent($source); 
@@ -220,17 +249,10 @@ class GiftController extends Controller
                         'desc'      => 'Edit image in menu Gift Store with ID '.$pk.' to '. $nama_file_unik
                     ]);
                     return redirect()->route('Table_Gift')->with('success','Update Image successfull');
-
-                }
-                else
-                {
-                    return redirect()->route('Table_Gift')->with('alert','Gagal Upload File');
-                    // echo "Gagal Upload File";
-                }
             }
             else
             {
-                return redirect()->route('Table_Gift')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Table_Gift')->with('alert','Your image source size height is more than 319 px and width is more than 384');
                 // echo 'Ukuran file terlalu besar';
             }
         }

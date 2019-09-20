@@ -45,7 +45,7 @@
             </div>
         </form>
     </div>
-</div>
+  </div>
 
 
 @if (Request::is('Store/Report_Store/ReportStore-search*'))
@@ -68,7 +68,7 @@
             <!-- This area used as dropdown edit box -->
         </div>
         <!-- end widget edit box -->
-                    
+        
         <!-- widget content -->
         <div class="widget-body p-0">
                     
@@ -92,7 +92,13 @@
                         <td>{{ $tr->username }}</td>
                         <td>{{ $tr->item_name }}</td>
                         <td>{{ $tr->quantity }}</td>
-                        <td>{{ $tr->item_price }}</td>
+                        @if ($tr->item_type == 1)
+                        <td>{{ $tr->item_price }} Gold</td>
+                        @elseif($tr->item_type == 2)
+                        <td> {{ strFormatMoney($tr->item_price) }}</td>
+                        @elseif($tr->item_type == 3)
+                        <td>{{ $tr->item_price }} Point</td>
+                        @endif
                         {{-- <td></td> --}}
                         <td>{{ strStatusApdec($tr->status) }}</td>
                         <td>{{ $tr->datetime }}</td>

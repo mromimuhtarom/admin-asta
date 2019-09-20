@@ -104,22 +104,35 @@
                 <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $emot->id }}"></td>
                     <td >
-                          <div class="media-container">
-                            <form method="POST" action="{{ route('Emoticon-updateimage') }}" enctype="multipart/form-data">
-                              {{  csrf_field() }}
-                              <span class="media-overlay med-ovlay{{ $emot->id }}">
-                                <input type="hidden" name="pk" value="{{ $emot->id }}">
-                                <input type="file" name="file" id="media-input" class="upload{{ $emot->id }}" accept="image/*">
-                                <i class="fa fa-edit media-icon"></i>
-                              </span>
-                              <figure class="media-object">
-                                <img class="img-object imgupload{{ $emot->id }}" src="/upload/emoticon/{{ $emot->id }}.jpg" style="display: block;margin-left: auto;margin-right: auto;">
-                              </figure>
-                            </div>
-                            <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
-                            </form>
-                              <button class="edit-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
+                            <div class="media-container">
+                              <form method="POST" action="{{ route('Emoticon-updateimage') }}" enctype="multipart/form-data">
+                                {{  csrf_field() }}
+                                <span class="media-overlay-wtr med-ovlay{{ $emot->id }}">
+                                  <input type="hidden" name="pk" value="{{ $emot->id }}">
+                                  <input type="file" name="file" id="media-input-wtr" class="upload{{ $emot->id }}" accept="image/*">
+                                  <i class="fa fa-edit media-icon-wtr"></i>
+                                  <p class="nav-name">Main Image</p>
+                                </span>
+                                <span class="media-overlay-wtr1 med-ovlay{{ $emot->id }}">
+                                  <input type="hidden" name="pk" value="{{ $emot->id }}">
+                                  <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $emot->id }}">
+                                  <i class="fa fa-edit media-icon-wtr1"></i>
+                                  <div class="nav-name">Watermark</div>
+                                </span>
+                                <figure class="media-object">
+                                  <img class="img-object-wtr imgupload{{ $emot->id }}" src="/upload/emoticon/{{ $emot->id }}.png" style="display: block;margin-left: auto;margin-right: auto;">
+                                  <img class="img-object-wtr1 imgupload1{{ $emot->id }}" src="http://placehold.jp/80x100.png">
+                                  <img class="img-object-wtr2 imgupload2{{ $emot->id }}" src="http://placehold.jp/80x100.png">
+                                </figure>
+                                <figure>
+                                  
+                                </figure>
+                              </div>
+                              <div class="media-control" align="center" style="margin-top:-1%">
+                                <button class="save-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
+                              </form>
+                                <button class="cancel-upload{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                                <button class="edit-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
                             </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $emot->id }}" data-type="text" data-url="{{ route('Emoticon-update') }}">{{ $emot->name }}</a></td>
@@ -179,10 +192,22 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group" align="center">
-                <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
-                  <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
-                </div><br>
-                  <input type='file' name="file" onchange="readURL(this);"/><br><br>
+                <table width="100%" height="auto">
+                  <tr>
+                    <td align="center">
+                        <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+                          <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                        </div><br>
+                        <input type='file' class="main-image" name="file" onchange="readURL(this);"/>
+                    </td>
+                    <td align="center">
+                      <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+                        <img id="blah1" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                      </div><br>
+                      <input type='file' class="watermark-image" name="file1" />
+                    </td>
+                  </tr>
+                </table>
                   <input type="text" class="form-control" name="title" placeholder="Name"><br>
                   <input type="number" class="form-control" name="price" placeholder="Price"><br>
               </div>
@@ -230,6 +255,17 @@
   </div>
 
 <script type="text/javascript">
+$(".watermark-image").change(function() {
+  if (this.files && this.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $("#blah1").attr("src", e.target.result);
+    };
+
+    reader.readAsDataURL(this.files[0]);
+  }
+});
 	$(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
@@ -308,16 +344,38 @@
               foreach($emoticon as $emot) {
                 echo'$(".save-profile'.$emot->id.'").hide(0);';
                   echo'$(".med-ovlay'.$emot->id.'").hide(0);';
+                  echo'$(".imgupload1'.$emot->id.'").hide(0);';
+                  echo'$(".imgupload2'.$emot->id.'").hide(0);';
+                  echo'$(".cancel-upload'.$emot->id.'").hide(0);';
 
                   echo'$(".edit-profile'.$emot->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
+                    echo'$(".imgupload'.$emot->id.'").fadeOut(300);';
+                    echo'$(".imgupload1'.$emot->id.'").fadeIn(300);';
+                    echo'$(".imgupload2'.$emot->id.'").fadeIn(300);';
                     echo'$(".med-ovlay'.$emot->id.'").fadeIn(300);';
+                    echo'$(".cancel-upload'.$emot->id.'").fadeIn(300);';
                     echo'$(".save-profile'.$emot->id.'").fadeIn(300);';
                   echo'});';
+
                   echo'$(".save-profile'.$emot->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
+                    echo'$(".cancel-upload'.$emot->id.'").fadeOut(300);';
                     echo'$(".med-ovlay'.$emot->id.'").fadeOut(300);';
+                    echo'$(".imgupload'.$emot->id.'").fadeIn(300);';
+                    echo'$(".imgupload1'.$emot->id.'").fadeOut(300);';
+                    echo'$(".imgupload2'.$emot->id.'").fadeOut(300);';
                     echo'$(".edit-profile'.$emot->id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".cancel-upload'.$emot->id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$emot->id.'").fadeOut(300);';
+                    echo'$(".imgupload'.$emot->id.'").fadeIn(300);';
+                    echo'$(".imgupload1'.$emot->id.'").fadeOut(300);';
+                    echo'$(".imgupload2'.$emot->id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$emot->id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$emot->id.'").hide(0);';
                   echo'});';
 
                   echo'$(".upload'.$emot->id.'").change(function() {';
@@ -325,7 +383,18 @@
                       echo'var reader = new FileReader();';
 
                       echo'reader.onload = function(e) {';
-                        echo'$(".imgupload'.$emot->id.'").attr("src", e.target.result);';
+                        echo'$(".imgupload1'.$emot->id.'").attr("src", e.target.result);';
+                      echo'};';
+
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+                echo'$(".upload1'.$emot->id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+
+                      echo'reader.onload = function(e) {';
+                        echo'$(".imgupload2'.$emot->id.'").attr("src", e.target.result);';
                       echo'};';
 
                       echo'reader.readAsDataURL(this.files[0]);';

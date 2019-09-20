@@ -24,12 +24,10 @@ class PushNotificationController extends Controller
     {
         $menu          = MenuClass::menuName('Push Notification');
         $mainmenu      = MenuClass::menuName('Notification');
-        $notifications = PushNotification::join('asta_db.game', 'game.id', '=', 'push_notifications.gameId')
-                         ->select(
-                             'asta_db.game.name as gamename', 
-                             'push_notifications.title',
-                             'push_notifications.message',
-                             'push_notifications.id'
+        $notifications = PushNotification::select(
+                            'msg',
+                            'type',
+                            'date'
                          )
                          ->get();
         $game          = Game::select(
@@ -37,8 +35,9 @@ class PushNotificationController extends Controller
                             'name'
                          )
                          ->get();
-        // $table         = Table::where('dealerId', '=', Session::get('dealerId'))->where('tabletype', '!=', 'm')->where('clubId', '=', 0)->where('seasonId', '=', 0)->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
-        return view('pages.notification.push_notification', compact('notifications','mainmenu', 'table', 'game', 'menu'));
+                
+        $datenow       = Carbon::now('GMT+7')->toDateString();
+        return view('pages.notification.push_notification', compact('notifications','mainmenu', 'table', 'game', 'menu', 'datenow'));
     }
 
     /**

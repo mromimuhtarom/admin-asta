@@ -124,7 +124,6 @@ class ChipController extends Controller
 
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc'));
         } else if ($searchUser != NULL && $minDate != NULL && $maxDate != NULL){
-
           $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                             ->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->orderBy('asta_db.balance_chip.datetime', 'asc')
@@ -132,7 +131,6 @@ class ChipController extends Controller
 
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc'));
         }else if ($searchUser != NULL && $minDate != NULL){
-
           $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                             ->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
                             ->orderBy('asta_db.balance_chip.datetime', 'asc')
@@ -141,7 +139,6 @@ class ChipController extends Controller
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow','game','actblnc'));
 
         }else if ($searchUser != NULL && $maxDate != NULL){
-
           $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchUser.'%' )
                             ->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
                             ->orderBy('asta_db.balance_chip.datetime', 'desc')
@@ -150,7 +147,6 @@ class ChipController extends Controller
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow','game','actblnc'));
 
         }else if ($minDate != NULL && $maxDate != NULL){
-
           $balancedetails = $balanceChip->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->orderBy('asta_db.balance_chip.datetime', 'asc')
                             ->get();
@@ -158,7 +154,6 @@ class ChipController extends Controller
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow','game','actblnc'));
 
         }else if ($searchUser != NULL){
-
           $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                             ->get();
 
@@ -179,7 +174,6 @@ class ChipController extends Controller
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow','game','actblnc'));
 
         }else if ($maxDate != NULL){
-
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
                             ->orderBy('asta_db.balance_chip.datetime', 'desc')
                             ->get();
