@@ -51,8 +51,8 @@
                 <div class="form-group">
                   <input type="text" class="form-control" name="title" placeholder="Title" required=""><br>
                   <textarea name="message" id="" class="form-control" cols="30" rows="10">Please Enter The message</textarea><br>
-                  <img src="" alt=""><br>
-                  <input type="file" name=""><br>
+                  {{-- <img src="" alt=""><br>
+                  <input type="file" name=""><br> --}}
                   <select name="notification_type" class="form-control">
                     <option value="">Select Notification Type</option>
                     <option value="">Game</option>
