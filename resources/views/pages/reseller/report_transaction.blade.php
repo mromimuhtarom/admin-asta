@@ -35,7 +35,14 @@
                 <div class="col">
                     <input type="text" name="inputUsername" class="left" placeholder="username" required>
                 </div>
-                <div class="col">
+                <div class="col" style="padding-left:3%;">
+                    <select name="choosedate" id="" class="form-control">
+                        <option value="">Choose Type Date</option>
+                        <option value="approvedecline">Date Aprove and Decline</option>
+                        <option value="request">Date Request</option>
+                    </select>
+                </div>
+                <div class="col" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col" style="padding-left:3%;">

@@ -60,10 +60,10 @@ function strMaintenanceOnOff($val) {
 function strStatusApdec($val) {
   if($val == 0)
   {
-    return 'Decline';
+    return 'Pending';
   } else if($val == 1)
   {
-    return 'Request';
+    return 'Approve';
   } else if($val == 2)
   {
     return 'Decline';

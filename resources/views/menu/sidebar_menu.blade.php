@@ -5,9 +5,6 @@
         @if($menuname->RoleType1($mnu->name) || $menuname->RoleType2($mnu->name))
             <li class="{{ Request::is($mnu->route.'/*') ? 'active' : null }}"><!-- first-level -->
                 <a class="has-arrow"   href="" title="Admin"> <span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ $mnu->name }}</span>
-                    {{-- @if($mnu->name == 'Feedback')
-                    <span class="badge pull-right inbox-badge">17</span>
-                    @endif --}}
                     <b class="collapse-sign">
                         <em class="fa fa-plus-square-o"></em>
                         <em class="fa fa-minus-square-o"></em>
@@ -33,7 +30,7 @@
                                     <ul aria-expanded="true" class="sa-sub-nav-second-level">   
                                         @if($menuname->RoleType1($smk->name) || $menuname->RoleType2($smk->name))                 
                                         <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/*') ? 'active' : null }}">
-                                            <a   href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ $smk->name }}</a> 
+                                            <a href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ $smk->name }}</a> 
                                         </li>
                                         @endif
                                     </ul>                    

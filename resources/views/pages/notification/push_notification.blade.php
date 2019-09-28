@@ -30,7 +30,6 @@
         <div class="alert alert-success">
             <p>{{\Session::get('success')}}</p>
         </div>
-        
     @endif
   <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -174,14 +173,14 @@
                     {{-- <td></td> --}}
                     <td></td>
                     <td></td>
-                    <td>{{ $notification->msg }}</td>
+                    <td><a href=""> {{ $notification->msg }}</a></td>
                     <td></td>
-                    <td>{{ $notification->type }}</td>
-                    <td></td>
-                    <td></td>
+                    <td><a href="">{{ $notification->type }}</a></td>
                     <td></td>
                     <td></td>
-                    <td>{{ $notification->date }}</td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="">{{ $notification->date }}</a></td>
                     <td>
                       <a href="#" style="color:red;" class="delete{{ $notification->id }}" 
                       id="delete" 

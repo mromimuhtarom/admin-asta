@@ -269,6 +269,7 @@ class ResellerController extends Controller
         $searchUsername    = $request->inputUsername;
         $startDate         = $request->inputMinDate;
         $endDate           = $request->inputMaxDate;
+        $choosedate        = $request->choosedate;
         $datenow           = Carbon::now('GMT+7');
         $reportTransaction = DB::table('asta_db.store_transaction_hist')
                              ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id')
@@ -279,11 +280,13 @@ class ResellerController extends Controller
                                  'asta_db.store_transaction_hist.quantity',
                                  'asta_db.store_transaction_hist.item_price',
                                  'asta_db.store_transaction_hist.status',
-                                 'asta_db.store_transaction_hist.datetime'
+                                 'asta_db.store_transaction_hist.datetime',
+                                 'asta_db.store_transaction_hist.action_date'
                              );
         $validator = Validator::make($request->all(),[
             'inputMinDate'    => 'required|date',
             'inputMaxDate'    => 'required|date',
+            'choosedate'      => 'required',
         ]);
     
         if ($validator->fails()) {
@@ -294,40 +297,80 @@ class ResellerController extends Controller
           return back()->with('alert','End Date can\'t be more than start date');
         }
   
-        if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
+        if($choosedate == 'approvedecline')
+        {
+            if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
   
-          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                            ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                            ->orderBy('asta_db.store_transaction_hist.datetime', 'asc')
-                            ->get();
+                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                  ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                  ->orderBy('asta_db.store_transaction_hist.datetime', 'asc')
+                                  ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+        
+              }else if ($searchUsername != NULL && $startDate != NULL) {
+        
+                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                                  ->WHERE('datetime', '>=', $startDate." 00:00:00")
+                                  ->orderBy('datetime', 'asc')
+                                  ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+        
+              }else if ($searchUsername != NULL && $endDate != NULL) {
+                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                                  ->WHERE('datetime', '<=', $endDate." 23:59:59")
+                                  ->orderBy('datetime', 'desc')
+                                  ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+              }else if($searchUsername != NULL) {
+                $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+              }
+        } else if($choosedate == 'request')
+        {
+            if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
   
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
-  
-        }else if ($searchUsername != NULL && $startDate != NULL) {
-  
-          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                            ->WHERE('datetime', '>=', $startDate." 00:00:00")
-                            ->orderBy('datetime', 'asc')
-                            ->get();
-  
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
-  
-        }else if ($searchUsername != NULL && $endDate != NULL) {
-          $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                            ->WHERE('datetime', '<=', $endDate." 23:59:59")
-                            ->orderBy('datetime', 'desc')
-                            ->get();
-  
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
-        }else if($searchUsername != NULL) {
-          $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                          ->get();
-  
-        //   $transactions->appends($request->all());
-          return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                  ->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                  ->orderBy('asta_db.store_transaction_hist.action_date', 'asc')
+                                  ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+        
+              }else if ($searchUsername != NULL && $startDate != NULL) {
+        
+                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                                  ->WHERE('action_date', '>=', $startDate." 00:00:00")
+                                  ->orderBy('action_date', 'asc')
+                                  ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+        
+              }else if ($searchUsername != NULL && $endDate != NULL) {
+                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
+                                  ->WHERE('action_date', '<=', $endDate." 23:59:59")
+                                  ->orderBy('action_date', 'desc')
+                                  ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+              }else if($searchUsername != NULL) {
+                $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                ->get();
+        
+              //   $transactions->appends($request->all());
+                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+              }
         }
     }
 //------- End Search Report Transaction ------//
@@ -489,7 +532,8 @@ public function detailTransaction($month, $year)
                             'asta_db.store_transaction.payment_id',
                             'asta_db.store_transaction.item_type'
                         )
-                        ->where('asta_db.store_transaction.status', '=', 1)
+                        ->where('asta_db.store_transaction.status', '=', 0)
+                        ->where('asta_db.store_transaction.shop_type', '=', 2)
                         ->orderBy('asta_db.store_transaction.datetime', 'ASC')
                         ->get();
                         

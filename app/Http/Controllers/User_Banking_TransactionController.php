@@ -4,7 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\StoreTransaction;
+use App\StoreTransactionHist;
 use App\Classes\MenucLass;
+use App\ItemsGold;
+use App\ItemsCash;
+use App\Log;
+use Session;
+use Carbon\Carbon;
 
 class User_Banking_TransactionController extends Controller
 {
@@ -17,9 +24,126 @@ class User_Banking_TransactionController extends Controller
     {
         $menu          = MenuClass::menuName('User Bank Transaction');
         $mainmenu      = MenuClass::menuName('Transaction');
-        $rewardRequest = DB::select('SELECT reward_transaction.*, user.avatar, reward_item.name as reward_name,user.username, operator.username as operator FROM reward_transaction JOIN user ON user.user_id = reward_transaction.user_id JOIN reward_item ON reward_item.id = reward_transaction.item_id LEFT JOIN operator ON reward_transaction.user_Id = operator.operator_id');
-        $rewardApprove = DB::select('SELECT reward_transaction.*, user.avatar, reward_item.name as reward_name,user.username, operator.username as operator FROM reward_transaction JOIN user ON user.user_id = reward_transaction.user_id JOIN reward_item ON reward_item.id = reward_transaction.item_id LEFT JOIN operator ON reward_transaction.operator_id = operator.operator_id ORDER BY reward_transaction.date_approved DESC');
-        return view('pages.transaction.user_bank_transaction', compact('rewardRequest', 'rewardApprove', 'menu', 'mainmenu'));
+        $transaction = StoreTransaction::where('shop_type', '=', 1)
+                       ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction.user_id')
+                       ->join('asta_db.payment','asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
+                       ->select(
+                           'asta_db.store_transaction.user_id',
+                           'username',
+                           'item_id',
+                           'asta_db.payment.id',
+                           'asta_db.payment.name as paymentname',
+                           'asta_db.store_transaction.status',
+                           'description',
+                           'quantity',
+                           'payment_id',
+                           'datetime',
+                           'shop_type',
+                           'item_type',
+                           'item_price',
+                           'asta_db.store_transaction.id as strtrnsid'
+                       )
+                       ->where('shop_type', '=', 1)
+                       ->where('asta_db.store_transaction.status', '=', 0)
+                       ->get();
+        $item_gold = ItemsGold::select(
+                        'item_id', 
+                        'name'
+                     )
+                     ->get();
+
+        $item_cash = ItemsCash::select(
+                        'item_id', 
+                        'name'
+                     )
+                     ->get();
+
+        $item_point = ItemsCash::select(
+                        'item_id', 
+                        'name'
+                     )
+                     ->get();
+                     
+        return view('pages.transaction.user_bank_transaction', compact('transaction', 'menu', 'mainmenu', 'item_cash', 'item_gold', 'item_point'));
+    }
+
+
+    public function decline(Request $request)
+    {
+        $declineOrderId = $request->declineId;
+        $goldAwarded    = $request->goldbuy;
+        $amount         = $request->price;
+        $user_id        = $request->user_id;
+        $item_name      = $request->item_name;
+        $desc           = $request->desc;
+        $quantity       = $request->quantity;
+        $payment_id     = $request->payment_id;
+        $datetime       = $request->datetime;
+        $shop_type      = $request->shop_type;
+        $item_type      = $request->item_type;
+        $description    = $request->description;
+
+        StoreTransactionHist::create([
+            'user_id'       =>  $user_id,
+            'item_name'     =>  $item_name,
+            'status'        =>  2,
+            'description'   =>  $description,
+            'quantity'      =>  $quantity,
+            'payment_id'    =>  $payment_id,
+            'datetime'      =>  $datetime,
+            'shop_type'     =>  $shop_type,
+            'item_type'     =>  $item_type,
+            'item_price'    =>  $amount,
+            'action_date'   => Carbon::now('GMT+7')
+        ]);
+
+        StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $declineOrderId)->delete();
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '6',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'decline request transaction with User id'. $user_id
+        ]);
+        return back()->with('success','Declined Succesful');
+    }
+
+    public function approve(Request $request)
+    {
+        $declineOrderId = $request->declineId;
+        $goldAwarded    = $request->goldbuy;
+        $amount         = $request->price;
+        $user_id        = $request->user_id;
+        $item_name      = $request->item_name;
+        $desc           = $request->desc;
+        $quantity       = $request->quantity;
+        $payment_id     = $request->payment_id;
+        $datetime       = $request->datetime;
+        $shop_type      = $request->shop_type;
+        $item_type      = $request->item_type;
+        $description    = $request->description;
+
+        StoreTransactionHist::create([
+            'user_id'       => $user_id,
+            'item_name'     =>  $item_name,
+            'status'        =>  1,
+            'description'   =>  $description,
+            'quantity'      =>  $quantity,
+            'payment_id'    =>  $payment_id,
+            'datetime'      =>  $datetime,
+            'shop_type'     =>  $shop_type,
+            'item_type'     =>  $item_type,
+            'item_price'    =>  $amount,
+            'action_date'   =>  Carbon::now('GMT+7')
+        ]);
+
+        StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $declineOrderId)->delete();
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '5',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Approve request transaction with user id'. $user_id
+        ]);
+        return back()->with('success','Approve Succesful');
     }
 
     /**

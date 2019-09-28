@@ -167,10 +167,7 @@
             @csrf
 			    <div class="modal-body">
                     Are you sure want to Approve this Transaction ?
-                    {{-- <input type="hidden" name="goldAwarded" value="{{ $transaction->goldAwarded }}">
-                    <input type="hidden" name="approveId" value="{{ $transaction->id }}">
-                    <input type="hidden" name="resellerId" value="{{ $transaction->reseller_id }}">
-										<input type="hidden" name="price" value="nanti"> --}}
+
 										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
 										<input type="hidden" name="goldbuy" value="190">
 										<input type="hidden" name="price" value="{{ $transaction->item_price }}">

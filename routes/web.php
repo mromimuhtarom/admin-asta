@@ -75,6 +75,8 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'User_Bank_Transaction'], function() {
             Route::middleware('page_denied:User Bank Transaction')->group(function(){
                 Route::get('User-Banking-view', 'User_Banking_TransactionController@index')->name('User_Bank_Transaction');
+                Route::post('User-Banking-approve', 'User_Banking_TransactionController@approve')->name('UserBankTransaction-Approve');
+                Route::post('User-Banking-decline', 'User_Banking_TransactionController@decline')->name('UserBankTransaction-Decline');
             });
         });
 
@@ -622,9 +624,14 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
                 Route::delete('ItemStore-delete', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-delete');
             });
-        });
+        });        
+    });
 
-        
+    Route::group(['prefix' => 'Version_Asset_Apk'], function() {
+        Route::middleware('page_denied:Version Asset Apk')->group(function(){
+            Route::get('VersionAsset-view', 'VersionAssetController@index')->name('Version_Asset_Apk');
+            Route::post('VersionAsset-update', 'VersionAssetController@update')->name('VersionAssetApk-update');
+        });
     });
 
 

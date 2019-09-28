@@ -94,7 +94,6 @@
         You can't access this page with your current roles
         <p class="text-align-left">
             <br>
-            {{-- <a href="javascript:void(0);" class="btn btn-sm btn-default"><strong>Action Button</strong></a> --}}
         </p>
 </div>	
 @endif

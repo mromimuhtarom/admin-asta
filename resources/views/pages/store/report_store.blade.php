@@ -34,6 +34,13 @@
                     <input type="text" name="username" class="left" placeholder="username">
                 </div>
                 <div class="col">
+                    <select name="choosedate" id="" class="form-control">
+                        <option value="">Choose Type Date</option>
+                        <option value="approvedecline">Date Aprove and Decline</option>
+                        <option value="request">Date Request</option>
+                    </select>
+                </div>
+                <div class="col">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
@@ -79,10 +86,12 @@
                         <th>Username</th>
                         <th>Item</th>
                         <th>Quantity</th>
+                        <th>Description</th>
                         <th>Price</th>
                         {{-- <th>Bonus Item</th> --}}
                         <th>Status</th>
-                        <th>TimeStamp</th>
+                        <th>Date Request</th>
+                        <th>Date Decline or Accept</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,6 +101,7 @@
                         <td>{{ $tr->username }}</td>
                         <td>{{ $tr->item_name }}</td>
                         <td>{{ $tr->quantity }}</td>
+                        <td>{{ $tr->description }}</td>
                         @if ($tr->item_type == 1)
                         <td>{{ $tr->item_price }} Gold</td>
                         @elseif($tr->item_type == 2)
@@ -102,6 +112,7 @@
                         {{-- <td></td> --}}
                         <td>{{ strStatusApdec($tr->status) }}</td>
                         <td>{{ $tr->datetime }}</td>
+                        <td>{{ $tr->action_date }}</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -35,7 +35,6 @@ class TableController extends Controller
         $menu     = MenuClass::menuName('Table Asta Poker');
         $mainmenu = MenuClass::menuName('Games');
         $submenu  = MenuClass::menuName('Asta Poker');
-        // $tables = Table::select()->where([['tabletype', '!=','m'],['clubId','=','0'],['seasonId', '=', '0']])->orderBy('bb', 'asc')->orderBy('tablename', 'asc')->get();
         $tables = TpkTable::join('asta_db.tpk_room', 'asta_db.tpk_room.room_id', '=', 'asta_db.tpk_table.room_id')
                   ->select(
                       'asta_db.tpk_room.name as roomname',
@@ -407,7 +406,7 @@ class TableController extends Controller
             {
                 TpkTable::where('table_id', '=', $pk)->update([
                     'small_blind'   => $value
-                  ]);
+                ]);
             }
         } else if($name == 'min_buy')
         {

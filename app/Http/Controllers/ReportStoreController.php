@@ -17,15 +17,17 @@ class ReportStoreController extends Controller
 
     public function search(Request $request)
     {
-        $username = $request->username;
-        $minDate  = $request->dari;
-        $maxDate  = $request->sampai;
-        $data     = $request->all();
-        $datenow  = Carbon::now('GMT+7');
+        $username   = $request->username;
+        $minDate    = $request->dari;
+        $maxDate    = $request->sampai;
+        $choosedate = $request->choosedate;
+        $data       = $request->all();
+        $datenow    = Carbon::now('GMT+7');
 
         $validate = [
-            'dari'   => 'required|date',
-            'sampai' => 'required|date'
+            'dari'       => 'required|date',
+            'sampai'     => 'required|date',
+            'choosedate' => 'required',
         ];
   
         $validator = Validator::make($data,$validate);
@@ -48,24 +50,45 @@ class ReportStoreController extends Controller
                                     'asta_db.store_transaction_hist.item_price', 
                                     'asta_db.store_transaction_hist.datetime',
                                     'asta_db.user.username',
-                                    'asta_db.store_transaction_hist.item_type'
+                                    'asta_db.store_transaction_hist.item_type',
+                                    'asta_db.store_transaction_hist.action_date',
+                                    'asta_db.store_transaction_hist.description',
+                                    'asta_db.store_transaction_hist.status'
                                 )
-                                ->where('asta_db.user.user_type', '=', 1)
-                                ->orWhere('asta_db.user.user_type', '=', 2);
-                if($username != NULL && $minDate != NULL && $maxDate != NULL)
+                                ->where('asta_db.store_transaction_hist.shop_type', '=', 1);
+                if($choosedate == 'request')
                 {
-                    $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                                    ->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                    ->get();
-                    
-                    return view('pages.store.report_store', compact('transactions', 'datenow'));
-                } else if($minDate != NULL && $maxDate != NULL)
+                    if($username != NULL && $minDate != NULL && $maxDate != NULL)
+                    {
+                        $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+                                        ->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->get();
+                        
+                        return view('pages.store.report_store', compact('transactions', 'datenow'));
+                    } else if($minDate != NULL && $maxDate != NULL)
+                    {
+                        $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->get();
+    
+                        return view('pages.store.report_store', compact('transactions', 'datenow'));
+                    } 
+                } else if($choosedate == 'approvedecline')
                 {
-                    $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                    ->get();
-
-                    return view('pages.store.report_store', compact('transactions', 'datenow'));
-                } 
+                    if($username != NULL && $minDate != NULL && $maxDate != NULL)
+                    {
+                        $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+                                        ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->get();
+                        
+                        return view('pages.store.report_store', compact('transactions', 'datenow'));
+                    } else if($minDate != NULL && $maxDate != NULL)
+                    {
+                        $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->get();
+    
+                        return view('pages.store.report_store', compact('transactions', 'datenow'));
+                    } 
+                }
             }
         }
 

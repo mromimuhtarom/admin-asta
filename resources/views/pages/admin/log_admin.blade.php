@@ -36,7 +36,7 @@
                     <select name="action" id="" class="form-control">
                         <option value="">Choose Action</option>
                         @foreach($actionSearch as $action)
-                        <option value="{{ $action->action }}">{{ $action->action}}</option>
+                        <option value="{{ $action->id}}">{{ $action->action}}</option>
                         @endforeach
                     </select>
                 </div>

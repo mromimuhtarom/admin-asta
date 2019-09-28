@@ -59,7 +59,67 @@
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span> (hari)</span>
                     </td>
                     @else
-                    <td>{{ $getPointExpired->value }} (hari)</td>
+                    <td>{{ $getPointExpired->value }} (Day)</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Award Signup</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_signup->value }}</a>
+                    </td>
+                    @else
+                    <td>{{ $award_signup->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Award Signup Guest</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_signup_guest->value }}</a>
+                    </td>
+                    @else
+                    <td>{{ $award_signup_guest->value }} </td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Award Daily Chips</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_chips->value }}</a>
+                    </td>
+                    @else
+                    <td>{{ $award_daily_chips->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Award Daily Chips Guest</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_chips_guest->value }}</a>
+                    </td>
+                    @else
+                    <td>{{ $award_daily_chips_guest->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Award Daily Days</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_days->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_days->value }}</a>
+                    </td>
+                    @else
+                    <td>{{ $award_daily_days->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Award Daily Multiply</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_multiply->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_multiply->value }}</a>
+                    </td>
+                    @else
+                    <td>{{ $award_daily_multiply->value }}</td>
                     @endif
                   </tr>
                 </tbody>
@@ -139,30 +199,6 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Privacy Policy</td>
-                    @if($menu && $mainmenu)
-                    <td>
-                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
-                            <i class="fa fa-edit"></i> Edit Privacy Policy
-                        </button>
-                    </td>
-                    @else 
-                    <td>{{ $getPrivacyPolicy->value }}</td>
-                    @endif
-                  </tr>
-                  <tr>
-                    <td>Term Of Service</td>
-                    @if($menu && $mainmenu)
-                    <td>
-                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
-                        <i class="fa fa-edit"></i> Edit Term Of service
-                    </button>
-                    </td>
-                    @else 
-                    <td>{{$getTermOfService->value }}</td>
-                    @endif
-                  </tr>
-                  <tr>
                     <td>About</td>
                     @if($menu && $mainmenu)
                     <td>
@@ -236,6 +272,30 @@
                     <td><a href="#" class="inlineSetting" data-title="Instagram" data-name="value" data-pk="{{ $getIg->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getIg->value }}</a></td>
                     @else 
                     <td>{{ $getIg->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Privacy Policy</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
+                            <i class="fa fa-edit"></i> Edit Privacy Policy
+                        </button>
+                    </td>
+                    @else 
+                    <td>{{ $getPrivacyPolicy->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Term Of Service</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
+                        <i class="fa fa-edit"></i> Edit Term Of service
+                    </button>
+                    </td>
+                    @else 
+                    <td>{{$getTermOfService->value }}</td>
                     @endif
                   </tr>
                 </tbody>

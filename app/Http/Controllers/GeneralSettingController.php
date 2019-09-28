@@ -26,15 +26,19 @@ class GeneralSettingController extends Controller
         $menu               = MenuClass::menuName('General Setting');
         $mainmenu           = MenuClass::menuName('Settings');
         // system settings
-        $getMaintenance     = Config::select('id', 'name', 'value')->where('id', '=', '101')->first();
-        $getPointExpired    = Config::select('id', 'name', 'value')->where('id', '=', '102')->first();
+        $getMaintenance          = Config::select('id', 'name', 'value')->where('id', '=', '101')->first();
+        $getPointExpired         = Config::select('id', 'name', 'value')->where('id', '=', '102')->first();
+        $award_signup            = Config::select('id', 'name', 'value')->where('id', '=', '31')->first();
+        $award_signup_guest      = Config::select('id', 'name', 'value')->where('id', '=', '32')->first();
+        $award_daily_chips       = Config::select('id', 'name', 'value')->where('id', '=', '33')->first();
+        $award_daily_chips_guest = Config::select('id', 'name', 'value')->where('id', '=', '34')->first();
+        $award_daily_days        = Config::select('id', 'name', 'value')->where('id', '=', '35')->first();
+        $award_daily_multiply       = Config::select('id', 'name', 'value')->where('id', '=', '36')->first();
 
         // Bank Settings
         $getBank            = Config::select('id', 'name', 'value')->where('id', '=', '201')->first();
 
         // Info Settings
-        $getPrivacyPolicy   = Config::select('id', 'name', 'value')->where('id', '=', '2')->first();
-        $getTermOfService   = Config::select('id', 'name', 'value')->where('id', '=', '3')->first();
         $getAbout           = Config::select('id', 'name', 'value')->where('id', '=', '4')->first();
         $getPokerWeb        = Config::select('id', 'name', 'value')->where('id', '=', '5')->first();
 
@@ -42,6 +46,8 @@ class GeneralSettingController extends Controller
         $getFb              = Config::select('id', 'name', 'value')->where('id', '=', '901')->first();
         $getTwitter         = Config::select('id', 'name', 'value')->where('id', '=', '902')->first();
         $getIg              = Config::select('id', 'name', 'value')->where('id', '=', '903')->first();
+        $getPrivacyPolicy   = Config::select('id', 'name', 'value')->where('id', '=', '2')->first();
+        $getTermOfService   = Config::select('id', 'name', 'value')->where('id', '=', '3')->first();
         
         $rootpath = '../../asta-asset/text/db_txt';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
@@ -59,7 +65,9 @@ class GeneralSettingController extends Controller
 
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
-                                                                'getAbout', 'getPokerWeb', "getBank", 'menu', 'client', 'maintenaceonoff', 'mainmenu'));
+                                                                'getAbout', 'getPokerWeb', "getBank", 'menu', 'client', 'maintenaceonoff', 'mainmenu',
+                                                                'award_signup', 'award_signup_guest', 'award_daily_chips', 'award_daily_chips_guest',
+                                                                'award_daily_days', 'award_daily_multiply'));
     }
 
     public function putAbout(Request $request)
