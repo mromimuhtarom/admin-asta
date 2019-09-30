@@ -654,12 +654,21 @@ class PlayersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function avatar($avatar)
+    public function avatar(Request $request)
     {
 
       // //
+      $all = $request->all();
+      dd($all);
       $path = public_path().'\\upload\\avatars\\'.$avatar;
       // return Image::make($path)->response();
-        return response()->file($path);
+        // return response()->file($path);
+      
+
+        $path1 = base64_encode(file_get_contents($path));
+        $path2 = base64_decode($path1);
+        // return Image::make($path)->response();
+          return response()->download($path1);
+        // echo $path2;
     }
 }

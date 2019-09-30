@@ -2,21 +2,22 @@
     list-style: none;
     font-weight: bold;
 }
+
 .searchguest {
-    width:40%;
+    width: 40%;
     height: 80px;
-    padding-top:1.5%;
-    padding-left:7%;
-    margin-left:28%;
+    padding-top: 1.5%;
+    padding-left: 7%;
+    margin-left: 28%;
     border-radius: 5px;
 }
 
 .search {
-    width:58%;
+    width: 58%;
     height: 80px;
-    padding-top:1.5%;
-    padding-left:3%;
-    margin-left:20%;
+    padding-top: 1.5%;
+    padding-left: 3%;
+    margin-left: 20%;
     border-radius: 5px;
 }
 
@@ -33,23 +34,29 @@ input[type=file]:before {
     padding: 0 10px;
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
-  }
+}
+
 .main-image:before {
     content: 'Choose Main Image';
 }
+
 .watermark-image:before {
     content: 'Choose Watermark Image';
 }
-  
-  input[type=file]::-webkit-file-upload-button {
+
+.upload-img:before {
+    content: 'Choose Image';
+}
+
+input[type=file]::-webkit-file-upload-button {
     visibility: hidden;
     display: none;
-    
-  }
+
+}
 
 
 .table-outer {
-  margin: 1%;
+    margin: 1%;
 }
 
 .searching {
@@ -60,7 +67,7 @@ input[type=file]:before {
 
 }
 
-.form  {
+.form {
     display: flex;
     flex-direction: row;
 }
@@ -76,7 +83,8 @@ input[type=file]:before {
 
 
 /* SETTINGS MENU LAYOUT */
-.settings-table, .game-settings {
+.settings-table,
+.game-settings {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
@@ -123,7 +131,7 @@ input[type=file]:before {
     .user-transactions {
         grid-template-columns: 1fr;
     }
-  }
+}
 
 .user-transaction-dates {
     display: flex;

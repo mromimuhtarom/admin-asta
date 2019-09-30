@@ -29,10 +29,10 @@ class LogController extends Controller
 
     public function search(Request $request)
     {
-        $searchUser    = $request->username;
-        $minDate = $request->dari;
-        $maxDate = $request->sampai;
-        $inputAction  = $request->action;
+        $searchUser  = $request->username;
+        $minDate     = $request->dari;
+        $maxDate     = $request->sampai;
+        $inputAction = $request->action;
   
         $actionSearch = Action::select('action', 'id')
                         ->whereBetween('id', [1, 6])
@@ -65,7 +65,7 @@ class LogController extends Controller
                   ->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                   ->orderBy('asta_db.log_operator.datetime', 'desc')
                   ->get();
-                 
+                  
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
   
         }else if($searchUser != NULL && $inputAction != NULL && $minDate != NULL) {

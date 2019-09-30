@@ -99,7 +99,7 @@
                         @foreach ($log_login as $login)
                         <tr>
                           <td>{{ $login->username }}</td>
-                          <td>{{ $login->action }}</td>
+                          <td>{{ $action_report_admin[$login->action_id] }} Admin</td>
                           <td>{{ $login->datetime }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>
