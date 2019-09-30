@@ -17,6 +17,8 @@ use App\Country;
 use App\PlayerActive;
 use App\UserRandom;
 use App\ConfigText;
+use File;
+use Storage;
 
 class PlayersController extends Controller
 {
@@ -658,17 +660,40 @@ class PlayersController extends Controller
     {
 
       // //
-      $all = $request->all();
-      dd($all);
-      // $path = public_path().'\\upload\\avatars\\'.$avatar;
-      // // return Image::make($path)->response();
-      //   // return response()->file($path);
-      
+      $all   = $request->all();
+      $image = $request->base64Image;
+      $id    = $request->userId;
 
-      //   $path1 = base64_encode(file_get_contents($path));
-      //   $path2 = base64_decode($path1);
-      //   // return Image::make($path)->response();
-      //     return response()->download($path1);
+      // $path = public_path().'\\upload\\avatars\\'.$avat;
+      // return Image::make($path)->response();
+        // return response()->file($path);
+
+        // $path1 = base64_encode(file_get_contents($path));
+        // $path2 = base64_decode($a);
+        // $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $a));
+
+        // $tmpFilePath=sys_get_temp_dir().'/'.uniqid(); 
+
+        // file_put_contents($tmpFilePath, $image_data);
+        $image_decode = base64_decode($image);
+        $imageName = $id.'.'.'jpg';
+        if(Storage::disk('public')->put('upload/tester/'.$imageName, $image_decode))
+        {
+          echo 'Succefull';
+        } else {
+          echo 'Failed';
+        }
+        
+      // if($image->move(public_path('../../asta-asset/images'), $path2))
+      // {
+      //   echo 'Successfull';
+      // } else {
+      //   echo 'failed';
+      // }
+
+
+        // return Image::make($path)->response();
+          // return response()->download($path1);
         // echo $path2;
     }
 }
