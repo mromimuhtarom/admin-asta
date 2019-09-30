@@ -677,14 +677,23 @@ class PlayersController extends Controller
         // file_put_contents($tmpFilePath, $image_data);
         $image_decode = base64_decode($image);
         $imageName = $id.'.'.'jpg';
-        if(Storage::disk('public')->put('upload/tester/'.$imageName, $image_decode))
+        // if(Storage::disk('public')->put('upload/tester/'.$imageName, $image_decode))
+        // {
+        //   echo 'Succefull';
+        // } else {
+        //   echo 'Failed';
+        $rootpath = '../../asta-api/test_upload';
+        $client = Storage::createLocalDriver(['root' => $rootpath]);
+        if($client->put($imageName, $image_decode))
         {
-          echo 'Succefull';
-        } else {
+          echo 'Successful';
+        } else 
+        {
           echo 'Failed';
         }
+        // }
         
-      // if($image->move(public_path('../../asta-asset/images'), $path2))
+      // if($file->move(public_path('../../asta-asset/images'), $imageName))
       // {
       //   echo 'Successfull';
       // } else {

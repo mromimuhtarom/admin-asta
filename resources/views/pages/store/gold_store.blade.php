@@ -117,10 +117,10 @@
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
-                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
+                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gold Image</button>
                         </form>
                           <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                          <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
+                          <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gold</button>
                     </div>
                 </td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>

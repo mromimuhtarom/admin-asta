@@ -116,7 +116,7 @@
                               <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Chip Image</button>
                             </form>
                               <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                              <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
+                              <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Chip</button>
                         </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
