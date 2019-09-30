@@ -660,15 +660,15 @@ class PlayersController extends Controller
       // //
       $all = $request->all();
       dd($all);
-      $path = public_path().'\\upload\\avatars\\'.$avatar;
-      // return Image::make($path)->response();
-        // return response()->file($path);
+      // $path = public_path().'\\upload\\avatars\\'.$avatar;
+      // // return Image::make($path)->response();
+      //   // return response()->file($path);
       
 
-        $path1 = base64_encode(file_get_contents($path));
-        $path2 = base64_decode($path1);
-        // return Image::make($path)->response();
-          return response()->download($path1);
+      //   $path1 = base64_encode(file_get_contents($path));
+      //   $path2 = base64_decode($path1);
+      //   // return Image::make($path)->response();
+      //     return response()->download($path1);
         // echo $path2;
     }
 }
