@@ -92,11 +92,12 @@
                 @if ($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
+                <th>Order</th>
                 <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Price Point</th>
                 <th class="th-sm">Quantity</th>
-                <th class="th-sm">Pay Transaction</th>
+                {{-- <th class="th-sm">Pay Transaction</th> --}}
                 <th class="th-sm">Status</th>
                 @if ($menu && $mainmenu)
                   <th class="th-sm">Action</th>
@@ -108,6 +109,7 @@
               @if($menu && $mainmenu)
               <tr>
                 <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->item_id }}"></td>
+                <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $goods->item_id }}" data-type="number" data-url="{{ route('GoodsStore-update') }}">{{ $goods->order }}</a></td>
                 <td>
                   <div class="media-container">
                     <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
@@ -122,16 +124,16 @@
                       </figure>
                     </div>
                     <div class="media-control" align="center" style="margin-top:-1%">
-                      <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
+                      <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Goods Image</button>
                     </form>
                       <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                      <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
+                      <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button>
                     </div>
                 </td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
                 <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
                 <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
-                <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td>
+                {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
                 <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
                 <td>
                   <a href="#" style="color:red;" class="delete{{ $goods->item_id }}" 
@@ -145,6 +147,7 @@
               </tr>
               @else 
               <tr>
+                  <td>{{ $goods->order }}</td>
                   <td>
                       <div class="media-container">
                         <figure class="media-object">
@@ -155,7 +158,7 @@
                   <td>{{ $goods->name }}</td>
                   <td>{{ $goods->price }}</td>
                   <td>{{ $goods->qty }}</td>
-                  <td>{{  strTypeTransaction($goods->trans_type) }}</td>
+                  {{-- <td>{{  strTypeTransaction($goods->trans_type) }}</td> --}}
                   <td>{{ strEnabledDisabled($goods->status) }}</td>
               </tr>
               @endif
@@ -188,7 +191,10 @@
             <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
               <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
             </div><br>
-             <input type='file' name="file" onchange="readURL(this);"/><br><br>
+            <input type='file' class="upload-img" name="file" onchange="readURL(this);"/><br><br>
+          </div>
+          <div class="form-group">
+              <input type="text" name="order" class="form-control" id="basic-url" placeholder="Order">
           </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
@@ -199,7 +205,7 @@
           <div class="form-group">
             <input type="number" name="qty" class="form-control" id="basic-url" placeholder="Quantity">
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <select class="custom-select" name="transaction_type">
               <option value="">Pay Transaction</option>
               <option value="1">Bank Transfer</option>
@@ -211,7 +217,7 @@
               <option value="7">Manual Transfer</option>
               <option value="8">Google Play</option>
             </select>
-          </div>
+          </div> --}}
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">

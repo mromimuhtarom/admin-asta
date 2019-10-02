@@ -29,9 +29,11 @@ class ChipStoreController extends Controller
                         'item_type',
                         'price',
                         'item_get',
-                        'status'
+                        'status',
+                        'order'
                     )
                     ->where('item_type', '=', 1)
+                    ->orderby('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
                         'name', 
@@ -55,7 +57,8 @@ class ChipStoreController extends Controller
           $validator = Validator::make($request->all(),[
             'title'       => 'required',
             'goldcost'    => 'required|integer',
-            'chipawarded' => 'required|integer'
+            'chipawarded' => 'required|integer',
+            'order'       => 'required|integer|unique:item_gold,order'
           ]);
     
           if ($validator->fails()) {
@@ -91,7 +94,8 @@ class ChipStoreController extends Controller
                          'item_type' => 1,
                          'price'     => $request->goldcost,
                          'item_get'  => $request->chipawarded,
-                         'status'    => 0
+                         'status'    => 0,
+                         'order'     => $request->order
                      ]);
 
                      Log::create([
@@ -145,6 +149,9 @@ class ChipStoreController extends Controller
               break;
           case "status":
               $name = "Status";
+              break;
+          case "order":
+              $name = "Order";
               break;
           default:
             "";

@@ -72,7 +72,7 @@ class GoldController extends Controller
         if ($searchUser != NULL && $minDate != NULL && $maxDate!= NULL){
 
           $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
-                            ->wherebetween('asta_db.balance_gold.datetime', [$minDate." 00:00:00", $endDate." 23:59:59"])
+                            ->wherebetween('asta_db.balance_gold.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
@@ -90,7 +90,7 @@ class GoldController extends Controller
         }else if ($searchUser != NULL && $maxDate!= NULL){
 
           $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
-                            ->WHERE('asta_db.balance_gold.datetime', '<=', $endDate." 23:59:59")
+                            ->WHERE('asta_db.balance_gold.datetime', '<=', $maxDate." 23:59:59")
                             ->orderBy('asta_db.balance_gold.datetime', 'desc')
                             ->get();
 
@@ -98,7 +98,7 @@ class GoldController extends Controller
 
         }else if ($minDate != NULL && $maxDate!= NULL){
 
-          $balancedetails = $balanceGold->wherebetween('asta_db.balance_gold.datetime', [$minDate." 00:00:00", $endDate." 23:59:59"])
+          $balancedetails = $balanceGold->wherebetween('asta_db.balance_gold.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->orderBy('asta_db.balance_gold.datetime', 'asc')
                             ->get();
 
@@ -121,7 +121,7 @@ class GoldController extends Controller
 
         }else if ($maxDate!= NULL){
 
-          $balancedetails = $balanceGold->WHERE('asta_db.balance_gold.datetime', '<=', $endDate." 23:59:59")
+          $balancedetails = $balanceGold->WHERE('asta_db.balance_gold.datetime', '<=', $maxDate." 23:59:59")
                             ->orderBy('asta_db.balance_gold.datetime', 'desc')
                             ->get();
 

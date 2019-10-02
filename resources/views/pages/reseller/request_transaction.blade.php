@@ -68,10 +68,28 @@
 										@if ($menu && $mainmenu && $submenu)
 										<td>{{ $transaction->datetime }}</td>
 										<td>{{ $transaction->username }}</td>
-										<td></td>
+										@if ( $transaction->item_type == 1 )
+											@foreach ($item_gold as $chip)
+											@if ($transaction->item_id == $chip->item_id)
+												<td>{{ $chip->name }}</td>
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 2)
+											@foreach ($item_cash as $gold)
+											@if ($transaction->item_id == $gold->item_id)
+												<td>{{ $gold->name }}</td>
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 3)
+											@foreach ($item_point as $goods)
+											@if ($transaction->item_id == $goods->item_id)
+												<td>{{ $goods->name }}</td>
+											@endif
+											@endforeach
+										@endif
 										<td>{{ $transaction->quantity }}</td>
 										<td>{{ $transaction->item_price }}</td>
-										<td>{{ $transaction->desc }}</td>
+										<td>{{ $transaction->description }}</td>
 										<td>{{ $transaction->bankname }} Bank Manual Transfer</td>
 										<td>
 											<div>
@@ -89,10 +107,28 @@
 										@else
 										<td>{{ $transaction->datetime }}</td>
 										<td>{{ $transaction->username }}</td>
-										<td></td>
+										@if ( $transaction->item_type == 1 )
+											@foreach ($item_gold as $chip)
+											@if ($transaction->item_id == $chip->item_id)
+												<td>{{ $chip->name }}</td>
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 2)
+											@foreach ($item_cash as $gold)
+											@if ($transaction->item_id == $gold->item_id)
+												<td>{{ $gold->name }}</td>
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 3)
+											@foreach ($item_point as $goods)
+											@if ($transaction->item_id == $goods->item_id)
+												<td>{{ $goods->name }}</td>
+											@endif
+											@endforeach
+										@endif
 										<td>{{ $transaction->quantity }}</td>
 										<td>{{ $transaction->item_price }}</td>
-										<td>{{ $transaction->desc }}</td>
+										<td>{{ $transaction->description }}</td>
 										<td>{{ $transaction->bankname }} Bank Manual Transfer</td>
 										<td>Pending</td>
 										@endif
@@ -128,17 +164,36 @@
             </div>
             <form action="{{ route('RequestTransaction-Decline')}}" method="POST">
             @csrf
-                <div class="modal-body">
+                <div class="modal-body" align="center">
+										<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
                     Are you sure want to Decline this Transaction ?
                     <input type="hidden" name="declineId" value="{{ $transaction->id }}">
 										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
 										<input type="hidden" name="price" value="{{ $transaction->item_price }}">
-										<input type="hidden" name="item_name" value="200Gold">
-										<input type="hidden" name="desc" value="{{ $transaction->desc }}">
+										
+										@if ( $transaction->item_type == 1 )
+											@foreach ($item_gold as $chip)
+											@if ($transaction->item_id == $chip->item_id)
+												<input type="hidden" name="item_name" value="{{ $chip->name }}">
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 2)
+											@foreach ($item_cash as $gold)
+											@if ($transaction->item_id == $gold->item_id)
+												<input type="hidden" name="item_name" value="{{ $gold->name }}">
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 3)
+											@foreach ($item_point as $goods)
+											@if ($transaction->item_id == $goods->item_id)
+												<input type="hidden" name="item_name" value="{{ $goods->name }}">
+											@endif
+											@endforeach
+										@endif
 										<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
 										<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
 										<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
-										<input type="hidden" name="user_type" value="{{ $transaction->user_type }}">
+										<input type="hidden" name="shop_type" value="{{ $transaction->shop_type }}">
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
@@ -165,18 +220,36 @@
             </div>
             <form action="{{ route('RequestTransaction-Approve')}}" method="POST">
             @csrf
-			    <div class="modal-body">
+			    <div class="modal-body" align="center">
+							<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
                     Are you sure want to Approve this Transaction ?
 
 										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
 										<input type="hidden" name="goldbuy" value="190">
 										<input type="hidden" name="price" value="{{ $transaction->item_price }}">
-										<input type="hidden" name="item_name" value="200Gold">
-										<input type="hidden" name="desc" value="{{ $transaction->desc }}">
+										@if ( $transaction->item_type == 1 )
+											@foreach ($item_gold as $chip)
+											@if ($transaction->item_id == $chip->item_id)
+												<input type="hidden" name="item_name" value="{{ $chip->name }}">
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 2)
+											@foreach ($item_cash as $gold)
+											@if ($transaction->item_id == $gold->item_id)
+												<input type="hidden" name="item_name" value="{{ $gold->name }}">
+											@endif
+											@endforeach
+										@elseif($transaction->item_type == 3)
+											@foreach ($item_point as $goods)
+											@if ($transaction->item_id == $goods->item_id)
+												<input type="hidden" name="item_name" value="{{ $goods->name }}">
+											@endif
+											@endforeach
+										@endif
 										<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
 										<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
 										<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
-										<input type="hidden" name="user_type" value="{{ $transaction->user_type }}">
+										<input type="hidden" name="shop_type" value="{{ $transaction->shop_type }}">
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">

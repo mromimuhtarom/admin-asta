@@ -30,8 +30,10 @@ class GoodsStoreController extends Controller
                         'price',
                         'qty',
                         'trans_type',
-                        'status'
+                        'status',
+                        'order'
                     )
+                    ->orderby('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
                         'name',
@@ -81,21 +83,13 @@ class GoodsStoreController extends Controller
             {           
                 if ($file->move(public_path('../public/upload/Goods'), $nama_file_unik))
                 {
-                    if($request->title== NULL){
-                        return redirect()->route('Goods_Store')->with('alert','Title can\'t be NULL ');
-                    } else if($request->transaction_type == NULL) {
-                        return redirect()->route('Goods_Store')->with('alert','Transaction Type can\'t be NULL ');
-                    } else if ($request->price == NULL) {
-                        return redirect()->route('Goods_Store')->with('alert','Price can\'t be NULL ');
-                    }  else if($request->qty == NULL) {
-                        return redirect()->route('Goods_Store')->with('alert','Quantity can\'t be NULL ');
-                    } else {
 
                         $validator = Validator::make($request->all(),[
                             'title'            => 'required',
-                            'transaction_type' => 'required|integer|between:1,8',
+                            // 'transaction_type' => 'required|integer|between:1,8',
                             'price'            => 'required|integer',
                             'qty'              => 'required',
+                            'order'            => 'required|integer|unique:item_point,order'
                         ]);
                     
                         if ($validator->fails()) {
@@ -105,7 +99,7 @@ class GoodsStoreController extends Controller
                         $goods = ItemPoint::create([
                             'item_id'         => $id_new,
                             'name'       => $request->title,
-                            'trans_type' => $request->transaction_type,
+                            // 'trans_type' => $request->transaction_type,
                             'price'      => $request->price,
                             'status'     => '1',
                             'qty'        => $request->qty
@@ -118,7 +112,7 @@ class GoodsStoreController extends Controller
                             'desc'      => 'Create new in menu Goods Store with name '. $goods->name
                         ]);
                         return redirect()->route('Goods_Store')->with('success','Insert Data successfull');
-                    }
+                    
                 }
                 else
                 {
@@ -173,7 +167,9 @@ class GoodsStoreController extends Controller
             case 'status':
                 $name = 'Status';
                 break;
-            
+            case 'order':
+                $name = 'Order';
+                break;            
             default:
                 "";
         }

@@ -85,6 +85,7 @@
                 @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
+                <th>Order</th>
                 <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Gold Awarded</th>
@@ -103,6 +104,7 @@
               @if($menu && $mainmenu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
+                <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->order }}</a></td>
                 <td>
                     <div class="media-container">
                         <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
@@ -142,6 +144,7 @@
               </tr>
               @else 
               <tr>
+                <td>{{ $gold->order }}</td>
                 <td>
                       <div class="media-container">
                         <figure class="media-object">
@@ -188,6 +191,9 @@
               <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
             </div><br>
              <input type='file' class="upload-img" name="file" onchange="readURL(this);"/><br><br>
+          </div>
+          <div class="form-group">
+            <input type="text" name="order" class="form-control" id="basic-url" placeholder="order">
           </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">

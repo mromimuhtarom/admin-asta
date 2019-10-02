@@ -9,6 +9,7 @@ use App\StoreTransactionHist;
 use App\Classes\MenucLass;
 use App\ItemsGold;
 use App\ItemsCash;
+use App\ItemPoint;
 use App\Log;
 use Session;
 use Carbon\Carbon;
@@ -58,7 +59,7 @@ class User_Banking_TransactionController extends Controller
                      )
                      ->get();
 
-        $item_point = ItemsCash::select(
+        $item_point = ItemsPoint::select(
                         'item_id', 
                         'name'
                      )

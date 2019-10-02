@@ -32,10 +32,11 @@ class GoldStoreController extends Controller
                         'trans_type',
                         'google_key',
                         'status',
-                        'shop_type'
+                        'shop_type',
+                        'order'
                     )
                     ->where('shop_type', '=', 1)
-                    ->orderBy('item_id', 'desc')
+                    ->orderBy('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
                         'name', 
@@ -61,12 +62,14 @@ class GoldStoreController extends Controller
         $goldAwarded    = $request->goldAwarded;
         $priceCash      = $request->priceCash;
         $googleKey      = $request->googleKey;
+        $order          = $request->order;
 
         $validator = Validator::make($request->all(),[
             'title'       => 'required',
             'goldAwarded' => 'required|integer',
             'priceCash'   => 'required|integer',
             'googleKey'   => 'required',
+            'order'       => 'required|integer|unique:item_cash,order'
         ]);
     
         if ($validator->fails()) {
@@ -106,6 +109,7 @@ class GoldStoreController extends Controller
                         'item_type'  => 2,
                         'status'     => 0,
                         'google_key' => $googleKey,
+                        'order'      => $order
                     ]);
             
                     Log::create([
@@ -166,6 +170,9 @@ class GoldStoreController extends Controller
                 break;
             case "trans_type":
                 $name = "Pay Transaction";
+                break;
+            case "order":
+                $name = "Order";
                 break;
             default:
             "";

@@ -170,7 +170,8 @@
                         {{-- <th>Gold Bonus</th> --}}
                         <th>Bonus Item</th>
                         <th>Status</th>
-                        <th>TimeStamp</th>
+                        <th>Date Request</th>
+                        <th>Date Aprove Decline</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -194,6 +195,7 @@
                         @endphp
                         <td>{{ $status }}</td>
                         <td>{{ $tr->datetime }}</td>
+                        <td>{{ $tr->action_date }}</td>
                     </tr>
                     @endforeach
                 </tbody>

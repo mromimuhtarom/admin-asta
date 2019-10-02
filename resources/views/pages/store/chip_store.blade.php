@@ -83,6 +83,7 @@
                 @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
+                <th>Order</th>
                 <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Category</th>
@@ -99,6 +100,7 @@
                 @if($menu && $mainmenu)
                   <tr>
                     <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->item_id }}"></td>
+                    <td><a href="#" class="usertext" data-name="order" data-title="Orders" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->order }}</a></td>
                     <td>
                         <div class="media-container">
                             <form method="POST" action="{{ route('ChipStore-updateimage') }}" enctype="multipart/form-data">
@@ -136,6 +138,7 @@
                   </tr>
                 @else 
                   <tr>
+                    <td>{{ $itm->order }}</td>
                     <td>
                       <div class="media-container">
                         <figure class="media-object">
@@ -212,7 +215,10 @@
             <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
               <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
             </div><br>
-             <input type='file' class="upload-img" name="file" onchange="readURL(this);"/><br><br>
+            <input type='file' class="upload-img" name="file" onchange="readURL(this);"/><br><br>
+          </div>
+          <div class="form-group">
+              <input type="text" name="order" class="form-control" id="basic-url" placeholder="Order">
           </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">

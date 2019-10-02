@@ -24,14 +24,16 @@
                         <div class="table-outer">
                             <table class="table table-bordered">
                                 <thead>
-                                    <th>tes</th>
-                                    <th>test2</th>
+                                    <th>Type</th>
+                                    <th>Link</th>
+                                    <th>Version</th>
                                 </thead>
                                 <tbody>
-                                @foreach ($xml->children() as $xl)
+                                @foreach ($xml_andro->children() as $xl)
                                     <tr>
-                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="gamecode" data-pk="{{ $xl['id'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->gamecode }}</a></td>
-                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['id'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->link }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->link }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->ver }}</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -58,15 +60,17 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td>tes</td>
-                                        <td>tes2</td>
+                                        <td>Type</td>
+                                        <td>Link</td>
+                                        <td>Version</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($xml->children() as $xl)
+                                @foreach ($xml_ios->children() as $xl_ios)
                                     <tr>
-                                        <td>{{ $xl->gamecode }}</td>
-                                        <td>{{ $xl->link }}</td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->link }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->ver }}</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

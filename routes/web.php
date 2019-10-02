@@ -631,6 +631,7 @@ Route::middleware('authenticated')->group(function(){
         Route::middleware('page_denied:Version Asset Apk')->group(function(){
             Route::get('VersionAsset-view', 'VersionAssetController@index')->name('Version_Asset_Apk');
             Route::post('VersionAsset-update', 'VersionAssetController@update')->name('VersionAssetApk-update');
+            Route::post('VersionAsset-updateIos', 'VersionAssetController@update_ios')->name('VersionAssetApkIos-update');
         });
     });
 

@@ -17,6 +17,8 @@ use App\Classes\MenuClass;
 use App\ResellerRank;
 use App\ItemsCash;
 use App\ConfigText;
+use App\ItemsGold;
+use App\ItemPoint;
 
 class ResellerController extends Controller
 {
@@ -279,6 +281,7 @@ class ResellerController extends Controller
                                  'asta_db.store_transaction_hist.item_name',
                                  'asta_db.store_transaction_hist.quantity',
                                  'asta_db.store_transaction_hist.item_price',
+                                 'asta_db.store_transaction_hist.action_date',
                                  'asta_db.store_transaction_hist.status',
                                  'asta_db.store_transaction_hist.datetime',
                                  'asta_db.store_transaction_hist.action_date'
@@ -302,7 +305,7 @@ class ResellerController extends Controller
             if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
   
                 $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                                  ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                  ->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
                                   ->orderBy('asta_db.store_transaction_hist.datetime', 'asc')
                                   ->get();
         
@@ -312,7 +315,7 @@ class ResellerController extends Controller
               }else if ($searchUsername != NULL && $startDate != NULL) {
         
                 $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('datetime', '>=', $startDate." 00:00:00")
+                                  ->WHERE('action_date', '>=', $startDate." 00:00:00")
                                   ->orderBy('datetime', 'asc')
                                   ->get();
         
@@ -321,7 +324,7 @@ class ResellerController extends Controller
         
               }else if ($searchUsername != NULL && $endDate != NULL) {
                 $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('datetime', '<=', $endDate." 23:59:59")
+                                  ->WHERE('action_date', '<=', $endDate." 23:59:59")
                                   ->orderBy('datetime', 'desc')
                                   ->get();
         
@@ -339,7 +342,7 @@ class ResellerController extends Controller
             if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
   
                 $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                                  ->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                  ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
                                   ->orderBy('asta_db.store_transaction_hist.action_date', 'asc')
                                   ->get();
         
@@ -349,7 +352,7 @@ class ResellerController extends Controller
               }else if ($searchUsername != NULL && $startDate != NULL) {
         
                 $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('action_date', '>=', $startDate." 00:00:00")
+                                  ->WHERE('datetime', '>=', $startDate." 00:00:00")
                                   ->orderBy('action_date', 'asc')
                                   ->get();
         
@@ -358,7 +361,7 @@ class ResellerController extends Controller
         
               }else if ($searchUsername != NULL && $endDate != NULL) {
                 $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('action_date', '<=', $endDate." 23:59:59")
+                                  ->WHERE('datetime', '<=', $endDate." 23:59:59")
                                   ->orderBy('action_date', 'desc')
                                   ->get();
         
@@ -383,14 +386,16 @@ public function detailTransaction($month, $year)
                         'asta_db.store_transaction_hist.item_name',
                         'asta_db.store_transaction_hist.quantity',
                         'asta_db.store_transaction_hist.item_price',
+                        'asta_db.store_transaction_hist.action_date',
+                        'asta_db.store_transaction_hist.shop_type',
                         'asta_db.store_transaction_hist.status',
                         'asta_db.store_transaction_hist.datetime', 
                         'asta_db.reseller.username'
                     )
                     ->join('asta_db.reseller','asta_db.store_transaction_hist.user_id','=','asta_db.reseller.reseller_id')
-                    ->whereYear('datetime', $year)
-                    ->whereMonth('datetime', $month)
-                    ->where('user_type', '=', 4)
+                    ->whereYear('action_date', $year)
+                    ->whereMonth('action_date', $month)
+                    ->where('shop_type', '=', 2)
                     ->orderby('datetime', 'ASC')
                     ->get();
     $datenow        = Carbon::now('GMT+7');
@@ -484,6 +489,21 @@ public function detailTransaction($month, $year)
     {
         $data = $request->all();
         $datetimenow = Carbon::now('GMT+7');
+        $validate = [
+            'username'      => 'unique:reseller,username',
+            'phone'         => 'unique:reseller,phone',
+            'email'         => 'unique:reseller,email',
+            'identitycard'  => 'unique:reseller,ktp'
+          ];
+    
+          $validator = Validator::make($data,$validate);
+    
+          if($validator->fails())
+          {
+    
+            return back()->withInput()->with('alert', $validator->errors()->first());
+    
+          }
   
         Reseller::insertData([
           'username' => $request->username,
@@ -523,11 +543,13 @@ public function detailTransaction($month, $year)
                             'asta_db.reseller.username',
                             'asta_db.payment.name as bankname',
                             'items_cash.name as item_name',
+                            'asta_db.store_transaction.item_id',
                             'items_cash.goldAwarded',
                             'asta_db.store_transaction.datetime',
                             'asta_db.store_transaction.quantity',
                             'asta_db.store_transaction.item_price',
                             'asta_db.store_transaction.description',
+                            'asta_db.store_transaction.shop_type',
                             'asta_db.store_transaction.id',
                             'asta_db.store_transaction.payment_id',
                             'asta_db.store_transaction.item_type'
@@ -536,11 +558,29 @@ public function detailTransaction($month, $year)
                         ->where('asta_db.store_transaction.shop_type', '=', 2)
                         ->orderBy('asta_db.store_transaction.datetime', 'ASC')
                         ->get();
+
+            $item_gold = ItemsGold::select(
+                            'item_id', 
+                            'name'
+                         )
+                         ->get();
+    
+            $item_cash = ItemsCash::select(
+                            'item_id', 
+                            'name'
+                         )
+                         ->get();
+    
+            $item_point = ItemPoint::select(
+                            'item_id', 
+                            'name'
+                         )
+                         ->get();
                         
         $menu     = MenuClass::menuName('Request Transaction');
         $submenu  = MenuClass::menuName('Reseller Transaction');
         $mainmenu = MenuClass::menuName('Reseller');
-        return view('pages.reseller.request_transaction', compact('transactions', 'menu', 'mainmenu', 'submenu'));
+        return view('pages.reseller.request_transaction', compact('item_gold', 'item_cash', 'item_point', 'transactions', 'menu', 'mainmenu', 'submenu'));
     }
 //------ End Index Request Transaction ------//
 
@@ -552,11 +592,11 @@ public function detailTransaction($month, $year)
         $amount                   = $request->price;
         $reseller_id              = $request->reseller_id;
         $item_name                = $request->item_name;
-        $desc                     = $request->desc;
+        $desc                     = $request->description;
         $quantity                 = $request->quantity;
         $payment_id               = $request->payment_id;
         $datetime                 = $request->datetime;
-        $user_type                = $request->user_type;
+        $shop_type                = $request->shop_type;
         $item_type                = $request->item_type;
         $datetimenow              = Carbon::now('GMT+7');
         $datenow                  = $datetimenow->toDateString();
@@ -590,13 +630,14 @@ public function detailTransaction($month, $year)
                 'user_id'       => $reseller_id,
                 'item_name'     =>  'nanti',
                 'status'        =>  2,
-                'desc'          =>  $desc,
+                'description'   =>  $desc,
                 'quantity'      =>  $quantity,
                 'payment_id'    =>  $payment_id,
                 'datetime'      =>  $datetime,
-                'user_type'     =>  $user_type,
+                'shop_type'     =>  $shop_type,
                 'item_type'     =>  4,
-                'item_price'    =>  $amount
+                'item_price'    =>  $amount,
+                'action_date'   => Carbon::now('GMT+7')
         ]);
 
   
@@ -604,14 +645,14 @@ public function detailTransaction($month, $year)
         //   $checkamount = DB::table('rese')
           ResellerBalance::create([
             'reseller_id' => $reseller_id,
-            'action_id'   => 2,
+            'action_id'   => 16,
             'credit'      => 0,
             'debet'       => $goldAwarded,
             'balance'     => $checkTotalGold->gold,
             'datetime'    => Carbon::now('GMT+7')
           ]);
 
-        StoreTransaction::where('user_id', '=', $reseller_id)->where('user_type', '=', 4)->delete();
+        StoreTransaction::where('user_id', '=', $reseller_id)->where('shop_type', '=', $shop_type)->delete();
 
 
           Log::create([
@@ -634,26 +675,26 @@ public function detailTransaction($month, $year)
         $amount         = $request->price;
         $reseller_id    = $request->reseller_id;
         $item_name      = $request->item_name;
-        $desc           = $request->desc;
+        $desc           = $request->description;
         $quantity       = $request->quantity;
         $payment_id     = $request->payment_id;
         $datetime       = $request->datetime;
-        $user_type      = $request->user_type;
+        $shop_type      = $request->shop_type;
         $item_type      = $request->item_type;
 
         StoreTransactionHist::create([
             'user_id'       => $reseller_id,
             'item_name'     =>  'nanti',
             'status'        =>  0,
-            'desc'          =>  $desc,
+            'description'   =>  $desc,
             'quantity'      =>  $quantity,
             'payment_id'    =>  $payment_id,
             'datetime'      =>  $datetime,
-            'user_type'     =>  $user_type,
+            'shop_type'     =>  $shop_type,
             'item_type'     =>  4,
             'item_price'    =>  $amount
         ]);
-        StoreTransaction::where('user_id', '=', $reseller_id)->where('user_type', '=', 4)->delete();
+        StoreTransaction::where('user_id', '=', $reseller_id)->where('shop_type', '=', $shop_type)->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '6',
@@ -684,7 +725,7 @@ public function detailTransaction($month, $year)
                         'status',
                         'shop_type'
                     )
-                    ->where('shop_type', '=', 4)
+                    ->where('shop_type', '=', 2)
                     ->orderBy('item_id', 'desc')
                     ->get();
         $active   = ConfigText::select(
@@ -714,7 +755,7 @@ public function detailTransaction($month, $year)
         $goldAwarded    = $request->goldAwarded;
         $priceCash      = $request->priceCash;
         $googleKey      = $request->googleKey;
-        $itemType       = $request->itemType;
+        // $itemType       = $request->itemType;
 
         $validator = Validator::make($request->all(),[
             'title'       => 'required',
@@ -733,7 +774,7 @@ public function detailTransaction($month, $year)
             'item_get'   => $goldAwarded,
             'price'      => $priceCash,
             'shop_type'  => 2,
-            'item_type'  => $itemType,
+            'item_type'  => 2,
             'google_key' => $googleKey,
         ]);
 

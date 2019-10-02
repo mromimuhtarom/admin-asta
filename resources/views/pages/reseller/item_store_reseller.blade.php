@@ -87,7 +87,8 @@
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                 <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ $gold->item_get }}</a></td>
                 <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->price }}</a></td>
-                <td><a href="#" class="itemType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ $gold->strItemType() }}</a></td>
+                {{-- <td><a href="#" class="itemType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ $gold->strItemType() }}</a></td> --}}
+                <td>Gold</td>
                 <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
                 <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->google_key }}</a></td>
                 <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
@@ -106,7 +107,8 @@
                 <td>{{ $gold->name }}</td>
                 <td>{{ $gold->item_get }}</td>
                 <td>{{ $gold->price }}</td>
-                <td>{{ $gold->strItemType() }}</td>
+                {{-- <td>{{ $gold->strItemType() }}</td> --}}
+                <td>Gold</td>
                 <td>{{ strTypeTransaction($gold->transaction_type) }}</td>
                 <td>{{ $gold->google_key }}</td>
                 <td>{{ strEnabledDisabled($gold->active) }}</td>
@@ -148,12 +150,12 @@
           </div>
           <div class="form-group">
             {{-- <input type="number" name="priceCash" class="form-control" id="basic-url" placeholder="price cash"> --}}
-            <select name="itemType" class="form-control">
+            {{-- <select name="itemType" class="form-control">
               <option value="">Choose Item Type</option>
               <option value="1">Chip</option>
               <option value="2">Gold</option>
               <option value="3">Goods</option>
-            </select>
+            </select> --}}
           </div>
           <div class="form-group">
             <input type="text" name="googleKey" class="form-control" id="basic-url" placeholder="google key">

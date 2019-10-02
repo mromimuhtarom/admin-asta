@@ -130,12 +130,12 @@
     };
     
     $('#dt_basic').dataTable({
-        "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
+        "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>f>"+
             "t"+
             "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
             "autoWidth" : true,
-            "oLanguage": {
-                "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+        "oLanguage": {
+            "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
         },
         "pagingType": "full_numbers",
         classes: {

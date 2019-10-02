@@ -13,8 +13,9 @@ class VersionAssetController extends Controller
      */
     public function index()
     {
-        $xml = simplexml_load_file("../../asta-asset/text/xml/books_report.xml");
-        return view('pages.version_asset.version_asset', compact('xml'));
+        $xml_andro = simplexml_load_file("../../asta-asset/text/xml/android/asset_game.xml");
+        $xml_ios = simplexml_load_file("../../asta-asset/text/xml/ios/asset_game.xml");
+        return view('pages.version_asset.version_asset', compact('xml_andro', 'xml_ios'));
     }
 
     /**
@@ -73,27 +74,74 @@ class VersionAssetController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        $gamep= simplexml_load_file("../../asta-asset/text/xml/books_report.xml");
-        foreach($gamep->game as $gamew)
+        $gamep= simplexml_load_file("../../asta-asset/text/xml/android/asset_game.xml");
+        foreach($gamep->children() as $gamew)
         {
-            if($name == 'gamecode')
+            if($name == 'type_ver')
             {
-                if($gamew['id'] == $pk)
+                if($gamew['name'] == $pk)
                 {
-                    $gamew->gamecode = $value;
+                    
+                    $gamew->type = $value;
                     break;
                 }
             } else if($name == 'link')
             {
-                if($gamew['id'] == $pk)
+                if($gamew['name'] == $pk)
                 {
                     $gamew->link = $value;
+                    break;
+                }
+            } else if($name == 'ver')
+            {
+                if($gamew['name'] == $pk)
+                {
+                    $gamew->ver = $value;
                     break;
                 }
             }
         }
         
-        file_put_contents("../../asta-asset/text/xml/books_report.xml", $gamep->asXML());
+        file_put_contents("../../asta-asset/text/xml/android/asset_game.xml", $gamep->asXML());
+
+
+    }
+
+    public function update_ios(Request $request)
+    {
+        $pk    = $request->pk;
+        $name  = $request->name;
+        $value = $request->value;
+
+        $gamep= simplexml_load_file("../../asta-asset/text/xml/ios/asset_game.xml");
+        foreach($gamep->children() as $gamew)
+        {
+            if($name == 'type_ver')
+            {
+                if($gamew['name'] == $pk)
+                {
+                    
+                    $gamew->type = $value;
+                    break;
+                }
+            } else if($name == 'link')
+            {
+                if($gamew['name'] == $pk)
+                {
+                    $gamew->link = $value;
+                    break;
+                }
+            } else if($name == 'ver')
+            {
+                if($gamew['name'] == $pk)
+                {
+                    $gamew->ver = $value;
+                    break;
+                }
+            }
+        }
+        
+        file_put_contents("../../asta-asset/text/xml/ios/asset_game.xml", $gamep->asXML());
 
 
     }
