@@ -59,7 +59,7 @@ class User_Banking_TransactionController extends Controller
                      )
                      ->get();
 
-        $item_point = ItemsPoint::select(
+        $item_point = ItemPoint::select(
                         'item_id', 
                         'name'
                      )

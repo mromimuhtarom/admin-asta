@@ -100,8 +100,8 @@
               @else 
               <tr>
                 <td>{{ $payment->name }}</td>
-                <td>{{ $payment->payment_type }}</td>
-                <td>{{ strTypeTransaction($payment->transaction_type) }}</td>
+                <td>{{ strTypeTransaction($payment->payment_type) }}</td>
+                <td>{{ $payment->transaction_type }}</td>
                 <td>{{ strEnabledDisabled($payment->status) }}</td>
               </tr>
               @endif

@@ -91,7 +91,7 @@
                 </tr>
                 @else 
                 <tr>
-                    <td><{{ $kt->name }}</td>
+                    <td>{{ $kt->name }}</td>
                     <td>{{ $kt->min_buy }}</td>
                     <td>{{ $kt->max_buy }}</td>
                 </tr>

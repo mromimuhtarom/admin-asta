@@ -121,7 +121,7 @@
                   </tr>
                   @else 
                   <tr>
-                      <td>{{ $tb->name }}<td>
+                      <td>{{ $tb->name }}</td>
                       <td>{{ $tb->roomname }}</td>
                       <td>{{ $tb->max_player }}</td>
                       <td>{{ $tb->small_blind }}</td>
