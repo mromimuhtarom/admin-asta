@@ -120,7 +120,7 @@
                                 <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gf->id }}">
                                 <i class="fa fa-edit media-icon-wtr1"></i>
                                 <div class="nav-name">Watermark</div>
-                              </span>
+                              </span> 
                               <figure class="media-object">
                                 <img class="img-object-wtr imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->id }}.png?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                                 <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
