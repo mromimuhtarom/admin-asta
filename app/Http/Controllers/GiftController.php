@@ -37,6 +37,8 @@ class GiftController extends Controller
         $value        = str_replace(':', ',', $giftcategory->value);
         $category     = explode(",", $value);
 
+        $timenow = Carbon::now('GMT+7');
+
         // ---- untuk enabled disabled ------//
         $active = ConfigText::select(
                     'name', 
@@ -47,7 +49,7 @@ class GiftController extends Controller
         $value = str_replace(':', ',', $active->value);
         $endis = explode(",", $value);
 
-        return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu'));
+        return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu', 'timenow'));
     }
 
     /**

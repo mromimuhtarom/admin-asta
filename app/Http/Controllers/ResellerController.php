@@ -489,7 +489,7 @@ public function detailTransaction($month, $year)
     {
         $data = $request->all();
         $datetimenow = Carbon::now('GMT+7');
-        $validate = [
+          $validate = [
             'username'      => 'unique:reseller,username',
             'phone'         => 'unique:reseller,phone',
             'email'         => 'unique:reseller,email',
@@ -500,9 +500,7 @@ public function detailTransaction($month, $year)
     
           if($validator->fails())
           {
-    
             return back()->withInput()->with('alert', $validator->errors()->first());
-    
           }
   
         Reseller::insertData([

@@ -30,11 +30,19 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($xml_andro->children() as $xl)
+                                    @if ($menu)
                                     <tr>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->ver }}</a></td>
                                     </tr>
+                                    @else 
+                                    <tr>
+                                        <td>{{ $xl->type }}</td>
+                                        <td>{{ $xl->link }}</td>
+                                        <td>{{ $xl->ver }}</td>
+                                    </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>
@@ -67,11 +75,19 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($xml_ios->children() as $xl_ios)
+                                    @if ($menu)
                                     <tr>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->ver }}</a></td>
                                     </tr>
+                                    @else 
+                                    <tr>
+                                        <td>{{ $xl_ios->type }}</td>
+                                        <td>{{ $xl_ios->link }}</td>
+                                        <td>{{ $xl_ios->ver }}</td>
+                                    </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>

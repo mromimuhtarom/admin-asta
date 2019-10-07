@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\MenuClass;
 
 class VersionAssetController extends Controller
 {
@@ -13,9 +14,10 @@ class VersionAssetController extends Controller
      */
     public function index()
     {
+        $menu      = MenuClass::menuName('Version Asset Apk');
         $xml_andro = simplexml_load_file("../../asta-api/AssetBundle/XML/Android/asset_game.xml");
-        $xml_ios = simplexml_load_file("../../asta-api/AssetBundle/XML/IOS/asset_game.xml");
-        return view('pages.version_asset.version_asset', compact('xml_andro', 'xml_ios'));
+        $xml_ios   = simplexml_load_file("../../asta-api/AssetBundle/XML/IOS/asset_game.xml");
+        return view('pages.version_asset.version_asset', compact('xml_andro', 'xml_ios', 'menu'));
     }
 
     /**
