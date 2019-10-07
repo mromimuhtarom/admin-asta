@@ -82,9 +82,8 @@ class GiftController extends Controller
         $ukuran                                   = $_FILES['file']['size'];
         $nama_file_unik                           = $id_new.'.'.$ekstensi;
         list($width, $height)                     = getimagesize($file);
-        list($width_watermark, $height_watermark) = getimagesize($file_wtr);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
             {
@@ -105,6 +104,10 @@ class GiftController extends Controller
                         if ($validator->fails()) {
                             return back()->withErrors($validator->errors());
                         }
+
+                        if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                        {
+                            // list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
                             $folder = "../public/upload/gifts/";
@@ -137,8 +140,11 @@ class GiftController extends Controller
                             imagepng($source, $thumbnail);
                             imagedestroy($source);
                         // end watermark image
-
-
+                        } else {
+                            $file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik);
+                            $file->move(public_path('../public/upload/gifts'), $nama_file_unik);
+                        }
+                            
                         $gift = Gift::create([
                             'id'          => $id_new,
                             'name'        => $request->title,
@@ -200,13 +206,15 @@ class GiftController extends Controller
         $filename               = $id->id;
         $nama_file_unik         = $filename.'.'.$ekstensi;
         list($width, $height)   = getimagesize($file);
-        list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
 
             if($ukuran < 1044070)
             {
+                if($file_wtr  && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                {
+                    // list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
                     $folder = "../public/upload/gifts/";
                     $thumbnail = $folder.$nama_file_unik;
@@ -240,9 +248,21 @@ class GiftController extends Controller
 
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
+                } else {
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts'), $nama_file_unik));
+                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                    File::delete($path);
+                    $path1 = '../public/upload/gifts/image2/'.$pk.'.png';
+                    File::delete($path1);
+                }
+
+
                     Gift::where('id', '=', $pk)->update([
-                        'img_ver' =>  $imageversion 
+                        'img_ver' =>  $imageversion,
+                        'width'   =>  $width,
+                        'height'  =>  $height
                     ]);
+
 
                     Log::create([
                         'op_id'     => Session::get('userId'),
@@ -324,7 +344,7 @@ class GiftController extends Controller
         if($id != '')
         { 
             Gift::where('id', '=', $id)->delete();
-            $path = '../public/upload/gifts/'.$gifts->id.'.jpg';
+            $path = '../public/upload/gifts/'.$gifts->id.'.png';
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),

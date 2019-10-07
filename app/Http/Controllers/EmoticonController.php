@@ -81,10 +81,10 @@ class EmoticonController extends Controller
         $ukuran                       = $_FILES['file']['size'];
         $nama_file_unik               = $id_new.'.'.$ekstensi;
         list($width, $height)         = getimagesize($file);
-        list($width_wtr, $height_wtr) = getimagesize($file_wtr);
+        // list($width_wtr, $height_wtr) = getimagesize($file_wtr);
         // $acak                   = rand(1,99);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
             {
@@ -110,7 +110,8 @@ class EmoticonController extends Controller
                             return back()->withErrors($validator->errors());
                         }
 
-
+                        if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                        {
                         // watermark image
                             // Menetapkan nama thumbnail
                             $folder = "../public/upload/emoticon/";
@@ -143,6 +144,13 @@ class EmoticonController extends Controller
                             imagepng($source, $thumbnail);
                             imagedestroy($source);
                         // end watermark image
+                        } else {
+                            $file->move(public_path('../public/upload/emoticon'), $nama_file_unik);
+                            $path = '../public/upload/emoticon/image1/'.$pk.'.png';
+                            File::delete($path);
+                            $path1 = '../public/upload/emoticon/image2/'.$pk.'.png';
+                            File::delete($path1);
+                        }
 
                         $emoticon = Emoticon::create([
                             'id'          => $id_new,
@@ -222,15 +230,19 @@ class EmoticonController extends Controller
         $filename               = $id->id;
         $nama_file_unik         = $filename.'.'.$ekstensi;
         list($width, $height)         = getimagesize($file);
-        list($width_wtr, $height_wtr) = getimagesize($file_wtr);
+        // list($width_wtr, $height_wtr) = getimagesize($file_wtr);
 
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true )
         {
 
             if($ukuran < 1044070)
             {
                 // if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
                 // {
+                    if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                    {
+
+                    
                         // watermark image
                             // Menetapkan nama thumbnail
                             $folder = "../public/upload/emoticon/";
@@ -261,6 +273,10 @@ class EmoticonController extends Controller
 
                             imagepng($source, $thumbnail);
                             imagedestroy($source);
+                    } else {
+                        $file->move(public_path('../public/upload/emoticon/image1'), $nama_file_unik);
+                        $file->move(public_path('../public/upload/emoticon'), $nama_file_unik);
+                    }
                         // end watermark image
                     Emoticon::where('id', '=', $pk)->update([
                         'img_ver' =>  $imageversion 
