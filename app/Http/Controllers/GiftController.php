@@ -12,6 +12,7 @@ use DB;
 use File;
 use Validator;
 use App\ConfigText;
+use Storage;
 
 class GiftController extends Controller
 {
@@ -107,7 +108,7 @@ class GiftController extends Controller
 
                         if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                         {
-                            // list($width_watermark, $height_watermark) = getimagesize($file_wtr);
+                            list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
                             $folder = "../public/upload/gifts/";
@@ -141,8 +142,8 @@ class GiftController extends Controller
                             imagedestroy($source);
                         // end watermark image
                         } else {
-                            $file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik);
-                            $file->move(public_path('../public/upload/gifts'), $nama_file_unik);
+                            $rootpath             = '../../asta-api/gift';
+                            $file->move($rootpath, $nama_file_unik) ;
                         }
                             
                         $gift = Gift::create([
@@ -214,16 +215,16 @@ class GiftController extends Controller
             {
                 if($file_wtr  && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
-                    // list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
+                    list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../public/upload/gifts/";
+                    $folder = "../../asta-api/gift/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik));
+                    $source = imagecreatefrompng($file->move('../../asta-api/gift/image1', $nama_file_unik));
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/gifts/image2'), $nama_file_unik));
+                    $watermark = imagecreatefrompng($file_wtr->move('../../asta-api/gift/image2', $nama_file_unik));
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -249,10 +250,11 @@ class GiftController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts'), $nama_file_unik));
-                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                    $rootpath             = '../../asta-api/gift';
+                    $file->move($rootpath, $nama_file_unik) ;
+                    $path = '../../asta-api/gift/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../public/upload/gifts/image2/'.$pk.'.png';
+                    $path1 = '../../asta-api/gift/image2/'.$pk.'.png';
                     File::delete($path1);
                 }
 
@@ -344,7 +346,7 @@ class GiftController extends Controller
         if($id != '')
         { 
             Gift::where('id', '=', $id)->delete();
-            $path = '../public/upload/gifts/'.$gifts->id.'.png';
+            $path = '../../asta-api/gift/'.$gifts->id.'.png';
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),
