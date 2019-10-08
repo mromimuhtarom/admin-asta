@@ -50,7 +50,11 @@ class GiftController extends Controller
         $value = str_replace(':', ',', $active->value);
         $endis = explode(",", $value);
 
-        return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu', 'timenow'));
+        $rootpath = '../../asta-api/gift';
+        $client = Storage::createLocalDriver(['root' => $rootpath]);
+        
+
+        return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu', 'timenow', 'client'));
     }
 
     /**
@@ -86,7 +90,7 @@ class GiftController extends Controller
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 1044070)
+            if($ukuran < 5242880)
             {
                     if($request->title == NULL){
                         return redirect()->route('Table_Gift')->with('alert','Name can\'t be NULL ');
@@ -142,8 +146,10 @@ class GiftController extends Controller
                             imagedestroy($source);
                         // end watermark image
                         } else {
-                            $rootpath             = '../../asta-api/gift';
-                            $file->move($rootpath, $nama_file_unik) ;
+                            // $rootpath = '../../asta-api/gift';
+                            // $client = Storage::createLocalDriver(['root' => $rootpath]);
+                            // $client->put($nama_file_unik, file_get_contents($file));
+                            $file->move(public_path('../public/upload/gifts'), $nama_file_unik);
                         }
                             
                         $gift = Gift::create([
@@ -211,20 +217,20 @@ class GiftController extends Controller
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
 
-            if($ukuran < 1044070)
-            {
+            if($ukuran < 5242880)
+            {            
                 if($file_wtr  && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../../asta-api/gift/";
+                    $folder = "../public/upload/gifts/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move('../../asta-api/gift/image1', $nama_file_unik));
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik));
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move('../../asta-api/gift/image2', $nama_file_unik));
+                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/gifts/image2'), $nama_file_unik));
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -250,11 +256,13 @@ class GiftController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    $rootpath             = '../../asta-api/gift';
-                    $file->move($rootpath, $nama_file_unik) ;
-                    $path = '../../asta-api/gift/image1/'.$pk.'.png';
+                    // $rootpath = '../../asta-api/gift';
+                    // $client = Storage::createLocalDriver(['root' => $rootpath]);
+                    // $client->put($nama_file_unik, file_get_contents($file));
+                    $file->move('../public/upload/gifts', $nama_file_unik);
+                    $path = '../public/gifts/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../../asta-api/gift/image2/'.$pk.'.png';
+                    $path1 = '../public/gifts/image2/'.$pk.'.png';
                     File::delete($path1);
                 }
 
@@ -282,7 +290,7 @@ class GiftController extends Controller
         }
         else
         {
-            return redirect()->route('Table_Gift')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Table_Gift')->with('alert','format must be png and pictorial');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -346,7 +354,7 @@ class GiftController extends Controller
         if($id != '')
         { 
             Gift::where('id', '=', $id)->delete();
-            $path = '../../asta-api/gift/'.$gifts->id.'.png';
+            $path = '../public/upload/gifts/'.$gifts->id.'.png';
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),

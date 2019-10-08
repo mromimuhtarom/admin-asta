@@ -39,7 +39,8 @@ class EmoticonController extends Controller
                     ->first();
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
-        return view('pages.item.emoticon', compact('emoticon', 'menu', 'mainmenu', 'endis'));
+        $timenow  = Carbon::now('GMT+7');
+        return view('pages.item.emoticon', compact('emoticon', 'menu', 'mainmenu', 'endis', 'timenow'));
     }
 
     /**
@@ -82,12 +83,11 @@ class EmoticonController extends Controller
         $ukuran                       = $_FILES['file']['size'];
         $nama_file_unik               = $id_new.'.'.$ekstensi;
         list($width, $height)         = getimagesize($file);
-        // list($width_wtr, $height_wtr) = getimagesize($file_wtr);
         // $acak                   = rand(1,99);
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 1044070)
+            if($ukuran < 5242880)
             {
                 // if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
                 // {
@@ -116,15 +116,15 @@ class EmoticonController extends Controller
                             list($width_wtr, $height_wtr) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../../asta-api/emoticon/";
+                            $folder = "../public/upload/emoticon/";
                             $thumbnail = $folder."".$nama_file_unik;
 
 
                             // Memuat gambar utama
-                            $source = imagecreatefrompng($file->move(public_path('../../asta-api/emoticon/image1'), $nama_file_unik));
+                            $source = imagecreatefrompng($file->move(public_path('../public/upload/emoticon/image1'), $nama_file_unik));
 
                             // Memuat gambar watermark
-                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../../asta-api/emoticon/image2'), $nama_file_unik));
+                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/emoticon/image2'), $nama_file_unik));
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
                             $water_width = imagesx($watermark);
@@ -147,7 +147,7 @@ class EmoticonController extends Controller
                             imagedestroy($source);
                         // end watermark image
                         } else {
-                            $file->move('../../asta-api/emoticon', $nama_file_unik);
+                            $file->move('../public/upload/emoticon', $nama_file_unik);
                         }
 
                         $emoticon = Emoticon::create([
@@ -233,7 +233,7 @@ class EmoticonController extends Controller
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true )
         {
 
-            if($ukuran < 1044070)
+            if($ukuran < 5242880)
             {
                 // if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
                 // {
@@ -243,14 +243,14 @@ class EmoticonController extends Controller
                         list($width_wtr, $height_wtr) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../../asta-api/emoticon/";
+                            $folder = "../public/upload/emoticon/";
                             $thumbnail = $folder.$nama_file_unik;
 
                             // Memuat gambar utama
-                            $source = imagecreatefrompng($file->move('../../asta-api/emoticon/image1', $nama_file_unik));
+                            $source = imagecreatefrompng($file->move('../public/upload/emoticon/image1', $nama_file_unik));
 
                             // Memuat gambar watermark
-                            $watermark = imagecreatefrompng($file_wtr->move('../../asta-api/emoticon/image2', $nama_file_unik));
+                            $watermark = imagecreatefrompng($file_wtr->move('../public/upload/emoticon/image2', $nama_file_unik));
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
                             $water_width = imagesx($watermark);
@@ -272,10 +272,10 @@ class EmoticonController extends Controller
                             imagepng($source, $thumbnail);
                             imagedestroy($source);
                     } else {
-                        $file->move('../../asta-api/emoticon', $nama_file_unik);
-                        $path = '../../asta-api/emoticon/image1/'.$pk.'.png';
+                        $file->move('../public/upload/emoticon', $nama_file_unik);
+                        $path = '../public/upload/emoticon/image1/'.$pk.'.png';
                         File::delete($path);
-                        $path1 = '../../asta-api/emoticon/image2/'.$pk.'.png';
+                        $path1 = '../public/upload/emoticon/image2/'.$pk.'.png';
                         File::delete($path1);
                     }
                         // end watermark image

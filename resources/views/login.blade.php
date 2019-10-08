@@ -56,7 +56,7 @@
                         <form method="post" action="{{ route('login') }}">
                             {{  csrf_field() }}
                             <div class="username">
-                                <input type="text" name="username" id="" placeholder="username">
+                            <input type="text" name="username" id="" placeholder="username" value="{{Session::get('data')}}">
                                 <i class="far fa-user fa-2x"></i>
                             </div>
                             <div class="password">

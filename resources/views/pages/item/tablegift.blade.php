@@ -40,9 +40,9 @@
 @endif
 
 @if (\Session::has('alert'))
-<div class="alert alert-danger">
+      <div class="alert alert-danger">
         <div>{{Session::get('alert')}}</div>
-</div>
+      </div>
 
 @endif
 
@@ -80,7 +80,7 @@
 
       </div>
 
-      <div class="custom-scroll table-responsive" style="height:870px;">
+      <div class="custom-scroll table-responsive" style="height:900px;">
 
         <div class="table-outer">
           <table class="table table-bordered">
@@ -113,16 +113,16 @@
                                 <input type="file" name="file" id="media-input-wtr" class="upload{{ $gf->id }}" accept="image/*">
                                 <i class="fa fa-edit media-icon-wtr"></i>
                                 <p class="nav-name">Main Image</p>
-                                 
+                                
                               </span>
                               <span class="media-overlay-wtr1 med-ovlay{{ $gf->id }}">
                                 <input type="hidden" name="pk" value="{{ $gf->id }}">
                                 <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gf->id }}">
                                 <i class="fa fa-edit media-icon-wtr1"></i>
                                 <div class="nav-name">Watermark</div>
-                              </span> 
+                              </span>
                               <figure class="media-object">
-                                <img class="img-object-wtr imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->id }}.png?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object-wtr imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->id }}.png?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                                 <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                                 <img class="img-object-wtr2 imgupload2{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                               </figure>
@@ -156,7 +156,7 @@
                     <td >
                           <div class="media-container">
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->id }}.png" style="display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object imgupload{{ $gf->id }}" src="/upload/gifts/{{ $gf->id }}.png?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
                           </div>
                     </td>
@@ -372,6 +372,7 @@ $(".watermark-image").change(function() {
               foreach($gifts as $gf) {
                 echo'$(".save-profile'.$gf->id.'").hide(0);';
                   echo'$(".med-ovlay'.$gf->id.'").hide(0);';
+                  echo'$(".imgupload'.$gf->id.'").show();';
                   echo'$(".imgupload1'.$gf->id.'").hide(0);';
                   echo'$(".imgupload2'.$gf->id.'").hide(0);';
                   echo'$(".cancel-upload'.$gf->id.'").hide(0);';

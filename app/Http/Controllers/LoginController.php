@@ -17,7 +17,7 @@ use Artisan;
 
 class LoginController extends Controller
 {
-    public function loginbefore()
+    public function loginbefore(Request $request)
     {
         Artisan::call('route:clear');
         Artisan::call('config:clear');
@@ -30,7 +30,8 @@ class LoginController extends Controller
             {
                 OperatorActive::where('date_update', '<', DB::raw('NOW() + INTERVAL 60 MINUTE'))->delete();
             }
-        return view('login');
+        $username = $request->username;
+        return view('login', compact('username'));
     }
 
     
@@ -84,7 +85,8 @@ class LoginController extends Controller
             return redirect(route('Dashboard'));
   
          } else {
-            return redirect('/')->with('alert','Username or Password are wrong!!');
+            $username = $request->username;
+            return redirect('/')->with('alert','Username or Password are wrong!!')->with('data', $username);
         }
   
     }
