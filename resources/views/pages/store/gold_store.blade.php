@@ -115,7 +115,7 @@
                             <i class="fa fa-edit media-icon"></i>
                           </span>
                           <figure class="media-object">
-                            <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png" style="  display: block;margin-left: auto;margin-right: auto;">
+                            <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
@@ -148,7 +148,7 @@
                 <td>
                       <div class="media-container">
                         <figure class="media-object">
-                          <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                          <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
                         </figure>
                       </div>
                 </td>

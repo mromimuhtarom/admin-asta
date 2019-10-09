@@ -138,8 +138,9 @@
 	    "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
-			"autoWidth" : true,
-			"oLanguage": {
+		"autoWidth" : true,
+        "bSort" : false,
+		"oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
 		},
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],

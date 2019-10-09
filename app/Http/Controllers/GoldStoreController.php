@@ -46,8 +46,8 @@ class GoldStoreController extends Controller
                     ->first();
         $value     = str_replace(':', ',', $active->value);
         $endis     = explode(",", $value);
-
-        return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu'));
+        $timenow   = Carbon::now('GMT+7');
+        return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu', 'timenow'));
     }
 
     /**

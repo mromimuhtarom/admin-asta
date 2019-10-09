@@ -133,7 +133,8 @@
         "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>f>"+
             "t"+
             "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
-            "autoWidth" : true,
+        "autoWidth" : true,
+        "order": [[ 6, "desc" ]],
         "oLanguage": {
             "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
         },

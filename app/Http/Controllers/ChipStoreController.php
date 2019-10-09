@@ -43,7 +43,8 @@ class ChipStoreController extends Controller
                     ->first();
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
-        return view('pages.store.chip_store', compact('items', 'menu', 'endis', 'mainmenu'));
+        $timenow  = Carbon::now('GMT+7');
+        return view('pages.store.chip_store', compact('items', 'menu', 'endis', 'mainmenu', 'timenow'));
     }
 
     /**

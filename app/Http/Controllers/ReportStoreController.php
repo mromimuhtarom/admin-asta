@@ -62,12 +62,14 @@ class ReportStoreController extends Controller
                     {
                         $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                                         ->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
                                         ->get();
                         
                         return view('pages.store.report_store', compact('transactions', 'datenow'));
                     } else if($minDate != NULL && $maxDate != NULL)
                     {
                         $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
                                         ->get();
     
                         return view('pages.store.report_store', compact('transactions', 'datenow'));
@@ -78,12 +80,14 @@ class ReportStoreController extends Controller
                     {
                         $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                                         ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                         ->get();
                         
                         return view('pages.store.report_store', compact('transactions', 'datenow'));
                     } else if($minDate != NULL && $maxDate != NULL)
                     {
                         $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                        ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                         ->get();
     
                         return view('pages.store.report_store', compact('transactions', 'datenow'));
