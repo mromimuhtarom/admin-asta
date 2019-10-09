@@ -47,6 +47,7 @@ class Banking_TransactionController extends Controller
                            );
 
 
+
         if($time == "today")
         {
             $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
@@ -122,6 +123,7 @@ class Banking_TransactionController extends Controller
 
         return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
     }
+
 
     
 }
