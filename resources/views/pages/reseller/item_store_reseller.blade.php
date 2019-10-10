@@ -76,7 +76,7 @@
 
       </div>
       
-      <div class="custom-scroll table-responsive" style="height:800px;">
+      <div class="custom-scroll table-responsive" style="height:900px;">
         
         <div class="table-outer">
           <table class="table table-bordered">
@@ -107,7 +107,7 @@
                 <td><a href="#" class="usertext" data-title="Name" data-name="order" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
                 <td>
                     <div class="media-container">
-                        <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('ItemStoreReseller-updateimage') }}" enctype="multipart/form-data">
                           {{  csrf_field() }}
                           <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
                             <input type="hidden" name="pk" value="{{ $gold->item_id }}">
@@ -128,7 +128,7 @@
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
-                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Goods Image</button>
+                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Image</button>
                         </form>
                           <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
                           <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button>
@@ -155,7 +155,13 @@
               @else 
               <tr>
                 <td>{{ $gold->order }}</td>
-                <td></td>
+                <td>
+                    <div class="media-container">
+                        <figure class="media-object">
+                          <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                        </figure>
+                    </div>
+                </td>
                 <td>{{ $gold->name }}</td>
                 <td>{{ $gold->item_get }}</td>
                 <td>{{ $gold->price }}</td>
@@ -188,9 +194,29 @@
           <i class="fa fa-remove"></i>
         </button>
       </div>
-      <form action="{{ route('ItemStoreReseller-create') }}" method="post">
+      <form action="{{ route('ItemStoreReseller-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
+            <table width="100%;" height="auto">
+                <tr>
+                  <td align="center">
+                    <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+                      <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                    </div><br>
+                      <input type='file' class="main-image" name="file" onchange="readURL(this);"/>
+                  </td>
+                  <td align="center">
+                    <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+                      <img id="blah1" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                    </div><br>
+                      <input type='file' class="watermark-image" name="file1" />
+                  </td>
+                </tr>
+            </table>
+          
+          <div class="form-group">
+            <input type="number" name="order" class="form-control" id="basic-url" placeholder="Order">
+          </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
@@ -272,7 +298,7 @@ $(".watermark-image").change(function() {
 
   $(document).ready(function() {
     $('table.table').dataTable( {
-      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+      "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
     });
   });

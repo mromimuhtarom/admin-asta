@@ -622,6 +622,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('ItemStoreReseller-view', 'ResellerController@ItemStoreReseller')->name('Item_Store_Reseller');
                 Route::post('ItemStoreReseller-create', 'ResellerController@ItemResellerstore')->name('ItemStoreReseller-create');
                 Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
+                Route::post('ItemStoreReseller-updateimage', 'ResellerController@updateImageItemStoreReseller')->name('ItemStoreReseller-updateimage');
                 Route::delete('ItemStore-delete', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-delete');
             });
         });        

@@ -19,6 +19,7 @@ use App\ItemsCash;
 use App\ConfigText;
 use App\ItemsGold;
 use App\ItemPoint;
+use File;
 
 class ResellerController extends Controller
 {
@@ -727,7 +728,7 @@ public function detailTransaction($month, $year)
                         'shop_type'
                     )
                     ->where('shop_type', '=', 2)
-                    ->orderBy('item_id', 'desc')
+                    ->orderBy('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
                         'name', 
@@ -756,12 +757,12 @@ public function detailTransaction($month, $year)
         $id = ItemsCash::select('item_id')
               ->orderBy('item_id', 'desc')
               ->first();
-
+        
         if($id === NULL )
         {
             $id_last = 0;
         } else {
-            $id_last = $id->id;
+            $id_last = $id->item_id;
         }
         $id_new                                   = $id_last + 1;
         $file                                     = $request->file('file');
@@ -789,11 +790,11 @@ public function detailTransaction($month, $year)
                 // $itemType       = $request->itemType;
         
                 $validator = Validator::make($request->all(),[
+                    'order'       => 'required|integer',
                     'title'       => 'required',
                     'goldAwarded' => 'required|integer',
                     'priceCash'   => 'required|integer',
                     'googleKey'   => 'required',
-                    'itemType'    => 'required'
                 ]);
         
                 if ($validator->fails()) {
@@ -940,20 +941,20 @@ public function detailTransaction($month, $year)
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 1044070)
+            if($ukuran < 5242880)
             {
                 if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../public/upload/Goods/";
+                    $folder = "../public/upload/Gold/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Goods/image1'), $nama_file_unik));
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Gold/image1'), $nama_file_unik));
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Goods/image2'), $nama_file_unik));
+                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -981,10 +982,10 @@ public function detailTransaction($month, $year)
                 }
                 else 
                 {
-                    $file->move(public_path('../public/upload/Goods'), $nama_file_unik);
-                    $path = '../public/upload/Goods/image1/'.$pk.'.png';
+                    $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
+                    $path = '../public/upload/Gold/image1/'.$pk.'.png';
                     File::delete($path);    
-                    $path = '../public/upload/Goods/image2/'.$pk.'.png';
+                    $path = '../public/upload/Gold/image2/'.$pk.'.png';
                     File::delete($path);    
                     // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }
@@ -994,17 +995,17 @@ public function detailTransaction($month, $year)
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Edit Image in menu Goods Store with ID '.$pk.' to '.$nama_file_unik
                 ]);
-                return redirect()->route('Goods_Store')->with('success','Update Image successfull');
+                return redirect()->route('Item_Store_Reseller')->with('success','Update Image successfull');
 
             }
             else 
             {
-                return redirect()->route('Goods_Store')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Item_Store_Reseller')->with('alert','Ukuran file terlalu besar');
             }
         }
         else 
         {
-            return redirect()->route('Goods_Store')->with('alert', 'Image Must Be png Format');
+            return redirect()->route('Item_Store_Reseller')->with('alert', 'Image Must Be png Format');
         }
     }
 // ------- End Update Image Item Store Reseller -------//

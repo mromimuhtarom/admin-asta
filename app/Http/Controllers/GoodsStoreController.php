@@ -240,7 +240,7 @@ class GoodsStoreController extends Controller
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 1044070)
+            if($ukuran < 5242880)
             {
                 if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
