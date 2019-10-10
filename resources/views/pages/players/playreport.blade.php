@@ -105,7 +105,7 @@
                 <tbody>
                         @foreach ($player_history as $history)
                         <tr>
-                          <td>{{ $history->round_id }}</td>
+                          <td><a href="" class="delete{{ $history->round_id }}" id="roundid_detail" data-pk="{{ $history->round_id }}" data-toggle="modal"data-target="#roundid-modal{{ $history->round_id }}">{{ $history->round_id }}</a></td>
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
                           <td>{{ $history->tablename }}</td>
@@ -138,6 +138,29 @@
                     
 </div>
     <!-- end widget -->
+
+<!-- Modal -->
+@foreach ($player_history as $history)
+<div class="modal fade" id="roundid-modal{{ $history->round_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Detail Round ID</h5>
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          Round ID {{ $history->round_id }}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        </div>
+      </div>
+    </div>
+</div>
+@endforeach
 <script>
     var responsiveHelper_dt_basic = responsiveHelper_dt_basic || undefined;
 			

@@ -183,13 +183,13 @@ class PlayReportController extends Controller
               ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00");
 
         $dms = $tbdms->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00");
+               ->where('asta_db.dms_round.date', '>=', $inputMinDate." 00:00:00");
 
         $tpk = $tbtpk->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00");
+               ->where('asta_db.tpk_round.date', '>=', $inputMinDate." 00:00:00");
 
         $player_history = $tbbgt->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-                          ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00")
+                          ->where('asta_db.bgt_round.date', '>=', $inputMinDate." 00:00:00")
                           ->union($dmq)
                           ->union($dms)
                           ->union($tpk)

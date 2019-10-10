@@ -9,6 +9,24 @@
 
 
 @section('content')
+<link rel="stylesheet" href="/css/imageinsertedit.css">
+<script>
+    function readURL(input) {
+       if (input.files && input.files[0]) {
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+               $('#blah')
+                   .attr('src', e.target.result);
+           };
+
+           reader.readAsDataURL(input.files[0]);
+       }
+   }
+</script>
+
+
+
 @if (count($errors) > 0)
 <div class="error-val">
   <div class="alert alert-danger">
@@ -67,6 +85,8 @@
                 @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
+                <th class="th-sm">Order</th>
+                <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
                 <th class="th-sm">Item Awarded</th>
                 <th class="th-sm">Price Cash</th>
@@ -84,6 +104,36 @@
               @if($menu && $mainmenu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="order" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
+                <td>
+                    <div class="media-container">
+                        <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
+                          {{  csrf_field() }}
+                          <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
+                            <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                            <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
+                            <i class="fa fa-edit media-icon-wtr"></i>
+                            <p class="nav-name">Main Image</p>
+                        </span>
+                        <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
+                            <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                            <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gold->item_id }}">
+                            <i class="fa fa-edit media-icon-wtr1"></i>
+                            <div class="nav-name">Watermark</div>
+                        </span>
+                          <figure class="media-object">
+                            <img class="img-object-wtr imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                            <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                            <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                          </figure>
+                        </div>
+                        <div class="media-control" align="center" style="margin-top:-1%">
+                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Goods Image</button>
+                        </form>
+                          <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                          <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button>
+                        </div>
+                </td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                 <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ $gold->item_get }}</a></td>
                 <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->price }}</a></td>
@@ -104,6 +154,8 @@
               </tr>
               @else 
               <tr>
+                <td>{{ $gold->order }}</td>
+                <td></td>
                 <td>{{ $gold->name }}</td>
                 <td>{{ $gold->item_get }}</td>
                 <td>{{ $gold->price }}</td>
@@ -205,6 +257,19 @@
 
 <!-- script -->
 <script>
+$(".watermark-image").change(function() {
+  if (this.files && this.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $("#blah1").attr("src", e.target.result);
+    };
+
+    reader.readAsDataURL(this.files[0]);
+  }
+});
+
+
   $(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
@@ -316,6 +381,70 @@
             echo'var test = $("#userid").val(id);';
           echo'});';
         }
+      @endphp
+      @php
+              foreach($getItems as $gold) {
+                echo'$(".save-profile'.$gold->item_id.'").hide(0);';
+                  echo'$(".med-ovlay'.$gold->item_id.'").hide(0);';
+                  echo'$(".cancel-upload'.$gold->item_id.'").hide(0);';
+                  echo'$(".imgupload'.$gold->item_id.'").show();';
+                  echo'$(".imgupload1'.$gold->item_id.'").hide(0);';
+                  echo'$(".imgupload2'.$gold->item_id.'").hide(0);';
+
+                  echo'$(".edit-profile'.$gold->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".cancel-upload'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".imgupload'.$gold->item_id.'").fadeOut(300);';
+                    echo'$(".imgupload1'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".imgupload2'.$gold->item_id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".save-profile'.$gold->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$gold->item_id.'").fadeOut(300);';
+                    echo'$(".edit-profile'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".cancel-upload'.$gold->item_id.'").fadeOut(300);';
+                    echo'$(".imgupload'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".imgupload1'.$gold->item_id.'").fadeOut(300);';
+                    echo'$(".imgupload2'.$gold->item_id.'").fadeOut(300);';
+                  echo'});';
+
+                  echo'$(".cancel-upload'.$gold->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlay'.$gold->item_id.'").fadeOut(300);';
+                    echo'$(".imgupload'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".edit-profile'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".save-profile'.$gold->item_id.'").hide(0);';
+                    echo'$(".imgupload'.$gold->item_id.'").fadeIn(300);';
+                    echo'$(".imgupload1'.$gold->item_id.'").fadeOut(300);';
+                    echo'$(".imgupload2'.$gold->item_id.'").fadeOut(300);';
+                  echo'});';
+
+                  echo'$(".upload'.$gold->item_id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+		
+                      echo'reader.onload = function(e) {';
+                        echo'$(".imgupload1'.$gold->item_id.'").attr("src", e.target.result);';
+                      echo'};';
+		
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+                echo'$(".upload1'.$gold->item_id.'").change(function() {';
+                  echo'if (this.files && this.files[0]) {';
+                    echo'var reader = new FileReader();';
+
+                    echo'reader.onload = function(e) {';
+                      echo'$(".imgupload2'.$gold->item_id.'").attr("src", e.target.result);';
+                    echo'};';
+
+                    echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+              }
       @endphp
     },
     responsive: false

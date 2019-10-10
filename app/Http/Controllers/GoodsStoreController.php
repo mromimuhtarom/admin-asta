@@ -43,7 +43,8 @@ class GoodsStoreController extends Controller
                     ->first();
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
-        return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis', 'mainmenu'));
+        $timenow = Carbon::now('GMT+7');
+        return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis', 'mainmenu', 'timenow'));
     }
 
     /**
@@ -59,6 +60,17 @@ class GoodsStoreController extends Controller
               ->first();
 
 
+        $validator = Validator::make($request->all(),[
+            'title'            => 'required',
+            // 'transaction_type' => 'required|integer|between:1,8',
+            'price'            => 'required|integer',
+            'qty'              => 'required',
+            'order'            => 'required|integer|unique:item_point,order'
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }       
 
         if($id === NULL)
         {
@@ -69,56 +81,84 @@ class GoodsStoreController extends Controller
         
         $id_new                 = $id_lst + 1;
         $file                   = $request->file('file');
+        $file_wtr               = $request->file('file1');
         $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
+        $nama_wtr               = $_FILES['file1']['name'];
         $x                      = explode('.', $nama);
+        $x_wtr                  = explode('.', $nama_wtr);
         $ekstensi               = strtolower(end($x));
+        $ekstensi_wtr           = strtolower(end($x_wtr));
         $ukuran                 = $_FILES['file']['size'];
         $nama_file_unik         = $id_new.'.'.$ekstensi;
-        // list($width, $height)   = getimagesize($file);
+        list($width, $height)   = getimagesize($file);
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 1044070)
+            if($ukuran < 5242880)
             {           
-                if ($file->move(public_path('../public/upload/Goods'), $nama_file_unik))
+                if ($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
+                    list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
+                    // Menetapkan nama thumbnail
+                    $folder = "../public/upload/Goods/";
+                    $thumbnail = $folder.$nama_file_unik;
 
-                        $validator = Validator::make($request->all(),[
-                            'title'            => 'required',
-                            // 'transaction_type' => 'required|integer|between:1,8',
-                            'price'            => 'required|integer',
-                            'qty'              => 'required',
-                            'order'            => 'required|integer|unique:item_point,order'
-                        ]);
-                    
-                        if ($validator->fails()) {
-                            return back()->withErrors($validator->errors());
-                        }
+                    // Memuat gambar utama
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Goods/image1'), $nama_file_unik));
 
-                        $goods = ItemPoint::create([
-                            'item_id'         => $id_new,
-                            'name'       => $request->title,
-                            // 'trans_type' => $request->transaction_type,
-                            'price'      => $request->price,
-                            'status'     => '1',
-                            'qty'        => $request->qty
-                        ]);
-            
-                        Log::create([
-                            'op_id'     => Session::get('userId'),
-                            'action_id' => '3',
-                            'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Create new in menu Goods Store with name '. $goods->name
-                        ]);
-                        return redirect()->route('Goods_Store')->with('success','Insert Data successfull');
+                    // Memuat gambar watermark
+                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Goods/image2'), $nama_file_unik));
+
+                    // mendapatkan lebar dan tinggi dari gambar watermark
+                    $water_width = imagesx($watermark);
+                    $water_height = imagesy($watermark);
+
+                    // mendapatkan lebar dan tinggi dari gambar utama
+                    $main_width = imagesx($source);
+                    $main_height = imagesy($source);
+
+                    // Menetapkan posisi gambar watermark
+                    // $dime_x = -180;
+                    // $dime_y = 200;
+                    // menyalin kedua gambar
+                    // imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
+                    $pos_x = $width - $width_watermark;
+                    $pos_y = $height - $height_watermark;
+                    imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                     
+                    imagealphablending($source, false);
+                    imagesavealpha($source, true);
+                    imagecolortransparent($source); 
+
+                    imagepng($source, $thumbnail);
+                    imagedestroy($source);
                 }
                 else
                 {
-                    return redirect()->route('Goods_Store')->with('alert','Upload Image Failed');
+                    $file->move(public_path('../public/upload/Goods'), $nama_file_unik);
+                    // return redirect()->route('Goods_Store')->with('alert','Upload Image Failed');
                     // echo "Gagal Upload File";
                 }
+
+
+                $goods = ItemPoint::create([
+                    'order'      => $request->order,  
+                    'item_id'    => $id_new,
+                    'name'       => $request->title,
+                    // 'trans_type' => $request->transaction_type,
+                    'price'      => $request->price,
+                    'status'     => '1',
+                    'qty'        => $request->qty
+                ]);
+    
+                Log::create([
+                    'op_id'     => Session::get('userId'),
+                    'action_id' => '3',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Create new in menu Goods Store with name '. $goods->name
+                ]);
+                return redirect()->route('Goods_Store')->with('success','Insert Data successfull');
             }
             else
             {       
@@ -186,32 +226,75 @@ class GoodsStoreController extends Controller
     {
         $pk                     = $request->pk;
         $file                   = $request->file('file');
+        $file_wtr               = $request->file('file1');
         $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
+        $nama_wtr               = $_FILES['file1']['name'];
         $x                      = explode('.', $nama);
+        $x_wtr                  = explode('.', $nama_wtr);
         $ekstensi               = strtolower(end($x));
+        $ekstensi_wtr           = strtolower(end($x_wtr));
         $ukuran                 = $_FILES['file']['size'];
         $nama_file_unik         = $pk.'.'.$ekstensi;
+        list($height, $width)   = getimagesize($file);
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
             {
-                if($file->move(public_path('../public/upload/Goods'), $nama_file_unik))
+                if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
-    
-                    Log::create([
-                        'op_id'     => Session::get('userId'),
-                        'action_id' => '2',
-                        'datetime'  => Carbon::now('GMT+7'),
-                        'desc'      => 'Edit Image in menu Goods Store with ID '.$pk.' to '.$nama_file_unik
-                    ]);
-                    return redirect()->route('Goods_Store')->with('success','Update Image successfull');
+                    list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
+                    // Menetapkan nama thumbnail
+                    $folder = "../public/upload/Goods/";
+                    $thumbnail = $folder.$nama_file_unik;
+
+                    // Memuat gambar utama
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Goods/image1'), $nama_file_unik));
+
+                    // Memuat gambar watermark
+                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Goods/image2'), $nama_file_unik));
+
+                    // mendapatkan lebar dan tinggi dari gambar watermark
+                    $water_width = imagesx($watermark);
+                    $water_height = imagesy($watermark);
+
+                    // mendapatkan lebar dan tinggi dari gambar utama
+                    $main_width = imagesx($source);
+                    $main_height = imagesy($source);
+
+                    // Menetapkan posisi gambar watermark
+                    // $dime_x = -180;
+                    // $dime_y = 200;
+                    // menyalin kedua gambar
+                    // imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
+                    $pos_x = $width - $width_watermark;
+                    $pos_y = $height - $height_watermark;
+                    imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
+                    imagealphablending($source, false);
+                    imagesavealpha($source, true);
+                    imagecolortransparent($source); 
+
+                    imagepng($source, $thumbnail);
+                    imagedestroy($source);
                 }
                 else 
                 {
-                    return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
+                    $file->move(public_path('../public/upload/Goods'), $nama_file_unik);
+                    $path = '../public/upload/Goods/image1/'.$pk.'.png';
+                    File::delete($path);    
+                    $path = '../public/upload/Goods/image2/'.$pk.'.png';
+                    File::delete($path);    
+                    // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }
+                Log::create([
+                    'op_id'     => Session::get('userId'),
+                    'action_id' => '2',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Edit Image in menu Goods Store with ID '.$pk.' to '.$nama_file_unik
+                ]);
+                return redirect()->route('Goods_Store')->with('success','Update Image successfull');
 
             }
             else 
