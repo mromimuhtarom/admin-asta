@@ -160,7 +160,7 @@
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
     "autoWidth" : true,
     "paging": false,
-	"orderBy": true
+	"order": [[ 7, "desc" ]],
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },
