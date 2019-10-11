@@ -58,7 +58,8 @@ class PlayReportController extends Controller
       $tbdmq = DmqRound::join('asta_db.dmq_round_player', 'asta_db.dmq_round_player.round_id', '=', 'asta_db.dmq_round.round_id')
                ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.dmq_round_player.user_id')
                ->join('asta_db.dmq_table', 'asta_db.dmq_table.table_id', '=', 'asta_db.dmq_round.table_id')
-               ->select('asta_db.dmq_round.gameplay_log',
+               ->select(
+                         'asta_db.dmq_round.gameplay_log',
                          'asta_db.dmq_round.date',
                          'asta_db.dmq_table.name AS tablename',
                          'asta_db.dmq_round_player.bet',
@@ -73,7 +74,8 @@ class PlayReportController extends Controller
        $tbdms = DmsRound::join('asta_db.dms_round_player', 'asta_db.dms_round.round_id', '=', 'asta_db.dms_round_player.round_id')
                 ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.dms_round_player.user_id')
                 ->join('asta_db.dms_table', 'asta_db.dms_table.table_id', '=', 'asta_db.dms_round.table_id')
-                ->select('asta_db.dms_round.gameplay_log',
+                ->select(
+                         'asta_db.dms_round.gameplay_log',
                          'asta_db.dms_round.date',
                          'asta_db.dms_table.name AS tablename',
                          'asta_db.dms_round_player.bet',
@@ -88,7 +90,8 @@ class PlayReportController extends Controller
        $tbbgt = BgtRound::join('asta_db.bgt_round_player', 'asta_db.bgt_round_player.round_id', '=', 'asta_db.bgt_round.round_id')
                 ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.bgt_round_player.user_id')
                 ->join('asta_db.bgt_table', 'asta_db.bgt_table.table_id', '=', 'asta_db.bgt_round.table_id')
-                ->select('asta_db.bgt_round.gameplay_log',
+                ->select(
+                         'asta_db.bgt_round.gameplay_log',
                          'asta_db.bgt_round.date',
                          'asta_db.bgt_table.name AS tablename',
                          'asta_db.bgt_round_player.bet',
@@ -103,7 +106,8 @@ class PlayReportController extends Controller
        $tbtpk = TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id', '=', 'asta_db.tpk_round_player.round_id')
                 ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.tpk_round_player.user_id')
                 ->join('asta_db.tpk_table', 'asta_db.tpk_table.table_id', '=', 'asta_db.tpk_round.table_id')
-                ->select('asta_db.tpk_round.gameplay_log',
+                ->select(
+                         'asta_db.tpk_round.gameplay_log',
                          'asta_db.tpk_round.date',
                          'asta_db.tpk_table.name AS tablename',
                          'asta_db.tpk_round_player.bet',

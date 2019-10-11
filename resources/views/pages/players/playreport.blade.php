@@ -9,6 +9,10 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+<style>
+.modal-dialog1 {
+  max-width: 80.15385rem; }
+</style>
 <!--- Warning Alert --->
 @if (\Session::has('alert'))
 <div class="alert alert-danger">
@@ -141,8 +145,8 @@
 
 <!-- Modal -->
 @foreach ($player_history as $history)
-<div class="modal fade" tabindex="-1" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog1" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Detail Round ID</h5>
@@ -151,25 +155,60 @@
           </button>
         </div>
         <div class="modal-body">
-          Round ID {{ $history->round_id }}
-          <table border="1" width="100%" height="100%">
-            <tr>
-                <td class="th-sm">Username</td>
-                <td style="width:10px;">Game Play Log</td>
-                <td class="th-sm">Date</td>
-            </tr>
-            @foreach ($player_history as $hsty_round)
-                @if($hsty_round->round_id === $history->round_id && $hsty_round->gamename === $history->gamename)
-                <tr>
-                    <td>{{ $hsty_round->username}}</td>
-                    <td>{{ $hsty_round->gameplay_log}}</td>
-                    <td>{{ $hsty_round->date}}</td>
-                </tr>
-                @endif
-            @endforeach
-          </table>
+          <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
+
+            <header>
+                <div class="widget-header">	
+                    <span class="widget-icon"> <i class="fa fa-history"></i> </span>
+                    <h2>Round ID {{ $history->round_id }}</h2>
+                </div>
+            
+                <div class="widget-toolbar">
+                    <!-- add: non-hidden - to disable auto hide -->
+                </div>
+            </header>
+            <div>
+                            
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+                </div>
+                <!-- end widget edit box -->
+                            
+                <!-- widget content -->
+                <div class="widget-body p-0">
+                            
+                    <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>			                
+                            <tr>
+                                <th>Username</th>
+                                <th>Game Play Log</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($player_history as $hsty_round)
+                            @if($hsty_round->round_id === $history->round_id && $hsty_round->gamename === $history->gamename)
+                            <tr>
+                                <td>{{ $hsty_round->username }}</td>
+                                <td>{{ $hsty_round->gameplay_log }}</td>
+                            </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                        
+                </div>
+                <!-- end widget content -->
+                            
+            </div>
+            <!-- end widget div -->
+                            
+         </div>
+
+
+
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" style="width:100%;">
           <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Exit</button>
         </div>
       </div>
