@@ -141,21 +141,36 @@
 
 <!-- Modal -->
 @foreach ($player_history as $history)
-<div class="modal fade" id="roundid-modal{{ $history->round_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" tabindex="-1" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Detail Round ID</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Detail Round ID</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
           Round ID {{ $history->round_id }}
+          <table border="1" width="100%" height="100%">
+            <tr>
+                <td class="th-sm">Username</td>
+                <td style="width:10px;">Game Play Log</td>
+                <td class="th-sm">Date</td>
+            </tr>
+            @foreach ($player_history as $hsty_round)
+                @if($hsty_round->round_id === $history->round_id && $hsty_round->gamename === $history->gamename)
+                <tr>
+                    <td>{{ $hsty_round->username}}</td>
+                    <td>{{ $hsty_round->gameplay_log}}</td>
+                    <td>{{ $hsty_round->date}}</td>
+                </tr>
+                @endif
+            @endforeach
+          </table>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Exit</button>
         </div>
       </div>
     </div>
