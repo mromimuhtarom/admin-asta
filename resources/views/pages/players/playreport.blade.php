@@ -188,9 +188,12 @@
                         <tbody>
                             @foreach ($player_history as $hsty_round)
                             @if($hsty_round->round_id === $history->round_id && $hsty_round->gamename === $history->gamename)
+                            @php 
+                            $gamelog = explode("[", $hsty_round->gameplay_log);
+                            @endphp
                             <tr>
                                 <td>{{ $hsty_round->username }}</td>
-                                <td>{{ $hsty_round->gameplay_log }}</td>
+                                <td>{{ $gamelog[0] }}</td>
                             </tr>
                             @endif
                         @endforeach
