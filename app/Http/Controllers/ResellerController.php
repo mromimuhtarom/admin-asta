@@ -19,6 +19,7 @@ use App\ItemsCash;
 use App\ConfigText;
 use App\ItemsGold;
 use App\ItemPoint;
+use File;
 
 class ResellerController extends Controller
 {
@@ -717,6 +718,7 @@ public function detailTransaction($month, $year)
         $getItems = ItemsCash::select(
                         'item_id',
                         'name',
+                        'order',
                         'item_get',
                         'item_type',
                         'price',
@@ -726,7 +728,7 @@ public function detailTransaction($month, $year)
                         'shop_type'
                     )
                     ->where('shop_type', '=', 2)
-                    ->orderBy('item_id', 'desc')
+                    ->orderBy('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
                         'name', 
@@ -740,52 +742,134 @@ public function detailTransaction($month, $year)
                     )
                     ->where('id', '=', 5)
                     ->first();
-        $value    = str_replace(':', ',', $active->value);
-        $endis    = explode(",", $value);
-        $valueitem    = str_replace(':', ',', $itemtype->value);
-        $item    = explode(",", $valueitem);
-        return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item'));
+        $value     = str_replace(':', ',', $active->value);
+        $endis     = explode(",", $value);
+        $valueitem = str_replace(':', ',', $itemtype->value);
+        $item      = explode(",", $valueitem);
+        $timenow   = Carbon::now('GMT+7');
+        return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item', 'timenow'));
     }
 // ------- End index Item Store Reseller -------- //
 
 // ------- Insert Item Store Reseller -------- //
     public function ItemResellerstore(Request $request)
     {
-        $title          = $request->title;
-        $goldAwarded    = $request->goldAwarded;
-        $priceCash      = $request->priceCash;
-        $googleKey      = $request->googleKey;
-        // $itemType       = $request->itemType;
-
-        $validator = Validator::make($request->all(),[
-            'title'       => 'required',
-            'goldAwarded' => 'required|integer',
-            'priceCash'   => 'required|integer',
-            'googleKey'   => 'required',
-            'itemType'    => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator->errors());
+        $id = ItemsCash::select('item_id')
+              ->orderBy('item_id', 'desc')
+              ->first();
+        
+        if($id === NULL )
+        {
+            $id_last = 0;
+        } else {
+            $id_last = $id->item_id;
         }
+        $id_new                                   = $id_last + 1;
+        $file                                     = $request->file('file');
+        $file_wtr                                 = $request->file('file1');
+        $ekstensi_diperbolehkan                   = array('png');
+        $nama                                     = $_FILES['file']['name'];
+        $nama_wtr                                 = $_FILES['file1']['name'];
+        $x                                        = explode('.', $nama);
+        $x_wtr                                    = explode('.', $nama_wtr);
+        $ekstensi                                 = strtolower(end($x));
+        $ekstensi_wtr                             = strtolower(end($x_wtr));
+        $ukuran                                   = $_FILES['file']['size'];
+        $nama_file_unik                           = $id_new.'.'.$ekstensi;
+        list($width, $height)                     = getimagesize($file);
 
-        $gold = ItemsCash::create([
-            'name'       => $title,
-            'item_get'   => $goldAwarded,
-            'price'      => $priceCash,
-            'shop_type'  => 2,
-            'item_type'  => 2,
-            'google_key' => $googleKey,
-        ]);
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        {
+            if($ukuran < 5242880)
+            {
 
-        Log::create([
-            'op_id'     => Session::get('userId'),
-            'action_id' => '3',
-            'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Item Store Reseller with title '. $request->title
-        ]);
+                $title          = $request->title;
+                $goldAwarded    = $request->goldAwarded;
+                $priceCash      = $request->priceCash;
+                $googleKey      = $request->googleKey;
+                // $itemType       = $request->itemType;
+        
+                $validator = Validator::make($request->all(),[
+                    'order'       => 'required|integer',
+                    'title'       => 'required',
+                    'goldAwarded' => 'required|integer',
+                    'priceCash'   => 'required|integer',
+                    'googleKey'   => 'required',
+                ]);
+        
+                if ($validator->fails()) {
+                    return back()->withErrors($validator->errors());
+                }             
 
-        return redirect()->route('Item_Store_Reseller')->with('success','Data Added');
+                if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                {
+                    list($width_watermark, $height_watermark) = getimagesize($file_wtr);
+                    // watermark image
+                    // Menetapkan nama thumbnail
+                    $folder = "../public/upload/Gold/";
+                    $thumbnail = $folder.$nama_file_unik;
+
+
+                    // Memuat gambar utama
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Gold/image1'), $nama_file_unik));
+                    // Memuat gambar watermark
+                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
+
+                    // mendapatkan lebar dan tinggi dari gambar watermark
+                    $water_width = imagesx($watermark);
+                    $water_height = imagesy($watermark);
+
+                    // mendapatkan lebar dan tinggi dari gambar utama
+                    $main_width = imagesx($source);
+                    $main_height = imagesy($source);
+
+                    // Menetapkan posisi gambar watermark
+                    $pos_x = $width - $width_watermark;
+                    $pos_y = $height - $height_watermark;
+                    imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
+                    imagealphablending($source, false);
+                    imagesavealpha($source, true);
+                    imagecolortransparent($source); 
+
+                    imagepng($source, $thumbnail);
+                    imagedestroy($source);
+                   // end watermark image
+                } else {
+                    // $rootpath = '../../asta-api/gift';
+                    // $client = Storage::createLocalDriver(['root' => $rootpath]);
+                    // $client->put($nama_file_unik, file_get_contents($file));
+                    $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
+                }
+                          
+                $gold = ItemsCash::create([
+                    'name'       => $title,
+                    'item_get'   => $goldAwarded,
+                    'price'      => $priceCash,
+                    'shop_type'  => 2,
+                    'item_type'  => 2,
+                    'google_key' => $googleKey,
+                ]);
+        
+                Log::create([
+                    'op_id'     => Session::get('userId'),
+                    'action_id' => '3',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Create new in menu Item Store Reseller with title '. $request->title
+                ]);
+                return redirect()->route('Item_Store_Reseller')->with('success','Data Added');                 
+            }
+            else
+            {
+                return redirect()->route('Item_Store_Reseller')->with('alert','Ukuran file terlalu besar');
+                // echo 'Ukuran file terlalu besar';
+            }
+        }
+        else
+        {
+            return redirect()->route('Item_Store_Reseller')->with('alert','Ekstensi file tidak di perbolehkan');
+            // echo 'Ekstensi file tidak di perbolehkan';
+        }
     }
 // ------- End Insert Item Store Reseller -------- //
 
@@ -834,6 +918,101 @@ public function detailTransaction($month, $year)
         ]);
     }
 // ------- End Update Item Store Reseller -------- //
+
+
+
+
+// ------- Update Image Item Store Reseller -------//
+    public function updateImageItemStoreReseller(Request $request)
+    {
+        $pk                     = $request->pk;
+        $file                   = $request->file('file');
+        $file_wtr               = $request->file('file1');
+        $ekstensi_diperbolehkan = array('png');
+        $nama                   = $_FILES['file']['name'];
+        $nama_wtr               = $_FILES['file1']['name'];
+        $x                      = explode('.', $nama);
+        $x_wtr                  = explode('.', $nama_wtr);
+        $ekstensi               = strtolower(end($x));
+        $ekstensi_wtr           = strtolower(end($x_wtr));
+        $ukuran                 = $_FILES['file']['size'];
+        $nama_file_unik         = $pk.'.'.$ekstensi;
+        list($height, $width)   = getimagesize($file);
+
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
+        {
+            if($ukuran < 5242880)
+            {
+                if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                {
+                    list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
+                    // Menetapkan nama thumbnail
+                    $folder = "../public/upload/Gold/";
+                    $thumbnail = $folder.$nama_file_unik;
+
+                    // Memuat gambar utama
+                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Gold/image1'), $nama_file_unik));
+
+                    // Memuat gambar watermark
+                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
+
+                    // mendapatkan lebar dan tinggi dari gambar watermark
+                    $water_width = imagesx($watermark);
+                    $water_height = imagesy($watermark);
+
+                    // mendapatkan lebar dan tinggi dari gambar utama
+                    $main_width = imagesx($source);
+                    $main_height = imagesy($source);
+
+                    // Menetapkan posisi gambar watermark
+                    // $dime_x = -180;
+                    // $dime_y = 200;
+                    // menyalin kedua gambar
+                    // imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
+                    $pos_x = $width - $width_watermark;
+                    $pos_y = $height - $height_watermark;
+                    imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
+                    imagealphablending($source, false);
+                    imagesavealpha($source, true);
+                    imagecolortransparent($source); 
+
+                    imagepng($source, $thumbnail);
+                    imagedestroy($source);
+                }
+                else 
+                {
+                    $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
+                    $path = '../public/upload/Gold/image1/'.$pk.'.png';
+                    File::delete($path);    
+                    $path = '../public/upload/Gold/image2/'.$pk.'.png';
+                    File::delete($path);    
+                    // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
+                }
+                Log::create([
+                    'op_id'     => Session::get('userId'),
+                    'action_id' => '2',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Edit Image in menu Goods Store with ID '.$pk.' to '.$nama_file_unik
+                ]);
+                return redirect()->route('Item_Store_Reseller')->with('success','Update Image successfull');
+
+            }
+            else 
+            {
+                return redirect()->route('Item_Store_Reseller')->with('alert','Ukuran file terlalu besar');
+            }
+        }
+        else 
+        {
+            return redirect()->route('Item_Store_Reseller')->with('alert', 'Image Must Be png Format');
+        }
+    }
+// ------- End Update Image Item Store Reseller -------//
+
+
+
+
 
 // ------- Delete Item Store Reseller -------- //
     public function destroyItemStoreReseller(Request $request)

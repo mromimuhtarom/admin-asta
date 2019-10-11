@@ -24,6 +24,7 @@
                         <div class="table-outer">
                             <table class="table table-bordered">
                                 <thead>
+                                    <th>Name</th>
                                     <th>Type</th>
                                     <th>Link</th>
                                     <th>Version</th>
@@ -32,12 +33,14 @@
                                 @foreach ($xml_andro->children() as $xl)
                                     @if ($menu)
                                     <tr>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->ver }}</a></td>
                                     </tr>
                                     @else 
                                     <tr>
+                                        <td>{{ $xl['name'] }}</td>
                                         <td>{{ $xl->type }}</td>
                                         <td>{{ $xl->link }}</td>
                                         <td>{{ $xl->ver }}</td>
@@ -68,6 +71,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <td>Name</td>
                                         <td>Type</td>
                                         <td>Link</td>
                                         <td>Version</td>
@@ -77,12 +81,14 @@
                                 @foreach ($xml_ios->children() as $xl_ios)
                                     @if ($menu)
                                     <tr>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->ver }}</a></td>
                                     </tr>
                                     @else 
                                     <tr>
+                                        <td>{{ $xl_ios['name'] }}</td>
                                         <td>{{ $xl_ios->type }}</td>
                                         <td>{{ $xl_ios->link }}</td>
                                         <td>{{ $xl_ios->ver }}</td>

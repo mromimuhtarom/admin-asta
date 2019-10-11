@@ -101,6 +101,13 @@ class VersionAssetController extends Controller
                     $gamew->ver = $value;
                     break;
                 }
+            } else if($name == 'name')
+            {
+                if($gamew['name'] == $pk)
+                {
+                    $gamew['name'] = $value;
+                    break;
+                }
             }
         }
         
@@ -138,6 +145,13 @@ class VersionAssetController extends Controller
                 if($gamew['name'] == $pk)
                 {
                     $gamew->ver = $value;
+                    break;
+                }
+            }  else if($name == 'name')
+            {
+                if($gamew['name'] == $pk)
+                {
+                    $gamew['name'] = $value;
                     break;
                 }
             }

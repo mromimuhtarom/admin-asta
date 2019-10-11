@@ -109,13 +109,22 @@
                     <div class="media-container">
                         <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
                           {{  csrf_field() }}
-                          <span class="media-overlay med-ovlay{{ $gold->item_id }}">
-                            <input type="hidden" name="pk" value="{{ $gold->item_id }}">
-                            <input type="file" name="file" id="media-input" class="upload{{ $gold->item_id }}" accept="image/*">
-                            <i class="fa fa-edit media-icon"></i>
+                          <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
+                              <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                              <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
+                              <i class="fa fa-edit media-icon-wtr"></i>
+                              <p class="nav-name">Main Image</p>
+                          </span>
+                          <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
+                              <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                              <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gold->item_id }}">
+                              <i class="fa fa-edit media-icon-wtr1"></i>
+                              <div class="nav-name">Watermark</div>
                           </span>
                           <figure class="media-object">
-                            <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                            <img class="img-object-wtr imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                            <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                            <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
@@ -187,10 +196,22 @@
         @csrf
         <div class="modal-body">
           <div class="form-group" align="center">
-            <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
-              <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
-            </div><br>
-             <input type='file' class="upload-img" name="file" onchange="readURL(this);"/><br><br>
+              <table width="100%;" height="auto">
+                  <tr>
+                    <td align="center">
+                      <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+                        <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                      </div><br>
+                        <input type='file' class="main-image" name="file" onchange="readURL(this);"/>
+                    </td>
+                    <td align="center">
+                      <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
+                        <img id="blah1" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                      </div><br>
+                        <input type='file' class="watermark-image" name="file1" />
+                    </td>
+                  </tr>
+              </table>
           </div>
           <div class="form-group">
             <input type="text" name="order" class="form-control" id="basic-url" placeholder="order">
@@ -252,22 +273,20 @@
 
 <!-- script -->
 <script>
-  // preview image
-  function readURL(input) {
-    if(input.files && input.files[0]) {
-      var reader = new FileReader();
+$(".watermark-image").change(function() {
+  if (this.files && this.files[0]) {
+    var reader = new FileReader();
 
-      reader.onload = function (e) {
-        $('#imgPreview').attr('src', e.target.result);
-      };
+    reader.onload = function(e) {
+      $("#blah1").attr("src", e.target.result);
+    };
 
-      reader.readAsDataURL(input.files[0]);
-    }
+    reader.readAsDataURL(this.files[0]);
   }
-  // end preview image 
+});
   $(document).ready(function() {
     $('table.table').dataTable( {
-      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+      "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
     });
   });
@@ -367,12 +386,18 @@
         echo'$(".save-profile'.$gold->item_id.'").hide(0);';
         echo'$(".med-ovlay'.$gold->item_id.'").hide(0);';
         echo'$(".cancel-upload'.$gold->item_id.'").hide(0);';
+        echo'$(".imgupload'.$gold->item_id.'").show();';
+        echo'$(".imgupload1'.$gold->item_id.'").hide(0);';
+        echo'$(".imgupload2'.$gold->item_id.'").hide(0);';
 
         echo'$(".edit-profile'.$gold->item_id.'").on("click", function() {';
           echo'$(this).hide(0);';
           echo'$(".med-ovlay'.$gold->item_id.'").fadeIn(300);';
           echo'$(".save-profile'.$gold->item_id.'").fadeIn(300);';
           echo'$(".cancel-upload'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".imgupload'.$gold->item_id.'").fadeOut(300);';
+          echo'$(".imgupload1'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".imgupload2'.$gold->item_id.'").fadeIn(300);';
         echo'});';
 
         echo'$(".save-profile'.$gold->item_id.'").on("click", function() {';
@@ -380,12 +405,17 @@
           echo'$(".med-ovlay'.$gold->item_id.'").fadeOut(300);';
           echo'$(".edit-profile'.$gold->item_id.'").fadeIn(300);';
           echo'$(".cancel-upload'.$gold->item_id.'").fadeOut(300);';
+          echo'$(".imgupload'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".imgupload1'.$gold->item_id.'").fadeOut(300);';
+          echo'$(".imgupload2'.$gold->item_id.'").fadeOut(300);';
         echo'});';
 
         echo'$(".cancel-upload'.$gold->item_id.'").on("click", function() {';
           echo'$(this).hide(0);';
           echo'$(".med-ovlay'.$gold->item_id.'").fadeOut(300);';
           echo'$(".imgupload'.$gold->item_id.'").fadeIn(300);';
+          echo'$(".imgupload1'.$gold->item_id.'").fadeOut(300);';
+          echo'$(".imgupload2'.$gold->item_id.'").fadeOut(300);';
           echo'$(".edit-profile'.$gold->item_id.'").fadeIn(300);';
           echo'$(".save-profile'.$gold->item_id.'").hide(0);';
         echo'});';
@@ -395,9 +425,20 @@
             echo'var reader = new FileReader();';
 		
             echo'reader.onload = function(e) {';
-              echo'$(".imgupload'.$gold->item_id.'").attr("src", e.target.result);';
+              echo'$(".imgupload1'.$gold->item_id.'").attr("src", e.target.result);';
             echo'};';
 		
+            echo'reader.readAsDataURL(this.files[0]);';
+          echo'}';
+        echo'});';
+        echo'$(".upload1'.$gold->item_id.'").change(function() {';
+          echo'if (this.files && this.files[0]) {';
+            echo'var reader = new FileReader();';
+
+            echo'reader.onload = function(e) {';
+              echo'$(".imgupload2'.$gold->item_id.'").attr("src", e.target.result);';
+            echo'};';
+
             echo'reader.readAsDataURL(this.files[0]);';
           echo'}';
         echo'});';

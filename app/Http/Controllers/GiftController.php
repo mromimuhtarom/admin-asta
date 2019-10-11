@@ -260,9 +260,9 @@ class GiftController extends Controller
                     // $client = Storage::createLocalDriver(['root' => $rootpath]);
                     // $client->put($nama_file_unik, file_get_contents($file));
                     $file->move('../public/upload/gifts', $nama_file_unik);
-                    $path = '../public/gifts/image1/'.$pk.'.png';
+                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../public/gifts/image2/'.$pk.'.png';
+                    $path1 = '../public/upload/gifts/image2/'.$pk.'.png';
                     File::delete($path1);
                 }
 

@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Session;
 use App\ConfigText;
 use Validator;
+use File;
 
 class ChipStoreController extends Controller
 {
@@ -78,38 +79,78 @@ class ChipStoreController extends Controller
 
           $id_new                 = $id_lst + 1;
           $file                   = $request->file('file');
+          $file_wtr               = $request->file('file1');
           $ekstensi_diperbolehkan = array('png');
           $nama                   = $_FILES['file']['name'];
+          $nama_wtr               = $_FILES['file1']['name'];
           $x                      = explode('.', $nama);
+          $x_wtr                  = explode('.', $nama_wtr);
           $ekstensi               = strtolower(end($x));
+          $ekstensi_wtr           = strtolower(end($x_wtr));
           $ukuran                 = $_FILES['file']['size'];
           $nama_file_unik         = $id_new.'.'.$ekstensi;
+          list($width, $height)  = getimagesize($file);
           if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
           {
-              if($ukuran < 1044070)
+              if($ukuran < 5242880)
               {
-                  if($file->move(public_path('../public/upload/Chip'), $nama_file_unik))
+                  if($file_wtr && in_array($ekstensi_wtr))
                   {
-                     $chip = ItemsGold::create([
-                         'name'      => $request->title,
-                         'item_type' => 1,
-                         'price'     => $request->goldcost,
-                         'item_get'  => $request->chipawarded,
-                         'status'    => 0,
-                         'order'     => $request->order
-                     ]);
+                    list($width_watermark, $height_watermark) = getimagesize($file_wtr);
+                        // watermark image
+                            // Menetapkan nama thumbnail
+                            $folder = "../public/upload/Chip/";
+                            $thumbnail = $folder.$nama_file_unik;
 
-                     Log::create([
-                         'op_id'     => Session::get('user_id'),
-                         'action_id' => '3',
-                         'datetime'  => Carbon::now('GMT+7'),
-                         'desc'      => 'Create new in menu Chip Store with title '. $chip->name
-                     ]);
-                     return redirect()->route('Chip_Store')->with('success', 'Data Insert Successfull');
+
+                            // Memuat gambar utama
+                            $source = imagecreatefrompng($file->move(public_path('../public/upload/Chip/image1'), $nama_file_unik));
+
+                            // Memuat gambar watermark
+                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Chip/image2'), $nama_file_unik));
+
+                            // mendapatkan lebar dan tinggi dari gambar watermark
+                            $water_width = imagesx($watermark);
+                            $water_height = imagesy($watermark);
+
+                            // mendapatkan lebar dan tinggi dari gambar utama
+                            $main_width = imagesx($source);
+                            $main_height = imagesy($source);
+
+                            // Menetapkan posisi gambar watermark
+                            $pos_x = $width - $width_watermark;
+                            $pos_y = $height - $height_watermark;
+                            imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
+                            imagealphablending($source, false);
+                            imagesavealpha($source, true);
+                            imagecolortransparent($source); 
+
+                            imagepng($source, $thumbnail);
+                            imagedestroy($source);
+                        // end watermark image
                   } else 
                   {
-                      return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
+                    $file->move(public_path('../public/upload/Chip'), $nama_file_unik);
+                    //   return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                   }
+                  $chip = ItemsGold::create([
+                    'name'      => $request->title,
+                    'item_type' => 1,
+                    'price'     => $request->goldcost,
+                    'item_get'  => $request->chipawarded,
+                    'status'    => 0,
+                    'order'     => $request->order
+                ]);
+
+                Log::create([
+                    'op_id'     => Session::get('user_id'),
+                    'action_id' => '3',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Create new in menu Chip Store with title '. $chip->name
+                ]);
+
+                return redirect()->route('Chip_Store')->with('success', 'Data Insert Successfull');
               } else {
                 return redirect()->route('Chip_Store')->with('alert',"Size Image it's to Big");
               }
@@ -172,29 +213,73 @@ class ChipStoreController extends Controller
     {
         $pk                     = $request->pk;
         $file                   = $request->file('file');
+        $file_wtr               = $request->file('file1');
         $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
+        $nama_wtr               = $_FILES['file1']['name'];
         $x                      = explode('.', $nama);
+        $x_wtr                  = explode('.', $nama_wtr);
         $ekstensi               = strtolower(end($x));
+        $ekstensi_wtr           = strtolower(end($x_wtr));
         $ukuran                 = $_FILES['file']['size'];
         $nama_file_unik         = $pk.'.'.$ekstensi;
+        list($width, $height)   = getimagesize($file);
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 1044070)
             {
-                if($file->move(public_path('../public/upload/Chip'), $nama_file_unik))
+                if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) == true)
                 {
-                    Log::create([
-                        'op_id'     => Session::get('userId'),
-                        'action_id' => '2',
-                        'datetime'  => Carbon::now('GMT+7'),
-                        'desc'      => 'Edit Image In menu Chip Store with ID '.$pk.' to '.$nama_file_unik
-                    ]);
-                    return redirect()->route('Chip_Store')->with('success','Update Image Successfull');
+                    list($width_watermark, $height_watermark) = getimagesize($file_wtr);
+                        // watermark image
+                            // Menetapkan nama thumbnail
+                            $folder = "../public/upload/Chip/";
+                            $thumbnail = $folder.$nama_file_unik;
+
+
+                            // Memuat gambar utama
+                            $source = imagecreatefrompng($file->move(public_path('../public/upload/Chip/image1'), $nama_file_unik));
+
+                            // Memuat gambar watermark
+                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Chip/image2'), $nama_file_unik));
+
+                            // mendapatkan lebar dan tinggi dari gambar watermark
+                            $water_width = imagesx($watermark);
+                            $water_height = imagesy($watermark);
+
+                            // mendapatkan lebar dan tinggi dari gambar utama
+                            $main_width = imagesx($source);
+                            $main_height = imagesy($source);
+
+                            // Menetapkan posisi gambar watermark
+                            $pos_x = $width - $width_watermark;
+                            $pos_y = $height - $height_watermark;
+                            imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
+                            imagealphablending($source, false);
+                            imagesavealpha($source, true);
+                            imagecolortransparent($source); 
+
+                            imagepng($source, $thumbnail);
+                            imagedestroy($source);
+                        // end watermark image
                 } else {
-                    return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
+                    $file->move(public_path('../public/upload/Chip'), $nama_file_unik);
+                    $path = '../public/upload/Chip/image1/'.$pk.'.png';
+                    File::delete($path);
+                    $path1 = '../public/upload/Chip/image2/'.$pk.'.png';
+                    File::delete($path1);
+                    // return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                 }
+                Log::create([
+                    'op_id'     => Session::get('userId'),
+                    'action_id' => '2',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Edit Image In menu Chip Store with ID '.$pk.' to '.$nama_file_unik
+                ]);
+
+                return redirect()->route('Chip_Store')->with('success','Update Image Successfull');
             } else  {
                 return redirect()->route('Chip_Store')->with('alert','Size Image is to big');
             }
