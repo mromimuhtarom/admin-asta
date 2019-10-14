@@ -122,6 +122,7 @@
 	$(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+	  "order": [[5, "desc"]]
     });
   });
   
@@ -160,7 +161,6 @@
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
     "autoWidth" : true,
     "paging": false,
-	"order": [[ 7, "desc" ]],
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },
