@@ -144,6 +144,28 @@
     <!-- end widget -->
 
 <!-- Modal -->
+{{-- @php
+    foreach($player_history as $tr)
+    {
+        $a = str_replace('~', '',$tr->gameplay_log);
+        $g[] = $a;
+        // $c = json_decode($g, true);
+        // $a = $tr->gameplay_log;
+        // $b = json_encode($g);
+        // $g = $c.$a.$e;        
+    }
+    // for ($i=0; $i<count($g); $i++) {
+    //         echo $g[$i]['game_state'];
+    // }
+    // dd($g);
+    foreach ($g as $d) {
+        echo $d[];
+    }
+@endphp --}}
+
+
+
+
 @foreach ($player_history as $history)
 <div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog1" role="document">
@@ -181,19 +203,68 @@
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>			                
                             <tr>
-                                <th>Username</th>
-                                <th>Game Play Log</th>
+                                <th>Game State</th>
+                                <th>Player</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($player_history as $hsty_round)
-                            @if($hsty_round->round_id === $history->round_id && $hsty_round->gamename === $history->gamename)
+                            {{-- @foreach ($player_history as $hsty_round)
+                            @if($hsty_round->round_id === $history->round_id && $hsty_round->gamename === $history->gamename) --}}
+                            @php 
+                            $json_gameplay = str_replace('#', ',', $history->gameplay_log);
+                            $kurungawalakhir = "[".$json_gameplay."]";
+                            $arrayjson_decode = json_decode($kurungawalakhir, true);                          
+                            @endphp
+                            @foreach($arrayjson_decode as $row)
                             <tr>
-                                <td>{{ $hsty_round->username }}</td>
-                                <td>{{ $hsty_round->gameplay_log }}</td>
+                                <td>{{ $row['game_state'] }}</td>
+                                <td>
+                                <table width="100%" class="submenusub" style="border:1px solid #dee2e6;">
+                                    <tr style="background-color:#f5f5f5;">
+                                      <td>Sit</td>
+                                      <td>User Id</td>
+                                      <td>Username</td>
+                                      @if (is_array($row['player']))
+                                      
+                                      <td>Credit</td>
+                                      <td>Hands</td>
+                                      @else 
+                                      <td>Card</td>
+                                      @endif
+
+                                    </tr>
+                                    @if (is_array($row['player'])) 
+                                    @foreach ($row['player'] as $key => $player) 
+                                    <tr>
+                                      <td>{{ $player['sit'] }}</td>
+                                      <td>{{ $player['user_id'] }}</td>
+                                      @foreach ($player_username as $plyr)
+                                      @if ($player['user_id'] === $plyr->user_id)
+                                      <td>{{ $plyr->username}}</td>
+                                      @endif
+                                      @endforeach
+                                      @if ($player['user_id'] === 0)
+                                      <td></td>                                          
+                                      @endif
+                                      @if ($key == 'credit')
+                                      <td>{{ $player['credit'] }}</td>  
+                                      @else 
+                                      <td></td>
+                                      @endif
+                                      <td>{{ $player['hands'] }}</td>
+                                    </tr>
+                                    @endforeach    
+                                    @else 
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>                                    
+                                    @endif          
+                                </table>
+                                </td>
                             </tr>
-                            @endif
-                        @endforeach
+                            @endforeach
+                            {{-- @endif --}}
+                        
                         </tbody>
                     </table>
                         
@@ -215,6 +286,10 @@
     </div>
 </div>
 @endforeach
+
+
+
+
 <script>
     var responsiveHelper_dt_basic = responsiveHelper_dt_basic || undefined;
 			

@@ -60,6 +60,7 @@ class GoldController extends Controller
           $actionbalance[6]  => $actionbalance[7] ,
           $actionbalance[8]  => $actionbalance[9] 
         ];
+        dd($actblnc);
     
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
