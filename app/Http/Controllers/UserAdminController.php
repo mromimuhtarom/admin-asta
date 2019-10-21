@@ -113,6 +113,7 @@ class UserAdminController extends Controller
         'desc'      => 'Edit '.$name.' in menu User Admin with UserId '.$pk.' to '. $value
       ]);
     }
+    
     public function updatepassword(Request $request) 
     {
         $pk = $request->userid;

@@ -122,7 +122,7 @@
 	$(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
-			"order": [[ 5, "desc" ]],
+	  "order": [[5, "desc"]]
     });
   });
   

@@ -55,7 +55,9 @@ class Banking_TransactionController extends Controller
                 ->get();
             
             return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
-        } else if($time == "week")
+
+        } 
+        else if($time == "week")
         {
             $history = $transaction_day->selectRaw(' YEARWEEK(asta_db.transaction_day.date_created) AS yearperweek, max(date(asta_db.transaction_day.date_created)) As maxDate, min(date(asta_db.transaction_day.date_created)) As minDate')
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
@@ -79,7 +81,7 @@ class Banking_TransactionController extends Controller
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')   
                         ->get();
-     
+                        
                 return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
             } else if($minDate != NULL)
             {

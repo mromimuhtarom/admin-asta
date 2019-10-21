@@ -195,6 +195,7 @@ class PlayersController extends Controller
                             ->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '>=', $minDate)
                             ->get();
+                  
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($searhUser != NULL && $status != NULL && $maxDate != NULL)
