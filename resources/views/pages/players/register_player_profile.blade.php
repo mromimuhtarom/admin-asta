@@ -65,8 +65,15 @@
                                     </p>
                                 </li>
                                 <li>
+                                    @php 
+                                    $key = "------------ASTA-KEY------------" ;
+                                    $iv = "-----ASTAIV-----";
+                                    $method = "aes-256-cbc";
+                                    $enStr = $profile->email;
+                                    $decStr = openssl_decrypt(hexToStr($enStr), $method, $key, $options=OPENSSL_RAW_DATA, $iv);
+                                    @endphp
                                     <p class="text-muted">
-                                        Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $profile->email }}</a>
+                                        Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $decStr  }}</a>
                                     </p>
                                 </li>
                                 <li>

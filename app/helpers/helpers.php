@@ -174,4 +174,16 @@ function bankTransactionStatus($val){
     return "";
   }
 }
+function strtohex($x){
+        $s='';
+        foreach (str_split($x) as $c) $s.=sprintf("%02X",ord($c));
+        return($s);
+}
+function hexToStr($hex){
+        $string='';
+        for ($i=0; $i < strlen($hex)-1; $i+=2){
+            $string .= chr(hexdec($hex[$i].$hex[$i+1]));
+        }
+        return $string;
+}
 ?>
