@@ -339,6 +339,16 @@
                                     <td>{{ $player['hand'] }}</td>
                                 </tr>
                                 @endforeach  
+                                @elseif($row['game_state'] === 'DRAW')
+                                @foreach ($row['players'] as $key => $player) 
+                                <tr>
+                                    <td>{{ $player['seat_id'] }}</td>
+                                    <td>{{ $player['username'] }}</td>
+                                    <td>{{ $row['game_state'] }}</td>
+                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ $player['hand'] }}</td>
+                                </tr>
+                                @endforeach
                                 @elseif($row['game_state'] === 'PLAYER_ACTION')
                                 <tr>
                                     <td>{{ $row['player']['seat_id'] }}</td>
@@ -351,18 +361,102 @@
                                     <td>{{ $row['player']['chip']}}</td>
                                     <td></td>
                                 </tr>  
-                                {{-- @elseif ($row['game_state'] === 'ACTION_DONE')
-                                @foreach ($row['players'] as $endplayer)
+                                @elseif ($row['game_state'] === 'ACTION_DONE')
+                                @foreach ($row['players'] as $key => $player) 
                                 <tr>
-                                    <td>{{ $endplayer['seat_id'] }}</td>
-                                    <td>{{ $endplayer['username'] }}</td>
-                                    <td>{{ $endplayer['chip'] }}</td>
-                                    <td>{{ $endplayer['card'] }}</td>
-                                    <td>{{ $row['card_table'] }}</td>
+                                    <td>{{ $player['seat_id'] }}</td>
+                                    <td>{{ $player['username'] }}</td>
+                                    <td>{{ $row['game_state'] }}</td>
+                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ $player['hand'] }}</td>
                                 </tr>
-                                @endforeach --}}
+                                @endforeach
                                 @elseif($row['game_state'] === 'PLAYER_WIN')     
-
+                                <tr>
+                                    <td>{{ $row['winner']['seat_id'] }}</td>
+                                    <td>{{ $row['winner']['username'] }}</td>
+                                    <td>{{ $row['game_state']}}</td>
+                                    <td>{{ $row['winner']['chip']}}</td>
+                                    <td></td>
+                                </tr>  
+                                @endif
+                                @endforeach                 
+                            </tbody>
+                    </table>     
+                    @elseif($history->gamename === 'Domino Susun') 
+                    <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>			                
+                                <tr>
+                                    <th>Sit</th>
+                                    <th>Username</th>
+                                    <th>Action</th>
+                                    <th>Chip</th>
+                                    <th>Card</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php 
+                                $inputMinDate = "2019-10-19";
+                                $inputMaxDate = "2019-10-19";
+                                $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 1221)->first();
+                                $arrayjson_decode = array_gameplaylog($tbdmq->gameplay_log);
+                                // dd($arrayjson_decode);
+                                @endphp                   
+                                @foreach($arrayjson_decode as $row)
+                                @if ($row['game_state'] === 'NEW_ROUND')
+                                @foreach ($row['players'] as $key => $player) 
+                                <tr>
+                                    <td>{{ $player['seat_id'] }}</td>
+                                    @foreach ($player_username as $plyr)
+                                    @if ($player['user_id'] === $plyr->user_id)
+                                    <td>{{ $plyr->username }}</td>
+                                    @endif
+                                    @endforeach
+                                    <td>{{ $row['game_state'] }}</td>
+                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ $player['hand'] }}</td>
+                                </tr>
+                                @endforeach  
+                                @elseif($row['game_state'] === 'DRAW')
+                                @foreach ($row['players'] as $key => $player) 
+                                <tr>
+                                    <td>{{ $player['seat_id'] }}</td>
+                                    <td>{{ $player['username'] }}</td>
+                                    <td>{{ $row['game_state'] }}</td>
+                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ $player['hand'] }}</td>
+                                </tr>
+                                @endforeach
+                                @elseif($row['game_state'] === 'PLAYER_ACTION')
+                                <tr>
+                                    <td>{{ $row['player']['seat_id'] }}</td>
+                                    @foreach ($player_username as $plyr)
+                                    @if ($row['player']['user_id'] === $plyr->user_id)
+                                    <td>{{ $plyr->username }}</td>
+                                    @endif
+                                    @endforeach
+                                    <td>{{ $row['action']}}</td>
+                                    <td>{{ $row['player']['chip']}}</td>
+                                    <td></td>
+                                </tr>  
+                                @elseif ($row['game_state'] === 'ACTION_DONE')
+                                @foreach ($row['players'] as $key => $player) 
+                                <tr>
+                                    <td>{{ $player['seat_id'] }}</td>
+                                    <td>{{ $player['username'] }}</td>
+                                    <td>{{ $row['game_state'] }}</td>
+                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ $player['hand'] }}</td>
+                                </tr>
+                                @endforeach
+                                @elseif($row['game_state'] === 'PLAYER_WIN')     
+                                <tr>
+                                    <td>{{ $row['winner']['seat_id'] }}</td>
+                                    <td>{{ $row['winner']['username'] }}</td>
+                                    <td>{{ $row['game_state']}}</td>
+                                    <td>{{ $row['winner']['chip']}}</td>
+                                    <td></td>
+                                </tr>  
                                 @endif
                                 @endforeach                 
                             </tbody>
