@@ -275,10 +275,9 @@ class PlayReportController extends Controller
         $player_history  = $tbtpk->wherebetween('asta_db.tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                            ->get();
         } else if($inputGame == 'Big Two') {
-        $player_history = $tbbgt->wherebetween('asta_db.bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
+        $player_history = $tbbgt->wherebetween('asta_db.bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 13:39:00"])
                           ->get();
         }
-       //  dd($bgt_round_gamplay_log);
           return view('pages.players.playreport', compact('player_history', 'player_username', 'bgt_round_gamplay_log','inputMaxDate', 'inputMinDate', 'inputGame', 'menus1', 'game', 'datenow'));
     }
     else if ($inputMinDate != NULL && $inputMaxDate != NULL) {
