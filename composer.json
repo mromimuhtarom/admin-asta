@@ -43,7 +43,8 @@
         ],
         "files": [
             "app/helpers/helpers.php",
-            "app/helpers/bothelper.php"
+            "app/helpers/bothelper.php",
+            "app/helpers/game.php"
         ]
     },
     "autoload-dev": {
