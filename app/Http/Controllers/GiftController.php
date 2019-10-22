@@ -50,11 +50,9 @@ class GiftController extends Controller
         $value = str_replace(':', ',', $active->value);
         $endis = explode(",", $value);
 
-        $rootpath = '../../asta-api/gift';
-        $client = Storage::createLocalDriver(['root' => $rootpath]);
         
 
-        return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu', 'timenow', 'client'));
+        return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu', 'timenow'));
     }
 
     /**
@@ -146,9 +144,6 @@ class GiftController extends Controller
                             imagedestroy($source);
                         // end watermark image
                         } else {
-                            // $rootpath = '../../asta-api/gift';
-                            // $client = Storage::createLocalDriver(['root' => $rootpath]);
-                            // $client->put($nama_file_unik, file_get_contents($file));
                             $file->move(public_path('../public/upload/gifts'), $nama_file_unik);
                         }
                             
@@ -256,9 +251,6 @@ class GiftController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    // $rootpath = '../../asta-api/gift';
-                    // $client = Storage::createLocalDriver(['root' => $rootpath]);
-                    // $client->put($nama_file_unik, file_get_contents($file));
                     $file->move('../public/upload/gifts', $nama_file_unik);
                     $path = '../public/upload/gifts/image1/'.$pk.'.png';
                     File::delete($path);

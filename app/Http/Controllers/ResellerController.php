@@ -836,9 +836,6 @@ public function detailTransaction($month, $year)
                     imagedestroy($source);
                    // end watermark image
                 } else {
-                    // $rootpath = '../../asta-api/gift';
-                    // $client = Storage::createLocalDriver(['root' => $rootpath]);
-                    // $client->put($nama_file_unik, file_get_contents($file));
                     $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
                 }
                           
