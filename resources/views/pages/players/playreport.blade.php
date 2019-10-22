@@ -146,7 +146,7 @@
 <!-- Modal -->
 @foreach ($player_history as $history)
 <div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog1" role="document">
+    <div class="modal-dialog modal-dialog1 modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Detail Round ID</h5>
@@ -253,9 +253,8 @@
                                 @php 
                                 $inputMinDate = "2019-10-18";
                                 $inputMaxDate = "2019-10-18";
-                                $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 4758)->first();
-                                $arrayjson_decode = array_gameplaylog($tbtpk->gameplay_log)
-                                // dd($arrayjson_decode);
+                                $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 4910)->first();
+                                $arrayjson_decode = array_gameplaylog($tbtpk->gameplay_log);
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
                                 @if ($row['game_state'] === 'NEW_ROUND')
@@ -320,7 +319,7 @@
                                 @php 
                                 $inputMinDate = "2019-10-19";
                                 $inputMaxDate = "2019-10-19";
-                                $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 1221)->first();
+                                $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 1327)->first();
                                 $arrayjson_decode = array_gameplaylog($tbdmq->gameplay_log);
                                 // dd($arrayjson_decode);
                                 @endphp                   
@@ -336,7 +335,7 @@
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['hand'] }}</td>
+                                    <td>{{ $player['card'] }}</td>
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'DRAW')
@@ -346,7 +345,7 @@
                                     <td>{{ $player['username'] }}</td>
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['hand'] }}</td>
+                                    <td>{{ $player['card'] }}</td>
                                 </tr>
                                 @endforeach
                                 @elseif($row['game_state'] === 'PLAYER_ACTION')
@@ -368,7 +367,7 @@
                                     <td>{{ $player['username'] }}</td>
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['hand'] }}</td>
+                                    <td>{{ $player['card'] }}</td>
                                 </tr>
                                 @endforeach
                                 @elseif($row['game_state'] === 'PLAYER_WIN')     
@@ -391,19 +390,21 @@
                                     <th>Username</th>
                                     <th>Action</th>
                                     <th>Chip</th>
-                                    <th>Card</th>
+                                    <th>Domino</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php 
                                 $inputMinDate = "2019-10-19";
                                 $inputMaxDate = "2019-10-19";
-                                $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 1221)->first();
-                                $arrayjson_decode = array_gameplaylog($tbdmq->gameplay_log);
-                                // dd($arrayjson_decode);
+                                $tbdms = App\DmsRound::where('dms_round.round_id', '=', 726)->first();
+
+                                $arrayjson_decode = array_gameplaylog($tbdms->gameplay_log);
+                                // $arrayjson_decode = json_decode($tbdms->gameplay_log);
+                                
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
-                                @if ($row['game_state'] === 'NEW_ROUND')
+                                @if ($row['game_state'] === 'READY')
                                 @foreach ($row['players'] as $key => $player) 
                                 <tr>
                                     <td>{{ $player['seat_id'] }}</td>
@@ -435,9 +436,11 @@
                                     <td>{{ $plyr->username }}</td>
                                     @endif
                                     @endforeach
-                                    <td>{{ $row['action']}}</td>
-                                    <td>{{ $row['player']['chip']}}</td>
+                                    <td>{{ $row['action']}}</td>                                  
                                     <td></td>
+                                    @if ($row['action'] !== 'PASS')
+                                    <td>{{ $row['domino']}}</td>
+                                    @endif  
                                 </tr>  
                                 @elseif ($row['game_state'] === 'ACTION_DONE')
                                 @foreach ($row['players'] as $key => $player) 
