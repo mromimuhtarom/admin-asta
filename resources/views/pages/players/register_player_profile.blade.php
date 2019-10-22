@@ -65,15 +65,15 @@
                                     </p>
                                 </li>
                                 <li>
-                                    @php 
-                                    $key = "------------ASTA-KEY------------" ;
-                                    $iv = "-----ASTAIV-----";
-                                    $method = "aes-256-cbc";
-                                    $enStr = $profile->email;
-                                    $decStr = openssl_decrypt(hexToStr($enStr), $method, $key, $options=OPENSSL_RAW_DATA, $iv);
-                                    @endphp
+                                  @php
+                                      $key = "------------ASTA-KEY------------";
+                                      $iv = "-----ASTAIV-----";
+                                      $method = "aes-256-cbc";
+                                      $enStr = $profile->email;
+                                      $emailDecrypt = openssl_decrypt(hexToStr($enStr), $method, $key, $options = OPENSSL_RAW_DATA, $iv);
+                                  @endphp  
                                     <p class="text-muted">
-                                        Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $decStr  }}</a>
+                                        Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $emailDecrypt }}</a>
                                     </p>
                                 </li>
                                 <li>
@@ -156,6 +156,7 @@
             </tr>
           </thead>
           <tbody>
+            
             @foreach($device as $dvc)
             <tr>
                 <td>{{ $dvc->device_key}}</td>

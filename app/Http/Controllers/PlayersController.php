@@ -256,7 +256,13 @@ class PlayersController extends Controller
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($searhUser != NULL)
+        } else if($minDate != NULL && $maxDate != NULL)
+        {
+          $registerPlayer = $register->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
+                            ->get();
+            return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
+        } 
+        else if($searhUser != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->get();
@@ -268,9 +274,10 @@ class PlayersController extends Controller
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        }else if($mindate != NULL)
+        } 
+        else if($minDate != NULL)
         {
-          $registerPlayer = $register->where('asta_db.user.join_date', '>=', $mindate)
+          $registerPlayer = $register->where('asta_db.user.join_date', '>=', $minDate)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));

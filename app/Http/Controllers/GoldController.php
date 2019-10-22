@@ -109,7 +109,7 @@ class GoldController extends Controller
 
           $balancedetails = $balanceGold->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                             ->get();
-
+          
           return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc'));
 
         }else if ($minDate != NULL){
