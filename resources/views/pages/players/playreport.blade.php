@@ -321,7 +321,6 @@
                                 $inputMaxDate = "2019-10-19";
                                 $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 1327)->first();
                                 $arrayjson_decode = array_gameplaylog($tbdmq->gameplay_log);
-                                // dd($arrayjson_decode);
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
                                 @if ($row['game_state'] === 'NEW_ROUND')
@@ -400,7 +399,6 @@
                                 $tbdms = App\DmsRound::where('dms_round.round_id', '=', 726)->first();
 
                                 $arrayjson_decode = array_gameplaylog($tbdms->gameplay_log);
-                                // $arrayjson_decode = json_decode($tbdms->gameplay_log);
                                 
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)

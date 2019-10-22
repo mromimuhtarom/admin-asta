@@ -290,7 +290,6 @@ class PlayReportController extends Controller
         $bgt = $tbbgt->wherebetween('asta_db.bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
         
         $player_history  = $bgt->union($dmq)->union($dms)->union($tpk)->get();
-        dd($bgt_round_gamplay_log);
       
        
           return view('pages.players.playreport', compact('player_history', 'player_username', 'bgt_round_gamplay_log', 'menus1', 'game', 'datenow'));
