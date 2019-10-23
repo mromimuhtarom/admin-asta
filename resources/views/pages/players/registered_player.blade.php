@@ -20,7 +20,7 @@
         <div class="table-header w-100 h-100">
             <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
-                    <div class="col" style="padding-left:1%;">
+                    <div cl ass="col" style="padding-left:1%;">
                         <input type="text" name="inputPlayer" class="left" placeholder="username">
                     </div>
                     <div class="col" style="padding-left:1%;">
@@ -110,7 +110,6 @@
                 <td><a href="#"class="status" data-title="Bank Account" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td>
                 <td>{{ $regis->join_date }}</td>
                 <td>{{ $user_type }}</td>
-                {{-- <td>{{ $regis->devicename}}</td> --}}
                 <td>{{ $regis->countryname }}</td>
             </tr>   
             @else
@@ -123,7 +122,6 @@
                 <td>{{ $regis->strStatus() }}</td>
                 <td>{{ $regis->join_date }}</td>
                 <td>{{ $user_type }}</td>
-                {{-- <td>{{ $regis->devicename}}</td> --}}
                 <td>{{ $regis->countryname }}</td>
             </tr>   
             @endif
@@ -168,7 +166,7 @@
       "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         $.ajaxSetup({
           headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
 

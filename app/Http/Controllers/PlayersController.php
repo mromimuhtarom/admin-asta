@@ -281,9 +281,9 @@ class PlayersController extends Controller
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
-        } else if($maxdate != NULL)
+        } else if($maxDate != NULL)
         {
-          $registerPlayer =  $register->where('asta_db.user.join_date', '<=', $maxdate)
+          $registerPlayer =  $register->where('asta_db.user.join_date', '<=', $maxDate)
                             ->get();
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
@@ -674,7 +674,7 @@ class PlayersController extends Controller
         $image_decode = base64_decode($image);
         $imageName = $id.'.'.'jpg';
 
-        $rootpath = '../../asta-ap/test_upload';
+        $rootpath = '../../asta-api/profile_player';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
         if($client->put($imageName, $image_decode))
         {

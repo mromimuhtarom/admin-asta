@@ -45,6 +45,7 @@ class PlayReportController extends Controller
        $validator = Validator::make($request->all(),[
               'inputMinDate' => 'required|date',
               'inputMaxDate' => 'required|date',
+              'inputGame'    => 'required',
        ]);
     
        if ($validator->fails()) {
@@ -148,25 +149,7 @@ class PlayReportController extends Controller
         }
 
         return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
-      } else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
-        $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-              ->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-
-        $dms = $tbdms->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->wherebetween('asta_db.dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-
-        $tpk = $tbtpk->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->wherebetween('asta_db.tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-
-        $bgt = $tbbgt->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-                          ->wherebetween('asta_db.bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-        $player_history = $bgt->union($dmq)
-                          ->union($dms)
-                          ->union($tpk)
-                          ->get();
-
-      return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
-    } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
+      } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
        
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
@@ -189,25 +172,7 @@ class PlayReportController extends Controller
                           ->get();
         }
        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
-     } else if($inputName != NULL && $inputMinDate != NULL ) {
-        $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-              ->where('asta_db.dmq_round.date', '>=', $inputMinDate." 00:00:00");
-
-        $dms = $tbdms->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->where('asta_db.dms_round.date', '>=', $inputMinDate." 00:00:00");
-
-        $tpk = $tbtpk->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->where('asta_db.tpk_round.date', '>=', $inputMinDate." 00:00:00");
-
-        $bgt = $tbbgt->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->where('asta_db.bgt_round.date', '>=', $inputMinDate." 00:00:00");
-        $player_history =  $dmq->union($dms)
-                           ->union($bgt)
-                           ->union($tpk)
-                           ->get();
-
-      return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
-    } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
+     } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
               ->where('asta_db.dmq_round.date', '<=', $inputMaxDate." 23:59:59")
@@ -229,24 +194,6 @@ class PlayReportController extends Controller
         }
 
           return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'datenow'));
-    } else if($inputName != NULL && $inputMaxDate != NULL) {
-        $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-              ->where('asta_db.dmq_round.date', '<=', $inputMaxDate." 23:59:59");
-
-        $dms = $tbdms->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->where('asta_db.dmq_round.date', '<=', $inputMaxDate." 23:59:59");
-
-        $tpk = $tbtpk->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-               ->where('asta_db.dmq_round.date', '<=', $inputMaxDate." 23:59:59");
-
-        $bgt = $tbbgt->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
-                          ->where('asta_db.dmq_round.date', '<=', $inputMaxDate." 23:59:59");
-        $player_history = $bgt->union($dmq)
-                          ->union($dms)
-                          ->union($tpk)
-                          ->get();
-
-      return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'datenow'));
     } else if($inputName != NULL && $inputGame != NULL) {
 
         if($inputGame == 'Domino QQ') {
@@ -280,46 +227,6 @@ class PlayReportController extends Controller
         }
           return view('pages.players.playreport', compact('player_history', 'player_username', 'bgt_round_gamplay_log','inputMaxDate', 'inputMinDate', 'inputGame', 'menus1', 'game', 'datenow'));
     }
-    else if ($inputMinDate != NULL && $inputMaxDate != NULL) {
-        $dmq = $tbdmq->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-
-        $dms = $tbdms->wherebetween('asta_db.dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-
-        $tpk = $tbtpk->wherebetween('asta_db.tpk_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-
-        $bgt = $tbbgt->wherebetween('asta_db.bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"]);
-        
-        $player_history  = $bgt->union($dmq)->union($dms)->union($tpk)->get();
-      
-       
-          return view('pages.players.playreport', compact('player_history', 'player_username', 'bgt_round_gamplay_log', 'menus1', 'game', 'datenow'));
-    } else if($inputName != NULL) {
-        $dmq = $tbdmq->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%');
-
-        $dms = $tbdms->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%');
-
-        $tpk = $tbtpk->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%');
-
-        $bgt = $tbbgt->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%');
-        $player_history = $bgt->union($dmq)
-                          ->union($dms)
-                          ->union($tpk)
-                          ->get();
-
-          return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'datenow'));
-    } else if($inputGame != NULL) {
-        if($inputGame == 'Domino QQ') {
-        $player_history = $tbdmq->get();
-        } else if($inputGame == 'Domino Susun') {
-        $player_history = $tbdms->get();
-        } else if($inputGame == 'Texas Poker') {
-        $player_history  = $tbtpk->get();
-        } else if($inputGame == 'Big Two') {
-        $player_history = $tbbgt->get();
-        }
-
-         return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'datenow'));
-   } 
-
+    
   }
 }

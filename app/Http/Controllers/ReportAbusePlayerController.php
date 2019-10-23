@@ -35,20 +35,20 @@ class ReportAbusePlayerController extends Controller
 
         if($reportplayer != NULL && $reportedplayer != NULL && $mindate != NULL && $maxdate != NULL)
         {
-            $problemplayer = AbusePlayer::where('report', '=', DB::raw('(select user_id from asta_db.user where username LIKE "%'.$reportplayer.'%" and user_id = asta_db.abuse_report.report)'))
-                             ->where('reported', '=', DB::raw('(Select user_id from asta_db.user where username LIKE "%'.$reportedplayer.'%" and user_id = asta_db.abuse_report.reported)'))
+            $problemplayer = AbusePlayer::where('report', '=', DB::raw('(select user_id from asta_db.user where username LIKE "%'.$reportplayer.'%" and user_id = asta_db.report_abuse.report)'))
+                             ->where('reported', '=', DB::raw('(Select user_id from asta_db.user where username LIKE "%'.$reportedplayer.'%" and user_id = asta_db.report_abuse.reported)'))
                              ->whereBetween('date', [$mindate.' 00:00:00', $maxdate.' 23:59:59'])
                              ->get();
             return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));                
         } else if($reportedplayer != NULL && $mindate != NULL && $maxdate != NULL)
         {
-            $problemplayer = AbusePlayer::where('reported', '=', DB::raw('(Select user_id from asta_db.user where username LIKE "%'.$reportedplayer.'%" and user_id = asta_db.abuse_report.reported)'))
+            $problemplayer = AbusePlayer::where('reported', '=', DB::raw('(Select user_id from asta_db.user where username LIKE "%'.$reportedplayer.'%" and user_id = asta_db.report_abuse.reported)'))
                              ->whereBetween('date', [$mindate.' 00:00:00', $maxdate.' 23:59:59'])
                              ->get();
             return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));    
         } else if($reportplayer!= NULL && $mindate != NULL && $maxdate != NULL)
         {
-            $problemplayer = AbusePlayer::where('report', '=', DB::raw('(select user_id from asta_db.user where username LIKE "%'.$reportplayer.'%" and user_id = asta_db.abuse_report.report)'))
+            $problemplayer = AbusePlayer::where('report', '=', DB::raw('(select user_id from asta_db.user where username LIKE "%'.$reportplayer.'%" and user_id = asta_db.report_abuse.report)'))
                              ->whereBetween('date', [$mindate.' 00:00:00', $maxdate.' 23:59:59'])
                              ->get();
             return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));    
