@@ -144,7 +144,7 @@ class PlayersController extends Controller
  //  ---------- Profile Image --------- //
     public function ImageProfilePlayer($user_id)
     {
-      $rootpath = '../../asta-api/profile_player';
+      $rootpath = '../../enginepk/profile_player';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
       $file = $client->get($user_id.'.jpg');
       $type = $client->mimeType($user_id.'.jpg');
@@ -690,7 +690,7 @@ class PlayersController extends Controller
         $image_decode = base64_decode($image);
         $imageName = $id.'.'.'jpg';
 
-        $rootpath = '../../asta-api/profile_player';
+        $rootpath = '../../enginepk/profile_player';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
         if($client->put($imageName, $image_decode))
         {
