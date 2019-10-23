@@ -253,8 +253,8 @@
                                 @php 
                                 $inputMinDate = "2019-10-18";
                                 $inputMaxDate = "2019-10-18";
-                                $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 4910)->first();
-                                $arrayjson_decode = array_gameplaylog($tbtpk->gameplay_log);
+                                $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 5120)->first();
+                                $arrayjson_decode = array_gameplaylog($history->gameplay_log);
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
                                 @if ($row['game_state'] === 'NEW_ROUND')
@@ -269,22 +269,24 @@
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
                                     <td>{{ $player['card'] }}</td>
-                                    <td>{{ $row['card_table']}}</td>
+                                    <td>{{ $row['cardtable']}}</td>
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'TURN_BET')
+                                @foreach ($row['player'] as $action_plyr)
                                 <tr>
-                                    <td>{{ $row['player']['seat_id'] }}</td>
+                                    <td>{{ $action_plyr['seat_id'] }}</td>
                                     @foreach ($player_username as $plyr)
-                                    @if ($row['player']['user_id'] === $plyr->user_id)
+                                    @if ($action_plyr['user_id'] === $plyr->user_id)
                                     <td>{{ $plyr->username }}</td>
                                     @endif
                                     @endforeach
-                                    <td>{{ $row['player']['action']}}</td>
-                                    <td>{{ $row['player']['chip']}}</td>
-                                    <td>{{ $row['player']['card'] }}</td>
-                                    <td>{{ $row['card_table'] }}</td>
-                                </tr>  
+                                    <td>{{ $action_plyr['action']}}</td>
+                                    <td>{{ $action_plyr['chip']}}</td>
+                                    <td>{{ $action_plyr['card'] }}</td>
+                                    <td>{{ $row['cardtable'] }}</td>
+                                </tr> 
+                                @endforeach 
                                 @elseif ($row['game_state'] === 'END_ROUND')
                                 @foreach ($row['player'] as $endplayer)
                                 <tr>
@@ -297,7 +299,7 @@
                                     <td>{{ $endplayer['status'] }}</td>
                                     <td>{{ $endplayer['chip'] }}</td>
                                     <td>{{ $endplayer['card'] }}</td>
-                                    <td>{{ $row['card_table'] }}</td>
+                                    <td>{{ $row['cardtable'] }}</td>
                                 </tr>
                                 @endforeach     
                                 @endif
@@ -398,7 +400,7 @@
                                 $inputMaxDate = "2019-10-19";
                                 $tbdms = App\DmsRound::where('dms_round.round_id', '=', 728)->first();
 
-                                $arrayjson_decode = array_gameplaylog($tbdms->gameplay_log);
+                                $arrayjson_decode = array_gameplaylog($history->gameplay_log);
                                 
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)

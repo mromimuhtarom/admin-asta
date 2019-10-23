@@ -19,6 +19,7 @@ use App\UserRandom;
 use App\ConfigText;
 use File;
 use Storage;
+use Response;
 
 class PlayersController extends Controller
 {
@@ -134,11 +135,26 @@ class PlayersController extends Controller
                     'asta_db.user.join_date'
                   )
                   ->where('asta_db.user.user_id', '=', $userId)
-                  ->first();
+                  ->first();                 
                 
       return view('pages.players.register_player_profile', compact('device', 'profile'));
     }
  // ----------- End Detail Registered Player ----------- //
+
+ //  ---------- Profile Image --------- //
+    public function ImageProfilePlayer($user_id)
+    {
+      $rootpath = '../../asta-api/profile_player';
+      $client = Storage::createLocalDriver(['root' => $rootpath]);
+      $file = $client->get($user_id.'.jpg');
+      $type = $client->mimeType($user_id.'.jpg');
+      // dd($type);
+
+      $response = Response::make($file, 200);
+      $response->header("Content-Type", $type);
+      return $response;
+    }
+ //  ---------- End Profile Image --------- // 
 
 
 //  ----------- Search Registered Player ----------//
@@ -674,7 +690,7 @@ class PlayersController extends Controller
         $image_decode = base64_decode($image);
         $imageName = $id.'.'.'jpg';
 
-        $rootpath = '../../enginepk/profile_player';
+        $rootpath = '../../asta-api/profile_player';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
         if($client->put($imageName, $image_decode))
         {

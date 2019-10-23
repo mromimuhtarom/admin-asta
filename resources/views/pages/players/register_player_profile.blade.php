@@ -47,10 +47,12 @@
                                 // if (is_numeric($profile->avatar)) {
                                 //     $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
                                 // } else {
-                                    $avatar = "/upload/avatars/".$profile->user_id.".png";
+                                    $avatar = route('image-profile', $profile->user_id );
+                                    // $avatar = $response;
                                 // }
                             @endphp
-                        <img src="{{ $avatar}}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
+                            {{-- {{ $avatar }} --}}
+                        <img src="{{ $avatar }}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
                          
                         </div>
                         <div class="col-sm-6 col-8">

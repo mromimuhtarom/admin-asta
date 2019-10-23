@@ -114,6 +114,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('RegisteredPlayer-update', 'PlayersController@updateRegisteredPlayer')->name('RegisteredPlayer-update');
                 Route::post('RegisteredPlayer1-update', 'PlayersController@updateRegistered')->name('RegisteredPlayer1-update');
                 Route::get('RegisteredPlayer-profile/{userId}/detail', 'PlayersController@detailRegistered')->name('RegisteredPlayer-detaildevice');
+                Route::get('profile/{user_id}', 'PlayersController@ImageProfilePlayer')->name('image-profile');
             });
         });
 
