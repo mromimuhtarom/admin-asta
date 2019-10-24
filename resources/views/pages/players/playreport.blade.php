@@ -397,12 +397,7 @@
                             </thead>
                             <tbody>
                                 @php 
-                                $inputMinDate = "2019-10-19";
-                                $inputMaxDate = "2019-10-19";
-                                $tbdms = App\DmsRound::where('dms_round.round_id', '=', 728)->first();
-
                                 $arrayjson_decode = array_gameplaylog($history->gameplay_log);
-                                
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
                                 @if ($row['game_state'] === 'READY')
@@ -429,7 +424,7 @@
                                     <td>{{ $player['hand'] }}</td>
                                 </tr>
                                 @endforeach
-                                @elseif($row['game_state'] === 'PLAYER_ACTION')
+                                @elseif($row['game_state'] === 'PLAYER_ACTION' && $row['action'] !== 'ALL_IN')
                                 <tr>
                                     <td>{{ $row['player']['seat_id'] }}</td>
                                     @foreach ($player_username as $plyr)
