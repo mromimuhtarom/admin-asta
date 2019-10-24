@@ -135,8 +135,7 @@ class PlayersController extends Controller
                     'asta_db.user.join_date'
                   )
                   ->where('asta_db.user.user_id', '=', $userId)
-                  ->first();                 
-                
+                  ->first(); 
       return view('pages.players.register_player_profile', compact('device', 'profile'));
     }
  // ----------- End Detail Registered Player ----------- //
@@ -148,10 +147,10 @@ class PlayersController extends Controller
       $client = Storage::createLocalDriver(['root' => $rootpath]);
       $file = $client->get($user_id.'.jpg');
       $type = $client->mimeType($user_id.'.jpg');
-      // dd($type);
 
       $response = Response::make($file, 200);
       $response->header("Content-Type", $type);
+
       return $response;
     }
  //  ---------- End Profile Image --------- // 

@@ -47,12 +47,20 @@
                                 // if (is_numeric($profile->avatar)) {
                                 //     $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
                                 // } else {
-                                    $avatar = route('image-profile', $profile->user_id );
-                                    // $avatar = $response;
+                                  $link_image = route('image-profile', $profile->user_id);
+                                  if(file_exists($link_image) == true)
+                                  {
+                                    $avatar = route('image-profile', $profile->user_id);
+                                  } else if(file_exists($link_image) == false)
+                                  {
+                                    $avatar= "/images/profile/empty_profile.png";
+                                  }
+                                  
+                                    
                                 // }
                             @endphp
                             {{-- {{ $avatar }} --}}
-                        <img src="{{ $avatar }}" class="rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
+                        <img src="{{ $avatar }}" class="border border-dark rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
                          
                         </div>
                         <div class="col-sm-6 col-8">
