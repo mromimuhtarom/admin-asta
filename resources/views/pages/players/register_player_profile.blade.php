@@ -47,14 +47,11 @@
                                 // if (is_numeric($profile->avatar)) {
                                 //     $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
                                 // } else {
-                                  $link_image = route('image-profile', $profile->user_id);
-                                  if(file_exists($link_image) == true)
-                                  {
                                     $avatar = route('image-profile', $profile->user_id);
-                                  } else if(file_exists($link_image) == false)
-                                  {
-                                    $avatar= "/images/profile/empty_profile.png";
-                                  }
+                                  // } else
+                                  // {
+                                  //   $avatar= "/images/profile/empty_profile.png";
+                                  // }
                                   
                                     
                                 // }

@@ -136,6 +136,17 @@ class PlayersController extends Controller
                   )
                   ->where('asta_db.user.user_id', '=', $userId)
                   ->first(); 
+
+                  $rootpath = '../../enginepk/profile_player';
+                  $client = Storage::createLocalDriver(['root' => $rootpath]);
+                  $user_id = 100000;
+                  $file     = $client->get($user_id.'.jpg');
+                  $type     = $client->mimeType($user_id.'.jpg');
+                  $response = Response::make($file, 200);
+                  
+                  $response->header("Content-Type", $type);
+                  dd($response);
+                  
       return view('pages.players.register_player_profile', compact('device', 'profile'));
     }
  // ----------- End Detail Registered Player ----------- //
@@ -145,13 +156,32 @@ class PlayersController extends Controller
     {
       $rootpath = '../../enginepk/profile_player';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
-      $file = $client->get($user_id.'.jpg');
-      $type = $client->mimeType($user_id.'.jpg');
+      // $file = Storage::exists($client->get($user_id.'.jpg'));
+      $file_exists = $client->exists($user_id.'.jpg');      
+      
 
-      $response = Response::make($file, 200);
-      $response->header("Content-Type", $type);
+      if($file_exists === false)
+      {  
+        $rootpath_empty = '../public/images/profile';
+        $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
+        $file_empty     = $client_empty->get('empty_profile.png');
+        $type_empty     = $client_empty->mimeType('empty_profile.png');
 
-      return $response;
+        $response_empty = Response::make($file_empty, 200);
+        $response_empty->header("Content-Type", $type_empty);
+        return $response_empty;
+      } else if($file_exists === true){
+        $file     = $client->get($user_id.'.jpg');
+        $type     = $client->mimeType($user_id.'.jpg');
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
+
+      }
+
+
+
+      
     }
  //  ---------- End Profile Image --------- // 
 
