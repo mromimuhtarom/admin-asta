@@ -136,16 +136,6 @@ class PlayersController extends Controller
                   )
                   ->where('asta_db.user.user_id', '=', $userId)
                   ->first(); 
-
-                  $rootpath = '../../enginepk/profile_player';
-                  $client = Storage::createLocalDriver(['root' => $rootpath]);
-                  $user_id = 100000;
-                  $file     = $client->get($user_id.'.jpg');
-                  $type     = $client->mimeType($user_id.'.jpg');
-                  $response = Response::make($file, 200);
-                  
-                  $response->header("Content-Type", $type);
-                  dd($response);
                   
       return view('pages.players.register_player_profile', compact('device', 'profile'));
     }
@@ -154,7 +144,7 @@ class PlayersController extends Controller
  //  ---------- Profile Image --------- //
     public function ImageProfilePlayer($user_id)
     {
-      $rootpath = '../../enginepk/profile_player';
+      $rootpath = '../../asta-api/profile_player';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
       // $file = Storage::exists($client->get($user_id.'.jpg'));
       $file_exists = $client->exists($user_id.'.jpg');      
@@ -162,6 +152,7 @@ class PlayersController extends Controller
 
       if($file_exists === false)
       {  
+        
         $rootpath_empty = '../public/images/profile';
         $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
         $file_empty     = $client_empty->get('empty_profile.png');
@@ -719,7 +710,7 @@ class PlayersController extends Controller
         $image_decode = base64_decode($image);
         $imageName = $id.'.'.'jpg';
 
-        $rootpath = '../../enginepk/profile_player';
+        $rootpath = '../../asta-api/profile_player';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
         if($client->put($imageName, $image_decode))
         {
