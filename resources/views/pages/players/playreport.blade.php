@@ -144,6 +144,7 @@
     <!-- end widget -->
 
 <!-- Modal -->
+
 @foreach ($player_history as $history)
 <div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog1 modal-dialog-scrollable" role="document">
@@ -253,7 +254,7 @@
                                 @php 
                                 $inputMinDate = "2019-10-18";
                                 $inputMaxDate = "2019-10-18";
-                                $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 5120)->first();
+                                // $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 5120)->first();
                                 $arrayjson_decode = array_gameplaylog($history->gameplay_log);
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
@@ -319,12 +320,12 @@
                             </thead>
                             <tbody>
                                 @php 
-                                $inputMinDate = "2019-10-19";
-                                $inputMaxDate = "2019-10-19";
-                                $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 1327)->first();
+                                $inputMinDate = "2019-10-24";
+                                $inputMaxDate = "2019-10-24";
+                                // $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 5481)->first();
                                 $arrayjson_decode = array_gameplaylog($history->gameplay_log);
                                 @endphp                   
-                                @foreach($arrayjson_decode as $row)
+                                @foreach($arrayjson_decode as $field => $row)
                                 @if ($row['game_state'] === 'NEW_ROUND')
                                 @foreach ($row['players'] as $key => $player) 
                                 <tr>
@@ -349,7 +350,7 @@
                                     <td>{{ $player['card'] }}</td>
                                 </tr>
                                 @endforeach
-                                @elseif($row['game_state'] === 'PLAYER_ACTION')
+                                @elseif($row['game_state'] === 'PLAYER_ACTION' && $row['action'] !== 'ALL_IN')
                                 <tr>
                                     <td>{{ $row['player']['seat_id'] }}</td>
                                     @foreach ($player_username as $plyr)
