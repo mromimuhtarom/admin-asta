@@ -65,7 +65,9 @@ class GoodsStoreController extends Controller
             // 'transaction_type' => 'required|integer|between:1,8',
             'price'            => 'required|integer',
             'qty'              => 'required',
-            'order'            => 'required|integer|unique:item_point,order'
+            'order'            => 'required|integer|unique:item_point,order',
+            'file'             => 'required',
+            'file1'            => 'required',
         ]);
         
         if ($validator->fails()) {
@@ -224,6 +226,14 @@ class GoodsStoreController extends Controller
 
     public function updateimage(Request $request)
     {
+        $validator     = Validator::make($request->all(),[
+            'file'     => 'required',
+            'file1'    => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         $pk                     = $request->pk;
         $file                   = $request->file('file');
         $file_wtr               = $request->file('file1');

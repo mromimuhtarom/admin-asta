@@ -69,7 +69,9 @@ class GoldStoreController extends Controller
             'goldAwarded' => 'required|integer',
             'priceCash'   => 'required|integer',
             'googleKey'   => 'required',
-            'order'       => 'required|integer|unique:item_cash,order'
+            'order'       => 'required|integer|unique:item_cash,order',
+            'file'        => 'required',
+            'file1'       => 'required',
         ]);
     
         if ($validator->fails()) {
@@ -230,6 +232,14 @@ class GoldStoreController extends Controller
 
     public function updateImage(Request $request)
     {
+        $validator              = Validator::make($request->all(),[
+            'file'     => 'required',
+            'file1'    => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         $pk                     = $request->pk;
         $file                   = $request->file('file');
         $file_wtr               = $request->file('file1');

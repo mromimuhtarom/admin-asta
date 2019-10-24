@@ -60,7 +60,9 @@ class ChipStoreController extends Controller
             'title'       => 'required',
             'goldcost'    => 'required|integer',
             'chipawarded' => 'required|integer',
-            'order'       => 'required|integer|unique:item_gold,order'
+            'order'       => 'required|integer|unique:item_gold,order',
+            'file'        => 'required',
+            'file1'       => 'required',
           ]);
     
           if ($validator->fails()) {
@@ -211,6 +213,14 @@ class ChipStoreController extends Controller
 
     public function updateImage(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'file'     => 'required',
+            'file1'    => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         $pk                     = $request->pk;
         $file                   = $request->file('file');
         $file_wtr               = $request->file('file1');

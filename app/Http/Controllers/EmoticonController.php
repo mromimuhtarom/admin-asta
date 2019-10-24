@@ -64,6 +64,17 @@ class EmoticonController extends Controller
         $id                     = Emoticon::select('id')
                                   ->orderBy('id', 'desc')
                                   ->first();
+        $validator = Validator::make($request->all(),[
+            'title'    => 'required',
+            'price'    => 'required|integer',
+            'file'     => 'required',
+            'file1'    => 'required',
+            // 'category' => 'required|integer|between:1,3',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         if($id === NULL )
         {
             $id_last = 0;
@@ -100,16 +111,6 @@ class EmoticonController extends Controller
                     //     return redirect()->route('Emoticon')->with('alert','Category can\'t be NULL ');
                     // } 
                     else {
-
-                        $validator = Validator::make($request->all(),[
-                            'title'    => 'required',
-                            'price'    => 'required|integer',
-                            // 'category' => 'required|integer|between:1,3',
-                        ]);
-
-                        if ($validator->fails()) {
-                            return back()->withErrors($validator->errors());
-                        }
 
                         if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                         {
@@ -214,6 +215,14 @@ class EmoticonController extends Controller
         $pk                     = $request->pk;
         $id                     = Emoticon::where('id', '=', $pk)
                                   ->first();
+        $validator              = Validator::make($request->all(),[
+                                    'file'     => 'required',
+                                    'file1'    => 'required',
+                                ]);
+                        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
         $file_wtr               = $request->file('file1');

@@ -66,6 +66,19 @@ class GiftController extends Controller
         $id                     = Gift::select('id')
                                   ->orderBy('id', 'desc')
                                   ->first();
+
+        $validator = Validator::make($request->all(),[
+            'title'    => 'required',
+            'price'    => 'required|integer',
+            'category' => 'required|integer|between:1,3',
+            'file'     => 'required',
+            'file1'    => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
         if($id === NULL )
         {
             $id_last = 0;
@@ -194,6 +207,14 @@ class GiftController extends Controller
         $pk                     = $request->pk;
         $id                     = Gift::where('id', '=', $pk)
                                   ->first();
+        $validator              = Validator::make($request->all(),[
+                                    'file'     => 'required',
+                                    'file1'    => 'required',
+                                ]);
+                        
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         $imageversion           = $id->img_ver + 1;
         $file                   = $request->file('file');
         $file_wtr               = $request->file('file1');
