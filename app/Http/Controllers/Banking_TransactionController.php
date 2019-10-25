@@ -23,7 +23,7 @@ class Banking_TransactionController extends Controller
 
     public function search(Request $request)
     {
-        $time    = $request->time;
+        $time    = $request->choose_time;
         $minDate = $request->inputMinDate;
         $maxDate = $request->inputMaxDate;
         $datenow = Carbon::now('GMT+7')->toDateString();
@@ -45,7 +45,6 @@ class Banking_TransactionController extends Controller
                                'asta_db.transaction_day.turnover',
                                'asta_db.transaction_day.fee'
                            );
-
 
 
         if($time == "today")
@@ -107,7 +106,7 @@ class Banking_TransactionController extends Controller
             ]);
         
             if ($validator->fails()) {
-                return self::index()->withErrors($validator->errors());
+                return back()->withErrors($validator->errors());
             }
         }
 

@@ -30,7 +30,7 @@
 			<form action="{{ route('Banking-search')}}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <select name="time" id="time" class="form-control">
+                    <select name="choose_time" id="time" class="form-control">
 												<option value="">Choose Time</option>
 												<option value="today">today</option>
 												<option value="week">Week</option>
