@@ -130,7 +130,22 @@
                           <td>{{ $history->date }}</td>
                           {{-- <td>{{ $history->countryname }}</td> --}}
                         </tr>
-                        {{-- popup round id --}}
+                        @endforeach
+                </tbody>
+            </table>
+                
+        </div>
+        <!-- end widget content -->
+        <div style="display: flex;justify-content: center;">{{ $player_history->links() }}</div>                    
+    </div>
+    <!-- end widget div -->
+                    
+</div>
+    <!-- end widget -->
+
+<!-- Modal -->
+
+@foreach ($player_history as $history)
 <div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog1 modal-dialog-scrollable" role="document">
       <div class="modal-content">
@@ -463,23 +478,7 @@
       </div>
     </div>
 </div>
-                        {{-- end popup round id --}}
-                        @endforeach
-                </tbody>
-            </table>
-                
-        </div>
-        <!-- end widget content -->
-                    
-    </div>
-    <!-- end widget div -->
-                    
-</div>
-    <!-- end widget -->
-
-<!-- Modal -->
-
-
+@endforeach
 
 
 
@@ -498,6 +497,9 @@
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
 	    "autoWidth" : true,
         "order": [[ 9, "desc" ]],
+        "paging": false,
+        "bLengthChange": false,
+        "bInfo" : false,
 		"oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
 		},
