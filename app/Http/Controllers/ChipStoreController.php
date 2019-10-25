@@ -291,7 +291,7 @@ class ChipStoreController extends Controller
                             imagedestroy($source);
                         // end watermark image
                 } else {
-                    $rootpath = '../../asta-api/upload/Gold';
+                    $rootpath = '../../asta-api/upload/Chip';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
 
