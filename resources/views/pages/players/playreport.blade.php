@@ -130,22 +130,7 @@
                           <td>{{ $history->date }}</td>
                           {{-- <td>{{ $history->countryname }}</td> --}}
                         </tr>
-                        @endforeach
-                </tbody>
-            </table>
-                
-        </div>
-        <!-- end widget content -->
-                    
-    </div>
-    <!-- end widget div -->
-                    
-</div>
-    <!-- end widget -->
-
-<!-- Modal -->
-
-@foreach ($player_history as $history)
+                        {{-- popup round id --}}
 <div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog1 modal-dialog-scrollable" role="document">
       <div class="modal-content">
@@ -478,7 +463,23 @@
       </div>
     </div>
 </div>
-@endforeach
+                        {{-- end popup round id --}}
+                        @endforeach
+                </tbody>
+            </table>
+                
+        </div>
+        <!-- end widget content -->
+                    
+    </div>
+    <!-- end widget div -->
+                    
+</div>
+    <!-- end widget -->
+
+<!-- Modal -->
+
+
 
 
 
