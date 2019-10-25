@@ -114,19 +114,19 @@ class GoldStoreController extends Controller
                   {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../../enginepk/upload/Gold/";
+                    $folder = "../../asta-api/upload/Gold/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $rootpath_main = '../../enginepk/upload/Gold/image1/';
-                    $upload_imagemain = '../../enginepk/upload/Gold/image1';
+                    $rootpath_main = '../../asta-api/upload/Gold/image1/';
+                    $upload_imagemain = '../../asta-api/upload/Gold/image1';
                     $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                     $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
                     $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $rootpath_wtr = '../../enginepk/upload/Gold/image2/';
-                    $upload_imagewtr = '../../enginepk/upload/Gold/image2';
+                    $rootpath_wtr = '../../asta-api/upload/Gold/image2/';
+                    $upload_imagewtr = '../../asta-api/upload/Gold/image2';
                     $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                     $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                     $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -156,7 +156,7 @@ class GoldStoreController extends Controller
                     imagedestroy($source);
                   } else 
                   {
-                    $rootpath = '../../enginepk/upload/Gold';
+                    $rootpath = '../../asta-api/upload/Gold';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
                     // $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
@@ -192,7 +192,7 @@ class GoldStoreController extends Controller
 
     public function ImageItem($item_id)
     {
-      $rootpath = '../../enginepk/upload/Gold';
+      $rootpath = '../../asta-api/upload/Gold';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
       $file_exists_gold = $client->exists($item_id.'.png');      
       
@@ -303,19 +303,19 @@ class GoldStoreController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../../enginepk/upload/Gold/";
+                    $folder = "../../asta-api/upload/Gold/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $rootpath_main = '../../enginepk/upload/Gold/image1/';
-                    $upload_imagemain = '../../enginepk/upload/Gold/image1';
+                    $rootpath_main = '../../asta-api/upload/Gold/image1/';
+                    $upload_imagemain = '../../asta-api/upload/Gold/image1';
                     $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                     $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
                     $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $rootpath_wtr = '../../enginepk/upload/Gold/image2/';
-                    $upload_imagewtr = '../../enginepk/upload/Gold/image2';
+                    $rootpath_wtr = '../../asta-api/upload/Gold/image2/';
+                    $upload_imagewtr = '../../asta-api/upload/Gold/image2';
                     $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                     $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                     $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -345,13 +345,13 @@ class GoldStoreController extends Controller
                     imagedestroy($source);
                 } else {
                     // $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
-                    $rootpath = '../../enginepk/upload/Gold';
+                    $rootpath = '../../asta-api/upload/Gold';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
 
-                    $path = '../../enginepk/upload/Gold/image1/'.$pk.'.png';
+                    $path = '../../asta-api/upload/Gold/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../../enginepk/upload/Gold/image2/'.$pk.'.png';
+                    $path1 = '../../asta-api/upload/Gold/image2/'.$pk.'.png';
                     File::delete($path1);
                     // return redirect()->route('Gold_Store')->with('alert','Upload Image Failed');
                 }
@@ -391,7 +391,7 @@ class GoldStoreController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Delete in menu Gift Store with ID '.$getGoldId
             ]);
-            $path = '../../enginepk/upload/Gold/'.$getGoldId.'.png';
+            $path = '../../asta-api/upload/Gold/'.$getGoldId.'.png';
             File::delete($path);
             
             return redirect()->route('Gold_Store')->with('success','Data Deleted');

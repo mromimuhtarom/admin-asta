@@ -127,20 +127,20 @@ class GiftController extends Controller
                             list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../../enginepk/upload/gifts/";
+                            $folder = "../../asta-api/upload/gifts/";
                             $thumbnail = $folder.$nama_file_unik;
 
 
                         // Memuat gambar utama
-                            $rootpath_main = '../../enginepk/upload/gifts/image1/';
-                            $upload_imagemain = '../../enginepk/upload/gifts/image1';
+                            $rootpath_main = '../../asta-api/upload/gifts/image1/';
+                            $upload_imagemain = '../../asta-api/upload/gifts/image1';
                             $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                             $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                         // Memuat gambar watermark
-                            $rootpath_wtr = '../../enginepk/upload/gifts/image2/';
-                            $upload_imagewtr = '../../enginepk/upload/gifts/image2';
+                            $rootpath_wtr = '../../asta-api/upload/gifts/image2/';
+                            $upload_imagewtr = '../../asta-api/upload/gifts/image2';
                             $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -166,7 +166,7 @@ class GiftController extends Controller
                             imagedestroy($source);
                         // end watermark image
                         } else {
-                            $rootpath = '../../enginepk/upload/gifts';
+                            $rootpath = '../../asta-api/upload/gifts';
                             $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                             $image_main->put($nama_file_unik, file_get_contents($file));
                         }
@@ -208,7 +208,7 @@ class GiftController extends Controller
 
     public function ImageGift($gift_id)
     {
-      $rootpath = '../../enginepk/upload/gifts';
+      $rootpath = '../../asta-api/upload/gifts';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
       $file_exists_gold = $client->exists($gift_id.'.png');      
       
@@ -280,19 +280,19 @@ class GiftController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../../enginepk/upload/gifts/";
+                    $folder = "../../asta-api/upload/gifts/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                        $rootpath_main = '../../enginepk/upload/gifts/image1/';
-                        $upload_imagemain = '../../enginepk/upload/gifts/image1';
+                        $rootpath_main = '../../asta-api/upload/gifts/image1/';
+                        $upload_imagemain = '../../asta-api/upload/gifts/image1';
                         $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                         $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
                         $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                        $rootpath_wtr = '../../enginepk/upload/gifts/image2/';
-                        $upload_imagewtr = '../../enginepk/upload/gifts/image2';
+                        $rootpath_wtr = '../../asta-api/upload/gifts/image2/';
+                        $upload_imagewtr = '../../asta-api/upload/gifts/image2';
                         $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                         $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                         $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -321,12 +321,12 @@ class GiftController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    $rootpath = '../../enginepk/upload/gifts';
+                    $rootpath = '../../asta-api/upload/gifts';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
-                    $path = '../../enginepk/upload/gifts/image1/'.$pk.'.png';
+                    $path = '../../asta-api/upload/gifts/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../../enginepk/upload/gifts/image2/'.$pk.'.png';
+                    $path1 = '../../asta-api/upload/gifts/image2/'.$pk.'.png';
                     File::delete($path1);
                 }
 
@@ -418,7 +418,7 @@ class GiftController extends Controller
         if($id != '')
         { 
             Gift::where('id', '=', $id)->delete();
-            $path = '../../enginepk/upload/gifts/'.$gifts->id.'.png';
+            $path = '../../asta-api/upload/gifts/'.$gifts->id.'.png';
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),
