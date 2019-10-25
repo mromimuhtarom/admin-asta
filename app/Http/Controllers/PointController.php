@@ -71,28 +71,28 @@ class PointController extends Controller
             $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                               ->where('asta_db.balance_point.game_id', '=', $gameName)
                               ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->get();
-            
+                              ->paginate(20);
+            $balancedetails->appends($request->all());
             return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($username != NULL && $minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                               ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->get();
-            
+                              ->paginate(20);
+            $balancedetails->appends($request->all());
             return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($gameName != NULL && $minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->where('asta_db.balance_point.game_id', '=', $gameName)
                               ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->get();
-            
+                              ->paginate(20);
+            $balancedetails->appends($request->all());
             return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->get();
-            
+                              ->paginate(20);
+            $balancedetails->appends($request->all());
             return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else {
-            return self::index();            
+            return back();            
         }
     }
 }

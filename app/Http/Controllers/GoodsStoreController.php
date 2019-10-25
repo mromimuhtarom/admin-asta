@@ -103,14 +103,22 @@ class GoodsStoreController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../public/upload/Goods/";
+                    $folder = "../../enginepk/upload/Goods/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Goods/image1'), $nama_file_unik));
+                    $rootpath_main = '../../enginepk/upload/Goods/image1/';
+                    $upload_imagemain = '../../enginepk/upload/Goods/image1';
+                    $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                    $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Goods/image2'), $nama_file_unik));
+                    $rootpath_wtr = '../../enginepk/upload/Goods/image2/';
+                    $upload_imagewtr = '../../enginepk/upload/Goods/image2';
+                    $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                    $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -138,9 +146,9 @@ class GoodsStoreController extends Controller
                 }
                 else
                 {
-                    $file->move(public_path('../public/upload/Goods'), $nama_file_unik);
-                    // return redirect()->route('Goods_Store')->with('alert','Upload Image Failed');
-                    // echo "Gagal Upload File";
+                    $rootpath = '../../enginepk/upload/Goods';
+                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main->put($nama_file_unik, file_get_contents($file));
                 }
 
 
@@ -256,14 +264,22 @@ class GoodsStoreController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../public/upload/Goods/";
+                    $folder = "../../enginepk/upload/Goods/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Goods/image1'), $nama_file_unik));
+                    $rootpath_main = '../../enginepk/upload/Gold/image1/';
+                    $upload_imagemain = '../../enginepk/upload/Gold/image1';
+                    $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                    $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Goods/image2'), $nama_file_unik));
+                    $rootpath_wtr = '../../enginepk/upload/Gold/image2/';
+                    $upload_imagewtr = '../../enginepk/upload/Gold/image2';
+                    $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                    $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -291,10 +307,13 @@ class GoodsStoreController extends Controller
                 }
                 else 
                 {
-                    $file->move(public_path('../public/upload/Goods'), $nama_file_unik);
-                    $path = '../public/upload/Goods/image1/'.$pk.'.png';
+                    $rootpath = '../../enginepk/upload/Goods';
+                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main->put($nama_file_unik, file_get_contents($file));
+
+                    $path = '../../enginepk/upload/Goods/image1/'.$pk.'.png';
                     File::delete($path);    
-                    $path = '../public/upload/Goods/image2/'.$pk.'.png';
+                    $path = '../../enginepk/upload/Goods/image2/'.$pk.'.png';
                     File::delete($path);    
                     // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }

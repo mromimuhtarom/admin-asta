@@ -83,7 +83,15 @@
                     
         <!-- widget content -->
         <div class="widget-body p-0">
-                    
+            <div class="widget-body-toolbar">
+                <div class="row">
+                    <!-- Button tambah bot baru -->
+                    <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                        Total Record Entries is {{ $logplayer->total() }}
+                    </div>
+                                <!-- End Button tambah bot baru -->
+                </div>
+            </div>                     
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
@@ -107,7 +115,7 @@
     
         </div>
         <!-- end widget content -->
-                    
+        <div style="display: flex;justify-content: center;">{{ $logplayer->links() }}</div>                    
     </div>
     <!-- end widget div -->
                     
@@ -131,6 +139,9 @@
 		},
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+        "paging":false,
+        "bInfo":false,
+        "bLengthChange": false,
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"
 		},

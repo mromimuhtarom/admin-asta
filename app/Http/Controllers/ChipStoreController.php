@@ -104,12 +104,19 @@ class ChipStoreController extends Controller
                             $folder = "../public/upload/Chip/";
                             $thumbnail = $folder.$nama_file_unik;
 
-
                             // Memuat gambar utama
-                            $source = imagecreatefrompng($file->move(public_path('../public/upload/Chip/image1'), $nama_file_unik));
+                            $rootpath_main = '../../enginepk/upload/Chip/image1/';
+                            $upload_imagemain = '../../enginepk/upload/Chip/image1';
+                            $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                            $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                            $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Chip/image2'), $nama_file_unik));
+                            $rootpath_wtr = '../../enginepk/upload/Chip/image2/';
+                            $upload_imagewtr = '../../enginepk/upload/Chip/image2';
+                            $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
                             $water_width = imagesx($watermark);
@@ -133,8 +140,9 @@ class ChipStoreController extends Controller
                         // end watermark image
                   } else 
                   {
-                    $file->move(public_path('../public/upload/Chip'), $nama_file_unik);
-                    //   return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
+                    $rootpath = '../../enginepk/upload/Chip';
+                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main->put($nama_file_unik, file_get_contents($file));
                   }
                   $chip = ItemsGold::create([
                     'name'      => $request->title,
@@ -249,10 +257,18 @@ class ChipStoreController extends Controller
 
 
                             // Memuat gambar utama
-                            $source = imagecreatefrompng($file->move(public_path('../public/upload/Chip/image1'), $nama_file_unik));
+                            $rootpath_main = '../../enginepk/upload/Chip/image1/';
+                            $upload_imagemain = '../../enginepk/upload/Chip/image1';
+                            $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                            $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                            $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Chip/image2'), $nama_file_unik));
+                            $rootpath_wtr = '../../enginepk/upload/Chip/image2/';
+                            $upload_imagewtr = '../../enginepk/upload/Chip/image2';
+                            $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
                             $water_width = imagesx($watermark);
@@ -275,10 +291,13 @@ class ChipStoreController extends Controller
                             imagedestroy($source);
                         // end watermark image
                 } else {
-                    $file->move(public_path('../public/upload/Chip'), $nama_file_unik);
-                    $path = '../public/upload/Chip/image1/'.$pk.'.png';
+                    $rootpath = '../../enginepk/upload/Gold';
+                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main->put($nama_file_unik, file_get_contents($file));
+
+                    $path = '../../enginepk/upload/Chip/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../public/upload/Chip/image2/'.$pk.'.png';
+                    $path1 = '../../enginepk/upload/Chip/image2/'.$pk.'.png';
                     File::delete($path1);
                     // return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                 }

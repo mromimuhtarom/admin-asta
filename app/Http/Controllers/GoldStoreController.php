@@ -10,7 +10,9 @@ use App\Log;
 use Carbon\Carbon;
 use Session;
 use Validator;
+use Storage;
 use App\ConfigText;
+use File;
 
 class GoldStoreController extends Controller
 {
@@ -107,18 +109,26 @@ class GoldStoreController extends Controller
           {
               if($ukuran < 5242880)
               {
-                  if($file_wtr && in_array($esktensi_wtr, $ekstensi_diperbolehkan) === true)
+                  if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                   {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../public/upload/Gold/";
+                    $folder = "../../enginepk/upload/Gold/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Gold/image1'), $nama_file_unik));
+                    $rootpath_main = '../../enginepk/upload/Gold/image1/';
+                    $upload_imagemain = '../../enginepk/upload/Gold/image1';
+                    $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                    $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
+                    $rootpath_wtr = '../../enginepk/upload/Gold/image2/';
+                    $upload_imagewtr = '../../enginepk/upload/Gold/image2';
+                    $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                    $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -145,7 +155,10 @@ class GoldStoreController extends Controller
                     imagedestroy($source);
                   } else 
                   {
-                    $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
+                    $rootpath = '../../enginepk/upload/Gold';
+                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main->put($nama_file_unik, file_get_contents($file));
+                    // $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
                     //   return redirect()->route('Gold_Store')->with('alert','Upload Image Failed');
                   }
 
@@ -234,7 +247,6 @@ class GoldStoreController extends Controller
     {
         $validator              = Validator::make($request->all(),[
             'file'     => 'required',
-            'file1'    => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -262,14 +274,22 @@ class GoldStoreController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../public/upload/Gold/";
+                    $folder = "../../enginepk/upload/Gold/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Gold/image1'), $nama_file_unik));
+                    $rootpath_main = '../../enginepk/upload/Gold/image1/';
+                    $upload_imagemain = '../../enginepk/upload/Gold/image1';
+                    $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                    $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
+                    $rootpath_wtr = '../../enginepk/upload/Gold/image2/';
+                    $upload_imagewtr = '../../enginepk/upload/Gold/image2';
+                    $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                    $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -295,10 +315,14 @@ class GoldStoreController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
-                    $path = '../public/upload/Gold/image1/'.$pk.'.png';
+                    // $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
+                    $rootpath = '../../enginepk/upload/Gold';
+                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main->put($nama_file_unik, file_get_contents($file));
+
+                    $path = '../../enginepk/upload/Gold/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../public/upload/Gold/image2/'.$pk.'.png';
+                    $path1 = '../../enginepk/upload/Gold/image2/'.$pk.'.png';
                     File::delete($path1);
                     // return redirect()->route('Gold_Store')->with('alert','Upload Image Failed');
                 }

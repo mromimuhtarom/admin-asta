@@ -77,7 +77,15 @@
                         
             <!-- widget content -->
             <div class="widget-body p-0">
-                        
+                <div class="widget-body-toolbar">
+                    <div class="row">
+                        <!-- Button tambah bot baru -->
+                        <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                                    Total Record Entries is {{ $balancedetails->total() }}
+                        </div>
+                                <!-- End Button tambah bot baru -->
+                    </div>
+                </div>                          
                 <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                     <thead>			                
                         <tr>
@@ -105,7 +113,7 @@
         
             </div>
             <!-- end widget content -->
-                        
+            <div style="display: flex;justify-content: center;">{{ $balancedetails->links() }}</div>                        
         </div>
         <!-- end widget div -->
                         
@@ -124,6 +132,10 @@
                 "t"+
                 "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
             "autoWidth" : true,
+            "paging":false,
+            "bInfo":false,
+            "bLengthChange": false,
+            "searching": false,
             "order": [[ 5, "desc" ]],
             "oLanguage": {
                     "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
