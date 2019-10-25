@@ -3,6 +3,12 @@
 Route::get('/', ['uses' => 'LoginController@loginbefore', 'middleware' => 'home'])->name('login');
 Route::post('login', 'LoginController@login')->name('login');
 Route::get('/avatars/{avatar}', 'PlayersController@avatar')->name('imageAvatar');
+// Item image
+Route::get('image-item/Gold/{item_id}.png', 'GoldStoreController@ImageItem')->name('imageItemGold');
+Route::get('image-item/Chip/{item_id}.png', 'ChipStoreController@ImageItem')->name('imageItemChip');
+Route::get('image-item/Goods/{item_id}.png', 'GoodsStoreController@ImageItem')->name('imageItemGoods');
+// image gift
+Route::get('image-gift/{gift_id}.png', 'GiftController@ImageGift')->name('imageshowgift');
 
 
 Route::middleware('authenticated')->group(function(){
@@ -636,9 +642,6 @@ Route::middleware('authenticated')->group(function(){
             Route::post('VersionAsset-updateIos', 'VersionAssetController@update_ios')->name('VersionAssetApkIos-update');
         });
     });
-
-
-
 
 });
 

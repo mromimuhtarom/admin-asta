@@ -9,6 +9,8 @@ use App\Log;
 use Session;
 use DB;
 use File;
+use Storage;
+use Response;
 use Carbon\Carbon;
 use Validator;
 use App\ConfigText;
@@ -29,7 +31,6 @@ class GoodsStoreController extends Controller
                         'name',
                         'price',
                         'qty',
-                        'trans_type',
                         'status',
                         'order'
                     )
@@ -338,6 +339,34 @@ class GoodsStoreController extends Controller
 
     }
 
+    public function ImageItem($item_id)
+    {
+      $rootpath = '../../enginepk/upload/Goods';
+      $client = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = $client->exists($item_id.'.png');      
+      
+
+      if($file_exists_gold  === false)
+      {  
+        
+        $rootpath_empty = '../public/images/image_not_found';
+        $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
+        $file_empty     = $client_empty->get('not_found.png');
+        $type_empty     = $client_empty->mimeType('not_found.png');
+
+        $response_empty = Response::make($file_empty, 200);
+        $response_empty->header("Content-Type", $type_empty);
+        return $response_empty;
+      } else if($file_exists_gold  === true){
+        $file_gold     = $client->get($item_id.'.png');
+        $type_gold     = $client->mimeType($item_id.'.png');
+        $response = Response::make($file_gold, 200);
+        $response->header("Content-Type", $type_gold);
+        return $response;
+
+      }      
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -351,7 +380,7 @@ class GoodsStoreController extends Controller
         if($id != '')
         {
             ItemPoint::where('item_id', '=', $id)->delete();
-            $path = '../public/upload/Goods/'.$goods->item_id.'.png';
+            $path = '../../enginepk/upload/Goods/'.$goods->item_id.'.png';
             File::delete($path);            
             Log::create([
                 'op_id'     => Session::get('userId'),

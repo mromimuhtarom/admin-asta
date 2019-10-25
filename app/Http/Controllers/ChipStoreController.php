@@ -12,6 +12,8 @@ use Session;
 use App\ConfigText;
 use Validator;
 use File;
+use Response;
+use Storage;
 
 class ChipStoreController extends Controller
 {
@@ -252,7 +254,7 @@ class ChipStoreController extends Controller
                     list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../public/upload/Chip/";
+                            $folder = "../../enginepk/upload/Chip/";
                             $thumbnail = $folder.$nama_file_unik;
 
 
@@ -317,6 +319,34 @@ class ChipStoreController extends Controller
         }
     }
 
+    public function ImageItem($item_id)
+    {
+      $rootpath = '../../enginepk/upload/Chip';
+      $client = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = $client->exists($item_id.'.png');      
+      
+
+      if($file_exists_gold  === false)
+      {  
+        
+        $rootpath_empty = '../public/images/image_not_found';
+        $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
+        $file_empty     = $client_empty->get('not_found.png');
+        $type_empty     = $client_empty->mimeType('not_found.png');
+
+        $response_empty = Response::make($file_empty, 200);
+        $response_empty->header("Content-Type", $type_empty);
+        return $response_empty;
+      } else if($file_exists_gold  === true){
+        $file_gold     = $client->get($item_id.'.png');
+        $type_gold     = $client->mimeType($item_id.'.png');
+        $response = Response::make($file_gold, 200);
+        $response->header("Content-Type", $type_gold);
+        return $response;
+
+      }      
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -328,7 +358,9 @@ class ChipStoreController extends Controller
         $id = $request->id;
         if($id != '')
         {
-            ItemsGold::where('item_id', '=', $id)->delete();   
+            ItemsGold::where('item_id', '=', $id)->delete(); 
+            $path = '../../enginepk/upload/Chip/'.$id.'.png';
+            File::delete($path);  
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',

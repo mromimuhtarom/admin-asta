@@ -13,6 +13,7 @@ use File;
 use Validator;
 use App\ConfigText;
 use Storage;
+use Response;
 
 class GiftController extends Controller
 {
@@ -126,15 +127,23 @@ class GiftController extends Controller
                             list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../public/upload/gifts/";
+                            $folder = "../../enginepk/upload/gifts/";
                             $thumbnail = $folder.$nama_file_unik;
 
 
-                            // Memuat gambar utama
-                            $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik));
+                        // Memuat gambar utama
+                            $rootpath_main = '../../enginepk/upload/gifts/image1/';
+                            $upload_imagemain = '../../enginepk/upload/gifts/image1';
+                            $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                            $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                            $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
-                            // Memuat gambar watermark
-                            $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/gifts/image2'), $nama_file_unik));
+                        // Memuat gambar watermark
+                            $rootpath_wtr = '../../enginepk/upload/gifts/image2/';
+                            $upload_imagewtr = '../../enginepk/upload/gifts/image2';
+                            $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
                             $water_width = imagesx($watermark);
@@ -157,7 +166,9 @@ class GiftController extends Controller
                             imagedestroy($source);
                         // end watermark image
                         } else {
-                            $file->move(public_path('../public/upload/gifts'), $nama_file_unik);
+                            $rootpath = '../../enginepk/upload/gifts';
+                            $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                            $image_main->put($nama_file_unik, file_get_contents($file));
                         }
                             
                         $gift = Gift::create([
@@ -191,6 +202,36 @@ class GiftController extends Controller
             return redirect()->route('Table_Gift')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
+    }
+
+
+
+    public function ImageGift($gift_id)
+    {
+      $rootpath = '../../enginepk/upload/gifts';
+      $client = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = $client->exists($gift_id.'.png');      
+      
+
+      if($file_exists_gold  === false)
+      {  
+        
+        $rootpath_empty = '../public/images/image_not_found';
+        $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
+        $file_empty     = $client_empty->get('not_found.png');
+        $type_empty     = $client_empty->mimeType('not_found.png');
+
+        $response_empty = Response::make($file_empty, 200);
+        $response_empty->header("Content-Type", $type_empty);
+        return $response_empty;
+      } else if($file_exists_gold  === true){
+        $file_gold     = $client->get($gift_id.'.png');
+        $type_gold     = $client->mimeType($gift_id.'.png');
+        $response = Response::make($file_gold, 200);
+        $response->header("Content-Type", $type_gold);
+        return $response;
+
+      }      
     }
 
     /**
@@ -239,14 +280,22 @@ class GiftController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../public/upload/gifts/";
+                    $folder = "../../enginepk/upload/gifts/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/gifts/image1'), $nama_file_unik));
+                        $rootpath_main = '../../enginepk/upload/gifts/image1/';
+                        $upload_imagemain = '../../enginepk/upload/gifts/image1';
+                        $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                        $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                        $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/gifts/image2'), $nama_file_unik));
+                        $rootpath_wtr = '../../enginepk/upload/gifts/image2/';
+                        $upload_imagewtr = '../../enginepk/upload/gifts/image2';
+                        $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                        $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                        $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width = imagesx($watermark);
@@ -272,10 +321,12 @@ class GiftController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    $file->move('../public/upload/gifts', $nama_file_unik);
-                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                    $rootpath = '../../enginepk/upload/gifts';
+                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main->put($nama_file_unik, file_get_contents($file));
+                    $path = '../../enginepk/upload/gifts/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../public/upload/gifts/image2/'.$pk.'.png';
+                    $path1 = '../../enginepk/upload/gifts/image2/'.$pk.'.png';
                     File::delete($path1);
                 }
 
@@ -367,7 +418,7 @@ class GiftController extends Controller
         if($id != '')
         { 
             Gift::where('id', '=', $id)->delete();
-            $path = '../public/upload/gifts/'.$gifts->id.'.png';
+            $path = '../../enginepk/upload/gifts/'.$gifts->id.'.png';
             File::delete($path);
             Log::create([
                 'op_id'     => Session::get('userId'),
