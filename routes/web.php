@@ -9,6 +9,7 @@ Route::get('image-item/Chip/{item_id}.png', 'ChipStoreController@ImageItem')->na
 Route::get('image-item/Goods/{item_id}.png', 'GoodsStoreController@ImageItem')->name('imageItemGoods');
 // image gift
 Route::get('image-gift/{gift_id}.png', 'GiftController@ImageGift')->name('imageshowgift');
+Route::get('image-emoticon/{emot_id}.png', 'EmoticonController@ImageEmoticon')->name('imageshowemoticon');
 
 
 Route::middleware('authenticated')->group(function(){

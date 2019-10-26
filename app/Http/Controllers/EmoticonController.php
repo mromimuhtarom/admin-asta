@@ -12,6 +12,7 @@ use App\Classes\MenuClass;
 use Validator;
 use File;
 use Storage;
+use Response;
 
 class EmoticonController extends Controller
 {
@@ -68,7 +69,6 @@ class EmoticonController extends Controller
             'title'    => 'required',
             'price'    => 'required|integer',
             'file'     => 'required',
-            'file1'    => 'required',
             // 'category' => 'required|integer|between:1,3',
         ]);
 
@@ -122,11 +122,11 @@ class EmoticonController extends Controller
 
 
                             // Memuat gambar utama
-                            $rootpath_main = '../../asta-api/emoticon/image1/';
+                            $rootpath_main    = '../../asta-api/emoticon/image1/';
                             $upload_imagemain = '../../asta-api/emoticon/image1';
-                            $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain]);
-                            $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
-                            $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                            $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain]);
+                            $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                            $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
                             $rootpath_wtr = '../../asta-api/emoticon/image2/';
@@ -227,7 +227,6 @@ class EmoticonController extends Controller
                                   ->first();
         $validator              = Validator::make($request->all(),[
                                     'file'     => 'required',
-                                    'file1'    => 'required',
                                 ]);
                         
         if ($validator->fails()) {
@@ -338,6 +337,35 @@ class EmoticonController extends Controller
             return redirect()->route('Emoticon')->with('alert','Ekstensi file tidak di perbolehkan');
             // echo 'Ekstensi file tidak di perbolehkan';
         }
+    }
+
+
+    public function ImageEmoticon($item_id)
+    {
+      $rootpath         = '../../asta-api/emoticon';
+      $client           = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = $client->exists($item_id.'.png');
+      
+
+      if($file_exists_gold  === false)
+      {  
+        
+        $rootpath_empty = '../public/images/image_not_found';
+        $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
+        $file_empty     = $client_empty->get('not_found.png');
+        $type_empty     = $client_empty->mimeType('not_found.png');
+
+        $response_empty = Response::make($file_empty, 200);
+        $response_empty->header("Content-Type", $type_empty);
+        return $response_empty;
+      } else if($file_exists_gold  === true){
+        $file_gold = $client->get($item_id.'.png');
+        $type_gold = $client->mimeType($item_id.'.png');
+        $response  = Response::make($file_gold, 200);
+        $response->header("Content-Type", $type_gold);
+        return $response;
+
+      }      
     }
 
 

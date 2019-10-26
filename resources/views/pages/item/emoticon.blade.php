@@ -120,7 +120,7 @@
                                   <div class="nav-name">Watermark</div>
                                 </span>
                                 <figure class="media-object">
-                                  <img class="img-object-wtr imgupload{{ $emot->id }}" src="/upload/emoticon/{{ $emot->id }}.png?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
+                                  <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ route('imageshowemoticon', $emot->id) }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                                   <img class="img-object-wtr1 imgupload1{{ $emot->id }}" src="http://placehold.jp/80x100.png">
                                   <img class="img-object-wtr2 imgupload2{{ $emot->id }}" src="http://placehold.jp/80x100.png">
                                 </figure>
@@ -154,7 +154,7 @@
                     <td >
                           <div class="media-container">
                               <figure class="media-object">
-                                <img class="img-object imgupload{{ $emot->id }}" src="/upload/emoticon/{{ $emot->id }}.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object imgupload{{ $emot->id }}" src="{{ route('imageshowemoticon', $emot->id) }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                               </figure>
                           </div>
                     </td>
