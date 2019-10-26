@@ -126,30 +126,30 @@ class GiftController extends Controller
                             list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../../asta-api/gift/";
+                            $folder    = "../../asta-api/gift/";
                             $thumbnail = $folder.$nama_file_unik;
 
 
                         // Memuat gambar utama
-                            $rootpath_main = '../../asta-api/gift/image1/';
+                            $rootpath_main    = '../../asta-api/gift/image1/';
                             $upload_imagemain = '../../asta-api/gift/image1';
-                            $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                            $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
-                            $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                            $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                            $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                            $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                         // Memuat gambar watermark
-                            $rootpath_wtr = '../../asta-api/gift/image2/';
+                            $rootpath_wtr    = '../../asta-api/gift/image2/';
                             $upload_imagewtr = '../../asta-api/gift/image2';
-                            $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                            $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
-                            $water_width = imagesx($watermark);
+                            $water_width  = imagesx($watermark);
                             $water_height = imagesy($watermark);
 
                             // mendapatkan lebar dan tinggi dari gambar utama
-                            $main_width = imagesx($source);
+                            $main_width  = imagesx($source);
                             $main_height = imagesy($source);
 
                             // Menetapkan posisi gambar watermark
@@ -165,7 +165,7 @@ class GiftController extends Controller
                             imagedestroy($source);
                         // end watermark image
                         } else {
-                            $rootpath = '../../asta-api/upload/gifts';
+                            $rootpath   = '../../asta-api/upload/gifts';
                             $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                             $image_main->put($nama_file_unik, file_get_contents($file));
                         }
@@ -224,9 +224,9 @@ class GiftController extends Controller
         $response_empty->header("Content-Type", $type_empty);
         return $response_empty;
       } else if($file_exists_gold  === true){
-        $file_gold     = $client->get($gift_id.'.png');
-        $type_gold     = $client->mimeType($gift_id.'.png');
-        $response = Response::make($file_gold, 200);
+        $file_gold = $client->get($gift_id.'.png');
+        $type_gold = $client->mimeType($gift_id.'.png');
+        $response  = Response::make($file_gold, 200);
         $response->header("Content-Type", $type_gold);
         return $response;
 
@@ -278,15 +278,15 @@ class GiftController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../../asta-api/gift/";
+                    $folder    = "../../asta-api/gift/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                        $rootpath_main = '../../asta-api/gift/image1/';
+                        $rootpath_main    = '../../asta-api/gift/image1/';
                         $upload_imagemain = '../../asta-api/gift/image1';
-                        $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                        $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
-                        $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                        $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                        $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                        $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
                         $rootpath_wtr = '../../asta-api/gift/image2/';
@@ -296,11 +296,11 @@ class GiftController extends Controller
                         $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
-                    $water_width = imagesx($watermark);
+                    $water_width  = imagesx($watermark);
                     $water_height = imagesy($watermark);
 
                     // mendapatkan lebar dan tinggi dari gambar utama
-                    $main_width = imagesx($source);
+                    $main_width  = imagesx($source);
                     $main_height = imagesy($source);
 
                     // Menetapkan posisi gambar watermark
@@ -319,11 +319,11 @@ class GiftController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    $rootpath = '../../asta-api/gift';
+                    $rootpath   = '../../asta-api/gift';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
                     $path = '../../asta-api/gift/image1/'.$pk.'.png';
-                    File::delete($path);
+                    File:: delete($path);
                     $path1 = '../../asta-api/gift/image2/'.$pk.'.png';
                     File::delete($path1);
                 }

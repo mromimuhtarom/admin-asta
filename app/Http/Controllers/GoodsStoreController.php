@@ -44,7 +44,7 @@ class GoodsStoreController extends Controller
                     ->first();
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
-        $timenow = Carbon::now('GMT+7');
+        $timenow  = Carbon::now('GMT+7');
         return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis', 'mainmenu', 'timenow'));
     }
 
@@ -107,25 +107,25 @@ class GoodsStoreController extends Controller
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $rootpath_main = '../../asta-api/upload/Goods/image1/';
+                    $rootpath_main    = '../../asta-api/upload/Goods/image1/';
                     $upload_imagemain = '../../asta-api/upload/Goods/image1';
-                    $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                    $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
+                    $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                     $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $rootpath_wtr = '../../asta-api/upload/Goods/image2/';
+                    $rootpath_wtr    = '../../asta-api/upload/Goods/image2/';
                     $upload_imagewtr = '../../asta-api/upload/Goods/image2';
-                    $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                    $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                     $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                     $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
-                    $water_width = imagesx($watermark);
+                    $water_width  = imagesx($watermark);
                     $water_height = imagesy($watermark);
 
                     // mendapatkan lebar dan tinggi dari gambar utama
-                    $main_width = imagesx($source);
+                    $main_width  = imagesx($source);
                     $main_height = imagesy($source);
 
                     // Menetapkan posisi gambar watermark
@@ -146,7 +146,7 @@ class GoodsStoreController extends Controller
                 }
                 else
                 {
-                    $rootpath = '../../asta-api/upload/Goods';
+                    $rootpath   = '../../asta-api/upload/Goods';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
                 }
@@ -263,29 +263,29 @@ class GoodsStoreController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../../asta-api/upload/Goods/";
+                    $folder    = "../../asta-api/upload/Goods/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $rootpath_main = '../../asta-api/upload/Gold/image1/';
+                    $rootpath_main    = '../../asta-api/upload/Gold/image1/';
                     $upload_imagemain = '../../asta-api/upload/Gold/image1';
-                    $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                    $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
-                    $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                    $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                    $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $rootpath_wtr = '../../asta-api/upload/Gold/image2/';
+                    $rootpath_wtr    = '../../asta-api/upload/Gold/image2/';
                     $upload_imagewtr = '../../asta-api/upload/Gold/image2';
-                    $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                    $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                     $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                     $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
-                    $water_width = imagesx($watermark);
+                    $water_width  = imagesx($watermark);
                     $water_height = imagesy($watermark);
 
                     // mendapatkan lebar dan tinggi dari gambar utama
-                    $main_width = imagesx($source);
+                    $main_width  = imagesx($source);
                     $main_height = imagesy($source);
 
                     // Menetapkan posisi gambar watermark
@@ -306,7 +306,7 @@ class GoodsStoreController extends Controller
                 }
                 else 
                 {
-                    $rootpath = '../../asta-api/upload/Goods';
+                    $rootpath   = '../../asta-api/upload/Goods';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
 
@@ -339,9 +339,9 @@ class GoodsStoreController extends Controller
 
     public function ImageItem($item_id)
     {
-      $rootpath = '../../asta-api/upload/Goods';
-      $client = Storage::createLocalDriver(['root' => $rootpath]);
-      $file_exists_gold = $client->exists($item_id.'.png');      
+      $rootpath         = '../../asta-api/upload/Goods';
+      $client           = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = $client->exists($item_id.'.png');
       
 
       if($file_exists_gold  === false)

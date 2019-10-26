@@ -102,29 +102,29 @@ class ChipStoreController extends Controller
                     list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../public/upload/Chip/";
+                            $folder    = "../public/upload/Chip/";
                             $thumbnail = $folder.$nama_file_unik;
 
                             // Memuat gambar utama
-                            $rootpath_main = '../../asta-api/upload/Chip/image1/';
+                            $rootpath_main    = '../../asta-api/upload/Chip/image1/';
                             $upload_imagemain = '../../asta-api/upload/Chip/image1';
-                            $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                            $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
-                            $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                            $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                            $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                            $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr = '../../asta-api/upload/Chip/image2/';
+                            $rootpath_wtr    = '../../asta-api/upload/Chip/image2/';
                             $upload_imagewtr = '../../asta-api/upload/Chip/image2';
-                            $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                            $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
-                            $water_width = imagesx($watermark);
+                            $water_width  = imagesx($watermark);
                             $water_height = imagesy($watermark);
 
                             // mendapatkan lebar dan tinggi dari gambar utama
-                            $main_width = imagesx($source);
+                            $main_width  = imagesx($source);
                             $main_height = imagesy($source);
 
                             // Menetapkan posisi gambar watermark
@@ -141,7 +141,7 @@ class ChipStoreController extends Controller
                         // end watermark image
                   } else 
                   {
-                    $rootpath = '../../asta-api/upload/Chip';
+                    $rootpath   = '../../asta-api/upload/Chip';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
                   }
@@ -252,30 +252,30 @@ class ChipStoreController extends Controller
                     list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../../asta-api/upload/Chip/";
+                            $folder    = "../../asta-api/upload/Chip/";
                             $thumbnail = $folder.$nama_file_unik;
 
 
                             // Memuat gambar utama
-                            $rootpath_main = '../../asta-api/upload/Chip/image1/';
+                            $rootpath_main    = '../../asta-api/upload/Chip/image1/';
                             $upload_imagemain = '../../asta-api/upload/Chip/image1';
-                            $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                            $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
-                            $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                            $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                            $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                            $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr = '../../asta-api/upload/Chip/image2/';
+                            $rootpath_wtr    = '../../asta-api/upload/Chip/image2/';
                             $upload_imagewtr = '../../asta-api/upload/Chip/image2';
-                            $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                            $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
-                            $water_width = imagesx($watermark);
+                            $water_width  = imagesx($watermark);
                             $water_height = imagesy($watermark);
 
                             // mendapatkan lebar dan tinggi dari gambar utama
-                            $main_width = imagesx($source);
+                            $main_width  = imagesx($source);
                             $main_height = imagesy($source);
 
                             // Menetapkan posisi gambar watermark
@@ -291,7 +291,7 @@ class ChipStoreController extends Controller
                             imagedestroy($source);
                         // end watermark image
                 } else {
-                    $rootpath = '../../asta-api/upload/Chip';
+                    $rootpath   = '../../asta-api/upload/Chip';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
 
@@ -319,9 +319,9 @@ class ChipStoreController extends Controller
 
     public function ImageItem($item_id)
     {
-      $rootpath = '../../asta-api/upload/Chip';
-      $client = Storage::createLocalDriver(['root' => $rootpath]);
-      $file_exists_gold = $client->exists($item_id.'.png');      
+      $rootpath         = '../../asta-api/upload/Chip';
+      $client           = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = $client->exists($item_id.'.png');
       
 
       if($file_exists_gold  === false)
@@ -336,9 +336,9 @@ class ChipStoreController extends Controller
         $response_empty->header("Content-Type", $type_empty);
         return $response_empty;
       } else if($file_exists_gold  === true){
-        $file_gold     = $client->get($item_id.'.png');
-        $type_gold     = $client->mimeType($item_id.'.png');
-        $response = Response::make($file_gold, 200);
+        $file_gold = $client->get($item_id.'.png');
+        $type_gold = $client->mimeType($item_id.'.png');
+        $response  = Response::make($file_gold, 200);
         $response->header("Content-Type", $type_gold);
         return $response;
 
