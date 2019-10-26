@@ -73,7 +73,6 @@ class GiftController extends Controller
             'price'    => 'required|integer',
             'category' => 'required|integer|between:1,3',
             'file'     => 'required',
-            'file1'    => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -208,7 +207,7 @@ class GiftController extends Controller
 
     public function ImageGift($gift_id)
     {
-      $rootpath = '../../asta-api/upload/gifts';
+      $rootpath = '../../asta-api/gift';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
       $file_exists_gold = $client->exists($gift_id.'.png');      
       
@@ -250,7 +249,6 @@ class GiftController extends Controller
                                   ->first();
         $validator              = Validator::make($request->all(),[
                                     'file'     => 'required',
-                                    'file1'    => 'required',
                                 ]);
                         
         if ($validator->fails()) {
@@ -321,7 +319,7 @@ class GiftController extends Controller
                     imagepng($source, $thumbnail);
                     imagedestroy($source);
                 } else {
-                    $rootpath = '../../asta-api/upload/gifts';
+                    $rootpath = '../../asta-api/gift';
                     $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main->put($nama_file_unik, file_get_contents($file));
                     $path = '../../asta-api/gift/image1/'.$pk.'.png';
