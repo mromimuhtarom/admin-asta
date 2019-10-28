@@ -76,7 +76,7 @@ class VersionAssetController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        $gamep= simplexml_load_file("../../asta-/AssetBundle/XML/Android/asset_game.xml");
+        $gamep= simplexml_load_file("../../asta-api/AssetBundle/XML/Android/asset_game.xml");
         foreach($gamep->children() as $gamew)
         {
             if($name == 'type_ver')
