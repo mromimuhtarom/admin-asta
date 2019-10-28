@@ -15,8 +15,8 @@ class VersionAssetController extends Controller
     public function index()
     {
         $menu      = MenuClass::menuName('Version Asset Apk');
-        $xml_andro = simplexml_load_file("../../enginepk/AssetBundle/XML/Android/asset_game.xml");
-        $xml_ios   = simplexml_load_file("../../enginepk/AssetBundle/XML/IOS/asset_game.xml");
+        $xml_andro = simplexml_load_file("../../asta-api/AssetBundle/XML/Android/asset_game.xml");
+        $xml_ios   = simplexml_load_file("../../asta-api/AssetBundle/XML/IOS/asset_game.xml");
         return view('pages.version_asset.version_asset', compact('xml_andro', 'xml_ios', 'menu'));
     }
 
@@ -76,7 +76,7 @@ class VersionAssetController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        $gamep= simplexml_load_file("../../enginepk/AssetBundle/XML/Android/asset_game.xml");
+        $gamep= simplexml_load_file("../../asta-api/AssetBundle/XML/Android/asset_game.xml");
         foreach($gamep->children() as $gamew)
         {
             
@@ -112,7 +112,7 @@ class VersionAssetController extends Controller
             }
         }
         
-        file_put_contents("../../enginepk/AssetBundle/XML/Android/asset_game.xml", $gamep->asXML());
+        file_put_contents("../../asta-api/AssetBundle/XML/Android/asset_game.xml", $gamep->asXML());
 
 
     }
@@ -123,7 +123,7 @@ class VersionAssetController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        $gamep= simplexml_load_file("../../enginepk/AssetBundle/XML/IOS/asset_game.xml");
+        $gamep= simplexml_load_file("../../asta-api/AssetBundle/XML/IOS/asset_game.xml");
         foreach($gamep->children() as $gamew)
         {
             if($name == 'type_ver')
@@ -158,7 +158,7 @@ class VersionAssetController extends Controller
             }
         }
         
-        file_put_contents("../../enginepk/AssetBundle/XML/IOS/asset_game.xml", $gamep->asXML());
+        file_put_contents("../../asta-api/AssetBundle/XML/IOS/asset_game.xml", $gamep->asXML());
 
 
     }
