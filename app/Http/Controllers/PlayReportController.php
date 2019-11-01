@@ -224,6 +224,9 @@ class PlayReportController extends Controller
                           ->paginate(20);
         }
         $player_history->appends($request->all());
+
+       
+       
         return view('pages.players.playreport', compact('player_history', 'player_username', 'bgt_round_gamplay_log','inputMaxDate', 'inputMinDate', 'inputGame', 'menus1', 'game', 'datenow'));
     }
     

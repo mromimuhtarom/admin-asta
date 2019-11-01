@@ -92,7 +92,7 @@ class ChipStoreController extends Controller
           $ekstensi_wtr           = strtolower(end($x_wtr));
           $ukuran                 = $_FILES['file']['size'];
           $nama_file_unik         = $id_new.'.'.$ekstensi;
-          list($width, $height)  = getimagesize($file);
+          list($width, $height)  = getimagesize($file);  
           if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
           {
               if($ukuran < 5242880)

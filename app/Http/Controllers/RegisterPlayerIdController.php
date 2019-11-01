@@ -36,6 +36,8 @@ class RegisterPlayerIdController extends Controller
 
         $value = str_replace(':', ',', $usertype->value);
         $type = explode(",", $value);
+
+        
         return view('pages.players.registerplayerid', compact('type', 'menu', 'mainmenu', 'totalplayer', 'totalguest', 'totalbot', 'playernotused', 'guestnotused', 'botnotused', 'playerused', 'guestused', 'botused'));
     }
 

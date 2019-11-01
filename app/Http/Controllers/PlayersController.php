@@ -324,7 +324,7 @@ class PlayersController extends Controller
 
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else {
-          return $this->indexRegisteredPlayer();
+          return back()->with('alert', 'field cannot be empty');
         }
     }
 
