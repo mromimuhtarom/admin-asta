@@ -163,7 +163,7 @@
                   <input type="text" class="form-control" name="tableName" placeholder="Table Name" required="">
                 </div>
                 <div class="form-group">
-                  <select class="custom-select" id="category" name="category">
+                  <select class="custom-select" id="category_table" name="category">
                     <option>Select Category</option>
                     @foreach ($category as $ct)
                     <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
@@ -232,6 +232,25 @@
           "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
           "pagingType": "full_numbers",
         });
+      });
+
+      $("#minbuy").keyup(function(e) {
+        e.preventDefault();
+        var category_val = $('#category_table').val();
+        var minbuy = $(this).val();
+        @php
+        $a = "category_table";
+        $b = "minbuy";
+        foreach ($category as $ct) {
+          echo 'if('.$ct->room_id.' == $("#category_table").val()) {';
+              echo 'var minbuyValue = $(this).val();';
+              echo 'var countBb = minbuyValue / 10;';
+              echo 'var countSb = countBb / 2;';
+              echo '$("#sb").val(countSb);';
+              echo '$("#bb").val(countBb);';
+              echo '}';
+        }
+        @endphp
       });
 
     

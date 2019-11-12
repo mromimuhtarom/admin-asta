@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Filesystems\FilesystemManager;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Classes\MenuClass;
 use App\Gift;
@@ -12,7 +14,6 @@ use DB;
 use File;
 use Validator;
 use App\ConfigText;
-use Storage;
 use Response;
 
 class GiftController extends Controller
@@ -64,9 +65,9 @@ class GiftController extends Controller
      */
     public function store(Request $request)
     {
-        $id                     = Gift::select('id')
-                                  ->orderBy('id', 'desc')
-                                  ->first();
+        $id = Gift::select('id')
+                ->orderBy('id', 'desc')
+                ->first();
 
         $validator = Validator::make($request->all(),[
             'title'    => 'required',
@@ -89,10 +90,10 @@ class GiftController extends Controller
         $file                                     = $request->file('file');
         $file_wtr                                 = $request->file('file1');
         $ekstensi_diperbolehkan                   = array('png');
-        $nama                                     = $_FILES['file']['name'];
-        $nama_wtr                                 = $_FILES['file1']['name'];
-        $x                                        = explode('.', $nama);
-        $x_wtr                                    = explode('.', $nama_wtr);
+        $filename1                                = $file->getClientOriginalName();
+        $filename2                                = $file->getClientOriginalName();
+        $x                                        = explode('.', $filename1);
+        $x_wtr                                    = explode('.', $filename2);
         $ekstensi                                 = strtolower(end($x));
         $ekstensi_wtr                             = strtolower(end($x_wtr));
         $ukuran                                   = $_FILES['file']['size'];
@@ -126,22 +127,25 @@ class GiftController extends Controller
                             list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder    = "../../asta-api/gift/";
+                    
+                            $folder = "../public/gift/";
                             $thumbnail = $folder.$nama_file_unik;
-
+    
+                            
 
                         // Memuat gambar utama
-                            $rootpath_main    = '../../asta-api/gift/image1/';
-                            $upload_imagemain = '../../asta-api/gift/image1';
+                            $rootpath_main    = '../public/gift/image1/';
+                            $upload_imagemain = '../public/gift/image1';
                             $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                             $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                        
 
                         // Memuat gambar watermark
-                            $rootpath_wtr    = '../../asta-api/gift/image2/';
-                            $upload_imagewtr = '../../asta-api/gift/image2';
+                            $rootpath_wtr    = '../public/gift/image2/';
+                            $upload_imagewtr = '../public/gift/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $putfile_wtr     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
@@ -155,19 +159,26 @@ class GiftController extends Controller
                             // Menetapkan posisi gambar watermark
                             $pos_x = $width - $width_watermark;
                             $pos_y = $height - $height_watermark;
-                            imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                            $copy_wtr = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                     
                             imagealphablending($source, false);
                             imagesavealpha($source, true);
                             imagecolortransparent($source); 
+                        
+                            $tery = image_data($source);
+                            
+                            $awsPath =  "unity-asset/gift/" . $nama_file_unik;
 
-                            imagepng($source, $thumbnail);
-                            imagedestroy($source);
+                            $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                            Storage::disk('s3')->put($awsPath, $tery);
+                        
                         // end watermark image
                         } else {
-                            $rootpath   = '../../asta-api/upload/gifts';
-                            $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                            $image_main->put($nama_file_unik, file_get_contents($file));
+                            // $rootpath   = '../../asta-api/upload/gifts';
+                            //$image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                            $rootpath = 'unity-asset/gift/' . $nama_file_unik;
+                            $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                            //$image_main->put($nama_file_unik, file_get_contents($file));
                         }
                             
                         $gift = Gift::create([
@@ -204,15 +215,14 @@ class GiftController extends Controller
     }
 
 
-
+//thumbnail gambar yang telah di merge
     public function ImageGift($gift_id)
     {
-      $rootpath = '../../asta-api/gift';
-      $client = Storage::createLocalDriver(['root' => $rootpath]);
-      $file_exists_gold = $client->exists($gift_id.'.png');      
+        $linkimage = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gift_id.'.png';
+        $fike_exists_gift = file_exists($linkimage);
       
 
-      if($file_exists_gold  === false)
+      if($fike_exists_gift   === false)
       {  
         
         $rootpath_empty = '../public/images/image_not_found';
@@ -223,11 +233,8 @@ class GiftController extends Controller
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
         return $response_empty;
-      } else if($file_exists_gold  === true){
-        $file_gold = $client->get($gift_id.'.png');
-        $type_gold = $client->mimeType($gift_id.'.png');
-        $response  = Response::make($file_gold, 200);
-        $response->header("Content-Type", $type_gold);
+      } else if($fike_exists_gift   === true){
+        $response = $linkimage;
         return $response;
 
       }      
@@ -413,18 +420,21 @@ class GiftController extends Controller
         $gifts = Gift::select('id')
                  ->where('id', '=', $id)
                  ->first();
+
+        $pathS3 = 'unity-asset/gift/' . $id .'.png';
+
         if($id != '')
         { 
             Gift::where('id', '=', $id)->delete();
             $path = '../../asta-api/gift/'.$gifts->id.'.png';
-            File::delete($path);
+            // File::delete($path);
+            Storage::disk('s3')->delete($pathS3);
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Delete in menu Gift Store with ID '.$id
             ]);
-
             return redirect()->route('Table_Gift')->with('success','Data Deleted');
         }
         return redirect()->route('Table_Gift')->with('success','Something wrong');

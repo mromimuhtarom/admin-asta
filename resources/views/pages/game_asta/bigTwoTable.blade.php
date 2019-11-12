@@ -143,21 +143,21 @@
                   <input type="text" class="form-control" name="tableName" placeholder="Table Name" required="">
                 </div>
                 <div class="form-group">
-                  <input type="number" class="form-control" name="stake" placeholder="Stake" required="">
-                </div>
-                <div class="form-group">
-                  <input type="number" class="form-control" name="minbuy" placeholder="Min Buy" required="">
-                </div>
-                <div class="form-group">
-                  <input type="number" class="form-control" name="maxbuy" placeholder="Max Buy" required="">
-                </div>
-                <div class="form-group">
-                  <select class="custom-select" name="category">
+                  <select class="custom-select" id="category_table" name="category">
                     <option selected>Select Category</option>
                     @foreach ($category as $ct)
                     <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
                     @endforeach
                   </select>
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control" id="stake" name="stake" placeholder="Stake" required="" >
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control" name="maxbuy" placeholder="Max Buy" required="">
                 </div>
               </div>
             </div>
@@ -212,6 +212,50 @@
           "pagingType": "full_numbers",
         });
       });
+
+    $("#stake").keyup(function(e) {
+      e.preventDefault();
+      // var minDate = $("#minbuy").val("34");
+      var category_val = $("#category_table").val();
+      var stake = $(this).val();
+      @php
+      
+      foreach ($category as $ct) {
+      echo'if('.$ct->room_id.' ==  $("#category_table").val()) {';
+      echo 'var stakevalue = $( this ).val();';
+      echo 'var countminbuy = stakevalue * 3 * 13;';
+        echo 'if(countminbuy >= '.$ct->min_buy.') {';
+          echo 'var minbuy = $("#minbuy").val(countminbuy);';
+        echo '} else {';
+          echo 'var minbuy = $("#minbuy").val(null);';
+        echo '}';
+      echo '}';
+      }
+      @endphp   
+    });
+    
+    // $("#category_table").on('change', function(){
+    //   var category_val = $(this).val();
+    //   @php
+    //   $a = "category_val";
+    //   foreach ($category as $ct) {
+    //   if($ct->room_id ===  $a){
+    //     echo 'if($("#stake").val() != "") {';
+    //       echo 'var countminbuy = stakevalue * 3 * 13;';
+    //       echo ' var minbuy = $("#minbuy").val(countminbuy);';
+    //     echo '} else {';
+    //       echo '$("#stake").val();';
+    //       echo '$("#minbuy").val();';
+    //     echo '}';
+    //   }
+
+    //   }
+    //   @endphp
+       
+      
+     
+    // });
+
 
     table = $('table.table').dataTable({
       "sDom": "t"+"<'dt-toolbar-footer d-flex'>",

@@ -146,21 +146,21 @@
                   <input type="text" class="form-control" name="tableName" placeholder="Table Name" required="">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" name="stake" placeholder="Stake" required="">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="minbuy" placeholder="Min Buy" required="">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="maxbuy" placeholder="Max Buy" required="">
-                </div>
-                <div class="form-group">
-                  <select class="custom-select" name="category">
+                  <select class="custom-select" id="category_table" name="category">
                     <option selected>Select Category</option>
                     @foreach ($category as $ct)
                     <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
                     @endforeach
                   </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="stake" name="stake" placeholder="Stake" required="">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
                 </div>
               </div>
             </div>
@@ -214,6 +214,30 @@
           "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
           "pagingType": "full_numbers",
         });
+      });
+
+      $("#stake").keyup(function(e) {
+        e.preventDefault();
+        var category_val = $("#category_table").val();
+        var stake = $(this).val();
+        var stakevalue = $( this ).val();
+        var countminbuy = stakevalue * 10;
+        var countmaxbuy = countminbuy * 2;
+
+        @php
+        foreach($category as $ct){
+            echo 'if('.$ct->room_id.' == $("#category_table").val()) {';
+                  echo 'if(countminbuy >= '.$ct->min_buy.' && countmaxbuy <= '.$ct->max_buy.') {';
+                    echo 'var minBuy = $("#minbuy").val(countminbuy);';
+                    echo 'var maxBuy = $("#maxbuy").val(countmaxbuy);';
+                  echo '} else {';
+                    echo 'var minBuy = $("#minbuy").val(null);';
+                    echo 'var maxBuy = $("#maxbuy").val(null);';
+                  echo '}';
+            echo '}';
+        }
+        @endphp
+        console.log(countmaxbuy)
       });
 
     table = $('table.table').dataTable({

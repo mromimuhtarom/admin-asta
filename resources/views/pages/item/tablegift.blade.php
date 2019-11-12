@@ -122,7 +122,8 @@
                                 <div class="nav-name">Watermark</div>
                               </span>
                               <figure class="media-object">
-                                <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                                {{-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
+                                <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                                 <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                                 <img class="img-object-wtr2 imgupload2{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                               </figure>
@@ -164,6 +165,7 @@
                     <td>{{ $gf->price }}</td>
                     <td>{{ $gf->strCategory() }}</td>
                     <td>{{ strEnabledDisabled($gf->status) }}</td>
+                  
                 </tr>
                 @endif
                 @endforeach

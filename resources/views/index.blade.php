@@ -802,6 +802,43 @@
 
 		}
 
+		$(document).ready(function() {
+			
+			//                                                                                                                                                                    pageSetUp();
+
+			/*
+			 * SUMMERNOTE EDITOR
+			 */
+			
+			$('.summernote').summernote({
+				height: 200,
+				toolbar: [
+			    ['style', ['style']],
+			    ['font', ['bold', 'italic', 'underline', 'clear']],
+			    ['fontname', ['fontname']],
+			    ['color', ['color']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['table', ['table']],
+			    ['insert', ['link', 'picture', 'hr']],
+			    ['view', ['fullscreen', 'codeview', 'help']]
+
+			  ]
+			});
+		
+			/*
+			 * MARKDOWN EDITOR
+			 */
+
+			$("#mymarkdown").markdown({
+				autofocus:false,
+				savable:true,
+				iconlibrary: "fa"
+			})
+						
+		
+		})
+
 
 
 

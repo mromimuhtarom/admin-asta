@@ -86,7 +86,7 @@ class LogController extends Controller
                   
   
           return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'datenow'));
-  
+                
         }else if($minDate != NULL && $maxDate != NULL &&  $inputAction != NULL) {
           $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                  ->where('asta_db.log_operator.action_id', '=', $inputAction)

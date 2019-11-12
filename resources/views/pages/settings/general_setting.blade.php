@@ -432,8 +432,16 @@
           </div>
           {{-- end create --}}
   
-
+          <script src="{{asset('public/ckeditor/ckeditor.js')}}"></script>
+          <script>
+            var konten = document.getElementById("konten");
+              CKEDITOR.replace(konten,{
+              language:'en-gb'
+            });
+            CKEDITOR.config.allowedContent = true;
+          </script>
 <script>
+
   $(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],

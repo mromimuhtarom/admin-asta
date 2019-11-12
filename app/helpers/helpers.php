@@ -2,6 +2,7 @@
 
 date_default_timezone_set('Australia/Sydney');
 
+//
 function time_elapsed_string($datetime, $full = false) {
     $now = new DateTime;
     $ago = new DateTime($datetime);
@@ -33,6 +34,8 @@ function time_elapsed_string($datetime, $full = false) {
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
+
+//kondisi disabled dan enabled (view emoticon, tablegift, slidebanner, stores .blade)
 function strEnabledDisabled ($val) {
 	if($val == 0) {
 		return 'Disabled';
@@ -41,6 +44,7 @@ function strEnabledDisabled ($val) {
 	}
 }
 
+//kondisi transactionType mingguan dan bulanan (view reseller_rank.blade) 
 function strTransactionType ($val) {
   if($val == 1) {
     return 'Monthly';
@@ -49,6 +53,8 @@ function strTransactionType ($val) {
   }
 }
 
+
+//kondisi On atau Of maintenance (general_setting.blade.php)
 function strMaintenanceOnOff($val) {
   if($val == 1) {
     return 'On';
@@ -57,6 +63,7 @@ function strMaintenanceOnOff($val) {
   }
 }
 
+//kondisi status pending, approve, decline (view report_store.blade)
 function strStatusApdec($val) {
   if($val == 0)
   {
@@ -70,6 +77,7 @@ function strStatusApdec($val) {
   }
 }
 
+//
 function strYesNo ($val) {
 	if($val == 0) {
 		return 'No';
@@ -78,7 +86,7 @@ function strYesNo ($val) {
 	}
 }
 
-
+//
 function strIcon ($val) {
 	if($val == 1) {
 		return 'fa-home';
@@ -89,6 +97,7 @@ function strIcon ($val) {
   }
 }
 
+//pengulangan pada form (view register_reseller.php)
 function generateID($digits = 4){
   $i = 0;
   $pin = "";
@@ -100,6 +109,7 @@ function generateID($digits = 4){
   return $pin;
 }
 
+//
 function rewardStatus($val){
   if($val == 0){
     return 'Request';
@@ -114,6 +124,7 @@ function rewardStatus($val){
   }
 }
 
+//kondisi tyoe player (view register_player.blade.php)
 function strPlayerType($val){
   if($val == 1){
     return 'Players';
@@ -122,11 +133,14 @@ function strPlayerType($val){
   }
 }
 
+//format mata uang (view report_store.blade.php)
 function strFormatMoney($val){
   $formatrupiah = "Rp" . number_format($val,2,',','.');
   return $formatrupiah;
 }
 
+
+//Menu type (view role_edit.blade.php)
 function strMenuType ($val) {
     if($val == 0) {
         return 'The Menu Can\'t be Accessed and can\'t be edited';
@@ -137,6 +151,7 @@ function strMenuType ($val) {
     }
 }
 
+//
 function transactionStatus($val){
   if($val == 'settlement' || $val == 'capture'){
     return 2;
@@ -147,6 +162,7 @@ function transactionStatus($val){
   }
 }
 
+//kondisi Type transfer (view item_store_reseller, gold_store, goods_store, payment_store.blade.php)
 function strTypeTransaction($val){
   if($val == 1) {
     return 'Bank Transfer';
@@ -167,6 +183,8 @@ function strTypeTransaction($val){
   }
 }
 
+
+//
 function bankTransactionStatus($val){
   if($val == 1){
     return "pending";
@@ -175,7 +193,7 @@ function bankTransactionStatus($val){
   }
 }
 
-
+//
 function strtohex($x)
     {
         $s='';
@@ -183,6 +201,7 @@ function strtohex($x)
         return($s);
     }
 
+//email decrypt (view register_player_profile.php)
 function hexToStr($hex){
         $string='';
         for ($i=0; $i < strlen($hex)-1; $i+=2){
@@ -190,5 +209,15 @@ function hexToStr($hex){
         }
         return $string;
     }
+
+
+
+//convert type data image boolean to string (Gift controller)
+function image_data($gdimage)
+{
+    ob_start();
+    imagepng($gdimage);
+    return(ob_get_clean());
+}
 
 ?>
