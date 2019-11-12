@@ -285,22 +285,22 @@ class GiftController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder    = "../../asta-api/gift/";
+                    $folder    = "../public/gift/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                        $rootpath_main    = '../../asta-api/gift/image1/';
-                        $upload_imagemain = '../../asta-api/gift/image1';
+                        $rootpath_main    = '../public/gift/image1/';
+                        $upload_imagemain = '../public/gift/image1';
                         $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                         $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                         $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                        $rootpath_wtr = '../../asta-api/gift/image2/';
-                        $upload_imagewtr = '../../asta-api/gift/image2';
-                        $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                        $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
-                        $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                        $rootpath_wtr    = '../public/gift/image2/';
+                        $upload_imagewtr = '../public/gift/image2';
+                        $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                        $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                        $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width  = imagesx($watermark);
@@ -321,17 +321,23 @@ class GiftController extends Controller
                     
                     imagealphablending($source, false);
                     imagesavealpha($source, true);
-                    imagecolortransparent($source); 
+                    imagecolortransparent($source);
+                    
+                    $tery = image_data($source);
+                    $awsPath = "unity-asset/gift/" . $nama_file_unik;
+                    $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
-                    imagepng($source, $thumbnail);
-                    imagedestroy($source);
+                    Storage::disk('s3')->put($awsPath, $tery);
+
+                    // imagepng($source, $thumbnail);
+                    // imagedestroy($source);
                 } else {
-                    $rootpath   = '../../asta-api/gift';
-                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                    $image_main->put($nama_file_unik, file_get_contents($file));
-                    $path = '../../asta-api/gift/image1/'.$pk.'.png';
+                    $rootpath   = 'unity-asset/gift/' . $nama_file_unik;
+                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                    $path = '../public/gift/image1/'.$pk.'.png';
                     File:: delete($path);
-                    $path1 = '../../asta-api/gift/image2/'.$pk.'.png';
+                    $path1 = '../public/gift/image2/'.$pk.'.png';
                     File::delete($path1);
                 }
 

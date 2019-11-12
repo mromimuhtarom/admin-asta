@@ -85,10 +85,10 @@ class EmoticonController extends Controller
         $file                         = $request->file('file');
         $file_wtr                     = $request->file('file1');
         $ekstensi_diperbolehkan       = array('png');
-        $nama                         = $_FILES['file']['name'];
-        $nama_wtr                     = $_FILES['file1']['name'];
-        $x                            = explode('.', $nama);
-        $x_wtr                        = explode('.', $nama_wtr);
+        $filename1                    = $file->getClientOriginalName();
+        $filename2                    = $file->getClientOriginalName();
+        $x                            = explode('.', $filename1);
+        $x_wtr                        = explode('.', $filename2);
         $ekstensi                     = strtolower(end($x));
         $ekstensi_wtr                 = strtolower(end($x_wtr));
         $ukuran                       = $_FILES['file']['size'];
@@ -117,23 +117,23 @@ class EmoticonController extends Controller
                             list($width_wtr, $height_wtr) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../../asta-api/emoticon/";
+                            $folder = "../public/emoticon/";
                             $thumbnail = $folder."".$nama_file_unik;
 
 
                             // Memuat gambar utama
-                            $rootpath_main    = '../../asta-api/emoticon/image1/';
-                            $upload_imagemain = '../../asta-api/emoticon/image1';
+                            $rootpath_main    = '../public/emoticon/image1/';
+                            $upload_imagemain = '../public/emoticon/image1';
                             $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain]);
                             $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr = '../../asta-api/emoticon/image2/';
-                            $upload_imagewtr = '../../asta-api/emoticon/image2';
-                            $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
-                            $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                            $rootpath_wtr      = '../public/emoticon/image2/';
+                            $upload_imagewtr   = '../public/emoticon/image2';
+                            $watermarkimage    = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                            $putfile_str       = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $watermark         = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
                             $water_width = imagesx($watermark);
@@ -150,15 +150,21 @@ class EmoticonController extends Controller
                     
                             imagealphablending($source, false);
                             imagesavealpha($source, true);
-                            imagecolortransparent($source); 
+                            imagecolortransparent($source);
+                            
+                            $tery = image_data($source);
 
-                            imagepng($source, $thumbnail);
-                            imagedestroy($source);
+                            $awsPath = "unity-asset/emoticon/" . $nama_file_unik;
+
+                            $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_wtr, $height_wtr);
+
+                            Storage::disk('s3')->put($awsPath, $tery);
+                            // imagedestroy($source);
                         // end watermark image
                         } else {
-                            $rootpath   = '../../asta-api/emoticon';
-                            $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                            $image_main->put($nama_file_unik, file_get_contents($file));
+                            $rootpath   = 'unity-asset/emoticon/' . $nama_file_unik;
+                            // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                            $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                         }
 
                         $emoticon = Emoticon::create([
@@ -261,21 +267,21 @@ class EmoticonController extends Controller
                         list($width_wtr, $height_wtr) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../public/upload/emoticon/";
+                            $folder = "../public/emoticon/";
                             $thumbnail = $folder.$nama_file_unik;
 
                             // Memuat gambar utama
-                            $rootpath_main = '../../asta-api/emoticon/image1/';
-                            $upload_imagemain = '../../asta-api/emoticon/image1';
+                            $rootpath_main = '../public/emoticon/image1/';
+                            $upload_imagemain = '../public/emoticon/image1';
                             $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain]);
                             $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr = '../../asta-api/emoticon/image2/';
-                            $upload_imagewtr = '../../asta-api/emoticon/image2';
+                            $rootpath_wtr = '../public/emoticon/image2/';
+                            $upload_imagewtr = '../public/emoticon/image2';
                             $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $putfile_str = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
@@ -293,17 +299,23 @@ class EmoticonController extends Controller
                     
                             imagealphablending($source, false);
                             imagesavealpha($source, true);
-                            imagecolortransparent($source); 
+                            imagecolortransparent($source);
+                            
+                            $tery = image_data($source);
+                            $awsPath = "unity-asset/emoticon/" . $nama_file_unik;
+                            $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_wtr, $height_wtr);
 
-                            imagepng($source, $thumbnail);
-                            imagedestroy($source);
+                            Storage::disk('s3')->put($awsPath, $tery);
+
+                            // imagepng($source, $thumbnail);
+                            // imagedestroy($source);
                     } else {
-                        $rootpath   = '../../asta-api/emoticon';
-                        $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                        $image_main->put($nama_file_unik, file_get_contents($file));
-                        $path = '../../asta-api/emoticon/image1/'.$pk.'.png';
+                        $rootpath   = 'unity-asset/emoticon/' . $nama_file_unik;
+                        // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                        $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                        $path = '../public/emoticon/image1/'.$pk.'.png';
                         File::delete($path);
-                        $path1 = '../../asta-api/emoticon/image2/'.$pk.'.png';
+                        $path1 = '../public/emoticon/image2/'.$pk.'.png';
                         File::delete($path1);
                     }
                         // end watermark image
@@ -342,9 +354,9 @@ class EmoticonController extends Controller
 
     public function ImageEmoticon($item_id)
     {
-      $rootpath         = '../../asta-api/emoticon';
-      $client           = Storage::createLocalDriver(['root' => $rootpath]);
-      $file_exists_gold = $client->exists($item_id.'.png');
+      
+        $linkimage        = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/emoticon/'.$item_id.'.png';
+        $file_exists_gold = file_exists($linkimage);
       
 
       if($file_exists_gold  === false)
@@ -357,7 +369,9 @@ class EmoticonController extends Controller
 
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
+
         return $response_empty;
+
       } else if($file_exists_gold  === true){
         $file_gold = $client->get($item_id.'.png');
         $type_gold = $client->mimeType($item_id.'.png');
@@ -418,15 +432,19 @@ class EmoticonController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->id;
-        $gifts = Emoticon::select('id')
+        $id     = $request->id;
+        $gifts  = Emoticon::select('id')
                  ->where('id', '=', $id)
                  ->first();
+
+        $pathS3 = 'unity-asset/emoticon/' . $id . '.png';
+
         if($id != '')
         {
             Emoticon::where('id', '=', $id)->delete();
             $path = '../../asta-api/emoticon/'.$gifts->id.'.png';
-            File::delete($path);
+            // File::delete($path);
+            Storage::disk('s3')->delete($pathS3);
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',

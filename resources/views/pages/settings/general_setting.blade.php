@@ -334,7 +334,39 @@
                 <div class="form-group">
                 <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
                 <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
-                <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
+                {{-- <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea> --}}
+                <div class="jarviswidget jarviswidget-color-blue no-padding" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                    <header>
+                        <div class="widget-header">
+                          <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                          <h2>Summernote (Lightweight)</h2>							
+                        </div>
+                      </header>
+
+                      <div>
+                          <div class="jarviswidget-editbox">
+                              <!-- This area used as dropdown edit box -->
+                
+                            </div>
+                      </div>
+
+                      <div class="widget-body">
+
+                          <div class="summernote">
+                            
+                          </div>
+                          
+                          <div class="widget-footer smart-form">
+            
+                            <label class="checkbox vcheck pull-left">
+                              <input type="checkbox" checked="checked" name="autosave" id="autosave">
+                              <span> Auto Save</span>
+                            </label> 
+            
+                          </div>
+                          
+                        </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -432,14 +464,6 @@
           </div>
           {{-- end create --}}
   
-          <script src="{{asset('public/ckeditor/ckeditor.js')}}"></script>
-          <script>
-            var konten = document.getElementById("konten");
-              CKEDITOR.replace(konten,{
-              language:'en-gb'
-            });
-            CKEDITOR.config.allowedContent = true;
-          </script>
 <script>
 
   $(document).ready(function() {

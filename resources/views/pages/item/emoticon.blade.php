@@ -120,7 +120,8 @@
                                   <div class="nav-name">Watermark</div>
                                 </span>
                                 <figure class="media-object">
-                                  <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ route('imageshowemoticon', $emot->id) }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
+                                  {{-- <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ route('imageshowemoticon', $emot->id) }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;"> --}}
+                                <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/emoticon/'.$emot->id.'.png' }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                                   <img class="img-object-wtr1 imgupload1{{ $emot->id }}" src="http://placehold.jp/80x100.png">
                                   <img class="img-object-wtr2 imgupload2{{ $emot->id }}" src="http://placehold.jp/80x100.png">
                                 </figure>

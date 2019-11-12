@@ -212,7 +212,7 @@ function hexToStr($hex){
 
 
 
-//convert type data image boolean to string (Gift controller)
+//convert type data image boolean to string (Gift controller, emoticon ccntroller)
 function image_data($gdimage)
 {
     ob_start();
