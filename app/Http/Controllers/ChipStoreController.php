@@ -97,7 +97,7 @@ class ChipStoreController extends Controller
           {
               if($ukuran < 5242880)
               {
-                  if($file_wtr && in_array($ekstensi_wtr))
+                  if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                   {
                     list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
@@ -106,18 +106,18 @@ class ChipStoreController extends Controller
                             $thumbnail = $folder.$nama_file_unik;
 
                             // Memuat gambar utama
-                            $rootpath_main    = '../../asta-api/upload/Chip/image1/';
-                            $upload_imagemain = '../../asta-api/upload/Chip/image1';
+                            $rootpath_main    = '../Public/upload/Chip/image1/';
+                            $upload_imagemain = '../Public/upload/Chip/image1';
                             $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                             $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr    = '../../asta-api/upload/Chip/image2/';
-                            $upload_imagewtr = '../../asta-api/upload/Chip/image2';
+                            $rootpath_wtr    = '../Public/upload/Chip/image2/';
+                            $upload_imagewtr = '../Public/upload/Chip/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
-                            $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                            $putfile_str    = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
                             $water_width  = imagesx($watermark);
@@ -136,14 +136,19 @@ class ChipStoreController extends Controller
                             imagesavealpha($source, true);
                             imagecolortransparent($source); 
 
-                            imagepng($source, $thumbnail);
-                            imagedestroy($source);
+                            $temp = image_data($source);
+                            $awsPath = "unity-asset/store/chip/" . $nama_file_unik;
+                            $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+
+                            Storage::disk('s3')->put($awsPath, $temp);
+                            // imagepng($source, $thumbnail);
+                            // imagedestroy($source);
                         // end watermark image
                   } else 
                   {
-                    $rootpath   = '../../asta-api/upload/Chip';
-                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                    $image_main->put($nama_file_unik, file_get_contents($file));
+                    $rootpath   = 'unity-asset/store/chip/' .$nama_file_unik;
+                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                   }
                   $chip = ItemsGold::create([
                     'name'      => $request->title,
@@ -252,22 +257,22 @@ class ChipStoreController extends Controller
                     list($width_watermark, $height_watermark) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder    = "../../asta-api/upload/Chip/";
+                            $folder    = "../public/upload/Chip/";
                             $thumbnail = $folder.$nama_file_unik;
 
 
                             // Memuat gambar utama
-                            $rootpath_main    = '../../asta-api/upload/Chip/image1/';
-                            $upload_imagemain = '../../asta-api/upload/Chip/image1';
+                            $rootpath_main    = '../public/upload/Chip/image1/';
+                            $upload_imagemain = '../public/upload/Chip/image1';
                             $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                             $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr    = '../../asta-api/upload/Chip/image2/';
-                            $upload_imagewtr = '../../asta-api/upload/Chip/image2';
+                            $rootpath_wtr    = '../public/upload/Chip/image2/';
+                            $upload_imagewtr = '../public/upload/Chip/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                            $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
@@ -286,18 +291,23 @@ class ChipStoreController extends Controller
                             imagealphablending($source, false);
                             imagesavealpha($source, true);
                             imagecolortransparent($source); 
-
-                            imagepng($source, $thumbnail);
-                            imagedestroy($source);
+                            
+                            $temp    = image_data($source);
+                            $awsPath = "unity-asset/store/chip/" . $nama_file_unik;
+                            $merge   = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                            
+                            Storage::disk('s3')->put($awsPath, $temp);
+                            // imagepng($source, $thumbnail);
+                            // imagedestroy($source);
                         // end watermark image
                 } else {
-                    $rootpath   = '../../asta-api/upload/Chip';
-                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                    $image_main->put($nama_file_unik, file_get_contents($file));
+                    $rootpath   = '../unity-asset/upload/chip';
+                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
-                    $path = '../../asta-api/upload/Chip/image1/'.$pk.'.png';
+                    $path = '../public/upload/Chip/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../../asta-api/upload/Chip/image2/'.$pk.'.png';
+                    $path1 = '../public/upload/Chip/image2/'.$pk.'.png';
                     File::delete($path1);
                     // return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                 }
@@ -319,9 +329,9 @@ class ChipStoreController extends Controller
 
     public function ImageItem($item_id)
     {
-      $rootpath         = '../../asta-api/upload/Chip';
-      $client           = Storage::createLocalDriver(['root' => $rootpath]);
-      $file_exists_gold = $client->exists($item_id.'.png');
+      $rootpath         = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$item_id.'.png';
+    //   $client           = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = file_exists($rootpath);
       
 
       if($file_exists_gold  === false)
@@ -354,11 +364,14 @@ class ChipStoreController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
+        $pathS3 = 'unity-asset/store/chip/' . $id . '.png';
+
         if($id != '')
         {
             ItemsGold::where('item_id', '=', $id)->delete(); 
-            $path = '../../asta-api/upload/Chip/'.$id.'.png';
-            File::delete($path);  
+            $path = '../public/store/Chip/'.$id.'.png';
+            File::delete($path);
+            Storage::disk('s3')->delete($pathS3);  
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',

@@ -103,22 +103,22 @@ class GoodsStoreController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder = "../../asta-api/upload/Goods/";
+                    $folder = "../public/upload/Goods/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $rootpath_main    = '../../asta-api/upload/Goods/image1/';
-                    $upload_imagemain = '../../asta-api/upload/Goods/image1';
+                    $rootpath_main    = '../public/upload/Goods/image1/';
+                    $upload_imagemain = '../public/upload/Goods/image1';
                     $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                     $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
-                    $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                    $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $rootpath_wtr    = '../../asta-api/upload/Goods/image2/';
-                    $upload_imagewtr = '../../asta-api/upload/Goods/image2';
+                    $rootpath_wtr    = '../public/upload/Goods/image2/';
+                    $upload_imagewtr = '../public/upload/Goods/image2';
                     $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                    $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
-                    $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                    $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
                     $water_width  = imagesx($watermark);
@@ -139,16 +139,23 @@ class GoodsStoreController extends Controller
                     
                     imagealphablending($source, false);
                     imagesavealpha($source, true);
-                    imagecolortransparent($source); 
+                    imagecolortransparent($source);
+                    
+                    $temp       = image_data($source);
+                    $awsPath    = "unity-asset/store/goods/".$nama_file_unik;
+                    $merge      = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
-                    imagepng($source, $thumbnail);
-                    imagedestroy($source);
+                    Storage::disk('s3')->put($awsPath, $temp);
+                    
+
+                    // imagepng($source, $thumbnail);
+                    // imagedestroy($source);
                 }
                 else
                 {
-                    $rootpath   = '../../asta-api/upload/Goods';
-                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                    $image_main->put($nama_file_unik, file_get_contents($file));
+                    $rootpath   = 'unity-asset/store/goods/'.$nama_file_unik;
+                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                 }
 
 
@@ -263,21 +270,21 @@ class GoodsStoreController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder    = "../../asta-api/upload/Goods/";
+                    $folder    = "../public/upload/Goods/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                    $rootpath_main    = '../../asta-api/upload/Gold/image1/';
-                    $upload_imagemain = '../../asta-api/upload/Gold/image1';
+                    $rootpath_main    = '../public/upload/Goods/image1/';
+                    $upload_imagemain = '../public/upload/Goods/image1';
                     $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                     $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                     $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                    $rootpath_wtr    = '../../asta-api/upload/Gold/image2/';
-                    $upload_imagewtr = '../../asta-api/upload/Gold/image2';
+                    $rootpath_wtr    = '../public/upload/Goods/image2/';
+                    $upload_imagewtr = '../public/upload/Goods/image2';
                     $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                    $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                     $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
@@ -301,18 +308,23 @@ class GoodsStoreController extends Controller
                     imagesavealpha($source, true);
                     imagecolortransparent($source); 
 
-                    imagepng($source, $thumbnail);
-                    imagedestroy($source);
+                    $temp       = image_data($source);
+                    $awsPath    = "unity-asset/store/goods/" .$nama_file_unik;
+                    $merge      = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+
+                    Storage::disk('s3')->put($awsPath, $temp);
+                    // imagepng($source, $thumbnail);
+                    // imagedestroy($source);
                 }
                 else 
                 {
-                    $rootpath   = '../../asta-api/upload/Goods';
-                    $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                    $image_main->put($nama_file_unik, file_get_contents($file));
+                    $rootpath   = '../unity-asset/upload/Goods';
+                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
-                    $path = '../../asta-api/upload/Goods/image1/'.$pk.'.png';
+                    $path = '../public/upload/Goods/image1/'.$pk.'.png';
                     File::delete($path);    
-                    $path = '../../asta-api/upload/Goods/image2/'.$pk.'.png';
+                    $path = '../public/upload/Goods/image2/'.$pk.'.png';
                     File::delete($path);    
                     // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }
@@ -339,9 +351,9 @@ class GoodsStoreController extends Controller
 
     public function ImageItem($item_id)
     {
-      $rootpath         = '../../asta-api/upload/Goods';
-      $client           = Storage::createLocalDriver(['root' => $rootpath]);
-      $file_exists_gold = $client->exists($item_id.'.png');
+      $rootpath         = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png';
+    //   $client           = Storage::createLocalDriver(['root' => $rootpath]);
+      $file_exists_gold = file_exists($rootpath);
       
 
       if($file_exists_gold  === false)
@@ -375,11 +387,16 @@ class GoodsStoreController extends Controller
     {
         $id    = $request->id;
         $goods = ItemPoint::where('item_id', '=', $id)->first();
+
+        $pathS3 = 'unity-asset/store/goods/'.$id.'.png';
+
         if($id != '')
         {
             ItemPoint::where('item_id', '=', $id)->delete();
-            $path = '../../asta-api/upload/Goods/'.$goods->item_id.'.png';
-            File::delete($path);            
+            $path = '../public/upload/Goods/'.$goods->item_id.'.png';
+            File::delete($path);
+            Storage::disk('s3')->delete($pathS3);
+
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
