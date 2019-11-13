@@ -354,7 +354,7 @@ class GoldStoreController extends Controller
                     // imagedestroy($source);
                 } else {
                     // $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
-                    $rootpath   = '../unity-asset/upload/Gold/';
+                    $rootpath   = 'unity-asset/upload/Gold/';
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
