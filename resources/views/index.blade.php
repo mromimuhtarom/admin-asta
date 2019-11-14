@@ -844,6 +844,16 @@
 			});
 
 		}
+
+		$(document).ready(function() {
+
+			$('#technig').summernote({
+
+  			height:300,
+
+			});
+
+		});
 	</script>
 
 </body>
