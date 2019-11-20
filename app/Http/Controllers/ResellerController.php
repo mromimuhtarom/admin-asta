@@ -20,6 +20,7 @@ use App\ConfigText;
 use App\ItemsGold;
 use App\ItemPoint;
 use File;
+use Storage;    
 
 class ResellerController extends Controller
 {
@@ -832,11 +833,18 @@ public function detailTransaction($month, $year)
                     imagesavealpha($source, true);
                     imagecolortransparent($source); 
 
-                    imagepng($source, $thumbnail);
-                    imagedestroy($source);
+                    $temp       = image_data($source);
+                    $awsPath    = "unity-asset/store/gold/".$nama_file_unik;
+                    $merge      = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                    
+                    Storage::disk('s3')->put($awsPath, $temp);
+                    // imagepng($source, $thumbnail);
+                    // imagedestroy($source);
                    // end watermark image
                 } else {
-                    $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
+                    // $file->move(public_path('unity-asset/store/gold'), $nama_file_unik);
+                    $rootpath = 'unity-asset/store/gold/'.$nama_file_unik;
+                    $img_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                 }
                           
                 $gold = ItemsCash::create([
@@ -973,13 +981,20 @@ public function detailTransaction($month, $year)
                     imagealphablending($source, false);
                     imagesavealpha($source, true);
                     imagecolortransparent($source); 
+                    
+                    $temp    = image_data($source);
+                    $awsPath = "unity-asset/store/gold/".$nama_file_unik;
+                    $merge   = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
-                    imagepng($source, $thumbnail);
-                    imagedestroy($source);
+                    Storage::disk('s3')->put($awsPath, $temp);
+                    // imagepng($source, $thumbnail);
+                    // imagedestroy($source);
                 }
                 else 
                 {
-                    $file->move(public_path('../public/upload/Gold'), $nama_file_unik);
+                    $rootpath = 'unity-asset/store/gold/';
+                    $img_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+
                     $path = '../public/upload/Gold/image1/'.$pk.'.png';
                     File::delete($path);    
                     $path = '../public/upload/Gold/image2/'.$pk.'.png';
@@ -1014,18 +1029,22 @@ public function detailTransaction($month, $year)
 // ------- Delete Item Store Reseller -------- //
     public function destroyItemStoreReseller(Request $request)
     {
-        $getItemdId    = $request->userid;
-        if($getItemdId  != '') 
+        $getItemId    = $request->userid;
+        $pathS3        = 'unity-asset/store/gold/'.$getItemId.'.png';
+
+        if($getItemId  != '') 
         {
-            ItemsCash::where('item_id', '=', $getItemdId)->delete();
+            ItemsCash::where('item_id', '=', $getItemId)->delete();
+            Storage::disk('s3')->delete($pathS3);
+        
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Item Store Reseller with ID '.$getItemdId
+                'desc'      => 'Delete in menu Item Store Reseller with ID '.$getItemId
             ]);
             return redirect()->route('Item_Store_Reseller')->with('success','Data Deleted');
-        } else if($getItemdId  == NULL )
+        } else if($getItemId  == NULL )
         {
             return redirect()->route('Item_Store_Reseller')->with('alert','ID must be Fill'); 
         }

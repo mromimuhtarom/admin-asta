@@ -316,7 +316,7 @@
 
 
   <!-- Modal About-->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  {{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -332,45 +332,18 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
-                <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
-                {{-- <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea> --}}
-                <div class="jarviswidget jarviswidget-color-blue no-padding" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
-                    <header>
-                        <div class="widget-header">
-                          <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                          <h2>Summernote (Lightweight)</h2>							
-                        </div>
-                      </header>
-
-                      <div>
-                          <div class="jarviswidget-editbox">
-                              <!-- This area used as dropdown edit box -->
-                
-                            </div>
-                      </div>
-
-                      <div class="widget-body">
-
-                          <div class="summernote">
-                            
-                          </div>
-                          
-                          <div class="widget-footer smart-form">
-            
-                            <label class="checkbox vcheck pull-left">
-                              <input type="checkbox" checked="checked" name="autosave" id="autosave">
-                              <span> Auto Save</span>
-                            </label> 
-            
-                          </div>
-                          
-                        </div>
-                </div>
+                  <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
+                  <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
+                  <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
+                  <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+                  <script>
+                    CKEDITOR.replace( 'contentabout' );
+                  </script>
                 </div>
               </div>
             </div>
           </div>
+      
           <div class="modal-footer">
             <button type="submit" class="btn sa-btn-primary submit-data">
               <i class="fa fa-save"></i> Save
@@ -379,12 +352,50 @@
               <i class="fa fa-remove"></i> Cancel
             </button>
           </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  {{-- end create --}}
+           </div>
+               </form> --}}
 
+            <!-- Modal Privacy Policy-->
+            <div class="modal fade" id="myModalPrivacyPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit Privacy Policy</h4>
+                    <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      <i class="fa fa-remove"></i>
+                    </button>
+                  </div>
+                  <form action="{{ route('AboutGeneralSetting') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+              
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group">
+                              <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
+                              <input type="text" name="urlprivacypolicy" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
+                              <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ $client->get('privacy-policy.txt') }}</textarea>
+                              <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+                                <script>
+                                    CKEDITOR.replace( 'contentprivacypolicy' );
+                                </script>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn sa-btn-primary submit-data">
+                        <i class="fa fa-save"></i> Save
+                      </button>
+                      <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{-- end create --}}
 
     <!-- Modal Term Of Service -->
     <div class="modal fade" id="myModalTermOfSevice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -405,7 +416,11 @@
                   <div class="form-group">
                       <input type="hidden" name="idtermofservice" value="{{ $getTermOfService->id }}">
                       <input type="text" name="urltermofservice" placeholder="Url" class="form-control" value="{{$getTermOfService->value }}"><br>
-                  <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ $client->get('term-of-service.txt') }}</textarea>
+                      <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ $client->get('term-of-service.txt') }}</textarea>
+                      <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+                        <script>
+                          CKEDITOR.replace( 'contenttermofservice' );
+                        </script>
                   </div>
                 </div>
               </div>
@@ -426,43 +441,49 @@
 
 
 
-        <!-- Modal Privacy Policy-->
-        <div class="modal fade" id="myModalPrivacyPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit Privacy Policy</h4>
-                  <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="fa fa-remove"></i>
-                  </button>
-                </div>
-                <form action="{{ route('AboutGeneralSetting') }}" method="post">
-                  @csrf
-                  <div class="modal-body">
-            
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="form-group">
-                            <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
-                            <input type="text" name="urlprivacypolicy" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
-                        <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ $client->get('privacy-policy.txt') }}</textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn sa-btn-primary submit-data">
-                      <i class="fa fa-save"></i> Save
-                    </button>
-                    <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                      <i class="fa fa-remove"></i> Cancel
-                    </button>
-                  </div>
-                </form>
+      <!-- Modal About-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit About</h4>
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+        <form action="{{ route('AboutGeneralSetting') }}" method="post">
+          @csrf
+          <div class="modal-body">
+    
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
+                  <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
+                  <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
+                  <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+                  <script>
+                      CKEDITOR.replace( 'contentabout' );
+                  </script>
               </div>
             </div>
           </div>
-          {{-- end create --}}
+          <div class="modal-footer">
+            <button type="submit" class="btn sa-btn-primary submit-data">
+              <i class="fa fa-save"></i> Save
+            </button>
+            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+              <i class="fa fa-remove"></i> Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+    
+
   
 <script>
 
