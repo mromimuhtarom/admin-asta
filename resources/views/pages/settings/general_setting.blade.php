@@ -461,9 +461,9 @@
                   <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
                   <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
                   <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
-                  <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+                  <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
                   <script>
-                    CKEDITOR.replace( 'contentabout' );
+                      CKEDITOR.replace( 'contentabout' );
                   </script>
               </div>
             </div>

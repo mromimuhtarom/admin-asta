@@ -1,3 +1,37 @@
+
+
+.custom-file-label1[type="file"]{
+	z-index: -1;
+  	position: absolute;
+  	opacity: 0;
+}
+
+.custom-file-label2[type="file"]{
+	z-index: -1;
+  	position: absolute;
+  	opacity: 0;
+}
+
+.main-image:before {
+    content: 'Choose file';
+    margin: 0 auto;
+}
+
+.watermark-image:before {
+    content: 'Choose Watermark Image';
+}
+
+.upload-img:before {
+    content: 'Choose Image';
+}
+
+input[type=file]::-webkit-file-upload-button {
+    visibility: hidden;
+    display: none;
+
+}
+
+
 .media-container {
     position: relative;
 	display: inline-block;
@@ -145,15 +179,10 @@
 
 
 
-
-.media-object {}
-
-
 .media-control {
 	margin-top: 30px;
 }
-.edit-profile {}
-.save-profile {}
+
 input[type=file] {
     cursor: pointer;
     width: 180px;

@@ -36,25 +36,6 @@ input[type=file]:before {
     font-family: Helvetica, Arial, sans-serif;
 }
 
-.main-image:before {
-    content: 'Choose Main Image';
-}
-
-.watermark-image:before {
-    content: 'Choose Watermark Image';
-}
-
-.upload-img:before {
-    content: 'Choose Image';
-}
-
-input[type=file]::-webkit-file-upload-button {
-    visibility: hidden;
-    display: none;
-
-}
-
-
 .table-outer {
     margin: 1%;
 }
