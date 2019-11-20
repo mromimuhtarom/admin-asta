@@ -23,27 +23,23 @@
                         <tr>
                             <th>ID Player</th>
                             <th>Username</th>
-                            <th>Item Type</th>
-                            <th>Item Total</th>
                             <th>Image Proof</th>
                             <th>Description</th>
                             <th>Date</th>
-                            <th>Print PDF <a href=""><i class="fa fa-file-pdf-o"></i></a></th>
+                            <th>Print PDF <a href="{{ route('AbuseTransactionReport-PDFall') }}"><i class="fa fa-file-pdf-o"></i></a></th>
                         </tr>
                     </thead>
                     <tbody>
-                            {{-- @foreach ($feedbackgame as $fdgame) --}}
+                            @foreach ($abusetransaction as $fdgame)
                             <tr>
+                             <td>{{ $fdgame->user_id }}</td>
+                             <td>{{ $fdgame->username }}</td>
                              <td></td>
-                             <td></td>
-                             <td></td>
-                             <td></td>
-                             <td></td>
-                             <td></td>
-                             <td></td>
-                             <td><a href=""><i class="fa fa-file-pdf-o"></i></a></td>
+                             <td>{{ $fdgame->message }}</td>
+                             <td>{{ $fdgame->date }}</td>
+                             <td><a href="{{ route('AbuseTransactionReport-PDFpersonal', $fdgame->id) }}"><i class="fa fa-file-pdf-o"></i></a></td>
                             </tr>
-                            {{-- @endforeach --}}
+                            @endforeach
                     </tbody>
                 </table>
         

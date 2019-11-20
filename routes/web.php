@@ -555,6 +555,8 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix' => 'Abuse_Transaction_Report'], function(){
             Route::middleware('page_denied:Abuse Transaction Report')->group(function(){
                 Route::get('AbuseTransactionReport-view', 'AbuseTransactionReportController@index')->name('Abuse_Transaction_Report');
+                Route::get('AbuseTransactionReportAll-PDF', 'AbuseTransactionReportController@pdfall')->name('AbuseTransactionReport-PDFall');
+                Route::get('AbuseTransactionReportPersonal-PDF/{reporttransaction}', 'AbuseTransactionReportController@pdfpersonal')->name('AbuseTransactionReport-PDFpersonal');
             });
         });
     });

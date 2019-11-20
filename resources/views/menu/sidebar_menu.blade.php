@@ -41,9 +41,20 @@
                         @else 
                         {{-- tidak memiliki submenu kedua --}}
                             @if ($menuname->RoleType1($sb->name) || $menuname->RoleType2($sb->name))
-                            <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
-                                <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> {{ $sb->name }}</a>                         
-                            </li>
+                            @if($sb->name === 'Abuse Transaction Report')
+                                <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
+                                    <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> 
+                                        {{ $sb->name }} 
+                                        @if($transaction_report_read->hitung !== 0)
+                                            <span class="badge bg-red pull-right inbox-badge">{{ $transaction_report_read->hitung }}</span>
+                                        @endif
+                                    </a>                         
+                                </li>
+                            @else 
+                                <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
+                                    <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> {{ $sb->name }}</a>                         
+                                </li>
+                            @endif
                             @endif
                         {{-- end tidak memiliki submenu kedua --}}
                         @endif
