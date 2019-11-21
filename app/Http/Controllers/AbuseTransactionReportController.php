@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ReportProblem;
 use PDF;
 use App\ReportFeedback;
+use Storage;
 
 class AbuseTransactionReportController extends Controller
 {
@@ -35,11 +36,13 @@ class AbuseTransactionReportController extends Controller
 
     public function api_insert_abuse_transaction(Request $request)
     {
-        $user_id    = $request->user_id;
-        $item       = $request->item;
-        $jlh        = $request->jlh;
-        $time       = $request->time;
+        $user_id     = $request->user_id;
+        $item        = $request->item;
+        $jlh         = $request->jlh;
+        $time        = $request->time;
         $description = $request->description;
+        $id_problem  = ReportProblem::select('id')->orderby('id', 'desc')->first();
+        $id          = $id_problem->id + 1;
 
         ReportProblem::create([
             'user_id' => $user_id,
@@ -48,22 +51,23 @@ class AbuseTransactionReportController extends Controller
             'isread'  => 0,
             'date'    => $time
         ]);
-        // $all   = $request->all();
-        // $image = $request->base64Image;
-        // $id    = $request->userId;
+        $all   = $request->all();
+        $image = $request->base64Image;
 
-        // $image_decode = base64_decode($image);
-        // $imageName = $id.'.'.'jpg';
+        $image_decode = base64_decode($image);
+        // $imageName    = $id.'.'.'jpg';
+        // $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
-        // $rootpath = '../public/report_problem';
-        // $client = Storage::createLocalDriver(['root' => $rootpath]);
-        // if($client->put($imageName, $image_decode))
-        // {
-        //   echo 'Successful';
-        // } else 
-        // {
-        //   echo 'Failed';
-        // }
+        $rootpath   = 'unity-asset/upload/report/' .$id.'.jpg';
+        // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+        $image_main = Storage::disk('s3');
+        if($image_main->put($rootpath, $image_decode ))
+        {
+          echo 'Successful';
+        } else 
+        {
+          echo 'Failed';
+        }
 
         return 'Successfull insert Data';
     }

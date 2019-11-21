@@ -54,7 +54,7 @@ class GiftController extends Controller
 
         
 
-        return view('pages.item.tablegift', compact('gifts', 'menu', 'dbgift', 'category', 'endis', 'mainmenu', 'timenow'));
+        return view('pages.item.tablegift', compact('gifts', 'menu', 'category', 'endis', 'mainmenu', 'timenow'));
     }
 
     /**

@@ -5,7 +5,7 @@
 <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">Settings</a></li> 
     <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">General Setting</a></li>
 @endsection
-
+<link rel="stylesheet" href="/css/versionasset.css">
 @if (count($errors) > 0)
 <div class="error-val">
   <div class="alert alert-danger">
@@ -223,10 +223,17 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group" align="center"><br>
-                        <div class="custom-file">
+                        <!--<div class="custom-file">
                           <input type="file" name="fileAdr">
                           {{-- <label class="custom-file-label1" for="inputFile" id="file-upload-filename">Choose file</label> --}}
-                        </div>
+                        </div>-->
+                        <div class="form-group">
+                            <input type="file" name="file" id="file" class="input-file">
+                            <label for="file" class="btn btn-tertiary js-labelFile">
+                              <i class="icon fa fa-check"></i>
+                              <span class="js-fileName">Choose a file</span>
+                            </label>
+                          </div>
                         <br>
                         <br>
                         <input class="form-control" name="Name" placeholder="Name"><br>
@@ -474,7 +481,25 @@
     </div>
   </div>
 
+<script>
+(function() {
+  
+  'use strict';
 
+  $('.input-file').each(function() {
+    var $input = $(this),
+        $label = $input.next('.js-labelFile'),
+        labelVal = $label.html();
+    
+   $input.on('change', function(element) {
+      var fileName = '';
+      if (element.target.value) fileName = element.target.value.split('\\').pop();
+      fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
+   });
+  });
+
+})();
+</script>
 
 
 <script>
