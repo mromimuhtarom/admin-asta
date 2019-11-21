@@ -5,7 +5,7 @@
 <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">Settings</a></li> 
     <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">General Setting</a></li>
 @endsection
-<link rel="stylesheet" href="/css/versionasset.css">
+
 @if (count($errors) > 0)
 <div class="error-val">
   <div class="alert alert-danger">
@@ -223,10 +223,6 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group" align="center"><br>
-                        <!--<div class="custom-file">
-                          <input type="file" name="fileAdr">
-                          {{-- <label class="custom-file-label1" for="inputFile" id="file-upload-filename">Choose file</label> --}}
-                        </div>-->
                         <div class="form-group">
                             <input type="file" name="file" id="file" class="input-file">
                             <label for="file" class="btn btn-tertiary js-labelFile">
@@ -281,10 +277,13 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group" align="center"><br>
-                  <div class="custom-file">
-                    <input type="file" name="fileIOS">
-                    {{-- <label class="custom-file-label2" for="inputFile" id="uploadFilename2">Choose file</label> --}}
-                  </div>
+                  <div class="form-group">
+                      <input type="file" name="file2" id="file2" class="input-file">
+                      <label for="file2" class="btn btn-tertiary js-labelFile">
+                        <i class="icon fa fa-check"></i>
+                        <span class="js-fileName">Choose a file</span>
+                      </label>
+                    </div>
                   <br>
                   <br>
                   <input class="form-control" name="Name" placeholder="Name"><br>
@@ -334,11 +333,14 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group" align="center"><br>
-                  <div class="custom-file">
-                    <input type="hidden" value="{{ $xl['name'] }}" name="pk">
-                    <input type="file" name="fileEditADR" required>
-                    {{-- <label class="custom-file-label" for="inputGroupFile3" id="upload-file-name3">Choose file</label> --}}
-                  </div>
+                  <input type="hidden" value="{{ $xl['name'] }}" name="pk">
+                  <div class="form-group">
+                      <input type="file" name="fileEditADR" id="file3{{ $xl['name'] }}" class="input-file">
+                      <label for="file3{{ $xl['name'] }}" class="btn btn-tertiary js-labelFile">
+                        <i class="icon fa fa-check"></i>
+                        <span class="js-fileName">Choose a file</span>
+                      </label>
+                    </div>
                   <br>
                   <br>
                   <input value="{{ $xl['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
@@ -387,10 +389,13 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group" align="center"><br>
-                  <div class="custom-file">
-                    <input type="hidden" value="{{ $xl_ios['name'] }}" name="pk">
-                    <input type="file" name="fileEditIOS" required>
-                    {{-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> --}}
+                <input type="hidden" value="{{ $xl_ios['name'] }}" name="pk">
+                <div class="form-group">
+                    <input type="file" name="fileEditIOS" id="file4{{ $xl_ios['name'] }}" class="input-file">
+                    <label for="file4{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
+                      <i class="icon fa fa-check"></i>
+                      <span class="js-fileName">Choose a file</span>
+                    </label>
                   </div>
                   <br>
                   <br>
@@ -482,6 +487,8 @@
   </div>
 
 <script>
+
+// ==================== choose file button Android ======================= //
 (function() {
   
   'use strict';
@@ -499,6 +506,9 @@
   });
 
 })();
+
+
+
 </script>
 
 
