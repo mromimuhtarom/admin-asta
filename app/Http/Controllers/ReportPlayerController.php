@@ -155,7 +155,7 @@ class ReportPlayerController extends Controller
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if ($minDate != NULL && $maxDate != NULL)
         {
-            $log_login = $logOnline->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+            $log_login = $logOnline->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->where('asta_db.log_online.type', '=', 0)
                          ->get();
 

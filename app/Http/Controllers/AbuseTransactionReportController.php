@@ -7,6 +7,8 @@ use App\ReportProblem;
 use PDF;
 use App\ReportFeedback;
 use Storage;
+use File;
+USE Carbon\Carbon;
 
 class AbuseTransactionReportController extends Controller
 {
@@ -25,6 +27,7 @@ class AbuseTransactionReportController extends Controller
                                 'asta_db.report_problem.message',
                                 'asta_db.report_problem.date'
                             )
+                            ->orderby('asta_db.report_problem.date', 'desc')
                             ->get();
                             ReportProblem::where('isread', '=', 0)->update([
                                 'isread' => 1
@@ -49,7 +52,7 @@ class AbuseTransactionReportController extends Controller
             'type'    => 1,
             'message' => "Item Name : ".$item."\n Quantity : ".$jlh."\n ".$description,
             'isread'  => 0,
-            'date'    => $time
+            'date'    => Carbon::now('GMT+7')
         ]);
         $all   = $request->all();
         $image = $request->base64Image;
@@ -57,13 +60,19 @@ class AbuseTransactionReportController extends Controller
         $image_decode = base64_decode($image);
         // $imageName    = $id.'.'.'jpg';
         // $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+        $f = finfo_open();  
 
+        $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
+        // $a = File::mimeType($image_decode);
         $rootpath   = 'unity-asset/upload/report/' .$id.'.jpg';
         // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+        if(function_exists('exif_imagetype')) {
+            // open with EXIF
+         } 
         $image_main = Storage::disk('s3');
         if($image_main->put($rootpath, $image_decode ))
         {
-          echo 'Successful';
+          echo 'Successful image';
         } else 
         {
           echo 'Failed';

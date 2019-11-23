@@ -35,7 +35,7 @@
                              <td>{{ $fdgame->user_id }}</td>
                              <td>{{ $fdgame->username }}</td>
                              <td>
-                                 <img src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg" alt="" width="100" height="100">
+                                 <a href="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg"><img src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg" class="border border-dark" alt="" width="100" height="100"></a>
                              </td>
                              <td>{{ $fdgame->message }}</td>
                              <td>{{ $fdgame->date }}</td>

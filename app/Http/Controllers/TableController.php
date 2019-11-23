@@ -211,10 +211,10 @@ class TableController extends Controller
         }  else if($minbuy > $maxbuy)
         {
             return back()->with('alert', 'Max Buy can\'t be under Min Buy');
-        } else if($category < $room->min_buy)
+        } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', 'Minbuy can\'t be under room min buy');
-        } else if($category > $room->max_buy)
+            return back()->with('alert', 'Minbuy can\'t be under room min buy'.$room->min_buy.'');
+        } else if($maxbuy > $room->max_buy)
         {
             return back()->with('alert', 'Maxbuy can\'t be up to room Max buy');
         }
@@ -278,7 +278,7 @@ class TableController extends Controller
         } else if($maxbuy > $room->max_buy)
         {
             return back()->with('alert', 'Max Buy table can\'t be Up to Max Buy room ');
-        } else if($stake < $seleisih)
+        } else if($stake < $selisih)
         {
             return back()->with('alert', 'the stake difference must be 250 from the last stake');
         }
