@@ -31,16 +31,30 @@
                     </thead>
                     <tbody>
                             @foreach ($abusetransaction as $fdgame)
+                            @if ($fdgame->isread === 0)
                             <tr>
-                             <td>{{ $fdgame->user_id }}</td>
-                             <td>{{ $fdgame->username }}</td>
-                             <td>
-                                 <a href="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg"><img src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg" class="border border-dark" alt="" width="100" height="100"></a>
-                             </td>
-                             <td>{{ $fdgame->message }}</td>
-                             <td>{{ $fdgame->date }}</td>
-                             <td><a href="{{ route('AbuseTransactionReport-PDFpersonal', $fdgame->id) }}"><i class="fa fa-file-pdf-o"></i></a></td>
+                                <td><b>{{ $fdgame->user_id }}</b></td>
+                                <td><b>{{ $fdgame->username }}</b></td>
+                                <td>
+                                    <a href="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg"><img src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg" class="border border-dark" alt="" width="100" height="100"></a>
+                                </td>
+                                <td><b>{{ $fdgame->message }}</b></td>
+                                <td><b>{{ $fdgame->date }}</b></td>
+                                <td><a href="{{ route('AbuseTransactionReport-PDFpersonal', $fdgame->id) }}"><i class="fa fa-file-pdf-o"></i></a></td>
                             </tr>
+                            @elseif($fdgame->isread === 1)
+                            <tr>
+                                <td>{{ $fdgame->user_id }}</td>
+                                <td>{{ $fdgame->username }}</td>
+                                <td>
+                                    <a href="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg"><img src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg" class="border border-dark" alt="" width="100" height="100"></a>
+                                </td>
+                                <td>{{ $fdgame->message }}</td>
+                                <td>{{ $fdgame->date }}</td>
+                                <td><a href="{{ route('AbuseTransactionReport-PDFpersonal', $fdgame->id) }}"><i class="fa fa-file-pdf-o"></i></a></td>
+                            </tr>
+                            @endif
+
                             @endforeach
                     </tbody>
                 </table>

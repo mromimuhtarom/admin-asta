@@ -25,7 +25,8 @@ class AbuseTransactionReportController extends Controller
                                 'asta_db.user.username',
                                 'asta_db.report_problem.user_id',
                                 'asta_db.report_problem.message',
-                                'asta_db.report_problem.date'
+                                'asta_db.report_problem.date',
+                                'asta_db.report_problem.isread'
                             )
                             ->orderby('asta_db.report_problem.date', 'desc')
                             ->get();
