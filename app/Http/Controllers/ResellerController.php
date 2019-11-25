@@ -537,16 +537,16 @@ public function detailTransaction($month, $year)
     public function RequestTransaction()
     {
         $transactions = DB::table('asta_db.store_transaction')
-                        ->join('items_cash', 'items_cash.id', '=', 'asta_db.store_transaction.item_id')
+                        ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
                         ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
                         ->join('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
                         ->select(
                             'asta_db.reseller.reseller_id',
                             'asta_db.reseller.username',
                             'asta_db.payment.name as bankname',
-                            'items_cash.name as item_name',
+                            'item_cash.name as item_name',
                             'asta_db.store_transaction.item_id',
-                            'items_cash.goldAwarded',
+                            'item_cash.item_get',
                             'asta_db.store_transaction.datetime',
                             'asta_db.store_transaction.quantity',
                             'asta_db.store_transaction.item_price',
