@@ -128,7 +128,7 @@ class GiftController extends Controller
                         // watermark image
                             // Menetapkan nama thumbnail
                     
-                            $folder = "../public/gift/";
+                            $folder = "../public/upload/gifts/";
                             $thumbnail = $folder.$nama_file_unik;
     
                             
@@ -142,8 +142,8 @@ class GiftController extends Controller
                         
 
                         // Memuat gambar watermark
-                            $rootpath_wtr    = '../public/upload/gift/image2/';
-                            $upload_imagewtr = '../public/upload/gift/image2';
+                            $rootpath_wtr    = '../public/upload/gifts/image2/';
+                            $upload_imagewtr = '../public/upload/gifts/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $putfile_wtr     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -171,6 +171,13 @@ class GiftController extends Controller
 
                             $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                             Storage::disk('s3')->put($awsPath, $tery);
+
+                            //DELETE FILE LOCAL SETELAH DI MERGE
+                            $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                            File:: delete($path);
+
+                            $path = '../public/upload/gifts/image2/'.$pk.'.png';
+                            File:: delete($path);
                         
                         // end watermark image
                         } else {
@@ -285,7 +292,7 @@ class GiftController extends Controller
                 {
                     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
                     // Menetapkan nama thumbnail
-                    $folder    = "../public/gift/";
+                    $folder    = "../public/upload/gifts/";
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
@@ -328,6 +335,14 @@ class GiftController extends Controller
                     $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
                     Storage::disk('s3')->put($awsPath, $tery);
+
+
+                    //DELETE FILE LOCAL SETELAH DI MERGE
+                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                    File:: delete($path);
+
+                    $path = '../public/upload/gifts/image2/'.$pk.'.png';
+                    File:: delete($path);
 
                     // imagepng($source, $thumbnail);
                     // imagedestroy($source);
