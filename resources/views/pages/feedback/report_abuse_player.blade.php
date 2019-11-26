@@ -74,14 +74,18 @@
             <tbody>
                     @foreach ($problemplayer as $pplayer)
                     <tr>
-                      @foreach($abuseplayer as $abplyr)
+                      @foreach($abuseplayer as $abplyr)	
                       @if ($abplyr->user_id === $pplayer->user_sender)
                       <td>{{ $abplyr->username }}</td>
                       @endif
-                      @if($abplyr->user_id === $pplayer->reported_user)
-                      <td>{{ $abplyr->username }}</td>
-                      @endif
                       @endforeach
+		     @foreach($abuseplayer as $abpplayers)
+			
+                      @if($abpplayers->user_id === $pplayer->reported_user)
+                      <td>{{ $abpplayers->username }}</td>
+                      @endif
+			
+		     @endforeach
                     <td>{{ $pplayer->reason }}</td>
                       <td>{{ $pplayer->date }}</td>
                     </tr>
