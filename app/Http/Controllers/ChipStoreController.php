@@ -315,9 +315,9 @@ class ChipStoreController extends Controller
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
-                    $path = '../public/upload/Chip/image1/'.$nama_file_unik;
+                    $path = '../public/upload/Chip/image1/'.$pk.'.png';
                     File::delete($path);
-                    $path1 = '../public/upload/Chip/image2/'.$nama_file_unik;
+                    $path1 = '../public/upload/Chip/image2/'.$pk.'.png';
                     File::delete($path1);
                     // return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                 }
