@@ -46,7 +46,6 @@ class AbuseTransactionReportController extends Controller
         $time        = $request->time;
         $description = $request->description;
         $id_problem  = ReportProblem::select('id')->orderby('id', 'desc')->first();
-        $id          = $id_problem->id + 1;
 
         ReportProblem::create([
             'user_id' => $user_id,
