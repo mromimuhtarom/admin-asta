@@ -72,6 +72,17 @@
 
       <!-- widget content -->
       <div class="widget-body p-0">
+          <div class="widget-body-toolbar">
+        
+              <div class="row">
+                
+                <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                  Total Record Entries is {{ $registerPlayer->total() }}
+                </div>
+      
+              </div>
+      
+          </div>
         
         <table id="registered-players" class="table table-striped table-bordered table-hover" width="100%">
           <thead>
@@ -131,7 +142,7 @@
       
       </div>
       <!-- end widget content -->
-
+      <div style="display: flex;justify-content: center;">{{ $registerPlayer->links() }}</div>
     </div>
     <!-- end widget div -->
 
@@ -142,6 +153,10 @@
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
+      "paging":false,
+      "bLengthChange": false,
+      "bFilter": false,
+      "bInfo": false
     });
   });
   
@@ -149,6 +164,8 @@
     "sDom": "<'dt-toolbar d-flex'<><'ml-auto hidden-xs show-control'>>",
     "autoWidth" : true,
     "paging": false,
+    "bInfo": false,
+    "bFilter": false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },

@@ -222,106 +222,120 @@ class PlayersController extends Controller
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                            ->get();
-
+                            ->paginate(20);
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($searhUser != NULL && $status != NULL && $minDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '>=', $minDate)
-                            ->get();
+                            ->paginate(20);
                   
-
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($searhUser != NULL && $status != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '<=', $maxDate)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
 
         } else if($searhUser != NULL && $status != NULL)
         {
           $registerPlayer =  $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.status', '=', $status)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($status != NULL && $minDate != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
                             ->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($status != NULL && $minDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '>=', $minDate)
-                            ->get();
-
+                            ->paginate(20);
+                            
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($status != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
                             ->where('asta_db.user.join_date', '<=', $maxDate)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($searhUser != NULL  && $minDate != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($searhUser != NULL  && $minDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.join_date', '>=', $minDate)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($searhUser != NULL  && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
                             ->where('asta_db.user.join_date', '<=', $maxdate)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($minDate != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                            ->get();
+                            ->paginate(20);
+
+            $registerPlayer->appends($request->all());
             return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } 
         else if($searhUser != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searhUser.'%')
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($status != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } 
         else if($minDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.join_date', '>=', $minDate)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else if($maxDate != NULL)
         {
           $registerPlayer =  $register->where('asta_db.user.join_date', '<=', $maxDate)
-                            ->get();
+                            ->paginate(20);
 
+          $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu'));
         } else {
           return back()->with('alert', 'field cannot be empty');
