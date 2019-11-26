@@ -264,7 +264,7 @@ class VersionAssetController extends Controller
         $xmllocal = "../public/assets/xml/IOS/asset_game.xml";
 
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
-    }
+    }   
     
     
     /* ===================================== FUNCTION UPDATE ASSET ====================================== */

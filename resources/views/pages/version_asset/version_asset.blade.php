@@ -222,7 +222,7 @@
       
                 <div class="row">
                   <div class="col-12">
-                    <div class="form-group" align="center"><br>
+                    <div class="form-group"><br>
                         <div class="form-group">
                             <input type="file" name="file" id="file" class="input-file">
                             <label for="file" class="btn btn-tertiary js-labelFile">

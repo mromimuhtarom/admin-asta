@@ -134,16 +134,16 @@ class GiftController extends Controller
                             
 
                         // Memuat gambar utama
-                            $rootpath_main    = '../public/gift/image1/';
-                            $upload_imagemain = '../public/gift/image1';
+                            $rootpath_main    = '../public/upload/gifts/image1/';
+                            $upload_imagemain = '../public/upload/gifts/image1';
                             $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                             $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
                         
 
                         // Memuat gambar watermark
-                            $rootpath_wtr    = '../public/gift/image2/';
-                            $upload_imagewtr = '../public/gift/image2';
+                            $rootpath_wtr    = '../public/upload/gift/image2/';
+                            $upload_imagewtr = '../public/upload/gift/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $putfile_wtr     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -289,15 +289,15 @@ class GiftController extends Controller
                     $thumbnail = $folder.$nama_file_unik;
 
                     // Memuat gambar utama
-                        $rootpath_main    = '../public/gift/image1/';
-                        $upload_imagemain = '../public/gift/image1';
+                        $rootpath_main    = '../public/upload/gifts/image1/';
+                        $upload_imagemain = '../public/upload/gifts/image1';
                         $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                         $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                         $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                     // Memuat gambar watermark
-                        $rootpath_wtr    = '../public/gift/image2/';
-                        $upload_imagewtr = '../public/gift/image2';
+                        $rootpath_wtr    = '../public/upload/gifts/image2/';
+                        $upload_imagewtr = '../public/upload/gifts/image2';
                         $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                         $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                         $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -335,9 +335,9 @@ class GiftController extends Controller
                     $rootpath   = 'unity-asset/gift/' . $nama_file_unik;
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
-                    $path = '../public/gift/image1/'.$pk.'.png';
+                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
                     File:: delete($path);
-                    $path1 = '../public/gift/image2/'.$pk.'.png';
+                    $path1 = '../public/upload/gifts/image2/'.$pk.'.png';
                     File::delete($path1);
                 }
 
@@ -383,7 +383,7 @@ class GiftController extends Controller
         ]);
 
         switch ($name) {
-          case "name":
+              case "name":
               $name = "Name";
               break;
           case "chipsPrice":
@@ -428,7 +428,7 @@ class GiftController extends Controller
                  ->first();
 
         $pathS3 = 'unity-asset/gift/' . $id .'.png';
-
+        
         if($id != '')
         { 
             Gift::where('id', '=', $id)->delete();
@@ -446,3 +446,5 @@ class GiftController extends Controller
         return redirect()->route('Table_Gift')->with('success','Something wrong');
     }
 }
+
+
