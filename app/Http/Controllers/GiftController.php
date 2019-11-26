@@ -173,10 +173,10 @@ class GiftController extends Controller
                             Storage::disk('s3')->put($awsPath, $tery);
 
                             //DELETE FILE LOCAL SETELAH DI MERGE
-                            $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                            $path = '../public/upload/gifts/image1/'.$nama_file_unik;
                             File:: delete($path);
 
-                            $path = '../public/upload/gifts/image2/'.$pk.'.png';
+                            $path = '../public/upload/gifts/image2/'.$nama_file_unik;
                             File:: delete($path);
                         
                         // end watermark image
@@ -350,9 +350,9 @@ class GiftController extends Controller
                     $rootpath   = 'unity-asset/gift/' . $nama_file_unik;
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
-                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                    $path = '../public/upload/gifts/image1/'.$nama_file_unik;
                     File:: delete($path);
-                    $path1 = '../public/upload/gifts/image2/'.$pk.'.png';
+                    $path1 = '../public/upload/gifts/image2/'.$nama_file_unik;
                     File::delete($path1);
                 }
 
