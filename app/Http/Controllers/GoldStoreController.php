@@ -156,6 +156,12 @@ class GoldStoreController extends Controller
                     $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
                     Storage::disk('s3')->put($awsPath, $temp);
+
+
+                    $path = '../public/upload/Gold/image1/'.$nama_file_unik;
+                    File::delete($path);
+                    $path1 = '../public/upload/Gold/image2/'.$nama_file_unik;
+                    File::delete($path1);
                     // imagepng($source, $thumbnail);
                     // imagedestroy($source);
                   } else 
@@ -350,6 +356,11 @@ class GoldStoreController extends Controller
                     $merge   = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
                     Storage::disk('s3')->put($awsPath, $temp);
+
+                    $path = '../public/upload/Gold/image1/'.$nama_file_unik;
+                    File::delete($path);
+                    $path1 = '../public/upload/Gold/image2/'.$nama_file_unik;
+                    File::delete($path1);
                     // imagepng($source, $thumbnail);
                     // imagedestroy($source);
                 } else {

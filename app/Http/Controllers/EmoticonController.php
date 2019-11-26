@@ -117,20 +117,20 @@ class EmoticonController extends Controller
                             list($width_wtr, $height_wtr) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../public/emoticon/";
+                            $folder = "../public/upload/emoticon/";
                             $thumbnail = $folder."".$nama_file_unik;
 
 
                             // Memuat gambar utama
-                            $rootpath_main    = '../public/emoticon/image1/';
-                            $upload_imagemain = '../public/emoticon/image1';
+                            $rootpath_main    = '../public/upload/emoticon/image1/';
+                            $upload_imagemain = '../public/upload/emoticon/image1';
                             $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain]);
                             $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr      = '../public/emoticon/image2/';
-                            $upload_imagewtr   = '../public/emoticon/image2';
+                            $rootpath_wtr      = '../public/upload/emoticon/image2/';
+                            $upload_imagewtr   = '../public/upload/emoticon/image2';
                             $watermarkimage    = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $putfile_str       = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark         = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -159,6 +159,10 @@ class EmoticonController extends Controller
                             $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_wtr, $height_wtr);
 
                             Storage::disk('s3')->put($awsPath, $tery);
+                            $path = '../public/upload/emoticon/image1/'.$nama_file_unik;
+                            File::delete($path);
+                            $path1 = '../public/upload/emoticon/image2/'.$nama_file_unik;
+                            File::delete($path1);
                             // imagedestroy($source);
                         // end watermark image
                         } else {
@@ -267,19 +271,19 @@ class EmoticonController extends Controller
                         list($width_wtr, $height_wtr) = getimagesize($file_wtr);
                         // watermark image
                             // Menetapkan nama thumbnail
-                            $folder = "../public/emoticon/";
+                            $folder = "../public/upload/emoticon/";
                             $thumbnail = $folder.$nama_file_unik;
 
                             // Memuat gambar utama
-                            $rootpath_main = '../public/emoticon/image1/';
+                            $rootpath_main = '../public/upload/emoticon/image1/';
                             $upload_imagemain = '../public/emoticon/image1';
                             $mainimage = Storage::createLocalDriver(['root' => $upload_imagemain]);
                             $putfile_main = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr = '../public/emoticon/image2/';
-                            $upload_imagewtr = '../public/emoticon/image2';
+                            $rootpath_wtr = '../public/upload/emoticon/image2/';
+                            $upload_imagewtr = '../public/upload/emoticon/image2';
                             $watermarkimage = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $putfile_str = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
@@ -304,18 +308,22 @@ class EmoticonController extends Controller
                             $tery = image_data($source);
                             $awsPath = "unity-asset/emoticon/" . $nama_file_unik;
                             $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_wtr, $height_wtr);
+                            
 
-                            Storage::disk('s3')->put($awsPath, $tery);
+                            $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                            $path = '../public/upload/emoticon/image1/'.$nama_file_unik;
+                            File::delete($path);
+                            $path1 = '../public/upload/emoticon/image2/'.$nama_file_unik;
+                            File::delete($path1);
 
                             // imagepng($source, $thumbnail);
                             // imagedestroy($source);
                     } else {
                         $rootpath   = 'unity-asset/emoticon/' . $nama_file_unik;
                         // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                        $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
-                        $path = '../public/emoticon/image1/'.$pk.'.png';
+                        $path = '../public/upload/emoticon/image1/'.$pk.'.png';
                         File::delete($path);
-                        $path1 = '../public/emoticon/image2/'.$pk.'.png';
+                        $path1 = '../public/upload/emoticon/image2/'.$pk.'.png';
                         File::delete($path1);
                     }
                         // end watermark image

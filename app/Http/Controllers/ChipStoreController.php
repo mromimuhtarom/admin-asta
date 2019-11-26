@@ -141,6 +141,11 @@ class ChipStoreController extends Controller
                             $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
                             Storage::disk('s3')->put($awsPath, $temp);
+
+                            $path = '../public/upload/Chip/image1/'.$nama_file_unik;
+                            File::delete($path);
+                            $path1 = '../public/upload/Chip/image2/'.$nama_file_unik;
+                            File::delete($path1);
                             // imagepng($source, $thumbnail);
                             // imagedestroy($source);
                         // end watermark image
@@ -297,6 +302,11 @@ class ChipStoreController extends Controller
                             $merge   = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                             
                             Storage::disk('s3')->put($awsPath, $temp);
+
+                            $path = '../public/upload/Chip/image1/'.$nama_file_unik;
+                            File::delete($path);
+                            $path1 = '../public/upload/Chip/image2/'.$nama_file_unik;
+                            File::delete($path1);
                             // imagepng($source, $thumbnail);
                             // imagedestroy($source);
                         // end watermark image
@@ -305,9 +315,9 @@ class ChipStoreController extends Controller
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
-                    $path = '../public/upload/Chip/image1/'.$pk.'.png';
+                    $path = '../public/upload/Chip/image1/'.$nama_file_unik;
                     File::delete($path);
-                    $path1 = '../public/upload/Chip/image2/'.$pk.'.png';
+                    $path1 = '../public/upload/Chip/image2/'.$nama_file_unik;
                     File::delete($path1);
                     // return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                 }
