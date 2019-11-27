@@ -33,7 +33,7 @@ https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/IOS/BGT
         <link>
 https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/IOS/
         </link>
-        <ver>0.0.1</ver>
+        <ver>0.0.10</ver>
     </bgt>
     <bgt name="bgt_game_audio">
         <type>Audio</type>

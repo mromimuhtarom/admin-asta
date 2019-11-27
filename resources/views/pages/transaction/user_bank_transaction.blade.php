@@ -77,6 +77,7 @@
 												<td>{{ $goods->name }}</td>
 											@endif
 											@endforeach
+										@else 
 										@endif
 										<td>{{ $trns->quantity }}</td>
 										<td>{{ $trns->item_price }}</td>

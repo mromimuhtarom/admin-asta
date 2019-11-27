@@ -11,6 +11,13 @@ Route::get('image-item/Goods/{item_id}.png', 'GoodsStoreController@ImageItem')->
 Route::get('image-gift/{gift_id}.png', 'GiftController@ImageGift')->name('imageshowgift');
 Route::get('image-emoticon/{emot_id}.png', 'EmoticonController@ImageEmoticon')->name('imageshowemoticon');
 
+Route::get('GeneralSetting-about/view', 'GeneralSettingController@AboutGame');
+Route::get('GeneralSetting-PrivacyPolicy/view', 'GeneralSettingController@PrivacyPolicyGame');
+Route::get('GeneralSetting-TermOfService/view', 'GeneralSettingController@TermOfServiceGame');
+Route::get('GeneralSetting-about/viewhtml', 'GeneralSettingController@AboutGamehtml');
+Route::get('GeneralSetting-PrivacyPolicy/viewhtml', 'GeneralSettingController@PrivacyPolicyGamehtml');
+Route::get('GeneralSetting-TermOfService/viewhtml', 'GeneralSettingController@TermOfServiceGamehtml');
+
 
 Route::middleware('authenticated')->group(function(){
 
@@ -654,6 +661,5 @@ Route::middleware('authenticated')->group(function(){
     });
 
 });
-
  //logout
  Route::get('/logout', 'LoginController@logout')->name("logout");
