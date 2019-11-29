@@ -39,7 +39,10 @@
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     <div class="col">
-                        <input type="text" class="left" name="inputPlayer" placeholder="username">
+                        <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="left" name="inputRoundID" placeholder="Round ID">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="inputGame" class="form-control">
@@ -107,6 +110,7 @@
                 <thead>			                
                     <tr>
                         <th>Round ID</th>
+                        <th>Player ID</th>
                         <th>Username</th>
                         <th>Playing Game</th>
                         <th>Table</th>
@@ -123,6 +127,7 @@
                         @foreach ($player_history as $history)
                         <tr>
                           <td><a href="" class="delete{{ $history->round_id }}" id="roundid_detail" data-pk="{{ $history->round_id }}" data-toggle="modal"data-target="#roundid-modal{{ $history->round_id }}">{{ $history->round_id }}</a></td>
+                          <td>{{ $history->user_id }}</td>
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
                           <td>{{ $history->tablename }}</td>

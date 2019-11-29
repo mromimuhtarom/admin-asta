@@ -21,7 +21,7 @@
             <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     <div cl ass="col" style="padding-left:1%;">
-                        <input type="text" name="inputPlayer" class="left" placeholder="username">
+                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
                     </div>
                     <div class="col" style="padding-left:1%;">
                       <select name="status" class="form-control">

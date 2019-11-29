@@ -136,12 +136,12 @@
                     @if($menu && $mainmenu)
                     <th class="th-sm">Reset Password</th>
                     <th align="center" ">
-                        <a  href="#" style="color:red;" 
+                        <a  href="#" style="color:black;font-weight:bold;" 
                         class="delete" 
                         id="delete" 
                         data-toggle="modal" 
                         data-target="#deleteAll">
-                              <i class="fa fa-times"></i>
+                              <i class="fa  fa-trash-o"></i>
                           </a>
                         </th> 
 
@@ -152,7 +152,7 @@
                 @foreach($admin as $adm)
                 @if($menu && $mainmenu)
                 <tr>
-                    <td align="center"><input type="checkbox" name="deletepermission" data-pk="{{ $adm->op_id }}" class="deletepermission{{ $adm->op_id }} deleteIdAll"></td>
+                    <td align="center"><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $adm->op_id }}" class="deletepermission{{ $adm->op_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->op_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
@@ -224,10 +224,10 @@
           </div>
           <div class="modal-body">
             Are You Sure Want To Delete all selected?
-            <form action="{{ route('UserAdmin-delete') }}" method="post">
+            <form action="{{ route('UserAdmin-DeleteAllSelected') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
-                  <input type="text" name="userid" id="idDeleteAll" value="">
+                  <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
           </div>
           <div class="modal-footer">
             <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> Yes</button>
@@ -355,21 +355,16 @@
           }
         @endphp
 
-        $('.deleteIdAll').click(function(e) {
+        $('.delete').click(function(e) {
           e.preventDefault();
               var allVals = []; 
-              
-            // if($(this:checked).length > 0) {
-            //   console.log('bhghjg');
-            // }
+              $(".deleteIdAll:checked").each(function() {  
+                  allVals.push($(this).attr('data-pk'));
+                  var join_selected_values = allVals.join(","); 
+                  $("#idDeleteAll").val(join_selected_values);
+                  console.log('dfjvhdfk');
+              }); 
         }); 
-
-        // $(".deleteIdAll:checked").each(function() {  
-        //           allVals.push($(this).attr(data-pk));
-        //           var join_selected_values = allVals.join(","); 
-        //           $("#idDeleteAll").val(join_selected_values);
-        //           console.log('dfjvhdfk');
-        // }); 
         
       },
       responsive: false

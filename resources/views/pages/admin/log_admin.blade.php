@@ -30,7 +30,7 @@
         <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" class="left" placeholder="username">
+                    <input type="text" name="username" class="left" placeholder="username / Admin ID">
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
@@ -83,6 +83,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
+                        <th>Admin ID</th>
                         <th>Username</th>
                         <th>Action</th>
                         <th>Date</th>
@@ -92,6 +93,7 @@
                 <tbody>
                     @foreach($logs as $log)
                     <tr>
+                        <td>{{ $log->op_id }}</td>
                         <td>{{ $log->username }}</td>
                         <td>{{ $log->action }}</td>
                         <td>{{ $log->datetime }}</td>

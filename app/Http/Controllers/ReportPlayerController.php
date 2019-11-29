@@ -65,7 +65,8 @@ class ReportPlayerController extends Controller
                          'asta_db.user.username',
                          'asta_db.log_online.action_id',
                          'asta_db.log_online.datetime',
-                         'asta_db.log_online.ip'
+                         'asta_db.log_online.ip',
+                         'asta_db.log_online.user_id'
                      );
         $config_text = ConfigText::select(
                         'value'
@@ -95,37 +96,77 @@ class ReportPlayerController extends Controller
         }
         if($player != NULL && $minDate != NULL && $maxDate != NULL && $logtype != NULL)
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->where('asta_db.log_online.action_id', '=', $logtype)
+                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
+
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if($player != NULL && $minDate != NULL && $logtype != NULL )
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.log_type', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.log_type', '=', $logtype)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->where('asta_db.log_online.datetime', '>=', $minDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if($player != NULL && $maxDate != NULL && $logtype != NULL)
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.action_id', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.action_id', '=', $logtype)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->where('asta_db.log_online.datetime', '<=', $maxDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if($player != NULL && $logtype != NULL) 
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.action_id', '=', $logtype)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->where('asta_db.log_online.action_id', '=', $logtype)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if ($minDate != NULL && $logtype != NULL)
@@ -133,6 +174,7 @@ class ReportPlayerController extends Controller
             $log_login = $logOnline->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.action_id', '=', $logtype)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
@@ -141,45 +183,76 @@ class ReportPlayerController extends Controller
             $log_login = $logOnline->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.action_id', '=', $logtype)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         }
         else if($player != NULL && $minDate != NULL && $maxDate != NULL)
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 0)
-                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate."00:00:00", $maxDate." 23:59:59"])
+                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if ($minDate != NULL && $maxDate != NULL)
         {
             $log_login = $logOnline->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                          ->where('asta_db.log_online.type', '=', 0)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if($player != NULL && $minDate != NULL)
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.datetime', '>=', $minDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->where('asta_db.log_online.datetime', '>=', $minDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if ($player != NULL && $maxDate != NULL)
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 0)
                          ->where('asta_db.log_online.datetime', '<=', $maxDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->where('asta_db.log_online.datetime', '<=', $maxDate)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
+ 
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if($minDate != NULL)
         {
             $log_login = $logOnline->where('asta_db.log_online.datetime', '>=', $minDate)
                          ->where('asta_db.log_online.type', '=', 0)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
@@ -187,6 +260,7 @@ class ReportPlayerController extends Controller
         {
             $log_login = $logOnline->where('asta_db.log_online.datetime', '<=', $maxDate)
                          ->where('asta_db.log_online.type', '=', 0)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
@@ -194,14 +268,23 @@ class ReportPlayerController extends Controller
         {
             $log_login = $logOnline->where('asta_db.log_online.action_id', '=', $logtype)
                          ->where('asta_db.log_online.type', '=', 0)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else if($player != NULL)
         {
+            if(is_numeric($player) !== true):
             $log_login = $logOnline->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                          ->where('asta_db.log_online.type', '=', 0)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
                          ->paginate(20);
+            else:
+            $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
+                         ->where('asta_db.log_online.type', '=', 0)
+                         ->orderby('asta_db.log_online.datetime', 'desc')
+                         ->paginate(20);
+            endif;
             $log_login->appends($request->all());
             return view('pages.players.report_player', compact('log_login', 'datenow', 'action', 'action_report_admin', 'logonlinetype'));
         } else {

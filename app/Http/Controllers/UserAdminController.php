@@ -169,8 +169,8 @@ class UserAdminController extends Controller
 
     public function deleteAll(Request $request)
     {
-        $ids =   $request->ids;
-        DB::table('asta_db.operator')->whereIn('id', explode(",", $ids))->delete();
+        $ids =   $request->userIdAll;
+        DB::table('asta_db.operator')->whereIn('op_id', explode(",", $ids))->delete();
         return redirect()->route('User_Admin')->with('success','Data Deleted');
     }
 }

@@ -34,7 +34,7 @@
             <form action="{{ route('ReportPlayer-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     <div class="col">
-                        <input type="text" name="inputPlayer" class="left" placeholder="username">
+                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
@@ -99,6 +99,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
+                        <th>Player ID</th>
                         <th>Username</th>
                         <th>Status</th>
                         <th>Time Stamp</th>
@@ -108,6 +109,7 @@
                 <tbody>
                         @foreach ($log_login as $login)
                         <tr>
+                          <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
                           <td>{{ $action_report_admin[$login->action_id] }} Admin</td>
                           <td>{{ $login->datetime }}</td>
