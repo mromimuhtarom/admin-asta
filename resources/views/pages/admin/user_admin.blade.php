@@ -121,35 +121,44 @@
   
         </div>
         
-        <div class="custom-scroll table-responsive" style="height:800px;">
+        <div id="frm-testing" class="custom-scroll table-responsive" style="height:800px;">
           
           <div class="table-outer">
-            <table class="table table-bordered">
+            <table id="testing" class="table table-bordered">
               <thead>
                 <tr>
                     @if($menu && $mainmenu)
-                    <th class="th-sm"></th>
+                    <th width="100px"><input id="checkAll"  type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
                     @endif
                     <th class="th-sm">Username</th>
                     <th class="th-sm">Full Name</th>
                     <th class="th-sm">Role Type</th>
                     @if($menu && $mainmenu)
                     <th class="th-sm">Reset Password</th>
-                    <th></th>
-                    @endif
+                    <th align="center" ">
+                        <a  href="#" style="color:red;" 
+                        class="delete" 
+                        id="delete" 
+                        data-toggle="modal" 
+                        data-target="#deleteAll">
+                              <i class="fa fa-times"></i>
+                          </a>
+                        </th> 
+
+                      @endif
                 </tr>
               </thead>
               <tbody>                      
                 @foreach($admin as $adm)
                 @if($menu && $mainmenu)
                 <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $adm->op_id }}"></td>
+                    <td align="center"><input type="checkbox" name="deletepermission" data-pk="{{ $adm->op_id }}" class="deletepermission{{ $adm->op_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->op_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
                     <td><a href="#" class="password{{ $adm->op_id }} btn btn-primary" id="password" data-pk="{{ $adm->op_id }}" data-toggle="modal" data-target="#reset-password"><i class="fa fa-key"></i> Reset Password</a></td>
-                    <td> 
-                      <a href="#" style="color:red;" class="delete{{ $adm->op_id }}" 
+                    <td align="center"> 
+                      <a  href="#" style="color:red;" class="delete{{ $adm->op_id }}" 
                         id="delete" 
                         data-pk="{{ $adm->op_id }}" 
                         data-toggle="modal" 
@@ -176,7 +185,7 @@
     </div>
   </div>
 
-      <!-- Modal -->
+  <!-- Modal DELETE -->
   <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -201,6 +210,34 @@
         </div>
       </div>
     </div>
+
+
+    <!-- Modal DELETE ALL-->
+  <div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected Data</h5>
+            <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="fa fa-remove"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are You Sure Want To Delete all selected?
+            <form action="{{ route('UserAdmin-delete') }}" method="post">
+              {{ method_field('delete')}}
+              {{ csrf_field() }}
+                  <input type="text" name="userid" id="idDeleteAll" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> Yes</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+          </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
 
 
   {{-- reset password --}}
@@ -231,96 +268,112 @@
   
   {{-- end reset password --}}
       
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('table.table').dataTable( {
-          "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
-          "pagingType": "full_numbers",
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('table.table').dataTable( {
+        "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        "pagingType": "full_numbers",
+      });
+    });
+  
+    table = $('table.table').dataTable({
+      "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
+      "paging": false,
+      "autoWidth" : true,
+      "classes": {
+        "sWrapper": "dataTables_wrapper dt-bootstrap4"
+      },
+      "oLanguage": {
+        "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+      },
+      "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $.ajaxSetup({
+          headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
-      });
-    
-      table = $('table.table').dataTable({
-        "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
-        "paging": false,
-        "autoWidth" : true,
-        "classes": {
-          "sWrapper": "dataTables_wrapper dt-bootstrap4"
-        },
-        "oLanguage": {
-          "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
-        },
-        "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-          $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  
+        $('.usertext').editable({
+          mode :'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
             }
-          });
-    
-          $('.usertext').editable({
-            mode :'inline',
-            validate: function(value) {
-              if($.trim(value) == '') {
-                return 'This field is required';
-              }
-            }
-          });
+          }
+        });
 
-          $('.role').editable({
-            mode:'inline',
-            source: [
-                  {value: '', text: 'Choose Role Type'},
-                    @php
-                      $roles = DB::table('asta_db.adm_role')->get();
-                      foreach($roles as $role) {
-                        echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
-                      }
-                    @endphp
-            ],
-            validate: function(value) {
-              if($.trim(value) == '') {
-                return 'This field is required';
-              }
+        $('.role').editable({
+          mode:'inline',
+          source: [
+                {value: '', text: 'Choose Role Type'},
+                  @php
+                    $roles = DB::table('asta_db.adm_role')->get();
+                    foreach($roles as $role) {
+                      echo '{value:"'.$role->role_id.'", text: "'.$role->name.'"}, ';
+                    }
+                  @endphp
+          ],
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
             }
-          });
+          }
+        });
 
-          @php 
-              foreach($admin as $adm) {            
-              echo'$(".password'.$adm->op_id.'").click(function(e) {';
-                echo'e.preventDefault();';
-    
-                echo"var id = $(this).attr('data-pk');";
-                echo'var test = $("#userid").val(id);';
-              echo'});';
-            }
-          @endphp
+        @php 
+            foreach($admin as $adm) {            
+            echo'$(".password'.$adm->op_id.'").click(function(e) {';
+              echo'e.preventDefault();';
+  
+              echo"var id = $(this).attr('data-pk');";
+              echo'var test = $("#userid").val(id);';
+            echo'});';
+          }
+        @endphp
 
-          @php
-              foreach($admin as $adm) {
-              echo'$(".delete'.$adm->op_id.'").hide();';
-              echo'$(".deletepermission'.$adm->op_id.'").on("click", function() {';
-                echo 'if($( ".deletepermission'.$adm->op_id.':checked" ).length > 0)';
-                echo '{';
-                  echo '$(".delete'.$adm->op_id.'").show();';
-                echo'}';
-                echo'else';
-                echo'{';
-                  echo'$(".delete'.$adm->op_id.'").hide();';
-                echo'}';
-    
-              echo '});';
-            
-              echo'$(".delete'.$adm->op_id.'").click(function(e) {';
-                echo'e.preventDefault();';
-    
-                echo"var id = $(this).attr('data-pk');";
-                echo'var test = $("#id").val(id);';
-              echo'});';
-            }
-          @endphp
+        @php
+            foreach($admin as $adm) {
+            echo'$(".delete'.$adm->op_id.'").hide();';
+            echo'$(".deletepermission'.$adm->op_id.'").on("click", function() {';
+              echo 'if($( ".deletepermission'.$adm->op_id.':checked" ).length > 0)';
+              echo '{';
+                echo '$(".delete'.$adm->op_id.'").show();';
+              echo'}';
+              echo'else';
+              echo'{';
+                echo'$(".delete'.$adm->op_id.'").hide();';
+              echo'}';
+  
+            echo '});';
           
-        },
-        responsive: false
-      });
-    
-    </script>
+            echo'$(".delete'.$adm->op_id.'").click(function(e) {';
+              echo'e.preventDefault();';
+  
+              echo"var id = $(this).attr('data-pk');";
+              echo'var test = $("#id").val(id);';
+            echo'});';
+          }
+        @endphp
+
+        $('.deleteIdAll').click(function(e) {
+          e.preventDefault();
+              var allVals = []; 
+              
+            // if($(this:checked).length > 0) {
+            //   console.log('bhghjg');
+            // }
+        }); 
+
+        // $(".deleteIdAll:checked").each(function() {  
+        //           allVals.push($(this).attr(data-pk));
+        //           var join_selected_values = allVals.join(","); 
+        //           $("#idDeleteAll").val(join_selected_values);
+        //           console.log('dfjvhdfk');
+        // }); 
+        
+      },
+      responsive: false
+    });
+  
+  </script>
 @endsection

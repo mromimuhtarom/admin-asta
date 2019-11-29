@@ -54,44 +54,81 @@
 										<th class="th-sm">Status</th>
 									</tr>
 								</thead>
+
 								<tbody>
 									@foreach ($transaction as $trns)
-									<tr>
-										<td>{{ $trns->datetime }}</td>
-										<td>{{ $trns->username }}</td>
 										@if ( $trns->item_type == 1 )
 											@foreach ($item_gold as $chip)
-											@if ($trns->item_id == $chip->item_id)
-												<td>{{ $chip->name }}</td>
-											@endif
+												@if ($trns->item_id == $chip->item_id)
+													<tr>
+														<td>{{ $trns->datetime }}</td>
+														<td>{{ $trns->username }}</td>
+														<td>{{ $chip->name }}</td>	
+														<td>{{ $trns->quantity }}</td>
+														<td>{{ $trns->item_price }}</td>
+														<td>{{ $trns->username }} buy {{ $trns->item_id}} using {{ $trns->paymentname }} at price {{ $trns->item_price }}</td>
+														<td>{{ $trns->paymentname }}</td>
+													@if ($menu && $mainmenu)
+														<td>
+															<div>
+																<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $trns->id }}"><i class="fa fa-remove"></i> Decline</button>
+																<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->id }}"><i class="fa fa-check"></i> Approve</button>
+															</div>
+														</td>
+													@endif
+														<td>{{ $trns->description }}</td>
+													</tr>
+												@endif
 											@endforeach
+
 										@elseif($trns->item_type == 2)
 											@foreach ($item_cash as $gold)
-											@if ($trns->item_id == $gold->item_id)
-												<td>{{ $gold->name }}</td>
-											@endif
+												@if ($trns->item_id == $gold->item_id)
+													<tr>
+														<td>{{ $trns->datetime }}</td>
+														<td>{{ $trns->username }}</td>
+														<td>{{ $gold->name }}</td>
+														<td>{{ $trns->quantity }}</td>
+														<td>{{ $trns->item_price }}</td>
+														<td>{{ $trns->username }} buy {{ $trns->item_id }} using {{ $trns->paymentname }} at price {{ $trns->item_price }}</td>																								
+														<td>{{ $trns->paymentname}}</td>
+														@if($menu && $mainmenu)
+															<td>
+																<div>
+																	<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $trns->id }}"><i class="fa fa-remove"></i> Decline</button>
+																	<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->id }}"><i class="fa fa-check"></i> Approve</button>
+																</div>
+															</td>
+														@endif
+															<td>{{ $trns->description}}</td>
+													</tr>
+												@endif
 											@endforeach
+
 										@elseif($trns->item_type == 3)
 											@foreach ($item_point as $goods)
-											@if ($trns->item_id == $goods->item_id)
-												<td>{{ $goods->name }}</td>
-											@endif
+												@if ($trns->item_id == $goods->item_id)
+													<tr>
+														<td>{{ $trns->datetime }}</td>
+														<td>{{ $trns->username }}</td>
+														<td>{{ $goods->name }}</td>
+														<td>{{ $trns->quantity }}</td>
+														<td>{{ $trns->item_price }}</td>
+														<td>{{ $trns->username }} buy {{ $trns->item_id }} using {{ $trns->paymentname }} at price {{ $trns->item_price }}</td>
+														<td>{{ $trns->paymentname }}</td>
+														@if($menu && $mainmenu)
+															<td>
+																<div>
+																	<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deline{{ $trns->id }}"><i class="fa fa-remove"></i> Decline</button>
+																	<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->id }}"><i class="fa fa-check"></i> Approve</button>
+																</div>
+															</td>
+														@endif
+															<td>{{ $trns->description }}</td>
+													</tr>
+												@endif
 											@endforeach
 										@endif
-										<td>{{ $trns->quantity }}</td>
-										<td>{{ $trns->item_price }}</td>
-										<td>{{ $trns->username }} buy {{ $trns->item_id}} using {{ $trns->paymentname }} at price {{ $trns->item_price }}</td>
-										<td>{{ $trns->paymentname }}</td>
-										@if ($menu && $mainmenu)
-										<td>
-											<div>
-												<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $trns->id }}"><i class="fa fa-remove"></i> Decline</button>
-												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->id }}"><i class="fa fa-check"></i> Approve</button>
-											</div>
-										</td>
-										@endif
-										<td>{{ $trns->description }}</td>
-									</tr>
 									@endforeach
 								</tbody>
 							</table>

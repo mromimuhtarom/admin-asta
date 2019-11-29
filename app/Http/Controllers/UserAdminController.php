@@ -166,4 +166,11 @@ class UserAdminController extends Controller
         return back()->with('alert', 'You didn\'t allow to delete your account');
                         
     }
+
+    public function deleteAll(Request $request)
+    {
+        $ids =   $request->ids;
+        DB::table('asta_db.operator')->whereIn('id', explode(",", $ids))->delete();
+        return redirect()->route('User_Admin')->with('success','Data Deleted');
+    }
 }

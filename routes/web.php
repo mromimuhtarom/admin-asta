@@ -34,6 +34,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('/Admin-updatepassword', 'UserAdminController@updatepassword')->name('UserAdmin-updatepassword');
                 Route::post('/Admin-create', 'UserAdminController@store')->name('UserAdmin-create');
                 Route::delete('/Admin-delete', 'UserAdminController@destroy')->name('UserAdmin-delete');
+                Route::delete('/Admin-deleteAll', 'UserAdminController@deleteAll')->name('UserAdmin-DeleteAllSelected');
             });
         });
 

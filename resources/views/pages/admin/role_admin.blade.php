@@ -121,12 +121,13 @@
           <thead>
             <tr>
                 @if($menu && $mainmenu)
-                <th></th>
+                <th class="th-sm" width="80px"><input type="checkbox" name="deletepermission" class="deletepermission">&nbsp;&nbsp;Select All</th>
                 @endif
                 <th class="th-sm">Role Name</th>
                 @if($menu && $mainmenu)
                 <th class="th-sm">Action</th>
-                <th style="width:2px;"></th>
+                <th style="width:70px;"><button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" style="height: 30px;">Delete all selected</button></th>
+                
                 @endif
             </tr>
           </thead>
@@ -134,10 +135,10 @@
             @foreach($roles as $role)
             @if($menu && $mainmenu)
             <tr>
-                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
+                <td align="center"><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $role->role_id }}" data-type="text" data-url="{{ route('Role-update') }}">{{ $role->name }}</a></td>
                 <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton"><i class="fa fa-eye"></i> View & Edit</a></td>
-                <td><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>
+                <td align="center"><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>
             </tr>
             @else 
             <tr>

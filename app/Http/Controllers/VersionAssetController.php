@@ -212,7 +212,7 @@ class VersionAssetController extends Controller
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
 
         //upload file
-        $uploadFile = $replacepath . $name;
+        // $uploadFile = $replacepath . $name;
         Storage::disk('s3')->put($uploadFile, file_get_contents($file));
 
     }
