@@ -565,6 +565,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('AbuseTransactionReport-view', 'AbuseTransactionReportController@index')->name('Abuse_Transaction_Report');
                 Route::get('AbuseTransactionReportAll-PDF', 'AbuseTransactionReportController@pdfall')->name('AbuseTransactionReport-PDFall');
                 Route::get('AbuseTransactionReportPersonal-PDF/{reporttransaction}', 'AbuseTransactionReportController@pdfpersonal')->name('AbuseTransactionReport-PDFpersonal');
+                Route::get('AbuseTransactionReport-search', 'AbuseTransactionReportController@search')->name('AbuseTransactionReport-search');
             });
         });
     });

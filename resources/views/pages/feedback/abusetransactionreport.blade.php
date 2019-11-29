@@ -7,6 +7,41 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="/css/admin.css">
+
+<!--- Content Search --->
+<div class="search bg-blue-dark" style="margin-bottom: 3%;">
+    <div class="table-header w-100 h-100">
+        <form action="{{ route('AbuseTransactionReport-search') }}" method="get" role="search">
+            <div class="row h-100 w-100 no-gutters">
+                <div class="col">
+                    <input type="text" name="inputPlayer" class="left" placeholder="username">
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <select style="width: 195px" name="TransactionType" class="form-control">
+                        <option value="">Choose Transaction Type</option>
+                        {{-- @foreach ($action as $act)
+                        <option value="{{ $act->id }}">{{ $act->action }}</option>                                
+                        @endforeach --}}
+                        <option value="{{ $AbusetrnsType[0] }}">{{ $AbusetrnsType[1]}} Player</option>
+                        <option value="{{ $AbusetrnsType[2] }}">{{ $AbusetrnsType[3]}} Player</option>
+                    </select>
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <input type="date" class="form-control" name="inputMinDate"  value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <input type="date" class="form-control" name="inputMaxDate"  value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>    
+<!--- End Content Search --->
+@if (Request::is('FeedBack/Abuse_Transaction_Report/AbuseTransactionReport-search'))
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
         <header>
             <div class="widget-header">	
@@ -30,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach ($abusetransaction as $fdgame)
+                            @foreach ($search as $fdgame)
                             @if ($fdgame->isread === 0)
                             <tr>
                                 <td><b>{{ $fdgame->user_id }}</b></td>
@@ -67,6 +102,7 @@
                         
         </div>
         <!-- end widget -->
+    @endif
         <script>
         $('#dt_basic').dataTable({
             "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>"+
