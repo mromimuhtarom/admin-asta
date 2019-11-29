@@ -110,7 +110,7 @@ class PlayersController extends Controller
         $converttocomma = str_replace(':', ',', $player_status->value);
         $plyr_status = explode(",", $converttocomma);
 
-        return view('pages.players.registered_player', compact('registered', 'plyr_status'));
+        return view('pages.players.registered_player', compact('plyr_status'));
     }
   // ----------- End Index Registered Player ----------- //
 

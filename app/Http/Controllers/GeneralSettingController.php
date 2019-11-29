@@ -49,7 +49,7 @@ class GeneralSettingController extends Controller
         $getPrivacyPolicy   = Config::select('id', 'name', 'value')->where('id', '=', '2')->first();
         $getTermOfService   = Config::select('id', 'name', 'value')->where('id', '=', '3')->first();
         
-        $rootpath = '../../asta-asset/text/db_txt';
+        $rootpath = '../public/upload/file_policy';
         $client = Storage::createLocalDriver(['root' => $rootpath]);
 
         $onoff = ConfigText::select(
@@ -81,7 +81,7 @@ class GeneralSettingController extends Controller
         $urlprivacypolicy     = $request->urlprivacypolicy;
         $contenttermofservice = $request->contenttermofservice;
         $contentprivacypolicy = $request->contentprivacypolicy;
-        $rootpath             = '../../asta-asset/text/db_txt';
+        $rootpath             = '../public/upload/file_policy';
         $client               = Storage::createLocalDriver(['root' => $rootpath]);
 
         if($contentabout)
@@ -113,6 +113,51 @@ class GeneralSettingController extends Controller
             return back()->with('alert','Update Can\'t Be process');
         }
         
+    }
+
+    public function AboutGame()
+    {
+        // $rootpath = '../public/upload/file_policy';
+        // $client = Storage::createLocalDriver(['root' => $rootpath]);
+        // $client->get('about.txt');
+        $client = file_get_contents(public_path()."/upload/file_policy/about.txt");
+        return $client;
+    }
+
+    public function PrivacyPolicyGame()
+    {
+        $client = file_get_contents(public_path()."/upload/file_policy/privacy-policy.txt");
+        return $client;
+    } 
+
+    public function TermOfServiceGame()
+    {
+        $client = file_get_contents(public_path()."/upload/file_policy/term-of-service.txt");
+        return $client;
+    }
+
+    public function AboutGamehtml()
+    {
+        // $rootpath = '../public/upload/file_policy';
+        // $client = Storage::createLocalDriver(['root' => $rootpath]);
+        // $client->get('about.txt');
+        $client = file_get_contents(public_path()."/upload/file_policy/about.txt");
+        $b = htmlspecialchars($client);
+        return $b;
+    }
+
+    public function PrivacyPolicyGamehtml()
+    {
+        $client = file_get_contents(public_path()."/upload/file_policy/privacy-policy.txt");
+        $b = htmlspecialchars($client);
+        return $b;
+    } 
+
+    public function TermOfServiceGamehtml()
+    {
+        $client = file_get_contents(public_path()."/upload/file_policy/term-of-service.txt");
+        $b = htmlspecialchars($client);
+        return $b;
     }
 
     /**

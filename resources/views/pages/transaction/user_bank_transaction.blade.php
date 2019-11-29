@@ -128,6 +128,7 @@
 													</tr>
 												@endif
 											@endforeach
+										@else 
 										@endif
 									@endforeach
 								</tbody>

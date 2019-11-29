@@ -65,8 +65,8 @@
         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
             <thead>			                
                 <tr>
-                    <th>Report</th>
-                    <th>Reported</th>
+                    <th>User Sender</th>
+                    <th>Reported User</th>
                     <th>Reason</th>
                     <th>Date</th>
                 </tr>
@@ -74,14 +74,19 @@
             <tbody>
                     @foreach ($problemplayer as $pplayer)
                     <tr>
-                      @foreach($abuseplayer as $abplyr)
-                      @if ($abplyr->user_id == $pplayer->report)
-                      <td>{{ $abplyr->username }}</td>
-                      @elseif($abplyr->user_id == $pplayer->reported)
+                      @foreach($abuseplayer as $abplyr)	
+                      @if ($abplyr->user_id === $pplayer->user_sender)
                       <td>{{ $abplyr->username }}</td>
                       @endif
                       @endforeach
-                      <td>{{ $pplayer->reason }}</td>
+		     @foreach($abuseplayer as $abpplayers)
+			
+                      @if($abpplayers->user_id === $pplayer->reported_user)
+                      <td>{{ $abpplayers->username }}</td>
+                      @endif
+			
+		     @endforeach
+                    <td>{{ $pplayer->reason }}</td>
                       <td>{{ $pplayer->date }}</td>
                     </tr>
                     @endforeach

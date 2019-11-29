@@ -52,7 +52,7 @@ class VersionAssetController extends Controller
         $file       = $request->fileAdr;
         $xml = new \DomDocument("1.0");
         // $xml->load("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
-        $xml->load("../public/assets/xml/Android/asset_game.xml");
+        $xml->load("../public/upload/xml/Android/asset_game.xml");
         $validator  = Validator::make($request->all(), [
             'fileAdr'       => 'required',
             'Name'          => 'required',
@@ -88,9 +88,9 @@ class VersionAssetController extends Controller
         $infoTag->appendChild($version_xml);
         $rootTag->appendChild($infoTag);
 
-        $xml->save('../public/assets/xml/Android/asset_game.xml');
+        $xml->save('../public/upload/xml/Android/asset_game.xml');
         $PathS3   = 'unity-asset/XML/Android/asset_game.xml';
-        $xmllocal = "../public/assets/xml/Android/asset_game.xml";
+        $xmllocal = "../public/upload/xml/Android/asset_game.xml";
 
         //upload file
         $uploadFile = $replacepath . $name;
@@ -121,7 +121,7 @@ class VersionAssetController extends Controller
         
 
         $xml = new \DomDocument("1.0");
-        $xml->load("../public/assets/xml/IOS/asset_game.xml");
+        $xml->load("../public/upload/xml/IOS/asset_game.xml");
         
         $type           = $request->Type;
         $link           = $request->Link;
@@ -144,8 +144,8 @@ class VersionAssetController extends Controller
         $infoTag->appendChild($version_xml);
         $rootTag->appendChild($infoTag);
 
-        $xml->save('../public/assets/xml/IOS/asset_game.xml');
-        $xmllocal = "../public/assets/xml/IOS/asset_game.xml";
+        $xml->save('../public/upload/xml/IOS/asset_game.xml');
+        $xmllocal = "../public/upload/xml/IOS/asset_game.xml";
         
         //upload xml
         $PathS3   = 'unity-asset/XML/IOS/asset_game.xml';
@@ -169,7 +169,7 @@ class VersionAssetController extends Controller
         $value = $request->value;
         
 
-        $gamep = simplexml_load_file("../public/assets/xml/Android/asset_game.xml");
+        $gamep = simplexml_load_file("../public/upload/xml/Android/asset_game.xml");
         foreach($gamep->children() as $gamew)
         {
             
@@ -205,16 +205,11 @@ class VersionAssetController extends Controller
             }
         }
         
-        file_put_contents("../public/assets/xml/Android/asset_game.xml", $gamep->asXML());
+        file_put_contents("../public/upload/xml/Android/asset_game.xml", $gamep->asXML());
         $PathS3   = 'unity-asset/XML/Android/asset_game.xml';
-        $xmllocal = "../public/assets/xml/Android/asset_game.xml";
+        $xmllocal = "../public/upload/xml/Android/asset_game.xml";
 
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
-
-        //upload file
-        // $uploadFile = $replacepath . $name;
-        Storage::disk('s3')->put($uploadFile, file_get_contents($file));
-
     }
 
     
@@ -224,7 +219,7 @@ class VersionAssetController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-        $gamep = simplexml_load_file("../public/assets/xml/IOS/asset_game.xml");
+        $gamep = simplexml_load_file("../public/upload/xml/IOS/asset_game.xml");
         foreach($gamep->children() as $gamew)
         {
             if($name == 'type_ver')
@@ -259,9 +254,9 @@ class VersionAssetController extends Controller
             }
         }
         
-        file_put_contents("../public/assets/xml/IOS/asset_game.xml", $gamep->asXML());
+        file_put_contents("../public/upload/xml/IOS/asset_game.xml", $gamep->asXML());
         $PathS3   = 'unity-asset/XML/IOS/asset_game.xml';
-        $xmllocal = "../public/assets/xml/IOS/asset_game.xml";
+        $xmllocal = "../public/upload/xml/IOS/asset_game.xml";
 
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
     }   
@@ -277,7 +272,7 @@ class VersionAssetController extends Controller
         $name       = $request->Name;
         $link       = $request->Link;
         $version    = $request->Version;
-        $gamep      = simplexml_load_file("../public/assets/xml/Android/asset_game.xml");
+        $gamep      = simplexml_load_file("../public/upload/xml/Android/asset_game.xml");
 
         foreach($gamep->children() as $gamew)
         {
@@ -294,8 +289,8 @@ class VersionAssetController extends Controller
 
         $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
         
-        file_put_contents("../public/assets/xml/Android/asset_game.xml", $gamep->asXML());
-        $xmllocal = "../public/assets/xml/Android/asset_game.xml";
+        file_put_contents("../public/upload/xml/Android/asset_game.xml", $gamep->asXML());
+        $xmllocal = "../public/upload/xml/Android/asset_game.xml";
 
         //update xml to aws s3
         $PathS3   = 'unity-asset/XML/Android/asset_game.xml';
@@ -318,7 +313,7 @@ class VersionAssetController extends Controller
         $name       =   $request->Name;
         $link       =   $request->Link;
         $version    =   $request->Version;
-        $gamep      =   simplexml_load_file("../public/assets/xml/IOS/asset_game.xml");
+        $gamep      =   simplexml_load_file("../public/upload/xml/IOS/asset_game.xml");
 
         foreach($gamep->children() as $gamew)
         {
@@ -331,8 +326,8 @@ class VersionAssetController extends Controller
 
         $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
 
-        file_put_contents("../public/assets/xml/IOS/asset_game.xml", $gamep->asXML());
-        $xmllocal   =   "../public/assets/xml/IOS/asset_game.xml";
+        file_put_contents("../public/upload/xml/IOS/asset_game.xml", $gamep->asXML());
+        $xmllocal   =   "../public/upload/xml/IOS/asset_game.xml";
 
         //update XML to aws s3
         $PathS3     =   'unity-asset/XML/IOS/asset_game.xml';
@@ -354,7 +349,7 @@ class VersionAssetController extends Controller
         $id     =   $request->name;
         $link   =   $request->Link;
         $xml    =   new \DomDocument("1.0", "UTF-8");
-        $xml->load('../public/assets/xml/Android/asset_game.xml');
+        $xml->load('../public/upload/xml/Android/asset_game.xml');
         $xpath  =   new \DOMXPATH($xml);
 
         foreach($xpath->query("/main_asset/".$tag."[@name = '$id']") as $node )
@@ -370,8 +365,8 @@ class VersionAssetController extends Controller
         Storage::disk('s3')->delete($deleteFile);
 
         //save xml local
-        $xml->save('../public/assets/xml/Android/asset_game.xml');
-        $xmllocal = "../public/assets/xml/Android/asset_game.xml";
+        $xml->save('../public/upload/xml/Android/asset_game.xml');
+        $xmllocal = "../public/upload/xml/Android/asset_game.xml";
 
         //save xml into aws s3
         $PathS3   = 'unity-asset/XML/Android/asset_game.xml';
@@ -389,7 +384,7 @@ class VersionAssetController extends Controller
             $id     =   $request->name;
             $link   =   $request->link;
             $xml    =   new \DomDocument("1.0", "UTF-8");
-            $xml->load('../public/assets/xml/IOS/asset_game.xml');
+            $xml->load('../public/upload/xml/IOS/asset_game.xml');
             $xpath  =   new \DOMXPATH($xml);
 
             foreach($xpath->query("/main_asset/".$tag."[@name = '$id']") as $node)
@@ -406,8 +401,8 @@ class VersionAssetController extends Controller
 
 
             //save xml local
-            $xml->save('../public/assets/xml/IOS/asset_game.xml');
-            $xmllocal = '../public/assets/xml/IOS/asset_game.xml';
+            $xml->save('../public/upload/xml/IOS/asset_game.xml');
+            $xmllocal = '../public/upload/xml/IOS/asset_game.xml';
 
             //save xml into aws s3
             $PathS3   = 'unity-asset/XML/IOS/asset_game.xml';
