@@ -8,7 +8,9 @@ use PDF;
 use App\ReportFeedback;
 use Storage;
 use File;
-USE Carbon\Carbon;
+use Carbon\Carbon;
+use App\ConfigText;
+use Validator;
 
 class AbuseTransactionReportController extends Controller
 {
@@ -33,9 +35,17 @@ class AbuseTransactionReportController extends Controller
                             ReportProblem::where('isread', '=', 0)->update([
                                 'isread' => 1
                             ]);
+        $datenow        =   Carbon::now('GMT+7');
+        $config_text    =   ConfigText::select(
+                                'value'
+                                ) ->where('id', '=', 15)
+                                  ->first();
+        $replace        =   str_replace(':',',', $config_text->value);
+        $AbusetrnsType  =   explode(",", $replace);
+        
 
         
-        return view('pages.feedback.abusetransactionreport', compact('abusetransaction'));
+        return view('pages.feedback.abusetransactionreport', compact('abusetransaction', 'AbusetrnsType', 'datenow'));
     }
 
     public function api_insert_abuse_transaction(Request $request)
@@ -186,6 +196,142 @@ class AbuseTransactionReportController extends Controller
         }
         $output .= '</table>';
         return $output;
+    }
+
+    public function search(Request $request)
+    {
+        $player     =   $request->inputPlayer;
+        $minDate    =   $request->inputMinDate;
+        $maxDate    =   $request->inputMaxDate;
+        $TransType  =   $request->TransactionType;
+        $datenow    =   Carbon::now('GMT+7');
+        $abusetransaction = ReportProblem::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.report_problem.user_id')
+                            ->select(
+                                'asta_db.report_problem.id',
+                                'asta_db.user.username',
+                                'asta_db.report_problem.user_id',
+                                'asta_db.report_problem.message',
+                                'asta_db.report_problem.date',
+                                'asta_db.report_problem.isread'
+                            );
+
+        $config_text    =   ConfigText::select(
+                        'value'
+                        ) ->where('id', '=', 15)
+                          ->first();
+        $replace        =   str_replace(':',',', $config_text->value);
+        $AbusetrnsType  =   explode(",", $replace);
+        
+        $action_abuse_transaction   =   [
+            $AbusetrnsType[0]   =>  $AbusetrnsType[1],
+            $AbusetrnsType[2]   =>  $AbusetrnsType[3]
+        ];
+
+        $validator      =   Validator::make($request->all(), [
+            'inputMinDate'  =>  'required|date',
+            'inputMaxDate'  =>  'required|date',
+        ]);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        if($maxDate < $minDate){
+            return back()->with('alert', 'end Date can\'t be less than start date');
+        }
+
+        if($player != NULL && $minDate != NULL && $maxDate != NULL && $TransType != NULL)
+        {
+            $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
+                        ->where('asta_db.report_problem.type', '=', $TransType)
+                        ->whereBetween('asta_db.report_problem.date' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $player != NULL && $minDate != NULL && $TransType != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
+                        ->where('asta_db.report_problem.type', '=', $TransType)
+                        ->where('asta_db.report_problem.date', '>=', $minDate)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feeback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $player != NULL && $maxDate != NULL && $TransType != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
+                        ->where('asta_db.report_problem.type', '=', $TransType)
+                        ->where('asta_db.report_problem.date', '<=', $maxDate)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $player != NULL && $TransType != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
+                        ->where('asta_db.report_problem.type', '=', $TransType)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $minDate != NULL && $TransType != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.report_problem.date', '>=', $minDate)
+                        ->where('asta_db.report_problem.type', '=', $TransType)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if($maxDate != NULL && $TransType != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.report_problem.date', '>=', $maxDate)
+                        ->where('asta_db.report_problem.type', '=', $TransType)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $player != NULL && $minDate != NULL && $maxDate != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
+                        ->whereBetween('asta_db.report_problem.date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $minDate != NULL && $maxDate != NULL)
+        {
+            $search = $abusetransaction->whereBetween('asta_db.report_problem.date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $player != NULL && $maxDate != NUll )
+        {
+            $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
+                        ->where('asta_db.report_problem.date', '<=', $maxDate)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $minDate != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.report_problem.date', '>=', $minDate)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $maxDate != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.report_problem.date', '<=', $maxDate)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $TransType != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.report_problem.Type', '=', $TransType)
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow','action_abuse_transaction', 'AbusetrnsType'));
+        } else if( $player != NULL )
+        {
+            $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
+                        ->paginate(20);
+            $search->appends($request->all());
+            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+        } else {
+            return redirect()->route('Abuse_Transaction_Report');
+        }
     }
 
     /**
