@@ -53,6 +53,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('/Role-menu/{role}', 'RoleController@menu')->name('Role-menu');
                 Route::post('/Role-menu/{role}/edit', 'RoleController@menuupdate')->name('Role-menu-edit');
                 Route::delete('/Role-delete', 'RoleController@destroy')->name('Role-delete');
+                Route::delete('/Role-deleteAllSelected', 'RoleController@deleteAllSelected')->name('Role-DeleteAllSelected');
             });
         });
 
