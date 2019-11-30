@@ -41,8 +41,8 @@
                     <div class="col">
                         <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
                     </div>
-                    <div class="col">
-                        <input type="text" class="left" name="inputRoundID" placeholder="Round ID">
+                    <div class="col" style="padding-left:1%;">
+                        <input type="text" class="form-control" name="inputRoundID" placeholder="Round ID">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="inputGame" class="form-control">
