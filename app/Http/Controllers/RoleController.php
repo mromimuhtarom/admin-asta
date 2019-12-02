@@ -179,12 +179,15 @@ class RoleController extends Controller
         return redirect()->route('Role_Admin')->with('alert','Something wrong'); 
     }
 
+    //DELETE ALL SELECTED 
     public function deleteAllSelected(Request $request)
     {
       $ids  = $request->userIdAll;
+      
       DB::table('asta_db.adm_role')->whereIn('role_id', explode(",", $ids))->delete();
       DB::table('asta_db.adm_access')->whereIn('role_id', explode(",", $ids))->delete();
 
       return redirect()->route('Role_Admin')->with('success', 'Data deleted');
     }
+
 }

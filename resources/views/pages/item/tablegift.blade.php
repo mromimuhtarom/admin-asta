@@ -9,7 +9,7 @@
 
 
 @section('content')
-
+<link rel="stylesheet" href="/css/admin.css">
 <link rel="stylesheet" href="/css/imageinsertedit.css">
 
 <script>
@@ -87,7 +87,7 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                <th style="width:10px;"></th>
+                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
                 @endif
                 <th style="width:10px;">Image</th>
                 <th class="th-sm">Title</th>
@@ -95,7 +95,14 @@
                 <th class="th-sm">Category</th>
                 <th class="th-sm">Status</th>
                 @if($menu && $mainmenu)
-                <th style="width:10px;"></th>
+                <th align="center" style="width:10px;">
+                  <a  href="#" style="color:red;font-weight:bold;" 
+                        class="delete" 
+                        id="trash" 
+                        data-toggle="modal" 
+                        data-target="#deleteAll"><i class="fa  fa-trash-o"></i>
+                  </a>  
+                </th>
                 @endif
               </tr>
             </thead>
@@ -103,7 +110,7 @@
                 @foreach($gifts as $gf)
                 @if($menu && $mainmenu)
                 <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $gf->id }}"></td>
+                  <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" class="deletepermission{{ $gf->id }} deleteIdAll"></td>
                     <td >
                           <div class="media-container">
                             <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
@@ -266,6 +273,32 @@
     </div>
   </div>
 
+<!-- MODAL DELETE ALL SELECTED -->
+<div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected Data</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete all selected?
+        <form action="{{ route('TableGift-deleteAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 $(".watermark-image").change(function() {
   if (this.files && this.files[0]) {
@@ -282,6 +315,19 @@ $(".watermark-image").change(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+    });
+
+    $("#trash").hide();
+    //CHECK ALL
+    $('#checkAll').on('click', function(e) {
+      if($(this).is(':checked', true))
+      {
+        $(".deleteIdAll").prop('checked', true);
+        $("#trash").show();
+      } else {
+        $(".deleteIdAll").prop('checked', false);
+        $("#trash").hide();
+      }
     });
   });
 
@@ -433,6 +479,27 @@ $(".watermark-image").change(function() {
                 echo'});';
               }
             @endphp
+            
+            //DELETE ALL SELECTED MODAL 
+            $('.delete').click(function(e) {
+              e.preventDefault();
+              var allVals = [];
+                $(".deleteIdAll:checked").each(function() {
+                  allVals.push($(this).attr('data-pk'));
+                  var join_selected_values = allVals.join(",");
+                  $('#idDeleteAll').val(join_selected_values);
+              });
+            });
+
+            //HIDE SHOW ICON DELETE ALL
+            $('#trash').hide();
+            $(".deleteIdAll").click(function(e) {
+              if($(".deleteIdAll:checked").length > 1) {
+                $('#trash').show();
+              }else{
+                $("#trash").hide();
+              }
+            });
     },
     responsive: false
   });

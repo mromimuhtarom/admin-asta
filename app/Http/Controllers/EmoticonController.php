@@ -464,4 +464,11 @@ class EmoticonController extends Controller
         }
         return redirect()->route('Emoticon')->with('success','Something wrong');
     }
+
+    public function deleteAllSelected(Request $request)
+    {
+        $ids    =   $request->userIdAll;
+        DB::table('asta_db.emoticon')->whereIn('id', explode(",", $ids))->delete();
+        return redirect()->route('Emoticon')->with('success','Data deleted');
+    }
 }

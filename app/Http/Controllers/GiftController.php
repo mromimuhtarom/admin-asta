@@ -460,6 +460,14 @@ class GiftController extends Controller
         }
         return redirect()->route('Table_Gift')->with('success','Something wrong');
     }
+
+
+    public function deleteAllSelected(Request $request)
+    {
+        $ids    =   $request->userIdAll;
+        DB::table('asta_db.gift')->whereIn('id', explode(",", $ids))->delete();
+        return redirect()->route('Table_Gift')->with('succes', 'Data deleted');
+    }
 }
 
 
