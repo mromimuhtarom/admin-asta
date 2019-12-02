@@ -31,10 +31,10 @@
         <form action="{{ route('ReportAbusePlayer-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
-                    <input type="text" name="inputReportPlayer" class="left" placeholder="Report Player">
+                    <input type="text" name="inputReportPlayer" class="left" placeholder="Player Sender / Player ID">
                 </div>
                 <div class="col" style="padding-left:1%;">
-                    <input type="text" name="inputReportedPlayer" class="form-control" placeholder="Reported Player">
+                    <input type="text" name="inputReportedPlayer" class="form-control" placeholder="Reported Player / Player ID">
                 </div>
                 <div class="col" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
@@ -65,7 +65,9 @@
         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
             <thead>			                
                 <tr>
+                    <th>User ID sender</th>
                     <th>User Sender</th>
+                    <th>Reported User ID</th>
                     <th>Reported User</th>
                     <th>Reason</th>
                     <th>Date</th>
@@ -76,12 +78,14 @@
                     <tr>
                       @foreach($abuseplayer as $abplyr)	
                       @if ($abplyr->user_id === $pplayer->user_sender)
+                      <td>{{ $abplyr->user_id }}</td>
                       <td>{{ $abplyr->username }}</td>
                       @endif
                       @endforeach
 		     @foreach($abuseplayer as $abpplayers)
 			
                       @if($abpplayers->user_id === $pplayer->reported_user)
+                      <td>{{ $abpplayers->user_id }}</td>
                       <td>{{ $abpplayers->username }}</td>
                       @endif
 			

@@ -306,36 +306,65 @@ class ResellerController extends Controller
         {
             if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
   
-                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                                  ->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                                  ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                  ->get();
+                if(is_numeric($searchUsername) !== true):
+                    $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                      ->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                      ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                      ->get();
+                else:
+                    $transactions =   $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                      ->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                      ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                      ->get();
+                endif;
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
         
               }else if ($searchUsername != NULL && $startDate != NULL) {
-        
-                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('action_date', '>=', $startDate." 00:00:00")
-                                  ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                  ->get();
+                
+                if(is_numeric($searchUsername) !== true):
+                    $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                      ->WHERE('action_date', '>=', $startDate." 00:00:00")
+                                      ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                      ->get();
+                else:
+                    $transactions =   $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                      ->WHERE('action_date', '>=', $startDate." 00:00:00")
+                                      ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                      ->get();
+                endif;
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
         
               }else if ($searchUsername != NULL && $endDate != NULL) {
-                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('action_date', '<=', $endDate." 23:59:59")
-                                  ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                  ->get();
+                
+                if(is_numeric($searchUsername) !== true):
+                    $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                      ->WHERE('action_date', '<=', $endDate." 23:59:59")
+                                      ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                      ->get();
+                else:
+                    $transactions =   $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                      ->WHERE('action_date', '<=', $endDate." 23:59:59")
+                                      ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                      ->get();
+                endif;
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
               }else if($searchUsername != NULL) {
-                $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                                ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                ->get();
+
+                if(is_numeric($searchUsername) !== true):
+                    $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                    ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                    ->get();
+                else:
+                    $transactions = $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                    ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                                    ->get();
+                endif;
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
@@ -344,37 +373,67 @@ class ResellerController extends Controller
         {
             if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
   
-                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                                  ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                                  ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
-                                  ->get();
+                if(is_numeric($searchUsername) !== true):
+                    $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                      ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                      ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                      ->get();
+                else:
+                    $transactions =   $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                      ->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                      ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                      ->get();
+                endif;
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
         
               }else if ($searchUsername != NULL && $startDate != NULL) {
         
-                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('datetime', '>=', $startDate." 00:00:00")
-                                  ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
-                                  ->get();
+                if(is_numeric($searchUsername) !== true):
+                    $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                      ->WHERE('datetime', '>=', $startDate." 00:00:00")
+                                      ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                      ->get();
+                else:
+                    $transactions =   $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                      ->WHERE('datetime', '>=', $startDate." 00:00:00")
+                                      ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                      ->get();
+                endif;
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
         
               }else if ($searchUsername != NULL && $endDate != NULL) {
-                $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', $searchUsername)
-                                  ->WHERE('datetime', '<=', $endDate." 23:59:59")
-                                  ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
-                                  ->get();
+
+                if(is_numeric($searchUsername) !== true):
+                    $transactions =   $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                      ->WHERE('datetime', '<=', $endDate." 23:59:59")
+                                      ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                      ->get();
+                else:
+                    $transactions =   $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                      ->WHERE('datetime', '<=', $endDate." 23:59:59")
+                                      ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                      ->get();
+                endif;
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
               }else if($searchUsername != NULL) {
-                $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                                ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
-                                ->get();
-        
+                
+                if(is_numeric($searchUsername) !== true):
+                    $transactions = $reportTransaction->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                                    ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                    ->get();
+                else:
+                    $transactions = $reportTransaction->WHERE('asta_db.store_transaction_hist.user_id',  '=', $searchUsername)
+                                    ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+                                    ->get();
+
+                endif;
+
               //   $transactions->appends($request->all());
                 return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
               }
@@ -445,32 +504,60 @@ public function detailTransaction($month, $year)
 
       if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
 
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                          ->get();
+        if(is_numeric($searchUsername) !== true):
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                              ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
+                              ->get();
+        else:
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.reseller_id', '=', $searchUsername)
+                              ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
+                              ->get();
+        endif;
 
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $startDate != NULL) {
 
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
-                          ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                          ->get();
+        if(is_numeric($searchUsername) !== true):
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                              ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
+                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
+                              ->get();
+        else:
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', '=', $searchUsername)
+                              ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
+                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
+                              ->get();
+        endif;
 
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
-                          ->orderBy('asta_db.reseller_balance.datetime', 'desc')
-                          ->get();
+
+        if(is_numeric($searchUsername) !== true):
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                              ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
+                              ->orderBy('asta_db.reseller_balance.datetime', 'desc')
+                              ->get();
+        else:
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.reseller_id', '=', $searchUsername)
+                              ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
+                              ->orderBy('asta_db.reseller_balance.datetime', 'desc')
+                              ->get();
+        endif;
 
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
       }else if($searchUsername != NULL) {
-        $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', $searchUsername)
-                          ->get();
+
+        if(is_numeric($searchUsername) !== true):
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
+                              ->get();
+        else:
+            $balancedetails = $balanceReseller->WHERE('asta_db.reseller.reseller_id', '=', $searchUsername)
+                              ->get();
+        endif;
 
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
       }

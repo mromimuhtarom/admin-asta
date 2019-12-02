@@ -31,7 +31,7 @@
       <form action="{{ route('ReportStore-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" class="left" placeholder="username">
+                    <input type="text" name="username" class="left" placeholder="username /Player ID">
                 </div>
                 <div class="col">
                     <select name="choosedate" id="" class="form-control">

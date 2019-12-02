@@ -35,7 +35,7 @@
                 <form action="{{ route('Gold-search') }}" method="get" role="search">
                     <div class="row h-100 w-100 no-gutters">
                         <div class="col" align="left">
-                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username">
+                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
                         </div>
                         <div class="col" align="left" style="padding-left:1%;">
                             <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
@@ -89,6 +89,7 @@
                 <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                     <thead>			                
                         <tr>
+                            <th>Player ID</th>
                             <th>Username</th>
                             <th>Action</th>
                             <th>Debit</th>
@@ -100,6 +101,7 @@
                     <tbody>
                             @foreach ($balancedetails as $bd)
                             <tr>
+                                <td>{{ $bd->user_id }}</td>
                                 <td>{{ $bd->username }}</td>
                                 <td>{{ $actblnc[$bd->action_id] }}</td>
                                 <td>{{ $bd->debit }}</td>

@@ -33,7 +33,7 @@
         <form action="{{ route('ResellerTransaction-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
-                    <input type="text" name="inputUsername" class="left" placeholder="username" required>
+                    <input type="text" name="inputUsername" class="left" placeholder="username / Reseller ID" required>
                 </div>
                 <div class="col" style="padding-left:3%;">
                     <select name="choosedate" id="" class="form-control">

@@ -188,7 +188,6 @@ class PlayReportController extends Controller
               ->where('asta_db.dmq_round.round_id', '=', $inputRoundID)
               ->paginate(20);
         elseif($inputGame == 'Domino Susun'):
-              dd('dfgd');
         $player_history = $tbdms->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
               ->wherebetween('asta_db.dms_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
               ->where('asta_db.dms_round.round_id', '=', $inputRoundID)
@@ -204,6 +203,8 @@ class PlayReportController extends Controller
               ->where('asta_db.bgt_round.round_id', '=', $inputRoundID)
               ->paginate(20);
         endif;
+        $player_history->appends($request->all());
+        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow'));
       } 
       else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
        
