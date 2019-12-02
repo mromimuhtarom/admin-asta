@@ -214,6 +214,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('TableGift-updateimage', 'GiftController@updateimage')->name('TableGift-updateimage');
                 Route::delete('TableGift-delete', 'GiftController@destroy')->name('TableGift-delete');
                 Route::post('TableGift-create', 'GiftController@store')->name('TableGift-create');
+                Route::delete('TableGift-deleteAllSelected', 'GiftController@deleteAllSelected')->name('TableGift-deleteAllSelected');
             });
         });
 
@@ -231,6 +232,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('Emoticon-UpdateImage', 'EmoticonController@updateimage')->name('Emoticon-updateimage');
                 Route::post('Emoticon-create', 'EmoticonController@store')->name('Emoticon-create');
                 Route::delete('Emoticon-delete', 'EmoticonController@destroy')->name('Emoticon-delete');
+                Route::delete('Emoticon-deleteAllSelected', 'EmoticonController@deleteAllSelected')->name('Emoticon-deleteAllSelected');
             });
         });
 

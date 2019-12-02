@@ -40,6 +40,7 @@
         </form>
     </div>
 </div>    
+
 <!--- End Content Search --->
 @if (Request::is('FeedBack/Abuse_Transaction_Report/AbuseTransactionReport-search'))
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
