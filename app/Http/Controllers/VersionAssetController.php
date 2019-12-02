@@ -17,8 +17,8 @@ class VersionAssetController extends Controller
     public function index()
     {
         $menu      = MenuClass::menuName('Version Asset Apk');
-        $xml_andro = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
-        $xml_ios   = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/IOS/asset_game.xml");
+        $xml_andro = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game2.xml");
+        $xml_ios   = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/IOS/asset_game2.xml");
         // $xml_andro = simplexml_load_file("../../asta-api/AssetBundle/XML/Android/asset_game.xml");
         // $xml_ios   = simplexml_load_file("../../asta-api/AssetBundle/XML/IOS/asset_game.xml");
         return view('pages.version_asset.version_asset', compact('xml_andro', 'xml_ios', 'menu'));
@@ -410,5 +410,58 @@ class VersionAssetController extends Controller
 
             return back()->with('success', 'Data deleted!');
 
+    }
+
+    public function deleteAllSelectedADR(Request $request)
+    {
+        $tag    =   $request->ids;
+        $id     =   $request->Names;
+        $link   =   $request->Links; 
+        $xml    =   new \DomDocument("1.0", "UTF-8");
+        $xml->load('../public/upload/xml/Android/asset_game2.xml');
+        $xpath  =   new \DOMXPATH($xml);
+        $idsArray = [$id];
+        $tagArray = [$tag];
+        $linkArray= [$link];
+
+        foreach($idsArray as  $ids)
+        {
+            foreach($tagArray as $tgs)    
+            {
+                foreach($linkArray as $lka)
+                {
+                    foreach($xpath->query("/main_asset/".$tgs."[@name = '$ids']") as $node)
+                    {
+                        $node->parentNode->removeChild($node);
+                    }
+
+                    $xml->formatouput = true;
+
+
+                    //delete file in aws s3
+                    $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $lka);
+                    $deleteFile  = $replacepath . $ids;
+                    Storage::disk('s3')->delete($deleteFile);
+                }
+                
+            }
+        }
+        
+        //save xml local
+        $xml->save('../public/upload/xml/Android/asset_game2.xml');
+        $xmllocal = '../public/upload/xml/Android/asset_game2.xml';
+
+        //save xml into aws s3
+        $PathS3 = 'unity-asset/XML/Android/asset_game2.xml';
+        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
+
+        return back()->with('success', 'Data deleted!');
+
+
+    }
+
+    public function deleteAllSelectedIOS(Request $request)
+    {
+        return view();
     }
 }

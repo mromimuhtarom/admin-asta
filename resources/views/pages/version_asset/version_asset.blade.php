@@ -19,6 +19,8 @@
 @endif
 
 @section('content')
+<link rel="stylesheet" href="/css/admin.css">
+
 @if (\Session::has('alert'))
       <div class="alert alert-danger">
         <div>{{Session::get('alert')}}</div>
@@ -66,21 +68,28 @@
                         <div class="table-outer">
                             <table class="table table-bordered">
                                 <thead>
-                                    <th></th>
+                                    <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission"></th>
                                     <th>File</th>
                                     <th>Name</th>
                                     <th>Type</th>
                                     <th>Link</th>
                                     <th>Version</th>
                                     @if($menu)
-                                      <th style="width:10px;"></th>
+                                      <th style="width:10px;">
+                                        <a  href="#" style="color:red;font-weight:bold;" 
+                                            class="delete" 
+                                            id="trash" 
+                                            data-toggle="modal" 
+                                            data-target="#deleteAll"><i class="fa  fa-trash-o"></i>
+                                        </a>
+                                      </th>
                                     @endif
                                 </thead>
                                 <tbody>
                                 @foreach ($xml_andro->children() as $key => $xl)
                                     @if ($menu)
                                     <tr>
-                                        <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $xl['name'].'1' }}"></td>
+                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl['name'].'1' }} deleteIdAll"></td>
                                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $xl['name'] }}" style="width: 100%"><i class="fa fa-edit"></i>Edit asset</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
@@ -151,14 +160,21 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td></td>
+                                        <td style="width:100px;"><input id="checkAll2" type="checkbox" name="deletepermission" class="deletepermission"></td>
                                         <td>File</td>
                                         <td>Name</td>
                                         <td>Type</td>
                                         <td>Link</td>
                                         <td>Version</td>
                                         @if($menu)
-                                          <td style="width:10px;"></td>
+                                          <td align="center" style="width:10px;">
+                                            <a  href="#" style="color:red;font-weight:bold;" 
+                                                class="delete2" 
+                                                id="trash2" 
+                                                data-toggle="modal" 
+                                                data-target="#deleteAll2"><i class="fa  fa-trash-o"></i>
+                                            </a>
+                                          </td>
                                         @endif
                                     </tr>
                                 </thead>
@@ -166,7 +182,7 @@
                                 @foreach ($xml_ios->children() as $key => $xl_ios)
                                     @if ($menu)
                                     <tr>
-                                        <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $xl_ios['name'].'2' }}"></td>
+                                        <td align="center"><input type="checkbox" name="deletepermission" data-pk="{{ $xl_ios['name'] }}" class="deletepermission{{ $xl_ios['name'].'2'}} deleteIdAll2"></td>
                                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $xl_ios['name'] }}"><i class="fa fa-edit"></i>Edit asset</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
@@ -444,9 +460,9 @@
           <form action="{{ route('VersionAssetApkAndroid-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
-            <input type="hidden" name="name" id="id" value="">
-            <input type="hidden" name="id" id="name" value="">
-            <input type="hidden" name="Link" id="Link" value="">
+            <input type="text" name="name" id="id" value="">
+            <input type="text" name="id" id="name" value="">
+            <input type="text" name="Link" id="Link" value="">
         </div>
         <div class="modal-footer">
           <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
@@ -456,6 +472,34 @@
       </div>
     </div>
   </div>
+
+<!-- Modal Pop up delete all selected data Android -->
+ <div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete all selected data?
+        <form action="{{ route('VersionAssetApkAndroid-deleteAssetAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="text" name="names" id="ids" value="">
+          <input type="text" name="ids" id="Names" value="">
+          <input type="text" name="LinksAll" id="LinksAll" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
 
 
   <!-- Modal Pop up delete confirm IOS -->
@@ -485,6 +529,35 @@
       </div>
     </div>
   </div>
+
+<!-- Modal Pop up delete all selected data Ios -->
+ <div class="modal fade" id="deleteAll2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete all selected data?
+        <form action="{{ route('VersionAssetApkIOS-deleteAssetAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="text" name="name" id="id" value="">
+          <input type="text" name="id" id="name" value="">
+          <input type="text" name="Link" id="Link" value="">
+          <input type="text" name="userIdAll2" id="idDeleteAll2" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -517,6 +590,89 @@
       $('table.table').dataTable( {
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
       });
+
+      //check all android
+      $('#trash').hide();
+      //check all
+      $('#checkAll').on('click', function(e) {
+        if($(this).is(':checked', true))
+        {
+          $(".deleteIdAll").prop('checked', true);
+          $("#trash").show();
+        }else{
+          $(".deleteIdAll").prop('checked', false);
+          $("#trash").hide();
+        }
+      });
+
+      //=============================== delete check all android ====================================//
+    $('.delete').click(function(e) {
+      e.preventDefault();
+      var allVals = [];
+      var alllink = [];
+      var allname = [];
+        $(".deleteIdAll:checked").each(function() {
+          allVals.push($(this).attr('data-pk'));
+          alllink.push($(this).attr('data-link'));
+          allname.push($(this).attr('data-name'));
+
+          var join_selected_values = allVals.join(",");
+          var join_selected_link = alllink.join(",");
+          var join_selected_name = allname.join(",");
+          
+          $('#ids').val(join_selected_values);
+          $('#LinksAll').val(join_selected_link);
+          $('#Names').val(join_selected_name);
+        });
+    });
+
+    //hide and show icon delete all
+    $('#trash').hide();
+    $(".deleteIdAll").click(function(e) {
+      
+        if($(".deleteIdAll:checked").length > 1) {
+          $("#trash").show();
+        }else{
+          $("#trash").hide();
+        }
+    });
+
+    //check all IOS
+    $('#trash2').hide();
+    //CHECK ALL
+    $('#checkAll2').on('click', function(e) {
+      if($(this).is(':checked', true))
+      {
+        $(".deleteIdAll2").prop('checked', true);
+        $("#trash2").show();
+      }else{
+        $(".deleteIdAll2").prop('checked', false);
+        $("#trash2").hide();
+      }
+    });
+
+    //=============================== delete check all IOS =====================================//
+    $('.delete2').click(function(e) {
+      e.preventDefault();
+      var allVals = [];
+      $('.deleteIdAll2:checked').each(function() {
+        allVals.push($(this).attr('data-pk'));
+        var join_selected_values = allVals.join(",");
+        $('#idDeleteAll2').val(join_selected_values);
+      });
+    });
+
+    //hide and show icon delete all
+    $('#trash2').hide();
+    $(".deleteIdAll2").click(function(e) {
+      if($(".deleteIdAll2:checked").length > 1) {
+        $("#trash2").show();
+      }else{
+        $("#trash2").hide();
+      }
+    });
+
+
     });
   
     table = $('table.table').dataTable({
@@ -546,6 +702,8 @@
         });
        
       },
+    
+    
       responsive: false
     });
 
@@ -675,23 +833,7 @@
           infoArea.textContent = ''+ fileName;
     }
 
-    // // Edit asset IOS upload file name
-    // var input = document.getElementById( 'inputFile' );
-    // var infoArea = document.getElementById( 'file-upload-filename' );
-
-    // input.addEventListener( 'change', showFileName );
-
-    // function showFileName( event ) {
-  
-    //       // the change event gives us the input it occurred in 
-    //       var input = event.srcElement;
-  
-    //       // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
-    //       var fileName = input.files[0].name;
-  
-    //       // use fileName however fits your app best, i.e. add it into a div
-    //       infoArea.textContent = ''+ fileName;
-    // }
+    
 
   </script>
 @endsection

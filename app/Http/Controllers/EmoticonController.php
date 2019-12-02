@@ -13,6 +13,7 @@ use Validator;
 use File;
 use Storage;
 use Response;
+use DB;
 
 class EmoticonController extends Controller
 {

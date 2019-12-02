@@ -661,6 +661,8 @@ Route::middleware('authenticated')->group(function(){
             Route::post('VersionAsset-updateIOS', 'VersionAssetController@updateAssetIOS')->name('VersionAssetApkIOS-updateAsset');
             Route::delete('VersionAsset-deleteAndroid', 'VersionAssetController@destroy')->name('VersionAssetApkAndroid-deleteAsset');
             Route::delete('VersionAsset-deleteIOS', 'VersionAssetController@destroyIOS')->name('VersionAssetApkIOS-deleteAsset');
+            Route::delete('VersionAsset-deleteAssetAllSelected', 'VersionAssetController@deleteAllSelectedADR')->name('VersionAssetApkAndroid-deleteAssetAllSelected');
+            Route::delete('VersionAsset-deleteAssetAllSelectedIOS', 'VersionAssetController@deleteAllSelectedIOS')->name('VersionAssetApkIOS-deleteAssetAllSelected');
         });
 
     });
