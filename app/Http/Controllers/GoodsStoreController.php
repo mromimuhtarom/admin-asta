@@ -412,7 +412,7 @@ class GoodsStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Goods Store with ID '.$id
+                'desc'      => 'Delete Image Photo in menu Goods Store with ID '.$id
             ]);
 
             return redirect()->route('Goods_Store')->with('success','Data Deleted');
