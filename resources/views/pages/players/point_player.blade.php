@@ -35,7 +35,7 @@
             <form action="{{ route('Point-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     <div class="col" style="padding-right:-10%">
-                        <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username">
+                        <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
                     </div>
                     <div class="col" >
                         <select name="inputGame" class="form-control">
@@ -96,6 +96,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
+                        <th>Player ID</th>
                         <th>Username</th>
                         <th>Game</th>
                         <th>Action</th>
@@ -109,6 +110,7 @@
                     @foreach ($balancedetails as $bd)
 
                     <tr class="gradeX">
+                        <td>{{ $bd->user_id }}</td>
                         <td>{{ $bd->username }}</td>
                         <td>{{ $bd->gamename }}</td>
                         <td>{{ $actblnc[$bd->action_id] }}</td>

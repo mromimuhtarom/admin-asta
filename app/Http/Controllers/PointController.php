@@ -35,7 +35,8 @@ class PointController extends Controller
                             'asta_db.balance_point.debit',
                             'asta_db.balance_point.credit',
                             'asta_db.balance_point.balance',
-                            'asta_db.balance_point.datetime'
+                            'asta_db.balance_point.datetime',
+                            'asta_db.balance_point.user_id'
                         );
         
         $validator = Validator::make($request->all(),[
@@ -68,18 +69,35 @@ class PointController extends Controller
         }
 
         if($username != NULL && $gameName != NULL && $minDate != NULL && $maxDate != NULL) {
-            $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                              ->where('asta_db.balance_point.game_id', '=', $gameName)
-                              ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->orderby('asta_db.balance_point.datetime', 'desc')
-                              ->paginate(20);
+            if(is_numeric($username) !== true):
+                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+                                  ->where('asta_db.balance_point.game_id', '=', $gameName)
+                                  ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->paginate(20);
+            else:
+                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $username)
+                                  ->where('asta_db.balance_point.game_id', '=', $gameName)
+                                  ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->paginate(20);
+            endif;
+
             $balancedetails->appends($request->all());
             return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($username != NULL && $minDate != NULL && $maxDate != NULL) {
-            $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                              ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->orderby('asta_db.balance_point.datetime', 'desc')
-                              ->paginate(20);
+            if(is_numeric($username) !== true):
+                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+                                  ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->paginate(20);
+            else:
+                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $username)
+                                  ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->paginate(20);
+            endif;
+
             $balancedetails->appends($request->all());
             return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc'));
         } else if($gameName != NULL && $minDate != NULL && $maxDate != NULL) {
