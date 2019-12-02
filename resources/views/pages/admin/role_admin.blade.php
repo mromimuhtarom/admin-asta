@@ -121,12 +121,20 @@
           <thead>
             <tr>
                 @if($menu && $mainmenu)
-                <th class="th-sm" width="80px"><input type="checkbox" name="deletepermission" class="deletepermission">&nbsp;&nbsp;Select All</th>
+                <th class="th-sm" width="80px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp;&nbsp;Select All</th>
                 @endif
                 <th class="th-sm">Role Name</th>
                 @if($menu && $mainmenu)
                 <th class="th-sm">Action</th>
-                <th style="width:70px;"><button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" style="height: 30px;">Delete all selected</button></th>
+                <th align="center">
+                  <a href="#" style="color:red; font-weight:bold;"
+                  class="delete"
+                  id="trash"
+                  data-toggle="modal"
+                  data-target="#deleteAll">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+                </th>
                 
                 @endif
             </tr>
@@ -135,10 +143,18 @@
             @foreach($roles as $role)
             @if($menu && $mainmenu)
             <tr>
-                <td align="center"><input type="checkbox" name="deletepermission" class="deletepermission{{ $role->role_id }}"></td>
+                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $role->role_id }}" class="deletepermission{{ $role->role_id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $role->role_id }}" data-type="text" data-url="{{ route('Role-update') }}">{{ $role->name }}</a></td>
                 <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton"><i class="fa fa-eye"></i> View & Edit</a></td>
-                <td align="center"><a href="#" style="color:red;" class="delete{{ $role->role_id }}" id="delete" data-pk="{{ $role->role_id }}" data-toggle="modal" data-target="#delete-modal"><i class="fa fa-times"></i></a></td>
+                <td align="center">
+                  <a href="#" style="color:red" class="delete{{ $role->role_id }}"
+                    id="delete"
+                    data-pk="{{ $role->role_id }}"
+                    data-toggle="modal"
+                    data-target="#delete-modal">
+                      <i class="fa fa-times"></i>
+                  </a>
+                </td>
             </tr>
             @else 
             <tr>
@@ -155,7 +171,8 @@
   </div>
 </div>
 </div>
-<!-- Modal -->
+
+<!-- Modal delete -->
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -180,6 +197,33 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal delete -->
+<div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected Data</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i> 
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete all selected?
+        <form action="{{ route('Role-DeleteAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
   
 <script type="text/javascript">
   $(document).ready(function() {
@@ -187,6 +231,23 @@
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
     });
+
+   
+   $("#trash").hide();
+
+    //check all
+    $('#checkAll').on('click', function(e) {
+    
+      if($(this).is(':checked', true))
+      { 
+        $(".deleteIdAll").prop('checked', true);
+        $("#trash").show();
+      } else {
+        $(".deleteIdAll").prop('checked', false);
+        $("#trash").hide();
+      }
+    });
+
   });
 
 
@@ -240,6 +301,25 @@
           echo'});';
         }
       @endphp
+
+      $('#trash').click(function(e){
+          e.preventDefault();
+            var allVals = [];
+            $(".deleteIdAll:checked").each(function() {
+              allVals.push($(this).attr('data-pk'));
+              var join_selected_values = allVals.join(",");
+              $("#idDeleteAll").val(join_selected_values);
+            });
+      });
+
+      $('#trash').hide()
+      $('.deleteIdAll').click(function(e) {
+        if( $(".deleteIdAll:checked").length > 1) {
+          $("#trash").show();
+        } else {
+          $("#trash").hide();
+        }
+      });
     },
     responsive: false
   });

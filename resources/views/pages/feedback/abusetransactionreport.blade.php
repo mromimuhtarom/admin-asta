@@ -18,7 +18,7 @@
                     <input type="text" name="inputPlayer" class="left" placeholder="username">
                 </div>
                 <div class="col" style="padding-left:1%;">
-                    <select style="width: 195px" name="TransactionType" class="form-control">
+                    <select style="width: 200px" name="TransactionType" class="form-control">
                         <option value="">Choose Transaction Type</option>
                         {{-- @foreach ($action as $act)
                         <option value="{{ $act->id }}">{{ $act->action }}</option>                                

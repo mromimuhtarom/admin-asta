@@ -128,7 +128,7 @@
               <thead>
                 <tr>
                     @if($menu && $mainmenu)
-                    <th width="100px"><input id="checkAll"  type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
+                    <th width="100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
                     @endif
                     <th class="th-sm">Username</th>
                     <th class="th-sm">Full Name</th>
@@ -136,9 +136,9 @@
                     @if($menu && $mainmenu)
                     <th class="th-sm">Reset Password</th>
                     <th align="center" ">
-                        <a  href="#" style="color:black;font-weight:bold;" 
+                        <a  href="#" style="color:red;font-weight:bold;" 
                         class="delete" 
-                        id="delete" 
+                        id="trash" 
                         data-toggle="modal" 
                         data-target="#deleteAll">
                               <i class="fa  fa-trash-o"></i>
@@ -274,6 +274,20 @@
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
       });
+
+      $("#trash").hide();
+      //CHECK ALL
+      $('#checkAll').on('click', function(e) {
+            if($(this).is(':checked',true))  
+            {
+                $(".deleteIdAll").prop('checked', true);
+                $("#trash").show();  
+            } else {  
+                $(".deleteIdAll").prop('checked',false);
+                $("#trash").hide();  
+            }  
+        });
+
     });
   
     table = $('table.table').dataTable({
@@ -330,7 +344,7 @@
             echo'});';
           }
         @endphp
-
+        
         @php
             foreach($admin as $adm) {
             echo'$(".delete'.$adm->op_id.'").hide();';
@@ -344,7 +358,7 @@
                 echo'$(".delete'.$adm->op_id.'").hide();';
               echo'}';
   
-            echo '});';
+            echo '} );';
           
             echo'$(".delete'.$adm->op_id.'").click(function(e) {';
               echo'e.preventDefault();';
@@ -366,6 +380,14 @@
               }); 
         }); 
         
+        $("#trash").hide();
+        $(".deleteIdAll").click(function(e) {
+          if( $(".deleteIdAll:checked").length > 1) {
+            $("#trash").show();
+          } else {
+            $("#trash").hide();
+          }
+        });
       },
       responsive: false
     });
