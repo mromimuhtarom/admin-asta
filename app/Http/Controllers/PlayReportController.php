@@ -396,7 +396,7 @@ class PlayReportController extends Controller
 
        
        
-        return view('pages.players.playreport', compact('player_history', 'player_username', 'bgt_round_gamplay_log','inputMaxDate', 'inputMinDate', 'inputGame', 'menus1', 'game', 'datenow'));
+        return view('pages.players.playreport', compact('player_history', 'player_username','inputMaxDate', 'inputMinDate', 'inputGame', 'menus1', 'game', 'datenow'));
     }
     
   }

@@ -34,6 +34,7 @@ class GoodsStoreController extends Controller
                         'status',
                         'order'
                     )
+                    ->where('status', '!=', 2)
                     ->orderby('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
@@ -400,7 +401,9 @@ class GoodsStoreController extends Controller
 
         if($id != '')
         {
-            ItemPoint::where('item_id', '=', $id)->delete();
+            ItemPoint::where('item_id', '=', $id)->update([
+                'status' => 2
+            ]);
             $path = '../public/upload/Goods/'.$goods->item_id.'.png';
             File::delete($path);
             Storage::disk('s3')->delete($pathS3);

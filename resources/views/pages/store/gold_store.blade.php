@@ -102,56 +102,100 @@
             <tbody>
               @foreach($getGolds as $gold)
               @if($menu && $mainmenu)
-              <tr>
-                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
-                <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->order }}</a></td>
-                <td>
-                    <div class="media-container">
-                        <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
-                          {{  csrf_field() }}
-                          <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
-                              <input type="hidden" name="pk" value="{{ $gold->item_id }}">
-                              <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
-                              <i class="fa fa-edit media-icon-wtr"></i>
-                              <p class="nav-name">Main Image</p>
-                          </span>
-                          <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
-                              <input type="hidden" name="pk" value="{{ $gold->item_id }}">
-                              <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gold->item_id }}">
-                              <i class="fa fa-edit media-icon-wtr1"></i>
-                              <div class="nav-name">Watermark</div>
-                          </span>
-                          <figure class="media-object">
-                            {{-- <img src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;"> --}}
-                            <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;">
-                            <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
-                            <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
-                          </figure>
-                        </div>
-                        <div class="media-control" align="center" style="margin-top:-1%">
-                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gold Image</button>
-                        </form>
-                          <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                          <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gold</button>
-                    </div>
-                </td>
-                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
-                <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->item_get }}</a></td>
-                <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
-                <td>{{ $gold->strItemType() }}</td>
-                <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
-                <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</a></td>
-                <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
-                <td style="text-align:center;">
-                  <a href="#" style="color:red;" class="delete{{ $gold->item_id }}" 
-                    id="delete" 
-                    data-pk="{{ $gold->item_id }}" 
-                    data-toggle="modal" 
-                    data-target="#delete-modal">
-                    <i class="fa fa-times"></i>
-                  </a>
-                </td>
-              </tr>
+                @if($gold->status === 0)
+                  <tr>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
+                    <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->order }}</a></td>
+                    <td>
+                      <div class="media-container">
+                          <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
+                            {{  csrf_field() }}
+                            <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
+                                <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                                <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
+                                <i class="fa fa-edit media-icon-wtr"></i>
+                                <p class="nav-name">Main Image</p>
+                            </span>
+                            <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
+                                <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                                <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gold->item_id }}">
+                                <i class="fa fa-edit media-icon-wtr1"></i>
+                                <div class="nav-name">Watermark</div>
+                            </span>
+                            <figure class="media-object">
+                              {{-- <img src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;"> --}}
+                              <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;">
+                              <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                              <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                            </figure>
+                          </div>
+                          <div class="media-control" align="center" style="margin-top:-1%">
+                            <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gold Image</button>
+                          </form>
+                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                            <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gold</button>
+                      </div>
+                    </td>
+                    <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->item_get }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
+                    <td>{{ $gold->strItemType() }}</td>
+                    <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->google_key }}</a></td>
+                    <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
+                    <td style="text-align:center;">
+                      <a href="#" style="color:red;" class="delete{{ $gold->item_id }}" 
+                        id="delete" 
+                        data-pk="{{ $gold->item_id }}" 
+                        data-toggle="modal" 
+                        data-target="#delete-modal">
+                        <i class="fa fa-times"></i>
+                      </a>
+                    </td>
+                  </tr>
+                @else
+                  <tr>
+                    <td style="text-align:center;"></td>
+                    <td>{{ $gold->order }}</td>
+                    <td>
+                      <div class="media-container">
+                          <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
+                            {{  csrf_field() }}
+                            <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
+                                <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                                <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
+                                <i class="fa fa-edit media-icon-wtr"></i>
+                                <p class="nav-name">Main Image</p>
+                            </span>
+                            <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
+                                <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                                <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gold->item_id }}">
+                                <i class="fa fa-edit media-icon-wtr1"></i>
+                                <div class="nav-name">Watermark</div>
+                            </span>
+                            <figure class="media-object">
+                              {{-- <img src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;"> --}}
+                              <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;">
+                              <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                              <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                            </figure>
+                          </div>
+                          <div class="media-control" align="center" style="margin-top:-1%">
+                            <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Gold Image</button>
+                          </form>
+                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                      </div>
+                    </td>
+                    <td>{{ $gold->name }}</td>
+                    <td>{{ $gold->item_get }}</td>
+                    <td>{{ $gold->price }}</td>
+                    <td>{{ $gold->strItemType() }}</td>
+                    <td>{{ strTypeTransaction($gold->trans_type) }}</td>
+                    <td>{{ $gold->google_key }}</td>
+                    <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
+                    <td style="text-align:center;"></td>
+                  </tr> 
+                @endif
               @else 
               <tr>
                 <td>{{ $gold->order }}</td>
@@ -321,6 +365,9 @@ $(".watermark-image").change(function() {
       $('.strEnable').editable({
         mode: 'inline',
         value: '',
+        success: function success() {
+          location.reload();
+        },
         validate: function(value) {
           if($.trim(value) == '') {
             return 'This field is required';

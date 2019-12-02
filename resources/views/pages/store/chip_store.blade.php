@@ -98,10 +98,11 @@
             <tbody>
               @foreach($items as $itm)
                 @if($menu && $mainmenu)
-                  <tr>
-                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->item_id }}"></td>
-                    <td><a href="#" class="usertext" data-name="order" data-title="Orders" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->order }}</a></td>
-                    <td>
+                  @if($itm->status === 0)
+                    <tr>
+                      <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->item_id }}"></td>
+                      <td><a href="#" class="usertext" data-name="order" data-title="Orders" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->order }}</a></td>
+                      <td>
                         <div class="media-container">
                             <form method="POST" action="{{ route('ChipStore-updateimage') }}" enctype="multipart/form-data">
                               {{  csrf_field() }}
@@ -130,22 +131,64 @@
                               <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
                               <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Chip</button>
                         </div>
-                    </td>
-                    <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
-                    <td>{{ $itm->strItemType() }}</td>
-                    <td><a href="#" class="usertext" data-name="item_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->item_get }}</a></td>
-                    <td><a href="#" class="usertext" data-name="price" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->price }}</a></td>
-                    <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
-                    <td>
-                      <a href="#" style="color:red;" class="delete{{ $itm->item_id }}" 
-                        id="delete" 
-                        data-pk="{{ $itm->item_id }}" 
-                        data-toggle="modal" 
-                        data-target="#delete-modal">
+                      </td>
+                      <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
+                      <td>{{ $itm->strItemType() }}</td>
+                      <td><a href="#" class="usertext" data-name="item_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->item_get }}</a></td>
+                      <td><a href="#" class="usertext" data-name="price" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->price }}</a></td>
+                      <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
+                      <td>
+                        <a href="#" style="color:red;" class="delete{{ $itm->item_id }}" 
+                          id="delete" 
+                          data-pk="{{ $itm->item_id }}" 
+                          data-toggle="modal" 
+                          data-target="#delete-modal">
                           <i class="fa fa-times"></i>
-                      </a>
-                    </td>
-                  </tr>
+                        </a>
+                      </td>
+                    </tr>
+                  @else 
+                    <tr>
+                      <td></td>
+                      <td>{{ $itm->order }}</td>
+                      <td>
+                        <div class="media-container">
+                            <form method="POST" action="{{ route('ChipStore-updateimage') }}" enctype="multipart/form-data">
+                              {{  csrf_field() }}
+                              <span class="media-overlay-wtr med-ovlay{{ $itm->item_id}}">
+                                  <input type="hidden" name="pk" value="{{ $itm->item_id }}">
+                                  <input type="file" name="file" id="media-input-wtr" class="upload{{ $itm->item_id }}" accept="image/*">
+                                  <i class="fa fa-edit media-icon-wtr"></i>
+                                  <p class="nav-name">Main Image</p>
+                              </span>
+                              <span class="media-overlay-wtr1 med-ovlay{{ $itm->item_id }}">
+                                  <input type="hidden" name="pk" value="{{ $itm->item_id }}">
+                                  <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $itm->item_id }}">
+                                  <i class="fa fa-edit media-icon-wtr1"></i>
+                                  <div class="nav-name">Watermark</div>
+                              </span>
+                              <figure class="media-object">
+                                {{-- <img class="img-object imgupload{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;"> --}}
+                                <img class="img-object imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object-wtr1 imgupload1{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
+                                <img class="img-object-wtr2 imgupload2{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
+                              </figure>
+                            </div>
+                            <div class="media-control" align="center" style="margin-top:-1%">
+                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Chip Image</button>
+                            </form>
+                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                              {{-- <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Chip</button> --}}
+                        </div>
+                      </td>
+                      <td>{{ $itm->name }}</td>
+                      <td>{{ $itm->strItemType() }}</td>
+                      <td>{{ $itm->item_get }}</td>
+                      <td>{{ $itm->price }}</td>
+                      <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
+                      <td></td>
+                    </tr>
+                  @endif
                 @else 
                   <tr>
                     <td>{{ $itm->order }}</td>
@@ -320,6 +363,9 @@
       $('.stractive').editable({
         value: '',
         mode :'inline',
+        success: function success() {
+          location.reload();
+        },
         validate: function(value) {
           if($.trim(value) == '') {
             return 'This field is required';
@@ -331,14 +377,14 @@
                       echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
                       echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
                   @endphp
-        ]
+        ]        
       });
 
 
       @php
           foreach($items as $itm) {
-              echo'$(".delete'.$itm->item_id.'").hide();';
-              echo'$(".deletepermission'.$itm->item_id.'").on("click", function() {';
+              echo '$(".delete'.$itm->item_id.'").hide();';
+              echo '$(".deletepermission'.$itm->item_id.'").on("click", function() {';
                 echo 'if($( ".deletepermission'.$itm->item_id.':checked" ).length > 0)';
                 echo '{';
                   echo '$(".delete'.$itm->item_id.'").show();';
@@ -422,9 +468,9 @@
                 echo'});';
               }
       @endphp
-
     },
     responsive: false
   });
+
 </script>
 @endsection

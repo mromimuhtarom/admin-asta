@@ -36,6 +36,7 @@ class ChipStoreController extends Controller
                         'order'
                     )
                     ->where('item_type', '=', 1)
+                    ->where('status', '!=', 2)
                     ->orderby('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
@@ -378,7 +379,10 @@ class ChipStoreController extends Controller
 
         if($id != '')
         {
-            ItemsGold::where('item_id', '=', $id)->delete(); 
+            // ItemsGold::where('item_id', '=', $id)->delete(); 
+            ItemsGold::where('item_id', '=', $id)->update([
+                'status' => 2
+            ]);
             $path = '../public/store/Chip/'.$id.'.png';
             File::delete($path);
             Storage::disk('s3')->delete($pathS3);  
@@ -386,7 +390,7 @@ class ChipStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Chip Store with ID '.$id
+                'desc'      => 'Delete Photo or image in menu Chip Store with ID '.$id
             ]);
 
             return redirect()->route('Chip_Store')->with('success','Data Deleted');

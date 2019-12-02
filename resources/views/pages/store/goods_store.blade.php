@@ -107,54 +107,97 @@
             <tbody>
               @foreach($itemGood as $goods)
               @if($menu && $mainmenu)
-              <tr>
-                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->item_id }}"></td>
-                <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $goods->item_id }}" data-type="number" data-url="{{ route('GoodsStore-update') }}">{{ $goods->order }}</a></td>
-                <td>
-                  <div class="media-container">
-                    <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
-                      {{  csrf_field() }}
-                      <span class="media-overlay-wtr med-ovlay{{ $goods->item_id}}">
-                        <input type="hidden" name="pk" value="{{ $goods->item_id }}">
-                        <input type="file" name="file" id="media-input-wtr" class="upload{{ $goods->item_id }}" accept="image/*">
-                        <i class="fa fa-edit media-icon-wtr"></i>
-                        <p class="nav-name">Main Image</p>
-                    </span>
-                    <span class="media-overlay-wtr1 med-ovlay{{ $goods->item_id }}">
-                        <input type="hidden" name="pk" value="{{ $goods->item_id }}">
-                        <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $goods->item_id }}">
-                        <i class="fa fa-edit media-icon-wtr1"></i>
-                        <div class="nav-name">Watermark</div>
-                    </span>
-                      <figure class="media-object">
-                        {{-- <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ route('imageItemGoods', $goods->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
-                        <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$goods->item_id. '.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
-                        <img class="img-object-wtr1 imgupload1{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
-                        <img class="img-object-wtr2 imgupload2{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
-                      </figure>
-                    </div>
-                    <div class="media-control" align="center" style="margin-top:-1%">
-                      <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Goods Image</button>
-                    </form>
-                      <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                      <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button>
-                    </div>
-                </td>
-                <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
-                <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
-                <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
-                {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
-                <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
-                <td>
-                  <a href="#" style="color:red;" class="delete{{ $goods->item_id }}" 
-                    id="delete" 
-                    data-pk="{{ $goods->item_id }}" 
-                    data-toggle="modal" 
-                    data-target="#delete-modal">
-                      <i class="fa fa-times"></i>
-                  </a>
-                </td>
-              </tr>
+                @if($goods->status === 0)
+                  <tr>
+                    <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $goods->item_id }}"></td>
+                    <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $goods->item_id }}" data-type="number" data-url="{{ route('GoodsStore-update') }}">{{ $goods->order }}</a></td>
+                    <td>
+                      <div class="media-container">
+                        <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
+                          {{  csrf_field() }}
+                          <span class="media-overlay-wtr med-ovlay{{ $goods->item_id}}">
+                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
+                            <input type="file" name="file" id="media-input-wtr" class="upload{{ $goods->item_id }}" accept="image/*">
+                            <i class="fa fa-edit media-icon-wtr"></i>
+                            <p class="nav-name">Main Image</p>
+                          </span>
+                          <span class="media-overlay-wtr1 med-ovlay{{ $goods->item_id }}">
+                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
+                            <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $goods->item_id }}">
+                            <i class="fa fa-edit media-icon-wtr1"></i>
+                            <div class="nav-name">Watermark</div>
+                          </span>
+                          <figure class="media-object">
+                            {{-- <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ route('imageItemGoods', $goods->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
+                            <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$goods->item_id. '.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                            <img class="img-object-wtr1 imgupload1{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
+                            <img class="img-object-wtr2 imgupload2{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
+                          </figure>
+                      </div>
+                      <div class="media-control" align="center" style="margin-top:-1%">
+                          <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Goods Image</button>
+                        </form>
+                        <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                        <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button>
+                      </div>
+                    </td>
+                    <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
+                    <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
+                    <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
+                    {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
+                    <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
+                    <td>
+                      <a href="#" style="color:red;" class="delete{{ $goods->item_id }}" 
+                        id="delete" 
+                        data-pk="{{ $goods->item_id }}" 
+                        data-toggle="modal" 
+                        data-target="#delete-modal">
+                        <i class="fa fa-times"></i>
+                      </a>
+                    </td>
+                  </tr>
+                @else 
+                  <tr>
+                    <td></td>
+                    <td>{{ $goods->order }}</td>
+                    <td>
+                      <div class="media-container">
+                        <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
+                          {{  csrf_field() }}
+                          <span class="media-overlay-wtr med-ovlay{{ $goods->item_id}}">
+                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
+                            <input type="file" name="file" id="media-input-wtr" class="upload{{ $goods->item_id }}" accept="image/*">
+                            <i class="fa fa-edit media-icon-wtr"></i>
+                            <p class="nav-name">Main Image</p>
+                          </span>
+                          <span class="media-overlay-wtr1 med-ovlay{{ $goods->item_id }}">
+                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
+                            <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $goods->item_id }}">
+                            <i class="fa fa-edit media-icon-wtr1"></i>
+                            <div class="nav-name">Watermark</div>
+                          </span>
+                          <figure class="media-object">
+                            {{-- <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ route('imageItemGoods', $goods->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
+                            <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$goods->item_id. '.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                            <img class="img-object-wtr1 imgupload1{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
+                            <img class="img-object-wtr2 imgupload2{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
+                          </figure>
+                      </div>
+                      <div class="media-control" align="center" style="margin-top:-1%">
+                        <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Goods Image</button>
+                      </form>
+                        <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                        {{-- <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button> --}}
+                      </div>
+                    </td>
+                    <td>{{ $goods->name }}</td>
+                    <td>{{ $goods->price }}</td>
+                    <td>{{ $goods->qty }}</td>
+                    {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
+                    <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
+                    <td></td>
+                  </tr>
+                @endif
               @else 
               <tr>
                   <td>{{ $goods->order }}</td>
@@ -334,6 +377,9 @@ $(".watermark-image").change(function() {
       $('.strEnable').editable({
         mode: 'inline',
         value: '',
+        success: function success() {
+          location.reload();
+        },
         validate: function(value) {
           if($.trim(value) == '') {
             return 'This field is required';

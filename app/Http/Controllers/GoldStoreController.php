@@ -39,6 +39,7 @@ class GoldStoreController extends Controller
                         'order'
                     )
                     ->where('shop_type', '=', 1)
+                    ->where('status', '!=', 2)
                     ->orderBy('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
@@ -406,14 +407,16 @@ class GoldStoreController extends Controller
         $pathS3       = 'unity-asset/store/gold/'.$getGoldId.'.png';
         if($getGoldId != '')
         {
-            ItemsCash::where('item_id', '=', $getGoldId)->delete();
             Storage::disk('s3')->delete($pathS3);
+            ItemsCash::where('item_id', '=', $getGoldId)->update([
+                'status' => 2
+            ]);
 
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Gift Store with ID '.$getGoldId
+                'desc'      => 'Delete image photo in menu Gift Store with ID '.$getGoldId
             ]);
             $path = '../public/upload/Gold/'.$getGoldId.'.png';
             File::delete($path);
@@ -422,12 +425,14 @@ class GoldStoreController extends Controller
             return redirect()->route('Gold_Store')->with('success','Data Deleted');
         } else if($goldreseller != '') 
         {
-            ItemsCash::where('item_id', '=', $goldreseller)->delete();
+            ItemsCash::where('item_id', '=', $goldreseller)->update([
+                'status' => 2
+            ]);
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Gift Store Reseller with ID '.$goldreseller
+                'desc'      => 'Delete Image photo in menu Gift Store Reseller with ID '.$goldreseller
             ]);
             return redirect()->route('Gold_Store_Reseller')->with('success','Data Deleted');
         } else if ($getGoldId == NULL)
