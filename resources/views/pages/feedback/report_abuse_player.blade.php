@@ -33,7 +33,7 @@
                 <div class="col">
                     <input type="text" name="inputReportPlayer" class="left" placeholder="Player Sender / Player ID">
                 </div>
-                <div class="col" style="padding-left:1%;">
+                <div class="col" style="padding-left:1%;"> 
                     <input type="text" name="inputReportedPlayer" class="form-control" placeholder="Reported Player / Player ID">
                 </div>
                 <div class="col" style="padding-left:1%;">

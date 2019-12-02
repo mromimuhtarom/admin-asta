@@ -242,6 +242,9 @@ class AbuseTransactionReportController extends Controller
 
         if($player != NULL && $minDate != NULL && $maxDate != NULL && $TransType != NULL)
         {
+            if(is_numeric() !== true):
+            else:
+            endif;
             $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                         ->where('asta_db.report_problem.type', '=', $TransType)
                         ->whereBetween('asta_db.report_problem.date' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
