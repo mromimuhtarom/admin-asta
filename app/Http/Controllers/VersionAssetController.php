@@ -415,14 +415,14 @@ class VersionAssetController extends Controller
     public function deleteAllSelectedADR(Request $request)
     {
         $tag    =   $request->ids;
-        $id     =   $request->Names;
-        $link   =   $request->Links; 
+        $id     =   $request->names;
+        $link   =   $request->LinksAll; 
         $xml    =   new \DomDocument("1.0", "UTF-8");
         $xml->load('../public/upload/xml/Android/asset_game2.xml');
         $xpath  =   new \DOMXPATH($xml);
-        $idsArray = [$id];
-        $tagArray = [$tag];
-        $linkArray= [$link];
+        $idsArray = explode(",", $id);
+        $tagArray = explode(",", $tag);
+        $linkArray= explode(",", $link);
 
         foreach($idsArray as  $ids)
         {
@@ -440,20 +440,23 @@ class VersionAssetController extends Controller
 
                     //delete file in aws s3
                     $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $lka);
+ 
                     $deleteFile  = $replacepath . $ids;
                     Storage::disk('s3')->delete($deleteFile);
+                    
+                    //save xml local
+                    $xml->save('../public/upload/xml/Android/asset_game2.xml');
+                    $xmllocal = '../public/upload/xml/Android/asset_game2.xml';
+
+                    //save xml into aws s3
+                    $PathS3 = 'unity-asset/XML/Android/asset_game2.xml';
+                    Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
                 }
                 
             }
         }
         
-        //save xml local
-        $xml->save('../public/upload/xml/Android/asset_game2.xml');
-        $xmllocal = '../public/upload/xml/Android/asset_game2.xml';
 
-        //save xml into aws s3
-        $PathS3 = 'unity-asset/XML/Android/asset_game2.xml';
-        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
 
         return back()->with('success', 'Data deleted!');
 

@@ -1,25 +1,9 @@
 <?xml version="1.0"?>
 <main_asset>
-  <main name="main_lol_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
-    <ver>0.0.6</ver>
-  </main>
-  <general name="general_java_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/General/Android/</link>
-    <ver>0.0.3</ver>
-  </general>
-  <general name="lobby_general_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/GLOBAL/</link>
-    <ver>0.0.4</ver>
-  </general>
-  <bgt name="bgt_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/BGT/</link>
-    <ver>0.0.3</ver>
-  </bgt>
+  
+  
+  
+  
   <bgt name="bgt_game_img">
     <type>Image</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Android/</link>
