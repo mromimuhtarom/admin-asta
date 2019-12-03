@@ -79,6 +79,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
+                        <th>Player ID</th>
                         <th>Username</th>
                         <th>Status</th>
                         <th>Time Stamp</th>
@@ -88,6 +89,7 @@
                 <tbody>
                         @foreach ($log_login as $login)
                         <tr>
+                          <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
                           <td>{{ $action_report_admin[$login->action_id] }} Admin</td>
                           <td>{{ $login->datetime }}</td>

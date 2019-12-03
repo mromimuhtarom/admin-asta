@@ -12,7 +12,7 @@ https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/IOS/
         <link>
 https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/General/IOS/
         </link>
-        <ver>0.0.1</ver>
+        <ver>0.0.2</ver>
     </general>
     <general name="lobby_general_img">
         <type>Image</type>
