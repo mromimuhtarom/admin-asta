@@ -110,7 +110,16 @@ class PlayersController extends Controller
         $converttocomma = str_replace(':', ',', $player_status->value);
         $plyr_status = explode(",", $converttocomma);
 
-        return view('pages.players.registered_player', compact('plyr_status'));
+        $player_type = ConfigText::where('id', '=', 1)
+                       ->select(
+                              'name',
+                              'value'
+                       )
+                       ->first();
+        $typeconverttocomma = str_replace(':', ',', $player_type->value);
+        $plyr_type        = explode(",", $typeconverttocomma); 
+
+        return view('pages.players.registered_player', compact('plyr_status', 'plyr_type'));
     }
   // ----------- End Index Registered Player ----------- //
 

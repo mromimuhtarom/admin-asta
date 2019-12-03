@@ -32,6 +32,14 @@
                       </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
+                        <select name="type_user" class="form-control">
+                          <option value="">Choose Register Type</option>
+                          <option value="{{ $plyr_type[0] }}">{{ ucwords($plyr_type[1]) }}</option>
+                          <option value="{{ $plyr_type[2] }}">{{ ucwords($plyr_type[3]) }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col" style="padding-left:1%;">
                         <input type="date" name="inputMinDate" class="form-control">
                     </div>
                     <div class="col" style="padding-left:1%;">
