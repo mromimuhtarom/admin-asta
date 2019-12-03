@@ -33,7 +33,7 @@
         <form action="{{ route('LogPlayer-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" class="left" placeholder="username">
+                    <input type="text" name="username" class="left" placeholder="username / Player ID">
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
@@ -95,6 +95,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
+                        <th>Player ID</th>
                         <th>Username</th>
                         <th>Action</th>
                         <th>Desc</th>
@@ -104,6 +105,7 @@
                 <tbody>
                     @foreach($logplayer  as $log)
                     <tr>
+                        <td>{{ $log->user_id}}</td>
                         <td>{{ $log->username }}</td>
                         <td>{{ $log->action }}</td>
                         <td>{{ $log->desc }}</td>
