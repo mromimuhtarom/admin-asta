@@ -16,42 +16,42 @@
 @endif
 <!--- End Warning Alert --->
 <!--- Content Search --->
-    <div class="search bg-blue-dark " style="margin-bottom:2%;">
-        <div class="table-header w-100 h-100">
-            <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
-                <div class="row h-100 w-100 no-gutters">
-                    <div cl ass="col" style="padding-left:1%;">
-                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                      <select name="status" class="form-control">
-                        <option value="">Choose Status</option>
-                        <option value="{{ $plyr_status[0] }}">{{ ucwords($plyr_status[1]) }}</option>
-                        <option value="{{ $plyr_status[2] }}">{{ ucwords($plyr_status[3]) }}</option>
-                        <option value="{{ $plyr_status[4] }}">{{ ucwords($plyr_status[5]) }}</option>
-                      </select>
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <select name="type_user" class="form-control">
-                          <option value="">Choose Register Type</option>
-                          <option value="{{ $plyr_type[0] }}">{{ ucwords($plyr_type[1]) }}</option>
-                          <option value="{{ $plyr_type[2] }}">{{ ucwords($plyr_type[3]) }}</option>
-                        </select>
-                    </div>
-
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMinDate" class="form-control">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMaxDate" class="form-control">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
-                    </div>
+<div class="search bg-blue-dark " style="margin-bottom:2%;">
+    <div class="table-header w-100 h-100">
+        <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
+            <div class="row h-100 w-100 no-gutters">
+                <div cl ass="col" style="padding-left:1%;">
+                    <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
                 </div>
-            </form>
-        </div>
-    </div> 
+                <div class="col" style="padding-left:1%;">
+                  <select name="status" class="form-control">
+                    <option value="">Choose Status</option>
+                    <option value="{{ $plyr_status[0] }}">{{ ucwords($plyr_status[1]) }}</option>
+                    <option value="{{ $plyr_status[2] }}">{{ ucwords($plyr_status[3]) }}</option>
+                    <option value="{{ $plyr_status[4] }}">{{ ucwords($plyr_status[5]) }}</option>
+                  </select>
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <select name="type_user" class="form-control">
+                      <option value="">Choose Register Type</option>
+                      <option value="{{ $plyr_type[0] }}">{{ ucwords($plyr_type[1]) }}</option>
+                      <option value="{{ $plyr_type[2] }}">{{ ucwords($plyr_type[3]) }}</option>
+                    </select>
+                </div>
+
+                <div class="col" style="padding-left:1%;">
+                    <input type="date" name="inputMinDate" class="form-control">
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <input type="date" name="inputMaxDate" class="form-control">
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> 
 <!--- End Content Search --->
 
 <!--- Show After Search --->
@@ -107,54 +107,55 @@
               <th class="th-sm">Country</th>
             </tr>
           </thead>
-          <tbody>
-            @foreach($registerPlayer as $regis)
-            @php
-              // if($regis->facebook_id !== ''){
-              //     $user_type = 'Facebook';
-              // } else 
-              if($regis->user_type === 1) {
-                $user_type = 'Player Asta';
-              } else if($regis->user_type === 2) {
-                $user_type = "Guest Asta";
-              }
-            @endphp
-            @if ($menu && $mainmenu)
-            <tr>
-                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id}}</a></td>
-                <td>{{ $regis->username }}</td>
-                <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->chip }}</a></td>
-                <td><a href="#" class="usertext" data-title="Bank Account" data-name="point" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->point }}</a></td>
-                <td><a href="#" class="usertext" data-title="Bank Account" data-name="gold" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->gold }}</a></td>
-                <td><a href="#"class="status" data-title="Bank Account" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td>
-                <td>{{ $regis->join_date }}</td>
-                <td>{{ $user_type }}</td>
-                <td>{{ $regis->countryname }}</td>
-            </tr>   
-            @else
-            <tr>
-                <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id }}</a></td>
-                <td>{{ $regis->username }}</td>
-                <td>{{ $regis->chip }}</td>
-                <td>{{ $regis->point }}</td>
-                <td>{{ $regis->gold }}</td>
-                <td>{{ $regis->strStatus() }}</td>
-                <td>{{ $regis->join_date }}</td>
-                <td>{{ $user_type }}</td>
-                <td>{{ $regis->countryname }}</td>
-            </tr>   
-            @endif
-            @endforeach
-          </tbody>
-        </table>
-      
-      </div>
-      <!-- end widget content -->
-      <div style="display: flex;justify-content: center;">{{ $registerPlayer->links() }}</div>
-    </div>
-    <!-- end widget div -->
+<tbody>
+@foreach($registerPlayer as $regis)
+@php
+  // if($regis->facebook_id !== ''){
+  //     $user_type = 'Facebook';
+  // } else 
+  if($regis->user_type === 1) {
+    $user_type = 'Player Asta';
+  } else if($regis->user_type === 2) {
+    $user_type = "Guest Asta";
+  }
+@endphp
 
-  </div>
+      @if ($menu && $mainmenu)
+        <tr>
+            <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id}}</a></td>
+            <td>{{ $regis->username }}</td>
+            <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->chip }}</a></td>
+            <td><a href="#" class="usertext" data-title="Bank Account" data-name="point" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->point }}</a></td>
+            <td><a href="#" class="usertext" data-title="Bank Account" data-name="gold" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->gold }}</a></td>
+            <td><a href="#"class="status" data-title="Bank Account" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td>
+            <td>{{ $regis->join_date }}</td>
+            <td>{{ $user_type }}</td>
+            <td>{{ $regis->countryname }}</td>
+        </tr>   
+      @else
+        <tr>
+            <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id }}</a></td>
+            <td>{{ $regis->username }}</td>
+            <td>{{ $regis->chip }}</td>
+            <td>{{ $regis->point }}</td>
+            <td>{{ $regis->gold }}</td>
+            <td>{{ $regis->strStatus() }}</td>
+            <td>{{ $regis->join_date }}</td>
+            <td>{{ $user_type }}</td>
+            <td>{{ $regis->countryname }}</td>
+        </tr>   
+      @endif
+    @endforeach
+  </tbody>
+</table>
+
+</div>
+<!-- end widget content -->
+<div style="display: flex;justify-content: center;">{{ $registerPlayer->links() }}</div>
+</div>
+<!-- end widget div -->
+
+</div>
 
 <script type="text/javascript">
 	$(document).ready(function() {
