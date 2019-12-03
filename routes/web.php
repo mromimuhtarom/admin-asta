@@ -596,6 +596,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('List-Reseller-update', 'ResellerController@update')->name('ListReseller-update');
                 Route::delete('List-Reseller-delete', 'ResellerController@destroy')->name('ListReseller-delete');
                 Route::post('List-Reseller-Password-update', 'ResellerController@PasswordUpdate')->name('ListResellerPassword-update');
+                Route::delete('List-Reseller-deleteAllSelected', 'ResellerController@deleteAllSelected')->name('ListReseller-deleteAllSelected');
             });
         });
 
