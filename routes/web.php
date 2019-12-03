@@ -623,6 +623,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('ResellerRank-update', 'ResellerController@updateRank')->name('ResellerRank-update');
                 Route::delete('ResellerRank-delete', 'ResellerController@destroyRank')->name('ResellerRank-delete');
                 Route::post('ResellerRank-create', 'ResellerController@storeRankReseller')->name('ResellerRank-create');
+                Route::delete('ResellerRank-deleteAllSelected', 'ResellerController@deleteAllSelectedRank')->name('ResellerRank-deleteAllSelectedRank');
             });
         });
 

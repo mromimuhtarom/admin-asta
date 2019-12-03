@@ -61,7 +61,7 @@
           <thead>
             <tr>
               @if($menu && $mainmenu)
-              <th></th>
+              <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
               @endif
               <th class="th-sm">ID</th>
               <th class="th-sm">Name</th>
@@ -69,7 +69,14 @@
               <th class="th-sm">Type</th>
               <th class="th-sm">Bonus</th>
               @if($menu && $mainmenu)
-              <th class="th-sm">Action</th>
+              <th class="th-sm">
+                <a  href="#" style="color:red;font-weight:bold;" 
+                        class="delete" 
+                        id="trash" 
+                        data-toggle="modal" 
+                        data-target="#deleteAll"><i class="fa  fa-trash-o"></i>
+                </a>
+              </th>
               @endif
             </tr>
           </thead>
@@ -77,7 +84,7 @@
             @foreach($rank as $rk)
             @if($menu && $mainmenu)
             <tr>
-                <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $rk->id }}"></td>
+                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $rk->id }}" class="deletepermission{{ $rk->id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-name="id" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->id }}</a></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->name }}</a></td>
                 <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rk->id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ $rk->gold }}</a></td>
@@ -178,6 +185,32 @@
   </div>
 </div>
 </div>
+
+<!-- Modal DELETE ALL SELECTED -->
+<div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete all selected data?
+        <form action="{{ route('ResellerRank-deleteAllSelectedRank') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="text" name="userIdAll" id="idDeleteAll" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
 <!-- End Modal -->
 
 
@@ -187,6 +220,19 @@
     "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
     "pagingType": "full_numbers",
   });
+
+  //CHECKBOX ALL
+  $('#trash').hide();
+    $('#checkAll').on('click', function(e) {
+      if($(this).is(':checked', true))
+      {
+        $(".deleteIdAll").prop('checked', true);
+        $("#trash").show();
+      }else{
+        $(".deleteIdAll").prop('checked', false);
+        $("#trash").hide();
+      }
+    });
 });
 
 table = $('table.table').dataTable({
@@ -255,6 +301,26 @@ table = $('table.table').dataTable({
         }
       @endphp
 
+    //js delete on delete all selected modal
+    $('.delete').click(function(e) {
+      e.preventDefault();
+      var allVals = [];
+      $('.deleteIdAll:checked').each(function() {
+        allVals.push($(this).attr('data-pk'));
+        var join_selected_values = allVals.join(",");
+        $('#idDeleteAll').val(join_selected_values);
+      });
+    });
+
+    //hide and show icon delete all
+    $('#trash').hide();
+    $(".deleteIdAll").click(function(e) {
+      if($(".deleteIdAll:checked").length > 1) {
+          $("#trash").show();
+      }else{
+          $("#trash").hide();
+        }
+    });
   },
   responsive: false
 });

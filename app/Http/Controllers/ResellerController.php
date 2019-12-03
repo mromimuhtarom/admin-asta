@@ -1144,6 +1144,13 @@ public function detailTransaction($month, $year)
         DB::table('asta_db.reseller')->whereIn('reseller_id', explode(",", $ids))->delete();
         return redirect()->route('List_Reseller')->with('success', 'Data deleted');
     }
+
+    public function deleteAllSelectedRank(Request $request)
+    {
+        $ids    =   $request->userIdAll;
+        DB::table('asta_db.reseller_rank')->whereIn('id', explode(",", $ids))->delete();
+        return redirect()->route('Reseller_Rank')->with('success', 'Data deleted');
+    }
 // ------- End Delete Item Store Reseller --------//
 //****************************************** Menu Item Store Reseller******************************************//
 }
