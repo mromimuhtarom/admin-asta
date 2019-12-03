@@ -1137,6 +1137,13 @@ public function detailTransaction($month, $year)
         }
         
     }
+
+    public function deleteAllSelected(Request $request) 
+    {
+        $ids    =   $request->userIdAll;
+        DB::table('asta_db.reseller')->whereIn('reseller_id', explode(",", $ids))->delete();
+        return redirect()->route('List_Reseller')->with('success', 'Data deleted');
+    }
 // ------- End Delete Item Store Reseller --------//
 //****************************************** Menu Item Store Reseller******************************************//
 }
