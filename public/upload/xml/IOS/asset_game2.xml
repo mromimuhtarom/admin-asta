@@ -1,15 +1,7 @@
 <?xml version="1.0"?>
 <main_asset>
-        <main name="main_lol_img">
-        <type>Image</type>
-        <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/IOS/</link>
-        <ver>0.0.5</ver>
-    </main>
-    <general name="general_game_img">
-        <type>Image</type>
-        <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/General/IOS/</link>
-        <ver>0.0.1</ver>
-    </general>
+        
+    
     <general name="lobby_general_img">
         <type>Image</type>
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/IOS/GLOBAL/</link>

@@ -4,16 +4,8 @@
   
   
   
-  <bgt name="bgt_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Android/</link>
-    <ver>0.0.1</ver>
-  </bgt>
-  <bgt name="bgt_game_audio1">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Android/</link>
-    <ver>0.0.1</ver>
-  </bgt>
+  
+  
   <dmq name="dmq_lobby_img">
     <type>Image</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/DMQ/</link>

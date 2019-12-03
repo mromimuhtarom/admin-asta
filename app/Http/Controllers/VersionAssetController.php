@@ -17,8 +17,8 @@ class VersionAssetController extends Controller
     public function index()
     {
         $menu      = MenuClass::menuName('Version Asset Apk');
-        $xml_andro = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game2.xml");
-        $xml_ios   = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/IOS/asset_game2.xml");
+        $xml_andro = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
+        $xml_ios   = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/IOS/asset_game.xml");
         // $xml_andro = simplexml_load_file("../../asta-api/AssetBundle/XML/Android/asset_game.xml");
         // $xml_ios   = simplexml_load_file("../../asta-api/AssetBundle/XML/IOS/asset_game.xml");
         return view('pages.version_asset.version_asset', compact('xml_andro', 'xml_ios', 'menu'));
@@ -418,7 +418,7 @@ class VersionAssetController extends Controller
         $id     =   $request->names;
         $link   =   $request->LinksAll; 
         $xml    =   new \DomDocument("1.0", "UTF-8");
-        $xml->load('../public/upload/xml/Android/asset_game2.xml');
+        $xml->load('../public/upload/xml/Android/asset_game.xml');
         $xpath  =   new \DOMXPATH($xml);
         $idsArray = explode(",", $id);
         $tagArray = explode(",", $tag);
@@ -445,11 +445,11 @@ class VersionAssetController extends Controller
                     Storage::disk('s3')->delete($deleteFile);
                     
                     //save xml local
-                    $xml->save('../public/upload/xml/Android/asset_game2.xml');
-                    $xmllocal = '../public/upload/xml/Android/asset_game2.xml';
+                    $xml->save('../public/upload/xml/Android/asset_game.xml');
+                    $xmllocal = '../public/upload/xml/Android/asset_game.xml';
 
                     //save xml into aws s3
-                    $PathS3 = 'unity-asset/XML/Android/asset_game2.xml';
+                    $PathS3 = 'unity-asset/XML/Android/asset_game.xml';
                     Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
                 }
                 
@@ -465,6 +465,49 @@ class VersionAssetController extends Controller
 
     public function deleteAllSelectedIOS(Request $request)
     {
-        return view();
+        $tag    =   $request->ids2;
+        $id     =   $request->names2;
+        $link   =   $request->LinksAll2;
+
+        $xml    =   new \DomDocument("1.0", "UTF-8");
+        $xml->load('../public/upload/xml/IOS/asset_game.xml');
+        $xpath  =   new \DOMXPATH($xml);
+        $idsArray   =   explode(",", $id);
+        $tagArray   =   explode(",", $tag);
+        $linkArray  =   explode(",", $link);
+
+        foreach($idsArray as  $ids)
+        {
+            foreach($tagArray as $tgs)    
+            {
+                foreach($linkArray as $lka)
+                {
+                    foreach($xpath->query("/main_asset/".$tgs."[@name = '$ids']") as $node)
+                    {
+                        $node->parentNode->removeChild($node);
+                    }
+
+                    $xml->formatouput = true;
+
+
+                    //delete file in aws s3
+                    $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $lka);
+ 
+                    $deleteFile  = $replacepath . $ids;
+                    Storage::disk('s3')->delete($deleteFile);
+                    
+                    //save xml local
+                    $xml->save('../public/upload/xml/IOS/asset_game.xml');
+                    $xmllocal = '../public/upload/xml/IOS/asset_game.xml';
+
+                    //save xml into aws s3
+                    $PathS3 = 'unity-asset/XML/IOS/asset_game.xml';
+                    Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
+                }
+                
+            }
+        }
+
+        return back()->with('success', 'Data deleted!');
     }
 }

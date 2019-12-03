@@ -182,7 +182,7 @@
                                 @foreach ($xml_ios->children() as $key => $xl_ios)
                                     @if ($menu)
                                     <tr>
-                                        <td align="center"><input type="checkbox" name="deletepermission" data-pk="{{ $xl_ios['name'] }}" class="deletepermission{{ $xl_ios['name'].'2'}} deleteIdAll2"></td>
+                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl_ios['name'] }}" data-link="{{ $xl_ios->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl_ios['name'].'2'}} deleteIdAll2"></td>
                                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $xl_ios['name'] }}"><i class="fa fa-edit"></i>Edit asset</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
@@ -460,9 +460,9 @@
           <form action="{{ route('VersionAssetApkAndroid-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
-            <input type="text" name="name" id="id" value="">
-            <input type="text" name="id" id="name" value="">
-            <input type="text" name="Link" id="Link" value="">
+            <input type="hidden" name="name" id="id" value="">
+            <input type="hidden" name="id" id="name" value="">
+            <input type="hidden" name="Link" id="Link" value="">
         </div>
         <div class="modal-footer">
           <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
@@ -488,9 +488,9 @@
         <form action="{{ route('VersionAssetApkAndroid-deleteAssetAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
-          <input type="text" name="names" id="ids" value="">
-          <input type="text" name="ids" id="Names" value="">
-          <input type="text" name="LinksAll" id="LinksAll" value="">
+          <input type="hidden" name="names" id="ids" value="">
+          <input type="hidden" name="ids" id="Names" value="">
+          <input type="hidden" name="LinksAll" id="LinksAll" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
@@ -545,10 +545,9 @@
         <form action="{{ route('VersionAssetApkIOS-deleteAssetAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
-          <input type="text" name="name" id="id" value="">
-          <input type="text" name="id" id="name" value="">
-          <input type="text" name="Link" id="Link" value="">
-          <input type="text" name="userIdAll2" id="idDeleteAll2" value="">
+          <input type="hidden" name="names2" id="ids2" value="">
+          <input type="hidden" name="ids2" id="Names2" value="">
+          <input type="hidden" name="LinksAll2" id="LinksAll2" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
@@ -654,11 +653,22 @@
     //=============================== delete check all IOS =====================================//
     $('.delete2').click(function(e) {
       e.preventDefault();
-      var allVals = [];
+      var allValsIOS = [];
+      var alllinkIOS = [];
+      var allnameIOS = [];
       $('.deleteIdAll2:checked').each(function() {
-        allVals.push($(this).attr('data-pk'));
-        var join_selected_values = allVals.join(",");
-        $('#idDeleteAll2').val(join_selected_values);
+        allValsIOS.push($(this).attr('data-pk'));
+        alllinkIOS.push($(this).attr('data-link'));
+        allnameIOS.push($(this).attr('data-name'));
+
+        var join_selected_valuesIOS = allValsIOS.join(",");
+        var join_selected_linkIOS = alllinkIOS.join(",");
+        var join_selected_nameIOS = allnameIOS.join(",");
+
+        $('#ids2').val(join_selected_valuesIOS);
+        $('#LinksAll2').val(join_selected_linkIOS);
+        $('#Names2').val(join_selected_nameIOS);
+
       });
     });
 
