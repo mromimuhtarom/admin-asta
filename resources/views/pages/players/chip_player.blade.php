@@ -94,14 +94,14 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Player ID</th>
-                        <th>Username</th>
-                        <th>Game</th>
-                        <th>Action</th>
-                        <th>Debit</th>
-                        <th>Credit</th>
-                        <th>Total</th>
-                        <th>Timestamp</th>
+                        <th>@sortablelink('user_id')</th>
+                        <th>Username @sortablelink('player.username')</th>
+                        <th><a href="&direction=asc"></a> Game</th>
+                        <th>Action @sortablelink('action_id')</th>
+                        <th>Debit @sortablelink('debit')</th>
+                        <th>Credit @sortablelink('credit')</th>
+                        <th>Total @sortablelink('balance')</th>
+                        <th>Timestamp @sortablelink('datetime')</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,6 +147,7 @@
         "autoWidth" : true,
         "paging":false,
         "bInfo":false,
+        "ordering": false,
         "bLengthChange": false,
         "searching": false,
         "order": [[ 6, "desc" ]],

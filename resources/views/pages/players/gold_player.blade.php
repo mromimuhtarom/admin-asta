@@ -42,6 +42,8 @@
                         </div>
                         <div class="col" align="left" style="padding-left:1%;">
                             <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                            @if(Request::is('Players/Gold_Players/Gold-view'))
+                            @endif
                         </div>
                         <div class="col" align="left" style="padding-left:1%;">
                             <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
@@ -89,13 +91,16 @@
                 <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                     <thead>			                
                         <tr>
-                            <th>Player ID</th>
-                            <th>Username</th>
-                            <th>Action</th>
-                            <th>Debit</th>
-                            <th>Credit</th>
-                            <th>Total</th>
-                            <th>Timestamp</th>
+                            @php 
+
+                            @endphp
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.user_id"> Player ID  <i class="{{ $user_id }}"></i></a></th>
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">Username <i class="{{ $username }}"></i></a></th>
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.action_id">Action <i class="{{ $action_id }}"></i></a></th>
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.debit">Debit <i class="{{ $debit }}"></i></a></th>
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.credit">Credit <i class="{{ $credit }}"></i></a></th>
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.balance">Total <i class="{{ $balance }}"></i></a></th>
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.datetime">Timestamp  <i class="{{ $datetime }}"></i></a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,6 +141,7 @@
             "autoWidth" : true,
             "paging":false,
             "bInfo":false,
+            "ordering": false,
             "bLengthChange": false,
             "searching": false,
             "order": [[ 5, "desc" ]],

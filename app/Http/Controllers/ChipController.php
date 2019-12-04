@@ -208,7 +208,7 @@ class ChipController extends Controller
 
         }else if ($minDate != NULL && $maxDate != NULL){
           $balancedetails = $balanceChip->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                            ->sortable()
                             ->paginate(20);
           $balancedetails->appends($request->all());
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow','game','actblnc'));
