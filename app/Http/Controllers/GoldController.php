@@ -208,15 +208,6 @@ class GoldController extends Controller
             $balance   = 'fa fa-sort';
             $user_id  = 'fa fa-sort';
           endif; 
-        else:
-         
-            $user_id   = 'fa fa-sort';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
         endif;
 
         if ($searchUser != NULL && $minDate != NULL && $maxDate!= NULL){
