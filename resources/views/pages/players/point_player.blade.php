@@ -96,14 +96,14 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id"> Player ID <i class="{{ $user_id }}"></i></a></th>
-                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="{{ $username }}"></i></a></th>
-                        <th>Game</th>
-                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id"> Action <i class="{{ $action_id }}"></i></a></th>
-                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit"> Debit <i class="{{ $debit }}"></i></a></th>
-                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit"> Credit <i class="{{ $credit }}"></i></a></th>
-                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.balance"> Total <i class="{{ $balance }}"></i></a></th>
-                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.datetime"> Timestamp <i class="{{ $datetime }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id"> Player ID <i class="fa fa-sort{{ iconsorting('asta_db.balance_point.user_id') }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename"> Game <i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id"> Action <i class="fa fa-sort{{ iconsorting('asta_db.balance_point.action_id') }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit"> Debit <i class="fa fa-sort{{ iconsorting('asta_db.balance_point.debit') }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit"> Credit <i class="fa fa-sort{{ iconsorting('asta_db.balance_point.credit') }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.balance"> Total <i class="fa fa-sort{{ iconsorting('asta_db.balance_point.balance') }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.datetime"> Timestamp <i class="fa fa-sort{{ iconsorting('asta_db.balance_point.datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,6 +148,7 @@
         "autoWidth" : true,
         "paging":false,
         "bInfo":false,
+        "ordering":false,
         "bLengthChange": false,
         "searching": false,
         "order": [[ 6, "desc" ]],

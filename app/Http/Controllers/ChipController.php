@@ -110,323 +110,189 @@ class ChipController extends Controller
           $sortingorder = 'asc';
         endif;
         
-        $getMindate = Input::get('inputMinDate');
-        $getMaxdate = Input::get('inputMaxDate');
+        $getMindate  = Input::get('inputMinDate');
+        $getMaxdate  = Input::get('inputMaxDate');
+        $getGame     = Input::get('inputGame');
+        $getUsername = Input::get('inputPlayer');
 
-        if(Input::get('sorting') === 'desc'):
-          if(Input::get('namecolumn') === 'asta_db.balance_chip.user_id'):
-            $user_id   = 'fa fa-sort-desc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
 
-          elseif(Input::get('namecolumn') === 'asta_db.user.username'):
-            $username  = 'fa fa-sort-desc';
-            $user_id   = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.action_id'):
-            $action_id = 'fa fa-sort-desc';
-            $username  = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.debit'):
-            $debit     = 'fa fa-sort-desc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.credit'):
-            $credit    = 'fa fa-sort-desc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.balance'):
-            $balance   = 'fa fa-sort-desc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.datetime'):
-            $datetime  = 'fa fa-sort-desc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-          endif;
-
-        elseif(Input::get('sorting') === 'asc'):
-          if(Input::get('namecolumn') === 'asta_db.balance_chip.user_id'): 
-            $user_id   = 'fa fa-sort-asc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.user.username'): 
-            $username  = 'fa fa-sort-asc';
-            $user_id   = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.action_id'): 
-            $action_id = 'fa fa-sort-asc';
-            $username  = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.debit'): 
-            $debit     = 'fa fa-sort-asc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.credit'): 
-            $credit    = 'fa fa-sort-asc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.balance'): 
-            $balance   = 'fa fa-sort-asc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-            $datetime  = 'fa fa-sort';
-
-          elseif(Input::get('namecolumn') === 'asta_db.balance_chip.datetime'): 
-            $datetime  = 'fa fa-sort-asc';
-            $username  = 'fa fa-sort';
-            $action_id = 'fa fa-sort';
-            $debit     = 'fa fa-sort';
-            $credit    = 'fa fa-sort';
-            $balance   = 'fa fa-sort';
-            $user_id   = 'fa fa-sort';
-          endif;
-
-        else:
-          $datetime  = 'fa fa-sort';
-          $username  = 'fa fa-sort';
-          $action_id = 'fa fa-sort';
-          $debit     = 'fa fa-sort';
-          $credit    = 'fa fa-sort';
-          $balance   = 'fa fa-sort';
-          $user_id   = 'fa fa-sort';
-      endif; 
         
         if($searchUser != NULL && $gameName != NULL && $minDate != NULL && $maxDate != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
                               ->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           else:
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
                               ->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($searchUser != NULL && $gameName != NULL && $minDate != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
                               ->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           else:
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
                               ->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
           
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($searchUser != NULL && $gameName != NULL && $maxDate != NULL) {
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
                               ->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           else:
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser)
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
                               ->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($searchUser != NULL && $gameName != NULL) {
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           else:
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($gameName != NULL && $minDate != NULL) {
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
                             ->where('asta_db.balance_chip.game_id', '=', $gameName)
-                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                            ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($gameName != NULL && $maxDate != NULL) {
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
                             ->where('asta_db.balance_chip.game_id', '=', $gameName)
-                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                            ->orderBy($namecolumn, $sorting)
                             ->get();
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if ($searchUser != NULL && $minDate != NULL && $maxDate != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           else:
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
                               ->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         }else if ($searchUser != NULL && $minDate != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);  
           else:  
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
                               ->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($searchUser != NULL && $maxDate != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           else:
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
                               ->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
-                              ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($minDate != NULL && $maxDate != NULL){
           $balancedetails = $balanceChip->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
-                            ->sortable()
+                            ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($searchUser != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           else:
             $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
+                              ->orderBy($namecolumn, $sorting)
                               ->paginate(20);
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         } else if($gameName != NULL) {
           $balancedetails = $balanceChip->where('asta_db.balance_chip.game_id', '=', $gameName)
-                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                            ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if ($minDate != NULL){
 
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
-                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                            ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($maxDate != NULL){
 
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
-                            ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                            ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
 
         }
