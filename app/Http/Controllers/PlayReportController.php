@@ -186,6 +186,7 @@ class PlayReportController extends Controller
                             ->orderby($namecolumn, $sorting)
                             ->paginate(20);
               endif;
+              
        } else if($inputGame == 'Domino Susun') {
               if(is_numeric($inputName) !== true):
                      $player_history = $tbdms->where('asta_db.user.username', 'LIKE', '%'.$inputName.'%')
