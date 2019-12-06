@@ -98,7 +98,7 @@
                     <tr>
                         <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id"> Player ID <i class="{{ $user_id }}"></i></a></th>
                         <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="{{ $username }}"></i></a></th>
-                        <th>Game</th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.name"> Game <i class="{{ $gamesname }}"></i></a></th>
                         <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id"> Action <i class="{{ $action_id }}"></i></a></th>
                         <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit"> Debit <i class="{{ $debit }}"></i></a></th>
                         <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit"> Credit <i class="{{ $credit }}"></i></a></th>
@@ -150,6 +150,7 @@
         "bInfo":false,
         "bLengthChange": false,
         "searching": false,
+        "ordering": false,
         "order": [[ 6, "desc" ]],
         "oLanguage": {
                 "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'

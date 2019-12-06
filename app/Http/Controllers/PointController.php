@@ -23,7 +23,7 @@ class PointController extends Controller
 
     public function search(Request $request)
     {
-        $username     = $request->inputPlayer;
+        $searchUser     = $request->inputPlayer;
         $gameName     = $request->inputGame;
         $minDate      = $request->inputMinDate;
         $maxDate      = $request->inputMaxDate;
@@ -96,22 +96,36 @@ class PointController extends Controller
             if(Input::get('namecolumn') === 'asta_db.balance_point.user_id'):
               $user_id = 'fa fa-sort-desc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
               $balance   = 'fa fa-sort';
               $datetime  = 'fa fa-sort';
             elseif(Input::get('namecolumn') === 'asta_db.user.username'):
-              $username = 'fa fa-sort-desc';
-              $user_id  = 'fa fa-sort';
+              $username  = 'fa fa-sort-desc';
+              $user_id   = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
               $balance   = 'fa fa-sort';
               $datetime  = 'fa fa-sort';
+
+            elseif(Input::get('namecolumn') === 'asta_db.game.name' ):
+              $gamesname = 'fa fa-sort-desc';
+              $username  = 'fa fa-sort';
+              $user_id   = 'fa fa-sort';
+              $action_id = 'fa fa-sort';
+              $debit     = 'fa fa-sort';
+              $credit    = 'fa fa-sort';
+              $balance   = 'fa fa-sort';
+              $datetime  = 'fa fa-sort';
+            
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.action_id'):
               $action_id = 'fa fa-sort-desc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $user_id   = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
@@ -120,22 +134,25 @@ class PointController extends Controller
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.debit'):
               $debit = 'fa fa-sort-desc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
-              $user_id    = 'fa fa-sort';
+              $user_id   = 'fa fa-sort';
               $credit    = 'fa fa-sort';
               $balance   = 'fa fa-sort';
               $datetime  = 'fa fa-sort';
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.credit'):
               $credit = 'fa fa-sort-desc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
-              $user_id    = 'fa fa-sort';
+              $user_id   = 'fa fa-sort';
               $balance   = 'fa fa-sort';
               $datetime  = 'fa fa-sort';
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.balance'):
               $balance = 'fa fa-sort-desc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
@@ -144,6 +161,7 @@ class PointController extends Controller
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.datetime'):
               $datetime = 'fa fa-sort-desc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
@@ -154,6 +172,7 @@ class PointController extends Controller
             if(Input::get('namecolumn') === 'asta_db.balance_point.user_id'): 
               $user_id = 'fa fa-sort-asc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
@@ -162,14 +181,27 @@ class PointController extends Controller
             elseif(Input::get('namecolumn') === 'asta_db.user.username'): 
               $username = 'fa fa-sort-asc';
               $user_id  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
               $balance   = 'fa fa-sort';
               $datetime  = 'fa fa-sort';
+
+            elseif(Input::get('namecolumn') === 'asta_db.game.name' ):
+              $gamesname = 'fa fa-sort-asc';
+              $username  = 'fa fa-sort';
+              $user_id   = 'fa fa-sort';
+              $action_id = 'fa fa-sort';
+              $debit     = 'fa fa-sort';
+              $credit    = 'fa fa-sort';
+              $balance   = 'fa fa-sort';
+              $datetime  = 'fa fa-sort';
+
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.action_id'): 
               $action_id = 'fa fa-sort-asc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $user_id   = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
@@ -178,14 +210,16 @@ class PointController extends Controller
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.debit'): 
               $debit = 'fa fa-sort-asc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
-              $user_id    = 'fa fa-sort';
+              $user_id   = 'fa fa-sort';
               $credit    = 'fa fa-sort';
               $balance   = 'fa fa-sort';
               $datetime  = 'fa fa-sort';
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.credit'): 
               $credit = 'fa fa-sort-asc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $user_id    = 'fa fa-sort';
@@ -194,6 +228,7 @@ class PointController extends Controller
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.balance'): 
               $balance = 'fa fa-sort-asc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
@@ -202,6 +237,7 @@ class PointController extends Controller
             elseif(Input::get('namecolumn') === 'asta_db.balance_point.datetime'): 
               $datetime = 'fa fa-sort-asc';
               $username  = 'fa fa-sort';
+              $gamesname = 'fa fa-sort';
               $action_id = 'fa fa-sort';
               $debit     = 'fa fa-sort';
               $credit    = 'fa fa-sort';
@@ -211,6 +247,7 @@ class PointController extends Controller
           else:
             $datetime = 'fa fa-sort';
             $username  = 'fa fa-sort';
+            $gamesname = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
             $credit    = 'fa fa-sort';
@@ -219,51 +256,51 @@ class PointController extends Controller
           endif;
             
 
-        if($username != NULL && $gameName != NULL && $minDate != NULL && $maxDate != NULL) {
-            if(is_numeric($username) !== true):
-                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+        if($searchUser != NULL && $gameName != NULL && $minDate != NULL && $maxDate != NULL) {
+            if(is_numeric($searchUser) !== true):
+                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                   ->where('asta_db.balance_point.game_id', '=', $gameName)
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->orderby($namecolumn, $sorting)
                                   ->paginate(20);
             else:
-                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $username)
+                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $searchUser)
                                   ->where('asta_db.balance_point.game_id', '=', $gameName)
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->orderby($namecolumn, $sorting)
                                   ->paginate(20);
             endif;
 
             $balancedetails->appends($request->all());
-            return view('pages.players.point_player', compact('balancedetails','datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
-        } else if($username != NULL && $minDate != NULL && $maxDate != NULL) {
-            if(is_numeric($username) !== true):
-                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+            return view('pages.players.point_player', compact('balancedetails','datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'gamesname', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+        } else if($searchUser != NULL && $minDate != NULL && $maxDate != NULL) {
+            if(is_numeric($searchUser) !== true):
+                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->orderby($namecolumn, $sorting)
                                   ->paginate(20);
             else:
-                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $username)
+                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $searchUser)
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                  ->orderby('asta_db.balance_point.datetime', 'desc')
+                                  ->orderby($namecolumn, $sorting)
                                   ->paginate(20);
             endif;
 
             $balancedetails->appends($request->all());
-            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'gamesname', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
         } else if($gameName != NULL && $minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->where('asta_db.balance_point.game_id', '=', $gameName)
                               ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->orderby('asta_db.balance_point.datetime', 'desc')
+                              ->orderby($namecolumn, $sorting)
                               ->paginate(20);
             $balancedetails->appends($request->all());
-            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'gamesname', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
         } else if($minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balancePoint->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                              ->orderby('asta_db.balance_point.datetime', 'desc')
+                              ->orderby($namecolumn, $sorting)
                               ->paginate(20);
             $balancedetails->appends($request->all());
-            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
+            return view('pages.players.point_player', compact('balancedetails', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'gamesname', 'action_id', 'debit', 'credit', 'balance', 'datetime', 'sortingorder', 'getMaxdate', 'getMindate', 'user_id', 'username', 'action_id', 'debit', 'credit', 'balance', 'datetime'));
         } else {
             return back();            
         }

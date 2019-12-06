@@ -96,7 +96,7 @@
                     <tr>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.user_id"> Player ID <i class="{{ $user_id }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">Username <i class="{{ $username }}"></i></a></th>
-                        <th><a href="&direction=asc"></a> Game</th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.name"> Game <i class="{{ $gamesname }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.action_id">Action <i class="{{ $action_id }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.debit">Debit <i class="{{ $debit }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.credit">Credit <i class="{{ $credit }}"></i></a></th>
