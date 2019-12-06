@@ -109,18 +109,17 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Round ID</th>
-                        <th>Player ID</th>
-                        <th>Username</th>
-                        <th>Playing Game</th>
-                        <th>Table</th>
-                        <th>Seat</th>
-                        <th>Hand Card</th>
-                        <th>Bet</th>
-                        <th>Win Lose</th>
-                        <th>Status</th>
-                        <th>Time Stamp</th>
-                        {{-- <th>Country</th> --}}
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=round_id"> Round ID <i class="fa fa-sort{{ iconsorting('round_id') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id">Player ID <i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">Username <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">Playing Game <i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=tablename">Table  <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=seat_id">Seat <i class="fa fa-sort{{ iconsorting('seat_id') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card">Hand Card <i class="fa fa-sort{{ iconsorting('hand_card') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=bet">Bet <i class="fa fa-sort{{ iconsorting('bet') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=win_lose">Win Lose <i class="fa fa-sort{{ iconsorting('win_lose') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=status">Status <i class="fa fa-sort{{ iconsorting('status') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=datetime">Time Stamp <i class="fa fa-sort{{ iconsorting('datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -145,7 +144,7 @@
                           }
                           @endphp
                           <td>{{ $status }}</td>
-                          <td>{{ $history->date }}</td>
+                          <td>{{ $history->datetimeround }}</td>
                           {{-- <td>{{ $history->countryname }}</td> --}}
                         </tr>
                         @endforeach
@@ -514,6 +513,7 @@
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
 	    "autoWidth" : true,
+        "ordering"  : false;
         "order": [[ 9, "desc" ]],
         "paging": false,
         "bLengthChange": false,

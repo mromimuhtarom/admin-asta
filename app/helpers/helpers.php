@@ -220,4 +220,23 @@ function image_data($gdimage)
     return(ob_get_clean());
 }
 
+function iconsorting($fieldname)
+{
+  if(isset($_GET['namecolumn'])):
+    if($_GET['namecolumn'] === $fieldname):
+      if($_GET['sorting'] === 'asc'):
+        $icon = '-asc';
+      else:
+        $icon = '-desc';
+      endif;
+    else:
+      $icon = '';
+    endif;
+  else:
+    $icon = '';
+  endif;
+
+  return $icon;
+}
+
 ?>
