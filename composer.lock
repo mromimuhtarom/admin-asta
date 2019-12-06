@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb31c1b354245c99a9cea462bfc1cb7c",
+    "content-hash": "bcaac22a1debed9520843b7fe006659c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -854,26 +854,26 @@
         },
         {
             "name": "kyslik/column-sortable",
-            "version": "6.2.0",
+            "version": "5.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kyslik/column-sortable.git",
-                "reference": "4b628bffdb1724284dd0ae091262d24790225768"
+                "reference": "4c3291b51a8b19e278b96703bc31439a13cdbe04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kyslik/column-sortable/zipball/4b628bffdb1724284dd0ae091262d24790225768",
-                "reference": "4b628bffdb1724284dd0ae091262d24790225768",
+                "url": "https://api.github.com/repos/Kyslik/column-sortable/zipball/4c3291b51a8b19e278b96703bc31439a13cdbe04",
+                "reference": "4c3291b51a8b19e278b96703bc31439a13cdbe04",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "5.8.*|^6.0",
-                "illuminate/support": "5.8.*|^6.0",
-                "php": ">=7.2"
+                "illuminate/database": "5.5.*|5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*",
+                "php": ">=7.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^4.0",
-                "phpunit/phpunit": "^8.0"
+                "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*",
+                "phpunit/phpunit": "^6.0|^7.0"
             },
             "type": "package",
             "extra": {
@@ -899,7 +899,7 @@
                     "role": "Developer and maintainer"
                 }
             ],
-            "description": "Package for handling column sorting in Laravel 6.x",
+            "description": "Package for handling column sorting in Laravel 5.x",
             "keywords": [
                 "column",
                 "laravel",
@@ -907,7 +907,7 @@
                 "sortable",
                 "sorting"
             ],
-            "time": "2019-10-14T19:39:29+00:00"
+            "time": "2019-02-28T13:56:07+00:00"
         },
         {
             "name": "laravel/framework",

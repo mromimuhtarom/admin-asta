@@ -94,7 +94,7 @@ class GoldController extends Controller
 
         if(Input::get('sorting') === 'desc'):
           if(Input::get('namecolumn') === 'asta_db.balance_gold.user_id'):
-            $user_id = 'fa fa-sort-desc';
+            $user_id   = 'fa fa-sort-desc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
@@ -112,29 +112,29 @@ class GoldController extends Controller
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.action_id'):
             $action_id = 'fa fa-sort-desc';
             $username  = 'fa fa-sort';
-            $user_id = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
             $debit     = 'fa fa-sort';
             $credit    = 'fa fa-sort';
             $balance   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.debit'):
-            $debit = 'fa fa-sort-desc';
+            $debit     = 'fa fa-sort-desc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
-            $user_id    = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
             $credit    = 'fa fa-sort';
             $balance   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.credit'):
-            $credit = 'fa fa-sort-desc';
+            $credit    = 'fa fa-sort-desc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
-            $user_id    = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
             $balance   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.balance'):
-            $balance = 'fa fa-sort-desc';
+            $balance   = 'fa fa-sort-desc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
@@ -142,13 +142,13 @@ class GoldController extends Controller
             $user_id   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.datetime'):
-            $datetime = 'fa fa-sort-desc';
+            $datetime  = 'fa fa-sort-desc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
             $credit    = 'fa fa-sort';
             $balance   = 'fa fa-sort';
-            $user_id  = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
           endif; 
         elseif(Input::get('sorting') === 'asc'):
           if(Input::get('namecolumn') === 'asta_db.balance_gold.user_id'): 
@@ -160,8 +160,8 @@ class GoldController extends Controller
             $balance   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.user.username'): 
-            $username = 'fa fa-sort-asc';
-            $user_id  = 'fa fa-sort';
+            $username  = 'fa fa-sort-asc';
+            $user_id   = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
             $credit    = 'fa fa-sort';
@@ -170,25 +170,25 @@ class GoldController extends Controller
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.action_id'): 
             $action_id = 'fa fa-sort-asc';
             $username  = 'fa fa-sort';
-            $user_id = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
             $debit     = 'fa fa-sort';
             $credit    = 'fa fa-sort';
             $balance   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.debit'): 
-            $debit = 'fa fa-sort-asc';
+            $debit     = 'fa fa-sort-asc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
-            $user_id    = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
             $credit    = 'fa fa-sort';
             $balance   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.credit'): 
-            $credit = 'fa fa-sort-asc';
+            $credit    = 'fa fa-sort-asc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
-            $user_id    = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
             $balance   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.balance'): 
@@ -200,22 +200,22 @@ class GoldController extends Controller
             $user_id   = 'fa fa-sort';
             $datetime  = 'fa fa-sort';
           elseif(Input::get('namecolumn') === 'asta_db.balance_gold.datetime'): 
-            $datetime = 'fa fa-sort-asc';
+            $datetime  = 'fa fa-sort-asc';
             $username  = 'fa fa-sort';
             $action_id = 'fa fa-sort';
             $debit     = 'fa fa-sort';
             $credit    = 'fa fa-sort';
             $balance   = 'fa fa-sort';
-            $user_id  = 'fa fa-sort';
+            $user_id   = 'fa fa-sort';
           endif; 
         else:
-          $datetime = 'fa fa-sort';
+          $datetime   = 'fa fa-sort';
           $username  = 'fa fa-sort';
           $action_id = 'fa fa-sort';
           $debit     = 'fa fa-sort';
           $credit    = 'fa fa-sort';
           $balance   = 'fa fa-sort';
-          $user_id  = 'fa fa-sort';
+          $user_id   = 'fa fa-sort';
         endif;
 
         if ($searchUser != NULL && $minDate != NULL && $maxDate!= NULL){

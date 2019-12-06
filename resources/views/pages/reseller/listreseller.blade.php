@@ -109,30 +109,30 @@
   </div>
 </div>
 
-  {{-- reset password --}}
-  <div class="modal fade" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            × 
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="{{ route('ListResellerPassword-update') }}" method="post">
-            {{ csrf_field() }}
-            <input type="hidden" name="userid" id="userid" value="">
-            <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="button_example-yes submit-data">Reset Password</button>
-          <button type="button" class="button_example-no" data-dismiss="modal">No</button>
-        </div>
-          </form>
+{{-- reset password --}}
+<div class="modal fade" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          × 
+        </button>
       </div>
+      <div class="modal-body">
+        <form action="{{ route('ListResellerPassword-update') }}" method="post">
+          {{ csrf_field() }}
+          <input type="hidden" name="userid" id="userid" value="">
+          <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes submit-data">Reset Password</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+      </div>
+        </form>
     </div>
   </div>
+</div>
 
 
 {{-- end reset password --}}
@@ -142,7 +142,7 @@
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div c lass="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i> 
@@ -200,7 +200,6 @@
       "pagingType": "full_numbers",
     });
 
-  
   //CHECKBOX ALL
   $('#trash').hide();
     $('#checkAll').on('click', function(e) {
@@ -227,39 +226,40 @@
       "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
     },
     "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-      $.ajaxSetup({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
+    
+    $.ajaxSetup({
+      headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
 
-      $('.usertext').editable({
-        mode :'inline',
-        validate: function(value) {
-          if($.trim(value) == '') {
-            return 'This field is required';
+    $('.usertext').editable({
+      mode :'inline',
+      validate: function(value) {
+        if($.trim(value) == '') {
+          return 'This field is required';
+        }
+      }
+    });
+
+
+    $('.rank').editable({
+      mode:'inline',
+      value: '',
+      source: [
+          {value:"", text: "Choose Rank" },
+          @php
+          foreach($rank as $rk) {
+            echo '{value:"'.$rk->id.'", text: "'.$rk->name.'" },';
           }
+          @endphp
+      ],
+      validate: function(value) {
+        if($.trim(value) == '') {
+          return 'This field is required';
         }
-      });
-
-
-          $('.rank').editable({
-            mode:'inline',
-  				  value: '',
-  				  source: [
-                {value:"", text: "Choose Rank" },
-                @php
-                foreach($rank as $rk) {
-                  echo '{value:"'.$rk->id.'", text: "'.$rk->name.'" },';
-                }
-                @endphp
-  				  ],
-            validate: function(value) {
-              if($.trim(value) == '') {
-                return 'This field is required';
-              }
-            }
-          });
+      }
+    });
     
      //js delete on delete all selected modal
     $('.delete').click(function(e) {
@@ -282,43 +282,44 @@
         }
     });
 
-          @php 
-              foreach($reseller as $rsl) {            
-              echo'$(".password'.$rsl->reseller_id.'").click(function(e) {';
-                echo'e.preventDefault();';
-    
-                echo"var id = $(this).attr('data-pk');";
-                echo'var test = $("#userid").val(id);';
-              echo'});';
-            }
-          @endphp
+    @php 
+        foreach($reseller as $rsl) {            
+        echo'$(".password'.$rsl->reseller_id.'").click(function(e) {';
+          echo'e.preventDefault();';
 
-      @php
-        foreach($reseller as $rsl) {
-          echo'$(".delete'.$rsl->reseller_id.'").hide();';
-          echo'$(".deletepermission'.$rsl->reseller_id.'").on("click", function() {';
-            echo 'if($( ".deletepermission'.$rsl->reseller_id.':checked" ).length > 0)';
-            echo '{';
-              echo '$(".delete'.$rsl->reseller_id.'").show();';
-            echo'}';
-            echo'else';
-            echo'{';
-              echo'$(".delete'.$rsl->reseller_id.'").hide();';
-            echo'}';
+          echo"var id = $(this).attr('data-pk');";
+          echo'var test = $("#userid").val(id);';
+        echo'});';
+      }
+    @endphp
 
-          echo '});';
-        
-          echo'$(".delete'.$rsl->reseller_id.'").click(function(e) {';
-            echo'e.preventDefault();';
+    @php
+      foreach($reseller as $rsl) {
+        echo'$(".delete'.$rsl->reseller_id.'").hide();';
+        echo'$(".deletepermission'.$rsl->reseller_id.'").on("click", function() {';
+          echo 'if($( ".deletepermission'.$rsl->reseller_id.':checked" ).length > 0)';
+          echo '{';
+            echo '$(".delete'.$rsl->reseller_id.'").show();';
+          echo'}';
+          echo'else';
+          echo'{';
+            echo'$(".delete'.$rsl->reseller_id.'").hide();';
+          echo'}';
 
-            echo"var id = $(this).attr('data-pk');";
-            echo'var test = $("#id").val(id);';
-          echo'});';
-        }
-      @endphp
+        echo '});';
+      
+        echo'$(".delete'.$rsl->reseller_id.'").click(function(e) {';
+          echo'e.preventDefault();';
+
+          echo"var id = $(this).attr('data-pk');";
+          echo'var test = $("#id").val(id);';
+        echo'});';
+      }
+    @endphp
 
     },
     responsive: false
+
   });
 
 </script>  

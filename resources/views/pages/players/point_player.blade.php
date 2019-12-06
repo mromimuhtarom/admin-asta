@@ -96,14 +96,14 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Player ID</th>
-                        <th>Username</th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id"> Player ID <i class="{{ $user_id }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="{{ $username }}"></i></a></th>
                         <th>Game</th>
-                        <th>Action</th>
-                        <th>Debit</th>
-                        <th>Credit</th>
-                        <th>Total</th>
-                        <th>Timestamp</th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id"> Action <i class="{{ $action_id }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit"> Debit <i class="{{ $debit }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit"> Credit <i class="{{ $credit }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.balance"> Total <i class="{{ $balance }}"></i></a></th>
+                        <th><a href="{{ route('Point-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.datetime"> Timestamp <i class="{{ $datetime }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>

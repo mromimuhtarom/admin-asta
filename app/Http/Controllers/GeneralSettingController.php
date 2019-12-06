@@ -33,7 +33,7 @@ class GeneralSettingController extends Controller
         $award_daily_chips       = Config::select('id', 'name', 'value')->where('id', '=', '33')->first();
         $award_daily_chips_guest = Config::select('id', 'name', 'value')->where('id', '=', '34')->first();
         $award_daily_days        = Config::select('id', 'name', 'value')->where('id', '=', '35')->first();
-        $award_daily_multiply       = Config::select('id', 'name', 'value')->where('id', '=', '36')->first();
+        $award_daily_multiply    = Config::select('id', 'name', 'value')->where('id', '=', '36')->first();
 
         // Bank Settings
         $getBank            = Config::select('id', 'name', 'value')->where('id', '=', '201')->first();
@@ -184,7 +184,6 @@ class GeneralSettingController extends Controller
             default:
               "";
         }
-
 
         Log::create([
             'op_id'     => Session::get('userId'),

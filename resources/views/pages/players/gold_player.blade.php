@@ -94,7 +94,7 @@
                             @php 
 
                             @endphp
-                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.user_id"> Player ID  <i class="{{ $user_id }}"></i></a></th>
+                            <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.user_id"> Player ID <i class="{{ $user_id }}"></i></a></th>
                             <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">Username <i class="{{ $username }}"></i></a></th>
                             <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.action_id">Action <i class="{{ $action_id }}"></i></a></th>
                             <th><a href="{{ route('Gold-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.debit">Debit <i class="{{ $debit }}"></i></a></th>

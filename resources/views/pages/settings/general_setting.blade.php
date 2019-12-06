@@ -375,7 +375,7 @@
                               <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
                               <input type="text" name="urlprivacypolicy" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
                               <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ $client->get('privacy-policy.txt') }}</textarea>
-                              <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+                              <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                                 <script>
                                     CKEDITOR.replace( 'contentprivacypolicy' );
                                 </script>
@@ -417,7 +417,7 @@
                       <input type="hidden" name="idtermofservice" value="{{ $getTermOfService->id }}">
                       <input type="text" name="urltermofservice" placeholder="Url" class="form-control" value="{{$getTermOfService->value }}"><br>
                       <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ $client->get('term-of-service.txt') }}</textarea>
-                      <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+                      <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                         <script>
                           CKEDITOR.replace( 'contenttermofservice' );
                         </script>
@@ -461,7 +461,7 @@
                   <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
                   <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
                   <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
-                  <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+                  <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/full/ckeditor.js"></script>
                   <script>
                       CKEDITOR.replace( 'contentabout' );
                   </script>

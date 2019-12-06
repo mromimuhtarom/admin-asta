@@ -94,14 +94,14 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>@sortablelink('user_id')</th>
-                        <th>Username @sortablelink('player.username')</th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.user_id"> Player ID <i class="{{ $user_id }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">Username <i class="{{ $username }}"></i></a></th>
                         <th><a href="&direction=asc"></a> Game</th>
-                        <th>Action @sortablelink('action_id')</th>
-                        <th>Debit @sortablelink('debit')</th>
-                        <th>Credit @sortablelink('credit')</th>
-                        <th>Total @sortablelink('balance')</th>
-                        <th>Timestamp @sortablelink('datetime')</th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.action_id">Action <i class="{{ $action_id }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.debit">Debit <i class="{{ $debit }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.credit">Credit <i class="{{ $credit }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.balance">Total <i class="{{ $balance }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.datetime">Timestamp  <i class="{{ $datetime }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>

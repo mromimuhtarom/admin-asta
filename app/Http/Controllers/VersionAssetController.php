@@ -376,7 +376,6 @@ class VersionAssetController extends Controller
 
     }
 
-
     //FUNCTION DELETE ASSET IOS
     public function destroyIOS(Request $request)
     {
@@ -414,15 +413,15 @@ class VersionAssetController extends Controller
 
     public function deleteAllSelectedADR(Request $request)
     {
-        $tag    =   $request->ids;
-        $id     =   $request->names;
-        $link   =   $request->LinksAll; 
-        $xml    =   new \DomDocument("1.0", "UTF-8");
+        $tag        =   $request->ids;
+        $id         =   $request->names;
+        $link       =   $request->LinksAll; 
+        $xml        =   new \DomDocument("1.0", "UTF-8");
         $xml->load('../public/upload/xml/Android/asset_game.xml');
-        $xpath  =   new \DOMXPATH($xml);
-        $idsArray = explode(",", $id);
-        $tagArray = explode(",", $tag);
-        $linkArray= explode(",", $link);
+        $xpath      =   new \DOMXPATH($xml);
+        $idsArray   =   explode(",", $id);
+        $tagArray   =   explode(",", $tag);
+        $linkArray  =   explode(",", $link);
 
         foreach($idsArray as  $ids)
         {
@@ -436,7 +435,6 @@ class VersionAssetController extends Controller
                     }
 
                     $xml->formatouput = true;
-
 
                     //delete file in aws s3
                     $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $lka);
@@ -456,22 +454,19 @@ class VersionAssetController extends Controller
             }
         }
         
-
-
         return back()->with('success', 'Data deleted!');
-
 
     }
 
     public function deleteAllSelectedIOS(Request $request)
     {
-        $tag    =   $request->ids2;
-        $id     =   $request->names2;
-        $link   =   $request->LinksAll2;
+        $tag        =   $request->ids2;
+        $id         =   $request->names2;
+        $link       =   $request->LinksAll2;
 
-        $xml    =   new \DomDocument("1.0", "UTF-8");
+        $xml        =   new \DomDocument("1.0", "UTF-8");
         $xml->load('../public/upload/xml/IOS/asset_game.xml');
-        $xpath  =   new \DOMXPATH($xml);
+        $xpath      =   new \DOMXPATH($xml);
         $idsArray   =   explode(",", $id);
         $tagArray   =   explode(",", $tag);
         $linkArray  =   explode(",", $link);
@@ -488,7 +483,6 @@ class VersionAssetController extends Controller
                     }
 
                     $xml->formatouput = true;
-
 
                     //delete file in aws s3
                     $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $lka);

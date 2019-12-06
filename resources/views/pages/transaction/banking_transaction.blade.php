@@ -39,7 +39,7 @@
                     </select>
                 </div>
                 <div class="col">
-									<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
+					<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
                 </div>
                 <div class="col">
                     <input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="">
@@ -119,36 +119,41 @@
 <!-- End daily gift transactions -->
 
 <script>
-	$(document).ready(function() {
-    $('table.table').dataTable( {
-      "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
-	  "order": [[5, "desc"]]
-    });
-  });
+
+$(document).ready(function() {
+	$('table.table').dataTable( {
+		"lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+		"order": [[5, "desc"]]
+	});
+});
   
   $('form input[type="date"]').prop("disabled", true);
   $("#time").click(function(e) {
    e.preventDefault();
 	 
-	 if($(this).val() == 'today'){ 
+	if($(this).val() == 'today'){ 
 		@php
-   	echo'var minDate = $("#minDate").val("'.$datenow.'");';
+   		echo'var minDate = $("#minDate").val("'.$datenow.'");';
 		echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
 		@endphp
 		$('form input[type="date"]').prop("readonly", true);
 		$('form input[type="date"]').prop("disabled", false);
-  } else if($(this).val() == 'week'){
+  	
+	} else if($(this).val() == 'week'){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
+	
 	} else if($(this).val() == 'month'){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
+	
 	} else if($(this).val() == ''){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
+	
 	} else {
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
@@ -157,20 +162,20 @@
 	}
    });
 
-  table = $('table.table').dataTable({
-    "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
-    "autoWidth" : true,
-    "paging": false,
-    "classes": {
-      "sWrapper": "dataTables_wrapper dt-bootstrap4"
-    },
-    "oLanguage": {
-      "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
-    },
-    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-      $.ajaxSetup({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	table = $('table.table').dataTable({
+		"sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
+		"autoWidth" : true,
+		"paging": false,
+		"classes": {
+		"sWrapper": "dataTables_wrapper dt-bootstrap4"
+		},
+		"oLanguage": {
+		"sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+		},
+		"fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+		$.ajaxSetup({
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
      
@@ -187,29 +192,34 @@
 // 		$('form input[type="date"]').prop("disabled", true);
 //   }
 // });
+
 $('form input[type="date"]').prop("disabled", true);
 $("#time").click(function(e) {
    e.preventDefault();
 	 
-	 if($(this).val() == 'today'){ 
+	if($(this).val() == 'today'){ 
 		@php
-   	echo'var minDate = $("#minDate").val("'.$datenow.'");';
+   		echo'var minDate = $("#minDate").val("'.$datenow.'");';
 		echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
 		@endphp
 		$('form input[type="date"]').prop("readonly", true);
 		$('form input[type="date"]').prop("disabled", false);
-  } else if($(this).val() == 'week'){
+  	
+	} else if($(this).val() == 'week'){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
+	
 	} else if($(this).val() == 'month'){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
+	
 	} else if($(this).val() == ''){
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
 		$('form input[type="date"]').prop("disabled", true);
+	
 	} else {
 		var minDate = $("#minDate").val("");
 		var maxDate = $("#maxDate").val("");
