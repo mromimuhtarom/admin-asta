@@ -149,6 +149,7 @@ class PlayReportController extends Controller
                          'asta_db.user.user_id',
                          DB::raw("'Texas Poker' AS gamename")
                         );
+                        
        if($inputGame == 'Domino QQ'):
               if($namecolumn == NULL):
                      $namecolumn = 'asta_db.dmq_round.date';

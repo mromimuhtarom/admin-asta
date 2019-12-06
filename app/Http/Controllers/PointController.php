@@ -23,7 +23,7 @@ class PointController extends Controller
 
     public function search(Request $request)
     {
-        $username     = $request->inputPlayer;
+        $searchUser     = $request->inputPlayer;
         $gameName     = $request->inputGame;
         $minDate      = $request->inputMinDate;
         $maxDate      = $request->inputMaxDate;
@@ -95,15 +95,15 @@ class PointController extends Controller
         $getGame     = Input::get('inputGame');
             
 
-        if($username != NULL && $gameName != NULL && $minDate != NULL && $maxDate != NULL) {
-            if(is_numeric($username) !== true):
-                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+        if($searchUser != NULL && $gameName != NULL && $minDate != NULL && $maxDate != NULL) {
+            if(is_numeric($searchUser) !== true):
+                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                   ->where('asta_db.balance_point.game_id', '=', $gameName)
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                   ->orderby($namecolumn, $sorting)
                                   ->paginate(20);
             else:
-                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $username)
+                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $searchUser)
                                   ->where('asta_db.balance_point.game_id', '=', $gameName)
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                   ->orderby($namecolumn, $sorting)
@@ -119,7 +119,7 @@ class PointController extends Controller
                                   ->orderby($namecolumn, $sorting)
                                   ->paginate(20);
             else:
-                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $username)
+                $balancedetails = $balancePoint->where('asta_db.balance_point.user_id', '=', $searchUser)
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                   ->orderby($namecolumn, $sorting)
                                   ->paginate(20);

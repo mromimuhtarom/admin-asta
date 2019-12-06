@@ -95,16 +95,16 @@
         <table id="registered-players" class="table table-striped table-bordered table-hover" width="100%">
           <thead>
             <tr>
-              <th class="th-sm">Player ID</th>
-              <th class="th-sm">Username</th>
-              <th class="th-sm">Chip</th>
-              <th class="th-sm">Point</th>
-              <th class="th-sm">Gold</th>
-              <th class="th-sm">Status</th>
-              <th class="th-sm">Date Created</th>
-              <th class="th-sm">Register From</th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id"> Player ID <i class="fa fa-sort{{ iconsorting('user_id') }}"></i></a></th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="fa fa-sort{{ iconsorting('username') }}"></i></a></th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip"> Chip <i class="fa fa-sort{{ iconsorting('chip') }}"></i></a></th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point"> Point <i class="fa fa-sort{{ iconsorting('point') }}"></i></a></th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.gold"> Gold <i class="fa fa-sort{{ iconsorting('gold') }}"></i></a></th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.status"> Status <i class="fa fa-sort{{ iconsorting('status') }}"></i></a></th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.join_date"> Date created <i class="fa fa-sort{{ iconsorting('join_date') }}"></i></a></th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_type"> Register Form <i class="fa fa-sort{{ iconsorting('user_type') }}"></i></a></th>
               {{-- <th class="th-sm">Device</th> --}}
-              <th class="th-sm">Country</th>
+              <th><a href="{{ route('Guest-search') }}?inputPlayer=&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.country.name"> Country <i class="fa fa-sort{{ iconsorting('name') }}"></i></a></th>
             </tr>
           </thead>
 <tbody>
@@ -163,6 +163,7 @@
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
       "paging":false,
+      "ordering": false,
       "bLengthChange": false,
       "bFilter": false,
       "bInfo": false
@@ -174,6 +175,7 @@
     "autoWidth" : true,
     "paging": false,
     "bInfo": false,
+    "ordering": false,
     "bFilter": false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
