@@ -566,7 +566,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in menu Registered Player with ID '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' di menu Pemain Terdaftar dengan ID '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -592,7 +592,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in menu Registered Player with ID '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' di menu Pemain terdaftar dengan ID '.$pk.' menjadi '. $value
         ]);
     }
   // ----------- End Update Registered Player ----------- //
@@ -640,7 +640,7 @@ class PlayersController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new user Random with '.$number.' Record'
+            'desc'      => 'Menambahkan data pengguna tamu dengan ID  '.$number
         ]);
 
         return back()->with('success', 'Input Data Successfull with '.$number.' Record');
@@ -820,7 +820,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '3',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Create new in menu Bot with username '. $username
+          'desc'      => 'Menambahkan data di menu Bot dengan username '. $username
         ]);
 
         return redirect()->route('Bots')->with('success','Data Added');
@@ -852,7 +852,7 @@ class PlayersController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu Bots with ID '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Bot dengan ID '.$pk.' menjadi '. $value
       ]);
 
     }

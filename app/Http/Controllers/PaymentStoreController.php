@@ -71,7 +71,7 @@ class PaymentStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Payment Store with Name '. $request->title
+            'desc'      => 'Menambahkan data di menu Toko Pembayaran dengan Nama '. $request->title
         ]);
 
         return redirect()->route('Payment_Store')->with('success','Data Added');
@@ -106,6 +106,11 @@ class PaymentStoreController extends Controller
                 break;
             case "status":
                 $name = "Status";
+                if($value === 0):
+                    $value = 'Disabled';
+                else: 
+                    $value = 'Enabled';
+                endif;
                 break;
             default:
             "";
@@ -115,7 +120,7 @@ class PaymentStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' in menu Payment Store with ID '.$pk.' to '. $value
+            'desc'      => 'Edit '.$name.' di menu Toko Pembayaran dengan ID '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -135,7 +140,7 @@ class PaymentStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Payment Store with ID '.$getPaymentId
+                'desc'      => 'Hapus di menu Toko Pembayaran dengan ID '.$getPaymentId
             ]);
             return redirect()->route('Payment_Store')->with('success','Data Deleted');
         }
