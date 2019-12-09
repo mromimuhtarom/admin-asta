@@ -240,7 +240,8 @@ class AbuseTransactionReportController extends Controller
             return back()->with('alert', 'end Date can\'t be less than start date');
         }
 
-        if($player != NULL && $minDate != NULL && $maxDate != NULL && $TransType != NULL)
+        if($player != NULL && $minDate != NULL && $maxDate != NULL &&
+           $TransType != NULL)
         {
             if(is_numeric() !== true):
             else:

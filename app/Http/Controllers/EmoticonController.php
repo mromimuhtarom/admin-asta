@@ -185,7 +185,7 @@ class EmoticonController extends Controller
                             'op_id'     => Session::get('userId'),
                             'action_id' => '3',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Create new in menu Emoticon with title '. $emoticon->subject
+                            'desc'      => 'Membuat insert baru di menu Emotikon dengan judul '. $emoticon->subject
                         ]);
                         return redirect()->route('Emoticon')->with('success','Insert Data successfull');
                     }
@@ -336,7 +336,7 @@ class EmoticonController extends Controller
                         'op_id'     => Session::get('userId'),
                         'action_id' => '2',
                         'datetime'  => Carbon::now('GMT+7'),
-                        'desc'      => 'Edit image in menu Emoticon Store with ID '.$pk.' to '. $nama_file_unik
+                        'desc'      => 'Edit gambar di menu Toko Emotikon dengan ID '.$pk
                     ]);
                     return redirect()->route('Emoticon')->with('success','Update Image successfull');
 
@@ -428,7 +428,7 @@ class EmoticonController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu Emoticon with Id '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Toko Emotikon dengan Id '.$pk.' menjadi '. $value
       ]);
         
     }
@@ -458,7 +458,7 @@ class EmoticonController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Emoticon with ID '.$id
+                'desc'      => 'hapus di menu Emotikon dengan ID '.$id
             ]);
 
             return redirect()->route('Emoticon')->with('success','Data Deleted');

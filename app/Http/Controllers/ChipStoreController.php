@@ -213,6 +213,11 @@ class ChipStoreController extends Controller
               break;
           case "status":
               $name = "Status";
+              if($value == 0):
+                $value = 'Disabled';
+              else:
+                $value = 'Enabled';
+              endif;
               break;
           case "order":
               $name = "Order";
@@ -226,7 +231,7 @@ class ChipStoreController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu Chip Store with Id '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Toko Chip dengan Id '.$pk.' menjadi '. $value
       ]);
     }
 
@@ -326,7 +331,7 @@ class ChipStoreController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Edit Image In menu Chip Store with ID '.$pk.' to '.$nama_file_unik
+                    'desc'      => 'Edit gambar di menu Toko Chip dengan ID '.$pk.' menjadi '.$nama_file_unik
                 ]);
 
                 return redirect()->route('Chip_Store')->with('success','Update Image Successfull');
@@ -390,7 +395,7 @@ class ChipStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete Photo or image in menu Chip Store with ID '.$id
+                'desc'      => 'Hapus Photo atau gambar di menu Toko Chip dengan ID '.$id
             ]);
 
             return redirect()->route('Chip_Store')->with('success','Data Deleted');
