@@ -240,23 +240,69 @@ function iconsorting($fieldname)
 }
 
 function tpkcard($array) {
-  $arraycard = explode(',', $array);
-  $cards = ['FD','2D','3D','4D','5D','6D','7D','8D','9D','10D','JD','QD','KD','AD', //13
-  '2C','3C','4C','5C','6C','7C','8C','9C','10C','JC','QC','KC','AC',         //26
-  '2H','3H','4H','5H','6H','7H','8H','9H','10H','JH','QH','KH','AH',         //39
-  '2S','3S','4S','5S','6S','7S','8S','9S','10S','JS','QS','KS','AS'];
+  if(!empty($array)):
+    $arraycard = explode(',', $array);
+    $cards = ['','2D','3D','4D','5D','6D','7D','8D','9D','10D','JD','QD','KD','AD', //13
+    '2C','3C','4C','5C','6C','7C','8C','9C','10C','JC','QC','KC','AC',         //26
+    '2H','3H','4H','5H','6H','7H','8H','9H','10H','JH','QH','KH','AH',         //39
+    '2S','3S','4S','5S','6S','7S','8S','9S','10S','JS','QS','KS','AS'];
+  
+    for ($i = 0; $i < count($arraycard); $i++){
+      // resCard[i]=cards[array[i]];
+      // $resCard.push($cards[$arraycard[$i]]);
+      $resCard[] = $cards[$arraycard[$i]];
+      
+    }
+  else:
+    $resCard = '';
+  endif;
+  return $resCard;
 
-  $resCard = [];
-  for ($i = 0; $i < $arraycard.length; $i++){
-    // resCard[i]=cards[array[i]];
-    $resCard.push($cards[$arraycard[i]]);
-  }
-  if ($arraycard.length == 1){
-    return $cards[$arraycard[0]];
-  }else{
-    $resCard = 'No Card';
-    return $resCard;
-  }
+}
+
+function bgtcard($array) {
+  if($array !== '-'):
+    $arraycard = explode(',', $array);
+    $cards = ['FD','3D','4D','5D','6D','7D','8D','9D','10D','JD','QD','KD','AD','2D', //13
+             '3C','4C','5C','6C','7C','8C','9C','10C','JC','QC','KC','AC','2C',         //26
+             '3H','4H','5H','6H','7H','8H','9H','10H','JH','QH','KH','AH','2H',        //39
+             '3S','4S','5S','6S','7S','8S','9S','10S','JS','QS','KS','AS','2S'];
+    
+    for ($i = 0; $i < count($arraycard); $i++){
+      
+      // resCard[i]=cards[array[i]];
+      // $resCard.push($cards[$arraycard[$i]]);
+      $resCard[] = $cards[$arraycard[$i]];
+      
+    }
+  else:
+    $resCard[]= '';
+  endif;
+
+  return $resCard;
+
+}
+
+
+function dmscard($array) {
+  if($array !== '-'):
+    $arraycard = explode(',', $array);
+    $cards = [
+      [0, 0],[0, 1],[0, 2],[0, 3],[0, 4],[0, 5],[0, 6],[1, 1],[1, 2],[1, 3],
+      [1, 4],[1, 5],[1, 6],[2, 2],[2, 3],[2, 4],[2, 5],[2, 6],[3, 3],[3, 4],
+      [3, 5],[3, 6],[4, 4],[4, 5],[4, 6],[5, 5],[5, 6],[6, 6]
+    ];
+    for ($i = 0; $i < count($arraycard); $i++){
+      // resCard[i]=cards[array[i]];
+      // $resCard.push($cards[$arraycard[$i]]);
+      $resCard[] = $cards[$arraycard[$i]];
+      
+    }
+  else:
+    $resCard[]= '';
+  endif;
+  return $resCard;
+
 }
 
 ?>

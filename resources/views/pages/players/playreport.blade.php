@@ -115,7 +115,7 @@
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">Playing Game <i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=tablename">Table  <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=seat_id">Seat <i class="fa fa-sort{{ iconsorting('seat_id') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card">Hand Card <i class="fa fa-sort{{ iconsorting('hand_card') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card_round">Hand Card <i class="fa fa-sort{{ iconsorting('hand_card_round') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=bet">Bet <i class="fa fa-sort{{ iconsorting('bet') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=win_lose">Win Lose <i class="fa fa-sort{{ iconsorting('win_lose') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=status">Status <i class="fa fa-sort{{ iconsorting('status') }}"></i></a></th>
@@ -131,7 +131,24 @@
                           <td>{{ $history->gamename }}</td>
                           <td>{{ $history->tablename }}</td>
                           <td>{{ $history->seat_id }}</td>
-                          <td>{{ $history->hand_card }}</td>
+                          <td>
+                            @if (isset($_GET['inputGame']))
+                                @if($_GET['inputGame'] === 'Texas Poker')
+                                    @foreach (tpkcard($history->hand_card_round) as $card)
+                                        {{ $card }}, 
+                                    @endforeach
+                                @elseif($_GET['inputGame'] === 'Big Two')
+                                    @foreach (bgtcard($history->hand_card_round) as $item)
+                                        {{ $item }} 
+                                    @endforeach
+                                @else
+                                    
+                                        {{$history->hand_card }} 
+                                @endif
+                            @endif
+                            
+                            {{-- {{ $history->hand_card_round }} --}}
+                          </td>                          
                           <td>{{ $history->bet }}</td>
                           <td>{{ $history->win_lose }}</td>
                           @php
@@ -161,8 +178,14 @@
     <!-- end widget -->
 
 <!-- Modal -->
-
-@foreach ($player_history as $history)
+@php 
+$ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id', '=', 'asta_db.tpk_round_player.round_id')
+->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.tpk_round_player.user_id')
+->join('asta_db.tpk_table', 'asta_db.tpk_table.table_id', '=', 'asta_db.tpk_round.table_id')
+->where('asta_db.tpk_round.round_id', '=', 10169)
+->get();
+@endphp
+@foreach ($ab as $history)
 <div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog1 modal-dialog-scrollable" role="document">
       <div class="modal-content">
@@ -248,7 +271,13 @@
                                     @endforeach
                                     <td>{{ $endplayer['status'] }}</td>
                                     <td>{{ $endplayer['chip'] }}</td>
-                                    <td>{{ $endplayer['card'] }}</td>
+                                    <td>
+                                        {{-- {{ dd($endplayer['card']) }} --}}
+                                        @foreach (bgtcard($endplayer['card']) as $item)
+                                            {{ $item }}
+                                        @endforeach
+                                        {{-- {{ $endplayer['card'] }} --}}
+                                    </td>
                                 </tr>
                                 @endforeach     
                                 @endif
@@ -259,7 +288,7 @@
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
-                                    <th>Sit</th>
+                                    <th>Sita</th>
                                     <th>Username</th>
                                     <th>Action</th>
                                     <th>Chip</th>
@@ -287,7 +316,7 @@
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
                                     <td>{{ $player['card'] }}</td>
-                                    <td>{{ $row['cardtable']}}</td>
+                                    <td>{{ tpkcard($row['cardtable']) }}</td>
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'TURN_BET')
@@ -302,7 +331,7 @@
                                     <td>{{ $action_plyr['action']}}</td>
                                     <td>{{ $action_plyr['chip']}}</td>
                                     <td>{{ $action_plyr['card'] }}</td>
-                                    <td>{{ $row['cardtable'] }}</td>
+                                    <td>{{ var_dump(tpkcard($row['cardtable'])) }}</td>
                                 </tr> 
                                 @endforeach 
                                 @elseif ($row['game_state'] === 'END_ROUND')
@@ -317,7 +346,7 @@
                                     <td>{{ $endplayer['status'] }}</td>
                                     <td>{{ $endplayer['chip'] }}</td>
                                     <td>{{ $endplayer['card'] }}</td>
-                                    <td>{{ $row['cardtable'] }}</td>
+                                    <td>{{ var_dump(tpkcard($row['cardtable'])).'tyu' }}</td>
                                 </tr>
                                 @endforeach     
                                 @endif

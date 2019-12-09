@@ -74,10 +74,10 @@ class ChipController extends Controller
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
         
-        $validator = Validator::make($request->all(),[
-          'inputMinDate'    => 'required|date',
-          'inputMaxDate'    => 'required|date',
-        ]);
+        // $validator = Validator::make($request->all(),[
+        //   'inputMinDate'    => 'required|date',
+        //   'inputMaxDate'    => 'required|date',
+        // ]);
 
         $actblnc = [
           $actionbalance[0]  => $actionbalance[1] ,
@@ -87,9 +87,9 @@ class ChipController extends Controller
           $actionbalance[8]  => $actionbalance[9] 
         ];
 
-        if ($validator->fails()) {
-          return back()->withErrors($validator->errors());
-        }
+        // if ($validator->fails()) {
+        //   return back()->withErrors($validator->errors());
+        // }
 
         if($maxDate < $minDate){
           return back()->with('alert','End Date can\'t be less than start date');
@@ -135,6 +135,14 @@ class ChipController extends Controller
           $balancedetails->appends($request->all());
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
+        } else if($gameName != NULL && $minDate != NULL && $maxDate != NULL) {
+            $balancedetails = $balanceChip->where('asta_db.balance_chip.game_id', '=', $gameName)
+                              ->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(20);
+
+          $balancedetails->appends($request->all());
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         } else if($searchUser != NULL && $gameName != NULL && $minDate != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
@@ -154,7 +162,6 @@ class ChipController extends Controller
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($searchUser != NULL && $gameName != NULL && $maxDate != NULL) {
-
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
                               ->where('asta_db.balance_chip.game_id', '=', $gameName)
@@ -189,7 +196,6 @@ class ChipController extends Controller
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($gameName != NULL && $minDate != NULL) {
-          
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
                             ->where('asta_db.balance_chip.game_id', '=', $gameName)
                             ->orderBy($namecolumn, $sorting)
@@ -253,7 +259,6 @@ class ChipController extends Controller
           return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($minDate != NULL && $maxDate != NULL){
-         
           $balancedetails = $balanceChip->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);

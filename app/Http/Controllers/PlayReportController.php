@@ -92,7 +92,7 @@ class PlayReportController extends Controller
                          'asta_db.dmq_round_player.round_id as round_id',
                          'asta_db.dmq_round_player.win_lose as win_lose',
                          'asta_db.dmq_round_player.status as status',
-                         'asta_db.dmq_round_player.hand_card as hand_card',
+                         'asta_db.dmq_round_player.hand_card as hand_card_round',
                          'asta_db.dmq_round_player.seat_id as seat_id',
                          'asta_db.user.username',
                          'asta_db.user.user_id',
@@ -109,12 +109,29 @@ class PlayReportController extends Controller
                          'asta_db.dms_round_player.round_id as round_id',
                          'asta_db.dms_round_player.win_lose as win_lose',
                          'asta_db.dms_round_player.status as status',
-                         'asta_db.dms_round_player.hand_card as hand_card',
+                         'asta_db.dms_round_player.hand_card as hand_card_round',
                          'asta_db.dms_round_player.seat_id as seat_id',
                          'asta_db.user.username',
                          'asta_db.user.user_id',
                          DB::raw("'Domino Susun' AS gamename")
                      );
+       // $tdms = DmsRound::join('asta_db.dms_round_player', 'asta_db.bgt_round_player.round_id', '=', 'asta_db.bgt_round.round_id')
+       //          ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.bgt_round_player.user_id')
+       //          ->join('asta_db.bgt_table', 'asta_db.bgt_table.table_id', '=', 'asta_db.bgt_round.table_id')
+       //          ->select(
+       //                   'asta_db.bgt_round.gameplay_log as gameplay_log',
+       //                   'asta_db.bgt_round.date As datetimeround',
+       //                   'asta_db.bgt_table.name AS tablename',
+       //                   'asta_db.bgt_round_player.bet as bet',
+       //                   'asta_db.bgt_round_player.round_id as round_id',
+       //                   'asta_db.bgt_round_player.win_lose as win_lose',
+       //                   'asta_db.bgt_round_player.status as status',
+       //                   'asta_db.bgt_round_player.hand_card as hand_card',
+       //                   'asta_db.bgt_round_player.seat_id as seat_id',
+       //                   'asta_db.user.username',
+       //                   'asta_db.user.user_id',
+       //                   DB::raw("'Big Two' AS gamename")
+       //          );
        $tbbgt = BgtRound::join('asta_db.bgt_round_player', 'asta_db.bgt_round_player.round_id', '=', 'asta_db.bgt_round.round_id')
                 ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.bgt_round_player.user_id')
                 ->join('asta_db.bgt_table', 'asta_db.bgt_table.table_id', '=', 'asta_db.bgt_round.table_id')
@@ -126,7 +143,7 @@ class PlayReportController extends Controller
                          'asta_db.bgt_round_player.round_id as round_id',
                          'asta_db.bgt_round_player.win_lose as win_lose',
                          'asta_db.bgt_round_player.status as status',
-                         'asta_db.bgt_round_player.hand_card as hand_card',
+                         'asta_db.bgt_round_player.hand_card as hand_card_round',
                          'asta_db.bgt_round_player.seat_id as seat_id',
                          'asta_db.user.username',
                          'asta_db.user.user_id',
@@ -143,7 +160,7 @@ class PlayReportController extends Controller
                          'asta_db.tpk_round_player.round_id as round_id',
                          'asta_db.tpk_round_player.win_lose as win_lose',
                          'asta_db.tpk_round_player.status as status',
-                         'asta_db.tpk_round_player.hand_card as hand_card',
+                         'asta_db.tpk_round_player.hand_card as hand_card_round',
                          'asta_db.tpk_round_player.seat_id as seat_id',
                          'asta_db.user.username',
                          'asta_db.user.user_id',

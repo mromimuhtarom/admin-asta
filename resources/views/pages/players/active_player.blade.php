@@ -49,6 +49,7 @@
                 </tr>
               </thead>
               <tbody>
+                {{dd($online)}}
                 @foreach($online as $ol)
                 <tr>
                     <td>{{ $ol->username }}</td>
