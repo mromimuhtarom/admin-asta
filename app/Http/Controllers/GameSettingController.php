@@ -56,7 +56,7 @@ class GameSettingController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => 2,
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit Asta Poker of Setting in menu Game Setting with ID '.$pk.' to '. $value
+            'desc'      => 'Edit Pengaturan Asta Poker di menu Pengaturan Game dengan ID '.$pk.' menjadi '. $value
         ]);
 
     }
@@ -75,7 +75,7 @@ class GameSettingController extends Controller
             'op_id' =>  Session::get('userId'),
             'action_id' =>  2,
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'  =>  'Edit Asta Big Two of setting in menu Game Setting with ID '.$pk.' to '.$value  
+            'desc'  =>  'Edit Pengaturan Asta Big Two di menu Pengaturan Game dengan ID '.$pk.' menjadi '.$value  
         ]);
     }
 
@@ -93,7 +93,7 @@ class GameSettingController extends Controller
             'op_id' =>  Session::get('userId'),
             'action_id' =>  2,
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit Domino Susun of Setting in menu Game Setting with ID '.$pk.' to '.$value
+            'desc'      =>  'Edit Pengaturan Domino Susun di menu Pengaturan Game dengan ID '.$pk.' menjadi '.$value
         ]);
     }
 
@@ -111,7 +111,7 @@ class GameSettingController extends Controller
             'op_id' =>  Session::get('userId'),
             'action_id' =>  2,
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit Domino QQ of Setting in menu Game Setting with ID '.$pk.' to '.$value
+            'desc'      =>  'Edit Pengaturan Domino QQ di menu Pengaturan Game dengan ID '.$pk.' menjadi '.$value
         ]);
     }
 }
