@@ -141,4 +141,11 @@ class PaymentStoreController extends Controller
         }
         return redirect()->route('Payment_Store')->with('success','Something wrong');  
     }
+
+    public function deleteAllSelectedpayment(Request $request)
+    {
+        $ids    =   $request->userIdAll;
+        DB::table('asta_db.payment')->whereIn('id', explode(",", $ids))->delete();
+        return redirect()->route('Payment_Store')->with('succes', 'Data deleted');
+    }
 }

@@ -56,7 +56,7 @@
                                 </li>
                             @endif
                             @endif
-                        {{-- end tidak memiliki submenu kedua --}}
+                        {{-- end tidak memiliki submenu k   edua --}}
                         @endif
                     @endforeach
                 </ul>

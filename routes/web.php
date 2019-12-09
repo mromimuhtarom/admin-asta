@@ -517,6 +517,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('PaymentStore-update', 'PaymentStoreController@update')->name('PaymentStore-update');
                 Route::post('PaymentStore-create', 'PaymentStoreController@store')->name('PaymentStore-create');
                 Route::delete('PaymentStore-delete', 'PaymentStoreController@destroy')->name('PaymentStore-delete');
+                Route::delete('PaymentStore-deleteAllSelected', 'PaymentStoreController@deleteAllSelectedpayment')->name('PaymentStore-deleteAllSelected');
             });
         });
         Route::group(['prefix'  =>  'Report_Store'], function() {

@@ -95,11 +95,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Player ID</th>
-                        <th>Username</th>
-                        <th>Action</th>
-                        <th>Desc</th>
-                        <th>TimeStamp</th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMindate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.user_id">Player ID<i class="fa fa-sort{{ iconsorting('asta_db.log_user.user_id') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.action_id"> Action <i class="fa fa-sort{{ iconsorting('asta_db.log_user.action_id') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}$action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.description"> Desc <i class="fa fa-sort{{ iconsorting('asta_db.log_user.description') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}$action={{ $getAction }}&dari={{ $getMindate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.datetime"> TimeStamp <i class="fa fa-sort{{ iconsorting('asta_db.log_user.datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,6 +143,7 @@
         "pagingType": "full_numbers",
         "paging":false,
         "bInfo":false,
+        "ordering": false,
         "bLengthChange": false,
 		classes: {
 		    sWrapper:      "dataTables_wrapper dt-bootstrap4"

@@ -66,14 +66,19 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                  <th class="th-sm"></th>
+                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
                 @endif
                 <th class="th-sm">Name</th>
                 <th class="th-sm">Type</th>
                 <th class="th-sm">desc</th>
                 <th class="th-sm">status</th>
                 @if($menu && $mainmenu)
-                <th>Action</th>
+                <th align="center" style="width: 10px;">
+                  <a href="#" style="color:red;font-weight:bold;" 
+                  class="delete" 
+                  id="trash" 
+                  data-toggle="modal" 
+                  data-target="#deleteAll"><i class="fa  fa-trash-o"></a></th>
                 @endif
               </tr>
             </thead>
@@ -81,7 +86,7 @@
               @foreach($getPayments as $payment)
               @if($menu && $mainmenu)
               <tr>
-                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $payment->id }}"></td>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $payment->id }}" class="deletepermission{{ $payment->id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>
                 <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->type) }}</td>
                 <td><a href="#" class="usertext" data-title="desc" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
@@ -188,6 +193,33 @@
 </div>
 <!-- End delete Modal -->
 
+<!-- Modal DELETE ALL SELECTED -->
+<div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure Want To Delete all selected data?
+        <form action="{{ route('PaymentStore-deleteAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
 <!-- script -->
 <script>
   $(document).ready(function() {
@@ -195,12 +227,28 @@
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
     });
+
+    //CHECKBOX ALL
+  $('#trash').hide();
+    $('#checkAll').on('click', function(e) {
+      if($(this).is(':checked', true))
+      {
+        $(".deleteIdAll").prop('checked', true);
+        $("#trash").show();
+      }else{
+        $(".deleteIdAll").prop('checked', false);
+        $("#trash").hide();
+      }
+    });
+
   });
+
 
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
     "autoWidth" : true,
     "paging": false,
+    "ordering": false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },
@@ -263,6 +311,27 @@
                   @endphp
         ]
       });
+
+      //js delete on delete all selected modal
+    $('.delete').click(function(e) {
+      e.preventDefault();
+      var allVals = [];
+      $('.deleteIdAll:checked').each(function() {
+        allVals.push($(this).attr('data-pk'));
+        var join_selected_values = allVals.join(",");
+        $('#idDeleteAll').val(join_selected_values);
+      });
+    });
+
+    //hide and show icon delete all
+    $('#trash').hide();
+    $(".deleteIdAll").click(function(e) {
+      if($(".deleteIdAll:checked").length > 1) {
+          $("#trash").show();
+      }else{
+          $("#trash").hide();
+        }
+    });
 
       // delete Payment store
       @php

@@ -45,7 +45,7 @@ class PlayersController extends Controller
                   ->where('asta_db.user.user_type', ' !=', '3')
                   ->where('asta_db.user_active.table_id', '!=', 0)
                   ->get();
-          // dd($online);
+  
         // $online = DB::select('select * from user_active join user on user.user_id = user_active.user_id join game on game.id = user_active.game_id join user_stat on user_stat.user_id = user_active.user_id where user.user_type != 3 and user_active.table_id != 0');
 
         return view('pages.players.active_player', compact('online'));
@@ -174,6 +174,7 @@ class PlayersController extends Controller
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
         return $response_empty;
+
       } else if($file_exists === true){
         $file     = $client->get($user_id.'.jpg');
         $type     = $client->mimeType($user_id.'.jpg');
@@ -182,9 +183,6 @@ class PlayersController extends Controller
         return $response;
 
       }
-
-
-
       
     }
  //  ---------- End Profile Image --------- // 

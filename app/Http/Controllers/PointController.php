@@ -112,9 +112,9 @@ class PointController extends Controller
 
             $balancedetails->appends($request->all());
             return view('pages.players.point_player', compact('balancedetails','datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
-        } else if($username != NULL && $minDate != NULL && $maxDate != NULL) {
-            if(is_numeric($username) !== true):
-                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+        } else if($searchUser != NULL && $minDate != NULL && $maxDate != NULL) {
+            if(is_numeric($searchUser) !== true):
+                $balancedetails = $balancePoint->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                                   ->wherebetween('asta_db.balance_point.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                   ->orderby($namecolumn, $sorting)
                                   ->paginate(20);
