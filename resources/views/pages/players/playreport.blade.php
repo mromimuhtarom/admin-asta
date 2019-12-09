@@ -143,7 +143,7 @@
                                     @endforeach
                                 @else
                                     
-                                        {{$history->hand_card }} 
+                                        {{ $history->hand_card }} 
                                 @endif
                             @endif
                             
@@ -178,14 +178,7 @@
     <!-- end widget -->
 
 <!-- Modal -->
-@php 
-$ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id', '=', 'asta_db.tpk_round_player.round_id')
-->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.tpk_round_player.user_id')
-->join('asta_db.tpk_table', 'asta_db.tpk_table.table_id', '=', 'asta_db.tpk_round.table_id')
-->where('asta_db.tpk_round.round_id', '=', 10169)
-->get();
-@endphp
-@foreach ($ab as $history)
+@foreach ($player_history as $history)
 <div class="modal fade" tabindex="-1" style="width:100%;" id="roundid-modal{{ $history->round_id }}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog1 modal-dialog-scrollable" role="document">
       <div class="modal-content">
@@ -245,7 +238,7 @@ $ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['card'] }}</td>
+                                    <td>{{ cardreadpopup(bgtcard($player['card'])) }}</td>
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'PLAYER_ACTION')
@@ -258,7 +251,7 @@ $ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id
                                     @endforeach
                                     <td>{{ $row['action']}}</td>
                                     <td></td>
-                                    <td>{{ $row['player']['card'] }}</td>
+                                    <td>{{ cardreadpopup(bgtcard($row['player']['card'])) }}</td>
                                 </tr>  
                                 @elseif ($row['game_state'] === 'END_ROUND')
                                 @foreach ($row['player'] as $endplayer)
@@ -271,13 +264,7 @@ $ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id
                                     @endforeach
                                     <td>{{ $endplayer['status'] }}</td>
                                     <td>{{ $endplayer['chip'] }}</td>
-                                    <td>
-                                        {{-- {{ dd($endplayer['card']) }} --}}
-                                        @foreach (bgtcard($endplayer['card']) as $item)
-                                            {{ $item }}
-                                        @endforeach
-                                        {{-- {{ $endplayer['card'] }} --}}
-                                    </td>
+                                    <td>{{ cardreadpopup(bgtcard($endplayer['card'])) }}</td>
                                 </tr>
                                 @endforeach     
                                 @endif
@@ -316,7 +303,7 @@ $ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
                                     <td>{{ $player['card'] }}</td>
-                                    <td>{{ tpkcard($row['cardtable']) }}</td>
+                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td>
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'TURN_BET')
@@ -331,7 +318,7 @@ $ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id
                                     <td>{{ $action_plyr['action']}}</td>
                                     <td>{{ $action_plyr['chip']}}</td>
                                     <td>{{ $action_plyr['card'] }}</td>
-                                    <td>{{ var_dump(tpkcard($row['cardtable'])) }}</td>
+                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td>
                                 </tr> 
                                 @endforeach 
                                 @elseif ($row['game_state'] === 'END_ROUND')
@@ -346,7 +333,7 @@ $ab = App\TpkRound::join('asta_db.tpk_round_player', 'asta_db.tpk_round.round_id
                                     <td>{{ $endplayer['status'] }}</td>
                                     <td>{{ $endplayer['chip'] }}</td>
                                     <td>{{ $endplayer['card'] }}</td>
-                                    <td>{{ var_dump(tpkcard($row['cardtable'])).'tyu' }}</td>
+                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td>
                                 </tr>
                                 @endforeach     
                                 @endif
