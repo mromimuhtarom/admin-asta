@@ -177,7 +177,7 @@ class GoodsStoreController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '3',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Menambahkan data di menu Toko Barang dengan nama '. $goods->name
+                    'desc'      => 'Create new in menu Good Store with name '. $goods->name
                 ]);
                 return redirect()->route('Goods_Store')->with('success','Insert Data successfull');
             }
@@ -244,7 +244,7 @@ class GoodsStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.'di menu Toko Barang dengan ID '.$pk.' menjadi '.$value
+            'desc'      => 'Edit '.$name.'in menu Goods Store with ID '.$pk.' to '.$value
         ]);
     }
 
@@ -346,7 +346,7 @@ class GoodsStoreController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Update gambar di menu Toko Barang dengan ID '.$pk
+                    'desc'      => 'Update image in menu Goods Store with ID '.$pk
                 ]);
                 return redirect()->route('Goods_Store')->with('success','Update Image successfull');
 
@@ -417,7 +417,7 @@ class GoodsStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar dan data di menu Toko Barang dengan ID '.$id
+                'desc'      => 'Delete Image or Photo in menu Goods Store with ID '.$id
             ]);
 
             return redirect()->route('Goods_Store')->with('success','Data Deleted');
