@@ -4,7 +4,7 @@
         @if(!$mnu['children']->isEMPTY())
         @if($menuname->RoleType1($mnu->name) || $menuname->RoleType2($mnu->name))
             <li class="{{ Request::is($mnu->route.'/*') ? 'active' : null }}"><!-- first-level -->
-                <a class="has-arrow"   href="" title="Admin"> <span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ $mnu->name }}</span>
+                <a class="has-arrow"   href="" title="Admin"> <span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ translate_menu($mnu->route) }}</span>
                     <b class="collapse-sign">
                         <em class="fa fa-plus-square-o"></em>
                         <em class="fa fa-minus-square-o"></em>
@@ -18,7 +18,7 @@
                         @if(!$sb['children']->isEMPTY())
                         @if($menuname->RoleType1($sb->name) || $menuname->RoleType2($sb->name))
                             <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
-                                <a href="" title="{{ $sb->name }}"> {{ $sb->name }}
+                                <a href="" title="{{ $sb->name }}"> {{ translate_menu($sb->route) }}
                                     <b class="collapse-sign">
                                         <em class="fa fa-plus-square-o"></em>
                                         <em class="fa fa-minus-square-o"></em>
@@ -30,7 +30,7 @@
                                     <ul aria-expanded="true" class="sa-sub-nav-second-level">   
                                         @if($menuname->RoleType1($smk->name) || $menuname->RoleType2($smk->name))                 
                                         <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/*') ? 'active' : null }}">
-                                            <a href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ $smk->name }}</a> 
+                                            <a href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ translate_menu($smk->route) }}</a> 
                                         </li>
                                         @endif
                                     </ul>                    
@@ -44,7 +44,7 @@
                             @if($sb->name === 'Abuse Transaction Report')
                                 <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
                                     <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> 
-                                        {{ $sb->name }} 
+                                        {{ translate_menu($sb->route) }} 
                                         @if($transaction_report_read->hitung !== 0)
                                             <span class="badge bg-red pull-right inbox-badge">{{ $transaction_report_read->hitung }}</span>
                                         @endif
@@ -52,7 +52,7 @@
                                 </li>
                             @else 
                                 <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
-                                    <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> {{ $sb->name }}</a>                         
+                                    <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> {{ translate_menu($sb->route) }}</a>                         
                                 </li>
                             @endif
                             @endif
@@ -68,7 +68,7 @@
         {{-- tidak memiliki submenu --}}
         @if ($menuname->RoleType1($mnu->name) || $menuname->RoleType2($mnu->name))
         <li class="{{ Request::is($mnu->route.'/*') ? ' active' : null }}">
-            <a class="has-arrow" href="{{ route($mnu->route)}}" title="Admin"><span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ $mnu->name }}</span>  </a>
+            <a class="has-arrow" href="{{ route($mnu->route)}}" title="Admin"><span class="fa fa-lg fa-fw {{ $mnu->icon }}"></span> <span class="menu-item-parent">{{ translate_menu($mnu->route) }}</span>  </a>
         </li>
         @endif
         {{-- end tidak memiliki submenu --}}
