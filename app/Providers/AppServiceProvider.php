@@ -41,12 +41,6 @@ class AppServiceProvider extends ServiceProvider
                                    ->select(DB::raw('COUNT(*) as hitung'))
                                    ->where('isread', '=', 0)
                                    ->first();
-        $array_menu = [
-            "Dasboard" => "Dasbor", 
-            "Admin" =>  'Admin',
-            'User_Admin'    =>  'Pengguna Admin',
-            ''
-        ];
         
         view::share('adm_menu', $adm_menu);
         view::share('menuname', $menuname);

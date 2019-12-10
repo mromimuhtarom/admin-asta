@@ -45,6 +45,7 @@
         ],
         "files": [
             "app/helpers/helpers.php",
+            "app/helpers/id_lang.php",
             "app/helpers/bothelper.php",
             "app/helpers/game.php"
         ]
