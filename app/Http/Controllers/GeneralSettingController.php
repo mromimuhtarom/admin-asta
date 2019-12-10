@@ -189,7 +189,7 @@ class GeneralSettingController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Pengaturan Umum dengan Config Id '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' in menu General Setting with Config Id '.$pk.' to '. $value
         ]);
     }
 }
