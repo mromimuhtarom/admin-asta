@@ -189,7 +189,7 @@ class GoldStoreController extends Controller
                     'op_id' => Session::get('userId'),
                     'action_id' => '3',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Create new in menu Gold Store with Title '. $gold->name
+                    'desc'      => 'Menambahkan data baru di menu Toko Koin dengan judul '. $gold->name
                   ]);
         
                 return redirect()->route('Gold_Store')->with('success','Data Added');
@@ -284,7 +284,7 @@ class GoldStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' in menu Gold Store with ID '.$pk.' to '. $value
+            'desc'      => 'Edit '.$name.' di menu Toko Koin dengan ID '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -387,7 +387,7 @@ class GoldStoreController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Update image in menu Gold Store with ID '.$pk
+                    'desc'      => 'Update gambar di menu Toko Koin dengan ID '.$pk
                 ]);
                 return redirect()->route('Gold_Store')->with('success','Update Image Successfull');
             } else  {
@@ -421,7 +421,7 @@ class GoldStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete image or photo in menu Gold Store with ID '.$getGoldId
+                'desc'      => 'Hapus gambar atau foto di menu Toko Koin dengan ID '.$getGoldId
             ]);
             $path = '../public/upload/Gold/'.$getGoldId.'.png';
             File::delete($path);
@@ -437,7 +437,7 @@ class GoldStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete image or photo in menu Gold Store Reseller with ID '.$goldreseller
+                'desc'      => 'Hapus gambar atau foto di menu Toko Koin Reseller dengan ID '.$goldreseller
             ]);
             return redirect()->route('Gold_Store_Reseller')->with('success','Data Deleted');
         } else if ($getGoldId == NULL)

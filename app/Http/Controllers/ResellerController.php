@@ -84,7 +84,7 @@ class ResellerController extends Controller
             'op_id' => Session::get('userId'),
             'action_id'   => '2',
             'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit'.$name.' in menu List Reseller with ID '.$pk.' To '.$value
+            'desc' => 'Edit'.$name.' di menu Daftar Agen dengan ID '.$pk.' menjadi '.$value
         ]);
     }
 //-------- End Update List Reseller --------- //
@@ -106,7 +106,7 @@ class ResellerController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '1',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit password in menu List Reseller with ResellerId '.$pk.' to '. $password
+                'desc'      => 'Edit kata sandi di menu Daftar Agen dengan AgenId '.$pk.' menjadi '. $password
             ]);
 
             return redirect()->route('List_Reseller')->with('success','Reset Password Successfully');
@@ -127,7 +127,7 @@ class ResellerController extends Controller
                 'op_id' => Session::get('userId'),
                 'action_id'   => '4',
                 'datetime'        => Carbon::now('GMT+7'),
-                'desc' => 'Deletein menu List Reseller with reseller ID '.$userid
+                'desc' => 'Hapus di menu Daftar Agen dengan AgenID '.$userid
             ]);
             return redirect()->route('List_Reseller')->with('success','Data Deleted');
         }
@@ -156,11 +156,11 @@ class ResellerController extends Controller
 // ------ Insert Reseller Rank ------ //
     public function storeRankReseller(Request $request)
     {
-        $id   = $request->id;
-        $rankname = $request->rankname;
+        $id        = $request->id;
+        $rankname  = $request->rankname;
         $validator = Validator::make($request->all(),[
-            'id'    => 'required|integer',
-            'rankname'    => 'required',
+            'id'       => 'required|integer',
+            'rankname' => 'required',
         ]);
     
         if ($validator->fails()) {
@@ -178,7 +178,7 @@ class ResellerController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Reseller Rank with Rank Name '. $rankname
+            'desc'      => 'Menambahkan data di menu Peringkat Agen dengan Nama Peringkat '. $rankname
         ]);
 
         return redirect()->route('Reseller_Rank')->with('success','Data Added');
@@ -227,7 +227,7 @@ class ResellerController extends Controller
             'op_id' => Session::get('userId'),
             'action_id'   => '2',
             'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit'.$name.' in menu Reseller Rank with Order ID '.$pk.' To '.$value
+            'desc' => 'Edit'.$name.' di menu Peringkat Agen dengan Order ID '.$pk.' menjadi '.$value
         ]);
     }
 //-------- End Update Reseller Rank ---------//
@@ -244,7 +244,7 @@ class ResellerController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Reseller Rank with reseller ID '.$id
+                'desc'      => 'Hapus di menu Peringkat Agen dengan AgenID '.$id
             ]);
             return redirect()->route('Reseller_Rank')->with('success','Data Deleted');
         }
@@ -611,7 +611,7 @@ public function detailTransaction($month, $year)
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Register Reseller with username '. $request->username
+            'desc'      => 'Menambahkan data di menu Pendaftaran Agen di menu Pendaftaran Agen dengan nama pengguna '. $request->username
         ]);
   
         return back()->with('success','REGISTER SUCCESSFULL');
@@ -748,7 +748,7 @@ public function detailTransaction($month, $year)
             'op_id'     => Session::get('userId'),
             'action_id' => '5',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'approve request transaction with reseller id'. $reseller_id
+            'desc'      => 'Menerima permintaan transaksi di menu Transaksi Permintaan Agen dengan Agenid'. $reseller_id
           ]);
 
           return back()->with('success','Approved Succesful');
@@ -788,7 +788,7 @@ public function detailTransaction($month, $year)
             'op_id'     => Session::get('userId'),
             'action_id' => '6',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'decline request transaction with reseller id'. $reseller_id
+            'desc'      => 'Menolak permintaan transaksi di menu Transaksi Permintaan Agen dengan Agenid'. $reseller_id
         ]);
         return back()->with('success','Declined Succesful');
     }
@@ -947,7 +947,7 @@ public function detailTransaction($month, $year)
                     'op_id'     => Session::get('userId'),
                     'action_id' => '3',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Create new in menu Item Store Reseller with title '. $request->title
+                    'desc'      => 'Menambahkan data di menu Toko Agen dengan judul '. $request->title
                 ]);
                 return redirect()->route('Item_Store_Reseller')->with('success','Data Added');                 
             }
@@ -1006,7 +1006,7 @@ public function detailTransaction($month, $year)
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' in menu Item Store Reseller with ID '.$pk.' to '. $value
+            'desc'      => 'Edit '.$name.' di menu Toko Barang dengan ID '.$pk.' menjadi '. $value
         ]);
     }
 // ------- End Update Item Store Reseller -------- //
@@ -1092,7 +1092,7 @@ public function detailTransaction($month, $year)
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Edit Image in menu Goods Store with ID '.$pk.' to '.$nama_file_unik
+                    'desc'      => 'Edit gambar di menu Toko Agen dengan ID '.$pk.' menjadi '.$nama_file_unik
                 ]);
                 return redirect()->route('Item_Store_Reseller')->with('success','Update Image successfull');
 
@@ -1128,7 +1128,7 @@ public function detailTransaction($month, $year)
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Item Store Reseller with ID '.$getItemId
+                'desc'      => 'Hapus di menu Toko Agen dengan ID '.$getItemId
             ]);
             return redirect()->route('Item_Store_Reseller')->with('success','Data Deleted');
         } else if($getItemId  == NULL )
@@ -1142,6 +1142,12 @@ public function detailTransaction($month, $year)
     {
         $ids    =   $request->userIdAll;
         DB::table('asta_db.reseller')->whereIn('reseller_id', explode(",", $ids))->delete();
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$ids
+        ]);
         return redirect()->route('List_Reseller')->with('success', 'Data deleted');
     }
 
@@ -1149,6 +1155,13 @@ public function detailTransaction($month, $year)
     {
         $ids    =   $request->userIdAll;
         DB::table('asta_db.reseller_rank')->whereIn('id', explode(",", $ids))->delete();
+
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Hapus di menu Peringkat Agen dengan ID '.$ids
+        ]);
         return redirect()->route('Reseller_Rank')->with('success', 'Data deleted');
     }
 // ------- End Delete Item Store Reseller --------//

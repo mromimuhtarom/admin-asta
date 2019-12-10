@@ -111,7 +111,7 @@ class GameSettingController extends Controller
             'op_id' =>  Session::get('userId'),
             'action_id' =>  2,
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit setting Domino QQ in menu Game Setting with ID '.$pk.' to '.$value
+            'desc'      =>  'Edit pengaturan Domino QQ di menu Pengaturan Game dengan ID '.$pk.' menjadi '.$value
         ]);
     }
 }

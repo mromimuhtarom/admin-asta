@@ -203,7 +203,7 @@ class GiftController extends Controller
                             'op_id'     => Session::get('userId'),
                             'action_id' => '3',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Create new insert in menu Gift Store with title'. $gift->subject
+                            'desc'      => 'Membuat insert baru di menu Toko Gift dengan judul'. $gift->subject
                         ]);
                         return redirect()->route('Table_Gift')->with('success','Insert Data successfull');
                     }
@@ -368,7 +368,7 @@ class GiftController extends Controller
                         'op_id'     => Session::get('userId'),
                         'action_id' => '2',
                         'datetime'  => Carbon::now('GMT+7'),
-                        'desc'      => 'Update image in menu Gift Store ID '.$pk
+                        'desc'      => 'Update gambar di menu Toko Hadiah dengan ID '.$pk
                     ]);
                     return redirect()->route('Table_Gift')->with('success','Update Image successfull');
             }
@@ -425,7 +425,7 @@ class GiftController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu Gift Store with Id '.$pk.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Toko Hadiah dengan Id '.$pk.' menjadi '. $value
       ]);
     }
 
@@ -454,7 +454,7 @@ class GiftController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Gift Store with ID '.$id
+                'desc'      => 'Hapus di menu Toko Hadiah dengan ID '.$id
             ]);
             return redirect()->route('Table_Gift')->with('success','Data Deleted');
         }
@@ -466,6 +466,12 @@ class GiftController extends Controller
     {
         $ids    =   $request->userIdAll;
         DB::table('asta_db.gift')->whereIn('id', explode(",", $ids))->delete();
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Hapus di menu Toko Hadiah dengan ID '.$ids
+        ]);
         return redirect()->route('Table_Gift')->with('succes', 'Data deleted');
     }
 }

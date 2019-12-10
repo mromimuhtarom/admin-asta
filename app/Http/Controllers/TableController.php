@@ -179,7 +179,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '3',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Create new in menu Asta Poker Table with name '.$request->tableName
+        'desc'      => 'Menambahkan data di menu Meja Asta Poker dengan nama '.$request->tableName
         ]);
 
         return redirect()->route('Table_Asta_Poker')->with('success','Data Added');
@@ -235,7 +235,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Big Two Table with name '.$request->tableName
+            'desc'      => 'Menambahkan data di menu Meja Big Two dengan nama '.$request->tableName
         ]);
  
         return redirect()->route('Table_Big_Two')->with('success','Data Added');
@@ -296,7 +296,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Domino Susun Table  with name '.$request->tableName
+            'desc'      => 'Menambahkan data di menu Meja Domino Susun dengan nama'.$request->tableName
           ]);
 
        return redirect()->route('Table_Domino_Susun')->with('success','Data Added');
@@ -359,7 +359,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu Domino QQ Table with name '.$request->tableName
+            'desc'      => 'Menambahkan data di menu Meja Domino QQ dengan nama '.$request->tableName
           ]);
 
        return redirect()->route('Table_Domino_QQ')->with('success','Data Added');
@@ -462,7 +462,7 @@ class TableController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in menu Table Asta Poker with gameID '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' idi menu Meja Asta Poker dengan RuangID '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -540,7 +540,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu Table Big Two with roomID '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Meja Big Two dengan RuangID '.$pk.' to '. $value
     ]);
     }
 
@@ -639,7 +639,7 @@ class TableController extends Controller
         'op_id' => Session::get('userId'),
         'action_id'   => '2',
         'datetime'        => Carbon::now('GMT+7'),
-        'desc' => 'Edit '.$name.' in menu Table Domino Susun with roomID '.$pk.' to '. $value
+        'desc' => 'Edit '.$name.' di menu Meja Domino Susun dengan RuangID '.$pk.' menjadi '. $value
     ]);
     }
 
@@ -729,7 +729,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu table Domino QQ with roomID '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Meja Domino QQ dengan RuangID '.$pk.' menjadi '. $value
     ]);
     }
 
@@ -744,7 +744,7 @@ class TableController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Table Asta Poker with room ID '.$tableid
+                'desc'      => 'Hapus di menu Meja Asta Poker dengan RuangID '.$tableid
             ]);
             return redirect()->route('Table_Asta_Poker')->with('success','Data Deleted');
         }
@@ -762,7 +762,7 @@ class TableController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu table Big Two with room ID '.$tableid
+                'desc'      => 'Hapus di menu Meja Big Two dengan RuangID '.$tableid
             ]);
             return redirect()->route('Table_Big_Two')->with('success','Data Deleted');
         }
@@ -781,7 +781,7 @@ class TableController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete Domino Susun Table with room ID '.$tableid
+                'desc'      => 'Hapus di menu Meja Domino Susun dengan RuangID '.$tableid
             ]);
             return redirect()->route('Table_Domino_Susun')->with('success','Data Deleted');
         }
@@ -800,7 +800,7 @@ class TableController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu table Domino QQ with room ID '.$tableid
+                'desc'      => 'Hapus di menu Meja Domino QQ dengan RuangID '.$tableid
             ]);
             return redirect()->route('Table_Domino_QQ')->with('success','Data Deleted');
         }

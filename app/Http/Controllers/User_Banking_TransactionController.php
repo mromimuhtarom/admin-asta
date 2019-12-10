@@ -103,7 +103,7 @@ class User_Banking_TransactionController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '6',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'decline request transaction with User id'. $user_id
+            'desc'      => 'Menolak permintaan transaksi dengan Penggunaid'. $user_id
         ]);
         return back()->with('success','Declined Succesful');
     }
@@ -142,7 +142,7 @@ class User_Banking_TransactionController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '5',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Approve request transaction with user id'. $user_id
+            'desc'      => 'Menerima permintaan Transaksi dengan PenggunaID'. $user_id
         ]);
         return back()->with('success','Approve Succesful');
     }

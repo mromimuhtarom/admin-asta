@@ -169,7 +169,7 @@ class ChipStoreController extends Controller
                     'op_id'     => Session::get('user_id'),
                     'action_id' => '3',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Create new in menu Chip Store with title '. $chip->name
+                    'desc'      => 'Menambahkan data di menu Toko Chip dengan title '. $chip->name
                 ]);
 
                 return redirect()->route('Chip_Store')->with('success', 'Data Insert Successfull');
@@ -231,7 +231,7 @@ class ChipStoreController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu Chip Store with Id '.$pk.' To '. $value
+        'desc'      => 'Edit '.$name.' di menu Toko Chip dengan ID '.$pk.' menjadi '. $value
       ]);
     }
 
@@ -331,7 +331,7 @@ class ChipStoreController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Edit Image in menu Chip Store with ID '.$pk.' to '.$nama_file_unik
+                    'desc'      => 'Edit gambar di menu Toko Chip dengan ID '.$pk.' menjadi '.$nama_file_unik
                 ]);
 
                 return redirect()->route('Chip_Store')->with('success','Update Image Successfull');
@@ -395,7 +395,7 @@ class ChipStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete image or Photo in menu Chip Store with ID '.$id
+                'desc'      => 'Hapus gambar atau foto di menu Toko Chip dengan ID '.$id
             ]);
 
             return redirect()->route('Chip_Store')->with('success','Data Deleted');
