@@ -2,15 +2,15 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">Admin</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">Active Admin</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Active Admin') }}</a></li>
 @endsection
 
 @section('content')  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-2" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-        <h2>Players Online </h2>
+        <h2>{{ translate_MenuContentAdmin('Players Online') }}</h2>
       </div>
 
       <div class="widget-toolbar">
@@ -33,9 +33,9 @@
             <table id="online-players" class="table table-striped table-bordered table-hover" width="100%">
               <thead>
                 <tr>
-                  <th>User Admin</th>
-                  <th>Date Login</th>
-                  <th>Ip</th>
+                  <th>{{ translate_MenuContentAdmin('User Admin') }}</th>
+                  <th>{{ translate_MenuContentAdmin('Date Login') }}</th>
+                  <th>{{ translate_MenuContentAdmin('Ip') }}</th>
                 </tr>
               </thead>
               <tbody>

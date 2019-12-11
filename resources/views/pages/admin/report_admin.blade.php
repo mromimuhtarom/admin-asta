@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">Admin</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">Report Admin</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_MenuContentAdmin('Report Admin') }}</a></li>
 @endsection
 
 @section('content')
@@ -33,9 +33,9 @@
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
-                            <option value="">Choose Log Type</option>
-                            <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} Admin</option>
-                            <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} Admin</option>
+                            <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
+                            <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} {{ translate_MenuContentAdmin('Admin') }}</option>
+                            <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} {{ translate_MenuContentAdmin('Admin') }}</option>
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
@@ -45,7 +45,7 @@
                         <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
-                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('Search') }}</button>
                     </div>
                 </div>
             </form>
@@ -58,7 +58,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2> Admin Report </h2>
+            <h2>{{ translate_MenuContentAdmin('Admin Report') }}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -79,11 +79,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Player ID</th>
-                        <th>Username</th>
-                        <th>Status</th>
-                        <th>Time Stamp</th>
-                        <th>IP</th>
+                        <th>{{ translate_MenuContentAdmin('Player ID') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Username') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Status') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Time Stamp') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Ip') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,7 +91,7 @@
                         <tr>
                           <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
-                          <td>{{ $action_report_admin[$login->action_id] }} Admin</td>
+                          <td>{{ $action_report_admin[$login->action_id] }}{{ translate_MenuContentAdmin('Admin') }}</td>
                           <td>{{ $login->datetime }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>

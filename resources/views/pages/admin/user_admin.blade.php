@@ -4,8 +4,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">Admin</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">User Admin</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">{{ translate_MenuContentAdmin('User Admin')}}</a></li>
 @endsection
 
 
@@ -42,7 +42,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create User Admin</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ translate_MenuContentAdmin('Create User Admin')}} </h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -54,10 +54,10 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="username" placeholder="username" required><br>
-                  <input type="text" class="form-control" name="fullname" placeholder="Full Name" required><br>
+                  <input type="text" class="form-control" name="username" placeholder="nama pengguna" required><br>
+                  <input type="text" class="form-control" name="fullname" placeholder="nama lengkap" required><br>
                   <select name="role" class="form-control" required>
-                    <option>Pilih Role</option>
+                    <option>{{ translate_MenuContentAdmin('Choose Role')}}</option>
                     @foreach($role as $rl)
                     <option value="{{ $rl->role_id}}">{{ $rl->name}}</option>
                     @endforeach
@@ -68,10 +68,10 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn sa-btn-primary submit-data">
-              <i class="fa fa-save"></i> Save
+              <i class="fa fa-save"></i> {{ translate_MenuContentAdmin('Save')}}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-              <i class="fa fa-remove"></i> Cancel
+              <i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('Cancel')}}
             </button>
           </div>
         </form>
@@ -84,7 +84,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong><i class="fa fa-user"></i> User Admin</strong></h2>				
+        <h2><strong><i class="fa fa-user"></i> {{ translate_MenuContentAdmin('User Admin')}}</strong></h2>				
       </div>
     </header>
   
@@ -92,7 +92,7 @@
       
       <div class="jarviswidget-editbox">
         <input class="form-control" type="text">
-        <span class="note"><i class="fa fa-check text-success"></i> Change title to update and save instantly!</span>
+        <span class="note"><i class="fa fa-check text-success"></i> {{ translate_MenuContentAdmin('Change title to update and save instantly!')}}</span>
         
       </div>
       
@@ -105,7 +105,7 @@
               <div class="input-group">
                 @if($menu && $mainmenu)
                   <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                      <i class="fa fa-plus"></i> Create New User
+                      <i class="fa fa-plus"></i> {{ translate_MenuContentAdmin('Create New User')}}
                   </button>
                   @endif
               </div>
@@ -128,13 +128,13 @@
               <thead>
                 <tr>
                     @if($menu && $mainmenu)
-                    <th width="100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
+                    <th width="100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
                     @endif
-                    <th class="th-sm">Username</th>
-                    <th class="th-sm">Full Name</th>
-                    <th class="th-sm">Role Type</th>
+                    <th class="th-sm">{{ translate_MenuContentAdmin('Username')}}</th>
+                    <th class="th-sm">{{ translate_MenuContentAdmin('Full Name')}}</th>
+                    <th class="th-sm">{{ translate_MenuContentAdmin('Role Type')}}</th>
                     @if($menu && $mainmenu)
-                    <th class="th-sm">Reset Password</th>
+                    <th class="th-sm">{{ translate_MenuContentAdmin('Reset Password')}}</th>
                     <th align="center" ">
                         <a  href="#" style="color:red;font-weight:bold;" 
                         class="delete" 
@@ -156,7 +156,7 @@
                     <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->op_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
-                    <td><a href="#" class="password{{ $adm->op_id }} btn btn-primary" id="password" data-pk="{{ $adm->op_id }}" data-toggle="modal" data-target="#reset-password"><i class="fa fa-key"></i> Reset Password</a></td>
+                    <td><a href="#" class="password{{ $adm->op_id }} btn btn-primary" id="password" data-pk="{{ $adm->op_id }}" data-toggle="modal" data-target="#reset-password"><i class="fa fa-key"></i> {{ translate_MenuContentAdmin('Reset Password')}}</a></td>
                     <td align="center"> 
                       <a  href="#" style="color:red;" class="delete{{ $adm->op_id }}" 
                         id="delete" 
@@ -190,21 +190,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ translate_MenuContentAdmin('Delete Data')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
-            Are You Sure Want To Delete It
+            {{ translate_MenuContentAdmin('Are You Sure Want To Delete It?')}}
             <form action="{{ route('UserAdmin-delete') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
               <input type="hidden" name="userid" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuContentAdmin('No')}}</button>
           </div>
             </form>
         </div>
@@ -217,21 +217,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected Data</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete all selected Data')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
-            Are You Sure Want To Delete all selected?
+            {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
             <form action="{{ route('UserAdmin-DeleteAllSelected') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> Yes</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('No')}}</button>
           </div>
             </form>
         </div>
@@ -243,7 +243,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-key"></i> Reset Password</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-key"></i> {{ translate_MenuContentAdmin('Reset Password')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
@@ -255,8 +255,8 @@
               <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-primary submit-data"><i class="fa fa-key"></i> Reset Password</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+            <button type="submit" class="button_example-yes btn sa-btn-primary submit-data"><i class="fa fa-key"></i>{{ translate_MenuContentAdmin('Reset Password')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuContentAdmin('No')}}</button>
           </div>
             </form>
         </div>

@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">Admin</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">Log Admin</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('Log Admin') }}</a></li>
 @endsection
 
 @section('content')
@@ -34,9 +34,9 @@
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
-                        <option value="">Choose Action</option>
+                        <option value="">{{ translate_MenuContentAdmin('Choose Action') }}</option>
                         @foreach($actionSearch as $action)
-                        <option value="{{ $action->id}}">{{ $action->action}}</option>
+                        <option value="{{ $action->id}}">{{ translate_MenuContentAdmin($action->action) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -47,7 +47,7 @@
                     <input type="date" class="form-control" name="sampai"  value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('Search') }}</button>
                 </div>
             </div>
         </form>
@@ -62,7 +62,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2> Log Admin </h2>
+            <h2>{{ translate_MenuContentAdmin('Log Admin') }}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -83,11 +83,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Admin ID</th>
-                        <th>Username</th>
-                        <th>Action</th>
-                        <th>Date</th>
-                        <th>Description</th>
+                        <th>{{ translate_MenuContentAdmin('Admin ID') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Username') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Action') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Date') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Description') }}</th>
                     </tr>
                 </thead>
                 <tbody>

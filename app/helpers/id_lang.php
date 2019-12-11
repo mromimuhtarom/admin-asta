@@ -1,5 +1,7 @@
 <?php
 
+
+//===========================TRANSLATE SIDEMENU===========================//
 function translate_menu($menu){
   
     $array_menu = [
@@ -32,7 +34,7 @@ function translate_menu($menu){
       'Table_Gift'                      =>  'Meja Gift',
       'Report_Gift'                     =>  'Laporan Gift',
       'Emoticon'                        =>  'Emoticon',
-      'Game'                            =>  'Permainan',
+      'Game'                            =>  'Gim',
       'Asta-Poker'                      =>  'Asta Poker',
       'Table_Asta_Poker'                =>  'Meja Asta Poker',
       'Category_Asta_Poker'             =>  'Ketegori Asta Poker',
@@ -65,7 +67,7 @@ function translate_menu($menu){
       'Store'                           =>  'Toko',
       'Best_Offer'                      =>  'Penawaran terbaik',
       'Chip_Store'                      =>  'Toko Chip',
-      'Gold_Store'                      =>  'Toko Emas',
+      'Gold_Store'                      =>  'Toko Koin',
       'Goods_Store'                     =>  'Toko Barang',
       'Payment_Store'                   =>  'Toko Pembayaran',
       'Report_Store'                    =>  'Laporan Toko',
@@ -92,6 +94,98 @@ function translate_menu($menu){
     ];
 
     return $array_menu[$menu];
+}
+
+
+//=================================MENU ADMIN===============================//
+function translate_MenuContentAdmin($menu){
+    
+    $array_menuContent = [
+
+        'Admin'                         =>  'Admin',
+        'User Admin'                    =>  'Pengguna Admin',
+        'Role Admin'                    =>  'Peran Admin',
+        'Log Admin'                     =>  'Catatan Admin',
+        'Active Admin'                  =>  'Admin Aktif',
+        'Report Admin'                  =>  'Laporan Admin',
+        'Create User Admin'             =>  'Buat admin baru',
+        'Create Role Admin'             =>  'Buat peran admin',
+        'Choose Action'                 =>  'Pilih Aksi',
+        
+        //PILIH AKSI
+        'Create Admin'                  =>  'Buat Admin',
+        'Delete Admin'                  =>  'Hapus Admin',
+        'Edit Admin'                    =>  'Edit Admin',
+        'Decline Admin'                 =>  'Tolak Admin',
+        'Approve Admin'                 =>  'Setujui Admin',
+        'Change Password Admin'         =>  'Ubah Katasandi Admin',
+
+
+        'Choose Role'                   =>  'Pilih Peran',
+        'Choose Log Type'               =>  'Pilih tipe Log',
+        'Players Online'                =>  'Pemain Online',
+        'Save'                          =>  'Simpan',
+        'Search'                        =>  'Cari',
+        'Cancel'                        =>  'Batal',
+        'Change title to update and save instantly!' => 'Ubah judul untuk memperbarui dan menyimpan secara instan!',
+        'Create New User'               =>  'Buat Pengguna Baru',
+        'Create New Role'               =>  'Buat Peran Baru',
+        'Select All'                    =>  'Pilih semua',
+        'Admin ID'                      =>  'ID Admin',
+        'Admin Report'                  =>  'Laporan Admin',
+        'Player ID'                     =>  'ID Pemain',
+        'Username'                      =>  'Nama pengguna',
+        'Status'                        =>  'Status',
+        'Role Name'                     =>  'Nama peran',
+        'Full Name'                     =>  'Nama lengkap',
+        'Role Type'                     =>  'Tipe peran',
+        'Date'                          =>  'Tanggal',
+        'Date Login'                    =>  'Tanggal Login',
+        'Time Stamp'                    =>  'Waktu',
+        'Ip'                            =>  'Alamat IP',
+        'Description'                   =>  'Deskripsi',
+        'Action'                        =>  'Aksi',
+        'Reset Password'                =>  'Atur ulang kata sandi',
+        'Delete Data'                   =>  'Hapus data',
+        'View & Edit'                   =>  'Tampil dan Ubah',
+        'Are You Sure Want To Delete It?'            =>  'Anda yakin ingin menghapusnya?',
+        'Yes'                           =>  'Ya',
+        'No'                            =>  'No',
+        'Delete all selected Data'      =>  'Hapus semua data yang dipilih',
+        'Are You Sure Want To Delete all selected?'  =>  'Anda yakin ingin menghapus semua yang telah dipilih?'
+    ];
+
+    return $array_menuContent[$menu];
+}
+
+
+//=========================MENU TRANSACTION========================//
+function translate_menuTransaction($menu){
+
+    $array_menuContent = [
+
+        'Transaction'           =>  'Transaksi',
+        'Reward Transaction'    =>  'Reward Transaction',
+        'Banking Transaction'   =>  'Transaksi Banking',
+        
+        //PILIH AKSI
+        'Choose Time'           =>  'Pilih waktu',
+        'Today'                 =>  'Hari ini',
+        'Week'                  =>  'Pekan',
+        'Month'                 =>  'Bulan',
+        'All time'              =>  'Sepanjang Waktu',
+
+        'Bank Transaction'      =>  'Transaksi Bank',
+        'ID Player'             =>  'ID pemain',
+        'Item'                  =>  'Barang',
+        'Username'              =>  'Nama pengguna',
+        'Date'                  =>  'Tanggal',
+        'Win'                   =>  'Menang',
+        'Lose'                  =>  'Kalah',
+        'Turn Over'             =>  'Turn Over',
+        'Fee'                   =>  'Biaya'
+    ];
+    return $array_menuContent[$menu];
 }
 
 ?>
