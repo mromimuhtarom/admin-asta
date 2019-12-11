@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Banking_Transactions') }}">Transaction</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Banking_Transactions') }}">Banking Transaction</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Banking_Transactions') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Banking_Transactions') }}">{{ translate_MenuTransaction('Banking Transaction') }}</a></li>
 @endsection
 
 @section('content')
@@ -31,11 +31,11 @@
             <div class="row h-100 w-100">
                 <div class="col">
                     <select name="choose_time" id="time" class="form-control">
-												<option value="">Choose Time</option>
-												<option value="today">today</option>
-												<option value="week">Week</option>
-												<option value="month">Month</option>
-												<option value="all time">All Time</option>
+												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+												<option value="today">{{ translate_MenuTransaction('Today') }}</option>
+												<option value="week">{{ translate_MenuTransaction('Week') }}</option>
+												<option value="month">{{ translate_MenuTransaction('Month') }}</option>
+												<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
                     </select>
                 </div>
                 <div class="col">
@@ -58,7 +58,7 @@
 			
 	<header>
 		<div class="widget-header">	
-			<h2><strong>Bank Transaction {{ ucwords($time) }}</strong></h2>				
+			<h2><strong>{{ translate_MenuTransaction('Bank Transaction') }} {{ ucwords($lang_id) }}</strong></h2>				
 		</div>
 	</header>
 
@@ -71,16 +71,16 @@
 						<thead>
 							<tr>
 								@if ($time == "today" || $time == "all time")
-								<th class="th-sm">Username</th>	
+								<th class="th-sm">{{ translate_MenuTransaction('Username') }}</th>	
 								@elseif($time == "week" || $time == "month")
-								<th class="th-sm">Date</th>
+								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
 								@endif
-								<th class="th-sm">Win</th>
-								<th class="th-sm">Lose</th>
-                <th class="th-sm">Turn Over</th>
-								<th class="th-sm">Fee</th>
+								<th class="th-sm">{{ translate_MenuTransaction('Win') }}</th>
+								<th class="th-sm">{{ translate_MenuTransaction('Lose') }}</th>
+                				<th class="th-sm">{{ translate_MenuTransaction('Turn Over') }}</th>
+								<th class="th-sm">{{ translate_MenuTransaction('Fee') }}</th>
 								@if($time == "today" || $time == "all time")
-								<th class="th-sm">Date</th>
+								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
 								@endif
 							</tr>
 						</thead>

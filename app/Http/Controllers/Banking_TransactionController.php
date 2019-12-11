@@ -52,8 +52,9 @@ class Banking_TransactionController extends Controller
             $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                 ->orderBy('asta_db.transaction_day.date_created', 'desc')       
                 ->get();
+                $lang_id ='Hari ini';
             
-            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
+            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
 
         } 
         else if($time == "week")
@@ -62,8 +63,9 @@ class Banking_TransactionController extends Controller
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->groupBy('yearperweek', DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                         ->get();
+                        $lang_id   = 'pekan ini';
  
-            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
+            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
 
         } else if($time == "month")
         {
@@ -71,8 +73,9 @@ class Banking_TransactionController extends Controller
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->groupBy('month', DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                         ->get();
+                        $lang_id = 'Bulan ini';
  
-            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
+            return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
         } else if($time == "all time")
         {
             if($minDate != NULL && $maxDate != NULL)
@@ -81,25 +84,26 @@ class Banking_TransactionController extends Controller
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')   
                         ->get();
                         
-                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
+                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
             } else if($minDate != NULL)
             {
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '>=', $minDate." 00:00:00")
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->get();
      
-                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
+                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
             } else if($maxDate != NULL)
             {
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '<=', $maxDate." 23:59:59")
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->get();
      
-                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time'));
+                return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
             } else if($minDate == NULL && $maxDate == NULL)
             {
                 return back()->with('alert', 'Min Date And Max Date Must be Filled In');
             }
+            $lang_id='Sepanjang waktu';
         } else {
             $validator = Validator::make($request->all(),[
                 'time'   => 'required',
