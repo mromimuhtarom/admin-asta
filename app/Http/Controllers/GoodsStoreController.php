@@ -213,28 +213,25 @@ class GoodsStoreController extends Controller
         ]);
 
         switch ($name) {
-            case 'name':
-                $name = 'Name';
+            case 'nama':
+                $name = 'Nama';
                 break;
             case 'price':
                 $name = 'Price';
                 break;
             case 'qty':
-                $name = 'Quantity';
-                break;
-            case 'trans_type':
-                $name = 'Transaction Type';
+                $name = 'Kuantitas';
                 break;
             case 'status':
                 $name = 'Status';
                 if($value == 0):
-                    $value = 'Disabled';
+                    $value = 'Dimatikan';
                 else:
-                    $value = 'Enabled';
+                    $value = 'Diaktifkan';
                 endif;
                 break;
             case 'order':
-                $name = 'Order';
+                $name = 'Memesan';
                 break;            
             default:
                 "";

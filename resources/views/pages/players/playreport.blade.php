@@ -237,7 +237,7 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ cardreadpopup(bgtcard($player['chip'])) }}</td>
+                                    <td>{{ $player['chip'] }}</td>
                                     <td>{{ cardreadpopup(bgtcard($player['card'])) }}</td>
                                 </tr>
                                 @endforeach  
@@ -263,7 +263,7 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $endplayer['status'] }}</td>
-                                    <td>{{ cardreadpopup(bgtcard($endplayer['chip'])) }}</td>
+                                    <td>{{ $endplayer['chip'] }}</td>
                                     <td>{{ cardreadpopup(bgtcard($endplayer['card'])) }}</td>
                                 </tr>
                                 @endforeach     

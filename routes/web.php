@@ -107,6 +107,7 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Active_Players'], function() {
             Route::middleware('page_denied:Active Players')->group(function(){
                 Route::get('Active-view', 'PlayersController@indexActive')->name('Active_Players');
+                Route::get('Active-search', 'PlayersController@searchactive')->name('ActivePlayers-search');
             });
         });
 

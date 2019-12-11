@@ -84,7 +84,7 @@ class ProfileController extends Controller
   
         switch ($name) {
             case "fullname":
-                $name = "Full Name";
+                $name = "Nama Lengkap";
                 break;
             default:
               "";

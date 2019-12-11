@@ -54,9 +54,9 @@
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               @if($menu && $mainmenu && $submenu)
-              <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+              {{-- <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"><span> Create New Category</span></i>
-              </button>
+              </button> --}}
               @endif
             </div>
             <!-- End Button tambah data baru -->
@@ -69,13 +69,13 @@
               <thead>
                 <tr>
                   @if($menu && $mainmenu && $submenu)
-                  <th></th>
+                  {{-- <th></th> --}}
                   @endif
                   <th class="th-sm">Room Name</th>
                   <th class="th-sm">Min Buy</th>
                   <th class="th-sm">Max Buy</th>
                   @if($menu && $mainmenu && $submenu)
-                  <th class="th-sm">Action</th>
+                  {{-- <th class="th-sm">Action</th> --}}
                   @endif
                 </tr>
               </thead>
@@ -83,11 +83,11 @@
                 @foreach($category as $kt)
                 @if($menu && $mainmenu && $submenu)
                 <tr>
-                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td>
-                    <td><a href="#" class="usertext" data-title="Room Name" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('DominoQCategory-update')}}">{{ $kt->name }}</a></td>
+                    {{-- <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td> --}}
+                    <td>{{-- <a href="#" class="usertext" data-title="Room Name" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('DominoQCategory-update')}}"> --}}{{ $kt->name }}{{--</a>--}}</td>
                     <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('DominoQCategory-update') }}">{{ $kt->min_buy }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('DominoQCategory-update') }}">{{ $kt->max_buy }}</a></td>
-                    <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td>
+                    {{-- <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td> --}}
                 </tr>
                 @else 
                 <tr>

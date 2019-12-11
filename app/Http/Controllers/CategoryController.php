@@ -299,16 +299,16 @@ class CategoryController extends Controller
   
         switch ($name) {
             case "name":
-                $name = "Room Name";
+                $name = "Nama Ruang";
                 break;
             case "min_buy":
-                $name = "Min Buy";
+                $name = "Minimal Beli";
                 break;
             case "max_buy":
-                $name = "Max Buy";
+                $name = "Maksimal Beli";
                 break;
             case "timer":
-                $name = "timer";
+                $name = "Pengatur Waktu";
                 break;
             default:
               "";
@@ -342,16 +342,16 @@ class CategoryController extends Controller
   
         switch ($name) {
             case "name":
-                $name = "Room Name";
+                $name = "Nama Ruang";
                 break;
             case "min_buy":
-                $name = "Min Buy";
+                $name = "Minimal Beli";
                 break;
             case "max_buy":
-                $name = "Max Buy";
+                $name = "Maksimal Beli";
                 break;
             case "timer":
-                $name = "Timer";
+                $name = "Pengatur Waktu";
                 break;
             default:
               "";
@@ -387,16 +387,16 @@ class CategoryController extends Controller
   
         switch ($name) {
             case "name":
-                $name = "Room Name";
+                $name = "Nama Ruang";
                 break;
             case "min_buy":
-                $name = "Min Buy";
+                $name = "Minimal Beli";
                 break;
             case "max_buy":
-                $name = "Max Buy";
+                $name = "Maksimal Beli";
                 break;
             case "timer":
-                $name = "Timer";
+                $name = "Pengatur Waktu";
                 break;
             default:
               "";
@@ -430,16 +430,16 @@ class CategoryController extends Controller
   
         switch ($name) {
             case "name":
-                $name = "Room Name";
+                $name = "Nama Ruang";
                 break;
             case "min_buy":
-                $name = "Min Buy";
+                $name = "Minimal Beli";
                 break;
             case "max_buy":
-                $name = "Max Buy";
+                $name = "Maksimal Beli";
                 break;
             case "timer":
-                $name = "Timer";
+                $name = "Pengatur Waktu";
                 break;
             default:
               "";

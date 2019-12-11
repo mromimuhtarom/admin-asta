@@ -161,7 +161,7 @@ class ReportAdminController extends Controller
                              ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                              ->get();
             else:
-                $log_login = $logOnline->where('asta_db.log_user.user_id', '=', $player)
+                $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
                              ->where('asta_db.log_online.type', '=', 1)
                              ->whereBetween('asta_db.log_online.datetime' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                              ->get();
@@ -184,7 +184,7 @@ class ReportAdminController extends Controller
                              ->where('asta_db.log_online.datetime', '>=', $minDate)
                              ->get();
             else:
-                $log_login = $logOnline->where('asta_db.log_user.user_id', '=', $player)
+                $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
                              ->where('asta_db.log_online.type', '=', 1)
                              ->where('asta_db.log_online.datetime', '>=', $minDate)
                              ->get();
@@ -199,7 +199,7 @@ class ReportAdminController extends Controller
                              ->where('asta_db.log_online.datetime', '<=', $maxDate)
                              ->get();
             else:
-                $log_login = $logOnline->where('asta_db.log_user.user_id', '=', $player)
+                $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
                              ->where('asta_db.log_online.type', '=', 1)
                              ->where('asta_db.log_online.datetime', '<=', $maxDate)
                              ->get();
@@ -234,7 +234,7 @@ class ReportAdminController extends Controller
                              ->where('asta_db.log_online.type', '=', 1)
                              ->get();
             else:
-                $log_login = $logOnline->where('asta_db.log_user.user_id', '=', $player)
+                $log_login = $logOnline->where('asta_db.log_online.user_id', '=', $player)
                              ->where('asta_db.log_online.type', '=', 1)
                              ->get();
             endif;

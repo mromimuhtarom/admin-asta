@@ -391,6 +391,37 @@ class GiftController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+                      // ---- untuk enabled disabled ------//
+        $active = ConfigText::select(
+                'name', 
+                'value'
+            )
+            ->where('id', '=', 4)
+            ->first();
+        $value = str_replace(':', ',', $active->value);
+        $endis = explode(",", $value);
+        
+        $endis_array = [
+            $endis[0]   =>  $endis[1],
+            $endis[2]   =>  $endis[3]
+        ];
+
+        // ---- untuk gift category -----//
+        $giftcategory = ConfigText::select(
+                'name', 
+                'value'
+            )
+            ->where('id', '=', 7)
+            ->first();
+        $value        = str_replace(':', ',', $giftcategory->value);
+        $category     = explode(",", $value);
+        $category_array = [
+            $category[0]    =>  $category[1],
+            $category[2]    =>  $category[3],
+            $category[4]    =>  $category[5]
+        ];
+
+        $timenow = Carbon::now('GMT+7');
 
 
         Gift::where('id', '=', $pk)->update([
@@ -402,19 +433,15 @@ class GiftController extends Controller
               $name = "Nama";
               break;
           case "chipsPrice":
-              $name = "Harga Chips";
+              $name = "Harga Chip";
               break;
-          case "diamondPrice":
-              $name = "Diamond Price";
-              break;
-          case "expire":
-              $name = "Expire";
-              break;
-          case "category":
+          case "category_id":
               $name = "Category";
+              $value = $category_array[$value];
               break;
-          case "permanent":
-              $name = "Permanent";
+          case "status":
+              $name = "Status";
+              $value = $endis_array[$value];
               break;
           default:
             "";

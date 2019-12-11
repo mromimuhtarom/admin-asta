@@ -411,10 +411,10 @@ class EmoticonController extends Controller
 
         switch ($name) {
           case "name":
-              $name = "Name";
+              $name = "Nama";
               break;
           case "price":
-              $name = "Price";
+              $name = "Harga";
               break;
           case "status":
               $name = "Status";

@@ -179,7 +179,7 @@ class GeneralSettingController extends Controller
 
         switch ($name) {
             case "value":
-                $name = "Value";
+                $name = "Pengaturan";
                 break;
             default:
               "";

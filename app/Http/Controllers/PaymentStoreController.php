@@ -96,20 +96,21 @@ class PaymentStoreController extends Controller
 
         switch ($name) {
             case "name":
-                $name = "Name";
+                $name = "Nama";
                 break;
-            case "transaction_type":
-                $name = "Transaction Type";
+            case "type":
+                $name  = "Tipe Transaksi";
+                $value = strTypeTransaction($value);
                 break;
-            case "image":
-                $name = "Image";
+            case "desc":
+                $name = "Deskripsi";
                 break;
             case "status":
                 $name = "Status";
                 if($value === 0):
-                    $value = 'Disabled';
+                    $value = 'Dimatikan';
                 else: 
-                    $value = 'Enabled';
+                    $value = 'Diaktifkan';
                 endif;
                 break;
             default:

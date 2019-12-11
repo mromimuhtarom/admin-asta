@@ -428,16 +428,16 @@ class TableController extends Controller
   
         switch ($name) {
             case "name":
-                $name = "Table Name";
+                $name = "Nama Meja";
                 break;
             case "roomid":
-                $name = "room id";
+                $name = "ID Ruang";
                 break;
             case "max_player":
-                $name = "Max Player";
+                $name = "Maksimal Pemain";
                 break;
             case "small_blind":
-                $name = "Small Blind";
+                $name = "Small  Blind";
                 break;
             case "big_blind":
                 $name = "Big Blind";

@@ -248,33 +248,31 @@ class GoldStoreController extends Controller
 
         switch ($name) {
             case "name":
-                $name = "Name";
+                $name = "Nama";
                 break;
             case "item_get":
-                $name = "Gold Awarded";
+                $name = "Koin didapatkan";
                 break;
             case "price":
-                $name = "Price Cash";
-                break;
-            case "shop_type":
-                $name = "Shop Type";
+                $name = "Harga Uang Tunai";
                 break;
             case "google_key":
-                $name = "Google Key";
+                $name = "Kunci Google";
                 break;
             case "status":
                 $name = "Status";
                 if($value == 0):
-                    $value = 'Disabled';
+                    $value = 'Dimatikan';
                 else:
-                    $value = 'Enabled';
+                    $value = 'Diaktifkan';
                 endif;
                 break;
             case "trans_type":
-                $name = "Pay Transaction";
+                $name = "Transaksi Pembayaran";
+                 $value = strTypeTransaction($type);
                 break;
             case "order":
-                $name = "Order";
+                $name = "Memesan";
                 break;
             default:
             "";

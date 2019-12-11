@@ -20,6 +20,7 @@ use App\ConfigText;
 use File;
 use Storage;
 use Response;
+use App\Game;
 use Illuminate\Support\Facades\Input;
 
 class PlayersController extends Controller
@@ -28,27 +29,128 @@ class PlayersController extends Controller
   // ----------- Index Active Player ----------- //
     public function indexActive()
     {
-        $online = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
-                  ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
-                  ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
-                  ->select(
-                    'asta_db.user.username', 
-                    'asta_db.user_stat.rank_id', 
-                    'asta_db.user_stat.chip', 
-                    'asta_db.user_stat.gold',
-                    'asta_db.user.user_type',
-                    'asta_db.game.name as game_name', 
-                    'asta_db.user_active.date_login',
-                    'asta_db.user_active.game_id',
-                    'asta_db.user_active.table_id'
-                  )
-                  ->where('asta_db.user_active.table_id', '!=', 0)
-                  ->where('asta_db.user_active.game_id', '!=', 0)
-                  ->get();
+      $player_type = ConfigText::select(
+                        'value'
+                     )
+                     ->where('id', '=', 1)
+                     ->first();
+      $replacetype = str_replace(':', ',', $player_type->value);
+      $explodetype = explode(',', $replacetype);
+      $game        = Game::select('id', 'desc')->get();
+
+
   
         // $online = DB::select('select * from user_active join user on user.user_id = user_active.user_id join game on game.id = user_active.game_id join user_stat on user_stat.user_id = user_active.user_id where user.user_type != 3 and user_active.table_id != 0');
 
-        return view('pages.players.active_player', compact('online'));
+        return view('pages.players.active_player', compact('online', 'explodetype', 'game'));
+    }
+
+    public function searchactive(Request $request) {
+      $inputPlayer  = $request->inputPlayer;
+      $registerType = $request->inputRegisterType;
+      $inputGame    = $request->inputGame;
+
+      $player_type = ConfigText::select(
+                        'value'
+                     )
+                     ->where('id', '=', 1)
+                     ->first();
+      $replacetype = str_replace(':', ',', $player_type->value);
+      $explodetype = explode(',', $replacetype);
+      $game        = Game::select('id', 'desc')->get();
+
+      $online = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
+                ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
+                ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
+                ->join('asta_db.user_rank', 'asta_db.user_rank.id', '=', 'asta_db.user_stat.rank_id')
+                ->select(
+                  'asta_db.user.username', 
+                  'asta_db.user_rank.name as rank_name', 
+                  'asta_db.user_active.user_id',
+                  'asta_db.user_stat.chip', 
+                  'asta_db.user_stat.gold',
+                  'asta_db.user.user_type',
+                  'asta_db.game.name as game_name', 
+                  'asta_db.user_active.date_login',
+                  'asta_db.user_active.game_id',
+                  'asta_db.user_active.table_id'
+                )
+                ->where('asta_db.user_active.table_id', '!=', 0)
+                ->where('asta_db.user_active.game_id', '!=', 0);
+
+
+      if($inputPlayer != NULL && $registerType != NULL && $inputGame != NULL):
+        if(!is_numeric($inputPlayer)):
+          $activePlayer = $online->where('asta_db.user.username', 'LIKE', '%'.$inputPlayer.'%')
+                          ->where('asta_db.user.user_type', '=', $registerType)
+                          ->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        else:
+          $activePlayer = $online->where('asta_db.user_active.user_id', '=', $inputPlayer)
+                          ->where('asta_db.user.user_type', '=', $registerType)
+                          ->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        endif;
+      elseif($inputPlayer != NULL && $registerType != NULL):
+        if(!is_numeric($inputPlayer)):
+          $activePlayer = $online->where('asta_db.user.username', 'LIKE', '%'.$inputPlayer.'%')
+                          ->where('asta_db.user.user_type', '=', $registerType)
+                          ->get();
+        else:
+          $activePlayer = $online->where('asta_db.user_active.user_id', '=', $inputPlayer)
+                          ->where('asta_db.user.user_type', '=', $registerType)
+                          ->get();
+        endif;
+      elseif($inputPlayer != NULL && $inputGame != NULL):
+        if(!is_numeric($inputPlayer)):
+          $activePlayer = $online->where('asta_db.user.username', 'LIKE', '%'.$inputPlayer.'%')
+                          ->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        else:
+          $activePlayer = $online->where('asta_db.user_active.user_id', '=', $inputPlayer)
+                          ->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        endif;
+      elseif($registerType != NULL && $inputGame != NULL):
+                if(!is_numeric($inputPlayer)):
+          $activePlayer = $online->where('asta_db.user.user_type', '=', $registerType)
+                          ->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        else:
+          $activePlayer = $online->where('asta_db.user.user_type', '=', $registerType)
+                          ->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        endif;
+      elseif($inputGame != NULL):
+                if(!is_numeric($inputPlayer)):
+          $activePlayer = $online->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        else:
+          $activePlayer = $online->where('asta_db.user_active.game_id', '=', $inputGame)
+                          ->get();
+        endif;
+      elseif($registerType != NULL):
+        if(!is_numeric($inputPlayer)):
+          $activePlayer = $online->where('asta_db.user.user_type', '=', $registerType)
+                          ->get();
+        else:
+          $activePlayer = $online->where('asta_db.user.user_type', '=', $registerType)
+                          ->get();
+        endif;
+      elseif($inputPlayer != NULL):
+        if(!is_numeric($inputPlayer)):
+          $activePlayer = $online->where('asta_db.user.username', 'LIKE', '%'.$inputPlayer.'%')
+                          ->get();
+        else:
+          $activePlayer = $online->where('asta_db.user_active.user_id', '=', $inputPlayer)
+                          ->get();
+        endif;
+      else:
+        $activePlayer = $online->get();
+      endif;
+      return view('pages.players.active_player', compact('activePlayer', 'explodetype', 'game'));
+
+
     }
   // ----------- End Active Player ----------- //
 //****************************************** End Menu Player Active ******************************************//

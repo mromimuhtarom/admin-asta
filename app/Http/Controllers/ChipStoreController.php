@@ -203,24 +203,24 @@ class ChipStoreController extends Controller
   
         switch ($name) {
           case "name":
-              $name = "Name Chip";
+              $name = "Nama Chip";
               break;
           case "item_get":
-              $name = "Chip Awarded";
+              $name = "Chip Dapatkan";
               break;
           case "price":
-              $name = "Price";
+              $name = "Harga";
               break;
           case "status":
               $name = "Status";
               if($value == 0):
-                $value = 'Disabled';
+                $value = 'Dimatikan';
               else:
-                $value = 'Enabled';
+                $value = 'Diaktifkan';
               endif;
               break;
           case "order":
-              $name = "Order";
+              $name = "Memesan";
               break;
           default:
             "";

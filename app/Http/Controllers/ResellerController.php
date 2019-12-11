@@ -54,15 +54,15 @@ class ResellerController extends Controller
 
         switch($name) {
             case "username":
-                $name = 'Username';
+                $name = 'Nama Pengguna';
                 break;
             
             case "name":
-                $name = "Name";
+                $name = "Nama";
                 break;
             
             case "phone":
-                $name = "Phone";
+                $name = "Telepon";
                 break;
             
             case "email":
@@ -70,11 +70,11 @@ class ResellerController extends Controller
                 break;
 
             case "gold":
-                $name = "Gold";
+                $name = "Koin";
                 break;
 
             case "rank_id":
-                $name = "Rank ID";
+                $name = "Peringkat ID";
                 break;
             
             default:
@@ -124,10 +124,10 @@ class ResellerController extends Controller
             Reseller::where('reseller_id', '=', $userid)->delete();
 
             Log::create([
-                'op_id' => Session::get('userId'),
-                'action_id'   => '4',
-                'datetime'        => Carbon::now('GMT+7'),
-                'desc' => 'Hapus di menu Daftar Agen dengan AgenID '.$userid
+                'op_id'     => Session::get('userId'),
+                'action_id' => '4',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$userid
             ]);
             return redirect()->route('List_Reseller')->with('success','Data Deleted');
         }
@@ -200,18 +200,18 @@ class ResellerController extends Controller
         
         switch($name) {
             case "order_id":
-                $name = 'Order ID';
+                $name = 'ID Pemesanan';
                 break;            
             case "name":
-                $name = "Name";
+                $name = "Nama";
                 break;
             
             case "gold_group":
-                $name = "Gold Group";
+                $name = "Grup Koin";
                 break;
             
             case "accumulate_type":
-                $name = "Accumulate Type";
+                $name = "Jenis Akumulasi";
                 break;
 
             case "bonus":
@@ -978,25 +978,23 @@ public function detailTransaction($month, $year)
 
         switch ($name) {
             case "name":
-                $name = "Name";
+                $name = "Nama";
                 break;
             case "item_get":
-                $name = "Gold Awarded";
+                $name = "Koin didapatkan";
                 break;
             case "price":
-                $name = "Price Cash";
-                break;
-            case "shop_type":
-                $name = "Shop Type";
+                $name = "Harga Uang Tunai";
                 break;
             case "google_key":
-                $name = "Google Key";
+                $name = "Kunci Google";
                 break;
             case "status":
                 $name = "Status";
                 break;
             case "trans_type":
-                $name = "Pay Transaction";
+                $name = "Jenis Pembayaran";
+                $value = strTypeTransaction($value);
                 break;
             default:
             "";
