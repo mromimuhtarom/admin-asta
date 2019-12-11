@@ -70,7 +70,7 @@ class UserAdminController extends Controller
               'op_id'     => Session::get('userId'),
               'action_id' => '3',
               'datetime'  => Carbon::now('GMT+7'),
-              'desc'      => 'Create new in menu User Admin with Username '. $user->username
+              'desc'      => 'Menambahkan data di menu Pengguna Admin dengan Nama pengguna '. $user->username
           ]);
           return redirect()->route('User_Admin')->with('success','Data Insert Successfull');
     }
@@ -110,7 +110,7 @@ class UserAdminController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu User Admin with UserId '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Pengguna Admin dengan PenggunaId '.$pk.' menjadi '. $value
       ]);
     }
     
@@ -130,7 +130,7 @@ class UserAdminController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '1',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit password in menu User Admin with UserId '.$pk.' to '. $password
+                'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan PenggunaId '.$pk.' menjadi '. $password
             ]);
             return redirect()->route('User_Admin')->with('success','Reset Password Successfully');
         }
@@ -157,7 +157,7 @@ class UserAdminController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '4',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Delete in menu User Admin with user ID '.$userid
+                    'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$userid
                 ]);
                 return redirect()->route('User_Admin')->with('success','Data Deleted');
             }
@@ -171,6 +171,12 @@ class UserAdminController extends Controller
     {
         $ids =   $request->userIdAll;
         DB::table('asta_db.operator')->whereIn('op_id', explode(",", $ids))->delete();
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$ids
+        ]);
         return redirect()->route('User_Admin')->with('success','Data Deleted');
     }
 }

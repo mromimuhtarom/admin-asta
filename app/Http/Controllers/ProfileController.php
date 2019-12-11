@@ -58,7 +58,7 @@ class ProfileController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '1',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit password with UserId '.$user.' to '. $password
+          'desc'      => 'Edit kata sandi dengan PenggunaId '.$user.' menjadi '. $password
         ]);
         return redirect()->route('profile-view')->with('success','Reset Password Successfully');
         }
@@ -95,7 +95,7 @@ class ProfileController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' with UserId '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' dengan PenggunaId '.$pk.' menjadi '. $value
         ]);
     }
 }

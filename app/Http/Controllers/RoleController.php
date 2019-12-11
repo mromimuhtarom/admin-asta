@@ -69,7 +69,7 @@ class RoleController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '3',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Create new Role in Menu Role Admin with Role Name '.$role
+                'desc'      => 'Menambahkan data Peran di Menu Peran Admin dengan Nama Peran '.$role
               ]);
               return redirect()->route('Role_Admin')->with('success','Data Insert Successfull');  
         }
@@ -130,7 +130,7 @@ class RoleController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in Menu Role Admin with Role Id'.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' di Menu Peran Admin dengan PeranId'.$pk.' menjadi '. $value
         ]);
     }
 
@@ -145,12 +145,22 @@ class RoleController extends Controller
         DB::table('asta_db.adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
           $name => $value
         ]);
+        $roletype       = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
+        $value          = str_replace(':', ',', $roletype->value);
+        $type           = explode(",", $value);
+        $typerole = [
+          $type[0] => $type[1],
+          $type[2] => $type[3],
+          $type[4] => $type[5]
+        ];
+        $typerleupdate = $typerole[$value];
+        
 
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Type Of Role Access in menu Role Admin with menu Id'.$pk.' to '. $value
+          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan menuId'.$pk.' menjadi '. $typerleupdate
         ]);
     }
 
@@ -172,7 +182,7 @@ class RoleController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Role Admin with Role ID '.$userid
+                'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$userid
             ]);
             return redirect()->route('Role_Admin')->with('success','Data Deleted');
         }
@@ -186,6 +196,13 @@ class RoleController extends Controller
       
       DB::table('asta_db.adm_role')->whereIn('role_id', explode(",", $ids))->delete();
       DB::table('asta_db.adm_access')->whereIn('role_id', explode(",", $ids))->delete();
+
+      Log::create([
+        'op_id'     => Session::get('userId'),
+        'action_id' => '4',
+        'datetime'  => Carbon::now('GMT+7'),
+        'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$ids
+    ]);
 
       return redirect()->route('Role_Admin')->with('success', 'Data deleted');
     }

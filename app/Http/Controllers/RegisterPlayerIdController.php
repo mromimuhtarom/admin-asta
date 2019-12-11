@@ -91,7 +91,7 @@ class RegisterPlayerIdController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '3',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Create new user Random with '.$number.' Record'
+                'desc'      => 'Menambahkan data sebanyak '.$number.' input  di menu Pendaftaran pemain ID'
             ]);
 
             return back()->with('success', 'Input Data Successfull with '.$number.' Record');

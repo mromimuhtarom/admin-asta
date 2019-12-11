@@ -146,7 +146,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new category Asta Poker in menu Category Asta Poker with name'. $tpk_category->name
+            'desc'      => 'Menambahkan data di menu kategori Asta Poker dengan nama'. $tpk_category->name
         ]);
 
         return redirect()->route('Category_Asta_Poker')->with('success','Data Added');
@@ -191,7 +191,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new Category Asta Big Two in menu Category Asta Big Two with name '. $bgt_category->name
+            'desc'      => 'Menambahkan data di menu Kategori Asta Big Two dengan nama '. $bgt_category->name
         ]);
  
         return redirect()->route('Category_Big_Two')->with('success','Data Added');
@@ -230,7 +230,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new Category Domino Susun in menu Category Domino Susun with name'. $dms_category->name
+            'desc'      => 'Menambahkan data di menu Kategori Domino Susun dengan nama'. $dms_category->name
         ]);
 
         return redirect()->route('Category_Domino_Susun')->with('success','Data Added');
@@ -271,7 +271,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new Category Domino QQ in menu Category Domino QQ with name '. $dmq_category->name
+            'desc'      => 'Menambahkan data di menu Kategori Domino QQ dengan nama '. $dmq_category->name
         ]);
 
         return redirect()->route('Category_Domino_QQ')->with('success','Data Added');
@@ -318,7 +318,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.'in menu Category Asta Poker with roomid '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.'di menu Kategori Asta Poker dengan Ruangid '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -361,7 +361,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in menu Category Big Two with roomid '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' di menu KategorI Big Two dengan Ruangid '.$pk.' menjadi '. $value
         ]);
 
         
@@ -406,7 +406,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in menu Category Domino Susun with roomid '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' di menu Kategory Domino Susun dengan Ruangid '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -449,7 +449,7 @@ class CategoryController extends Controller
           'op_id'       => Session::get('userId'),
           'action_id'   => '2',
           'datetime'    => Carbon::now('GMT+7'),
-          'desc' => 'Edit '.$name.' in menu Category Domino QQ with roomid '.$pk.' to '. $value
+          'desc' => 'Edit '.$name.' di menu KategorI Domino QQ dengan Ruangid '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -471,7 +471,7 @@ class CategoryController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Category Asta Poker with Room ID '.$roomid
+                'desc'      => 'Hapus di menu Kategori Asta Poker dengan RuangID '.$roomid
             ]);
 
             return redirect()->route('Category_Asta_Poker')->with('success','Data Deleted');
@@ -497,7 +497,7 @@ class CategoryController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Category Asta Big Two with Room ID '.$roomid
+                'desc'      => 'Hapus di menu Kategori Asta Big Two dengan RuangID '.$roomid
             ]);
             return redirect()->route('Category_Big_Two')->with('success','Data Deleted');
         }
@@ -522,7 +522,7 @@ class CategoryController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Category Domino Susun with Room ID '.$roomid
+                'desc'      => 'Hapus di menu Kategory Domino Susun dengan RuangID '.$roomid
             ]);
             return redirect()->route('Category_Domino_Susun')->with('success','Data Deleted');
         }
@@ -547,7 +547,7 @@ class CategoryController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Delete in menu Category Domino QQ with Room ID '.$roomid
+                'desc'      => 'Hapus di menu Kategori Domino QQ dengan RuangID '.$roomid
             ]);
             return redirect()->route('Category_Domino_QQ')->with('success','Data Deleted');
         }

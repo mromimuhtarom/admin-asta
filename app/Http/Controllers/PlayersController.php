@@ -279,7 +279,7 @@ class PlayersController extends Controller
         {
           $registerPlayer = $register->where('asta_db.user.username', 'LIKE', '%'.$searchUser.'%')
                             ->where('asta_db.user.status', '=', $status)
-                            ->where('asta_db.user.user_type', '=', $type)
+                            ->where('asta_db.user.user_type', '=', $typeUser)
                             ->orderby($namecolumn, $sorting)
                             ->paginate(20);
           $registerPlayer->appends($request->all());
@@ -564,7 +564,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in menu Registered Player with ID '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' di menu Pemain Terdaftar dengan ID '.$pk.' menjadi '. $value
         ]);
     }
 
@@ -590,7 +590,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' in menu Registered Player with ID '.$pk.' to '. $value
+          'desc'      => 'Edit '.$name.' di menu Pemain terdaftar dengan ID '.$pk.' menjadi '. $value
         ]);
     }
   // ----------- End Update Registered Player ----------- //
@@ -638,7 +638,7 @@ class PlayersController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Create new in menu User Guest with ID  '.$number
+            'desc'      => 'Menambahkan data pengguna tamu dengan ID  '.$number
         ]);
 
         return back()->with('success', 'Input Data Successfull with '.$number.' Record');
@@ -818,7 +818,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '3',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Create new in menu Bot with username '. $username
+          'desc'      => 'Menambahkan data di menu Bot dengan username '. $username
         ]);
 
         return redirect()->route('Bots')->with('success','Data Added');
@@ -850,7 +850,7 @@ class PlayersController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' in menu Bot with ID '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Bot dengan ID '.$pk.' menjadi '. $value
       ]);
 
     }
