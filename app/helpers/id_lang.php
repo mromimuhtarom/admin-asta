@@ -29,6 +29,7 @@ function translate_menu($menu){
       'Point_Players'                   =>  'Poin pemain',
       'Register_Player_ID'              =>  'ID pemain terdaftar',
       'Log_Players'                     =>  'Catatan pemain',
+      'Transaction_Players'             =>  'Transaksi Pemain',
       'Slide_Banner'                    =>  'Slide spanduk',
       'Item'                            =>  'Barang',
       'Table_Gift'                      =>  'Meja Gift',

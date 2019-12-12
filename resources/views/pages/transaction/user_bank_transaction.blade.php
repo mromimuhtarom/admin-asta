@@ -65,8 +65,8 @@
 														<td>{{ $trns->username }}</td>
 														<td>{{ $chip->name }}</td>	
 														<td>{{ $trns->quantity }}</td>
-														<td>{{ $trns->item_price }}</td>
-														<td>{{ $trns->username }} buy {{ $trns->item_id}} using {{ $trns->paymentname }} at price {{ $trns->item_price }}</td>
+														<td>{{ number_format($trns->item_price, 2) }}</td>
+														<td>{{ $trns->username }} buy {{ $trns->item_id}} using {{ $trns->paymentname }} at price {{ number_format($trns->item_price, 2) }}</td>
 														<td>{{ $trns->paymentname }}</td>
 													@if ($menu && $mainmenu)
 														<td>

@@ -10,7 +10,7 @@
 
 
 @section('content')
-<link rel="stylesheet" href="/css/admin.css">
+<link rel="stylesh  eet" href="/css/admin.css">
   <!-- Response Status -->
   @if (count($errors) > 0)
     <div class="error-val">

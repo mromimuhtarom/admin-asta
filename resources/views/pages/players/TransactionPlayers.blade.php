@@ -27,7 +27,7 @@
 @endif
 <div class="search bg-blue-dark" style="margin-bottom:3%;">
     <div class="table-header w-100 h-100">
-			<form action="{{ route('Banking-search')}}">
+			<form action="{{ route('TransactionPlayers-search')}}">
             <div class="row h-100 w-100">
                 <div class="col">
                     <select name="choose_time" id="time" class="form-control">
