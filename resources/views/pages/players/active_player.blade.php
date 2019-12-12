@@ -3,8 +3,8 @@
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i
             class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">Players</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">Active Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Active Players') }}</a></li>
 @endsection
 
 
@@ -39,14 +39,14 @@
                 </div>
                 <div class="col">
                     <select name="inputRegisterType" class="form-control">
-                        <option value="">Choose Register Type</option>
-                        <option value="{{ $explodetype[0]}}">{{ $explodetype[1]}}</option>
-                        <option value="{{ $explodetype[2]}}">{{ $explodetype[3]}}</option>
+                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                        <option value="{{ $explodetype[0]}}">{{ Translate_menuPlayers($explodetype[1]) }}</option>
+                        <option value="{{ $explodetype[2]}}">{{ Translate_menuPlayers($explodetype[3]) }}</option>
                     </select>
                 </div>
                 <div class="col" style="padding-left:3%;">
                     <select name="inputGame" class="form-control">
-                        <option value="">Choose Game</option>
+                        <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
                         @foreach ($game as $gm)
                         <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                         @endforeach
@@ -68,7 +68,7 @@
     <header>
         <div class="widget-header">
             <span class="widget-icon"> <i class="fa fa-group"></i> </span>
-            <h2></i> Players Online </h2>
+            <h2></i>{{ Translate_menuPlayers('Players Online') }}</h2>
         </div>
 
         <div class="widget-toolbar">
@@ -94,15 +94,15 @@
                     <table id="online-players" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                             <tr>
-                                <th>ID Player</th>
-                                <th>User Player</th>
-                                <th>Rank</th>
-                                <th>Chip</th>
-                                <th>Gold Coins</th>
-                                <th>From</th>
-                                <th>Playing Games</th>
-                                <th>Table Name</th>
-                                <th>timestamp</th>
+                                <th>{{ Translate_menuPlayers('Player ID') }}</th>
+                                <th>{{ Translate_menuPlayers('Playername') }}</th>
+                                <th>{{ Translate_menuPlayers('Rank') }}</th>
+                                <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                <th>{{ Translate_menuPlayers('Gold Coins') }}</th>
+                                <th>{{ Translate_menuPlayers('From') }}</th>
+                                <th>{{ Translate_menuPlayers('Playing Games') }}</th>
+                                <th>{{ Translate_menuPlayers('Table Name') }}</th>
+                                <th>{{ Translate_menuPlayers('Timestamp') }}</th>
                             </tr>
                         </thead>
                         <tbody>

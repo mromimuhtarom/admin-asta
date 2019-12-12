@@ -2,7 +2,7 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">Players</a></li>
+<li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('Players') }}</a></li>
         <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">High Roller</a></li>
 @endsection
 
@@ -36,10 +36,10 @@
           <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
             <thead>
               <tr>
-                <th data-hide="phone">Back Account</th>
-                <th data-hide="phone,tablet">Players</th>
-                <th data-hide="phone,tablet">Country</th>
-                <th data-hide="phone,tablet">Gold</th>
+                <th data-hide="phone">{{ Translate_menuPlayers('Bank Account') }}</th>
+                <th data-hide="phone,tablet">{{ Translate_menuPlayers('Players') }}</th>
+                <th data-hide="phone,tablet">{{ Translate_menuPlayers('Country') }}</th>
+                <th data-hide="phone,tablet">{{ Translate_menuPlayers('Gold Coins') }}</th>
               </tr>
             </thead>
             <tbody>

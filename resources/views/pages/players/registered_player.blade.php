@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">Registered Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Registered Player') }}</a></li>
 @endsection
 
 @section('content')
@@ -25,17 +25,17 @@
                 </div>
                 <div class="col" style="padding-left:1%;">
                   <select name="status" class="form-control">
-                    <option value="">Choose Status</option>
-                    <option value="{{ $plyr_status[0] }}">{{ ucwords($plyr_status[1]) }}</option>
-                    <option value="{{ $plyr_status[2] }}">{{ ucwords($plyr_status[3]) }}</option>
-                    <option value="{{ $plyr_status[4] }}">{{ ucwords($plyr_status[5]) }}</option>
+                    <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                    <option value="{{ $plyr_status[0] }}">{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                    <option value="{{ $plyr_status[2] }}">{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
+                    <option value="{{ $plyr_status[4] }}">{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
                   </select>
                 </div>
                 <div class="col" style="padding-left:1%;">
                     <select name="type_user" class="form-control">
-                      <option value="">Choose Register Type</option>
-                      <option value="{{ $plyr_type[0] }}">{{ ucwords($plyr_type[1]) }}</option>
-                      <option value="{{ $plyr_type[2] }}">{{ ucwords($plyr_type[3]) }}</option>
+                      <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                      <option value="{{ $plyr_type[0] }}">{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
+                      <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
                     </select>
                 </div>
 
@@ -60,7 +60,7 @@
     <header>
       <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-user"></i> </span>
-        <h2>Registered Players </h2>
+        <h2>{{ Translate_menuPlayers('Registered Player') }}</h2>
       </div>
 
       <div class="widget-toolbar">
@@ -85,7 +85,7 @@
               <div class="row">
                 
                 <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                  Total Record Entries is {{ $registerPlayer->total() }}
+                  {{ Translate_menuPlayers('Total Record Entries is') }}{{ $registerPlayer->total() }}
                 </div>
       
               </div>
@@ -95,16 +95,16 @@
         <table id="registered-players" class="table table-striped table-bordered table-hover" width="100%">
           <thead>
             <tr>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id"> Player ID <i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip"> Chip <i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point"> Point <i class="fa fa-sort{{ iconsorting('asta_db.user_stat.point') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.gold"> Gold <i class="fa fa-sort{{ iconsorting('asta_db.user_stat.gold') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.status"> Status <i class="fa fa-sort{{ iconsorting('asta_db.user.status') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.join_date"> Date created <i class="fa fa-sort{{ iconsorting('asta_db.user.join_date') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_type"> Register Form <i class="fa fa-sort{{ iconsorting('asta_db.user.user_type') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip">{{ Translate_menuPlayers('Chip') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point">{{ Translate_menuPlayers('Point') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.point') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.gold">{{ Translate_menuPlayers('Gold Coins') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.gold') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.status">{{ Translate_menuPlayers('Status') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.status') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.join_date">{{ Translate_menuPlayers('Date Created') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.join_date') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_type">{{ Translate_menuPlayers('Register Form') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_type') }}"></i></a></th>
               {{-- <th class="th-sm">Device</th> --}}
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.country.name"> Country <i class="fa fa-sort{{ iconsorting('asta_db.country.name') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.country.name">{{ Translate_menuPlayers('Country') }}<i class="fa fa-sort{{ iconsorting('asta_db.country.name') }}"></i></a></th>
             </tr>
           </thead>
 <tbody>

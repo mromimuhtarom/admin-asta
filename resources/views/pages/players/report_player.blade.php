@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">Report Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Report Player') }}</a></li>
 @endsection
 
 
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
-                            <option value="">Choose Log Type</option>
+                            <option value="">{{ Translate_menuPlayers('Choose Log Type') }}</option>
                             {{-- @foreach ($action as $act)
                             <option value="{{ $act->id }}">{{ $act->action }}</option>                                
                             @endforeach --}}
@@ -68,7 +68,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2>Player Report </h2>
+            <h2>{{ Translate_menuPlayers('Report Player') }} </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -90,7 +90,7 @@
                         <div class="row">
                           
                           <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                            Total Record Entries is {{ $log_login->total() }}                         </div>
+                            {{ Translate_menuPlayers('Total Record Entries is') }} {{ $log_login->total() }}                         </div>
                 
                         </div>
                 
@@ -99,11 +99,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Player ID</th>
-                        <th>Username</th>
-                        <th>Status</th>
-                        <th>Time Stamp</th>
-                        <th>IP</th>
+                        <th>{{ Translate_menuPlayers('Player ID') }}</th>
+                        <th>{{ Translate_menuPlayers('Username') }}</th>
+                        <th>{{ Translate_menuPlayers('Status') }}</th>
+                        <th>{{ Translate_menuPlayers('Timestamp') }}</th>
+                        <th>{{ Translate_menuPlayers('IP') }}</th>
                     </tr>
                 </thead>
                 <tbody>
