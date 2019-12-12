@@ -93,7 +93,7 @@ class RoleController extends Controller
                     ->where('status', '=', 1)
                     ->where('parent_id', '=', 0)
                     ->where('asta_db.adm_access.role_id', '=', $role)
-                    ->where('asta_db.adm_menu.menu_id', '!=', 86)
+                    ->where('asta_db.adm_menu.menu_id', '!=', 87)
                     ->get();
         $op_id   = Session::get('userId');
         $role_op = User::where('op_id', '=', $op_id)->first();

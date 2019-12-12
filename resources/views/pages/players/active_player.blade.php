@@ -165,6 +165,7 @@
         ],
         "pagingType": "full_numbers",
         "autoWidth": true,
+        "searching": false,
         "classes": {
             "sWrapper": "dataTables_wrapper dt-bootstrap4"
         },

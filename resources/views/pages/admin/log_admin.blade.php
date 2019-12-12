@@ -2,16 +2,9 @@
 
 
 @section('page')
-<<<<<<< HEAD
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i
-            class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">Admin</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">Log Admin</a></li>
-=======
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
 <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
         <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('Log Admin') }}</a></li>
->>>>>>> 829cf097a39e63247153669b300c49f05cca01dd
 @endsection
 
 @section('content')
