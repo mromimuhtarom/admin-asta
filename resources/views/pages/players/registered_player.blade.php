@@ -124,9 +124,9 @@
         <tr>
             <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id}}</a></td>
             <td>{{ $regis->username }}</td>
-            <td><a href="#" class="usertext" data-title="Bank Account" data-name="chip" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->chip }}</a></td>
-            <td><a href="#" class="usertext" data-title="Bank Account" data-name="point" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->point }}</a></td>
-            <td><a href="#" class="usertext" data-title="Bank Account" data-name="gold" data-pk="{{ $regis->user_id }}" data-type="number" data-url="{{ route('RegisteredPlayer-update') }}">{{ $regis->gold }}</a></td>
+            <td><a href="{{ route('Chip-search') }}?inputPlayer={{ $regis->user_id }}&inputGame=&inputMinDate=&inputMaxDate=">{{ $regis->chip }}</a></td>
+            <td><a href="{{ route('Point-search') }}?inputPlayer={{ $regis->user_id }}&inputGame=&inputMinDate=&inputMaxDate=">{{ $regis->point }}</a></td>
+            <td><a href="{{ route('Gold-search') }}?inputPlayer={{ $regis->user_id }}&inputMinDate=&inputMaxDate=">{{ $regis->gold }}</a></td>
             <td><a href="#"class="status" data-title="Bank Account" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td>
             <td>{{ $regis->join_date }}</td>
             <td>{{ $user_type }}</td>
@@ -136,9 +136,9 @@
         <tr>
             <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id }}</a></td>
             <td>{{ $regis->username }}</td>
-            <td>{{ $regis->chip }}</td>
-            <td>{{ $regis->point }}</td>
-            <td>{{ $regis->gold }}</td>
+            <td><a href="{{ route('Chip-search') }}?inputPlayer={{ $regis->user_id }}&inputGame=&inputMinDate=&inputMaxDate=">{{ $regis->chip }}</a></td>
+            <td><a href="{{ route('Point-search') }}?inputPlayer={{ $regis->user_id }}&inputGame=&inputMinDate=&inputMaxDate=">{{ $regis->point }}</a></td>
+            <td><a href="{{ route('Gold-search') }}?inputPlayer={{ $regis->user_id }}&inputMinDate=&inputMaxDate=">{{ $regis->gold }}</a></td>
             <td>{{ $regis->strStatus() }}</td>
             <td>{{ $regis->join_date }}</td>
             <td>{{ $user_type }}</td>
