@@ -996,11 +996,14 @@ class PlayersController extends Controller
         $id    = $request->userId;
 
         $image_decode = base64_decode($image);
+        $f = finfo_open();
+        $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
         $imageName = $id.'.'.'jpg';
 
-        $rootpath = '../../asta-api/profile_player';
-        $client = Storage::createLocalDriver(['root' => $rootpath]);
-        if($client->put($imageName, $image_decode))
+        $rootpath   = 'unity-asset/profile_player/' .$id.'.jpg';
+        $image_main = Storage::disk('s3');
+
+        if($image_main->put($rootpath, $image_decode ))
         {
           echo 'Successful';
         } else 

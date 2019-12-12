@@ -39,7 +39,7 @@
                     </select>
                 </div>
                 <div class="col">
-					<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
+										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
                 </div>
                 <div class="col">
                     <input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="">
