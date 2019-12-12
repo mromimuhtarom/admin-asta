@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">Transaction</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">Reward Transaction</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('Reward Transaction') }}</a></li>
 @endsection
 
 
@@ -34,7 +34,7 @@
 		
 			<header>
 				<div class="widget-header">	
-					<h2><strong>Reward Transactions</strong></h2>				
+					<h2><strong>{{ translate_MenuTransaction('Reward Transaction') }}</strong></h2>				
 				</div>
 			</header>
 		
@@ -46,15 +46,15 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th class="th-sm">ID Player</th>
-										<th class="th-sm">username</th>
-										<th class="th-sm">Item</th>
-										<th class="th-sm">Awarded</th>
-										<th class="th-sm">Type</th>
-										<th class="th-sm">Status</th>
-										<th class="th-sm">Status Payment</th>
-										<th class="th-sm">Confirm request</th>
-										<th class="th-sm">Status</th>
+										<th class="th-sm">{{ translate_MenuTransaction('ID Player') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Username') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Item') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Awarded') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Type') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Status') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Status Payment') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Confirm request') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Status') }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -68,18 +68,18 @@
 										<td></td>
 										<td></td>
 										<td></td>
-										<td> Bank Manual Transfer</td>
+										<td>{{ translate_MenuTransaction('Bank Manual Transfer') }}</td>
 										<td>
 											<div>
-												<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline"><i class="fa fa-remove"></i> Decline</button>
+												<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('Decline') }}</button>
 										  {{-- </div>
 											<div> --}}
-												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve"><i class="fa fa-check"></i> Approve</button>
+												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Approve') }}</button>
 											</div>
 										</td>
 										<td>
 											<div class="user-transaction-status">
-												<p>Pending</p>
+												<p>{{ translate_MenuTransaction('Pending') }}</p>
 											</div>
 										</td>
 									</tr>

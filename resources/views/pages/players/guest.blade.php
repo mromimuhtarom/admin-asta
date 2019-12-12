@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Guest') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Guest') }}">Guest</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Guest') }}</a></li>
 @endsection
 
 
@@ -38,9 +38,9 @@
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select id="status" name="inputStatus" class="form-control" required>
-                            <option value="">Choose Status</option>
-                            <option value="used">Used</option>
-                            <option value="nonused">Non Used</option>
+                            <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                            <option value="used">{{ Translate_menuPlayers('Used') }}</option>
+                            <option value="nonused">{{ Translate_menuPlayers('Non used') }}</option>
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
@@ -58,7 +58,7 @@
         <header>
           <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-group"></i> </span>
-            <h2>Guest </h2>
+            <h2>{{ Translate_menuPlayers('Guest') }} </h2>
           </div>
   
           <div class="widget-toolbar">
@@ -88,7 +88,7 @@
                       <div class="input-group">
                         @if($menu && $mainmenu)
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                          <i class="fa fa-plus"></i> Create User Guest ID
+                          <i class="fa fa-plus"></i> {{ Translate_menuPlayers('Create user guest ID') }}
                         </button>
                         @endif
                       </div>
@@ -103,13 +103,13 @@
               
               <thead>
                 <tr>
-                    <th>ID Guest</th>
+                    <th>{{ Translate_menuPlayers('Guest ID') }}</th>
                     @if($status == 'used')
-                    <th class="th-sm">Username Guest</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('Username') }}</th>
                     @endiF
-                    <th class="th-sm">Device ID</th>
-                    <th>Device Timer</th>
-                    <th>Status</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('Device ID') }}</th>
+                    <th>{{ Translate_menuPlayers('Device Timer') }}</th>
+                    <th>{{ Translate_menuPlayers('Status') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -160,7 +160,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Guest ID</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('Create user guest ID') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -179,10 +179,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
-            <i class="fa fa-save"></i> Save
+            <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> Cancel
+            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
           </button>
         </div>
       </form>

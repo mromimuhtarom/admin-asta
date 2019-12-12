@@ -767,7 +767,7 @@ class PlayersController extends Controller
                       'asta_db.user_guest.guest_id', 
                       'asta_db.user_guest.expired_date',
                       'asta_db.user_guest.user_id',
-                      DB::raw("'Non Used' AS status")
+                      DB::raw("'tidak digunakan' AS status")
                     )
                     ->whereNull('user_id')
                     ->get();   
@@ -781,7 +781,7 @@ class PlayersController extends Controller
                         'asta_db.user_guest.device_key', 
                         'asta_db.user_guest.expired_date',
                         'asta_db.user_guest.user_id',
-                        DB::raw("'Used' AS status")
+                        DB::raw("'digunakan' AS status")
                       )
                       ->where('username', 'LIKE', '%'.$username.'%')
                       ->whereNotNull('asta_db.user_guest.user_id')
@@ -796,7 +796,7 @@ class PlayersController extends Controller
                         'asta_db.user_guest.device_key', 
                         'asta_db.user_guest.expired_date',
                         'asta_db.user_guest.user_id',
-                        DB::raw("'Used' AS status")
+                        DB::raw("'digunakan' AS status")
                       )
                       ->whereNotNull('asta_db.user_guest.user_id')
                       ->get();

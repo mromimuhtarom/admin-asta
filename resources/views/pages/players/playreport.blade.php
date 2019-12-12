@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Play_Report') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Play_Report') }}">Play Report</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Play_Report') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Play_Report') }}">{{ Translate_menuPlayers('Play report') }}</a></li>
 @endsection
 
 
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="inputGame" class="form-control">
-                            <option value="">Choose Game</option>
+                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
                             @foreach ($game as $gm)
                             <option value="{{ $gm->desc }}">{{ $gm->desc }}</option>
                             @endforeach
@@ -75,7 +75,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2>Player Report </h2>
+            <h2>{{ Translate_menuPlayers('Report Player') }} </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -98,7 +98,7 @@
                           
                           <!-- Button tambah bot baru -->
                           <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                            Total Record Entries is {{ $player_history->total() }}
+                            {{ Translate_menuPlayers('Total Record Entries is') }} {{ $player_history->total() }}
                           </div>
                           <!-- End Button tambah bot baru -->
                 
@@ -109,17 +109,17 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=round_id"> Round ID <i class="fa fa-sort{{ iconsorting('round_id') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id">Player ID <i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">Username <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">Playing Game <i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=tablename">Table  <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=seat_id">Seat <i class="fa fa-sort{{ iconsorting('seat_id') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card_round">Hand Card <i class="fa fa-sort{{ iconsorting('hand_card_round') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=bet">Bet <i class="fa fa-sort{{ iconsorting('bet') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=win_lose">Win Lose <i class="fa fa-sort{{ iconsorting('win_lose') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=status">Status <i class="fa fa-sort{{ iconsorting('status') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=datetime">Time Stamp <i class="fa fa-sort{{ iconsorting('datetime') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=round_id">{{ Translate_menuPlayers('Round ID') }}<i class="fa fa-sort{{ iconsorting('round_id') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">{{ Translate_menuPlayers('Playing Game') }} <i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=tablename">{{ Translate_menuPlayers('Table') }}<i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=seat_id">{{ Translate_menuPlayers('Seat') }}<i class="fa fa-sort{{ iconsorting('seat_id') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card_round">{{ Translate_menuPlayers('Hand card') }}<i class="fa fa-sort{{ iconsorting('hand_card_round') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=bet">{{ Translate_menuPlayers('Bet') }}<i class="fa fa-sort{{ iconsorting('bet') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=win_lose">{{ Translate_menuPlayers('Win Lose') }}<i class="fa fa-sort{{ iconsorting('win_lose') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=status">{{ Translate_menuPlayers('Status') }}<i class="fa fa-sort{{ iconsorting('status') }}"></i></a></th>
+                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=datetime">{{ Translate_menuPlayers('Timestamp') }}<i class="fa fa-sort{{ iconsorting('datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -183,7 +183,7 @@
     <div class="modal-dialog modal-dialog1 modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Detail Round ID</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Detail round ID') }}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
@@ -194,7 +194,7 @@
             <header>
                 <div class="widget-header">	
                     <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-                    <h2>Round ID {{ $history->round_id }}</h2>
+                    <h2>{{ Translate_menuPlayers('Round ID') }}{{ $history->round_id }}</h2>
                 </div>
             
                 <div class="widget-toolbar">
@@ -215,11 +215,11 @@
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
-                                    <th>Sit</th>
-                                    <th>Username</th>
-                                    <th>Action</th>
-                                    <th>Chip</th>
-                                    <th>Card</th>
+                                    <th>{{ Translate_menuPlayers('Sit') }}</th>
+                                    <th>{{ Translate_menuPlayers('Username') }}</th>
+                                    <th>{{ Translate_menuPlayers('Action') }}</th>
+                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                    <th>{{ Translate_menuPlayers('Card') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -275,12 +275,12 @@
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
-                                    <th>Sita</th>
-                                    <th>Username</th>
-                                    <th>Action</th>
-                                    <th>Chip</th>
-                                    <th>Card</th>
-                                    <th>Card Table</th>
+                                    <th>{{ Translate_menuPlayers('Sit') }}</th>
+                                    <th>{{ Translate_menuPlayers('Username') }}</th>
+                                    <th>{{ Translate_menuPlayers('Action') }}</th>
+                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                    <th>{{ Translate_menuPlayers('Card') }}</th>
+                                    <th>{{ Translate_menuPlayers('Card Table') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -344,11 +344,11 @@
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
-                                    <th>Sit</th>
-                                    <th>Username</th>
-                                    <th>Action</th>
-                                    <th>Chip</th>
-                                    <th>Card</th>
+                                    <th>{{ Translate_menuPlayers('Sit') }}</th>
+                                    <th>{{ Translate_menuPlayers('Username') }}</th>
+                                    <th>{{ Translate_menuPlayers('Action') }}</th>
+                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                    <th>{{ Translate_menuPlayers('Card') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -421,11 +421,11 @@
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
-                                    <th>Sit</th>
-                                    <th>Username</th>
-                                    <th>Action</th>
-                                    <th>Chip</th>
-                                    <th>Domino</th>
+                                    <th>{{ Translate_menuPlayers('Sit') }}</th>
+                                    <th>{{ Translate_menuPlayers('Username') }}</th>
+                                    <th>{{ Translate_menuPlayers('Action') }}</th>
+                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                    <th>{{ Translate_menuPlayers('Domino') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
