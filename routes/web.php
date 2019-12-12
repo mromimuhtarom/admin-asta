@@ -77,14 +77,6 @@ Route::middleware('authenticated')->group(function(){
             });
         });
         
-        Route::group(['prefix'  =>  'Transaction_Players'], function() {
-            Route::middleware('page_denied:Transaction Players')->group(function(){
-                Route::get('Banking-view', 'TransactionPlayersController@index')->name('Transaction_Players');
-                Route::get('Banking-search', 'TransactionPlayersController@search')->name('TransactionPlayers-search');
-                Route::get('Banking-search/{mindate}/{maxdate}/detail', 'TransactionPlayersController@detail')->name('detailTransactionDay');
-
-            });
-        });
     });
 
     Route::group(['prefix'  =>  'Transaction'], function() {
@@ -200,6 +192,15 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Register Player ID')->group(function(){
                 Route::get('RegisterPlayerID-view', 'RegisterPlayerIdController@index')->name('Register_Player_ID');
                 Route::post('RegisterPlayerID-create', 'RegisterPlayerIdController@store')->name('RegisterPlayerID-create');
+            });
+        });
+
+        Route::group(['prefix'  =>  'Transaction_Players'], function() {
+            Route::middleware('page_denied:Transaction Players')->group(function(){
+                Route::get('Banking-view', 'TransactionPlayersController@index')->name('Transaction_Players');
+                Route::get('Banking-search', 'TransactionPlayersController@search')->name('TransactionPlayers-search');
+                Route::get('Banking-search/{mindate}/{maxdate}/detail', 'TransactionPlayersController@detail')->name('detailTransactionDay');
+
             });
         });
 

@@ -51,7 +51,6 @@
         </form>
     </div>
 </div>
-
 @if (Request::is('Transaction/Banking_Transactions/Banking-search*'))
 {{-- @if ($time == "today") --}}
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
