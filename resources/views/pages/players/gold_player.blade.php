@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">Gold Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">{{ Translate_menuPlayers('Gold Players') }}</a></li>
 @endsection
 
 
@@ -83,7 +83,7 @@
                     <div class="row">
                         <!-- Button tambah bot baru -->
                         <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                                    Total Record Entries is {{ $balancedetails->total() }}
+                            {{ Translate_menuPlayers('Total record em') }} {{ $balancedetails->total() }}
                         </div>
                                 <!-- End Button tambah bot baru -->
                     </div>
