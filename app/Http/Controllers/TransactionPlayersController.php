@@ -18,7 +18,7 @@ class TransactionPlayersController extends Controller
     public function index()
     {
         $datenow = Carbon::now('GMT+7')->toDateString();
-        return view('pages.playersTransaction', compact('datenow'));
+        return view('pages.players.TransactionPlayers', compact('datenow'));
     }
 
     public function search(Request $request)
@@ -54,7 +54,7 @@ class TransactionPlayersController extends Controller
                 ->get();
                 $lang_id ='Hari ini';
             
-            return view('pages.playersTransaction', compact('history', 'datenow', 'time', 'lang_id'));
+            return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
 
         } 
         else if($time == "week")
@@ -65,7 +65,7 @@ class TransactionPlayersController extends Controller
                         ->get();
                         $lang_id   = 'pekan ini';
  
-            return view('pages.playersTransaction', compact('history', 'datenow', 'time', 'lang_id'));
+            return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
 
         } else if($time == "month")
         {
@@ -75,7 +75,7 @@ class TransactionPlayersController extends Controller
                         ->get();
                         $lang_id = 'Bulan ini';
  
-            return view('pages.playersTransaction', compact('history', 'datenow', 'time', 'lang_id'));
+            return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
         } else if($time == "all time")
         {
             if($minDate != NULL && $maxDate != NULL)
@@ -84,21 +84,21 @@ class TransactionPlayersController extends Controller
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')   
                         ->get();
                         
-                return view('pages.playersTransaction', compact('history', 'datenow', 'time', 'lang_id'));
+                return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
             } else if($minDate != NULL)
             {
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '>=', $minDate." 00:00:00")
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->get();
      
-                return view('pages.playersTransaction', compact('history', 'datenow', 'time', 'lang_id'));
+                return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
             } else if($maxDate != NULL)
             {
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '<=', $maxDate." 23:59:59")
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->get();
      
-                return view('pages.playersTransaction', compact('history', 'datenow', 'time', 'lang_id'));
+                return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
             } else if($minDate == NULL && $maxDate == NULL)
             {
                 return back()->with('alert', 'Min Date And Max Date Must be Filled In');
@@ -132,6 +132,6 @@ class TransactionPlayersController extends Controller
                    ->get();
         $time      = "all time";
 
-        return view('pages.playersTransaction', compact('history', 'datenow', 'time'));
+        return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time'));
     }
 }

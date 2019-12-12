@@ -1,11 +1,18 @@
 <?php
 
+function xmlfile()
+{
+    // $xml = simplexml_load_file("../public/upload/xml/Language/Indonesia/language.xml");
+    $xml = simplexml_load_file("../public/upload/xml/Language/Indonesia/language.xml");
+    
+    return $xml;
+}
 
 //===========================TRANSLATE SIDEMENU===========================//
 function translate_menu($menu){
   
     $array_menu = [
-      'Dashboard'                       =>  'Dasbor', 
+      'Dashboard'                       =>  xmlfile()->L_PASSWORD->attributes()->val, 
       'Admin'                           =>  'Admin',
       'User_Admin'                      =>  'Pengguna Admin',
       'Role_Admin'                      =>  'Peran Admin',
@@ -283,5 +290,8 @@ function Translate_menuPlayers($menu){
     ];
     return $array_menuContent[$menu];
 }
+
+
+
 
 ?>

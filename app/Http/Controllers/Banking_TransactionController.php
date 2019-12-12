@@ -7,6 +7,9 @@ use App\TransactionDay;
 use Carbon\Carbon;
 use DB;
 use Validator;
+use App\BalanceChip;
+use App\BalanceGold;
+use App\BalancePoint;
 
 class Banking_TransactionController extends Controller
 {
@@ -36,15 +39,17 @@ class Banking_TransactionController extends Controller
                                DB::raw('sum(asta_db.transaction_day.fee) As totalFee'),
                                DB::raw('sum(asta_db.transaction_day.turnover) As totalTurnover')
                            );
-        $Transaction = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
-                           ->select(
-                               'asta_db.user.username',
-                               'asta_db.transaction_day.date_created',
-                               'asta_db.transaction_day.win',
-                               'asta_db.transaction_day.lose',
-                               'asta_db.transaction_day.turnover',
-                               'asta_db.transaction_day.fee'
-                           );
+        // $Transaction = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
+        //                    ->select(
+        //                        'asta_db.user.username',
+        //                        'asta_db.transaction_day.date_created',
+        //                        'asta_db.transaction_day.win',
+        //                        'asta_db.transaction_day.lose',
+        //                        'asta_db.transaction_day.turnover',
+        //                        'asta_db.transaction_day.fee'
+        //                    );
+
+        // $balancechip = BalanceChip::select(DB::raw(''))
 
 
         if($time == "today")
