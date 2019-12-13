@@ -59,7 +59,7 @@
 <!--------- End Content Search ------->
 
 <!--------- Show after search ------->
-@if (Request::is('Players/Chip_Players/Chip-search*'))
+@if (Request::is('Players/Chip_Players/Chip-search*') || Request::is('Players/Chip_Players/Chip-all*'))
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
 
     <header>
@@ -99,7 +99,7 @@
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename"> Game <i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.action_id">Action <i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.action_id') }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.debit">Debit <i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.debit') }}"></i></a></th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.credit">Credit <i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.credit') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{  $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.credit">Credit <i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.credit') }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.balance">Total <i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.balance') }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.datetime">Timestamp  <i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.datetime') }}"></i></a></th>
                     </tr>

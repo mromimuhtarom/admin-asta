@@ -102,6 +102,12 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('RewardTransaction-view', 'RewardTransactionController@index')->name('Reward_Transaction');
             });
         });
+
+        Route::group(['prefix'  =>  'Add_Transaction'], function() {
+            Route::middleware('page_denied:Add Transaction')->group(function(){
+                Route::get('AddTransaction-view', 'Add_TransactionController@index')->name('Add_Transaction');
+            });
+        });
     });
 
     Route::group(['prefix'  =>  'Players'], function() {
@@ -164,6 +170,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Chip Player')->group(function(){
                 Route::get('Chip-view', 'ChipController@index')->name('Chip_Players');
                 Route::get('Chip-search', 'ChipController@search')->name('Chip-search');
+                Route::get('Chip-all', 'ChipController@registerplayerchip')->name('chip_detail');
             });
         });
 
@@ -171,6 +178,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Gold Player')->group(function(){
                 Route::get('Gold-view', 'GoldController@index')->name('Gold_Players');
                 Route::get('Gold-search', 'GoldController@search')->name('Gold-search');
+                Route::get('Gold-all', 'GoldController@registerplayergold')->name('gold_detail');
             });
         });
 
@@ -178,6 +186,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Point Player')->group(function(){
                 Route::get('Point-view', 'PointController@index')->name('Point_Players');
                 Route::get('Point-search', 'PointController@search')->name('Point-search');
+                Route::get('Point-all', 'PointController@registerplayerpoint')->name('point_detail');
             });
         });
 

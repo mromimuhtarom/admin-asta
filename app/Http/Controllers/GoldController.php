@@ -24,6 +24,64 @@ class GoldController extends Controller
       return view('pages.players.gold_player', compact('datenow'));
     }
 
+    public function registerplayergold(Request $request)
+    {
+        $searchUser  = $request->inputPlayer;
+        $sorting     = $request->sorting;
+        $namecolumn  = $request->namecolumn;
+
+        $menus1      = MenuClass::menuName('Balance Gold');
+        $datenow     = Carbon::now('GMT+7');
+
+        $action      = ConfigText::select(
+                        'name',
+                        'value'
+                       ) 
+                       ->where('id', '=', 11)
+                       ->first();
+        $value               = str_replace(':', ',', $action->value);
+        $actionbalance       = explode(",", $value);
+        $actblnc = [
+          $actionbalance[0]  => $actionbalance[1] ,
+          $actionbalance[2]  => $actionbalance[3] ,
+          $actionbalance[4]  => $actionbalance[5] ,
+          $actionbalance[6]  => $actionbalance[7] ,
+          $actionbalance[8]  => $actionbalance[9] 
+        ];
+        if(Input::get('sorting') === 'asc'):
+          $sortingorder = 'desc';
+        else:
+          $sortingorder = 'asc';
+        endif;
+
+        if($namecolumn == NULL):
+          $namecolumn = 'asta_db.balance_gold.datetime';
+        endif;
+        if($sorting == NULL):
+          $sorting = 'desc';
+        endif;
+        
+        $getMindate     = Input::get('inputMinDate');
+        $getMaxdate     = Input::get('inputMaxDate');
+        $getusername    = Input::get('inputPlayer');
+        $balancedetails = BalanceGold::select(
+                          'asta_db.balance_gold.debit',
+                          'asta_db.balance_gold.credit',
+                          'asta_db.balance_gold.balance',
+                          'asta_db.balance_gold.datetime', 
+                          'asta_db.user.username', 
+                          'asta_db.balance_gold.user_id',
+                          'asta_db.balance_gold.action_id'
+                        )
+                        ->JOIN('asta_db.user', 'asta_db.balance_gold.user_id', '=', 'asta_db.user.user_id')
+                        ->WHERE('asta_db.balance_gold.user_id', '=', $searchUser )
+                        ->orderBy($namecolumn, $sorting)
+                        ->paginate(20);
+
+          $balancedetails->appends($request->all());
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','datenow','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+    }
+
     public function search(Request $request) 
     {
         $searchUser  = $request->inputPlayer;

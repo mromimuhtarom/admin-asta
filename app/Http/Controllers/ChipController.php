@@ -26,6 +26,60 @@ class ChipController extends Controller
       return view('pages.players.chip_player', compact('datenow', 'game'));
     }
 
+    public function registerplayerchip(Request $request)
+    {
+        $searchUser   = $request->inputPlayer;
+        $menus1       = MenuClass::menuName('Balance Chip');
+        $game         = Game::all();
+        $datenow      = Carbon::now('GMT+7');
+        $action       = ConfigText::select(
+                          'name',
+                          'value'
+                        ) 
+                        ->where('id', '=', 11)
+                        ->first();
+
+        $value               = str_replace(':', ',', $action->value);
+        $actionbalance       = explode(",", $value);
+        $actblnc = [
+          $actionbalance[0]  => $actionbalance[1] ,
+          $actionbalance[2]  => $actionbalance[3] ,
+          $actionbalance[4]  => $actionbalance[5] ,
+          $actionbalance[6]  => $actionbalance[7] ,
+          $actionbalance[8]  => $actionbalance[9] 
+        ];
+
+        $getMindate  = Input::get('inputMinDate');
+        $getMaxdate  = Input::get('inputMaxDate');
+        $getGame     = Input::get('inputGame');
+        $getUsername = Input::get('inputPlayer');
+        if(Input::get('sorting') === 'asc'):
+          $sortingorder = 'desc';
+        else:
+          $sortingorder = 'asc';
+        endif;
+
+        $balancedetails  = BalanceChip::select(
+                          'asta_db.balance_chip.debit',
+                          'asta_db.balance_chip.credit',
+                          'asta_db.balance_chip.balance',
+                          'asta_db.balance_chip.datetime', 
+                          'asta_db.user.username', 
+                          'asta_db.balance_chip.user_id',
+                          'asta_db.game.name as gamename', 
+                          'asta_db.balance_chip.action_id'
+                        )
+                        ->JOIN('asta_db.user', 'asta_db.balance_chip.user_id', '=', 'asta_db.user.user_id')
+                        ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id')
+                        ->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
+                        ->orderBy('asta_db.balance_chip.datetime', 'desc')
+                        ->paginate(20);
+                        $balancedetails->appends($request->all());
+        
+        return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
