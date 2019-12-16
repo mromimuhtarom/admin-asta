@@ -42,11 +42,13 @@ class GoldController extends Controller
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
         $actblnc = [
-          $actionbalance[0]  => $actionbalance[1] ,
-          $actionbalance[2]  => $actionbalance[3] ,
-          $actionbalance[4]  => $actionbalance[5] ,
-          $actionbalance[6]  => $actionbalance[7] ,
-          $actionbalance[8]  => $actionbalance[9] 
+          $actionbalance[0]  => $actionbalance[1],
+          $actionbalance[2]  => $actionbalance[3],
+          $actionbalance[4]  => $actionbalance[5],
+          $actionbalance[6]  => $actionbalance[7],
+          $actionbalance[8]  => $actionbalance[9],
+          $actionbalance[10] => $actionbalance[11],
+          $actionbalance[12] => $actionbalance[13]
         ];
         if(Input::get('sorting') === 'asc'):
           $sortingorder = 'desc';

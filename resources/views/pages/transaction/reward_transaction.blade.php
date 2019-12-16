@@ -46,44 +46,38 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th class="th-sm">{{ translate_MenuTransaction('ID Player') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Time Stamp') }}</th>
 										<th class="th-sm">{{ translate_MenuTransaction('Username') }}</th>
 										<th class="th-sm">{{ translate_MenuTransaction('Item') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Awarded') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Type') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Status') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Status Payment') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Quantity') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Price') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('Detail Information') }}</th>
+										@if ($menu && $mainmenu)
 										<th class="th-sm">{{ translate_MenuTransaction('Confirm request') }}</th>
+										@endif
 										<th class="th-sm">{{ translate_MenuTransaction('Status') }}</th>
 									</tr>
 								</thead>
 								<tbody>
-									{{-- @foreach ($transactions as $transaction) --}}
-									
-									<tr>
-										{{-- @if ($menu && $mainmenu) --}}
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>{{ translate_MenuTransaction('Bank Manual Transfer') }}</td>
-										<td>
-											<div>
-												<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('Decline') }}</button>
-										  {{-- </div>
-											<div> --}}
-												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Approve') }}</button>
-											</div>
-										</td>
-										<td>
-											<div class="user-transaction-status">
-												<p>{{ translate_MenuTransaction('Pending') }}</p>
-											</div>
-										</td>
-									</tr>
-									{{-- @endforeach --}}
+									@foreach ($transaction as $trns)
+										<tr>
+											<td>{{ $trns->datetime }}</td>
+											<td>{{ $trns->username }}</td>
+											<td>{{ $trns->item_name }}</td>	
+											<td>{{ $trns->quantity }}</td>
+											<td>{{ $trns->item_price }}</td>
+											<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_name }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }} Point</td>
+											@if ($menu && $mainmenu)
+											<td>
+												<div>
+													<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $trns->strtrnsid }}"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('Decline') }}</button>
+													<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->strtrnsid }}"><i class="fa fa-check"></i> {{ translate_MenuTransaction('Approve') }}</button>
+												</div>
+											</td>
+											@endif
+											<td>{{ $trns->description }}</td>
+										</tr>
+									@endforeach
 								</tbody>
 							</table>
 						</div>
@@ -100,81 +94,81 @@
 	{{-- yg hilang --}}
 {{-- </div> --}}
 
+@foreach ($transaction as $transaction)
+<!-- Modal approve transaction -->
+<div class="modal fade" id="approve{{ $transaction->strtrnsid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Approve Transaction') }}</h5>
+				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fa fa-remove"></i>
+				</button>
+            </div>
+            <form action="{{ route('RewardTransaction-Approve')}}" method="POST">
+            @csrf
+			    <div class="modal-body" align="center">
+						<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
+						{{ translate_MenuTransaction('Are you sure want to Approve this Transaction?') }}
+          <input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
+					<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+					<input type="hidden" name="price" value="{{ $transaction->item_price }}">
+					<input type="hidden" name="item_name" value="{{ $transaction->item_name }}">
+					<input type="hidden" name="desc" value="{{ $transaction->description }}">
+					<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
+					<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
+					<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
+					<input type="hidden" name="shop_type" value="{{ $transaction->shop_type }}">
+					<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
+
+			    </div>
+			    <div class="modal-footer">
+				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
+				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
+                </div>
+            </form>
+		</div>
+	</div>
+</div>
+<!-- End Modal approve transaction -->
+
 
 <!-- Modal decline -->
-{{-- @foreach ($transactions as $transaction)
-<div class="modal fade" id="decline{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="decline{{ $transaction->strtrnsid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Decline Transaction</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Decline Transaction') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
             </div>
-            <form action="{{ route('RequestTransaction-Decline')}}" method="POST">
+            <form action="{{ route('RewardTransaction-Decline')}}" method="POST">
             @csrf
-                <div class="modal-body">
-                    Are you sure want to Decline this Transaction ?
-                    <input type="hidden" name="declineId" value="{{ $transaction->id }}">
-										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
-										<input type="hidden" name="price" value="{{ $transaction->item_price }}">
-										<input type="hidden" name="item_name" value="200Gold">
-										<input type="hidden" name="desc" value="{{ $transaction->desc }}">
-										<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
-										<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
-										<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
-										<input type="hidden" name="user_type" value="{{ $transaction->user_type }}">
-										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
-			    </div>
-			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
-                </div>
-            </form>
+                <div class="modal-body" align="center">
+										<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
+										{{ translate_MenuTransaction('Are you sure want to Decline this Transaction?') }}
+													<input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
+													<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+													<input type="hidden" name="price" value="{{ $transaction->item_price }}">	
+													<input type="hidden" name="item_name" value="{{ $transaction->item_name }}">
+													<input type="hidden" name="desc" value="{{ $transaction->description }}">
+													<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
+													<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
+													<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
+													<input type="hidden" name="shop_type" value="{{ $transaction->shop_type }}">
+													<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
+			    			</div>
+			    			<div class="modal-footer">
+				    			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
+				    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
+          			</div>
+          	</form>
 		</div>
 	</div>
 </div>
-@endforeach --}}
+@endforeach
 <!-- End Modal decline -->
-
-<!-- Modal approve transaction -->
-{{-- @foreach ($transactions as $transaction)
-<div class="modal fade" id="approve{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Approve Transaction</h5>
-				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
-					<i class="fa fa-remove"></i>
-				</button>
-            </div>
-            <form action="{{ route('RequestTransaction-Approve')}}" method="POST">
-            @csrf
-			    <div class="modal-body">
-                    Are you sure want to Approve this Transaction ?
-                   
-										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
-										<input type="hidden" name="goldbuy" value="190">
-										<input type="hidden" name="price" value="{{ $transaction->item_price }}">
-										<input type="hidden" name="item_name" value="200Gold">
-										<input type="hidden" name="desc" value="{{ $transaction->desc }}">
-										<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
-										<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
-										<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
-										<input type="hidden" name="user_type" value="{{ $transaction->user_type }}">
-										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
-			    </div>
-			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Yes</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
-                </div>
-            </form>
-		</div>
-	</div>
-</div>
-@endforeach --}}
-<!-- End Modal approve transaction -->
 
 
 <script>

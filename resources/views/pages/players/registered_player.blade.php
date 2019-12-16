@@ -136,9 +136,9 @@
         <tr>
             <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id }}</a></td>
             <td>{{ $regis->username }}</td>
-            <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->chip }}</a></td>
-            <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->point }}</a></td>
-            <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->gold }}</a></td>
+            <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->chip, 2) }}</a></td>
+            <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->point, 2) }}</a></td>
+            <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->gold, 2) }}</a></td>
             <td>{{ $regis->strStatus() }}</td>
             <td>{{ $regis->join_date }}</td>
             <td>{{ $user_type }}</td>

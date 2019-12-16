@@ -51,7 +51,7 @@ class UserAdminController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'username' => 'required',
+            'username' => 'required|regex:/^\S*$/u',
             'role'     => 'required|integer',
             'fullname' => 'required',
         ]);
