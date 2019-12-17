@@ -48,7 +48,10 @@ class ChipController extends Controller
           $actionbalance[6]  => $actionbalance[7] ,
           $actionbalance[8]  => $actionbalance[9] ,
           $actionbalance[10] => $actionbalance[11],
-          $actionbalance[12] => $actionbalance[13]
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         $getMindate  = Input::get('inputMinDate');
@@ -96,14 +99,6 @@ class ChipController extends Controller
         $gameName     = $request->inputGame;
         $sorting      = $request->sorting;
         $namecolumn   = $request->namecolumn;
-        
-        // $user_id      = $request->user_id;
-        // $username     = $request->username;
-        // $action_id    = $request->action_id;
-        // $debit        = $request->debit;
-        // $credit       = $request->credit;
-        // $balance      = $request->balance;
-        // $datetime     = $request->datetime;
 
         $menus1       = MenuClass::menuName('Balance Chip');
         $game         = Game::all();
@@ -142,7 +137,10 @@ class ChipController extends Controller
           $actionbalance[6]  => $actionbalance[7],
           $actionbalance[8]  => $actionbalance[9],
           $actionbalance[10] => $actionbalance[11],
-          $actionbalance[12] => $actionbalance[13]
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         // if ($validator->fails()) {

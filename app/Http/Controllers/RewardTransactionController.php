@@ -41,36 +41,43 @@ class RewardTransactionController extends Controller
                        ->where('item_type', '=', 3)
                        ->where('asta_db.store_transaction.status', '=', 0)
                        ->get();
-        // $item_point = ItemPoint::select(
-        //                 'item_id', 
-        //                 'name'
-        //              )
-        //              ->get();
+
         return view('pages.transaction.reward_transaction', compact('transaction', 'menu', 'mainmenu'));
     }
 
     public function approve(Request $request)
     {
+
+        $user_id     = $request->user_id;
+        $item_name   = $request->item_name;
+        $description = $request->description;
+        $quantity    = $request->quantity;
+        $payment_id  = $request->payment_id;
+        $datetime    = $request->datetime;
+        $shop_type   = $request->shop_type;
+        $price       = $request->price;
+        $approveid   = $request->approveId;
+
         StoreTransactionHist::create([
-            'user_id'     => $request->user_id,
-            'item_name'   => $request->item_name,
+            'user_id'     => $user_id,
+            'item_name'   => $item_name,
             'status'      => 1,
-            'description' => $request->description,
-            'quantity'    => $request->quantity,
-            'payment_id'  => $request->payment_id,
-            'datetime'    => $request->datetime,
-            'shop_type'   => $request->shop_type,
+            'description' => $description,
+            'quantity'    => $quantity,
+            'payment_id'  => $payment_id,
+            'datetime'    => $datetime,
+            'shop_type'   => $shop_type,
             'item_type'   => 3,
-            'item_price'  => $request->price,
+            'item_price'  => $price,
             'action_date' => Carbon::now('GMT+7')
         ]);
 
-        StoreTransaction::where('user_id', '=', $request->user_id)->where('id', '=', $request->declineId)->delete();
+        StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $approveid)->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '5',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $request->user_id
+            'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $user_id
         ]);
 
         return back()->with('success', 'Menerima permintaan Transaksi telah berhasil');
@@ -78,31 +85,60 @@ class RewardTransactionController extends Controller
 
     public function decline(Request $request)
     {
+        $user_id     = $request->user_id;
+        $item_name   = $request->item_name;
+        $description = $request->description;
+        $quantity    = $request->quantity;
+        $payment_id  = $request->payment_id;
+        $datetime    = $request->datetime;
+        $shop_type   = $request->shop_type;
+        $price       = $request->price;
+        $declineid   = $request->declineId;
+
+
         StoreTransactionHist::create([
-            'user_id'     => $request->user_id,
-            'item_name'   => $request->item_name,
+            'user_id'     => $user_id,
+            'item_name'   => $item_name,
             'status'      => 2,
-            'description' => $request->description,
-            'quantity'    => $request->quantity,
-            'payment_id'  => $request->payment_id,
-            'datetime'    => $request->datetime,
-            'shop_type'   => $request->shop_type,
+            'description' => $description,
+            'quantity'    => $quantity,
+            'payment_id'  => $payment_id,
+            'datetime'    => $datetime,
+            'shop_type'   => $shop_type,
             'item_type'   => 3,
-            'item_price'  => $request->price,
+            'item_price'  => $price,
             'action_date' => Carbon::now('GMT+7')
         ]);
-        $user_stat = Stat::where('user_id', '=', $request->user_id)->first();
-        $totalPoint = $user_stat->point + $request->price;
-        Stat::where('user_id', '=', $request->user_id)->update([
+
+        
+        $user_stat  = Stat::where('user_id', '=', $user_id)->first();
+        $totalPoint = $user_stat->point + $price;
+
+
+        Stat::where('user_id', '=', $user_id)->update([
             'point' =>  $totalPoint
         ]);
-        StoreTransaction::where('user_id', '=', $request->user_id)->where('id', '=', $request->declineId)->delete();
+
+
+        BalancePoint::create([
+            'user_id'   =>  $user_id,
+            'game_id'   =>  0,
+            'action_id' =>  10,
+            'debit'     =>  $price,
+            'credit'    =>  0.00,
+            'balance'   =>  $totalPoint,
+            'datetime'  =>  Carbon::now('GMT+7')
+        ]);
+
+        StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $$declineid)->delete();
+
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '5',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $request->user_id
+            'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $user_id
         ]);
+
         return back()->with('success', 'Menolak permintaan Transaksi telah berhasil');
     }
 }

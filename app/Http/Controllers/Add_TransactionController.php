@@ -94,9 +94,10 @@ class Add_TransactionController extends Controller
         $actblnc = [
           $actionbalance[10] => $actionbalance[11],
           $actionbalance[12] => $actionbalance[13]
-        ];
+        ];   
 
         $add_transaction->appends($request->all());
+
         return view('pages.transaction.add_transaction', compact('add_transaction', 'getUsername', 'sortingorder', 'actblnc'));
     }
 

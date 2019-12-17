@@ -43,7 +43,10 @@ class PointController extends Controller
           $actionbalance[6]  => $actionbalance[7],
           $actionbalance[8]  => $actionbalance[9],
           $actionbalance[10] => $actionbalance[11],
-          $actionbalance[12] => $actionbalance[13]
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         if(Input::get('sorting') === 'asc'):
@@ -128,7 +131,10 @@ class PointController extends Controller
           $actionbalance[6]  => $actionbalance[7],
           $actionbalance[8]  => $actionbalance[9],
           $actionbalance[10] => $actionbalance[11],
-          $actionbalance[12] => $actionbalance[13]
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         // if sorting variable is null

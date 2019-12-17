@@ -48,7 +48,10 @@ class GoldController extends Controller
           $actionbalance[6]  => $actionbalance[7],
           $actionbalance[8]  => $actionbalance[9],
           $actionbalance[10] => $actionbalance[11],
-          $actionbalance[12] => $actionbalance[13]
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
         if(Input::get('sorting') === 'asc'):
           $sortingorder = 'desc';
@@ -123,7 +126,12 @@ class GoldController extends Controller
           $actionbalance[2]  => $actionbalance[3] ,
           $actionbalance[4]  => $actionbalance[5] ,
           $actionbalance[6]  => $actionbalance[7] ,
-          $actionbalance[8]  => $actionbalance[9] 
+          $actionbalance[8]  => $actionbalance[9] ,
+          $actionbalance[10] => $actionbalance[11],
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
     
         if ($validator->fails()) {
