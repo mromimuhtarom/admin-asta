@@ -310,7 +310,7 @@ class PlayersController extends Controller
         $typeconverttocomma = str_replace(':', ',', $player_type->value);
         $plyr_type        = explode(",", $typeconverttocomma); 
 
-        $menu          = MenuClass::menuName('Registered Player');
+        $menu          = MenuClass::menuName('Registered Players');
         $mainmenu      = MenuClass::menuName('Players');
         $player_status = ConfigText::where('id', '=', 8)
                          ->select(

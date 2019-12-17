@@ -117,7 +117,7 @@ class ChipStoreController extends Controller
                             $rootpath_wtr    = '../Public/upload/Chip/image2/';
                             $upload_imagewtr = '../Public/upload/Chip/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                            $putfile_str    = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                            $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
@@ -137,9 +137,9 @@ class ChipStoreController extends Controller
                             imagesavealpha($source, true);
                             imagecolortransparent($source); 
 
-                            $temp = image_data($source);
+                            $temp    = image_data($source);
                             $awsPath = "unity-asset/store/chip/" . $nama_file_unik;
-                            $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                            $merge   = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
                             Storage::disk('s3')->put($awsPath, $temp);
 
@@ -193,8 +193,8 @@ class ChipStoreController extends Controller
     public function update(Request $request)
     {
 
-        $pk = $request->pk;
-        $name = $request->name;
+        $pk    = $request->pk;
+        $name  = $request->name;
         $value = $request->value;
 
         ItemsGold::where('item_id', '=', $pk)->update([
