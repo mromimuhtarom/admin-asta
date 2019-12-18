@@ -374,7 +374,6 @@
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(","); 
                   $("#idDeleteAll").val(join_selected_values);
-                  console.log('dfjvhdfk');
               }); 
         }); 
         

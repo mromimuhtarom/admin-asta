@@ -177,6 +177,6 @@ class UserAdminController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$ids
         ]);
-        return redirect()->route('User_Admin')->with('success','Data Deleted');
+        return redirect()->route('User_Admin')->with('success','Data berhasil di hapus');
     }
 }
