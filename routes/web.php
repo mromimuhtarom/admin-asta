@@ -217,6 +217,11 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
+        Route::group(['prefix'  =>  'Players_Level'], function() {
+            Route::middleware('page_denied:Players Level')->group(function(){
+                Route::get('PlayersLevel-view', 'PlayersLevelController@index')->name('Players_Level');
+            });
+        });
     });
 
     Route::group(['prefix'  =>  'Slide_Banner'], function() {

@@ -104,7 +104,7 @@
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
-            </div>
+      </div>
             <form action="{{ route('RewardTransaction-Approve')}}" method="POST">
             @csrf
 			    <div class="modal-body" align="center">
@@ -198,17 +198,7 @@
 
       $('.inlineSetting').editable({
             mode :'inline'
-        });
-
-      // $('.popUpSetting').editable({
-      //   mode: 'inline',
-      //   value: 0,
-      //   source: [
-      //     {value: 0, text: 'Off'},
-      //     {value: 1, text: 'On'}
-      //   ]
-      // });
-     
+        });     
     },
     responsive: false
   });

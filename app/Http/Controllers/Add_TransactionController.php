@@ -94,7 +94,7 @@ class Add_TransactionController extends Controller
         $actblnc = [
           $actionbalance[10] => $actionbalance[11],
           $actionbalance[12] => $actionbalance[13]
-        ];   
+        ];  
 
         $add_transaction->appends($request->all());
 
@@ -151,6 +151,6 @@ class Add_TransactionController extends Controller
 
 
       return back()->with('success', 'Successfull Update');
-    }
+    } 
 
 }

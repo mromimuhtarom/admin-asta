@@ -38,6 +38,7 @@ function translate_menu($menu){
       'Register_Player_ID'              =>  'ID pemain terdaftar',
       'Log_Players'                     =>  'Catatan pemain',
       'Transaction_Players'             =>  'Transaksi Pemain',
+      'Players_Level'                   =>  'Level Pemain',
       'Slide_Banner'                    =>  'Slide spanduk',
       'Item'                            =>  'Barang',
       'Table_Gift'                      =>  'Meja Gift',
