@@ -8,5 +8,8 @@ class BalancePoint extends Model
 {
     protected $table = 'asta_db.balance_point';
     
-    public $timestamps = 'false';
+    protected $guarded = [];
+    protected $primaryKey = 'id';
+    
+    public $timestamps = false;
 }

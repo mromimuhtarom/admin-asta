@@ -391,7 +391,11 @@ class GiftController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
-                      // ---- untuk enabled disabled ------//
+        Gift::where('id', '=', $pk)->update([
+          $name => $value
+        ]);
+
+        // ---- untuk enabled disabled ------//
         $active = ConfigText::select(
                 'name', 
                 'value'
@@ -424,15 +428,13 @@ class GiftController extends Controller
         $timenow = Carbon::now('GMT+7');
 
 
-        Gift::where('id', '=', $pk)->update([
-          $name => $value
-        ]);
+
 
         switch ($name) {
               case "name":
               $name = "Nama";
               break;
-          case "chipsPrice":
+          case "price":
               $name = "Harga Chip";
               break;
           case "category_id":

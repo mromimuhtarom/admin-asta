@@ -127,7 +127,8 @@
             <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->chip }}</a></td>
             <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->point }}</a></td>
             <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->gold }}</a></td>
-            <td><a href="#"class="status" data-title="Bank Account" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td>
+            {{-- <td><a href="#"class="status" data-title="Status" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td> --}}
+            <td><a href="#"class="status" data-toggle="modal" data-target="#ModalBanned{{ $regis->user_id }}">{{ Translate_menuPlayers($regis->strStatus()) }}</a></td>
             <td>{{ $regis->join_date }}</td>
             <td>{{ $user_type }}</td>
             <td>{{ $regis->countryname }}</td>
@@ -136,9 +137,9 @@
         <tr>
             <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id }}</a></td>
             <td>{{ $regis->username }}</td>
-            <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->chip }}</a></td>
-            <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->point }}</a></td>
-            <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->gold }}</a></td>
+            <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->chip, 2) }}</a></td>
+            <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->point, 2) }}</a></td>
+            <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->gold, 2) }}</a></td>
             <td>{{ $regis->strStatus() }}</td>
             <td>{{ $regis->join_date }}</td>
             <td>{{ $user_type }}</td>
@@ -156,6 +157,53 @@
 <!-- end widget div -->
 
 </div>
+
+
+@foreach($registerPlayer as $regis)
+<!-- Modal Insert -->
+<div class="modal fade" id="ModalBanned{{ $regis->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>Change Player Status</h4>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <form action="{{ route('Guest-create') }}" method="post">
+        @csrf
+        <div class="modal-body">
+  
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                  <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
+                  <select name="status_player" class="form-control" id="">
+                    <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                    <option value="{{ $plyr_status[0] }}" @if($regis->status == $plyr_status[0]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                    <option value="{{ $plyr_status[2] }}" @if($regis->status == $plyr_status[2]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
+                    <option value="{{ $plyr_status[4] }}" @if($regis->status == $plyr_status[4]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn sa-btn-primary submit-data">
+            <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+          </button>
+          <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+ 
+  
+<!-- End Modal Insert -->
+@endforeach
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -206,23 +254,22 @@
             }
           }
         });
-        $('.status').editable({
-            mode :'inline',
-            validate: function(value) {
-              if($.trim(value) == '') {
-                return 'This field is required';
-              }
-            },
-            source: [
-                {value: '', text: 'Choose For Activation'},
-                @php
-                  echo '{value: "'.$plyr_status[0].'", text: "'.$plyr_status[1].'"},';
-                  echo '{value: "'.$plyr_status[2].'", text: "'.$plyr_status[3].'"},';
-                  echo '{value: "'.$plyr_status[4].'", text: "'.$plyr_status[5].'"},';
-                @endphp
-            ]
-
-        });
+        // $('.status').editable({
+        //     mode :'inline',
+        //     validate: function(value) {
+        //       if($.trim(value) == '') {
+        //         return 'This field is required';
+        //       }
+        //     },
+        //     source: [
+        //         {value: '', text: 'Choose For Activation'},
+        //         @php
+        //           echo '{value: "'.$plyr_status[0].'", text: "'.$plyr_status[1].'"},';
+        //           echo '{value: "'.$plyr_status[2].'", text: "'.$plyr_status[3].'"},';
+        //           echo '{value: "'.$plyr_status[4].'", text: "'.$plyr_status[5].'"},';
+        //         @endphp
+        //     ]
+        // });
       },
     responsive: false
   });

@@ -37,11 +37,16 @@ class PointController extends Controller
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
         $actblnc = [
-          $actionbalance[0]  => $actionbalance[1] ,
-          $actionbalance[2]  => $actionbalance[3] ,
-          $actionbalance[4]  => $actionbalance[5] ,
-          $actionbalance[6]  => $actionbalance[7] ,
-          $actionbalance[8]  => $actionbalance[9] 
+          $actionbalance[0]  => $actionbalance[1],
+          $actionbalance[2]  => $actionbalance[3],
+          $actionbalance[4]  => $actionbalance[5],
+          $actionbalance[6]  => $actionbalance[7],
+          $actionbalance[8]  => $actionbalance[9],
+          $actionbalance[10] => $actionbalance[11],
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         if(Input::get('sorting') === 'asc'):
@@ -62,7 +67,7 @@ class PointController extends Controller
         $getUsername = Input::get('inputPlayer');
         $getGame     = Input::get('inputGame');
         $balancedetails = BalancePoint::JOIN('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.balance_point.user_id')
-                        ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_point.game_id')
+                        ->leftJOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_point.game_id')
                         ->select(
                             'asta_db.user.username', 
                             'asta_db.balance_point.action_id', 
@@ -94,7 +99,7 @@ class PointController extends Controller
         $datenow      = Carbon::now('GMT+7');
         $game         = Game::all();
         $balancePoint = BalancePoint::JOIN('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.balance_point.user_id')
-                        ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_point.game_id')
+                        ->leftJOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_point.game_id')
                         ->select(
                             'asta_db.user.username', 
                             'asta_db.balance_point.action_id', 
@@ -120,11 +125,16 @@ class PointController extends Controller
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
         $actblnc = [
-          $actionbalance[0]  => $actionbalance[1] ,
-          $actionbalance[2]  => $actionbalance[3] ,
-          $actionbalance[4]  => $actionbalance[5] ,
-          $actionbalance[6]  => $actionbalance[7] ,
-          $actionbalance[8]  => $actionbalance[9] 
+          $actionbalance[0]  => $actionbalance[1],
+          $actionbalance[2]  => $actionbalance[3],
+          $actionbalance[4]  => $actionbalance[5],
+          $actionbalance[6]  => $actionbalance[7],
+          $actionbalance[8]  => $actionbalance[9],
+          $actionbalance[10] => $actionbalance[11],
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         // if sorting variable is null

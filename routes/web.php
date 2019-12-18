@@ -100,12 +100,16 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Reward_Transaction'], function() {
             Route::middleware('page_denied:Reward Transaction')->group(function(){
                 Route::get('RewardTransaction-view', 'RewardTransactionController@index')->name('Reward_Transaction');
+                Route::post('Reward-Transaction-Approve', 'RewardTransactionController@approve')->name('RewardTransaction-Approve');
+                Route::post('Reward-Transaction-Decline', 'RewardTransactionController@decline')->name('RewardTransaction-Decline');
             });
         });
 
         Route::group(['prefix'  =>  'Add_Transaction'], function() {
             Route::middleware('page_denied:Add Transaction')->group(function(){
                 Route::get('AddTransaction-view', 'Add_TransactionController@index')->name('Add_Transaction');
+                Route::get('AddTrasanction-search', 'Add_TransactionController@search')->name('AddTransaction-search');
+                Route::post('AddvalueCurrency', 'Add_TransactionController@update')->name('AddTransaction-update');
             });
         });
     });

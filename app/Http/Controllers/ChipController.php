@@ -46,7 +46,12 @@ class ChipController extends Controller
           $actionbalance[2]  => $actionbalance[3] ,
           $actionbalance[4]  => $actionbalance[5] ,
           $actionbalance[6]  => $actionbalance[7] ,
-          $actionbalance[8]  => $actionbalance[9] 
+          $actionbalance[8]  => $actionbalance[9] ,
+          $actionbalance[10] => $actionbalance[11],
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         $getMindate  = Input::get('inputMinDate');
@@ -70,7 +75,7 @@ class ChipController extends Controller
                           'asta_db.balance_chip.action_id'
                         )
                         ->JOIN('asta_db.user', 'asta_db.balance_chip.user_id', '=', 'asta_db.user.user_id')
-                        ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id')
+                        ->leftjoin('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id')
                         ->WHERE('asta_db.balance_chip.user_id', '=', $searchUser )
                         ->orderBy('asta_db.balance_chip.datetime', 'desc')
                         ->paginate(20);
@@ -94,14 +99,6 @@ class ChipController extends Controller
         $gameName     = $request->inputGame;
         $sorting      = $request->sorting;
         $namecolumn   = $request->namecolumn;
-        
-        // $user_id      = $request->user_id;
-        // $username     = $request->username;
-        // $action_id    = $request->action_id;
-        // $debit        = $request->debit;
-        // $credit       = $request->credit;
-        // $balance      = $request->balance;
-        // $datetime     = $request->datetime;
 
         $menus1       = MenuClass::menuName('Balance Chip');
         $game         = Game::all();
@@ -124,7 +121,7 @@ class ChipController extends Controller
                           'asta_db.balance_chip.action_id'
                         )
                         ->JOIN('asta_db.user', 'asta_db.balance_chip.user_id', '=', 'asta_db.user.user_id')
-                        ->JOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id');
+                        ->leftJOIN('asta_db.game', 'asta_db.game.id', '=', 'asta_db.balance_chip.game_id');
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
         
@@ -134,11 +131,16 @@ class ChipController extends Controller
         // ]);
 
         $actblnc = [
-          $actionbalance[0]  => $actionbalance[1] ,
-          $actionbalance[2]  => $actionbalance[3] ,
-          $actionbalance[4]  => $actionbalance[5] ,
-          $actionbalance[6]  => $actionbalance[7] ,
-          $actionbalance[8]  => $actionbalance[9] 
+          $actionbalance[0]  => $actionbalance[1],
+          $actionbalance[2]  => $actionbalance[3],
+          $actionbalance[4]  => $actionbalance[5],
+          $actionbalance[6]  => $actionbalance[7],
+          $actionbalance[8]  => $actionbalance[9],
+          $actionbalance[10] => $actionbalance[11],
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[14] => $actionbalance[15],
+          $actionbalance[16] => $actionbalance[17],
+          $actionbalance[18] => $actionbalance[19]
         ];
 
         // if ($validator->fails()) {
