@@ -55,7 +55,7 @@
                     <!-- Button tambah bot baru -->
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
-                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalLevel">
                           <i class="fa fa-plus"></i> {{ Translate_menuPlayers('Create player level') }}
                         </button>
                       </div>
@@ -68,8 +68,18 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Experience') }}</th>
+                    <th align="center">
+                      <a  href="#" style="color:red;font-weight:bold;" 
+                        class="delete" 
+                        id="trash" 
+                        data-toggle="modal" 
+                        data-target="#deleteAll">
+                        <i class="fa  fa-trash-o"></i>
+                      </a>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -120,7 +130,7 @@
                     <!-- Button tambah bot baru -->
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
-                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                        <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalRank">
                           <i class="fa fa-plus"></i> {{ Translate_menuPlayers('Create Rank Player') }}
                         </button>
                       </div>
@@ -133,8 +143,19 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th><input id="checkAllrank" type="checkbox" name="deletepermissionrank" class="deletepermissionrank">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
+                    <th class="th-sm">ID</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Level') }}</th>
+                    <th>
+                      <a  href="#" style="color:red;font-weight:bold;" 
+                        class="deleterank" 
+                        id="trashrank" 
+                        data-toggle="modal" 
+                        data-target="#deleteAllrank">
+                        <i class="fa  fa-trash-o"></i>
+                      </a>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
