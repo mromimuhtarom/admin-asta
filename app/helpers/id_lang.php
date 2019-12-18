@@ -454,6 +454,7 @@ function TranslateMenuToko($menu){
         'Choose type date'  =>  xmlfile()->L_CHOOSETYPEDATE->attributes()->val,
         'Date approve and Decline' => xmlfile()->L_DATEAPPROVE->attributes()->val,
         'Date Request'      =>  xmlfile()->L_DATEREQUEST->attributes()->val,
+        'Item awarded'      =>  xmlfile()->L_ITEMAWARDED->attributes()->val,
 
     ];
 
@@ -519,6 +520,18 @@ function TranslateReseller($menu){
         'Report Transaction'    =>  xmlfile()->L_REPORTTRANS->attributes()->val,
         'Bonus Item'            =>  xmlfile()->L_BONUSITEM->attributes()->val,
         'Balance'               =>  xmlfile()->L_BALANCE->attributes()->val,
+        'Gold Group'            =>  xmlfile()->L_GOLDGROUP->attributes()->val,
+        'Create Reseller Rank'  =>  xmlfile()->L_CREATERESELLRANK->attributes()->val,
+        'Password'              =>  xmlfile()->L_PASSWORD->attributes()->val,
+        'Identity Card'         =>  xmlfile()->L_IDENTITYCARD->attributes()->val,
+        'Access denied'         =>  xmlfile()->L_DENIED->attributes()->val,
+        'You cant access'       =>  xmlfile()->L_UCANT->attributes()->val,
+        'Create new asset'      =>  xmlfile()->L_NEWASSET->attributes()->val,
+        'Link'                  =>  xmlfile()->L_LINK->attributes()->val,
+        'Version'               =>  xmlfile()->L_VERSION->attributes()->val,
+        'Edit Asset'            =>  xmlfile()->L_EDITASSET->attributes()->val,
+        'Choose a file'         =>  xmlfile()->L_CHOOSEFILE->attributes()->val,
+        
 
 
     ];

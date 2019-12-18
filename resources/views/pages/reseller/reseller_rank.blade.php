@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Reseller_Rank') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Reseller_Rank') }}">Reseller Rank</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Reseller_Rank') }}">{{ translate_menu('Reseller')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Reseller_Rank') }}">{{ translate_menu('Reseller_Rank')}}</a></li>
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
 <header>
   <div class="widget-header">	
-    <h2><strong>Reseller Rank</strong></h2>				
+    <h2><strong>{{ translate_menu('Reseller_Rank')}}</strong></h2>				
   </div>
 </header>
 
@@ -43,7 +43,7 @@
           <div class="input-group">
             @if($menu && $mainmenu)
             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-              <i class="fa fa-plus"></i> Create New Reseller Rank
+              <i class="fa fa-plus"></i>Buat {{ translate_menu('Reseller')}} baru
             </button>
             @endif
           </div>
@@ -64,9 +64,9 @@
               <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
               @endif
               <th class="th-sm">ID</th>
-              <th class="th-sm">Name</th>
-              <th class="th-sm">Gold Group</th>
-              <th class="th-sm">Type</th>
+              <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+              <th class="th-sm">{{ TranslateReseller('Gold Group')}}</th>
+              <th class="th-sm">{{ translate_menuTransaction('Type')}}</th>
               <th class="th-sm">Bonus</th>
               @if($menu && $mainmenu)
               <th class="th-sm">
@@ -126,7 +126,7 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Reseller Rank</h4>
+      <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create Reseller Rank')}}</h4>
       <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-hidden="true">
         <i class="fa fa-remove"></i>
       </button>
@@ -148,10 +148,10 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn sa-btn-primary submit-data">
-          <i class="fa fa-save"></i> Save
+          <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
         </button>
         <button type="submit" class="btn btn-danger" data-dismiss="modal">
-          <i class="fa fa-remove"></i> Cancel
+          <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}
         </button>
       </div>
     </form>
@@ -165,21 +165,21 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('DeleteData')}}</h5>
       <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
         <i class="fa fa-remove"></i>
       </button>
     </div>
     <div class="modal-body">
-      Are You Sure Want To Delete It
+      {{ TranslateMenuItem('Are U Sure')}}
       <form action="{{ route('ResellerRank-delete') }}" method="post">
         {{ method_field('delete')}}
         {{ csrf_field() }}
         <input type="hidden" name="id" id="id" value="">
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i> Yes</button>
-      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
     </div>
       </form>
   </div>
@@ -191,21 +191,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        Are You Sure Want To Delete all selected data?
+        {{ TranslateMenuItem('Are you sure want to delete it')}}
         <form action="{{ route('ResellerRank-deleteAllSelectedRank') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="text" name="userIdAll" id="idDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
       </div>
         </form>
     </div>

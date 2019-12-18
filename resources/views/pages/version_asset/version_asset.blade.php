@@ -2,8 +2,8 @@
 
 @section('pages')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">Settings</a></li> 
-    <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">General Setting</a></li>
+<li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('Settings')}}</a></li> 
+    <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('General_Setting')}}</a></li>
 @endsection
 
 @if (count($errors) > 0)
@@ -53,7 +53,7 @@
                                     <div class="input-group">
                                       @if($menu)
                                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetAdr">
-                                        <i class="fa fa-plus"></i> Create new asset
+                                        <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
                                       </button>
                                       @endif
                                     </div>
@@ -70,10 +70,10 @@
                                 <thead>
                                     <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission"></th>
                                     <th>File</th>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Link</th>
-                                    <th>Version</th>
+                                    <th>{{ TranslateMenuGame('Name')}}</th>
+                                    <th>{{ translate_menuTransaction('Type')}}</th>
+                                    <th>{{ TranslateReseller('Link')}}</th>
+                                    <th>{{ TranslateReseller('Version')}}</th>
                                     @if($menu)
                                       <th style="width:10px;">
                                         <a  href="#" style="color:red;font-weight:bold;" 
@@ -90,7 +90,7 @@
                                     @if ($menu)
                                     <tr>
                                         <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl['name'].'1' }} deleteIdAll"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $xl['name'] }}" style="width: 100%"><i class="fa fa-edit"></i>Edit asset</button></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $xl['name'] }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->link }}</a></td>
@@ -145,7 +145,7 @@
                                     <div class="input-group">
                                       @if($menu)
                                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetIos">
-                                        <i class="fa fa-plus"></i> Create new asset
+                                        <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
                                       </button>
                                       @endif
                                     </div>
@@ -162,10 +162,10 @@
                                     <tr>
                                         <td style="width:100px;"><input id="checkAll2" type="checkbox" name="deletepermission" class="deletepermission"></td>
                                         <td>File</td>
-                                        <td>Name</td>
-                                        <td>Type</td>
-                                        <td>Link</td>
-                                        <td>Version</td>
+                                        <td>{{ TranslateMenuGame('Name')}}</td>
+                                        <td>{{ translate_menuTransaction('Type')}}</td>
+                                        <td>{{ TranslateReseller('Link')}}</td>
+                                        <td>{{ TranslateReseller('Version')}}</td>
                                         @if($menu)
                                           <td align="center" style="width:10px;">
                                             <a  href="#" style="color:red;font-weight:bold;" 
@@ -183,7 +183,7 @@
                                     @if ($menu)
                                     <tr>
                                         <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl_ios['name'] }}" data-link="{{ $xl_ios->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl_ios['name'].'2'}} deleteIdAll2"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $xl_ios['name'] }}"><i class="fa fa-edit"></i>Edit asset</button></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $xl_ios['name'] }}"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->link }}</a></td>
@@ -227,7 +227,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create new asset</h4>
+              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new asset')}}</h4>
               <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                 <i class="fa fa-remove"></i>
               </button>
@@ -243,16 +243,16 @@
                             <input type="file" name="file" id="file" class="input-file">
                             <label for="file" class="btn btn-tertiary js-labelFile">
                               <i class="icon fa fa-check"></i>
-                              <span class="js-fileName">Choose a file</span>
+                              <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                             </label>
                           </div>
                         <br>
                         <br>
                         <input class="form-control" name="Name" placeholder="Name"><br>
                           <select name="Type" class="form-control">
-                            <option>Type</option>
+                            <option>{{ translate_menuTransaction('Type')}}</option>
                             <option value="Audio">Audio</option>
-                            <option value="Image">Image</option>
+                            <option value="Image">{{ TranslateMenuItem('Image')}}</option>
                           </select>
                         <br>
                           <input class="form-control" name="Link" placeholder="Link"><br>
@@ -264,11 +264,10 @@
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn sa-btn-primary submit-data" >
-                  <i class="fa fa-save"></i> Save
+                  <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
                 </button>
                 <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                  <i class="fa fa-remove"></i> Cancel
-                </button>
+                  <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}
               </div>
             </form>
           </div>
@@ -281,7 +280,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create new asset</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new asset')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -297,7 +296,7 @@
                       <input type="file" name="file2" id="file2" class="input-file">
                       <label for="file2" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
-                        <span class="js-fileName">Choose a file</span>
+                        <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                       </label>
                     </div>
                   <br>
@@ -306,7 +305,7 @@
                     <select name="Type" class="form-control">
                       <option>Type</option>
                       <option value="Audio">Audio</option>
-                      <option value="Image">Image</option>
+                      <option value="Image">{{ TranslateMenuItem('Image')}}</option>
                     </select>
                   <br>
                     <input class="form-control" name="Link" placeholder="Link"><br>
@@ -318,10 +317,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" >
-            <i class="fa fa-save"></i> Save
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> Cancel
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
           </button>
         </div>
       </form>
@@ -337,7 +336,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Edit asset andorid</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('Edit Asset')}} andorid</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -354,7 +353,7 @@
                       <input type="file" name="fileEditADR" id="file3{{ $xl['name'] }}" class="input-file">
                       <label for="file3{{ $xl['name'] }}" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
-                        <span class="js-fileName">Choose a file</span>
+                        <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                       </label>
                     </div>
                   <br>
@@ -363,7 +362,7 @@
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
                       <option @if( $xl->type == 'Audio' ) selected @endif value="Audio">Audio </option>
-                      <option @if( $xl->type == 'Image' ) selected @endif value="Image">Image</option>
+                      <option @if( $xl->type == 'Image' ) selected @endif value="Image">{{ TranslateMenuItem('Image')}}</option>
                     </select>
                   <br>
                   <input readonly value="{{ $xl->link }}" class="form-control" name="Link" placeholder="Link"><br>
@@ -374,10 +373,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" >
-            <i class="fa fa-save"></i> Save
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> Cancel
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
           </button>
         </div>
       </form>
@@ -393,7 +392,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Edit asset IOS</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('Edit Asset')}} IOS</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -410,7 +409,7 @@
                     <input type="file" name="fileEditIOS" id="file4{{ $xl_ios['name'] }}" class="input-file">
                     <label for="file4{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
                       <i class="icon fa fa-check"></i>
-                      <span class="js-fileName">Choose a file</span>
+                      <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                     </label>
                   </div>
                   <br>
@@ -419,7 +418,7 @@
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
                       <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">Audio </option>
-                      <option @if( $xl_ios->type == 'Image' ) selected @endif value="Image">Image</option>
+                      <option @if( $xl_ios->type == 'Image' ) selected @endif value="Image">{{ TranslateMenuItem('Image')}}</option>
                     </select>
                   <br>
                   <input readonly value="{{ $xl_ios->link }}" class="form-control" name="Link" placeholder="Link"><br>
@@ -430,11 +429,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" >
-            <i class="fa fa-save"></i> Save
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> Cancel
-          </button>
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
         </div>
       </form>
     </div>
@@ -450,13 +448,13 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('DeleteData')}}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          Are You Sure Want To Delete It
+          {{ TranslateMenuItem('Are you sure want to delete it')}}
           <form action="{{ route('VersionAssetApkAndroid-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
@@ -465,8 +463,8 @@
             <input type="hidden" name="Link" id="Link" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
         </div>
           </form>
       </div>
@@ -478,13 +476,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        Are You Sure Want To Delete all selected data?
+        {{ TranslateMenuItem('Are U Sure')}}
         <form action="{{ route('VersionAssetApkAndroid-deleteAssetAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -493,8 +491,8 @@
           <input type="hidden" name="LinksAll" id="LinksAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
       </div>
         </form>
     </div>
@@ -507,13 +505,13 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ TranslateMenuItem('DeleteData')}}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          Are You Sure Want To Delete It
+          {{ TranslateMenuItem('Are you sure want to delete it')}}
           <form action="{{ route('VersionAssetApkIOS-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
@@ -522,8 +520,8 @@
             <input type="hidden" name="link" id="link1" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
         </div>
           </form>
       </div>
@@ -535,13 +533,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        Are You Sure Want To Delete all selected data?
+        {{ TranslateMenuItem('Are U Sure')}}
         <form action="{{ route('VersionAssetApkIOS-deleteAssetAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}

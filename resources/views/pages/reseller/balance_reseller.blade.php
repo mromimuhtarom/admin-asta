@@ -79,7 +79,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ TranslateReseller('ResellerID')}}</th>
+                        <th>{{ TranslateReseller('Reseller ID')}}</th>
                         <th>{{ Translate_menuPlayers('Username')}}</th>
                         {{-- <th>Description</th> --}}
                         <th>{{ Translate_menuPlayers('Debit')}}</th>

@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">Gold Store Resller</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">{{ translate_menu('Reseller')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">{{ translate_menu('Item_Store_Reseller')}}</a></li>
 @endsection
 
 
@@ -50,7 +50,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i> Item Store Reseller</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i>{{ translate_menu('Item_Store_Reseller')}}</strong></h2>				
     </div>
   </header>
 
@@ -65,7 +65,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoldStore">
-                <i class="fa fa-plus"></i> Create New Item Store Reseller
+                <i class="fa fa-plus"></i> Buat baru {{ translate_menu('Item_Store_Reseller')}}
               </button>
               @endif
             </div>
@@ -85,15 +85,15 @@
                 @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
-                <th class="th-sm">Order</th>
-                <th style="width:10px;">Image</th>
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Item Awarded</th>
-                <th class="th-sm">Price Cash</th>
-                <th class="th-sm">Item Type</th>
-                <th class="th-sm">Pay Transaction</th>
+                <th class="th-sm">{{ TranslateMenuToko('Order')}}</th>
+                <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Item awarded')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Price cash')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Item type')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Pay Transaction')}}</th>
                 <th class="th-sm">Google Key</th>
-                <th class="th-sm">Status</th>
+                <th class="th-sm">{{ TranslateMenuItem('Status')}}</th>
                 @if($menu && $mainmenu)
                   <th>Action</th>
                 @endif
@@ -113,7 +113,7 @@
                             <input type="hidden" name="pk" value="{{ $gold->item_id }}">
                             <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
                             <i class="fa fa-edit media-icon-wtr"></i>
-                            <p class="nav-name">Main Image</p>
+                            <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
                         </span>
                         <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
                             <input type="hidden" name="pk" value="{{ $gold->item_id }}">
@@ -129,17 +129,17 @@
                           </figure>
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
-                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Image</button>
+                          <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                         </form>
-                          <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                          <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button>
+                          <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}</button>
+                          <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
                         </div>
                 </td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                 <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ $gold->item_get }}</a></td>
                 <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->price }}</a></td>
                 {{-- <td><a href="#" class="itemType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ $gold->strItemType() }}</a></td> --}}
-                <td>Gold</td>
+                <td>{{ translate_menuPlayers('Gold Coins')}}</td>
                 <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
                 <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->google_key }}</a></td>
                 <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
@@ -167,7 +167,7 @@
                 <td>{{ $gold->item_get }}</td>
                 <td>{{ $gold->price }}</td>
                 {{-- <td>{{ $gold->strItemType() }}</td> --}}
-                <td>Gold</td>
+                <td>{{ translate_menuPlayers('Gold Coins')}}</td>
                 <td>{{ strTypeTransaction($gold->transaction_type) }}</td>
                 <td>{{ $gold->google_key }}</td>
                 <td>{{ strEnabledDisabled($gold->active) }}</td>
@@ -190,7 +190,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create New Item Store Reseller</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Buat baru {{ translate_menu('Item_Store_Reseller')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -243,10 +243,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
-            <i class="fa fa-save"></i> Save
+            <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> Cancel
+            <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}
           </button>
         </div>
       </form>
@@ -260,21 +260,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('DeleteData')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i> 
         </button>
       </div>
       <div class="modal-body">
-        Are You Sure Want To Delete It
+        {{ TranslateMenuItem('Are you sure want to delete it')}}
         <form action="{{ route('ItemStore-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userid" id="userid" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i> Yes</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
       </div>
         </form>
     </div>
