@@ -40,6 +40,7 @@ function translate_menu($menu){
       'Register_Player_ID'              =>  xmlfile()->L_Register_Player_ID->attributes()->val,
       'Log_Players'                     =>  xmlfile()->L_Log_Players->attributes()->val,
       'Transaction_Players'             =>  xmlfile()->L_Transaction_Players->attributes()->val,
+      'Players_Level'                   =>  xmlfile()->L_Players_level->attributes()->val,
       'Slide_Banner'                    =>  xmlfile()->L_Slide_Banner->attributes()->val,
       'Item'                            =>  xmlfile()->L_Item->attributes()->val,
       'Table_Gift'                      =>  xmlfile()->L_Table_Gift->attributes()->val,
