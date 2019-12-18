@@ -2,8 +2,8 @@
 
 @section('page')
     <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">Players Level</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">Players Level</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('Players level') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('Players level') }}</a></li>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>Player Level</strong></h2>	
+          <h2><strong>{{ Translate_menuPlayers('Players level') }}</strong></h2>	
         </div>
       </header>
     
@@ -31,7 +31,7 @@
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                          <i class="fa fa-plus"></i> Create Level Player
+                          <i class="fa fa-plus"></i> {{ Translate_menuPlayers('Create player level') }}
                         </button>
                       </div>
                     </div>
@@ -43,8 +43,8 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="th-sm">Level</th>
-                    <th class="th-sm">Experience</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('Experience') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,7 +70,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>Player Rank</strong></h2>				
+          <h2><strong>{{ Translate_menuPlayers('Players Rank') }}</strong></h2>				
         </div>
       </header>
     
@@ -86,7 +86,7 @@
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                          <i class="fa fa-plus"></i> Create Rank Player
+                          <i class="fa fa-plus"></i> {{ Translate_menuPlayers('Create Rank Player') }}
                         </button>
                       </div>
                     </div>
@@ -98,8 +98,8 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Level</th>
+                    <th class="th-sm">{{ TranslateMenuGame('Players level') }}</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('Level') }}</th>
                   </tr>
                 </thead>
                 <tbody>

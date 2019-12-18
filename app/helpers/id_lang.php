@@ -314,6 +314,13 @@ function Translate_menuPlayers($menu){
         'Problem'                   =>  xmlfile()->L_Problem->attributes()->val,
         'Save'                      =>  xmlfile()->L_Save->attributes()->val,
         'Cancel'                    =>  xmlfile()->L_Cancel->attributes()->val,
+        'Players level'             =>  xmlfile()->L_Playerlv->attributes()->val,
+        'Create player level'       =>  xmlfile()->L_Createlv->attributes()->val,
+        'Level'                     =>  xmlfile()->L_Level->attributes()->val,
+        'Experience'                =>  xmlfile()->L_Experience->attributes()->val,
+        'Player Rank'               =>  xmlfile()->L_PlayerRank->attributes()->val,
+        'Create Rank Player'        =>  xmlfile()->L_CreateRankPlayer->attributes()->val,
+        
 
     ];
     return $array_menuContent[$menu];
@@ -531,12 +538,13 @@ function TranslateReseller($menu){
         'Version'               =>  xmlfile()->L_VERSION->attributes()->val,
         'Edit Asset'            =>  xmlfile()->L_EDITASSET->attributes()->val,
         'Choose a file'         =>  xmlfile()->L_CHOOSEFILE->attributes()->val,
-        
-
+    
 
     ];
     return $array_menuContent[$menu];
 }
+
+
 
 
 ?>
