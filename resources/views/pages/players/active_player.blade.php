@@ -96,7 +96,7 @@
                             <tr>
                                 <th>{{ Translate_menuPlayers('Player ID') }}</th>
                                 <th>{{ Translate_menuPlayers('Playername') }}</th>
-                                <th>{{ Translate_menuPlayers('Rank') }}</th>
+                                <th>{{ Translate_menuPlayers('Level') }}</th>
                                 <th>{{ Translate_menuPlayers('Chip') }}</th>
                                 <th>{{ Translate_menuPlayers('Gold Coins') }}</th>
                                 <th>{{ Translate_menuPlayers('From') }}</th>

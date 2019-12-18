@@ -220,6 +220,14 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Players_Level'], function() {
             Route::middleware('page_denied:Players Level')->group(function(){
                 Route::get('PlayersLevel-view', 'PlayersLevelController@index')->name('Players_Level');
+                Route::post('PlayersLevel-LevelCreate', 'PlayersLevelController@store')->name('playerslevel_create');
+                Route::post('PlayersLevel-RankCreate', 'PlayersLevelController@store_rank')->name('playersrank_create');
+                Route::post('PlayersLevel-LevelUpdate', 'PlayersLevelController@update')->name('playerslevel_update');
+                Route::post('PlayersLevel-RankUpdate', 'PlayersLevelController@update_rank')->name('playersrank_update'); 
+                Route::delete('PlayersLevel-LevelDelete', 'PlayersLevelController@destroy')->name('playerslevel_delete');
+                Route::delete('PlayersLevel-RankDelete', 'PlayersLevelController@destroy_rank')->name('playersrank_delete'); 
+                Route::delete('PlayersLevel-DeleteAlllevel', 'PlayersLevelController@delete_all')->name('playerslevel_deleteall');
+                Route::delete('PlayersLevel-DeleteAllrank', 'PlayersLevelController@delete_allRank')->name('playersrank_deleteall');
             });
         });
     });

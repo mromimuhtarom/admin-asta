@@ -62,10 +62,10 @@ class PlayersController extends Controller
       $online = PlayerActive::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_active.user_id')
                 ->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.user_active.game_id')
                 ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user_active.user_id')
-                ->join('asta_db.user_rank', 'asta_db.user_rank.id', '=', 'asta_db.user_stat.rank_id')
+                ->join('asta_db.user_level', 'asta_db.user_level.level', '=', 'asta_db.user_stat.level_id')
                 ->select(
                   'asta_db.user.username', 
-                  'asta_db.user_rank.name as rank_name', 
+                  'asta_db.user_level.level as rank_name', 
                   'asta_db.user_active.user_id',
                   'asta_db.user_stat.chip', 
                   'asta_db.user_stat.gold',
@@ -234,7 +234,7 @@ class PlayersController extends Controller
   // ----------- Detail Registered Player ----------- //
     public function detailRegistered($userId)
     {
-      $device = Device::where('user_id', '=', $userId)->get();
+      $device  = Device::where('user_id', '=', $userId)->get();
       $profile = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
                   ->join('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
                   ->select(
@@ -329,10 +329,12 @@ class PlayersController extends Controller
         }
         $register = Player::leftjoin('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                     ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
+                    ->join('asta_db.user_level', 'asta_db.user_level.level', '=', 'asta_db.user_stat.level_id')
                     ->select(
                       'asta_db.user.username', 
                       'asta_db.user.user_id',
                       'asta_db.user.status',
+                      'asta_db.user_level.level',
                       'asta_db.user.join_date',
                       'asta_db.user.user_type',
                       'asta_db.country.name as countryname', 
@@ -613,7 +615,11 @@ class PlayersController extends Controller
           $registerPlayer->appends($request->all());
           return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
         } else {
-          return back()->with('alert', 'field cannot be empty');
+          $registerPlayer =  $register->orderby($namecolumn, $sorting)
+                            ->paginate(20);
+
+          $registerPlayer->appends($request->all());
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
         }
     }
 
