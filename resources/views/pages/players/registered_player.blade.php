@@ -96,6 +96,7 @@
           <thead>
             <tr>
               <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_level.level">{{ Translate_menuPlayers('Level') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_level.level') }}"></i></a></th>
               <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
               <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip">{{ Translate_menuPlayers('Chip') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
               <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point">{{ Translate_menuPlayers('Point') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.point') }}"></i></a></th>
@@ -123,6 +124,7 @@
       @if ($menu && $mainmenu)
         <tr>
             <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id}}</a></td>
+            <td>{{ $regis->level }}</td>
             <td>{{ $regis->username }}</td>
             <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->chip }}</a></td>
             <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->point }}</a></td>

@@ -279,6 +279,7 @@ function Translate_menuPlayers($menu){
         'Desc'                      =>  xmlfile()->L_Desc->attributes()->val,
         'Playing Game'              =>  xmlfile()->L_PlayingGame->attributes()->val,
         'Rank'                      =>  xmlfile()->L_Rank->attributes()->val,
+        'Level'                     =>  xmlfile()->L_Level->attributes()->val,
         'Table'                     =>  xmlfile()->L_Table->attributes()->val,
         'Hand card'                 =>  xmlfile()->L_HandCard->attributes()->val,
         'Seat'                      =>  xmlfile()->L_Seat->attributes()->val,
