@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">Store</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">Chip Store</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ TranslateMenuToko('Chip store')}}</a></li>
 @endsection
 
 
@@ -48,7 +48,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i> Chip Store</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuToko('Chip store')}}</strong></h2>				
     </div>
   </header>
 
@@ -63,7 +63,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createChipStore">
-                <i class="fa fa-plus"></i> Create New Chip Store
+                <i class="fa fa-plus"></i>{{ TranslateMenuToko('Create new chip store')}}
               </button>
               @endif
             </div>
@@ -83,13 +83,13 @@
                 @if($menu && $mainmenu)
                   <th class="th-sm"></th>
                 @endif
-                <th>Order</th>
-                <th style="width:10px;">Image</th>
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Category</th>
-                <th class="th-sm">Chip Awarded</th>
-                <th class="th-sm">Gold Cost</th>
-                <th class="th-sm">Active</th>
+                <th>{{ TranslateMenuToko('Order')}}</th>
+                <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Category')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Chip Awarded')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Gold Cost')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Active')}}</th>
                 @if($menu && $mainmenu)
                   <th></th>
                 @endif
@@ -110,7 +110,7 @@
                                   <input type="hidden" name="pk" value="{{ $itm->item_id }}">
                                   <input type="file" name="file" id="media-input-wtr" class="upload{{ $itm->item_id }}" accept="image/*">
                                   <i class="fa fa-edit media-icon-wtr"></i>
-                                  <p class="nav-name">Main Image</p>
+                                  <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
                               </span>
                               <span class="media-overlay-wtr1 med-ovlay{{ $itm->item_id }}">
                                   <input type="hidden" name="pk" value="{{ $itm->item_id }}">
@@ -126,10 +126,10 @@
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Chip Image</button>
+                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                             </form>
-                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                              <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Chip</button>
+                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
+                              <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
                         </div>
                       </td>
                       <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
@@ -159,7 +159,7 @@
                                   <input type="hidden" name="pk" value="{{ $itm->item_id }}">
                                   <input type="file" name="file" id="media-input-wtr" class="upload{{ $itm->item_id }}" accept="image/*">
                                   <i class="fa fa-edit media-icon-wtr"></i>
-                                  <p class="nav-name">Main Image</p>
+                                  <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
                               </span>
                               <span class="media-overlay-wtr1 med-ovlay{{ $itm->item_id }}">
                                   <input type="hidden" name="pk" value="{{ $itm->item_id }}">
@@ -175,9 +175,9 @@
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Chip Image</button>
+                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                             </form>
-                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
+                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
                               {{-- <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Chip</button> --}}
                         </div>
                       </td>
@@ -226,21 +226,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('Delete Data')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i> 
             </button>
           </div>
           <div class="modal-body">
-            Are You Sure Want To Delete It
+            {{ TranslateMenuGame('Are you sure')}}
             <form action="{{ route('ChipStore-delete') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
               <input type="hidden" name="id" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i> Yes</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('Yes')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('No')}}</button>
           </div>
             </form>
         </div>
@@ -256,7 +256,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create New Chip Store</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('Create new chip store')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -301,10 +301,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
-            <i class="fa fa-save"></i> Save
+            <i class="fa fa-save"></i>{{ Translate_MenuContentAdmin('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> Cancel
+            <i class="fa fa-remove"></i>{{ Translate_MenuContentAdmin('Cancel')}}
           </button>
         </div>
       </form>

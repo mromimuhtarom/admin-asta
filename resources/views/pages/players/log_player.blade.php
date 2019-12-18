@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">Players</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">Log Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('LogPlayers') }}</a></li>
 @endsection
 
 @section('content')
@@ -37,9 +37,9 @@
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
-                        <option value="">Choose Action</option>
+                        <option value="">{{ Translate_menuPlayers('Choose Action') }}</option>
                         @foreach($action as $ac)
-                        <option value="{{ $ac->id }}">{{ $ac->action}}</option>
+                        <option value="{{ $ac->id }}">{{ Translate_menuPlayers($ac->action) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -66,7 +66,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2>Log Player </h2>
+            <h2>{{ Translate_menuPlayers('LogPlayers') }}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -87,7 +87,7 @@
                 <div class="row">
                     <!-- Button tambah bot baru -->
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                        Total Record Entries is {{ $logplayer->total() }}
+                        {{ Translate_menuPlayers('Total Record Entries is') }} {{ $logplayer->total() }}
                     </div>
                                 <!-- End Button tambah bot baru -->
                 </div>
@@ -95,11 +95,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMindate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.user_id">Player ID<i class="fa fa-sort{{ iconsorting('asta_db.log_user.user_id') }}"></i></a></th>
-                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username"> Username <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.action_id"> Action <i class="fa fa-sort{{ iconsorting('asta_db.log_user.action_id') }}"></i></a></th>
-                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}$action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.description"> Desc <i class="fa fa-sort{{ iconsorting('asta_db.log_user.description') }}"></i></a></th>
-                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}$action={{ $getAction }}&dari={{ $getMindate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.datetime"> TimeStamp <i class="fa fa-sort{{ iconsorting('asta_db.log_user.datetime') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMindate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.log_user.user_id') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}&action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.log_user.action_id') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}$action={{ $getAction }}&dari={{ $getMaxdate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.description">{{ Translate_menuPlayers('Desc') }}<i class="fa fa-sort{{ iconsorting('asta_db.log_user.description') }}"></i></a></th>
+                        <th><a href="{{ route('LogPlayer-search') }}?username={{ $getusername }}$action={{ $getAction }}&dari={{ $getMindate }}&sampai={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_user.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class="fa fa-sort{{ iconsorting('asta_db.log_user.datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>

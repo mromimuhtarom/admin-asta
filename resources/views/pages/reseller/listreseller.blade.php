@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('List_Reseller') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('List_Reseller') }}">Reseller</a></li>
+<li class="breadcrumb-item"><a href="{{ route('List_Reseller') }}">{{ translate_menu('Reseller')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('List_Reseller') }}">{{ translate_menu('Reseller')}}</a></li>
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">	
-      <h2><strong>List Reseller</strong></h2>				
+      <h2><strong>{{ translate_menu('List_Reseller')}}</strong></h2>				
     </div>
   </header>
 
@@ -44,15 +44,15 @@
                 @if($menu && $mainmenu)
                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th></th>
                 @endif
-                <th class="th-sm">ID Reseller</th>
-                <th class="th-sm">Username</th>
-                <th class="th-sm">Name</th>
-                <th class="th-sm">Phone</th>
+                <th class="th-sm">{{ TranslateReseller('Reseller ID')}}</th>
+                <th class="th-sm">{{ Translate_menuPlayers('Username')}}</th>
+                <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                <th class="th-sm">{{ TranslateReseller('Phone')}}e</th>
                 <th class="th-sm">Email</th>
-                <th class="th-sm">Saldo Gold</th>
-                <th class="th-sm">Rank</th>
+                <th class="th-sm">{{ TranslateReseller('Saldo gold')}}</th>
+                <th class="th-sm">{{ Translate_menuPlayers('Rank')}}</th>
                 @if($menu && $mainmenu)
-                <th class="th-sm">Reset Password</th>
+                <th class="th-sm">{{ translate_MenuContentAdmin('Reset Password')}}</th>
                 <th class="th-sm" style="width:90px;">
                   <a  href="#" style="color:red;font-weight:bold;" 
                         class="delete" 
@@ -76,7 +76,7 @@
                   <td><a href="#" class="usertext" data-name="email" data-pk="{{ $rsl->reseller_id }}" data-type="email" data-url="{{ route('ListReseller-update') }}">{{ $rsl->email }}</a></td>
                   <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->gold }}</a></td>
                   <td><a href="#" class="rank" data-name="rank_id" data-value="{{ $rsl->rank_id }}" data-pk="{{ $rsl->reseller_id }}" data-type="select" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rankname }}</a></td>
-                  <td><a href="#" class="password{{ $rsl->reseller_id }} btn btn-primary" id="password" data-pk="{{ $rsl->reseller_id }}" data-toggle="modal" data-target="#reset-password">Reset Password</a></td>
+                  <td><a href="#" class="password{{ $rsl->reseller_id }} btn btn-primary" id="password" data-pk="{{ $rsl->reseller_id }}" data-toggle="modal" data-target="#reset-password">{{ translate_MenuContentAdmin('Reset Password')}}</a></td>
                   <td>
                     <a href="#" style="color:red;" class="delete{{ $rsl->reseller_id }}" 
                       id="delete" 
@@ -114,7 +114,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuContentAdmin('Reset Password')}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           × 
         </button>
@@ -126,8 +126,8 @@
           <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes submit-data">Reset Password</button>
-        <button type="button" class="button_example-no" data-dismiss="modal">No</button>
+        <button type="submit" class="button_example-yes submit-data">{{ translate_MenuContentAdmin('Reset Password')}}</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">Tidak</button>
       </div>
         </form>
     </div>
@@ -143,21 +143,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div c lass="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete Data')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i> 
         </button>
       </div>
       <div class="modal-body">
-        Are You Sure Want To Delete It
+        {{ translate_MenuContentAdmin('Are You Sure Want To Delete It?')}}
         <form action="{{ route('ListReseller-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="id" id="id" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i> Yes</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i> Ya</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Tidak</button>
       </div>
         </form>
     </div>
@@ -170,21 +170,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete all selected Data')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        Are You Sure Want To Delete all selected data?
+        {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
         <form action="{{ route('ListReseller-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>Ya</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Tidak</button>
       </div>
         </form>
     </div>

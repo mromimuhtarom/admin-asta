@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Table_Big_Two') }}">Games > Big Two</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Table_Big_Two') }}">Table</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Table_Big_Two') }}">Big Two</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Table_Big_Two') }}">{{ TranslateMenuGame('Table') }}</a></li>
 @endsection
 
 
@@ -40,7 +40,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong><i class="fa fa-table"></i> Asta Big Two Table</strong></h2>				
+        <h2><strong><i class="fa fa-table"></i>{{ TranslateMenuGame('Asta Big Two Table') }}</strong></h2>				
       </div>
     </header>
 
@@ -53,7 +53,7 @@
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               @if($menu && $mainmenu && $submenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"> Create New Table</i>
+                <i class="fa fa-plus">{{ TranslateMenuGame('Create New Table') }}</i>
               </button>
               @endif
             </div>
@@ -69,17 +69,17 @@
                   @if($menu && $mainmenu && $submenu)
                   <th></th>
                   @endif
-                  <th class="th-sm">Nama Table</th>
-                  <th class="th-sm">Group</th>
-                  <th class="th-sm">Max Player</th>
-                  <th class="th-sm">Turn</th>
-                  <th class="th-sm">Total Bet</th>
-                  <th class="th-sm">Stake</th>
-                  <th class="th-sm">Min Buy</th>
-                  <th class="th-sm">Max Buy</th>
-                  <th class="th-sm">Timer</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Table Name') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Group') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Max Player') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Turn') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Total Bet') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Stake') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Min Buy') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Max Buy') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Timer') }}</th>
                   @if($menu && $mainmenu && $submenu)
-                  <th class="th-sm">action</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Action') }}</th>
                   @endif
                 </tr>
               </thead>
@@ -128,7 +128,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Table</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuGame('Create Table') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="form-group">
                   <select class="custom-select" id="category_table" name="category">
-                    <option selected>Select Category</option>
+                    <option selected>{{ TranslateMenuGame('Select Category') }}</option>
                     @foreach ($category as $ct)
                     <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
                     @endforeach
@@ -164,10 +164,10 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn sa-btn-primary submit-data">
-              <i class="fa fa-save"></i> Save
+              <i class="fa fa-save"></i>{{ TranslateMenuGame('Save') }}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-              <i class="fa fa-remove"></i> Cancel
+              <i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel') }}
             </button>
           </div>
         </form>
@@ -181,21 +181,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('Delete Data') }}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          Are You Sure Want To Delete It
+          {{ TranslateMenuGame('Are you sure') }}
           <form action="{{ route('BigTwoTable-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
             <input type="hidden" name="tableid" id="tableid" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i> Yes</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('Yes') }}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('No') }}</button>
         </div>
           </form>
       </div>

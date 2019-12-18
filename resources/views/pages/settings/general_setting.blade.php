@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">Settings</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">General Setting</a></li>
+<li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('Settings') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('General_Setting') }}</a></li>
 @endsection
 
 
@@ -27,7 +27,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>System Settings</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('System settings') }}</strong></h2>				
         </div>
       </header>
     
@@ -39,13 +39,13 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Setting</th>
+                    <th class="th-sm">{{ TranslateMenuGame('Name') }}</th>
+                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Maintenance</td>
+                    <td>{{ TranslateGeneralSettings('Maintenance') }}</td>
                     @if($menu && $mainmenu)
                     <td><a href="#" class="popUpSetting" data-title="Maintenance" data-name="value" data-value="{{ $getMaintenance->value }}" data-pk="{{ $getMaintenance->id }}" data-type="select" data-url="{{ route('GeneralSetting-update') }}">{{ $getMaintenance->strmaintenance() }}</a></td>
                     @else 
@@ -53,7 +53,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>Point Expired</td>
+                    <td>{{ TranslateGeneralSettings('Point expired') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span> (hari)</span>
@@ -63,7 +63,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>Award Signup</td>
+                    <td>{{ TranslateGeneralSettings('Award Signup') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_signup->value }}</a>
@@ -73,7 +73,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>Award Signup Guest</td>
+                    <td>{{ TranslateGeneralSettings('Award Signup Guest') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_signup_guest->value }}</a>
@@ -83,7 +83,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>Award Daily Chips</td>
+                    <td>{{ TranslateGeneralSettings('Award Daily Chips') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_chips->value }}</a>
@@ -93,7 +93,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>Award Daily Chips Guest</td>
+                    <td>{{ TranslateGeneralSettings('Award Daily Chips Guest') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_chips_guest->value }}</a>
@@ -103,7 +103,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>Award Daily Days</td>
+                    <td>{{ TranslateGeneralSettings('Award Daily Days') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_days->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_days->value }}</a>
@@ -113,7 +113,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>Award Daily Multiply</td>
+                    <td>{{ TranslateGeneralSettings('Award Daily Multiply') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_multiply->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_multiply->value }}</a>
@@ -138,7 +138,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>Bank Settings</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('Bank Settings') }}</strong></h2>				
         </div>
       </header>
     
@@ -150,8 +150,8 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Value</th>
+                    <th class="th-sm">{{ translateMenuGame('Name') }}</th>
+                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -181,7 +181,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>Info Settings</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('Info Settings') }}</strong></h2>				
         </div>
       </header>
     
@@ -193,17 +193,17 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Setting</th>
+                    <th class="th-sm">{{ translateMenuGame('Name') }}</th>
+                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>About</td>
+                    <td>{{ TranslateGeneralSettings('About') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-edit"></i> Edit About
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
                     </button>
                     </td>
                     @else 
@@ -233,7 +233,7 @@
     <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
       <header>
         <div class="widget-header">	
-          <h2><strong>CS & Legal Settings</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('CS & Legal Settings') }}</strong></h2>				
         </div>
       </header>
     
@@ -245,8 +245,8 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Setting</th>
+                    <th class="th-sm">{{ translateMenuGame('Name') }}</th>
+                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -279,7 +279,7 @@
                     @if($menu && $mainmenu)
                     <td>
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
-                            <i class="fa fa-edit"></i> Edit Privacy Policy
+                          <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit privacy & policy')}}
                         </button>
                     </td>
                     @else 
@@ -291,7 +291,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
-                        <i class="fa fa-edit"></i> Edit Term Of service
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Term of Service')}}
                     </button>
                     </td>
                     @else 
@@ -360,7 +360,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit Privacy Policy</h4>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit privacy & policy') }}</h4>
                     <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                       <i class="fa fa-remove"></i>
                     </button>
@@ -385,10 +385,10 @@
                     </div>
                     <div class="modal-footer">
                       <button type="submit" class="btn sa-btn-primary submit-data">
-                        <i class="fa fa-save"></i> Save
+                        <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
                       </button>
                       <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                        <i class="fa fa-remove"></i> Cancel
+                        <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
                       </button>
                     </div>
                   </form>
@@ -402,7 +402,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit Term Of Service</h4>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Term of Service') }}</h4>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
               <i class="fa fa-remove"></i>
             </button>
@@ -427,10 +427,10 @@
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn sa-btn-primary submit-data">
-                <i class="fa fa-save"></i> Save
+                <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
               </button>
               <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                <i class="fa fa-remove"></i> Cancel
+                <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
               </button>
             </div>
           </form>
@@ -446,7 +446,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit About</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -470,10 +470,10 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn sa-btn-primary submit-data">
-              <i class="fa fa-save"></i> Save
+              <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-              <i class="fa fa-remove"></i> Cancel
+              <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
             </button>
           </div>
         </form>

@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Balance_Reseller') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Balance_Reseller') }}">Balance Reseller</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Balance_Reseller') }}">{{ translate_menu('Reseller')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Balance_Reseller') }}">{{ translate_menu('Balance_Reseller')}}</a></li>
 @endsection
 
 @section('content')
@@ -58,7 +58,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Balance Reseller</h2>
+            <h2>{{ translate_menu('Balance_Reseller')}}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -79,14 +79,14 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>ID Reseller</th>
-                        <th>Username</th>
+                        <th>{{ TranslateReseller('ResellerID')}}</th>
+                        <th>{{ Translate_menuPlayers('Username')}}</th>
                         {{-- <th>Description</th> --}}
-                        <th>Debit</th>
-                        <th>Credit</th>
-                        <th>Balance</th>
-                        <th>Category</th>
-                        <th>Timestamp</th>
+                        <th>{{ Translate_menuPlayers('Debit')}}</th>
+                        <th>{{ Translate_menuPlayers('Credit')}}</th>
+                        <th>{{ TranslateReseller('Balance')}}</th>
+                        <th>{{ TranslateMenuItem('Category')}}</th>
+                        <th>{{ Translate_menuPlayers('Timestamp')}}</th>
                     </tr>
                 </thead>
                 <tbody>

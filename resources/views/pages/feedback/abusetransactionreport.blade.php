@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Feedback_Game') }}">Feedback</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Abuse_Transaction_Report') }}">Abuse Transaction Report</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Abuse_Transaction_Report') }}">{{ TranslateMenuFeedback('Abuse Transaction Report') }}</a></li>
 @endsection
 
 @section('content')
@@ -19,12 +19,12 @@
                 </div>
                 <div class="col" style="padding-left:1%;">
                     <select style="width: 200px" name="TransactionType" class="form-control">
-                        <option value="">Choose Transaction Type</option>
+                        <option value="">{{ TranslateMenuToko('Transaction type') }}</option>
                         {{-- @foreach ($action as $act)
                         <option value="{{ $act->id }}">{{ $act->action }}</option>                                
                         @endforeach --}}
-                        <option value="{{ $AbusetrnsType[0] }}">{{ $AbusetrnsType[1]}} Player</option>
-                        <option value="{{ $AbusetrnsType[2] }}">{{ $AbusetrnsType[3]}} Player</option>
+                        <option value="{{ $AbusetrnsType[0] }}">{{ translate_menu($AbusetrnsType[1]) }} Pemain</option>
+                        <option value="{{ $AbusetrnsType[2] }}">{{ $AbusetrnsType[3]}} Pemain</option>
                     </select>
                 </div>
                 <div class="col" style="padding-left:1%;">
@@ -47,7 +47,7 @@
         <header>
             <div class="widget-header">	
                 <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-                <h2>Feedback Game</h2>
+                <h2>{{ TranslateMenuFeedback('Feedback') }} Game</h2>
             </div>
         </header>
         <div>           
@@ -57,11 +57,11 @@
                 <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                     <thead>			                
                         <tr>
-                            <th>ID Player</th>
-                            <th>Username</th>
-                            <th>Image Proof</th>
-                            <th>Description</th>
-                            <th>Date</th>
+                            <th>{{ Translate_menuPlayers('Player ID') }}</th>
+                            <th>{{ Translate_menuPlayers('Username') }}</th>
+                            <th>{{ TranslateMenuFeedback('Image Proof') }}</th>
+                            <th>{{ TranslateMenuItem('Description') }}</th>
+                            <th>{{ Translate_menuTransaction('Date') }}</th>
                             <th>Print PDF <a href="{{ route('AbuseTransactionReport-PDFall') }}"><i class="fa fa-file-pdf-o"></i></a></th>
                         </tr>
                     </thead>

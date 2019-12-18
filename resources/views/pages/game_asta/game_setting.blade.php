@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">Settings</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">Game Setting</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">{{ Translate_menu('Settings')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">{{ Translate_menu('Game_Setting')}}</a></li>
 @endsection
 
 
@@ -27,8 +27,8 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Setting</th>
+                    <th class="th-sm">{{ Translate_menu('Settings')}}</th>
+                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,8 +70,8 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Setting</th>
+                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                    <th class="th-sm">{{ Translate_Menu('Settings')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -114,8 +114,8 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Setting</th>
+                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                    <th class="th-sm">{{ Translate_Menu('Settings')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,8 +157,8 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">Name</th>
-                    <th class="th-sm">Setting</th>
+                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                    <th class="th-sm">{{ Translate_Menu('Settings')}}</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">Item</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">Report Gift</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Item') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Report Gift') }}</a></li>
 @endsection
 
 
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
-                        <option value="">Choose Game</option>
+                        <option value="">{{ TranslateMenuItem('Choose Game') }}</option>
                         @foreach($game as $gm)
                         <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                         @endforeach

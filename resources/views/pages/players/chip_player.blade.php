@@ -59,7 +59,7 @@
 <!--------- End Content Search ------->
 
 <!--------- Show after search ------->
-@if (Request::is('Players/Chip_Players/Chip-search*'))
+@if (Request::is('Players/Chip_Players/Chip-search*') || Request::is('Players/Chip_Players/Chip-all*'))
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
 
     <header>

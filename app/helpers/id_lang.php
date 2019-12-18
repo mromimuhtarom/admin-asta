@@ -25,6 +25,7 @@ function translate_menu($menu){
       'Banking_Transactions'            =>  xmlfile()->L_Banking_Transactions->attributes()->val,
       'User_Bank_Transaction'           =>  xmlfile()->L_User_Bank_Transaction->attributes()->val,
       'Reward_Transaction'              =>  xmlfile()->L_Reward_Transaction->attributes()->val,
+      'Add_Transaction'                 =>  xmlfile()->L_AddTransaction->attributes()->val,
       'Players'                         =>  xmlfile()->L_Players->attributes()->val,
       'Active_Players'                  =>  xmlfile()->L_Active_Players->attributes()->val,
       'Report_Players'                  =>  xmlfile()->L_Report_Players->attributes()->val,
@@ -208,8 +209,8 @@ function translate_menuTransaction($menu){
         'Are you sure want to Approve this Transaction?'    =>  xmlfile()->L_AreYouSureWantToApproveThisTransaction->attributes()->val,
         'Approve'               =>  xmlfile()->L_Approve->attributes()->val,
         'Pending'               =>  xmlfile()->L_Pending->attributes()->val,
-        'Status Payment'        =>  xmlfile()->L_StatusPyament->attributes()->val,
-        'Confirm request'       =>  xmlfile()->L_ConfirmPayment->attributes()->val,
+        'Status Payment'        =>  xmlfile()->L_StatusPayment->attributes()->val,
+        'Confirm request'       =>  xmlfile()->L_ConfirmRequest->attributes()->val,
         'Username'              =>  xmlfile()->L_Username->attributes()->val,
         'Date'                  =>  xmlfile()->L_Date->attributes()->val,
         'Win'                   =>  xmlfile()->L_Win->attributes()->val,
@@ -233,25 +234,48 @@ function Translate_menuPlayers($menu){
         'Play report'               =>  xmlfile()->L_PlayReport->attributes()->val,
         'Players Online'            =>  xmlfile()->L_PlayersOnline->attributes()->val,
         'Registered Player'         =>  xmlfile()->L_RegisteredPlayer->attributes()->val,
+        'RegisteredPlayerID'        =>  xmlfile()->L_RegisteredPlayerID->attributes()->val,
+        'LogPlayers'                =>  xmlfile()->L_LogPlayers->attributes()->val,
+        'NumberOfIDsToBeAdded'      =>  xmlfile()->L_NumberOfIDsToBeAdded->attributes()->val,
         'Chip Players'              =>  xmlfile()->L_ChipPlayers->attributes()->val,
-        'Gold Players'              =>  xmlfile()->L_GoldPlayers->attributes()->val,   
+        'Gold Players'              =>  xmlfile()->L_GoldPlayers->attributes()->val,
+        'Point Players'             =>  xmlfile()->L_PointPlayers->attributes()->val,
         'Guest'                     =>  xmlfile()->L_Guest->attributes()->val,
         'Choose Register Type'      =>  xmlfile()->L_ChooseRegisterType->attributes()->val,
         'Choose Game'               =>  xmlfile()->L_ChooseGame->attributes()->val,
         'Choose Log Type'           =>  xmlfile()->L_ChooseLogType->attributes()->val,
-        'Choose status'             =>  xmlfile()->L_Choosestatus->attributes()->val,
+        'Choose status'             =>  xmlfile()->L_ChooseStatus->attributes()->val,
+        'Choose User Type'          =>  xmlfile()->L_ChooseUserType->attributes()->val,
+        'Choose Action'             =>  xmlfile()->L_ChooseAction->attributes()->val,
         'Total Record Entries is'   =>  xmlfile()->L_TotalRecordEntriesIs->attributes()->val,
         'Create user guest ID'      =>  xmlfile()->L_CreateUserGuestID->attributes()->val,
         'Bank Account'              =>  xmlfile()->L_BankAccount->attributes()->val,
         'Country'                   =>  xmlfile()->L_Country->attributes()->val,
+        'Create Player'             =>  xmlfile()->L_CreatePlayer->attributes()->val,
+        'Delete Player'             =>  xmlfile()->L_DeletePlayer->attributes()->val,
+        'Edit Player'               =>  xmlfile()->L_EditPlayer->attributes()->val,
+        'Change Password Player'    =>  xmlfile()->L_ChangePasswordPlayer->attributes()->val,
+        'Total Record Entries is'   =>  xmlfile()->L_TotalRecordEntriesIs->attributes()->val,
         'Player ID'                 =>  xmlfile()->L_PlayerID->attributes()->val,
         'Guest ID'                  =>  xmlfile()->L_GuestID->attributes()->val,
         'Device ID'                 =>  xmlfile()->L_DeviceID->attributes()->val,
         'Round ID'                  =>  xmlfile()->L_RoundID->attributes()->val,
-        'Detail round ID'           =>  xmlfile()->L_DetailroundID->attributes()->val,
+        'Detail round ID'           =>  xmlfile()->L_DetailRoundID->attributes()->val,
+        'ID Player already'         =>  xmlfile()->L_IDPlayerAlready->attributes()->val,
+        'Player ID used'            =>  xmlfile()->L_PlayerIDUsed->attributes()->val,
+        'Guest ID used'             =>  xmlfile()->L_GuestIDUsedIs->attributes()->val,
+        'Bot ID used'               =>  xmlfile()->L_BotIDUsedIs->attributes()->val,
+        'Player ID didnt use'       =>  xmlfile()->L_PlayerIDDidntUse->attributes()->val,
+        'Guest ID didnt use'        =>  xmlfile()->L_GuestIDDidntUse->attributes()->val,
+        'Bot ID didnt use'          =>  xmlfile()->L_BotIDDidntUse->attributes()->val,
+        'Total Player ID'           =>  xmlfile()->L_TotalPlayerID->attributes()->val,
+        'Total Guest ID'            =>  xmlfile()->L_TotalGuestID->attributes()->val,
+        'Total Bot ID'              =>  xmlfile()->L_TotalBotID->attributes()->val,
         'Playername'                =>  xmlfile()->L_Playername->attributes()->val,
         'Game'                      =>  xmlfile()->L_Game->attributes()->val,
+        'UserType'                  =>  xmlfile()->L_UserType->attributes()->val,
         'Username'                  =>  xmlfile()->L_Username->attributes()->val,
+        'Desc'                      =>  xmlfile()->L_Desc->attributes()->val,
         'Playing Game'              =>  xmlfile()->L_PlayingGame->attributes()->val,
         'Rank'                      =>  xmlfile()->L_Rank->attributes()->val,
         'Table'                     =>  xmlfile()->L_Table->attributes()->val,
@@ -261,6 +285,7 @@ function Translate_menuPlayers($menu){
         'Bet'                       =>  xmlfile()->L_Bet->attributes()->val,
         'Win Lose'                  =>  xmlfile()->L_Win->attributes()->val,
         'Chip'                      =>  xmlfile()->L_Chip->attributes()->val,
+        'Goods'                     =>  xmlfile()->L_Point->attributes()->val,
         'Point'                     =>  xmlfile()->L_Point->attributes()->val,
         'Action'                    =>  xmlfile()->L_Action->attributes()->val,
         'Gold Coins'                =>  xmlfile()->L_GoldCoins->attributes()->val,
@@ -288,6 +313,212 @@ function Translate_menuPlayers($menu){
         'Problem'                   =>  xmlfile()->L_Problem->attributes()->val,
         'Save'                      =>  xmlfile()->L_Save->attributes()->val,
         'Cancel'                    =>  xmlfile()->L_Cancel->attributes()->val,
+
+    ];
+    return $array_menuContent[$menu];
+}
+
+
+function TranslateMenuItem($menu){
+
+    $array_menuContent = [
+
+        'Item'              =>  xmlfile()->L_Item->attributes()->val,
+        'Table Gift'        =>  xmlfile()->L_TableGift->attributes()->val,
+        'Create New Gift'   =>  xmlfile()->L_CreateNewGift->attributes()->val,
+        'Report Gift'       =>  xmlfile()->L_ReportGift->attributes()->val,
+        'Select All'        =>  xmlfile()->L_SelectAll->attributes()->val,
+        'Image'             =>  xmlfile()->L_Image->attributes()->val,
+        'Title'             =>  xmlfile()->L_Title->attributes()->val,
+        'Price'             =>  xmlfile()->L_Price->attributes()->val,
+        'Category'          =>  xmlfile()->L_Category->attributes()->val,
+        'Status'            =>  xmlfile()->L_Status->attributes()->val,
+        'Main Image'        =>  xmlfile()->L_MainImage->attributes()->val,
+        'Save Gift'         =>  xmlfile()->L_SaveGift->attributes()->val,
+        'Save'              =>  xmlfile()->L_Save->attributes()->val,
+        'Cancel'            =>  xmlfile()->L_Cancel->attributes()->val,
+        'Edit Gift'         =>  xmlfile()->L_EditGift->attributes()->val,
+        'Create gift store' =>  xmlfile()->L_CreateGiftStore->attributes()->val,
+        'DeleteData'        =>  xmlfile()->L_DeleteData->attributes()->val,
+        'Are you sure want to delete it'    => xmlfile()->L_AreYouSureWantToDeleteIt->attributes()->val,
+        'Yes'               =>  xmlfile()->L_Yes->attributes()->val,
+        'No'                =>  xmlfile()->L_No->attributes()->val,
+        'Delete all selected data'          => xmlfile()->L_DeleteAllSelectedData->attributes()->val,
+        'Are U Sure'        =>  xmlfile()->L_AreUSure->attributes()->val,
+        'Choose Game'       =>  xmlfile()->L_ChooseGame->attributes()->val,
+        'Username'          =>  xmlfile()->L_Username->attributes()->val,
+        'Action Game'       =>  xmlfile()->L_ActionGame->attributes()->val,
+        'Date'              =>  xmlfile()->L_Date->attributes()->val,
+        'Description'       =>  xmlfile()->L_Description->attributes()->val,
+        'Emoticon'          =>  xmlfile()->L_Emoticon->attributes()->val,
+        'Create New Emoticon'               => xmlfile()->L_CreateNewEmoticon->attributes()->val,
+        'Create Emoticon'   =>  xmlfile()->L_CreateEmoticon->attributes()->val
+    ];
+
+    return $array_menuContent[$menu];
+
+}
+
+
+function TranslateMenuGame($menu){
+
+    $array_menuContent = [
+        'Table'             => xmlfile()->L_Table->attributes()->val,
+        'Table Player'      => xmlfile()->L_TablePlayer->attributes()->val,
+        'Change Title'      => xmlfile()->L_ChangeTitle->attributes()->val,
+        'Create New Table'  => xmlfile()->L_CreateNewTable->attributes()->val, 
+        'Table Name'        => xmlfile()->L_TableName->attributes()->val,
+        'Group'             => xmlfile()->L_Group->attributes()->val,
+        'Max Player'        => xmlfile()->L_MaxPlayer->attributes()->val,
+        'Small Blind'       => xmlfile()->L_SmallBlind->attributes()->val,
+        'Big Blind'         => xmlfile()->L_BigBlind->attributes()->val,
+        'Jackpot'           => xmlfile()->L_Jackpot->attributes()->val,
+        'Min Buy'           => xmlfile()->L_MinBuy->attributes()->val,
+        'Max Buy'           => xmlfile()->L_MaxBuy->attributes()->val,
+        'Timer'             => xmlfile()->L_Timer->attributes()->val,
+        'Action'            => xmlfile()->L_Action->attributes()->val,
+        'Create Table'      => xmlfile()->L_CreateTable->attributes()->val,
+        'Select Category'   => xmlfile()->L_SelectCategory->attributes()->val,
+        'Save'              => xmlfile()->L_Save->attributes()->val,
+        'Cancel'            => xmlfile()->L_Cancel->attributes()->val,
+        'Delete Data'       => xmlfile()->L_DeleteData->attributes()->val,
+        'Are you sure'      => xmlfile()->L_AreUsure->attributes()->val,
+        'Yes'               => xmlfile()->L_Yes->attributes()->val,
+        'No'                => xmlfile()->L_No->attributes()->val,
+        'Category'          => xmlfile()->L_Category->attributes()->val,
+        'Asta Poker Table'  => xmlfile()->L_AstaPokerTable->attributes()->val,
+        'Title'             => xmlfile()->L_Title->attributes()->val,
+        'Create Category'   => xmlfile()->L_CreateCategory->attributes()->val,
+        'Asta Big Two Table'=> xmlfile()->L_AstaBig2Table->attributes()->val,
+        'Create New Table'  => xmlfile()->L_CreateNewTable->attributes()->val,
+        'Turn'              => xmlfile()->L_TURN->attributes()->val,
+        'Total Bet'         => xmlfile()->L_TotalBet->attributes()->val,
+        'Stake'             => xmlfile()->L_Stake->attributes()->val,
+        'Timer'             => xmlfile()->L_Timer->attributes()->val,
+        'Game state'        => xmlfile()->L_GameState->attributes()->val,
+        'Current turn seat ID'  => xmlfile()->L_CurrentTurnSeatId->attributes()->val,
+        'Room Name'         => xmlfile()->L_RoomName->attributes()->val,
+        'Name'              => xmlfile()->L_Name->attributes()->val,
+
+    ];
+
+    return $array_menuContent[$menu];
+}
+
+
+function TranslateMenuToko($menu){
+
+    $array_menuContent = [
+
+        'Best Offer'        =>  xmlfile()->L_BESTOFFER->attributes()->val,
+        'Store'             =>  xmlfile()->L_STORE->attributes()->val,
+        'Image'             =>  xmlfile()->L_IMAGE->attributes()->val,
+        'Title'             =>  xmlfile()->L_TITLE->attributes()->val,
+        'Rate'              =>  xmlfile()->L_RATE->attributes()->val,
+        'Category'          =>  xmlfile()->L_CATEGORY->attributes()->val,
+        'Price cash'        =>  xmlfile()->L_PRICECASH->attributes()->val,
+        'As long'           =>  xmlfile()->L_ASLONG->attributes()->val,
+        'Pay Transaction'   =>  xmlfile()->L_PAYTRANSACTION->attributes()->val,
+        'Action'            =>  xmlfile()->L_ACTION->attributes()->val,
+        'Create best offer' =>  xmlfile()->L_CREATEBEST->attributes()->val,
+        'Day'               =>  xmlfile()->L_DAY->attributes()->val,
+        'Payment method'    =>  xmlfile()->L_PAYMENTMETHOD->attributes()->val,
+        'Transaction type'  =>  xmlfile()->L_TRANSACTIONTYPE->attributes()->val,
+        'Bank Transfer'     =>  xmlfile()->L_BANKTRANSFER->attributes()->val,
+        'Internet Banking'  =>  xmlfile()->L_INTERNETBANKING->attributes()->val,
+        'Cash Digital'      =>  xmlfile()->L_CASHDIGITAL->attributes()->val,
+        'Manual transfer'   =>  xmlfile()->L_MANUALTF->attributes()->val,
+        'Shop'              =>  xmlfile()->L_SHOP->attributes()->val,
+        'Credit card'       =>  xmlfile()->L_CC->attributes()->val,
+        'Store'             =>  xmlfile()->L_STORE->attributes()->val,
+        'Chip store'        =>  xmlfile()->L_CHIPSTORE->attributes()->val,
+        'Goods Store'       =>  xmlfile()->L_GOODS->attributes()->val,
+        'Report store'      =>  xmlfile()->L_REPORTSTORE->attributes()->val,
+        'Payment Store'     =>  xmlfile()->L_PAYMENTSTORE->attributes()->val,
+        'Create new chip store'=> xmlfile()->L_CREATENEWCHIP->attributes()->val,
+        'Create new goods store'=> xmlfile()->L_CREATENEWGOODS->attributes()->val,
+        'Create new payment store'=> xmlfile()->L_CREATENEWPAYMENT->attributes()->val,
+        'Order'             =>  xmlfile()->L_ORDER->attributes()->val,
+        'Chip Awarded'      =>  xmlfile()->L_CHIPAWARDED->attributes()->val,
+        'Gold Awarded'      =>  xmlfile()->L_GOLDAWARDED->attributes()->val,
+        'Gold Cost'         =>  xmlfile()->L_GOLDCOST->attributes()->val,
+        'Active'            =>  xmlfile()->L_ACTIVE->attributes()->val,
+        'Main Image'        =>  xmlfile()->L_MAINIMAGE->attributes()->val,
+        'Save Image'        =>  xmlfile()->L_SAVEIMAGE->attributes()->val,
+        'Edit'              =>  xmlfile()->L_EDIT->attributes()->val,
+        'Create new gold store' =>  xmlfile()->L_CREATENEW->attributes()->val,
+        'Item type'         =>  xmlfile()->L_ITEMTYPE->attributes()->val,
+        'Pay Transaction'   =>  xmlfile()->L_PAY->attributes()->val,
+        'Price Point'       =>  xmlfile()->L_PRICEPOINT->attributes()->val,
+        'Choose type date'  =>  xmlfile()->L_CHOOSETYPEDATE->attributes()->val,
+        'Date approve and Decline' => xmlfile()->L_DATEAPPROVE->attributes()->val,
+        'Date Request'      =>  xmlfile()->L_DATEREQUEST->attributes()->val,
+
+    ];
+
+    return $array_menuContent[$menu];
+}
+
+
+function TranslateMenuFeedback($menu){
+
+    $array_menuContent = [
+
+        'Feedback'                  =>  xmlfile()->L_FEEDBACK->attributes()->val,
+        'Abuse Transaction Report'  =>  xmlfile()->L_ABUSETRANS->attributes()->val,
+        'Report Abuse Player'       =>  xmlfile()->L_ABUSEPLAYER->attributes()->val,
+        'Image Proof'               =>  xmlfile()->L_IMAGEPROOF->attributes()->val,
+        'Rating'                    =>  xmlfile()->L_RATING->attributes()->val,
+        'Message'                   =>  xmlfile()->L_MESSAGE->attributes()->val,
+        'User ID sender'            =>  xmlfile()->L_IDSENDER->attributes()->val,
+        'Username sender'           =>  xmlfile()->L_USERSENDER->attributes()->val,
+        'Reported User ID'          =>  xmlfile()->L_REPORTUSERID->attributes()->val,
+        'Reported User'             =>  xmlfile()->L_REPORTUSER->attributes()->val,
+        'Reason'                    =>  xmlfile()->L_REASON->attributes()->val,
+
+
+    
+    ];
+    return $array_menuContent[$menu];
+}
+
+function TranslateGeneralSettings($menu){
+
+    $array_menuContent = [
+
+        'System settings'           =>  xmlfile()->L_SYSTEMSETT->attributes()->val,
+        'Maintenance'               =>  xmlfile()->L_MAINTENANCE->attributes()->val,
+        'Point expired'             =>  xmlfile()->L_POINTEXP->attributes()->val,
+        'Award Signup'              =>  xmlfile()->L_AWARDSIGN->attributes()->val,
+        'Award Signup Guest'        =>  xmlfile()->L_AWARDSIGNGUEST->attributes()->val,
+        'Award Daily Chips'         =>  xmlfile()->L_AWARDDAILYCHIPS->attributes()->val,
+        'Award Daily Chips Guest'   =>  xmlfile()->L_AWARDDAILYCHIPSGUEST->attributes()->val,
+        'Award Daily Days'          =>  xmlfile()->L_AWARDDAILYDAYS->attributes()->val,
+        'Award Daily Multiply'      =>  xmlfile()->L_AWARDDAILYMULTIPLY->attributes()->val,
+        'Bank Settings'             =>  xmlfile()->L_BANKSETTINGS->attributes()->val,
+        'Info Settings'             =>  xmlfile()->L_INFOSETTINGS->attributes()->val,
+        'About'                     =>  xmlfile()->L_ABOUT->attributes()->val,
+        'Edit About'                =>  xmlfile()->L_EDIT->attributes()->val,
+        'CS & Legal Settings'       =>  xmlfile()->L_LEGALSETTING->attributes()->val,
+        'Edit privacy & policy'     =>  xmlfile()->L_PRIVACY->attributes()->val,
+        'Edit Term of Service'      =>  xmlfile()->L_EDITTERM->attributes()->val,
+
+
+    ];
+    return $array_menuContent[$menu];
+}
+
+function TranslateReseller($menu){
+
+    $array_menuContent = [
+
+        'Reseller ID'           =>  xmlfile()->L_RESELLERID->attributes()->val,
+        'Phone'                 =>  xmlfile()->L_PHONE->attributes()->val,
+        'Saldo gold'            =>  xmlfile()->L_SALDOGOLD->attributes()->val,
+        'Report Transaction'    =>  xmlfile()->L_REPORTTRANS->attributes()->val,
+        'Bonus Item'            =>  xmlfile()->L_BONUSITEM->attributes()->val,
+        'Balance'               =>  xmlfile()->L_BALANCE->attributes()->val,
+
 
     ];
     return $array_menuContent[$menu];

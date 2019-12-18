@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">Feedback</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">Report Abuse Player</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Report Abuse Player') }}</a></li>
 @endsection
 
 @section('content')
@@ -55,7 +55,7 @@
 <header>
     <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-        <h2>Report Abuse Player </h2>
+        <h2>{{ TranslateMenuFeedback('Report Abuse Player') }}</h2>
     </div>
 </header>
 <div>           
@@ -65,12 +65,12 @@
         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
             <thead>			                
                 <tr>
-                    <th>User ID sender</th>
-                    <th>User Sender</th>
-                    <th>Reported User ID</th>
-                    <th>Reported User</th>
-                    <th>Reason</th>
-                    <th>Date</th>
+                    <th>{{ TranslateMenuFeedback('User ID sender') }}</th>
+                    <th>{{ TranslateMenuFeedback('Username sender') }}</th>
+                    <th>{{ TranslateMenuFeedback('Reported User ID') }}</th>
+                    <th>{{ TranslateMenuFeedback('Reported User') }}</th>
+                    <th>{{ TranslateMenuFeedback('Reason') }}</th>
+                    <th>{{ TranslateMenuItem('Date') }}</th>
                 </tr>
             </thead>
             <tbody>

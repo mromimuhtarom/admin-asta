@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">Settings</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">General Setting</a></li>
+<li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ Translate_menuPlayers('RegisteredPlayerID') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ Translate_menuPlayers('Player ID') }}</a></li>
 @endsection
 
 
@@ -46,17 +46,17 @@
           @csrf
           <table style="color:white" border="1" width="100%" height="100%">
               <tr>
-                  <td colspan="3" align="center" style="font-size: 200%;">Player ID <i class="fa fa-group"></i></td>
+                  <td colspan="3" align="center" style="font-size: 200%;">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-group"></i></td>
               </tr>
               <tr>
-                  <td width='30%'>Number of inputs filled in Player ID</td>
+                  <td width='30%'>{{ Translate_menuPlayers('NumberOfIDsToBeAdded') }}</td>
                   <td colspan="2"><input type="number" name="inputcount" class="form-control" required>&nbsp;</td>
               </tr>
               <tr>
-                  <td width="30%">User Type</td>
+                  <td width="30%">{{ Translate_menuPlayers('UserType') }}</td>
                   <td colspan="2">
                       <select name="usertype" class="form-control" required>
-                          <option value="">Choose User Type</option>
+                          <option value="">{{ Translate_menuPlayers('Choose User Type') }}</option>
                           <option value="{{ $type[0] }}">{{ $type[1] }}</option>
                           <option value="{{ $type[2] }}">{{ $type[3] }}</option>
                           <option value="{{ $type[4] }}">{{ $type[5] }}</option>
@@ -64,44 +64,44 @@
                   </td>
               </tr>
               <tr>
-                  <td colspan="3" align="center"><button type="submit" class="btn btn-primary submit-data"><i class="fa fa-save"></i> Save</button></td>
+                  <td colspan="3" align="center"><button type="submit" class="btn btn-primary submit-data"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button></td>
               </tr>
               <tr>
-                  <td> Player ID used : {{ $playerused->countuserid }}</td>
-                  <td> Guest ID used is: {{ $guestused->countuserid }}</td>
-                  <td> Bot ID used is: {{ $botused->countuserid }}</td>
+                  <td>{{ Translate_menuPlayers('Player ID used') }} : {{ $playerused->countuserid }}</td>
+                  <td> {{ Translate_menuPlayers('Guest ID used') }} : {{ $guestused->countuserid }}</td>
+                  <td>{{ Translate_menuPlayers('Bot ID used') }} : {{ $botused->countuserid }}</td>
               </tr>
               <tr>
-                  <td>Player ID didn't use : {{ $playernotused->countuserid }}</td>
-                  <td>Guest ID didn't use : {{ $guestnotused->countuserid }} </td>
-                  <td>Bot Id didn't use: {{ $botnotused->countuserid }}</td>
+                  <td>{{ Translate_menuPlayers('Player ID didnt use') }} : {{ $playernotused->countuserid }}</td>
+                  <td>{{ Translate_menuPlayers('Guest ID didnt use') }} : {{ $guestnotused->countuserid }} </td>
+                  <td>{{ Translate_menuPlayers('Bot ID didnt use') }} : {{ $botnotused->countuserid }}</td>
               </tr>
               <tr>
-                  <td>Total Player ID : {{ $totalplayer->countuserid }}</td>
-                  <td>Total Guest ID : {{ $totalguest->countuserid }} </td>
-                  <td>Total Bot ID : {{ $totalbot->countuserid }}</td>
+                  <td>{{ Translate_menuPlayers('Total Player ID') }} : {{ $totalplayer->countuserid }}</td>
+                  <td>{{ Translate_menuPlayers('Total Guest ID') }} : {{ $totalguest->countuserid }} </td>
+                  <td>{{ Translate_menuPlayers('Total Bot ID') }} : {{ $totalbot->countuserid }}</td>
               </tr>
           </table>
       </form>
       @else 
       <table style="color:white;" border="1" width="100%" height="80%">
           <tr>
-            <td Colspan="3" align="center">ID player Already</td>
+            <td Colspan="3" align="center">{{ Translate_menuPlayers('ID Player already') }}</td>
           </tr>
           <tr>
-              <td> Player ID used : {{ $playerused->countuserid }}</td>
-              <td> Guest ID used is: {{ $guestused->countuserid }}</td>
-              <td> Bot ID used is: {{ $botused->countuserid }}</td>
+              <td>{{ Translate_menuPlayers('Player ID used') }} : {{ $playerused->countuserid }}</td>
+              <td>{{ Translate_menuPlayers('Guest ID used') }}: {{ $guestused->countuserid }}</td>
+              <td>{{ Translate_menuPlayers('Bot ID used') }}: {{ $botused->countuserid }}</td>
           </tr>
           <tr>
-              <td>Player ID didn't use : {{ $playernotused->countuserid }}</td>
-              <td>Guest ID didn't use : {{ $guestnotused->countuserid }} </td>
-              <td>Bot Id didn't use: {{ $botnotused->countuserid }}</td>
+              <td>{{ Translate_menuPlayers('Player ID didnt use') }} : {{ $playernotused->countuserid }}</td>
+              <td>{{ Translate_menuPlayers('Guest ID didnt use') }}  : {{ $guestnotused->countuserid }} </td>
+              <td>{{ Translate_menuPlayers('Bot ID didnt use') }}: {{ $botnotused->countuserid }}</td>
           </tr>
           <tr>
-              <td>Total Player ID : {{ $totalplayer->countuserid }}</td>
-              <td>Total Guest ID : {{ $totalguest->countuserid }} </td>
-              <td>Total Bot ID : {{ $totalbot->countuserid }}</td>
+              <td>{{ Translate_menuPlayers('Total Player ID') }}: {{ $totalplayer->countuserid }}</td>
+              <td>{{ Translate_menuPlayers('Total Guest ID') }} : {{ $totalguest->countuserid }} </td>
+              <td>{{ Translate_menuPlayers('Total Bot ID') }} : {{ $totalbot->countuserid }}</td>
           </tr>
       </table>
       @endif

@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">Item</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">Emoticon</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Item') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Emoticon') }}</a></li>
 @endsection
 
 
@@ -54,7 +54,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">
-      <h2><strong><i class="fa fa-columns"></i> Emoticon</strong></h2>
+      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuItem('Emoticon') }}</strong></h2>
     </div>
   </header>
 
@@ -69,7 +69,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"></i> Create New Emoticon
+                <i class="fa fa-plus"></i> {{ TranslateMenuItem('Create New Emoticon') }}
               </button>
               @endif
             </div>
@@ -87,13 +87,13 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
+                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
                 @endif
-                <th style="width:10px;">Image</th>
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Price</th>
+                <th style="width:10px;">{{ TranslateMenuItem('Image') }}</th>
+                <th class="th-sm">{{ TranslateMenuItem('Title') }}</th>
+                <th class="th-sm">{{ TranslateMenuItem('Price') }}</th>
                 {{-- <th class="th-sm">Category</th> --}}
-                <th class="th-sm">Status</th>
+                <th class="th-sm">{{ TranslateMenuItem('Status') }}</th>
                 @if($menu && $mainmenu)
                 <th align="center" style="width:10px;">
                   <a  href="#" style="color:red;font-weight:bold;" 
@@ -119,7 +119,7 @@
                                   <input type="hidden" name="pk" value="{{ $emot->id }}">
                                   <input type="file" name="file" id="media-input-wtr" class="upload{{ $emot->id }}" accept="image/*">
                                   <i class="fa fa-edit media-icon-wtr"></i>
-                                  <p class="nav-name">Main Image</p>
+                                  <p class="nav-name">{{ TranslateMenuItem('Main Image') }}</p>
                                 </span>
                                 <span class="media-overlay-wtr1 med-ovlay{{ $emot->id }}">
                                   <input type="hidden" name="pk" value="{{ $emot->id }}">
@@ -138,10 +138,10 @@
                                 </figure>
                               </div>
                               <div class="media-control" align="center" style="margin-top:-1%">
-                                <button class="save-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i> Save Gift</button>
+                                <button class="save-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuItem('Save Gift') }}</button>
                               </form>
-                                <button class="cancel-upload{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                                <button class="edit-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Gift</button>
+                                <button class="cancel-upload{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
+                                <button class="edit-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit Gift') }}</button>
                             </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $emot->id }}" data-type="text" data-url="{{ route('Emoticon-update') }}">{{ $emot->name }}</a></td>
@@ -189,7 +189,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Emoticon</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuItem('Create Emoticon') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -225,10 +225,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" >
-            <i class="fa fa-save"></i> Save
+            <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> Cancel
+            <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
           </button>
         </div>
       </form>
@@ -242,21 +242,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete Data</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('DeleteData') }}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          Are You Sure Want To Delete It
+          {{ TranslateMenuItem('Are you sure want to delete it') }}
           <form action="{{ route('Emoticon-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
             <input type="hidden" name="id" id="id" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
         </div>
           </form>
       </div>
@@ -268,21 +268,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> Delete all selected data</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        Are You Sure Want To Delete all selected data?
+        {{ TranslateMenuItem('Are you sure want to delete it') }}
         <form action="{{ route('Emoticon-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i> Yes</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
       </div>
         </form>
     </div>

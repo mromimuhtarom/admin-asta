@@ -2,8 +2,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">Reseller</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">Reseller Transaction</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">{{ translate_menu('Reseller')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">{{ translate_menu('Reseller-Transaction')}}</a></li>
 @endsection
 
 @section('content')
@@ -37,9 +37,9 @@
                 </div>
                 <div class="col" style="padding-left:3%;">
                     <select name="choosedate" id="" class="form-control">
-                        <option value="">Choose Type Date</option>
-                        <option value="approvedecline">Date Aprove and Decline</option>
-                        <option value="request">Date Request</option>
+                        <option value="">{{ TranslateMenuToko('Choose type date')}}</option>
+                        <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
+                        <option value="request">{{ TranslateMenuToko('Date Request')}}</option>
                     </select>
                 </div>
                 <div class="col" style="padding-left:3%;">
@@ -64,7 +64,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Report Transaction </h2>
+            <h2>{{ TranslateReseller('Report Transaction')}} </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -85,8 +85,8 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>Date</th>
-                        <th>Gold</th>
+                        <th>{{ translate_menuTransaction('Date')}}</th>
+                        <th>Koin</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -140,7 +140,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Report Transaction</h2>
+            <h2>{{ TranslateReseller('Report Transaction')}}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -161,17 +161,17 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>ID Reseller</th>
-                        <th>Username</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
+                        <th>{{ TranslateReseller('Reseller ID')}}</th>
+                        <th>{{ Translate_menuPlayers('Username')}}</th>
+                        <th>{{ translate_menu('Item')}}</th>
+                        <th>{{ translate_menuTransaction('Quantity')}}</th>
+                        <th>{{ TranslateMenuItem('Price')}}</th>
                         {{-- <th>Gold</th> --}}
                         {{-- <th>Gold Bonus</th> --}}
-                        <th>Bonus Item</th>
-                        <th>Status</th>
-                        <th>Date Request</th>
-                        <th>Date Aprove Decline</th>
+                        <th>{{ TranslateMenuToko('Bonus Item')}}</th>
+                        <th>{{ Translate_menuPlayers('Status')}}</th>
+                        <th>{{ TranslateMenuToko('Date Request')}}</th>
+                        <th>{{ TranslateMenuToko('Date approve and Decline')}}</th>
                     </tr>
                 </thead>
                 <tbody>

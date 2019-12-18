@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">Store</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">Report Store</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Report store')}}</a></li>
 @endsection
 
 
@@ -35,9 +35,9 @@
                 </div>
                 <div class="col">
                     <select name="choosedate" id="" class="form-control">
-                        <option value="">Choose Type Date</option>
-                        <option value="approvedecline">Date Aprove and Decline</option>
-                        <option value="request">Date Request</option>
+                        <option value="">{{ TranslateMenuToko('Choose type date')}}</option>
+                        <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
+                        <option value="request">{{ TranslateMenuToko('Date Request')}}</option>
                     </select>
                 </div>
                 <div class="col">
@@ -61,7 +61,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>Report Store</h2>
+            <h2>{{ TranslateMenuToko('Report store')}}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -82,16 +82,16 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>ID Player</th>
-                        <th>Username</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Description</th>
-                        <th>Price</th>
+                        <th>{{ Translate_menuPlayers('Player ID')}}</th>
+                        <th>{{ Translate_menuPlayers('Username')}}</th>
+                        <th>{{ translate_menu('Item')}}</th>
+                        <th>{{ Translate_menuTransaction('Quantity')}}</th>
+                        <th>{{ translate_MenuContentAdmin('Description')}}</th>
+                        <th>{{ translate_menuTransaction('Price')}}</th>
                         {{-- <th>Bonus Item</th> --}}
-                        <th>Status</th>
-                        <th>Date Request</th>
-                        <th>Date Decline or Accept</th>
+                        <th>{{ Translate_menuPlayers('Status')}}</th>
+                        <th>{{ TranslateMenuToko('Date Request')}}</th>
+                        <th>{{ TranslateMenuToko('Date approve and Decline')}}</th>
                     </tr>
                 </thead>
                 <tbody>

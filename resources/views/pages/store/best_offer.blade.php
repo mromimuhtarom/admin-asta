@@ -26,7 +26,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i> Best Offers</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuToko('Best Offer')}}</strong></h2>				
     </div>
   </header>
 
@@ -61,15 +61,15 @@
                 @if ($menu)
                   <th class="th-sm"></th>
                 @endif
-                <th class="th-sm">Image</th>
-                <th class="th-sm">Title</th>
-                <th class="th-sm">Rate</th>
-                <th class="th-sm">Category</th>
-                <th class="th-sm">Price Cash</th>
-                <th class="th-sm">As long</th>
-                <th class="th-sm">Pay Transaction</th>
+                <th class="th-sm">{{ TranslateMenuToko('Image')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Rate')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Category')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Price cash')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('As long')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('Pay Transaction')}}</th>
                 @if ($menu)
-                  <th class="th-sm">Action</th>
+                  <th class="th-sm">{{ TranslateMenuToko('Action')}}</th>
                 @endif
               </tr>
             </thead>
@@ -117,7 +117,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Create Best Offers</h4>
+        <h4 class="modal-title" id="myModalLabel">{{ TranslateMenuToko('Create best offer')}}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
           ×
         </button>
@@ -140,41 +140,41 @@
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option selected>As Long</option>
-              <option value="1">1 Day</option>
-              <option value="2">2 Day</option>
-              <option value="3">3 Day</option>
-              <option value="4">4 Day</option>
-              <option value="5">5 Day</option>
-              <option value="6">6 Day</option>
-              <option value="7">7 Day</option>
+              <option selected>{{ TranslateMenuToko('As long')}}</option>
+              <option value="1">1 {{ TranslateMenuToko('Day')}}</option>
+              <option value="2">2 {{ TranslateMenuToko('Day')}}</option>
+              <option value="3">3 {{ TranslateMenuToko('Day')}}</option>
+              <option value="4">4 {{ TranslateMenuToko('Day')}}</option>
+              <option value="5">5 {{ TranslateMenuToko('Day')}}</option>
+              <option value="6">6 {{ TranslateMenuToko('Day')}}</option>
+              <option value="7">7 {{ TranslateMenuToko('Day')}}</option>
             </select>
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option selected>Select Category</option>
-              <option value="gold">Gold</option>
-              <option value="chip">Chip</option>
-              <option value="goods">Goods</option>
+              <option selected>{{ TranslateMenuGame('Select Category')}}</option>
+              <option value="gold">{{ Translate_menuPlayers('Gold Coins')}}</option>
+              <option value="chip">{{ Translate_menuPlayers('Chip')}}</option>
+              <option value="goods">{{ Translate_menuPlayers('Goods')}}</option>
             </select>
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option selected>Payment Method</option>
-              <option value="viaTf">Bank Transfer</option>
-              <option value="viaIb">Internet Banking</option>
-              <option value="viaCd">Cash Digital</option>
-              <option value="viaToko">Toko</option>
-              <option value="ViaCc">Credit Card</option>
+              <option selected>{{ TranslateMenuToko('Payment method')}}</option>
+              <option value="viaTf">{{ TranslateMenuToko('Bank Transfer')}}</option>
+              <option value="viaIb">{{ TranslateMenuToko('Internet Banking')}}</option>
+              <option value="viaCd">{{ TranslateMenuToko('Cash Digital')}}</option>
+              <option value="viaToko">{{ TranslateMenuToko('Shop')}}</option>
+              <option value="ViaCc">{{ TranslateMenuToko('Credit card')}}</option>
             </select>
           </div>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal">
-            Cancel
+            {{ TranslateMenuGame('Cancel')}}
           </button>
           <button type="submit" class="btn sa-btn-primary">
-            Save
+            {{ TranslateMenuGame('Save')}}
           </button>
         </div>
       </form>
