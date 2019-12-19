@@ -95,7 +95,7 @@
                 <th class="th-sm">Google Key</th>
                 <th class="th-sm">{{ TranslateMenuItem('Status')}}</th>
                 @if($menu && $mainmenu)
-                  <th>Action</th>
+                  <th>{{ TranslateMenuToko('Action')}}</th>
                 @endif
               </tr>
             </thead>
@@ -190,7 +190,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Buat baru {{ translate_menu('Item_Store_Reseller')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new')}} {{ translate_menu('Item_Store_Reseller')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>

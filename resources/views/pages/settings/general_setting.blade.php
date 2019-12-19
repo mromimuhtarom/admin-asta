@@ -56,10 +56,10 @@
                     <td>{{ TranslateGeneralSettings('Point expired') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span> (hari)</span>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span>({{ TranslateGeneralSettings('days')}})</span>
                     </td>
                     @else
-                    <td>{{ $getPointExpired->value }} (Day)</td>
+                    <td>{{ $getPointExpired->value }} ({{ TranslateGeneralSettings('days')}})</td>
                     @endif
                   </tr>
                   <tr>

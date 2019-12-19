@@ -43,7 +43,7 @@
           <div class="input-group">
             @if($menu && $mainmenu)
             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-              <i class="fa fa-plus"></i>Buat {{ translate_menu('Reseller')}} baru
+              <i class="fa fa-plus"></i>{{ TranslateReseller('Create new reseller')}}
             </button>
             @endif
           </div>
@@ -61,7 +61,7 @@
           <thead>
             <tr>
               @if($menu && $mainmenu)
-              <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th>
+              <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('Select All')}}</th>
               @endif
               <th class="th-sm">ID</th>
               <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
@@ -88,7 +88,7 @@
                 <td><a href="#" class="usertext" data-name="id" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->id }}</a></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->name }}</a></td>
                 <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rk->id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ $rk->gold }}</a></td>
-                <td><a href="#" class="typeday" data-name="type" data-pk="{{ $rk->id }}" data-type="select" data-url="{{ route('ResellerRank-update') }}">{{ strTransactionType($rk->type) }}</a></td>
+                <td><a href="#" class="typeday" data-name="type" data-pk="{{ $rk->id }}" data-type="select" data-url="{{ route('ResellerRank-update') }}">{{ TranslateReseller(strTransactionType($rk->type)) }}</a></td>
                 <td><a href="#" class="usertext" data-name="bonus" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->bonus }}</a></td>
                 <td>
                     <a href="#" style="color:red;" class="delete{{ $rk->id }}" 

@@ -86,7 +86,7 @@
                 <thead>			                
                     <tr>
                         <th>{{ translate_menuTransaction('Date')}}</th>
-                        <th>Koin</th>
+                        <th>{{ Translate_menuPlayers('Gold Coins')}}</th>
                     </tr>
                 </thead>
                 <tbody>

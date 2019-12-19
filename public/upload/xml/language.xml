@@ -1,0 +1,897 @@
+<?xml version="1.0"?>
+<ID_id>
+
+    <!-- Scene Login -->
+    <!-- Textbox -->
+    <L_EMAIL val="Email"/>
+    <L_PASSWORD val="Kata Sandi"/>
+    <L_USERNAME val="Nama Pengguna"/>
+    <L_PASSWORD_CONFIRM val="Konfirmasi Kata Sandi"/>
+    <L_MEN val="Pria"/>
+    <L_WOMAN val="Wanita"/>
+    <!-- End Textbox -->
+
+    <!-- button -->
+    <L_LOGIN val="MASUK"/>
+    <L_BACK val="Kembali"/>
+    <L_CREATE_ACCOUNT val="Buat Akun"/>
+    <L_FORGOT_PASSWORD val="LUPA KATA SANDI ?"/>
+    <L_RESET val="Atur Ulang"/>
+    <L_EXIT val="Keluar"/>
+    <L_CANCEL val="Batal"/>
+    <!-- end button -->
+
+    <!-- notif -->
+    <L_ENTER_EMAIL_FOR_RESET_PASSWORD val="Masukkan email untuk mengatur ulang password"/>
+    <L_NOTIFICATION_LOGIN_FAILED val="* Email atau kata sandi salah"/>
+    <L_EXIT_GAME val="Apakah anda yakin ingin keluar dari game"/>
+    <L_USERNAME_VALIDATION_REGISTER val="Harus terdiri 4 - 5 karakter"/>
+    <L_USERNAME_CHARACTER_SPECIAL val="Tidak boleh menggunakan karakter spesial"/>
+    <L_USERNAME_EMPTY val="Username tidak boleh kosong"/>
+    <L_EMAIL_USED val="Email sudah digunakan"/>
+    <L_EMAIL_VALIDATION_REGISTER val="Format tidak sesuai"/>
+    <L_EMAIL_EMPTY val="Emil tidak boleh kosong"/>
+    <L_PASSWORD_MIN_CHARACTER val="Minimal 6 karakter"/>
+    <L_PASSWORD_EMPTY val="Password tidak boleh kosong"/>
+    <L_PASSWORD_WEAK val="Password terlalu lemah"/>
+    <L_CONFIRM_PASSWORD val="Konfirmasi kata sandi harus sama dengan kata sandi"/>
+    <!-- end notif -->
+
+
+    <!-- End Scene Login -->
+
+
+
+
+
+    <!-- ======/////======= -->
+
+
+
+
+
+    <!-- Scene WelcomeScene -->
+
+    <!-- notif -->
+    <L_LOADING val="Menunggu ..."/>
+    <L_DOWNLOADING_ASSET val="Mengunduh Asset "/>
+    <!-- end notif -->
+
+    <!-- End Scene WelcomeScene-->
+
+
+
+
+
+    <!-- ======/////======= -->
+
+
+
+
+
+    <!-- Scene ShopScene -->
+
+    <!-- Button -->
+    <L_GOLD val="Koin"/>
+    <L_CHIP val="chip"/>
+    <L_GOODS val="Barang"/>
+    <L_IDR val="IDR"/>
+    <L_PROMO val="Promo"/>
+    <!-- End Button -->
+
+    <!-- sentences -->
+    <L_PAYMENT val="PEMBAYARAN"/>
+    <L_250_GOLD val="250 Koin"/>
+    <L_150_POINT val="150 Poin"/>
+    <!-- end sentences -->
+
+    <!-- Notif -->
+    <L_NO_TRANSACTION_RECORD_YET val="Belum ada catatan transaksi"/>
+    <!-- End Notif -->
+
+    <!-- End Scene ShopScene -->
+
+
+
+
+
+    <!-- ======/////======= -->
+
+
+
+
+
+    <!-- Scene Setting -->
+
+    <!-- Textbox -->
+    <!-- End Textbox -->
+
+    <!-- Button -->
+    <L_OPSI val="Opsi"/>
+    <L_NOTIFICATION val="Notifikasi"/>
+    <L_INFO val="Info"/>
+    <L_CS_TERM val="CS dan Terms"/>
+    <L_ON val="HIDUP"/>
+    <L_OFF val="MATI"/>
+    <L_ASTA_POKER val="Asta Poker"/>
+    <L_ASTA_BIG_TWO val="Asta Big 2"/>
+    <L_ASTA_DOMINO_QQ val="Asta Domino QQ"/>
+    <L_ASTA_DOMINO_SUSUN val="Asta Domino Susun"/>
+    <L_CONTACT_US val="Hubungi Kami"/>
+    <L_TERM_OF_SERVICE val="Syarat dan Ketentuan"/>
+    <L_CRITICS_AND_SUGGEST val="Kritik dan Saran"/>
+    <L_CHANGE_ACCOUNT val="Ganti Akun"/>
+    <!-- End Button -->
+
+    <!-- Sentences -->
+    <L_INDONESIA val="Indonesia"/>
+    <L_INGGRIS val="Inggris"/>
+    <L_SOUND_FX val="Suara FX"/>
+    <L_MUSIC val="Musik"/>
+    <L_VIBRATION val="Getar"/>
+    <L_AUTO_PLAY val="Main Otomatis"/>
+    <L_CHAT_SOUND val="Suara Obrolan"/>
+    <L_LANGUAGE val="Bahasa"/>
+    <L_MESSAGE_NOTIFICATION val="Notifikasi Pesan"/>
+    <L_DAILY_GIFT val="Hadiah Harian"/>
+    <L_NEW_FRIEND val="Teman Baru"/>
+    <L_REQUEST_PLAY val="Ajakan Bermain"/>
+    <L_FRIEND_MESSAGE val="Pesan Teman"/>
+    <L_NEWS_OR_EVENT val="Berita / acara"/>
+    <!-- End Sentences -->
+
+    <!-- notif -->
+    <L_ARE_YOU_SURE_WANT_TO_EXIT val="Apakah anda yakin ingin keluar dari "/>
+
+    <!-- End notif -->
+
+    <!-- End Scene Setting -->
+
+
+
+
+
+    <!-- ======/////======= -->
+
+
+
+
+
+    <!-- Scene FriendScene -->
+
+    <!-- Textbox -->
+    <L_USERNAME_ID val="Nama Pengguna / ID"/>
+    <!-- End Textbox -->
+
+    <!-- Button -->
+    <L_FRIEND val="Teman"/>
+    <L_REQUEST val="Permintaan"/>
+    <L_LOOKING_FRIEND val="Cari Teman"/>
+    <L_INVITE_FRIEND val="Ajak Teman"/>
+    <!-- End Button -->
+
+    <!-- notif -->
+    <L_NO_LIST_FRIEND val="Kamu belum memiliki teman. \n Berteman sebanyak yang kamu bisa, \n dan nikmati bermain bersama teman temanmu.."/>
+    <L_NO_REQUEST_FRIEND val="Tidak ada permintaan pertemanan dari player lain"/>
+    <!-- End Notif -->
+
+    <!-- Sentences -->
+    <L_OFFLINE val="Offline"/>
+    <L_ONLINE val="Online"/>
+    <!-- End Sentences -->
+    <L_Request_Friend val="Permintaan Teman"/>
+    <!-- End Scene FriendScene -->
+
+
+
+
+
+    <!-- ======/////======= -->
+
+
+
+
+
+    <!-- Scene ProfileScene -->
+
+    <!-- Button -->
+    <L_STATISTIK val="Statistik"/>
+    <L_EXPERIENCE val="Pengalaman"/>
+    <L_ACHIVEMENT val="Pencapaian"/>
+    <L_TROPHY val="Tropi"/>
+    <!-- End Button -->
+
+    <!-- Sentences -->
+    <L_VICTORY val="Kemenangan"/>
+    <L_BIG_WIN val="Menang Besar"/>
+    <L_BEGINNER val="Pemula"/>
+    <L_AMATEUR val="Amatir"/>
+    <L_EXPERIENCED val="Berpengalaman"/>
+    <L_PROFESSIONAL val="Ahli"/>
+    <L_SULTAN val="Sultan"/>
+    <!-- End Sentences -->
+
+    <!-- End Scene ProfileScene -->
+
+
+
+
+
+    <!-- ======/////======= -->
+
+
+
+
+
+    <!-- Scene Lobby Scene -->
+
+    <!-- button -->
+    <L_PLAY_NOW val="MAIN SEKARANG"/>
+    <L_ENTER_LOBBY val="MASUK LOBI"/>
+    <L_CHOOSE_TABLE val="PILIH MEJA"/>
+    <L_LOOKING_TABLE val="CARI MEJA"/>
+    <L_SHOP val="Toko"/>
+    <L_LOBBY val="Lobby"/>
+    <!-- End Button -->
+
+    <!-- End Scene Lobby Scene -->
+
+
+
+
+
+    <!-- ======/////======= -->
+
+
+
+
+
+    <!-- Scene SelectTable -->
+
+    <!-- Button -->
+    <L_NOVICE val="PEMULA"/>
+    <L_INTERMEDIATE val="MENENGAH"/>
+    <L_PRO val="AHLI"/>
+    <L_PLAY val="Main"/>
+    <L_NORMAL val="Normal"/>
+    <L_FAST val="Cepat"/>
+    <L_AVAILABLE val="Tersedia"/>
+    <L_ALL_TABLE val="Semua"/>
+    <!-- End Button -->
+
+    <!-- Sentences -->
+    <L_TABLE_NAME val="Nama Meja"/>
+    <L_PLAYER val="Pemain"/>
+    <L_BET_SELECT_TABLE val="Taruhan"/>
+    <L_SPEED val="Waktu"/>
+    <L_MINIMUM val="Min"/>
+    <L_MAXIMUM val="Maks"/>
+    <L_BUY_IN val="BELI"/>
+    <!-- End Sentences -->
+
+    <!-- Notif -->
+    <L_CHIP_NOT_ENOUGH_IN_TABLE val="Chip Anda Tidak Cukup Untuk Bermain di Table Ini"/>
+    <!-- End Notif -->
+
+    <!-- End Scene SelectTable -->
+
+
+
+
+
+
+
+
+    <!-- Inside game -->
+    <!-- button -->
+    <L_SAVE val="Simpan"/>
+    <L_FOLD val="TUTUP"/>
+    <L_CHECK val="CEK"/>
+    <L_BACK_TO_LOBBY val="Keluar ke Lobby"/>
+    <L_STAND_UP val="Berdiri"/>
+    <L_CHOOSE_NEW_TABLE val="Pilih Meja Baru"/>
+    <L_CARD_MODEL val="Model Kartu"/>
+    <L_SETTING val="Pengaturan"/>
+    <L_CHAT val="Pesan"/>
+    <L_GAME_NOTE val="Catatan Game"/>
+    <L_JOIN val="Bergabung"/>
+    <L_CALL val="IKUT"/>
+    <L_BET val="TARUH"/>
+    <L_CLEAR val="Hapus"/>
+    <L_HINT val="Petunjuk"/>
+    <L_PASS val="LEWAT"/>
+    <L_BUY_JACKPOT val="Beli Jackpot"/>
+    <L_WAIT val="Menunggu"/>
+    <L_EMOTICON val="Emotikon"/>
+    <L_CANCEL_EXIT val="Batal Keluar"/>
+    <L_CANCEL_STAND val="Batal Berdiri"/>
+    <L_CANCEL_TABLE val="Batal ke Meja"/>
+    <!-- end button -->
+
+
+    <!-- notif -->
+    <L_ARE_YOU_SURE_WANT_TO_ENTER_THIS_TABLE val="Apakah anda ingin masuk ke table ini ?"/>
+    <L_LOAD_ASSET_BUNDLE_SUCCESS val="Muat Asset Bundle Sukses"/>
+    <L_DOWNLOAD_OR_CACHE_SUCCESS val="Unduh atau cache berhasil"/>
+    <L_NOT_ENOUGH_CHIP val="Chip anda tidak mencukupi"/>
+    <L_GAME_MSG_ALLFOLD val="Semua pemain TUTUP"/>
+    <L_NO_EMOTICON val="Tidak ada emotikon yang tersedia"/>
+    <L_NO_COMBINATION val="Tidak ada Kombinasi"/>
+    <L_NO_CARD_FOR_PLAY val="Tidak ada kartu yang dimainkan, akan otomatis lewat" />
+    <!-- end notif -->
+
+    <!-- sentence -->
+    <L_DAILY_GIFT_DESCRIPTION val="Dapat kan lebih banyak chip dengan Login tiap hari"/>
+    <L_RAISE val="NAIK"/>
+    <L_NEW_ROUND val="Ronde Baru"/>
+    <L_TURN val="Giliran"/>
+    <L_PLAYER_WIN val="Menang!"/>
+    <L_PLAYER_BET val="Bet:"/>
+    <L_PLAYER_COST val="Biaya:"/>
+    <L_SIX_DEVIL val="SIX DEVIL"/>
+    <L_SIX_DEVIL_DESCRIPTION val="Semua kartu di meja berjumlah 6. \nKartu spesial yang terbesar."/>
+    <L_TWIN_CARD val="TWIN CARD"/>
+    <L_TWIN_CARD_DESCRIPTION val="Nilai kartu yang di atas sama \ndengan yang di bawah semuanya."/>
+    <L_SMALL_CARD val="SMALL CARD"/>
+    <L_SMALL_CARD_DESCRIPTION val="Nilai total kartu semuanya menjadi \nkurang dari atau sama dengan 8."/>
+    <L_BIG_CARD val="BIG CARD"/>
+    <L_BIG_CARD_DESCRIPTION val="Nilai total kartu semuanya menjadi 39 atau lebih."/>
+    <L_DOUBLE_CARD val="DOUBLE CARD"/>
+    <L_DOUBLE_CARD_DESCRIPTION val="Nilai total kartu disebelah kiri dan kanan sama sama menjadi 9"/>
+    <L_KARTU_BIASA val="KARTU BIASA"/>
+    <L_KARTU_BIASA_DESCRIPTION val="Kartu yang bukan kartu spesial"/>
+    <L_SINGLE_X1 val="Single x1"/>
+    <L_SINGLE_X1_DESCRIPTION val="Single: Apabila kartu Dead-End, maka perhitungan pembayaran hanya 1x lipat"/>
+    <L_DOUBLE_X2 val="Double x2"/>
+    <L_DOUBLE_X2_DESCRIPTION val="Double: Pemenang yang memiliki kartu biasa dan dapat menghubungkan pada sisi kepala atau ekor, \n maka akan mendapatkan bayaran 2x lipat"/>
+    <L_TRIPLE_X3 val="Triple x3"/>
+    <L_TRIPLE_X3_DESCRIPTION val="Triple: Pemenang yang memiliki kartu balak dan dapat menghubungkan pada sisi kepala atau ekor, \n maka akan mendapatkan bayaran 3x lipat"/>
+    <L_QUARTET_X4 val="Quartet x4"/>
+    <L_QUARTET_X4_DESCRIPTION val="Quartet: Pemain yang memiliki kartu biasa dan dapat menghubungkan pada kedua sisi kartu, maka \n akan mendapatkan bayaran 4x lipat"/>
+    <L_QUINTET_X5 val="Quintet x5"/>
+    <L_QUINTET_X5_DESCRIPTION val="Quintet: Pemain yang memiliki kartu balak dan dapat menghubungkan pada kedua sisi kartu, maka akan \n mendapatkan bayaran 5x lipat"/>
+    <L_READY val="Bersiap"/>
+    <L_REPEATED_GAME val="Ulang Game"/>
+    <L_JOIN_GAME val="Bergabung Ke Game"/>
+    <L_SHOW_CARD val="Tunjukkan Kartu"/>
+    <L_RESULT_GAME val="Hasil Game"/>
+    <L_TURN_COMPLETE val="Giliran Selesai"/>
+    <L_NEW_START_ROUND val="Mulai Ronde Baru(Round ID:"/>
+    <L_CHANGE_TURN val="Ganti Giliran"/>
+    <L_PLAY_CARD val="Memasang Kartu"/>
+    <L_START_TURN val="Memulai Giliran"/>
+    <L_WIN_PROFIT val="menang, untung:"/>
+    <L_RESULT val="HASIL"/>
+    <L_ROYAL_FLUSH val="ROYAL FLUSH"/>
+    <L_STRAIGHT_FLUSH val="STRAIGHT FLUSH"/>
+    <L_4_OF_A_KIND val="4 OF A KIND"/>
+    <L_FULL_HOUSE val="FULL HOUSE"/>
+    <L_FLUSH val="FLUSH"/>
+    <L_STRAIGHT val="STRAIGHT"/>
+    <L_3_OF_A_KIND val="3 OF KIND"/>
+    <L_PAIR val="PAIR"/>
+    <L_2_PAIR val="2 PAIR"/>
+    <L_1_PAIRS val="1 PAIR"/>
+    <L_HIGH_CARD val="HIGH CARD"/>
+    <L_DRAGON_STRAIGHT val="DRAGON STRAIGHT"/>
+    <L_DRAGON_STRAIGHT_FLUSH val="DRAGON STRAIGHT FLUSH"/>
+    <L_WAIT_FOR_NEW_ROUND val="Tunggu Ronde Berikutnya"/>
+    <L_GAME_PLAYER_GOES_FOLD val="game aksi tutup"/>
+    <L_GAME_PLAYER_GOES_CALL val="game aksi ikut"/>
+    <L_GAME_PLAYER_GOES_BET val="game aksi bertaruh"/>
+    <L_GAME_PLAYER_GOES_ALLIN val="game aksi semua"/>
+    <L_GAME_PLAYER_GOES_RAISE val="game aksi tambah"/>
+    <L_GAME_PLAYER_GOES_CHECK val="game aksi cek"/>
+    <L_AUTOMATICLY_JOIN_GAME_LOG val="Anda akan otomatis bergabung ketika pemainan anda selesai"/>
+    <L_FOLD_LOG val="Tutup"/>
+    <L_TOURNAMENT val="Turnamen"/>
+    <L_SEASON val="Musim"/>
+    <L_RANK val="Peringkat"/>
+    <L_WIN_TOTAL val="Total Menang"/>
+    <L_PLAY_TOTAL val="Total Permainan"/>
+    <L_OTOMATIC_BUY val="Ketika chip tidak cukup, otomatis membeli"/>
+    <L_YOUR_CHIP val="Chip Kamu"/>
+    <L_NO_GIFT_FOUND val="Tidak ada hadiah yang di berikan"/>
+    <L_INVITATION_HAS_BEEN_SENT val="Undangan anda telah terkirim"/>
+    <L_INVITATION_FAILED val="Undangan anda tidak terkirim"/>
+    <L_INVITED_BY_SOMEONE val="Hi{0}, kamu di undang {1} untuk bermain di game {2}. Apakah kamu mau?"/>
+    <L_RECONNECT val="Menyambung Ulang"/>
+    <L_PASS_NOTIFICATION val="Lewat"/>
+    <L_WINNING val="Kemenangan"/>
+    <L_PASS_GIFT val="Hadiah Lewat"/>
+    <!-- end sentence -->
+
+
+    <!-- Dropdown -->
+    <L_ALL val="Semua"/>
+    <L_ALL_SETTING_PLAYER_DMQ val="Semua 4-7"/>
+    <L_ALL_SETTING_PLAYER_TPK val="Semua 5-9"/>
+    <!-- end Dropdown -->
+    <!-- End Inside game -->
+
+    <!-- ======/////======= -->
+	
+	
+	<!-- ADMIN -->	
+	<!-- SIDEBAR MENU -->
+	<L_Dashboard val="Dasbor"/>
+	<L_Admin val = "Admin" />
+	<L_User_Admin val = "Pengguna Admin"/>
+	<L_Role_Admin val = "Peran Admin"/>
+	<L_Log_Admin val = "Catatan Admin"/>
+	<L_Active_Admin val = "Admin aktif"/>
+	<L_Report_Admin val = "Laporan Admin"/>
+	<L_Transaction val = "Transaksi"/>
+	<L_Banking_Transactions val = "Transaksi Bank"/>
+	<L_User_Bank_Transaction val = "Transaksi Bank Pengguna"/>
+	<L_Reward_Transaction val = "Transaksi hadiah"/>
+    <L_AddTransaction val = "Tambah transaksi"/>
+	<L_Players val = "Pemain"/>
+	<L_Active_Players val = "Pemain Aktif"/>
+	<L_Report_Players val = "Laporan Pemain"/>
+	<L_High_Roller val = "High Roller"/>
+	<L_Registered_Players val = "Pemain terdaftar"/>
+	<L_Guest val = "Tamu"/>
+	<L_Bots val = "Bot"/>
+	<L_Play_Report val = "Laporan Permainan"/>
+	<L_Chip_Players val = "Chip pemain"/>
+	<L_Gold_Players val = "Koin Pemain"/>
+	<L_Point_Players val = "Poin Pemain"/>
+	<L_Register_Player_ID val = "ID pemain terdaftar"/>
+	<L_Log_Players val = "Catatan Pemain"/>
+	<L_Transaction_Players val = "Transaksi Pemain"/>
+	<L_Players_level val = "level pemain"/>
+    <L_Slide_Banner val = "Slide Spanduk"/>
+	<L_Item	val = "Barang"/>
+	<L_Table_Gift val = "Table Gift"/>
+	<L_Report_Gift val = "Laporan Gift"/>
+	<L_Emoticon val = "Emoticon"/>
+	<L_Game val = "Gim"/>
+	<L_AstaPoker val = "Asta Poker"/>
+	<L_Table_Asta_Poker val ="Meja Asta Poker"/>
+	<L_Category_Asta_Poker val ="Kategori Asta Poker"/>
+	<L_Season_Asta_Poker val = "Musim Asta Poker"/>
+	<L_Season_Reward_Asta_Poker val = "Hadiah Musim Asta Poker"/>
+ 	<L_Tournament_Asta_Poker val = "Turnamen Asta Poker"/>
+	<L_Jackpot_Paytable_Asta_Poker val = "Jackpot Paytable Asta Poker"/>
+	<L_Big_Two val = "Big 2"/>
+	<L_Table_Big_Two val = "Meja Big 2"/>
+	<L_Category_Big_Two val = "Kategori Big 2"/>
+	<L_Season_Big_Two val = "Musim Big 2"/>
+	<L_Season_Reward_Big_Two val = "Hadiah Musim Big 2"/>
+	<L_Tournament_Big_Two val = "Turnamen Big 2"/>
+	<L_Jackpot_Paytable_Big_Two val = "Jackpot Paytable Big 2"/>
+	<L_Domino_Susun val = "Domino susun"/>
+	<L_Table_Domino_Susun val = "Meja Domino susun"/>
+	<L_Category_Domino_Susun val = "Kategori Domino susun"/>
+	<L_Season_Domino_Susun val = "Musim Domino susun"/>
+	<L_Season_Reward_Domino_Susun val = "Hadiah Musim Domino Susun"/>
+	<L_Tournament_Domino_Susun val = "Turnamen Domino susun"/>
+	<L_Jackpot_Paytable_Domino_Susun val = "Jackpot Paytable Domino Susun"/>
+	<L_DominoQQ val = "Domino QQ"/>
+	<L_Table_Domino_QQ val = "Meja Domino QQ"/>
+	<L_Category_Domino_QQ val = "Kategori Domino QQ"/>
+	<L_Season_Domino_QQ val = "Domino QQ"/>
+	<L_Season_Reward_Domino_QQ val = "Hadiah Musim Domino QQ"/>
+	<L_Tournament_Domino_QQ val = "Turnamen_Domino_QQ"/>
+	<L_Jackpot_Paytable_Domino_QQ val = "Jackpot Paytable Domino QQ"/>
+	<L_Game_Setting val = "Pengaturan permainan"/>
+	<L_Store val = "Toko"/>
+	<L_Best_Offer val = "Penawaran terbaik"/>
+	<L_Chip_Store val = "Toko Chip"/>
+	<L_Gold_Store val = "Toko Koin"/>
+	<L_Goods_Store val = "Toko barang"/>
+	<L_Payment_Store val = "Toko Pembayaran"/>
+	<L_Report_Store val = "Laporan Toko"/>
+	<L_Notification val = "Pemberitahuan"/>
+	<L_Push_Notification val = "Pemberitahuan push"/>
+	<L_Email_Notification val = "Pemberitahuan email"/>
+	<L_FeedBack val = "Umpan balik"/>
+	<L_Report_Abuse_Player val = "Laporan penyalahgunaan pemain"/>
+	<L_Abuse_Transaction_Report val = "Laporan penyalahgunaan transaksi"/>
+	<L_Feedback_Game val = "Umpan balik permainan"/>
+	<L_Settings val ="Pengaturan"/>
+	<L_General_Setting val = "Pengaturan Umum"/>
+    <L_Reseller val = "Agen"/>
+    <L_List_Reseller val = "daftar agen"/>
+    <L_Reseller_Transaction val = "Transaksi agen"/>
+    <L_Request_Transaction val = "Transaksi permintaan"/>>
+    <L_Report_Transaction val = "Laporan Transaksi"/>
+    <L_Balance_Reseller val = "Saldo Agen"/>
+    <L_Item_Store_Reseller val = "Toko barang agen"/>
+	<L_Reseller_Rank val = "Peringkat Agen"/>
+	<L_Register_Reseller val = "Pendaftaran Agen"/>
+	<L_Version_Asset_Apk val = "Versi Aset Apk"/>
+	<L_logout val = "Keluar"/>
+
+
+    
+    <!-- MENU ADMIN -->
+    <L_Admin val = "Admin"/>
+    <L_UserAdmin val = "Pengguna Admin"/>
+    <L_RoleAdmin val = "Peran Admin"/>
+    <L_LogAdmin val = "Catatan Admin"/>
+    <L_ActiveAdmin val = "Admin Aktif"/>
+    <L_ReportAdmin val = "Laporan Admin"/>
+    <L_CreateUserAdmin val = "Buat Admin Baru"/>
+    <L_CreateRoleAdmin val = "Buat peran admin"/>
+    <L_ChooseAction val = "Pilih aksi"/>
+    <L_CreateAdmin val = "Buat Admin"/>
+    <L_DeleteAdmin val = "Hapus Admin"/>
+    <L_EditAdmin val = "Edit Admin"/>
+    <L_DeclineAdmin val = "Tolak Admin"/>
+    <L_ApproveAdmin val = "Terima Admin"/>
+    <L_ChangePasswordAdmin val = "Ubah Katasandi Admin"/>
+    <L_ChooseRole val = "Pilih Role"/>
+    <L_ChooseLogType val = "Pilih tipe Log"/>
+    <L_PlayersOnline val = "Pemain Online"/>
+    <L_Save val = "Simpan"/>
+    <L_Search val = "Cari"/>
+    <L_Cancel val = "Batal"/>
+    <L_Change_title_to_update_and_save_instantly val = "Ubah judul untuk memperbarui dan menyimpan secara instan!"/>
+    <L_CreateNewUser val = "Buat pengguna baru"/>
+    <L_CreateNewRole val = "Buat peran baru"/>
+    <L_SelectAll val = "Pilih semua"/>
+    <L_AdminID val = "ID Admin"/>
+    <L_AdminReport val = "Laporan Admin"/>
+    <L_PlayerID val = "ID pemain"/>
+    <L_Username val = "Nama pengguna"/>
+    <L_Status val = "Status"/>
+    <L_RoleName val = "Nama peran"/>
+    <L_FullName val = "Nama lengkap"/>
+    <L_RoleType val = "Tipe peran"/>
+    <L_Date val = "Tanggal"/>
+    <L_DateLogin val = "Tanggal Login"/>
+    <L_TimeStamp val = "Waktu"/>
+    <L_IP val = "Alamat IP"/>
+    <L_Description val = "Deskripsi"/>
+    <L_Action val = "Aksi"/>
+    <L_ResetPassword val = "Atur ulang kata sandi"/>
+    <L_DeleteData val = "Hapus data"/>
+    <L_ViewEdit val = "Tampil dan ubah"/>
+    <L_AreYouSureWantToDeleteIt val = "Apakah anda yakin ingin menghapusnya?"/>
+    <L_Yes val = "Ya"/>
+    <L_No val = "Tidak"/>
+    <L_DeleteAllSelectedData val = "Hapus semua data yang dipilih"/>
+    <L_Are_you_sure_want_to_delete_all_selected val ="Apakah anda yakin ingin menghapus semua data yang dipilih?"/>
+
+
+    <!-- MENU TRANSACTIONS -->
+    <L_Transaction val = "Transaksi"/>
+    <L_RewardTransaction val = "Reward Transaction"/>
+    <L_BankingTransaction val = "Transaksi Banking"/>
+    <L_UserBankTransaction val = "Transaksi Bank Pengguna"/>
+
+    <L_ChooseTime val = "Pilih waktu"/>
+    <L_Today val ="Hari ini"/>
+    <L_Week val = "Mingguan"/>
+    <L_Month val = "Bulanan"/>
+    <L_AllTime val ="Sepanjang waktu"/>
+    <L_Timestamp val = "Waktu"/>
+    <L_BankTransaction val = "Transaksi Bank"/>
+    <L_BankManualTransfer val = "Transfer Bank Manual"/>
+    <L_ID_Player val = "ID pemain"/>
+    <L_Item val = "Barang"/>
+    <L_Quantity val = "Kuantitas"/>
+    <L_Price val = "Harga"/>
+    <L_DetailInformation val = "Informasi detail"/>
+    <L_buy val = "membeli"/>
+    <L_using val = "memakai"/>
+    <L_atPrice val = "Pada harga"/>
+    <L_Awarded val = "Awarded"/>
+    <L_Type val = "Tipe"/>
+    <L_Status val = "Status"/>
+    <L_Decline val = "Tolak"/>
+    <L_DeclineTransaction val = "Tolak transaksi"/>
+    <L_ApproveTransaction val = "Terima Transaksi"/>
+    <L_AreYouSureWantToDeclineThisTransaction val = "Anda yakin akan menolak transaksi ini ?"/>
+    <L_AreYouSureWantToApproveThisTransaction  val = "Anda yakin akan menerima transaksi ini ?"/>
+    <L_Approve val = "Terima"/>
+    <L_Pending val = "Tunda"/>
+    <L_StatusPayment val = "Status pembayaran"/>
+    <L_ConfirmRequest val = "Konfirmasi permintaan"/>
+    <L_Username val = "Nama pengguna"/>
+    <L_Date val = "Tanggal"/>
+    <L_Win val = "Menang"/>
+    <L_Lose val = "Kalah"/>
+    <L_TurnOver val = "Turn Over"/>
+    <L_Fee val = "Biaya"/>
+    <L_Yes val = "Ya"/>
+    <L_No val = "No"/>
+    <L_Pending val = "Tunda"/>
+
+
+
+
+    <!-- MENU PLAYERS -->
+    <L_Players val = "Pemain"/>
+    <L_ActivePlayers val = "Pemain aktif"/>
+    <L_ReportPlayers val = "Laporan Pemain"/>
+    <L_PlayReport val = "Laporan bermain"/>
+    <L_PlayersOnline val = "Pemain Online"/>
+    <L_RegisteredPlayer val = "Pemain terdaftar"/>
+    <L_RegisteredPlayerID val = "ID pemain terdaftar"/>
+    <L_LogPlayers val = "Catatan Pemain"/>
+    <L_ChipPlayers val = "Chip Pemain"/>
+    <L_GoldPlayers val = "Koin Pemain"/>
+    <L_PointPlayers val = "Poin Pemain"/>
+    <L_NumberOfIDsToBeAdded val = "Jumlah ID yang akan ditambah"/>
+    <L_Guest val = "Tamu"/>
+    <L_ChooseRegisterType val = "Pilih tipe daftar"/>
+    <L_ChooseGame val = "Pilih game"/>
+    <L_ChooseLogType val = "Pilih Tipe Log"/>
+    <L_ChooseStatus val = "Pilih status"/>
+    <L_ChooseUserType val = "Pilih tipe pengguna"/>
+    <L_ChooseAction val = "Pilih aksi"/>
+    <L_CreatePlayer val = "Buat Pemain"/>
+    <L_DeletePlayer val = "Hapus Pemain"/>
+    <L_EditPlayer val = "Ubah Pemain"/>
+    <L_ChangePasswordPlayer val = "ganti katasandi pemain"/>
+    <L_TotalRecordEntriesIs val = "Total entri catatan adalah"/>
+    <L_CreateUserGuestID val = "Buat ID user tamu"/>
+    <L_BankAccount val = "Akun Bank"/>
+    <L_Country val = "Negara"/>
+    <L_PlayerID val = "ID Pemain"/>
+    <L_GuestID val = "ID Tamu"/>
+    <L_DeviceID val = "ID Perangkat"/>
+    <L_RoundID val = "ID putaran"/>
+    <L_DetailRoundID val = "Detail ID putaran"/>
+    <L_IDPlayerAlready val = "ID pemain yang sudah ada"/>
+    <L_PlayerIDUsed val = "ID Pemain terpakai"/>
+    <L_GuestIDUsedIs val = "ID tamu yang terpakai"/>
+    <L_BotIDUsedIs val = "ID Bot yang terpakai"/>
+    <L_PlayerIDDidntUse val = "ID pemain yang tidak terpakai"/>
+    <L_GuestIDDidntUse val = "ID tamu yang tidak terpakai"/>
+    <L_BotIDDidntUse val = "ID Bot yang tidak terpakai"/>
+    <L_TotalPlayerID val = "Total ID Pemain"/>
+    <L_TotalGuestID val = "Total ID Tamu"/>
+    <L_TotalBotID val = "Total ID Bot"/>
+    <L_Playername val = "Nama pemain"/>
+    <L_Playerlv val = "level pemain"/>
+    <L_Experience val = "Pengalaman"/>
+    <L_PlayerRank val = "Peringkat pemain"/>
+    <L_Level val ="Level"/>
+    <L_Game val = "Gim"/>
+    <L_UserType val = "Tipe pengguna"/>
+    <L_Username val = "Nama pengguna"/>
+    <L_Desc val = "Deskripsi"/>
+    <L_PlayingGame val = "Bermain di"/>
+    <L_Rank val = "Peringkat"/>
+    <L_Table val = "Meja"/>
+    <L_HandCard val = "Hand Card"/>
+    <L_Seat val = "Tempat duduk"/>
+    <L_Sit val = "duduk"/>
+    <L_Bet val = "Taruhan"/>
+    <L_WinLose val = "Menang Kalah"/>
+    <L_Chip val = "Chip"/>
+    <L_Goods val = "Barang"/>
+    <L_Point val = "Poin"/>
+    <L_Action val = "Aksi"/>
+    <L_GoldCoins val = "Koin"/>
+    <L_Card val = "Kartu"/>
+    <L_Domino val = "Domino"/>
+    <L_CardTable val = "Table Kartu"/>
+    <L_DeviceTimer val = "Tanggal"/>
+    <L_Used val = "Terpakai"/>
+    <L_NonUsed val = "Tidak Terpakai"/>
+    <L_From val = "Dari"/>
+    <L_Debit val = "Debit"/>
+    <L_Credit val = "Kredit"/>
+    <L_Total val = "Total"/>
+    <L_PlayingGames val = "Kategori gim"/>
+    <L_TableName val = "Nama table"/>
+    <L_Timestamp val = "Waktu dibuat"/>
+    <L_Status val = "Status"/>
+    <L_DateCreated val = "Waktu dibuat"/>
+    <L_RegisterForm val = "Form pendaftaran"/>
+    <L_IP val = "Alamat IP"/>
+    <L_Player val = "Pemain"/>
+    <L_Guest val = "Tamu"/>
+    <L_Approve val = "Setuju"/>
+    <L_Banned val = "Dilarang"/>
+    <L_Problem val = "Bermasalah"/>
+    <L_Save val = "Simpan"/>
+    <L_Cancel val = "Batal"/>
+    <L_Createlv val = "Buat level pemain"/>
+    <L_CreateRankPlayer val ="buat peringkat pemain"/>
+    <L_Playerlv val = "level pemain"/>
+
+
+
+    <!-- MENU ITEM (BARANG) -->
+
+    <L_Item val ="Barang"/>
+    <L_TableGift val = "Table Gift"/>
+    <L_CreateNewGift val = "Buat gift baru"/>
+    <L_ReportGift val = "Laporan Gift"/>
+    <L_Emoticon val = "Emotikon"/>
+    <L_SelectAll val = "Pilih semua"/>
+    <L_ChooseGame val = "Pilih gim"/>
+    <L_Image val = "Gambar"/>
+    <L_Title val = "Judul"/>
+    <L_Price val = "Harga"/>
+    <L_Category val = "Kategori"/>
+    <L_Status val = "Status"/>
+    <L_MainImage val = "Gambar utama"/>
+    <L_SaveGift val = "Simpan gift"/>
+    <L_Save val = "Simpan"/>
+    <L_Cancel val = "Batal"/>
+    <L_EditGift val = "Edit Gift"/>
+    <L_CreateGiftStore val = "Buat Toko gift"/>
+    <L_DeleteData val = "Hapus Data"/>
+    <L_AreYouSureWantToDeleteIt val = "Apakah anda yakin akan menghapusnya?"/>
+    <L_Yes val= "Ya"/>
+    <L_No val = "Tidak"/>
+    <L_DeleteAllSelectedData val = "Hapus semua data yang dipilih"/>
+    <L_AreUSure val = "Apakah anda yakin akan menghapus semua yang dipilih?"/>
+    <L_Username val = "Nama pengguna"/>
+    <L_ActionGame val = "aksi gim"/>
+    <L_Date val = "Date"/>
+    <L_Description val = "Deskripsi"/>
+    <L_CreateNewEmoticon val = "Buat emotikon baru"/>
+    <L_CreateEmoticon val = "Buat emotikon"/>
+
+
+
+    <!-- MENU GAME -->
+    <!-- ASTA POKER -->
+    <!-- BIG TWO -->
+    <!-- DOMINO SUSUN -->
+    <!-- DOMINO QQ -->
+
+    <L_Table val = "Table"/>
+    <L_TablePlayer val = "Table pemain"/>
+    <L_ChangeTitle val = "Ubah judul untuk memperbarui dan menyimmpan secara instan!"/>
+    <L_CreateNewTable val = "Buat Table baru"/>
+    <L_TableName val = "Nama Table"/>
+    <L_Group val = "grup"/>
+    <L_MaxPlayer val = "Pemain maks"/>
+    <L_SmallBlind val = "Small blind"/>
+    <L_BigBlind val = "Big blind"/>
+    <L_Jackpot val = "Jackpot"/>
+    <L_MinBuy val = "Minimal beli"/>
+    <L_MaxBuy val = "Maksimal beli"/>
+    <L_Timer val = "Timer"/>
+    <L_Action val = "Aksi"/>
+    <L_CreateTable val = "Buat table"/>
+    <L_SelectCategory val = "Pilih Kategori"/>
+    <L_Save val = "Simpan"/>
+    <L_Cancel val = "Batal"/>
+    <L_DeleteData val = "Hapus Data"/>
+    <L_AreUsure val = "Apakah anda yakin ingin menghapusnya?"/>
+    <L_Yes val = "Ya"/>
+    <L_No val = "Tidak"/>
+    <L_Category val = "Kategori"/>
+    <L_AstaPokerTable val = "Asta Poker Table"/>
+    <L_Title val = "Judul"/>
+    <L_CreateCategory val = "Buat kategori"/>
+    <L_AstaBig2Table val = "Table Asta Big 2"/>
+    <L_CreateNewTable val = "Buat table baru"/>
+    <L_TotalBet val = "Total taruhan"/>
+    <L_Stake val = "Stake"/>
+    <L_GameState val = "Status permainan"/>
+    <L_CurrentTurnSeatId val ="Giliran ID kursi saat ini"/>
+    <L_RoomName val = "Nama room"/>
+    <L_Name val = "Nama"/>
+
+
+    <!-- MENU TOKO -->
+    <!--BEST OFFER-->
+    <!-- CHIP STORE-->
+    <!-- GOLD STORE-->
+    <!-- GOODS STORE-->
+    <!-- PAYMENT STORE-->]
+    <!-- REPORT STORE -->
+
+    <L_BESTOFFER val = "Penawaran Terbaik"/>
+    <L_IMAGE val = "Gambar"/>
+    <L_TITLE val = "Judul"/>
+    <L_RATE val = "Rate"/>
+    <L_CATEGORY val = "Kategori"/>
+    <L_PRICECASH val = "Harga cash"/>
+    <L_ASLONG val = "As long"/>
+    <L_PAYTRANSACTION val = "Transaksi pembayaran"/>
+    <L_ACTION val = "Aksi"/>
+    <L_CREATEBEST val = "Buat penawaran terbaik"/>
+    <L_DAY val = "hari"/>
+    <L_PAYMENTMETHOD val = "Metode pembayaran"/>
+    <L_TRANSACTIONTYPE val = "Tipe transaksi"/>
+    <L_BANKTRANSFER val = "Transfer bank"/>
+    <L_INTERNETBANKING val = "Internet Banking"/>
+    <L_CASHDIGITAL val = "Uang digital"/>
+    <L_MANUALTF val ="transfer manual"/>
+    <L_SHOP val = "Toko"/>
+    <L_GOLDCOST val = "harga koin"/>
+    <L_CC val ="Kartu kredit"/>
+    <L_STORE val = "Toko"/>
+    <L_CHIPSTORE val = "Toko chip"/>
+    <L_GOODS val ="Toko barang"/>
+    <L_REPORTSTORE val = "Laporan toko"/>
+    <L_PAYMENTSTORE val = "Toko pembayaran"/>
+    <L_CREATENEWCHIP val = "Buat toko chip baru"/>
+    <L_CREATENEWGOODS val = "Buat toko barang baru"/>
+    <L_CREATENEWPAYMENT val = "Buat toko pembayaran baru"/>
+    <L_ORDER val="No Urut"/>
+    <L_CHIPAWARDED val="Chip yang didapat"/>
+    <L_ACTIVE val = "Aktif"/>
+    <L_MAINIMAGE val = "Gambar utama"/>
+    <L_SAVEIMAGE val = "Simpan gambar"/>
+    <L_EDIT val = "edit"/>
+    <L_CREATENEW val ="Buat Toko koin baru" />
+    <L_GOLDAWARDED val = "Koin yang didapat"/>
+    <L_ITEMTYPE val = "tipe item"/>
+    <L_PAY val = "Transaksi pembayaran"/>
+    <L_PRICEPOINT val = "Price point"/>
+    <L_CHOOSETYPEDATE val = "Pilih tipe tanggal"/>
+    <L_DATEAPPROVE val = "tanggal di setujui dan di tolak"/>
+    <L_DATEREQUEST  val = "Tanggal permintaan"/>
+    
+
+
+
+    <!-- MENU FEEDBACK -->
+    
+    <L_FEEDBACK val = "Umpan balik"/>
+    <L_ABUSETRANS val = "Laporan penyalahgunaan transaksi"/>
+    <L_IMAGEPROOF val = "Bukti gambar"/>
+    <L_RATING val = "Penilaian"/>
+    <L_MESSAGE val = "Pesan"/>
+    <L_ABUSEPLAYER val = "Laporan penyalahgunaan pemain"/>
+    <L_IDSENDER val = "ID pengirim"/>
+    <L_USERSENDER val = "nama pengirim"/>
+    <L_REPORTUSERID val = "ID pengguna yang dilaporkan"/>
+    <L_REPORTUSER val = "Pengguna yang dilaporkan"/>
+    <L_REASON val = "Alasan"/>
+
+
+
+    <!-- MENU SETTING -->
+    <!-- MENU RESELLER -->
+    <!-- MENU VERSION ASSET -->
+    
+    <L_SYSTEMSETT val = "Pengaturan sistem"/>
+    <L_MAINTENANCE val = "Pemeliharaan"/>
+    <L_POINTEXP val = "Masa aktif poin"/>
+    <L_AWARDSIGN val = "Hadiah sign up"/>
+    <L_AWARDSIGNGUEST val = "Hadiah sign up sebagai guest"/>
+    <L_AWARDDAILYCHIPS val = "Hadiah chip harian"/>
+    <L_AWARDDAILYCHIPSGUEST val = "Hadiah chip harian guest"/>
+    <L_AWARDDAILYDAYS val = "Hadiah harian"/>
+    <L_AWARDDAILYMULTIPLY val = "Hadiah berlipat harian"/>
+    <L_BANKSETTINGS val = "Pengaturan Bank"/>
+    <L_INFOSETTINGS val = "Pengaturan info"/>
+    <L_ABOUT val = "Tentang"/>
+    <L_EDITABOUT val = "Ubah tentang"/>
+    <L_LEGALSETTING val = "Pengaturan legal dan setting"/>
+    <L_PRIVACY val = "Ubah privacy dan policy"/>
+    <L_EDITTERM val = "Ubah Term of Service"/>
+    <L_PHONE val = "telefon"/>
+    <L_SALDOGOLD val = "saldo koin"/>
+    <L_RESELLERID val = "ID agen"/>
+    <L_REPORTTRANS val = "Laporan transaksi"/>
+    <L_BONUSITEM val = "bonus item"/>
+    <L_BALANCE val = "Saldo"/>
+    <L_ITEMAWARDED val = "hadiah diberikan"/>
+    <L_CREATERESELLRANK val = "Buat peringkat agen"/>
+    <L_GOLDGROUP val = "grup koin"/>
+    <L_PASSWORD val = "katasandi"/>
+    <L_IDENTITYCARD val = "Kartu identitas"/>
+    <L_DENIED val = "akses ditolak"/>
+    <L_UCANT val = "Anda tidak dapat mengakses halaman ini dengan role anda saat ini"/>
+    <L_NEWASSET val = "Buat asset baru"/>
+    <L_LINK val = "Link"/>
+    <L_VERSION val = "Versi"/>
+    <L_EDITASSET val = "Ubah aset"/>
+    <L_CHOOSEFILE val = "pilih file"/>
+    <L_CREATENEWRES val = "Buat agen baru"/>
+    <L_SELECTALL val = "Pilih semua"/>
+    <L_WEEKLY val = "Mingguan"/>
+    <L_MONTHLY val = "Bulanan"/>
+    <L_CREATENEW val = "Buat baru"/>
+    <L_DAYS val = "hari"/>
+
+
+
+
+
+</ID_id>

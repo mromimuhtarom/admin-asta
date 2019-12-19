@@ -79,7 +79,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ translate_MenuContentAdmin('Player ID') }}</th>
+                        <th>{{ translate_MenuContentAdmin('Admin ID') }}</th>
                         <th>{{ translate_MenuContentAdmin('Username') }}</th>
                         <th>{{ translate_MenuContentAdmin('Status') }}</th>
                         <th>{{ translate_MenuContentAdmin('Time Stamp') }}</th>

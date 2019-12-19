@@ -119,7 +119,7 @@
                                 <input type="hidden" name="pk" value="{{ $gf->id }}">
                                 <input type="file" name="file" id="media-input-wtr" class="upload{{ $gf->id }}" accept="image/*">
                                 <i class="fa fa-edit media-icon-wtr"></i>
-                                <p class="nav-name">{{ TranslateMenuItem('Main Image') }}</p>
+                                <p class="nav-name">Main image</p>
                                 
                               </span>
                               <span class="media-overlay-wtr1 med-ovlay{{ $gf->id }}">

@@ -42,12 +42,12 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;Select all</th></th>
+                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('Select All')}}</th></th>
                 @endif
                 <th class="th-sm">{{ TranslateReseller('Reseller ID')}}</th>
                 <th class="th-sm">{{ Translate_menuPlayers('Username')}}</th>
                 <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
-                <th class="th-sm">{{ TranslateReseller('Phone')}}e</th>
+                <th class="th-sm">{{ TranslateReseller('Phone')}}</th>
                 <th class="th-sm">Email</th>
                 <th class="th-sm">{{ TranslateReseller('Saldo gold')}}</th>
                 <th class="th-sm">{{ Translate_menuPlayers('Rank')}}</th>
@@ -127,7 +127,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes submit-data">{{ translate_MenuContentAdmin('Reset Password')}}</button>
-        <button type="button" class="button_example-no" data-dismiss="modal">Tidak</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">{{ TranslateMenuItem('No')}}</button>
       </div>
         </form>
     </div>
@@ -156,8 +156,8 @@
           <input type="hidden" name="id" id="id" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i> Ya</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Tidak</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
       </div>
         </form>
     </div>
@@ -183,8 +183,8 @@
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>Ya</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Tidak</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
       </div>
         </form>
     </div>
