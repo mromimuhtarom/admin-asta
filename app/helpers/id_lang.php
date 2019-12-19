@@ -243,7 +243,7 @@ function Translate_menuPlayers($menu){
         'Point Players'             =>  'Poin pemain',
         'Guest'                     =>  'Guest',
         'Choose Register Type'      =>  'Pilih tipe pendaftaran',
-        'Choose Game'               =>  'Pilig game',
+        'Choose Game'               =>  'Pilih game',
         'Choose Log Type'           =>  'Pilih tipe Log',
         'Choose status'             =>  'Pilih status',
         'Choose User Type'          =>  'Pilih tipe pengguna',
