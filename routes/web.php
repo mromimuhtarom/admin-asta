@@ -8,7 +8,7 @@ Route::get('image-item/Gold/{item_id}.png', 'GoldStoreController@ImageItem')->na
 Route::get('image-item/Chip/{item_id}.png', 'ChipStoreController@ImageItem')->name('imageItemChip');
 Route::get('image-item/Goods/{item_id}.png', 'GoodsStoreController@ImageItem')->name('imageItemGoods');
 // image gift
-Route::get('image-gift/{gift_id}.png', 'GiftController@ImageGift')->name('imageshowgift');
+Route::get('image-gift/{gift_id}', 'GiftController@ImageGift')->name('imageshowgift');
 Route::get('image-emoticon/{emot_id}.png', 'EmoticonController@ImageEmoticon')->name('imageshowemoticon');
 
 Route::get('GeneralSetting-about/view', 'GeneralSettingController@AboutGame');
@@ -252,6 +252,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::delete('TableGift-delete', 'GiftController@destroy')->name('TableGift-delete');
                 Route::post('TableGift-create', 'GiftController@store')->name('TableGift-create');
                 Route::delete('TableGift-deleteAllSelected', 'GiftController@deleteAllSelected')->name('TableGift-deleteAllSelected');
+        
             });
         });
 

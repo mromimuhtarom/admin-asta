@@ -1,15 +1,13 @@
-
-
-.custom-file-label1[type="file"]{
-	z-index: -1;
-  	position: absolute;
-  	opacity: 0;
+.custom-file-label1[type="file"] {
+    z-index: -1;
+    position: absolute;
+    opacity: 0;
 }
 
-.custom-file-label2[type="file"]{
-	z-index: -1;
-  	position: absolute;
-  	opacity: 0;
+.custom-file-label2[type="file"] {
+    z-index: -1;
+    position: absolute;
+    opacity: 0;
 }
 
 .main-image:before {
@@ -34,153 +32,164 @@ input[type=file]::-webkit-file-upload-button {
 
 .media-container {
     position: relative;
-	display: inline-block;
-	margin: auto;
+    display: inline-block;
+    margin: auto;
     border-radius: 10px;
     border: 1px solid black;
-	overflow: hidden;
-	width: 200px;
-	height: 100px;
-	/* vertical-align: middle */
+    overflow: hidden;
+    width: 200px;
+    height: 100px;
+    /* vertical-align: middle */
 }
+
 /* with watermark */
 .media-overlay-wtr {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 45%;
-	height: 100%;
-	background-color: rgba(180, 180, 180, 0.6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    background-color: rgba(180, 180, 180, 0.6);
 }
+
 .media-overlay-wtr1 {
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 45%;
-	height: 100%;
-	background-color: rgba(180, 180, 180, 0.6);
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    background-color: rgba(180, 180, 180, 0.6);
 }
+
 #media-input-wtr {
-	display: block;
-	width: 100%;
-	height: 100%;
-	line-height: 100%;
-	opacity: 0;
-	position: relative;
-	z-index: 9;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    opacity: 0;
+    position: relative;
+    z-index: 9;
 }
 
 #media-input-wtr1 {
-	display: block;
-	width: 100%;
-	height: 100%;
-	line-height: 100%;
-	opacity: 0;
-	position: relative;
-	z-index: 9;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    opacity: 0;
+    position: relative;
+    z-index: 9;
 }
+
 .media-icon-wtr {
-    transform: translate(-1%,-90%);
-	color: #ffffff;
-	font-size: 2em;
-	height: 100%;
-	line-height: 100px;
+    transform: translate(-1%, -90%);
+    color: #ffffff;
+    font-size: 2em;
+    height: 100%;
+    line-height: 100px;
     /* position: absolute; */
-	z-index: 0;
-	width: 100%;
-	text-align: center;
+    z-index: 0;
+    width: 100%;
+    text-align: center;
 }
+
 .media-icon-wtr1 {
-    transform: translate(-1%,-90%);
-	color: #ffffff;
-	font-size: 2em;
-	height: 100%;
-	line-height: 100px;
+    transform: translate(-1%, -90%);
+    color: #ffffff;
+    font-size: 2em;
+    height: 100%;
+    line-height: 100px;
     /* position: absolute; */
-	z-index: 0;
-	width: 100%;
-	text-align: center;
+    z-index: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .img-object-wtr {
+	transform: translate(-1%, -36%);
 	border-radius: 10px;
-	width: auto;
-	height: 100px;
-	display: block;
+	height: 320px;
+	width: 320px;
+	object-fit: none;
+    display: block;
 }
 
 .img-object-wtr1 {
-	border-radius: 10px;
-	border:1px solid black;
-	width: 45%;
-	left:0;
-	height: 100px;
-	/* position: relative; */
-	/* display: block; */
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 45%;
+    left: 0;
+    height: 100px;
+    /* position: relative; */
+    /* display: block; */
 }
+
 .img-object-wtr2 {
-	border-radius: 10px;
-	/* right:-7; */
-	margin-left:8%;
-	width: 45%;
-	height: 100px;
-	border:1px solid black;
-	/* position: relative; */
-	/* display: block; */
+    border-radius: 10px;
+    /* right:-7; */
+    margin-left: 8%;
+    width: 45%;
+    height: 100px;
+    border: 1px solid black;
+    /* position: relative; */
+    /* display: block; */
 }
 
 .nav-name {
-	transform: translate(-1%,-700%);
-	color: #ffffff;
-	font-size: -6cm;
-	z-index: 0;
-	width: 100%;
-	text-align: center;
+    transform: translate(-1%, -700%);
+    color: #ffffff;
+    font-size: -6cm;
+    z-index: 0;
+    width: 100%;
+    text-align: center;
 }
+
 /* end watermark */
 /* without watermark */
 .media-overlay {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(180, 180, 180, 0.6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(180, 180, 180, 0.6);
 }
 
 #media-input {
-	display: block;
-	width: 100%;
-	height: 100%;
-	line-height: 100%;
-	opacity: 0;
-	position: relative;
-	z-index: 9;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    opacity: 0;
+    position: relative;
+    z-index: 9;
 }
 
 .media-icon {
-    transform: translate(-1%,-90%);
-	color: #ffffff;
-	font-size: 2em;
-	height: 100%;
-	line-height: 100px;
+    transform: translate(-1%, -90%);
+    color: #ffffff;
+    font-size: 2em;
+    height: 100%;
+    line-height: 100px;
     position: absolute;
-	z-index: 0;
-	width: 100%;
-	text-align: center;
+    z-index: 0;
+    width: 100%;
+    text-align: center;
 }
+
 .img-object {
-	border-radius: 10px;
-	width: auto;
-	height: 100px;
-	display: block;
+    border-radius: 10px;
+    width: auto;
+    height: 100px;
+    display: block;
 }
+
 /* end without watermark */
 
 
 
 .media-control {
-	margin-top: 30px;
+    margin-top: 30px;
 }
 
 input[type=file] {
