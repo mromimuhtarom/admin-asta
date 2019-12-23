@@ -1,87 +1,138 @@
-<p style="text-align:justify">Asta poker mission is to provide a fun poker game experience through the convenience of your smartphone and play with friends.</p>
 
-<p style="text-align:justify">Please read these Terms of Service and our privacy policy before using Astapoker Services. These Terms of Service set out the terms and conditions that apply when you use our Services (described below). When you use our Services, you agree to be bound by these terms and conditions. If you don&#39;t agree to all the terms and conditions, you must not use our Services.Account information and security In order to use our Services, we may ask you to create an Account and select a password and/or provide us with certain personal information, which may include your name, email address, and, in some cases, payment information.</p>
+                Asta poker mission is to provide a fun poker game experience through the convenience of your smartphone and play with friends.
+            
+                Please read these Terms of Service and our privacy policy before using Astapoker Services. These Terms of Service set out 
+                the terms and conditions that apply when you use our Services (described below). When you use our Services, you agree to be 
+                bound by these terms and conditions. If you don't agree to all the terms and conditions, you must not use our Services.Account 
+                information and security
+                In order to use our Services, we may ask you to create an Account and select a 
+                password and/or provide us with certain personal information, which may include your name, email address, and, in some cases, 
+                payment information.    
+              
+                You are responsible for maintaining the security of your Account. Don't share your Account details with others or allow 
+                others to access or use your Account. We will treat all acts performed through your Account as being performed by you. You 
+                therefore accept responsibility for all acts done using your Account, whether or not authorized by you, including purchases
+                made using any payment instrument (for example, credit card or PayPal), and you understand you may be held liable for losses 
+                incurred by us or any other user of the Services caused by someone else using your Account.
+        
+                If you become aware of any actual or suspected loss, theft, fraud, or unauthorized use of your Account or Account password, 
+                please tell us immediately.
+                
+                <size=24><b>1. Using our service</b></size>
+                <color=#808080ff>
+                    We provide this service to you and others to help advance our mission. Instead, we want you to make the following commitments:
+                </color>
 
-<p style="text-align:justify">You are responsible for maintaining the security of your Account. Don&#39;t share your Account details with others or allow others to access or use your Account. We will treat all acts performed through your Account as being performed by you. You therefore accept responsibility for all acts done using your Account, whether or not authorized by you, including purchases made using any payment instrument (for example, credit card or PayPal), and you understand you may be held liable for losses incurred by us or any other user of the Services caused by someone else using your Account.</p>
+                <b><color=#808080ff>a. Who can use our service</color></b>
+                <color=#808080ff>
+                    * You are under 13 years of age (or under the age specified in your country to be able to use our products).
+                    * You are a convicted sex offender.
+                    * We previously deactivated your account because there was a violation of our terms and policies.
+                    * You are not allowed to accept our products, services or software based on applicable law.
+                </color>
+                <color=#808080ff>
+                    We may delete content that you share that violates these provisions and, if applicable, we will 
+                    take action against your account for the reasons described below. We can also deactivate your 
+                    account if you repeatedly violate other people's intellectual property rights.
+                </color>
 
-<p style="text-align:justify">If you become aware of any actual or suspected loss, theft, fraud, or unauthorized use of your Account or Account password, please tell us immediately.</p>
+                <b><color=#808080ff>b. Additional Important Rules and Terms</color></b>
+                <color=#808080ff>
+                    If you access the Services from a social network, such as Facebook, or download the Services 
+                    from another platform, such as Apple or Google, you must also comply with that third party’s 
+                    terms of service/use as well as these Terms.
+                </color>
 
-<p style="text-align:justify"><strong>1. Using our service</strong></p>
+                <b><color=#808080ff>c. Update our Terms</color></b>
+                <color=#808080ff>
+                    We always work to improve our services and develop new features to make our Products better 
+                    for you and our community. Therefore, we need to update these Terms from time to time in order 
+                    to accurately reflect our services and practices
+                    We hope you continue to use our Products, but if you do not agree with our updated Terms and do not 
+                    want to be part of the Astapoker community again, you can delete your account at any time.   
+                </color>
 
-<p style="text-align:justify">&nbsp;</p>
+                <b><color=#808080ff>d. Deleting your account</color></b>
+                <color=#808080ff>
+                    You may stop using our Services at any time and may request that we delete your Account at any time 
+                    by following the instructions in our Privacy Policy. Unless applicable law requires otherwise, we are not 
+                    required to provide refunds, benefits, or other compensation if you request deletion of your Account.
+                </color>
 
-<p style="text-align:justify">We provide this service to you and others to help advance our mission. Instead, we want you to make the following commitments:</p>
+                <b><color=#808080ff>e. Limitation of liability</color></b>
+                <color=#808080ff>
+                    We strive to provide our best products and provide clear guidelines for anyone who uses them. However, our 
+                    Products are provided "as is" and we do not guarantee that the Product is always safe and free of errors, nor 
+                    guarantees that the Product functions without interference, obstructions or defects.
+                </color>
 
-<p style="text-align:justify"><strong>a. Who can use our service</strong></p>
+                <size><color=#808080ff>2. Games and service</color></size>
+                <color=#808080ff>
+                    The Services are comprised of works that are owned or licensed by Astagame, and they are protected by copyright, 
+                    trademark, trade dress, patent, and other worldwide intellectual property rights and other applicable laws, rules, or 
+                    regulations. All such rights are reserved. These Terms do not grant you or any other party any right, title, or interest 
+                    in the Services or any content in the Services.
+                    So long as you abide by these Terms and any other rules, including the Community Rules and any Feature Terms, you may use 
+                    the Services subject to these Terms, for your own non-commercial, entertainment purposes. You agree not to use the Services 
+                    for any other purpose and agree that Zynga will have no liability to you for any damage or loss arising from unauthorized uses.
+                </color>
 
-<p style="text-align:justify">* You are under 13 years of age (or under the age specified in your country to be able to use our products).</p>
+                <size=24><color=#808080ff>3. Mobile application providers, social networking, and third party terms</color></size>
+                <color=#808080ff>
+                    This Agreement and these Terms are between you and Astapoker only, and not with Apple, Google, Facebook, or any other mobile 
+                    application provider or social networking website. Astapoker is solely responsible for the Services and the maintenance and 
+                    support of the Services. In addition to these Terms, your access and use of the Services is subject to applicable third-party terms 
+                    of agreement, including the terms of service and usage rules of the application provider for your mobile device or the social 
+                    networking websites that you use to access the Services (“Third Party Terms”). You must comply with all applicable Third-Party 
+                    Terms when accessing or using the Services.
+                    Asta Poker, not your mobile application provider or social networking website, is responsible for (a) addressing any claims arising 
+                    in connection with the Services, which relate to product liability, the warranties expressed and not disclaimed herein, and consumer 
+                    protection; (b) the investigation, defense, settlement, and discharge of any third-party claim alleging that the Services or your 
+                    use of the Services infringes any third-party intellectual property rights.
+                </color>
 
-<p style="text-align:justify">* You are a convicted sex offender.</p>
+                <size=24><color=#808080ff>4. Accuracy of billing and account information</color></size>
+                <color=#808080ff>
+                    You agree to provide current, complete and accurate purchase and account information for all purchases made at out store. 
+                    You agree to promptly update your account and other information, including your email address, bank account, anda credit card
+                    information, so that we can complete your transaction and contact you as needed.    
+                </color>
 
-<p style="text-align:justify">* We previously deactivated your account because there was a violation of our terms and policies.</p>
+                <size=24><color=#808080ff>5. Accuracy of billing and account information</color></size>
+                <color=#808080ff>
+                    From time to time, we may offer limited-time promotions. Please review the official rules or Feature Terms (if any) 
+                    associated with any promotion. They will apply in addition to these Terms.
+                    In addition, from time to time, we may promote Offers. We are not required to give, and you are not required to accept, 
+                    any Offer. Offers are not transferable, redeemable, or exchangeable for other things of value, except at our sole discretion. 
+                    If you accept any Offer, you may have to sign a declaration of eligibility and liability release or other paperwork to receive 
+                    the Offer. Some Offers will be subject to taxes and other charges, travel, or activities outside of the virtual world, all of 
+                    which will be disclosed before you accept the offer. If you accept any Offer, you assume all liability associated with the Offer.         
+                </color>
 
-<p style="text-align:justify">* You are not allowed to accept our products, services or software based on applicable law.</p>
+                <size=24><b>6. limitation of liability</b></size>
+                <color=#808080ff>
+                    Under no circumstances, including negligence, shall any member of the Group be liable for any special, incidental, direct, 
+                    indirect or consequential damages whatsoever (including, without limitation, damages for loss of business profits, business 
+                    interruption, loss of business information, or any other pecuniary loss) arising out of the use (or misuse) of the Service even 
+                    if we had prior knowledge of the possibility of such damages.         
+                </color>
 
-<p style="text-align:justify">&nbsp;</p>
+                <size=24><b>7. Severability</b></size>
+                <color=#808080ff>
+                    If any of the Terms and Conditions are determined by any competent authority to be invalid, unlawful or unenforceable to any 
+                    extent, such term, condition or provision will, to that extent, be severed from these Terms and Conditions. All remaining terms, 
+                    conditions and provisions will continue to be valid to the fullest extent permitted by law. In such cases, the part deemed invalid 
+                    or unenforceable will be amended in a manner consistent with the applicable law to reflect, as closely as possible, VGW Group’s 
+                    original intent.         
+                </color>  
 
-<p style="text-align:justify">We may delete content that you share that violates these provisions and, if applicable, we will take action against your account for the reasons described below.</p>
-
-<p style="text-align:justify">We can also deactivate your account if you repeatedly violate other people&#39;s intellectual property rights.</p>
-
-<p style="text-align:justify"><strong>b. Additional Important Rules and Terms</strong></p>
-
-<p style="text-align:justify">If you access the Services from a social network, such as Facebook, or download the Services from another platform, such as Apple or Google, you must also comply with that third party&rsquo;s terms of service/use as well as these Terms.</p>
-
-<p style="text-align:justify"><strong>c. Update our Terms</strong></p>
-
-<p style="text-align:justify">We always work to improve our services and develop new features to make our Products better for you and our community. Therefore, we need to update these Terms from time to time in order to accurately reflect our services and practices We hope you continue to use our Products, but if you do not agree with our updated Terms and do not want to be part of the Astapoker community again, you can delete your account at any time.</p>
-
-<p style="text-align:justify"><strong>d. Deleting your account</strong></p>
-
-<p style="text-align:justify">You may stop using our Services at any time and may request that we delete your Account at any time by following the instructions in our Privacy Policy. Unless applicable law requires otherwise, we are not required to provide refunds, benefits, or other compensation if you request deletion of your Account.</p>
-
-<p style="text-align:justify"><strong>e. Limitation of liability</strong></p>
-
-<p style="text-align:justify">We strive to provide our best products and provide clear guidelines for anyone who uses them. However, our Products are provided &quot;as is&quot; and we do not guarantee that the Product is always safe and free of errors, nor guarantees that the Product functions without interference, obstructions or defects.</p>
-
-<p style="text-align:justify">&nbsp;</p>
-
-<p style="text-align:justify"><strong>2. Games and service</strong></p>
-
-<p style="text-align:justify">The Services are comprised of works that are owned or licensed by Astagame, and they are protected by copyright, trademark, trade dress, patent, and other worldwide intellectual property rights and other applicable laws, rules, or regulations. All such rights are reserved. These Terms do not grant you or any other party any right, title, or interest in the Services or any content in the Services. So long as you abide by these Terms and any other rules, including the Community Rules and any Feature Terms, you may use the Services subject to these Terms, for your own non-commercial, entertainment purposes. You agree not to use the Services for any other purpose and agree that Zynga will have no liability to you for any damage or loss arising from unauthorized uses.</p>
-
-<p style="text-align:justify">&nbsp;</p>
-
-<p style="text-align:justify"><strong>3. Mobile application providers, social networking, and third party terms</strong></p>
-
-<p style="text-align:justify">This Agreement and these Terms are between you and Astapoker only, and not with Apple, Google, Facebook, or any other mobile application provider or social networking website. Astapoker is solely responsible for the Services and the maintenance and support of the Services. In addition to these Terms, your access and use of the Services is subject to applicable third-party terms of agreement, including the terms of service and usage rules of the application provider for your mobile device or the social networking websites that you use to access the Services (&ldquo;Third Party Terms&rdquo;). You must comply with all applicable Third-Party Terms when accessing or using the Services. Asta Poker, not your mobile application provider or social networking website, is responsible for (a) addressing any claims arising in connection with the Services, which relate to product liability, the warranties expressed and not disclaimed herein, and consumer protection; (b) the investigation, defense, settlement, and discharge of any third-party claim alleging that the Services or your use of the Services infringes any third-party intellectual property rights.</p>
-
-<p style="text-align:justify">&nbsp;</p>
-
-<p style="text-align:justify"><strong>4. Accuracy of billing and account information</strong></p>
-
-<p style="text-align:justify">You agree to provide current, complete and accurate purchase and account information for all purchases made at out store. You agree to promptly update your account and other information, including your email address, bank account, anda credit card information, so that we can complete your transaction and contact you as needed.</p>
-
-<p style="text-align:justify">&nbsp;</p>
-
-<p style="text-align:justify"><strong>5. Accuracy of billing and account information</strong></p>
-
-<p style="text-align:justify">From time to time, we may offer limited-time promotions. Please review the official rules or Feature Terms (if any) associated with any promotion. They will apply in addition to these Terms. In addition, from time to time, we may promote Offers. We are not required to give, and you are not required to accept, any Offer. Offers are not transferable, redeemable, or exchangeable for other things of value, except at our sole discretion. If you accept any Offer, you may have to sign a declaration of eligibility and liability release or other paperwork to receive the Offer. Some Offers will be subject to taxes and other charges, travel, or activities outside of the virtual world, all of which will be disclosed before you accept the offer. If you accept any Offer, you assume all liability associated with the Offer.</p>
-
-<p style="text-align:justify">&nbsp;</p>
-
-<p style="text-align:justify"><strong>6. limitation of liability</strong></p>
-
-<p style="text-align:justify">Under no circumstances, including negligence, shall any member of the Group be liable for any special, incidental, direct, indirect or consequential damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use (or misuse) of the Service even if we had prior knowledge of the possibility of such damages.</p>
-
-<p style="text-align:justify">&nbsp;</p>
-
-<p style="text-align:justify"><strong>7. Severability</strong></p>
-
-<p style="text-align:justify">If any of the Terms and Conditions are determined by any competent authority to be invalid, unlawful or unenforceable to any extent, such term, condition or provision will, to that extent, be severed from these Terms and Conditions. All remaining terms, conditions and provisions will continue to be valid to the fullest extent permitted by law. In such cases, the part deemed invalid or unenforceable will be amended in a manner consistent with the applicable law to reflect, as closely as possible, VGW Group&rsquo;s original intent.</p>
-
-<p style="text-align:justify">&nbsp;</p>
-
-<p style="text-align:justify"><strong>8. Terms</strong></p>
-
-<p style="text-align:justify">This agreement and these Terms of Use, as amended from time to time by Asta Poker, are effective from the moment of acceptance by clicking on the &ldquo;Continue&rdquo; button, and shall remain in force indefinitely unless terminated by Asta Poker or you. For the avoidance of doubt, you agree that you are bound by this agreement and these Terms of Use if you access or use the Services in any way. These Terms and Conditions are personal to you, and are not assignable, transferable or sub-licensable by you except with our prior written consent. We reserve the right to assign, transfer or delegate any of our rights and obligations hereunder to any third party without notice to you</p>
+                <size=24><b>8. Terms</b></size>
+                <color=#808080ff>
+                    This agreement and these Terms of Use, as amended from time to time by Asta Poker, are effective from the moment of acceptance 
+                    by clicking on the “Continue” button, and shall remain in force indefinitely unless terminated by Asta Poker or you. For the 
+                    avoidance of doubt, you agree that you are bound by this agreement and these Terms of Use if you access or use the Services 
+                    in any way.
+                    These Terms and Conditions are personal to you, and are not assignable, transferable or sub-licensable by you except with our prior 
+                    written consent. We reserve the right to assign, transfer or delegate any of our rights and obligations hereunder to any third party 
+                    without notice to you
+                </color>

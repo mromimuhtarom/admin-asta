@@ -87,6 +87,9 @@ class GeneralSettingController extends Controller
         if($contentabout)
         {
             $client->put('about.txt', $contentabout) ;
+            $filelication = "../public/upload/file_policy/about.txt";
+            $PathS3       = 'unity-asset/text_file/about.txt';
+            Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idabout)->update([
                 'value' =>  $urlabout
             ]);
@@ -95,6 +98,9 @@ class GeneralSettingController extends Controller
         } else if ($contenttermofservice)
         {
             $client->put('term-of-service.txt', $contenttermofservice) ;
+            $filelication = $rootpath."/term-of-service.txt";
+            $PathS3       = 'unity-asset/text_file/term-of-service.txt';
+            Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idtermofservice )->update([
                 'value' =>  $urltermofservice
             ]);
@@ -103,6 +109,9 @@ class GeneralSettingController extends Controller
         } else if ($contentprivacypolicy)
         {
             $client->put('privacy-policy.txt', $contentprivacypolicy) ;
+            $filelication = $rootpath."/privacy-policy.txt";
+            $PathS3       = 'unity-asset/text_file/privacy-policy.txt';
+            Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idprivacypolicy )->update([
                 'value' =>  $urlprivacypolicy
             ]);

@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 Route::post('avatars/file', 'PlayersController@avatar');
 Route::post('insert/abuse_transaction', 'AbuseTransactionReportController@api_insert_abuse_transaction');
+Route::post('Avatar-profile', 'PlayersController@avatarplayer');
 Route::post('terserah', function(Request $request) {
     $a = $request->clive;
     return $a;
