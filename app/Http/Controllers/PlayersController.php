@@ -1017,4 +1017,12 @@ class PlayersController extends Controller
           echo 'Failed';
         }
     }
+
+    public function avatarplayer(Request $request)
+    {
+      $avatarname = $request->avatar_name;
+      $avatar = public_path().'/upload/avatars/'.$avatarname.'.jpg';
+      
+      return response()->file($avatar);
+    }
 }

@@ -130,8 +130,12 @@
                               </span>
                               <figure class="media-object">
                                 {{-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
+<<<<<<< HEAD
                                 {{-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" --}}
                                 <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+=======
+                                <img class="img-object-wtr imgupload{{ $gf->id }}" style="width: height:" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+>>>>>>> 37f48add707176f2d8fefe4713480974074e8d6b
                                 <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                                 <img class="img-object-wtr2 imgupload2{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                               </figure>

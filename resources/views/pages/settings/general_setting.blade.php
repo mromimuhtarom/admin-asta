@@ -378,6 +378,8 @@
                               <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                                 <script>
                                     CKEDITOR.replace( 'contentprivacypolicy' );
+                                    CKEDITOR.config.autoParagraph = false;
+                                    CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
                                 </script>
                           </div>
                         </div>
@@ -420,6 +422,8 @@
                       <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                         <script>
                           CKEDITOR.replace( 'contenttermofservice' );
+                          CKEDITOR.config.autoParagraph = false;
+                          CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
                         </script>
                   </div>
                 </div>
@@ -460,10 +464,23 @@
                 <div class="form-group">
                   <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
                   <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
-                  <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
+                  <textarea name="contentabout" id="aboutasta" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
                   <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/full/ckeditor.js"></script>
                   <script>
                       CKEDITOR.replace( 'contentabout' );
+                      CKEDITOR.config.autoParagraph = false;
+                      CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
+                      CKEDITOR.config.coreStyles_italic = { element: 'i'};
+                      CKEDITOR.config.colorButton_foreStyle = { element: 'color'};
+                      // {element:'span',styles:{color:'#(color)'},overrides:[{element:'font',attributes:{color:null}}]}
+                      CKEDITOR.config.colorButton_colors = 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16';
+                      // var writer = new CKEDITOR.htmlWriter();
+                      //   writer.openTag( 'size' );
+                      //   writer.attribute( '', '12' );
+                      //   writer.openTagClose( 'size' );
+                      //   writer.text( 'Hello' );
+                      //   writer.closeTag( 'size' );
+                      //   alert( writer.getHtml() );
                   </script>
               </div>
             </div>
