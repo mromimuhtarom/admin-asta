@@ -8,6 +8,8 @@
 
 
 @section('content')
+<link rel="stylesheet" href="minified/themes/default.min.css" />
+<script src="minified/sceditor.min.js"></script>
 
 @if (\Session::has('alert'))
 <div class="alert alert-danger">

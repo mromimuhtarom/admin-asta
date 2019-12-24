@@ -89,6 +89,9 @@ class GeneralSettingController extends Controller
             $client->put('about.txt', $contentabout) ;
             $filelication = "../public/upload/file_policy/about.txt";
             $PathS3       = 'unity-asset/text_file/about.txt';
+
+            $replacecolore= str_replace('', '', '');
+            dd($contentabout);
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idabout)->update([
                 'value' =>  $urlabout
