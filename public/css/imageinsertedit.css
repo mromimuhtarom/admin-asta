@@ -110,7 +110,7 @@ input[type=file]::-webkit-file-upload-button {
 	border-radius: 10px;
 	height: 320px;
 	width: 320px;
-	object-fit: none;
+	object-fit: contain;
     display: block;
 }
 

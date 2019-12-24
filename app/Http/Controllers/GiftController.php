@@ -262,17 +262,14 @@ class GiftController extends Controller
 
     //   } else if($fike_exists_gift   === true){
         
-        $response = $linkimage;
-        $im   = imagecreatefrompng($response);
+        // $response = $linkimage;
+        $im   = imagecreatefrompng($linkimage);
         $size = min(imagesx($im), imagesy($im));
-        $im2  = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => 320, 'height' => 320]);
-  
+        $im2  = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
         if($im2 !== FALSE) {
-            header("Content-type: image/png");
             imagepng($im2);
             imagedestroy($im2);
         }
-
         imagedestroy($im);
   
         file_put_contents('../public/upload/gifts/crop/', file_get_contents($im2));
