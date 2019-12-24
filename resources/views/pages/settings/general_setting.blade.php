@@ -471,7 +471,8 @@
                       CKEDITOR.config.autoParagraph = false;
                       CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
                       CKEDITOR.config.coreStyles_italic = { element: 'i'};
-                      CKEDITOR.config.colorButton_foreStyle = { element: 'color'};
+                      CKEDITOR.config.colorButton_foreStyle = { element: 'color', styles:{color:'#(color)'}};
+                      CKEDITOR.config.fontSize = { element: 'size', styles:{color:'#(color)'}};
                       // {element:'span',styles:{color:'#(color)'},overrides:[{element:'font',attributes:{color:null}}]}
                       CKEDITOR.config.colorButton_colors = 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16';
                       // var writer = new CKEDITOR.htmlWriter();

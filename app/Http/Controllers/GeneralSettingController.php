@@ -89,6 +89,13 @@ class GeneralSettingController extends Controller
             $client->put('about.txt', $contentabout) ;
             $filelication = "../public/upload/file_policy/about.txt";
             $PathS3       = 'unity-asset/text_file/about.txt';
+            $replacetagcolor = str_replace('color style="', '', $contentabout);
+            $petik = str_replace('"', '', $replacetagcolor);
+            $spanreplace = str_replace('span style=font', '', $petik );
+            $stripreplace = str_replace('-', '', $spanreplace);
+            $replacepx = str_replace('px', '', $stripreplace);
+            $smadengan = str_replace(':', '=', $replacepx);
+            dd($smadengan);
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idabout)->update([
                 'value' =>  $urlabout
@@ -111,6 +118,10 @@ class GeneralSettingController extends Controller
             $client->put('privacy-policy.txt', $contentprivacypolicy) ;
             $filelication = $rootpath."/privacy-policy.txt";
             $PathS3       = 'unity-asset/text_file/privacy-policy.txt';
+            $replacetagcolor = str_replace('span style="', '', $contentprivacypolicy);
+            $petik = str_replace('"', '', $replacetagcolor);
+
+            dd($petik);
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idprivacypolicy )->update([
                 'value' =>  $urlprivacypolicy
