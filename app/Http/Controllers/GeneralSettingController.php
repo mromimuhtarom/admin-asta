@@ -92,10 +92,12 @@ class GeneralSettingController extends Controller
             $replacetagcolor = str_replace('color style="', '', $contentabout);
             $petik = str_replace('"', '', $replacetagcolor);
             $spanreplace = str_replace('span style=font', '', $petik );
-            $stripreplace = str_replace('-', '', $spanreplace);
+            $replacesize = str_replace('size style=font-', '', $spanreplace);
+            $stripreplace = str_replace('-', '', $replacesize);
             $replacepx = str_replace('px', '', $stripreplace);
             $smadengan = str_replace(':', '=', $replacepx);
-            dd($smadengan);
+            $titikkome = str_replace(';', '', $replacesize);
+            dd($titikkome);
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idabout)->update([
                 'value' =>  $urlabout
