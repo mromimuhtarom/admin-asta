@@ -85,13 +85,23 @@ class GeneralSettingController extends Controller
         $client               = Storage::createLocalDriver(['root' => $rootpath]);
 
         if($contentabout)
-        {
+        {   
+
             $client->put('about.txt', $contentabout) ;
             $filelication = "../public/upload/file_policy/about.txt";
+
+            $replacetagcolor    = str_replace('color style="', '', $contentabout);
+            $petik              = str_replace('"', '', $replacetagcolor);
+            $spanreplace        = str_replace('span style=font', '', $petik );
+            $stripreplace       = str_replace('-', '', $spanreplace);
+            $replacepx          = str_replace('px', '', $stripreplace);
+            $equals             = str_replace(':', '=', $replacepx);
+            $semicolon          = str_replace(';', '', $equals);
+            $space              = str_replace('&nbsp', '', $semicolon);
+            dd($space);
+
             $PathS3       = 'unity-asset/text_file/about.txt';
 
-            $replacecolore= str_replace('', '', '');
-            dd($contentabout);
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idabout)->update([
                 'value' =>  $urlabout
@@ -99,10 +109,24 @@ class GeneralSettingController extends Controller
             return back()->with('success','Data Updated');
 
         } else if ($contenttermofservice)
-        {
+        {   
+
             $client->put('term-of-service.txt', $contenttermofservice) ;
             $filelication = $rootpath."/term-of-service.txt";
+
+
+            $replacetagcolor    =   str_replace('color style="', '', $contenttermofservice);
+            $petik              =   str_replace('"', '', $replacetagcolor);
+            $spanreplace        =   str_replace('span style=font', '', $petik);
+            $stripreplace       =   str_replace('-', '', $spanreplace);
+            $replacepx          =   str_replace('px', '', $stripreplace);
+            $equals             =   str_replace(':', '=', $replacepx);
+            $semicolon          =   str_replace(';', '', $equals);
+            $space              =   str_replace('&nbsp', '', $semicolon);
+            dd($space);
+
             $PathS3       = 'unity-asset/text_file/term-of-service.txt';
+
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idtermofservice )->update([
                 'value' =>  $urltermofservice
@@ -112,8 +136,20 @@ class GeneralSettingController extends Controller
         } else if ($contentprivacypolicy)
         {
             $client->put('privacy-policy.txt', $contentprivacypolicy) ;
-            $filelication = $rootpath."/privacy-policy.txt";
-            $PathS3       = 'unity-asset/text_file/privacy-policy.txt';
+            $filelication       = $rootpath."/privacy-policy.txt";
+            
+            $replacetagcolor    = str_replace('color style="', '', $contentprivacypolicy);
+            $petik              = str_replace('"', '', $replacetagcolor);
+            $spanreplace        = str_replace('span style=font', '', $petik);
+            $equals             = str_replace(':', '=', $spanreplace);
+            $stripreplace       = str_replace('-', '', $equals);
+            $replacepx          = str_replace('px', '', $stripreplace);
+            $semicolon          = str_replace(';', '', $replacepx);
+            $space              = str_replace('&nbsp', '', $semicolon);
+
+            dd($replacepx);
+
+            $PathS3             = 'unity-asset/text_file/privacy-policy.txt';
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idprivacypolicy )->update([
                 'value' =>  $urlprivacypolicy
