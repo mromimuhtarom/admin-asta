@@ -70,7 +70,7 @@
                   <tr>
                     <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
-                    <th class="th-sm">{{ Translate_menuPlayers('Experience') }}</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('Experience') }} (Xp)</th>
                     <th align="center">
                       <a  href="#" style="color:red;font-weight:bold;" 
                         class="delete" 

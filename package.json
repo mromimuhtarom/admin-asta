@@ -23,6 +23,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "jquery-zoom": "^1.7.21"
+        "jquery-zoom": "^1.7.21",
+        "sceditor": "^2.1.3"
     }
 }

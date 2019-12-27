@@ -8,8 +8,7 @@
 
 
 @section('content')
-<link rel="stylesheet" href="minified/themes/default.min.css" />
-<script src="minified/sceditor.min.js"></script>
+
 
 @if (\Session::has('alert'))
 <div class="alert alert-danger">
@@ -376,18 +375,12 @@
                           <div class="form-group">
                               <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
                               <input type="text" name="urlprivacypolicy" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
-                              <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ $client->get('privacy-policy.txt') }}</textarea>
+                              <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ nl2br($client->get('unity-asset/text_file/privacy-policy.txt')) }}</textarea>
                               <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                                 <script>
                                     CKEDITOR.replace( 'contentprivacypolicy' );
                                     CKEDITOR.config.autoParagraph = false;
                                     CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
-                                    CKEDITOR.config.coreStyles_italic = { element: 'i'};
-                                    CKEDITOR.config.fontSize = { element: 'size', stlyles:{size:'#(color)'}};
-                                    CKEDITOR.config.fillEmptyBlocks = false;
-                                    CKEDITOR.config.colorButton_foreStyle = { element: 'color', styles:{color:'#(color)'}};
-                                    CKEDITOR.config.colorButton_colors = 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16';
-
                                 </script>
                           </div>
                         </div>
@@ -425,18 +418,13 @@
                 <div class="col-12">
                   <div class="form-group">
                       <input type="hidden" name="idtermofservice" value="{{ $getTermOfService->id }}">
-                      <input type="text" name="urltermofservice" placeholder="Url" class="form-control" value="{{$getTermOfService->value }}"><br>
-                      <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ $client->get('term-of-service.txt') }}</textarea>
+                      <input type="text" name="urltermofservice" placeholder="Url" class="form-control" val ue="{{ $getTermOfService->value }}"><br>
+                      <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ nl2br($client->get('unity-asset/text_file/term-of-service.txt')) }}</textarea>
                       <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                         <script>
                           CKEDITOR.replace( 'contenttermofservice' );
                           CKEDITOR.config.autoParagraph = false;
                           CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
-                          CKEDITOR.config.coreStyles_italic = { element: 'i' };
-                          CKEDITOR.config.colorButton_foreStyle = { element: 'color', stlyles:{color:'#(color)'}};
-                          CKEDITOR.config.fontSize = { element: 'size', stlyles:{color:'#(color)'}};
-                          CKEDITOR.config.fillEmptyBlocks = false;
-                          CKEDITOR.config.colorButton_colors = 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16';
                         </script>
                   </div>
                 </div>
@@ -477,26 +465,19 @@
                 <div class="form-group">
                   <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
                   <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
-                  <textarea name="contentabout" id="aboutasta" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
-                  <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/full/ckeditor.js"></script>
+                  <textarea name="contentabout" id="aboutasta" class="form-control" cols="30" rows="10">{{ nl2br($client->get('unity-asset/text_file/about.txt')) }}</textarea>
+                  <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/standard/ckeditor.js"></script>
                   <script>
                       CKEDITOR.replace( 'contentabout' );
                       CKEDITOR.config.autoParagraph = false;
                       CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
                       CKEDITOR.config.coreStyles_italic = { element: 'i'};
                       CKEDITOR.config.colorButton_foreStyle = { element: 'color', styles:{color:'#(color)'}};
-                      CKEDITOR.config.fontSize = { element: 'size', styles:{color:'#(color)'}};
-                      CKEDITOR.config.fillEmptyBlocks = false;
-
                       // {element:'span',styles:{color:'#(color)'},overrides:[{element:'font',attributes:{color:null}}]}
-                      CKEDITOR.config.colorButton_colors = 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16';
-                      // var writer = new CKEDITOR.htmlWriter();
-                      //   writer.openTag( 'size' );
-                      //   writer.attribute( '', '12' );
-                      //   writer.openTagClose( 'size' );
-                      //   writer.text( 'Hello' );
-                      //   writer.closeTag( 'size' );
-                      //   alert( writer.getHtml() );
+                      CKEDITOR.config.fontSize_style = {
+                          element:        'size',
+                          styles:         { 'font-size': '#(size)' }
+                      };
                   </script>
               </div>
             </div>
