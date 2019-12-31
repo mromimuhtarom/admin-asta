@@ -69,7 +69,7 @@ class GeneralSettingController extends Controller
                                                                 'getTwitter', 'getIg', 'getPrivacyPolicy', 'getTermOfService',
                                                                 'getAbout', 'getPokerWeb', "getBank", 'menu', 'client', 'maintenaceonoff', 'mainmenu',
                                                                 'award_signup', 'award_signup_guest', 'award_daily_chips', 'award_daily_chips_guest',
-                                                                'award_daily_days', 'award_daily_multiply', 'replacebreakline'));
+                                                                'award_daily_days', 'award_daily_multiply'));
     }
 
     public function putAbout(Request $request)
