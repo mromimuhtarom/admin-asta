@@ -314,7 +314,6 @@ function dmscard($array) {
       // resCard[i]=cards[array[i]];
       // $resCard.push($cards[$arraycard[$i]]);
       $resCard[] = $cards[$arraycard[$i]];
-      
     }
   else:
     $resCard[]= '';
@@ -322,6 +321,16 @@ function dmscard($array) {
   return $resCard;
 
 }
+
+function tagsEnabler($txt)
+  {
+    $enableSize   = str_replace('size=', 'font size="', $txt);
+    $closesize    = str_replace('/size', '/font', $enableSize);
+    $enablecolor  = str_replace('color=', 'color style="color:', $closesize); 
+    $replacekoma  = str_replace(' >', ';">', $enablecolor);
+    
+    return $replacekoma;
+  }
 
 
 ?>

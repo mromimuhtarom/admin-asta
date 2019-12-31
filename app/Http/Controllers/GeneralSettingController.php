@@ -51,6 +51,7 @@ class GeneralSettingController extends Controller
         
         $rootpath = '../public/upload/file_policy';
         $client = Storage::disk('s3');
+        // $client = Storage::createLocalDriver(['root' => $rootpath]);
 
 
         $onoff = ConfigText::select(
@@ -90,19 +91,20 @@ class GeneralSettingController extends Controller
             
             $filelication = "../public/upload/file_policy/about.txt";
 
-            $replacetagcolor    = str_replace('color style="', '', $contentabout);
-            $petik              = str_replace('"', '', $replacetagcolor);
-            $spanreplace        = str_replace('span style=font', '', $petik );
-            $replacesize        = str_replace('size style=font-', '', $spanreplace);
-            $stripreplace       = str_replace('-', '', $replacesize);
-            $replacepx          = str_replace('px', '', $stripreplace);
-            $smadengan          = str_replace(':', '=', $replacepx);
-            $titikkome          = str_replace(';', '', $smadengan);
-            $space              = str_replace('&nbsp', '', $titikkome);
+            $replacetagcolor     = str_replace('color style="', '', $contentabout);
+            $petik               = str_replace('"', ' ', $replacetagcolor);
+            $spanreplace         = str_replace('span style= font', '', $petik );
+            $replacesize         = str_replace('size style= font-', '', $spanreplace);
+            $stripreplace        = str_replace('-', '', $replacesize);
+            $replacepx           = str_replace('px', '', $stripreplace);
+            $smadengan           = str_replace(':', '=', $replacepx);
+            $titikkome           = str_replace(';', '', $smadengan);
+            $space               = str_replace('&nbsp', '', $titikkome);
             $replaceparagraftags = str_replace('<p>', '', $space);
-            $replaceclosetags   = str_replace('</p>', '', $replaceparagraftags);
-            $replaceEnter       = str_replace('<br />', '', $replaceclosetags);
-    
+            $replaceclosetags    = str_replace('</p>', '', $replaceparagraftags);
+            $replaceEnter        = str_replace('<br />', '', $replaceclosetags);
+            
+            
             $client->put('about.txt', $replaceEnter);
             
             $PathS3       = 'unity-asset/text_file/about.txt';
@@ -114,19 +116,18 @@ class GeneralSettingController extends Controller
 
         } else if ($contenttermofservice)
         {   
-            $replacetagcolor    =   str_replace('color style="', '', $contenttermofservice);
-            $petik              =   str_replace('"', '', $replacetagcolor);
-            $spanreplace        =   str_replace('size style=font', '', $petik);
-            $stripreplace       =   str_replace('-', '', $spanreplace);
-            $replacepx          =   str_replace('px', '', $stripreplace);
-            $equals             =   str_replace(':', '=', $replacepx);
-            $semicolon          =   str_replace(';', '', $equals);
-            $space              =   str_replace('&nbsp', '', $semicolon);
-            $replaceparagraftags = str_replace('<p>', '', $space);
-            $replaceclosetags   = str_replace('</p>', '', $replaceparagraftags);
-            $replaceEnter       = str_replace('<br />', '', $replaceclosetags);
+            $replacetagcolor     =   str_replace('color style="', '', $contenttermofservice);
+            $spanreplace         =   str_replace('size style="font', '', $replacetagcolor);
+            $petik               =   str_replace('"', ' ', $spanreplace);
+            $stripreplace        =   str_replace('-', '', $petik);
+            $replacepx           =   str_replace('px', '', $stripreplace);
+            $equals              =   str_replace(':', '=', $replacepx);
+            $semicolon           =   str_replace(';', '', $equals);
+            $space               =   str_replace('&nbsp', '', $semicolon);
+            $replaceparagraftags =   str_replace('<p>', '', $space);
+            $replaceclosetags    =   str_replace('</p>', '', $replaceparagraftags);
+            $replaceEnter        =   str_replace('<br />', '', $replaceclosetags);
 
-        
             $client->put('term-of-service.txt', $replaceEnter);
             $filelication = $rootpath."/term-of-service.txt";
             $PathS3       = 'unity-asset/text_file/term-of-service.txt';
@@ -138,21 +139,22 @@ class GeneralSettingController extends Controller
 
         } else if ($contentprivacypolicy)
         {
-            $replacetagcolor    = str_replace('color style="', '', $contentprivacypolicy);
-            $petik              = str_replace('"', '', $replacetagcolor);
-            $stylereplace       = str_replace('size style=font', '', $petik);
-            $equals             = str_replace(':', '=', $stylereplace);
-            $stripreplace       = str_replace('-', '', $equals);
-            $replacepx          = str_replace('px', '', $stripreplace);
-            $semicolon          = str_replace(';', '', $replacepx);
-            $space              = str_replace('&nbsp', '', $semicolon);
+            $replacetagcolor     = str_replace('color style="', '', $contentprivacypolicy);
+            $stylereplace        = str_replace('size style="font', '', $replacetagcolor);
+            $petik               = str_replace('"', ' ', $stylereplace);
+            $equals              = str_replace(':', '=', $petik);
+            $stripreplace        = str_replace('-', '', $equals);
+            $replacepx           = str_replace('px', '', $stripreplace);
+            $semicolon           = str_replace(';', '', $replacepx);
+            $space               = str_replace('&nbsp', '', $semicolon);
             $replaceparagraftags = str_replace('<p>', '', $space);
-            $replaceclosetags   = str_replace('</p>', '', $replaceparagraftags);
-            $replaceEnter       = str_replace('<br />', '', $replaceclosetags);
+            $replaceclosetags    = str_replace('</p>', '', $replaceparagraftags);
+            $replaceEnter        = str_replace('<br />', '', $replaceclosetags);
 
+            
             $client->put('privacy-policy.txt', $replaceEnter) ;
-            $filelication       = $rootpath."/privacy-policy.txt";
-            $PathS3             = 'unity-asset/text_file/privacy-policy.txt';
+            $filelication        = $rootpath."/privacy-policy.txt";
+            $PathS3              = 'unity-asset/text_file/privacy-policy.txt';
             Storage::disk('s3')->put($PathS3, file_get_contents($filelication));
             Config::where('id', '=', $idprivacypolicy )->update([
                 'value' =>  $urlprivacypolicy
