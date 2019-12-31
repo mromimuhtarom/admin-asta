@@ -324,12 +324,13 @@ function dmscard($array) {
 
 function tagsEnabler($txt)
   {
-    $enableSize   = str_replace('size=', 'font size="', $txt);
-    $closesize    = str_replace('/size', '/font', $enableSize);
-    $enablecolor  = str_replace('color=', 'color style="color:', $closesize); 
-    $replacekoma  = str_replace(' >', ';">', $enablecolor);
     
-    return $replacekoma;
+    $semanticTagleft    =   str_replace('<', '[', $txt);
+    $semanticTagright   =   str_replace('>', ']', $semanticTagleft);
+    $semanticTagclosel  =   str_replace('</', '[/', $semanticTagright);
+    $semanticTagcloser  =   str_replace('>', ']', $semanticTagclosel); 
+    
+    return $semanticTagcloser;
   }
 
 

@@ -355,7 +355,7 @@
           </div>
            </div>
                </form> --}}
-               {{ tagsEnabler(nl2br($client->get('unity-asset/text_file/about.txt'))) }}
+              
             <!-- Modal Privacy Policy-->
             <div class="modal fade" id="myModalPrivacyPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -375,10 +375,26 @@
                           <div class="form-group">
                               <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
                               <input type="text" name="urlprivacypolicy" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
-                              <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler(nl2br($client->get('unity-asset/text_file/privacy-policy.txt'))) }}</textarea>
+                              <textarea name="contentprivacypolicy" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/privacy-policy.txt')) }}</textarea>
                               <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                                 <script>
-                                    CKEDITOR.replace( 'contentprivacypolicy' );
+                                    CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
+                                    CKEDITOR.replace( 'contentprivacypolicy', {
+                                      extraPlugins:'bbcode',
+                                      removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                                      fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                                      toolbar: [
+                                        [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
+                                        [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
+                                        [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar' ],
+                                        '/',
+                                        [ 'Bold', 'Italic', 'Underline' ],
+                                        [ 'FontSize' ],
+                                        [ 'TextColor' ],
+                                        [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
+                                        [ 'Maximize' ]
+                                      ]
+                                    });
                                     CKEDITOR.config.autoParagraph = false;
                                     CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
                                 </script>
@@ -419,10 +435,26 @@
                   <div class="form-group">
                       <input type="hidden" name="idtermofservice" value="{{ $getTermOfService->id }}">
                       <input type="text" name="urltermofservice" placeholder="Url" class="form-control" val ue="{{ $getTermOfService->value }}"><br>
-                      <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ nl2br($client->get('unity-asset/text_file/term-of-service.txt')) }}</textarea>
+                      <textarea name="contenttermofservice" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/term-of-service.txt')) }}</textarea>
                       <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                         <script>
-                          CKEDITOR.replace( 'contenttermofservice' );
+                          CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
+                          CKEDITOR.replace( 'contenttermofservice', {
+                            extraPlugins:'bbcode',
+                              removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                              fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                              toolbar: [
+                                [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
+                                [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
+                                [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar' ],
+                                '/',
+                                [ 'Bold', 'Italic', 'Underline' ],
+                                [ 'FontSize' ],
+                                [ 'TextColor' ],
+                                [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
+                                [ 'Maximize' ]
+                              ]
+                          } );
                           CKEDITOR.config.autoParagraph = false;
                           CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
                         </script>
@@ -464,22 +496,39 @@
                 <div class="form-group">
                   <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
                   <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
-                  <textarea name="contentabout" id="aboutasta" class="form-control" cols="30" rows="10">{{ tagsEnabler(nl2br($client->get('unity-asset/text_file/about.txt'))) }}</textarea>
+                  <textarea name="contentabout" id="aboutasta" class="form-control" cols="30" rows="10">{{ tagsEnabler($client->get('unity-asset/text_file/about.txt')) }}</textarea>
                   <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/standard/ckeditor.js"></script>
                   <script>
-                      CKEDITOR.replace( 'contentabout' );
+                      CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
+                      CKEDITOR.replace( 'contentabout', {
+                        extraPlugins:'bbcode',
+                        removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                        fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                        toolbar: [
+                          [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
+                          [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
+                          [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar' ],
+                          '/',
+                          [ 'Bold', 'Italic', 'Underline' ],
+                          [ 'FontSize' ],
+                          [ 'TextColor' ],
+                          [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
+                          [ 'Maximize' ]
+                        ]
+                      });
                       CKEDITOR.config.autoParagraph = false;
                       CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
                       CKEDITOR.config.coreStyles_italic = { element: 'i'};
-                      CKEDITOR.config.colorButton_foreStyle = { 
-                        element: 'color', 
-                        styles: {'color': '#(color)'}
-                        };
-                      CKEDITOR.config.fontSize_style = {
-                          element:        'size',
-                          styles:         { 'font-size': '#(size)' }
-                      };
-                      CKEDITOR.config.fontSize_sizes = '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px';
+                      // CKEDITOR.config.colorButton_foreStyle = { 
+                      //   element: 'color', 
+                      //   styles: {'color': '#(color)'}
+                      //   };
+                      // CKEDITOR.config.fontSize_style = {
+                      //     element:        'size',
+                      //     styles:         { 'font-size': '#(size)' }
+                      // };
+                      // CKEDITOR.config.extraPlugins = 'bbcode';
+                      // CKEDITOR.config.fontSize_sizes = '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px';
                   </script>
               </div>
             </div>

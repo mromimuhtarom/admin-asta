@@ -2,13 +2,13 @@ Asta poker mission is to provide a fun poker game experience through the conveni
 
 Please read these Terms of Service and our privacy policy before using Astapoker Services. These Terms of Service set out
 the terms and conditions that apply when you use our Services (described below). When you use our Services, you agree to be
-bound by these terms and conditions. If you don&#39t agree to all the terms and conditions, you must not use our Services.Account
+bound by these terms and conditions. If you don't agree to all the terms and conditions, you must not use our Services.Account
 information and security
 In order to use our Services, we may ask you to create an Account and select a
 password and/or provide us with certain personal information, which may include your name, email address, and, in some cases,
 payment information.
 
-You are responsible for maintaining the security of your Account. Don&#39t share your Account details with others or allow
+You are responsible for maintaining the security of your Account. Don't share your Account details with others or allow
 others to access or use your Account. We will treat all acts performed through your Account as being performed by you. You
 therefore accept responsibility for all acts done using your Account, whether or not authorized by you, including purchases
 made using any payment instrument (for example, credit card or PayPal), and you understand you may be held liable for losses
@@ -17,7 +17,7 @@ incurred by us or any other user of the Services caused by someone else using yo
 If you become aware of any actual or suspected loss, theft, fraud, or unauthorized use of your Account or Account password,
 please tell us immediately.
 
-<size style= fontsize=24 ><b>1. Using our service</b></size>
+<size=150><b>1. Using our service</b></size>
 
 We provide this service to you and others to help advance our mission. Instead, we want you to make the following commitments
 
@@ -31,7 +31,7 @@ We provide this service to you and others to help advance our mission. Instead, 
 
 We may delete content that you share that violates these provisions and, if applicable, we will
 take action against your account for the reasons described below. We can also deactivate your
-account if you repeatedly violate other people&#39s intellectual property rights.
+account if you repeatedly violate other people's intellectual property rights.
 
 
 <b>b. Additional Important Rules and Terms</b>
@@ -64,7 +64,7 @@ Products are provided &quotas is&quot and we do not guarantee that the Product i
 guarantees that the Product functions without interference, obstructions or defects.
 
 
-<b>2. Games and service</b>
+<size=150><b>2. Games and service</b></size>
 
 The Services are comprised of works that are owned or licensed by Astagame, and they are protected by copyright,
 trademark, trade dress, patent, and other worldwide intellectual property rights and other applicable laws, rules, or
@@ -75,13 +75,13 @@ the Services subject to these Terms, for your own noncommercial, entertainment p
 for any other purpose and agree that Zynga will have no liability to you for any damage or loss arising from unauthorized uses.
 
 
-<b>3. Mobile application providers, social networking, and third party terms</b>
+<size=150><b>3. Mobile application providers, social networking, and third party terms</b></size>
 
 This Agreement and these Terms are between you and Astapoker only, and not with Apple, Google, Facebook, or any other mobile
 application provider or social networking website. Astapoker is solely responsible for the Services and the maintenance and
 support of the Services. In addition to these Terms, your access and use of the Services is subject to applicable thirdparty terms
 of agreement, including the terms of service and usage rules of the application provider for your mobile device or the social
-networking websites that you use to access the Services (&ampldquoThird Party Terms&amprdquo). You must comply with all applicable ThirdParty
+networking websites that you use to access the Services (Third Party Terms). You must comply with all applicable ThirdParty
 Terms when accessing or using the Services.
 Asta Poker, not your mobile application provider or social networking website, is responsible for (a) addressing any claims arising
 in connection with the Services, which relate to product liability, the warranties expressed and not disclaimed herein, and consumer
@@ -89,14 +89,14 @@ protection (b) the investigation, defense, settlement, and discharge of any thir
 use of the Services infringes any thirdparty intellectual property rights.
 
 
-<b>4. Accuracy of billing and account information</b>
+<size=150><b>4. Accuracy of billing and account information</b></size>
 
 You agree to provide current, complete and accurate purchase and account information for all purchases made at out store.
 You agree to promptly update your account and other information, including your email address, bank account, anda credit card
 information, so that we can complete your transaction and contact you as needed.
 
 
-<b>5. Accuracy of billing and account information</b>
+<size=150><b>5. Accuracy of billing and account information</b></size>
 
 From time to time, we may offer limitedtime promotions. Please review the official rules or Feature Terms (if any)
 associated with any promotion. They will apply in addition to these Terms.
@@ -107,7 +107,7 @@ the Offer. Some Offers will be subject to taxes and other charges, travel, or ac
 which will be disclosed before you accept the offer. If you accept any Offer, you assume all liability associated with the Offer.
 
 
-<b>6. limitation of liability</b>
+<size=150><b>6. limitation of liability</b></size>
 
 Under no circumstances, including negligence, shall any member of the Group be liable for any special, incidental, direct,
 indirect or consequential damages whatsoever (including, without limitation, damages for loss of business profits, business
@@ -115,7 +115,7 @@ interruption, loss of business information, or any other pecuniary loss) arising
 if we had prior knowledge of the possibility of such damages.
 
 
-<b>7. Severability</b>
+<size=150><b>7. Severability</b></size>
 
 If any of the Terms and Conditions are determined by any competent authority to be invalid, unlawful or unenforceable to any
 extent, such term, condition or provision will, to that extent, be severed from these Terms and Conditions. All remaining terms,
@@ -124,10 +124,10 @@ or unenforceable will be amended in a manner consistent with the applicable law 
 original intent.
 
 
-<b>8. Terms</b>
+<size=150><b>8. Terms</b></size>
 
 This agreement and these Terms of Use, as amended from time to time by Asta Poker, are effective from the moment of acceptance
-by clicking on the &ampldquoContinue&amprdquo button, and shall remain in force indefinitely unless terminated by Asta Poker or you. For the
+by clicking on the "Continue button", and shall remain in force indefinitely unless terminated by Asta Poker or you. For the
 avoidance of doubt, you agree that you are bound by this agreement and these Terms of Use if you access or use the Services
 in any way.
 These Terms and Conditions are personal to you, and are not assignable, transferable or sublicensable by you except with our prior
