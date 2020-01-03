@@ -77,7 +77,7 @@
                         id="trash" 
                         data-toggle="modal" 
                         data-target="#deleteAll">
-                        <i class="fa  fa-trash-o"></i>
+                        <i class="fa fa-trash-o"></i>
                       </a>
                     </th>
                   </tr>

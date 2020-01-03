@@ -390,7 +390,7 @@
                                         '/',
                                         [ 'Bold', 'Italic', 'Underline' ],
                                         [ 'FontSize' ],
-                                        [ 'TextColor' ],
+                                        [ 'TextColor' ], 
                                         [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
                                         [ 'Maximize' ]
                                       ]

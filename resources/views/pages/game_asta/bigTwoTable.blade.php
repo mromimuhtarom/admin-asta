@@ -67,7 +67,7 @@
               <thead>
                 <tr>
                   @if($menu && $mainmenu && $submenu)
-                  <th></th>
+                  <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{translate_MenuContentAdmin('Select All')}}</th>
                   @endif
                   <th class="th-sm">{{ TranslateMenuGame('Table Name') }}</th>
                   <th class="th-sm">{{ TranslateMenuGame('Group') }}</th>
@@ -79,7 +79,15 @@
                   <th class="th-sm">{{ TranslateMenuGame('Max Buy') }}</th>
                   <th class="th-sm">{{ TranslateMenuGame('Timer') }}</th>
                   @if($menu && $mainmenu && $submenu)
-                  <th class="th-sm">{{ TranslateMenuGame('Action') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('Action') }}
+                    <a href="#" style="color:red; font-weight:bold;"
+                      class="delete"
+                      id="trash"
+                      data-toggle="modal"
+                      data-target="#deleteAll">
+                      <i class="fa fa-trash-o"></i>
+                    </a>
+                  </th>
                   @endif
                 </tr>
               </thead>
@@ -87,7 +95,7 @@
                 @foreach($tables as $tb)
                 @if($menu && $mainmenu && $submenu)
                   <tr>
-                    <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $tb->table_id }}"></td>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" id="deletepermission[]" data-pk="{{ $tb->table_id }}" class="deletepermission{{ $tb->table_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Room name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->roomname }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
@@ -203,6 +211,32 @@
   </div>
   <!-- End Modal delete data -->
 
+  <!-- Modal DELETE ALL -->
+  <div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete all selected Data')}}</h5>
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
+          <form action="{{ route('BigTwoTable-deleteAllB2') }}" method="post">
+            {{ method_field('delete')}}
+            {{ csrf_field() }}
+                <input type="hidden" name="AstaAll" id="AstaAll" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('No')}}</button>
+        </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Script -->
   <script type="text/javascript">
 
@@ -210,6 +244,19 @@
         $('table.table').dataTable( {
           "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
           "pagingType": "full_numbers",
+        });
+
+        $("#trash").hide();
+        //CHECK ALL
+        $('#checkAll').on('click', function(e) {
+          if($(this).is(':checked',true))  
+          {
+            $(".deleteIdAll").prop('checked', true);
+            $("#trash").show();
+          } else {  
+            $(".deleteIdAll").prop('checked',false);
+            $("#trash").hide();  
+          }  
         });
       });
 
@@ -322,6 +369,25 @@
             if($.trim(value) == '') {
               return 'This field is required';
             }
+          }
+        });
+
+        //select all delete
+        $('.delete').click(function(e) {
+          e.preventDefault();
+          var allVals = [];
+          $(".deleteIdAll:checked").each(function() {
+            allVals.push($(this).attr('data-pk'));
+            var join_selected_values = allVals.join(",");
+            $('#AstaAll').val(join_selected_values);
+          });
+        });
+        $("#trash").hide();
+        $(".deleteIdAll").click(function(e) {
+          if( $(".deleteIdAll:checked").length > 1) {
+            $("#trash").show();
+          } else {
+            $("#trash").hide();
           }
         });
       },

@@ -343,10 +343,6 @@ class GoldStoreController extends Controller
                     $main_height = imagesy($source);
 
                     // Menetapkan posisi gambar watermark
-                    // $dime_x = -180;
-                    // $dime_y = 200;
-                    // menyalin kedua gambar
-                    // imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
                     $pos_x = $width - $width_watermark;
                     $pos_y = $height - $height_watermark;
                     imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);

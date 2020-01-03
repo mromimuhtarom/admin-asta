@@ -852,6 +852,7 @@ public function detailTransaction($month, $year)
         } else {
             $id_last = $id->item_id;
         }
+        
         $id_new                                   = $id_last + 1;
         $file                                     = $request->file('file');
         $file_wtr                                 = $request->file('file1');
@@ -871,6 +872,7 @@ public function detailTransaction($month, $year)
             if($ukuran < 5242880)
             {
 
+                $order          = $request->order;
                 $title          = $request->title;
                 $goldAwarded    = $request->goldAwarded;
                 $priceCash      = $request->priceCash;
@@ -899,20 +901,31 @@ public function detailTransaction($month, $year)
 
 
                     // Memuat gambar utama
-                    $source = imagecreatefrompng($file->move(public_path('../public/upload/Gold/image1'), $nama_file_unik));
+                    $rootpath_main      =   '../public/upload/Gold/image1/';
+                    $upload_imagemain   =   '../public/upload/Gold/image1';
+                    $mainimage          =   Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_main       =   $mainimage->put($nama_file_unik, file_get_contents($file));
+                    $source             =   imagecreatefrompng($rootpath_main.$nama_file_unik);
+                    // $source = imagecreatefrompng($file->move(public_path('../public/upload/Gold/image1'), $nama_file_unik));
+                    
                     // Memuat gambar watermark
-                    $watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
+                    $rootpath_wtr       =   '../public/upload/Gold/image2/';
+                    $upload_imagewtr    =   '../public/upload/Gold/image2';
+                    $waterimage         =   Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_wtr        =   $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $watermark          =   imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                    //$watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
-                    $water_width = imagesx($watermark);
-                    $water_height = imagesy($watermark);
+                    $water_width    = imagesx($watermark);
+                    $water_height   = imagesy($watermark);
 
                     // mendapatkan lebar dan tinggi dari gambar utama
-                    $main_width = imagesx($source);
-                    $main_height = imagesy($source);
+                    $main_width     = imagesx($source);
+                    $main_height    = imagesy($source);
 
                     // Menetapkan posisi gambar watermark
-                    $pos_x = $width - $width_watermark;
+                    $pos_x = $width  - $width_watermark;
                     $pos_y = $height - $height_watermark;
                     imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                     
@@ -925,6 +938,12 @@ public function detailTransaction($month, $year)
                     $merge      = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                     
                     Storage::disk('s3')->put($awsPath, $temp);
+            
+                    $path   =   '../public/upload/Gold/image1/'.$nama_file_unik;
+                    File::delete($path);
+                    $path1  =   '../public/upload/Gold/image2/'.$nama_file_unik;
+                    File::delete($path1);
+
                     // imagepng($source, $thumbnail);
                     // imagedestroy($source);
                    // end watermark image
@@ -932,9 +951,11 @@ public function detailTransaction($month, $year)
                     // $file->move(public_path('unity-asset/store/gold'), $nama_file_unik);
                     $rootpath = 'unity-asset/store/gold/'.$nama_file_unik;
                     $img_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+
                 }
                           
                 $gold = ItemsCash::create([
+                    'order'      => $order,
                     'name'       => $title,
                     'item_get'   => $goldAwarded,
                     'price'      => $priceCash,

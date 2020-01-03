@@ -286,6 +286,7 @@ Route::middleware('authenticated')->group(function(){
                     Route::post('Table-update', 'TableController@update')->name('Table-update');
                     Route::post('Table-create', 'TableController@store')->name('Table-create');
                     Route::delete('Table-delete', 'TableController@destroy')->name('Table-delete');
+                    Route::delete('Table-deleteAllTpk', 'TableController@deleteAllSelectedTpk')->name('Table-deleteAllTpk');
                 });
             });
 
@@ -342,6 +343,7 @@ Route::middleware('authenticated')->group(function(){
                     Route::post('BigTwoTable-update', 'TableController@BigTwoupdate')->name('BigTwoTable-update');
                     Route::post('BigTwoTable-create', 'TableController@BigTwostore')->name('BigTwoTable-create');
                     Route::delete('BigTwoTable-delete', 'TableController@BigTwodestroy')->name('BigTwoTable-delete');
+                    Route::delete('BigTwoTable-deleteAllB2', 'TableController@BigTwoDeleteAll')->name('BigTwoTable-deleteAllB2');
                 });
             });
 
@@ -396,6 +398,7 @@ Route::middleware('authenticated')->group(function(){
                     Route::post('DominoSTable-update', 'TableController@DominoSusunupdate')->name('DominoSTable-update');
                     Route::post('DominoSTable-create', 'TableController@DominoSusunstore')->name('DominoSTable-create');
                     Route::delete('DominoSTable-delete', 'TableController@DominoSusundestroy')->name('DominoSTable-delete');
+                    Route::delete('DominoSTable-deleteAllDominoS', 'TableController@DominoSDeleteAll')->name('DominoSTable-deleteAllDominoS');
                 });
             });
 
@@ -450,6 +453,7 @@ Route::middleware('authenticated')->group(function(){
                     Route::post('DominoQTable-update', 'TableController@DominoQupdate')->name('DominoQTable-update');
                     Route::post('DominoQTable-create', 'TableController@DominoQstore')->name('DominoQTable-create');
                     Route::delete('DominoQTable-delete', 'TableController@DominoQdestroy')->name('DominoQTable-delete');
+                    Route::delete('DominoQTable-deleteAllDominoQ', 'TableController@DominoQDeleteAll')->name('DominoQTable-deleteAllDominoQ');
                 });
             });
 

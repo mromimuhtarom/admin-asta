@@ -748,7 +748,20 @@ class TableController extends Controller
             ]);
             return redirect()->route('Table_Asta_Poker')->with('success','Data Deleted');
         }
-        return redirect()->route('Table_Asta_Poker')->with('success','Something wrong');                
+        return redirect()->route('Table_Asta_Poker')->with('alert','Something wrong');                
+    }
+
+    public function deleteAllSelectedTpk(Request $request)
+    {
+        $ids    =   $request->AstaAll;
+        DB::table('asta_db.tpk_table')->whereIn('table_id', explode(",", $ids))->delete();
+        Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '4',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Hapus di menu table asta poker' .$ids
+        ]);
+        return redirect()->route('Table_Asta_Poker')->with('succes', 'Data deleted');
     }
 
 
@@ -766,7 +779,20 @@ class TableController extends Controller
             ]);
             return redirect()->route('Table_Big_Two')->with('success','Data Deleted');
         }
-        return redirect()->route('Table_Big_Two')->with('success','Something wrong');                
+        return redirect()->route('Table_Big_Two')->with('alert','Something wrong');                
+    }
+
+    public function BigTwoDeleteAll(Request $request)
+    {
+        $ids    =   $request->AstaAll;
+        DB::table('asta_db.bgt_table')->whereIn('table_id', explode(",", $ids))->delete();
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Hapus di menu table Big two' .$ids
+        ]);
+        return redirect()->route('Table_Big_Two')->with('success', 'Data deleted');
     }
 
 
@@ -785,7 +811,20 @@ class TableController extends Controller
             ]);
             return redirect()->route('Table_Domino_Susun')->with('success','Data Deleted');
         }
-        return redirect()->route('Table_Domino_Susun')->with('success','Something wrong');                
+        return redirect()->route('Table_Domino_Susun')->with('alert','Something wrong');                
+    }
+
+    public function DominoSDeleteAll(Request $request)
+    {
+        $ids    =   $request->AstaAll;
+        DB::table('asta_db.dms_table')->whereIn('table_id', explode(",", $ids))->delete();
+        Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '4',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Hapus di menu table Domino susun' .$ids
+        ]);
+        return redirect()->route('Table_Domino_Susun')->with('success', 'Data deleted');
     }
 
 
@@ -804,6 +843,21 @@ class TableController extends Controller
             ]);
             return redirect()->route('Table_Domino_QQ')->with('success','Data Deleted');
         }
-        return redirect()->route('Table_Domino_QQ')->with('success','Something wrong');                
+        return redirect()->route('Table_Domino_QQ')->with('alert','Something wrong');                
     }
+
+    public function DominoQDeleteAll(Request $request)
+    {
+        $ids    =   $request->AstaAll;
+        DB::table('asta_db.dmq_table')->whereIn('table_id', explode(",", $ids))->delete();
+        Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '4',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Hapus di menu table Domino QQ' .$ids
+        ]);
+        return redirect()->route('Table_Domino_QQ')->with('succes', 'Data deleted');
+    }
+
+
 }

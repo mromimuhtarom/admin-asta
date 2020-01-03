@@ -389,7 +389,6 @@ class GiftController extends Controller
                     File::delete($path1);
                 }
 
-
                     Gift::where('id', '=', $pk)->update([
                         'img_ver' =>  $imageversion,
                         'width'   =>  $width,
