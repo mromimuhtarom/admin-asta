@@ -136,7 +136,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  $description
+          'desc'      =>  'alasan: '.$description.' / di edit pada menu tambah transaksi'
         ]);
 
       elseif($columnname == 'gold'):
@@ -159,7 +159,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  $description
+          'desc'      =>  'alasan: '.$description.' / di edit pada menu tambah transaksi'
         ]);
 
       elseif($columnname == 'point'):
@@ -183,7 +183,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  $description 
+          'desc'      =>  'alasan: '.$description.' / di edit pada menu tambah transaksi'
         ]);
       endif;
 
