@@ -87,9 +87,9 @@
                 <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $rk->id }}" class="deletepermission{{ $rk->id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-name="id" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->id }}</a></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->name }}</a></td>
-                <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rk->id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ $rk->gold }}</a></td>
+                <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rk->id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ number_format($rk->gold, 2) }}</a></td>
                 <td><a href="#" class="typeday" data-name="type" data-pk="{{ $rk->id }}" data-type="select" data-url="{{ route('ResellerRank-update') }}">{{ TranslateReseller(strTransactionType($rk->type)) }}</a></td>
-                <td><a href="#" class="usertext" data-name="bonus" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->bonus }}</a></td>
+                <td><a href="#" class="usertext" data-name="bonus" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ number_format($rk->bonus, 2) }}</a></td>
                 <td>
                     <a href="#" style="color:red;" class="delete{{ $rk->id }}" 
                         id="delete" 
@@ -104,9 +104,9 @@
             <tr>
               <td>{{ $rk->id}}</td>
               <td>{{ $rk->name }}</td>
-              <td>{{ $rk->gold }}</td>
+              <td>{{ number_format($rk->gold, 2) }}</td>
               <td>{{ strTransactionType($rk->type) }}</td>
-              <td>{{ $rk->bonus }}</td>
+              <td>{{ number_format($rk->bonus, 2) }}</td>
             </tr>
             @endif
             @endforeach

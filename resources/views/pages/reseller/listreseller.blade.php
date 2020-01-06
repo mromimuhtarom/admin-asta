@@ -74,7 +74,7 @@
                   <td><a href="#" class="usertext" data-name="fullname" data-pk="{{ $rsl->reseller_id }}" data-type="text" data-url="{{ route('ListReseller-update') }}">{{ $rsl->fullname }}</a></td>
                   <td><a href="#" class="usertext" data-name="phone" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->phone }}</a></td>
                   <td><a href="#" class="usertext" data-name="email" data-pk="{{ $rsl->reseller_id }}" data-type="email" data-url="{{ route('ListReseller-update') }}">{{ $rsl->email }}</a></td>
-                  <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ $rsl->gold }}</a></td>
+                  <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ number_format($rsl->gold, 2) }}</a></td>
                   <td><a href="#" class="rank" data-name="rank_id" data-value="{{ $rsl->rank_id }}" data-pk="{{ $rsl->reseller_id }}" data-type="select" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rankname }}</a></td>
                   <td><a href="#" class="password{{ $rsl->reseller_id }} btn btn-primary" id="password" data-pk="{{ $rsl->reseller_id }}" data-toggle="modal" data-target="#reset-password">{{ translate_MenuContentAdmin('Reset Password')}}</a></td>
                   <td>
@@ -94,7 +94,7 @@
                 <td>{{ $rsl->fullname }}</td>
                 <td>{{ $rsl->phone }}</td>
                 <td>{{ $rsl->email }}</td>
-                <td>{{ $rsl->gold }}</td>
+                <td>{{ number_format($rsl->gold, 2) }}</td>
                 <td>{{ $rsl->rankname }}</td>
               </tr>
               @endif

@@ -65,7 +65,7 @@
 														<td>{{ $trns->username }}</td>
 														<td>{{ $chip->name }}</td>	
 														<td>{{ $trns->quantity }}</td>
-														<td>{{ $trns->item_price }}</td>
+														<td>{{ number_format($trns->item_price, 2) }}</td>
 														<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_id}} {{ translate_MenuTransaction('using') }} {{ $trns->paymentname }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }}</td>
 														<td>{{ $trns->paymentname }}</td>
 													@if ($menu && $mainmenu)
@@ -89,7 +89,7 @@
 														<td>{{ $trns->username }}</td>
 														<td>{{ $gold->name }}</td>
 														<td>{{ $trns->quantity }}</td>
-														<td>{{ $trns->item_price }}</td>
+														<td>{{ number_format($trns->item_price, 2) }}</td>
 														<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_id }} {{ translate_MenuTransaction('using') }} {{ $trns->paymentname }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }}</td>																								
 														<td>{{ $trns->paymentname}}</td>
 														@if($menu && $mainmenu)
@@ -113,7 +113,7 @@
 														<td>{{ $trns->username }}</td>
 														<td>{{ $goods->name }}</td>
 														<td>{{ $trns->quantity }}</td>
-														<td>{{ $trns->item_price }}</td>
+														<td>{{ number_format($trns->item_price, 2) }}</td>
 														<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_id }} {{ translate_MenuTransaction('using') }} {{ $trns->paymentname }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }}</td>
 														<td>{{ $trns->paymentname }}</td>
 														@if($menu && $mainmenu)

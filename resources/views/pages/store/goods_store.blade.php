@@ -142,8 +142,8 @@
                       </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
-                    <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->price }}</a></td>
-                    <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->qty }}</a></td>
+                    <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ number_format($goods->price, 2) }}</a></td>
+                    <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ number_format($goods->qty) }}</a></td>
                     {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
                     <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
                     <td>
@@ -191,8 +191,8 @@
                       </div>
                     </td>
                     <td>{{ $goods->name }}</td>
-                    <td>{{ $goods->price }}</td>
-                    <td>{{ $goods->qty }}</td>
+                    <td>{{ number_format($goods->price, 2) }}</td>
+                    <td>{{ number_format($goods->qty) }}</td>
                     {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
                     <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
                     <td></td>
@@ -209,8 +209,8 @@
                       </div>
                   </td>
                   <td>{{ $goods->name }}</td>
-                  <td>{{ $goods->price }}</td>
-                  <td>{{ $goods->qty }}</td>
+                  <td>{{ number_format($goods->price, 2) }}</td>
+                  <td>{{ number_format($goods->qty) }}</td>
                   {{-- <td>{{  strTypeTransaction($goods->trans_type) }}</td> --}}
                   <td>{{ strEnabledDisabled($goods->status) }}</td>
               </tr>

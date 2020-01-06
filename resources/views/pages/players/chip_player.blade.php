@@ -39,12 +39,8 @@
                     </div>
                     <div class="col" >
                         <select name="inputGame" class="form-control">
-<<<<<<< HEAD
                             <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
-=======
-                            <option value="">Choose Game</option>
                             <option value="0">Utama</option>
->>>>>>> f4887084d893d6a708d8216892ff130be5814261
                             @foreach ($game as $gm)
                             <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                             @endforeach

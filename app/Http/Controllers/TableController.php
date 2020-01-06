@@ -857,7 +857,7 @@ class TableController extends Controller
             'desc'      =>  'Hapus di menu table Domino QQ' .$ids
         ]);
         return redirect()->route('Table_Domino_QQ')->with('succes', 'Data deleted');
+    
     }
-
 
 }

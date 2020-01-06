@@ -93,7 +93,7 @@
                     @foreach($transactions as $tr)
                     <tr>
                         <td><a href="{{ route('detailResellerTransaction', [$tr->monthnumber,$tr->year]) }}">{{ $tr->monthname }} {{ $tr->year }}</a></td>
-                        <td>{{ $tr->totalgold }}</td>
+                        <td>{{ number_format($tr->totalgold, 2) }}</td>
                     </tr>
                     @endforeach
                 </tbody>

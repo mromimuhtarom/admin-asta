@@ -168,7 +168,7 @@
                           </div>
                     </td>
                     <td>{{ $emot->name }}</td>
-                    <td>{{ $emot->price }}</td>
+                    <td>{{ number_format($emot->price, 2) }}</td>
                     {{-- <td>{{ $emot->strCategory() }}</td> --}}
                     <td>{{ strEnabledDisabled($emot->status) }}</td>
                 </tr>

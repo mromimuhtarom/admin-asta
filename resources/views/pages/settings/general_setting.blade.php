@@ -67,60 +67,60 @@
                     <td>{{ TranslateGeneralSettings('Award Signup') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_signup->value }}</a>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_signup->value, 2) }}</a>
                     </td>
                     @else
-                    <td>{{ $award_signup->value }}</td>
+                    <td>{{ number_format($award_signup->value, 2) }}</td>
                     @endif
                   </tr>
                   <tr>
                     <td>{{ TranslateGeneralSettings('Award Signup Guest') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_signup_guest->value }}</a>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_signup_guest->value, 2) }}</a>
                     </td>
                     @else
-                    <td>{{ $award_signup_guest->value }} </td>
+                    <td>{{ number_format($award_signup_guest->value, 2) }} </td>
                     @endif
                   </tr>
                   <tr>
                     <td>{{ TranslateGeneralSettings('Award Daily Chips') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_chips->value }}</a>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_chips->value, 2) }}</a>
                     </td>
                     @else
-                    <td>{{ $award_daily_chips->value }}</td>
+                    <td>{{ number_format($award_daily_chips->value, 2) }}</td>
                     @endif
                   </tr>
                   <tr>
                     <td>{{ TranslateGeneralSettings('Award Daily Chips Guest') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_chips_guest->value }}</a>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_chips_guest->value, 2) }}</a>
                     </td>
                     @else
-                    <td>{{ $award_daily_chips_guest->value }}</td>
+                    <td>{{ number_format($award_daily_chips_guest->value, 2) }}</td>
                     @endif
                   </tr>
                   <tr>
                     <td>{{ TranslateGeneralSettings('Award Daily Days') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_days->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_days->value }}</a>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_days->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_days->value, 2) }}</a>
                     </td>
                     @else
-                    <td>{{ $award_daily_days->value }}</td>
+                    <td>{{ number_format($award_daily_days->value, 2) }}</td>
                     @endif
                   </tr>
                   <tr>
                     <td>{{ TranslateGeneralSettings('Award Daily Multiply') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_multiply->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $award_daily_multiply->value }}</a>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_multiply->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_multiply->value, 2) }}</a>
                     </td>
                     @else
-                    <td>{{ $award_daily_multiply->value }}</td>
+                    <td>{{ number_format($award_daily_multiply->value, 2) }}</td>
                     @endif
                   </tr>
                 </tbody>

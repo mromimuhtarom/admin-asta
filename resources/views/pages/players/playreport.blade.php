@@ -149,8 +149,8 @@
                             
                             {{-- {{ $history->hand_card_round }} --}}
                           </td>                          
-                          <td>{{ $history->bet }}</td>
-                          <td>{{ $history->win_lose }}</td>
+                          <td>{{ number_format($history->bet, 2) }}</td>
+                          <td>{{ number_format($history->win_lose,2 ) }}</td>
                           @php
                           if($history->status === 0) {
                               $status = 'Lose';

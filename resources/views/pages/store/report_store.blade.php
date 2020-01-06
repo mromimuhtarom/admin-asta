@@ -105,7 +105,7 @@
                         @if ($tr->item_type == 1)
                     <td>{{ $tr->item_price }} {{ Transl}}</td>
                         @elseif($tr->item_type == 2)
-                        <td> {{ strFormatMoney($tr->item_price) }}</td>
+                        <td> {{ number_format($tr->item_price) }}</td>
                         @elseif($tr->item_type == 3)
                         <td>{{ $tr->item_price }} Point</td>
                         @endif

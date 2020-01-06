@@ -80,15 +80,15 @@
                 <tr>
                     {{-- <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $kt->room_id }}"></td> --}}
                     <td>{{--<a href="#" class="usertext" data-title="Title" data-name="name" data-pk="{{ $kt->room_id }}" data-type="text" data-url="{{ route('Category-update')}}">--}}{{ $kt->name }}{{--</a>--}}</td>
-                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->min_buy }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ $kt->max_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ number_format($kt->min_buy, 2) }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $kt->room_id }}" data-type="number" data-url="{{ route('Category-update')}}">{{ number_format($kt->max_buy, 2) }}</a></td>
                     {{-- <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $kt->room_id }}" id="delete" data-pk="{{ $kt->room_id }}" data-toggle="modal" data-target="#delete-category"><i class="fa fa-times"></i></a></td> --}}
                 </tr>
                 @else 
                 <tr>
                     <td>{{ $kt->name }}</td>
-                    <td>{{ $kt->min_buy }}</td>
-                    <td>{{ $kt->max_buy }}</td>
+                    <td>{{ number_format($kt->min_buy, 2) }}</td>
+                    <td>{{ number_format($kt->max_buy, 2) }}</td>
                 </tr>
                 @endif
                 @endforeach

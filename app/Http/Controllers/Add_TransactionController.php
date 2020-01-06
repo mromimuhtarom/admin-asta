@@ -11,6 +11,8 @@ use App\BalanceChip;
 use App\BalanceGold;
 use App\BalancePoint;
 use Carbon\Carbon;
+use App\Log;
+use Session;
 
 class Add_TransactionController extends Controller
 {
@@ -107,13 +109,19 @@ class Add_TransactionController extends Controller
       $columnname    = $request->columnname;
       $valuecurrency = $request->currency;
       $type          = $request->type;
+      $plusminus     = $request->operator_aritmatika;
+      $description   = $request->description;
       
       $stat = Stat::where('user_id', '=', $user_id)->first();
       
-
-
       if($columnname == 'chip'):
-        $totalbalance = $stat->chip + $valuecurrency;
+        if( $plusminus == "+"):    
+          $totalbalance = $stat->chip + $valuecurrency;
+        else:
+          $totalbalance = $stat->chip - $valuecurrency;
+        endif;
+
+        
         $balance = BalanceChip::create([
             'user_id'   => $user_id,
             'action_id' => $type,
@@ -123,8 +131,21 @@ class Add_TransactionController extends Controller
             'balance'   => $totalbalance,
             'datetime'  => Carbon::now('GMT+7')
         ]);
+
+        Log::create([
+          'op_id'     =>  Session::get('userId'),
+          'action_id' =>  '2',
+          'datetime'  =>  Carbon::now('GMT+7'),
+          'desc'      =>  $description
+        ]);
+
       elseif($columnname == 'gold'):
-        $totalbalance = $stat->gold + $valuecurrency;
+        if( $plusminus == "+"):    
+          $totalbalance = $stat->gold + $valuecurrency;
+        else:
+          $totalbalance = $stat->gold - $valuecurrency;
+        endif;
+
         $balance = BalanceGold::create([
             'user_id'   => $user_id,
             'action_id' => $type,
@@ -133,8 +154,21 @@ class Add_TransactionController extends Controller
             'balance'   => $totalbalance,
             'datetime'  => Carbon::now('GMT+7')
         ]);
+
+        Log::create([
+          'op_id'     =>  Session::get('userId'),
+          'action_id' =>  '2',
+          'datetime'  =>  Carbon::now('GMT+7'),
+          'desc'      =>  $description
+        ]);
+
       elseif($columnname == 'point'):
-        $totalbalance = $stat->point + $valuecurrency;
+        if( $plusminus == "+"):    
+          $totalbalance = $stat->point + $valuecurrency;
+        else:
+          $totalbalance = $stat->point - $valuecurrency;
+        endif;
+
         $balance = BalancePoint::create([
             'user_id'   => $user_id,
             'game_id'   => 0,
@@ -144,13 +178,23 @@ class Add_TransactionController extends Controller
             'balance'   => $totalbalance,
             'datetime'  => Carbon::now('GMT+7')
         ]);
+
+        Log::create([
+          'op_id'     =>  Session::get('userId'),
+          'action_id' =>  '2',
+          'datetime'  =>  Carbon::now('GMT+7'),
+          'desc'      =>  $description 
+        ]);
       endif;
+
       Stat::where('user_id', '=', $user_id)->update([
         $columnname => $totalbalance
       ]);
-
+      
 
       return back()->with('success', 'Successfull Update');
-    } 
+
+    
+    }
 
 }

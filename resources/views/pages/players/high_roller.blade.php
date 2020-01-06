@@ -45,10 +45,10 @@
             <tbody>
                 @foreach($player as $plyr)
               <tr>
-                <td>{{ number_format($plyr->chip, 2,',', '.') }}</td>
+                <td>{{ number_format($plyr->chip, 2) }}</td>
                 <td>{{ $plyr->username }}</td>
                 <td>{{ $plyr->name }}</td>
-                <td>{{ $plyr->gold}}</td>
+                <td>{{ number_format($plyr->gold, 2)}}</td>
               </tr>
               @endforeach
             </tbody>

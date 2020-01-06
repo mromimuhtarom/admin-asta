@@ -68,7 +68,7 @@
                         <div class="table-outer">
                             <table class="table table-bordered">
                                 <thead>
-                                    <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission"></th>
+                                    <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission"></th>
                                     <th>File</th>
                                     <th>{{ TranslateMenuGame('Name')}}</th>
                                     <th>{{ translate_menuTransaction('Type')}}</th>
@@ -80,7 +80,7 @@
                                             class="delete" 
                                             id="trash" 
                                             data-toggle="modal" 
-                                            data-target="#deleteAll"><i class="fa  fa-trash-o"></i>
+                                            data-target="#deleteAll"><i class="fa fa-trash-o"></i>
                                         </a>
                                       </th>
                                     @endif
@@ -160,7 +160,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td style="width:100px;"><input id="checkAll2" type="checkbox" name="deletepermission" class="deletepermission"></td>
+                                        <td><input id="checkAll2" type="checkbox" name="deletepermission" class="deletepermission"></td>
                                         <td>File</td>
                                         <td>{{ TranslateMenuGame('Name')}}</td>
                                         <td>{{ translate_menuTransaction('Type')}}</td>
@@ -172,7 +172,7 @@
                                                 class="delete2" 
                                                 id="trash2" 
                                                 data-toggle="modal" 
-                                                data-target="#deleteAll2"><i class="fa  fa-trash-o"></i>
+                                                data-target="#deleteAll2"><i class="fa fa-trash-o"></i>
                                             </a>
                                           </td>
                                         @endif
@@ -586,8 +586,58 @@
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+        "ordering": false,
       });
 
+      //=============================== delete check all IOS =====================================//
+    //check all IOS
+    $('#trash2').hide();
+      //check all
+      $('#checkAll2').on('click', function(e) {
+        if($(this).is(":checked", true))
+        {
+          $(".deleteIdAll2").prop('checked', true);
+          $("#trash2").show();
+        }else{
+          $(".deleteIdAll2").prop('checked', false);
+          $("#trash2").hide();
+        }
+      })
+
+
+    $('.delete2').click(function(e) {
+      e.preventDefault();
+      var allValsIOS = [];
+      var alllinkIOS = [];
+      var allnameIOS = [];
+      $('.deleteIdAll2:checked').each(function() {
+        allValsIOS.push($(this).attr('data-pk'));
+        alllinkIOS.push($(this).attr('data-link'));
+        allnameIOS.push($(this).attr('data-name'));
+
+        var join_selected_valuesIOS = allValsIOS.join(",");
+        var join_selected_linkIOS = alllinkIOS.join(",");
+        var join_selected_nameIOS = allnameIOS.join(",");
+
+        $('#ids2').val(join_selected_valuesIOS);
+        $('#LinksAll2').val(join_selected_linkIOS);
+        $('#Names2').val(join_selected_nameIOS);
+
+      });
+    });
+
+    //hide and show icon delete all
+    $('#trash2').hide();
+    $(".deleteIdAll2").click(function(e) {
+      
+        if($(".deleteIdAll2:checked").length > 1) {
+          $("#trash2").show();
+        }else{
+          $("#trash2").hide();
+        }
+    });
+
+      //=============================== delete check all android ====================================//
       //check all android
       $('#trash').hide();
       //check all
@@ -602,8 +652,8 @@
         }
       });
 
-      //=============================== delete check all android ====================================//
-    $('.delete').click(function(e) {
+      //mengambil data
+      $('.delete').click(function(e) {
       e.preventDefault();
       var allVals = [];
       var alllink = [];
@@ -634,51 +684,6 @@
         }
     });
 
-    //check all IOS
-    $('#trash2').hide();
-    //CHECK ALL
-    $('#checkAll2').on('click', function(e) {
-      if($(this).is(':checked', true))
-      {
-        $(".deleteIdAll2").prop('checked', true);
-        $("#trash2").show();
-      }else{
-        $(".deleteIdAll2").prop('checked', false);
-        $("#trash2").hide();
-      }
-    });
-
-    //=============================== delete check all IOS =====================================//
-    $('.delete2').click(function(e) {
-      e.preventDefault();
-      var allValsIOS = [];
-      var alllinkIOS = [];
-      var allnameIOS = [];
-      $('.deleteIdAll2:checked').each(function() {
-        allValsIOS.push($(this).attr('data-pk'));
-        alllinkIOS.push($(this).attr('data-link'));
-        allnameIOS.push($(this).attr('data-name'));
-
-        var join_selected_valuesIOS = allValsIOS.join(",");
-        var join_selected_linkIOS = alllinkIOS.join(",");
-        var join_selected_nameIOS = allnameIOS.join(",");
-
-        $('#ids2').val(join_selected_valuesIOS);
-        $('#LinksAll2').val(join_selected_linkIOS);
-        $('#Names2').val(join_selected_nameIOS);
-
-      });
-    });
-
-    //hide and show icon delete all
-    $('#trash2').hide();
-    $(".deleteIdAll2").click(function(e) {
-      if($(".deleteIdAll2:checked").length > 1) {
-        $("#trash2").show();
-      }else{
-        $("#trash2").hide();
-      }
-    });
 
 
     });
@@ -687,6 +692,7 @@
       "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
       "autoWidth" : true,
       "paging": false,
+      "ordering": false,
       "classes": {
         "sWrapper": "dataTables_wrapper dt-bootstrap4"
       },
@@ -710,7 +716,6 @@
         });
        
       },
-    
     
       responsive: false
     });

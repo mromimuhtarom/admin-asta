@@ -119,11 +119,11 @@
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Table Name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('Table-update')}}">{{ $tb->roomname }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update')}}">{{ $tb->max_player }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->small_blind }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->big_blind }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->jackpot }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->min_buy }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->max_buy }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Small Blind" data-name="small_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->small_blind, 2) }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Big Blind" data-name="big_blind" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->big_blind, 2) }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->jackpot, 2) }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->min_buy, 2) }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->max_buy, 2) }}</a></td>
                     <td><a href="#" class="usertext" data-title="Timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ $tb->timer }}</a></td>
                     <td><a href="#" style="color:red;" class="delete{{ $tb->table_id }}" id="delete" data-pk="{{ $tb->table_id }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
@@ -132,11 +132,11 @@
                       <td>{{ $tb->name }}</td>
                       <td>{{ $tb->roomname }}</td>
                       <td>{{ $tb->max_player }}</td>
-                      <td>{{ $tb->small_blind }}</td>
-                      <td>{{ $tb->big_blind }}</td>
-                      <td>{{ $tb->jackpot }}</td>
-                      <td>{{ $tb->min_buy }}</td>
-                      <td>{{ $tb->max_buy }}</td>
+                      <td>{{ number_format($tb->small_blind, 2) }}</td>
+                      <td>{{ number_format($tb->big_blind, 2) }}</td>
+                      <td>{{ number_format($tb->jackpot, 2) }}</td>
+                      <td>{{ number_format($tb->min_buy, 2) }}</td>
+                      <td>{{ number_format($tb->max_buy, 2) }}</td>
                       <td>{{ $tb->timer }}</td>
                   </tr>
                   @endif

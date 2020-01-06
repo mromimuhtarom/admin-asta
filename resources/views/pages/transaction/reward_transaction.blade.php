@@ -65,7 +65,7 @@
 											<td>{{ $trns->username }}</td>
 											<td>{{ $trns->item_name }}</td>	
 											<td>{{ $trns->quantity }}</td>
-											<td>{{ $trns->item_price }}</td>
+											<td>{{ number_format($trns->item_price, 2) }}</td>
 											<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_name }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }} Point</td>
 											@if ($menu && $mainmenu)
 											<td>

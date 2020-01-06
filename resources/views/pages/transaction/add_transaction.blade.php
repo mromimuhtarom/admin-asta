@@ -93,6 +93,10 @@
                                                 data-target="#modalChip{{ $transaction->user_id }}">
                                                 <i class="fa fa-plus"></i>
                                             </button>
+                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
+                                                data-target="#modalChipMinus{{ $transaction->user_id }}">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </td>
@@ -104,6 +108,10 @@
                                                 data-target="#modalPoint{{ $transaction->user_id }}">
                                                 <i class="fa fa-plus"></i>
                                             </button>
+                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
+                                                data-target="#modalPointMinus{{ $transaction->user_id }}">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </td>
@@ -114,6 +122,10 @@
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
                                                 data-target="#modalGold{{ $transaction->user_id }}">
                                                 <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
+                                                data-target="#modalGoldMinus{{ $transaction->user_id }}">
+                                                <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -133,107 +145,189 @@
 
 
 @foreach ($add_transaction as $transaction)
-<!-- Modal Insert -->
-<div class="modal fade" id="modalChip{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><i
-                        class="fa fa-plus-square"></i>Add Transaction Chip</h4>
-                <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="fa fa-remove"></i>
-                </button>
-            </div>
-            <form action="{{ route('AddTransaction-update') }}" method="post">
-                @csrf
-                <div class="modal-body">
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
-                                <input type="hidden" name="columnname" value="chip">
-                                <input type="number" name="currency" placeholder="Chip" class="form-control" required><br>
-                                <select name="type" class="form-control" id="">
-                                    <option value="">Select Type</option>
-                                    @foreach ($actblnc as $key => $act)
-                                        <option value="{{ $key }}"> {{ $act }}</option>
-                                    @endforeach
-                                </select>
+{{-- MODAL INSERT LOWER CHIP --}}
+        <!-- Modal Insert -->
+        <div class="modal fade" id="modalChip{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel"><i
+                                class="fa fa-plus-square"></i>Tambah Transaction Chip</h4>
+                        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                    <form action="{{ route('AddTransaction-update') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input type="hidden" name="operator_aritmatika" value="+">
+                                        <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+                                        <input type="hidden" name="columnname" value="chip">
+                                        <input type="number" min="0" name="currency" placeholder="Chip" class="form-control" required><br>
+                                        <select name="type" class="form-control" id="">
+                                            <option value="">Select Type</option>
+                                            @foreach ($actblnc as $key => $act)
+                                                <option value="{{ $key }}"> {{ $act }}</option>
+                                            @endforeach
+                                        </select><br>
+                                        <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Chip ditambah"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn sa-btn-primary submit-data">
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                            </button>
+                            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn sa-btn-primary submit-data">
-                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
-                    </button>
-                    <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<!-- End Modal Insert -->
-
-<!-- Modal Insert -->
-<div class="modal fade" id="modalPoint{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Add Transaction Point</h4>
-                <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="fa fa-remove"></i>
-                </button>
             </div>
-            <form action="{{ route('AddTransaction-update') }}" method="post">
-                @csrf
-                <div class="modal-body">
+        </div>
+        <!-- End Modal Insert -->
+        <!-- Modal minus -->
+        <div class="modal fade" id="modalChipMinus{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel"><i
+                                class="fa fa-plus-square"></i>Kurang Transaction Chip</h4>
+                        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                    <form action="{{ route('AddTransaction-update') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
-                                <input type="hidden" name="columnname" value="point">
-                                <input type="number" name="currency" placeholder="Point" class="form-control" required><br>
-                                <select name="type" class="form-control" id="">
-                                    <option value="">Select Type</option>
-                                    @foreach ($actblnc as $key => $act)
-                                        <option value="{{ $key }}"> {{ $act }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input type="hidden" name="operator_aritmatika" value="-">
+                                        <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+                                        <input type="hidden" name="columnname" value="chip">
+                                        <input type="number" min="0" name="currency" placeholder="Chip" class="form-control" required><br>
+                                        <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Chip dikurangi"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn sa-btn-primary submit-data">
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                            </button>
+                            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn sa-btn-primary submit-data">
-                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
-                    </button>
-                    <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
+        <!-- End Modal minus -->
 
+{{-- MODAL INSERT DAN LOWER TRANSACTION POINT --}}
+        <!-- Modal Insert -->
+        <div class="modal fade" id="modalPoint{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Tambah Transaction Point</h4>
+                        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                    <form action="{{ route('AddTransaction-update') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
 
-<!-- End Modal Insert -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input type="hidden" name="operator_aritmatika" value="+">
+                                        <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+                                        <input type="hidden" name="columnname" value="point">
+                                        <input type="number" min="0" name="currency" placeholder="Point" class="form-control" required><br>
+                                        <select name="type" class="form-control" id="">
+                                            <option value="">Select Type</option>
+                                            @foreach ($actblnc as $key => $act)
+                                                <option value="{{ $key }}"> {{ $act }}</option>
+                                            @endforeach
+                                        </select><br>
+                                        <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Point ditambah"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn sa-btn-primary submit-data">
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                            </button>
+                            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Insert -->
+        <!-- Modal lower -->
+        <div class="modal fade" id="modalPointMinus{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Kurang Transaction Point</h4>
+                        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                    <form action="{{ route('AddTransaction-update') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
 
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input type="hidden" name="operator_aritmatika" value="-">
+                                        <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+                                        <input type="hidden" name="columnname" value="point">
+                                        <input type="number" min="0" name="currency" placeholder="Point" class="form-control" required><br>
+                                        <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Poin dikurangi"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn sa-btn-primary submit-data">
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                            </button>
+                            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Lower -->
 
+{{-- MODAL INSERT AND LOWER TRANSACTION GOLD --}}
 <!-- Modal Insert -->
 <div class="modal fade" id="modalGold{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><i
-                        class="fa fa-plus-square"></i>Add Transaction Gold</h4>
+                        class="fa fa-plus-square"></i>Tambah Transaction Gold</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
@@ -245,16 +339,59 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
+                                <input type="hidden" name="operator_aritmatika" value="+">
                                 <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                 <input type="hidden" name="username" value="{{ $transaction->username }}">
                                 <input type="hidden" name="columnname" value="gold">
-                                <input type="number" name="currency" placeholder="Gold" class="form-control" required><br>
+                                <input type="number" min="0" name="currency" placeholder="Gold" class="form-control" required><br>
                                 <select name="type" class="form-control" id="">
                                     <option value="">Select Type</option>
                                     @foreach ($actblnc as $key => $act)
                                         <option value="{{ $key }}"> {{ $act }}</option>
                                     @endforeach
-                                </select>
+                                </select><br>
+                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Koin ditambah"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn sa-btn-primary submit-data">
+                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                    </button>
+                    <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal Insert -->
+<!-- Modal Lower -->
+<div class="modal fade" id="modalGoldMinus{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"><i
+                        class="fa fa-plus-square"></i>Kurang Transaction Gold</h4>
+                <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-remove"></i>
+                </button>
+            </div>
+            <form action="{{ route('AddTransaction-update') }}" method="post">
+                @csrf
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="hidden" name="operator_aritmatika" value="-">
+                                <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+                                <input type="hidden" name="username" value="{{ $transaction->username }}">
+                                <input type="hidden" name="columnname" value="gold">
+                                <input type="number" min="0" name="currency" placeholder="Gold" class="form-control" required><br>
+                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Koin dikurangi"></textarea>
                             </div>
                         </div>
                     </div>

@@ -126,9 +126,9 @@
             <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id}}</a></td>
             <td>{{ $regis->level }}</td>
             <td>{{ $regis->username }}</td>
-            <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->chip }}</a></td>
-            <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->point }}</a></td>
-            <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ $regis->gold }}</a></td>
+            <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->chip, 2) }}</a></td>
+            <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->point, 2) }}</a></td>
+            <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->gold, 2) }}</a></td>
             {{-- <td><a href="#"class="status" data-title="Status" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td> --}}
             <td><a href="#"class="status" data-toggle="modal" data-target="#ModalBanned{{ $regis->user_id }}">{{ Translate_menuPlayers($regis->strStatus()) }}</a></td>
             <td>{{ $regis->join_date }}</td>

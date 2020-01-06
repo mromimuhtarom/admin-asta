@@ -111,8 +111,8 @@
                                 <td>{{ $ol->user_id }}</td>
                                 <td>{{ $ol->username }}</td>
                                 <td>{{ $ol->rank_name }}</td>
-                                <td>{{ $ol->chip }}</td>
-                                <td>{{ $ol->gold }}</td>
+                                <td>{{ number_format($ol->chip, 2) }}</td>
+                                <td>{{ number_format($ol->gold, 2) }}</td>
                                 <td>{{ $ol->strUser_type() }}</td>
                                 <td>{{ $ol->game_name }}</td>
                                 @php

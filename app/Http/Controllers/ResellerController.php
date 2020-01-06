@@ -560,6 +560,12 @@ public function detailTransaction($month, $year)
         endif;
 
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
+      } else if ($startDate != NULL && $endDate != NULL) {
+          $balancedetails = $balanceReseller->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
+                                            ->orderBy('asta_db.reseller_balance.datetime', 'asc')
+                                            ->get();
+                                            
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
       }
     }
 //----- End Search Balance Reseller -----//

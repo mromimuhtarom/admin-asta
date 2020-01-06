@@ -95,9 +95,9 @@
                         <td>{{ $bd->reseller_id }}</td>
                         <td>{{ $bd->username }}</td>
                         {{-- <td></td> --}}
-                        <td>{{ $bd->debet }}</td>
-                        <td>{{ $bd->credit }}</td>
-                        <td>{{ $bd->balance }}</td>
+                        <td>{{ number_format($bd->debet, 2) }}</td>
+                        <td>{{ number_format($bd->credit, 2) }}</td>
+                        <td>{{ number_format($bd->balance, 2) }}</td>
                         <td>{{ $bd->action }}</td> 
                         <td>{{ $bd->datetime }}</td>
                     </tr>

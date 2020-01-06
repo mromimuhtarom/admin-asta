@@ -87,7 +87,7 @@
                         <tr>
                           <td><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $level->level }}" class="deleteplayerslevel{{ $level->level }} deleteIdAll"></td>
                           <td><a href="#" class="inlinelevel" data-name="level" data-title="level" data-pk="{{ $level->level }}" data-type="text" data-url="{{ route('playerslevel_update') }}">{{ $level->level}}</a></td>
-                          <td><a href="#" class="inlinelevel" data-name="experience" data-title="experience" data-pk="{{ $level->level }}" data-type="text" data-url="{{ route('playerslevel_update') }}">{{ $level->experience}}</a></td>
+                          <td><a href="#" class="inlinelevel" data-name="experience" data-title="experience" data-pk="{{ $level->level }}" data-type="text" data-url="{{ route('playerslevel_update') }}">{{ number_format($level->experience)}}</a></td>
                           <td>
                             <a  href="#" style="color:red;" class="delete{{ $level->level }}" 
                               id="delete" 
