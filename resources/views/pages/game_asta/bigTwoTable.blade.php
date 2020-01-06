@@ -165,7 +165,7 @@
                   <input type="number" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
                 </div>
                 <div class="form-group">
-                  <input type="number" class="form-control" name="maxbuy" placeholder="Max Buy" required="">
+                  <input type="number" class="form-control" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
                 </div>
               </div>
             </div>
@@ -271,12 +271,18 @@
       echo'if('.$ct->room_id.' ==  $("#category_table").val()) {';
       echo 'var stakevalue = $( this ).val();';
       echo 'var countminbuy = stakevalue * 3 * 13;';
+      echo 'var countmaxbuy = countminbuy * 4;';
         echo 'if(countminbuy >= '.$ct->min_buy.') {';
           echo 'var minbuy = $("#minbuy").val(countminbuy);';
+          echo 'var maxbuy = $("#maxbuy").val(countmaxbuy);';
         echo '} else {';
           echo 'var minbuy = $("#minbuy").val(null);';
+          echo 'var maxbuy = $("#maxbuy").val(null);';
         echo '}';
       echo '}';
+      
+      
+      
       }
       @endphp   
     });

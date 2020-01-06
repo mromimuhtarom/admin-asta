@@ -205,6 +205,7 @@ class TableController extends Controller
         $maxbuy           = $request->maxbuy;
         $category         = $request->category;
         $minbuyvalidation = $stake * 3 * 13;
+        $maxbuyvalidation = $minbuyvalidation * 4;
         $room             = BigTwoRoom::where('room_id', '=', $category)->first();
         if($minbuy < $minbuyvalidation)
         {
