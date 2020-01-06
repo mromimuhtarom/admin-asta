@@ -139,8 +139,9 @@ class TableController extends Controller
         $validator = Validator::make($request->all(),[
             'tableName'     => 'required',
             'category'      => 'required',
-            'minbuy'       => 'required|int',
-            'maxbuy'       => 'required|int'          
+            'minbuy'        => 'required|int',
+            'maxbuy'        => 'required|int'
+                      
             
         ]);
 
@@ -172,7 +173,7 @@ class TableController extends Controller
             'jackpot'     => '0',
             'min_buy'     => $minbuy,
             'max_buy'     => $maxbuy,
-            'timer'       => '0'
+            'timer'       => '7'
         ]);
 
         Log::create([
@@ -228,7 +229,7 @@ class TableController extends Controller
             'stake'      => $stake,
             'min_buy'    => $minbuy,
             'max_buy'    => $maxbuy,
-            'timer'      => '0'
+            'timer'      => '7'
         ]);
 
         Log::create([
@@ -289,7 +290,7 @@ class TableController extends Controller
             'stake'                => $stake,
             'min_buy'              => $minbuy,
             'max_buy'              => $maxbuy,
-            'timer'                => '0'
+            'timer'                => '7'
         ]);
 
           Log::create([
@@ -352,7 +353,7 @@ class TableController extends Controller
             'stake'                => $stake,
             'min_buy'              => $minbuy,
             'max_buy'              => $maxbuy,
-            'timer'                => '0'
+            'timer'         =>  '7'
         ]);
 
           Log::create([

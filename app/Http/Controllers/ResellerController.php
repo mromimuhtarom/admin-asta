@@ -950,9 +950,7 @@ public function detailTransaction($month, $year)
                     $path1  =   '../public/upload/Gold/image2/'.$nama_file_unik;
                     File::delete($path1);
 
-                    // imagepng($source, $thumbnail);
-                    // imagedestroy($source);
-                   // end watermark image
+                   
                 } else {
                     // $file->move(public_path('unity-asset/store/gold'), $nama_file_unik);
                     $rootpath = 'unity-asset/store/gold/'.$nama_file_unik;
@@ -1099,8 +1097,7 @@ public function detailTransaction($month, $year)
                     $merge   = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
                     Storage::disk('s3')->put($awsPath, $temp);
-                    // imagepng($source, $thumbnail);
-                    // imagedestroy($source);
+                    
                 }
                 else 
                 {
