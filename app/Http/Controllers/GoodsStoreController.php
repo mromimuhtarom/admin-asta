@@ -225,9 +225,9 @@ class GoodsStoreController extends Controller
             case 'status':
                 $name = 'Status';
                 if($value == 0):
-                    $value = 'Dimatikan';
+                    $value = 'Disabled';
                 else:
-                    $value = 'Diaktifkan';
+                    $value = 'enabled';
                 endif;
                 break;
             case 'order':
@@ -241,7 +241,7 @@ class GoodsStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.'di menu Toko Barang dengan ID '.$pk.' menjadi '.$value
+            'desc'      => 'Edit '.$name. ' di menu Toko Barang dengan ID '.$pk.' menjadi '.$value
         ]);
     }
 

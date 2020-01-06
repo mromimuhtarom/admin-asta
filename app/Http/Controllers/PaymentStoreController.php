@@ -108,9 +108,9 @@ class PaymentStoreController extends Controller
             case "status":
                 $name = "Status";
                 if($value === 0):
-                    $value = 'Dimatikan';
+                    $value = 'Disabled';
                 else: 
-                    $value = 'Diaktifkan';
+                    $value = 'Enabled';
                 endif;
                 break;
             default:

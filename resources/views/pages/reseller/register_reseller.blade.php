@@ -58,7 +58,7 @@
                         <tr>
                             <td>{{ TranslateReseller('Phone')}}<p>&nbsp;</p></td>
                             <td colspan="3">
-                                    <input type="number" name="phone" class="form-control" value="{{ old('phone') }}" required>
+                                    <input type="number" min="0" name="phone" class="form-control" value="{{ old('phone') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>

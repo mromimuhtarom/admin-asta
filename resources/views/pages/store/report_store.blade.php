@@ -103,7 +103,7 @@
                         <td>{{ $tr->quantity }}</td>
                         <td>{{ $tr->description }}</td>
                         @if ($tr->item_type == 1)
-                    <td>{{ $tr->item_price }} {{ Transl}}</td>
+                        <td>{{ $tr->item_price }}</td>
                         @elseif($tr->item_type == 2)
                         <td> {{ number_format($tr->item_price) }}</td>
                         @elseif($tr->item_type == 3)

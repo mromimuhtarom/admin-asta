@@ -418,7 +418,12 @@ class EmoticonController extends Controller
               break;
           case "status":
               $name = "Status";
-              break;
+              if($value == 0):
+                $value = 'disabled';
+              else:
+                $value = 'enabled';
+              endif;
+            break;
           default:
             "";
       }
