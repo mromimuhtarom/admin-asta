@@ -41,6 +41,7 @@ function translate_menu($menu){
       'Log_Players'                     =>  'Catatan Pemain',
       'Transaction_Players'             =>  'Transaksi pemain',
       'Players_Level'                   =>  'Level pemain',
+      'avatar_player'                   =>  'avatar pemain',
       'Slide_Banner'                    =>  'Slide spanduk',
       'Item'                            =>  'Item',
       'Table_Gift'                      =>  'Table gift',

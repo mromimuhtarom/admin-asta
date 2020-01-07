@@ -229,6 +229,13 @@ Route::middleware('authenticated')->group(function(){
                 Route::delete('PlayersLevel-DeleteAllrank', 'PlayersLevelController@delete_allRank')->name('playersrank_deleteall');
             });
         });
+
+        Route::group(['prefix'  =>  'Avatar_player'], function() {
+            Route::middleware('page_denied:avatar player')->group(function(){
+                Route::get('AvaPlayer-view', 'AvatarPlayerController@index')->name('avatar_player');
+
+            });
+        });
     });
 
     Route::group(['prefix'  =>  'Slide_Banner'], function() {

@@ -111,7 +111,7 @@
                 @if($menu && $mainmenu)
                 <tr>
                   <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
-                  <td >
+                  <td>
                           <div class="media-container">
                             <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
                               {{  csrf_field() }}
@@ -301,17 +301,7 @@
 </div>
 
 <script type="text/javascript">
-$(".watermark-image").change(function() {
-  if (this.files && this.files[0]) {
-    var reader = new FileReader();
 
-    reader.onload = function(e) {
-      $("#blah1").attr("src", e.target.result);
-    };
-
-    reader.readAsDataURL(this.files[0]);
-  }
-});
 	$(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],

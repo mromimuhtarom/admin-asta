@@ -427,13 +427,8 @@ class GiftController extends Controller
           $name => $value
         ]);
 
-        
-        
-
+    
         $timenow = Carbon::now('GMT+7');
-
-
-
 
         switch ($name) {
               case "name":
