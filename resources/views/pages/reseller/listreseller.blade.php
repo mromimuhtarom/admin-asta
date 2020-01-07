@@ -137,33 +137,33 @@
 
 {{-- end reset password --}}
  
-  
-<!-- Modal -->
+
+<!-- Modal delete data -->
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div c lass="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete Data')}}</h5>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete Data') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="fa fa-remove"></i> 
+          <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ translate_MenuContentAdmin('Are You Sure Want To Delete It?')}}
+        {{ TranslateMenuGame('Are you sure') }}
         <form action="{{ route('ListReseller-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="id" id="id" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('Yes') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('No') }}</button>
       </div>
         </form>
     </div>
   </div>
 </div>
-
+<!-- End Modal delete data -->
 
 <!-- Modal DELETE ALL SELECTED -->
 <div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

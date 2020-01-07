@@ -435,7 +435,6 @@ class EmoticonController extends Controller
         'datetime'  => Carbon::now('GMT+7'),
         'desc'      => 'Edit '.$name.' di menu Emotikon dengan Id '.$pk.' menjadi '. $value
       ]);
-        
     }
 
     /**
