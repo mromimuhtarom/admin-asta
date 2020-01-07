@@ -85,7 +85,7 @@
                                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; select all</th>
                                 @endif
                                 <th>ID</th>
-                                <th>Image</th>
+                                <th style="width:10px;">Image</th>
                                 <th>name</th>
                                 <th>status</th>
                                 @if($menu && $mainmenu)
@@ -277,187 +277,179 @@
 
   <script type="text/javascript">
 
-    $(".watermark-image").change(function() {
-    if (this.files && this.files[0]) {
-        var reader = new FileReader();
+        $(document).ready(function() {
+            $('table.table').dataTable( {
+                "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
+                "pagingType": "full_numbers",
+            });
 
-        reader.onload = function(e) {
-        $("#blah1").attr("src", e.target.result);
-        };
-
-        reader.readAsDataURL(this.files[0]);
-    }
-    });
-  
-    $(document).ready(function() {
-        $('table.table').dataTable( {
-            "lengthMenu": [[5, 25, 50, -1], 5, 25, 50, "All"]],
-            "pagingType": "full_members",
-        });
-
-        $("#trash").hide();
-        //check all
-        $('#checkAll').on('click', function(e) {
-            if($(this).is(':checked', true))
-            {
-                $(".deleteIdAll").prop('checked', true);
-                $("#trash").show();
-            } else {
-                $(".deleteIdAll").prop('checked', false);
-                $("#trash").hide();
-            }
-        });
-    });
-
-    table = $('table.table').dataTable({
-        "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
-        "autoWidth" : true,
-        "paging": false,
-        "classes": {
-        "sWrapper": "dataTables_wrapper dt-bootstrap4"
-        },
-        "oLanguage": {
-        "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
-        },
-        "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-            $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        
-        //TEXT EDITABLE
-        $('.usertext').editable({
-            mode : 'inline',
-            value: '',
-            validate: function(value)   {
-                if($.trim(value) == '') {
-                    return 'This field is required';
+            $('#trash').hide();
+            //CHECK ALL
+            $('#checkAll').on('click', function(e) {
+                if($(this).is(':checked', true))
+                {
+                    $(".deleteIdAll").prop('checked', true);
+                    $("#trash").show();
+                }else{
+                    $(".deleteIdAll").prop('checked', false);
+                    $("#trash").hide();
                 }
-            }
+            });
         });
 
-        //STATUS TEXT EDITABLE
-        $('.status').editable({
-            mode: 'inline',
-            value: '',
-            validate: function(value) {
-                if($.trim(value) == '') {
-                    return 'This field is required';
-                }
+        table = $('table.table').dataTable({
+            "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
+            "autoWidth" : true,
+            "paging": false,
+            "classes": {
+                "sWrapper": "dataTables_wrapper dt-bootstrap4"
             },
-            source: [
-                {value: '', text: 'Choose for activation'},
-                @php
-                echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
-                @endphp
-            ]
+            "oLanguage": {
+                "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+            },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $('.usertext').editable({
+                        mode :'inline',
+                        validate: function(value) {
+                        if($.trim(value) == '') {
+                            return 'This field is required';
+                        }
+                        }
+                    });
+
+                    $('.status').editable({
+                        mode :'inline',
+                        value: '',
+                        validate: function(value) {
+                            if($.trim(value) == '') {
+                                return 'This field is required';
+                            }
+                        },
+                        source: [
+                            {value: '', text: 'Choose for activation'},
+                            @php
+                            echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
+                            echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                            @endphp
+                        ]
+                    });
+
+                    @php
+                            foreach($avatarPlayer as $ap) {
+                            echo'$(".delete'.$ap->id.'").hide();';
+                            echo'$(".deletepermission'.$ap->id.'").on("click", function() {';
+                                echo 'if($( ".deletepermission'.$ap->id.':checked" ).length > 0)';
+                                echo '{';
+                                echo '$(".delete'.$ap->id.'").show();';
+                                echo'}';
+                                echo'else';
+                                echo'{';
+                                echo'$(".delete'.$ap->id.'").hide();';
+                                echo'}';
+
+                            echo '});';
+
+                            echo'$(".delete'.$ap->id.'").click(function(e) {';
+                                echo'e.preventDefault();';
+
+                                echo"var id = $(this).attr('data-pk');";
+                                echo'var test = $("#id").val(id);';
+                            echo'});';
+
+
+
+                            // untuk image
+                            echo'$(".save-profile'.$ap->id.'").hide(0);';
+                            echo'$(".med-ovlay'.$ap->id.'").hide(0);';
+                            echo'$(".imgupload1'.$ap->id.'").hide(0);';
+                            echo'$(".imgupload2'.$ap->id.'").hide(0);';
+                            echo'$(".cancel-upload'.$ap->id.'").hide(0);';
+
+                            echo'$(".edit-profile'.$ap->id.'").on("click", function() {';
+                                echo'$(this).hide(0);';
+                                echo'$(".imgupload'.$ap->id.'").fadeOut(300);';
+                                echo'$(".imgupload1'.$ap->id.'").fadeIn(300);';
+                                echo'$(".imgupload2'.$ap->id.'").fadeIn(300);';
+                                echo'$(".med-ovlay'.$ap->id.'").fadeIn(300);';
+                                echo'$(".cancel-upload'.$ap->id.'").fadeIn(300);';
+                                echo'$(".save-profile'.$ap->id.'").fadeIn(300);';
+                            echo'});';
+
+                            echo'$(".save-profile'.$ap->id.'").on("click", function() {';
+                                echo'$(this).hide(0);';
+                                echo'$(".cancel-upload'.$ap->id.'").fadeOut(300);';
+                                echo'$(".med-ovlay'.$ap->id.'").fadeOut(300);';
+                                echo'$(".imgupload'.$ap->id.'").fadeIn(300);';
+                                echo'$(".imgupload1'.$ap->id.'").fadeOut(300);';
+                                echo'$(".imgupload2'.$ap->id.'").fadeOut(300);';
+                                echo'$(".edit-profile'.$ap->id.'").fadeIn(300);';
+                            echo'});';
+
+                            echo'$(".cancel-upload'.$ap->id.'").on("click", function() {';
+                                echo'$(this).hide(0);';
+                                echo'$(".med-ovlay'.$ap->id.'").fadeOut(300);';
+                                echo'$(".imgupload'.$ap->id.'").fadeIn(300);';
+                                echo'$(".imgupload1'.$ap->id.'").fadeOut(300);';
+                                echo'$(".imgupload2'.$ap->id.'").fadeOut(300);';
+                                echo'$(".edit-profile'.$ap->id.'").fadeIn(300);';
+                                echo'$(".save-profile'.$ap->id.'").hide(0);';
+                            echo'});';
+
+                            echo'$(".upload'.$ap->id.'").change(function() {';
+                                echo'if (this.files && this.files[0]) {';
+                                echo'var reader = new FileReader();';
+
+                                echo'reader.onload = function(e) {';
+                                    echo'$(".imgupload1'.$ap->id.'").attr("src", e.target.result);';
+                                echo'};';
+
+                                echo'reader.readAsDataURL(this.files[0]);';
+                            echo'}';
+                            echo'});';
+                            echo'$(".upload1'.$ap->id.'").change(function() {';
+                                echo'if (this.files && this.files[0]) {';
+                                echo'var reader = new FileReader();';
+
+                                echo'reader.onload = function(e) {';
+                                    echo'$(".imgupload2'.$ap->id.'").attr("src", e.target.result);';
+                                echo'};';
+
+                                echo'reader.readAsDataURL(this.files[0]);';
+                            echo'}';
+                            echo'});';
+                        }
+                    @endphp
+
+
+                    //js delete on delete all selected modal
+                    $('.delete').click(function(e) {
+                    e.preventDefault();
+                    var allVals = [];
+                        $(".deleteIdAll:checked").each(function() {
+                            allVals.push($(this).attr('data-pk'));
+                            var join_selected_values = allVals.join(",");
+                            $('#idDeleteAll').val(join_selected_values);
+                        });
+                    });
+
+                    //hide and show icon delete all
+                    $('#trash').hide();
+                    $(".deleteIdAll").click(function(e) {
+                        if($(".deleteIdAll:checked").length > 1) {
+                            $("#trash").show();
+                        }else{
+                            $("#trash").hide();
+                        }
+                    });
+            },
+            responsive: false
         });
-
-        @php
-            foreach($avatarPlayer as $ap){
-                echo'$(".delete'.$ap->id.'").hide();';
-                echo'$(".deletepermission'.$ap->id.'").on("click", function() {';
-                    echo 'if($( ".deletepermission'.$ap->id.':checked" ).length > 0)';
-                    echo '{';
-                        echo '$(".delete'.$ap->id.'").show();';
-                    echo'}';
-                    echo'else';
-                    echo'{';
-                        echo'$(".delete'.$ap->id.'").hide();';
-                    echo'}';
-                echo '});';
-
-                echo'$(".delete'.$ap->id.'").click(function(e) {';
-                    echo'e.preventDefault();';
-
-                    echo"var id = $(this).attr('data-pk');";
-                    echo'var test = $("#id").val(id);';
-                echo'});';
-            }
-        @endphp
-
-        @php
-            foreach($avatarPlayer as $ap){
-                echo'$(".save-profile'.$ap->id.'").hide(0);';
-                  echo'$(".med-ovlay'.$ap->id.'").hide(0);';
-                  echo'$(".imgupload'.$ap->id.'").show();';
-                  echo'$(".cancel-upload'.$ap->id.'").hide(0);';
-
-                  echo'$(".edit-profile'.$ap->id.'").on("click", function() {';
-                    echo'$(this).hide(0);';
-                    echo'$(".imgupload'.$ap->id.'").fadeOut(300);';
-                    echo'$(".med-ovlay'.$ap->id.'").fadeIn(300);';
-                    echo'$(".cancel-upload'.$ap->id.'").fadeIn(300);';
-                    echo'$(".save-profile'.$ap->id.'").fadeIn(300);';
-                  echo'});';
-
-                  echo'$(".save-profile'.$ap->id.'").on("click", function() {';
-                    echo'$(this).hide(0);';
-                    echo'$(".cancel-upload'.$ap->id.'").fadeOut(300);';
-                    echo'$(".med-ovlay'.$ap->id.'").fadeOut(300);';
-                    echo'$(".imgupload'.$ap->id.'").fadeIn(300);';
-                    echo'$(".edit-profile'.$ap->id.'").fadeIn(300);';
-                  echo'});';
-
-                  echo'$(".cancel-upload'.$ap->id.'").on("click", function() {';
-                    echo'$(this).hide(0);';
-                    echo'$(".med-ovlay'.$ap->id.'").fadeOut(300);';
-                    echo'$(".imgupload'.$ap->id.'").fadeIn(300);';
-                    echo'$(".edit-profile'.$ap->id.'").fadeIn(300);';
-                    echo'$(".save-profile'.$ap->id.'").hide(0);';
-                  echo'});';
-
-                  echo'$(".upload'.$ap->id.'").change(function() {';
-                    echo'if (this.files && this.files[0]) {';
-                      echo'var reader = new FileReader();';
-
-                      echo'reader.onload = function(e) {';
-                        echo'$(".imgupload1'.$ap->id.'").attr("src", e.target.result);';
-                      echo'};';
-
-                      echo'reader.readAsDataURL(this.files[0]);';
-                  echo'}';
-                echo'});';
-
-                echo'$(".upload1'.$ap->id.'").change(function() {';
-                    echo'if (this.files && this.files[0]) {';
-                      echo'var reader = new FileReader();';
-
-                      echo'reader.onload = function(e) {';
-                        echo'$(".imgupload2'.$ap->id.'").attr("src", e.target.result);';
-                      echo'};';
-
-                      echo'reader.readAsDataURL(this.files[0]);';
-                  echo'}';
-                echo'});';
-            }
-        @endphp
-
-        //DELETE ALL SELECTED MODAL
-        $('.delete').click(function(e) {
-            e.preventDefault();
-            var allVall = [];
-                $(".deleteIdAll:checked").each(function() {
-                    allVals.push($(this).attr('data-pk'));
-                    var join_selected_values = allVals.join(",");
-                    $('#idDeleteAll').val(join_selected_values);
-                });
-        });
-
-        //HIDE SHOW ICON DELETE ALL
-        $('#trash').hide();
-        $(".deleteIdAll").click(function(e) {
-            if($(".deleteIdAll:checked").length > 1) {
-                $('#trash').show();
-            }else{
-                $("#trash").hide();
-            }
-        });
-    },
-    responsive: false
-    });
   
   </script>
 @endsection
