@@ -120,7 +120,7 @@ class Add_TransactionController extends Controller
         else:
           $totalbalance = $stat->chip - $valuecurrency;
         endif;
-
+        
         
         $balance = BalanceChip::create([
             'user_id'   => $user_id,
@@ -139,13 +139,18 @@ class Add_TransactionController extends Controller
           'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' chip. Dengan alasan: ' .$description
         ]);
 
+        //PREVENT BALANCE MINUS
+        if($stat->chip == 0):
+          return back()->with('alert', 'balance tidak dapat dikurangi');
+        endif;
+
       elseif($columnname == 'gold'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->gold + $valuecurrency;
         else:
           $totalbalance = $stat->gold - $valuecurrency;
         endif;
-
+    
         $balance = BalanceGold::create([
             'user_id'   => $user_id,
             'action_id' => $type,
@@ -161,6 +166,11 @@ class Add_TransactionController extends Controller
           'datetime'  =>  Carbon::now('GMT+7'),
           'desc'      =>  'Edit balance koin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' koin. Dengan alasan: ' .$description
         ]);
+
+        //PREVENT BALANCE MINUS
+        if($stat->gold == 0):
+          return back()->with('alert', 'balance tidak dapat dikurangi');
+        endif;
 
       elseif($columnname == 'point'):
         if( $plusminus == "+"):    
@@ -185,11 +195,22 @@ class Add_TransactionController extends Controller
           'datetime'  =>  Carbon::now('GMT+7'),
           'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' poin. Dengan alasan: ' .$description
         ]);
+
+        //PREVENT BALANCE MINUS
+        if($stat->point == 0):
+          return back()->with('alert', 'balance tidak dapat dikurangi');
+        endif;
+
       endif;
 
       Stat::where('user_id', '=', $user_id)->update([
         $columnname => $totalbalance
       ]);
+
+      
+    
+
+                        
       
 
       return back()->with('success', 'Successfull Update');
