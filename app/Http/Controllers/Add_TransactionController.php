@@ -136,7 +136,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'alasan: '.$description.' / di edit pada menu tambah transaksi'
+          'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' chip. Dengan alasan: ' .$description
         ]);
 
       elseif($columnname == 'gold'):
@@ -159,7 +159,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'alasan: '.$description.' / di edit pada menu tambah transaksi'
+          'desc'      =>  'Edit balance koin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' koin. Dengan alasan: ' .$description
         ]);
 
       elseif($columnname == 'point'):
@@ -183,7 +183,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'alasan: '.$description.' / di edit pada menu tambah transaksi'
+          'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' poin. Dengan alasan: ' .$description
         ]);
       endif;
 
