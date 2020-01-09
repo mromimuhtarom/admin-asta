@@ -17,11 +17,7 @@ use DB;
 
 class EmoticonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $emoticon = Emoticon::select(
@@ -45,22 +41,7 @@ class EmoticonController extends Controller
         return view('pages.item.emoticon', compact('emoticon', 'menu', 'mainmenu', 'endis', 'timenow'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $id                     = Emoticon::select('id')
@@ -101,16 +82,13 @@ class EmoticonController extends Controller
         {
             if($ukuran < 5242880)
             {
-                // if ($file->move(public_path('../public/upload/emoticon'), $nama_file_unik))
-                // {
+                
                     if($request->title == NULL){
                         return redirect()->route('Emoticon')->with('alert','Name can\'t be NULL ');
                     } else if($request->price == NULL) {
                         return redirect()->route('Emoticon')->with('alert','Price can\'t be NULL ');
                     } 
-                    // else if($request->category == NULL) {
-                    //     return redirect()->route('Emoticon')->with('alert','Category can\'t be NULL ');
-                    // } 
+                   
                     else {
 
                         if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
@@ -189,12 +167,7 @@ class EmoticonController extends Controller
                         ]);
                         return redirect()->route('Emoticon')->with('success','Insert Data successfull');
                     }
-                // }
-                // else
-                // {
-                //     return redirect()->route('Emoticon')->with('alert','Gagal Upload File');
-                //     // echo "Gagal Upload File";
-                // }
+            
             }
             else
             {
@@ -209,27 +182,7 @@ class EmoticonController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+  
 
     public function updateimage(Request $request)
     {
@@ -472,8 +425,19 @@ class EmoticonController extends Controller
 
     public function deleteAllSelected(Request $request)
     {
-        $ids    =   $request->userIdAll;
+        $ids        =   $request->userIdAll;
+        $imageid    =   $request->imageid;
+
+        //DELETE
+        Storage::disk('s3')->delete(explode(",", $imageid));
         DB::table('asta_db.emoticon')->whereIn('id', explode(",", $ids))->delete();
+
+        Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '4',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Menghapus data yang dipilih di menu emoticon dengan id '.$imageid
+        ]);
         return redirect()->route('Emoticon')->with('success','Data deleted');
     }
 }

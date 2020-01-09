@@ -501,8 +501,14 @@ class GiftController extends Controller
 
     public function deleteAllSelected(Request $request)
     {
-        $ids    =   $request->userIdAll;
+        $ids        =   $request->userIdAll;
+        $imageid    =   $request->imageid;
+        
+        //DELETE
+        Storage::disk('s3')->delete(explode(",", $imageid));
         DB::table('asta_db.gift')->whereIn('id', explode(",", $ids))->delete();
+        
+        //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',

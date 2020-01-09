@@ -263,7 +263,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::delete('TableGift-delete', 'GiftController@destroy')->name('TableGift-delete');
                 Route::post('TableGift-create', 'GiftController@store')->name('TableGift-create');
                 Route::delete('TableGift-deleteAllSelected', 'GiftController@deleteAllSelected')->name('TableGift-deleteAllSelected');
-        
+
             });
         });
 
@@ -702,6 +702,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
                 Route::post('ItemStoreReseller-updateimage', 'ResellerController@updateImageItemStoreReseller')->name('ItemStoreReseller-updateimage');
                 Route::delete('ItemStore-delete', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-delete');
+                Route::delete('ItemStore-deleteAll', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-deleteAllSelected');
             });
         });        
     });

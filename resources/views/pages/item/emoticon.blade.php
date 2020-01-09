@@ -110,7 +110,7 @@
                 @foreach($emoticon as $emot)
                 @if($menu && $mainmenu)
                 <tr>
-                  <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $emot->id }}" class="deletepermission{{ $emot->id }} deleteIdAll"></td>
+                  <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $emot->id }}" data-name="unity-asset/emoticon/{{ $emot->id }}.png" class="deletepermission{{ $emot->id }} deleteIdAll"></td>
                     <td >
                             <div class="media-container">
                               <form method="POST" action="{{ route('Emoticon-updateimage') }}" enctype="multipart/form-data">
@@ -127,12 +127,15 @@
                                   <i class="fa fa-edit media-icon-wtr1"></i>
                                   <div class="nav-name">Watermark</div>
                                 </span>
+
                                 <figure class="media-object">
-                                  {{-- <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ route('imageshowemoticon', $emot->id) }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;"> --}}
-                                <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/emoticon/'.$emot->id.'.png' }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
+                                  {{-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
+                                  {{-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" --}}
+                                  <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/emoticon/'.$emot->id.'.png' }}?{{ $timenow }}" style="display:block !important;margin-left: auto; margin-right: auto;">
                                   <img class="img-object-wtr1 imgupload1{{ $emot->id }}" src="http://placehold.jp/80x100.png">
                                   <img class="img-object-wtr2 imgupload2{{ $emot->id }}" src="http://placehold.jp/80x100.png">
                                 </figure>
+                                
                                 <figure>
                                   
                                 </figure>
@@ -279,6 +282,7 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+          <input type="text" name="imageid" id="idDeleteAllimage" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -460,6 +464,13 @@ $(".watermark-image").change(function() {
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(",");
                   $('#idDeleteAll').val(join_selected_values);
+                });
+
+              var allimage = [];
+                $(".deleteIdAll:checked").each(function() {
+                  allimage.push($(this).attr('data-name'));
+                  var join_selected_image = allimage.join(",");
+                  $('#idDeleteAllimage').val(join_selected_image);
                 });
             });
 

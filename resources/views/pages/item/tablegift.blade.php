@@ -110,7 +110,7 @@
                 @foreach($gifts as $gf)
                 @if($menu && $mainmenu)
                 <tr>
-                  <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
+                  <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
                   <td>
                           <div class="media-container">
                             <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
@@ -290,6 +290,7 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+          <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -479,6 +480,13 @@
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(",");
                   $('#idDeleteAll').val(join_selected_values);
+              });
+
+              var allimage = [];
+                $(".deleteIdAll:checked").each(function() {
+                  allimage.push($(this).attr('data-name'));
+                  var join_selected_image = allimage.join(",");
+                  $('#idDeleteAllimage').val(join_selected_image);
               });
             });
 

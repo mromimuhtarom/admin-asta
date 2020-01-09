@@ -83,7 +83,7 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                  <th class="th-sm"></th>
+                <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('Select All') }}</th>
                 @endif
                 <th class="th-sm">{{ TranslateMenuToko('Order')}}</th>
                 <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
@@ -103,7 +103,7 @@
               @foreach($getItems as $gold)
               @if($menu && $mainmenu)
               <tr>
-                <td style="text-align:center;"><input type="checkbox" name="deletepermission" class="deletepermission{{ $gold->item_id }}"></td>
+              <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-name="unity-asset/store/gold{{ $gold->id }}.png" class="deletepermission{{ $gold->item_id }}"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="order" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
                 <td>
                     <div class="media-container">
@@ -282,6 +282,33 @@
 </div>
 <!-- End delete Modal -->
 
+<!-- MODAL DELETE ALL SELECTED -->
+<div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ TranslateMenuItem('Are U Sure') }}
+        <form action="{{ route('ItemStore-deleteAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+          <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 <!-- script -->
 <script>
 $(".watermark-image").change(function() {
@@ -301,6 +328,20 @@ $(".watermark-image").change(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+    });
+
+    //icon trash delete all
+    $("#trash").hide();
+    //CHECK ALL
+    $('#checkAll').on('click', function(e) {
+      if($(this).is(':checked', true))
+      {
+        $(".deleteIdAll").prop('checked', true);
+        $("#trash").show();
+      } else {
+        $(".deleteIdAll").prop('checked', false);
+        $("#trash").hide();
+      }
     });
   });
 
@@ -473,6 +514,34 @@ $(".watermark-image").change(function() {
                 echo'});';
               }
       @endphp
+
+      //JS DELETE ALL SELECTED
+      $('.delete').click(function(e) {
+        e.preventDefault();
+        var allVals = [];
+          $(".deleteIdAll:checked").each(function() {
+            allVals.push($(this).attr('data-pk'));
+            var join_selected_values = allVals.join(",");
+            $('#idDeleteAll').val(join_selected_values);
+          });
+
+        var allimage = [];
+          $('.deleteIdAll:checked').each(function() {
+            allimage.push($(this).attr('data-name'));
+            var join_selected_image = allimage.join(",");
+            $('#idDeleteAllimage').val(join_selected_image)
+          })
+      });
+
+      //HIDE SHOW ICON DELETE ALL
+      $('#trash').hide();
+      $(.'deleteIdAll').click(function(e) {
+        if($(".deleteIdAll:checked").length > 1) {
+          $('#trash').show();
+        }else{
+          $('#trash').hide();
+        }
+      });
     },
     responsive: false
   });
