@@ -104,7 +104,7 @@
                             @foreach($avatarPlayer as $ap)
                             @if($menu && $mainmenu)
                             <tr>
-                                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $ap->id }}" data-name="avatar/{{ $ap->id }}.png" class="deletepermission{{ $ap->id }} deleteIdAll"></td>
+                                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $ap->id }}" data-name="avatar/{{ $ap->id }}.jpg" class="deletepermission{{ $ap->id }} deleteIdAll"></td>
                                 <td><a href="#" class="usertext" data-name="id" data-title="id" data-type="text" data-pk="{{ $ap->id }}" data-url="">{{ $ap->id }}</a></td>
                                 <td>
                                     <div class="media-container">
@@ -117,7 +117,7 @@
                                             <p class="nav-name">Main image</p>
                                           </span>
                                           <figure class="media-object">
-                                            <img class="img-object-wtr imgupload{{ $ap->id }}" src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{ $ap->id }}.png?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                                            <img class="img-object-wtr imgupload{{ $ap->id }}" src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{ $ap->id }}.jpg?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                                             <img class="img-object-wtr1Ava imgupload1{{ $ap->id }}" src="http://placehold.jp/80x100.png">
                                         </figure>
                                          

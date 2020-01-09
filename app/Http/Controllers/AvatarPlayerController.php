@@ -69,7 +69,7 @@ class AvatarPlayerController extends Controller
 
         $id_new                 =   $id_last + 1;
         $file                   =   $request->file('file');
-        $ekstensi_diperbolehkan =   array('png');
+        $ekstensi_diperbolehkan =   array('jpg');
         $filename               =   $file->getClientOriginalName();
         $x                      =   explode('.', $filename);
         $ekstensi               =   strtolower(end($x));
@@ -129,7 +129,7 @@ class AvatarPlayerController extends Controller
             return back()->withErrors($validator->errors());
         }
         $file                   =   $request->file('file');
-        $ekstensi_diperbolehkan =   array('png');
+        $ekstensi_diperbolehkan =   array('jpg');
         $filename               =   $_FILES['file']['name'];
         $x                      =   explode('.', $filename);
         $ekstensi               =   strtolower(end($x));
@@ -151,7 +151,7 @@ class AvatarPlayerController extends Controller
             return redirect()->route('avatar_player')->with('success', 'Update image successfull');
         }
         else {
-            return redirect()->route('avatar_player')->with('alert', 'format must be png and pictorial');
+            return redirect()->route('avatar_player')->with('alert', 'format must be jpg and pictorial');
         }
     }
 
@@ -191,7 +191,7 @@ class AvatarPlayerController extends Controller
                             ->where('id', '=', $id)
                             ->first();
 
-        $pathS3         =   'avatar/'.$id.'.png';
+        $pathS3         =   'avatar/'.$id.'.jpg';
 
         if($id != '')
         {
