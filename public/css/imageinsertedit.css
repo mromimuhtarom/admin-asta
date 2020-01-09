@@ -47,12 +47,30 @@ input[type=file]::-webkit-file-upload-button {
     position: absolute;
     left: 0;
     top: 0;
+    width: 45%;
+    height: 100%;
+    background-color: rgba(180, 180, 180, 0.6);
+}
+
+.media-overlay-wtrAva {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(180, 180, 180, 0.6);
 }
 
 .media-overlay-wtr1 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    background-color: rgba(180, 180, 180, 0.6);
+}
+
+.media-overlay-wtr1Ava {
     position: absolute;
     right: 0;
     top: 0;
@@ -118,6 +136,16 @@ input[type=file]::-webkit-file-upload-button {
     border-radius: 10px;
     border: 1px solid black;
     width: 45%;
+    left: 0;
+    height: 100px;
+    /* position: relative; */
+    /* display: block; */
+}
+
+.img-object-wtr1Ava {
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100%;
     left: 0;
     height: 100px;
     /* position: relative; */

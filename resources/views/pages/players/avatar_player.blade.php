@@ -38,14 +38,14 @@
 @endif
 
 @if (\Session::has('alert'))
-    <div class="alert alert-succes">
-        <div>{{\Session::get('danger')}}</div>
+    <div class="alert alert-success">
+        <div>{{Session::get('danger')}}</div>
     </div>
 @endif
 
-@if (\Session::has('succes'))
-    <div class="alert alert-succes">
-        <p>{{\Session::get('succes')}}</p>
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <p>{{\Session::get('success')}}</p>
     </div>
 @endif
 
@@ -87,9 +87,8 @@
                                 <th>ID</th>
                                 <th style="width:10px;">Image</th>
                                 <th>name</th>
-                                <th>status</th>
                                 @if($menu && $mainmenu)
-                                <th>
+                                <th>Aksi &nbsp; &nbsp;
                                     <a href="#" style="color:red;font-weight:bold;"
                                         class="delete"
                                         id="trash"
@@ -105,21 +104,22 @@
                             @foreach($avatarPlayer as $ap)
                             @if($menu && $mainmenu)
                             <tr>
-                                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $ap->id }}" class="deletepermission{{ $ap->id }} deleteIdAll"></td>
+                                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $ap->id }}" data-name="avatar/{{ $ap->id }}.png" class="deletepermission{{ $ap->id }} deleteIdAll"></td>
                                 <td><a href="#" class="usertext" data-name="id" data-title="id" data-type="text" data-pk="{{ $ap->id }}" data-url="">{{ $ap->id }}</a></td>
                                 <td>
                                     <div class="media-container">
-                                        <form method="POST" action="" enctype="multipart/form-data">
+                                        <form method="POST" action="{{ route('avatar_playerUpdateImage')}}" enctype="multipart/form-data">
                                           {{  csrf_field() }}
-                                          <span class="media-overlay-wtr med-ovlay{{ $ap->id }}">
+                                          <span class="media-overlay-wtrAva med-ovlay{{ $ap->id }}">
                                             <input type="hidden" name="pk" value="{{ $ap->id }}">
                                             <input type="file" name="file" id="media-input-wtr" class="upload{{ $ap->id }}" accept="image/*">
                                             <i class="fa fa-edit media-icon-wtr"></i>
                                             <p class="nav-name">Main image</p>
                                           </span>
                                           <figure class="media-object">
-                                            <img class="img-object-wtr imgupload{{ $ap->id }}" src="" style="margin-left: auto; margin-right: auto;">
-                                          </figure>
+                                            <img class="img-object-wtr imgupload{{ $ap->id }}" src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{ $ap->id }}.png?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                                            <img class="img-object-wtr1Ava imgupload1{{ $ap->id }}" src="http://placehold.jp/80x100.png">
+                                        </figure>
                                          
                                         </div>
                                         <div class="media-control" align="center" style="margin-top:-1%">
@@ -129,11 +129,11 @@
                                           <button class="edit-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit Gift') }}</button>
                                         </div>
                                 </td>
-                                <td><a href="#" class="usertext" data-name="name" data-title="Title Avatar" data-type="text" data-pk="{{ $ap->id }}" data-url="">{{ $ap->name }}</a></td>
-                                <td><a href="#" class="status" data-name="status" data-pk="{{ $ap->id }}" data-type="select" data-value="{{ $ap->status }}" data-url="" data-title="Select type">{{ strEnabledDisabled($ap->status) }}</a></td>
+                            <td><a href="#" class="usertext" data-name="name" data-title="Title Avatar" data-type="text" data-pk="{{ $ap->id }}" data-url="{{ route('avatar_playerUpdate') }}">{{ $ap->name }}</a></td>
                                 <td>
                                     <a href="#" style="color:red;" class="delete{{ $ap->id}}"
                                         id="delete"
+
                                         data-pk="{{ $ap->id }}"
                                         data-toggle="modal"
                                         data-target="#delete-modal">
@@ -153,7 +153,6 @@
                                     </div>
                                 </td>
                                 <td>{{ $ap->name }}</td>
-                                <td>{{ strEnabledDisabled($ap->status) }}</td>
                             </tr>
                             @endif
                             @endforeach
@@ -175,7 +174,7 @@
                     <i class="fa fa-remove"></i>
                 </button>
                 </div>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{ route('avatar_playerCreate')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
         
@@ -195,13 +194,6 @@
                             </table>
                             
                             <input type="text" class="form-control" name="title" placeholder="Name"><br>
-                            <input type="number" class="form-control" name="price" placeholder="Price"><br>
-                            <select name="category" class="form-control">
-                            <option>{{ TranslateMenuItem('Category') }}</option>
-                            <option value="1">Makanan</option>
-                            <option value="2">Minuman</option>
-                            <option value="3">Item</option>
-                            </select>
                         </div>
                     </div>
                     </div>
@@ -219,7 +211,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal Delete-->
         <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -231,7 +223,7 @@
                     </div>
                 <div class="modal-body">
                     {{ TranslateMenuItem('Are you sure want to delete it') }}
-                    <form action="" method="post">
+                    <form action="{{ route('avatar_playerDelete') }}" method="post">
                         {{ method_field('delete')}}
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="id" value="">
@@ -256,11 +248,12 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                {{ TranslateMenuItem('Are U Sure') }}
-                <form action="" method="post">
-                    {{ method_field('delete')}}
-                    {{ csrf_field() }}
+                    {{ TranslateMenuItem('Are U Sure') }}
+                    <form action="{{ route('avatar_playerDelete-DeleteAllSelected') }}" method="post">
+                        {{ method_field('delete')}}
+                        {{ csrf_field() }}
                     <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+                    <input type="hidden" name="imageid" id="idDeleteAllimage" value="">
                 </div>
                 <div class="modal-footer">
                 <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -323,22 +316,22 @@
                         }
                     });
 
-                    $('.status').editable({
-                        mode :'inline',
-                        value: '',
-                        validate: function(value) {
-                            if($.trim(value) == '') {
-                                return 'This field is required';
-                            }
-                        },
-                        source: [
-                            {value: '', text: 'Choose for activation'},
-                            @php
-                            echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                            echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
-                            @endphp
-                        ]
-                    });
+                    // $('.status').editable({
+                    //     mode :'inline',
+                    //     value: '',
+                    //     validate: function(value) {
+                    //         if($.trim(value) == '') {
+                    //             return 'This field is required';
+                    //         }
+                    //     },
+                    //     source: [
+                    //         {value: '', text: 'Choose for activation'},
+                    //         @php
+                    //         echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
+                    //         echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                    //         @endphp
+                    //     ]
+                    // });
 
                     @php
                             foreach($avatarPlayer as $ap) {
@@ -361,7 +354,6 @@
                                 echo"var id = $(this).attr('data-pk');";
                                 echo'var test = $("#id").val(id);';
                             echo'});';
-
 
 
                             // untuk image
@@ -426,23 +418,29 @@
                         }
                     @endphp
 
-
-                    //js delete on delete all selected modal
+                    ///DELETE ALL SELECTED MODAL 
                     $('.delete').click(function(e) {
-                    e.preventDefault();
-                    var allVals = [];
-                        $(".deleteIdAll:checked").each(function() {
+                        e.preventDefault();
+                        var allVals = [];
+                            $(".deleteIdAll:checked").each(function() {
                             allVals.push($(this).attr('data-pk'));
                             var join_selected_values = allVals.join(",");
                             $('#idDeleteAll').val(join_selected_values);
                         });
+
+                        var allimage = [];
+                            $(".deleteIdAll:checked").each(function() {
+                            allimage.push($(this).attr('data-name'));
+                            var join_selected_image = allimage.join(",");
+                            $('#idDeleteAllimage').val(join_selected_image);
+                        });
                     });
 
-                    //hide and show icon delete all
+                    //HIDE SHOW ICON DELETE ALL
                     $('#trash').hide();
-                    $(".deleteIdAll").click(function(e) {
+                        $(".deleteIdAll").click(function(e) {
                         if($(".deleteIdAll:checked").length > 1) {
-                            $("#trash").show();
+                            $('#trash').show();
                         }else{
                             $("#trash").hide();
                         }

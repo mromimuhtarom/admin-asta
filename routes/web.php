@@ -9,6 +9,7 @@ Route::get('image-item/Chip/{item_id}.png', 'ChipStoreController@ImageItem')->na
 Route::get('image-item/Goods/{item_id}.png', 'GoodsStoreController@ImageItem')->name('imageItemGoods');
 // image gift
 Route::get('image-gift/{gift_id}', 'GiftController@ImageGift')->name('imageshowgift');
+Route::get('image-avatar/{avatar_id', 'AvatarPlayerController@ImageAvatar')->name('imageshowavatar');
 Route::get('image-emoticon/{emot_id}.png', 'EmoticonController@ImageEmoticon')->name('imageshowemoticon');
 
 Route::get('GeneralSetting-about/view', 'GeneralSettingController@AboutGame');
@@ -233,7 +234,11 @@ Route::middleware('authenticated')->group(function(){
         Route::group(['prefix'  =>  'Avatar_player'], function() {
             Route::middleware('page_denied:avatar player')->group(function(){
                 Route::get('AvaPlayer-view', 'AvatarPlayerController@index')->name('avatar_player');
-
+                Route::post('AvaPlayer-AvaCreate', 'AvatarPlayerController@store')->name('avatar_playerCreate');
+                Route::delete('AvaPlayer-AvaDelete', 'AvatarPlayerController@destroy')->name('avatar_playerDelete');
+                Route::delete('AvaPlayer-AvaDeleteAll', 'AvatarPlayerController@deleteAll')->name('avatar_playerDelete-DeleteAllSelected');
+                Route::post('AvaPlayer-AvaUpdateImage', 'AvatarPlayerController@updateImage')->name('avatar_playerUpdateImage');
+                Route::post('AvaPlayer-AvaUpdate', 'AvatarPlayerController@update')->name('avatar_playerUpdate');
             });
         });
     });

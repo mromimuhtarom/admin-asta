@@ -128,13 +128,13 @@
                                 <i class="fa fa-edit media-icon-wtr1"></i>
                                 <div class="nav-name">Watermark</div>
                               </span>
-                              <figure class="media-object">
-                                {{-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
-                                {{-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" --}}
-                                <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
-                                <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
-                                <img class="img-object-wtr2 imgupload2{{ $gf->id }}" src="http://placehold.jp/80x100.png">
-                              </figure>
+                                <figure class="media-object">
+                                  {{-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
+                                  {{-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" --}}
+                                  <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                                  <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
+                                  <img class="img-object-wtr2 imgupload2{{ $gf->id }}" src="http://placehold.jp/80x100.png">
+                                </figure>
                               <figure>
                                 
                               </figure>

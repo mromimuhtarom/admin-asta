@@ -111,7 +111,7 @@
                         <tr>
                           <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
-                          <td>{{ $action_report_admin[$login->action_id] }} Admin</td>
+                          <td>{{ $action_report_player[$login->action_id] }} pemain</td>
                           <td>{{ $login->datetime }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>

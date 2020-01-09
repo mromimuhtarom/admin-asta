@@ -246,8 +246,6 @@ class GiftController extends Controller
     {
         $linkimage = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gift_id.'.png';
         
-     
-
     //   if($fike_exists_gift   === false)
     //   {  
         
@@ -497,7 +495,7 @@ class GiftController extends Controller
             ]);
             return redirect()->route('Table_Gift')->with('success','Data Deleted');
         }
-        return redirect()->route('Table_Gift')->with('success','Something wrong');
+        return redirect()->route('Table_Gift')->with('alert','Something wrong');
     }
 
 

@@ -617,7 +617,7 @@ public function detailTransaction($month, $year)
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Pendaftaran Agen di menu Pendaftaran Agen dengan nama pengguna '. $request->username
+            'desc'      => 'Menambahkan di menu Pendaftaran Agen dengan nama pengguna '. $request->username
         ]);
   
         return back()->with('success','REGISTER SUCCESSFULL');
