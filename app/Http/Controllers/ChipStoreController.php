@@ -317,7 +317,7 @@ class ChipStoreController extends Controller
                             // imagedestroy($source);
                         // end watermark image
                 } else {
-                    $rootpath   = '../unity-asset/upload/chip';
+                    $rootpath   = '../unity-asset/upload/chip'.$nama_file_unik;
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 

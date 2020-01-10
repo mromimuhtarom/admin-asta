@@ -1101,9 +1101,9 @@ public function detailTransaction($month, $year)
                 }
                 else 
                 {
-                    $rootpath = 'unity-asset/store/gold/';
-                    $img_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
-
+                    $rootpath = 'unity-asset/store/gold/' .$nama_file_unik;
+                    Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                    
                     $path = '../public/upload/Gold/image1/'.$pk.'.png';
                     File::delete($path);    
                     $path = '../public/upload/Gold/image2/'.$pk.'.png';
@@ -1162,15 +1162,21 @@ public function detailTransaction($month, $year)
 
     public function deleteAllSelected(Request $request) 
     {
-        $ids    =   $request->userIdAll;
-        DB::table('asta_db.reseller')->whereIn('reseller_id', explode(",", $ids))->delete();
+        $ids      =   $request->userIdAll;
+        $imageid  =   $request->imageid;
+        
+        //DELETE
+        $deleteAWS = Storage::disk('s3')->delete(explode(",", $imageid));        
+        DB::table('asta_db.item_cash')->whereIn('item_id', explode(",", $ids))->delete();
+        
+        //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$ids
         ]);
-        return redirect()->route('List_Reseller')->with('success', 'Data deleted');
+        return redirect()->route('Item_Store_Reseller')->with('success', 'Data deleted');
     }
 
     public function deleteAllSelectedRank(Request $request)

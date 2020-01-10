@@ -95,7 +95,14 @@
                 <th class="th-sm">Google Key</th>
                 <th class="th-sm">{{ TranslateMenuItem('Status')}}</th>
                 @if($menu && $mainmenu)
-                  <th>{{ TranslateMenuToko('Action')}}</th>
+                  <th>{{ TranslateMenuToko('Action')}} &nbsp; &nbsp;
+                    <a href="#" style="color:red;font-weight:bold;"
+                        class="delete"
+                        id="trash"
+                        data-toggle="modal"
+                        data-target="#deleteAll"><i class="fa fa-trash-o"></i>
+                    </a>
+                  </th>
                 @endif
               </tr>
             </thead>
@@ -103,8 +110,8 @@
               @foreach($getItems as $gold)
               @if($menu && $mainmenu)
               <tr>
-              <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-name="unity-asset/store/gold{{ $gold->id }}.png" class="deletepermission{{ $gold->item_id }}"></td>
-                <td><a href="#" class="usertext" data-title="Name" data-name="order" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="order" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
                 <td>
                     <div class="media-container">
                         <form method="POST" action="{{ route('ItemStoreReseller-updateimage') }}" enctype="multipart/form-data">
@@ -330,7 +337,6 @@ $(".watermark-image").change(function() {
       "pagingType": "full_numbers",
     });
 
-    //icon trash delete all
     $("#trash").hide();
     //CHECK ALL
     $('#checkAll').on('click', function(e) {
@@ -514,34 +520,35 @@ $(".watermark-image").change(function() {
                 echo'});';
               }
       @endphp
-
-      //JS DELETE ALL SELECTED
-      $('.delete').click(function(e) {
-        e.preventDefault();
-        var allVals = [];
-          $(".deleteIdAll:checked").each(function() {
-            allVals.push($(this).attr('data-pk'));
-            var join_selected_values = allVals.join(",");
-            $('#idDeleteAll').val(join_selected_values);
+      
+       //DELETE ALL SELECTED MODAL 
+       $('.delete').click(function(e) {
+          e.preventDefault();
+          var allVals = [];
+            $(".deleteIdAll:checked").each(function() {
+              allVals.push($(this).attr('data-pk'));
+              var join_selected_values = allVals.join(",");
+              $('#idDeleteAll').val(join_selected_values);
           });
 
-        var allimage = [];
-          $('.deleteIdAll:checked').each(function() {
-            allimage.push($(this).attr('data-name'));
-            var join_selected_image = allimage.join(",");
-            $('#idDeleteAllimage').val(join_selected_image)
-          })
-      });
+          var allimage = [];
+            $(".deleteIdAll:checked").each(function() {
+              allimage.push($(this).attr('data-name'));
+              var join_selected_image = allimage.join(",");
+              $('#idDeleteAllimage').val(join_selected_image);
+          });
+        });
 
-      //HIDE SHOW ICON DELETE ALL
-      $('#trash').hide();
-      $(.'deleteIdAll').click(function(e) {
-        if($(".deleteIdAll:checked").length > 1) {
-          $('#trash').show();
-        }else{
-          $('#trash').hide();
-        }
-      });
+        //HIDE SHOW ICON DELETE ALL
+        $('#trash').hide();
+        $(".deleteIdAll").click(function(e) {
+          if($(".deleteIdAll:checked").length > 1) {
+            $('#trash').show();
+          }else{
+            $("#trash").hide();
+          }
+        });
+      
     },
     responsive: false
   });
