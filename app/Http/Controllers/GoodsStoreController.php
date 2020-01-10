@@ -400,4 +400,25 @@ class GoodsStoreController extends Controller
         }
         return redirect()->route('Goods_Store')->with('success','Something wrong');  
     }
+
+    public function deleteAllSelected(Request $request)
+    {
+        $ids        =   $request->userIdAll;
+        $imageid    =   $request->imageid;
+
+        //DELETE
+        Storage::disk('s3')->delete(explode(",", $imageid));
+        DB::table('asta_db.item_point')->whereIn('item_id', explode(",", $ids))->update([
+            'status'    => 2
+        ]);
+
+        //RECORD LOG
+        Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '4',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Hapus gambar dan data yang dipilih di menu Toko barang dengan id'.$ids
+        ]);
+        return redirect()->route('Goods_Store')->with('success', 'Data deleted');
+    }
 }
