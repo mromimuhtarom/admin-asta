@@ -417,7 +417,7 @@ class GoodsStoreController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus gambar dan data yang dipilih di menu Toko barang dengan id'.$ids
+            'desc'      =>  'Hapus gambar dan data yang dipilih di menu Toko barang dengan id '.$ids
         ]);
         return redirect()->route('Goods_Store')->with('success', 'Data deleted');
     }

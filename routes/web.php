@@ -548,6 +548,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('GoldStore-update', 'GoldStoreController@update')->name('GoldStore-update');
                 Route::post('GoldStore-updateimage', 'GoldStoreController@updateimage')->name('GoldStore-updateimage');
                 Route::delete('GoldStore-delete', 'GoldStoreController@destroy')->name('GoldStore-delete');
+                Route::delete('GoldStore-deleteAllSelected', 'GoldStoreController@deleteAllSelected')->name('GoldStore-deleteAllSelected');
             });
         });
         Route::group(['prefix'  =>  'Goods_Store'], function() {

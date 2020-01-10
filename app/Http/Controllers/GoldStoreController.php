@@ -229,13 +229,7 @@ class GoldStoreController extends Controller
       }      
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
         $pk    = $request->pk;
@@ -392,12 +386,7 @@ class GoldStoreController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Request $request)
     {
         $getGoldId    = $request->userid;
@@ -442,5 +431,26 @@ class GoldStoreController extends Controller
             return redirect()->route('Gold_Store_Reseller')->with('alert','ID must be Fill'); 
         }
         
+    }
+
+    public function deleteAllSelected(Request $request)
+    {
+        $ids        =   $request->userIdAll;
+        $imageid    =   $request->imageid;
+
+        //DELETE
+        Storage::disk('s3')->delete(explode(",", $imageid));
+        DB::table('asta_db.item_cash')->whereIn('item_id', explode(",", $ids))->update([
+            'status'    =>  2
+        ]);
+
+        //RECORD LOG
+        Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '4',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Hapus gambar dan data yang dipilih di menu toko koin dengan id '.$ids
+        ]);
+        return redirect()->route('Gold_Store_Reseller')->with('success', 'Data deleted');
     }
 }
