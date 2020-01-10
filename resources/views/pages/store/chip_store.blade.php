@@ -81,7 +81,7 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                  <th class="th-sm"></th>
+                  <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('Select All') }}</th>
                 @endif
                 <th>{{ TranslateMenuToko('Order')}}</th>
                 <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
@@ -91,7 +91,14 @@
                 <th class="th-sm">{{ TranslateMenuToko('Gold Cost')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Active')}}</th>
                 @if($menu && $mainmenu)
-                  <th></th>
+                  <th>{{ TranslateMenuGame('Action')}}
+                    <a href="#" style="color:red;font-weight:bold;"
+                        class="delete"
+                        id="trash"
+                        data-toggle="modal"
+                        data-target="#deleteAll"><i class="fa fa-trash-o"></i>
+                    </a>
+                  </th>
                 @endif
               </tr>
             </thead>
@@ -100,7 +107,7 @@
                 @if($menu && $mainmenu)
                   @if($itm->status === 0)
                     <tr>
-                      <td><input type="checkbox" name="deletepermission" class="deletepermission{{ $itm->item_id }}"></td>
+                      <td><input type="checkbox" name="deletepermission[]" data-pk="{{ $itm->item_id }}" data-name="unity-asset/store/chip/{{ $itm->item_id }}.png" class="deletepermission{{ $itm->item_id }} deleteIdAll"></td>
                       <td><a href="#" class="usertext" data-name="order" data-title="Orders" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->order }}</a></td>
                       <td>
                         <div class="media-container">
@@ -219,8 +226,6 @@
 <!-- end Table -->
 
 
-
-
       <!-- Modal -->
     <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -246,9 +251,6 @@
         </div>
       </div>
     </div>
-
-
-
 
 
 <!-- Modal -->
@@ -313,6 +315,33 @@
 </div>
 <!-- end Modal -->
 
+<!-- MODAL DELETE ALL SELECTED -->
+<div class="modal fade" id="deleteAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ TranslateMenuItem('Are U Sure') }}
+        <form action="{{ route('ChipStore-deleteAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+          <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 <!-- Script -->
 <script>
   $(".watermark-image").change(function() {
@@ -331,6 +360,19 @@
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+    });
+
+    $("#trash").hide();
+    //CHECK ALL
+    $('#checkAll').on('click', function(e) {
+      if($(this).is(':checked', true))
+      {
+        $(".deleteIdAll").prop('checked', true);
+        $("#trash").show();
+      } else {
+        $(".deleteIdAll").prop('checked', false);
+        $("#trash").hide();
+      }
     });
   });
 
@@ -468,6 +510,34 @@
                 echo'});';
               }
       @endphp
+
+      //DELETE ALL SELECTED MODAL 
+      $('.delete').click(function(e) {
+          e.preventDefault();
+          var allVals = [];
+            $(".deleteIdAll:checked").each(function() {
+              allVals.push($(this).attr('data-pk'));
+              var join_selected_values = allVals.join(",");
+              $('#idDeleteAll').val(join_selected_values);
+          });
+
+          var allimage = [];
+            $(".deleteIdAll:checked").each(function() {
+              allimage.push($(this).attr('data-name'));
+              var join_selected_image = allimage.join(",");
+              $('#idDeleteAllimage').val(join_selected_image);
+          });
+        });
+
+        //HIDE SHOW ICON DELETE ALL
+        $('#trash').hide();
+        $(".deleteIdAll").click(function(e) {
+          if($(".deleteIdAll:checked").length > 1) {
+            $('#trash').show();
+          }else{
+            $("#trash").hide();
+          }
+        });
     },
     responsive: false
   });

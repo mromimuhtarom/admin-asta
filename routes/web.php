@@ -539,6 +539,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('ChipStore-updateimage','ChipStoreController@updateImage')->name('ChipStore-updateimage');
                 Route::post('ChipStore-create', 'ChipStoreController@store')->name('ChipStore-create');
                 Route::delete('ChipStore-delete', 'ChipStoreController@destroy')->name('ChipStore-delete');
+                Route::delete('ChipStore-deleteAllSelected', 'ChipStoreController@deleteAllSelected')->name('ChipStore-deleteAllSelected');
             });
         });
         Route::group(['prefix'  =>  'Gold_Store'], function() {

@@ -17,11 +17,7 @@ use Storage;
 
 class ChipStoreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $menu     = MenuClass::menuName('Chip Store');
@@ -51,12 +47,7 @@ class ChipStoreController extends Controller
         return view('pages.store.chip_store', compact('items', 'menu', 'endis', 'mainmenu', 'timenow'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
           $validator = Validator::make($request->all(),[
@@ -183,13 +174,7 @@ class ChipStoreController extends Controller
          
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
 
@@ -371,12 +356,7 @@ class ChipStoreController extends Controller
       }      
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Request $request)
     {
         $id = $request->id;
@@ -401,5 +381,26 @@ class ChipStoreController extends Controller
             return redirect()->route('Chip_Store')->with('success','Data Deleted');
         }
         return redirect()->route('Chip_Store')->with('success','Something wrong');   
+    }
+
+    public function deleteAllSelected(Request $request)
+    {
+        $ids        =   $request->userIdAll;
+        $imageid    =   $request->imageid;
+
+        //DELETE
+        Storage::disk('s3')->delete(explode(",", $imageid));
+        DB::table('asta_db.item_gold')->whereIn('item_id', explode(",", $ids))->update([
+            'Status'    => 2
+        ]);
+
+        //RECORD LOG
+        Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '4',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Hapus gambar dan data yang dipilih dimenu Toko barang dengan id '.$ids
+        ]);
+        return redirect()->route('Chip_Store')->with('success', 'Data deleted');
     }
 }
