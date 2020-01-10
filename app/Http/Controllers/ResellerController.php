@@ -822,6 +822,7 @@ public function detailTransaction($month, $year)
                         'shop_type'
                     )
                     ->where('shop_type', '=', 2)
+                    ->where('status', '!=', 2)
                     ->orderBy('order', 'asc')
                     ->get();
         $active   = ConfigText::select(
@@ -964,6 +965,7 @@ public function detailTransaction($month, $year)
                     'item_get'   => $goldAwarded,
                     'price'      => $priceCash,
                     'shop_type'  => 2,
+                    'status'     => 1,
                     'item_type'  => 2,
                     'google_key' => $googleKey,
                 ]);
@@ -1134,7 +1136,6 @@ public function detailTransaction($month, $year)
 
 
 
-
 // ------- Delete Item Store Reseller -------- //
     public function destroyItemStoreReseller(Request $request)
     {
@@ -1143,7 +1144,10 @@ public function detailTransaction($month, $year)
 
         if($getItemId  != '') 
         {
-            ItemsCash::where('item_id', '=', $getItemId)->delete();
+            ItemsCash::where('item_id', '=', $getItemId)->update([
+                'status'    =>  2
+            ]);
+
             Storage::disk('s3')->delete($pathS3);
         
             Log::create([
@@ -1166,8 +1170,10 @@ public function detailTransaction($month, $year)
         $imageid  =   $request->imageid;
         
         //DELETE
-        $deleteAWS = Storage::disk('s3')->delete(explode(",", $imageid));        
-        DB::table('asta_db.item_cash')->whereIn('item_id', explode(",", $ids))->delete();
+        Storage::disk('s3')->delete(explode(",", $imageid));        
+        DB::table('asta_db.item_cash')->whereIn('item_id', explode(",", $ids))->update([
+            'status'    =>  2   
+        ]);
         
         //RECORD LOG
         Log::create([

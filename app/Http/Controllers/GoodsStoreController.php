@@ -17,11 +17,7 @@ use App\ConfigText;
 
 class GoodsStoreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $menu     = MenuClass::menuName('Gold Store');
@@ -49,12 +45,7 @@ class GoodsStoreController extends Controller
         return view('pages.store.goods_store', compact('menu', 'itemGood', 'endis', 'mainmenu', 'timenow'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $id = ItemPoint::select('item_id')
@@ -194,14 +185,7 @@ class GoodsStoreController extends Controller
         }
     }
 
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request)
     {
         $pk    = $request->pk;
@@ -363,7 +347,7 @@ class GoodsStoreController extends Controller
     public function ImageItem($item_id)
     {
       $rootpath         = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png';
-    //   $client           = Storage::createLocalDriver(['root' => $rootpath]);
+
       $file_exists_gold = file_exists($rootpath);
       
 
@@ -388,12 +372,7 @@ class GoodsStoreController extends Controller
       }      
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy(Request $request)
     {
         $id    = $request->id;

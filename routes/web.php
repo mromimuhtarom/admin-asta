@@ -557,6 +557,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('GoodsStore-updateimage', 'GoodsStoreController@updateimage')->name('GoodsStore-updateimage');
                 Route::delete('GoodsStore-delete', 'GoodsStoreController@destroy')->name('GoodsStore-delete');
                 Route::post('GoodsStore-create', 'GoodsStoreController@store')->name('GoodsStore-create');
+                Route::delete('GoodsStore-deleteAllSelected', 'GoodsStoreController@deleteAllSelected')->name('GoodsStore-deleteAllSelected');
             });
         });
         // Route::group(['prefix'  =>  'Transaction-Store'], function() {

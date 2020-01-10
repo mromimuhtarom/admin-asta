@@ -111,7 +111,7 @@
                 @if($menu && $mainmenu)
                 <tr>
                   <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
-                  <td>
+                    <td>
                           <div class="media-container">
                             <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
                               {{  csrf_field() }}
