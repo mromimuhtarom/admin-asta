@@ -60,7 +60,8 @@ class RegisterPlayerIdController extends Controller
         if($validator->fails())
         {  
           return back()->withInput()->with('alert', $validator->errors()->first());
-        }
+        }            
+
         $last = UserRandom::select('user_id')
                 ->orderBy('user_id', 'desc')
                 ->first();
@@ -86,12 +87,20 @@ class RegisterPlayerIdController extends Controller
                 ];
             }
 
+            if($usertype == 1):
+                $usertype = 'Player';
+            elseif($usertype == 2):
+                $usertype = 'Guest';
+            else:
+                $usertype = 'Bot';
+            endif;
+
             UserRandom::insert($playerId);
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '3',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Menambahkan data sebanyak '.$number.' input  di menu Pendaftaran pemain ID'
+                'desc'      => 'Menambahkan data sebanyak '.$number.' input  di menu Pendaftaran '.$usertype.' ID'
             ]);
 
             return back()->with('success', 'Input Data Successfull with '.$number.' Record');
