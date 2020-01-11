@@ -111,7 +111,7 @@ class AvatarPlayerController extends Controller
                     return redirect()->route('avatar_player')->with('success', 'Insert Data successfull');
                 }
         } else {
-            return back()->with('alert', 'Ekstensi file tidak diperbolehkan');
+            return redirect()->route('avatar_player')->with('alert', 'Ekstensi file tidak diperbolehkan, harus menggunakan .png');
         }
     }
         

@@ -19,7 +19,6 @@
                $('#blah')
                    .attr('src', e.target.result);
            };
-
            reader.readAsDataURL(input.files[0]);
        }
    }
@@ -38,8 +37,8 @@
 @endif
 
 @if (\Session::has('alert'))
-    <div class="alert alert-success">
-        <div>{{Session::get('danger')}}</div>
+    <div class="alert alert-danger">
+        <p>{{Session::get('alert')}}</p>
     </div>
 @endif
 
