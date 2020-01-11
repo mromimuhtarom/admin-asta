@@ -10,34 +10,29 @@
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
 
-@if (count($errors) > 0)
-  <div class="error-val">
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{$error}}</li>  
-        @endforeach
-      </ul>
-    </div>  
-  </div>
-@endif
-
-
-@if (\Session::has('alert'))
-<div class="alert alert-danger">
-    <div>{{Session::get('alert')}}</div>
-</div>
-    
-@endif
-
-  
 @if (\Session::has('success'))
   <div class="alert alert-success">
     <p>{{\Session::get('success')}}</p>
   </div>
 @endif
 
+@if (\Session::has('alert'))
+  <div class="alert alert-danger">
+    <p>{{\Session::get('alert')}}</p>
+  </div>
+@endif
 
+@if (count($errors) > 0)
+<div class="error-val">
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{$error}}</li>  
+      @endforeach
+    </ul>
+  </div>
+</div>
+@endif
 
 <div class="playerId bg-blue-dark">
     <div class="table-header w-100 h-100" style="padding-right:2%;">

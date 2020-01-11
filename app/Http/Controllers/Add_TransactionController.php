@@ -119,6 +119,10 @@ class Add_TransactionController extends Controller
           $totalbalance = $stat->chip + $valuecurrency;
         else:
           $totalbalance = $stat->chip - $valuecurrency;
+          //PREVENT BALANCE MINUS
+          if($stat->chip == 0):
+            return back()->with('alert', 'balance tidak dapat dikurangi');
+          endif;
         endif;
         
         
@@ -139,16 +143,17 @@ class Add_TransactionController extends Controller
           'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' chip. Dengan alasan: ' .$description
         ]);
 
-        //PREVENT BALANCE MINUS
-        if($stat->chip == 0):
-          return back()->with('alert', 'balance tidak dapat dikurangi');
-        endif;
+        
 
       elseif($columnname == 'gold'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->gold + $valuecurrency;
         else:
           $totalbalance = $stat->gold - $valuecurrency;
+          //PREVENT BALANCE MINUS
+          if($stat->gold == 0):
+            return back()->with('alert', 'balance tidak dapat dikurangi');
+          endif;
         endif;
     
         $balance = BalanceGold::create([
@@ -167,16 +172,17 @@ class Add_TransactionController extends Controller
           'desc'      =>  'Edit balance koin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' koin. Dengan alasan: ' .$description
         ]);
 
-        //PREVENT BALANCE MINUS
-        if($stat->gold == 0):
-          return back()->with('alert', 'balance tidak dapat dikurangi');
-        endif;
+
 
       elseif($columnname == 'point'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->point + $valuecurrency;
         else:
           $totalbalance = $stat->point - $valuecurrency;
+          //PREVENT BALANCE MINUS
+          if($stat->point == 0):
+            return back()->with('alert', 'balance tidak dapat dikurangi');
+          endif;
         endif;
 
         $balance = BalancePoint::create([
@@ -196,10 +202,6 @@ class Add_TransactionController extends Controller
           'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' poin. Dengan alasan: ' .$description
         ]);
 
-        //PREVENT BALANCE MINUS
-        if($stat->point == 0):
-          return back()->with('alert', 'balance tidak dapat dikurangi');
-        endif;
 
       endif;
 
