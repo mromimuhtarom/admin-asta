@@ -19,7 +19,7 @@ class Add_TransactionController extends Controller
 {
     public function index()
     {
-        // for action name
+        //for action name
         $action       = ConfigText::select(
                           'name',
                           'value'
@@ -36,6 +36,7 @@ class Add_TransactionController extends Controller
         return view('pages.transaction.add_transaction', compact('actblnc'));
     }
 
+    //FUNGSI SEARCH
     public function search(Request $request)
     {
         $searhUser   = $request->inputPlayer;
@@ -43,6 +44,7 @@ class Add_TransactionController extends Controller
         $namecolumn  = $request->namecolumn;
         $getUsername = Input::get('inputPlayer');
 
+        //Sorting
         if($sorting == NULL): 
           $sorting = 'desc';
         endif;
@@ -103,6 +105,8 @@ class Add_TransactionController extends Controller
         return view('pages.transaction.add_transaction', compact('add_transaction', 'getUsername', 'sortingorder', 'actblnc'));
     }
 
+
+    //FUNGSI UPDATE
     public function update(Request $request)
     {
       $user_id       = $request->user_id;
@@ -114,6 +118,7 @@ class Add_TransactionController extends Controller
       
       $stat = Stat::where('user_id', '=', $user_id)->first();
 
+      //VALIDASI FORM INPUT
       $validator = Validator::make($request->all(), [
         'currency'    =>  'required',
         'type'        =>  'required',
@@ -124,18 +129,21 @@ class Add_TransactionController extends Controller
         return back()->withErrors($validator->errors());
       }
       
+      //KONDISI PENJUMLAHAN DAN PENGURANGAN BALANCE
+      //=== CHIP ===//
       if($columnname == 'chip'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->chip + $valuecurrency;
         else:
           $totalbalance = $stat->chip - $valuecurrency;
-          //PREVENT BALANCE MINUS
+
+          //PREVENT BALANCE MINUS CHIP
           if($stat->chip == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
         endif;
         
-        
+        //UPDATE DATABASE
         $balance = BalanceChip::create([
             'user_id'   => $user_id,
             'action_id' => $type,
@@ -145,25 +153,29 @@ class Add_TransactionController extends Controller
             'balance'   => $totalbalance,
             'datetime'  => Carbon::now('GMT+7')
         ]);
-
+        
+        //RECORD LOG 
         Log::create([
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
           'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' chip. Dengan alasan: ' .$description
         ]);
-
+      
+      //=== GOLD ===/
       elseif($columnname == 'gold'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->gold + $valuecurrency;
         else:
           $totalbalance = $stat->gold - $valuecurrency;
-          //PREVENT BALANCE MINUS
+          
+        //PREVENT BALANCE MINUS GOLD
           if($stat->gold == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
         endif;
-    
+        
+        //UPDATE DATABASE
         $balance = BalanceGold::create([
             'user_id'   => $user_id,
             'action_id' => $type,
@@ -172,7 +184,8 @@ class Add_TransactionController extends Controller
             'balance'   => $totalbalance,
             'datetime'  => Carbon::now('GMT+7')
         ]);
-
+        
+        //RECORD LOG
         Log::create([
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
@@ -181,18 +194,20 @@ class Add_TransactionController extends Controller
         ]);
 
 
-
+      //=== POINT ===//
       elseif($columnname == 'point'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->point + $valuecurrency;
         else:
           $totalbalance = $stat->point - $valuecurrency;
-          //PREVENT BALANCE MINUS
+          
+          //PREVENT BALANCE MINUS POINT
           if($stat->point == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
         endif;
 
+        //UPDATE DATABASE
         $balance = BalancePoint::create([
             'user_id'   => $user_id,
             'game_id'   => 0,
@@ -203,14 +218,13 @@ class Add_TransactionController extends Controller
             'datetime'  => Carbon::now('GMT+7')
         ]);
 
+        //RECORD LOG
         Log::create([
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
           'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' poin. Dengan alasan: ' .$description
         ]);
-
-
       endif;
 
       Stat::where('user_id', '=', $user_id)->update([
@@ -219,7 +233,6 @@ class Add_TransactionController extends Controller
 
       return back()->with('success', 'Successfull Update');
 
-    
     }
 
 }

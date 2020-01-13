@@ -22,12 +22,16 @@ class SlideBannerController extends Controller
      */
     public function index()
     {
-        $menu         = MenuClass::menuName('Slide Banner');
-        $slide_banner = SlideBanner::all();
-        $active       = ConfigText::select('name', 'value')->where('id', '=', 4)->first();
-        $value        = str_replace(':', ',', $active->value);
-        $endis        = explode(",", $value);
-        return view('pages.slide_banner.slide_banner', compact('menu', 'slide_banner', 'endis'));
+        // $menu         = MenuClass::menuName('Slide Banner');
+        // $slide_banner = SlideBanner::all();
+        // $active       = ConfigText::select('name', 'value')->where('id', '=', 4)->first();
+        // $value        = str_replace(':', ',', $active->value);
+        // $endis        = explode(",", $value);
+
+        // compact('menu', 'slide_banner', 'endis')
+        return view('pages.Maintenance.underconstruction');
+
+        
     }
 
     /**

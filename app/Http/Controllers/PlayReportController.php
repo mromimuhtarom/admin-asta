@@ -48,7 +48,7 @@ class PlayReportController extends Controller
               'inputMaxDate' => 'required|date',
               'inputGame'    => 'required',
        ]);
-    
+
        if ($validator->fails()) {
               return back()->withErrors($validator->errors());
        }
@@ -56,7 +56,6 @@ class PlayReportController extends Controller
       if($inputMaxDate < $inputMinDate){
        return back()->with('alert','End Date can\'t be less than start date');
       }
-
         // if sorting variable is null
         if($sorting == NULL):
           $sorting = 'desc';
