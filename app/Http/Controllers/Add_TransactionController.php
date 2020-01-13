@@ -13,6 +13,7 @@ use App\BalancePoint;
 use Carbon\Carbon;
 use App\Log;
 use Session;
+use Validator;
 
 class Add_TransactionController extends Controller
 {
@@ -41,7 +42,6 @@ class Add_TransactionController extends Controller
         $sorting     = $request->sorting;
         $namecolumn  = $request->namecolumn;
         $getUsername = Input::get('inputPlayer');
-
 
         if($sorting == NULL): 
           $sorting = 'desc';
@@ -113,6 +113,16 @@ class Add_TransactionController extends Controller
       $description   = $request->description;
       
       $stat = Stat::where('user_id', '=', $user_id)->first();
+
+      $validator = Validator::make($request->all(), [
+        'currency'    =>  'required',
+        'type'        =>  'required',
+        'description' =>  'required'
+      ]);
+
+      if ($validator->fails()) {
+        return back()->withErrors($validator->errors());
+      }
       
       if($columnname == 'chip'):
         if( $plusminus == "+"):    
@@ -142,8 +152,6 @@ class Add_TransactionController extends Controller
           'datetime'  =>  Carbon::now('GMT+7'),
           'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' chip. Dengan alasan: ' .$description
         ]);
-
-        
 
       elseif($columnname == 'gold'):
         if( $plusminus == "+"):    
@@ -208,12 +216,6 @@ class Add_TransactionController extends Controller
       Stat::where('user_id', '=', $user_id)->update([
         $columnname => $totalbalance
       ]);
-
-      
-    
-
-                        
-      
 
       return back()->with('success', 'Successfull Update');
 

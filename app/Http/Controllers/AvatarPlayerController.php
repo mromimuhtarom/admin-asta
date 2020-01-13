@@ -137,6 +137,7 @@ class AvatarPlayerController extends Controller
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
+
             //MENYIMPAN KE AWS S3
             $pathS3     =   'avatar/'.$nama_file_unik;
             Storage::disk('s3')->put($pathS3, file_get_contents($file));
@@ -167,7 +168,7 @@ class AvatarPlayerController extends Controller
         ]);
 
         $timenow = Carbon::now('GMT+7');
-
+            
         switch($name) {
             case 'name':
                 $name = "Nama";

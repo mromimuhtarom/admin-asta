@@ -29,9 +29,6 @@ class PlayReportController extends Controller
         return view('pages.players.playreport', compact('game', 'datenow'));
     }
 
-
-
-
     public function search(Request $request)
     {
 
