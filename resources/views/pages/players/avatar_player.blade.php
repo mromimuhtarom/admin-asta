@@ -122,10 +122,10 @@
                                          
                                         </div>
                                         <div class="media-control" align="center" style="margin-top:-1%">
-                                          <button class="save-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuItem('Save Gift') }}</button>
+                                          <button class="save-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save Avatar') }}</button>
                                         </form>
                                           <button class="cancel-upload{{ $ap->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                                          <button class="edit-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit Gift') }}</button>
+                                          <button class="edit-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit Avatar') }}</button>
                                         </div>
                                 </td>
                             <td><a href="#" class="usertext" data-name="name" data-title="Title Avatar" data-type="text" data-pk="{{ $ap->id }}" data-url="{{ route('avatar_playerUpdate') }}">{{ $ap->name }}</a></td>

@@ -88,6 +88,9 @@
                 <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Category')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Chip Awarded')}}</th>
+                <th class="th-sm">Item Bonus</th>
+                <th class="th-sm">Gambar Item Bonus</th>
+                <th class="th-sm">Item Bonus yang didapat</th>
                 <th class="th-sm">{{ TranslateMenuToko('Gold Cost')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Active')}}</th>
                 @if($menu && $mainmenu)
@@ -142,6 +145,9 @@
                       <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
                       <td>{{ $itm->strItemType() }}</td>
                       <td><a href="#" class="usertext" data-name="item_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->item_get }}</a></td>
+                      <td><a href="#" class="" data-name="" data-title="Title Chip" data-pk="" data-type="" data-url=""></a></td>
+                      <td><a href="#" class="" data-name="" data-title="Title Chip" data-pk="" data-type="" data-url=""></a></td>
+                      <td><a href="#" class="" data-name="" data-title="Title Chip" data-pk="" data-type="" data-url=""></a></td>
                       <td><a href="#" class="usertext" data-name="price" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->price }}</a></td>
                       <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
                       <td>
@@ -191,6 +197,9 @@
                       <td>{{ $itm->name }}</td>
                       <td>{{ $itm->strItemType() }}</td>
                       <td>{{ $itm->item_get }}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                       <td>{{ $itm->price }}</td>
                       <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
                       <td></td>
@@ -300,6 +309,34 @@
           <div class="form-grsoup">
             <input type="number" name="goldcost" class="form-control" id="basic-url" placeholder="gold cost">
           </div>
+          <br>
+          <div class="dd" id="nestable2">
+            <ol class="dd-list">
+              <li class="dd-item" data-id="15">
+                <div class="dd-handle">
+                  Item 15
+                </div>
+                <ol class="dd-list">
+                  <li class="dd-item" data-id="16">
+                    <div class="dd-handle">
+                      Item 16
+                    </div>
+                  </li>
+                  <li class="dd-item" data-id="17">
+                    <div class="dd-handle">
+                      Item 17
+                    </div>
+                  </li>
+                  <li class="dd-item" data-id="18">
+                    <div class="dd-handle">
+                       Item 18
+                    </div>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
@@ -538,6 +575,14 @@
             $("#trash").hide();
           }
         });
+
+        //activate nestable
+        $('#nestable2').nestable({
+          group : 1
+        }).on('change', updateOutput);
+
+        //output initial seialised data
+        updateOutput($('#nestable2').data('output', $('#nestable2-output')));
     },
     responsive: false
   });

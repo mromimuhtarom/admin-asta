@@ -322,6 +322,8 @@ function Translate_menuPlayers($menu){
         'Experience'                =>  'Maks Pengalaman',
         'Player Rank'               =>  'Peringkat player',
         'Create Rank Player'        =>  'Buat peringkat pemain',
+        'Save Avatar'               =>  'Simpan avatar',
+        'Edit Avatar'               =>  'Ubah avatar'
         
 
     ];
