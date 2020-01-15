@@ -315,33 +315,23 @@ class EmoticonController extends Controller
 
 
     public function ImageEmoticon($item_id)
-    {
-      
-        $linkimage        = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/emoticon/'.$item_id.'.png';
-        $file_exists_gold = file_exists($linkimage);
-      
-
-      if($file_exists_gold  === false)
-      {  
+    { 
+        $linkimage = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/emoticon/'.$item_id.'.png';
         
-        $rootpath_empty = '../public/images/image_not_found';
-        $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
-        $file_empty     = $client_empty->get('not_found.png');
-        $type_empty     = $client_empty->mimeType('not_found.png');
 
-        $response_empty = Response::make($file_empty, 200);
-        $response_empty->header("Content-Type", $type_empty);
-
-        return $response_empty;
-
-      } else if($file_exists_gold  === true){
-        $file_gold = $client->get($item_id.'.png');
-        $type_gold = $client->mimeType($item_id.'.png');
-        $response  = Response::make($file_gold, 200);
-        $response->header("Content-Type", $type_gold);
-        return $response;
-
-      }      
+        $im   = imagecreatefrompng($linkimage);
+        $size = min(imagesx($im), imagesy($im));
+        $im2  = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
+        if($im2 !== FALSE) {
+            imagepng($im2);
+            imagedestroy($im2);
+        }
+        imagedestroy($im);
+  
+        file_put_contents('../public/upload/gifts/crop/', file_get_contents($im2));
+        $filepublic = public_path().'/upload/gifts/crop/';
+        
+        return $linkimage;
     }
 
 

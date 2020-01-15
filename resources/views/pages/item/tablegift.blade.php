@@ -138,7 +138,7 @@
                               <figure>
                                 
                               </figure>
-                            </div>
+                          </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
                               <button class="save-profile{{ $gf->id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuItem('Save Gift') }}</button>
                             </form>
