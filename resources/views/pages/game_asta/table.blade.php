@@ -174,15 +174,17 @@
                   <select class="custom-select" id="category_table" name="category">
                     <option>{{ TranslateMenuGame('Select Category') }}</option>
                     @foreach ($category as $ct)
-                    <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
+                    <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }} {{ number_format($ct->min_buy) }} - {{ number_format($ct->max_buy) }}</option>
                     @endforeach
                   </select>
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
+                  <span id="lblErrorminbuy" style="color: red"></span>
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
+                  <span id="lblErrormaxbuy" style="color: red"></span>
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" id="sb" name="sb" placeholder="Small Blind" required="">
@@ -299,8 +301,34 @@
               echo 'var countSb = countBb / 2;';
               echo '$("#sb").val(countSb);';
               echo '$("#bb").val(countBb);';
+              echo 'var lblErrorminbuy = document.getElementById("lblErrorminbuy");';
+
+              echo 'if(minbuyValue >= '.$ct->min_buy.') {';
+                  echo 'lblErrorminbuy.innerHTML = "";';
+              echo '}else{';
+                  echo 'lblErrorminbuy.innerHTML = "Min buy table kurang dari min buy di kategori.";';
               echo '}';
+          echo '}';
         }
+        @endphp
+      });
+
+
+
+      $("#maxbuy").keyup(function(e) {
+        e.preventDefault();
+        var maxbuyValue = $(this).val();
+        var lblErrormaxbuy = document.getElementById("lblErrormaxbuy");
+        @php
+          foreach ($category as $ct) {
+            echo 'if('.$ct->room_id.' == $("#category_table").val()) {';
+              echo 'if( maxbuyValue <= '.$ct->max_buy.') {';
+                  echo 'lblErrormaxbuy.innerHTML = "";';
+              echo '}else{';
+                  echo 'lblErrormaxbuy.innerHTML = "Max buy table kurang dari max buy di kategori.";';
+              echo '}';
+            echo '}';
+          }
         @endphp
       });
 

@@ -154,7 +154,7 @@
                   <select class="custom-select" id="category_table" name="category">
                     <option selected>{{ TranslateMenuGame('Select Category') }}</option>
                     @foreach ($category as $ct)
-                    <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ $ct->min_buy }} - {{ $ct->max_buy }}</option>
+                    <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ number_format($ct->min_buy) }} - {{ number_format($ct->max_buy) }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -163,9 +163,11 @@
                 </div>
                 <div class="form-group">
                   <input type="number" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
+                  <span id="lblErrorminbuy" style="color: red"></span>
                 </div>
                 <div class="form-group">
                   <input type="number" class="form-control" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
+                  <span id="lblErrormaxbuy" style="color: red"></span>
                 </div>
               </div>
             </div>
@@ -272,16 +274,26 @@
       echo 'var stakevalue = $( this ).val();';
       echo 'var countminbuy = stakevalue * 3 * 13;';
       echo 'var countmaxbuy = countminbuy * 4;';
+      echo 'var lblErrormaxbuy = document.getElementById("lblErrormaxbuy");';
+      echo 'var lblErrorminbuy = document.getElementById("lblErrorminbuy");';
         echo 'if(countminbuy >= '.$ct->min_buy.') {';
           echo 'var minbuy = $("#minbuy").val(countminbuy);';
-          echo 'var maxbuy = $("#maxbuy").val(countmaxbuy);';
+          echo 'lblErrorminbuy.innerHTML = "";';
         echo '} else {';
           echo 'var minbuy = $("#minbuy").val(null);';
+          echo 'lblErrorminbuy.innerHTML = "Min buy table kurang dari min buy di kategori.";';
+        echo '}';
+
+
+        echo 'if(countmaxbuy <= '.$ct->max_buy.') {';
+          echo 'var maxbuy = $("#maxbuy").val(countmaxbuy);';
+          echo 'lblErrormaxbuy.innerHTML = "";';
+        echo '} else {';
           echo 'var maxbuy = $("#maxbuy").val(null);';
+          echo 'lblErrormaxbuy.innerHTML = "Max buy table melebihi dari max buy di kategori.";';
+
         echo '}';
       echo '}';
-      
-      
       
       }
       @endphp   

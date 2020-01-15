@@ -126,12 +126,14 @@ class Add_TransactionController extends Controller
       if($columnname == 'chip'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->chip + $valuecurrency;
+          $op_math = "ditambahkan";
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
             'type'        =>  'required',
             'description' =>  'required'
           ]);
         else:
+          $op_math = "dikurang";
           $totalbalance = $stat->chip - $valuecurrency;
 
           //PREVENT BALANCE MINUS CHIP
@@ -165,20 +167,36 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' chip. Dengan alasan: ' .$description
+          'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang '.$op_math.' '.$valuecurrency. ' chip. Dengan alasan: ' .$description
         ]);
       
       //=== GOLD ===/
       elseif($columnname == 'gold'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->gold + $valuecurrency;
+          $op_math = 'ditambahkan';
+          $validator = Validator::make($request->all(), [
+            'currency'    =>  'required',
+            'type'        =>  'required',
+            'description' =>  'required'
+          ]);
         else:
           $totalbalance = $stat->gold - $valuecurrency;
+          $op_math = 'dikurang';
+
+          $validator = Validator::make($request->all(), [
+            'currency'    =>  'required',
+            'description' =>  'required'
+          ]);
           
         //PREVENT BALANCE MINUS GOLD
           if($stat->gold == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
+        endif;
+
+        if ($validator->fails()) :
+          return back()->withErrors($validator->errors());
         endif;
         
         //UPDATE DATABASE
@@ -196,7 +214,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'Edit balance koin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' koin. Dengan alasan: ' .$description
+          'desc'      =>  'Edit balance koin dengan ID ' .$user_id. ' jumlah yang '.$op_math.' '.$valuecurrency. ' koin. Dengan alasan: ' .$description
         ]);
 
 
@@ -204,13 +222,30 @@ class Add_TransactionController extends Controller
       elseif($columnname == 'point'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->point + $valuecurrency;
+          $op_math = 'ditambahkan';
+
+          $validator = Validator::make($request->all(), [
+            'currency'    =>  'required',
+            'type'        =>  'required',
+            'description' =>  'required'
+          ]);
         else:
           $totalbalance = $stat->point - $valuecurrency;
+          $op_math = 'dikurang';
+
+          $validator = Validator::make($request->all(), [
+            'currency'    =>  'required',
+            'description' =>  'required'
+          ]);
           
           //PREVENT BALANCE MINUS POINT
           if($stat->point == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
+        endif;
+
+        if ($validator->fails()) :
+          return back()->withErrors($validator->errors());
         endif;
 
         //UPDATE DATABASE
@@ -229,7 +264,7 @@ class Add_TransactionController extends Controller
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',
           'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang di edit '.$valuecurrency. ' poin. Dengan alasan: ' .$description
+          'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang '. $op_math.' '.$valuecurrency. ' poin. Dengan alasan: ' .$description
         ]);
       endif;
 
