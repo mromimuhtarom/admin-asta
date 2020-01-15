@@ -28,6 +28,8 @@ class ChipStoreController extends Controller
                         'item_type',
                         'price',
                         'item_get',
+                        'bonus_get',
+                        'bonus_type',
                         'status',
                         'order'
                     )
@@ -42,9 +44,21 @@ class ChipStoreController extends Controller
                     ->where('id', '=', 4)
                     ->first();
         $value    = str_replace(':', ',', $active->value);
-        $endis    = explode(",", $value);
+        $endis    = explode(",", $value);            
+                    
+                    
+        $bonusType= ConfigText::select(
+                        'name',
+                        'value'
+                    )
+                    ->where('id', '=', 5)
+                    ->first();
+        $valueBonus = str_replace(':', ',', $bonusType->value);
+        $bontype    = explode(",", $valueBonus);
+       
+
         $timenow  = Carbon::now('GMT+7');
-        return view('pages.store.chip_store', compact('items', 'menu', 'endis', 'mainmenu', 'timenow'));
+        return view('pages.store.chip_store', compact('items', 'menu', 'endis', 'mainmenu', 'timenow', 'bontype'));
     }
 
     
@@ -75,15 +89,20 @@ class ChipStoreController extends Controller
           $id_new                 = $id_lst + 1;
           $file                   = $request->file('file');
           $file_wtr               = $request->file('file1');
+          $filebonus              = $request->file('filebonus');
           $ekstensi_diperbolehkan = array('png');
           $nama                   = $_FILES['file']['name'];
           $nama_wtr               = $_FILES['file1']['name'];
+          $namafilebonus          = $_FILES['filebonus']['name'];
           $x                      = explode('.', $nama);
           $x_wtr                  = explode('.', $nama_wtr);
+          $x_bonus                = explode('.', $namafilebonus);
           $ekstensi               = strtolower(end($x));
           $ekstensi_wtr           = strtolower(end($x_wtr));
+          $ekstensi_bonus         = strtolower(end($x_bonus));
           $ukuran                 = $_FILES['file']['size'];
           $nama_file_unik         = $id_new.'.'.$ekstensi;
+          $imageBonusname         = $id_new.'-2.'.$ekstensi_bonus;
           list($width, $height)  = getimagesize($file);  
           if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
           {
@@ -147,12 +166,20 @@ class ChipStoreController extends Controller
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                   }
+
+                  //Upload image bonus to aws
+                  $awsPath = "unity-asset/store/chip/" . $imageBonusname;
+                  Storage::disk('s3')->put($awsPath, file_get_contents($filebonus));
+                  
+                  //Simpan ke database
                   $chip = ItemsGold::create([
                     'name'      => $request->title,
                     'item_type' => 1,
                     'price'     => $request->goldcost,
                     'item_get'  => $request->chipawarded,
-                    'status'    => 0,
+                    'bonus_get' => $request->itemAwarded,
+                    'bonus_type'=> $request->BonusType,
+                    'status'    => $request->status_item,
                     'order'     => $request->order
                 ]);
 
@@ -211,7 +238,7 @@ class ChipStoreController extends Controller
             "";
       }
   
-  
+      //RECORD LOG
       Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
@@ -222,9 +249,10 @@ class ChipStoreController extends Controller
 
 
     public function updateImage(Request $request)
-    {
+    {   
+
         $validator = Validator::make($request->all(),[
-            'file'     => 'required',
+            'file'              => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -298,12 +326,9 @@ class ChipStoreController extends Controller
                             File::delete($path);
                             $path1 = '../public/upload/Chip/image2/'.$nama_file_unik;
                             File::delete($path1);
-                            // imagepng($source, $thumbnail);
-                            // imagedestroy($source);
-                        // end watermark image
+                           
                 } else {
-                    $rootpath   = '../unity-asset/upload/chip'.$nama_file_unik;
-                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $rootpath   = 'unity-asset/store/chip/'.$nama_file_unik;
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
                     $path = '../public/upload/Chip/image1/'.$pk.'.png';
@@ -312,6 +337,7 @@ class ChipStoreController extends Controller
                     File::delete($path1);
                     // return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                 }
+
                 Log::create([
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
@@ -326,6 +352,49 @@ class ChipStoreController extends Controller
         } else  {
             return redirect()->route('Chip_Store')->with('alert','Image must be in png format');
         }
+    }
+
+    //UPDATE IMAGE BONUS
+    public function updateImageBonus(Request $request){
+        
+        $validator = Validator::make($request->all(),[
+            'fileImageBonus'  => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        $pk                     = $request->pk;
+        $fileBonus              = $request->file('fileImageBonus');
+        $ekstensi_diperbolehkan = array('png');
+        $namaImageBonus         = $_FILES['fileImageBonus']['name'];
+        $xBonus                 = explode('.', $namaImageBonus);
+        $ekstensiBonus          = strtolower(end($xBonus));
+        $ukuran                 = $_FILES['file']['size'];
+        $finalname              = $pk.'-2.'.$ekstensiBonus;
+
+
+        if(in_array($ekstensiBonus, $ekstensi_diperbolehkan) === true)
+        {   
+            
+            $awsPath   = '/unity-asset/store/chip/'.$finalname;
+            Storage::disk('s3')->put($awsPath, file_get_contents($fileBonus));
+
+            //RECORD LOG
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Edit gambar bonus di menu Toko Chip dengan ID '.$pk.' menjadi '.$finalname
+            ]);
+            
+            return redirect()->route('Chip_Store')->with('success','Update Image Successfull');
+        } else {
+            return redirect()->route('Chip_Store')->with('alert','Image must be in png format');
+        }
+
+
     }
 
     public function ImageItem($item_id)
@@ -360,7 +429,8 @@ class ChipStoreController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        $pathS3 = 'unity-asset/store/chip/' . $id . '.png';
+        $pathS3  = 'unity-asset/store/chip/' . $id . '.png';
+        $Awspath = 'unity-asset/store/chip/' . $id . '-2.png';
 
         if($id != '')
         {
@@ -368,9 +438,14 @@ class ChipStoreController extends Controller
             ItemsGold::where('item_id', '=', $id)->update([
                 'status' => 2
             ]);
+
             $path = '../public/store/Chip/'.$id.'.png';
             File::delete($path);
-            Storage::disk('s3')->delete($pathS3);  
+            
+            //DELETE ON AWS
+            Storage::disk('s3')->delete([$pathS3, $Awspath]);
+            
+            //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
@@ -387,9 +462,13 @@ class ChipStoreController extends Controller
     {
         $ids        =   $request->userIdAll;
         $imageid    =   $request->imageid;
+        $imgIdBonus =   $request->imageidBonus;
 
-        //DELETE
+        //DELETE ON AWS
         Storage::disk('s3')->delete(explode(",", $imageid));
+        Storage::disk('s3')->delete(explode(",", $imgIdBonus));
+
+        //DELETE ON DB
         DB::table('asta_db.item_gold')->whereIn('item_id', explode(",", $ids))->update([
             'Status'    => 2
         ]);

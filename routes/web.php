@@ -537,6 +537,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('ChipStore-view', 'ChipStoreController@index')->name('Chip_Store');
                 Route::post('ChipStore-update', 'ChipStoreController@update')->name('ChipStore-update');
                 Route::post('ChipStore-updateimage','ChipStoreController@updateImage')->name('ChipStore-updateimage');
+                Route::post('ChipStore-updateimageBonus', 'ChipStoreController@updateImageBonus')->name('ChipStore-updateimageBonus');
                 Route::post('ChipStore-create', 'ChipStoreController@store')->name('ChipStore-create');
                 Route::delete('ChipStore-delete', 'ChipStoreController@destroy')->name('ChipStore-delete');
                 Route::delete('ChipStore-deleteAllSelected', 'ChipStoreController@deleteAllSelected')->name('ChipStore-deleteAllSelected');

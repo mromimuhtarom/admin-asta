@@ -44,6 +44,17 @@ function strEnabledDisabled ($val) {
 	}
 }
 
+//kondisi select type item bonus(chip store, gold store)
+function strItemBonType($val) {
+  if($val == 1) {
+    return 'Chip';
+  } else if($val == 2){
+    return 'Gold';
+  } else {
+    return 'Goods';
+  }
+}
+
 //kondisi transactionType mingguan dan bulanan (view reseller_rank.blade) 
 function strTransactionType ($val) {
   if($val == 1) {

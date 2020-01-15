@@ -25,6 +25,17 @@
            reader.readAsDataURL(input.files[0]);
        }
    }
+
+   function readURL1(input) {
+       if (input.files && input.files[0]) {
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+               $('#blah3').attr('src', e.target.result);
+           };
+           reader.readAsDataURL(input.files[0]);
+       }
+   }
 </script>
 
 @if (count($errors) > 0)
@@ -89,6 +100,9 @@
                 <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Gold Awarded')}}</th>
+                <th class="th-sm">Item Bonus</th>
+                <th class="th-sm">Gambar Item Bonus</th>
+                <th class="th-sm">Item Bonus yang didapat</th>
                 <th class="th-sm">{{ TranslateMenuToko('Price cash')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Item type')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Pay Transaction')}}</th>
@@ -111,7 +125,7 @@
               @if($menu && $mainmenu)
                 @if($gold->status === 0)
                   <tr>
-                  <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" data-bonus="unity-asset/store/gold/{{ $gold->item_id }}-2.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->order }}</a></td>
                     <td>
                       <div class="media-container">
@@ -131,7 +145,7 @@
                             </span>
                             <figure class="media-object">
                               {{-- <img src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;"> --}}
-                              <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;">
+                              <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" class="img-object-normal imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;">
                               <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
                               <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
                             </figure>
@@ -145,6 +159,31 @@
                     </td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->item_get }}</a></td>
+                    <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strItemBonType($gold->bonus_type) }}</a></td>
+                    <td>
+                      <div class="media-container" align="center">
+                        <form method="POST" action="" enctype="multipart/form-data">
+                          {{  csrf_field() }}
+                          <span class="media-overlay-wtrAva med-ovlayBonus{{ $gold->item_id }}">
+                            <input type="hidden" name="pk" value="{{ $gold->item_id }}">
+                            <input type="file" name="fileImageBonus" id="media-input-wtr" class="uploadBonus{{ $gold->item_id }}" accept="image/*">
+                            <i class="fa fa-edit media-icon-wtr"></i>
+                            <p class="nav-name">Main image</p>
+                          </span>
+                          <figure class="media-object">
+                            <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'-2.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                            <img class="img-object-wtr1Ava uploadBonusImg1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                          </figure>
+                         
+                        </div>
+                        <div class="media-control" align="center" style="margin-top:-1%">
+                          <button class="save-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                        </form>
+                          <button class="cancel-ImgBonus{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
+                          <button class="edit-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                      </div>
+                    </td>
+                    <td><a href="#" class="usertext" data-name="bonus_get" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->bonus_get }}</a></>
                     <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
                     <td>{{ $gold->strItemType() }}</td>
                     <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
@@ -187,14 +226,20 @@
                               <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
                             </figure>
                           </div>
-                          <div class="media-control" align="center" style="margin-top:-1%">
-                            <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                           </form>
-                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
                       </div>
                     </td>
                     <td>{{ $gold->name }}</td>
                     <td>{{ $gold->item_get }}</td>
+                    <td>{{ $gold->bonus_get }}</td>
+                    <td>
+                      <div class="media-container">
+                        <figure class="media-object">
+                            <img class="img-object uploadBonus{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'-2.png'}}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                        </figure>
+                      </div> 
+                    </td>
+                    <td>{{ $gold->bonus_type }}</td>
                     <td>{{ $gold->price }}</td>
                     <td>{{ $gold->strItemType() }}</td>
                     <td>{{ strTypeTransaction($gold->trans_type) }}</td>
@@ -215,6 +260,9 @@
                 </td>
                 <td>{{ $gold->name }}</td>
                 <td>{{ $gold->item_get }}</td>
+                <td>{{ strItemBonType($itm->bonus_type) }}</td>
+                <td></td>
+                <td>{{ $itm->bonus_get}}</td>
                 <td>{{ $gold->price }}</td>
                 <td>{{ $gold->strItemType() }}</td>
                 <td>{{ strTypeTransaction($gold->transaction_type) }}</td>
@@ -281,6 +329,52 @@
             <input type="text" name="googleKey" class="form-control" id="basic-url" placeholder="google key">
           </div>
 
+          <div class="form-group">
+            <p>
+              <a href="#" width="200px" class="btn btn-primary mainmenu" role="button" 
+                  data-toggle="" aria-expanded="false" aria-controls="collapseExample">
+                      Add item bonus
+              </a>
+            </p>
+            <div class="form-collaps" id="collapseExample">
+                <div class="sub-form">
+                  <select name="BonusType" class="form-control" id="">
+                    <option value="">Select type</option>
+                    <option value="{{ $bontype[0] }}">{{ $bontype[1] }}</option>
+                    <option value="{{ $bontype[2] }}">{{ $bontype[3] }}</option>
+                    <option value="{{ $bontype[4] }}">{{ $bontype[5] }}</option>
+                  </select>
+                </div>
+              <br class="sub-form">
+                
+              <div class="form-group sub-form" align="center">
+                <table width="100%;" height="auto">
+                    <tr>
+                      <td align="center">
+                        <div style="border-radius:10px;border:1px solid black;width:198px;height:100px;position: relative;display: inline-block;">
+                          <img id="blah3" src="http://placehold.jp/150x50.png" alt="your image" style="margin-top: 1px; display: block;border-radius:10px;" width="auto" height="97px" />
+                        </div><br>
+                          <input type='file' class="main-imageBonus" name="filebonus" onchange="readURL1(this);"/>
+                      </td>
+                    </tr>
+                </table>
+              </div>
+              
+              <div class="form-group sub-form">
+                <input type="text" name="itemAwarded" class="form-control" id="basic-url" placeholder="item awarded">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group ">
+            <select name="status_item" class="form-control" id="">
+              <option value="">Select status</option>
+              <option value="{{ $endis[0] }}">{{ $endis[1] }}</option>
+              <option value="{{ $endis[2] }}">{{ $endis[3] }}</option>
+            </select>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
@@ -339,7 +433,8 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
-          <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="imageidBonus" id="idDeleteAllBonus" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -450,6 +545,27 @@ $(".watermark-image").change(function() {
 				   ]
 			});
 
+      $('.bontypeActive').editable({  
+        value: '',
+        mode :'inline',
+        success: function success() {
+          location.reload();
+        },
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
+				source: [
+                  {value: '', text: 'choose type bonus'},
+                  @php
+                      echo '{value:"'.$bontype[0].'", text: "'.$bontype[1].'"}, ';
+                      echo '{value:"'.$bontype[2].'", text: "'.$bontype[3].'"}, ';
+                      echo '{value:"'.$bontype[4].'", text: "'.$bontype[5].'"}, ';
+                  @endphp
+        ]        
+      });
+
       // delete gold store
       @php
         foreach($getGolds as $gold) {
@@ -537,6 +653,53 @@ $(".watermark-image").change(function() {
             echo'reader.readAsDataURL(this.files[0]);';
           echo'}';
         echo'});';
+
+        //JS BAGIAN IMAGE BONUS
+        echo'$(".save-ImgBonus'.$gold->item_id.'").hide(0);';
+          echo'$(".med-ovlayBonus'.$gold->item_id.'").hide(0);';
+          echo'$(".uploadBonusImg'.$gold->item_id.'").show();';
+          echo'$(".uploadBonusImg1'.$gold->item_id.'").show(0);';
+          echo'$(".cancel-ImgBonus'.$gold->item_id.'").hide(0);';
+
+          echo'$(".edit-ImgBonus'.$gold->item_id.'").on("click", function() {';
+            echo'$(this).hide(0);';
+            echo'$(".uploadBonusImg'.$gold->item_id.'").fadeOut(300);';
+            echo'$(".uploadBonusImg1'.$gold->item_id.'").fadeIn(300);';
+            echo'$(".med-ovlayBonus'.$gold->item_id.'").fadeIn(300);';
+            echo'$(".save-ImgBonus'.$gold->item_id.'").fadeIn(300);';
+            echo'$(".cancel-ImgBonus'.$gold->item_id.'").fadeIn(300);';
+          echo'});';
+
+          echo'$(".save-ImgBonus'.$gold->item_id.'").on("click", function() {';
+            echo'$(this).hide(0);';
+            echo'$(".med-ovlayBonus'.$gold->item_id.'").fadeOut(300);';
+            echo'$(".edit-ImgBonus'.$gold->item_id.'").fadeIn(300);';
+            echo'$(".cancel-ImgBonus'.$gold->item_id.'").fadeOut(300);';
+            echo'$(".uploadBonusImg'.$gold->item_id.'").fadeIn(300);';
+            echo'$(".uploadBonusImg1'.$gold->item_id.'").fadeOut(300);';
+          echo'});';
+
+          echo'$(".cancel-ImgBonus'.$gold->item_id.'").on("click", function() {';
+            echo'$(this).hide(0);';
+            echo'$(".med-ovlayBonus'.$gold->item_id.'").fadeOut(300);';
+            echo'$(".uploadBonusImg'.$gold->item_id.'").fadeIn(300);';
+            echo'$(".uploadBonusImg1'.$gold->item_id.'").fadeOut(300);';
+            echo'$(".edit-ImgBonus'.$gold->item_id.'").fadeIn(300);';
+            echo'$(".save-ImgBonus'.$gold->item_id.'").hide(0);';
+          echo'});';
+
+        //JS MAIN IMAGE BONUS
+        echo'$(".uploadBonus'.$gold->item_id.'").change(function() {';
+            echo'if (this.files && this.files[0]) {';
+              echo'var reader = new FileReader();';
+
+              echo'reader.onload = function(e) {';
+                echo'$(".uploadBonusImg1'.$gold->item_id.'").attr("src", e.target.result);';
+              echo'};';
+
+              echo'reader.readAsDataURL(this.files[0]);';
+          echo'}';
+        echo'});';
       }
       @endphp
 
@@ -556,6 +719,13 @@ $(".watermark-image").change(function() {
               var join_selected_image = allimage.join(",");
               $('#idDeleteAllimage').val(join_selected_image);
           });
+
+          var allBonus = [];
+            $('.deleteIdAll:checked').each(function() {
+              allBonus.push($(this).attr('data-bonus'));
+              var join_selected_bonus = allBonus.join(",");
+              $('#idDeleteAllBonus').val(join_selected_bonus);
+            });
         });
 
         //HIDE SHOW ICON DELETE ALL
@@ -566,6 +736,14 @@ $(".watermark-image").change(function() {
           }else{
             $("#trash").hide();
           }
+        });
+
+        //HIDE SHOW FORM BONUS
+        $('.sub-form').hide();
+        $(".mainmenu").on("click", function(e) {
+          $('.sub-form').toggle();
+          // $('.form-collaps').toggle();
+          e.preventDefault();
         });
     },
     responsive: false
