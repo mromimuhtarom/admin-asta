@@ -314,47 +314,6 @@
 
 
 
-
-
-  <!-- Modal About-->
-  {{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i> Edit About</h4>
-          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            <i class="fa fa-remove"></i>
-          </button>
-        </div>
-        <form action="{{ route('AboutGeneralSetting') }}" method="post">
-          @csrf
-          <div class="modal-body">
-    
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  <input type="hidden" name="idabout" value="{{ $getAbout->id }}">
-                  <input type="text" name="urlabout" placeholder="Url" class="form-control" value="{{$getAbout->value }}"><br>
-                  <textarea name="contentabout" id="" class="form-control" cols="30" rows="10">{{ $client->get('about.txt') }}</textarea>
-                  <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
-                  <script>
-                    CKEDITOR.replace( 'contentabout' );
-                  </script>
-                </div>
-              </div>
-            </div>
-          </div>
-      
-          <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary submit-data">
-              <i class="fa fa-save"></i> Save
-            </button>
-            <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-              <i class="fa fa-remove"></i> Cancel
-            </button>
-          </div>
-           </div>
-               </form> --}}
               
             <!-- Modal Privacy Policy-->
             <div class="modal fade" id="myModalPrivacyPolicy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
