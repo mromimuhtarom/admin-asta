@@ -10,16 +10,26 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/imageinsertedit.css">
+
 <script>
     function readURL(input) {
        if (input.files && input.files[0]) {
            var reader = new FileReader();
 
            reader.onload = function (e) {
-               $('#blah')
-                   .attr('src', e.target.result);
+               $('#blah').attr('src', e.target.result);
            };
+           reader.readAsDataURL(input.files[0]);
+       }
+   }
 
+   function readURL1(input) {
+       if (input.files && input.files[0]) {
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+               $('#blah3').attr('src', e.target.result);
+           };
            reader.readAsDataURL(input.files[0]);
        }
    }
@@ -110,7 +120,7 @@
                 @if($menu && $mainmenu)
                   @if($itm->status === 0)
                     <tr>
-                      <td><input type="checkbox" name="deletepermission[]" data-pk="{{ $itm->item_id }}" data-name="unity-asset/store/chip/{{ $itm->item_id }}.png" class="deletepermission{{ $itm->item_id }} deleteIdAll"></td>
+                      <td><input type="checkbox" name="deletepermission[]" data-pk="{{ $itm->item_id }}" data-name="unity-asset/store/chip/{{ $itm->item_id }}.png" data-bonus="unity-asset/store/chip/{{ $itm->item_id }}-2.png" class="deletepermission{{ $itm->item_id }} deleteIdAll"></td>
                       <td><a href="#" class="usertext" data-name="order" data-title="Orders" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->order }}</a></td>
                       <td>
                         <div class="media-container">
@@ -129,8 +139,7 @@
                                   <div class="nav-name">Watermark</div>
                               </span>
                               <figure class="media-object">
-                                {{-- <img class="img-object imgupload{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;"> --}}
-                                <img class="img-object imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object-normal imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
                                 <img class="img-object-wtr1 imgupload1{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
                                 <img class="img-object-wtr2 imgupload2{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
                               </figure>
@@ -145,9 +154,31 @@
                       <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
                       <td>{{ $itm->strItemType() }}</td>
                       <td><a href="#" class="usertext" data-name="item_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->item_get }}</a></td>
-                      <td><a href="#" class="" data-name="" data-title="Title Chip" data-pk="" data-type="" data-url=""></a></td>
-                      <td><a href="#" class="" data-name="" data-title="Title Chip" data-pk="" data-type="" data-url=""></a></td>
-                      <td><a href="#" class="" data-name="" data-title="Title Chip" data-pk="" data-type="" data-url=""></a></td>
+                      <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strItemBonType($itm->bonus_type) }}</a></td>
+                      <td>
+                        <div class="media-container" align="center">
+                          <form method="POST" action="{{ route('ChipStore-updateimageBonus') }}" enctype="multipart/form-data">
+                            {{  csrf_field() }}
+                            <span class="media-overlay-wtrAva med-ovlayBonus{{ $itm->item_id }}">
+                              <input type="hidden" name="pk" value="{{ $itm->item_id }}">
+                              <input type="file" name="fileImageBonus" id="media-input-wtr" class="uploadBonus{{ $itm->item_id }}" accept="image/*">
+                              <i class="fa fa-edit media-icon-wtr"></i>
+                              <p class="nav-name">Main image</p>
+                            </span>
+                            <figure class="media-object">
+                              <img class="img-object uploadBonusImg{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'-2.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                              <img class="img-object-wtr1Ava uploadBonusImg1{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
+                            </figure>
+                           
+                          </div>
+                          <div class="media-control" align="center" style="margin-top:-1%">
+                            <button class="save-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                          </form>
+                            <button class="cancel-ImgBonus{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
+                            <button class="edit-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                        </div>
+                      </td>
+                      <td><a href="#" class="usertext" data-name="bonus_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update')}}">{{ $itm->bonus_get }}</a></td>
                       <td><a href="#" class="usertext" data-name="price" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->price }}</a></td>
                       <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
                       <td>
@@ -166,40 +197,26 @@
                       <td>{{ $itm->order }}</td>
                       <td>
                         <div class="media-container">
-                            <form method="POST" action="{{ route('ChipStore-updateimage') }}" enctype="multipart/form-data">
-                              {{  csrf_field() }}
-                              <span class="media-overlay-wtr med-ovlay{{ $itm->item_id}}">
-                                  <input type="hidden" name="pk" value="{{ $itm->item_id }}">
-                                  <input type="file" name="file" id="media-input-wtr" class="upload{{ $itm->item_id }}" accept="image/*">
-                                  <i class="fa fa-edit media-icon-wtr"></i>
-                                  <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
-                              </span>
-                              <span class="media-overlay-wtr1 med-ovlay{{ $itm->item_id }}">
-                                  <input type="hidden" name="pk" value="{{ $itm->item_id }}">
-                                  <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $itm->item_id }}">
-                                  <i class="fa fa-edit media-icon-wtr1"></i>
-                                  <div class="nav-name">Watermark</div>
-                              </span>
                               <figure class="media-object">
                                 {{-- <img class="img-object imgupload{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;"> --}}
-                                <img class="img-object imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                                 <img class="img-object-wtr1 imgupload1{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
                                 <img class="img-object-wtr2 imgupload2{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
-                              </figure>
-                            </div>
-                            <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
-                            </form>
-                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
-                              {{-- <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Chip</button> --}}
+                              </figure>      
                         </div>
                       </td>
                       <td>{{ $itm->name }}</td>
                       <td>{{ $itm->strItemType() }}</td>
                       <td>{{ $itm->item_get }}</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{{ $itm->bonus_get}}</td>
+                      <td>
+                        <div class="media-container">
+                          <figure class="media-object">
+                              <img class="img-object uploadBonus{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'-2.png'}}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                          </figure>
+                        </div>                        
+                      </td>
+                      <td>{{ $itm->bonus_type}}</td>
                       <td>{{ $itm->price }}</td>
                       <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
                       <td></td>
@@ -208,16 +225,13 @@
                 @else 
                   <tr>
                     <td>{{ $itm->order }}</td>
-                    <td>
-                      <div class="media-container">
-                        <figure class="media-object">
-                          <img class="img-object imgupload{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
-                        </figure>
-                      </div>
-                    </td>
+                    <td></td>
                     <td>{{ $itm->name }}</td>
                     <td>{{ $itm->strItemType() }}</td>
                     <td>{{ $itm->item_get }}</td>
+                    <td>{{ strItemBonType($itm->bonus_type) }}</td>
+                    <td></td>
+                    <td>{{ $itm->bonus_get}}</td>
                     <td>{{ $itm->price }}</td>
                     <td>{{ strEnabledDisabled($itm->status) }}</td>
                   </tr>
@@ -292,10 +306,7 @@
                     </td>
                   </tr>
               </table>
-            {{-- <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
-              <img id="imgPreview" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
-            </div><br> --}}
-            {{-- <input type='file' class="upload-img" name="file" onchange="readURL(this);"/><br><br> --}}
+           
           </div>
           <div class="form-group">
               <input type="text" name="order" class="form-control" id="basic-url" placeholder="Order">
@@ -306,37 +317,57 @@
           <div class="form-group">
             <input type="number" name="chipawarded" class="form-control" id="basic-url" placeholder="chip awarded">
           </div>
-          <div class="form-grsoup">
+          <div class="form-group">
             <input type="number" name="goldcost" class="form-control" id="basic-url" placeholder="gold cost">
           </div>
-          <br>
-          <div class="dd" id="nestable2">
-            <ol class="dd-list">
-              <li class="dd-item" data-id="15">
-                <div class="dd-handle">
-                  Item 15
+          
+          <div class="form-group">
+            <p>
+              <a href="#" width="200px" class="btn btn-primary mainmenu" role="button" data-toggle="" aria-expanded="false" aria-controls="collapseExample">
+                Add item bonus
+              </a>
+            </p>
+          
+            <div class="form-collaps" id="collapseExample">
+                <div class="sub-form">
+                    <select name="BonusType" class="form-control" id="">
+                        <option value="">Select type</option>
+                        <option value="{{ $bontype[0] }}">{{ $bontype[1] }}</option>
+                        <option value="{{ $bontype[2] }}">{{ $bontype[3] }}</option>
+                        <option value="{{ $bontype[4] }}">{{ $bontype[5] }}</option>
+                    </select>
                 </div>
-                <ol class="dd-list">
-                  <li class="dd-item" data-id="16">
-                    <div class="dd-handle">
-                      Item 16
-                    </div>
-                  </li>
-                  <li class="dd-item" data-id="17">
-                    <div class="dd-handle">
-                      Item 17
-                    </div>
-                  </li>
-                  <li class="dd-item" data-id="18">
-                    <div class="dd-handle">
-                       Item 18
-                    </div>
-                  </li>
-                </ol>
-              </li>
-            </ol>
-          </div>
+                <br class="sub-form">
+                        
+                <div class="sub-form" align="center">
+                    <table width="100%;" height="auto">
+                        <tr>
+                            <td align="center">
+                                <div style="border-radius:10px;border:1px solid black;width:198px;height:100px;position: relative;display: inline-block;">
+                                  <img id="blah3" src="http://placehold.jp/150x50.png" alt="your image" style="margin-top: 1px; display: block;border-radius:10px;" width="auto" height="97px" />
+                                </div>
+                                  <br>
+                                  <input type='file' class="main-imageBonus" name="filebonus" onchange="readURL1(this);"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                      
+                <div class="sub-form">              
+                  <input type="text" name="itemAwarded" class="form-control" id="basic-url" placeholder="item awarded">
+                </div>
+        
+            </div>
+        </div>
 
+          <div class="form-group">
+            <select name="status_item" class="form-control" id="">
+              <option value="">Select status</option>
+                <option value="{{ $endis[0]}}">{{ $endis[1] }}</option>
+            <option value="{{ $endis[2]}}">{{ $endis[3] }}</option>
+            </select>
+          </div>
+      
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
@@ -368,7 +399,8 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
-          <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="imageidBonus" id="idDeleteAllBonus" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -459,6 +491,27 @@
         ]        
       });
 
+      $('.bontypeActive').editable({  
+        value: '',
+        mode :'inline',
+        success: function success() {
+          location.reload();
+        },
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
+				source: [
+                  {value: '', text: 'choose type bonus'},
+                  @php
+                      echo '{value:"'.$bontype[0].'", text: "'.$bontype[1].'"}, ';
+                      echo '{value:"'.$bontype[2].'", text: "'.$bontype[3].'"}, ';
+                      echo '{value:"'.$bontype[4].'", text: "'.$bontype[5].'"}, ';
+                  @endphp
+        ]        
+      });
+
 
       @php
           foreach($items as $itm) {
@@ -517,7 +570,7 @@
                     echo'$(this).hide(0);';
                     echo'$(".med-ovlay'.$itm->item_id.'").fadeOut(300);';
                     echo'$(".imgupload'.$itm->item_id.'").fadeIn(300);';
-                    echo'$(".imgupload2'.$itm->item_id.'").fadeOut(300);';
+                    echo'$(".imgupload1'.$itm->item_id.'").fadeOut(300);';
                     echo'$(".imgupload2'.$itm->item_id.'").fadeOut(300);';
                     echo'$(".edit-profile'.$itm->item_id.'").fadeIn(300);';
                     echo'$(".save-profile'.$itm->item_id.'").hide(0);';
@@ -545,6 +598,55 @@
                       echo'reader.readAsDataURL(this.files[0]);';
                   echo'}';
                 echo'});';
+
+
+                //JS BAGIAN IMAGE BONUS
+                echo'$(".save-ImgBonus'.$itm->item_id.'").hide(0);';
+                  echo'$(".med-ovlayBonus'.$itm->item_id.'").hide(0);';
+                  echo'$(".uploadBonusImg'.$itm->item_id.'").show();';
+                  echo'$(".uploadBonusImg1'.$itm->item_id.'").show(0);';
+                  echo'$(".cancel-ImgBonus'.$itm->item_id.'").hide(0);';
+
+                  echo'$(".edit-ImgBonus'.$itm->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".uploadBonusImg'.$itm->item_id.'").fadeOut(300);';
+                    echo'$(".uploadBonusImg1'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".med-ovlayBonus'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".save-ImgBonus'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".cancel-ImgBonus'.$itm->item_id.'").fadeIn(300);';
+                  echo'});';
+
+                  echo'$(".save-ImgBonus'.$itm->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlayBonus'.$itm->item_id.'").fadeOut(300);';
+                    echo'$(".edit-ImgBonus'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".cancel-ImgBonus'.$itm->item_id.'").fadeOut(300);';
+                    echo'$(".uploadBonusImg'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".uploadBonusImg1'.$itm->item_id.'").fadeOut(300);';
+                  echo'});';
+
+                  echo'$(".cancel-ImgBonus'.$itm->item_id.'").on("click", function() {';
+                    echo'$(this).hide(0);';
+                    echo'$(".med-ovlayBonus'.$itm->item_id.'").fadeOut(300);';
+                    echo'$(".uploadBonusImg'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".uploadBonusImg1'.$itm->item_id.'").fadeOut(300);';
+                    echo'$(".edit-ImgBonus'.$itm->item_id.'").fadeIn(300);';
+                    echo'$(".save-ImgBonus'.$itm->item_id.'").hide(0);';
+                  echo'});';
+
+                //JS MAIN IMAGE BONUS
+                echo'$(".uploadBonus'.$itm->item_id.'").change(function() {';
+                    echo'if (this.files && this.files[0]) {';
+                      echo'var reader = new FileReader();';
+		
+                      echo'reader.onload = function(e) {';
+                        echo'$(".uploadBonusImg1'.$itm->item_id.'").attr("src", e.target.result);';
+                      echo'};';
+		
+                      echo'reader.readAsDataURL(this.files[0]);';
+                  echo'}';
+                echo'});';
+
               }
       @endphp
 
@@ -563,7 +665,16 @@
               allimage.push($(this).attr('data-name'));
               var join_selected_image = allimage.join(",");
               $('#idDeleteAllimage').val(join_selected_image);
+              
           });
+          
+          var allBonus = [];
+            $(".deleteIdAll:checked").each(function() {
+              allBonus.push($(this).attr('data-bonus'));
+              var join_selected_bonus = allBonus.join(",");
+              $('#idDeleteAllBonus').val(join_selected_bonus);
+          });
+          
         });
 
         //HIDE SHOW ICON DELETE ALL
@@ -576,13 +687,13 @@
           }
         });
 
-        //activate nestable
-        $('#nestable2').nestable({
-          group : 1
-        }).on('change', updateOutput);
-
-        //output initial seialised data
-        updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+        //HIDE SHOW FORM BONUS
+        $('.sub-form').show();
+        $(".mainmenu").on("click", function(e) {
+          $('.sub-form').toggle();
+          e.preventDefault();
+        });
+        
     },
     responsive: false
   });

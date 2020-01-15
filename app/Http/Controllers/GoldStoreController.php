@@ -32,6 +32,8 @@ class GoldStoreController extends Controller
                         'item_get',
                         'item_type',
                         'price',
+                        'bonus_get',
+                        'bonus_type',
                         'trans_type',
                         'google_key',
                         'status',
@@ -50,8 +52,17 @@ class GoldStoreController extends Controller
                     ->first();
         $value     = str_replace(':', ',', $active->value);
         $endis     = explode(",", $value);
+
+        $bonusType  = ConfigText::select(
+                        'name',
+                        'value'
+                    )
+                    ->where('id', '=', 5)
+                    ->first();
+        $valueBonus= str_replace(':', ',', $bonusType->value);
+        $bontype  = explode(",", $valueBonus);
         $timenow   = Carbon::now('GMT+7');
-        return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu', 'timenow'));
+        return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu', 'timenow', 'bontype'));
     }
 
     /**
@@ -95,15 +106,21 @@ class GoldStoreController extends Controller
           $id_new                 = $id_lst + 1;
           $file                   = $request->file('file');
           $file_wtr               = $request->file('file1');
+          $filebonus              = $request->file('filebonus');
           $ekstensi_diperbolehkan = array('png');
           $nama                   = $_FILES['file']['name'];
           $nama_wtr               = $_FILES['file1']['name'];
+          $namafilebonus          = $_FILES['filebonus']['name'];
           $x                      = explode('.', $nama);
           $x_wtr                  = explode('.', $nama_wtr);
+          $x_bonus                = explode('.', $namafilebonus);
           $ekstensi               = strtolower(end($x));
           $ekstensi_wtr           = strtolower(end($x_wtr));
+          $ekstensi_bonus         = strtolower(end($x_bonus));
           $ukuran                 = $_FILES['file']['size'];
           $nama_file_unik         = $id_new.'.'.$ekstensi;
+          $imageBonusname         = $id_new.'-2.'.$ekstensi_bonus;
+        //   dd($imageBonusname);
           list($width, $height)   = getimagesize($file);
 
           if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
@@ -174,13 +191,20 @@ class GoldStoreController extends Controller
                     //   return redirect()->route('Gold_Store')->with('alert','Upload Image Failed');
                   }
 
+                  //UPLOAD IMAGE BONUS TO AWS
+                  $awsPath = 'unity-asset/store/gold/' . $imageBonusname;
+                  Storage::disk('s3')->put($awsPath, file_get_contents($filebonus));
+
+                  //Simpan ke Database
                   $gold = ItemsCash::create([
                     'name'       => $title,
                     'item_get'   => $goldAwarded,
                     'price'      => $priceCash,
+                    'bonus_get'  => $request->itemAwarded,
+                    'bonus_type' => $request->BonusType,
                     'shop_type'  => 1,
                     'item_type'  => 2,
-                    'status'     => 0,
+                    'status'     => $request->status_item,
                     'google_key' => $googleKey,
                     'order'      => $order
                   ]);
@@ -272,6 +296,7 @@ class GoldStoreController extends Controller
             "";
         }
 
+        //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
@@ -393,19 +418,23 @@ class GoldStoreController extends Controller
         $goldreseller = $request->id;
 
         $pathS3       = 'unity-asset/store/gold/'.$getGoldId.'.png';
+        $awsPath      = 'unity-asset/store/gold' .$getGoldId. '-2.png';
         if($getGoldId != '')
         {
-            Storage::disk('s3')->delete($pathS3);
+            //DELETE ON AWS
+            Storage::disk('s3')->delete([$pathS3, $awsPath]);
             ItemsCash::where('item_id', '=', $getGoldId)->update([
                 'status' => 2
             ]);
-
+            
+            //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus gambar atau foto di menu Toko Koin dengan ID '.$getGoldId
             ]);
+
             $path = '../public/upload/Gold/'.$getGoldId.'.png';
             File::delete($path);
             
@@ -437,9 +466,13 @@ class GoldStoreController extends Controller
     {
         $ids        =   $request->userIdAll;
         $imageid    =   $request->imageid;
+        $imgIdBonus =   $request->imageidBonus;
 
-        //DELETE
+        //DELETE ON AWS
         Storage::disk('s3')->delete(explode(",", $imageid));
+        Storage::disk('s3')->delete(explode(",", $imgIdBonus));
+
+        //DELETE ON DB
         DB::table('asta_db.item_cash')->whereIn('item_id', explode(",", $ids))->update([
             'status'    =>  2
         ]);
@@ -451,6 +484,6 @@ class GoldStoreController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus gambar dan data yang dipilih di menu toko koin dengan id '.$ids
         ]);
-        return redirect()->route('Gold_Store_Reseller')->with('success', 'Data deleted');
+        return redirect()->route('Gold_Store')->with('success', 'Data deleted');
     }
 }

@@ -15,6 +15,11 @@
     margin: 0 auto;
 }
 
+.main-imageBonus:before {
+    content: 'Choose file';
+    margin: 0 auto;
+}
+
 .watermark-image:before {
     content: 'Choose Watermark Image';
 }
@@ -132,6 +137,15 @@ input[type=file]::-webkit-file-upload-button {
     display: block;
 }
 
+.img-object-normal {
+	transform: translate(-1%, -3%);
+	border-radius: 10px;
+	height: 100px;
+    width: 45%;
+    object-fit: scale-down;
+    display: block;
+}
+
 .img-object-wtr1 {
     border-radius: 10px;
     border: 1px solid black;
@@ -226,3 +240,5 @@ input[type=file] {
     height: 34px;
     overflow: hidden;
 }
+
+
