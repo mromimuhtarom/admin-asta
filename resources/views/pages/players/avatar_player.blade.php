@@ -84,7 +84,7 @@
                                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; select all</th>
                                 @endif
                                 <th>ID</th>
-                                <th style="width:10px;">Image</th>
+                                <th style="width:5px;">Image</th>
                                 <th>name</th>
                                 @if($menu && $mainmenu)
                                 <th>Aksi &nbsp; &nbsp;

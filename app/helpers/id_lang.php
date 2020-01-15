@@ -549,7 +549,7 @@ function TranslateReseller($menu){
         'Weekly'                =>  'Mingguan',
         'Monthly'               =>  'Bulanan',
         'Create new'            =>  'Buat baru',
-
+        ''                      =>  '', 
 
     
 

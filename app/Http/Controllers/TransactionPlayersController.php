@@ -131,7 +131,8 @@ class TransactionPlayersController extends Controller
                    ->wherebetween('asta_db.transaction_day.date_created', [$mindate." 00:00:00", $maxdate." 23:59:59"])
                    ->get();
         $time      = "all time";
+        $lang_id   = '';
 
-        return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time'));
+        return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
     }
 }

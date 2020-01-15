@@ -119,21 +119,18 @@ class Add_TransactionController extends Controller
       $stat = Stat::where('user_id', '=', $user_id)->first();
 
       //VALIDASI FORM INPUT
-      $validator = Validator::make($request->all(), [
-        'currency'    =>  'required',
-        'type'        =>  'required',
-        'description' =>  'required'
-      ]);
 
-      if ($validator->fails()) {
-        return back()->withErrors($validator->errors());
-      }
       
       //KONDISI PENJUMLAHAN DAN PENGURANGAN BALANCE
       //=== CHIP ===//
       if($columnname == 'chip'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->chip + $valuecurrency;
+          $validator = Validator::make($request->all(), [
+            'currency'    =>  'required',
+            'type'        =>  'required',
+            'description' =>  'required'
+          ]);
         else:
           $totalbalance = $stat->chip - $valuecurrency;
 
@@ -141,6 +138,15 @@ class Add_TransactionController extends Controller
           if($stat->chip == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
+
+          $validator = Validator::make($request->all(), [
+            'currency'    =>  'required',
+            'description' =>  'required'
+          ]);
+        endif;
+
+        if ($validator->fails()) :
+          return back()->withErrors($validator->errors());
         endif;
         
         //UPDATE DATABASE

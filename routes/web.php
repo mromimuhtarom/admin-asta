@@ -10,7 +10,7 @@ Route::get('image-item/Goods/{item_id}.png', 'GoodsStoreController@ImageItem')->
 // image gift
 Route::get('image-gift/{gift_id}', 'GiftController@ImageGift')->name('imageshowgift');
 Route::get('image-avatar/{avatar_id', 'AvatarPlayerController@ImageAvatar')->name('imageshowavatar');
-Route::get('image-emoticon/{emot_id}.png', 'EmoticonController@ImageEmoticon')->name('imageshowemoticon');
+Route::get('image-emoticon/{emot_id}', 'EmoticonController@ImageEmoticon')->name('imageshowemoticon');
 
 Route::get('GeneralSetting-about/view', 'GeneralSettingController@AboutGame');
 Route::get('GeneralSetting-PrivacyPolicy/view', 'GeneralSettingController@PrivacyPolicyGame');

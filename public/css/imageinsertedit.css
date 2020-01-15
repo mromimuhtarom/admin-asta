@@ -129,11 +129,11 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 .img-object-wtr {
-	transform: translate(-1%, -36%);
-	border-radius: 10px;
-	height: 320px;
-	width: 320px;
-	object-fit: contain;
+    transform: translate(-1%, -36%);
+    border-radius: 10px;
+    height: 320px;
+    width: 320px;
+    object-fit: contain;
     display: block;
 }
 

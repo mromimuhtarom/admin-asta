@@ -221,24 +221,6 @@ class GiftController extends Controller
         }
     }
 
-    // public function CropGift($gift_id){
-    //     $im   = imagecreatefrompng($gift_id);
-    //     $size = min(imagesx($im), imagesy($im));
-  
-    //     $im2  = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => 320, 'height' => 320]);
-  
-    //     if($im2 !== FALSE) {
-    //         header("Content-type: image/png");
-    //         imagepng($im2);
-    //         imagedestroy($im2);
-    //     }
-    //     imagedestroy($im);
-  
-    //     file_put_contents('../public/upload/gifts/crop/', file_get_contents($im2));
-    //     $filepublic = public_path().'/upload/gifts/crop/';
-  
-    //     return $filepublic;;
-    // }
 
 
 //thumbnail gambar yang telah di merge
@@ -246,21 +228,7 @@ class GiftController extends Controller
     {
         $linkimage = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gift_id.'.png';
         
-    //   if($fike_exists_gift   === false)
-    //   {  
-        
-    //     $rootpath_empty = '../public/images/image_not_found';
-    //     $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
-    //     $file_empty     = $client_empty->get('not_found.png');
-    //     $type_empty     = $client_empty->mimeType('not_found.png');
 
-    //     $response_empty = Response::make($file_empty, 200);
-    //     $response_empty->header("Content-Type", $type_empty);
-    //     return $response_empty;
-
-    //   } else if($fike_exists_gift   === true){
-        
-        // $response = $linkimage;
         $im   = imagecreatefrompng($linkimage);
         $size = min(imagesx($im), imagesy($im));
         $im2  = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
@@ -274,7 +242,6 @@ class GiftController extends Controller
         $filepublic = public_path().'/upload/gifts/crop/';
         
         return $linkimage;
-    //   }
       
     }
 
