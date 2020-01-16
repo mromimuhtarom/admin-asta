@@ -16,7 +16,7 @@ class BestOfferController extends Controller
     {
         $menu     = MenuClass::menuName('Best Offer');
         $mainmenu = MenuClass::menuName('Store');
-        return view('pages.store.best_offer', compact('menu', 'mainmenu'));
+        return view('pages.Maintenance.underconstruction');
     }
 
     /**

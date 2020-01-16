@@ -35,12 +35,21 @@
                 <div class="col">
                     <input type="text" name="inputUsername" class="left" placeholder="username">
                 </div>
+                @if (Request::is('Reseller/Balance_Reseller/BalanceReseller-search*'))
+                <div class="col">
+                    <input type="date" class="form-control" name="inputMinDate" value="{{ $startDate }}">
+                </div>
+                <div class="col" style="padding-left:3%;">
+                    <input type="date" class="form-control" name="inputMaxDate" value="{{ $endDate }}">
+                </div>
+                @else
                 <div class="col">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                 </div>
+                @endif
                 <div class="col" style="padding-left:3%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>

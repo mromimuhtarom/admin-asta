@@ -27,12 +27,21 @@
                         <option value="{{ $AbusetrnsType[2] }}">{{ $AbusetrnsType[3]}} Pemain</option>
                     </select>
                 </div>
+                @if (Request::is('FeedBack/Abuse_Transaction_Report/AbuseTransactionReport-search'))
+                <div class="col" style="padding-left:1%;">
+                    <input type="date" class="form-control" name="inputMinDate"  value="{{ $minDate }}">
+                </div>
+                <div class="col" style="padding-left:1%;">
+                    <input type="date" class="form-control" name="inputMaxDate"  value="{{ $maxDate }}">
+                </div>
+                @else
                 <div class="col" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMinDate"  value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMaxDate"  value="{{ $datenow->toDateString() }}">
                 </div>
+                @endif
                 <div class="col" style="padding-left:1%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>

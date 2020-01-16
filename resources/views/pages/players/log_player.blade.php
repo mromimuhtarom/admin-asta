@@ -43,12 +43,21 @@
                         @endforeach
                     </select>
                 </div>
+                @if (Request::is('Players/Log_Players/LogPlayer'))
+                <div class="col">
+                    <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
+                </div>
+                @else
                 <div class="col">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
                     <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
                 </div>
+                @endif
                 <div class="col">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>

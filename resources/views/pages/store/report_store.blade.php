@@ -35,17 +35,33 @@
                 </div>
                 <div class="col">
                     <select name="choosedate" id="" class="form-control">
-                        <option value="">{{ TranslateMenuToko('Choose type date')}}</option>
-                        <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
                         <option value="request">{{ TranslateMenuToko('Date Request')}}</option>
+                        <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
                     </select>
                 </div>
+                <div class="col">
+                    <select name="chooseitem" id="" class="form-control">
+                        <option value="">Choose item</option>
+                        <option value="{{ $type[0] }}">{{ $type[1] }}</option>
+                        <option value="{{ $type[2] }}">{{ $type[3] }}</option>
+                        <option value="{{ $type[4] }}">{{ $type[5] }}</option>
+                    </select>
+                </div>
+                @if(Request::is('Store/Report_Store/ReportStore-search*'))
+                <div class="col">
+                    <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
+                </div>
+                @else
                 <div class="col">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col">
                     <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
                 </div>
+                @endif
                 <div class="col">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
