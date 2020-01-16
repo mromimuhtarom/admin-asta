@@ -467,6 +467,7 @@ function TranslateMenuToko($menu){
         'Date approve and Decline' => 'Tanggal disetujui dan ditolak',
         'Date Request'      =>  'Tanggal permintaan',
         'Item awarded'      =>  'Item diberikan',
+        'Bonus Item'        =>  'Bonus Item'
 
     ];
 

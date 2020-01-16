@@ -45,6 +45,7 @@ class User_Banking_TransactionController extends Controller
                            'asta_db.store_transaction.id as strtrnsid'
                        )
                        ->where('asta_db.store_transaction.status', '=', 0)
+                       ->where('item_type', '=', 2)
                        ->get();
         $item_gold = ItemsGold::select(
                         'item_id', 

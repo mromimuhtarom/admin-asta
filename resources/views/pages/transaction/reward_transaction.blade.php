@@ -110,7 +110,7 @@
 			    <div class="modal-body" align="center">
 						<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
 						{{ translate_MenuTransaction('Are you sure want to Approve this Transaction?') }}
-          <input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
+          <input type="hidden" name="approveId" value="{{ $transaction->strtrnsid }}">
 					<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
 					<input type="hidden" name="price" value="{{ $transaction->item_price }}">
 					<input type="hidden" name="item_name" value="{{ $transaction->item_name }}">

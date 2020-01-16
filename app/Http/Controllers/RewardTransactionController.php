@@ -130,7 +130,7 @@ class RewardTransactionController extends Controller
             'datetime'  =>  Carbon::now('GMT+7')
         ]);
 
-        StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $$declineid)->delete();
+        StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $declineid)->delete();
 
         Log::create([
             'op_id'     => Session::get('userId'),
