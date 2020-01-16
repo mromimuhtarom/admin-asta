@@ -39,7 +39,6 @@ class PlayReportController extends Controller
       $inputRoundID = $request->inputRoundID;
       $sorting      = $request->sorting;
       $namecolumn   = $request->namecolumn;
-      $datenow      = Carbon::now('GMT+7');
       $menus1       = MenuClass::menuName('Report');
       $game         = Game::all();
       
@@ -111,23 +110,6 @@ class PlayReportController extends Controller
                          'asta_db.user.user_id',
                          DB::raw("'Domino Susun' AS gamename")
                      );
-       // $tdms = DmsRound::join('asta_db.dms_round_player', 'asta_db.bgt_round_player.round_id', '=', 'asta_db.bgt_round.round_id')
-       //          ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.bgt_round_player.user_id')
-       //          ->join('asta_db.bgt_table', 'asta_db.bgt_table.table_id', '=', 'asta_db.bgt_round.table_id')
-       //          ->select(
-       //                   'asta_db.bgt_round.gameplay_log as gameplay_log',
-       //                   'asta_db.bgt_round.date As datetimeround',
-       //                   'asta_db.bgt_table.name AS tablename',
-       //                   'asta_db.bgt_round_player.bet as bet',
-       //                   'asta_db.bgt_round_player.round_id as round_id',
-       //                   'asta_db.bgt_round_player.win_lose as win_lose',
-       //                   'asta_db.bgt_round_player.status as status',
-       //                   'asta_db.bgt_round_player.hand_card as hand_card',
-       //                   'asta_db.bgt_round_player.seat_id as seat_id',
-       //                   'asta_db.user.username',
-       //                   'asta_db.user.user_id',
-       //                   DB::raw("'Big Two' AS gamename")
-       //          );
        $tbbgt = BgtRound::join('asta_db.bgt_round_player', 'asta_db.bgt_round_player.round_id', '=', 'asta_db.bgt_round.round_id')
                 ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.bgt_round_player.user_id')
                 ->join('asta_db.bgt_table', 'asta_db.bgt_table.table_id', '=', 'asta_db.bgt_round.table_id')
@@ -246,7 +228,7 @@ class PlayReportController extends Controller
               endif;
         }
         $player_history->appends($request->all());
-        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
+        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
       } else if($inputRoundID != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ'):
         $player_history = $tbdmq->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
@@ -273,7 +255,7 @@ class PlayReportController extends Controller
               ->paginate(20);
         endif;
         $player_history->appends($request->all());
-        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
+        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
       } 
       else if($inputName != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
        
@@ -327,7 +309,7 @@ class PlayReportController extends Controller
               endif;
         }
         $player_history->appends($request->all());
-        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
+        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
       } else if($inputName != NULL && $inputMinDate != NULL && $inputGame != NULL) {
        
         if($inputGame == 'Domino QQ') {
@@ -380,7 +362,7 @@ class PlayReportController extends Controller
               endif;
         }
        $player_history->appends($request->all());
-       return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'datenow', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
+       return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
 
       } else if($inputName != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
         if($inputGame == 'Domino QQ') {
@@ -434,7 +416,7 @@ class PlayReportController extends Controller
               endif;
         }
         $player_history->appends($request->all());
-        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'datenow', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
+        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
     } else if($inputName != NULL && $inputGame != NULL) {
 
         if($inputGame == 'Domino QQ') {
@@ -479,7 +461,7 @@ class PlayReportController extends Controller
               endif;
         }
         $player_history->appends($request->all());
-        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'datenow', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
+        return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
     } else if($inputGame != NULL && $inputMinDate != NULL && $inputMaxDate != NULL) {
        if($inputGame == 'Domino QQ') {
         $player_history = $tbdmq->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
@@ -502,7 +484,7 @@ class PlayReportController extends Controller
 
        
        
-        return view('pages.players.playreport', compact('player_history', 'player_username','inputMaxDate', 'inputMinDate', 'inputGame', 'menus1', 'game', 'datenow', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
+        return view('pages.players.playreport', compact('player_history', 'player_username','inputMaxDate', 'inputMinDate', 'inputGame', 'menus1', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
     }
     
   }

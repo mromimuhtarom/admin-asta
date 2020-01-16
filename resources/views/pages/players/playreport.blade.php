@@ -52,12 +52,21 @@
                             @endforeach
                         </select>
                     </div>
+                    @if (Request::is('Players/Play_Report/PlayReport-search*'))
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMinDate" value="{{ $inputMinDate  }}">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMaxDate" value="{{ $inputMaxDate }}">
+                    </div>
+                    @else 
                     <div class="col" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                     </div>
+                    @endif
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                     </div>

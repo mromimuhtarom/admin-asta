@@ -31,7 +31,6 @@ class ChipController extends Controller
         $searchUser   = $request->inputPlayer;
         $menus1       = MenuClass::menuName('Balance Chip');
         $game         = Game::all();
-        $datenow      = Carbon::now('GMT+7');
         $action       = ConfigText::select(
                           'name',
                           'value'
@@ -81,7 +80,7 @@ class ChipController extends Controller
                         ->paginate(20);
                         $balancedetails->appends($request->all());
         
-        return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+        return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
     }
 
@@ -189,7 +188,7 @@ class ChipController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($gameName != NULL && $minDate != NULL && $maxDate != NULL) {
             $balancedetails = $balanceChip->where('asta_db.balance_chip.game_id', '=', $gameName)
@@ -198,7 +197,7 @@ class ChipController extends Controller
                               ->paginate(20);
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         } else if($searchUser != NULL && $gameName != NULL && $minDate != NULL){
           if(is_numeric($searchUser) !== true):
             $balancedetails = $balanceChip->WHERE('asta_db.user.username', 'LIKE', '%'.$searchUser.'%' )
@@ -215,7 +214,7 @@ class ChipController extends Controller
           endif;
           
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($searchUser != NULL && $gameName != NULL && $maxDate != NULL) {
           if(is_numeric($searchUser) !== true):
@@ -233,7 +232,7 @@ class ChipController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($searchUser != NULL && $gameName != NULL) {
           if(is_numeric($searchUser) !== true):
@@ -249,14 +248,14 @@ class ChipController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($gameName != NULL && $minDate != NULL) {
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '>=', $minDate." 00:00:00")
                             ->where('asta_db.balance_chip.game_id', '=', $gameName)
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if($gameName != NULL && $maxDate != NULL) {
           $balancedetails = $balanceChip->WHERE('asta_db.balance_chip.datetime', '<=', $maxDate." 23:59:59")
@@ -264,7 +263,7 @@ class ChipController extends Controller
                             ->orderBy($namecolumn, $sorting)
                             ->get();
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if ($searchUser != NULL && $minDate != NULL && $maxDate != NULL){
           if(is_numeric($searchUser) !== true):
@@ -280,7 +279,7 @@ class ChipController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         }else if ($searchUser != NULL && $minDate != NULL){
           if(is_numeric($searchUser) !== true):
@@ -296,7 +295,7 @@ class ChipController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($searchUser != NULL && $maxDate != NULL){
           if(is_numeric($searchUser) !== true):
@@ -312,14 +311,14 @@ class ChipController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($minDate != NULL && $maxDate != NULL){
           $balancedetails = $balanceChip->wherebetween('asta_db.balance_chip.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($searchUser != NULL){
           if(is_numeric($searchUser) !== true):
@@ -333,14 +332,14 @@ class ChipController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         } else if($gameName != NULL) {
           $balancedetails = $balanceChip->where('asta_db.balance_chip.game_id', '=', $gameName)
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
         
         } else if ($minDate != NULL){
 
@@ -348,7 +347,7 @@ class ChipController extends Controller
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
         }else if ($maxDate != NULL){
 
@@ -356,7 +355,7 @@ class ChipController extends Controller
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+          return view('pages.players.chip_player', compact('balancedetails', 'menus1', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
 
 
         }
