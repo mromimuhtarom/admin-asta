@@ -217,6 +217,14 @@ class ResellerController extends Controller
             case "bonus":
                 $name = "Bonus";
                 break;
+            case "type":
+                $name = "Type";
+                if($value == 1):
+                    $value = 'Bulanan';
+                else:
+                    $value = 'Mingguan';
+                endif;
+                break;
             
             default:
                 "";
