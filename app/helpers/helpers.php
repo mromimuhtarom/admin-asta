@@ -334,15 +334,25 @@ function dmscard($array) {
 }
 
 function tagsEnabler($txt)
-  {
-    
-    $semanticTagleft    =   str_replace('<', '[', $txt);
-    $semanticTagright   =   str_replace('>', ']', $semanticTagleft);
-    $semanticTagclosel  =   str_replace('</', '[/', $semanticTagright);
-    $semanticTagcloser  =   str_replace('>', ']', $semanticTagclosel); 
-    
-    return $semanticTagcloser;
+{ 
+  $semanticTagleft    =   str_replace('<', '[', $txt);
+  $semanticTagright   =   str_replace('>', ']', $semanticTagleft);
+  $semanticTagclosel  =   str_replace('</', '[/', $semanticTagright);
+  $semanticTagcloser  =   str_replace('>', ']', $semanticTagclosel); 
+  
+  return $semanticTagcloser;
+}
+
+function status_player($val) {
+  if($val == 25){
+    return "Setuju";
+  }else if($val == 26){
+    return "Dilarang";
+  } else if($val == 27) {
+    return "Bermasalah";
   }
+}
+
 
 
 ?>

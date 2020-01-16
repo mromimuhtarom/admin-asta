@@ -139,8 +139,8 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Registered Player')->group(function(){
                 Route::get('RegisteredPlayer-view', 'PlayersController@indexRegisteredPlayer')->name('Registered_Players');
                 Route::get('RegisteredPlayer-search', 'PlayersController@SearchRegisteredPlayer')->name('RegisteredPlayer-search');
-                Route::post('RegisteredPlayer-update', 'PlayersController@updateRegisteredPlayer')->name('RegisteredPlayer-update');
-                Route::post('RegisteredPlayer1-update', 'PlayersController@updateRegistered')->name('RegisteredPlayer1-update');
+                Route::post('RegisteredPlayer-update', 'PlayersController@updateBannedAccount')->name('RegisteredPlayer-update');
+                Route::get('loguser/{user_id}', 'PlayersController@loguserregister')->name('showloguser');
                 Route::get('RegisteredPlayer-profile/{userId}/detail', 'PlayersController@detailRegistered')->name('RegisteredPlayer-detaildevice');
                 Route::get('profile/{user_id}.jpg', 'PlayersController@ImageProfilePlayer')->name('image-profile');
             });
