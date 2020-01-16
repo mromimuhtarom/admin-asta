@@ -251,7 +251,7 @@ class AbuseTransactionReportController extends Controller
                         ->whereBetween('asta_db.report_problem.date' ,[$minDate." 00:00:00", $maxDate." 23:59:59"])
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $player != NULL && $minDate != NULL && $TransType != NULL )
         {
             $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
@@ -259,7 +259,7 @@ class AbuseTransactionReportController extends Controller
                         ->where('asta_db.report_problem.date', '>=', $minDate)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feeback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feeback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $player != NULL && $maxDate != NULL && $TransType != NULL )
         {
             $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
@@ -267,140 +267,74 @@ class AbuseTransactionReportController extends Controller
                         ->where('asta_db.report_problem.date', '<=', $maxDate)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $player != NULL && $TransType != NULL )
         {
             $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                         ->where('asta_db.report_problem.type', '=', $TransType)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $minDate != NULL && $TransType != NULL )
         {
             $search = $abusetransaction->where('asta_db.report_problem.date', '>=', $minDate)
                         ->where('asta_db.report_problem.type', '=', $TransType)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if($maxDate != NULL && $TransType != NULL )
         {
             $search = $abusetransaction->where('asta_db.report_problem.date', '>=', $maxDate)
                         ->where('asta_db.report_problem.type', '=', $TransType)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $player != NULL && $minDate != NULL && $maxDate != NULL )
         {
             $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                         ->whereBetween('asta_db.report_problem.date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $minDate != NULL && $maxDate != NULL)
         {
             $search = $abusetransaction->whereBetween('asta_db.report_problem.date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $player != NULL && $maxDate != NUll )
         {
             $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                         ->where('asta_db.report_problem.date', '<=', $maxDate)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $minDate != NULL )
         {
             $search = $abusetransaction->where('asta_db.report_problem.date', '>=', $minDate)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $maxDate != NULL )
         {
             $search = $abusetransaction->where('asta_db.report_problem.date', '<=', $maxDate)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $TransType != NULL )
         {
             $search = $abusetransaction->where('asta_db.report_problem.Type', '=', $TransType)
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow','action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else if( $player != NULL )
         {
             $search = $abusetransaction->where('asta_db.user.username', 'LIKE', '%'.$player.'%')
                         ->paginate(20);
             $search->appends($request->all());
-            return view('pages.feedback.abusetransactionreport', compact('search', 'datenow', 'action_abuse_transaction', 'AbusetrnsType'));
+            return view('pages.feedback.abusetransactionreport', compact('search', 'minDate', 'maxDate', 'action_abuse_transaction', 'AbusetrnsType'));
         } else {
             return redirect()->route('Abuse_Transaction_Report');
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

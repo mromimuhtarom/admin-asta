@@ -42,12 +42,21 @@
                         <option value="request">{{ TranslateMenuToko('Date Request')}}</option>
                     </select>
                 </div>
+                @if (Request::is('Reseller/Reseller-Transaction/Report_Transaction/ReportTransaction-view'))
                 <div class="col" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
                 <div class="col" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                 </div>
+                @else
+                <div class="col" style="padding-left:3%;">
+                    <input type="date" class="form-control" name="inputMinDate" value="{{ $startDate }}">
+                </div>
+                <div class="col" style="padding-left:3%;">
+                    <input type="date" class="form-control" name="inputMaxDate" value="{{ $endDate }}">
+                </div>
+                @endif
                 <div class="col" style="padding-left:3%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>

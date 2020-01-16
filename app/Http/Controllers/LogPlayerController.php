@@ -95,7 +95,7 @@ class LogPlayerController extends Controller
             endif;
 
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
 
         } else if($searchUser != NULL && $inputAction != NULL && $minDate != NULL)
         {
@@ -114,7 +114,7 @@ class LogPlayerController extends Controller
             endif;
 
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
 
         } else if($searchUser != NULL && $inputAction != NULL && $maxDate != NULL)
         {
@@ -133,7 +133,7 @@ class LogPlayerController extends Controller
             endif;
 
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
 
         } else if($searchUser != NULL && $inputAction != NULL)
         {
@@ -150,7 +150,7 @@ class LogPlayerController extends Controller
             endif;
 
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         
         } else if($searchUser != NULL &&  $minDate != NULL && $maxDate != NULL)
         {
@@ -167,7 +167,7 @@ class LogPlayerController extends Controller
             endif;
 
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         
         } else if($searchUser != NULL && $maxDate != NULL)
         {
@@ -184,7 +184,7 @@ class LogPlayerController extends Controller
             endif;
 
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         } else if($searchUser != NULL && $minDate != NULL)
         {
             if(is_numeric($searchUser) !== TRUE):
@@ -200,7 +200,7 @@ class LogPlayerController extends Controller
             endif;
 
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         } else if($inputAction != NULL && $minDate != NULL && $maxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
@@ -208,7 +208,7 @@ class LogPlayerController extends Controller
                                     ->orderby($namecolumn, $sorting)
                                     ->paginate(20);
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         } else if($inputAction != NULL && $minDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
@@ -216,7 +216,7 @@ class LogPlayerController extends Controller
                                     ->orderby($namecolumn, $sorting)
                                     ->paginate(20);
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         } else if($inputAction != NULL && $maxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.action_id', '=', $inputAction )
@@ -224,14 +224,14 @@ class LogPlayerController extends Controller
                                     ->orderby($namecolumn, $sorting)
                                     ->paginate(20);
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         } else if($minDate != NULL && $maxDate != NULL)
         {
             $logplayer =    $loguser->wherebetween('asta_db.log_user.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                                     ->orderby($namecolumn, $sorting)
                                     ->paginate(20);
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         } else if($searchUser != NULL)
         {
             if(is_numeric($searchUser) !== TRUE):
@@ -252,21 +252,21 @@ class LogPlayerController extends Controller
                                     ->orderby($namecolumn, $sorting)
                                     ->paginate(20);
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));
         } else if($minDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.datetime', '>=', $minDate)
                                     ->orderby($namecolumn, $sorting)
                                     ->paginate(20);
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));            
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction'));            
         } else if($maxDate != NULL)
         {
             $logplayer =    $loguser->where('asta_db.log_user.datetime', '<=', $maxDate)
                                     ->orderby($namecolumn, $sorting)
                                     ->paginate(20);
             $logplayer->appends($request->all());
-            return view('pages.players.log_player', compact('logplayer', 'action', 'datenow', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction')); 
+            return view('pages.players.log_player', compact('logplayer', 'action', 'minDate', 'maxDate', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'getAction')); 
         }
     }
 }

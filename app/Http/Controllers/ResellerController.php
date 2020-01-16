@@ -317,9 +317,9 @@ class ResellerController extends Controller
                                       ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                       ->get();
                 endif;
-        
+                dd($startDate);
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
         
               }else if ($searchUsername != NULL && $startDate != NULL) {
                 
@@ -336,7 +336,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
         
               }else if ($searchUsername != NULL && $endDate != NULL) {
                 
@@ -353,7 +353,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
               }else if($searchUsername != NULL) {
 
                 if(is_numeric($searchUsername) !== true):
@@ -367,7 +367,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
               }
         } else if($choosedate == 'request')
         {
@@ -386,7 +386,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
         
               }else if ($searchUsername != NULL && $startDate != NULL) {
         
@@ -403,7 +403,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
         
               }else if ($searchUsername != NULL && $endDate != NULL) {
 
@@ -420,7 +420,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
               }else if($searchUsername != NULL) {
                 
                 if(is_numeric($searchUsername) !== true):
@@ -435,14 +435,14 @@ class ResellerController extends Controller
                 endif;
 
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
               }
         }
     }
 //------- End Search Report Transaction ------//
 
 //------ Detail Report Transaction ------//
-public function detailTransaction($month, $year)
+public function detailTransaction(Request $request, $month, $year)
 {
     $transactions = StoreTransactionHist::select(
                         'asta_db.store_transaction_hist.user_id',
@@ -462,8 +462,10 @@ public function detailTransaction($month, $year)
                     ->orderby('datetime', 'ASC')
                     ->get();
     $datenow        = Carbon::now('GMT+7');
+    $startDate      = $request->inputMinDate;
+    $endDate        = $request->inputMaxDate;
 
-    return view('pages.reseller.report_Transaction', compact('transactions', 'datenow'));
+    return view('pages.reseller.report_Transaction', compact('transactions', 'starDate', 'endDate'));
 }
 //------ End Detail Report Transaction ------//
 //****************************************** End Menu Report Transaction ******************************************//
@@ -516,7 +518,7 @@ public function detailTransaction($month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
 
       }else if ($searchUsername != NULL && $startDate != NULL) {
 
@@ -532,7 +534,7 @@ public function detailTransaction($month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
 
@@ -548,7 +550,7 @@ public function detailTransaction($month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
       }else if($searchUsername != NULL) {
 
         if(is_numeric($searchUsername) !== true):
@@ -559,13 +561,13 @@ public function detailTransaction($month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
       } else if ($startDate != NULL && $endDate != NULL) {
           $balancedetails = $balanceReseller->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
                                             ->orderBy('asta_db.reseller_balance.datetime', 'asc')
                                             ->get();
                                             
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'datenow'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
       }
     }
 //----- End Search Balance Reseller -----//

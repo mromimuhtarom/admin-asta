@@ -25,10 +25,12 @@ class ReportAbusePlayerController extends Controller
         $maxdate        = $request->inputMaxDate;
         $datenow        = Carbon::now('GMT+7');
         $abuseplayer    = Player::select('username', 'user_id')->get();
+
         $validator = Validator::make($request->all(),[
             'inputMinDate'    => 'required|date',
             'inputMaxDate'    => 'required|date',
         ]);
+
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
@@ -47,7 +49,7 @@ class ReportAbusePlayerController extends Controller
                                  ->get();
             endif;
 
-            return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));                
+            return view('pages.feedback.report_abuse_player', compact('mindate', 'maxdate', 'problemplayer', 'abuseplayer'));                
         } else if($reportedplayer != NULL && $mindate != NULL && $maxdate != NULL)
         {
             if(is_numeric($reportedplayer) !== true):
@@ -60,7 +62,7 @@ class ReportAbusePlayerController extends Controller
                                  ->get();
             endif;
 
-            return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));    
+            return view('pages.feedback.report_abuse_player', compact('mindate', 'maxdate', 'problemplayer', 'abuseplayer'));    
         } else if($reportplayer!= NULL && $mindate != NULL && $maxdate != NULL)
         {
             if(is_numeric($reportplayer) !== true):
@@ -73,18 +75,19 @@ class ReportAbusePlayerController extends Controller
                                  ->get();
             endif;
 
-            return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));    
+            return view('pages.feedback.report_abuse_player', compact('mindate', 'maxdate', 'problemplayer', 'abuseplayer'));    
         } else if($mindate != NULL && $maxdate != NULL)
         {
            $problemplayer = AbusePlayer::whereBetween('date', [$mindate.' 00:00:00', $maxdate.' 23:59:59'])
                             ->get();
-            return view('pages.feedback.report_abuse_player', compact('datenow', 'problemplayer', 'abuseplayer'));    
+            return view('pages.feedback.report_abuse_player', compact('mindate', 'maxdate', 'problemplayer', 'abuseplayer'));    
         } else if($mindate == NULL && $maxdate == NULL) 
         {
             $validator = Validator::make($request->all(),[
                 'inputMinDate'    => 'required|date',
                 'inputMaxDate'    => 'required|date',
             ]);
+
             if ($validator->fails()) {
                 return back()->withErrors($validator->errors());
             }
