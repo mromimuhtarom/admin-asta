@@ -37,14 +37,21 @@
                         <div class="col" align="left">
                             <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
                         </div>
+                        @if (Request::is('Players/Gold_Players/Gold-search*') || Request::is('Players/Gold_Players/Gold-all*'))
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
+                        </div>
+                        <div class="col" align="left" style="padding-left:1%;">
+                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
+                        </div>
+                        @else 
                         <div class="col" align="left" style="padding-left:1%;">
                             <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
                         </div>
                         <div class="col" align="left" style="padding-left:1%;">
                             <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
-                            @if(Request::is('Players/Gold_Players/Gold-view'))
-                            @endif
                         </div>
+                        @endif
                         <div class="col" align="left" style="padding-left:1%;">
                             <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                         </div>
@@ -117,7 +124,11 @@
                             <tr>
                                 <td>{{ $bd->user_id }}</td>
                                 <td>{{ $bd->username }}</td>
-                                <td>{{ $actblnc[$bd->action_id] }}</td>
+                                @if ($bd->action_id == NULL)
+                                <td>{{ var_dump($bd->action_id) }}</td>
+                                @else    
+                                <td>{{ $actblnc[$bd->action_id] }}</td> 
+                                @endif
                                 <td>{{ number_format($bd->debit, 2) }}</td>
                                 <td>{{ number_format($bd->credit, 2) }}</td>
                                 <td>{{ number_format($bd->balance, 2) }}</td>

@@ -46,12 +46,21 @@
                             <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} Player</option>
                         </select>
                     </div>
+                    @if (Request::is('Players/Report_Players/ReportPlayer-search'))
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMinDate"  value="{{ $minDate }}">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <input type="date" class="form-control" name="inputMaxDate"  value="{{ $maxDate }}">
+                    </div>
+                    @else 
                     <div class="col" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMinDate"  value="{{ $datenow->toDateString() }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMaxDate"  value="{{ $datenow->toDateString() }}">
-                    </div>
+                    </div>                    
+                    @endif
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                     </div>

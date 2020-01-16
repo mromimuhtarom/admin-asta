@@ -31,7 +31,6 @@ class GoldController extends Controller
         $namecolumn  = $request->namecolumn;
 
         $menus1      = MenuClass::menuName('Balance Gold');
-        $datenow     = Carbon::now('GMT+7');
 
         $action      = ConfigText::select(
                         'name',
@@ -193,7 +192,7 @@ class GoldController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
 
         }else if ($searchUser != NULL && $maxDate!= NULL){
 
@@ -210,7 +209,7 @@ class GoldController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
 
         }else if ($minDate != NULL && $maxDate!= NULL){
 
@@ -218,7 +217,7 @@ class GoldController extends Controller
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
 
         }else if ($searchUser != NULL){
 
@@ -233,7 +232,7 @@ class GoldController extends Controller
           endif;
 
           $balancedetails->appends($request->all());
-          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
 
         }else if ($minDate != NULL){
 
@@ -241,7 +240,7 @@ class GoldController extends Controller
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
 
         }else if ($maxDate!= NULL){
 
@@ -249,7 +248,7 @@ class GoldController extends Controller
                             ->orderBy($namecolumn, $sorting)
                             ->paginate(20);
           $balancedetails->appends($request->all());
-          return view('pages.players.gold_player', compact('balancedetails', 'menus1', 'datenow','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','actblnc','sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
 
 
         }

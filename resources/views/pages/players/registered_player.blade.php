@@ -38,13 +38,21 @@
                       <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
                     </select>
                 </div>
-
+                @if (Request::is('Players/Registered_Players/RegisteredPlayer-search*'))
+                <div class="col" style="padding-left:1%;">
+                  <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
+                </div>
+                <div class="col" style="padding-left:1%;">
+                  <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
+                </div>
+                @else 
                 <div class="col" style="padding-left:1%;">
                     <input type="date" name="inputMinDate" class="form-control">
                 </div>
                 <div class="col" style="padding-left:1%;">
                     <input type="date" name="inputMaxDate" class="form-control">
                 </div>
+                @endif
                 <div class="col" style="padding-left:1%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
