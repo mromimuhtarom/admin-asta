@@ -39,9 +39,6 @@
 												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
                     </select>
 								</div>
-								@php
-								dd($maxDate); 
-								@endphp
                 <div class="col">
 									<input type="date" class="form-control" id="minDate" name="inputMinDate" value=" {{ $minDate }}">
                 </div>

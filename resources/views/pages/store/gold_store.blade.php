@@ -183,7 +183,7 @@
                           <button class="edit-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
                       </div>
                     </td>
-                    <td><a href="#" class="usertext" data-name="bonus_get" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->bonus_get }}</a></>
+                    <td><a href="#" class="usertext" data-name="bonus_get" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->bonus_get }}</a></td>
                     <td><a href="#" class="usertext" data-title="Price" data-name="price" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->price }}</a></td>
                     <td>{{ $gold->strItemType() }}</td>
                     <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
