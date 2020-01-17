@@ -20,38 +20,56 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
-                <div cl ass="col" style="padding-left:1%;">
-                    <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
-                </div>
-                <div class="col" style="padding-left:1%;">
-                  <select name="status" class="form-control">
-                    <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
-                    <option value="{{ $plyr_status[0] }}">{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
-                    <option value="{{ $plyr_status[2] }}">{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
-                    <option value="{{ $plyr_status[4] }}">{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
-                  </select>
-                </div>
-                <div class="col" style="padding-left:1%;">
-                    <select name="type_user" class="form-control">
-                      <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
-                      <option value="{{ $plyr_type[0] }}">{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
-                      <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
-                    </select>
-                </div>
                 @if (Request::is('Players/Registered_Players/RegisteredPlayer-search*'))
-                <div class="col" style="padding-left:1%;">
-                  <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
-                </div>
-                <div class="col" style="padding-left:1%;">
-                  <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
-                </div>
+                  <div cl ass="col" style="padding-left:1%;">
+                    <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID" value="{{ $getUsername }}">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <select name="status" class="form-control">
+                      <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                      <option value="{{ $plyr_status[0] }}" @if($getStatus == $plyr_status[0]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                      <option value="{{ $plyr_status[2] }}" @if($getStatus == $plyr_status[2]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
+                      <option value="{{ $plyr_status[4] }}" @if($getStatus == $plyr_status[4]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
+                    </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <select name="type_user" class="form-control">
+                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                        <option value="{{ $plyr_type[0] }}" @if($getTypeUser == $plyr_type[0]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
+                        <option value="{{ $plyr_type[2] }}" @if($getTypeUser == $plyr_type[2]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
+                      </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
+                  </div>
                 @else 
-                <div class="col" style="padding-left:1%;">
-                    <input type="date" name="inputMinDate" class="form-control">
-                </div>
-                <div class="col" style="padding-left:1%;">
-                    <input type="date" name="inputMaxDate" class="form-control">
-                </div>
+                  <div cl ass="col" style="padding-left:1%;">
+                      <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <select name="status" class="form-control">
+                      <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                      <option value="{{ $plyr_status[0] }}">{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                      <option value="{{ $plyr_status[2] }}">{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
+                      <option value="{{ $plyr_status[4] }}">{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
+                    </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <select name="type_user" class="form-control">
+                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                        <option value="{{ $plyr_type[0] }}">{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
+                        <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
+                      </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <input type="date" name="inputMinDate" class="form-control">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <input type="date" name="inputMaxDate" class="form-control">
+                  </div>
                 @endif
                 <div class="col" style="padding-left:1%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>

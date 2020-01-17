@@ -29,6 +29,25 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
+                @if(Request::is('Admin/Log_Admin/Log-search*'))
+                    <div class="col">
+                        <input type="text" name="username" class="left" placeholder="username / Admin ID" value="{{ $searchUser }}">
+                    </div>
+                    <div class="col">
+                        <select name="action" id="" class="form-control">
+                            <option value="">{{ translate_MenuContentAdmin('Choose Action') }}</option>
+                            @foreach($actionSearch as $action)
+                            <option value="{{ $action->id }}" @if($inputAction == $action->id) selected @endif;>{{ translate_MenuContentAdmin($action->action) }}</option>
+                            @endforeach
+                        </select>
+                    </div>                    
+                    <div class="col">
+                        <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
+                    </div>
+                @else
                 <div class="col">
                     <input type="text" name="username" class="left" placeholder="username / Admin ID">
                 </div>
@@ -39,15 +58,7 @@
                         <option value="{{ $action->id}}">{{ translate_MenuContentAdmin($action->action) }}</option>
                         @endforeach
                     </select>
-                </div>
-                @if(Request::is('Admin/Log_Admin/Log-search*'))
-                <div class="col">
-                    <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
-                </div>
-                <div class="col">
-                    <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
-                </div>
-                @else
+                </div>   
                 <div class="col">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>

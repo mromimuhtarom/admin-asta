@@ -41,9 +41,15 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('AddTransaction-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
+                @if (Request::is('Transaction/Add_Transaction/AddTrasanction-search*'))
+                <div class="col" align="right">
+                    <input type="text" id="username" class="left" name="inputPlayer" placeholder="username / Player ID" value="{{ $getUsername }}">
+                </div>
+                @else
                 <div class="col" align="right">
                     <input type="text" id="username" class="left" name="inputPlayer" placeholder="username / Player ID">
-                </div>
+                </div> 
+                @endif;
                 <div class="col" style="padding-left:2%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>

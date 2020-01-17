@@ -34,24 +34,45 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('ActivePlayers-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
-                <div class="col">
-                    <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
-                </div>
-                <div class="col">
-                    <select name="inputRegisterType" class="form-control">
-                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
-                        <option value="{{ $explodetype[0]}}">{{ Translate_menuPlayers($explodetype[1]) }}</option>
-                        <option value="{{ $explodetype[2]}}">{{ Translate_menuPlayers($explodetype[3]) }}</option>
-                    </select>
-                </div>
-                <div class="col" style="padding-left:3%;">
-                    <select name="inputGame" class="form-control">
-                        <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
-                        @foreach ($game as $gm)
-                        <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @if (Request::is('Players/Active_Players/Active-search*'))
+                    <div class="col">
+                        <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID" value="{{ $inputPlayer }}">
+                    </div>
+                    <div class="col">
+                        <select name="inputRegisterType" class="form-control">
+                            <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                            <option value="{{ $explodetype[0]}}"@if($registerType == $explodetype[0]) selected @endif;>{{ Translate_menuPlayers($explodetype[1]) }}</option>
+                            <option value="{{ $explodetype[2]}}"@if($registerType == $explodetype[2]) selected @endif;>{{ Translate_menuPlayers($explodetype[3]) }}</option>
+                        </select>
+                    </div>
+                    <div class="col" style="padding-left:3%;">
+                        <select name="inputGame" class="form-control">
+                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                            @foreach ($game as $gm)
+                            <option value="{{ $gm->id }}" @if($inputGame == $gm->id) selected @endif;>{{ $gm->desc }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @else 
+                    <div class="col">
+                        <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
+                    </div>
+                    <div class="col">
+                        <select name="inputRegisterType" class="form-control">
+                            <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                            <option value="{{ $explodetype[0]}}">{{ Translate_menuPlayers($explodetype[1]) }}</option>
+                            <option value="{{ $explodetype[2]}}">{{ Translate_menuPlayers($explodetype[3]) }}</option>
+                        </select>
+                    </div>
+                    <div class="col" style="padding-left:3%;">
+                        <select name="inputGame" class="form-control">
+                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                            @foreach ($game as $gm)
+                            <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                 <div class="col" style="padding-left:1%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>

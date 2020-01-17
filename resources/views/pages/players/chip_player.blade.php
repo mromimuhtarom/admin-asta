@@ -34,32 +34,44 @@
         <div class="table-header w-100 h-100">
             <form action="{{ route('Chip-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
-                    <div class="col" style="padding-right:-10%">
-                        <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / player ID">
-                    </div>
-                    <div class="col" >
-                        <select name="inputGame" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
-                            <option value="0">Utama</option>
-                            @foreach ($game as $gm)
-                            <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     @if (Request::is('Players/Chip_Players/Chip-search*') || Request::is('Players/Chip_Players/Chip-all*'))
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
-                    </div>
+                        <div class="col" style="padding-right:-10%">
+                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / player ID" value="{{ $getUsername }}">
+                        </div>
+                        <div class="col" >
+                            <select name="inputGame" class="form-control">
+                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="0" @if($getGame == 0) selected @endif>Utama</option>
+                                @foreach ($game as $gm)
+                                <option value="{{ $gm->id }}" @if($getGame == $gm->id) selected @endif>{{ $gm->desc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
+                        </div>
                     @else 
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
-                    </div>
+                        <div class="col" style="padding-right:-10%">
+                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / player ID">
+                        </div>
+                        <div class="col" >
+                            <select name="inputGame" class="form-control">
+                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="0">{{ Translate_menuPlayers('Main') }}</option>
+                                @foreach ($game as $gm)
+                                <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                        </div>
                     @endif
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
@@ -109,7 +121,16 @@
                     <tr>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.user_id') }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">{{ Translate_menuPlayers('Game') }}<i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
+                        <th>
+                            <a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">
+                                @if($getGame == 0)
+                                Utama
+                                @else
+                                {{ Translate_menuPlayers('Game') }}
+                                @endif
+                                <i class="fa fa-sort{{ iconsorting('gamename') }}"></i>
+                            </a>
+                        </th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.action_id') }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.debit">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.debit') }}"></i></a></th>
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.credit') }}"></i></a></th>
@@ -123,7 +144,7 @@
                         if($bd->gamename != NULL):
                             $gamename = $bd->gamename;
                         else:
-                            $gamename = 'Utama';
+                            $gamename = 'Lobi';
                         endif;
                     @endphp
                     <tr class="gradeX">

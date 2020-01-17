@@ -33,6 +33,21 @@
         <div class="table-header w-100 h-100">
             <form action="{{ route('Guest-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
+                  @if (Request::is('Players/Guest/Guest-search*'))
+                    <div class="col">
+                      <input type="text" id="username" class="left" name="inputPlayer" placeholder="username" value="{{ $username }}">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <select id="status" name="inputStatus" class="form-control" required>
+                            <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                            <option value="used" @if($status == 'used') selected @endif;>{{ Translate_menuPlayers('Used') }}</option>
+                            <option value="nonused" @if($status == 'nonused') selected @endif;>{{ Translate_menuPlayers('Non used') }}</option>
+                        </select>
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    </div>
+                  @else 
                     <div class="col">
                         <input type="text" id="username" class="left" name="inputPlayer" placeholder="username">
                     </div>
@@ -46,6 +61,7 @@
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                     </div>
+                  @endif;
                 </div>
             </form>
         </div>

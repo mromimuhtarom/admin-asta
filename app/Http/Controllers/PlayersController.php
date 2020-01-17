@@ -149,7 +149,7 @@ class PlayersController extends Controller
       else:
         $activePlayer = $online->get();
       endif;
-      return view('pages.players.active_player', compact('activePlayer', 'explodetype', 'game'));
+      return view('pages.players.active_player', compact('activePlayer', 'explodetype', 'game', 'inputPlayer', 'registerType', 'inputGame'));
 
 
     }
@@ -741,7 +741,7 @@ class PlayersController extends Controller
                     )
                     ->whereNull('user_id')
                     ->get();   
-      return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu'));
+      return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($username != NULL && $status == 'used')
     {
         $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
@@ -756,7 +756,7 @@ class PlayersController extends Controller
                       ->where('username', 'LIKE', '%'.$username.'%')
                       ->whereNotNull('asta_db.user_guest.user_id')
                       ->get();
-        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu'));
+        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($status == 'used')
     {
         $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
@@ -770,7 +770,7 @@ class PlayersController extends Controller
                       )
                       ->whereNotNull('asta_db.user_guest.user_id')
                       ->get();
-        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu'));
+        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($minDate == NULL || $maxDate == NULL || $minDate == NULL && $maxDate == NULL)
     {
       return self::indexGuest()->with('alert', 'You must to Choose Status');

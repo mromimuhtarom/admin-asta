@@ -28,30 +28,40 @@
         <div class="table-header w-100 h-100">
             <form action="{{ route('ReportAdmin-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
-                    <div class="col">
-                        <input type="text" name="inputPlayer" class="left" placeholder="username">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <select name="logType" class="form-control">
-                            <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
-                            <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} {{ translate_MenuContentAdmin('Admin') }}</option>
-                            <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} {{ translate_MenuContentAdmin('Admin') }}</option>
-                        </select>
-                    </div>
                     @if(Request::is('Admin/Report_Admin/ReportAdmin-search*'))
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMinDate" value="{{ $minDate }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMaxDate" value="{{ $maxDate }}">
-                    </div>
+                        <div class="col">
+                            <input type="text" name="inputPlayer" class="left" placeholder="username" value="{{ $player }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <select name="logType" class="form-control">
+                                <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
+                                <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;>{{ $logonlinetype[1]}} {{ translate_MenuContentAdmin('Admin') }}</option>
+                                <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;>{{ $logonlinetype[3]}} {{ translate_MenuContentAdmin('Admin') }}</option>
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMinDate" value="{{ $minDate }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMaxDate" value="{{ $maxDate }}">
+                        </div>
                     @else 
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
-                    </div>
+                        <div class="col">
+                            <input type="text" name="inputPlayer" class="left" placeholder="username">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <select name="logType" class="form-control">
+                                <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
+                                <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} {{ translate_MenuContentAdmin('Admin') }}</option>
+                                <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} {{ translate_MenuContentAdmin('Admin') }}</option>
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
+                        </div>
                     @endif
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('Search') }}</button>

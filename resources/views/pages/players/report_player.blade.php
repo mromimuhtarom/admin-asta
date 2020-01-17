@@ -33,27 +33,34 @@
         <div class="table-header w-100 h-100">
             <form action="{{ route('ReportPlayer-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
+                    @if (Request::is('Players/Report_Players/ReportPlayer-search'))
                     <div class="col">
-                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
+                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID" value="{{ $player }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
                             <option value="">{{ Translate_menuPlayers('Choose Log Type') }}</option>
-                            {{-- @foreach ($action as $act)
-                            <option value="{{ $act->id }}">{{ $act->action }}</option>                                
-                            @endforeach --}}
-                            <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} Player</option>
-                            <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} Player</option>
+                            <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;>{{ $logonlinetype[1]}} Player</option>
+                            <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;>{{ $logonlinetype[3]}} Player</option>
                         </select>
                     </div>
-                    @if (Request::is('Players/Report_Players/ReportPlayer-search'))
                     <div class="col" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMinDate"  value="{{ $minDate }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMaxDate"  value="{{ $maxDate }}">
                     </div>
-                    @else 
+                    @else
+                    <div class="col">
+                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
+                    </div>
+                    <div class="col" style="padding-left:1%;">
+                        <select name="logType" class="form-control">
+                            <option value="">{{ Translate_menuPlayers('Choose Log Type') }}</option>
+                            <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} Player</option>
+                            <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} Player</option>
+                        </select>
+                    </div> 
                     <div class="col" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMinDate"  value="{{ $datenow->toDateString() }}">
                     </div>

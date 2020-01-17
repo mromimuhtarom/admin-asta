@@ -716,14 +716,19 @@ Route::middleware('authenticated')->group(function(){
             Route::get('VersionAsset-view', 'VersionAssetController@index')->name('Version_Asset_Apk');
             Route::post('VersionAsset-update', 'VersionAssetController@update')->name('VersionAssetApk-update');
             Route::post('VersionAsset-updateIos', 'VersionAssetController@update_ios')->name('VersionAssetApkIos-update');
+            Route::post('VersionAssetdata-updateWindows', 'VersionAssetController@update_windows')->name('VersionAssetApkWindows-update');
             Route::post('VersionAsset-store', 'VersionAssetController@store')->name('VersionAssetApkAndroid-create');
             Route::post('VersionAsset-storeIos', 'VersionAssetController@storeIos')->name('VersionAssetApkIos-create');
+            Route::post('VersionAsset-storeWindows', 'VersionAssetController@storeWindows')->name('VersionAssetApkwindows-create');
             Route::post('VersionAsset-updateAndroid', 'VersionAssetController@updateAssetAndroid')->name('VersionAssetApkAndroid-updateAsset');
             Route::post('VersionAsset-updateIOS', 'VersionAssetController@updateAssetIOS')->name('VersionAssetApkIOS-updateAsset');
+            Route::post('VersionAsset-updateWindows', 'VersionAssetController@updateAssetWindows')->name('VersionAssetApkWindows-updateAsset');
             Route::delete('VersionAsset-deleteAndroid', 'VersionAssetController@destroy')->name('VersionAssetApkAndroid-deleteAsset');
             Route::delete('VersionAsset-deleteIOS', 'VersionAssetController@destroyIOS')->name('VersionAssetApkIOS-deleteAsset');
+            Route::delete('VersionAsset-deleteWindows', 'VersionAssetController@destroyWindows')->name('VersionAssetApkWindows-deleteAsset');
             Route::delete('VersionAsset-deleteAssetAllSelected', 'VersionAssetController@deleteAllSelectedADR')->name('VersionAssetApkAndroid-deleteAssetAllSelected');
             Route::delete('VersionAsset-deleteAssetAllSelectedIOS', 'VersionAssetController@deleteAllSelectedIOS')->name('VersionAssetApkIOS-deleteAssetAllSelected');
+            Route::delete('VersionAsset-deleteAssetAllSelectedWindows', 'VersionAssetController@deleteAllSelectedWindows')->name('VersionAssetApkWindows-deleteAssetAllSelected');
         });
 
     });

@@ -219,6 +219,99 @@
         </div>
     </div>
 </div>
+<div class="settings-table" style="margin-top:10px;">
+    <div>
+        <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+            <header>
+                <div class="widget-header">
+                    <h2><strong>Windows</strong></h2>
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body">
+                        <div class="widget-body-toolbar">
+
+                                <div class="row">
+                        
+                                  <!-- Button tambah bot baru -->
+                                  <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+                                    <div class="input-group">
+                                      @if($menu)
+                                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetWindows">
+                                        <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
+                                      </button>
+                                      @endif
+                                    </div>
+                                  </div>
+                                  <!-- End Button tambah bot baru -->
+                        
+                                </div>
+                        
+                              </div>
+                    <div class="custom-scroll table-responsive" style="height:420px;">
+                        
+                        <div class="table-outer">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th><input id="checkAll3" type="checkbox" name="deletepermission" class="deletepermission"></th>
+                                    <th>File</th>
+                                    <th>{{ TranslateMenuGame('Name')}}</th>
+                                    <th>{{ translate_menuTransaction('Type')}}</th>
+                                    <th>{{ TranslateReseller('Link')}}</th>
+                                    <th>{{ TranslateReseller('Version')}}</th>
+                                    @if($menu)
+                                      <th style="width:10px;">
+                                        <a  href="#" style="color:red;font-weight:bold;" 
+                                            class="delete3" 
+                                            id="trash3" 
+                                            data-toggle="modal" 
+                                            data-target="#deleteAll3"><i class="fa fa-trash-o"></i>
+                                        </a>
+                                      </th>
+                                    @endif
+                                </thead>
+                                <tbody>
+                                @foreach ($xml_windows->children() as $key => $xl)
+                                    @if ($menu)
+                                    <tr>
+                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl['name'] }}3 deleteIdAll3"></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetWindows{{ $xl['name'] }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl['name'] }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->type }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->link }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->ver }}</a></td>
+                                        <td>
+                                          <a href="#" style="color:red;" class="delete{{ $xl['name'] }}3" 
+                                              id="delete"
+                                              data-pk3="{{ $xl['name'] }}"
+                                              data-name3="{{ $key }}"
+                                              data-link3="{{ $xl->link }}"
+                                              data-toggle="modal"
+                                              data-target="#deletewindows">
+                                                <i class="fa fa-times"></i>
+                                          </a>
+                                      </td>
+                                    </tr>
+                                    @else 
+                                    <tr>
+                                        <td>{{ $xl['name'] }}</td>
+                                        <td>{{ $xl->type }}</td>
+                                        <td>{{ $xl->link }}</td>
+                                        <td>{{ $xl->file}}</td>
+                                        <td>{{ $xl->ver }}</td>
+                                    </tr>
+                                    @endif
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- ==================================================================== MODAL CREATE ASSET ======================================================================== -->
@@ -240,7 +333,7 @@
                   <div class="col-12">
                     <div class="form-group"><br>
                         <div class="form-group">
-                            <input type="file" name="file" id="file" class="input-file">
+                            <input type="file" name="fileAdr" id="file" class="input-file">
                             <label for="file" class="btn btn-tertiary js-labelFile">
                               <i class="icon fa fa-check"></i>
                               <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -293,7 +386,61 @@
             <div class="col-12">
               <div class="form-group" align="center"><br>
                   <div class="form-group">
-                      <input type="file" name="file2" id="file2" class="input-file">
+                      <input type="file" name="fileIOS" id="file2" class="input-file">
+                      <label for="file2" class="btn btn-tertiary js-labelFile">
+                        <i class="icon fa fa-check"></i>
+                        <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                      </label>
+                    </div>
+                  <br>
+                  <br>
+                  <input class="form-control" name="Name" placeholder="Name"><br>
+                    <select name="Type" class="form-control">
+                      <option>Type</option>
+                      <option value="Audio">Audio</option>
+                      <option value="Image">{{ TranslateMenuItem('Image')}}</option>
+                    </select>
+                  <br>
+                    <input class="form-control" name="Link" placeholder="Link"><br>
+                    <input class="form-control" name="Version" placeholder="Version"><br>
+                    <input class="form-control" name="FolderName" placeholder="Folder name"><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn sa-btn-primary submit-data" >
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+          </button>
+          <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal create new asset Windows -->
+<div class="modal fade" id="ModalAssetWindows" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new asset')}}</h4>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <form action="{{ route('VersionAssetApkwindows-create') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group" align="center"><br>
+                  <div class="form-group">
+                      <input type="file" name="fileWindows" id="file2" class="input-file">
                       <label for="file2" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
                         <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -398,6 +545,62 @@
         </button>
       </div>
       <form action="{{ route('VersionAssetApkIOS-updateAsset') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group" align="center"><br>
+                <input type="hidden" value="{{ $xl_ios['name'] }}" name="pk">
+                <div class="form-group">
+                    <input type="file" name="fileEditIOS" id="file4{{ $xl_ios['name'] }}" class="input-file">
+                    <label for="file4{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
+                      <i class="icon fa fa-check"></i>
+                      <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                    </label>
+                  </div>
+                  <br>
+                  <br>
+                  <input value="{{ $xl_ios['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
+                    <select disabled name="Type" class="form-control">
+                      <option>Type</option>
+                      <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">Audio </option>
+                      <option @if( $xl_ios->type == 'Image' ) selected @endif value="Image">{{ TranslateMenuItem('Image')}}</option>
+                    </select>
+                  <br>
+                  <input readonly value="{{ $xl_ios->link }}" class="form-control" name="Link" placeholder="Link"><br>
+                  <input value="{{ $xl_ios->ver }}" class="form-control" name="Version" placeholder="Version"><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn sa-btn-primary submit-data" >
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+          </button>
+          <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+@endforeach
+
+
+
+<!-- Modal edit asset Windows -->
+@foreach ($xml_windows->children() as $xl_ios)
+<div class="modal fade" id="ModalAssetWindows{{ $xl_ios['name'] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('Edit Asset')}} IOS</h4>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <form action="{{ route('VersionAssetApkWindows-updateAsset') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
 
@@ -556,6 +759,64 @@
   </div>
 </div>
 
+
+
+  <!-- Modal Pop up delete confirm Windows -->
+ <div class="modal fade" id="deletewindows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ TranslateMenuItem('DeleteData')}}</h5>
+          <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ TranslateMenuItem('Are you sure want to delete it')}}
+          <form action="{{ route('VersionAssetApkWindows-deleteAsset') }}" method="post">
+            {{ method_field('delete')}}
+            {{ csrf_field() }}
+            <input type="hidden" name="name" id="id3" value="">
+            <input type="hidden" name="id" id="name3" value="">
+            <input type="hidden" name="link" id="link3" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Pop up delete all selected data Windows -->
+ <div class="modal fade" id="deleteAll3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
+        <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ TranslateMenuItem('Are U Sure')}}
+        <form action="{{ route('VersionAssetApkWindows-deleteAssetAllSelected') }}" method="post">
+          {{ method_field('delete')}}
+          {{ csrf_field() }}
+          <input type="hidden" name="names2" id="ids3" value="">
+          <input type="hidden" name="ids2" id="Names3" value="">
+          <input type="hidden" name="LinksAll2" id="LinksAll3" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> Yes</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> No</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 <script>
 
 // ==================== choose file button Android ======================= //
@@ -636,6 +897,66 @@
           $("#trash2").hide();
         }
     });
+
+    //=============================== delete check all Windows =====================================//
+    //check all Windows
+    $('#trash3').hide();
+      //check all
+      $('#checkAll3').on('click', function(e) {
+        if($(this).is(":checked", true))
+        {
+          $(".deleteIdAll3").prop('checked', true);
+          $("#trash3").show();
+        }else{
+          $(".deleteIdAll3").prop('checked', false);
+          $("#trash3").hide();
+        }
+      })
+
+
+    $('.delete3').click(function(e) {
+      e.preventDefault();
+      var allValsIOS = [];
+      var alllinkIOS = [];
+      var allnameIOS = [];
+      $('.deleteIdAll3:checked').each(function() {
+        allValsIOS.push($(this).attr('data-pk'));
+        alllinkIOS.push($(this).attr('data-link'));
+        allnameIOS.push($(this).attr('data-name'));
+
+        var join_selected_valuesIOS = allValsIOS.join(",");
+        var join_selected_linkIOS = alllinkIOS.join(",");
+        var join_selected_nameIOS = allnameIOS.join(",");
+
+        $('#ids3').val(join_selected_valuesIOS);
+        $('#LinksAll3').val(join_selected_linkIOS);
+        $('#Names3').val(join_selected_nameIOS);
+
+      });
+    });
+
+    //hide and show icon delete all
+    $('#trash2').hide();
+    $(".deleteIdAll2").click(function(e) {
+      
+        if($(".deleteIdAll2:checked").length > 1) {
+          $("#trash2").show();
+        }else{
+          $("#trash2").hide();
+        }
+    });
+
+      //=============================== delete check all Windows ====================================//
+      //check all Windows
+      $('#trash3').hide();
+      $(".deleteIdAll3").click(function(e) {
+        
+          if($(".deleteIdAll3:checked").length > 1) {
+            $("#trash3").show();
+          }else{
+            $("#trash3").hide();
+          }
+      });
 
       //=============================== delete check all android ====================================//
       //check all android
@@ -778,6 +1099,38 @@
                 echo'var test = $("#id1").val(id);';
                 echo'var test2= $("#name1").val(name);';
                 echo'var test3= $("#link1").val(link);';
+              echo'});';
+            }
+
+    @endphp
+
+
+    //checkbox delete permission Windows
+    @php
+            $c = 3;
+            foreach($xml_windows->children() as $xl_ios) {
+              echo'$(".delete'.$xl_ios['name'].$c.'").hide();';
+              echo'$(".deletepermission'.$xl_ios['name'].$c.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$xl_ios['name'].$c.':checked" ).length > 0)';
+                echo '{';
+                  echo '$(".delete'.$xl_ios['name'].$c.'").show();';
+                echo'}';
+                echo'else';
+                echo'{';
+                  echo'$(".delete'.$xl_ios['name'].$c.'").hide();';
+                echo'}';
+
+              echo '});';
+
+              echo'$(".delete'.$xl_ios['name'].$c.'").click(function(e) {';
+                echo'e.preventDefault();';
+                  
+                echo"var id   = $(this).attr('data-pk3');";
+                echo"var name = $(this).attr('data-name3');";
+                echo"var link = $(this).attr('data-link3');";
+                echo'var test = $("#id3").val(id);';
+                echo'var test2= $("#name3").val(name);';
+                echo'var test3= $("#link3").val(link);';
               echo'});';
             }
 

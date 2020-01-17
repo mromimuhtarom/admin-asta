@@ -324,8 +324,8 @@ function Translate_menuPlayers($menu){
         'Create Rank Player'        =>  'Buat peringkat pemain',
         'Save Avatar'               =>  'Simpan avatar',
         'Edit Avatar'               =>  'Ubah avatar',
-        'Edit'                      =>  'Edit'
-        
+        'Edit'                      =>  'Edit',
+        'Main'                      =>  'Utama',
 
     ];
     return $array_menuContent[$menu];
