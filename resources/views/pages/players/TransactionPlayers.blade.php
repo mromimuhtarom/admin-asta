@@ -29,7 +29,30 @@
     <div class="table-header w-100 h-100">
 			<form action="{{ route('TransactionPlayers-search')}}">
             <div class="row h-100 w-100">
+							@if (Request::is('Players/Transaction_Players/Banking-search*'))
                 <div class="col">
+                    <select name="choose_time" id="time" class="form-control">
+												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+												<option value="today" @if($time == 'today') selected @endif>{{ translate_MenuTransaction('Today') }}</option>
+												<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
+												<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
+												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
+                    </select>
+								</div>
+								@php
+								dd($maxDate); 
+								@endphp
+                <div class="col">
+									<input type="date" class="form-control" id="minDate" name="inputMinDate" value=" {{ $minDate }}">
+                </div>
+                <div class="col">
+									<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value=" {{ $maxDate }}">
+                </div>
+                <div class="col">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+								</div>
+							@else
+							  <div class="col">
                     <select name="choose_time" id="time" class="form-control">
 												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
 												<option value="today">{{ translate_MenuTransaction('Today') }}</option>
@@ -39,14 +62,15 @@
                     </select>
                 </div>
                 <div class="col">
-					<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
+									<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
                 </div>
                 <div class="col">
                     <input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="">
                 </div>
                 <div class="col">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
-                </div>
+								</div> 
+							@endif
             </div>
         </form>
     </div>
