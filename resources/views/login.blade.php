@@ -46,25 +46,26 @@
 
             <div class="login-logo">
                 <div class="margin-login">
-                    <img src="/images/login/logo.png" alt="logo" height="80%">
+                    <img class="asta" src="/images/login/logo.png" alt="logo">
                 </div>
             </div>
 
-            <div class="form-login ">
+            <div class="form-login">
                 <div class="aii-login">
                     <div class="margin-login">
                         <form method="post" action="{{ route('login') }}">
                             {{  csrf_field() }}
                             <div class="username">
-                            <input type="text" name="username" id="" placeholder="username" value="{{Session::get('data')}}">
                                 <i class="far fa-user fa-2x"></i>
+                                    <input type="text" name="username" id="" placeholder="username" value="{{Session::get('data')}}">
                             </div>
                             <div class="password">
-                                <input type="password" name="password" id="password-field" placeholder="password">
                                 <i class="fas fa-lock fa-2x lock"></i>
+                                    <input class="pass" type="password" name="password" id="password-field" placeholder="password">
                                 <i id="pass-status" class="fa fa-eye eye" aria-hidden="true" onClick="viewPassword()"></i>
                             </div>
-                            <button class="btn-login rounded-pill">LOGIN ></button>
+
+                            <button class="btn-login rounded-pill">LOGIN</button>
                         </form>
                     </div>
                 </div>
@@ -72,8 +73,8 @@
 
         </div>
 
-        <div class="background-login ">
-            <img src="/images/login/qq2.png" alt="" height="90%" width="90%">
+        <div class="background-login">
+            <img class="" src="/images/login/qq2.png" alt="" height="90%" width="90%">
         </div>
 
     </div>

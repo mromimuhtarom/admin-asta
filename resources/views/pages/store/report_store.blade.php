@@ -31,14 +31,34 @@
       <form action="{{ route('ReportStore-search') }}">
             <div class="row h-100 w-100">
                 <div class="col">
-                    <input type="text" name="username" class="left" placeholder="username /Player ID">
+                    <input type="text" name="username" class="form-control" placeholder="username /Player ID">
                 </div>
+                @if(Request::is('Store/Report_Store/ReportStore-search*'))
                 <div class="col">
-                    <select name="choosedate" id="" class="form-control">
+                    <select style="width: 150px;" name="choosedate" id="" class="form-control">
+                        <option value="request" @if( $choosedate == 'request' ) selected @endif>{{ TranslateMenuToko('Date Request')}}</option>
+                        <option value="approvedecline" @if( $choosedate == 'approvedecline') selected @endif>{{ TranslateMenuToko('Date approve and Decline')}}</option>
+                    </select>
+                </div>
+                @else
+                <div class="col">
+                    <select style="width: 150px;" name="choosedate" id="" class="form-control">
                         <option value="request">{{ TranslateMenuToko('Date Request')}}</option>
                         <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
                     </select>
                 </div>
+                @endif
+
+                @if(Request::is('Store/Report_Store/ReportStore-search*'))
+                <div class="col">
+                    <select name="chooseitem" id="" class="form-control">
+                        <option value="">Choose item</option>
+                        <option value="{{ $type[0] }}" @if( $chooseitem == $type[0] ) selected @endif>{{ $type[1] }}</option>
+                        <option value="{{ $type[2] }}" @if( $chooseitem == $type[2] ) selected @endif>{{ $type[3] }}</option>
+                        <option value="{{ $type[4] }}" @if( $chooseitem == $type[4] ) selected @endif>{{ $type[5] }}</option>
+                    </select>
+                </div>
+                @else
                 <div class="col">
                     <select name="chooseitem" id="" class="form-control">
                         <option value="">Choose item</option>
@@ -47,6 +67,8 @@
                         <option value="{{ $type[4] }}">{{ $type[5] }}</option>
                     </select>
                 </div>
+                @endif
+
                 @if(Request::is('Store/Report_Store/ReportStore-search*'))
                 <div class="col">
                     <input type="date" class="form-control" name="dari" value="{{ $minDate }}">

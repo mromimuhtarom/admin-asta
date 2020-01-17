@@ -23,7 +23,7 @@ function translate_menu($menu){
       'Report_Admin'                    =>  'Laporan admin',
       'Transaction'                     =>  'Transaksi',
       'Banking_Transactions'            =>  'Transaksi Banking',
-      'User_Bank_Transaction'           =>  'Transaksi Bank Pengguna',
+      'User_Bank_Transaction'           =>  'Transaksi Bank Pemain',
       'Reward_Transaction'              =>  'Transaksi Hadiah',
       'Add_Transaction'                 =>  'Tambah transaksi',
       'Players'                         =>  'Pemain',

@@ -323,7 +323,8 @@
           
           <div class="form-group">
             <p>
-              <a href="#" width="200px" class="btn btn-primary mainmenu" role="button" data-toggle="" aria-expanded="false" aria-controls="collapseExample">
+              <a href="#" width="200px" class="btn btn-primary mainmenu" role="button" 
+                  data-toggle="" aria-expanded="false" aria-controls="collapseExample">
                 Add item bonus
               </a>
             </p>
@@ -339,7 +340,7 @@
                 </div>
                 <br class="sub-form">
                         
-                <div class="sub-form" align="center">
+                <div class="form-group sub-form" align="center">
                     <table width="100%;" height="auto">
                         <tr>
                             <td align="center">
@@ -353,7 +354,7 @@
                     </table>
                 </div>
                       
-                <div class="sub-form">              
+                <div class="form-group sub-form">              
                   <input type="text" name="itemAwarded" class="form-control" id="basic-url" placeholder="item awarded">
                 </div>
         
@@ -429,6 +430,13 @@
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+    });
+
+            //HIDE SHOW FORM BONUS
+    $('.sub-form').hide();
+    $(".mainmenu").on("click", function(e) {
+      $('.sub-form').toggle();
+      e.preventDefault();
     });
 
     $("#trash").hide();
@@ -687,13 +695,7 @@
           }
         });
 
-        //HIDE SHOW FORM BONUS
-        $('.sub-form').show();
-        $(".mainmenu").on("click", function(e) {
-          $('.sub-form').toggle();
-          e.preventDefault();
-        });
-        
+
     },
     responsive: false
   });

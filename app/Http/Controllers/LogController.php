@@ -25,8 +25,6 @@ class LogController extends Controller
         return view('pages.admin.log_admin', compact('actionSearch', 'datenow'));
     }
 
-
-
     public function search(Request $request)
     {
         $searchUser  = $request->username;
@@ -34,7 +32,7 @@ class LogController extends Controller
         $maxDate     = $request->sampai;
         $inputAction = $request->action;
   
-        $actionSearch = Action::select('action', 'id')
+        $actionSearch = Action::select('action', 'id')  
                         ->whereBetween('id', [1, 6])
                         ->get();
         $logOperator  = Log::select(

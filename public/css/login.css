@@ -61,6 +61,7 @@ input[type="text"] {
     border-color: dodgerBlue;
     box-shadow: 0 0 8px 0 dodgerBlue;
   }
+  
   .password input[type=password]{
     padding-left: 7%;
 }
@@ -90,3 +91,122 @@ input[type="text"] {
     width: 60%;
     height: 100%;
 }
+
+/* min resolution */
+@media (min-width:1500px){
+
+    .iconUser{
+        padding-right: 30px;
+    }
+
+    .iconGembok{
+        padding-right: 30px;
+    }
+}
+
+/* min resolution */
+/* @media (min-width:320px) {
+
+/* login */
+/* .my-aii-login {
+    height: 100%;
+    width: 40%;
+} */
+/* .margin-login {
+    margin-top: 10%;
+    margin-left: 20%;
+    width: 200px;
+} */
+/* .login-logo {
+    height: 100px;
+    width: 318px;
+} */
+/* .asta{
+    width: 200px;
+} */
+/* .form-login {
+    height: 100%;
+    width: 100%;
+} */
+/* .aii-login {
+    margin-top: 2%;
+} */
+/* input[type="text"] {
+    width: 50%;
+    border: none;
+    border-bottom: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+  } */
+  
+  /* input[type="text"]:focus {
+    border-color: dodgerBlue;
+    box-shadow: 0 0 8px 0 dodgerBlue;
+  } */
+  /* .username {
+      position: relative;
+  } */
+  /* .username i {
+      position: absolute;
+      left: 0;
+      top: 8px;
+
+  } */
+  /* .username input[type=text]{
+      padding-left: 7%;
+  } */
+  
+  /* input[type="password"] {
+    width: 50%;
+    border: none;
+    border-bottom: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+  } */
+
+  /* input[type="password"]:focus {
+    border-color: dodgerBlue;
+    box-shadow: 0 0 8px 0 dodgerBlue;
+  } */
+  /* .password input[type=password]{
+    padding-left: 7%;
+} */
+  /* .password {
+      margin-top: 10%;
+      position: relative;
+  } */
+  /* .password .lock {
+      position: absolute;
+      left: 0;
+      top: 8px;
+  } */
+  /* .password input[type=text] {
+      padding-left: 7%;
+  } */
+  /* .btn-login {
+      margin-top: 10%;
+      width: 50%;
+      background-color: #4477b2;
+      color: #ffffff;
+      height: 50px;
+      border-color: #4477b2;
+  } */
+/* end login */
+
+/* .background-login {
+    width: 70%;
+    height: 30%;
+    display: block;
+    margin-top: 150px;
+}  */
+
+
+/* .layoutlogo {
+    margin-top: 174px;
+}*/

@@ -95,7 +95,7 @@ class ReportStoreController extends Controller
                                             ->get();
                         endif;
                         
-                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate'));
+                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
                     } 
                         else if($minDate != NULL && $maxDate != NULL && $chooseitem != NULL)
                     { 
@@ -104,7 +104,7 @@ class ReportStoreController extends Controller
                                         ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
                                         ->get();
                         
-                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate'));
+                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
 
                     } 
                         else if($minDate != NULL && $maxDate != NULL)
@@ -113,7 +113,7 @@ class ReportStoreController extends Controller
                                         ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
                                         ->get();
                         
-                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate'));
+                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
                     }
                 }
                      
@@ -133,7 +133,7 @@ class ReportStoreController extends Controller
                                             ->get();
                         endif;
                         
-                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate'));
+                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
                     }
                     else if($minDate != NULL && $maxDate != NULL && $chooseitem != NULL)
                     { 
@@ -142,7 +142,7 @@ class ReportStoreController extends Controller
                                         ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
                                         ->get();
                     
-                        return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type'));
+                        return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type', 'chooseitem', 'choosedate'));
                     }  
                     else if($minDate != NULL && $maxDate != NULL)
                     {
@@ -150,7 +150,7 @@ class ReportStoreController extends Controller
                                         ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                         ->get();
 
-                        return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type'));
+                        return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type', 'chooseitem', 'choosedate'));
                     }
                 }
             }

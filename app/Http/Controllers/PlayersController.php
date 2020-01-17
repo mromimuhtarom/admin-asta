@@ -1017,7 +1017,7 @@ class PlayersController extends Controller
           echo 'Failed';
         }
     }
-
+  
     public function avatarplayer(Request $request)
     {
       $avatarname = $request->avatar_name;
