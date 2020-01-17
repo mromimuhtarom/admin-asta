@@ -32,31 +32,42 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('LogPlayer-search') }}">
             <div class="row h-100 w-100">
-                <div class="col">
-                    <input type="text" name="username" class="left" placeholder="username / Player ID">
-                </div>
-                <div class="col">
-                    <select name="action" id="" class="form-control">
-                        <option value="">{{ Translate_menuPlayers('Choose Action') }}</option>
-                        @foreach($action as $ac)
-                        <option value="{{ $ac->id }}">{{ Translate_menuPlayers($ac->action) }}</option>
-                        @endforeach
-                    </select>
-                </div>
                 @if (Request::is('Players/Log_Players/LogPlayer'))
-                <div class="col">
-                    <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
-                </div>
-                <div class="col">
-                    <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
-                </div>
+                    <div class="col">
+                        <input type="text" name="username" class="left" placeholder="username / Player ID" value="{{ $getusername }}">
+                    </div>
+                    <div class="col">
+                        <select name="action" id="" class="form-control">
+                            <option value="">{{ Translate_menuPlayers('Choose Action') }}</option>
+                            @foreach($action as $ac)
+                            <option value="{{ $ac->id }}" @if($getAction == $ac->id) selected @endif>{{ Translate_menuPlayers($ac->action) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
+                    </div>
                 @else
-                <div class="col">
-                    <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
-                </div>
-                <div class="col">
-                    <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
-                </div>
+                    <div class="col">
+                        <input type="text" name="username" class="left" placeholder="username / Player ID">
+                    </div>
+                    <div class="col">
+                        <select name="action" id="" class="form-control">
+                            <option value="">{{ Translate_menuPlayers('Choose Action') }}</option>
+                            @foreach($action as $ac)
+                            <option value="{{ $ac->id }}">{{ Translate_menuPlayers($ac->action) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
+                    </div>
                 @endif
                 <div class="col">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>

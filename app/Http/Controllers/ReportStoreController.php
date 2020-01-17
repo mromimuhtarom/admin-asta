@@ -22,7 +22,7 @@ class ReportStoreController extends Controller
         $valueItem = str_replace(':', ',', $itemType->value);
         $type      = explode(",", $valueItem);
         $datenow = Carbon::now('GMT+7');
-    
+
         return view('pages.store.report_store', compact('datenow', 'type'));
     }
 
@@ -79,10 +79,8 @@ class ReportStoreController extends Controller
                                     'asta_db.store_transaction_hist.status'
                                 )
                                 ->where('asta_db.store_transaction_hist.shop_type', '=', 1);
-                if($choosedate == 'request')
-                {
-                    if($username != NULL && $minDate != NULL && $maxDate != NULL)
-                    {
+                if($choosedate == 'request') {
+                    if($username != NULL && $minDate != NULL && $maxDate != NULL) {
                         if(is_numeric($username) !== true):
                             $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                                             ->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
@@ -100,27 +98,22 @@ class ReportStoreController extends Controller
                         else if($minDate != NULL && $maxDate != NULL && $chooseitem != NULL)
                     { 
                         $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate. ' 23:59:59'])
-                                        ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
                                         ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
+                                        ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
                                         ->get();
                         
                         return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
 
-                    } 
-                        else if($minDate != NULL && $maxDate != NULL)
-                    {
+                    } else if($minDate != NULL && $maxDate != NULL) {
                         $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                         ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
                                         ->get();
                         
                         return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
                     }
-                }
-                     
-                    else if($choosedate == 'approvedecline')
-                    {
-                    if($username != NULL && $minDate != NULL && $maxDate != NULL)
-                    {
+
+                } else if($choosedate == 'approvedecline') {
+                    if($username != NULL && $minDate != NULL && $maxDate != NULL) {
                         if(is_numeric($username) !== true):
                             $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
                                             ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
@@ -140,6 +133,7 @@ class ReportStoreController extends Controller
                         $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.'23:59:59'])
                                         ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                         ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
+                                        ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                         ->get();
                     
                         return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type', 'chooseitem', 'choosedate'));

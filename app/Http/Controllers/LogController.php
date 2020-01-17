@@ -72,7 +72,7 @@ class LogController extends Controller
                   ->get();
           endif;
                   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
   
         }else if($searchUser != NULL && $inputAction != NULL && $minDate != NULL) {
           if(is_numeric($searchUser) !== true):
@@ -89,7 +89,7 @@ class LogController extends Controller
                   ->get();
           endif;
                   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
   
         }else if($searchUser != NULL && $inputAction != NULL &&  $maxDate != NULL) {
           if(is_numeric($searchUser) !== true):
@@ -107,7 +107,7 @@ class LogController extends Controller
           endif;
                   
   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
                 
         }else if($minDate != NULL && $maxDate != NULL &&  $inputAction != NULL) {
           $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
@@ -115,7 +115,7 @@ class LogController extends Controller
                  ->orderBy('asta_db.log_operator.datetime', 'desc')
                  ->get();
                  
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
        } else if($searchUser != NULL && $minDate != NULL && $maxDate != NULL) {
         if(is_numeric($searchUser) !== true):
         $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
@@ -128,12 +128,12 @@ class LogController extends Controller
                 ->orderBy('asta_db.log_operator.datetime', 'asc')
                 ->get();
         endif;
-        return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+        return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
        } else if ($minDate != NULL && $maxDate != NULL){
          $logs = $logOperator->wherebetween('asta_db.log_operator.datetime', [$minDate." 00:00:00", $maxDate." 23:59:59"])
                  ->orderBy('asta_db.log_operator.datetime', 'asc')
                  ->get();     
-         return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+         return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
   
        }else if ($searchUser != NULL && $maxDate != NULL){
           if(is_numeric($searchUser) !== true):
@@ -148,7 +148,7 @@ class LogController extends Controller
                   ->get();
           endif;
   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
   
         }else if($searchUser != NULL &&  $inputAction != NULL) {
           if(is_numeric($searchUser) !== true):
@@ -163,7 +163,7 @@ class LogController extends Controller
                   ->get();
           endif;
 
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
         }else if($minDate != NULL &&  $inputAction != NULL) {
                $logs = $logOperator->where('asta_db.log_operator.action_id', '=', $inputAction)
                        ->WHERE('asta_db.log_operator.datetime', '>=', $minDate." 00:00:00")
@@ -171,7 +171,7 @@ class LogController extends Controller
                        ->get();
   
   
-                return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+                return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
         }else if($maxDate != NULL &&  $inputAction != NULL) {
                 $logs = $logOperator->where('asta_db.log_operator.action_id', '=', $inputAction)
                         ->WHERE('asta_db.log_operator.datetime', '<=', $maxDate." 23:59:59")
@@ -179,7 +179,7 @@ class LogController extends Controller
                         ->get();
   
   
-                return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+                return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
         }else if($searchUser != NULL && $minDate != NULL ) {
           if(is_numeric($searchUser) !== true):
           $logs = $logOperator->where('asta_db.operator.username', 'LIKE', '%'.$searchUser.'%')
@@ -193,13 +193,13 @@ class LogController extends Controller
                   ->get();
           endif;  
   
-         return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+         return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
        }else if ($minDate != NULL){
           $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '>=', $minDate." 00:00:00")
                   ->orderBy('asta_db.log_operator.datetime', 'asc')
                   ->get();
   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
   
         }else if ($maxDate != NULL){
           $logs = $logOperator->WHERE('asta_db.log_operator.datetime', '<=', $maxDate." 23:59:59")
@@ -207,7 +207,7 @@ class LogController extends Controller
                   ->get();
   
   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
   
         }else if($searchUser != NULL ){
           if(is_numeric($searchUser) !== true):
@@ -220,7 +220,7 @@ class LogController extends Controller
                   ->get();
           endif;
   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
   
         }else if($inputAction != NULL) {
           $logs = $logOperator->where('asta_db.log_operator.action_id', '=', $inputAction)
@@ -228,7 +228,7 @@ class LogController extends Controller
                  ->get();
   
   
-          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate'));
+          return view('pages.admin.log_admin', compact('logs', 'actionSearch', 'minDate', 'maxDate', 'searchUser', 'inputAction'));
         }else{
           return self::index();
         }

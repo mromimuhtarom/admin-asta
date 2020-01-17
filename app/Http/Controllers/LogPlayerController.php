@@ -67,7 +67,7 @@ class LogPlayerController extends Controller
 
         $getMindate  = Input::get('dari');
         $getMaxdate  = Input::get('sampai');
-        $getusername = Input::get('inputPlayer');
+        $getusername = Input::get('username');
         $getAction   = Input::get('action');
     
         if ($validator->fails()) {

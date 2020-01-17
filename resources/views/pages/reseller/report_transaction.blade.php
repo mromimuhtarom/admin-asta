@@ -33,10 +33,10 @@
         <form action="{{ route('ResellerTransaction-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
-                    <input type="text" name="inputUsername" class="left" placeholder="username / Reseller ID" required>
+                    <input type="text" name="inputUsername" class="left" placeholder="username / Reseller ID">
                 </div>
                 <div class="col" style="padding-left:3%;">
-                    <select name="choosedate" id="" class="form-control">
+                    <select name="choosedate" id="" class="form-control" required>
                         <option value="">{{ TranslateMenuToko('Choose type date')}}</option>
                         <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
                         <option value="request">{{ TranslateMenuToko('Date Request')}}</option>

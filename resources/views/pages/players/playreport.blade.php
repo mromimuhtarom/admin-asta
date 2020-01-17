@@ -38,34 +38,48 @@
         <div class="table-header w-100 h-100">
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
-                    <div class="col">
-                        <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="text" class="form-control" name="inputRoundID" placeholder="Round ID">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <select name="inputGame" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
-                            @foreach ($game as $gm)
-                            <option value="{{ $gm->desc }}">{{ $gm->desc }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     @if (Request::is('Players/Play_Report/PlayReport-search*'))
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMinDate" value="{{ $inputMinDate  }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMaxDate" value="{{ $inputMaxDate }}">
-                    </div>
+                        <div class="col">
+                            <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID" value="{{ $getusername }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="text" class="form-control" name="inputRoundID" placeholder="Round ID" value="{{ $getroundid }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <select name="inputGame" class="form-control">
+                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                @foreach ($game as $gm)
+                                <option value="{{ $gm->desc }}" @if($getgame == $gm->desc) selected @endif;>{{ $gm->desc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMinDate" value="{{ $inputMinDate  }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMaxDate" value="{{ $inputMaxDate }}">
+                        </div>
                     @else 
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
-                    </div>
+                        <div class="col">
+                            <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="text" class="form-control" name="inputRoundID" placeholder="Round ID">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <select name="inputGame" class="form-control">
+                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                @foreach ($game as $gm)
+                                <option value="{{ $gm->desc }}">{{ $gm->desc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
+                        </div>
                     @endif
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>

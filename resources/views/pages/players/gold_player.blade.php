@@ -34,10 +34,10 @@
             <div class="table-header w-100 h-100" style="padding-right:2%;">
                 <form action="{{ route('Gold-search') }}" method="get" role="search">
                     <div class="row h-100 w-100 no-gutters">
-                        <div class="col" align="left">
-                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
-                        </div>
                         @if (Request::is('Players/Gold_Players/Gold-search*') || Request::is('Players/Gold_Players/Gold-all*'))
+                        <div class="col" align="left">
+                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID" value=" {{ $getusername }}">
+                        </div>
                         <div class="col" align="left" style="padding-left:1%;">
                             <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
                         </div>
@@ -45,6 +45,9 @@
                             <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
                         </div>
                         @else 
+                        <div class="col" align="left">
+                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
+                        </div>
                         <div class="col" align="left" style="padding-left:1%;">
                             <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
                         </div>

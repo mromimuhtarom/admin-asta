@@ -20,38 +20,56 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
-                <div cl ass="col" style="padding-left:1%;">
-                    <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
-                </div>
-                <div class="col" style="padding-left:1%;">
-                  <select name="status" class="form-control">
-                    <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
-                    <option value="{{ $plyr_status[0] }}">{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
-                    <option value="{{ $plyr_status[2] }}">{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
-                    <option value="{{ $plyr_status[4] }}">{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
-                  </select>
-                </div>
-                <div class="col" style="padding-left:1%;">
-                    <select name="type_user" class="form-control">
-                      <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
-                      <option value="{{ $plyr_type[0] }}">{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
-                      <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
-                    </select>
-                </div>
                 @if (Request::is('Players/Registered_Players/RegisteredPlayer-search*'))
-                <div class="col" style="padding-left:1%;">
-                  <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
-                </div>
-                <div class="col" style="padding-left:1%;">
-                  <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
-                </div>
+                  <div cl ass="col" style="padding-left:1%;">
+                    <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID" value="{{ $getUsername }}">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <select name="status" class="form-control">
+                      <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                      <option value="{{ $plyr_status[0] }}" @if($getStatus == $plyr_status[0]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                      <option value="{{ $plyr_status[2] }}" @if($getStatus == $plyr_status[2]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
+                      <option value="{{ $plyr_status[4] }}" @if($getStatus == $plyr_status[4]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
+                    </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <select name="type_user" class="form-control">
+                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                        <option value="{{ $plyr_type[0] }}" @if($getTypeUser == $plyr_type[0]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
+                        <option value="{{ $plyr_type[2] }}" @if($getTypeUser == $plyr_type[2]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
+                      </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
+                  </div>
                 @else 
-                <div class="col" style="padding-left:1%;">
-                    <input type="date" name="inputMinDate" class="form-control">
-                </div>
-                <div class="col" style="padding-left:1%;">
-                    <input type="date" name="inputMaxDate" class="form-control">
-                </div>
+                  <div cl ass="col" style="padding-left:1%;">
+                      <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                    <select name="status" class="form-control">
+                      <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                      <option value="{{ $plyr_status[0] }}">{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                      <option value="{{ $plyr_status[2] }}">{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
+                      <option value="{{ $plyr_status[4] }}">{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
+                    </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <select name="type_user" class="form-control">
+                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                        <option value="{{ $plyr_type[0] }}">{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
+                        <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
+                      </select>
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <input type="date" name="inputMinDate" class="form-control">
+                  </div>
+                  <div class="col" style="padding-left:1%;">
+                      <input type="date" name="inputMaxDate" class="form-control">
+                  </div>
                 @endif
                 <div class="col" style="padding-left:1%;">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
@@ -170,7 +188,7 @@
 
 
 @foreach($registerPlayer as $regis)
-<!-- Modal Insert -->
+<!-- Modal update Account -->
 <div class="modal fade" id="ModalBanned{{ $regis->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -180,13 +198,38 @@
           <i class="fa fa-remove"></i>
         </button>
       </div>
-      <form action="{{ route('Guest-create') }}" method="post">
+      <form action="{{ route('RegisteredPlayer-update') }}" method="post">
         @csrf
         <div class="modal-body">
   
           <div class="row">
             <div class="col-12">
               <div class="form-group">
+                <div style="height:100px;overflow:auto;margin-bottom:20px;" class="border border-dark">
+                  <table width="100%" style="border:1px solid #dee2e6;">
+                    <tr style="background-color:#f5f5f5;">
+                      <td>User ID</td>
+                      <td>Username</td>
+                      <td>Status</td>
+                      <td>Date Time</td>
+                      <td>Description</td>
+                    </tr>
+                    @php 
+                      $loguser = App\LogUser::where('user_id', '=', $regis->user_id)->wherebetween('action_id', [25, 27])->get();
+                      
+                    @endphp
+                    @foreach($loguser as $log)
+                    <tr>
+                      <td>{{ $log->user_id }}</td>
+                      <td>{{ $regis->username}}</td>
+                      <td>{{ status_player($log->action_id) }}</td>
+                      <td>{{ $log->datetime }}</td>
+                      <td>{{ $log->description }}</td>
+                    </tr>
+                    @endforeach
+                  </table> 
+                </div>           
+                  <input type="hidden" name="player_id" value="{{ $regis->user_id}}">
                   <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
                   <select name="status_player" class="form-control" id="">
                     <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
@@ -255,32 +298,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
-
-        $('.usertext').editable({
-          mode :'inline',
-          validate: function(value) {
-            if($.trim(value) == '') {
-              return 'This field is required';
-            }
-          }
-        });
-        // $('.status').editable({
-        //     mode :'inline',
-        //     validate: function(value) {
-        //       if($.trim(value) == '') {
-        //         return 'This field is required';
-        //       }
-        //     },
-        //     source: [
-        //         {value: '', text: 'Choose For Activation'},
-        //         @php
-        //           echo '{value: "'.$plyr_status[0].'", text: "'.$plyr_status[1].'"},';
-        //           echo '{value: "'.$plyr_status[2].'", text: "'.$plyr_status[3].'"},';
-        //           echo '{value: "'.$plyr_status[4].'", text: "'.$plyr_status[5].'"},';
-        //         @endphp
-        //     ]
-        // });
-      },
     responsive: false
   });
 </script>

@@ -89,6 +89,9 @@
                 <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Item awarded')}}</th>
+                <th class="th-sm">Item Bonus</th>
+                <th class="th-sm">Gambar Item Bonus</th>
+                <th class="th-sm">Item Bonus yang didapat</th>
                 <th class="th-sm">{{ TranslateMenuToko('Price cash')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Item type')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Pay Transaction')}}</th>

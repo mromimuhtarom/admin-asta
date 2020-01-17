@@ -12,6 +12,7 @@ class Player extends Model
     // const CREATED_AT = NULL;
     // const UPDATED_AT = NULL;
     public $timestamps = false;
+    protected $primaryKey   = 'asta_db.user.user_id';
 
     public $statusUser = [
         '1' => 'Approve',
@@ -30,4 +31,7 @@ class Player extends Model
     public function device(){
       return $this->belongsTo(Device::class);
     }
+    public function loguser() {
+        return $this->hasMany(LogUser::class);
+    } 
 }

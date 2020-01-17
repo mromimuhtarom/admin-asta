@@ -21,6 +21,7 @@ use File;
 use Storage;
 use Response;
 use App\Game;
+use App\LogUser;
 use Illuminate\Support\Facades\Input;
 
 class PlayersController extends Controller
@@ -148,7 +149,7 @@ class PlayersController extends Controller
       else:
         $activePlayer = $online->get();
       endif;
-      return view('pages.players.active_player', compact('activePlayer', 'explodetype', 'game'));
+      return view('pages.players.active_player', compact('activePlayer', 'explodetype', 'game', 'inputPlayer', 'registerType', 'inputGame'));
 
 
     }
@@ -365,6 +366,7 @@ class PlayersController extends Controller
         $getStatus   = Input::get('status');
         $getTypeUser = Input::get('type_user');
 
+
           
         if($typeUser != NULL && $searchUser != NULL && $status != NULL && $minDate != NULL && $maxDate != NULL)
         {
@@ -376,7 +378,7 @@ class PlayersController extends Controller
                             ->orderby($namecolumn, $sorting)
                             ->paginate(20);
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
 
         
         }elseif($typeUser != NULL && $searchUser != NULL && $status != NULL)
@@ -387,7 +389,7 @@ class PlayersController extends Controller
                             ->orderby($namecolumn, $sorting)
                             ->paginate(20);
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));   
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));   
         
         
         }elseif($typeUser != NULL && $searchUser != NULL)
@@ -399,7 +401,7 @@ class PlayersController extends Controller
                             ->paginate(20);
           
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         
         
         }elseif($typeUser != NULL && $status != NULL)
@@ -410,7 +412,7 @@ class PlayersController extends Controller
                                      ->paginate(20);
           
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         
         
         }elseif($typeUser != NULL)
@@ -420,7 +422,7 @@ class PlayersController extends Controller
                                      ->paginate(20);
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         
         
         }elseif($searchUser != NULL && $status != NULL && $minDate != NULL && $maxDate != NULL)
@@ -439,7 +441,7 @@ class PlayersController extends Controller
                             ->paginate(20);
           endif;
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         
         
         } else if($searchUser != NULL && $status != NULL && $minDate != NULL)
@@ -458,7 +460,7 @@ class PlayersController extends Controller
                             ->paginate(20);
           endif;                  
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type','sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type','sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         
         
         } else if($searchUser != NULL && $status != NULL && $maxDate != NULL)
@@ -477,7 +479,7 @@ class PlayersController extends Controller
                             ->paginate(20);
           endif;
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
 
         } else if($searchUser != NULL && $status != NULL)
         {
@@ -493,7 +495,7 @@ class PlayersController extends Controller
                              ->paginate(20);
           endif;
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'soertingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'soertingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($status != NULL && $minDate != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
@@ -502,7 +504,7 @@ class PlayersController extends Controller
                             ->paginate(20);
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($status != NULL && $minDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
@@ -511,7 +513,7 @@ class PlayersController extends Controller
                             ->paginate(20);
                             
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($status != NULL && $maxDate != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
@@ -520,7 +522,7 @@ class PlayersController extends Controller
                             ->paginate(20);
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($searchUser != NULL  && $minDate != NULL && $maxDate != NULL)
         {
           if(is_numeric($searchUser) !== true):
@@ -536,7 +538,7 @@ class PlayersController extends Controller
           endif;
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($searchUser != NULL  && $minDate != NULL)
         {
           if(is_numeric($searchUser) !== true):
@@ -551,7 +553,7 @@ class PlayersController extends Controller
                             ->paginate(20);
           endif;
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($searchUser != NULL  && $maxDate != NULL)
         {
           if(is_numeric($searchUser) !== true):
@@ -566,7 +568,7 @@ class PlayersController extends Controller
                             ->paginate(20);
           endif;
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($minDate != NULL && $maxDate != NULL)
         { 
           $registerPlayer = $register->wherebetween('asta_db.user.join_date', [$minDate." 00:00:00", $maxDate." 23:59:59"])
@@ -574,7 +576,7 @@ class PlayersController extends Controller
                             ->paginate(20);
 
             $registerPlayer->appends($request->all());
-            return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+            return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } 
         else if($searchUser != NULL)
         {
@@ -588,7 +590,7 @@ class PlayersController extends Controller
                             ->paginate(20);
           endif;
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($status != NULL)
         {
           $registerPlayer = $register->where('asta_db.user.status', '=', $status)
@@ -596,7 +598,7 @@ class PlayersController extends Controller
                             ->paginate(20);
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } 
         else if($minDate != NULL)
         {
@@ -605,7 +607,7 @@ class PlayersController extends Controller
                             ->paginate(20);
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else if($maxDate != NULL)
         {
           $registerPlayer =  $register->where('asta_db.user.join_date', '<=', $maxDate)
@@ -613,13 +615,13 @@ class PlayersController extends Controller
                             ->paginate(20);
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         } else {
           $registerPlayer =  $register->orderby($namecolumn, $sorting)
                             ->paginate(20);
 
           $registerPlayer->appends($request->all());
-          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser'));
+          return view('pages.players.registered_player', compact('registerPlayer', 'menu', 'plyr_status', 'mainmenu', 'plyr_type', 'sortingorder', 'getMindate', 'getMaxdate', 'getUsername', 'getStatus', 'getTypeUser', 'request'));
         }
     }
 
@@ -627,78 +629,40 @@ class PlayersController extends Controller
 
 
  // ----------- Update Registered Player ----------- //
-    public function updateRegisteredPlayer(Request $request)
+    public function updateBannedAccount(Request $request)
     {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+        $plyr_id     = $request->player_id;
+        $description = $request->description;
+        $sts_plyr    = $request->status_player;
+
+        Player::where('user_id', '=', $plyr_id)->update([
+          'status' => $sts_plyr
+        ]);
+        switch($sts_plyr):
+          case '1':
+            $sts_plyr = 25;
+            break;
+          case '2':
+            $sts_plyr = 26;
+            break;
+          case '3':
+            $sts_plyr = 27;
+            break;
+        endswitch;
+
+        LogUser::create([  
+          'user_id'     => $plyr_id,
+          'action_id'   => $sts_plyr,
+          'datetime'    => Carbon::now('GMT+7'),
+          'description' => $description
+        ]);
         
-        if($name == 'chip')
-        {
-          Stat::where('user_id', '=', $pk)->update([
-            'chip'      => $value,
-            'chip_val'  => bcrypt($value) 
-          ]);
-        } else if($name == 'point')
-        {
-          Stat::where('user_id', '=', $pk)->update([
-            'point'     => $value,
-            'point_val' => bcrypt($value)
-          ]);
-        } else if($name == 'gold')
-        {
-          Stat::where('user_id', '=', $pk)->update([
-            'gold' => $value,
-            'gold_val' => bcrypt($value)
-          ]);
-        }
-
-        switch ($name) {
-          case "chip":
-              $name = "Chip";
-              break;
-          case "point":
-              $name = "Point";
-              break;
-          case "gold":
-              $name = "Gold";
-              break;
-          default:
-            "";
-        }
-
 
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu Pemain Terdaftar dengan ID '.$pk.' menjadi '. $value
-        ]);
-    }
-
-    public function updateRegistered(Request $request)
-    {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
-        
-        Player::where('user_id', '=', $pk)->update([
-          $name => $value
-        ]);
-
-        switch ($name) {
-          case "chip":
-              $name = "Status";
-              break;
-          default:
-            "";
-        }
-
-        Log::create([
-          'op_id'     => Session::get('userId'),
-          'action_id' => '2',
-          'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu Pemain terdaftar dengan ID '.$pk.' menjadi '. $value
+          'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi Dilarang'
         ]);
     }
   // ----------- End Update Registered Player ----------- //
@@ -777,7 +741,7 @@ class PlayersController extends Controller
                     )
                     ->whereNull('user_id')
                     ->get();   
-      return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu'));
+      return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($username != NULL && $status == 'used')
     {
         $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
@@ -792,7 +756,7 @@ class PlayersController extends Controller
                       ->where('username', 'LIKE', '%'.$username.'%')
                       ->whereNotNull('asta_db.user_guest.user_id')
                       ->get();
-        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu'));
+        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($status == 'used')
     {
         $guests   =   UserGuest::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.user_guest.user_id')
@@ -806,7 +770,7 @@ class PlayersController extends Controller
                       )
                       ->whereNotNull('asta_db.user_guest.user_id')
                       ->get();
-        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu'));
+        return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($minDate == NULL || $maxDate == NULL || $minDate == NULL && $maxDate == NULL)
     {
       return self::indexGuest()->with('alert', 'You must to Choose Status');

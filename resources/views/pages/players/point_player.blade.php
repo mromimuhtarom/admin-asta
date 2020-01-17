@@ -34,31 +34,43 @@
         <div class="table-header w-100 h-100">
             <form action="{{ route('Point-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
-                    <div class="col" style="padding-right:-10%">
-                        <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
-                    </div>
-                    <div class="col" >
-                        <select name="inputGame" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
-                            @foreach ($game as $gm)
-                            <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @if (Request::is('Players/Point_Players/Point-search*') || Request::is('Players/Point_Players/Point-all*'))
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMinDate" class="form-control" value="{{ $minDate }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMaxDate" class="form-control" value="{{ $maxDate }}">
-                    </div>
+                     @if (Request::is('Players/Point_Players/Point-search*') || Request::is('Players/Point_Players/Point-all*'))
+                        <div class="col" style="padding-right:-10%">
+                        <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID" value="{{ $getUsername }}">
+                        </div>
+                        <div class="col" >
+                            <select name="inputGame" class="form-control">
+                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="0">{{ Translate_menuPlayers('Main') }}</option>
+                                @foreach ($game as $gm)
+                                <option value="{{ $gm->id }}" @if($getGame == $gm->id) selected @endif>{{ $gm->desc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMinDate" class="form-control" value="{{ $minDate }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $maxDate }}">
+                        </div>
                     @else
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
-                    </div>
-                    <div class="col" style="padding-left:1%;">
-                        <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
-                    </div>
+                        <div class="col" style="padding-right:-10%">
+                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
+                        </div>
+                        <div class="col" >
+                            <select name="inputGame" class="form-control">
+                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                @foreach ($game as $gm)
+                                <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                        </div>
+                        <div class="col" style="padding-left:1%;">
+                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                        </div>
                     @endif
                     <div class="col" style="padding-left:1%;">
                         <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
