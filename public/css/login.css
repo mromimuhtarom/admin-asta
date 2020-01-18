@@ -3,88 +3,403 @@
     height: 100%;
     width: 40%;
 }
-.margin-login {
-    margin-top: 10%;
-    margin-left: 20%;
+
+@media (min-width: 320px) {
+    .margin-login {
+        margin-top: 5%;
+        margin-left: 20%;
+    }
+
+    .fa-2x {
+        font-size: 15px;
+    }
+
+    /* username */
+    input[type="text"] {
+        width: 70%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        font-size: 11px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="text"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .username {
+        position: relative;
+        height: auto;
+    }
+
+    .username i {
+        position: absolute;
+        left: 0;
+        top: 25px;
+
+    }
+
+    .username input[type=text] {
+        padding-left: 20%;
+    }
+
+    /* end username */
+
+    /* password */
+    input[type="password"] {
+        width: 70%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        font-size: 11px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="password"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .password input[type=password] {
+        padding-left: 20%;
+    }
+
+    .password {
+        margin-top: 10%;
+        position: relative;
+        height: auto;
+    }
+
+    .password .lock {
+        position: absolute;
+        left: 0;
+        top: 18px;
+    }
+
+
+    /* end password */
+
+    /* btn login */
+    .btn-login {
+        margin-top: 10%;
+        width: 70%;
+        font-size: 11px;
+        background-color: #4477b2;
+        color: #ffffff;
+        height: 30px;
+        border-color: #4477b2;
+    }
+
+    /* end btn login */
 }
+
+@media (min-width: 600px) {
+    .margin-login {
+        margin-top: 7%;
+        margin-left: 20%;
+    }
+
+    .fa-2x {
+        font-size: 20px;
+    }
+
+    /* username */
+    input[type="text"] {
+        width: 70%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        font-size: 15px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="text"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .username {
+        position: relative;
+    }
+
+    .username i {
+        position: absolute;
+        left: 0;
+        top: 20px;
+
+    }
+
+    .username input[type=text] {
+        padding-left: 20%;
+    }
+
+    /* end username */
+
+    /* password */
+    input[type="password"] {
+        width: 70%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        margin: 8px 0;
+        font-size: 15px;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="password"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .password input[type=password] {
+        padding-left: 20%;
+    }
+
+    .password {
+        margin-top: 10%;
+        position: relative;
+    }
+
+    .password .lock {
+        position: absolute;
+        left: 0;
+        top: 20px;
+    }
+
+
+    /* end password */
+
+    /* btn login */
+    .btn-login {
+        margin-top: 10%;
+        width: 70%;
+        background-color: #4477b2;
+        color: #ffffff;
+        font-size: 15px;
+        height: 40px;
+        border-color: #4477b2;
+    }
+
+    /* end btn login */
+}
+
+@media (min-width: 1000px) {
+    .margin-login {
+        margin-top: 7%;
+        margin-left: 20%;
+    }
+
+    .fa-2x {
+        font-size: 30px;
+    }
+
+    /* username */
+    input[type="text"] {
+        width: 70%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        font-size: 20px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="text"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .username {
+        position: relative;
+    }
+
+    .username i {
+        position: absolute;
+        left: 0;
+        top: 20px;
+
+    }
+
+    .username input[type=text] {
+        padding-left: 20%;
+    }
+
+    /* end username */
+
+    /* password */
+    input[type="password"] {
+        width: 70%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        margin: 8px 0;
+        font-size: 20px;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="password"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .password input[type=password] {
+        padding-left: 20%;
+    }
+
+    .password {
+        margin-top: 10%;
+        position: relative;
+    }
+
+    .password .lock {
+        position: absolute;
+        left: 0;
+        top: 20px;
+    }
+
+
+    /* end password */
+
+    /* btn login */
+    .btn-login {
+        margin-top: 10%;
+        width: 70%;
+        background-color: #4477b2;
+        color: #ffffff;
+        font-size: 15px;
+        height: 40px;
+        border-color: #4477b2;
+    }
+
+    /* end btn login */
+}
+
+@media (min-width: 1700px) {
+    .margin-login {
+        margin-top: 10%;
+        margin-left: 20%;
+    }
+
+    .fa-2x {
+        font-size: 30px;
+    }
+
+    /* username */
+
+    input[type="text"] {
+        width: 50%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        font-size: 25px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="text"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .username {
+        position: relative;
+    }
+
+    .username i {
+        position: absolute;
+        left: 0;
+        top: 15px;
+
+    }
+
+    .username input[type=text] {
+        padding-left: 7%;
+    }
+
+    /* end username */
+
+    /* password */
+    input[type="password"] {
+        width: 50%;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        border-radius: 4px;
+        font-size: 25px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="password"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .password input[type=password] {
+        padding-left: 7%;
+    }
+
+    .password {
+        margin-top: 10%;
+        position: relative;
+    }
+
+    .password .lock {
+        position: absolute;
+        left: 0;
+        top: 15px;
+    }
+
+
+    /* end password */
+
+    /* btn login */
+    .btn-login {
+        margin-top: 10%;
+        width: 50%;
+        background-color: #4477b2;
+        color: #ffffff;
+        height: 50px;
+        border-color: #4477b2;
+    }
+
+    /* end btn login */
+}
+
 .login-logo {
-    height: 30%;
+    height: auto;
     width: 100%;
 }
+
 .form-login {
     height: 100%;
     width: 100%;
 }
+
 .aii-login {
     margin-top: 2%;
 }
-input[type="text"] {
-    width: 50%;
-    border: none;
-    border-bottom: 2px solid #aaa;
-    border-radius: 4px;
-    margin: 8px 0;
-    outline: none;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  input[type="text"]:focus {
-    border-color: dodgerBlue;
-    box-shadow: 0 0 8px 0 dodgerBlue;
-  }
-  .username {
-      position: relative;
-  }
-  .username i {
-      position: absolute;
-      left: 0;
-      top: 8px;
 
-  }
-  .username input[type=text]{
-      padding-left: 7%;
-  }
-  
-  input[type="password"] {
-    width: 50%;
-    border: none;
-    border-bottom: 2px solid #aaa;
-    border-radius: 4px;
-    margin: 8px 0;
-    outline: none;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-
-  input[type="password"]:focus {
-    border-color: dodgerBlue;
-    box-shadow: 0 0 8px 0 dodgerBlue;
-  }
-  
-  .password input[type=password]{
-    padding-left: 7%;
-}
-  .password {
-      margin-top: 10%;
-      position: relative;
-  }
-  .password .lock {
-      position: absolute;
-      left: 0;
-      top: 8px;
-  }
-  .password input[type=text] {
-      padding-left: 7%;
-  }
-  .btn-login {
-      margin-top: 10%;
-      width: 50%;
-      background-color: #4477b2;
-      color: #ffffff;
-      height: 50px;
-      border-color: #4477b2;
-  }
 /* end login */
 
 .background-login {
@@ -93,13 +408,13 @@ input[type="text"] {
 }
 
 /* min resolution */
-@media (min-width:1500px){
+@media (min-width:1500px) {
 
-    .iconUser{
+    .iconUser {
         padding-right: 30px;
     }
 
-    .iconGembok{
+    .iconGembok {
         padding-right: 30px;
     }
 }
@@ -141,25 +456,25 @@ input[type="text"] {
     padding: 8px;
     box-sizing: border-box;
   } */
-  
-  /* input[type="text"]:focus {
+
+/* input[type="text"]:focus {
     border-color: dodgerBlue;
     box-shadow: 0 0 8px 0 dodgerBlue;
   } */
-  /* .username {
+/* .username {
       position: relative;
   } */
-  /* .username i {
+/* .username i {
       position: absolute;
       left: 0;
       top: 8px;
 
   } */
-  /* .username input[type=text]{
+/* .username input[type=text]{
       padding-left: 7%;
   } */
-  
-  /* input[type="password"] {
+
+/* input[type="password"] {
     width: 50%;
     border: none;
     border-bottom: 2px solid #aaa;
@@ -170,26 +485,26 @@ input[type="text"] {
     box-sizing: border-box;
   } */
 
-  /* input[type="password"]:focus {
+/* input[type="password"]:focus {
     border-color: dodgerBlue;
     box-shadow: 0 0 8px 0 dodgerBlue;
   } */
-  /* .password input[type=password]{
+/* .password input[type=password]{
     padding-left: 7%;
 } */
-  /* .password {
+/* .password {
       margin-top: 10%;
       position: relative;
   } */
-  /* .password .lock {
+/* .password .lock {
       position: absolute;
       left: 0;
       top: 8px;
   } */
-  /* .password input[type=text] {
+/* .password input[type=text] {
       padding-left: 7%;
   } */
-  /* .btn-login {
+/* .btn-login {
       margin-top: 10%;
       width: 50%;
       background-color: #4477b2;
