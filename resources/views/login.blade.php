@@ -46,7 +46,7 @@
 
             <div class="login-logo">
                 <div class="margin-login">
-                    <img class="asta" src="/images/login/logo.png" alt="logo">
+                    <img class="asta" src="/images/login/logo.png" alt="logo" width="90%" height="auto">
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
         </div>
 
         <div class="background-login">
-            <img class="" src="/images/login/qq2.png" alt="" height="90%" width="90%">
+            <img class="" src="/images/login/qq2.png" alt="" height="auto" width="90%">
         </div>
 
     </div>

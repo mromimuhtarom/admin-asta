@@ -192,8 +192,10 @@ class GoldStoreController extends Controller
                   }
 
                   //UPLOAD IMAGE BONUS TO AWS
-                  $awsPath = 'unity-asset/store/gold/' . $imageBonusname;
-                  Storage::disk('s3')->put($awsPath, file_get_contents($filebonus));
+                  if($filebonus):
+                    $awsPath = 'unity-asset/store/gold/' . $imageBonusname;
+                    Storage::disk('s3')->put($awsPath, file_get_contents($filebonus));
+                  endif;
 
                   //Simpan ke Database
                   $gold = ItemsCash::create([
@@ -292,6 +294,17 @@ class GoldStoreController extends Controller
             case "order":
                 $name = "Memesan";
                 break;
+            case "bonus_type":
+                $name = "Item Bonus";
+                if($value == 1):
+                    $value = 'Chip';
+                elseif($value == 2):
+                    $value = 'Koin';
+                elseif($value == 3):
+                    $value = 'Barang';
+                endif;
+                break;
+            case ""
             default:
             "";
         }

@@ -861,63 +861,75 @@ public function detailTransaction(Request $request, $month, $year)
         $endis     = explode(",", $value);
         $valueitem = str_replace(':', ',', $itemtype->value);
         $item      = explode(",", $valueitem);
+        $bonusType = ConfigText::select(
+                        'name',
+                        'value'
+                    )
+                    ->where('id', '=', 5)
+                    ->first();
+        $valueBonus= str_replace(':', ',', $bonusType->value);
+        $bontype  = explode(",", $valueBonus);
         $timenow   = Carbon::now('GMT+7');
-        return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item', 'timenow'));
+        return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item', 'timenow', 'bontype'));
     }
 // ------- End index Item Store Reseller -------- //
 
 // ------- Insert Item Store Reseller -------- //
     public function ItemResellerstore(Request $request)
     {
+
+        $title          = $request->title;
+        $goldAwarded    = $request->goldAwarded;
+        $priceCash      = $request->priceCash;
+        $googleKey      = $request->googleKey;
+        $order          = $request->order;
+
+        $validator = Validator::make($request->all(),[
+            'title'       => 'required',
+            'goldAwarded' => 'required|integer',
+            'priceCash'   => 'required|integer',
+            'googleKey'   => 'required',
+            'order'       => 'required|integer',
+            'file'        => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         $id = ItemsCash::select('item_id')
               ->orderBy('item_id', 'desc')
               ->first();
         
         if($id === NULL )
         {
-            $id_last = 0;
+            $id_lst = 0;
         } else {
-            $id_last = $id->item_id;
+            $id_lst = $id->item_id;
         }
         
-        $id_new                                   = $id_last + 1;
-        $file                                     = $request->file('file');
-        $file_wtr                                 = $request->file('file1');
-        $ekstensi_diperbolehkan                   = array('png');
-        $nama                                     = $_FILES['file']['name'];
-        $nama_wtr                                 = $_FILES['file1']['name'];
-        $x                                        = explode('.', $nama);
-        $x_wtr                                    = explode('.', $nama_wtr);
-        $ekstensi                                 = strtolower(end($x));
-        $ekstensi_wtr                             = strtolower(end($x_wtr));
-        $ukuran                                   = $_FILES['file']['size'];
-        $nama_file_unik                           = $id_new.'.'.$ekstensi;
+          $id_new                 = $id_lst + 1;
+          $file                   = $request->file('file');
+          $file_wtr               = $request->file('file1');
+          $filebonus              = $request->file('filebonus');
+          $ekstensi_diperbolehkan = array('png');
+          $nama                   = $_FILES['file']['name'];
+          $nama_wtr               = $_FILES['file1']['name'];
+          $namafilebonus          = $_FILES['filebonus']['name'];
+          $x                      = explode('.', $nama);
+          $x_wtr                  = explode('.', $nama_wtr);
+          $x_bonus                = explode('.', $namafilebonus);
+          $ekstensi               = strtolower(end($x));
+          $ekstensi_wtr           = strtolower(end($x_wtr));
+          $ekstensi_bonus         = strtolower(end($x_bonus));
+          $ukuran                 = $_FILES['file']['size'];
+          $nama_file_unik         = $id_new.'.'.$ekstensi;
+          $imageBonusname         = $id_new.'-2.'.$ekstensi_bonus;
         list($width, $height)                     = getimagesize($file);
-
+       
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
             if($ukuran < 5242880)
             {
-
-                $order          = $request->order;
-                $title          = $request->title;
-                $goldAwarded    = $request->goldAwarded;
-                $priceCash      = $request->priceCash;
-                $googleKey      = $request->googleKey;
-                // $itemType       = $request->itemType;
-        
-                $validator = Validator::make($request->all(),[
-                    'order'       => 'required|integer',
-                    'title'       => 'required',
-                    'goldAwarded' => 'required|integer',
-                    'priceCash'   => 'required|integer',
-                    'googleKey'   => 'required',
-                ]);
-        
-                if ($validator->fails()) {
-                    return back()->withErrors($validator->errors());
-                }             
-
                 if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
                     list($width_watermark, $height_watermark) = getimagesize($file_wtr);
@@ -978,14 +990,23 @@ public function detailTransaction(Request $request, $month, $year)
                     $img_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
                 }
+
+                //UPLOAD IMAGE BONUS TO AWS
+                if($filebonus):
+                    $awsPath = 'unity-asset/store/gold/' . $imageBonusname;
+                    Storage::disk('s3')->put($awsPath, file_get_contents($filebonus));
+                endif;
+                
                           
                 $gold = ItemsCash::create([
                     'order'      => $order,
                     'name'       => $title,
                     'item_get'   => $goldAwarded,
                     'price'      => $priceCash,
+                    'bonus_get'  => $request->itemAwarded,
+                    'bonus_type' => $request->BonusType,
                     'shop_type'  => 2,
-                    'status'     => 1,
+                    'status'     => $request->status_item,
                     'item_type'  => 2,
                     'google_key' => $googleKey,
                 ]);
