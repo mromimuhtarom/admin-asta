@@ -162,7 +162,7 @@
                     <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strItemBonType($gold->bonus_type) }}</a></td>
                     <td>
                       <div class="media-container" align="center">
-                        <form method="POST" action="" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('GoldStore-updateimageBonus') }}" enctype="multipart/form-data">
                           {{  csrf_field() }}
                           <span class="media-overlay-wtrAva med-ovlayBonus{{ $gold->item_id }}">
                             <input type="hidden" name="pk" value="{{ $gold->item_id }}">

@@ -549,6 +549,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('GoldStore-create', 'GoldStoreController@store')->name('GoldStore-create');
                 Route::post('GoldStore-update', 'GoldStoreController@update')->name('GoldStore-update');
                 Route::post('GoldStore-updateimage', 'GoldStoreController@updateimage')->name('GoldStore-updateimage');
+                Route::post('GoldStore-updateimageBonus', 'GoldStoreController@updateImageBonus')->name('GoldStore-updateimageBonus');
                 Route::delete('GoldStore-delete', 'GoldStoreController@destroy')->name('GoldStore-delete');
                 Route::delete('GoldStore-deleteAllSelected', 'GoldStoreController@deleteAllSelected')->name('GoldStore-deleteAllSelected');
             });
@@ -704,6 +705,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('ItemStoreReseller-view', 'ResellerController@ItemStoreReseller')->name('Item_Store_Reseller');
                 Route::post('ItemStoreReseller-create', 'ResellerController@ItemResellerstore')->name('ItemStoreReseller-create');
                 Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
+                Route::post('ItemStoreReselle-updateimageBonus', 'ResellerController@updateImageBonusitemstoreresller')->name('ItemStoreReseller-updateimageBonus');
                 Route::post('ItemStoreReseller-updateimage', 'ResellerController@updateImageItemStoreReseller')->name('ItemStoreReseller-updateimage');
                 Route::delete('ItemStore-delete', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-delete');
                 Route::delete('ItemStore-deleteAll', 'ResellerController@deleteAllSelected')->name('ItemStore-deleteAllSelected');

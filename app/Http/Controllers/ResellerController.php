@@ -1175,6 +1175,50 @@ public function detailTransaction(Request $request, $month, $year)
 // ------- End Update Image Item Store Reseller -------//
 
 
+// ------ Update image bonus ------//
+    public function updateImageBonusitemstoreresller(Request $request){
+        
+        $validator = Validator::make($request->all(),[
+            'fileImageBonus'  => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        $pk                     = $request->pk;
+        $fileBonus              = $request->file('fileImageBonus');
+        $ekstensi_diperbolehkan = array('png');
+        $namaImageBonus         = $_FILES['fileImageBonus']['name'];
+        $xBonus                 = explode('.', $namaImageBonus);
+        $ekstensiBonus          = strtolower(end($xBonus));
+        $ukuran                 = $_FILES['fileImageBonus']['size'];
+        $finalname              = $pk.'-2.'.$ekstensiBonus;
+
+
+        if(in_array($ekstensiBonus, $ekstensi_diperbolehkan) === true)
+        {   
+            
+            $awsPath   = '/unity-asset/store/gold/'.$finalname;
+            Storage::disk('s3')->put($awsPath, file_get_contents($fileBonus));
+
+            //RECORD LOG
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Edit gambar bonus di menu Toko Item Agen dengan ID '.$pk.' menjadi '.$finalname
+            ]);
+            
+            return redirect()->route('Item_Store_Reseller')->with('success','Update Image Successfull');
+        } else {
+            return redirect()->route('Item_Store_Reseller')->with('alert','Image must be in png format');
+        }
+
+
+    }
+// ------ end update image bonus -------//
+
 
 
 // ------- Delete Item Store Reseller -------- //
