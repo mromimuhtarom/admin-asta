@@ -1225,7 +1225,8 @@ public function detailTransaction(Request $request, $month, $year)
     public function destroyItemStoreReseller(Request $request)
     {
         $getItemId    = $request->userid;
-        $pathS3        = 'unity-asset/store/gold/'.$getItemId.'.png';
+        $pathS3       = 'unity-asset/store/gold/'.$getItemId.'.png';
+        $pathS3_bonus = 'unity-asset/store/gold/'.$getItemId.'.png';
 
         if($getItemId  != '') 
         {
@@ -1233,7 +1234,7 @@ public function detailTransaction(Request $request, $month, $year)
                 'status'    =>  2
             ]);
 
-            Storage::disk('s3')->delete($pathS3);
+            Storage::disk('s3')->delete([$pathS3, $pathS3_bonus]);
         
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -1253,9 +1254,11 @@ public function detailTransaction(Request $request, $month, $year)
     {
         $ids      =   $request->userIdAll;
         $imageid  =   $request->imageid;
+        $imgIdBonus =   $request->imageidBonus;
         
         //DELETE
-        Storage::disk('s3')->delete(explode(",", $imageid));        
+        Storage::disk('s3')->delete(explode(",", $imageid));  
+        Storage::disk('s3')->delete(explode(",", $imgIdBonus));      
         DB::table('asta_db.item_cash')->whereIn('item_id', explode(",", $ids))->update([
             'status'    =>  2   
         ]);

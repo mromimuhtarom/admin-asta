@@ -130,7 +130,7 @@
               @foreach($getItems as $gold)
               @if($menu && $mainmenu)
               <tr>
-                <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" data-bonus="unity-asset/store/gold/{{ $gold->item_id }}-2.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="order" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
                 <td>
                     <div class="media-container">
@@ -387,6 +387,7 @@
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
           <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="imageidBonus" id="idDeleteAllBonus" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -671,6 +672,13 @@ $(".watermark-image").change(function() {
               allimage.push($(this).attr('data-name'));
               var join_selected_image = allimage.join(",");
               $('#idDeleteAllimage').val(join_selected_image);
+          });
+
+          var allBonus = [];
+          $('.deleteIdAll:checked').each(function() {
+            allBonus.push($(this).attr('data-bonus'));
+            var join_selected_bonus = allBonus.join(",");
+            $('#idDeleteAllBonus').val(join_selected_bonus);
           });
         });
 
