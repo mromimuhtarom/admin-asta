@@ -35,7 +35,6 @@ class ReportStoreController extends Controller
         $chooseitem = $request->chooseitem;
         $data       = $request->all();
         
-
         $itemType= ConfigText::select(
             'name',
             'value'
@@ -149,6 +148,5 @@ class ReportStoreController extends Controller
                 }
             }
         }
-
     }
 }
