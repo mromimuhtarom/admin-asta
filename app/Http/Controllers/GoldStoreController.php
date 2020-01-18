@@ -304,7 +304,9 @@ class GoldStoreController extends Controller
                     $value = 'Barang';
                 endif;
                 break;
-            case ""
+            case "bonus_get":
+                $name = "Item Bonus yang di dapatkan";
+                break;
             default:
             "";
         }

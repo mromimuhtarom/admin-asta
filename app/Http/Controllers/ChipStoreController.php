@@ -234,6 +234,19 @@ class ChipStoreController extends Controller
           case "order":
               $name = "Memesan";
               break;
+          case "bonus_type":
+               $name = "Item Bonus";
+               if($value == 1):
+                  $value = 'Chip';
+               elseif($value == 2):
+                  $value = 'Koin';
+               elseif($value == 3):
+                  $value = 'Barang';
+               endif;
+               break;
+          case "bonus_get":
+               $name = "Item Bonus yang di dapatkan";
+               break;
           default:
             "";
       }
