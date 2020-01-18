@@ -44,7 +44,7 @@
     <div class="d-flex flex-row w-100 h-100">
         <div class="d-flex flex-column my-aii-login">
 
-            <div class="login-logo">
+            <div class="login-logo ">
                 <div class="margin-login">
                     <img class="asta" src="/images/login/logo.png" alt="logo" width="90%" height="auto">
                 </div>

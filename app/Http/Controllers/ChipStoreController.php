@@ -371,7 +371,7 @@ class ChipStoreController extends Controller
         $namaImageBonus         = $_FILES['fileImageBonus']['name'];
         $xBonus                 = explode('.', $namaImageBonus);
         $ekstensiBonus          = strtolower(end($xBonus));
-        $ukuran                 = $_FILES['file']['size'];
+        $ukuran                 = $_FILES['fileImageBonus']['size'];
         $finalname              = $pk.'-2.'.$ekstensiBonus;
 
 
