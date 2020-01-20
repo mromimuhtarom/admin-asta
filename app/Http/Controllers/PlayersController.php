@@ -299,8 +299,8 @@ class PlayersController extends Controller
         $typeUser      = $request->type_user;
         $minDate       = $request->inputMinDate;
         $maxDate       = $request->inputMaxDate;
-        $sorting     = $request->sorting;
-        $namecolumn  = $request->namecolumn;
+        $sorting       = $request->sorting;
+        $namecolumn    = $request->namecolumn;
 
         $player_type = ConfigText::where('id', '=', 1)
                        ->select(
@@ -635,9 +635,26 @@ class PlayersController extends Controller
         $description = $request->description;
         $sts_plyr    = $request->status_player;
 
+        $validator = Validator::make($request->all(),[
+          'description' => 'required'
+          
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
         Player::where('user_id', '=', $plyr_id)->update([
           'status' => $sts_plyr
         ]);
+
+        $validator = Validator::make($request->all(),[
+          'description' => 'required'
+
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+        
         switch($sts_plyr):
           case '1':
             $sts_plyr = 25;
@@ -650,6 +667,8 @@ class PlayersController extends Controller
             break;
         endswitch;
 
+        
+
         LogUser::create([  
           'user_id'     => $plyr_id,
           'action_id'   => $sts_plyr,
@@ -657,7 +676,6 @@ class PlayersController extends Controller
           'description' => $description
         ]);
         
-
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',

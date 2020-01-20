@@ -60,6 +60,7 @@
                         <div class="col" >
                             <select name="inputGame" class="form-control">
                                 <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="0">Utama</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                                 @endforeach
