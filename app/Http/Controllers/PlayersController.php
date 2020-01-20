@@ -225,7 +225,7 @@ class PlayersController extends Controller
                        ->first();
         $typeconverttocomma = str_replace(':', ',', $player_type->value);
         $plyr_type        = explode(",", $typeconverttocomma); 
-
+       
         return view('pages.players.registered_player', compact('plyr_status', 'plyr_type'));
     }
   // ----------- End Index Registered Player ----------- //
@@ -237,14 +237,14 @@ class PlayersController extends Controller
     {
       $device  = Device::where('user_id', '=', $userId)->get();
       $profile = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                  ->join('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
+                  ->leftjoin('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
                   ->select(
                     'asta_db.user.username',
                     'asta_db.user.email',
                     'asta_db.user.country_code',
-                    'asta_db.user_stat.gold',
                     'asta_db.user_stat.chip',
                     'asta_db.user_stat.point',
+                    'asta_db.user_stat.gold',
                     'asta_db.user.user_type',
                     'asta_db.user.user_id',
                     'asta_db.country.name',
@@ -252,7 +252,7 @@ class PlayersController extends Controller
                   )
                   ->where('asta_db.user.user_id', '=', $userId)
                   ->first(); 
-                  
+    
       return view('pages.players.register_player_profile', compact('device', 'profile'));
     }
  // ----------- End Detail Registered Player ----------- //
@@ -664,6 +664,8 @@ class PlayersController extends Controller
           'datetime'  => Carbon::now('GMT+7'),
           'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi Dilarang'
         ]);
+
+        return back()->with('success','Update Image Successfull');
     }
   // ----------- End Update Registered Player ----------- //
 //****************************************** End Menu Registered Player ******************************************//
@@ -951,12 +953,7 @@ class PlayersController extends Controller
   // ----------- End Delete Bots ----------- //
 //****************************************** End Menu Bots ******************************************//  
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function avatar(Request $request)
     {
