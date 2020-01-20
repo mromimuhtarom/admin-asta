@@ -8,12 +8,26 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+ <!-- Response Status -->
+ @if (count($errors) > 0)
+ <div class="error-val">
+   <div class="alert alert-danger">
+     <ul>
+       @foreach ($errors->all() as $error)
+         <li>{{$error}}</li>  
+       @endforeach
+     </ul>
+   </div>
+ </div>
+@endif
+
 <!--- Warning Aler --->
 @if (\Session::has('alert'))
   <div class="alert alert-danger">
     <p>{{\Session::get('alert')}}</p>
   </div>
 @endif
+
 <!--- End Warning Alert --->
 <!--- Content Search --->
 <div class="search bg-blue-dark " style="margin-bottom:2%;">
@@ -234,9 +248,17 @@
                   <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
                   <select name="status_player" class="form-control" id="">
                     <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
-                    <option value="{{ $plyr_status[0] }}" @if($regis->status == $plyr_status[0]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                    @if ($regis->status == 1)
                     <option value="{{ $plyr_status[2] }}" @if($regis->status == $plyr_status[2]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
                     <option value="{{ $plyr_status[4] }}" @if($regis->status == $plyr_status[4]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
+                    @elseif($regis->status == 2)
+                    <option value="{{ $plyr_status[0] }}" @if($regis->status == $plyr_status[0]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                    <option value="{{ $plyr_status[4] }}" @if($regis->status == $plyr_status[4]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
+                    @elseif($regis->status == 3)
+                    <option value="{{ $plyr_status[0] }}" @if($regis->status == $plyr_status[0]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
+                    <option value="{{ $plyr_status[2] }}" @if($regis->status == $plyr_status[2]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
+                    @endif
+
                   </select>
               </div>
             </div>

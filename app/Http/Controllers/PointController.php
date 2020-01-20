@@ -54,6 +54,7 @@ class PointController extends Controller
         else:
             $sortingorder = 'asc';
         endif;
+        
         if($sorting == NULL):
             $sorting = 'desc';
         endif;

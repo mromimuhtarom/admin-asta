@@ -107,4 +107,6 @@ class RegisterPlayerIdController extends Controller
         }
         return back()->with('alert', 'Number of inputs filled in Player ID can\'t be NULL ');
     }
+
+    
 }

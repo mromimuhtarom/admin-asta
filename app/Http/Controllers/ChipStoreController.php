@@ -37,6 +37,7 @@ class ChipStoreController extends Controller
                     ->where('status', '!=', 2)
                     ->orderby('order', 'asc')
                     ->get();
+                    
         $active   = ConfigText::select(
                         'name', 
                         'value'
