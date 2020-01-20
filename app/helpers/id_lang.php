@@ -197,7 +197,6 @@ function translate_menuTransaction($menu){
         'Item'                  =>  'Item',
         'Quantity'              =>  'Jumlah',
         'Price'                 =>  'Harga',
-        'Detail Information'    =>  'Informasi detail',
         'buy'                   =>  'membeli',
         'using'                 =>  'menggunakan',
         'at price'              =>  'pada harga',

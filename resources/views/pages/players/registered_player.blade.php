@@ -164,6 +164,7 @@
       @else
         <tr>
             <td><a href="{{ route('RegisteredPlayer-detaildevice', $regis->user_id) }}">{{ $regis->user_id }}</a></td>
+            <td>{{ $regis->level }}</td>
             <td>{{ $regis->username }}</td>
             <td><a href="{{ route('chip_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->chip, 2) }}</a></td>
             <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->point, 2) }}</a></td>

@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use App\Log;
 use Session;
 use Validator;
+use App\Classes\MenuClass;
 
 class Add_TransactionController extends Controller
 {
@@ -43,6 +44,8 @@ class Add_TransactionController extends Controller
         $sorting     = $request->sorting;
         $namecolumn  = $request->namecolumn;
         $getUsername = Input::get('inputPlayer');
+        $menu        = MenuClass::menuName('Transaction');
+        $mainmenu    = MenuClass::menuName('Add Transaction');
 
         //Sorting
         if($sorting == NULL): 
@@ -102,7 +105,7 @@ class Add_TransactionController extends Controller
 
         $add_transaction->appends($request->all());
 
-        return view('pages.transaction.add_transaction', compact('add_transaction', 'getUsername', 'sortingorder', 'actblnc'));
+        return view('pages.transaction.add_transaction', compact('add_transaction', 'getUsername', 'sortingorder', 'actblnc', 'menu', 'mainmenu'));
     }
 
 

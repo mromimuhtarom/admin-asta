@@ -208,7 +208,7 @@
                       <td>{{ $itm->name }}</td>
                       <td>{{ $itm->strItemType() }}</td>
                       <td>{{ $itm->item_get }}</td>
-                      <td>{{ $itm->bonus_get}}</td>
+                      <td>{{ strItemBonType($itm->bonus_type)}}</td>
                       <td>
                         <div class="media-container">
                           <figure class="media-object">
@@ -216,7 +216,7 @@
                           </figure>
                         </div>                        
                       </td>
-                      <td>{{ $itm->bonus_type}}</td>
+                      <td>{{ $itm->bonus_get  }}</td>
                       <td>{{ $itm->price }}</td>
                       <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
                       <td></td>
@@ -225,12 +225,24 @@
                 @else 
                   <tr>
                     <td>{{ $itm->order }}</td>
-                    <td></td>
+                    <td>
+                        <div class="media-container">
+                            <figure class="media-object">
+                              <img class="img-object-normal imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                            </figure>
+                        </div>
+                    </td>
                     <td>{{ $itm->name }}</td>
                     <td>{{ $itm->strItemType() }}</td>
                     <td>{{ $itm->item_get }}</td>
                     <td>{{ strItemBonType($itm->bonus_type) }}</td>
-                    <td></td>
+                    <td>
+                        <div class="media-container">
+                          <figure class="media-object">
+                              <img class="img-object uploadBonus{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'-2.png'}}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                          </figure>
+                        </div>                        
+                    </td>
                     <td>{{ $itm->bonus_get}}</td>
                     <td>{{ $itm->price }}</td>
                     <td>{{ strEnabledDisabled($itm->status) }}</td>

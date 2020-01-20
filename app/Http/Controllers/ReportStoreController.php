@@ -129,8 +129,7 @@ class ReportStoreController extends Controller
                     }
                     else if($minDate != NULL && $maxDate != NULL && $chooseitem != NULL)
                     { 
-                        $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.'23:59:59'])
-                                        ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+                        $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                                         ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
                                         ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                         ->get();

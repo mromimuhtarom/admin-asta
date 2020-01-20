@@ -250,6 +250,24 @@
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }
           });
+
+          $('.type').editable({
+            mode: 'inline',
+            value: '',
+            source: [
+                {value: '', text: 'Choose for role type'},
+                @php
+                echo '{value: "'.$type[0].'", text: "'.$type[1].'"},';
+                echo '{value: "'.$type[2].'", text: "'.$type[3].'"},';
+                echo '{value: "'.$type[4].'", text: "'.$type[5].'"}';
+                @endphp
+            ],
+            validate: function(value) {
+              if($.trim(value) == '' ) {
+                return 'This field is required';
+              }
+            }
+          });
               @php
                 foreach($mainmenu as $mnu) {
                   echo'$(".namedetail'.$mnu->menu_id.'").show();';
@@ -270,24 +288,6 @@
                   }
                 }
               @endphp
-
-          $('.type').editable({
-            mode: 'inline',
-            value: '',
-            source: [
-                {value: '', text: 'Choose for role type'},
-                @php
-                echo '{value: "'.$type[0].'", text: "'.$type[1].'"},';
-                echo '{value: "'.$type[2].'", text: "'.$type[3].'"},';
-                echo '{value: "'.$type[4].'", text: "'.$type[5].'"}';
-                @endphp
-            ],
-            validate: function(value) {
-              if($.trim(value) == '' ) {
-                return 'This field is required';
-              }
-            }
-          });
       
           $(document).ready(function() {
             $('table.table').dataTable( {

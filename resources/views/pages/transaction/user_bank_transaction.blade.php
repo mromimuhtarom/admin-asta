@@ -46,7 +46,6 @@
 										<th class="th-sm">{{ translate_MenuTransaction('Item') }}</th>
 										<th class="th-sm">{{ translate_MenuTransaction('Quantity') }}</th>
 										<th class="th-sm">{{ translate_MenuTransaction('Price') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Detail Information') }}</th>
 										<th class="th-sm">{{ translate_MenuTransaction('Status Payment') }}</th>
 										@if ($menu && $mainmenu)
 										<th class="th-sm">{{ translate_MenuTransaction('Confirm request') }}</th>
@@ -66,7 +65,6 @@
 														<td>{{ $chip->name }}</td>	
 														<td>{{ $trns->quantity }}</td>
 														<td>{{ number_format($trns->item_price, 2) }}</td>
-														<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_id}} {{ translate_MenuTransaction('using') }} {{ $trns->paymentname }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }}</td>
 														<td>{{ $trns->paymentname }}</td>
 													@if ($menu && $mainmenu)
 														<td>
@@ -89,8 +87,7 @@
 														<td>{{ $trns->username }}</td>
 														<td>{{ $gold->name }}</td>
 														<td>{{ $trns->quantity }}</td>
-														<td>{{ number_format($trns->item_price, 2) }}</td>
-														<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_id }} {{ translate_MenuTransaction('using') }} {{ $trns->paymentname }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }}</td>																								
+														<td>{{ number_format($trns->item_price, 2) }}</td>																			
 														<td>{{ $trns->paymentname}}</td>
 														@if($menu && $mainmenu)
 															<td>
@@ -114,7 +111,6 @@
 														<td>{{ $goods->name }}</td>
 														<td>{{ $trns->quantity }}</td>
 														<td>{{ number_format($trns->item_price, 2) }}</td>
-														<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_id }} {{ translate_MenuTransaction('using') }} {{ $trns->paymentname }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }}</td>
 														<td>{{ $trns->paymentname }}</td>
 														@if($menu && $mainmenu)
 															<td>
