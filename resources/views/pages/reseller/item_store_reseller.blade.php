@@ -134,10 +134,10 @@
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" data-bonus="unity-asset/store/gold/{{ $gold->item_id }}-2.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="order" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
                     <td>
-                        <div class="media-container">
-                            <form method="POST" action="{{ route('ItemStoreReseller-updateimage') }}" enctype="multipart/form-data">
-                              {{  csrf_field() }}
-                              <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
+                      <div class="media-container">
+                          <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
+                            {{  csrf_field() }}
+                            <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
                                 <input type="hidden" name="pk" value="{{ $gold->item_id }}">
                                 <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
                                 <i class="fa fa-edit media-icon-wtr"></i>
@@ -149,19 +149,19 @@
                                 <i class="fa fa-edit media-icon-wtr1"></i>
                                 <div class="nav-name">Watermark</div>
                             </span>
-                              <figure class="media-object">
-                                {{-- <img class="img-object-wtr imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}.png?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
-                                <img class="img-object-wtr imgupload{{ $gold->item_id }}" src="{{'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
-                                <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
-                                <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
-                              </figure>
-                            </div>
-                            <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
-                            </form>
-                              <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}</button>
-                              <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
-                            </div>
+                            <figure class="media-object">
+                              {{-- <img src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;"> --}}
+                              <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" class="img-object-normal imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;">
+                              <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                              <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
+                            </figure>
+                          </div>
+                          <div class="media-control" align="center" style="margin-top:-1%">
+                            <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
+                          </form>
+                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
+                            <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
+                      </div>
                     </td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ number_format($gold->item_get, 2) }}</a></td>
@@ -180,7 +180,7 @@
                             <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'-2.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                             <img class="img-object-wtr1Ava uploadBonusImg1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
                           </figure>
-                          
+                         
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
                           <button class="save-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
@@ -213,7 +213,7 @@
                     <td>
                       <div class="media-container">
                           <figure class="media-object">
-                            <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                            <img class="img-object-normal imgupload{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
                           </figure>
                       </div>
                     </td>
@@ -221,10 +221,9 @@
                     <td>{{ number_format($gold->item_get, 2) }}</td>
                     <td>{{ strItemBonType($gold->bonus_type) }}</td>
                     <td>
-                      <div class="media-container" align="center">
+                      <div class="media-container">
                           <figure class="media-object">
                             <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'-2.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
-                            <img class="img-object-wtr1Ava uploadBonusImg1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
                           </figure>
                       </div>
                     </td>
@@ -238,24 +237,32 @@
                   </tr>
                 @endif
               @else 
-              <tr>
-                <td>{{ $gold->order }}</td>
-                <td>
-                    <div class="media-container">
-                        <figure class="media-object">
-                          <img class="img-object imgupload{{ $gold->item_id }}" src="/upload/Gold/{{ $gold->item_id }}" style="  display: block;margin-left: auto;margin-right: auto;">
-                        </figure>
-                    </div>
-                </td>
-                <td>{{ $gold->name }}</td>
-                <td>{{ $gold->item_get }}</td>
-                <td>{{ $gold->price }}</td>
-                {{-- <td>{{ $gold->strItemType() }}</td> --}}
-                <td>{{ translate_menuPlayers('Gold Coins')}}</td>
-                <td>{{ strTypeTransaction($gold->transaction_type) }}</td>
-                <td>{{ $gold->google_key }}</td>
-                <td>{{ strEnabledDisabled($gold->active) }}</td>
-              </tr>
+                  <tr>
+                    <td>{{ $gold->order }}</td>
+                    <td>
+                      <div class="media-container">
+                          <figure class="media-object">
+                            <img class="img-object-normal imgupload{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                          </figure>
+                      </div>
+                    </td>
+                    <td>{{ $gold->name }}</td>
+                    <td>{{ number_format($gold->item_get, 2) }}</td>
+                    <td>{{ strItemBonType($gold->bonus_type) }}</td>
+                    <td>
+                      <div class="media-container">
+                          <figure class="media-object">
+                            <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'-2.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                          </figure>
+                      </div>
+                    </td>
+                    <td>{{ $gold->bonus_get }}</td>
+                    <td>{{ number_format($gold->price, 2) }}</td>
+                    <td>{{ translate_menuPlayers('Gold Coins')}}</td>
+                    <td>{{ strTypeTransaction($gold->trans_type) }}</td>
+                    <td>{{ $gold->google_key }}</td>
+                    <td>{{ strEnabledDisabled($gold->status) }}</td>
+                  </tr>
               @endif
               @endforeach
             </tbody>

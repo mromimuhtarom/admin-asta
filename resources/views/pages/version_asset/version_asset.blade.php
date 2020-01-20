@@ -68,8 +68,10 @@
                         <div class="table-outer">
                             <table class="table table-bordered">
                                 <thead>
+                                    @if($menu)
                                     <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission"></th>
                                     <th>File</th>
+                                    @endif
                                     <th>{{ TranslateMenuGame('Name')}}</th>
                                     <th>{{ translate_menuTransaction('Type')}}</th>
                                     <th>{{ TranslateReseller('Link')}}</th>
@@ -112,7 +114,6 @@
                                         <td>{{ $xl['name'] }}</td>
                                         <td>{{ $xl->type }}</td>
                                         <td>{{ $xl->link }}</td>
-                                        <td>{{ $xl->file}}</td>
                                         <td>{{ $xl->ver }}</td>
                                     </tr>
                                     @endif
@@ -160,8 +161,10 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        @if($menu)
                                         <td><input id="checkAll2" type="checkbox" name="deletepermission" class="deletepermission"></td>
                                         <td>File</td>
+                                        @endif
                                         <td>{{ TranslateMenuGame('Name')}}</td>
                                         <td>{{ translate_menuTransaction('Type')}}</td>
                                         <td>{{ TranslateReseller('Link')}}</td>
@@ -205,7 +208,6 @@
                                         <td>{{ $xl_ios['name'] }}</td>
                                         <td>{{ $xl_ios->type }}</td>
                                         <td>{{ $xl_ios->link }}</td>
-                                        <td>{{ $xl_ios->file }}</td>
                                         <td>{{ $xl_ios->ver }}</td>
                                     </tr>
                                     @endif
@@ -254,8 +256,10 @@
                         <div class="table-outer">
                             <table class="table table-bordered">
                                 <thead>
+                                    @if($menu)
                                     <th><input id="checkAll3" type="checkbox" name="deletepermission" class="deletepermission"></th>
                                     <th>File</th>
+                                    @endif
                                     <th>{{ TranslateMenuGame('Name')}}</th>
                                     <th>{{ translate_menuTransaction('Type')}}</th>
                                     <th>{{ TranslateReseller('Link')}}</th>
@@ -298,7 +302,6 @@
                                         <td>{{ $xl['name'] }}</td>
                                         <td>{{ $xl->type }}</td>
                                         <td>{{ $xl->link }}</td>
-                                        <td>{{ $xl->file}}</td>
                                         <td>{{ $xl->ver }}</td>
                                     </tr>
                                     @endif

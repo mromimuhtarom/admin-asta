@@ -221,6 +221,7 @@ function translate_menuTransaction($menu){
         'Yes'                   =>  'Ya',
         'No'                    =>  'Tidak',
         'pending'               =>  'Tunda',
+        'Detail Information'    =>  'Detail Informasi'
     ];
     return $array_menuContent[$menu];
 }

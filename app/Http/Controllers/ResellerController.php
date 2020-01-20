@@ -829,6 +829,7 @@ public function detailTransaction(Request $request, $month, $year)
     {
         $menu     = MenuClass::menuName('Item Store Reseller');
         $mainmenu = MenuClass::menuName('Reseller');
+        
         $getItems = ItemsCash::select(
                         'item_id',
                         'name',

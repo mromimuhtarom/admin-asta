@@ -9,7 +9,7 @@ class RolesClass {
       $menus1 = DB::table('asta_db.adm_menu')
                 ->join('asta_db.adm_access','asta_db.adm_menu.menu_id', '=', 'asta_db.adm_access.menu_id')
                 ->where('role_id', Session::get('roleId'))
-                ->where('name', '=', $menu)
+                ->where('adm_menu.name', '=', $menu)
                 ->where('type', '=', '2')
                 ->first();
       return $menus1;
