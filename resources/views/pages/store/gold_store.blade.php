@@ -252,17 +252,23 @@
               <tr>
                 <td>{{ $gold->order }}</td>
                 <td>
-                      <div class="media-container">
-                        <figure class="media-object">
-                          <img class="img-object imgupload{{ $gold->item_id }}" src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
-                        </figure>
-                      </div>
+                  <div class="media-container">
+                      <figure class="media-object">
+                        <img class="img-object-normal imgupload{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                      </figure>
+                  </div>
                 </td>
                 <td>{{ $gold->name }}</td>
                 <td>{{ $gold->item_get }}</td>
-                <td>{{ strItemBonType($itm->bonus_type) }}</td>
-                <td></td>
-                <td>{{ $itm->bonus_get}}</td>
+                <td>{{ strItemBonType($gold->bonus_type) }}</td>
+                <td>
+                  <div class="media-container">
+                      <figure class="media-object">
+                         <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'-2.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                      </figure>
+                  </div>
+                </td>
+                <td>{{ $gold->bonus_get}}</td>
                 <td>{{ $gold->price }}</td>
                 <td>{{ $gold->strItemType() }}</td>
                 <td>{{ strTypeTransaction($gold->transaction_type) }}</td>

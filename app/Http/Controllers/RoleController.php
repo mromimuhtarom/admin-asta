@@ -153,14 +153,21 @@ class RoleController extends Controller
           $type[2] => $type[3],
           $type[4] => $type[5]
         ];
-        $typerleupdate = $typerole[$value];
+
+        if($value == 0) :
+          $value = $type[1];
+        elseif($value == 1):
+          $value = $type[3];
+        elseif($value == 2):
+          $value = $type[5];
+        endif;
         
 
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan menuId'.$pk.' menjadi '. $typerleupdate
+          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan menuId'.$pk.' menjadi '. $value
         ]);
     }
 

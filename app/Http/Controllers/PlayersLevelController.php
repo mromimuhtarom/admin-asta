@@ -9,6 +9,7 @@ use App\Log;
 use Session;
 use Carbon\Carbon;
 use DB;
+use App\Classes\MenuClass;
 
 class PlayersLevelController extends Controller
 {
@@ -16,7 +17,9 @@ class PlayersLevelController extends Controller
     {
         $playerslevel = PlayerLevel::all();
         $playersrank = PlayerRank::all();
-        return view('pages.players.players_level', compact('playerslevel', 'playersrank'));
+        $menu        = MenuClass::menuName('Players');
+        $mainmenu    = MenuClass::menuName('Players Level');
+        return view('pages.players.players_level', compact('playerslevel', 'playersrank', 'menu', 'mainmenu'));
     }
 
     public function store(Request $request)

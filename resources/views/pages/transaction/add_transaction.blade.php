@@ -94,6 +94,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col">{{ number_format($transaction->chip, 2) }} </div>
+                                        @if($menu && $mainmenu)
                                         <div class="col" align="right">
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
                                                 data-target="#modalChip{{ $transaction->user_id }}">
@@ -104,11 +105,13 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
+                                        @endif
                                     </div>
                                 </td>
                                 <td>
                                     <div class="row">
                                         <div class="col">{{ number_format($transaction->point, 2) }}</div>
+                                        @if($menu && $mainmenu)
                                         <div class="col" align="right">
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
                                                 data-target="#modalPoint{{ $transaction->user_id }}">
@@ -119,11 +122,13 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
+                                        @endif
                                     </div>
                                 </td>
                                 <td>
                                     <div class="row">
                                         <div class="col">{{ number_format($transaction->gold, 2) }}</div>
+                                        @if($menu && $mainmenu)
                                         <div class="col" align="right">
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
                                                 data-target="#modalGold{{ $transaction->user_id }}">
@@ -134,6 +139,7 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

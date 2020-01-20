@@ -128,7 +128,7 @@
                                           <button class="edit-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit Avatar') }}</button>
                                         </div>
                                 </td>
-                            <td><a href="#" class="usertext" data-name="name" data-title="Title Avatar" data-type="text" data-pk="{{ $ap->id }}" data-url="{{ route('avatar_playerUpdate') }}">{{ $ap->name }}</a></td>
+                                <td><a href="#" class="usertext" data-name="name" data-title="Title Avatar" data-type="text" data-pk="{{ $ap->id }}" data-url="{{ route('avatar_playerUpdate') }}">{{ $ap->name }}</a></td>
                                 <td>
                                     <a href="#" style="color:red;" class="delete{{ $ap->id}}"
                                         id="delete"
@@ -142,12 +142,11 @@
                             </tr>
                             @else
                             <tr>
-                                <td></td>
                                 <td>{{ $ap->id }}</td>
                                 <td>
                                     <div class="media-container">
                                         <figure class="media-object">
-                                            <img class="img-object imgupload{{ $ap->id }}" src="" style="">
+                                            <img class="img-object imgupload{{ $ap->id }}" src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{ $ap->id }}.jpg?{{ $timenow }}" style="margin:auto;">
                                         </figure>
                                     </div>
                                 </td>

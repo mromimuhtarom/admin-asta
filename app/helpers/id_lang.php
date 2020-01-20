@@ -197,7 +197,6 @@ function translate_menuTransaction($menu){
         'Item'                  =>  'Item',
         'Quantity'              =>  'Jumlah',
         'Price'                 =>  'Harga',
-        'Detail Information'    =>  'Informasi detail',
         'buy'                   =>  'membeli',
         'using'                 =>  'menggunakan',
         'at price'              =>  'pada harga',
@@ -222,6 +221,7 @@ function translate_menuTransaction($menu){
         'Yes'                   =>  'Ya',
         'No'                    =>  'Tidak',
         'pending'               =>  'Tunda',
+        'Detail Information'    =>  'Detail Informasi'
     ];
     return $array_menuContent[$menu];
 }

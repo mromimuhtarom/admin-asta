@@ -24,7 +24,7 @@
                         <a href="javascript:void(0);" class="btn text-white bg-teal btn-sm"><i class="fa fa-check"></i> Profile</a>&nbsp; 
                     </div>
                     <div class="air air-top-left padding-10">
-                        <h4 class="text-white font-md">Register In {{ date([' F d, Y', strtotime($profile->join_date)]) }}</h4>
+                        <h4 class="text-white font-md">Register In {{ $profile->join_date }}</h4>
                     </div>
 
 

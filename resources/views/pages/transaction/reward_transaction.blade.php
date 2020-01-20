@@ -51,7 +51,6 @@
 										<th class="th-sm">{{ translate_MenuTransaction('Item') }}</th>
 										<th class="th-sm">{{ translate_MenuTransaction('Quantity') }}</th>
 										<th class="th-sm">{{ translate_MenuTransaction('Price') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Detail Information') }}</th>
 										@if ($menu && $mainmenu)
 										<th class="th-sm">{{ translate_MenuTransaction('Confirm request') }}</th>
 										@endif
@@ -66,7 +65,6 @@
 											<td>{{ $trns->item_name }}</td>	
 											<td>{{ $trns->quantity }}</td>
 											<td>{{ number_format($trns->item_price, 2) }}</td>
-											<td>{{ $trns->username }} {{ translate_MenuTransaction('buy') }} {{ $trns->item_name }} {{ translate_MenuTransaction('at price') }} {{ $trns->item_price }} Point</td>
 											@if ($menu && $mainmenu)
 											<td>
 												<div>

@@ -326,7 +326,7 @@ class ResellerController extends Controller
                                       ->get();
                 endif;
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
             }else if ($searchUsername != NULL && $startDate != NULL) {
                 
                 if(is_numeric($searchUsername) !== true):
@@ -342,7 +342,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
         
             }else if ($searchUsername != NULL && $endDate != NULL) {
                 
@@ -359,7 +359,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
             }else if($searchUsername != NULL) {
 
                 if(is_numeric($searchUsername) !== true):
@@ -373,13 +373,13 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
             } else if ($startDate != NULL && $endDate != NULL) {
                     $transactions =   $reportTransaction->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
                                       ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                       ->get();
 
-                    return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                    return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
             }
         } else if($choosedate == 'request')
         {
@@ -398,7 +398,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
         
               }else if ($searchUsername != NULL && $startDate != NULL) {
         
@@ -415,7 +415,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
         
               }else if ($searchUsername != NULL && $endDate != NULL) {
 
@@ -432,7 +432,7 @@ class ResellerController extends Controller
                 endif;
         
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
               }else if($searchUsername != NULL) {
                 
                 if(is_numeric($searchUsername) !== true):
@@ -447,13 +447,13 @@ class ResellerController extends Controller
                 endif;
 
               //   $transactions->appends($request->all());
-                return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
             } else if ($startDate != NULL && $endDate != NULL) {
                     $transactions =   $reportTransaction->wherebetween('asta_db.store_transaction_hist.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
                                       ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
                                       ->get();
 
-                    return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+                    return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
             }
         }
 
@@ -483,7 +483,7 @@ public function detailTransaction(Request $request, $month, $year)
     $startDate      = Carbon::now('GMT+7')->toDateString();
     $endDate        = Carbon::now('GMT+7')->toDateString();
     
-    return view('pages.reseller.report_Transaction', compact('transactions', 'startDate', 'endDate'));
+    return view('pages.reseller.report_transaction', compact('transactions', 'startDate', 'endDate'));
 }
 //------ End Detail Report Transaction ------//
 //****************************************** End Menu Report Transaction ******************************************//
@@ -829,6 +829,7 @@ public function detailTransaction(Request $request, $month, $year)
     {
         $menu     = MenuClass::menuName('Item Store Reseller');
         $mainmenu = MenuClass::menuName('Reseller');
+        
         $getItems = ItemsCash::select(
                         'item_id',
                         'name',
@@ -1225,7 +1226,8 @@ public function detailTransaction(Request $request, $month, $year)
     public function destroyItemStoreReseller(Request $request)
     {
         $getItemId    = $request->userid;
-        $pathS3        = 'unity-asset/store/gold/'.$getItemId.'.png';
+        $pathS3       = 'unity-asset/store/gold/'.$getItemId.'.png';
+        $pathS3_bonus = 'unity-asset/store/gold/'.$getItemId.'.png';
 
         if($getItemId  != '') 
         {
@@ -1233,7 +1235,7 @@ public function detailTransaction(Request $request, $month, $year)
                 'status'    =>  2
             ]);
 
-            Storage::disk('s3')->delete($pathS3);
+            Storage::disk('s3')->delete([$pathS3, $pathS3_bonus]);
         
             Log::create([
                 'op_id'     => Session::get('userId'),
@@ -1253,9 +1255,11 @@ public function detailTransaction(Request $request, $month, $year)
     {
         $ids      =   $request->userIdAll;
         $imageid  =   $request->imageid;
+        $imgIdBonus =   $request->imageidBonus;
         
         //DELETE
-        Storage::disk('s3')->delete(explode(",", $imageid));        
+        Storage::disk('s3')->delete(explode(",", $imageid));  
+        Storage::disk('s3')->delete(explode(",", $imgIdBonus));      
         DB::table('asta_db.item_cash')->whereIn('item_id', explode(",", $ids))->update([
             'status'    =>  2   
         ]);

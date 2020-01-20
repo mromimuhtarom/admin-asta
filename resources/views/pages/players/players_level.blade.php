@@ -53,6 +53,7 @@
                   <div class="row">
                     
                     <!-- Button tambah bot baru -->
+                    @if($menu && $mainmenu)
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalLevel">
@@ -60,6 +61,7 @@
                         </button>
                       </div>
                     </div>
+                    @endif
                     <!-- End Button tambah bot baru -->
           
                   </div>
@@ -84,6 +86,7 @@
                 </thead>
                 <tbody>
                     @foreach ($playerslevel as $level)
+                      @if($menu && $mainmenu)
                         <tr>
                           <td><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $level->level }}" class="deleteplayerslevel{{ $level->level }} deleteIdAll"></td>
                           <td><a href="#" class="inlinelevel" data-name="level" data-title="level" data-pk="{{ $level->level }}" data-type="text" data-url="{{ route('playerslevel_update') }}">{{ $level->level}}</a></td>
@@ -97,7 +100,15 @@
                               <i class="fa fa-times"></i>
                             </a>
                           </td>
-                        </tr>    
+                        </tr>
+                      @else  
+                        <tr>
+                          <td></td>
+                          <td>{{ $level->level}}</td>
+                          <td>{{ number_format($level->experience)}}</td>
+                          <td></td>
+                        </tr> 
+                      @endif  
                     @endforeach
                 </tbody>
               </table>
@@ -128,6 +139,7 @@
                 <div class="row">
                     
                     <!-- Button tambah bot baru -->
+                    @if($menu && $mainmenu)
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalRank">
@@ -135,6 +147,7 @@
                         </button>
                       </div>
                     </div>
+                    @endif
                     <!-- End Button tambah bot baru -->
           
                   </div>
@@ -143,23 +156,28 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th><input id="checkAllrank" type="checkbox" name="deletepermissionrank" class="deletepermissionrank">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
+                    @if($menu && $mainmenu)
+                      <th><input id="checkAllrank" type="checkbox" name="deletepermissionrank" class="deletepermissionrank">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
+                    @endif
                     <th class="th-sm">ID</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Level') }}</th>
-                    <th>
-                      <a  href="#" style="color:red;font-weight:bold;" 
-                        class="deleterank" 
-                        id="trashrank" 
-                        data-toggle="modal" 
-                        data-target="#deleteAllrank">
-                        <i class="fa  fa-trash-o"></i>
-                      </a>
-                    </th>
+                    @if($menu && $mainmenu)
+                      <th>
+                        <a  href="#" style="color:red;font-weight:bold;" 
+                          class="deleterank" 
+                          id="trashrank" 
+                          data-toggle="modal" 
+                          data-target="#deleteAllrank">
+                          <i class="fa  fa-trash-o"></i>
+                        </a>
+                      </th>
+                    @endif
                   </tr>
                 </thead>
                 <tbody>
                     @foreach ($playersrank as $rank)
+                      @if($menu && $mainmenu)
                         <tr>
                           <td><input type="checkbox" name="deletepermissionrank[]" id="deletepermissionrank[]"data-pk="{{ $rank->id }}" class="deleteplayersrank{{ $rank->id }} deleteIdAllrank"></td>
                           <td>{{ $rank->id }}</td>
@@ -175,6 +193,13 @@
                             </a>
                           </td>
                         </tr>
+                      @else
+                        <tr>
+                          <td>{{ $rank->id }}</td>
+                          <td>{{ $rank->name }}</td>
+                          <td>{{ $rank->level }}</td>
+                        </tr>
+                      @endif
                     @endforeach
                 </tbody>
               </table>
