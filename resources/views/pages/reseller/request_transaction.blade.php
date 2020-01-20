@@ -2,9 +2,8 @@
 
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('Reseller') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('Request_Transaction') }}</a></li>
+	<li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('Reseller') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('Request_Transaction') }}</a></li>
 @endsection
 
 

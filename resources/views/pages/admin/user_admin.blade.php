@@ -3,7 +3,6 @@
 
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
   <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">{{ translate_MenuContentAdmin('User Admin')}}</a></li>
 @endsection

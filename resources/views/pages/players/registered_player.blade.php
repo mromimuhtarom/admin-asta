@@ -1,9 +1,8 @@
 @extends('index')
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Registered Player') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Registered Player') }}</a></li>
 @endsection
 
 @section('content')

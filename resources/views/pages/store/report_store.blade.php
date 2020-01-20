@@ -2,9 +2,8 @@
 
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Report store')}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Report store')}}</a></li>
 @endsection
 
 

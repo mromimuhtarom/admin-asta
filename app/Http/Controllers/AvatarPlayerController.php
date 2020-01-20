@@ -100,18 +100,18 @@ class AvatarPlayerController extends Controller
                         'name'    =>    $request->title,
                         'path'    =>    $nama_file_unik
                     ]);
-
+                        
                     //MENYIMPAN LOG
                     Log::create([
                         'op_id'     =>  Session::get('userId'),
                         'action_id' =>  '3',
                         'datetime'  =>  Carbon::now('GMT+7'),
-                        'desc'      =>  'Membuat insert baru di menu Avatar player dengan nama'. $avatarPlayer->subject
+                        'desc'      =>  'Membuat insert baru di menu Avatar player dengan nama '. $request->title
                     ]);
                     return redirect()->route('avatar_player')->with('success', 'Insert Data successfull');
                 }
         } else {
-            return redirect()->route('avatar_player')->with('alert', 'Ekstensi file tidak diperbolehkan, harus menggunakan .png');
+            return redirect()->route('avatar_player')->with('alert', 'Ekstensi file tidak diperbolehkan, harus menggunakan .jpg');
         }
     }
         

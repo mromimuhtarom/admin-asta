@@ -2,9 +2,8 @@
 
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Point Players') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Point Players') }}</a></li>
 @endsection
 
 

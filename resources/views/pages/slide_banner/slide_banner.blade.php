@@ -2,9 +2,8 @@
 
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Settings</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Slide Banner</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Settings</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Slide Banner</a></li>
 @endsection
 
 
