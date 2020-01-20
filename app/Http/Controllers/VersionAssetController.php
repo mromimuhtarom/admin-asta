@@ -502,7 +502,7 @@ class VersionAssetController extends Controller
     }
 
 
-        //FUNCTION UPDATE ASSET IOS
+    //FUNCTION UPDATE ASSET IOS
     public function updateAssetwINDOWS(Request $request)
     {
         $pk         =   $request->pk;
@@ -539,6 +539,43 @@ class VersionAssetController extends Controller
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE aset  di menu Versi Aset APK untuk Windows dengan nama '.$pk
+          ]);
+        return back()->with('success', 'Input Succeeded');
+    }
+
+
+    /* ===================================== FUNCTION DELETE ASSET ====================================== */
+    //FUNCTION UPDATE File Language Indonesia
+    public function update_languageindo(Request $request)
+    {
+        $file       =   $request->fileLanguageId;
+        //update file to aws s3
+        $PathS3     =   'unity-asset/Language/Indonesia/language.xml';
+        Storage::disk('s3')->put($PathS3, file_get_contents($file));
+
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Update FILE Bahasa  di menu Versi Aset APK untuk bahasa Indonesia'
+          ]);
+        return back()->with('success', 'Input Succeeded');
+    }
+
+    //FUNCTION UPDATE File Language English
+    public function update_languageEnglish(Request $request)
+    {
+        $file       =   $request->fileLanguageEn;
+
+        //update file to aws s3
+        $PathS3     =   'unity-asset/Language/English/language.xml';
+        Storage::disk('s3')->put($PathS3, file_get_contents($file));
+
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '2',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Update FILE Bahasa  di menu Versi Aset APK untuk bahasa Indonesia'
           ]);
         return back()->with('success', 'Input Succeeded');
     }

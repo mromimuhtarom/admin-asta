@@ -731,6 +731,8 @@ Route::middleware('authenticated')->group(function(){
             Route::delete('VersionAsset-deleteAssetAllSelected', 'VersionAssetController@deleteAllSelectedADR')->name('VersionAssetApkAndroid-deleteAssetAllSelected');
             Route::delete('VersionAsset-deleteAssetAllSelectedIOS', 'VersionAssetController@deleteAllSelectedIOS')->name('VersionAssetApkIOS-deleteAssetAllSelected');
             Route::delete('VersionAsset-deleteAssetAllSelectedWindows', 'VersionAssetController@deleteAllSelectedWindows')->name('VersionAssetApkWindows-deleteAssetAllSelected');
+            Route::post('VersionAssetfile-updateLangId', 'VersionAssetController@update_languageindo')->name('VersionAssetApkLangId-update');
+            Route::post('VersionAssetfile-updateLangEn', 'VersionAssetController@update_languageEnglish')->name('VersionAssetApkLangEn-update');
         });
 
     });
