@@ -145,9 +145,11 @@ class RoleController extends Controller
         DB::table('asta_db.adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
           $name => $value
         ]);
-        $roletype       = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
-        $value          = str_replace(':', ',', $roletype->value);
-        $type           = explode(",", $value);
+        $menuname = DB::table('adm_menu')->select('name')->where('menu_id', '=', $pk)->first();
+
+        $roletype = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
+        $valuetyp = str_replace(':', ',', $roletype->value);
+        $type     = explode(",", $valuetyp);
         $typerole = [
           $type[0] => $type[1],
           $type[2] => $type[3],
@@ -167,7 +169,7 @@ class RoleController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan menuId'.$pk.' menjadi '. $value
+          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan nama peran '.$role->name.' di nama menu '.$menuname->name.' dengan type '. $value
         ]);
     }
 
