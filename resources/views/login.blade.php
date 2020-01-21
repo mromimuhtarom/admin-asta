@@ -17,6 +17,8 @@
     <title>Document</title>
 </head>
 <body>
+
+
     {{--popup warning login--}}
 <script src="/js/warnpopuplogin.js"></script>
 <div id="dialogoverlay"></div>
@@ -91,15 +93,13 @@
  
   if (passwordInput.type == 'password'){
     passwordInput.type='text';
-    passStatus.className='fa fa-eye-slash';
-    
+    passStatus.className='fa fa-eye-slash'; 
   }
   else{
     passwordInput.type='password';
     passStatus.className='fa fa-eye';
   }
 }
-
     </script>
 </body>
 </html>
