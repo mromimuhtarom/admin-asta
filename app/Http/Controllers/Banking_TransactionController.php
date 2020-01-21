@@ -125,7 +125,8 @@ class Banking_TransactionController extends Controller
                    ->get();
         $time      = "all time";
         $lang_id   = '';
-        return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
+        $minDate   = '';
+        return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id', 'minDate'));
     }
 
 

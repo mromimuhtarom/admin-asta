@@ -108,6 +108,15 @@ function strIcon ($val) {
   }
 }
 
+function decryptaes256($email) {
+  $key = "------------ASTA-KEY------------";
+  $iv = "-----ASTAIV-----";
+  $method = "aes-256-cbc";
+  $enStr = $email;
+  $emailDecrypt = openssl_decrypt(hexToStr($enStr), $method, $key, $options = OPENSSL_RAW_DATA, $iv);
+  return $emailDecrypt;
+}
+
 //pengulangan pada form (view register_reseller.php)
 function generateID($digits = 4){
   $i = 0;
