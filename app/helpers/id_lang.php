@@ -213,6 +213,7 @@ function translate_menuTransaction($menu){
         'Status Payment'        =>  'Status pembayaran',
         'Confirm request'       =>  'Konfirmasi permintaan',
         'Username'              =>  'Nama pengguna',
+        'Status'                =>  'Status',
         'Date'                  =>  'Tanggal',
         'Win'                   =>  'Menang',
         'Lose'                  =>  'Kalah',
