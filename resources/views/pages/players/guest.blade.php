@@ -1,9 +1,8 @@
 @extends('index')
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Guest') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Guest') }}</a></li>
 @endsection
 
 
@@ -221,6 +220,7 @@
 		        "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+        "order": [[ 3, "desc" ]],
         "autoWidth" : true,
         "classes": {
             "sWrapper":      "dataTables_wrapper dt-bootstrap4"

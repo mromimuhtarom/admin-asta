@@ -683,7 +683,7 @@ class PlayersController extends Controller
           'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi Dilarang'
         ]);
 
-        return back()->with('success','Update Image Successfull');
+        return back()->with('success','Update Status Successfull');
     }
   // ----------- End Update Registered Player ----------- //
 //****************************************** End Menu Registered Player ******************************************//

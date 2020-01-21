@@ -2,9 +2,8 @@
 
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Table_Domino_Susun') }}">Domino Susun</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Table_Domino_Susun') }}">{{ TranslateMenuGame('Table') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Table_Domino_Susun') }}">Domino Susun</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Table_Domino_Susun') }}">{{ TranslateMenuGame('Table') }}</a></li>
 @endsection
 
 

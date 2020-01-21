@@ -1,9 +1,8 @@
 @extends('index')
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Active Admin') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Active Admin') }}</a></li>
 @endsection
 
 @section('content') <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-2"
