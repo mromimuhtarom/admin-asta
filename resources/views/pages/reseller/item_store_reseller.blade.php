@@ -164,7 +164,7 @@
                     </td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ number_format($gold->item_get, 2) }}</a></td>
-                    <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ strItemBonType($gold->bonus_type) }}</a></td>
+                    <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</a></td>
                     <td>
                       <div class="media-container" align="center">
                         <form method="POST" action="{{ route('ItemStoreReseller-updateimageBonus') }}" enctype="multipart/form-data">
@@ -194,7 +194,7 @@
                     <td>{{ translate_menuPlayers('Gold Coins')}}</td>
                     <td><a href="#" class="transactionType" data-title="Price" data-name="trans_type" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strTypeTransaction($gold->trans_type) }}</a></td>
                     <td><a href="#" class="usertext" data-title="Google Key" data-name="google_key" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->google_key }}</a></td>
-                    <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
+                    <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($gold->status)) }}</a></td>
                     <td style="text-align:center;">
                       <a href="#" style="color:red;" class="delete{{ $gold->item_id }}" 
                         id="delete" 
@@ -218,7 +218,7 @@
                     </td>
                     <td>{{ $gold->name }}</td>
                     <td>{{ number_format($gold->item_get, 2) }}</td>
-                    <td>{{ strItemBonType($gold->bonus_type) }}</td>
+                    <td>{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</td>
                     <td>
                       <div class="media-container">
                           <figure class="media-object">
@@ -231,7 +231,7 @@
                     <td>{{ translate_menuPlayers('Gold Coins')}}</td>
                     <td>{{ strTypeTransaction($gold->trans_type) }}</td>
                     <td>{{ $gold->google_key }}</td>
-                    <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ strEnabledDisabled($gold->status) }}</a></td>
+                    <td><a href="#" class="strEnable" data-title="Active" data-name="status" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($gold->status)) }}</a></td>
                     <td style="text-align:center;"></td>
                   </tr>
                 @endif
@@ -247,7 +247,7 @@
                     </td>
                     <td>{{ $gold->name }}</td>
                     <td>{{ number_format($gold->item_get, 2) }}</td>
-                    <td>{{ strItemBonType($gold->bonus_type) }}</td>
+                    <td>{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</td>
                     <td>
                       <div class="media-container">
                           <figure class="media-object">
@@ -260,7 +260,7 @@
                     <td>{{ translate_menuPlayers('Gold Coins')}}</td>
                     <td>{{ strTypeTransaction($gold->trans_type) }}</td>
                     <td>{{ $gold->google_key }}</td>
-                    <td>{{ strEnabledDisabled($gold->status) }}</td>
+                    <td>{{ ConfigTextTranslate(strEnabledDisabled($gold->status)) }}</td>
                   </tr>
               @endif
               @endforeach
@@ -330,10 +330,10 @@
             <div class="form-collaps" id="collapseExample">
                 <div class="sub-form">
                   <select name="BonusType" class="form-control" id="">
-                    <option value="">Select type</option>
-                    <option value="{{ $bontype[0] }}">{{ $bontype[1] }}</option>
-                    <option value="{{ $bontype[2] }}">{{ $bontype[3] }}</option>
-                    <option value="{{ $bontype[4] }}">{{ $bontype[5] }}</option>
+                    <option value="">Pilih tipe</option>
+                    <option value="{{ $bontype[0] }}">{{ ConfigTextTranslate($bontype[1]) }}</option>
+                    <option value="{{ $bontype[2] }}">{{ ConfigTextTranslate($bontype[3]) }}</option>
+                    <option value="{{ $bontype[4] }}">{{ ConfigTextTranslate($bontype[5]) }}</option>
                   </select>
                 </div>
               <br class="sub-form">
@@ -360,9 +360,9 @@
 
           <div class="form-group ">
             <select name="status_item" class="form-control" id="">
-              <option value="">Select status</option>
-              <option value="{{ $endis[0] }}">{{ $endis[1] }}</option>
-              <option value="{{ $endis[2] }}">{{ $endis[3] }}</option>
+              <option value="">Pilih status</option>
+              <option value="{{ $endis[0] }}">{{ ConfigTextTranslate($endis[1]) }}</option>
+              <option value="{{ $endis[2] }}">{{ ConfigTextTranslate($endis[3]) }}</option>
             </select>
           </div>
 
@@ -522,6 +522,27 @@ $(".watermark-image").change(function() {
         ]
       })
 
+      $('.bontypeActive').editable({  
+        value: '',
+        mode :'inline',
+        success: function success() {
+          location.reload();
+        },
+        validate: function(value) {
+          if($.trim(value) == '') {
+            return 'This field is required';
+          }
+        },
+				source: [
+                  {value: '', text: 'choose type bonus'},
+                  @php
+                      echo '{value:"'.$bontype[0].'", text: "'.ConfigTextTranslate($bontype[1]).'"}, ';
+                      echo '{value:"'.$bontype[2].'", text: "'.ConfigTextTranslate($bontype[3]).'"}, ';
+                      echo '{value:"'.$bontype[4].'", text: "'.ConfigTextTranslate($bontype[5]).'"}, ';
+                  @endphp
+        ]        
+      });
+
       $('.strEnable').editable({
         mode: 'inline',
         value: '',
@@ -534,11 +555,11 @@ $(".watermark-image").change(function() {
           }
         },
         source: [
-          {value: '', text: 'Choose For Activation'},
+          {value: '', text: 'Pilih untuk aktivasi'},
           @php            
               // $endis = preg_split( "/ :|, /", $atv->value );
-              echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-              echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+              echo '{value:"'.$endis[0].'", text: "'.ConfigTextTranslate($endis[1]).'"}, ';
+              echo '{value:"'.$endis[2].'", text: "'.ConfigTextTranslate($endis[3]).'"}, ';
           @endphp
         ]
       });
@@ -552,7 +573,7 @@ $(".watermark-image").change(function() {
           }
         },
 				source: [
-            {value: '', text: 'Choose For Transaction Type'},
+            {value: '', text: 'Pilih tipe transaksi'},
 					  {value: 1, text: 'Bank Transfer'},
 					  {value: 2, text: 'Internet Banking'},
 					  {value: 3, text: 'Cash Digital'},

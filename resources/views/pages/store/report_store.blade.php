@@ -51,19 +51,19 @@
                 @if(Request::is('Store/Report_Store/ReportStore-search*'))
                 <div class="col">
                     <select name="chooseitem" id="" class="form-control">
-                        <option value="">Choose item</option>
-                        <option value="{{ $type[0] }}" @if( $chooseitem == $type[0] ) selected @endif>{{ $type[1] }}</option>
-                        <option value="{{ $type[2] }}" @if( $chooseitem == $type[2] ) selected @endif>{{ $type[3] }}</option>
-                        <option value="{{ $type[4] }}" @if( $chooseitem == $type[4] ) selected @endif>{{ $type[5] }}</option>
+                        <option value="">Pilih item</option>
+                        <option value="{{ $type[0] }}" @if( $chooseitem == $type[0] ) selected @endif>{{ ConfigTextTranslate($type[1]) }}</option>
+                        <option value="{{ $type[2] }}" @if( $chooseitem == $type[2] ) selected @endif>{{ ConfigTextTranslate($type[3]) }}</option>
+                        <option value="{{ $type[4] }}" @if( $chooseitem == $type[4] ) selected @endif>{{ ConfigTextTranslate($type[5]) }}</option>
                     </select>
                 </div>
                 @else
                 <div class="col">
                     <select name="chooseitem" id="" class="form-control">
-                        <option value="">Choose item</option>
-                        <option value="{{ $type[0] }}">{{ $type[1] }}</option>
-                        <option value="{{ $type[2] }}">{{ $type[3] }}</option>
-                        <option value="{{ $type[4] }}">{{ $type[5] }}</option>
+                        <option value="">Pilih item</option>
+                        <option value="{{ $type[0] }}">{{ ConfigTextTranslate($type[1]) }}</option>
+                        <option value="{{ $type[2] }}">{{ ConfigTextTranslate($type[3]) }}</option>
+                        <option value="{{ $type[4] }}">{{ ConfigTextTranslate($type[5]) }}</option>
                     </select>
                 </div>
                 @endif

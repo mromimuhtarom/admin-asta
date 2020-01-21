@@ -51,7 +51,7 @@ function strItemBonType($val) {
   } else if($val == 2){
     return 'Gold';
   } else {
-    return 'Goods';
+    return 'Good';
   }
 }
 

@@ -384,6 +384,7 @@ function TranslateMenuItem($menu){
         'Emoticon'          =>  'Emoticon',
         'Create New Emoticon'=> 'Buat emotikon baru',
         'Create Emoticon'   =>  'Buat emotikon',
+        'Edit'              =>  'Ubah'
     ];
 
     return $array_menuContent[$menu];
@@ -573,13 +574,48 @@ function TranslateReseller($menu){
         'Weekly'                =>  'Mingguan',
         'Monthly'               =>  'Bulanan',
         'Create new'            =>  'Buat baru',
-        ''                      =>  '', 
+ 
 
     
-
     ];
     return $array_menuContent[$menu];
 }
+
+
+function ConfigTextTranslate($menu){
+
+    $array_menuContent = [
+
+        "The Menu Can't be Accessed and can't be edited"    =>   "Menu tidak dapat diakses dan tidak dapat diubah",
+        "The Menu Can be Accessed and can't be edited"      =>   "Menu dapat diakses dan tidak dapat diubah",
+        "The Menu Can be Accessed and edited"               =>   "Menu dapat diakses dan dapat di ubah",
+        "Login"                                             =>   "Masuk",
+        "Logout"                                            =>   "Keluar",
+        "pending"                                           =>   "Tunda",
+        "Success"                                           =>   "Sukses",
+        "Failed"                                            =>   "Gagal",
+        "Bet"                                               =>   "Taruhan",
+        "Win"                                               =>   "Menang",
+        "Lose"                                              =>   "Kalah",
+        "Transfer Out"                                      =>   "Transfer Out",
+        "Free"                                              =>   "Gratis",
+        "Bonus"                                             =>   "Bonus",
+        "Gift"                                              =>   "Hadiah",
+        "Reward"                                            =>   "Penghargaan",
+        "Buy"                                               =>   "Beli",
+        "Player"                                            =>   "Pemain",
+        "Guest"                                             =>   "Guest",
+        "Bot"                                               =>   "Bot",
+        "Disabled"                                          =>   "Non aktif",
+        "Enabled"                                           =>   "Aktif",
+        "Chip"                                              =>   "Chip",
+        "Gold"                                              =>   "Koin",
+        "Good"                                              =>   "Barang",
+        "" => ""
+
+    ];
+    return $array_menuContent[$menu];
+};
 
 
 

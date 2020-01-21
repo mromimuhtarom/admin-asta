@@ -39,8 +39,8 @@
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
                             <option value="">{{ Translate_menuPlayers('Choose Log Type') }}</option>
-                            <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;>{{ $logonlinetype[1]}} Player</option>
-                            <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;>{{ $logonlinetype[3]}} Player</option>
+                            <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;>Pemain {{ ConfigTextTranslate($logonlinetype[1])}}</option>
+                            <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;>Pemain {{ ConfigTextTranslate($logonlinetype[3])}}</option>
                         </select>
                     </div>
                     <div class="col" style="padding-left:1%;">
@@ -56,8 +56,8 @@
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
                             <option value="">{{ Translate_menuPlayers('Choose Log Type') }}</option>
-                            <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} Player</option>
-                            <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} Player</option>
+                            <option value="{{ $logonlinetype[0] }}">Pemain {{ ConfigTextTranslate($logonlinetype[1])}}</option>
+                            <option value="{{ $logonlinetype[2] }}">Pemain {{ ConfigTextTranslate($logonlinetype[3])}}</option>
                         </select>
                     </div> 
                     <div class="col" style="padding-left:1%;">

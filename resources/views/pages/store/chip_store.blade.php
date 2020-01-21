@@ -153,7 +153,7 @@
                       <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
                       <td>{{ $itm->strItemType() }}</td>
                       <td><a href="#" class="usertext" data-name="item_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->item_get }}</a></td>
-                      <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strItemBonType($itm->bonus_type) }}</a></td>
+                      <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ ConfigTextTranslate(strItemBonType($itm->bonus_type)) }}</a></td>
                       <td>
                         <div class="media-container" align="center">
                           <form method="POST" action="{{ route('ChipStore-updateimageBonus') }}" enctype="multipart/form-data">
@@ -179,7 +179,7 @@
                       </td>
                       <td><a href="#" class="usertext" data-name="bonus_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update')}}">{{ $itm->bonus_get }}</a></td>
                       <td><a href="#" class="usertext" data-name="price" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update') }}">{{ $itm->price }}</a></td>
-                      <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
+                      <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($itm->status)) }}</a></td>
                       <td>
                         <a href="#" style="color:red;" class="delete{{ $itm->item_id }}" 
                           id="delete" 
@@ -217,7 +217,7 @@
                       </td>
                       <td>{{ $itm->bonus_get  }}</td>
                       <td>{{ $itm->price }}</td>
-                      <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ strEnabledDisabled($itm->status) }}</a></td>
+                      <td><a href="#" class="stractive" data-name="status" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="select" data-url="{{ route('ChipStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($itm->status)) }}</a></td>
                       <td></td>
                     </tr>
                   @endif
@@ -244,7 +244,7 @@
                     </td>
                     <td>{{ $itm->bonus_get}}</td>
                     <td>{{ $itm->price }}</td>
-                    <td>{{ strEnabledDisabled($itm->status) }}</td>
+                    <td>{{ ConfigTextTranslate(strEnabledDisabled($itm->status)) }}</td>
                   </tr>
                 @endif
               @endforeach
@@ -343,10 +343,10 @@
             <div class="form-collaps" id="collapseExample">
                 <div class="sub-form">
                     <select name="BonusType" class="form-control" id="">
-                        <option value="">Select type</option>
-                        <option value="{{ $bontype[0] }}">{{ $bontype[1] }}</option>
-                        <option value="{{ $bontype[2] }}">{{ $bontype[3] }}</option>
-                        <option value="{{ $bontype[4] }}">{{ $bontype[5] }}</option>
+                        <option value="">Pilih tipe</option>
+                        <option value="{{ $bontype[0] }}">{{ ConfigTextTranslate($bontype[1]) }}</option>
+                        <option value="{{ $bontype[2] }}">{{ ConfigTextTranslate($bontype[3]) }}</option>
+                        <option value="{{ $bontype[4] }}">{{ ConfigTextTranslate($bontype[5]) }}</option>
                     </select>
                 </div>
                 <br class="sub-form">
@@ -374,9 +374,9 @@
 
           <div class="form-group">
             <select name="status_item" class="form-control" id="">
-              <option value="">Select status</option>
-                <option value="{{ $endis[0]}}">{{ $endis[1] }}</option>
-            <option value="{{ $endis[2]}}">{{ $endis[3] }}</option>
+              <option value="">Pilih status</option>
+                <option value="{{ $endis[0]}}">{{ ConfigTextTranslate($endis[1]) }}</option>
+            <option value="{{ $endis[2]}}">{{ ConfigTextTranslate($endis[3]) }}</option>
             </select>
           </div>
       
@@ -502,10 +502,10 @@
           }
         },
 				source: [
-                  {value: '', text: 'choose for activation'},
+                  {value: '', text: 'pilih tipe aktivasi'},
                   @php
-                      echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                      echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                      echo '{value:"'.$endis[0].'", text: "'.ConfigTextTranslate($endis[1]).'"}, ';
+                      echo '{value:"'.$endis[2].'", text: "'.ConfigTextTranslate($endis[3]).'"}, ';
                   @endphp
         ]        
       });
@@ -522,11 +522,11 @@
           }
         },
 				source: [
-                  {value: '', text: 'choose type bonus'},
+                  {value: '', text: 'pilih tipe bonus'},
                   @php
-                      echo '{value:"'.$bontype[0].'", text: "'.$bontype[1].'"}, ';
-                      echo '{value:"'.$bontype[2].'", text: "'.$bontype[3].'"}, ';
-                      echo '{value:"'.$bontype[4].'", text: "'.$bontype[5].'"}, ';
+                      echo '{value:"'.$bontype[0].'", text: "'.ConfigTextTranslate($bontype[1]).'"}, ';
+                      echo '{value:"'.$bontype[2].'", text: "'.ConfigTextTranslate($bontype[3]).'"}, ';
+                      echo '{value:"'.$bontype[4].'", text: "'.ConfigTextTranslate($bontype[5]).'"}, ';
                   @endphp
         ]        
       });

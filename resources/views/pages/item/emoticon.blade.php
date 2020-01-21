@@ -141,12 +141,12 @@
                               <button class="save-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuItem('Save Gift') }}</button>
                             </form>
                               <button class="cancel-upload{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                              <button class="edit-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit Gift') }}</button>
+                              <button class="edit-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit') }}</button>
                             </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $emot->id }}" data-type="text" data-url="{{ route('Emoticon-update') }}">{{ $emot->name }}</a></td>
                     <td><a href="#" class="usertext" data-name="price" data-title="price" data-pk="{{ $emot->id }}" data-type="number" data-url="{{ route('Emoticon-update') }}">{{ $emot->price }}</a></td>
-                    <td><a href="#" class="status" data-name="status" data-pk="{{ $emot->id }}" data-type="select" data-value="{{ $emot->status }}" data-url="{{ route('Emoticon-update') }}" data-title="Select type">{{ strEnabledDisabled($emot->status)}}</a></td>
+                    <td><a href="#" class="status" data-name="status" data-pk="{{ $emot->id }}" data-type="select" data-value="{{ $emot->status }}" data-url="{{ route('Emoticon-update') }}" data-title="Select type">{{ ConfigTextTranslate(strEnabledDisabled($emot->status)) }}</a></td>
                     <td>
                         <a href="#" style="color:red;" class="delete{{ $emot->id }}" 
                             id="delete"
@@ -169,7 +169,7 @@
                     <td>{{ $emot->name }}</td>
                     <td>{{ number_format($emot->price, 2) }}</td>
                     {{-- <td>{{ $emot->strCategory() }}</td> --}}
-                    <td>{{ strEnabledDisabled($emot->status) }}</td>
+                    <td>{{ ConfigTextTranslate(strEnabledDisabled($emot->status)) }}</td>
                 </tr>
                 @endif
                 @endforeach
@@ -357,10 +357,10 @@ $(".watermark-image").change(function() {
           }
         },
 				source: [
-                  {value: '', text: 'Choose for activation'},
+                  {value: '', text: 'Pilih untuk aktivasi'},
                   @php
-                  echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                  echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                  echo '{value:"'.$endis[0].'", text: "'.ConfigTextTranslate($endis[1]).'"}, ';
+                  echo '{value:"'.$endis[2].'", text: "'.ConfigTextTranslate($endis[3]).'"}, ';
                   @endphp
         ]
       });

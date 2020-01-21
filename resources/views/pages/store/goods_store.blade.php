@@ -151,7 +151,7 @@
                     <td><a href="#" class="usertext" data-name="price" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ number_format($goods->price, 2) }}</a></td>
                     <td><a href="#" class="usertext" data-name="qty" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ number_format($goods->qty) }}</a></td>
                     {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
-                    <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
+                    <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($goods->status)) }}</a></td>
                     <td>
                       <a href="#" style="color:red;" class="delete{{ $goods->item_id }}" 
                         id="delete" 
@@ -200,7 +200,7 @@
                     <td>{{ number_format($goods->price, 2) }}</td>
                     <td>{{ number_format($goods->qty) }}</td>
                     {{-- <td><a href="#" class="transactionType" data-name="trans_type" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{  strTypeTransaction($goods->trans_type) }}</a></td> --}}
-                    <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ strEnabledDisabled($goods->status) }}</a></td>
+                    <td><a href="#" class="strEnable" data-name="status" data-pk="{{ $goods->item_id }}" data-type="select" data-url="{{ route('GoodsStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($goods->status)) }}</a></td>
                     <td></td>
                   </tr>
                 @endif
@@ -218,7 +218,7 @@
                   <td>{{ number_format($goods->price, 2) }}</td>
                   <td>{{ number_format($goods->qty) }}</td>
                   {{-- <td>{{  strTypeTransaction($goods->trans_type) }}</td> --}}
-                  <td>{{ strEnabledDisabled($goods->status) }}</td>
+                  <td>{{ ConfigTextTranslate(strEnabledDisabled($goods->status)) }}</td>
               </tr>
               @endif
               @endforeach
@@ -432,10 +432,10 @@ $(".watermark-image").change(function() {
           }
         },
         source: [
-          {value: '', text: 'Choose For Activation'},
+          {value: '', text: 'Pilih untuk aktivasi'},
           @php
-              echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-              echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+              echo '{value:"'.$endis[0].'", text: "'.ConfigTextTranslate($endis[1]).'"}, ';
+              echo '{value:"'.$endis[2].'", text: "'.ConfigTextTranslate($endis[3]).'"}, ';
           @endphp
         ]
       });
@@ -449,7 +449,7 @@ $(".watermark-image").change(function() {
           }
         },
 				source: [
-            {value: '', text: 'Choose For Transaction Type'},
+            {value: '', text: 'Pilih untuk tipe transaksi'},
 					  {value: 1, text: 'Bank Transfer'},
 					  {value: 2, text: 'Internet Banking'},
 					  {value: 3, text: 'Cash Digital'},
