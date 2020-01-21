@@ -18,8 +18,8 @@ class SeasonController extends Controller
     public function index()
     {
         // $menu  = MenuClass::menuName('Role Admin');
-        $season = DB::table('seasons')->get();
-        return view('pages.game_asta.season', compact('season'));
+        // $season = DB::table('seasons')->get();
+        return view('pages.Maintenance.underconstruction');
     }
 
     /**
@@ -30,8 +30,8 @@ class SeasonController extends Controller
      */
     public function BigTwoindex()
     {
-        $season = 'This page under construction';
-        return view('pages.game_asta.BigTwoSeason', compact('season'));
+        // $season = 'This page under construction';
+        return view('pages.Maintenance.underconstruction');
     }
 
     /**

@@ -19,13 +19,14 @@ class JackpotPaytableController extends Controller
      */
     public function index()
     {
-        $jackpot_paytable = Jackpot_paytable::all();
+        // $jackpot_paytable = Jackpot_paytable::all();
 
-        //roles for jackpot_paytable pages
-        $menus1 = MenuClass::menuName('Jackpot Paytable');
+        // //roles for jackpot_paytable pages
+        // $menus1 = MenuClass::menuName('Jackpot Paytable');
 
 
-        return view('pages.game_asta.jackpot_paytable', compact('jackpot_paytable', 'menus1'));
+        // return view('pages.game_asta.jackpot_paytable', compact('jackpot_paytable', 'menus1'));
+        return view('pages.Maintenance.underconstruction');
     }
 
     /**

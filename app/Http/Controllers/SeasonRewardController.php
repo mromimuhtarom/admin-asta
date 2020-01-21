@@ -18,8 +18,9 @@ class SeasonRewardController extends Controller
     public function index()
     {
         // $menu  = MenuClass::menuName('Role Admin');
-        $reward = SR::all();
-        return view('pages.game_asta.season_reward', compact('reward'));
+        // $reward = SR::all();
+        // return view('pages.game_asta.season_reward', compact('reward'));
+        return view('pages.Maintenance.underconstruction');
     }
 
     /**
@@ -30,8 +31,9 @@ class SeasonRewardController extends Controller
      */
     public function BigTwoindex()
     {
-        $season = 'This page under construction';
-        return view('pages.game_asta.BigTwoSeason_reward', compact('season'));
+        // $season = 'This page under construction';
+        // return view('pages.game_asta.BigTwoSeason_reward', compact('season'));
+        return view('pages.Maintenance.underconstruction');
     }
 
     /**

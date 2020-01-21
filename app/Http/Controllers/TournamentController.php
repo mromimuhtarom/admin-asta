@@ -22,14 +22,15 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\Response
      * asta poker index
      */
-    public function index(Dealer $dealer)
+    public function index()
     {
-        $tournaments = Tournament::all();
+        // $tournaments = Tournament::all();
 
-        //roles for tournaments pages
-        $menus1 = MenuClass::menuName('Tournaments');
+        // //roles for tournaments pages
+        // $menus1 = MenuClass::menuName('Tournaments');
 
-        return view('pages.game_asta.tournament', compact('tournaments', 'menus1'));
+        // return view('pages.game_asta.tournament', compact('tournaments', 'menus1'));
+        return view('pages.Maintenance.underconstruction');
     }
 
     /**
@@ -38,11 +39,12 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\Response
      * big two index
      */
-    public function BigTwoindex(Dealer $dealer)
+    public function BigTwoindex()
     {
-      // $menu  = MenuClass::menuName('Table Asta Big Two');
-      $season = 'This page under construction';
-      return view('pages.game_asta.BigTwoTournament', compact('season'));
+      // // $menu  = MenuClass::menuName('Table Asta Big Two');
+      // $season = 'This page under construction';
+      // return view('pages.game_asta.BigTwoTournament', compact('season'));
+      return view('pages.Maintenance.underconstruction');
     }
 
     /**

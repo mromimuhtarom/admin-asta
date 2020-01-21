@@ -221,6 +221,7 @@
                     <td>{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</td>
                     <td>
                       <div class="media-container">
+                        
                           <figure class="media-object">
                             <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'-2.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                           </figure>

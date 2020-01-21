@@ -396,7 +396,7 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  => 'Jackpot_Paytable_Big_Two'], function() {
                 Route::middleware('page_denied:Jackpot Paytable Big Two')->group(function(){
-                    Route::get('BigTwoJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('Jackpot_Paytable_Big_Two');
+                    Route::get('BigTwoJackpotPaytable-view', 'JackpotPaytableController@index')->name('Jackpot_Paytable_Big_Two');
                     Route::post('BigTwoJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('BigTwoJackpotPaytable-update');
                 });
             });
@@ -451,7 +451,7 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  => 'Jackpot_Paytable_Domino_Susun'], function() {
                 Route::middleware('page_denied:Jackpot Paytable Domino Susun')->group(function(){
-                    Route::get('DominoSJackpotPaytable-view', 'JackpotPaytableController@BigTwoindex')->name('Jackpot_Paytable_Domino_Susun');
+                    Route::get('DominoSJackpotPaytable-view', 'JackpotPaytableController@index')->name('Jackpot_Paytable_Domino_Susun');
                     Route::post('DominoSJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('DominoSJackpotPaytable-update');
                 });
             });
@@ -480,7 +480,7 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  => 'Season_Domino_QQ'], function() {
                 Route::middleware('page_denied:Season Domino QQ')->group(function(){
-                    Route::get('DominoQSeason-view', 'SeasonController@DominoQindex')->name('Season_Domino_QQ');
+                    Route::get('DominoQSeason-view', 'SeasonController@BigTwoindex')->name('Season_Domino_QQ');
                     Route::post('DominoQSeason-create', 'SeasonController@DominoQstore')->name('DominoQSeason-create');
                     Route::post('DominoQSeason-update', 'SeasonController@DominoQupdate')->name('DominoQSeason-update');
                     Route::delete('DominoQSeason-delete', 'SeasonController@DominoQdestroy')->name('DominoQSeason-delete');
@@ -489,7 +489,7 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  => 'Season_Reward_Domino_QQ'], function() {
                 Route::middleware('page_denied:Season Reward Domino QQ')->group(function(){
-                    Route::get('DominoQSeasonReward-view', 'SeasonRewardController@DominoQindex')->name('Season_Reward_Domino_QQ');
+                    Route::get('DominoQSeasonReward-view', 'SeasonRewardController@BigTwoindex')->name('Season_Reward_Domino_QQ');
                     Route::post('DominoQSeasonReward-create', 'SeasonRewardController@DominoQstore')->name('DominoQSeasonReward-create');
                     Route::post('DominoQSeasonReward-update', 'SeasonRewardController@DominoQupdate')->name('DominoQSeasonReward-update');
                     Route::delete('DominoQSeasonReward-delete', 'SeasonRewardController@DominoQdestroy')->name('DominoQSeasonReward-delete');
@@ -498,7 +498,7 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  => 'Tournament_Domino_QQ'], function() {
                 Route::middleware('page_denied:Tournament Domino QQ')->group(function(){
-                    Route::get('DominoQTournament-view', 'TournamentController@DominoQindex')->name('Tournament_Domino_QQ');
+                    Route::get('DominoQTournament-view', 'TournamentController@BigTwoindex')->name('Tournament_Domino_QQ');
                     Route::post('DominoQTournament-create', 'TournamentController@DominoQstore')->name('DominoQTournament-create');
                     Route::post('DominoQTournament-update', 'TournamentController@DominoQupdate')->name('DominoQTournament-update');
                 });
@@ -506,7 +506,7 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  => 'Jackpot_Paytable_Domino_QQ'], function() {
                 Route::middleware('page_denied:Jackpot Paytable Domino QQ')->group(function(){
-                    Route::get('DominoQJackpotPaytable-view', 'JackpotPaytableController@DominoQindex')->name('Jackpot_Paytable_Domino_QQ');
+                    Route::get('DominoQJackpotPaytable-view', 'JackpotPaytableController@index')->name('Jackpot_Paytable_Domino_QQ');
                     Route::post('DominoQJackpotPaytable-update', 'JackpotPaytableController@DominoQupdate')->name('DominoQJackpotPaytable-update');
                 });
             });
