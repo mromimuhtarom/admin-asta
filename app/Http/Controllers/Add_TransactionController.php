@@ -144,6 +144,10 @@ class Add_TransactionController extends Controller
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
 
+          if($stat->chip < $valuecurrency):
+            return back()->with('alert', 'balance tidak dapat dikurangi, silahkan masukan nominal yang sesuai');
+          endif;
+
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
             'description' =>  'required'
@@ -196,6 +200,11 @@ class Add_TransactionController extends Controller
           if($stat->gold == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
           endif;
+
+          if($stat->gold < $valuecurrency):
+            return back()->with('alert', 'balance tidak dapat dikurangi, silahkan masukan nominal yang sesuai');
+          endif;
+
         endif;
 
         if ($validator->fails()) :
@@ -244,6 +253,10 @@ class Add_TransactionController extends Controller
           //PREVENT BALANCE MINUS POINT
           if($stat->point == 0):
             return back()->with('alert', 'balance tidak dapat dikurangi');
+          endif;
+
+          if($stat->point < $valuecurrency):
+            return back()->with('alert', 'balance tidak dapat dikurangi, silahkan masukan nominal yang sesuai');
           endif;
         endif;
 

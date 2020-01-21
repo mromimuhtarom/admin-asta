@@ -34,8 +34,8 @@
                         <div class="col" style="padding-left:1%;">
                             <select name="logType" class="form-control">
                                 <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
-                                <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;>{{ $logonlinetype[1]}} {{ translate_MenuContentAdmin('Admin') }}</option>
-                                <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;>{{ $logonlinetype[3]}} {{ translate_MenuContentAdmin('Admin') }}</option>
+                                <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;> {{ translate_MenuContentAdmin('Admin') }} {{ ConfigTextTranslate($logonlinetype[1]) }}</option>
+                                <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;> {{ translate_MenuContentAdmin('Admin') }} {{ ConfigTextTranslate($logonlinetype[3]) }}</option>
                             </select>
                         </div>
                         <div class="col" style="padding-left:1%;">
@@ -109,7 +109,7 @@
                         <tr>
                           <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
-                          <td>{{ $action_report_admin[$login->action_id] }}{{ translate_MenuContentAdmin('Admin') }}</td>
+                          <td>{{ translate_MenuContentAdmin('Admin') }} {{ ConfigTextTranslate($action_report_admin[$login->action_id]) }}</td>
                           <td>{{ $login->datetime }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>

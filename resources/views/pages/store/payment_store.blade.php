@@ -89,7 +89,7 @@
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>
                 <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->type) }}</td>
                 <td><a href="#" class="usertext" data-title="desc" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
-                <td><a href="#" class="stractive" data-title="status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td>
+                <td><a href="#" class="stractive" data-title="status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($payment->status)) }}</td>
                 {{-- <td><a href="#" class="stractive" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td> --}}
                 <td style="text-align:center;">
                   <a href="#" style="color:red;" class="delete{{ $payment->id }}" 
@@ -106,7 +106,7 @@
                 <td>{{ $payment->name }}</td>
                 <td>{{ strTypeTransaction($payment->type) }}</td>
                 <td>{{ $payment->desc }}</td>
-                <td>{{ strEnabledDisabled($payment->status) }}</td>
+                <td>{{ ConfigTextTranslate(strEnabledDisabled($payment->status)) }}</td>
               </tr>
               @endif
               @endforeach
@@ -279,7 +279,7 @@
           }
         },
         source: [
-          {value: '', text:'Choose Payment Type'},
+          {value: '', text:'Pilih tipe pembayaran'},
           {value: '1', text:'Bank Transfer'},
           {value: '2', text:'Internet Banking' },
           {value: '3', text:'Cash Digital'},
@@ -305,8 +305,8 @@
 					        // {value: '0', text: 'Disabled'},
                   @php
                         // $endis = preg_split( "/ :|, /", $atv->value );
-                      echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                      echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                      echo '{value:"'.$endis[0].'", text: "'.ConfigTextTranslate($endis[1]).'"}, ';
+                      echo '{value:"'.$endis[2].'", text: "'.ConfigTextTranslate($endis[3]).'"}, ';
                   @endphp
         ]
       });

@@ -51,9 +51,9 @@
                   <td colspan="2">
                       <select name="usertype" class="form-control" required>
                           <option value="">{{ Translate_menuPlayers('Choose User Type') }}</option>
-                          <option value="{{ $type[0] }}">{{ $type[1] }}</option>
-                          <option value="{{ $type[2] }}">{{ $type[3] }}</option>
-                          <option value="{{ $type[4] }}">{{ $type[5] }}</option>
+                          <option value="{{ $type[0] }}">{{ ConfigTextTranslate($type[1]) }}</option>
+                          <option value="{{ $type[2] }}">{{ ConfigTextTranslate($type[3]) }}</option>
+                          <option value="{{ $type[4] }}">{{ ConfigTextTranslate($type[5]) }}</option>
                       </select>&nbsp;
                   </td>
               </tr>

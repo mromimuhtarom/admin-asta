@@ -180,9 +180,8 @@
                                         <input type="hidden" name="columnname" value="chip">
                                         <input type="number" min="0" name="currency" placeholder="Chip" class="form-control" required><br>
                                         <select name="type" class="form-control" id="">
-                                            <option value="">Select Type</option>
                                             @foreach ($actblnc as $key => $act)
-                                                <option value="{{ $key }}"> {{ $act }}</option>
+                                                <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
                                             @endforeach
                                         </select><br>
                                         <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Chip ditambah"></textarea>
@@ -267,9 +266,8 @@
                                         <input type="hidden" name="columnname" value="point">
                                         <input type="number" min="0" name="currency" placeholder="Point" class="form-control" required><br>
                                         <select name="type" class="form-control" id="">
-                                            <option value="">Select Type</option>
                                             @foreach ($actblnc as $key => $act)
-                                                <option value="{{ $key }}"> {{ $act }}</option>
+                                                <option value="{{ $key }}"> {{ ConfigTextTranslate($act) }}</option>
                                             @endforeach
                                         </select><br>
                                         <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Point ditambah"></textarea>
@@ -355,9 +353,8 @@
                                 <input type="hidden" name="columnname" value="gold">
                                 <input type="number" min="0" name="currency" placeholder="Gold" class="form-control" required><br>
                                 <select name="type" class="form-control" id="">
-                                    <option value="">Select Type</option>
                                     @foreach ($actblnc as $key => $act)
-                                        <option value="{{ $key }}"> {{ $act }}</option>
+                                        <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
                                     @endforeach
                                 </select><br>
                                 <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Koin ditambah"></textarea>

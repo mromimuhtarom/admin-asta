@@ -72,7 +72,7 @@
 												</div>
 											</td>
 											@endif
-											<td>{{ $trns->description }}</td>
+											<td>{{ ConfigTextTranslate($trns->description)	 }}</td>
 										</tr>
 									@endforeach
 								</tbody>
