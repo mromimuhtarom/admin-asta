@@ -951,9 +951,9 @@ public function detailTransaction(Request $request, $month, $year)
                     // Memuat gambar watermark
                     $rootpath_wtr       =   '../public/upload/Gold/image2/';
                     $upload_imagewtr    =   '../public/upload/Gold/image2';
-                    $waterimage         =   Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                    $putfile_wtr        =   $waterimage->put($nama_file_unik, file_get_contents($file_wtr));
-                    $watermark          =   imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                    $watermarkimage     =   Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                    $putfile_wtr        =   $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                    $watermark          =   imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
                     //$watermark = imagecreatefrompng($file_wtr->move(public_path('../public/upload/Gold/image2'), $nama_file_unik));
 
                     // mendapatkan lebar dan tinggi dari gambar watermark
