@@ -55,6 +55,12 @@
   </div>
 @endif
 
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+  <p>{{\Session::get('alert')}}</p>
+</div>
+@endif
+
 <!-- Table -->
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
 

@@ -757,8 +757,8 @@
               <div class="form-group" align="center"><br>
                 <input type="hidden" value="{{ $xl_ios['name'] }}" name="pk">
                 <div class="form-group">
-                    <input type="file" name="fileEditIOS" id="file4{{ $xl_ios['name'] }}" class="input-file">
-                    <label for="file4{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
+                    <input type="file" name="fileEditIOS" id="file7{{ $xl_ios['name'] }}" class="input-file">
+                    <label for="file7{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
                       <i class="icon fa fa-check"></i>
                       <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                     </label>

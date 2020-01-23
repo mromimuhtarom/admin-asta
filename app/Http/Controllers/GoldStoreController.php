@@ -422,7 +422,7 @@ class GoldStoreController extends Controller
                 return redirect()->route('Gold_Store')->with('alert','Size Image is to big');
             }
         } else  {
-            return redirect()->route('Gold_Store')->with('alert','Image must be in png format');
+            return redirect()->route('Gold_Store')->with('alert', TranslateMenuItem('aa'));
         }
     }
 
