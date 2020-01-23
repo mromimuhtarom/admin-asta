@@ -134,7 +134,9 @@ class TransactionPlayersController extends Controller
                    ->get();
         $time      = "all time";
         $lang_id   = '';
+        $minDate   = '';
+        $maxDate   = '';
 
-        return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id'));
+        return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate'));
     }
 }

@@ -213,6 +213,7 @@ function translate_menuTransaction($menu){
         'Status Payment'        =>  'Status pembayaran',
         'Confirm request'       =>  'Konfirmasi permintaan',
         'Username'              =>  'Nama pengguna',
+        'Status'                =>  'Status',
         'Date'                  =>  'Tanggal',
         'Win'                   =>  'Menang',
         'Lose'                  =>  'Kalah',
@@ -239,7 +240,9 @@ function translate_menuTransaction($menu){
         'Date Sent'             =>  'Tanggal Dikirim',
         'Item Name'             =>  'Nama Barang',
         'Type Of Shipment'      =>  'Jenis Pengiriman (Transfer, JNE, TIKI, DLL)',
-        'Shipping Code'         =>  'Kode Pengiriman (No Resi / No Transferan)'
+        'Shipping Code'         =>  'Kode Pengiriman (No Resi / No Transferan)',
+        'Completed'             =>  'Selesai',
+        'Confirmation'          =>  'Konfirmasi',
     ];
     return $array_menuContent[$menu];
 }
@@ -344,6 +347,7 @@ function Translate_menuPlayers($menu){
         'Edit Avatar'               =>  'Ubah avatar',
         'Edit'                      =>  'Edit',
         'Main'                      =>  'Utama',
+        'Confirmation'              =>  'Konfirmasi'
 
     ];
     return $array_menuContent[$menu];
@@ -489,9 +493,26 @@ function TranslateMenuToko($menu){
         'Price Point'       =>  'Price poin',
         'Choose type date'  =>  'Pilih tipe tanggal',
         'Date approve and Decline' => 'Tanggal disetujui dan ditolak',
-        'Date Request'      =>  'Tanggal permintaan',
+        'Date Request'      =>  'Tanggal Pembelian',
         'Item awarded'      =>  'Item diberikan',
-        'Bonus Item'        =>  'Bonus Item'
+        'Bonus Item'        =>  'Bonus Item',
+        'Status Information' => 'Informasi Status',
+        'Player ID'         =>  'ID Pemain',
+        'Username'          =>  'Nama Pengguna',
+        'Item'              =>  'Item',
+        'Quantity'          =>  'Jumlah',
+        'Description'       =>  'Deskripsi',
+        'Price'             =>  'Harga',
+        'Confirmation'      =>  'Konfirmasi',
+        'Status'            =>  'Status',
+        'Date Sent'         =>  'Tanggal Pengiriman',
+        'The Date The Item Was Received'    =>  'Tanggal Diterima',
+        'Type Of Delivery'  =>  'Jenis Pengiriman',
+        'Code Receipt'      =>  'Kode pengiriman (no resi / no transferan)',
+        'Success'           =>  'Sukses',
+        'Decline'           =>  'Ditolak',
+        'Received And Sent' =>  'Terima & Dikirm',
+        'Payment Type'      =>  'Tipe Pembayaran'
 
     ];
 
@@ -611,6 +632,7 @@ function ConfigTextTranslate($menu){
         "Chip"                                              =>   "Chip",
         "Gold"                                              =>   "Koin",
         "Good"                                              =>   "Barang",
+        //"1"                                                 =>  "1",
         "" => ""
 
     ];

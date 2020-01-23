@@ -119,32 +119,32 @@
                     <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $goods->item_id }}" data-type="number" data-url="{{ route('GoodsStore-update') }}">{{ $goods->order }}</a></td>
                     <td>
                       <div class="media-container">
-                        <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
-                          {{  csrf_field() }}
-                          <span class="media-overlay-wtr med-ovlay{{ $goods->item_id}}">
-                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
-                            <input type="file" name="file" id="media-input-wtr" class="upload{{ $goods->item_id }}" accept="image/*">
-                            <i class="fa fa-edit media-icon-wtr"></i>
-                            <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
-                          </span>
-                          <span class="media-overlay-wtr1 med-ovlay{{ $goods->item_id }}">
-                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
-                            <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $goods->item_id }}">
-                            <i class="fa fa-edit media-icon-wtr1"></i>
-                            <div class="nav-name">Watermark</div>
-                          </span>
-                          <figure class="media-object">
-                            {{-- <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ route('imageItemGoods', $goods->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
-                            <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$goods->item_id. '.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
-                            <img class="img-object-wtr1 imgupload1{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
-                            <img class="img-object-wtr2 imgupload2{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
-                          </figure>
-                      </div>
-                      <div class="media-control" align="center" style="margin-top:-1%">
-                          <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
-                        </form>
-                        <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
-                        <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
+                          <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
+                            {{  csrf_field() }}
+                            <span class="media-overlay-wtr med-ovlay{{ $goods->item_id}}">
+                                <input type="hidden" name="pk" value="{{ $goods->item_id }}">
+                                <input type="file" name="file" id="media-input-wtr" class="upload{{ $goods->item_id }}" accept="image/*">
+                                <i class="fa fa-edit media-icon-wtr"></i>
+                                <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
+                            </span>
+                            <span class="media-overlay-wtr1 med-ovlay{{ $goods->item_id }}">
+                                <input type="hidden" name="pk" value="{{ $goods->item_id }}">
+                                <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $goods->item_id }}">
+                                <i class="fa fa-edit media-icon-wtr1"></i>
+                                <div class="nav-name">Watermark</div>
+                            </span>
+                            <figure class="media-object">
+                              {{-- <img src="{{ route('imageItemGold', $goods->item_id) }}?{{ $timenow }}" class="img-object-wtr imgupload{{ $goods->item_id }}" style="margin-left: auto; margin-right: auto;"> --}}
+                             <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$goods->item_id.'.png'}}?{{ $timenow }}" class="img-object-normal imgupload{{ $goods->item_id }}" style="margin-left: auto; margin-right: auto;">
+                              <img class="img-object-wtr1 imgupload1{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
+                              <img class="img-object-wtr2 imgupload2{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
+                            </figure>
+                          </div>
+                          <div class="media-control" align="center" style="margin-top:-1%">
+                            <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
+                          </form>
+                            <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
+                            <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
                       </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
@@ -168,33 +168,10 @@
                     <td>{{ $goods->order }}</td>
                     <td>
                       <div class="media-container">
-                        <form method="POST" action="{{ route('GoodsStore-updateimage') }}" enctype="multipart/form-data">
-                          {{  csrf_field() }}
-                          <span class="media-overlay-wtr med-ovlay{{ $goods->item_id}}">
-                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
-                            <input type="file" name="file" id="media-input-wtr" class="upload{{ $goods->item_id }}" accept="image/*">
-                            <i class="fa fa-edit media-icon-wtr"></i>
-                            <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
-                          </span>
-                          <span class="media-overlay-wtr1 med-ovlay{{ $goods->item_id }}">
-                            <input type="hidden" name="pk" value="{{ $goods->item_id }}">
-                            <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $goods->item_id }}">
-                            <i class="fa fa-edit media-icon-wtr1"></i>
-                            <div class="nav-name">Watermark</div>
-                          </span>
-                          <figure class="media-object">
-                            {{-- <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ route('imageItemGoods', $goods->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
-                            <img class="img-object-wtr imgupload{{ $goods->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$goods->item_id. '.png' }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
-                            <img class="img-object-wtr1 imgupload1{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
-                            <img class="img-object-wtr2 imgupload2{{ $goods->item_id }}" src="http://placehold.jp/80x100.png">
-                          </figure>
-                      </div>
-                      <div class="media-control" align="center" style="margin-top:-1%">
-                        <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i> Save Goods Image</button>
-                      </form>
-                        <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i> Cancel</button>
-                        {{-- <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i> Edit Goods</button> --}}
-                      </div>
+                        <figure class="media-object">
+                            <img class="img-object uploadBonus{{ $goods->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$goods->item_id. '.png' }}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                        </figure>
+                      </div> 
                     </td>
                     <td>{{ $goods->name }}</td>
                     <td>{{ number_format($goods->price, 2) }}</td>

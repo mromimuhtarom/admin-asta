@@ -72,6 +72,8 @@
 													{{ translate_MenuTransaction('Request') }}
 												@elseif($trns->description == 'On Process')
 													<Span style="color:#739e73">{{ translate_MenuTransaction('Approve') }}</Span>
+												@elseif($trns->description == 'sent')
+													<Span style="color:#739e73">{{ translate_MenuTransaction('Approve') }}</Span>
 												@endif
 											</td>
 											<td>
@@ -82,6 +84,8 @@
 													{{ translate_MenuTransaction('Pending') }}
 												@elseif($trns->description == 'On Process')
 													<Span style="color:blue">{{ translate_MenuTransaction('On Process') }}</Span>
+												@elseif($trns->description == 'Sent')
+													<Span style="color:#739e73">{{ translate_MenuTransaction('Approve') }}</Span>
 												@endif
 											</td>
 											@if ($menu && $mainmenu)
@@ -94,7 +98,9 @@
 														<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $trns->strtrnsid }}"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('Decline') }}</button>
 														<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->strtrnsid }}"><i class="fa fa-check"></i> {{ translate_MenuTransaction('Approve') }}</button>
 													@elseif($trns->description == 'On Process')
-															<button type="button" class="btn btn-xs text-white" style="background-color:blue;" data-toggle="modal" data-target="#process{{ $trns->strtrnsid }}">{{ translate_MenuTransaction('On Process') }}</button>														
+															<button type="button" class="btn btn-xs text-white" style="background-color:blue;" data-toggle="modal" data-target="#process{{ $trns->strtrnsid }}">{{ translate_MenuTransaction('On Process') }}</button>		
+													@elseif($trns->description == 'Sent')	
+														<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->strtrnsid }}"><i class="fa fa-check"></i> {{ translate_MenuTransaction('Completed') }}</button>											
 													@endif
 												</div>
 											</td>
@@ -315,7 +321,7 @@
 	</div>
 </div>
 @endforeach
-<!-- End Modal decline -->
+<!-- End Modal detail info -->
 
 
 <script>

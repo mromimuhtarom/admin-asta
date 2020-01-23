@@ -34,7 +34,8 @@ class Add_TransactionController extends Controller
           $actionbalance[10] => $actionbalance[11],
           $actionbalance[12] => $actionbalance[13]
         ];
-        return view('pages.transaction.add_transaction', compact('actblnc'));
+        
+        return view('pages.transaction.add_transaction', compact('actblnc', 'a'));
     }
 
     //FUNGSI SEARCH

@@ -313,14 +313,17 @@ class GoodsStoreController extends Controller
                 }
                 else 
                 {
-                    $rootpath   = '../unity-asset/upload/Goods';
+                    $rootpath   = 'unity-asset/store/goods/'.$nama_file_unik;
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                    // $rootpath   = 'unity-asset/upload/Goods'.$nama_file_unik;
+                    // // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    // $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
-                    $path = '../public/upload/Goods/image1/'.$pk.'.png';
-                    File::delete($path);    
-                    $path = '../public/upload/Goods/image2/'.$pk.'.png';
-                    File::delete($path);    
+                    // $path = '../public/upload/Goods/image1/'.$pk.'.png';
+                    // File::delete($path);    
+                    // $path = '../public/upload/Goods/image2/'.$pk.'.png';
+                    // File::delete($path);    
                     // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }
                 Log::create([

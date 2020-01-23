@@ -49,7 +49,6 @@ class ReportStoreController extends Controller
         $validate = [
             'dari'       => 'required|date',
             'sampai'     => 'required|date',
-            'choosedate' => 'required',
         ];
   
         $validator = Validator::make($data,$validate);
@@ -65,6 +64,7 @@ class ReportStoreController extends Controller
             } else
             {
                 $storeHistory = StoreTransactionHist::JOIN('asta_db.user', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.user.user_id')
+                                ->leftJoin('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction_hist.payment_id')
                                 ->select(
 				    'asta_db.store_transaction_hist.id',
                                     'asta_db.store_transaction_hist.user_id', 
@@ -76,10 +76,12 @@ class ReportStoreController extends Controller
                                     'asta_db.store_transaction_hist.item_type',
                                     'asta_db.store_transaction_hist.action_date',
                                     'asta_db.store_transaction_hist.description',
+                                    'asta_db.store_transaction_hist.payment_id',
+                                    'asta_db.payment.name as paymentname',
                                     'asta_db.store_transaction_hist.status'
                                 )
                                 ->where('asta_db.store_transaction_hist.shop_type', '=', 1);
-                if($choosedate == 'request') {
+                // if($choosedate == 'request') {
 		        if($username != NULL  && $chooseitem != NULL && $minDate != NULL && $maxDate != NULL) 
 		    {
                         if(is_numeric($username) !== true):
@@ -132,64 +134,64 @@ class ReportStoreController extends Controller
                         return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
                     }
 
-                } else if($choosedate == 'approvedecline') {
-		        if($username != NULL  && $chooseitem != NULL && $minDate != NULL && $maxDate != NULL) 
-		    {
-                        if(is_numeric($username) !== true):
-                            $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                                            ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-					    ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
-                                            ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
-                                            ->get();
-                        else:
-                            $transactions = $storeHistory->where('asta_db.store_transaction_hist.user_id', '=', $username)
-                                            ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-					    ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
-                                            ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
-                                            ->get();
-                        endif;
+            //     } else if($choosedate == 'approvedecline') {
+		    //     if($username != NULL  && $chooseitem != NULL && $minDate != NULL && $maxDate != NULL) 
+		    // {
+            //             if(is_numeric($username) !== true):
+            //                 $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+            //                                 ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+			// 		    ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
+            //                                 ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+            //                                 ->get();
+            //             else:
+            //                 $transactions = $storeHistory->where('asta_db.store_transaction_hist.user_id', '=', $username)
+            //                                 ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+			// 		    ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
+            //                                 ->orderBy('asta_db.store_transaction_hist.datetime', 'desc')
+            //                                 ->get();
+            //             endif;
 
 
-                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
+            //             return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
 
-		    }
+		    // }
 
-                    else if($minDate != NULL && $maxDate != NULL && $chooseitem != NULL)
-                    { 
-                        $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                        ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
-                                        ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                        ->get();
+            //         else if($minDate != NULL && $maxDate != NULL && $chooseitem != NULL)
+            //         { 
+            //             $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+            //                             ->where('asta_db.store_transaction_hist.item_type', '=', $chooseitem)
+            //                             ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+            //                             ->get();
                    
-                        return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type', 'chooseitem', 'choosedate'));
-                    }  
+            //             return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type', 'chooseitem', 'choosedate'));
+            //         }  
 
-            	    else if($username != NULL && $minDate != NULL && $maxDate != NULL) {
-                        if(is_numeric($username) !== true):
-                            $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
-                                            ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                            ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                            ->get();
-                        else:
-                            $transactions = $storeHistory->where('asta_db.store_transaction_hist.user_id', '=', $username)
-                                            ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                            ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                            ->get();
-                        endif;
+            // 	    else if($username != NULL && $minDate != NULL && $maxDate != NULL) {
+            //             if(is_numeric($username) !== true):
+            //                 $transactions = $storeHistory->where('asta_db.user.username', 'LIKE', '%'.$username.'%')
+            //                                 ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+            //                                 ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+            //                                 ->get();
+            //             else:
+            //                 $transactions = $storeHistory->where('asta_db.store_transaction_hist.user_id', '=', $username)
+            //                                 ->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+            //                                 ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+            //                                 ->get();
+            //             endif;
 
                         
-                        return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
-                    }
-                    else if($minDate != NULL && $maxDate != NULL)
-                    {
-                        $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                                        ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
-                                        ->get();
+            //             return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
+            //         }
+            //         else if($minDate != NULL && $maxDate != NULL)
+            //         {
+            //             $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.action_date', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+            //                             ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
+            //                             ->get();
 
 			
-                        return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type', 'chooseitem', 'choosedate'));
-                    }
-                }
+            //             return view('pages.store.report_store', compact('transactions', 'minDate', 'maxDate', 'type', 'chooseitem', 'choosedate'));
+            //         }
+            //     }
             }
         }
     }
