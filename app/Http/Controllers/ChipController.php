@@ -14,11 +14,7 @@ use Illuminate\Support\Facades\Input;
 
 class ChipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
       $datenow = Carbon::now('GMT+7');
@@ -84,11 +80,7 @@ class ChipController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
 
     public function search(Request $request)
     {
@@ -147,7 +139,7 @@ class ChipController extends Controller
         // }
 
         if($maxDate < $minDate){
-          return back()->with('alert','End Date can\'t be less than start date');
+          return back()->with('alert', alertTranslate("end date can't be less than start date"));
         }
 
         //if sorting variable is null

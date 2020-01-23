@@ -14,11 +14,7 @@ use Validator;
 
 class AbuseTransactionReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $abusetransaction = ReportProblem::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.report_problem.user_id')
@@ -88,13 +84,12 @@ class AbuseTransactionReportController extends Controller
         $image_main = Storage::disk('s3');
         if($image_main->put($rootpath, $image_decode ))
         {
-          echo 'Successful image';
-        } else 
-        {
-          echo 'Failed';
+          echo alertTranslate('Successful image');
+        } else {
+          echo alertTranslate('Failed');
         }
 
-        return 'Successfull insert Data';
+        return alertTranslate('insert data successful');
     }
 
 
@@ -236,8 +231,9 @@ class AbuseTransactionReportController extends Controller
             return back()->withErrors($validator->errors());
         }
 
+        $translateAlert = alertTranslate("end date can't be less than start date");
         if($maxDate < $minDate){
-            return back()->with('alert', 'end Date can\'t be less than start date');
+            return back()->with('alert', $translateAlert);
         }
 
         if($player != NULL && $minDate != NULL && $maxDate != NULL &&

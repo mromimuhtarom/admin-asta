@@ -24,12 +24,7 @@ use App\DominoQRoom;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * asta poker index
-     */
+
     public function index()
     {
         $category = TpkRoom::select(
@@ -46,12 +41,7 @@ class CategoryController extends Controller
         return view('pages.game_asta.category', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * asta big two index
-     */
+    
     public function BigTwoindex()
     {
         $category = BigTwoRoom::select(
@@ -69,12 +59,7 @@ class CategoryController extends Controller
         return view('pages.game_asta.bigTwoCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * asta big domino susun index
-     */
+   
     public function DominoSusunindex()
     {
         $category = DominoSusunRoom::select(
@@ -91,12 +76,7 @@ class CategoryController extends Controller
         return view('pages.game_asta.dominoSusunCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * asta big domino QQ index
-     */
+    
     public function DominoQindex()
     {
         $category = DominoQRoom::select(
@@ -113,13 +93,7 @@ class CategoryController extends Controller
         return view('pages.game_asta.dominoQCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * asta poker store
-     */
+    
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -149,17 +123,11 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data di menu kategori Asta Poker dengan nama'. $tpk_category->name
         ]);
 
-        return redirect()->route('Category_Asta_Poker')->with('success','Data Added');
+        return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('Data Added'));
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * asta big two store
-     */
+    
     public function BigTwostore(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -194,16 +162,9 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data di menu Kategori Asta Big Two dengan nama '. $bgt_category->name
         ]);
  
-        return redirect()->route('Category_Big_Two')->with('success','Data Added');
+        return redirect()->route('Category_Big_Two')->with('success', alertTranslate('Data Added'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * asta domino susun store
-     */
     public function DominoSusunstore(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -233,17 +194,10 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data di menu Kategori Domino Susun dengan nama'. $dms_category->name
         ]);
 
-        return redirect()->route('Category_Domino_Susun')->with('success','Data Added');
+        return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('Data Added'));
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     * asta domino QQ store
-     */
     public function DominoQstore(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -274,18 +228,11 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data di menu Kategori Domino QQ dengan nama '. $dmq_category->name
         ]);
 
-        return redirect()->route('Category_Domino_QQ')->with('success','Data Added');
+        return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('Data Added'));
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta poker update
-     */
+    
     public function update(Request $request)
     {
         $pk    = $request->pk;
@@ -322,14 +269,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta big two update
-     */
+    
     public function BigTwoupdate(Request $request)
     {
         $pk    = $request->pk;
@@ -367,14 +307,6 @@ class CategoryController extends Controller
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta domino susun update
-     */
     public function DominoSusunupdate(Request $request)
     {
         $pk          = $request->pk;
@@ -410,14 +342,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta domino QQ update
-     */
+
     public function DominoQupdate(Request $request)
     {
         $pk          = $request->pk;
@@ -453,13 +378,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta poker destroy
-     */
     public function destroy(Request $request)
     {
         $roomid = $request->categoryid;
@@ -474,18 +392,12 @@ class CategoryController extends Controller
                 'desc'      => 'Hapus di menu Kategori Asta Poker dengan RuangID '.$roomid
             ]);
 
-            return redirect()->route('Category_Asta_Poker')->with('success','Data Deleted');
+            return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Category_Asta_Poker')->with('success','Something wrong');      
+        return redirect()->route('Category_Asta_Poker')->with('alert', alertTranslate('Something wrong'));      
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta big two destroy 
-     */
+
     public function BigTwodestroy(Request $request)
     {
         $roomid = $request->categoryid;
@@ -499,18 +411,12 @@ class CategoryController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Kategori Asta Big Two dengan RuangID '.$roomid
             ]);
-            return redirect()->route('Category_Big_Two')->with('success','Data Deleted');
+            return redirect()->route('Category_Big_Two')->with('success', alertTranslate('Data Deleted'));
         }
-        return redirect()->route('Category_Big_Two')->with('success','Something wrong');      
+     return redirect()->route('Category_Big_Two')->with('alert', alertTranslate('Something wrong'));      
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta domino susun destroy 
-     */
+    
     public function DominoSusundestroy(Request $request)
     {
         $roomid = $request->categoryid;
@@ -524,18 +430,12 @@ class CategoryController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Kategory Domino Susun dengan RuangID '.$roomid
             ]);
-            return redirect()->route('Category_Domino_Susun')->with('success','Data Deleted');
+            return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('Data Deleted'));
         }
-        return redirect()->route('Category_Domino_Susun')->with('success','Something wrong');      
+        return redirect()->route('Category_Domino_Susun')->with('alert', alertTranslate('Something wrong'));      
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     * asta domino QQ destroy 
-     */
+    
     public function DominoQdestroy(Request $request)
     {
         $roomid = $request->categoryid;
@@ -549,8 +449,9 @@ class CategoryController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Kategori Domino QQ dengan RuangID '.$roomid
             ]);
-            return redirect()->route('Category_Domino_QQ')->with('success','Data Deleted');
+            return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('Data Deleted'));
         }
-        return redirect()->route('Category_Domino_QQ')->with('success','Something wrong');      
+        return redirect()->route('Category_Domino_QQ')->with('alert', alertTranslate('Something wrong'));      
     }
 }
+ 

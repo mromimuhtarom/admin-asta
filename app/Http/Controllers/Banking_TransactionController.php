@@ -13,11 +13,7 @@ use App\BalancePoint;
 
 class Banking_TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $datenow = Carbon::now('GMT+7')->toDateString();
@@ -56,6 +52,7 @@ class Banking_TransactionController extends Controller
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->groupBy('yearperweek', DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                         ->get();
+
                         $lang_id   = 'pekan ini';
  
             return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
@@ -66,6 +63,7 @@ class Banking_TransactionController extends Controller
                         ->orderBy('asta_db.transaction_day.date_created', 'desc')
                         ->groupBy('month', DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                         ->get();
+
                         $lang_id = 'Bulan ini';
  
             return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
@@ -94,7 +92,7 @@ class Banking_TransactionController extends Controller
                 return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id'));
             } else if($minDate == NULL && $maxDate == NULL)
             {
-                return back()->with('alert', 'Min Date And Max Date Must be Filled In');
+                return back()->with('alert', alertTranslate('Min Date And Max Date Must be Filled In'));
             }
             $lang_id='Sepanjang waktu';
         } else {
@@ -106,7 +104,6 @@ class Banking_TransactionController extends Controller
                 return back()->withErrors($validator->errors());
             }
         }
-
     }
 
     public function detail($mindate, $maxdate)
@@ -128,7 +125,4 @@ class Banking_TransactionController extends Controller
         $minDate   = '';
         return view('pages.transaction.banking_transaction', compact('history', 'datenow', 'time', 'lang_id', 'minDate'));
     }
-
-
-    
 }

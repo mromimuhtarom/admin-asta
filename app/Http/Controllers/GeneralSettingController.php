@@ -101,7 +101,7 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idabout)->update([
                 'value' =>  $urlabout
             ]);
-            return back()->with('success','Data Updated');
+            return back()->with('success', alertTranslate("Data Updated"));
 
         } else if ($contenttermofservice)
         {   
@@ -115,7 +115,7 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idtermofservice )->update([
                 'value' =>  $urltermofservice
             ]);
-            return back()->with('success','Data Updated');
+            return back()->with('success', alertTranslate("Data Updated"));
 
         } else if ($contentprivacypolicy)
         {
@@ -129,11 +129,11 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idprivacypolicy )->update([
                 'value' =>  $urlprivacypolicy
             ]);
-            return back()->with('success','Data Updated');
+            return back()->with('success', alertTranslate('Data Updated'));
 
         } else 
         {
-            return back()->with('alert','Update Can\'t Be process');
+            return back()->with('alert', alertTranslate("Update can't be process"));
         }
         
     }

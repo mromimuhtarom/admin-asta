@@ -57,12 +57,8 @@ class GiftController extends Controller
         return view('pages.item.tablegift', compact('gifts', 'menu', 'category', 'endis', 'mainmenu', 'timenow'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
+    
     public function store(Request $request)
     {
         $id = Gift::select('id')
@@ -105,11 +101,11 @@ class GiftController extends Controller
             if($ukuran < 5242880)
             {
                     if($request->title == NULL){
-                        return redirect()->route('Table_Gift')->with('alert','Name can\'t be NULL ');
+                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("Name can't be NULL"));
                     } else if($request->price == NULL) {
-                        return redirect()->route('Table_Gift')->with('alert','Price can\'t be NULL ');
+                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("Price can't be NULL"));
                     } else if($request->category == NULL) {
-                        return redirect()->route('Table_Gift')->with('alert','Category can\'t be NULL ');
+                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("Category can't be NULL"));
                     } else {
 
                         $validator = Validator::make($request->all(),[
@@ -205,18 +201,18 @@ class GiftController extends Controller
                             'datetime'  => Carbon::now('GMT+7'),
                             'desc'      => 'Membuat insert baru di menu Toko Gift dengan judul'. $gift->subject
                         ]);
-                        return redirect()->route('Table_Gift')->with('success','Insert Data successfull');
+                        return redirect()->route('Table_Gift')->with('success', alertTranslate("insert data successful"));
                     }
             }
             else
             {
-                return redirect()->route('Table_Gift')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Table_Gift')->with('alert', alertTranslate("Size Image it's too Big"));
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {
-            return redirect()->route('Table_Gift')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Table_Gift')->with('alert', alertTranslate('File extensions are not allowed'));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -245,13 +241,6 @@ class GiftController extends Controller
       
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
 
     public function updateimage(Request $request)
@@ -367,17 +356,17 @@ class GiftController extends Controller
                         'datetime'  => Carbon::now('GMT+7'),
                         'desc'      => 'Update gambar di menu Toko Hadiah dengan ID '.$pk
                     ]);
-                    return redirect()->route('Table_Gift')->with('success','Update Image successfull');
+                    return redirect()->route('Table_Gift')->with('success', alertTranslate('Update image successfull'));
             }
             else
             {
-                return redirect()->route('Table_Gift')->with('alert','Your image source size height is more than 319 px and width is more than 384');
+                return redirect()->route('Table_Gift')->with('alert', alertTranslate("Your image source size height is more than 319 px and width is more than 384"));
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {
-            return redirect()->route('Table_Gift')->with('alert','format must be png and pictorial');
+            return redirect()->route('Table_Gift')->with('alert', alertTranslate("format must be png and pictorial"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -433,12 +422,7 @@ class GiftController extends Controller
       ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Request $request)
     {
         $id = $request->id;
@@ -460,9 +444,9 @@ class GiftController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Toko Hadiah dengan ID '.$id
             ]);
-            return redirect()->route('Table_Gift')->with('success','Data Deleted');
+            return redirect()->route('Table_Gift')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Table_Gift')->with('alert','Something wrong');
+        return redirect()->route('Table_Gift')->with('alert', alertTranslate('Something wrong'));
     }
 
 
@@ -482,7 +466,7 @@ class GiftController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Toko Hadiah dengan ID '.$ids
         ]);
-        return redirect()->route('Table_Gift')->with('succes', 'Data deleted');
+        return redirect()->route('Table_Gift')->with('succes', alertTranslate('Data deleted'));
     }
 }
 

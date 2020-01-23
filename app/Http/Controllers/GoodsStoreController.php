@@ -170,17 +170,17 @@ class GoodsStoreController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Menambahkan data di menu Toko Barang dengan nama '. $goods->name
                 ]);
-                return redirect()->route('Goods_Store')->with('success','Insert Data successfull');
+                return redirect()->route('Goods_Store')->with('success', alertTranslate('insert data successful'));
             }
             else
             {       
-                return redirect()->route('Goods_Store')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Goods_Store')->with('alert', alertTranslate("Size Image it's too Big"));
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {       
-            return redirect()->route('Goods_Store')->with('alert','Image must be in png');
+            return redirect()->route('Goods_Store')->with('alert', alertTranslate("Image must be in png"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -332,12 +332,12 @@ class GoodsStoreController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Update gambar di menu Toko Barang dengan ID '.$pk
                 ]);
-                return redirect()->route('Goods_Store')->with('success','Update Image successfull');
+                return redirect()->route('Goods_Store')->with('success', alertTranslate('Update image successfull'));
 
             }
             else 
             {
-                return redirect()->route('Goods_Store')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Goods_Store')->with('alert', alertTranslate("Size Image it's too Big"));
             }
         }
         else 
