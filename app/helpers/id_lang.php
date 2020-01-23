@@ -632,6 +632,7 @@ function ConfigTextTranslate($menu){
         "Chip"                                              =>   "Chip",
         "Gold"                                              =>   "Koin",
         "Good"                                              =>   "Barang",
+        //"1"                                                 =>  "1",
         "" => ""
 
     ];

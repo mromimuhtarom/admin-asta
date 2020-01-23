@@ -210,33 +210,14 @@
                     <td>{{ $gold->order }}</td>
                     <td>
                       <div class="media-container">
-                          <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
-                            {{  csrf_field() }}
-                            <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
-                                <input type="hidden" name="pk" value="{{ $gold->item_id }}">
-                                <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
-                                <i class="fa fa-edit media-icon-wtr"></i>
-                                <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
-                            </span>
-                            <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
-                                <input type="hidden" name="pk" value="{{ $gold->item_id }}">
-                                <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gold->item_id }}">
-                                <i class="fa fa-edit media-icon-wtr1"></i>
-                                <div class="nav-name">Watermark</div>
-                            </span>
-                            <figure class="media-object">
-                              {{-- <img src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;"> --}}
-                              <img src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png'}}?{{ $timenow }}" class="img-object-wtr imgupload{{ $gold->item_id }}" style="margin-left: auto; margin-right: auto;">
-                              <img class="img-object-wtr1 imgupload1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
-                              <img class="img-object-wtr2 imgupload2{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
-                            </figure>
-                          </div>
-                          </form>
-                      </div>
+                        <figure class="media-object">
+                            <img class="img-object uploadBonus{{ $gold->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$gold->item_id.'.png' }}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                        </figure>
+                      </div> 
                     </td>
                     <td>{{ $gold->name }}</td>
                     <td>{{ $gold->item_get }}</td>
-                    <td>{{ $gold->bonus_get }}</td>
+                    <td>{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</td>
                     <td>
                       <div class="media-container">
                         <figure class="media-object">
@@ -244,7 +225,7 @@
                         </figure>
                       </div> 
                     </td>
-                    <td>{{ ConfigTextTranslate($gold->bonus_type) }}</td>
+                    <td>{{ $gold->bonus_get }}</td>
                     <td>{{ $gold->price }}</td>
                     <td>{{ ConfigTextTranslate($gold->strItemType()) }}</td>
                     <td>{{ strTypeTransaction($gold->trans_type) }}</td>
@@ -473,6 +454,14 @@ $(".watermark-image").change(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+    });
+
+    //HIDE SHOW FORM BONUS
+    $('.sub-form').hide();
+    $(".mainmenu").on("click", function(e) {
+      $('.sub-form').toggle();
+      // $('.form-collaps').toggle();
+      e.preventDefault();
     });
 
     $("#trash").hide();
@@ -747,14 +736,6 @@ $(".watermark-image").change(function() {
           }else{
             $("#trash").hide();
           }
-        });
-
-        //HIDE SHOW FORM BONUS
-        $('.sub-form').hide();
-        $(".mainmenu").on("click", function(e) {
-          $('.sub-form').toggle();
-          // $('.form-collaps').toggle();
-          e.preventDefault();
         });
     },
     responsive: false
