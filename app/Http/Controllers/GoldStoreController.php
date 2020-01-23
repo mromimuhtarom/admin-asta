@@ -218,12 +218,12 @@ class GoldStoreController extends Controller
                     'desc'      => 'Menambahkan data baru di menu Toko Koin dengan judul '. $gold->name
                   ]);
         
-                return redirect()->route('Gold_Store')->with('success','Data Added');
+                return redirect()->route('Gold_Store')->with('success', alertTranslate("Data Added"));
               } else {
-                return redirect()->route('Gold_Store')->with('alert',"Size Image it's to Big");
+                return redirect()->route('Gold_Store')->with('alert', alertTranslate("Size Image it's too Big"));
               }
           } else {
-            return redirect()->route('Gold_Store')->with('alert','Image must be in png');
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('Image must be in png'));
           }
     }
 
@@ -417,12 +417,12 @@ class GoldStoreController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Update gambar di menu Toko Koin dengan ID '.$pk
                 ]);
-                return redirect()->route('Gold_Store')->with('success','Update Image Successfull');
+                return redirect()->route('Gold_Store')->with('success', alertTranslate('Update image successfull'));
             } else  {
-                return redirect()->route('Gold_Store')->with('alert','Size Image is to big');
+                return redirect()->route('Gold_Store')->with('alert', alertTranslate("Size Image it's too Big"));
             }
         } else  {
-            return redirect()->route('Gold_Store')->with('alert','Image must be in png format');
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('Image must be in png'));
         }
     }
 
@@ -462,9 +462,9 @@ class GoldStoreController extends Controller
                 'desc'      => 'Edit gambar bonus di menu Toko Gold dengan ID '.$pk.' menjadi '.$finalname
             ]);
             
-            return redirect()->route('Gold_Store')->with('success','Update Image Successfull');
+            return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));
         } else {
-            return redirect()->route('Gold_Store')->with('alert','Image must be in png format');
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('Image must be in png'));
         }
 
 
@@ -498,7 +498,7 @@ class GoldStoreController extends Controller
             File::delete($path);
             
             
-            return redirect()->route('Gold_Store')->with('success','Data Deleted');
+            return redirect()->route('Gold_Store')->with('success', alertTranslate('Data deleted'));
         } else if($goldreseller != '') 
         {
             ItemsCash::where('item_id', '=', $goldreseller)->update([
@@ -510,13 +510,13 @@ class GoldStoreController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus gambar atau foto di menu Toko Koin Reseller dengan ID '.$goldreseller
             ]);
-            return redirect()->route('Gold_Store_Reseller')->with('success','Data Deleted');
+            return redirect()->route('Gold_Store_Reseller')->with('success', alertTranslate('Data deleted'));
         } else if ($getGoldId == NULL)
         {
-            return redirect()->route('Gold_Store')->with('alert','ID must be Fill');  
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('ID must be fill'));  
         } else if($goldreseller == NULL )
         {
-            return redirect()->route('Gold_Store_Reseller')->with('alert','ID must be Fill'); 
+            return redirect()->route('Gold_Store_Reseller')->with('alert', alertTranslate('ID must be fill')); 
         }
         
     }
@@ -543,6 +543,6 @@ class GoldStoreController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus gambar dan data yang dipilih di menu toko koin dengan id '.$ids
         ]);
-        return redirect()->route('Gold_Store')->with('success', 'Data deleted');
+        return redirect()->route('Gold_Store')->with('success', alertTranslate('Data deleted'));
     }
 }

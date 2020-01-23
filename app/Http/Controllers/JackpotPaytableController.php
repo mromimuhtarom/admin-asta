@@ -12,11 +12,7 @@ use Carbon\Carbon;
 
 class JackpotPaytableController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         // $jackpot_paytable = Jackpot_paytable::all();
@@ -29,12 +25,6 @@ class JackpotPaytableController extends Controller
         return view('pages.Maintenance.underconstruction');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -62,13 +52,7 @@ class JackpotPaytableController extends Controller
       }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Jackpot_paytable  $jackpot_paytable
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Jackpot_paytable $jackpot_paytable)
     {
       $pk    = $request->pk;
@@ -114,12 +98,7 @@ class JackpotPaytableController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Jackpot_paytable  $jackpot_paytable
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Jackpot_paytable $jackpot_paytable,  Request $request)
     {
 

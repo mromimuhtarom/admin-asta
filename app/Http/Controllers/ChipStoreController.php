@@ -191,12 +191,12 @@ class ChipStoreController extends Controller
                     'desc'      => 'Menambahkan data di menu Toko Chip dengan title '. $chip->name
                 ]);
 
-                return redirect()->route('Chip_Store')->with('success', 'Data Insert Successfull');
+                return redirect()->route('Chip_Store')->with('success', alertTranslate('insert data successful'));
               } else {
-                return redirect()->route('Chip_Store')->with('alert',"Size Image it's to Big");
+                return redirect()->route('Chip_Store')->with('alert', alertTranslate("Size Image it's too Big"));
               }
           } else {
-            return redirect()->route('Chip_Store')->with('alert','Image must be in png');
+            return redirect()->route('Chip_Store')->with('alert', alertTranslate('Image must be in png'));
           }
 
          
@@ -359,12 +359,12 @@ class ChipStoreController extends Controller
                     'desc'      => 'Edit gambar di menu Toko Chip dengan ID '.$pk.' menjadi '.$nama_file_unik
                 ]);
 
-                return redirect()->route('Chip_Store')->with('success','Update Image Successfull');
+                return redirect()->route('Chip_Store')->with('success', alertTranslate('Update image successfull'));
             } else  {
-                return redirect()->route('Chip_Store')->with('alert','Size Image is to big');
+                return redirect()->route('Chip_Store')->with('alert', alertTranslate("Size Image its too big"));
             }
         } else  {
-            return redirect()->route('Chip_Store')->with('alert','Image must be in png format');
+            return redirect()->route('Chip_Store')->with('alert', alertTranslate('Image must be in png'));
         }
     }
 
@@ -403,9 +403,9 @@ class ChipStoreController extends Controller
                 'desc'      => 'Edit gambar bonus di menu Toko Chip dengan ID '.$pk.' menjadi '.$finalname
             ]);
             
-            return redirect()->route('Chip_Store')->with('success','Update Image Successfull');
+            return redirect()->route('Chip_Store')->with('success', alertTranslate('Update image successfull'));
         } else {
-            return redirect()->route('Chip_Store')->with('alert','Image must be in png format');
+            return redirect()->route('Chip_Store')->with('alert', alertTranslate('Image must be in png'));
         }
 
 
@@ -467,9 +467,9 @@ class ChipStoreController extends Controller
                 'desc'      => 'Hapus gambar atau foto di menu Toko Chip dengan ID '.$id
             ]);
 
-            return redirect()->route('Chip_Store')->with('success','Data Deleted');
+            return redirect()->route('Chip_Store')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Chip_Store')->with('success','Something wrong');   
+        return redirect()->route('Chip_Store')->with('alert', alertTranslate('Something wrong'));   
     }
 
     public function deleteAllSelected(Request $request)
@@ -494,6 +494,6 @@ class ChipStoreController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus gambar dan data yang dipilih dimenu Toko barang dengan id '.$ids
         ]);
-        return redirect()->route('Chip_Store')->with('success', 'Data deleted');
+        return redirect()->route('Chip_Store')->with('success', alertTranslate('Data deleted'));
     }
 }

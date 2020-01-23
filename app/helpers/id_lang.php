@@ -617,6 +617,45 @@ function ConfigTextTranslate($menu){
     return $array_menuContent[$menu];
 };
 
+function alertTranslate($menu){
+
+    $array_menuContent = [
+
+        "insert data successful"                                        =>  "memasukan data berhasil",
+        "Successful image"                                              =>  "Gambar berhasil",
+        "Failed"                                                        =>  "Gagal",
+        "end date can't be less than start date"                        =>  "Tanggal akhir tidak boleh sebelum tanggal mulai",
+        "balance cannot be reduced"                                     =>  "balance tidak dapat dikurangi",
+        "balance cannot be reduced, please enter the appropriate amount"=>  "balance tidak dapat dikurangi, silahkan masukan nominal yang sesuai",
+        "Successful update"                                             =>  "Update sukses",
+        "Name can't be NULL"                                            =>  "Nama tidak bisa menjadi NULL",
+        "File extensions are not allowed, you must use .jpg"            =>  "Ekstensi file tidak diperbolehkan, harus menggunakan .jpg",
+        "Update image successfull"                                      =>  "Update gambar sukses",
+        "format must be jpg and pictorial"                              =>  "Format gambar harus jpg",
+        "Data deleted"                                                  =>  "Data terhapus",
+        "Something wrong"                                               =>  "Ada sesuatu yang salah",
+        "Min Date And Max Date Must be Filled In"                       =>  "Minimum tanggal dan maksimal tanggal harus di isi",
+        "Data Added"                                                    =>  "Data ditambahkan",
+        "Max Buy can't be under Min Buy"                                =>  "Max buy tidak bisa dibawah Min buy",
+        "Size Image it's too Big"                                       =>  "Ukuran gambar terlalu besar",
+        "Image must be in png"                                          =>  "Gambar harus berformat png",
+        "Price can't be NULL"                                           =>  "Harga tidak bisa NULL",
+        "File extensions are not allowed"                               =>  "Ekstensi file tidak diperbolehkan",
+        "Data Updated"                                                  =>  "Data diperbarui",
+        "Update can't be process"                                       =>  "Data tidak dapat diproses",
+        "Category can't be NULL"                                        =>  "Kategori tidak dapat NULL",
+        "Your image source size height is more than 319 px and width is more than 384" => "Tinggi ukuran sumber gambar Anda lebih dari 319 px dan lebar lebih dari 384",
+        "format must be png and pictorial"                              =>  "Format gambar harus png",
+        "ID must be fill"                                               =>  "ID harus diisi",
+        
+        
+
+        
+
+    ];
+    return $array_menuContent[$menu];
+};
+
 
 
 

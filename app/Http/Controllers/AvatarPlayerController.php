@@ -80,7 +80,7 @@ class AvatarPlayerController extends Controller
         {
                 if($request->title == NULL)
                 {
-                    return redirect()->route('avatar_player')->with('alert', 'Name can\'t be NULL ');
+                    return redirect()->route('avatar_player')->with('alert', alertTranslate("Name can't be NULL"));
                 } else {
                     $validator = Validator::make($request->all(),[
                         'title' =>  'required'
@@ -108,10 +108,10 @@ class AvatarPlayerController extends Controller
                         'datetime'  =>  Carbon::now('GMT+7'),
                         'desc'      =>  'Membuat insert baru di menu Avatar player dengan nama '. $request->title
                     ]);
-                    return redirect()->route('avatar_player')->with('success', 'Insert Data successfull');
+                    return redirect()->route('avatar_player')->with('success', alertTranslate('Insert Data successfull'));
                 }
         } else {
-            return redirect()->route('avatar_player')->with('alert', 'Ekstensi file tidak diperbolehkan, harus menggunakan .jpg');
+            return redirect()->route('avatar_player')->with('alert', alertTranslate('File extensions are not allowed, you must use .jpg'));
         }
     }
         
@@ -149,10 +149,10 @@ class AvatarPlayerController extends Controller
                 'datetime'  =>  Carbon::now('GMT+7'),
                 'desc'      =>  'Update gambar di menu avatar player dengan ID'.$pk
             ]);
-            return redirect()->route('avatar_player')->with('success', 'Update image successfull');
+            return redirect()->route('avatar_player')->with('success', alertTranslate('Update image successfull'));
         }
         else {
-            return redirect()->route('avatar_player')->with('alert', 'format must be jpg and pictorial');
+            return redirect()->route('avatar_player')->with('alert', alertTranslate('format must be jpg and pictorial'));
         }
     }
 
@@ -204,9 +204,9 @@ class AvatarPlayerController extends Controller
                 'datetime'  =>  Carbon::now('GMT+7'),
                 'desc'      =>  'Hapus di menu Avatar player dengan ID '.$id
             ]);
-            return redirect()->route('avatar_player')->with('success', 'Data deleted');
+            return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('avatar_player')->with('alert', 'Something wrong');
+        return redirect()->route('avatar_player')->with('alert', alertTranslate('Something wrong'));
     }
 
     public function deleteAll(Request $request)
@@ -225,6 +225,6 @@ class AvatarPlayerController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus di menu avatar player dengan ID ' .$ids
         ]);
-        return redirect()->route('avatar_player')->with('success', 'Data deleted');
+        return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
     }
 }

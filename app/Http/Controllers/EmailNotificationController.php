@@ -77,7 +77,7 @@ class EmailNotificationController extends Controller
                       'datetime'  => Carbon::now('GMT+7'),
                       'desc'      => 'Create new in menu Email Notification with title '. $notification->subject
                     ]);
-                    return redirect()->route('Email_Notification')->with('success','Insert Data successfull');
+                    return redirect()->route('Email_Notification')->with('success', alertTranslate('insert data successfull'));
             
                 }
                 else
@@ -148,7 +148,7 @@ class EmailNotificationController extends Controller
                         'datetime'  => Carbon::now('GMT+7'),
                         'desc'      => 'Edit imageUrl in menu Email Notification with ID '.$pk.' to '. $nama_file_unik
                     ]);
-                    return redirect()->route('Email_Notification')->with('success','Update Image successfull');
+                    return redirect()->route('Email_Notification')->with('success', alertTranslate('Update Image successfull'));
             
                 }
                 else
@@ -167,13 +167,7 @@ class EmailNotificationController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
         $pk    = $request->pk;
@@ -223,12 +217,7 @@ class EmailNotificationController extends Controller
           ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Request $request)
     {
         $id = $request->id;
@@ -243,9 +232,9 @@ class EmailNotificationController extends Controller
                 'desc'      => 'Delete in menu Email Notification with ID '.$id
             ]);
 
-            return redirect()->route('Email_Notification')->with('success','Data Deleted');
+            return redirect()->route('Email_Notification')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Email_Notification')->with('success','Something wrong');   
+        return redirect()->route('Email_Notification')->with('success', alertTranslate('Something wrong'));   
     }
     
 }

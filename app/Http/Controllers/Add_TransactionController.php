@@ -74,6 +74,7 @@ class Add_TransactionController extends Controller
                                 'asta_db.user_stat.point',
                                 'asta_db.user_stat.user_id'
                            )
+                           ->where('asta_db.user.status', '=', 2)
                            ->orderby($namecolumn, $sorting);
 
 
@@ -141,11 +142,11 @@ class Add_TransactionController extends Controller
 
           //PREVENT BALANCE MINUS CHIP
           if($stat->chip == 0):
-            return back()->with('alert', 'balance tidak dapat dikurangi');
+            return back()->with('alert', alertTranslate('balance cannot be reduced'));
           endif;
 
           if($stat->chip < $valuecurrency):
-            return back()->with('alert', 'balance tidak dapat dikurangi, silahkan masukan nominal yang sesuai');
+            return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
           endif;
 
           $validator = Validator::make($request->all(), [
@@ -185,8 +186,11 @@ class Add_TransactionController extends Controller
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
             'type'        =>  'required',
-            'description' =>  'required'
+             'description' =>  'required'
           ]);
+
+          
+
         else:
           $totalbalance = $stat->gold - $valuecurrency;
           $op_math = 'dikurang';
@@ -198,11 +202,11 @@ class Add_TransactionController extends Controller
           
         //PREVENT BALANCE MINUS GOLD
           if($stat->gold == 0):
-            return back()->with('alert', 'balance tidak dapat dikurangi');
+            return back()->with('alert', alertTranslate('balance cannot be reduced'));
           endif;
 
           if($stat->gold < $valuecurrency):
-            return back()->with('alert', 'balance tidak dapat dikurangi, silahkan masukan nominal yang sesuai');
+            return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
           endif;
 
         endif;
@@ -252,11 +256,11 @@ class Add_TransactionController extends Controller
           
           //PREVENT BALANCE MINUS POINT
           if($stat->point == 0):
-            return back()->with('alert', 'balance tidak dapat dikurangi');
+            return back()->with('alert', alertTranslate('balance cannot be reduced'));
           endif;
 
           if($stat->point < $valuecurrency):
-            return back()->with('alert', 'balance tidak dapat dikurangi, silahkan masukan nominal yang sesuai');
+            return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
           endif;
         endif;
 
@@ -282,14 +286,14 @@ class Add_TransactionController extends Controller
           'datetime'  =>  Carbon::now('GMT+7'),
           'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang '. $op_math.' '.$valuecurrency. ' poin. Dengan alasan: ' .$description
         ]);
+
       endif;
 
       Stat::where('user_id', '=', $user_id)->update([
         $columnname => $totalbalance
       ]);
 
-      return back()->with('success', 'Successfull Update');
+      return back()->with('success', alertTranslate('Successful update'));
 
     }
-
 }

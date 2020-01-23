@@ -17,13 +17,12 @@
            var reader = new FileReader();
 
            reader.onload = function (e) {
-               $('#blah')
-                   .attr('src', e.target.result);
+               $('#blah').attr('src', e.target.result);
            };
 
            reader.readAsDataURL(input.files[0]);
        }
-   }
+      }
 </script>
 
 @if (count($errors) > 0)
@@ -216,7 +215,7 @@
                         <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
                           <img id="blah1" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
                         </div><br>
-                          <input type='file' class="watermark-image" name="file1" />
+                          <input type='file' class="watermark-image" name="file1"/>
                       </td>
                     </tr>
                   </table>
@@ -301,6 +300,17 @@
 </div>
 
 <script type="text/javascript">
+  $(".watermark-image").change(function() {
+    if(this.files && this.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        $("#blah1").attr("src", e.target.result);
+      };
+
+      reader.readAsDataURL(this.files[0]);
+    }
+  });
 
 	$(document).ready(function() {
     $('table.table').dataTable( {

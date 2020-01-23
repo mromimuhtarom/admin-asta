@@ -8,6 +8,23 @@
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
 
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+  <p>{{\Session::get('alert')}}</p>
+</div>
+@endif
+@if (count($errors) > 0)
+<div class="error-val">
+<div class="alert alert-danger">
+  <ul>
+    @foreach ($errors->all() as $error)
+      <li>{{$error}}</li>  
+    @endforeach
+  </ul>
+</div>
+</div>
+@endif
+
 <!--- Content Search --->
 <div class="search bg-blue-dark" style="margin-bottom: 3%;">
     <div class="table-header w-100 h-100">
