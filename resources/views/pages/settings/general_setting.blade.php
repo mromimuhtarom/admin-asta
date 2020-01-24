@@ -223,7 +223,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalAstaPoker">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Asta Poker') }}
                       </button>
                     </td>
                     @else 
@@ -235,7 +235,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalBigTwo">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Big Two') }}
                       </button>
                     </td>
                     @else 
@@ -246,8 +246,8 @@
                     <td>Domino QQ</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalQQ">
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino QQ') }}
                       </button>
                     </td>
                     @else 
@@ -258,8 +258,8 @@
                     <td>Domino Susun</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalSusun">
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino Susun') }}
                       </button>
                     </td>
                     @else 
@@ -377,13 +377,13 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="form-group">
-                              <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
+                              <input type="hidden" name="idastapoker" value="{{ $getPrivacyPolicy->id }}">
                               <input type="text" name="urlastapoker" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
-                              <textarea name="contentastapoker" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/privacy-policy.txt')) }}</textarea>
+                              <textarea name="contentastapoker" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/asta-poker.txt')) }}</textarea>
                               <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                                 <script>
                                     CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
-                                    CKEDITOR.replace( 'contentprivacypolicy', {
+                                    CKEDITOR.replace( 'contentastapoker', {
                                       extraPlugins:'bbcode',
                                       removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
                                       fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
@@ -427,7 +427,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Asta Poker') }}</h4>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Big Two') }}</h4>
                     <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                       <i class="fa fa-remove"></i>
                     </button>
@@ -439,13 +439,13 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="form-group">
-                              <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
+                              <input type="hidden" name="idbigtwo" value="{{ $getPrivacyPolicy->id }}">
                               <input type="text" name="urlbigtwo" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
-                              <textarea name="contentbigtwo" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/privacy-policy.txt')) }}</textarea>
+                              <textarea name="contentbigtwo" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/bigtwo.txt')) }}</textarea>
                               <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
                                 <script>
                                     CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
-                                    CKEDITOR.replace( 'contentprivacypolicy', {
+                                    CKEDITOR.replace( 'contentbigtwo', {
                                       extraPlugins:'bbcode',
                                       removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
                                       fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
@@ -482,6 +482,127 @@
             </div>
             {{-- end create --}}
 
+
+            <!-- Modal Domino QQ -->
+            <div class="modal fade" id="myModalQQ" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino QQ') }}</h4>
+                    <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      <i class="fa fa-remove"></i>
+                    </button>
+                  </div>
+                  <form action="{{ route('AboutGeneralSetting') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+              
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group">
+                              <input type="hidden" name="iddominoQQ" value="{{ $getPrivacyPolicy->id }}">
+                              <input type="text" name="urldominoQQ" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
+                              <textarea name="contentdominoQQ" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/dominoQQ.txt')) }}</textarea>
+                              <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+                                <script>
+                                    CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
+                                    CKEDITOR.replace( 'contentdominoQQ', {
+                                      extraPlugins:'bbcode',
+                                      removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                                      fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                                      toolbar: [
+                                        [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
+                                        [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
+                                        [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar' ],
+                                        '/',
+                                        [ 'Bold', 'Italic', 'Underline' ],
+                                        [ 'FontSize' ],
+                                        [ 'TextColor' ], 
+                                        [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
+                                        [ 'Maximize' ]
+                                      ]
+                                    });
+                                    CKEDITOR.config.autoParagraph = false;
+                                    CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
+                                </script>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn sa-btn-primary submit-data">
+                        <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
+                      </button>
+                      <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                        <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{-- end create --}}
+
+
+            <!-- Modal Domino Susun -->
+            <div class="modal fade" id="myModalSusun" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino Susun') }}</h4>
+                    <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      <i class="fa fa-remove"></i>
+                    </button>
+                  </div>
+                  <form action="{{ route('AboutGeneralSetting') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+              
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group">
+                              <input type="hidden" name="iddominosusun" value="{{ $getPrivacyPolicy->id }}">
+                              <input type="text" name="urldominosusun" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
+                              <textarea name="contentdominosusun" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/dominosusun.txt')) }}</textarea>
+                              <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+                                <script>
+                                    CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
+                                    CKEDITOR.replace( 'contentdominosusun', {
+                                      extraPlugins:'bbcode',
+                                      removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                                      fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                                      toolbar: [
+                                        [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
+                                        [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
+                                        [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar' ],
+                                        '/',
+                                        [ 'Bold', 'Italic', 'Underline' ],
+                                        [ 'FontSize' ],
+                                        [ 'TextColor' ], 
+                                        [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
+                                        [ 'Maximize' ]
+                                      ]
+                                    });
+                                    CKEDITOR.config.autoParagraph = false;
+                                    CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
+                                </script>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn sa-btn-primary submit-data">
+                        <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
+                      </button>
+                      <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                        <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{-- end create --}}
 
 
               

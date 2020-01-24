@@ -84,8 +84,19 @@ class GeneralSettingController extends Controller
         $contenttermofservice = $request->contenttermofservice;
         $contentprivacypolicy = $request->contentprivacypolicy;
         $contentastapoker     = $request->contentastapoker;
+        $idastapoker          = $request->idastapoker;
         $urlastapoker         = $request->urlastapoker;
-          
+        $contentbigtwo        = $request->contentbigtwo;
+        $idbigtwo             = $request->idbigtwo;
+        $urlbigtwo            = $request->urlbigtwo;
+        $contentdominoQQ      = $request->contentdominoQQ;
+        $iddominoQQ           = $request->iddominoQQ;
+        $urldominoQQ          = $request->urldominoQQ;
+        $contentdominosusun   = $request->contentdominosusun;
+        $iddominosusun        = $request->iddominosusun;
+        $urldominosusun       = $request->urldomiosusun;
+
+  
 
         if($contentabout)
         {   
@@ -140,14 +151,54 @@ class GeneralSettingController extends Controller
             $semanticTagclosel  =   str_replace('[/', '</', $semanticTagright);
             $semanticTagcloser  =   str_replace(']', '>', $semanticTagclosel);
 
-            $PathS3             = 'unity-asset/text_file/privacy-policy.txt';
+            $PathS3             = 'unity-asset/text_file/asta-poker.txt';
             Storage::disk('s3')->put($PathS3, $semanticTagcloser);
-            Config::where('id', '=', $idprivacypolicy )->update([
+            Config::where('id', '=', $idastapoker )->update([
                 'value' =>  $urlastapoker
             ]);
             return back()->with('success', alertTranslate('Data Updated'));
 
-        } else 
+        } else if($contentbigtwo) {
+            $semanticTagleft    =   str_replace('[', '<', $contentbigtwo);
+            $semanticTagright   =   str_replace(']', '>', $semanticTagleft);
+            $semanticTagclosel  =   str_replace('[/', '</', $semanticTagright);
+            $semanticTagcloser  =   str_replace(']', '>', $semanticTagclosel);
+            
+
+            $PathS3             =   'unity-asset/text_file/bigtwo.txt';
+            Storage::disk('s3')->put($PathS3, $semanticTagcloser);
+            Config::where('id', '=', $idbigtwo)->update([
+                'value' =>  $urlbigtwo
+            ]);
+            return back()->with('success', alertTranslate('Data Updated'));
+        
+        } else if($contentdominoQQ) {
+            $semanticTagleft    =   str_replace('[', '<', $contentdominoQQ);
+            $semanticTagright   =   str_replace(']', '>', $semanticTagleft);
+            $semanticTagclosel  =   str_replace('[/', '</', $semanticTagright);
+            $semanticTagcloser  =   str_replace(']', '>', $semanticTagclosel);
+
+            $PathS3             =   'unity-asset/text_file/dominoQQ.txt';
+            Storage::disk('s3')->put($PathS3, $semanticTagcloser);
+            Config::where('id', '=', $iddominoQQ)->update([
+                'value'         =>  $urldominoQQ
+            ]);
+            return back()->with('success', alertTranslate('Data Updated'));
+        } else if($contentdominosusun) {
+            $semanticTagleft    =   str_replace('[', '<', $contentdominosusun);
+            $semanticTagright   =   str_replace(']', '>', $semanticTagleft);
+            $semanticTagclosel  =   str_replace('[/', '</', $semanticTagright);
+            $semanticTagcloser  =   str_replace(']', '>', $semanticTagclosel);
+
+            $PathS3             =   'unity-asset/text_file/dominosusun.txt';
+            Storage::disk('s3')->put($PathS3, $semanticTagcloser);
+            Config::where('id', '=', $iddominosusun)->update([
+                     'value' =>  $urldominosusun
+            ]);
+
+            return back()->with('success', alertTranslate('Data Updated'));
+            
+        } else
         {
             return back()->with('alert', alertTranslate("Update can't be process"));
         }
