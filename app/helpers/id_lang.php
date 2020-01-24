@@ -563,6 +563,7 @@ function TranslateGeneralSettings($menu){
         'Edit privacy & policy'     =>  'Edit Kebijakan dan privasi',
         'Edit Term of Service'      =>  'Edit Ketentuan pelayanan',
         'days'                      =>  'Hari',
+        'Edit Asta Poker'           =>  'Edit Asta Poker'
 
 
     ];

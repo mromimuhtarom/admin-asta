@@ -510,7 +510,7 @@ class VersionAssetController extends Controller
         $name       =   $request->Name;
         $link       =   $request->Link;
         $version    =   $request->Version;
-        $gamep      =   simplexml_load_file("../public/upload/xml/Windows/asset_game.xml");
+        $gamep      =   simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Windows/asset_game.xml");
 
         foreach($gamep->children() as $gamew)
         {
@@ -523,12 +523,9 @@ class VersionAssetController extends Controller
 
         $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
 
-        file_put_contents("../public/upload/xml/Windows/asset_game.xml", $gamep->asXML());
-        $xmllocal   =   "../public/upload/xml/Windows/asset_game.xml";
-
         //update XML to aws s3
         $PathS3     =   'unity-asset/XML/Windows/asset_game.xml';
-        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
+        Storage::disk('s3')->put($PathS3, $gamep->asXML());
 
         //update file to aws s3
         $uploadFile = $replacepath . $name;

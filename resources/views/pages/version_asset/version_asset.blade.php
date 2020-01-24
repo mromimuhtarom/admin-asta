@@ -397,8 +397,8 @@
                   <div class="col-12">
                     <div class="form-group"><br>
                         <div class="form-group">
-                            <input type="file" name="fileLanguageId" id="file" class="input-file">
-                            <label for="file" class="btn btn-tertiary js-labelFile">
+                            <input type="file" name="fileLanguageId" id="file9" class="input-file">
+                            <label for="file9" class="btn btn-tertiary js-labelFile">
                               <i class="icon fa fa-check"></i>
                               <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                             </label>
@@ -588,8 +588,8 @@
             <div class="col-12">
               <div class="form-group" align="center"><br>
                   <div class="form-group">
-                      <input type="file" name="fileWindows" id="file2" class="input-file">
-                      <label for="file2" class="btn btn-tertiary js-labelFile">
+                      <input type="file" name="fileWindows" id="file10" class="input-file">
+                      <label for="file10" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
                         <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                       </label>

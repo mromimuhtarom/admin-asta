@@ -204,7 +204,7 @@
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
-                    </button>
+                      </button>
                     </td>
                     @else 
                     <td>{{$getAbout->value }}</td>
@@ -214,6 +214,54 @@
                     <td>PokerWeb</td>
                     @if($menu && $mainmenu)
                     <td><a href="#" class="inlineSetting" data-title="About" data-name="value" data-pk="{{ $getPokerWeb->id }}" data-type="text" data-url="{{ route('GeneralSetting-update')}}">{{ $getPokerWeb->value }}</a></td>
+                    @else 
+                    <td>{{ $getPokerWeb->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Asta</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalAstaPoker">
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                      </button>
+                    </td>
+                    @else 
+                    <td>{{ $getPokerWeb->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Big Two</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalBigTwo">
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                      </button>
+                    </td>
+                    @else 
+                    <td>{{ $getPokerWeb->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Domino QQ</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                      </button>
+                    </td>
+                    @else 
+                    <td>{{ $getPokerWeb->value }}</td>
+                    @endif
+                  </tr>
+                  <tr>
+                    <td>Domino Susun</td>
+                    @if($menu && $mainmenu)
+                    <td>
+                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                      </button>
+                    </td>
                     @else 
                     <td>{{ $getPokerWeb->value }}</td>
                     @endif
@@ -310,6 +358,129 @@
   </div>
   
 </div>
+
+
+            <!-- Modal Asta Poker-->
+            <div class="modal fade" id="myModalAstaPoker" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Asta Poker') }}</h4>
+                    <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      <i class="fa fa-remove"></i>
+                    </button>
+                  </div>
+                  <form action="{{ route('AboutGeneralSetting') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+              
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group">
+                              <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
+                              <input type="text" name="urlastapoker" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
+                              <textarea name="contentastapoker" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/privacy-policy.txt')) }}</textarea>
+                              <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+                                <script>
+                                    CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
+                                    CKEDITOR.replace( 'contentprivacypolicy', {
+                                      extraPlugins:'bbcode',
+                                      removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                                      fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                                      toolbar: [
+                                        [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
+                                        [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
+                                        [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar' ],
+                                        '/',
+                                        [ 'Bold', 'Italic', 'Underline' ],
+                                        [ 'FontSize' ],
+                                        [ 'TextColor' ], 
+                                        [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
+                                        [ 'Maximize' ]
+                                      ]
+                                    });
+                                    CKEDITOR.config.autoParagraph = false;
+                                    CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
+                                </script>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn sa-btn-primary submit-data">
+                        <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
+                      </button>
+                      <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                        <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{-- end create --}}
+
+
+
+            <!-- Modal Big Two -->
+            <div class="modal fade" id="myModalBigTwo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Asta Poker') }}</h4>
+                    <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      <i class="fa fa-remove"></i>
+                    </button>
+                  </div>
+                  <form action="{{ route('AboutGeneralSetting') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+              
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group">
+                              <input type="hidden" name="idprivacypolicy" value="{{ $getPrivacyPolicy->id }}">
+                              <input type="text" name="urlbigtwo" placeholder="Url" class="form-control" value="{{ $getPrivacyPolicy->value }}"><br>
+                              <textarea name="contentbigtwo" id="" class="form-control" cols="30" rows="27">{{ tagsEnabler($client->get('unity-asset/text_file/privacy-policy.txt')) }}</textarea>
+                              <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+                                <script>
+                                    CKEDITOR.plugins.addExternal('bbcode', '/ckeditor/plugins/bbcode/plugin.js');
+                                    CKEDITOR.replace( 'contentprivacypolicy', {
+                                      extraPlugins:'bbcode',
+                                      removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                                      fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                                      toolbar: [
+                                        [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
+                                        [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
+                                        [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar' ],
+                                        '/',
+                                        [ 'Bold', 'Italic', 'Underline' ],
+                                        [ 'FontSize' ],
+                                        [ 'TextColor' ], 
+                                        [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
+                                        [ 'Maximize' ]
+                                      ]
+                                    });
+                                    CKEDITOR.config.autoParagraph = false;
+                                    CKEDITOR.config.coreStyles_bold = { element: 'b', overrides: 'strong' };
+                                </script>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn sa-btn-primary submit-data">
+                        <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
+                      </button>
+                      <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
+                        <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{-- end create --}}
 
 
 

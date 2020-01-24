@@ -118,15 +118,15 @@ class ChipStoreController extends Controller
                             $thumbnail = $folder.$nama_file_unik;
 
                             // Memuat gambar utama
-                            $rootpath_main    = '../Public/upload/Chip/image1/';
-                            $upload_imagemain = '../Public/upload/Chip/image1';
+                            $rootpath_main    = '../public/upload/Chip/image1/';
+                            $upload_imagemain = '../public/upload/Chip/image1';
                             $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
                             $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
                             $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
                             // Memuat gambar watermark
-                            $rootpath_wtr    = '../Public/upload/Chip/image2/';
-                            $upload_imagewtr = '../Public/upload/Chip/image2';
+                            $rootpath_wtr    = '../public/upload/Chip/image2/';
+                            $upload_imagewtr = '../public/upload/Chip/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
                             $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);

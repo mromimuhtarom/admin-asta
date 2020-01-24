@@ -83,6 +83,9 @@ class GeneralSettingController extends Controller
         $urlprivacypolicy     = $request->urlprivacypolicy;
         $contenttermofservice = $request->contenttermofservice;
         $contentprivacypolicy = $request->contentprivacypolicy;
+        $contentastapoker     = $request->contentastapoker;
+        $urlastapoker         = $request->urlastapoker;
+          
 
         if($contentabout)
         {   
@@ -128,6 +131,19 @@ class GeneralSettingController extends Controller
             Storage::disk('s3')->put($PathS3, $semanticTagcloser);
             Config::where('id', '=', $idprivacypolicy )->update([
                 'value' =>  $urlprivacypolicy
+            ]);
+            return back()->with('success', alertTranslate('Data Updated'));
+
+        } else if($contentastapoker) {
+            $semanticTagleft    =   str_replace('[', '<', $contentastapoker);
+            $semanticTagright   =   str_replace(']', '>', $semanticTagleft);
+            $semanticTagclosel  =   str_replace('[/', '</', $semanticTagright);
+            $semanticTagcloser  =   str_replace(']', '>', $semanticTagclosel);
+
+            $PathS3             = 'unity-asset/text_file/privacy-policy.txt';
+            Storage::disk('s3')->put($PathS3, $semanticTagcloser);
+            Config::where('id', '=', $idprivacypolicy )->update([
+                'value' =>  $urlastapoker
             ]);
             return back()->with('success', alertTranslate('Data Updated'));
 

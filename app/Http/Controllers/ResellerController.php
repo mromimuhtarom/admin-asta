@@ -839,6 +839,8 @@ public function detailTransaction(Request $request, $month, $year)
                         'price',
                         'trans_type',
                         'google_key',
+                        'bonus_type',
+                        'bonus_get',
                         'status',
                         'shop_type'
                     )
@@ -1040,6 +1042,7 @@ public function detailTransaction(Request $request, $month, $year)
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        //  return response()->json($pk, 400);
 
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
@@ -1060,6 +1063,17 @@ public function detailTransaction(Request $request, $month, $year)
                 break;
             case "status":
                 $name = "Status";
+                break;
+            case "bonus_type":
+                $name = "Item Bonus";
+                if($value == 1):
+                    $value = 'chip';
+                elseif($value == 2):
+                    $value = 'Koin';
+                elseif($value == 3):
+                    $value = 'Barang';
+                endif;
+
                 break;
             case "trans_type":
                 $name = "Jenis Pembayaran";

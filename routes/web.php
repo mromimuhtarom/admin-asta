@@ -19,6 +19,7 @@ Route::get('GeneralSetting-about/viewhtml', 'GeneralSettingController@AboutGameh
 Route::get('GeneralSetting-PrivacyPolicy/viewhtml', 'GeneralSettingController@PrivacyPolicyGamehtml');
 Route::get('GeneralSetting-TermOfService/viewhtml', 'GeneralSettingController@TermOfServiceGamehtml');
 
+
 Route::middleware('authenticated')->group(function(){
 
     Route::group(['prefix' => 'Edit-Profile'], function(){

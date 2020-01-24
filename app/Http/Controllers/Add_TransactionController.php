@@ -15,6 +15,7 @@ use App\Log;
 use Session;
 use Validator;
 use App\Classes\MenuClass;
+use App\StoreTransactionDay;
 
 class Add_TransactionController extends Controller
 {
@@ -123,6 +124,11 @@ class Add_TransactionController extends Controller
       
       $stat = Stat::where('user_id', '=', $user_id)->first();
 
+      $storetransactionday = StoreTransactionDay::where('user_id', '=', $user_id)
+                             ->where('date', '=', Carbon::now('GMT+7')->toDateString())
+                             ->first();
+
+
       //VALIDASI FORM INPUT
 
       
@@ -158,6 +164,23 @@ class Add_TransactionController extends Controller
 
         if ($validator->fails()) :
           return back()->withErrors($validator->errors());
+        endif;
+
+        // lari ke table store transaction day jika di tambah atau dikurang
+        if($storetransactionday):
+          $chip = $storetransactionday->correction_chip + $valuecurrency;
+          StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            'date'            => Carbon::now('GMT+7')->toDateString(),
+            'date_created'    => Carbon::now('GMT+7'),
+            'correction_chip' =>  $chip
+          ]);
+        else:
+          StoreTransactionDay::create([
+            'user_id'         => $user_id,
+            'date'            => Carbon::now('GMT+7')->toDateString(),
+            'date_created'    => Carbon::now('GMT+7'),
+            'correction_chip' => $valuecurrency
+          ]);
         endif;
         
         //UPDATE DATABASE
@@ -215,6 +238,23 @@ class Add_TransactionController extends Controller
         if ($validator->fails()) :
           return back()->withErrors($validator->errors());
         endif;
+
+        // lari ke table store transaction day jika di tambah atau dikurang
+        if($storetransactionday):
+          $gold = $storetransactionday->correction_gold + $valuecurrency;
+          StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            'date'            => Carbon::now('GMT+7')->toDateString(),
+            'date_created'    => Carbon::now('GMT+7'),
+            'correction_gold' =>  $gold
+          ]);
+        else:
+          StoreTransactionDay::create([
+            'user_id'         => $user_id,
+            'date'            => Carbon::now('GMT+7')->toDateString(),
+            'date_created'    => Carbon::now('GMT+7'),
+            'correction_gold' => $valuecurrency
+          ]);
+        endif;
         
         //UPDATE DATABASE
         $balance = BalanceGold::create([
@@ -267,6 +307,23 @@ class Add_TransactionController extends Controller
 
         if ($validator->fails()) :
           return back()->withErrors($validator->errors());
+        endif;
+
+        // lari ke table store transaction day jika di tambah atau dikurang
+        if($storetransactionday):
+          $point = $storetransactionday->correction_point + $valuecurrency;
+          StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            'date'            => Carbon::now('GMT+7')->toDateString(),
+            'date_created'    => Carbon::now('GMT+7'),
+            'correction_point' =>  $point
+          ]);
+        else:
+          StoreTransactionDay::create([
+            'user_id'         => $user_id,
+            'date'            => Carbon::now('GMT+7')->toDateString(),
+            'date_created'    => Carbon::now('GMT+7'),
+            'correction_point' => $valuecurrency
+          ]);
         endif;
 
         //UPDATE DATABASE

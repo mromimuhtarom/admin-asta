@@ -38,7 +38,7 @@
     <dmq name="dmq_game_img">
         <type>Image</type>
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMQ/Windows/</link>
-        <ver>0.0.3</ver>
+        <ver>0.0.7</ver>
     </dmq>
     <dmq name="dmq_game_audio">
         <type>Audio</type>
@@ -48,7 +48,7 @@
     <dms name="dms_lobby_img">
         <type>Image</type>
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Windows/DMS/</link>
-        <ver>0.0.4</ver>
+        <ver>0.0.5</ver>
     </dms>
     <dms name="dms_game_img">
         <type>Image</type>
@@ -75,4 +75,4 @@
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/Windows/</link>
         <ver>0.0.1</ver>
     </tpk>
-</main_asset>
+<tyu name="tyu"><type>Audio</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Windows/</link><ver>0.0.2</ver></tyu></main_asset>

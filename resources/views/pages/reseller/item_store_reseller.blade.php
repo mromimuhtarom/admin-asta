@@ -131,7 +131,7 @@
                 @if($gold->status === 0)
                   <tr>
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" data-bonus="unity-asset/store/gold/{{ $gold->item_id }}-2.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
-                    <td><a href="#" class="usertext" data-title="Name" data-name="order" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
+                    <td><a href="#" class="usertext" data-title="Name" data-name="order" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
                     <td>
                       <div class="media-container">
                           <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
@@ -164,7 +164,7 @@
                     </td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ number_format($gold->item_get, 2) }}</a></td>
-                    <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('GoldStore-update') }}">{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</a></td>
+                    <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</a></td>
                     <td>
                       <div class="media-container" align="center">
                         <form method="POST" action="{{ route('ItemStoreReseller-updateimageBonus') }}" enctype="multipart/form-data">
@@ -526,9 +526,6 @@ $(".watermark-image").change(function() {
       $('.bontypeActive').editable({  
         value: '',
         mode :'inline',
-        success: function success() {
-          location.reload();
-        },
         validate: function(value) {
           if($.trim(value) == '') {
             return 'This field is required';
