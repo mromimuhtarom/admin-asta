@@ -84,7 +84,7 @@ class RewardTransactionController extends Controller
             'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $user_id
         ]);
 
-        return back()->with('success', 'Menerima permintaan Transaksi telah berhasil');
+        return back()->with('success', alertTranslate("Receiving request Transaction has been successful"));
     }
 
     public function decline(Request $request)
@@ -143,6 +143,6 @@ class RewardTransactionController extends Controller
             'desc'      => 'Menolak permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $user_id
         ]);
 
-        return back()->with('success', 'Menolak permintaan Transaksi telah berhasil');
+        return back()->with('success', alertTranslate('Reject request Transaction has been successful'));
     }
 }

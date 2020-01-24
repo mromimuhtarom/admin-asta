@@ -65,7 +65,7 @@ class PaymentStoreController extends Controller
             'desc'      => 'Menambahkan data di menu Toko Pembayaran dengan Nama '. $request->title
         ]);
 
-        return redirect()->route('Payment_Store')->with('success','Data Added');
+        return redirect()->route('Payment_Store')->with('success', alertTranslate('Data Added'));
     }
 
 
@@ -123,9 +123,9 @@ class PaymentStoreController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Toko Pembayaran dengan ID '.$getPaymentId
             ]);
-            return redirect()->route('Payment_Store')->with('success','Data Deleted');
+            return redirect()->route('Payment_Store')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Payment_Store')->with('success','Something wrong');  
+        return redirect()->route('Payment_Store')->with('success', alertTranslate('Something wrong'));  
     }
 
     public function deleteAllSelectedpayment(Request $request)
@@ -138,6 +138,6 @@ class PaymentStoreController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Toko Pembayaran dengan ID '.$ids
         ]);
-        return redirect()->route('Payment_Store')->with('succes', 'Data deleted');
+        return redirect()->route('Payment_Store')->with('succes', alertTranslate('Data deleted'));
     }
 }

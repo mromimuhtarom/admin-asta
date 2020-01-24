@@ -342,7 +342,7 @@ class GoodsStoreController extends Controller
         }
         else 
         {
-            return redirect()->route('Goods_Store')->with('alert', 'Image Must Be png Format');
+            return redirect()->route('Goods_Store')->with('alert', alertTranslate('Image must be png format'));
         }
 
     }
@@ -399,9 +399,9 @@ class GoodsStoreController extends Controller
                 'desc'      => 'Hapus gambar dan data di menu Toko Barang dengan ID '.$id
             ]);
 
-            return redirect()->route('Goods_Store')->with('success','Data Deleted');
+            return redirect()->route('Goods_Store')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Goods_Store')->with('success','Something wrong');  
+        return redirect()->route('Goods_Store')->with('alert', alertTranslate('Something wrong'));  
     }
 
     public function deleteAllSelected(Request $request)
@@ -422,6 +422,6 @@ class GoodsStoreController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus gambar dan data yang dipilih di menu Toko barang dengan id '.$ids
         ]);
-        return redirect()->route('Goods_Store')->with('success', 'Data deleted');
+        return redirect()->route('Goods_Store')->with('success', alertTranslate('Data deleted'));
     }
 }

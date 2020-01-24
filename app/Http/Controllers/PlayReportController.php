@@ -17,11 +17,7 @@ use Illuminate\Support\Facades\Input;
 
 class PlayReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $game = Game::all();
@@ -53,7 +49,7 @@ class PlayReportController extends Controller
        }
 
       if($inputMaxDate < $inputMinDate){
-       return back()->with('alert','End Date can\'t be less than start date');
+       return back()->with('alert', alertTranslate("end date can't be less than start date"));
       }
         // if sorting variable is null
         if($sorting == NULL):

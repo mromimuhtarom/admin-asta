@@ -60,18 +60,12 @@ class ProfileController extends Controller
           'datetime'  => Carbon::now('GMT+7'),
           'desc'      => 'Edit kata sandi dengan PenggunaId '.$user.' menjadi '. $password
         ]);
-        return redirect()->route('profile-view')->with('success','Reset Password Successfully');
+        return redirect()->route('profile-view')->with('success', alertTranslate('Reset Password Successfully'));
         }
-        return redirect()->route('profile-view')->with('alert','Password is Null');
+        return redirect()->route('profile-view')->with('alert', alertTranslate("Password is NULL"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request)
     {
         $pk    = $request->pk;

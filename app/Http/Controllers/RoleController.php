@@ -16,11 +16,7 @@ use App\User;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $menu     = MenuClass::menuName('Role Admin');
@@ -28,12 +24,7 @@ class RoleController extends Controller
         $roles    = Role::select('role_id', 'name')->get();
         return view('pages.admin.role_admin', compact('roles', 'menu', 'mainmenu'));
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $role = $request->rolename;
@@ -71,9 +62,9 @@ class RoleController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Menambahkan data Peran di Menu Peran Admin dengan Nama Peran '.$role
               ]);
-              return redirect()->route('Role_Admin')->with('success','Data Insert Successfull');  
+              return redirect()->route('Role_Admin')->with('success', alertTranslate('insert data successful'));  
         }
-        return redirect()->route('Role_Admin')->with('alert','Role Name is Null');
+        return redirect()->route('Role_Admin')->with('alert', alertTranslate('Role Name is Null'));
     }
 
     public function menu($role)
@@ -107,13 +98,7 @@ class RoleController extends Controller
         return view('pages.admin.role_edit', compact('roles', 'role', 'menu', 'type','mainmenu', 'mainmenuaccess', 'role_op'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
         $pk    = $request->pk;
@@ -173,12 +158,6 @@ class RoleController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         $userid = $request->id;
@@ -193,9 +172,9 @@ class RoleController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$userid
             ]);
-            return redirect()->route('Role_Admin')->with('success','Data Deleted');
+            return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Role_Admin')->with('alert','Something wrong'); 
+        return redirect()->route('Role_Admin')->with('alert', alertTranslate('Something wrong')); 
     }
 
     //DELETE ALL SELECTED 
@@ -213,7 +192,7 @@ class RoleController extends Controller
         'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$ids
     ]);
 
-      return redirect()->route('Role_Admin')->with('success', 'Data deleted');
+      return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
     }
 
 }

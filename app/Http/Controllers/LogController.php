@@ -54,7 +54,7 @@ class LogController extends Controller
             return self::index()->withErrors($validator->errors());
         }
         if($maxDate < $minDate){
-                return back()->with('alert','End Date can\'t be less than start date');
+                return back()->with('alert', alertTranslate("end date can't be less than start date"));
         }
 
         if($searchUser != NULL && $minDate != NULL && $maxDate != NULL && $inputAction != NULL) {
