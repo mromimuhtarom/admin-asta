@@ -13,11 +13,7 @@ use Validator;
 
 class ReportPlayerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $datenow = Carbon::now('GMT+7');
@@ -91,7 +87,7 @@ class ReportPlayerController extends Controller
 
 
         if($maxDate < $minDate){
-            return back()->with('alert','End Date can\'t be less than start date');
+            return back()->with('alert', alertTranslate("end date can't be less than start date"));
         }
         if($player != NULL && $minDate != NULL && $maxDate != NULL && $logtype != NULL)
         {

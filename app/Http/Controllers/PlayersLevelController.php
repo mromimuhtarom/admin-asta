@@ -39,7 +39,7 @@ class PlayersLevelController extends Controller
             'desc'      => 'Menambahkan data level pemain di menu level pemain dengan level '.$level
         ]);
 
-        return back()->with('success', 'Data berhasil di input');
+        return back()->with('success', alertTranslate("Data input successfull"));
     }
 
     public function store_rank(Request $request)
@@ -59,7 +59,7 @@ class PlayersLevelController extends Controller
             'desc'      => 'Menambahkan data peringkat pemain di menu level pemain dengan nama level '.$name
         ]);
 
-        return back()->with('success', 'Data berhasil di input');
+        return back()->with('success', alertTranslate('Data input successfull'));
     }
 
     public function update(Request $request)
@@ -136,9 +136,9 @@ class PlayersLevelController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data level pemain di menu Level Pemain dengan Level '.$level
             ]);
-            return redirect()->route('Players_Level')->with('success','Data telah di hapus');
+            return redirect()->route('Players_Level')->with('success', alertTranslate("Data deleted"));
         }
-        return redirect()->route('Players_Level')->with('alert','Mohon maaf terjadi suatu masalah');
+        return redirect()->route('Players_Level')->with('alert', alertTranslate('Something wrong'));
        
     }
 
@@ -157,9 +157,9 @@ class PlayersLevelController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data peringkat pemain di menu Level Pemain dengan ID '.$id
             ]);
-            return redirect()->route('Players_Level')->with('success','Data telah di hapus');
+            return redirect()->route('Players_Level')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Players_Level')->with('alert','Mohon maaf terjadi suatu masalah');
+        return redirect()->route('Players_Level')->with('alert', alertTranslate("Something wrong"));
        
     }
 
@@ -174,7 +174,7 @@ class PlayersLevelController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus data Level pemain di menu Level Pemain dengan level '.$levelall
         ]);
-        return redirect()->route('Players_Level')->with('success','Data berhasil di hapus');        
+        return redirect()->route('Players_Level')->with('success', alertTranslate('Data deleted'));        
     }
 
     public function delete_allRank(Request $request)
@@ -188,6 +188,6 @@ class PlayersLevelController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus data Peringkat pemain di menu Level Pemain dengan id '.$id
         ]);
-        return redirect()->route('Players_Level')->with('success','Data berhasil di hapus');        
+        return redirect()->route('Players_Level')->with('success', AlertTranslate('Data deleted'));        
     }
 }

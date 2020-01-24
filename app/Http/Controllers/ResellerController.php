@@ -24,11 +24,7 @@ use Storage;
 
 class ResellerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
 //****************************************** Menu List Reseller ******************************************//
 //---------- Index List Reseller --------- //
     public function index()
@@ -109,9 +105,9 @@ class ResellerController extends Controller
                 'desc'      => 'Edit kata sandi di menu Daftar Agen dengan AgenId '.$pk.' menjadi '. $password
             ]);
 
-            return redirect()->route('List_Reseller')->with('success','Reset Password Successfully');
+            return redirect()->route('List_Reseller')->with('success', alertTranslate("Reset Password Successfully"));
         }
-        return redirect()->route('List_Reseller')->with('alert','Password is Null');
+        return redirect()->route('List_Reseller')->with('alert', alertTranslate("Password is Null"));
     }
 // ------- End Password Update List Reseller ------- //
 
@@ -129,9 +125,9 @@ class ResellerController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$userid
             ]);
-            return redirect()->route('List_Reseller')->with('success','Data Deleted');
+            return redirect()->route('List_Reseller')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('List_Reseller')->with('success','Somethong wrong');                
+        return redirect()->route('List_Reseller')->with('success', alertTranslate('Somethong wrong'));                
     }
 //----- End List Reseller ------//
 //****************************************** End Menu List Reseller ******************************************//
@@ -181,7 +177,7 @@ class ResellerController extends Controller
             'desc'      => 'Menambahkan data di menu Peringkat Agen dengan Nama Peringkat '. $rankname
         ]);
 
-        return redirect()->route('Reseller_Rank')->with('success','Data Added');
+        return redirect()->route('Reseller_Rank')->with('success', alertTranslate('Data added'));
     }
 // ------ End Insert Reseller Rank ------ //
 
@@ -254,9 +250,9 @@ class ResellerController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Peringkat Agen dengan AgenID '.$id
             ]);
-            return redirect()->route('Reseller_Rank')->with('success','Data Deleted');
+            return redirect()->route('Reseller_Rank')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Reseller_Rank')->with('success','Somethong wrong');  
+        return redirect()->route('Reseller_Rank')->with('alert', alertTranslate('Somethong wrong'));  
     }
 //-------- End Delete Reseller Rank ----------//
 //****************************************** End Menu Reseller Rank ******************************************//
@@ -307,7 +303,7 @@ class ResellerController extends Controller
         }
   
         if($endDate < $startDate){
-          return back()->with('alert','End Date can\'t be more than start date');
+          return back()->with('alert', alertTranslation("end date can't be more than start date"));
         }
 
         if($choosedate == 'approvedecline')
@@ -519,7 +515,7 @@ public function detailTransaction(Request $request, $month, $year)
                              ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
       
       if($endDateComparison < $startDateComparison){
-        return back()->with('alert','End Date can\'t be less than start date');
+        return back()->with('alert', alertTranslate("end date can't be less than start date"));
       }
 
       if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){
@@ -777,7 +773,7 @@ public function detailTransaction(Request $request, $month, $year)
             'desc'      => 'Menerima permintaan transaksi di menu Transaksi Permintaan Agen dengan Agenid'. $reseller_id
           ]);
 
-          return back()->with('success','Approved Succesful');
+          return back()->with('success', alertTranslate("Approved Succesful"));
     }
 //------ End Request Transaction Approve -------//
 
@@ -816,7 +812,7 @@ public function detailTransaction(Request $request, $month, $year)
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menolak permintaan transaksi di menu Transaksi Permintaan Agen dengan Agenid'. $reseller_id
         ]);
-        return back()->with('success','Declined Succesful');
+        return back()->with('success', alertTranslate("Declined Succesful"));
     }
 //------ End Request Transaction Decline -------//
 //****************************************** End Menu Request Transaction ******************************************//
@@ -1018,17 +1014,17 @@ public function detailTransaction(Request $request, $month, $year)
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Menambahkan data di menu Toko Agen dengan judul '. $request->title
                 ]);
-                return redirect()->route('Item_Store_Reseller')->with('success','Data Added');                 
+                return redirect()->route('Item_Store_Reseller')->with('success', alertTranslate('Data added'));                 
             }
             else
             {
-                return redirect()->route('Item_Store_Reseller')->with('alert','Ukuran file terlalu besar');
+                return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate('Ukuran file terlalu besar'));
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {
-            return redirect()->route('Item_Store_Reseller')->with('alert','Ekstensi file tidak di perbolehkan');
+            return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate("File extensions are not allowed"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }

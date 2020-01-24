@@ -669,7 +669,42 @@ function alertTranslate($menu){
         "Your image source size height is more than 319 px and width is more than 384" => "Tinggi ukuran sumber gambar Anda lebih dari 319 px dan lebar lebih dari 384",
         "format must be png and pictorial"                              =>  "Format gambar harus png",
         "ID must be fill"                                               =>  "ID harus diisi",
+        "Username or Password are wrong!!"                              =>  "Username dan katasandi salah!!",
+        "You are already Log Out"                                       =>  "Kamu sudah keluar",
+        "Update status successfull"                                     =>  "Memperbarui status berhasil",
+        "Input Data successfull with"                                   =>  "Input data berhasil dengan",
+        "Number of inputs filled in player ID can't be NULL"            =>  "Jumlah input yang diisi ID pemain tidak boleh NULL",
+        "You must to Choose Status"                                     =>  "Kamu harus memilih status",
+        "Data input successfull"                                        =>  "Data berhasil di input", 
+        "Reset Password Successfully"                                   =>  "Setel ulang password berhasil",
+        "Password is NULL"                                              =>  "Katasandi NULL",
+        "REGISTER SUCCESSFULL"                                          =>  "Pendaftaran sukses",
+        "Approved Successful"                                           =>  "BERHASIL DISETUJUI",
+        "Declined Successful"                                           =>  "DITOLAK BERHASIL",
+        "File size too large"                                           =>  "Ukuran file terlalu besar",
+        "Receiving request Transaction has been successful"             =>  "Menerima permintaan transaksi telah berhasil",
+        "Reject request Transaction has been successful"                =>  "Menolak permintaan transaksi telah berhasil",
+        "Role Name is Null"                                             =>  "Nama peran NULL",
+        "your Big blind can't be under Minbuy divided 10 "              =>  "Big blind Anda tidak dapat berada di bawah Minbuy dibagi 10",
+        "your Small Blind can't be under Big Blind divided 2 "          =>  "Small blind Anda tidak dapat berada di bawah Big Blind dibagi 2",
+        "Min buy table can't be under Min Buy room"                     =>  "Table min buy tidak boleh dibawah room min buy",
+        "Max buy table can't be up to max buy room"                     =>  "Table max buy tidak bisa sampai dengan room max buy",
+        "Min Buy can't be under Stake multiplied by 3 multiplied 13 or under "  =>  "Min Buy tidak bisa di bawah stake yang dikalikan dengan 3 kali 13 atau di bawah",
+        "Max buy can't be under min buy"                                =>  "Max buy tidak bisa dibawah min buy",
+        "Min buy can't be under max buy"                                =>  "Min buy tidak bisa dibawah max buy",
+        "Max buy can't be up to max buy room"                           =>  "Max buy tidak bisa sampai room max buy",
+        "Max buy can't be under Stake multiplied by 10 or under "       =>  "Max buy tidak bisa dibawah stake dikalikan 10 atau dibawahnya",
+        "Max buy can't be under Min buy multiplied by 4 or under "      =>  "Max buy tidak bisa dibawah Min buy dikalikan 4 atau dibawahnya",
+        "Min buy can't be under stake multiplied by 10 or under"        =>  "Min buy tidak bisa dibawah stake dikalikan 10 atau dibawahnya",
+        "Max buy can't be under Min Buy multiplied by 2 or under"       =>  "Max buy tidak bisa dibawah Min buy dikalikan 2 atau dibawahnya",
+        "your Small Blind can't be under Big Blind divided 2 or under"  =>  "Small blind mu tidak bisa dibawah Big blind dibagi 2 atau dibawahnya",
+        "Min buy can't be under to min buy room "                       =>  "Min buy tidak bisa dibawah room min buy",
+        "Max Buy can't be under Stake multiplied by 4 or under "        =>  "Max buy tidak bisa dibawah stake dikali 4 atau dibawahnya",
+        ""
+
+
         
+
         
 
         

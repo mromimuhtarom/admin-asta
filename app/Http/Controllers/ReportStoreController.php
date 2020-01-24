@@ -60,7 +60,7 @@ class ReportStoreController extends Controller
         {
             if($minDate > $maxDate)
             {
-                return back()->with('alert','End Date can\'t be less than start date');
+                return back()->with('alert', alertTranslate("end date can't be less than start date"));
             } else
             {
                 $storeHistory = StoreTransactionHist::JOIN('asta_db.user', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.user.user_id')

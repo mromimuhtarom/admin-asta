@@ -325,7 +325,7 @@ class PlayersController extends Controller
         if($minDate != NULL && $maxDate != NULL)
         {
           if($maxDate < $minDate){
-            return back()->with('alert','End Date can\'t be less than start date');
+            return back()->with('alert', alertTranlsate("end date can't be less than start date"));
           }
         }
         $register = Player::leftjoin('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
@@ -683,7 +683,7 @@ class PlayersController extends Controller
           'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi Dilarang'
         ]);
 
-        return back()->with('success','Update Status Successfull');
+        return back()->with('success', alertTranslate('Update status successfull'));
     }
   // ----------- End Update Registered Player ----------- //
 //****************************************** End Menu Registered Player ******************************************//
@@ -735,7 +735,7 @@ class PlayersController extends Controller
 
         return back()->with('success', 'Input Data Successfull with '.$number.' Record');
       }
-    return back()->with('alert', 'Number of inputs filled in Player ID can\'t be NULL ');
+    return back()->with('alert', alertTranslate("Number of inputs filled in Player ID can't be NULL"));
   }
   // -----------End Insert Guest ---------------//
 
@@ -793,7 +793,7 @@ class PlayersController extends Controller
         return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($minDate == NULL || $maxDate == NULL || $minDate == NULL && $maxDate == NULL)
     {
-      return self::indexGuest()->with('alert', 'You must to Choose Status');
+      return self::indexGuest()->with('alert', alertTranslate("You must to Choose Status"));
     }
 
 
@@ -854,7 +854,7 @@ class PlayersController extends Controller
         }
         if($botId == NULL)
         {
-          return back()->with('alert','Bot ID is Null you must Add Id ot In menu Register Player ID');
+          return back()->with('alert','Bot ID is Null you must Add Id or In menu Register Player ID');
         }
 
 
@@ -913,7 +913,7 @@ class PlayersController extends Controller
           'desc'      => 'Menambahkan data di menu Bot dengan username '. $username
         ]);
 
-        return redirect()->route('Bots')->with('success','Data Added');
+        return redirect()->route('Bots')->with('success', alertTranslate('Data added'));
     }
   // ----------- End Insert Bots ----------- //
 
@@ -964,9 +964,9 @@ class PlayersController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Delete in menu Bots with ID '.$userid
           ]);
-          return redirect()->route('Bots')->with('success','Data Deleted');
+          return redirect()->route('Bots')->with('success', alertTranslate('Data deleted'));
       }
-      return redirect()->route('Bots')->with('success','Something wrong');   
+      return redirect()->route('Bots')->with('alert', alertTranslate('Something wrong'));   
     }
   // ----------- End Delete Bots ----------- //
 //****************************************** End Menu Bots ******************************************//  

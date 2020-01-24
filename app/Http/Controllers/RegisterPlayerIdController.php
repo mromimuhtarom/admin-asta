@@ -103,9 +103,9 @@ class RegisterPlayerIdController extends Controller
                 'desc'      => 'Menambahkan data sebanyak '.$number.' input  di menu Pendaftaran '.$usertype.' ID'
             ]);
 
-            return back()->with('success', 'Input Data Successfull with '.$number.' Record');
+            return back()->with('success', alertTranslate("Input Data successfull with ").$number.' Record');
         }
-        return back()->with('alert', 'Number of inputs filled in Player ID can\'t be NULL ');
+        return back()->with('alert', alertTranslate("Number of inputs filled in player ID can't be NULL"));
     }
 
     

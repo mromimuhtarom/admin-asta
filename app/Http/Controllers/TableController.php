@@ -152,16 +152,16 @@ class TableController extends Controller
         $sbvalidation = $bbvalidation / 2;
         if($bb < $bbvalidation)
         {
-            return back()->with('alert', 'your Big blind can\'t be under Minbuy divided 10 '.$bbvalidation.' ');
+            return back()->with('alert', alertTranslate("your Big blind can't be under Minbuy divided 10 ").$bbvalidation.' ');
         } else if($sb < $sbvalidation)
         {
-            return back()->with('alert', 'your Small Blind can\'t be under Big Blind divided 2 '.$sbvalidation.' ');
+            return back()->with('alert', alertTranslate("your Small Blind can't be under Big Blind divided 2 ").$sbvalidation.' ');
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', 'Min buy table can\'t be under Min Buy room');
+            return back()->with('alert', alertTranslate("Min buy table can't be under Min Buy room"));
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', 'Max buy table can\'t be Up to Max Buy room');
+            return back()->with('alert', alertTranslate("Max buy table can't be up to max buy room"));
         }
 
         TpkTable::create([
@@ -183,7 +183,7 @@ class TableController extends Controller
         'desc'      => 'Menambahkan data di menu Meja Asta Poker dengan nama '.$request->tableName
         ]);
 
-        return redirect()->route('Table_Asta_Poker')->with('success','Data Added');
+        return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('Data Added'));
     }
 
 
@@ -194,7 +194,7 @@ class TableController extends Controller
             'category'      => 'required',
             
         ], [
-            'category.integer'  => 'category is required'
+            'category.integer'  => 'category dibutuhkan'
         ]);
         
         if ($validator->fails()) {
@@ -209,16 +209,16 @@ class TableController extends Controller
         $room             = BigTwoRoom::where('room_id', '=', $category)->first();
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 3 multiplied 13 or under '.$minbuyvalidation);
+            return back()->with('alert', alertTranslate("Min Buy can't be under Stake multiplied by 3 multiplied 13 or under ").$minbuyvalidation);
         }  else if($minbuy > $maxbuy)
         {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy');
+            return back()->with('alert', alertTranslate("Max buy can't be under min buy"));
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', 'Minbuy can\'t be under room min buy'.$room->min_buy.'');
+            return back()->with('alert', alertTranslate("Min buy can't be under max buy").$room->min_buy.'');
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', 'Maxbuy can\'t be up to room Max buy');
+            return back()->with('alert', alertTranslate("Max buy can't be up to max buy room"));
         }
 
         BigTwoTable::create([
@@ -240,7 +240,7 @@ class TableController extends Controller
             'desc'      => 'Menambahkan data di menu Meja Big Two dengan nama '.$request->tableName
         ]);
  
-        return redirect()->route('Table_Big_Two')->with('success','Data Added');
+        return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data Added'));
      }
 
     public function DominoSusunstore(Request $request)
@@ -250,7 +250,7 @@ class TableController extends Controller
             'category'      => 'required|integer',
             
         ], [
-            'category.integer'  => 'category is required'
+            'category.integer'  => 'category dibutuhkan'
         ]);
         
         if ($validator->fails()) {
@@ -266,19 +266,19 @@ class TableController extends Controller
         $lastrecord       = DominoSusunTable::orderby('table_id', 'desc')->first();
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
+            return back()->with('alert', alertTranslate("Max buy can't be under Stake multiplied by 10 or under").$minbuyvalidation);
         }  else if($maxbuy < $maxbuyvalidation)
         {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 4 or under '.$maxbuyvalidation);
+            return back()->with('alert', alertTranslate("Max buy can't be under Min buy multiplied by 4 or under ").$maxbuyvalidation);
         } else if($minbuy > $maxbuy)
         {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy ');
+            return back()->with('alert', alertTranslate("Max buy can't be under min buy"));
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', 'Min Buy table can\'t be under Min Buy room ');
+            return back()->with('alert', alertTranslate("Min buy table can't be under Min Buy room"));
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', 'Max Buy table can\'t be Up to Max Buy room ');
+            return back()->with('alert', alertTranslate("Max buy table can't be up to max buy room"));
         }
 
         DominoSusunTable::create([
@@ -301,7 +301,7 @@ class TableController extends Controller
             'desc'      => 'Menambahkan data di menu Meja Domino Susun dengan nama'.$request->tableName
           ]);
 
-       return redirect()->route('Table_Domino_Susun')->with('success','Data Added');
+       return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data Added'));
     }
 
     public function DominoQstore(Request $request)
@@ -329,19 +329,19 @@ class TableController extends Controller
 
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', 'Min Buy can\'t be under Stake multiplied by 10 or under '.$minbuyvalidation);
+            return back()->with('alert', alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$minbuyvalidation);
         }  else if($maxbuy < $maxbuyvalidation)
         {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy multiplied by 2 or under '.$maxbuyvalidation);
+            return back()->with('alert', alertTranslate("Max buy can't be under Min Buy multiplied by 2 or under").$maxbuyvalidation);
         } else if($minbuy > $maxbuy)
         {
-            return back()->with('alert', 'Max Buy can\'t be under Min Buy');
+            return back()->with('alert', alertTranslate("Max buy can't be under min buy"));
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', 'Min Buy table can\'t be under Min Buy room');
+            return back()->with('alert', alertTranslate("Min buy table can't be under Min Buy room"));
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', 'Max Buy table can\'t be under Max Buy room');
+            return back()->with('alert', alertTranslate("Max buy table can't be up to max buy room"));
         } 
 
         DominoQTable::create([
@@ -364,7 +364,7 @@ class TableController extends Controller
             'desc'      => 'Menambahkan data di menu Meja Domino QQ dengan nama '.$request->tableName
           ]);
 
-       return redirect()->route('Table_Domino_QQ')->with('success','Data Added');
+       return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data Added'));
     }
 
 
@@ -383,7 +383,7 @@ class TableController extends Controller
         {
             if($value < $bbvalidation)
             {
-                return response()->json("your Small Blind can't be under Big Blind divided 2 or under ".$bbvalidation." ", 400);
+                return response()->json(alertTranslate("your Small Blind can't be under Big Blind divided 2 or under ").$bbvalidation." ", 400);
             } else 
             {
                 TpkTable::where('table_id', '=', $pk)->update([
@@ -395,7 +395,7 @@ class TableController extends Controller
 
             if($value < $sbvalidation)
             {
-                return response()->json("your Small Blind can't be under Big Blind divided 2 or under ".$findcategory->min_buy." ", 400);
+                return response()->json(alertTranslate("your Small Blind can't be under Big Blind divided 2 or under ").$findcategory->min_buy." ", 400);
             } else 
             {
                 TpkTable::where('table_id', '=', $pk)->update([
@@ -406,7 +406,7 @@ class TableController extends Controller
         {
             if($value < $room->min_buy)
             {
-                return response()->json("Min Buy table can't be Under To Min buy room", 400);
+                return response()->json(alertTranslate("Min buy table can't be under Min Buy room"), 400);
             } 
             TpkTable::where('table_id', '=', $pk)->update([
                 $name => $value
@@ -416,7 +416,7 @@ class TableController extends Controller
         {
             if($value > $room->max_buy)
             {
-                return response()->json("Max Buy table can't be Up To Max buy room", 400);
+                return response()->json(alertTranslate("Max buy table can't be up to max buy room"), 400);
             }
             TpkTable::where('table_id', '=', $pk)->update([
                 $name => $value
@@ -481,13 +481,13 @@ class TableController extends Controller
             $count          = $validasiminbuy->stake * 3 * 13;
             if($count > $value)
             {
-                return response()->json("Min Buy can't be under Stake multiplied by 3 multiplied by 13 or under ".$count." ", 400);
+                return response()->json(alertTranslate("Min Buy can't be under Stake multiplied by 3 multiplied 13 or under ").$count." ", 400);
             } else if($value > $validasiminbuy->max_buy)
             {
-                return response()->json("Man Buy can't be Up To Max Buy", 400);
+                return response()->json(alertTranslate("Max buy can't be up to max buy room "), 400);
             } else if($value < $room->min_buy)
             {
-                return response()->json("Min Buy table can't be Under To Min buy room", 400);
+                return response()->json(alertTranslation("Min buy table can't be under to min buy room "), 400);
             } 
             BigTwoTable::where('table_id', '=', $pk)->update([
                 'min_buy'   => $value
@@ -497,10 +497,10 @@ class TableController extends Controller
             $validasimaxbuy =BigTwoTable::where('table_id', '=', $pk)->first();
             if($value < $validasimaxbuy->min_buy)
             {
-                return response()->json("Max Buy can't be under Min Buy", 400);
+                return response()->json(alertTranslate("Max buy can't be under min buy"), 400);
             } else if($value > $room->max_buy)
             {
-                return response()->json("Max Buy table can't be Up To Max buy room", 400);
+                return response()->json(alertTranslate("Max buy table can't be up to max buy room"), 400);
             }
             BigTwoTable::where('table_id', '=', $pk)->update([
                 'max_buy'   => $value
@@ -561,13 +561,13 @@ class TableController extends Controller
         {
             if($value < $countminbuy)
             {
-                return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
+                return response()->json(alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$countminbuy." ", 400);
             } else if($value > $dmsroom->max_buy)
             {
-                return response()->json("Min Buy can't be up to max buy ", 400);
+                return response()->json(alertTranslate("Min buy can't be up to max buy "), 400);
             } else if($value< $room->min_buy)
             {
-                return response()->json("Min Buy room can't be under to min buy room ", 400);
+                return response()->json(alertTranslate("Min Buy can't be under to min buy room "), 400);
             } else 
             {
                 DominoSusunTable::where('table_id', '=', $pk)->update([
