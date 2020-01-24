@@ -562,10 +562,16 @@ function TranslateGeneralSettings($menu){
         'About'                     =>  'Tentang',
         'Edit About'                =>  'Edit Tentang',
         'CS & Legal Settings'       =>  'CS dan pengaturan legal',
-        'Edit privacy & policy'     =>  'Edit Kebijakan dan privasi',
-        'Edit Term of Service'      =>  'Edit Ketentuan pelayanan',
+        'Edit privacy & policy'     =>  'Ubah Kebijakan dan privasi',
+        'Edit Term of Service'      =>  'Ubah Ketentuan pelayanan',
         'days'                      =>  'Hari',
-        'Edit Asta Poker'           =>  'Edit Asta Poker'
+        'Edit Asta Poker'           =>  'Ubah Asta Poker',
+        'Edit Big Two'              =>  'Ubah Big two',
+        'Edit Domino QQ'            =>  'Ubah Domino QQ',
+        'Edit Domino Susun'         =>  'Ubah Domino susun',
+        
+
+
 
 
     ];
