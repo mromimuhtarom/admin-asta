@@ -97,8 +97,9 @@
 								@endif
 								<th class="th-sm">{{ translate_MenuTransaction('Win') }}</th>
 								<th class="th-sm">{{ translate_MenuTransaction('Lose') }}</th>
-                				<th class="th-sm">{{ translate_MenuTransaction('Turn Over') }}</th>
+                <th class="th-sm">{{ translate_MenuTransaction('Turn Over') }}</th>
 								<th class="th-sm">{{ translate_MenuTransaction('Fee') }}</th>
+								<th class="th-sm">{{ translate_MenuTransaction('Jackpot') }}</th>
 								@if($time == "today" || $time == "all time")
 								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
 								@endif
@@ -112,7 +113,8 @@
 									<td>{{ number_format($hst->win, 2) }}</td>
 									<td>{{ number_format($hst->lose, 2) }}</td>
 									<td>{{ number_format($hst->turnover, 2) }}</td>
-                  <td>{{ number_format($hst->fee, 2) }}</td>
+									<td>{{ number_format($hst->fee, 2) }}</td>
+									<td>{{ number_format($hst->price, 2)}}</td>
                   <td>{{ $hst->date_created }}</td>
 							</tr>
 							@endforeach
@@ -124,6 +126,7 @@
 								<td>{{ number_format($hst->totalLose, 2) }}</td>
 								<td>{{ number_format($hst->totalTurnover, 2) }}</td>
 								<td>{{ number_format($hst->totalFee, 2) }}</td>
+								<td>{{ number_format($hst->totalprice, 2)}}</td>
 							</tr>
 							@endforeach
 							@endif

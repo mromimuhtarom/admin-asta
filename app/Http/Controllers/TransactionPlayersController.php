@@ -35,7 +35,9 @@ class TransactionPlayersController extends Controller
                                DB::raw('sum(asta_db.transaction_day.win) As totalWin'),
                                DB::raw('sum(asta_db.transaction_day.lose) As totalLose'),
                                DB::raw('sum(asta_db.transaction_day.fee) As totalFee'),
-                               DB::raw('sum(asta_db.transaction_day.turnover) As totalTurnover')
+                               DB::raw('sum(asta_db.transaction_day.turnover) As totalTurnover'),
+                               DB::raw('sum(asta_db.transaction_day.prize) As totalprize')
+
                            );
         $Transaction = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
                            ->select(
@@ -44,7 +46,8 @@ class TransactionPlayersController extends Controller
                                'asta_db.transaction_day.win',
                                'asta_db.transaction_day.lose',
                                'asta_db.transaction_day.turnover',
-                               'asta_db.transaction_day.fee'
+                               'asta_db.transaction_day.fee',
+                               'asta_db.transaction_day.prize'
                            );
 
 
