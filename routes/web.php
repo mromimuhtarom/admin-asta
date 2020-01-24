@@ -213,7 +213,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Transaction Players')->group(function(){
                 Route::get('Banking-view', 'TransactionPlayersController@index')->name('Transaction_Players');
                 Route::get('Banking-search', 'TransactionPlayersController@search')->name('TransactionPlayers-search');
-                Route::get('Banking-search/{mindate}/{maxdate}/detail', 'TransactionPlayersController@detail')->name('detailTransactionDay');
+                Route::get('Banking-search/detail', 'TransactionPlayersController@detail')->name('detailTransactionDay');
 
             });
         });

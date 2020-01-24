@@ -87,53 +87,83 @@
 			<div class="custom-scroll table-responsive">
 				
 				<div class="table-outer">
+						<div class="row">
+							<div class="col" style="font-style:italic;color:#969696;font-weight:bold;">
+								{{ Translate_menuPlayers('Total Record Entries is') }} {{ $history->total() }}
+							</div>
+						</div>	
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>
 							<tr>
 								@if ($time == "today" || $time == "all time")
-								<th class="th-sm">{{ translate_MenuTransaction('Username') }}</th>	
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>	
+								@elseif($time == 'detail')
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>	
 								@elseif($time == "week" || $time == "month")
-								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=minDate">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('minDate') }}"></i></a></th>
 								@endif
-								<th class="th-sm">{{ translate_MenuTransaction('Win') }}</th>
-								<th class="th-sm">{{ translate_MenuTransaction('Lose') }}</th>
-                <th class="th-sm">{{ translate_MenuTransaction('Turn Over') }}</th>
-								<th class="th-sm">{{ translate_MenuTransaction('Fee') }}</th>
-								<th class="th-sm">{{ translate_MenuTransaction('Jackpot') }}</th>
+								@if($time != 'detail')
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('Win') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('Lose') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('Turn Over') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('Fee') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
+								@else
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('Win') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('Lose') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('Turn Over') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('Fee') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
+								@endif
 								@if($time == "today" || $time == "all time")
-								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
+								@elseif($time == 'detail')
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@endif
 							</tr>
 						</thead>
 						<tbody>
-							@if ($time == "today" || $time == "all time")
+							@if ($time == "today" || $time == "all time" || $time == "detail")
 							@foreach($history as $hst)
 							<tr>
                   <td>{{ $hst->username }}</td>
-									<td>{{ number_format($hst->win, 2) }}</td>
-									<td>{{ number_format($hst->lose, 2) }}</td>
-									<td>{{ number_format($hst->turnover, 2) }}</td>
-									<td>{{ number_format($hst->fee, 2) }}</td>
-									<td>{{ number_format($hst->price, 2)}}</td>
+									<td>{{ number_format($hst->wintransaction, 2) }}</td>
+									<td>{{ number_format($hst->losetransaction, 2) }}</td>
+									<td>{{ number_format($hst->turnovertransaction, 2) }}</td>
+									<td>{{ number_format($hst->feetransaction, 2) }}</td>
+									@if ($hst->prizetransaction == NULL)
+									<td></td>
+									@else
+									<td>{{ number_format($hst->prizetransaction, 2) }}</td>
+									@endif
+									<td>{{ number_format($hst->totalWinLose, 2) }}</td>
                   <td>{{ $hst->date_created }}</td>
 							</tr>
 							@endforeach
 							@elseif($time == "week" || $time == "month")
 							@foreach($history as $hst)
 							<tr>
-								<td><a href="{{ route('detailTransactionDay', [$hst->minDate,$hst->maxDate]) }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
-								<td>{{ number_format($hst->totalWin, 2) }}</td>
-								<td>{{ number_format($hst->totalLose, 2) }}</td>
-								<td>{{ number_format($hst->totalTurnover, 2) }}</td>
-								<td>{{ number_format($hst->totalFee, 2) }}</td>
-								<td>{{ number_format($hst->totalprice, 2)}}</td>
+								<td><a href="{{ route('detailTransactionDay') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
+							<td>{{ number_format($hst->wintransaction, 2) }} {{ $hst->totalWin }}</td>
+								<td>{{ number_format($hst->losetransaction, 2) }}</td>
+								<td>{{ number_format($hst->turnovertransaction, 2) }}</td>
+								<td>{{ number_format($hst->feetransaction, 2) }}</td>
+								@if ($hst->prizetransaction == NULL)
+								<td></td>
+								@else
+								<td>{{ number_format($hst->prizetransaction, 2)}}</td>
+								@endif
+								<td>{{ number_format($hst->totalWinLose, 2) }}</td>
 							</tr>
 							@endforeach
 							@endif
 						</tbody>
 					</table>
 				</div>
-		
+		    <!-- end widget content -->
+        <div style="display: flex;justify-content: center;">{{ $history->links() }}</div>  
 			</div>
 		
 		</div>
@@ -146,7 +176,11 @@
 $(document).ready(function() {
 	$('table.table').dataTable( {
 		"lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
-		"order": [[5, "desc"]]
+		"order": [[5, "desc"]],
+		"searching": false,
+		"paging":false,
+		"bInfo":false,
+		"ordering": false
 	});
 });
   
@@ -188,7 +222,11 @@ $(document).ready(function() {
 	table = $('table.table').dataTable({
 		"sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
 		"autoWidth" : true,
-		"paging": false,
+		"paging":false,
+		"bInfo":false,
+		"ordering": false,
+		"bLengthChange": false,
+		"searching": false,
 		"classes": {
 		"sWrapper": "dataTables_wrapper dt-bootstrap4"
 		},
