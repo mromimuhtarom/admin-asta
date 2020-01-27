@@ -72,15 +72,9 @@ class UserAdminController extends Controller
               'datetime'  => Carbon::now('GMT+7'),
               'desc'      => 'Menambahkan data di menu Pengguna Admin dengan Nama pengguna '. $user->username
           ]);
-          return redirect()->route('User_Admin')->with('success','Data Insert Successfull');
+          return redirect()->route('User_Admin')->with('success', alertTranslate('insert data successful'));
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
       $pk    = $request->pk;
@@ -132,17 +126,12 @@ class UserAdminController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan PenggunaId '.$pk.' menjadi '. $password
             ]);
-            return redirect()->route('User_Admin')->with('success','Reset Password Successfully');
+            return redirect()->route('User_Admin')->with('success', alertTranslate('Reset Password Successfully'));
         }
-        return redirect()->route('User_Admin')->with('alert','Password is Null');
+        return redirect()->route('User_Admin')->with('alert', alertTranslate('Password is Null'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy(Request $request)
     {
         $userid = $request->userid;
@@ -161,9 +150,9 @@ class UserAdminController extends Controller
                 ]);
                 return redirect()->route('User_Admin')->with('success','Data Deleted');
             }
-            return redirect()->route('User_Admin')->with('success','Somethong wrong');
+            return redirect()->route('User_Admin')->with('success', alertTranslate('Somethong wrong'));
         }
-        return back()->with('alert', 'You didn\'t allow to delete your account');
+        return back()->with('alert', alertTranslate("You didn't allow to delete your account"));
                         
     }
 
@@ -177,6 +166,6 @@ class UserAdminController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$ids
         ]);
-        return redirect()->route('User_Admin')->with('success','Data berhasil di hapus');
+        return redirect()->route('User_Admin')->with('success', alertTranslate("Data deleted"));
     }
 }

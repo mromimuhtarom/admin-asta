@@ -706,9 +706,13 @@ function alertTranslate($menu){
         "Min buy can't be under stake multiplied by 10 or under"        =>  "Min buy tidak bisa dibawah stake dikalikan 10 atau dibawahnya",
         "Max buy can't be under Min Buy multiplied by 2 or under"       =>  "Max buy tidak bisa dibawah Min buy dikalikan 2 atau dibawahnya",
         "your Small Blind can't be under Big Blind divided 2 or under"  =>  "Small blind mu tidak bisa dibawah Big blind dibagi 2 atau dibawahnya",
+        "Max buy can't be under Stake multiplied by 2 or under"         =>  "Max buy tidak bisa dibawah Stake dikalikan 2 atau dibawahnya",
         "Min buy can't be under to min buy room "                       =>  "Min buy tidak bisa dibawah room min buy",
         "Max Buy can't be under Stake multiplied by 4 or under "        =>  "Max buy tidak bisa dibawah stake dikali 4 atau dibawahnya",
-        ""
+        "Max Buy table can't be Up to Max Buy room"                     =>  "table max buy tidak bisa diatas room max buy",
+        "You didn't allow to delete your account"                       =>  "Kamu tidak diperbolehkan menghapus akunmu",
+        "Data saved"                                                    =>  "Data tersimpan!",
+
 
 
         

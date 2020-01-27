@@ -12,11 +12,7 @@ use App\Log;
 
 class VersionAssetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $menu        = MenuClass::menuName('Version Asset Apk');
@@ -28,22 +24,11 @@ class VersionAssetController extends Controller
         return view('pages.version_asset.version_asset', compact('xml_andro', 'xml_ios', 'menu', 'xml_windows'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $menu      = MenuClass::menuName('Version Asset Apk');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
 
     
@@ -108,7 +93,7 @@ class VersionAssetController extends Controller
             'desc'      => 'Menambahkan data di menu Versi Aset APK untuk android dengan Nama '. $name
         ]);
         
-        return back()->with('success', 'Data saved!');
+        return back()->with('success', alertTranslate("Data saved"));
 
     }
 
@@ -173,7 +158,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menambahkan data di menu Versi Aset APK untuk IOS dengan Nama '. $name
         ]);
-        return back()->with('success', 'Data saved!');
+        return back()->with('success', alertTranslate("Data saved"));
 
     }
 
@@ -240,7 +225,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menambahkan data di menu Versi Aset APK untuk Windows dengan Nama '. $name
         ]);
-        return back()->with('success', 'Data saved!');
+        return back()->with('success', alertTranslate("Data saved"));
 
     }
 
@@ -456,7 +441,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE aset  di menu Versi Aset APK untuk Android dengan nama '.$pk
           ]);
-        return back()->with('success', 'Input succeeded');
+        return back()->with('success', alertTranslate('Data input successfull'));
     }
 
 
@@ -498,7 +483,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE aset  di menu Versi Aset APK untuk IOS dengan nama '.$pk
           ]);
-        return back()->with('success', 'Input Succeeded');
+        return back()->with('success', alertTranslate('Data input successfull'));
     }
 
 
@@ -537,7 +522,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE aset  di menu Versi Aset APK untuk Windows dengan nama '.$pk
           ]);
-        return back()->with('success', 'Input Succeeded');
+        return back()->with('success', alertTranslate('Data input successfull'));
     }
 
 
@@ -556,7 +541,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE Bahasa  di menu Versi Aset APK untuk bahasa Indonesia'
           ]);
-        return back()->with('success', 'Input Succeeded');
+        return back()->with('success', alertTranslate('Data input successfull'));
     }
 
     //FUNCTION UPDATE File Language English
@@ -574,7 +559,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE Bahasa  di menu Versi Aset APK untuk bahasa Indonesia'
           ]);
-        return back()->with('success', 'Input Succeeded');
+        return back()->with('success', alertTranslate('Data input successfull'));
     }
 
  
@@ -616,7 +601,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Versi Aset APK untuk Android dengan nama '.$id
         ]);
-        return back()->with('success', 'Data deleted!');
+        return back()->with('success', alertTranslate('Data deleted'));
 
     }
 
@@ -657,7 +642,7 @@ class VersionAssetController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
             ]);
-            return back()->with('success', 'Data deleted!');
+            return back()->with('success', alertTranslate('Data deleted'));
 
     }
 
@@ -698,7 +683,7 @@ class VersionAssetController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Versi Aset APK untuk Windows dengan nama '.$id
             ]);
-            return back()->with('success', 'Data deleted!');
+            return back()->with('success', alertTranslate('Data deleted'));
 
     }
 
@@ -751,7 +736,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Versi Aset APK untuk Android dengan nama '.$id
         ]);
-        return back()->with('success', 'Data deleted!');
+        return back()->with('success', alertTranslate('Data deleted'));
 
     }
 
@@ -805,7 +790,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
         ]);
-        return back()->with('success', 'Data deleted!');
+        return back()->with('success', alertTranslate('Data deleted'));
     }
 
 
@@ -859,7 +844,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
         ]);
-        return back()->with('success', 'Data deleted!');
+        return back()->with('success', alertTranslate('Data deleted'));
     }
 
 

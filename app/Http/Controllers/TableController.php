@@ -578,13 +578,13 @@ class TableController extends Controller
         {
             if($value < $countmaxbuy)
             {
-                return response()->json("Max Buy can't be under Stake multiplied by 4 or under ".$countmaxbuy." ", 400);
+                return response()->json( alertTranslate("Max buy can't be under Stake multiplied by 4 or under ").$countmaxbuy." ", 400);
             } else if($value < $dmsroom->min_buy)
             {
-                return response()->json("Max Buy can't be under Min Buy", 400);
+                return response()->json( alertTranslate("Max buy can't be under min buy"), 400);
             } else if($value > $room->max_buy) 
             {
-                return response()->json("Max Buy table can't be up to Max Buy room", 400);
+                return response()->json( alertTranslate("Max buy table can't be up to max buy room"), 400);
             } else 
             {
                 DominoSusunTable::where('table_id', '=', $pk)->update([
@@ -660,14 +660,14 @@ class TableController extends Controller
         {
             if($value < $countminbuy)
             {
-                return response()->json("Min Buy can't be under Stake multiplied by 10 or under ".$countminbuy." ", 400);
+                return response()->json( alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$countminbuy." ", 400);
             } else 
             if($value > $dmqroom->max_buy)
             {
-                return response()->json("Min Buy can't be up to Max Buy ".$countminbuy." ", 400);
+                return response()->json( alertTranslate("Min buy can't be up to max buy ").$countminbuy." ", 400);
             } else if($value < $room->min_buy)
             {
-                return response()->json("Min Buy table can't be under Min buy room", 400);
+                return response()->json( alertTranslate("Min buy table can't be under Min Buy room"), 400);
             } else 
             {
                 DominoQTable::where('table_id', '=', $pk)->update([
@@ -678,14 +678,14 @@ class TableController extends Controller
         {
             if($value < $countmaxbuy)
             {
-                return response()->json("Max Buy can't be under Stake multiplied by 2 or under ".$countmaxbuy." ", 400);
+                return response()->json( alertTranslate("Max buy can't be under Stake multiplied by 2 or under ").$countmaxbuy." ", 400);
             } else 
             if($value < $dmqroom->min_buy)
             {
-                return response()->json("Max Buy can't be under Min Buy ", 400);
+                return response()->json( alertTranslate("Max buy can't be under min buy "), 400);
             } else if($value > $room->max_buy)
             {
-                return response()->json("Max Buy room can't be Up to Max Buy room ", 400);
+                return response()->json( alertTranslate("Max Buy table can't be Up to Max Buy room "), 400);
             }else 
             {
                 DominoQTable::where('table_id', '=', $pk)->update([
@@ -748,9 +748,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Asta Poker dengan RuangID '.$tableid
             ]);
-            return redirect()->route('Table_Asta_Poker')->with('success','Data Deleted');
+            return redirect()->route('Table_Asta_Poker')->with('success', alertTranlsate('Data deleted'));
         }
-        return redirect()->route('Table_Asta_Poker')->with('alert','Something wrong');                
+        return redirect()->route('Table_Asta_Poker')->with('alert', alertTranslate('Something wrong'));                
     }
 
     public function deleteAllSelectedTpk(Request $request)
@@ -763,7 +763,7 @@ class TableController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus di menu table asta poker' .$ids
         ]);
-        return redirect()->route('Table_Asta_Poker')->with('succes', 'Data deleted');
+        return redirect()->route('Table_Asta_Poker')->with('succes', alertTranslate('Data deleted'));
     }
 
 
@@ -779,9 +779,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Big Two dengan RuangID '.$tableid
             ]);
-            return redirect()->route('Table_Big_Two')->with('success','Data Deleted');
+            return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Table_Big_Two')->with('alert','Something wrong');                
+        return redirect()->route('Table_Big_Two')->with('alert', alertTranslate('Something wrong'));                
     }
 
     public function BigTwoDeleteAll(Request $request)
@@ -794,7 +794,7 @@ class TableController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu table Big two' .$ids
         ]);
-        return redirect()->route('Table_Big_Two')->with('success', 'Data deleted');
+        return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data deleted'));
     }
 
 
@@ -811,9 +811,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Domino Susun dengan RuangID '.$tableid
             ]);
-            return redirect()->route('Table_Domino_Susun')->with('success','Data Deleted');
+            return redirect()->route('Table_Domino_Susun')->with('success', alertTranlsate('Data deleted'));
         }
-        return redirect()->route('Table_Domino_Susun')->with('alert','Something wrong');                
+        return redirect()->route('Table_Domino_Susun')->with('alert', alertTranslate('Something wrong'));                
     }
 
     public function DominoSDeleteAll(Request $request)
@@ -826,7 +826,7 @@ class TableController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus di menu table Domino susun' .$ids
         ]);
-        return redirect()->route('Table_Domino_Susun')->with('success', 'Data deleted');
+        return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data deleted'));
     }
 
 
@@ -843,9 +843,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Domino QQ dengan RuangID '.$tableid
             ]);
-            return redirect()->route('Table_Domino_QQ')->with('success','Data Deleted');
+            return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data deleted'));
         }
-        return redirect()->route('Table_Domino_QQ')->with('alert','Something wrong');                
+        return redirect()->route('Table_Domino_QQ')->with('alert', alertTranslate('Something wrong'));                
     }
 
     public function DominoQDeleteAll(Request $request)
@@ -858,7 +858,7 @@ class TableController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus di menu table Domino QQ' .$ids
         ]);
-        return redirect()->route('Table_Domino_QQ')->with('succes', 'Data deleted');
+        return redirect()->route('Table_Domino_QQ')->with('succes', alertTranslate('Data deleted'));
     
     }
 

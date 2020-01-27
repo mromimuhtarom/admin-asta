@@ -10,11 +10,7 @@ use Validator;
 
 class TransactionPlayersController extends Controller
 {
-        /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        
     public function index()
     {
         $datenow = Carbon::now('GMT+7')->toDateString();
@@ -106,7 +102,7 @@ class TransactionPlayersController extends Controller
                 return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate'));
             } else if($minDate == NULL && $maxDate == NULL)
             {
-                return back()->with('alert', 'Min Date And Max Date Must be Filled In');
+                return back()->with('alert', alertTranlsate("Min Date And Max Date Must be Filled In"));
             }
             $lang_id='Sepanjang waktu';
         } else {
