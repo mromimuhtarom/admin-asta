@@ -154,14 +154,16 @@
                         <td>{{ $bd->user_id }}</td>
                         <td>{{ $bd->username }}</td>
                         <td>{{ $gamename }}</td>
+                        @if($bd->action_id == NULL)
+                        <td></td>
+                        @else 
                         <td>{{ $actblnc[$bd->action_id] }}</td>
+                        @endif
                         <td>{{ number_format($bd->debit, 2) }}</td>
                         <td>{{ number_format($bd->credit, 2) }}</td>
                         <td>{{ number_format($bd->balance, 2) }}</td>
                         <td>{{ $bd->datetime }}</td>
                     </tr>
-    
-    
                     @endforeach
                 </tbody>
             </table>
