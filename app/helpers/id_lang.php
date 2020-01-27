@@ -243,7 +243,8 @@ function translate_menuTransaction($menu){
         'Shipping Code'         =>  'Kode Pengiriman (No Resi / No Transferan)',
         'Completed'             =>  'Selesai',
         'Confirmation'          =>  'Konfirmasi',
-        'Jackpot'               =>  'Jackpot'
+        'Jackpot'               =>  'Jackpot',
+        'Win Lose'              =>  'Menang Kalah'
     ];
     return $array_menuContent[$menu];
 }

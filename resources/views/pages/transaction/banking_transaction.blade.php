@@ -80,6 +80,15 @@
 								@if($time == "today" || $time == "all time")
 								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
 								@endif
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
+								<th class="th-sm">saaaaaaaa</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -91,7 +100,7 @@
 									<td>{{ number_format($hst->lose, 2) }}</td>
 									<td>{{ number_format($hst->turnover, 2) }}</td>
                   <td>{{ number_format($hst->fee, 2) }}</td>
-                  <td>{{ $hst->date_created }}</td>
+									<td>{{ $hst->date_created }}</td>
 							</tr>
 							@endforeach
 							@elseif($time == "week" || $time == "month")
@@ -102,6 +111,15 @@
 								<td>{{ number_format($hst->totalLose, 2) }}</td>
 								<td>{{ number_format($hst->totalTurnover, 2) }}</td>
 								<td>{{ number_format($hst->totalFee, 2) }}</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
 							</tr>
 							@endforeach
 							@endif

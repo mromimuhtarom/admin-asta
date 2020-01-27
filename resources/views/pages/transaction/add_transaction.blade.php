@@ -308,7 +308,7 @@
                                         <input type="hidden" name="operator_aritmatika" value="-">
                                         <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                         <input type="hidden" name="columnname" value="point">
-                                        <input type="number" min="0" name="currency" placeholder="Point" class="form-control" required><br>
+                                        <input type="number" step="0.01" min="0.01" max="999999999999" name="currency" placeholder="Point" class="form-control" required><br>
                                         <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Poin dikurangi"></textarea>
                                     </div>
                                 </div>
