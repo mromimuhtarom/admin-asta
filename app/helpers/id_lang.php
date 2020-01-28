@@ -22,7 +22,7 @@ function translate_menu($menu){
       'Active_Admin'                    =>  'Admin aktif',
       'Report_Admin'                    =>  'Laporan admin',
       'Transaction'                     =>  'Transaksi',
-      'Banking_Transactions'            =>  'Transaksi Banking',
+      'Transaction_Day'                 =>  'Transaksi Harian',
       'User_Bank_Transaction'           =>  'Transaksi Bank Pemain',
       'Reward_Transaction'              =>  'Transaksi Hadiah',
       'Add_Transaction'                 =>  'Tambah transaksi',
@@ -244,7 +244,23 @@ function translate_menuTransaction($menu){
         'Completed'             =>  'Selesai',
         'Confirmation'          =>  'Konfirmasi',
         'Jackpot'               =>  'Jackpot',
-        'Win Lose'              =>  'Menang Kalah'
+        'Win Lose'              =>  'Menang Kalah',
+        'Cash Debit'            =>  'Debit Tunai',
+        'Cash Credit'           =>  'Kredit Tunai',
+        'Gold Debit'            =>  'Debit Koin',
+        'Gold Credit'           =>  'Kredit Koin',
+        'Chip Debit'            =>  'Debit Chip',
+        'Chip Credit'           =>  'Kredit Chip',
+        'Reward Gold'           =>  'Hadiah Koin',
+        'Reward Chip'           =>  'Hadiah Chip',
+        'Reward Point'          =>  'Hadiah Poin',
+        'Correction Gold'       =>  'Koreksi Koin',
+        'Correction Chip'       =>  'Koreksi Chip',
+        'Correction Point'       =>  'Koreksi Poin', 
+        'Point Get'             =>  'Point Di Dapat',
+        'Point Spend'           =>  'Poin Di Pakai',
+        'Point Expired'         =>  'Poin Kadaluarsa',
+        'Transaction Day'       =>  'Transaksi Harian' 
     ];
     return $array_menuContent[$menu];
 }
