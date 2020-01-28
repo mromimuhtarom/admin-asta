@@ -305,7 +305,7 @@
     "autoWidth" : true,
     "paging": false,
     "bInfo": false,
-    "ordering": false,
+    "ordering": false,  
     "bFilter": false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"

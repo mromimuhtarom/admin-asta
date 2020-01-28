@@ -114,10 +114,8 @@ class RewardTransactionController extends Controller
             'action_date' => Carbon::now('GMT+7')
         ]);
 
-        
         $user_stat  = Stat::where('user_id', '=', $user_id)->first();
         $totalPoint = $user_stat->point + $price;
-
 
         Stat::where('user_id', '=', $user_id)->update([
             'point' =>  $totalPoint

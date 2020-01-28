@@ -44,6 +44,7 @@
 
 @endif
 
+
 @if (\Session::has('success'))
   <div class="alert alert-success">
     <p>{{\Session::get('success')}}</p>
@@ -146,8 +147,8 @@
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('TableGift-update') }}">{{ $gf->name }}</a></td>
                     <td><a href="#" class="usertext" data-name="price" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('TableGift-update') }}">{{ number_format($gf->price, 2) }}</a></td>
-                    <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ $gf->strCategory() }}</a></td>
-                    <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ strEnabledDisabled($gf->status)}}</a></td>
+                    <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate($gf->strCategory()) }}</a></td>
+                    <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate(strEnabledDisabled($gf->status)) }}</a></td>
                     <td>
                         <a href="#" style="color:red;" class="delete{{ $gf->id }}" 
                             id="delete"
@@ -227,6 +228,7 @@
                     <option value="1">Makanan</option>
                     <option value="2">Minuman</option>
                     <option value="3">Item</option>
+                    <option value="4">Aksi</option>
                   </select>
               </div>
             </div>
@@ -367,11 +369,12 @@
           }
         },
 				source: [
-                {value: '', text: 'Choose Category Gift'},
+                {value: '', text: 'Pilih kategori gift'},
                 @php 
-				          echo '{value: "'.$category[0].'", text: "'.$category[1].'"},';
-					        echo '{value: "'.$category[2].'", text: "'.$category[3].'"},';
-					        echo '{value: "'.$category[4].'", text: "'.$category[5].'"},';
+				          echo '{value: "'.$category[0].'", text: "'.ConfigTextTranslate($category[1]).'"},';
+					        echo '{value: "'.$category[2].'", text: "'.ConfigTextTranslate($category[3]).'"},';
+					        echo '{value: "'.$category[4].'", text: "'.ConfigTextTranslate($category[5]).'"},';
+                  echo '{value: "'.$category[6].'", text: "'.ConfigTextTranslate($category[7]).'"},';
                 @endphp
         ]
       });
@@ -385,10 +388,10 @@
           }
         },
 				source: [
-                  {value: '', text: 'Choose for activation'},
+                  {value: '', text: 'Pilih untuk aktivasi'},
                   @php
-                  echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                  echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
+                  echo '{value:"'.$endis[0].'", text: "'.ConfigTextTranslate($endis[1]).'"}, ';
+                  echo '{value:"'.$endis[2].'", text: "'.ConfigTextTranslate($endis[3]).'"}, ';
                   @endphp
         ]
       });

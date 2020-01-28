@@ -654,7 +654,8 @@ class PlayersController extends Controller
         $sts_plyr    = $request->status_player;
 
         $validator = Validator::make($request->all(),[
-          'description' => 'required'
+          'status_player' => 'required',
+          'description'   => 'required'
           
         ]);
         if ($validator->fails()) {
@@ -666,7 +667,8 @@ class PlayersController extends Controller
         ]);
 
         $validator = Validator::make($request->all(),[
-          'description' => 'required'
+          'description'   => 'required',
+          'status_player' =>  'required'
 
         ]);
         if ($validator->fails()) {
@@ -676,17 +678,19 @@ class PlayersController extends Controller
         switch($sts_plyr):
           case '1':
             $sts_plyr = 25;
+            $sts_user = "setuju";
             break;
           case '2':
             $sts_plyr = 26;
+            $sts_user = "dilarang";
             break;
           case '3':
             $sts_plyr = 27;
+            $sts_user = "bermasalah";
             break;
         endswitch;
 
         
-
         LogUser::create([  
           'user_id'     => $plyr_id,
           'action_id'   => $sts_plyr,
@@ -698,7 +702,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi Dilarang'
+          'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi '.$sts_user
         ]);
 
         return back()->with('success', alertTranslate('Update status successfull'));

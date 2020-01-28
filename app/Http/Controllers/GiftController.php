@@ -68,7 +68,7 @@ class GiftController extends Controller
         $validator = Validator::make($request->all(),[
             'title'    => 'required',
             'price'    => 'required|integer',
-            'category' => 'required|integer|between:1,3',
+            'category' => 'required|integer|between:1,4',
             'file'     => 'required',
         ]);
 
@@ -111,7 +111,7 @@ class GiftController extends Controller
                         $validator = Validator::make($request->all(),[
                             'title'    => 'required',
                             'price'    => 'required|integer',
-                            'category' => 'required|integer|between:1,3',
+                            'category' => 'required|integer|between:1,4',
                         ]);
 
                         if ($validator->fails()) {
@@ -397,8 +397,10 @@ class GiftController extends Controller
                 $value = 'makanan';
                 elseif($value == 2):
                     $value = 'minuman';
-                else:
+                elseif($value == 3):
                     $value = 'item';
+                else:
+                    $value = 'aksi';
                 endif;
               break;
           case "status":
