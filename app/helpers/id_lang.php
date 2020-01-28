@@ -661,6 +661,7 @@ function ConfigTextTranslate($menu){
         "Drink"                                             =>   "Minuman",
         "Item"                                              =>   "Item",
         "Action"                                            =>   "Aksi",
+        "Correction"                                        =>   "Koreksi",
         // "1"                                                 =>  "1",
         "" => ""
 

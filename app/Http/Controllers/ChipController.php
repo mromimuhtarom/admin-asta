@@ -46,7 +46,8 @@ class ChipController extends Controller
           $actionbalance[12] => $actionbalance[13],
           $actionbalance[14] => $actionbalance[15],
           $actionbalance[16] => $actionbalance[17],
-          $actionbalance[18] => $actionbalance[19]
+          $actionbalance[18] => $actionbalance[19],
+          $actionbalance[20] => $actionbalance[21]
         ];
 
         $getMindate  = Input::get('inputMinDate');
@@ -131,7 +132,8 @@ class ChipController extends Controller
           $actionbalance[12] => $actionbalance[13],
           $actionbalance[14] => $actionbalance[15],
           $actionbalance[16] => $actionbalance[17],
-          $actionbalance[18] => $actionbalance[19]
+          $actionbalance[18] => $actionbalance[19],
+          $actionbalance[20] => $actionbalance[21]
         ];
 
         // if ($validator->fails()) {

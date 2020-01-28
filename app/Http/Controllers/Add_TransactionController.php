@@ -31,9 +31,11 @@ class Add_TransactionController extends Controller
 
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
+      
         $actblnc = [
           $actionbalance[10] => $actionbalance[11],
-          $actionbalance[12] => $actionbalance[13]
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[20] => $actionbalance[21]
         ];
         
         return view('pages.transaction.add_transaction', compact('actblnc'));
@@ -103,7 +105,8 @@ class Add_TransactionController extends Controller
         $actionbalance       = explode(",", $value);
         $actblnc = [
           $actionbalance[10] => $actionbalance[11],
-          $actionbalance[12] => $actionbalance[13]
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[20] => $actionbalance[21]
         ];  
 
         $add_transaction->appends($request->all());
@@ -146,6 +149,7 @@ class Add_TransactionController extends Controller
         else:
           $op_math = "dikurang";
           $totalbalance = $stat->chip - $valuecurrency;
+          $type = 11;
 
           //PREVENT BALANCE MINUS CHIP
           if($stat->chip == 0):
@@ -182,7 +186,7 @@ class Add_TransactionController extends Controller
             'correction_chip' => $valuecurrency
           ]);
         endif;
-        
+
         //UPDATE DATABASE
         $balance = BalanceChip::create([
             'user_id'   => $user_id,
@@ -206,7 +210,7 @@ class Add_TransactionController extends Controller
       elseif($columnname == 'gold'):
         if( $plusminus == "+"):    
           $totalbalance = $stat->gold + $valuecurrency;
-          $op_math = 'ditambahkan';
+          $op_math      = 'ditambahkan';
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
             'type'        =>  'required',
@@ -217,7 +221,8 @@ class Add_TransactionController extends Controller
 
         else:
           $totalbalance = $stat->gold - $valuecurrency;
-          $op_math = 'dikurang';
+          $op_math      = 'dikurang';
+          $type         = 11;
 
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
@@ -256,6 +261,7 @@ class Add_TransactionController extends Controller
           ]);
         endif;
         
+
         //UPDATE DATABASE
         $balance = BalanceGold::create([
             'user_id'   => $user_id,
@@ -289,6 +295,7 @@ class Add_TransactionController extends Controller
         else:
           $totalbalance = $stat->point - $valuecurrency;
           $op_math = 'dikurang';
+          $type         = 11;
 
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
@@ -326,6 +333,7 @@ class Add_TransactionController extends Controller
           ]);
         endif;
 
+       
         //UPDATE DATABASE
         $balance = BalancePoint::create([
             'user_id'   => $user_id,

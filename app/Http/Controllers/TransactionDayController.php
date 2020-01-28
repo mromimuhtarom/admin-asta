@@ -52,6 +52,7 @@ class TransactionDayController extends Controller
                               'user_point.point_spend',
                               'user_point.point_expired'
                           );
+                          
         $validator = Validator::make($request->all(),[
             'inputMinDate'   => 'required',
             'inputMaxDate'   => 'required',
