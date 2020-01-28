@@ -675,7 +675,7 @@ public function detailTransaction(Request $request, $month, $year)
                             'name'
                          )
                          ->get();
-    
+                
             $item_cash = ItemsCash::select(
                             'item_id', 
                             'name'
