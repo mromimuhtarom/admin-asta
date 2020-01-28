@@ -587,9 +587,6 @@ function TranslateGeneralSettings($menu){
         'Edit Domino Susun'         =>  'Ubah Domino susun',
         
 
-
-
-
     ];
     return $array_menuContent[$menu];
 }
@@ -613,7 +610,7 @@ function TranslateReseller($menu){
         'Create new asset'      =>  'Buat asset baru',
         'Link'                  =>  'Link',
         'Version'               =>  'Versi',
-        'Edit Asset'            =>  'Edit asset',
+        'Edit Asset'            =>  'Edit asset', 
         'Choose a file'         =>  'pilih file',
         'Create new reseller'   =>  'buat agen baru',
         'Select All'            =>  'Pilih semua',
@@ -733,14 +730,6 @@ function alertTranslate($menu){
         "Max Buy table can't be Up to Max Buy room"                     =>  "table max buy tidak bisa diatas room max buy",
         "You didn't allow to delete your account"                       =>  "Kamu tidak diperbolehkan menghapus akunmu",
         "Data saved"                                                    =>  "Data tersimpan!",
-
-
-
-        
-
-        
-
-        
 
     ];
     return $array_menuContent[$menu];

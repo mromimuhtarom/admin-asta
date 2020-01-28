@@ -142,20 +142,20 @@ class GiftController extends Controller
                             $upload_imagewtr = '../public/upload/gifts/image2';
                             $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
                             $putfile_wtr     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
-                            $watermark = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                            $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
                             // mendapatkan lebar dan tinggi dari gambar watermark
-                            $water_width  = imagesx($watermark);
-                            $water_height = imagesy($watermark);
+                            $water_width     = imagesx($watermark);
+                            $water_height    = imagesy($watermark);
 
                             // mendapatkan lebar dan tinggi dari gambar utama
-                            $main_width  = imagesx($source);
-                            $main_height = imagesy($source);
+                            $main_width      = imagesx($source);
+                            $main_height     = imagesy($source);
 
                             // Menetapkan posisi gambar watermark
-                            $pos_x = $width - $width_watermark;
-                            $pos_y = $height - $height_watermark;
-                            $copy_wtr = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                            $pos_x           = $width - $width_watermark;
+                            $pos_y           = $height - $height_watermark;
+                            $copy_wtr        = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                     
                             imagealphablending($source, false);
                             imagesavealpha($source, true);
