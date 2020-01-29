@@ -119,6 +119,7 @@
               <thead>
                 <tr>
                     <th>{{ Translate_menuPlayers('Guest ID') }}</th>
+                    <th>{{ Translate_menuPlayers('Player ID') }}</th>
                     @if($status == 'used')
                     <th class="th-sm">{{ Translate_menuPlayers('Username') }}</th>
                     @endiF
@@ -131,6 +132,7 @@
                     @foreach($guests as $gs)
                     <tr>
                       <td>{{ $gs->guest_id }}</td>
+                      <td>{{ $gs->user_id }}</td>
                       @if($status == 'used')
                      <td>{{ $gs->username }}</td>
                      @endif
