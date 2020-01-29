@@ -840,21 +840,23 @@ class PlayersController extends Controller
   // ----------- Index Bots ----------- //
     public function indexBots()
     {
-        $menu  = MenuClass::menuName('Bots');
-        $mainmenu = MenuClass::menuName('Players');
-        $bots = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                ->join('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
-                ->select(
-                  'asta_db.user.username',
-                  'asta_db.user.user_id',
-                  'asta_db.user_stat.chip',
-                  'asta_db.user_stat.rank_id',
-                  'asta_db.user_stat.gold',
-                  'asta_db.country.name'
-                )
-                ->where('asta_db.user.user_type', '=', '3')
-                ->get();
-        return view('pages.players.bots', compact('bots', 'menu', 'mainmenu'));
+        // $menu  = MenuClass::menuName('Bots');
+        // $mainmenu = MenuClass::menuName('Players');
+        // $bots = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
+        //         ->join('asta_db.country', 'asta_db.country.code', '=', 'asta_db.user.country_code')
+        //         ->select(
+        //           'asta_db.user.username',
+        //           'asta_db.user.user_id',
+        //           'asta_db.user_stat.chip',
+        //           'asta_db.user_stat.rank_id',
+        //           'asta_db.user_stat.gold',
+        //           'asta_db.country.name'
+        //         )
+        //         ->where('asta_db.user.user_type', '=', '3')
+        //         ->get();
+        // return view('pages.players.bots', compact('bots', 'menu', 'mainmenu'));
+
+        return view('pages.Maintenance.underconstruction');
     }
   // ----------- End Index Bots ----------- //
 
