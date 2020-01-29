@@ -12,6 +12,7 @@ class ReportFeedback extends Model
     public $timestamps = false;
 
     public $ratings = [
+        0 => 0,
         1 => 'Terrible',
         2 => 'Bad',
         3 => 'OK',

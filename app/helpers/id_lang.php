@@ -702,7 +702,7 @@ function alertTranslate($menu){
         "Username or Password are wrong!!"                              =>  "Username dan katasandi salah!!",
         "You are already Log Out"                                       =>  "Kamu sudah keluar",
         "Update status successfull"                                     =>  "Memperbarui status berhasil",
-        "Input Data successfull with"                                   =>  "Input data berhasil dengan",
+        "Input Data successfull with "                                   =>  "Input data berhasil dengan",
         "Number of inputs filled in player ID can't be NULL"            =>  "Jumlah input yang diisi ID pemain tidak boleh NULL",
         "You must to Choose Status"                                     =>  "Kamu harus memilih status",
         "Data input successfull"                                        =>  "Data berhasil di input", 

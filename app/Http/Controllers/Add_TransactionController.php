@@ -146,6 +146,21 @@ class Add_TransactionController extends Controller
             'type'        =>  'required',
             'description' =>  'required'
           ]);
+
+          if ($validator->fails()) :
+            return back()->withErrors($validator->errors());
+          endif;
+
+          //UPDATE DATABASE
+          $balance = BalanceChip::create([
+              'user_id'   => $user_id,
+              'action_id' => $type,
+              'game_id'   => 0,
+              'debit'     => $valuecurrency,
+              'credit'    => 0,
+              'balance'   => $totalbalance,
+              'datetime'  => Carbon::now('GMT+7')
+          ]);
         else:
           $op_math = "dikurang";
           $totalbalance = $stat->chip - $valuecurrency;
@@ -164,11 +179,24 @@ class Add_TransactionController extends Controller
             'currency'    =>  'required',
             'description' =>  'required'
           ]);
+
+          if ($validator->fails()) :
+            return back()->withErrors($validator->errors());
+          endif;
+
+          //UPDATE DATABASE
+          $balance = BalanceChip::create([
+              'user_id'   => $user_id,
+              'action_id' => $type,
+              'game_id'   => 0,
+              'debit'     => 0,
+              'credit'    => $valuecurrency,
+              'balance'   => $totalbalance,
+              'datetime'  => Carbon::now('GMT+7')
+          ]);
         endif;
 
-        if ($validator->fails()) :
-          return back()->withErrors($validator->errors());
-        endif;
+
 
         // lari ke table store transaction day jika di tambah atau dikurang
         if($storetransactionday):
@@ -186,17 +214,6 @@ class Add_TransactionController extends Controller
             'correction_chip' => $valuecurrency
           ]);
         endif;
-
-        //UPDATE DATABASE
-        $balance = BalanceChip::create([
-            'user_id'   => $user_id,
-            'action_id' => $type,
-            'game_id'   => 0,
-            'debit'     => $valuecurrency,
-            'credit'    => 0,
-            'balance'   => $totalbalance,
-            'datetime'  => Carbon::now('GMT+7')
-        ]);
         
         //RECORD LOG 
         Log::create([
@@ -217,7 +234,19 @@ class Add_TransactionController extends Controller
              'description' =>  'required'
           ]);
 
-          
+          if ($validator->fails()) :
+            return back()->withErrors($validator->errors());
+          endif;
+
+          //UPDATE DATABASE
+          $balance = BalanceGold::create([
+              'user_id'   => $user_id,
+              'action_id' => $type,
+              'debit'     => $valuecurrency,
+              'credit'    => 0,
+              'balance'   => $totalbalance,
+              'datetime'  => Carbon::now('GMT+7')
+          ]);
 
         else:
           $totalbalance = $stat->gold - $valuecurrency;
@@ -238,11 +267,24 @@ class Add_TransactionController extends Controller
             return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
           endif;
 
+
+          if ($validator->fails()) :
+            return back()->withErrors($validator->errors());
+          endif;
+
+          //UPDATE DATABASE
+          $balance = BalanceGold::create([
+              'user_id'   => $user_id,
+              'action_id' => $type,
+              'debit'     => 0,
+              'credit'    => $valuecurrency,
+              'balance'   => $totalbalance,
+              'datetime'  => Carbon::now('GMT+7')
+          ]);
+
         endif;
 
-        if ($validator->fails()) :
-          return back()->withErrors($validator->errors());
-        endif;
+
 
         // lari ke table store transaction day jika di tambah atau dikurang
         if($storetransactionday):
@@ -260,17 +302,6 @@ class Add_TransactionController extends Controller
             'correction_gold' => $valuecurrency
           ]);
         endif;
-        
-
-        //UPDATE DATABASE
-        $balance = BalanceGold::create([
-            'user_id'   => $user_id,
-            'action_id' => $type,
-            'debit'     => $valuecurrency,
-            'credit'    => 0,
-            'balance'   => $totalbalance,
-            'datetime'  => Carbon::now('GMT+7')
-        ]);
         
         //RECORD LOG
         Log::create([
@@ -292,6 +323,21 @@ class Add_TransactionController extends Controller
             'type'        =>  'required',
             'description' =>  'required'
           ]);
+
+          if ($validator->fails()) :
+            return back()->withErrors($validator->errors());
+          endif;
+
+          //UPDATE DATABASE
+          $balance = BalancePoint::create([
+              'user_id'   => $user_id,
+              'game_id'   => 0,
+              'action_id' => $type,
+              'debit'     => $valuecurrency,
+              'credit'    => 0,
+              'balance'   => $totalbalance,
+              'datetime'  => Carbon::now('GMT+7')
+          ]);
         else:
           $totalbalance = $stat->point - $valuecurrency;
           $op_math = 'dikurang';
@@ -310,10 +356,21 @@ class Add_TransactionController extends Controller
           if($stat->point < $valuecurrency):
             return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
           endif;
-        endif;
 
-        if ($validator->fails()) :
-          return back()->withErrors($validator->errors());
+          if ($validator->fails()) :
+            return back()->withErrors($validator->errors());
+          endif;
+
+          //UPDATE DATABASE
+          $balance = BalancePoint::create([
+              'user_id'   => $user_id,
+              'game_id'   => 0,
+              'action_id' => $type,
+              'debit'     => 0,
+              'credit'    => $valuecurrency,
+              'balance'   => $totalbalance,
+              'datetime'  => Carbon::now('GMT+7')
+          ]);
         endif;
 
         // lari ke table store transaction day jika di tambah atau dikurang
@@ -332,18 +389,6 @@ class Add_TransactionController extends Controller
             'correction_point' => $valuecurrency
           ]);
         endif;
-
-       
-        //UPDATE DATABASE
-        $balance = BalancePoint::create([
-            'user_id'   => $user_id,
-            'game_id'   => 0,
-            'action_id' => $type,
-            'debit'     => $valuecurrency,
-            'credit'    => 0,
-            'balance'   => $totalbalance,
-            'datetime'  => Carbon::now('GMT+7')
-        ]);
 
         //RECORD LOG
         Log::create([

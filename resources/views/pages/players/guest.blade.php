@@ -14,6 +14,13 @@
   <p>{{\Session::get('alert')}}</p>
 </div>
 @endif
+
+@if (\Session::has('success'))
+<div class="alert alert-success">
+  <p>{{\Session::get('success')}}</p>
+</div>
+@endif
+
 @if (count($errors) > 0)
 <div class="error-val">
   <div class="alert alert-danger">
