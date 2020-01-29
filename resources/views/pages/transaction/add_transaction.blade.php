@@ -176,7 +176,7 @@
                                         <input type="hidden" name="operator_aritmatika" value="+">
                                         <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                         <input type="hidden" name="columnname" value="chip">
-                                        <input type="number" min="0" name="currency" placeholder="Chip" class="form-control" required><br>
+                                        <input type="number" step="0.01" min="0.01" name="currency" placeholder="Chip" class="form-control" required><br>
                                         <select name="type" class="form-control" id="">
                                             @foreach ($actblnc as $key => $act)
                                                 <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
@@ -221,7 +221,7 @@
                                         <input type="hidden" name="operator_aritmatika" value="-">
                                         <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                         <input type="hidden" name="columnname" value="chip">
-                                        <input type="number" min="0" name="currency" placeholder="Chip" class="form-control" required><br>
+                                        <input type="number" step="0.01" min="0.01" name="currency" placeholder="Chip" class="form-control" required><br>
                                         <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Chip dikurangi"></textarea>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@
                                         <input type="hidden" name="operator_aritmatika" value="+">
                                         <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                         <input type="hidden" name="columnname" value="point">
-                                        <input type="number" min="0" name="currency" placeholder="Point" class="form-control" required><br>
+                                        <input type="number" step="0.01" min="0.01" name="currency" placeholder="Point" class="form-control" required><br>
                                         <select name="type" class="form-control" id="">
                                             @foreach ($actblnc as $key => $act)
                                                 <option value="{{ $key }}"> {{ ConfigTextTranslate($act) }}</option>
@@ -349,7 +349,7 @@
                                 <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                 <input type="hidden" name="username" value="{{ $transaction->username }}">
                                 <input type="hidden" name="columnname" value="gold">
-                                <input type="number" min="0" name="currency" placeholder="Gold" class="form-control" required><br>
+                                <input type="number" step="0.01" min="0.01" name="currency" placeholder="Gold" class="form-control" required><br>
                                 <select name="type" class="form-control" id="">
                                     @foreach ($actblnc as $key => $act)
                                         <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
@@ -395,7 +395,7 @@
                                 <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                 <input type="hidden" name="username" value="{{ $transaction->username }}">
                                 <input type="hidden" name="columnname" value="gold">
-                                <input type="number" min="0" name="currency" placeholder="Gold" class="form-control" required><br>
+                                <input type="number" step="0.01" min="0.01" name="currency" placeholder="Gold" class="form-control" required><br>
                                 <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Koin dikurangi"></textarea>
                             </div>
                         </div>
