@@ -126,8 +126,8 @@
               <thead>
                 <tr>
                     <th>{{ Translate_menuPlayers('Guest ID') }}</th>
-                    <th>{{ Translate_menuPlayers('Player ID') }}</th>
                     @if($status == 'used')
+                    <th>{{ Translate_menuPlayers('Player ID') }}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Username') }}</th>
                     @endiF
                     <th class="th-sm">{{ Translate_menuPlayers('Device ID') }}</th>
@@ -139,17 +139,17 @@
                     @foreach($guests as $gs)
                     <tr>
                       <td>{{ $gs->guest_id }}</td>
-                      <td>{{ $gs->user_id }}</td>
                       @if($status == 'used')
-                     <td>{{ $gs->username }}</td>
-                     @endif
-                     @if ($gs->device_key == NULL)
-                    <td>{{ "Device is Not Connected"}}</td>
-                    @else
-                    <td>{{ $gs->device_key }}</td>
-                    @endif
-                    <td>{{ $gs->expired_date }}</td>
-                    <td>{{ $gs->status }}</td>
+                      <td>{{ $gs->user_id }}</td>
+                      <td>{{ $gs->username }}</td>
+                      @endif
+                      @if ($gs->device_key == NULL)
+                      <td>{{ "Device is Not Connected"}}</td>
+                      @else
+                      <td>{{ $gs->device_key }}</td>
+                      @endif
+                      <td>{{ $gs->expired_date }}</td>
+                      <td>{{ $gs->status }}</td>
                     </tr>
                 @endforeach
               </tbody>
