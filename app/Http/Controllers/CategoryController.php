@@ -38,7 +38,7 @@ class CategoryController extends Controller
         $menu     = MenuClass::menuName('Category Asta Poker');
         $submenu  = MenuClass::menuName('Asta Poker');
         $mainmenu = MenuClass::menuName('Games');
-        return view('pages.game_asta.category', compact('category', 'menu', 'submenu', 'mainmenu'));
+        return view('pages.game_asta.asta_poker.category', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
     
@@ -56,7 +56,7 @@ class CategoryController extends Controller
         $menu     = MenuClass::menuName('Category Big Two');
         $submenu  = MenuClass::menuName('Big Two');
         $mainmenu = MenuClass::menuName('Games');
-        return view('pages.game_asta.bigTwoCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
+        return view('pages.game_asta.big_two.bigTwoCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
    
@@ -73,7 +73,7 @@ class CategoryController extends Controller
         $menu     = MenuClass::menuName('Category Domino Susun');
         $submenu  = MenuClass::menuName('Domino Susun');
         $mainmenu = MenuClass::menuName('Games');
-        return view('pages.game_asta.dominoSusunCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
+        return view('pages.game_asta.domino_susun.dominoSusunCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
     
@@ -90,7 +90,7 @@ class CategoryController extends Controller
         $menu     = MenuClass::menuName('Category Domino QQ');
         $submenu  = MenuClass::menuName('Domino QQ');
         $mainmenu = MenuClass::menuName('Games');
-        return view('pages.game_asta.dominoQCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
+        return view('pages.game_asta.domino_qq.dominoQCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
     

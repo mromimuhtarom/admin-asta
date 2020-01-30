@@ -13,17 +13,17 @@ class AstaPokerMonitoringTableController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.game_asta.monitoring_table_asta_poker.novice');
     }
 
     public function IntermadiateIndex()
     {
-        //
+        return view('pages.game_asta.monitoring_table_asta_poker.intermediate');        
     }
 
     public function ProIndex()
     {
-        //
+        return view('pages.game_asta.monitoring_table_asta_poker.pro');                
     }
 
     /**
