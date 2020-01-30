@@ -738,25 +738,37 @@ class PlayersController extends Controller
       return back()->withInput()->with('alert', $validator->errors()->first());
     }
 
-      if($number)
-      {
-        for ($i=1; $i <= $number; $i++) {
-            $a = UserRandom::where('user_type', '=', 2)->where('isused', '=', 0)->first();
-            $guestId[] = [
-              'guest_id'   => $a->user_id,
-            ];
-            $b = UserRandom::where('user_id', '=', $a->user_id)->update(['isused' => 1]);
-        }
-        UserGuest::insert($guestId);
-        Log::create([
-            'op_id'     => Session::get('userId'),
-            'action_id' => '3',
-            'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data pengguna tamu dengan ID  '.$number
-        ]);
+    $a     = UserRandom::where('user_type', '=', 2)->where('isused', '=', 0)->first();
+    $count = UserRandom::where('user_type', '=', 2)->where('isused', '=', 0)->count();
 
-        return back()->with('success', 'Input Data Successfull with '.$number.' Record');
+    // Validasi
+    if($number > $count):
+      return back()->withInput()->with('alert', 'ID player  for guest is not Enough you must to add Player ID in menu Register Player ID');
+    endif;
+    if($a === NULL):
+      return back()->withInput()->with('alert', 'You must to add Guest ID in menu Register Player ID');
+    endif;
+    // end validasi
+
+    if($number)
+    {
+      for ($i=1; $i <= $number; $i++) {
+          $a = UserRandom::where('user_type', '=', 2)->where('isused', '=', 0)->first();
+          $guestId[] = [
+            'guest_id'   => $a->user_id,
+          ];
+          $b = UserRandom::where('user_id', '=', $a->user_id)->update(['isused' => 1]);
       }
+      UserGuest::insert($guestId);
+      Log::create([
+          'op_id'     => Session::get('userId'),
+          'action_id' => '3',
+          'datetime'  => Carbon::now('GMT+7'),
+          'desc'      => 'Menambahkan data pengguna tamu dengan ID  '.$number
+      ]);
+
+      return back()->with('success', 'Input Data Successfull with '.$number.' Record');
+    }
     return back()->with('alert', alertTranslate("Number of inputs filled in Player ID can't be NULL"));
   }
   // -----------End Insert Guest ---------------//

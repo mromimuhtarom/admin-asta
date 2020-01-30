@@ -441,6 +441,7 @@
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+      "order": [[ 1, "asc" ]]
     });
 
             //HIDE SHOW FORM BONUS

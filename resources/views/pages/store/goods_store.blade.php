@@ -89,7 +89,7 @@
             <thead>
               <tr>
                 @if ($menu && $mainmenu)
-                <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
+                <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
                 @endif
                 <th>{{ TranslateMenuToko('Order')}}</th>
                 <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
@@ -355,6 +355,7 @@ $(".watermark-image").change(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+      "order": [[ 1, "asc" ]]
     });
 
     $("#trash").hide();

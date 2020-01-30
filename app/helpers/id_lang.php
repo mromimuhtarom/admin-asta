@@ -55,6 +55,10 @@ function translate_menu($menu){
       'Season_Reward_Asta_Poker'        =>  'Hadiah musim Asta Poker',
       'Tournament_Asta_Poker'           =>  'Turnamen Asta Poker',
       'Jackpot_Paytable_Asta_Poker'     =>  'Jackpot Paytable Asta Poker',
+      'Monitoring_Table_Asta_Poker'     =>  'Monitor Meja',
+      'Novice_Asta_Poker'               =>  'Novice',
+      'Intermediate_Asta_Poker'         =>  'Intermediate',
+      'Pro_Asta_Poker'                  =>  'Pro',
       'Big-Two'                         =>  'Big Two',
       'Table_Big_Two'                   =>  'Table Big Two',
       'Category_Big_Two'                =>  'Kategori Big Two',
@@ -264,7 +268,8 @@ function translate_menuTransaction($menu){
         'Point Get'             =>  'Point Di Dapat',
         'Point Spend'           =>  'Poin Di Pakai',
         'Point Expired'         =>  'Poin Kadaluarsa',
-        'Transaction Day'       =>  'Transaksi Harian' 
+        'Transaction Day'       =>  'Transaksi Harian',
+        'Detail Information'    =>  'Detail Information' 
     ];
     return $array_menuContent[$menu];
 }

@@ -344,6 +344,28 @@ Route::middleware('authenticated')->group(function(){
                     Route::post('JackpotPaytable-update', 'JackpotPaytableController@update')->name('JackpotPaytable-update');
                 });
             });
+
+            Route::group(['prefix'  =>  'Asta_Poker_Monitoring_Table'], function() {
+                
+                Route::group(['prefix' => 'Novice_Asta_Poker'], function() {
+                    Route::middleware('page_denied:Novice Asta Poker')->group(function(){
+                        Route::get('Novice_Asta_Poker-view', 'AstaPokerMonitoringTableController@index')->name('Novice_Asta_Poker');
+                    });
+                });
+
+                Route::group(['prefix' => 'Intermediate_Asta_Poker'], function() {
+                    Route::middleware('page_denied:Intermediate Asta Poker')->group(function(){
+                        Route::get('Intermediate_Asta_Poker-view', 'AstaPokerMonitoringTableController@IntermediateIndex')->name('Intermediate_Asta_Poker');
+                    });
+                });
+
+                Route::group(['prefix' => 'Pro_Asta_Poker'], function() {
+                    Route::middleware('page_denied:Pro Asta Poker')->group(function(){
+                        Route::get('Pro_Asta_Poker-view', 'AstaPokerMonitoringTableController@ProIndex')->name('Pro_Asta_Poker');
+                    });
+                });
+
+            });
         });
 
 

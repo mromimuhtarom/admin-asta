@@ -51,7 +51,7 @@ class TableController extends Controller
                   )
                   ->get();
         $category = TpkRoom::all();
-        return view('pages.game_asta.table', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
+        return view('pages.game_asta.asta_poker.table', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
     public function BigTwoindex()
@@ -74,7 +74,7 @@ class TableController extends Controller
                 )
                 ->get();
         $category = BigTwoRoom::all();
-        return view('pages.game_asta.bigTwoTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
+        return view('pages.game_asta.big_two.bigTwoTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
 
@@ -99,7 +99,7 @@ class TableController extends Controller
                     )
                     ->get();
         $category = DominoSusunRoom::all();
-        return view('pages.game_asta.dominoSusunTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
+        return view('pages.game_asta.domino_susun.dominoSusunTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
 
@@ -124,7 +124,7 @@ class TableController extends Controller
                     )
                     ->get();
         $category = DominoQRoom::all();
-        return view('pages.game_asta.dominoQTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
+        return view('pages.game_asta.domino_qq.dominoQTable', compact('tables', 'category', 'menu', 'mainmenu', 'submenu'));
     }
 
 
