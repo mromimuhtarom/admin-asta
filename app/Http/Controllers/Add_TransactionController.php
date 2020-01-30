@@ -139,13 +139,13 @@ class Add_TransactionController extends Controller
       //=== CHIP ===//
       if($columnname == 'chip'):
         if( $plusminus == "+"):    
-          $plusminus = "";
+          $plusminus    = "";
           $totalbalance = $stat->chip + $valuecurrency;
-          $op_math = "ditambahkan";
-          $validator = Validator::make($request->all(), [
-            'currency'    =>  'required',
-            'type'        =>  'required',
-            'description' =>  'required'
+          $op_math      = "ditambahkan";
+          $validator    = Validator::make($request->all(), [
+            'currency'    => 'required',
+            'type'        => 'required',
+            'description' => 'required'
           ]);
 
           if ($validator->fails()) :
@@ -163,10 +163,10 @@ class Add_TransactionController extends Controller
               'datetime'  => Carbon::now('GMT+7')
           ]);
         else:
-          $plusminus = "-";
-          $op_math = "dikurang";
+          $plusminus    = "-";
+          $op_math      = "dikurang";
           $totalbalance = $stat->chip - $valuecurrency;
-          $type = 11;
+          $type         = 11;
 
           //PREVENT BALANCE MINUS CHIP
           if($stat->chip == 0):
@@ -227,10 +227,10 @@ class Add_TransactionController extends Controller
       //=== GOLD ===/
       elseif($columnname == 'gold'):
         if( $plusminus == "+"): 
-          $plusminus = "";   
+          $plusminus    = "";
           $totalbalance = $stat->gold + $valuecurrency;
           $op_math      = 'ditambahkan';
-          $validator = Validator::make($request->all(), [
+          $validator    = Validator::make($request->all(), [
             'currency'    => 'required',
             'type'        => 'required',
             'description' => 'required'
@@ -306,7 +306,7 @@ class Add_TransactionController extends Controller
           ]);
         endif;
         
-        //RECORD LOG
+        //RECORD LOG 
         Log::create([
           'op_id'     =>  Session::get('userId'),
           'action_id' =>  '2',

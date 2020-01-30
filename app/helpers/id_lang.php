@@ -260,7 +260,8 @@ function translate_menuTransaction($menu){
         'Point Get'             =>  'Point Di Dapat',
         'Point Spend'           =>  'Poin Di Pakai',
         'Point Expired'         =>  'Poin Kadaluarsa',
-        'Transaction Day'       =>  'Transaksi Harian' 
+        'Transaction Day'       =>  'Transaksi Harian',
+        'Detail Information'    =>  'Detail Information' 
     ];
     return $array_menuContent[$menu];
 }
