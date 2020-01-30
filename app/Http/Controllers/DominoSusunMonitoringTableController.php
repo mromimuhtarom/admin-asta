@@ -9,17 +9,17 @@ class DominoSusunMonitoringTableController extends Controller
     
     public function index()
     {
-        return view('pages.games_asta.dominoSusunNovice');
+        return view('pages.games_asta.domino_susun.dominoSusunNovice');
     }
 
     public function indexIntermediate()
     {
-        return view('pages.games_asta.dominoSusunIntermediate');
+        return view('pages.games_asta.domino_susun.dominoSusunIntermediate');
     }
 
     public function indexPro()
     {
-        return view('pages.games_asta.dominoSusunPro');
+        return view('pages.games_asta.domino_susun.dominoSusunPro');
     }
 
     

@@ -9,36 +9,32 @@ class DominoQQMonitoringTableController extends Controller
     
     public function index()
     {
-        //
+        return view('pages.games_asta.domino_qq.dominoQQNovice');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function indexIntermediate()
+    {
+        return view('pages.games_asta.domino_qq.dominoQQIntermediate');
+    }
+
+    public function indexPro()
+    {
+        return view('pages.games_asta.domino_qq.dominoQQPro');
+    }
+
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         //
