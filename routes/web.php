@@ -456,6 +456,14 @@ Route::middleware('authenticated')->group(function(){
                     Route::post('DominoSJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('DominoSJackpotPaytable-update');
                 });
             });
+
+            Route::group(['prefix'  =>  'Monitoring_Table_DominoS'], function() {
+                Route::middleware('page_denied:Monitoring Table Domino Susun')->group(function(){
+                    Route::get('MonitoringTableNovice-view', 'DominoSusunMonitoringTableController@index')->name('TableDominoSNovice');
+                    Route::get('MonitoringTableIntermediate-view', 'DominoSusunMonitoringTableController@indexIntermediate')->name('TableDominoSIntermediate');
+                    Route::get('MonitoringTablePro-view'm)
+                });
+            });
         });
 
         // Game Asta Domino QQ
@@ -509,6 +517,12 @@ Route::middleware('authenticated')->group(function(){
                 Route::middleware('page_denied:Jackpot Paytable Domino QQ')->group(function(){
                     Route::get('DominoQJackpotPaytable-view', 'JackpotPaytableController@index')->name('Jackpot_Paytable_Domino_QQ');
                     Route::post('DominoQJackpotPaytable-update', 'JackpotPaytableController@DominoQupdate')->name('DominoQJackpotPaytable-update');
+                });
+            });
+
+            Route::group(['prefix' => 'Monitoring_Table_DominoQ'], function() {
+                Route::middleware('page_denied:Monitoring Table Domino QQ')->group(function(){
+                    Route::get('MonitoringTableNovice-view', 'DominoQQMonitoringTableController@index')->name('TableDominoQNovice');
                 });
             });
             

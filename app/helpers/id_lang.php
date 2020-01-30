@@ -103,7 +103,11 @@ function translate_menu($menu){
       'Reseller_Rank'                   =>  'Rank agen',
       'Register_Reseller'               =>  'Pendaftaran agen',
       'Version_Asset_Apk'               =>  'Versi asset apk',
-      'logout'                          =>  'Keluar'
+      'logout'                          =>  'Keluar',
+      'Monitoring_Table_DominoS'        =>  'Monitor table domino susun',
+      'Novice'                          =>  'Pemula',
+      'Intermediate'                    =>  'Menengah',
+      'Pro'                             =>  'Ahli'
     ];
 
     return $array_menu[$menu];
