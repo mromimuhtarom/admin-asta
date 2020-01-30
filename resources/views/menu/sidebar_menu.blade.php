@@ -28,10 +28,34 @@
                                     {{-- submenu kedua --}}
                                     @foreach ($sb['children'] as $smk)
                                     <ul aria-expanded="true" class="sa-sub-nav-second-level">   
-                                        @if($menuname->RoleType1($smk->name) || $menuname->RoleType2($smk->name))                 
-                                        <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/*') ? 'active' : null }}">
-                                            <a href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ translate_menu($smk->route) }}</a> 
-                                        </li>
+                                        @if(!$smk['children']->isEMPTY())
+                                            <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
+                                                <a href="" title="{{ $sb->name }}"> {{ translate_menu($sb->route) }}
+                                                    <b class="collapse-sign">
+                                                        <em class="fa fa-plus-square-o"></em>
+                                                        <em class="fa fa-minus-square-o"></em>
+                                                    </b>
+                                                </a>
+                                                    
+                                                {{-- submenu ketiga --}}
+                                                @foreach ($smk['children'] as $sme)
+                                                    <ul aria-expanded="true" class="sa-sub-nav-second-level">   
+                                                        @if($menuname->RoleType1($sme->name) || $menuname->RoleType2($sme->name))                 
+                                                        <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/'.$sme->route.'/*') ? 'active' : null }}">
+                                                            <a href="{{ route($sme->route) }}" title="{{ $sme->name }}"> {{ translate_menu($sme->route) }}</a> 
+                                                        </li>
+                                                        @endif
+                                                    </ul>                    
+                                                @endforeach
+                                                {{-- end sub menu ketiga --}}
+                                            </li>
+                                            
+                                        @else 
+                                            @if($menuname->RoleType1($smk->name) || $menuname->RoleType2($smk->name))                 
+                                            <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/*') ? 'active' : null }}">
+                                                <a href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ translate_menu($smk->route) }}</a> 
+                                            </li>
+                                            @endif
                                         @endif
                                     </ul>                    
                                     @endforeach

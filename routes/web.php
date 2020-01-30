@@ -345,7 +345,7 @@ Route::middleware('authenticated')->group(function(){
                 });
             });
 
-            Route::group(['prefix'  =>  'Asta_Poker_Monitoring_Table'], function() {
+            Route::group(['prefix'  =>  'Monitoring_Table_Asta_Poker'], function() {
                 
                 Route::group(['prefix' => 'Novice_Asta_Poker'], function() {
                     Route::middleware('page_denied:Novice Asta Poker')->group(function(){
