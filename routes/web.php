@@ -481,9 +481,9 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  =>  'Monitoring_Table_DominoS'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino Susun')->group(function(){
-                    Route::get('MonitoringTableNovice-view', 'DominoSusunMonitoringTableController@index')->name('TableDominoSNovice');
-                    Route::get('MonitoringTableIntermediate-view', 'DominoSusunMonitoringTableController@indexIntermediate')->name('TableDominoSIntermediate');
-                    Route::get('MonitoringTablePro-view', 'DominoSusunMonitoringTableController@indexPro')->name('TableDominoSPro');
+                    Route::get('MonitoringTableNovice-view', 'DominoSusunMonitoringTableController@index')->name('Novice_DominoS');
+                    Route::get('MonitoringTableIntermediate-view', 'DominoSusunMonitoringTableController@indexIntermediate')->name('Intermediate_DominoS');
+                    Route::get('MonitoringTablePro-view', 'DominoSusunMonitoringTableController@indexPro')->name('Pro_DominoS');
                 });
             });
         });
@@ -544,9 +544,9 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix' => 'Monitoring_Table_DominoQ'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino QQ')->group(function(){
-                    Route::get('MonitoringTableNovice-view', 'DominoQQMonitoringTableController@index')->name('TableDominoQNovice');
-                    Route::get('MonitoringTableIntermediateview', 'DominoQQMonitoringTableController@indexIntermediate')->name('TableDominoQIntermediate');
-                    Route::get('MonitoringTableProView', 'DominoQQMonitoringTableController@indexPro')->name('TableDominoQPro');
+                    Route::get('MonitoringTableNovice-view', 'DominoQQMonitoringTableController@index')->name('Novice_DominoQ');
+                    Route::get('MonitoringTableIntermediateview', 'DominoQQMonitoringTableController@indexIntermediate')->name('Intermediate_DominoQ');
+                    Route::get('MonitoringTableProView', 'DominoQQMonitoringTableController@indexPro')->name('Pro_DominoQ');
                 });
             });
 
