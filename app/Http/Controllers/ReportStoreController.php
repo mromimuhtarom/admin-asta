@@ -101,7 +101,7 @@ class ReportStoreController extends Controller
 
                         return view('pages.store.report_store', compact('transactions', 'type', 'minDate', 'maxDate', 'chooseitem', 'choosedate'));
 
-		    }
+		        }
                         else if($minDate != NULL && $maxDate != NULL && $chooseitem != NULL)
                     { 
                         $transactions = $storeHistory->whereBetween('asta_db.store_transaction_hist.datetime', [$minDate.' 00:00:00', $maxDate. ' 23:59:59'])

@@ -109,12 +109,13 @@ function translate_menu($menu){
       'Version_Asset_Apk'               =>  'Versi asset apk',
       'logout'                          =>  'Keluar',
       'Monitoring_Table_DominoS'        =>  'Monitor table domino susun',
-      'Novice_DominoS'                          =>  'Pemula',
-      'Intermediate_DominoS'                    =>  'Menengah',
-      'Pro_DominoS'                             =>  'Ahli',
-      'Novice_DominoQ'                          =>  'Pemula',
-      'Intermediate_DominoQ'                    =>  'Menengah',
-      'Pro_DominoQ'                             =>  'Ahli'
+      'Novice_DominoS'                  =>  'Pemula',
+      'Intermediate_DominoS'            =>  'Menengah',
+      'Pro_DominoS'                     =>  'Ahli',
+      'Novice_DominoQ'                  =>  'Pemula',
+      'Intermediate_DominoQ'            =>  'Menengah',
+      'Pro_DominoQ'                     =>  'Ahli'
+      
     ];
 
     return $array_menu[$menu];

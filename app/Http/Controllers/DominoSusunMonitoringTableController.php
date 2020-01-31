@@ -9,6 +9,7 @@ class DominoSusunMonitoringTableController extends Controller
     
     public function index()
     {
+        
         return view('pages.games_asta.domino_susun.dominoSusunNovice');
     }
 

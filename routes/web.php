@@ -369,7 +369,6 @@ Route::middleware('authenticated')->group(function(){
         });
 
 
-
         // Game Asta Big 2
         Route::group(['prefix'  =>  'Big-Two'], function() {
             Route::group(['prefix'  => 'Table_Big_Two'], function() {
