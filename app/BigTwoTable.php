@@ -15,4 +15,8 @@ class BigTwoTable extends Model
     public function room() {
         return $this->belongsTo(BigTwoRoom::class);
     }
+
+    public function BigTwoPlayer() {
+        return $this->belongsTo(BigTwoPlayer::class, 'table_id');
+    } 
 }

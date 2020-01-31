@@ -24,7 +24,7 @@
           <div class="row">
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-                    jgn lupa diisi
+            <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div><div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayers) }}</div> <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div><a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">Refresh</a>
             </div>
             <!-- End Button tambah data baru -->
           </div>
@@ -34,7 +34,7 @@
         
         <div class="custom-scroll table-responsive" style="height:800px;">
           <div class="table-outer">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="tablerefreshed1">
               <thead>
                 <tr>
                   <th class="th-sm">{{ TranslateMenuGame('Table Name') }}</th>
@@ -52,7 +52,7 @@
                     <td>{{ $tb->max_player }}</td>
                     <td>
                       @foreach ($tb['TpkPlayer'] as $plyr)
-                        {{ $plyr->username }}                          
+                        {{ $plyr->username }},                          
                       @endforeach
                     </td>
                     <td>
@@ -75,6 +75,13 @@
       $('table.table').dataTable( {
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+      });
+
+      $('#refreshtable').on('click', function() {
+        console.log('aa');
+        var url = "{{ route('Novice_Asta_Poker') }}"; 
+        location.reload();        
+        // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
       });
     });
 

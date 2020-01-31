@@ -83,9 +83,11 @@ class PointController extends Controller
                         ->where('asta_db.balance_point.user_id', '=', $searchUser)
                         ->orderby($namecolumn, $sorting)
                         ->paginate(20);
+            $minDate = '';
+            $maxDate = '';
 
             $balancedetails->appends($request->all());
-            return view('pages.players.point_player', compact('balancedetails','datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame'));
+            return view('pages.players.point_player', compact('balancedetails','datenow', 'game','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'sortingorder', 'getMaxdate', 'getMindate', 'getUsername', 'getGame', 'minDate', 'maxDate'));
 
     }
 

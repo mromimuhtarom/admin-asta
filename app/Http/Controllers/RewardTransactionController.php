@@ -136,7 +136,7 @@ class RewardTransactionController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '5',
+            'action_id' => '6',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menolak permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $user_id
         ]);

@@ -114,7 +114,11 @@ function translate_menu($menu){
       'Pro_DominoS'                             =>  'Ahli',
       'Novice_DominoQ'                          =>  'Pemula',
       'Intermediate_DominoQ'                    =>  'Menengah',
-      'Pro_DominoQ'                             =>  'Ahli'
+      'Pro_DominoQ'                             =>  'Ahli',
+      'Monitoring_Table_Big_Two'        =>  'Monitor Meja Big Two',
+      'Novice_Big_Two'                  =>  'Pemula',
+      'Intermediate_Big_Two'            =>  'Menengah',
+      'Pro_Big_Two'                     =>  'Ahli'
     ];
 
     return $array_menu[$menu];
@@ -377,7 +381,8 @@ function Translate_menuPlayers($menu){
         'Edit Avatar'               =>  'Ubah avatar',
         'Edit'                      =>  'Edit',
         'Main'                      =>  'Utama',
-        'Confirmation'              =>  'Konfirmasi'
+        'Confirmation'              =>  'Konfirmasi',
+        'Lobby'                     =>  'Lobi'
 
     ];
     return $array_menuContent[$menu];
@@ -475,7 +480,9 @@ function TranslateMenuGame($menu){
         'Seat'                 => 'Kursi',
         'Username Player'      => 'Nama Pengguna Pemain',
         'See Detail'           => 'Lihat Detail',
-        'See'                  => 'Lihat'
+        'See'                  => 'Lihat',
+        'Online'               => 'Daring',
+        'Players'              => 'Pemain'
 
     ];
 
@@ -749,6 +756,7 @@ function alertTranslate($menu){
         "Max Buy table can't be Up to Max Buy room"                     =>  "table max buy tidak bisa diatas room max buy",
         "You didn't allow to delete your account"                       =>  "Kamu tidak diperbolehkan menghapus akunmu",
         "Data saved"                                                    =>  "Data tersimpan!",
+        'Data added'                                                    =>  "Data berhasil di tambahkan"
 
     ];
     return $array_menuContent[$menu];

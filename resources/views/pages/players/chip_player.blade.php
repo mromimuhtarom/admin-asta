@@ -39,8 +39,8 @@
                         </div>
                         <div class="col" >
                             <select name="inputGame" class="form-control">
-                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
-                                <option value="0" @if($getGame == 0) selected @endif>Utama</option>
+                                <option value="" @if($getGame == NULL) selected @endif>{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="0" @if($getGame == '0') selected @endif>Utama</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}" @if($getGame == $gm->id) selected @endif>{{ $gm->desc }}</option>
                                 @endforeach
@@ -122,8 +122,8 @@
                         <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
                         <th>
                             <a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">
-                                @if($getGame == 0)
-                                Utama
+                                @if($getGame == '0')
+                                {{ Translate_menuPlayers('Main') }}
                                 @else
                                 {{ Translate_menuPlayers('Game') }}
                                 @endif
@@ -143,7 +143,7 @@
                         if($bd->gamename != NULL):
                             $gamename = $bd->gamename;
                         else:
-                            $gamename = 'Lobi';
+                            $gamename = Translate_menuPlayers('Lobby');
                         endif;
                     @endphp
                     <tr class="gradeX">

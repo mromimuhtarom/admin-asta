@@ -1020,7 +1020,7 @@ public function detailTransaction(Request $request, $month, $year)
             }
             else
             {
-                return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate('Ukuran file terlalu besar'));
+                return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate('File size too large'));
                 // echo 'Ukuran file terlalu besar';
             }
         }
