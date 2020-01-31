@@ -355,7 +355,7 @@ Route::middleware('authenticated')->group(function(){
 
                 Route::group(['prefix' => 'Intermediate_Asta_Poker'], function() {
                     Route::middleware('page_denied:Intermediate Asta Poker')->group(function(){
-                        Route::get('Intermediate_Asta_Poker-view', 'AstaPokerMonitoringTableController@IntermediateIndex')->name('Intermediate_Asta_Poker');
+                        Route::get('Intermediate_Asta_Poker-view', 'AstaPokerMonitoringTableController@IntermadiateIndex')->name('Intermediate_Asta_Poker');
                     });
                 });
 
@@ -421,6 +421,28 @@ Route::middleware('authenticated')->group(function(){
                     Route::get('BigTwoJackpotPaytable-view', 'JackpotPaytableController@index')->name('Jackpot_Paytable_Big_Two');
                     Route::post('BigTwoJackpotPaytable-update', 'JackpotPaytableController@BigTwoupdate')->name('BigTwoJackpotPaytable-update');
                 });
+            });
+
+            Route::group(['prefix'  =>  'Monitoring_Table_Big_Two'], function() {
+                
+                Route::group(['prefix' => 'Novice_Big_Two'], function() {
+                    Route::middleware('page_denied:Novice Big Two')->group(function(){
+                        Route::get('Novice_Big_Two-view', 'BigTwoMonitoringTableController@index')->name('Novice_Big_Two');
+                    });
+                });
+
+                Route::group(['prefix' => 'Intermediate_Big_Two'], function() {
+                    Route::middleware('page_denied:Intermediate Big Two')->group(function(){
+                        Route::get('Intermediate_Big_Two-view', 'BigTwoMonitoringTableController@IntermadiateIndex')->name('Intermediate_Big_Two');
+                    });
+                });
+
+                Route::group(['prefix' => 'Pro_Big_Two'], function() {
+                    Route::middleware('page_denied:Pro Big Two')->group(function(){
+                        Route::get('Pro_Big_Two-view', 'BigTwoMonitoringTableController@ProIndex')->name('Pro_Big_Two');
+                    });
+                });
+
             });
         });
 

@@ -39,8 +39,8 @@
                         </div>
                         <div class="col" >
                             <select name="inputGame" class="form-control">
-                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
-                                <option value="0">{{ Translate_menuPlayers('Main') }}</option>
+                                <option value=""@if($getGame == NULL) selected @endif>{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="0" @if($getGame == '0') selected @endif>{{ Translate_menuPlayers('Main') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}" @if($getGame == $gm->id) selected @endif>{{ $gm->desc }}</option>
                                 @endforeach
@@ -120,7 +120,16 @@
                         <tr>
                             <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.user_id') }}"></i></a></th>
                             <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">{{ Translate_menuPlayers('Game') }}<i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
+                            <th>
+                                <a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">
+                                    @if($getGame == '0')
+                                        {{ Translate_menuPlayers('Main') }}
+                                    @else
+                                        {{ Translate_menuPlayers('Game') }}
+                                    @endif
+                                    <i class="fa fa-sort{{ iconsorting('gamename') }}"></i>
+                                </a>
+                            </th>
                             <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.action_id') }}"></i></a></th>
                             <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.debit') }}"></i></a></th>
                             <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.credit') }}"></i></a></th>
@@ -147,7 +156,7 @@
                         if($bd->gamename != NULL):
                             $gamename = $bd->gamename;
                         else:
-                            $gamename = 'Utama';
+                            $gamename = Translate_menuPlayers('Lobby');
                         endif;
                     @endphp
                     <tr class="gradeX">

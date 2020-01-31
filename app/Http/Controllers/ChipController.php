@@ -52,7 +52,7 @@ class ChipController extends Controller
 
         $getMindate  = Input::get('inputMinDate');
         $getMaxdate  = Input::get('inputMaxDate');
-        $getGame     = Input::get('inputGame');
+        $getGame     = '';
         $getUsername = Input::get('inputPlayer');
         if(Input::get('sorting') === 'asc'):
           $sortingorder = 'desc';

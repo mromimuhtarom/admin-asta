@@ -82,9 +82,10 @@ class GoldController extends Controller
                         ->WHERE('asta_db.balance_gold.user_id', '=', $searchUser )
                         ->orderBy($namecolumn, $sorting)
                         ->paginate(20);
+          $datenow = '';
 
           $balancedetails->appends($request->all());
-          return view('pages.players.gold_player', compact('balancedetails', 'menus1','datenow','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername'));
+          return view('pages.players.gold_player', compact('balancedetails', 'menus1','datenow','actblnc', 'sortingorder', 'getMaxdate', 'getMindate', 'getusername', 'datenow'));
     }
 
     public function search(Request $request) 

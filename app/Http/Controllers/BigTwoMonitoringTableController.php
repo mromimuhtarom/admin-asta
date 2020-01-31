@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\TpkTable;
+use App\BigTwoTable;
 
-class AstaPokerMonitoringTableController extends Controller
+class BigTwoMonitoringTableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,29 +15,29 @@ class AstaPokerMonitoringTableController extends Controller
      */
     public function index()
     {
-        $table      = TpkTable::where('room_id', '=', 2)->get();
-        $tpkPlayers = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                      ->where('room_id', '=', 2)
+        $table      = BigTwoTable::where('room_id', '=', 1)->get();
+        $tpkPlayers = BigTwoTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+                      ->where('room_id', '=', 1)
                       ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.novice', compact('table', 'tpkPlayers'));
+        return view('pages.game_asta.big_two.monitoring_table_asta_poker.novice', compact('table', 'tpkPlayers'));
     }
 
     public function IntermadiateIndex()
     {
-        $table      = TpkTable::where('room_id', '=', 4)->get();
-        $tpkPlayers = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                      ->where('room_id', '=', 4)
+        $table      = BigTwoTable::where('room_id', '=', 2)->get();
+        $tpkPlayers = BigTwoTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+                      ->where('room_id', '=', 2)
                       ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.intermediate', compact('table', 'tpkPlayers'));        
+        return view('pages.game_asta.big_two.monitoring_table_asta_poker.intermediate', compact('table', 'tpkPlayers'));        
     }
 
     public function ProIndex()
     {
-        $table      = TpkTable::where('room_id', '=', 4)->get();
-        $tpkPlayers = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                      ->where('room_id', '=', 4)
+        $table      = BigTwoTable::where('room_id', '=', 3)->get();
+        $tpkPlayers = BigTwoTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+                      ->where('room_id', '=', 3)
                       ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.pro', compact('table', 'tpkPlayers'));                
+        return view('pages.game_asta.big_two.monitoring_table_asta_poker.pro', compact('table', 'tpkPlayers'));                
     }
 
     /**
