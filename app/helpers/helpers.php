@@ -215,11 +215,22 @@ function bankTransactionStatus($val){
 
 //
 function strtohex($x)
-    {
-        $s='';
-        foreach (str_split($x) as $c) $s.=sprintf("%02X", ord($c));
-        return($s);
-    }
+{
+    $s='';
+    foreach (str_split($x) as $c) $s.=sprintf("%02X", ord($c));
+    return($s);
+}
+
+
+function strNormalFast ($val) {
+	if($val == 7) {
+		return 'Normal';
+	} else if($val == 15) {
+		return 'Fast';
+	} else {
+    return $val;
+  }
+}
 
 //email decrypt (view register_player_profile.php)
 function hexToStr($hex){

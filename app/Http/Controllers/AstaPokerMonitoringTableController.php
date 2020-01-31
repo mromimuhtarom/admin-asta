@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\TpkTable;
 
 class AstaPokerMonitoringTableController extends Controller
 {
@@ -13,12 +15,13 @@ class AstaPokerMonitoringTableController extends Controller
      */
     public function index()
     {
-        return view('pages.game_asta.monitoring_table_asta_poker.novice');
+        $table = TpkTable::where('room_id', '=', 2)->get();
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.novice', compact('table'));
     }
 
     public function IntermadiateIndex()
     {
-        return view('pages.game_asta.monitoring_table_asta_poker.intermediate');        
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.intermediate');        
     }
 
     public function ProIndex()
