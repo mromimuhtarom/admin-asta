@@ -45,13 +45,21 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{{ $table->name }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                @foreach ($table as $tb)
+                  <tr>
+                    <td>{{ $tb->name }}</td>
+                    <td>{{ strNormalFast($tb->timer) }}</td>
+                    <td>{{ $tb->max_player }}</td>
+                    <td>
+                      @foreach ($tb['TpkPlayer'] as $plyr)
+                        {{ $plyr->username }}                          
+                      @endforeach
+                    </td>
+                    <td>
+                      <a href="#" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</a>  
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -61,4 +69,41 @@
     </div>
   </div>
   <!-- End Form Category -->
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('table.table').dataTable( {
+        "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
+        "pagingType": "full_numbers",
+      });
+    });
+
+    table = $('table.table').dataTable({
+      "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
+      "autoWidth" : true,
+      "paging": false,
+      "classes": {
+        "sWrapper": "dataTables_wrapper dt-bootstrap4"
+      },
+      "oLanguage": {
+        "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
+      },
+      "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $.ajaxSetup({
+          headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        $('.usertext').editable({
+          mode : 'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          }
+        });
+      },
+      responsive: false
+    });
+  </script>  
 @endsection

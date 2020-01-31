@@ -474,7 +474,8 @@ function TranslateMenuGame($menu){
         'Play Time'            => 'Waktu Bermain',
         'Seat'                 => 'Kursi',
         'Username Player'      => 'Nama Pengguna Pemain',
-        'See Detail'           => 'Lihat Detail'
+        'See Detail'           => 'Lihat Detail',
+        'See'                  => 'Lihat'
 
     ];
 

@@ -204,6 +204,7 @@ function strTypeTransaction($val){
 }
 
 
+
 //
 function bankTransactionStatus($val){
   if($val == 1){
