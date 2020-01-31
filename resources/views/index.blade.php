@@ -178,6 +178,7 @@
 
   </div>
 	<!-- END .sa-wrapper -->
+	<script>$.fn.slider = null</script>
 	<script src="/assets/vendors/vendors.bundle.js"></script>
 	<script src="/assets/app/app.bundle.js"></script>  
 	<script>

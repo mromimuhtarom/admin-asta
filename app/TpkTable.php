@@ -17,4 +17,8 @@ class TpkTable extends Model
         return $this->belongsTo(Room::class);
     }
 
+    public function TpkPlayer() {
+        return $this->hasMany(TpkPlayer::class, 'table_id', 'table_id')->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.tpk_player.user_id');
+    } 
+
 }

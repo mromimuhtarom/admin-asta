@@ -470,7 +470,13 @@ function TranslateMenuGame($menu){
         'Language'             => 'Bahasa',
         'Indonesia'            => 'Indonesia',
         'English'              => 'Inggris',
-        'Upload File Language' => 'Unduh File Bahasa'
+        'Upload File Language' => 'Unduh File Bahasa',
+        'Table Name'           => 'Nama Meja',
+        'Play Time'            => 'Waktu Bermain',
+        'Seat'                 => 'Kursi',
+        'Username Player'      => 'Nama Pengguna Pemain',
+        'See Detail'           => 'Lihat Detail',
+        'See'                  => 'Lihat'
 
     ];
 

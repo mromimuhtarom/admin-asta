@@ -105,7 +105,7 @@
                     <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ number_format($tb->stake, 2) }}</a></td>
                     <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ number_format($tb->min_buy, 2) }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ number_format($tb->max_buy, 2) }}</a></td>
-                    <td><a href="#" class="usertext" data-title="timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ $tb->timer }}</a></td>
+                    <td><a href="#" class="timertable" data-title="timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('DominoQTable-update')}}">{{ strNormalFast($tb->timer) }}</a></td>
                     <td style="text-align:center;"><a href="#" style="color:red;" class="delete{{ $tb->table_id }}" id="delete" data-pk="{{ $tb->table_id }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
                   @else 
@@ -363,6 +363,21 @@
             echo '{value:"'.$ct->room_id.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';
             }
             @endphp
+          ]
+        });
+
+        $('.timertable').editable({
+          value: '',
+          mode :'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          },
+          source: [
+            {value: '', text: 'Choose Timer'},
+            {value: '7', text: 'Normal'},
+            {value: '15', text: 'Fast'},
           ]
         });
        
