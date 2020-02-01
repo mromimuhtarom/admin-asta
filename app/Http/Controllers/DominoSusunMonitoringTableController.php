@@ -23,7 +23,8 @@ class DominoSusunMonitoringTableController extends Controller
 
     public function indexPro()
     {
-        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusunPro');
+        $table =    DominoSusunTable::where('room_id', '=', 3)->get();
+        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusunPro', compact('table'));
     }
 
     

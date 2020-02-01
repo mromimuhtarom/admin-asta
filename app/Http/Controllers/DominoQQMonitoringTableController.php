@@ -3,23 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\DominoQTable;
 
 class DominoQQMonitoringTableController extends Controller
 {
     
     public function index()
     {
-        return view('pages.games_asta.domino_qq.dominoQQNovice');
+        $table = DominoQTable::where('room_id', '=', 1)->get();
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoQ.dominoQQNovice', compact('table'));
     }
 
     public function indexIntermediate()
     {
-        return view('pages.games_asta.domino_qq.dominoQQIntermediate');
+        $table = DominoQTable::where('room_id', '=', 2)->get();
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoQ.dominoQQIntermediate', compact('table'));
     }
 
     public function indexPro()
     {
-        return view('pages.games_asta.domino_qq.dominoQQPro');
+        $table = DominoQTable::where('room_id', '=', 3)->get();
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoQ.dominoQQPro', compact('table'));
     }
 
     
