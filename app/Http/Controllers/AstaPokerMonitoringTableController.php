@@ -40,6 +40,15 @@ class AstaPokerMonitoringTableController extends Controller
         return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.pro', compact('table', 'tpkPlayers'));                
     }
 
+
+    public function Game(Request $request)
+    {
+        $idtable    = $request->id_table;
+        $name_table = $request->name_table;
+
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.game_asta_poker', compact('idtable', 'name_table'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

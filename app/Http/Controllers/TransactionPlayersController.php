@@ -52,7 +52,7 @@ class TransactionPlayersController extends Controller
                                'asta_db.transaction_day.turnover as turnovertransaction',
                                'asta_db.transaction_day.fee as feetransaction',
                                'asta_db.transaction_day.prize as prizetransaction',
-                               DB::raw('asta_db.transaction_day.win + asta_db.transaction_day.fee - asta_db.transaction_day.lose - asta_db.transaction_day.prize as totalWinLose')
+                               DB::raw('(asta_db.transaction_day.win + asta_db.transaction_day.fee) - (asta_db.transaction_day.lose - asta_db.transaction_day.prize) as totalWinLose')
                            );
 
 

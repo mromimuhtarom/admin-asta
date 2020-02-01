@@ -57,7 +57,11 @@
                       @endforeach
                     </td>
                     <td>
-                      <a href="#" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</a>  
+                      <form action="{{ route('Pro_Asta_Poker-game')}}">
+                        <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
+                        <input type="hidden" name="name_table" value="{{ $tb->name }}">
+                        <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                      </form>
                     </td>
                   </tr>
                 @endforeach

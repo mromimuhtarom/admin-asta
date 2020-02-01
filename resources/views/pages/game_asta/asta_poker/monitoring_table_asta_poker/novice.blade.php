@@ -13,7 +13,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong><i class="fa fa-puzzle-piece"></i>{{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>				
+        <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>				
       </div>
     </header>
 
@@ -56,7 +56,11 @@
                       @endforeach
                     </td>
                     <td>
-                      <a href="#" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</a>  
+                      <form action="{{ route('Novice_Asta_Poker-game')}}">
+                        <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
+                        <input type="hidden" name="name_table" value="{{ $tb->name }}">
+                        <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                      </form>  
                     </td>
                   </tr>
                 @endforeach
