@@ -16,7 +16,7 @@ class BigTwoTable extends Model
         return $this->belongsTo(BigTwoRoom::class);
     }
 
-    public function BigTwoPlayer() {
-        return $this->belongsTo(BigTwoPlayer::class, 'table_id');
+    public function BgtPlayer() {
+        return $this->hasMany(BigTwoPlayer::class, 'table_id', 'table_id')->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.bgt_player.user_id');
     } 
 }
