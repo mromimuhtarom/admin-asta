@@ -12,7 +12,7 @@ class BigTwoPlayer extends Model
     
     public $timestamps = false;
 
-    public function BigTwoTable() {
+    public function BgtTable() {
         return $this->belongsTo(BigTwoTable::class, 'table_id');
     } 
 }

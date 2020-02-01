@@ -16,28 +16,28 @@ class BigTwoMonitoringTableController extends Controller
     public function index()
     {
         $table      = BigTwoTable::where('room_id', '=', 1)->get();
-        $tpkPlayers = BigTwoTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+        $bgtPlayers = BigTwoTable::join('asta_db.bgt_player', 'asta_db.bgt_player.table_id', '=', 'asta_db.bgt_table.table_id')
                       ->where('room_id', '=', 1)
                       ->get();
-        return view('pages.game_asta.big_two.monitoring_table_asta_poker.novice', compact('table', 'tpkPlayers'));
+        return view('pages.game_asta.big_two.monitoring_table_big_two.novice', compact('table', 'bgtPlayers'));
     }
 
     public function IntermadiateIndex()
     {
         $table      = BigTwoTable::where('room_id', '=', 2)->get();
-        $tpkPlayers = BigTwoTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+        $bgtPlayers = BigTwoTable::join('asta_db.bgt_player', 'asta_db.bgt_player.table_id', '=', 'asta_db.bgt_table.table_id')
                       ->where('room_id', '=', 2)
                       ->get();
-        return view('pages.game_asta.big_two.monitoring_table_asta_poker.intermediate', compact('table', 'tpkPlayers'));        
+        return view('pages.game_asta.big_two.monitoring_table_big_two.intermediate', compact('table', 'bgtPlayers'));        
     }
 
     public function ProIndex()
     {
         $table      = BigTwoTable::where('room_id', '=', 3)->get();
-        $tpkPlayers = BigTwoTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+        $bgtPlayers = BigTwoTable::join('asta_db.bgt_player', 'asta_db.bgt_player.table_id', '=', 'asta_db.bgt_table.table_id')
                       ->where('room_id', '=', 3)
                       ->get();
-        return view('pages.game_asta.big_two.monitoring_table_asta_poker.pro', compact('table', 'tpkPlayers'));                
+        return view('pages.game_asta.big_two.monitoring_table_big_two.pro', compact('table', 'bgtPlayers'));                
     }
 
     /**
