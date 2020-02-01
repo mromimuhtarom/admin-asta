@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Novice_DominoS') }}">Gamse > Domino Susun</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Novice_DominoS') }}">Games > Domino Susun</a></li>
     <li class="breadcrumb-item"><a href="{{ route('Novice_DominoS') }}">Monitoring Table</a></li>
     <li class="breadcrumb-item"><a href="{{ route('Novice_DominoS') }}">Novice</a></li>
 @endsection
