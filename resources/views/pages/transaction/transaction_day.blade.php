@@ -47,8 +47,17 @@
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
 								</div> --}}
 								@if (Request::is('Transaction/Transaction_Day/Transaction_Day-search*'))
-									<div class="col">
+									{{-- <div class="col">
 										<input type="text" class="form-control" id="username" placeholder="Player ID / Username" name="inputPlayer" value="{{ $searchUser }}">
+									</div> --}}
+									<div class="col">
+										<select name="chooose_time" id="time" class="form-control">
+											<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+												<option value="today" @if($time == 'today') selected @endif>{{ translate_MenuTransaction('Today') }}</option>
+												<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
+												<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
+												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
+										</select>
 									</div>
 									<div class="col">
 										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $minDate }}">
@@ -61,7 +70,13 @@
 									</div>
 								@else 
 									<div class="col">
-											<input type="text" class="form-control" id="username" placeholder="Player ID / Username" name="inputPlayer" value="">
+										<select name="choose_time" id="time" class="form-control">
+											<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+											<option value="today">{{ translate_MenuTransaction('Today') }}</option>
+											<option value="week">{{ translate_MenuTransaction('Week') }}</option>
+											<option value="month">{{ translate_MenuTransaction('Month') }}</option>
+											<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
+										</select>
 									</div>
 									<div class="col">
 										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $datenow }}">
@@ -94,7 +109,7 @@
 				<div class="table-outer">
 					<div class="row">
 						<div class="col" style="font-style:italic;color:#969696;font-weight:bold;">
-							{{ Translate_menuPlayers('Total Record Entries is') }} {{ $transaction_day->total() }}
+							{{ Translate_menuPlayers('Total Record Entries is') }} {{ $transactionDay->total() }}
 						</div>
 					</div>
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
