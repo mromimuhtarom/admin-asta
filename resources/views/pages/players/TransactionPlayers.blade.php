@@ -32,17 +32,25 @@
                 <div class="col">
                     <select name="choose_time" id="time" class="form-control">
 												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
-												<option value="today" @if($time == 'today') selected @endif>{{ translate_MenuTransaction('Today') }}</option>
+												<option value="day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
 												<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
 												<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
 												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
                     </select>
 								</div>
+								<div class="col">
+                    <select name="game_name" id="gamename" class="form-control">
+												<option value="">{{ translate_MenuTransaction('Choose Game') }}</option>
+												@foreach ($gamename as $gm)
+												<option value="{{ $gm->id }}" @if($game == $gm->id) selected @endif>{{ $gm->desc }}</option>														
+												@endforeach
+                    </select>
+								</div>
                 <div class="col">
-									<input type="date" class="form-control" id="minDate" name="inputMinDate" value=" {{ $minDate }}">
+									<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $minDate }}">
                 </div>
                 <div class="col">
-									<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value=" {{ $maxDate }}">
+									<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
                 </div>
                 <div class="col">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
@@ -51,17 +59,25 @@
 							  <div class="col">
                     <select name="choose_time" id="time" class="form-control">
 												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
-												<option value="today">{{ translate_MenuTransaction('Today') }}</option>
+												<option value="day">{{ translate_MenuTransaction('Day') }}</option>
 												<option value="week">{{ translate_MenuTransaction('Week') }}</option>
 												<option value="month">{{ translate_MenuTransaction('Month') }}</option>
 												<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
                     </select>
+								</div>
+								<div class="col">
+                    <select name="game_name" id="gamename" class="form-control">
+												<option value="">{{ translate_MenuTransaction('Choose Game') }}</option>
+												@foreach ($gamename as $gm)
+												<option value="{{ $gm->id }}">{{ $gm->desc }}</option>														
+												@endforeach
+                    </select>
+								</div>
+                <div class="col">
+									<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $datenow }}">
                 </div>
                 <div class="col">
-									<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
-                </div>
-                <div class="col">
-                    <input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="">
+                	<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
                 </div>
                 <div class="col">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
@@ -95,12 +111,14 @@
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>
 							<tr>
-								@if ($time == "today" || $time == "all time")
-								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>	
+								@if ($time == "all time")
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>	
 								@elseif($time == 'detail')
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>	
-								@elseif($time == "week" || $time == "month")
-								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=minDate">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('minDate') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>		
+								@elseif($time == 'day' || $time == "week" || $time == "month")
+								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@endif
 								@if($time != 'detail')
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('Win') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
@@ -117,7 +135,7 @@
 								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
 								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
 								@endif
-								@if($time == "today" || $time == "all time")
+								@if($time == "all time")
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@elseif($time == 'detail')
 								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
@@ -125,39 +143,40 @@
 							</tr>
 						</thead>
 						<tbody>
-							@if ($time == "today" || $time == "all time" || $time == "detail")
-							@foreach($history as $hst)
-							<tr>
-                  <td>{{ $hst->username }}</td>
-									<td>{{ number_format($hst->wintransaction, 2) }}</td>
+							@if ($time == "all time" || $time == "detail")
+								@foreach($history as $hst)
+								<tr>
+										<td>{{ $hst->username }}</td>
+										<td>{{ $hst->desc }}</td>
+										<td>{{ number_format($hst->wintransaction, 2) }}</td>
+										<td>{{ number_format($hst->losetransaction, 2) }}</td>
+										<td>{{ number_format($hst->turnovertransaction, 2) }}</td>
+										<td>{{ number_format($hst->feetransaction, 2) }}</td>
+										@if ($hst->prizetransaction == NULL)
+										<td></td>
+										@else
+										<td>{{ number_format($hst->prizetransaction, 2) }}</td>
+										@endif
+										<td>{{ number_format($hst->totalWinLose, 2) }}</td>
+										<td>{{ $hst->date_created }}</td>
+								</tr>
+								@endforeach
+							@elseif($time == "day" || $time == "week" || $time == "month")
+								@foreach($history as $hst)
+								<tr>
+									<td><a href="{{ route('detailTransactionDay') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
+								<td>{{ number_format($hst->wintransaction, 2) }} {{ $hst->totalWin }}</td>
 									<td>{{ number_format($hst->losetransaction, 2) }}</td>
 									<td>{{ number_format($hst->turnovertransaction, 2) }}</td>
 									<td>{{ number_format($hst->feetransaction, 2) }}</td>
 									@if ($hst->prizetransaction == NULL)
 									<td></td>
 									@else
-									<td>{{ number_format($hst->prizetransaction, 2) }}</td>
+									<td>{{ number_format($hst->prizetransaction, 2)}}</td>
 									@endif
 									<td>{{ number_format($hst->totalWinLose, 2) }}</td>
-                  <td>{{ $hst->date_created }}</td>
-							</tr>
-							@endforeach
-							@elseif($time == "week" || $time == "month")
-							@foreach($history as $hst)
-							<tr>
-								<td><a href="{{ route('detailTransactionDay') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
-							<td>{{ number_format($hst->wintransaction, 2) }} {{ $hst->totalWin }}</td>
-								<td>{{ number_format($hst->losetransaction, 2) }}</td>
-								<td>{{ number_format($hst->turnovertransaction, 2) }}</td>
-								<td>{{ number_format($hst->feetransaction, 2) }}</td>
-								@if ($hst->prizetransaction == NULL)
-								<td></td>
-								@else
-								<td>{{ number_format($hst->prizetransaction, 2)}}</td>
-								@endif
-								<td>{{ number_format($hst->totalWinLose, 2) }}</td>
-							</tr>
-							@endforeach
+								</tr>
+								@endforeach
 							@endif
 						</tbody>
 					</table>
@@ -183,40 +202,38 @@ $(document).ready(function() {
 		"ordering": false
 	});
 });
+		if($('#time').val() == 'day'){ 
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($('#time').val() == 'week'){
+			$("#gamename").prop("disabled", true);			
+		} else if($('#time').val() == 'month'){
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($('#time').val() == ''){
+			$("#gamename").prop("disabled", true);	
+		
+		} else {
+			$("#gamename").prop("disabled", false);	
+		}
   
-  $('form input[type="date"]').prop("disabled", true);
   $("#time").click(function(e) {
    e.preventDefault();
 	 
-	if($(this).val() == 'today'){ 
-		@php
-   		echo'var minDate = $("#minDate").val("'.$datenow.'");';
-		echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
-		@endphp
-		$('form input[type="date"]').prop("readonly", true);
-		$('form input[type="date"]').prop("disabled", false);
-  	
-	} else if($(this).val() == 'week'){
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("disabled", true);
-	
-	} else if($(this).val() == 'month'){
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("disabled", true);
-	
-	} else if($(this).val() == ''){
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("disabled", true);
-	
-	} else {
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("readonly", false);
-		$('form input[type="date"]').prop("disabled", false);
-	}
+		if($(this).val() == 'day'){ 
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($(this).val() == 'week'){
+			$("#gamename").prop("disabled", true);			
+		} else if($(this).val() == 'month'){
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($(this).val() == ''){
+			$("#gamename").prop("disabled", true);	
+		
+		} else {
+			$("#gamename").prop("disabled", false);	
+		}
    });
 
 	table = $('table.table').dataTable({
@@ -254,40 +271,38 @@ $(document).ready(function() {
 //   }
 // });
 
-$('form input[type="date"]').prop("disabled", true);
 $("#time").click(function(e) {
    e.preventDefault();
 	 
-	if($(this).val() == 'today'){ 
-		@php
-   		echo'var minDate = $("#minDate").val("'.$datenow.'");';
-		echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
-		@endphp
-		$('form input[type="date"]').prop("readonly", true);
-		$('form input[type="date"]').prop("disabled", false);
-  	
-	} else if($(this).val() == 'week'){
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("disabled", true);
-	
-	} else if($(this).val() == 'month'){
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("disabled", true);
-	
-	} else if($(this).val() == ''){
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("disabled", true);
-	
-	} else {
-		var minDate = $("#minDate").val("");
-		var maxDate = $("#maxDate").val("");
-		$('form input[type="date"]').prop("readonly", false);
-		$('form input[type="date"]').prop("disabled", false);
-	}
+		if($(this).val() == 'day'){ 
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($(this).val() == 'week'){
+			$("#gamename").prop("disabled", true);			
+		} else if($(this).val() == 'month'){
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($(this).val() == ''){
+			$("#gamename").prop("disabled", true);	
+		
+		} else {
+			$("#gamename").prop("disabled", false);	
+		}
 });
+		if($(this).val() == 'day'){ 
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($(this).val() == 'week'){
+			$("#gamename").prop("disabled", true);			
+		} else if($(this).val() == 'month'){
+			$("#gamename").prop("disabled", true);	
+		
+		} else if($(this).val() == ''){
+			$("#gamename").prop("disabled", true);	
+		
+		} else {
+			$("#gamename").prop("disabled", false);	
+		}
 
 
 

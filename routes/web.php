@@ -505,6 +505,7 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  =>  'Monitoring_Table_DominoS'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino Susun')->group(function(){
+                    
                     Route::get('MonitoringTableNovice-view', 'DominoSusunMonitoringTableController@index')->name('Novice_DominoS');
                     Route::get('MonitoringTableIntermediate-view', 'DominoSusunMonitoringTableController@indexIntermediate')->name('Intermediate_DominoS');
                     Route::get('MonitoringTablePro-view', 'DominoSusunMonitoringTableController@indexPro')->name('Pro_DominoS');

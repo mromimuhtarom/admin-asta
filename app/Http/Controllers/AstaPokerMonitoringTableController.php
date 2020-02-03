@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\TpkTable;
+use Session;
 
 class AstaPokerMonitoringTableController extends Controller
 {
@@ -46,7 +47,10 @@ class AstaPokerMonitoringTableController extends Controller
         $idtable    = $request->id_table;
         $name_table = $request->name_table;
 
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.game_asta_poker', compact('idtable', 'name_table'));
+        $username = Session::get('username');
+        $operator = DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();
+        $password = $operator->userpass;
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.game_asta_poker', compact('idtable', 'name_table', 'username', 'password'));
     }
 
     /**
