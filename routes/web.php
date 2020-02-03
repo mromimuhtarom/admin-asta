@@ -344,31 +344,14 @@ Route::middleware('authenticated')->group(function(){
                     Route::post('JackpotPaytable-update', 'JackpotPaytableController@update')->name('JackpotPaytable-update');
                 });
             });
+           
 
             Route::group(['prefix'  =>  'Monitoring_Table_Asta_Poker'], function() {
-                
-                Route::group(['prefix' => 'Novice_Asta_Poker'], function() {
-                    Route::middleware('page_denied:Novice Asta Poker')->group(function(){
-                        Route::get('Novice_Asta_Poker-view', 'AstaPokerMonitoringTableController@index')->name('Novice_Asta_Poker');
-                        Route::get('Novice_Asta_Poker-game', 'AstaPokerMonitoringTableController@Game')->name('Novice_Asta_Poker-game');
-                    });
+                Route::middleware('page_denied:Monitoring Table Asta Poker')->group(function(){
+                    Route::get('Monitor_Asta_Poker-view', 'AstaPokerMonitoringTableController@index')->name('Monitoring_Table_Asta_Poker');                    
                 });
-
-                Route::group(['prefix' => 'Intermediate_Asta_Poker'], function() {
-                    Route::middleware('page_denied:Intermediate Asta Poker')->group(function(){
-                        Route::get('Intermediate_Asta_Poker-view', 'AstaPokerMonitoringTableController@IntermadiateIndex')->name('Intermediate_Asta_Poker');
-                        Route::get('Intermediate_Asta_Poker-game', 'AstaPokerMonitoringTableController@Game')->name('Intermediate_Asta_Poker-game');
-                    });
-                });
-
-                Route::group(['prefix' => 'Pro_Asta_Poker'], function() {
-                    Route::middleware('page_denied:Pro Asta Poker')->group(function(){
-                        Route::get('Pro_Asta_Poker-view', 'AstaPokerMonitoringTableController@ProIndex')->name('Pro_Asta_Poker');
-                        Route::get('Pro_Asta_Poker-game', 'AstaPokerMonitoringTableController@Game')->name('Pro_Asta_Poker-game');
-                    });
-                });
-
             });
+
         });
 
 

@@ -23,12 +23,9 @@
 
 
 @if (\Session::has('alert'))
-<div class="alert alert-danger">
-    <div class="alert alert-danger">
-        <div>{{Session::get('alert')}}</div>
-    </div>
-</div>
-    
+  <div class="alert alert-danger">
+      <div>{{Session::get('alert')}}</div>
+  </div>    
 @endif
 
 
@@ -106,7 +103,7 @@
         <div class="col-3 col-sm-7 col-md-7 col-lg-7 text-right">
           
         </div>
-        
+
       </div>
       
         

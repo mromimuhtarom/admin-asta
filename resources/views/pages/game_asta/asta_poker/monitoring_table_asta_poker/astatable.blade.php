@@ -2,9 +2,9 @@
 
 
 @section('page')
-<li class="breadcrumb-item"><a href="{{ route('Novice_Asta_Poker') }}">Games > Asta Poker</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Novice_Asta_Poker') }}">Monitoring Table</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Novice_Asta_Poker') }}">Novice</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Games > Asta Poker</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Monitoring Table</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Novice</a></li>
 @endsection
 
 
@@ -24,7 +24,12 @@
           <div class="row">
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-            <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div><div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayers) }}</div> <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div><a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">Refresh</a>
+              <div class="border border-dark">
+                <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div>
+                <div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayers) }}</div> 
+                <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div>
+                <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">Refresh</a>
+              </div>
             </div>
             <!-- End Button tambah data baru -->
           </div>
