@@ -185,7 +185,7 @@
 			$(function () {
 				$('#menu1').metisMenu();
 			});
-		  </script>
+	</script>
 	<script>
 			$(document).ready(function() {
 			
@@ -207,7 +207,6 @@
 			    ['table', ['table']],
 			    ['insert', ['link', 'picture', 'hr']],
 			    ['view', ['fullscreen', 'codeview', 'help']]
-
 			  ]
 			});
 		

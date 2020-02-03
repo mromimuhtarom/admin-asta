@@ -15,6 +15,7 @@
           float: right;
       }
     </style>
+    
     <script>
         var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/13.json", {onProgress: UnityProgress});
        
@@ -22,9 +23,12 @@
             console.log("### application is loaded");
             var nametable = '{{ $name_table}}';
             var idtable = '{{ $idtable }}';
+            var user = '{{ $username }}';
+            var pass = '{{ $password }}';
                 
             console.log("========== ini PARAM 1.1");
-            var param = {id: idtable, name: nametable};
+            var param = {id: idtable, name: nametable, username: user, password: pass};
+            console.log(param);
             console.log("========== ini PARAM 2", param);
             console.log("========== ini PARAM 2 str ; " + JSON.stringify(param));
             gameInstance.SendMessage("GameNetwork", "GetDataFromWeb", JSON.stringify(param)); 
@@ -65,6 +69,7 @@
         
         <div class="custom-scroll table-responsive" style="height:800px;">
           <div class="table-outer">
+
             <div class="webgl-content">
                 <div id="gameContainer" style="width: 960px; height: 600px"></div>
                 <div class="footer">
@@ -73,6 +78,8 @@
                     <div class="title">TPKAstaGame</div>
                 </div>
             </div>
+
+            
           </div>
         </div>
       

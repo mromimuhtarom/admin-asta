@@ -201,10 +201,13 @@ function translate_menuTransaction($menu){
         
         //PILIH AKSI
         'Choose Time'           =>  'Pilih waktu',
+        'Choose Game'           =>  'Pilih Game',
         'Today'                 =>  'Hari ini',
+        'Day'                   =>  'Harian',
         'Week'                  =>  'Mingguan',
         'Month'                 =>  'Bulanan',
         'All time'              =>  'Sepanjang waktu',
+        'Game'                  =>  'Permainan',
 
         'Time Stamp'            =>  'Waktu',
         'Bank Transaction'      =>  'Transaksi Bank',
