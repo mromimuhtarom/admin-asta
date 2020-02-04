@@ -82,10 +82,10 @@ Route::middleware('authenticated')->group(function(){
 
     Route::group(['prefix'  =>  'Transaction'], function() {
         Route::group(['prefix'  =>  'Transaction_Day'], function() {
-            Route::middleware('page_denied:Banking transaction')->group(function(){
+            Route::middleware('page_denied:Transaction Day')->group(function(){
                 Route::get('Transaction_Day-view', 'TransactionDayController@index')->name('Transaction_Day');
                 Route::get('Transaction_Day-search', 'TransactionDayController@search')->name('TransactionDay-search');
-                Route::get('Transaction_Day-search/{mindate}/{maxdate}/detail', 'TransactionDayController@detail')->name('detailTransactionDay');
+                Route::get('Transaction_Day-search/detail', 'TransactionDayController@detail')->name('detailTransactionDay');
 
             });
         });
@@ -213,7 +213,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:Transaction Players')->group(function(){
                 Route::get('Banking-view', 'TransactionPlayersController@index')->name('Transaction_Players');
                 Route::get('Banking-search', 'TransactionPlayersController@search')->name('TransactionPlayers-search');
-                Route::get('Banking-search/detail', 'TransactionPlayersController@detail')->name('detailTransactionDay');
+                Route::get('Banking-search/detail', 'TransactionPlayersController@detail')->name('detailTransactionPlayers');
 
             });
         });
