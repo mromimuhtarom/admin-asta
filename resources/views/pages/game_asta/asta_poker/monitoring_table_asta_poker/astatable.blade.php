@@ -25,11 +25,39 @@
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <!-- Pertama -->
-              <div style="border:1px solid black;">
+              <div style="float:left;margin-right:5%;">
+                <table border="0">
+                  <tr>
+                    <td>
+                      <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">{{ TranslateMenuGame('Refresh') }}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">
+                      <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('Auto Refresh') }}</div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="border border-dark" style="width:30%;float:left;">
                 {{-- <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div>
                 <div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
                 <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> --}}
-                <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">Refresh</a>
+                <table border="1" style="width:auto;">
+                  <tr class="border-bottom">
+                    <td>
+                      {{ TranslateMenuGame('Novice') }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
+                        <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                    </td>
+                  </tr>
+                </table>
               </div>
               <!-- end pertama -->
               <!-- Kedua -->

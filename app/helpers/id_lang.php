@@ -486,7 +486,10 @@ function TranslateMenuGame($menu){
         'See Detail'           => 'Lihat Detail',
         'See'                  => 'Lihat',
         'Online'               => 'Daring',
-        'Players'              => 'Pemain'
+        'Players'              => 'Pemain',
+        'Refresh'              => 'Refresh',
+        'Auto Refresh'         => 'Refresh Otomatis',
+        'Novice'               => 'Pemula'  
 
     ];
 
