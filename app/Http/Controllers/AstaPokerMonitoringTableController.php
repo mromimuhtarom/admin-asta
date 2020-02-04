@@ -23,7 +23,7 @@ class AstaPokerMonitoringTableController extends Controller
         $tpkPlayersintermediate = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
                                   ->where('room_id', '=', 2)
                                    ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('table', 'tpkPlayers'));
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('table', 'tpkPlayersinvoice'));
     }
 
     public function Game(Request $request)

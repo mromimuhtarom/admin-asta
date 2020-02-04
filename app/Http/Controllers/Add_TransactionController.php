@@ -130,6 +130,7 @@ class Add_TransactionController extends Controller
       $storetransactionday = StoreTransactionDay::where('user_id', '=', $user_id)
                              ->where('date', '=', Carbon::now('GMT+7')->toDateString())
                              ->first();
+      
 
 
       //VALIDASI FORM INPUT
@@ -139,10 +140,15 @@ class Add_TransactionController extends Controller
       //=== CHIP ===//
       if($columnname == 'chip'):
         if( $plusminus == "+"):    
-          $plusminus    = "";
-          $totalbalance = $stat->chip + $valuecurrency;
-          $op_math      = "ditambahkan";
-          $validator    = Validator::make($request->all(), [
+          $plusminus       = "";
+          $totalbalance    = $stat->chip + $valuecurrency;
+          $op_math         = "ditambahkan";
+          if($storetransactionday):
+            $totalcorrection = $storetransactionday->correction_chip + $valuecurrency;
+          else:
+            $totalcorrection = $valuecurrency;
+          endif;
+          $validator       = Validator::make($request->all(), [
             'currency'    => 'required',
             'type'        => 'required',
             'description' => 'required'
@@ -163,10 +169,15 @@ class Add_TransactionController extends Controller
               'datetime'  => Carbon::now('GMT+7')
           ]);
         else:
-          $plusminus    = "-";
-          $op_math      = "dikurang";
-          $totalbalance = $stat->chip - $valuecurrency;
-          $type         = 11;
+          $plusminus       = "-";
+          $op_math         = "dikurang";
+          $totalbalance    = $stat->chip - $valuecurrency;
+          if($storetransactionday):
+            $totalcorrection = $storetransactionday->correction_chip - $valuecurrency;
+          else:
+            $totalcorrection = $plusminus.$valuecurrency;
+          endif;
+          $type            = 11;
 
           //PREVENT BALANCE MINUS CHIP
           if($stat->chip == 0):
@@ -205,14 +216,14 @@ class Add_TransactionController extends Controller
           StoreTransactionDay::where('user_id', '=', $user_id)->update([
             'date'            => Carbon::now('GMT+7')->toDateString(),
             'date_created'    => Carbon::now('GMT+7'),
-            'correction_chip' => $plusminus.$valuecurrency
+            'correction_chip' => $totalcorrection
           ]);
         else:
           StoreTransactionDay::create([
             'user_id'         => $user_id,
             'date'            => Carbon::now('GMT+7')->toDateString(),
             'date_created'    => Carbon::now('GMT+7'),
-            'correction_chip' => $plusminus.$valuecurrency
+            'correction_chip' => $valuecurrency
           ]);
         endif;
         
@@ -227,10 +238,15 @@ class Add_TransactionController extends Controller
       //=== GOLD ===/
       elseif($columnname == 'gold'):
         if( $plusminus == "+"): 
-          $plusminus    = "";
-          $totalbalance = $stat->gold + $valuecurrency;
-          $op_math      = 'ditambahkan';
-          $validator    = Validator::make($request->all(), [
+          $plusminus       = "";
+          $totalbalance    = $stat->gold + $valuecurrency;
+          if($storetransactionday):
+            $totalcorrection = $storetransactionday->correction_gold + $valuecurrency;
+          else:
+            $totalcorrection = $valuecurrency;
+          endif;
+          $op_math         = 'ditambahkan';
+          $validator       = Validator::make($request->all(), [
             'currency'    => 'required',
             'type'        => 'required',
             'description' => 'required'
@@ -252,9 +268,14 @@ class Add_TransactionController extends Controller
 
         else:
           $plusminus = "-";
-          $totalbalance = $stat->gold - $valuecurrency;
-          $op_math      = 'dikurang';
-          $type         = 11;
+          $totalbalance    = $stat->gold - $valuecurrency;
+          if($storetransactionday):
+            $totalcorrection = $storetransactionday->correction_gold - $valuecurrency;
+          else:
+            $totalcorrection = $plusminus.$valuecurrency;
+          endif;
+          $op_math         = 'dikurang';
+          $type            = 11;
 
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
@@ -295,14 +316,14 @@ class Add_TransactionController extends Controller
           StoreTransactionDay::where('user_id', '=', $user_id)->update([
             'date'            => Carbon::now('GMT+7')->toDateString(),
             'date_created'    => Carbon::now('GMT+7'),
-            'correction_gold' => $plusminus.$valuecurrency
+            'correction_gold' => $totalcorrection
           ]);
         else:
           StoreTransactionDay::create([
             'user_id'         => $user_id,
             'date'            => Carbon::now('GMT+7')->toDateString(),
             'date_created'    => Carbon::now('GMT+7'),
-            'correction_gold' => $plusminus.$valuecurrency
+            'correction_gold' => $valuecurrency
           ]);
         endif;
         
@@ -318,9 +339,14 @@ class Add_TransactionController extends Controller
       //=== POINT ===//
       elseif($columnname == 'point'):
         if( $plusminus == "+"): 
-          $plusminus = "";   
-          $totalbalance = $stat->point + $valuecurrency;
-          $op_math = 'ditambahkan';
+          $plusminus       = "";
+          $totalbalance    = $stat->point + $valuecurrency;
+          if($storetransactionday):
+            $totalcorrection = $storetransactionday->correction_point + $valuecurrency;
+          else:
+            $totalcorrection = $valuecurrency;
+          endif;
+          $op_math         = 'ditambahkan';
 
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
@@ -343,10 +369,15 @@ class Add_TransactionController extends Controller
               'datetime'  => Carbon::now('GMT+7')
           ]);
         else:
-          $plusminus = "-";   
-          $totalbalance = $stat->point - $valuecurrency;
-          $op_math = 'dikurang';
-          $type         = 11;
+          $plusminus       = "-";
+          $totalbalance    = $stat->point - $valuecurrency;
+          if($storetransactionday):
+            $totalcorrection = $storetransactionday->correction_point - $valuecurrency;
+          else:
+            $totalcorrection = $plusminus.$valuecurrency;
+          endif;
+          $op_math         = 'dikurang';
+          $type            = 11;
 
           $validator = Validator::make($request->all(), [
             'currency'    =>  'required',
@@ -384,14 +415,14 @@ class Add_TransactionController extends Controller
           StoreTransactionDay::where('user_id', '=', $user_id)->update([
             'date'             => Carbon::now('GMT+7')->toDateString(),
             'date_created'     => Carbon::now('GMT+7'),
-            'correction_point' => $plusminus.$valuecurrency
+            'correction_point' => $totalcorrection
           ]);
         else:
           StoreTransactionDay::create([
             'user_id'          => $user_id,
             'date'             => Carbon::now('GMT+7')->toDateString(),
             'date_created'     => Carbon::now('GMT+7'),
-            'correction_point' => $plusminus.$valuecurrency
+            'correction_point' => $valuecurrency
           ]);
         endif;
 

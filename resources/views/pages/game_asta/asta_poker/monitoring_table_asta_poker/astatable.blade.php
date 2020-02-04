@@ -24,12 +24,22 @@
           <div class="row">
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-              <div class="border border-dark">
-                <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div>
-                <div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayers) }}</div> 
-                <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div>
+              <!-- Pertama -->
+              <div style="border:1px solid black;">
+                {{-- <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div>
+                <div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
+                <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> --}}
                 <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">Refresh</a>
               </div>
+              <!-- end pertama -->
+              <!-- Kedua -->
+              {{-- <div class="border border-dark">
+                <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div>
+                <div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
+                <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div>
+                <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">Refresh</a>
+              </div> --}}
+              <!-- end kedua -->
             </div>
             <!-- End Button tambah data baru -->
           </div>
@@ -61,7 +71,7 @@
                       @endforeach
                     </td>
                     <td>
-                      <form action="{{ route('Novice_Asta_Poker-game')}}">
+                      <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
                         <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                         <input type="hidden" name="name_table" value="{{ $tb->name }}">
                         <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
@@ -88,7 +98,7 @@
 
       $('#refreshtable').on('click', function() {
         console.log('aa');
-        var url = "{{ route('Novice_Asta_Poker') }}"; 
+        var url = "{{ route('Monitoring_Table_Asta_Poker') }}"; 
         location.reload();        
         // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
       });
