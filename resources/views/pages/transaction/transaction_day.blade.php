@@ -53,10 +53,10 @@
 									<div class="col">
 										<select name="chooose_time" id="time" class="form-control">
 											<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
-												<option value="today" @if($time == 'today') selected @endif>{{ translate_MenuTransaction('Today') }}</option>
-												<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
-												<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
-												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
+												<option value="Day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
+												<option value="Week" @if($time == 'Week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
+												<option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
+												<option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
 										</select>
 									</div>
 									<div class="col">
@@ -72,10 +72,10 @@
 									<div class="col">
 										<select name="choose_time" id="time" class="form-control">
 											<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
-											<option value="today">{{ translate_MenuTransaction('Today') }}</option>
-											<option value="week">{{ translate_MenuTransaction('Week') }}</option>
-											<option value="month">{{ translate_MenuTransaction('Month') }}</option>
-											<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
+											<option value="Day">{{ translate_MenuTransaction('Day') }}</option>
+											<option value="Week">{{ translate_MenuTransaction('Week') }}</option>
+											<option value="Month">{{ translate_MenuTransaction('Month') }}</option>
+											<option value="All time">{{ translate_MenuTransaction('All time') }}</option>
 										</select>
 									</div>
 									<div class="col">
@@ -109,7 +109,7 @@
 				<div class="table-outer">
 					<div class="row">
 						<div class="col" style="font-style:italic;color:#969696;font-weight:bold;">
-							{{ Translate_menuPlayers('Total Record Entries is') }} {{ $transactionDay->total() }}
+							{{ Translate_menuPlayers('Total Record Entries is') }} {{ $history->total() }}
 						</div>
 					</div>
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
@@ -155,39 +155,39 @@
 						</tbody> --}}
 						<thead>
 							<tr>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.date_created">{{ translate_MenuTransaction("Date") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.date_created') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.user_id">{{ translate_MenuTransaction("ID Player") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.user_id') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction("Username") }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.debet">{{ translate_MenuTransaction("Cash Debit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.debet') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.credit">{{ translate_MenuTransaction("Cash Credit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.credit') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.gold_debet">{{ translate_MenuTransaction("Gold Debit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.gold_debet') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.gold_credit">{{ translate_MenuTransaction("Gold Credit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.gold_credit') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.chip_debet">{{ translate_MenuTransaction("Chip Debit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.chip_debet') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.chip_credit">{{ translate_MenuTransaction("Chip Credit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.chip_credit') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.reward_gold">{{ translate_MenuTransaction("Reward Gold") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.reward_gold') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.reward_chip">{{ translate_MenuTransaction("Reward Chip") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.reward_chip') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.reward_point">{{ translate_MenuTransaction("Reward Point") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.reward_point') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_gold">{{ translate_MenuTransaction("Correction Gold") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_gold') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_chip">{{ translate_MenuTransaction("Correction Chip") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_chip') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_point">{{ translate_MenuTransaction("Correction Point") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_point') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point">{{ translate_MenuTransaction("Point Get") }} <i class="fa fa-sort{{ iconsorting('asta_db.user_point.point')}}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point_spend">{{ translate_MenuTransaction("Point Spend") }} <i class="fa fa-sort{{ iconsorting('asta_db.user_point.point_spend') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?inputPlayer={{ $searchUser }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point_expired">{{ translate_MenuTransaction("Point Expired") }} <i class="fa fa-sort{{ iconsorting('asta_db.user_point.point_expired') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.date_created">{{ translate_MenuTransaction("Date") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.date_created') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.user_id">{{ translate_MenuTransaction("ID Player") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.user_id') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction("Username") }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.debet">{{ translate_MenuTransaction("Cash Debit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.debet') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.credit">{{ translate_MenuTransaction("Cash Credit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.credit') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.gold_debet">{{ translate_MenuTransaction("Gold Debit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.gold_debet') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.gold_credit">{{ translate_MenuTransaction("Gold Credit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.gold_credit') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.chip_debet">{{ translate_MenuTransaction("Chip Debit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.chip_debet') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.chip_credit">{{ translate_MenuTransaction("Chip Credit") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.chip_credit') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.reward_gold">{{ translate_MenuTransaction("Reward Gold") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.reward_gold') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.reward_chip">{{ translate_MenuTransaction("Reward Chip") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.reward_chip') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.reward_point">{{ translate_MenuTransaction("Reward Point") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.reward_point') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_gold">{{ translate_MenuTransaction("Correction Gold") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_gold') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_chip">{{ translate_MenuTransaction("Correction Chip") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_chip') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_point">{{ translate_MenuTransaction("Correction Point") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_point') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point">{{ translate_MenuTransaction("Point Get") }} <i class="fa fa-sort{{ iconsorting('asta_db.user_point.point')}}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point_spend">{{ translate_MenuTransaction("Point Spend") }} <i class="fa fa-sort{{ iconsorting('asta_db.user_point.point_spend') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point_expired">{{ translate_MenuTransaction("Point Expired") }} <i class="fa fa-sort{{ iconsorting('asta_db.user_point.point_expired') }}"></i></a></td>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($transaction_day as $trns_day)
+							@foreach ($history as $trns_day)
 								<tr>
 									<td>{{ $trns_day->date_created }}</td>
-									<td>{{ $trns_day->user_id }}</td>
-									<td>{{ $trns_day->username }}</td>
-									<td>{{ $trns_day->debet }}</td>
-									<td>{{ $trns_day->credit }}</td>
-									<td>{{ $trns_day->gold_debet }}</td>
-									<td>{{ $trns_day->gold_credit }}</td>
-									<td>{{ $trns_day->chip_debet }}</td>
-									<td>{{ $trns_day->chip_credit }}</td>
-									<td>{{ $trns_day->reward_gold }}</td>
+									<td>{{ $trns_day->debettransaction }}</td>
+									<td>{{ $trns_day->credittransaction }}</td>
+									<td>{{ $trns_day->gold_debettransaction }}</td>
+									<td>{{ $trns_day->gold_credittransaction }}</td>
+									<td>{{ $trns_day->chip_debettransaction }}</td>
+									<td>{{ $trns_day->chip_credittransaction }}</td>
+									<td>{{ $trns_day->reward_goldtransaction }}</td>
+									<td>{{ $trns_day->reward_pointtransaction }}</td>
+									<td>{{ $trns_day->reward_chiptransaction }}</td>
 									<td>{{ $trns_day->reward_chip }}</td>
 									<td>{{ $trns_day->reward_point }}</td>
 									<td>{{ $trns_day->correction_gold }}</td>
@@ -202,7 +202,7 @@
 					</table>
 				</div>
 
-				<div style="display: flex;justify-content: center;">{{ $transaction_day->links() }}</div>  		
+				<div style="display: flex;justify-content: center;">{{ $history->links() }}</div>  		
 			</div>
 		
 		</div>
