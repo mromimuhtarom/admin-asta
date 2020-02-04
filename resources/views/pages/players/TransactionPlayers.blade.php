@@ -115,8 +115,8 @@
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>	
 								@elseif($time == 'detail')
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>		
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>		
 								@elseif($time == 'day' || $time == "week" || $time == "month")
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@endif
@@ -128,17 +128,17 @@
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
 								@else
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('Win') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('Lose') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
-                <th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('Turn Over') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></a></th>
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('Fee') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('Win') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('Lose') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('Turn Over') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('Fee') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
 								@endif
 								@if($time == "all time")
 								<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@elseif($time == 'detail')
-								<th class="th-sm"><a href="{{ route('detailTransactionDay') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
+								<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@endif
 							</tr>
 						</thead>
@@ -164,7 +164,7 @@
 							@elseif($time == "day" || $time == "week" || $time == "month")
 								@foreach($history as $hst)
 								<tr>
-									<td><a href="{{ route('detailTransactionDay') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
+									<td><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
 								<td>{{ number_format($hst->wintransaction, 2) }} {{ $hst->totalWin }}</td>
 									<td>{{ number_format($hst->losetransaction, 2) }}</td>
 									<td>{{ number_format($hst->turnovertransaction, 2) }}</td>

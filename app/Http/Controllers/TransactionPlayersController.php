@@ -84,10 +84,6 @@ class TransactionPlayersController extends Controller
                            ->orderBy($namecolumn, $sortingorder)
                            ->groupBy(DB::raw('DATE(asta_db.transaction_day.date_created)'))      
                            ->paginate(20);  
-            else:
-                $history = $Transaction->orderBy($namecolumn, $sortingorder)
-                           ->groupBy(DB::raw('DATE(asta_db.transaction_day.date_created)'))      
-                           ->paginate(20);  
             endif;
             $lang_id ='Harian';
             $history->appends($request->all());
@@ -124,10 +120,6 @@ class TransactionPlayersController extends Controller
             elseif($maxDate != NULL):
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '<=', $maxDate." 23:59:59")
                            ->orderBy($namecolumn, $sortingorder)
-                           ->groupBy( DB::raw(' YEARWEEK(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))     
-                           ->paginate(20);
-            else:
-                $history = $Transaction->orderBy($namecolumn, $sortingorder)
                            ->groupBy( DB::raw(' YEARWEEK(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))     
                            ->paginate(20);
             endif;
@@ -169,10 +161,6 @@ class TransactionPlayersController extends Controller
             elseif($maxDate != NULL):
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '<=', $maxDate." 23:59:59")
                            ->orderBy($namecolumn, $sortingorder)
-                           ->groupBy(DB::raw('month(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))
-                           ->paginate(20);
-            else:
-                $history = $Transaction->orderBy($namecolumn, $sortingorder)
                            ->groupBy(DB::raw('month(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                            ->paginate(20);
             endif;
@@ -221,7 +209,7 @@ class TransactionPlayersController extends Controller
                 return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate', 'namecolumn', 'sortingorder', 'gamename', 'game'));
             } else if($minDate == NULL && $maxDate == NULL)
             {
-                return back()->with('alert', alertTranslate("Min Date And Max Date Must be Filled In"));
+                return back()->with('alert', alertTranlsate("Min Date And Max Date Must be Filled In"));
             }
             $lang_id='Sepanjang waktu';
         } else {
