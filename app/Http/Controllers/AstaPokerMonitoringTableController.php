@@ -16,31 +16,15 @@ class AstaPokerMonitoringTableController extends Controller
      */
     public function index()
     {
-        $table      = TpkTable::where('room_id', '=', 2)->get();
-        $tpkPlayers = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                      ->where('room_id', '=', 2)
-                      ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.novice', compact('table', 'tpkPlayers'));
+        $table             = TpkTable::where('room_id', '=', 2)->get();
+        $tpkPlayersinvoice = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+                             ->where('room_id', '=', 2)
+                             ->get();
+        $tpkPlayersintermediate = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
+                                  ->where('room_id', '=', 2)
+                                   ->get();
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('table', 'tpkPlayers'));
     }
-
-    public function IntermadiateIndex()
-    {
-        $table      = TpkTable::where('room_id', '=', 4)->get();
-        $tpkPlayers = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                      ->where('room_id', '=', 4)
-                      ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.intermediate', compact('table', 'tpkPlayers'));        
-    }
-
-    public function ProIndex()
-    {
-        $table      = TpkTable::where('room_id', '=', 4)->get();
-        $tpkPlayers = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                      ->where('room_id', '=', 4)
-                      ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.pro', compact('table', 'tpkPlayers'));                
-    }
-
 
     public function Game(Request $request)
     {

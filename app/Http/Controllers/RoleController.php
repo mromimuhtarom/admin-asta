@@ -161,20 +161,25 @@ class RoleController extends Controller
     public function destroy(Request $request)
     {
         $userid = $request->id;
-        if($userid != '')
-        {
-            DB::table('asta_db.adm_role')->where('role_id', '=', $userid)->delete();
-            DB::table('asta_db.adm_access')->where('role_id', '=', $userid)->delete();
+        $operator = DB::table('operator')->where('role_id', '=', $userid)->first();
+      
+        if(!$operator) {
+          if($userid != '')
+          {
+              DB::table('asta_db.adm_role')->where('role_id', '=', $userid)->delete();
+              DB::table('asta_db.adm_access')->where('role_id', '=', $userid)->delete();
 
-            Log::create([
-                'op_id'     => Session::get('userId'),
-                'action_id' => '4',
-                'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$userid
-            ]);
-            return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
+              Log::create([
+                  'op_id'     => Session::get('userId'),
+                  'action_id' => '4',
+                  'datetime'  => Carbon::now('GMT+7'),
+                  'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$userid
+              ]);
+              return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
+          }
+          return redirect()->route('Role_Admin')->with('alert', alertTranslate('Something wrong')); 
         }
-        return redirect()->route('Role_Admin')->with('alert', alertTranslate('Something wrong')); 
+        return back()->with('alert', alertTranslate('Operator Still use this role, wait until role didnott use'));
     }
 
     //DELETE ALL SELECTED 

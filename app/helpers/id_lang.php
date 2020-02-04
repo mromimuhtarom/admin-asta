@@ -760,7 +760,8 @@ function alertTranslate($menu){
         "Max Buy table can't be Up to Max Buy room"                     =>  "table max buy tidak bisa diatas room max buy",
         "You didn't allow to delete your account"                       =>  "Kamu tidak diperbolehkan menghapus akunmu",
         "Data saved"                                                    =>  "Data tersimpan!",
-        'Data added'                                                    =>  "Data berhasil di tambahkan"
+        'Data added'                                                    =>  "Data berhasil di tambahkan",
+        'Operator Still use this role, wait until role didnott use'      =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai"
 
     ];
     return $array_menuContent[$menu];
