@@ -53,8 +53,11 @@ class TransactionPlayersController extends Controller
         if($time == "day")
         {
             
-            $Transaction = TransactionDay::select(
+            $Transaction = TransactionDay::join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
+                           ->select(
                             'asta_db.transaction_day.date_created',
+                            'asta_db.game.desc',
+                            'asta_db.transaction_day.game_id',
                             DB::raw('sum(asta_db.transaction_day.win) As wintransaction'),
                             DB::raw('sum(asta_db.transaction_day.lose) As losetransaction'),
                             DB::raw('sum(asta_db.transaction_day.fee) As feetransaction'),
@@ -66,8 +69,14 @@ class TransactionPlayersController extends Controller
                             DB::raw('min(date(asta_db.transaction_day.date_created)) As minDate')
                           );    
             
-    
-            if($minDate != NULL && $maxDate != NULL):
+            if($game != NULL && $minDate != NULL && $maxDate != NULL):
+                
+                $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                           ->where('asta_db.transaction_day.game_id', '=', $game)
+                           ->orderBy($namecolumn, $sortingorder)
+                           ->groupBy(DB::raw('DATE(asta_db.transaction_day.date_created)'))      
+                           ->paginate(20);
+            elseif($minDate != NULL && $maxDate != NULL):
          
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                            ->orderBy($namecolumn, $sortingorder)
@@ -92,8 +101,11 @@ class TransactionPlayersController extends Controller
         } 
         else if($time == "week")
         {
-            $Transaction = $transaction_day->select(
+            $Transaction = $transaction_day->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
+                           ->select(
                             'asta_db.transaction_day.date_created',
+                            'asta_db.game.desc',
+                            'asta_db.transaction_day.game_id',
                             DB::raw('sum(asta_db.transaction_day.win) As wintransaction'),
                             DB::raw('sum(asta_db.transaction_day.lose) As losetransaction'),
                             DB::raw('sum(asta_db.transaction_day.fee) As feetransaction'),
@@ -105,7 +117,14 @@ class TransactionPlayersController extends Controller
                             DB::raw('min(date(asta_db.transaction_day.date_created)) As minDate')
                       );
             // Search berdasarkan time, game, tnggal minimal tanggal maksimal
-            if($minDate != NULL && $maxDate != NULL):
+            if($game != NULL && $minDate != NULL && $maxDate != NULL):
+                
+                $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                           ->where('asta_db.transaction_day.game_id', '=', $game)
+                           ->orderBy($namecolumn, $sortingorder)
+                           ->groupBy( DB::raw(' YEARWEEK(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))                                     
+                           ->paginate(20);
+            elseif($minDate != NULL && $maxDate != NULL):
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                            ->where('game_id', '=', $game)
                            ->orderBy($namecolumn, $sortingorder)
@@ -130,8 +149,11 @@ class TransactionPlayersController extends Controller
 
         } else if($time == "month")
         {
-            $Transaction= $transaction_day->select(
+            $Transaction= $transaction_day->join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
+                           ->select(
                             'asta_db.transaction_day.date_created',
+                            'asta_db.game.desc',
+                            'asta_db.transaction_day.game_id',
                             DB::raw('sum(asta_db.transaction_day.win) As wintransaction'),
                             DB::raw('sum(asta_db.transaction_day.lose) As losetransaction'),
                             DB::raw('sum(asta_db.transaction_day.fee) As feetransaction'),
@@ -146,7 +168,14 @@ class TransactionPlayersController extends Controller
                         $lang_id = 'Bulanan';
                       
              // Search berdasarkan time, game, tnggal minimal tanggal maksimal
-            if($minDate != NULL && $maxDate != NULL):
+            if($game != NULL && $minDate != NULL && $maxDate != NULL):
+                
+                $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                           ->where('asta_db.transaction_day.game_id', '=', $game)
+                           ->orderBy($namecolumn, $sortingorder)
+                           ->groupBy(DB::raw('month(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))                                                              
+                           ->paginate(20);
+            elseif($minDate != NULL && $maxDate != NULL):
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                            ->where('game_id', '=', $game)
                            ->orderBy($namecolumn, $sortingorder)
@@ -174,6 +203,7 @@ class TransactionPlayersController extends Controller
                             ->select(
                                 'asta_db.user.username',
                                 'asta_db.game.desc',
+                                'asta_db.transaction_day.game_id',
                                 'asta_db.transaction_day.date_created',
                                 'asta_db.transaction_day.win as wintransaction',
                                 'asta_db.transaction_day.lose as losetransaction',
@@ -183,6 +213,16 @@ class TransactionPlayersController extends Controller
                                 DB::raw('asta_db.transaction_day.win - asta_db.transaction_day.lose + asta_db.transaction_day.prize as totalWinLose')
                             );
             $lang_id = '';
+            if($game != NULL && $minDate != NULL && $maxDate != NULL)
+            {
+                $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                           ->where('asta_dn.transaction_day.game_id', '=', $game)
+                           ->orderBy($namecolumn, $sortingorder)   
+                           ->paginate(20);
+                        
+                $history->appends($request->all());
+                return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate', 'namecolumn', 'sortingorder', 'gamename', 'game'));
+            }
             if($minDate != NULL && $maxDate != NULL)
             {
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
@@ -245,20 +285,29 @@ class TransactionPlayersController extends Controller
           $sortingorder = 'asc';
         endif;
 
-        $history = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
-                   ->leftJoin('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
-                   ->select(
-                    'asta_db.game.desc',
-                    'asta_db.user.username',
-                    'asta_db.transaction_day.date_created',
-                    'asta_db.transaction_day.win as wintransaction',
-                    'asta_db.transaction_day.lose as losetransaction',
-                    'asta_db.transaction_day.turnover as turnovertransaction',
-                    'asta_db.transaction_day.fee as feetransaction'
-                   )
-                   ->wherebetween('asta_db.transaction_day.date_created', [$mindate." 00:00:00", $maxdate." 23:59:59"])
+        $transaction = TransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.transaction_day.user_id')
+                       ->leftJoin('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
+                       ->select(
+                        'asta_db.game.desc',
+                        'asta_db.transaction_day.game_id',
+                        'asta_db.user.username',
+                        'asta_db.transaction_day.date_created',
+                        'asta_db.transaction_day.win as wintransaction',
+                        'asta_db.transaction_day.lose as losetransaction',
+                        'asta_db.transaction_day.turnover as turnovertransaction',
+                        'asta_db.transaction_day.fee as feetransaction'
+                       );
+    if($game):
+        $history = $transaction->wherebetween('asta_db.transaction_day.date_created', [$mindate." 00:00:00", $maxdate." 23:59:59"])
+                   ->where('asta_db.transaction_day.game_id', '=', $game)
                    ->orderBy($namecolumn, $sortingorder)
                    ->paginate(20);
+    else:
+        $history = $transaction->wherebetween('asta_db.transaction_day.date_created', [$mindate." 00:00:00", $maxdate." 23:59:59"])
+                   ->orderBy($namecolumn, $sortingorder)
+                   ->paginate(20);
+    endif;
+
                    
         $time      = "detail";
         $lang_id   = '';
