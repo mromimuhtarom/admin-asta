@@ -18,20 +18,8 @@ class AstaPokerMonitoringTableController extends Controller
      */
     public function index(Request $request)
     {
-        // $sorting = $request->sorting;
-        // if($sorting == NULL):
-        //     $sorting = 'desc';
-        // endif;
-        $namecolumn   = $request->namecolumn;
-        if($namecolumn == NULL):
-            $namecolumn = 'name';
-        endif;
-
-        if(Input::get('sorting') === 'asc'):
-            $sortingorder = 'desc';
-        else:
-            $sortingorder = 'asc';
-        endif;
+        $checked = $request->checkauto;
+        // dd($checked);
 
         // room Novice / Pemula
         $onlineinvoice = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
@@ -44,18 +32,92 @@ class AstaPokerMonitoringTableController extends Controller
         $tpkPlayersnovice->appends($request->all());
 
         //  room untuk Intermedite / Menengah
+        $onlineintermediate = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                              ->where('room_id', '=', 4)
+                              ->get();
+
+        //  room untuk Pro / Ahli
+        $onlinepro = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                              ->where('room_id', '=', 6)
+                              ->get();
+
+        $tpkPlayersPro = TpkTable::where('room_id', '=', 6)
+                         ->paginate(20);
+
+        $tpkPlayersPro->appends($request->all());
+
+        // all online
+        $onlinetpk = TpkPlayer::all();
+
+
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'table', 'tpkPlayersnovice', 'sortingorder', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
+    }
+
+    public function indexIntermediate(Request $request)
+    {
+
+        $checked = $request->checkauto;
+
+
+        // room Novice / Pemula
+        $onlineinvoice = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                         ->where('room_id', '=', 2)
+                         ->get();
+
+        //  room untuk Intermedite / Menengah
+        $onlineintermediate = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                              ->where('room_id', '=', 4)
+                              ->get();
+
         $tpkPlayersintermediate = TpkTable::where('room_id', '=', 4)
                                   ->paginate(20);
 
         $tpkPlayersintermediate->appends($request->all());
 
         //  room untuk Pro / Ahli
+        $onlinepro = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                              ->where('room_id', '=', 6)
+                              ->get();
+
+
+        // all online
+        $onlinetpk = TpkPlayer::all();
+
+
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'table', 'sortingorder', 'tpkPlayersintermediate', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
+    }
+
+    public function indexPro(Request $request)
+    {
+        $checked = $request->checkauto;
+      
+
+        // room Novice / Pemula
+        $onlineinvoice = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                         ->where('room_id', '=', 2)
+                         ->get();
+
+        //  room untuk Intermedite / Menengah
+        $onlineintermediate = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                              ->where('room_id', '=', 4)
+                              ->get();
+
+        //  room untuk Pro / Ahli
+        $onlinepro = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                              ->where('room_id', '=', 6)
+                              ->get();
+        
         $tpkPlayersPro = TpkTable::where('room_id', '=', 6)
                          ->paginate(20);
+
         $tpkPlayersPro->appends($request->all());
 
 
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('table', 'tpkPlayersnovice', 'sortingorder', 'tpkPlayersintermediate', 'tpkPlayersPro', 'onlineinvoice'));
+        // all online
+        $onlinetpk = TpkPlayer::all();
+
+
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'table', 'sortingorder', 'tpkPlayersPro', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
     }
 
     public function Game(Request $request)
