@@ -348,7 +348,9 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  =>  'Monitoring_Table_Asta_Poker'], function() {
                 Route::middleware('page_denied:Monitoring Table Asta Poker')->group(function(){
-                    Route::get('Monitor_Asta_Poker-view', 'AstaPokerMonitoringTableController@index')->name('Monitoring_Table_Asta_Poker');   
+                    Route::get('Monitor_Asta_Poker-view', 'AstaPokerMonitoringTableController@index')->name('Monitoring_Table_Asta_Poker'); 
+                    Route::get('Monitor_Asta_Poker-intermediate', 'AstaPokerMonitoringTableController@indexIntermediate')->name('Monitoring_Table_Asta_Poker-intermediate'); 
+                    Route::get('Monitor_Asta_Poker-pro', 'AstaPokerMonitoringTableController@indexPro')->name('Monitoring_Table_Asta_Poker-pro');   
                     Route::get('Monitor_Asta_Poker-Game', 'AstaPokerMonitoringTableController@Game')->name('Monitoring_Table_Asta_Poker-game');                    
                 });
             });
