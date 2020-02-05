@@ -15,7 +15,7 @@
       {{-- <div>	 --}}
         <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>
         <span style="background-color:#fffffe;margin-right:1%;margin-left:1%;color:black;margin-top:auto;margin-bottom:auto;padding-right:1%;padding-left:1%;">
-          <i class="fa fa-user-circle" style="color:#00ff34"></i> 0
+          <i class="fa fa-user-circle" style="color:#00ff34"></i> 
         </span>
       {{-- </div> --}}
     </header>
