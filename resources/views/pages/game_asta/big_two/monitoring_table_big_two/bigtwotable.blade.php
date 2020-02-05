@@ -60,7 +60,7 @@
                         @endforeach
                       </td>
                       <td>
-                        <form action="{{ route('Monitoring_Table_Big_Two')}}">
+                        <form action="{{ route('Monitoring_Table_Big_Two-game')}}">
                           <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                           <input type="hidden" name="name_table" value="{{ $tb->name }}">
                           <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
