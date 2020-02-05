@@ -202,6 +202,7 @@ function translate_menuTransaction($menu){
         //PILIH AKSI
         'Choose Time'           =>  'Pilih waktu',
         'Choose Game'           =>  'Pilih Game',
+        'All Game'              =>  'Semua Game',
         'Today'                 =>  'Hari ini',
         'Day'                   =>  'Harian',
         'Week'                  =>  'Mingguan',
@@ -489,7 +490,9 @@ function TranslateMenuGame($menu){
         'Players'              => 'Pemain',
         'Refresh'              => 'Refresh',
         'Auto Refresh'         => 'Refresh Otomatis',
-        'Novice'               => 'Pemula'  
+        'Novice'               => 'Pemula',
+        'Intermediate'         => 'Menengah',
+        'Pro'                  => 'Ahli'  
 
     ];
 
