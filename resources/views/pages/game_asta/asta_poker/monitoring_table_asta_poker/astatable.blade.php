@@ -54,7 +54,7 @@
                   <tr>
                     <td valign="top">
                         <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
-                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div>
+                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlineinvoice) }}</div>
                         <div style="float:left;">{{ TranslateMenuGame('Players') }}</div> 
                         <div style="float:right;margin-left:10%;"><button class="btn bg-blue-light text-white"><i class="fa fa-arrow-down"></i></button></div>
                     </td>
@@ -72,7 +72,7 @@
                   <tr>
                     <td valign="top">
                         <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
-                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
+                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlineinvoice) }}</div> 
                         <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
                         <div style="float:right"><button class="btn bg-blue-light text-white"><i class="fa fa-arrow-down"></i></button></div>
                     </td>
@@ -90,7 +90,7 @@
                   <tr>
                     <td valign="top">
                         <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
-                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
+                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlineinvoice) }}</div> 
                         <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
                         <div style="float:right;"><button class="btn bg-blue-light text-white"><i class="fa fa-arrow-down"></i></button></div>
                     </td>
@@ -115,39 +115,73 @@
         
         <div class="custom-scroll table-responsive" style="height:800px;">
           <div class="table-outer">
+            <div class="row">
+                <!-- Button tambah bot baru -->
+                <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                    {{ Translate_menuPlayers('Total Record Entries is') }} {{ $tpkPlayersnovice->total() }}
+                </div>
+                            <!-- End Button tambah bot baru -->
+            </div>
             <table class="table table-bordered" id="tablerefreshed1">
               <thead>
                 <tr>
-                  <th class="th-sm"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
-                  <th class="th-sm"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
-                  <th class="th-sm"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
-                  <th class="th-sm">{{ TranslateMenuGame('Username Player') }}</th>
-                  <th class="th-sm">{{ TranslateMenuGame('See Detail') }}</th>
+                  {{-- <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
+                  <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
+                  <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th> --}}
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }} </th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($tpkPlayersinvoice as $tb)
-                  <tr>
-                    <td class="th-sm">{{ $tb->tablename }}</td>
-                    <td class="th-sm">{{ strNormalFast($tb->timer) }}</td>
-                    <td class="th-sm">{{ $tb->maxplayer }}</td>
-                    <td class="th-sm">
-                      @foreach ($tb['TpkPlayer'] as $plyr)
-                        {{ $plyr->username }},                          
-                      @endforeach
-                    </td>
-                    <td class="th-sm">
-                      <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
-                        <input type="hidden" name="id_table" value="{{ $tb->tableid }}">
-                        <input type="hidden" name="name_table" value="{{ $tb->tablename }}">
-                        <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
-                      </form>  
-                    </td>
-                  </tr>
+                @foreach ($tpkPlayersnovice  as $tb)
+                  @if(tpkplayeronline($tb->table_id)) 
+                    <tr>
+                      <td class="th-sm">{{ $tb->name }}</td>
+                      <td class="th-sm">{{ strNormalFast($tb->timer) }}</td>
+                      <td class="th-sm">{{ $tb->max_player }}</td>
+                      <td class="th-sm">
+                        @foreach (tpkplayeronline($tb->table_id) as $plyr)
+                          <a href="{{ route('chip_detail') }}?inputPlayer={{ $plyr->user_id }}">{{ $plyr->username }}</a>,&nbsp;                          
+                        @endforeach
+                      </td>
+                      <td class="th-sm">
+                        <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}" target="_blank">
+                          <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
+                          <input type="hidden" name="name_table" value="{{ $tb->name }}">
+                          <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                        </form>  
+                      </td>
+                    </tr>
+                  @else
+                    <tr>
+                      <td class="th-sm">{{ $tb->name }}</td>
+                      <td class="th-sm">{{ strNormalFast($tb->timer) }}</td>
+                      <td class="th-sm">{{ $tb->max_player }}</td>
+                      <td class="th-sm">
+                        @foreach (tpkplayeronline($tb->table_id) as $plyr)
+                          <a href="{{ route('chip_detail') }}?inputPlayer={{ $plyr->user_id }}">{{ $plyr->username }}</a>,&nbsp;                          
+                        @endforeach
+                      </td>
+                      <td class="th-sm">
+                        <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
+                          <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
+                          <input type="hidden" name="name_table" value="{{ $tb->name }}">
+                          <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                        </form>  
+                      </td>
+                    </tr>
+                  @endif
                 @endforeach
               </tbody>
             </table>
           </div>
+          <div style="display: flex;justify-content: center;">{{ $tpkPlayersnovice->links() }}</div>                    
+
         </div>
       
       </div>
@@ -160,27 +194,39 @@
       $('table.table').dataTable( {
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+        "paging": false,
+        "bInfo":false,
+        "ordering":false,
+        "bLengthChange": false,
+        "searching": false,
+        "ordering": false
       });
 
-      $('#refreshtable').on('click', function() {
-        var url = "{{ route('Monitoring_Table_Asta_Poker') }}"; 
-        location.reload();        
-        // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
-      });
-      $('#autorefresh').click(function(){
-          if($(this).prop("checked") == true){
-            console.log('aa');
-            setInterval(function(){
-              $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
-            }, 5000);
-          }
-      });
+
+
+        $('#refreshtable').on('click', function() {
+          console.log('asas');
+            var url = "{{ route('Monitoring_Table_Asta_Poker') }}"; 
+            // location.reload();
+             $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");        
+            // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
+        });
+        $('#autorefresh').click(function(){
+          console.log('ass');
+            if($(this).prop("checked") == true){
+              console.log('ada');
+              setInterval(function(){
+                $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
+              }, 300000);
+            }
+        });
     });
 
     table = $('table.table').dataTable({
       "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
       "autoWidth" : true,
       "paging": false,
+      "ordering": false,
       "classes": {
         "sWrapper": "dataTables_wrapper dt-bootstrap4"
       },

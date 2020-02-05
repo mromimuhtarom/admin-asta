@@ -1,11 +1,12 @@
-@extends('index')
 
-
-@section('content')
     <link rel="shortcut icon" href="/game/asta_poker/TemplateData/favicon.ico">
     <link rel="stylesheet" href="/game/asta_poker/TemplateData/style.css">
     <script src="/game/asta_poker/TemplateData/UnityProgress.js"></script>
     <script src="/game/asta_poker/Build/UnityLoader.js"></script>
+    <link rel="stylesheet" media="screen, print" href="/assets/vendors/vendors.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="/assets/app/app.bundle.css">
+    <script src="/assets/vendors/vendors.bundle.js"></script>
+	  <script src="/assets/app/app.bundle.js"></script>
 
     <style> /*wew*/
       #gameContainer{
@@ -17,7 +18,7 @@
     </style>
     
     <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/13.json", {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/15.json", {onProgress: UnityProgress});
        
         function OnAppReady(){
             console.log("### application is loaded");
@@ -78,12 +79,10 @@
                     <div class="title">TPKAstaGame</div>
                 </div>
             </div>
-
-            
+                        
           </div>
         </div>
       
       </div>
     </div>
   </div>
-@endsection

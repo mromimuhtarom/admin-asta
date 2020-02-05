@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\TpkTable;
+use App\TpkPlayer;
 use Session;
 use Illuminate\Support\Facades\Input;
 
@@ -23,7 +24,7 @@ class AstaPokerMonitoringTableController extends Controller
         // endif;
         $namecolumn   = $request->namecolumn;
         if($namecolumn == NULL):
-            $namecolumn = 'playername';
+            $namecolumn = 'name';
         endif;
 
         if(Input::get('sorting') === 'asc'):
@@ -32,27 +33,29 @@ class AstaPokerMonitoringTableController extends Controller
             $sortingorder = 'asc';
         endif;
 
+        // room Novice / Pemula
+        $onlineinvoice = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
+                         ->where('room_id', '=', 2)
+                         ->get();
 
-        $table             = TpkTable::where('room_id', '=', 2)->get();
-        $tpkPlayersinvoice = TpkTable::leftjoin('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                             ->leftjoin('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.tpk_player.user_id')
-                             ->select(
-                                 'asta_db.tpk_table.table_id as tableid',
-                                 'asta_db.user.username as playername', 
-                                 'asta_db.tpk_table.room_id as roomid',
-                                 'asta_db.tpk_table.name as tablename',
-                                 'asta_db.tpk_table.timer as timer',
-                                 'asta_db.tpk_table.max_player as maxplayer',
-                                 'asta_db.tpk_player.user_id as userid'
-                             )
-                             ->orderby($namecolumn, $sortingorder)
-                             ->where('room_id', '=', 2)
+        $tpkPlayersnovice = TpkTable::where('room_id', '=', 2)
                              ->paginate(20);
                              
-        $tpkPlayersintermediate = TpkTable::join('asta_db.tpk_player', 'asta_db.tpk_player.table_id', '=', 'asta_db.tpk_table.table_id')
-                                  ->where('room_id', '=', 2)
-                                   ->get();
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('table', 'tpkPlayersinvoice', 'sortingorder'));
+        $tpkPlayersnovice->appends($request->all());
+
+        //  room untuk Intermedite / Menengah
+        $tpkPlayersintermediate = TpkTable::where('room_id', '=', 4)
+                                  ->paginate(20);
+
+        $tpkPlayersintermediate->appends($request->all());
+
+        //  room untuk Pro / Ahli
+        $tpkPlayersPro = TpkTable::where('room_id', '=', 6)
+                         ->paginate(20);
+        $tpkPlayersPro->appends($request->all());
+
+
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('table', 'tpkPlayersnovice', 'sortingorder', 'tpkPlayersintermediate', 'tpkPlayersPro', 'onlineinvoice'));
     }
 
     public function Game(Request $request)

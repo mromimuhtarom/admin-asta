@@ -252,6 +252,12 @@ function image_data($gdimage)
     return(ob_get_clean());
 }
 
+function tpkplayeronline($table_id)
+{
+  $a = DB::table('tpk_player')->where('table_id', '=', $table_id)->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.tpk_player.user_id')->get();
+  return $a;
+}
+
 function iconsorting($fieldname)
 {
   if(isset($_GET['namecolumn'])):
