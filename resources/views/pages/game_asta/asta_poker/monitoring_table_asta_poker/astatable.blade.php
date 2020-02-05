@@ -11,10 +11,13 @@
 @section('content')
   <!-- Form Category -->
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
-    <header>
-      <div class="widget-header">	
-        <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>				
-      </div>
+    <header class="border border-light">
+      {{-- <div>	 --}}
+        <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>
+        <span style="background-color:#fffffe;margin-right:1%;margin-left:1%;color:black;margin-top:auto;margin-bottom:auto;padding-right:1%;padding-left:1%;">
+          <i class="fa fa-user-circle" style="color:#00ff34"></i> 0
+        </span>
+      {{-- </div> --}}
     </header>
 
     <div>
@@ -23,7 +26,7 @@
         <div class="widget-body-toolbar">
           <div class="row">
             <!-- Button tambah data baru -->
-            <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+            <div class="col">
               <!-- Pertama -->
               <div style="float:left;margin-right:5%;">
                 <table border="0">
@@ -34,27 +37,62 @@
                   </tr>
                   <tr>
                     <td>
-                      <input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">
+                      <input id="autorefresh" type="checkbox" name="autorefresh" class="deletepermission">
                       <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('Auto Refresh') }}</div>
                     </td>
                   </tr>
                 </table>
               </div>
-              <div class="border border-dark" style="width:30%;float:left;">
-                {{-- <div style="float:left;margin-right:1%;">{{ TranslateMenuGame('Online') }}</div>
-                <div class="border" style="width:min-content;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
-                <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> --}}
-                <table border="1" style="width:auto;">
+
+              <div style="border:2px solid black;width:auto;float:left;margin-right:5%;">
+                <table border="0" width="100%" style="">
                   <tr class="border-bottom">
                     <td>
                       {{ TranslateMenuGame('Novice') }}
                     </td>
                   </tr>
                   <tr>
+                    <td valign="top">
+                        <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div>
+                        <div style="float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                        <div style="float:right;margin-left:10%;"><button class="btn bg-blue-light text-white"><i class="fa fa-arrow-down"></i></button></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div style="border:2px solid black;width:auto;float:left;margin-right:5%;">
+                <table border="0" width="100%">
+                  <tr class="border-bottom">
                     <td>
+                      {{ TranslateMenuGame('Intermediate') }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
                         <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
                         <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
                         <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                        <div style="float:right"><button class="btn bg-blue-light text-white"><i class="fa fa-arrow-down"></i></button></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div style="border:2px solid black;width:auto;float:left;">
+                <table border="0" width="100%">
+                  <tr class="border-bottom">
+                    <td>
+                      {{ TranslateMenuGame('Pro') }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top">
+                        <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                        <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($tpkPlayersinvoice ) }}</div> 
+                        <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                        <div style="float:right;"><button class="btn bg-blue-light text-white"><i class="fa fa-arrow-down"></i></button></div>
                     </td>
                   </tr>
                 </table>
@@ -90,15 +128,15 @@
               <tbody>
                 @foreach ($table as $tb)
                   <tr>
-                    <td>{{ $tb->name }}</td>
-                    <td>{{ strNormalFast($tb->timer) }}</td>
-                    <td>{{ $tb->max_player }}</td>
-                    <td>
+                    <td class="th-sm">{{ $tb->name }}</td>
+                    <td class="th-sm">{{ strNormalFast($tb->timer) }}</td>
+                    <td class="th-sm">{{ $tb->max_player }}</td>
+                    <td class="th-sm">
                       @foreach ($tb['TpkPlayer'] as $plyr)
                         {{ $plyr->username }},                          
                       @endforeach
                     </td>
-                    <td>
+                    <td class="th-sm">
                       <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
                         <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                         <input type="hidden" name="name_table" value="{{ $tb->name }}">
@@ -125,10 +163,17 @@
       });
 
       $('#refreshtable').on('click', function() {
-        console.log('aa');
         var url = "{{ route('Monitoring_Table_Asta_Poker') }}"; 
         location.reload();        
         // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
+      });
+      $('#autorefresh').click(function(){
+          if($(this).prop("checked") == true){
+            console.log('aa');
+            setInterval(function(){
+              $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
+            }, 5000);
+          }
       });
     });
 

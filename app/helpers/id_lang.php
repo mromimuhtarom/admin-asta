@@ -489,7 +489,9 @@ function TranslateMenuGame($menu){
         'Players'              => 'Pemain',
         'Refresh'              => 'Refresh',
         'Auto Refresh'         => 'Refresh Otomatis',
-        'Novice'               => 'Pemula'  
+        'Novice'               => 'Pemula',
+        'Intermediate'         => 'Menengah',
+        'Pro'                  => 'Ahli'  
 
     ];
 
