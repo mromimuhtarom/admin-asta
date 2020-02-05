@@ -22,7 +22,6 @@ class DominoQQMonitoringTableController extends Controller
     public function Game(Request $request)
     {
         $idtable    =   $request->id_table;
-        $name_table =   $request->name_table;
 
         $username   =   Session::get('username');
         $operator   =   DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();

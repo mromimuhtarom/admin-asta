@@ -9,10 +9,11 @@
 @section('content')
 <!-- Form Category -->
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
-    <header>
-      <div class="widget-header">	
-        <h2><strong><i class="fa fa-gamepad"></i>Domino QQ Table</strong></h2>				
-      </div>
+    <header class="border border-light">
+        <h2><strong><i class="fa fa-gamepad"></i>Domino QQ Table</strong></h2>
+        <span style="background-color:#fffffe;margin-right:1%;margin-left:1%;color:black;margin-top:auto;margin-bottom:auto;padding-right:1%;padding-left:1%;">
+          <i class="fa fa-user-circle" style="color:#00ff34"></i>
+        </span>				
     </header>
 
     <div>
@@ -58,7 +59,7 @@
                       @endforeach
                     </td>
                     <td>
-                      <form action="{{ route('Monitoring_Table_DominoQQ-game')}}">
+                      <form action="{{ route('Monitoring_Table_DominoQQ-game')}}" target="_blank">
                         <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                         <input type="hidden" name="name_table" value="{{ $tb->name }}">
                         <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
