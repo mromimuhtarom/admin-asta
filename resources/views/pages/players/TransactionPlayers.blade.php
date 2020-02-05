@@ -67,7 +67,7 @@
 								</div>
 								<div class="col">
                     <select name="game_name" id="gamename" class="form-control">
-												<option value="">{{ translate_MenuTransaction('Choose Game') }}</option>
+												<option value="">{{ translate_MenuTransaction('All Game') }}</option>
 												@foreach ($gamename as $gm)
 												<option value="{{ $gm->id }}">{{ $gm->desc }}</option>														
 												@endforeach

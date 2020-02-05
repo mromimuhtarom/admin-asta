@@ -118,19 +118,19 @@
             <table class="table table-bordered" id="tablerefreshed1">
               <thead>
                 <tr>
-                  <th class="th-sm">{{ TranslateMenuGame('Table Name') }}</th>
-                  <th class="th-sm">{{ TranslateMenuGame('Play Time') }}</th>
-                  <th class="th-sm">{{ TranslateMenuGame('Seat') }}</th>
+                  <th class="th-sm"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
+                  <th class="th-sm"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
+                  <th class="th-sm"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
                   <th class="th-sm">{{ TranslateMenuGame('Username Player') }}</th>
                   <th class="th-sm">{{ TranslateMenuGame('See Detail') }}</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($table as $tb)
+                @foreach ($tpkPlayersinvoice as $tb)
                   <tr>
-                    <td class="th-sm">{{ $tb->name }}</td>
+                    <td class="th-sm">{{ $tb->tablename }}</td>
                     <td class="th-sm">{{ strNormalFast($tb->timer) }}</td>
-                    <td class="th-sm">{{ $tb->max_player }}</td>
+                    <td class="th-sm">{{ $tb->maxplayer }}</td>
                     <td class="th-sm">
                       @foreach ($tb['TpkPlayer'] as $plyr)
                         {{ $plyr->username }},                          
@@ -138,8 +138,8 @@
                     </td>
                     <td class="th-sm">
                       <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
-                        <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
-                        <input type="hidden" name="name_table" value="{{ $tb->name }}">
+                        <input type="hidden" name="id_table" value="{{ $tb->tableid }}">
+                        <input type="hidden" name="name_table" value="{{ $tb->tablename }}">
                         <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
                       </form>  
                     </td>

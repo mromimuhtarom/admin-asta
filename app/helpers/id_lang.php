@@ -202,6 +202,7 @@ function translate_menuTransaction($menu){
         //PILIH AKSI
         'Choose Time'           =>  'Pilih waktu',
         'Choose Game'           =>  'Pilih Game',
+        'All Game'              =>  'Semua Game',
         'Today'                 =>  'Hari ini',
         'Day'                   =>  'Harian',
         'Week'                  =>  'Mingguan',
