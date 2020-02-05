@@ -11,20 +11,24 @@ class DominoQQMonitoringTableController extends Controller
     
     public function index()
     {
-        $table = DominoQTable::where('room_id', '=', 1)->get();
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoQ.dominoQQNovice', compact('table'));
+        $table                  = DominoQTable::where('room_id', '=', 1)->get();
+        $dominoQPlayerNovice    = DominoQTable::join('asta_db.dmq_player', 'asta_db.dmq_player.table_id', '=', 'asta_db.dmq_table.table_id')
+                                    ->where('room_id', '=', 1)
+                                    ->get();
+
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('table', 'dominoQPlayerNovice'));
     }
 
-    public function indexIntermediate()
+    public function Game(Request $request)
     {
-        $table = DominoQTable::where('room_id', '=', 2)->get();
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoQ.dominoQQIntermediate', compact('table'));
-    }
+        $idtable    =   $request->id_table;
+        $name_table =   $request->name_table;
 
-    public function indexPro()
-    {
-        $table = DominoQTable::where('room_id', '=', 3)->get();
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoQ.dominoQQPro', compact('table'));
+        $username   =   Session::get('username');
+        $operator   =   DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();
+        $password   =   $operator->userpass;
+
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('idtable', 'name_table', 'username', 'password'));
     }
 
     
@@ -45,35 +49,19 @@ class DominoQQMonitoringTableController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //

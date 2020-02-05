@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\BigTwoTable;
+use Session;
 
 class BigTwoMonitoringTableController extends Controller
 {
@@ -19,26 +20,23 @@ class BigTwoMonitoringTableController extends Controller
         $bgtPlayers = BigTwoTable::join('asta_db.bgt_player', 'asta_db.bgt_player.table_id', '=', 'asta_db.bgt_table.table_id')
                       ->where('room_id', '=', 1)
                       ->get();
-        return view('pages.game_asta.big_two.monitoring_table_big_two.novice', compact('table', 'bgtPlayers'));
+
+        return view('pages.game_asta.big_two.monitoring_table_big_two.bigtwotable', compact('table', 'bgtPlayers'));
     }
 
-    public function IntermadiateIndex()
+    public function Game()
     {
-        $table      = BigTwoTable::where('room_id', '=', 2)->get();
-        $bgtPlayers = BigTwoTable::join('asta_db.bgt_player', 'asta_db.bgt_player.table_id', '=', 'asta_db.bgt_table.table_id')
-                      ->where('room_id', '=', 2)
-                      ->get();
-        return view('pages.game_asta.big_two.monitoring_table_big_two.intermediate', compact('table', 'bgtPlayers'));        
+        $idtable    =   $request->id_table;
+        $name_table =   $request->name_tables;
+
+        $username   =   Session::get('username');
+        $operator   =   DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();
+        $password   =   $operator->userpass;
+
+        return view('pages.game_asta.big_two.monitoring_table_big_two.game_big_two', compact('idtable', 'name_table', 'username', 'password'));        
     }
 
-    public function ProIndex()
-    {
-        $table      = BigTwoTable::where('room_id', '=', 3)->get();
-        $bgtPlayers = BigTwoTable::join('asta_db.bgt_player', 'asta_db.bgt_player.table_id', '=', 'asta_db.bgt_table.table_id')
-                      ->where('room_id', '=', 3)
-                      ->get();
-        return view('pages.game_asta.big_two.monitoring_table_big_two.pro', compact('table', 'bgtPlayers'));                
-    }
+  
 
     /**
      * Show the form for creating a new resource.

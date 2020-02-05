@@ -11,21 +11,26 @@ class DominoSusunMonitoringTableController extends Controller
     
     public function index()
     {
-        $table  =   DominoSusunTable::where('room_id', '=', 1)->get();   
-        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusunNovice', compact('table'));
+        $table              =   DominoSusunTable::where('room_id', '=', 1)->get();
+        $dmsPlayerNovice    =   DominoSusunTable::join('asta_db.dms_player', 'asta_db.dms_player.table_id', '=', 'asta_db.dms_table.table_id')
+                                ->where('room_id', '=', 1)
+                                ->get();
+
+        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('table', 'dmsPlayerNovice'));
     }
 
-    public function indexIntermediate()
+    public function Game(Request $request)
     {
-        $table =    DominoSusunTable::where('room_id', '=', 2)->get();
-        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusunIntermediate', compact('table'));
+        $idtable    =   $request->id_table;
+        $name_table =   $request->name_table;
+
+        $username   =   Session::get('username');
+        $operator   =   DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();
+        $password   =   $operator->userpass;
+
+        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.game_dominosusun', compact('idtable', 'name_table', 'username', 'password'));
     }
 
-    public function indexPro()
-    {
-        $table =    DominoSusunTable::where('room_id', '=', 3)->get();
-        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusunPro', compact('table'));
-    }
 
     
     public function create()

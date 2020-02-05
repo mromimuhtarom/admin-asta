@@ -410,26 +410,12 @@ Route::middleware('authenticated')->group(function(){
                 });
             });
 
-            Route::group(['prefix'  =>  'Monitoring_Table_Big_Two'], function() {
-                
-                Route::group(['prefix' => 'Novice_Big_Two'], function() {
-                    Route::middleware('page_denied:Novice Big Two')->group(function(){
-                        Route::get('Novice_Big_Two-view', 'BigTwoMonitoringTableController@index')->name('Novice_Big_Two');
-                    });
+            
+            Route::group(['prefix' => 'Monitoring_Table_Big_Two'], function() {
+                Route::middleware('page_denied:Monitoring Table Big Two')->group(function(){
+                    Route::get('Monitoring_Big_Two-view', 'BigTwoMonitoringTableController@index')->name('Monitoring_Table_Big_Two');
+                    Route::get('Monitoring_Big_Two_Game', 'BigTwoMpnitoringTableController@Game')->name('Monitoring_Table_Big_Two-game');
                 });
-
-                Route::group(['prefix' => 'Intermediate_Big_Two'], function() {
-                    Route::middleware('page_denied:Intermediate Big Two')->group(function(){
-                        Route::get('Intermediate_Big_Two-view', 'BigTwoMonitoringTableController@IntermadiateIndex')->name('Intermediate_Big_Two');
-                    });
-                });
-
-                Route::group(['prefix' => 'Pro_Big_Two'], function() {
-                    Route::middleware('page_denied:Pro Big Two')->group(function(){
-                        Route::get('Pro_Big_Two-view', 'BigTwoMonitoringTableController@ProIndex')->name('Pro_Big_Two');
-                    });
-                });
-
             });
         });
 
@@ -489,10 +475,8 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix'  =>  'Monitoring_Table_DominoS'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino Susun')->group(function(){
-                    
-                    Route::get('MonitoringTableNovice-view', 'DominoSusunMonitoringTableController@index')->name('Novice_DominoS');
-                    Route::get('MonitoringTableIntermediate-view', 'DominoSusunMonitoringTableController@indexIntermediate')->name('Intermediate_DominoS');
-                    Route::get('MonitoringTablePro-view', 'DominoSusunMonitoringTableController@indexPro')->name('Pro_DominoS');
+                   Route::get('Monitoring_Domino_Susun-view', 'DominoSusunMonitoringTableController@index')->name('Monitoring_Table_DominoS');
+                   Route::get('Monitoring_Domino_Susun-Game', 'DominoSusunMonitoringTableController@Game')->name('Monitoring_Table_DominoS-game'); 
                 });
             });
         });
@@ -553,9 +537,8 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix' => 'Monitoring_Table_DominoQ'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino QQ')->group(function(){
-                    Route::get('MonitoringTableNovice-view', 'DominoQQMonitoringTableController@index')->name('Novice_DominoQ');
-                    Route::get('MonitoringTableIntermediateview', 'DominoQQMonitoringTableController@indexIntermediate')->name('Intermediate_DominoQ');
-                    Route::get('MonitoringTableProView', 'DominoQQMonitoringTableController@indexPro')->name('Pro_DominoQ');
+                    Route::get('Monitoring_Domino_QQ-view', 'DominoQQMonitoringTableController@index')->name('Monitoring_Table_DominoQ');
+                    Route::get('Monitoring_Domino_QQ-Game', 'DominoQQMonitoringTableController@Game')->name('Monitoring_Table_DominoQQ-game');
                 });
             });
 
