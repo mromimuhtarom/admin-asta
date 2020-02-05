@@ -24,7 +24,7 @@ class BigTwoMonitoringTableController extends Controller
         return view('pages.game_asta.big_two.monitoring_table_big_two.bigtwotable', compact('table', 'bgtPlayers'));
     }
 
-    public function Game()
+    public function Game(Request $request)
     {
         $idtable    =   $request->id_table;
         $name_table =   $request->name_tables;
@@ -33,7 +33,7 @@ class BigTwoMonitoringTableController extends Controller
         $operator   =   DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();
         $password   =   $operator->userpass;
 
-        return view('pages.game_asta.big_two.monitoring_table_big_two.game_big_two', compact('idtable', 'name_table', 'username', 'password'));        
+        return view('pages.game_asta.big_two.monitoring_table_big_two.game_bigtwo', compact('idtable', 'name_table', 'username', 'password'));        
     }
 
   

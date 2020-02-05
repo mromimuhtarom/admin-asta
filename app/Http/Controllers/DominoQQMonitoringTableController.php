@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\DominoQTable;
+use Session;
 
 class DominoQQMonitoringTableController extends Controller
 {
@@ -15,7 +16,6 @@ class DominoQQMonitoringTableController extends Controller
         $dominoQPlayerNovice    = DominoQTable::join('asta_db.dmq_player', 'asta_db.dmq_player.table_id', '=', 'asta_db.dmq_table.table_id')
                                     ->where('room_id', '=', 1)
                                     ->get();
-
         return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('table', 'dominoQPlayerNovice'));
     }
 
@@ -28,7 +28,7 @@ class DominoQQMonitoringTableController extends Controller
         $operator   =   DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();
         $password   =   $operator->userpass;
 
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('idtable', 'name_table', 'username', 'password'));
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.games_dominoqq', compact('idtable', 'name_table', 'username', 'password'));
     }
 
     
