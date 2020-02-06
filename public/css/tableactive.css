@@ -9,3 +9,16 @@
 .color-fontactive a {
     color: #827cfb !important;
 }
+
+.btntablearrow {
+    width: 20px;
+    height: 30px;
+    position: relative;
+}
+
+.icontable {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

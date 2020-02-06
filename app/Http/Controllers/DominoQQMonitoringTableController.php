@@ -53,7 +53,7 @@ class DominoQQMonitoringTableController extends Controller
         $operator   =   DB::table('operator')->where('op_id', '=', Session::get('userId'))->first();
         $password   =   $operator->userpass;
 
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.games_dominoqq', compact('idtable', 'name_table', 'username', 'password'));
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.games_dominoqq', compact('idtable', 'username', 'password'));
     }
 
     

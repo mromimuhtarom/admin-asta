@@ -50,7 +50,7 @@ class AstaPokerMonitoringTableController extends Controller
         $onlinetpk = TpkPlayer::all();
 
 
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'table', 'tpkPlayersnovice', 'sortingorder', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'tpkPlayersnovice', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
     }
 
     public function indexIntermediate(Request $request)
@@ -84,7 +84,7 @@ class AstaPokerMonitoringTableController extends Controller
         $onlinetpk = TpkPlayer::all();
 
 
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'table', 'sortingorder', 'tpkPlayersintermediate', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'tpkPlayersintermediate', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
     }
 
     public function indexPro(Request $request)
@@ -117,7 +117,7 @@ class AstaPokerMonitoringTableController extends Controller
         $onlinetpk = TpkPlayer::all();
 
 
-        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'table', 'sortingorder', 'tpkPlayersPro', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
+        return view('pages.game_asta.asta_poker.monitoring_table_asta_poker.astatable', compact('checked', 'tpkPlayersPro', 'onlineinvoice', 'onlineintermediate', 'onlinepro', 'onlinetpk'));
     }
 
     public function Game(Request $request)
