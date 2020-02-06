@@ -698,6 +698,7 @@ Route::middleware('authenticated')->group(function(){
             Route::group(['prefix' => 'Transaction_Day_Reseller'], function() {
                 Route::middleware('page_denied:Transaction Day Reseller')->group(function() {
                     Route::get('TransactionDayReseller-view', 'ResellerController@TransactionDayReseller')->name('Transaction_Day_Reseller');
+                    Route::get('TransactionDayReseller-search', 'ResellerController@searchTransactionDayReseller')->name('Transaction_Day_Reseller-search');
                 });
             });
 
@@ -706,6 +707,13 @@ Route::middleware('authenticated')->group(function(){
                     Route::get('RequestTransaction-view', 'ResellerController@RequestTransaction')->name('Request_Transaction');
                     Route::post('RequestTransaction-approve', 'ResellerController@RequestTransactionApprove')->name('RequestTransaction-Approve');
                     Route::post('RequestTransaction-decline', 'ResellerController@RequestTransactionDecline')->name('RequestTransaction-Decline');
+                });
+            });
+
+            Route::group(['prefix' => 'Add_Transaction_Reseller'], function() {
+                Route::middleware('page_denied:Add Transaction Reseller')->group(function() {
+                    Route::get('AddTransactionReseller-view', 'ResellerController@AddTransactionReseller')->name('Add_Transaction_Reseller');
+                    Route::get('AddTransactionReseller-search', 'ResellerController@searchAddTransactionReseller')->name('Add_Transaction_Reseller-search');
                 });
             });
 

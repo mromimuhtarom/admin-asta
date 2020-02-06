@@ -102,6 +102,7 @@ function translate_menu($menu){
       'Reseller-Transaction'          => 'Transaksi Agen',
       'Transaction_Day_Reseller'      => 'Transaksi Harian Agen',
       'Request_Transaction'           => 'Transaksi permintaan',
+      'Add_Transaction_Reseller'      => 'Tambah Transaksi',
       'Report_Transaction'            => 'Laporan Transaksi',
       'Balance_Reseller'              => 'Saldo agen',
       'Item_Store_Reseller'           => 'Toko item agen',
@@ -653,6 +654,7 @@ function TranslateReseller($menu){
         'Weekly'                =>  'Mingguan',
         'Monthly'               =>  'Bulanan',
         'Create new'            =>  'Buat baru',
+        'Username / Reseller ID'   =>  'Nama Agent / ID Agen'
  
 
     
