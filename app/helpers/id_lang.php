@@ -100,6 +100,7 @@ function translate_menu($menu){
       'Reseller'                      => 'Agen',
       'List_Reseller'                 => 'Daftar agen',
       'Reseller-Transaction'          => 'Transaksi Agen',
+      'Transaction_Day_Reseller'      => 'Transaksi Harian Agen',
       'Request_Transaction'           => 'Transaksi permintaan',
       'Report_Transaction'            => 'Laporan Transaksi',
       'Balance_Reseller'              => 'Saldo agen',
