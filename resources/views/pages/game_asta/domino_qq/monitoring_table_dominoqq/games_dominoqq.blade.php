@@ -18,7 +18,6 @@
         float: right;
     }
 </style>
-{{ $username }}
   <script>
     var gameInstance = UnityLoader.instantiate("gameContainer", "/game/dmq/Build/DMQWeb.json", {onProgress: UnityProgress});
     
