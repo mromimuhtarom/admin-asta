@@ -416,6 +416,8 @@ Route::middleware('authenticated')->group(function(){
             Route::group(['prefix' => 'Monitoring_Table_Big_Two'], function() {
                 Route::middleware('page_denied:Monitoring Table Big Two')->group(function(){
                     Route::get('Monitoring_Big_Two-view', 'BigTwoMonitoringTableController@index')->name('Monitoring_Table_Big_Two');
+                    Route::get('Monitor_Big_Two-intermediate', 'BigTwoMonitoringTableController@indexIntermediate')->name('Monitoring_Table_Big_Two-intermediate'); 
+                    Route::get('Monitor_Big_Two-pro', 'BigTwoMonitoringTableController@indexPro')->name('Monitoring_Table_Big_Two-pro'); 
                     Route::get('Monitoring_Big_Two_Game', 'BigTwoMonitoringTableController@Game')->name('Monitoring_Table_Big_Two-game');
                 });
             });

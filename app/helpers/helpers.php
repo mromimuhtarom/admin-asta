@@ -258,6 +258,12 @@ function tpkplayeronline($table_id)
   return $a;
 }
 
+function bgtplayeronline($table_id)
+{
+  $a = DB::table('bgt_player')->where('table_id', '=', $table_id)->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.bgt_player.user_id')->get();
+  return $a;
+}
+
 function iconsorting($fieldname)
 {
   if(isset($_GET['namecolumn'])):
