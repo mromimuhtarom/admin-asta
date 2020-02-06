@@ -32,10 +32,106 @@
                     <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">{{ TranslateMenuGame('Refresh') }}</a>
                   </td>
                 </tr>
-                <tr
+                <tr>
+                  <td>
+                    <input id="autorefresh"@if($checked == 'checked') checked @endif type="checkbox" name="autorefresh" class="deletepermission">
+                    <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('Auto Refresh')}}</div>
+                  </td>
+                </tr>
                </table>
               </div>
              
+              <div class="@if(Request::is('/Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-view*')) tableactive @endif" style="border:2px solid black;width:auto;float:left;margin-right:5%;">
+                <table border="0" width="100%" style="">
+                  <tr class="border-bottom" style="padding-left:2%;padding-right:2%;">
+                    <td class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-view*')) color-fontactive @endif">
+                      <a href="{{ route('Monitoring_Table_DominoQ') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Novice') }}0</b></a>
+                    </td>
+                  </tr>
+                  <tr style="padding-left:2%; padding-right:2%;">
+                    <td valign="top">
+                      <table>
+                        <tr>
+                          <td>
+                            <div class="" style="float:left;margin-right:4%;"><{{ TranslateMenuGame('Online') }}/div>
+                          </td>
+                          <td>
+                            <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:4%;">{{ count($onlineinvoice) }}</div>
+                          </td>
+                          <td>
+                            <div style="float:left;">{{ TranslateMenuGame('Players') }}</div>
+                          </td>
+                          <div style="float:right;margin-left:10%;">
+                            <form action="{{ route('Monitoring_Table_DominoQ') }}">
+                              <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">                            
+                              <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('/Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-view*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable" style=""></i></button>
+                            </form>
+                          </div>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="@if(Request::is('/Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-Intermediate*')) tableactive @endif" style="border:2px solid black; width:auto; float:left;margin-right:5%;">
+                <table border="0" width="100%">
+                  <tr class="border-bottom" style="padding-left:5%;padding-right:5%;">
+                    <td class="@if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*')) color-fontactive @endif">
+                      <a href="{{ route('Monitoring_Table_DominoQ-intermediate') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Intermediate') }}</b></a>
+                    </td>
+                  </tr>
+                  <tr style="padding-left:5%;padding-right:5%;">
+                    <td valign="top">
+                      <table>
+                        <tr>
+                          <td>
+                            <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                          </td>
+                          <td>
+                            <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlineintermediate) }}</div>
+                          </td>
+                          <td>
+                            <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                          </td>
+                          <td>
+                            <div style="float:right">
+                              <form action="{{ route('Monitoring_Table_DominoQ-intermediate')}}">
+                                <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">
+                                <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Reques::is('Game/Asta-Poker/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-intermediate*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"><i></button>
+                              </form>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="@if(Request::is('Game/Asta-Poker/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-intermediate*')) tableactive @endif" style="border:2px solid black;width:auto;float:left">
+                <table border="0" width="100%">
+                  <tr>
+                    <td>
+                      <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                    </td>
+                    <td>
+                      <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlinepro) }}</div> 
+                    </td>
+                    <td>
+                      <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                    </td>
+                    <td>
+                      <div style="float:right;">
+                        <form action="{{ root('Monitoring_Table_DominoQ-pro')}}"></form>
+
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+              </div>
             </div>
             <!-- End Button tambah data baru -->
           </div>

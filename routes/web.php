@@ -540,6 +540,8 @@ Route::middleware('authenticated')->group(function(){
             Route::group(['prefix' => 'Monitoring_Table_DominoQ'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino QQ')->group(function(){
                     Route::get('Monitoring_Domino_QQ-view', 'DominoQQMonitoringTableController@index')->name('Monitoring_Table_DominoQ');
+                    Route::get('Monitoring_Domino_QQ-intermediate', 'DominoQQMonitoringTableController@indexIntermediate')->name('Monitoring_Table_DominoQ-intermediate');
+                    Route::get('Monitoring_Domino_QQ-pro', 'DominoQQMonitoringTableController@indexPro')->name('Monitoring_Table_DominoQ-pro');
                     Route::get('Monitoring_Domino_QQ-Game', 'DominoQQMonitoringTableController@Game')->name('Monitoring_Table_DominoQQ-game');
                 });
             });
