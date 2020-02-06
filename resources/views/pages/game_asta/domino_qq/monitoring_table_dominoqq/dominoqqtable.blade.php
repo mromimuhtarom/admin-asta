@@ -8,11 +8,12 @@
 
 @section('content')
 <!-- Form Category -->
+<link rel="stylesheet" href="/css/tableactive.css">
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header class="border border-light">
         <h2><strong><i class="fa fa-gamepad"></i>Domino QQ Table</strong></h2>
         <span style="background-color:#fffffe;margin-right:1%;margin-left:1%;color:black;margin-top:auto;margin-bottom:auto;padding-right:1%;padding-left:1%;">
-          <i class="fa fa-user-circle" style="color:#00ff34"></i>
+          <i class="fa fa-user-circle" style="color:#00ff34"></i> {{ count($onlinedmq)}}
         </span>				
     </header>
 
@@ -22,11 +23,17 @@
         <div class="widget-body-toolbar">
           <div class="row">
             <!-- Button tambah data baru -->
-            <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+            <div class="col">
               <!-- Pertama -->
-              <div style="border:1px solid black;">
-               
-                <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">Refresh</a>
+              <div style="float:left;margin-right:5%;">
+               <table border="0">
+                <tr>
+                  <td>
+                    <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">{{ TranslateMenuGame('Refresh') }}</a>
+                  </td>
+                </tr>
+                <tr
+               </table>
               </div>
              
             </div>

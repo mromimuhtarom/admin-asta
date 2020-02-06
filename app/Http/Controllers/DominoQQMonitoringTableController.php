@@ -10,13 +10,39 @@ use Session;
 class DominoQQMonitoringTableController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $table                  = DominoQTable::where('room_id', '=', 1)->get();
-        $dominoQPlayerNovice    = DominoQTable::join('asta_db.dmq_player', 'asta_db.dmq_player.table_id', '=', 'asta_db.dmq_table.table_id')
-                                    ->where('room_id', '=', 1)
+        $checked                =   $request->checkauto;
+
+        // $table                  = DominoQTable::where('room_id', '=', 1)->get();
+        //room Novice / Pemula
+        $onlinenovice    = DominoQPlayer::join('DominoQTable', 'DominoQTable.table_id', '=', 'DominoQPlayer.table_id')
+                                    ->where('room_id', '=', 2)
                                     ->get();
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('table', 'dominoQPlayerNovice'));
+
+        $dmqPlayerNovice = DominoQTable::where('room_id', '=', 2)
+                            ->paginate(20);
+
+        $dmqPlayersNovice->appends($request->all());
+
+        //room Intermediate / Menengah
+        $onlineintermediate =   DominoQPlayer::join('DominoQTable', 'DominoQTable.table_id', '=', 'DominoQPlayer.table_id')
+                                ->where('room_id', '=', 4)
+                                ->get();
+
+        //room Pro / Ahli
+        $onlinepro  =   DominoQPlayer::join('DominoQTable', 'DominoQTable.table_id', '=', 'DominoQPlayer.table_id')
+                        ->where('room_id', '=', 6)
+                        ->get();
+        
+        $dmqPlayersPro  =   DominoQTable::where('room_id', '=', 6)
+                            ->paginate(20);
+        $dmqPlayersPro->appends($request->all());
+
+        //all online
+        $onlinedmq  =   DominoQPlayer::all();
+
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('checked', 'table', 'dominoQPlayerNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedmq'));
     }
 
     public function Game(Request $request)
