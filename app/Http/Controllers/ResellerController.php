@@ -492,6 +492,11 @@ public function detailTransaction(Request $request, $month, $year)
     {
         return view('pages.reseller.transaction.transaction_day_reseller');
     }
+
+    public function searchTransactionDayReseller(Request $request)
+    {
+        
+    }
 //------ End Index Transaction Day Reseller --------//
 //****************************************** Menu Transaction Day Reseller ******************************************//
 
