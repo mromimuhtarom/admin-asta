@@ -69,7 +69,7 @@
                             <div style="float:right;margin-left:10%;">
                               <form action="{{ route('Monitoring_Table_Asta_Poker') }}">
                                 <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">                            
-                                <button type="submit" class="btn bg-blue-light text-white @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-view*')) btnactivetable @endif"><i class="fa fa-arrow-down"></i></button>
+                                <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-view*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable" style=""></i></button>
                               </form>
                             </div>
                           </td>
@@ -104,7 +104,7 @@
                             <div style="float:right">
                               <form action="{{ route('Monitoring_Table_Asta_Poker-intermediate') }}">
                                 <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">                            
-                                <button type="submit" class="btn bg-blue-light text-white @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*')) btnactivetable @endif"><i class="fa fa-arrow-down"></i></button>
+                                <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"></i></button>
                               </form>
                             </div>
                           </td>
@@ -140,7 +140,7 @@
                               <div style="float:right;">
                                 <form action="{{ route('Monitoring_Table_Asta_Poker-pro') }}">
                                   <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">
-                                  <button type="submit" class="btn bg-blue-light text-white @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-pro*')) btnactivetable @endif"><i class="fa fa-arrow-down"></i></button>
+                                  <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-pro*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"></i></button>
                                 </form>
                               </div>
                             </td>
