@@ -20,7 +20,7 @@ class DominoQQMonitoringTableController extends Controller
                                     ->where('room_id', '=', 2)
                                     ->get();
 
-        $dmqPlayerNovice = DominoQTable::where('room_id', '=', 2)
+        $dmqPlayersNovice = DominoQTable::where('room_id', '=', 2)
                             ->paginate(20);
 
         $dmqPlayersNovice->appends($request->all());

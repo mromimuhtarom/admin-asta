@@ -77,7 +77,7 @@
               <div class="@if(Request::is('/Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-Intermediate*')) tableactive @endif" style="border:2px solid black; width:auto; float:left;margin-right:5%;">
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:5%;padding-right:5%;">
-                    <td class="@if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*')) color-fontactive @endif">
+                    <td class="@if(Request::is('/Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-Intermediate*')) color-fontactive @endif">
                       <a href="{{ route('Monitoring_Table_DominoQ-intermediate') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Intermediate') }}</b></a>
                     </td>
                   </tr>
@@ -96,7 +96,7 @@
                           </td>
                           <td>
                             <div style="float:right">
-                              <form action="{{ route('Monitoring_Table_DominoQ-intermediate')}}">
+                              <form action="{{ route('Monitoring_Table_DominoQQ-intermediate')}}">
                                 <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">
                                 <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Reques::is('Game/Asta-Poker/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-intermediate*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"><i></button>
                               </form>
@@ -124,8 +124,10 @@
                     </td>
                     <td>
                       <div style="float:right;">
-                        <form action="{{ root('Monitoring_Table_DominoQ-pro')}}"></form>
-
+                        <form action="{{ root('Monitoring_Table_DominoQ-pro')}}">
+                          <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">
+                          <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-pro*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"></i></button>
+                        </form>
                       </div>
                     </td>
                   </tr>
@@ -137,9 +139,72 @@
           </div>
         </div>
 
-    
+        @if(Request::is('Game/Asta-Poker/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-view*'))
         <div class="custom-scroll table-responsive" style="height:800px;">
           <div class="table-outer">
+            <div class="row">
+              <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                {{ Translate_menuPlayers('Total Record Entries is') }} {{ $dmqPlayerNovice->total() }}
+            </div>
+            </div>
+            <table class="table table-bordered" id="tablerefreshed1">
+              <thead>
+                <tr>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ( $dmqPlayersNovice as $tb)
+                  @if(dmqplayeronline($tb->table_id) as $plyr)
+                    <tr>
+                      <td class="th-sm">{{ $tb->name }}</td>
+                      <td class="th-sm">{{ strNormalFast($tb->timer) }}</td>
+                      <td class="th-sm">{{ $tb_max_player }}</td>
+                      <td class="th-sm">
+                        @foreach (dmqplayeronline($tb->table_id) as $plyr)
+                          <a href="{{ route('chip_detail') }}?inputPlayer={{ $plyr->user_id }}">{{ $plyr->username }}</a>, &nbsp;   
+                        @endforeach
+                      </td>
+                      <td class="th-sm">
+                        <form action="{{ route('Monitoring_Table_DominoQ-game')}}" target="_blank">
+                          <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
+                          <input type="hidden" name="name_table" value="{{ $tb->name }}">
+                          <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                        </form>
+                      </td>
+                    </tr>
+                  @else
+                    <tr>
+                      <td class="th-sm">{{ $tb->name }}</td>
+                      <td class="th-sm">{{ strNormalFast($tb->timer) }}</td>
+                      <td class="th-sm">
+                        @foreach(dmqplayeronline($tb->table_id) as $plyr)
+                          <a href="{{ route('chip_detail') }}?inputPlayer={{ $plyr->user_id }}">{{ $plyr->username }}</a>,&nbsp;
+                        @endforeach
+                      </td>
+                      <td class="th-sm">
+                        <form action="{{ route('Monitoring_Table_DominoQ-game') }}">
+                          <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
+                          <input type="hidden" name="name_table" value="{{ $tb->name }}">
+                          <button type="submit" class="btn bg-blue-light text-white"{{ TranslateMenuGame('See') }}></button>
+                        </form>
+                      </td>
+                    </tr>
+                  @endif
+                  @endforeach
+              </tbody>
+            </table>
+          </div>
+          <div style="display: flex;justify-content: center;">{{ $dmqPlayersNovice->links() }}</div>
+        </div>
+      @elseif(Request::is('Game/Asta-Poker/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-view*'))
+        <div class="custom-scroll table-responsive" style="height:800px;">
+          <div class="table-outer" id="Novice">
+            
             <table class="table table-bordered" id="tablerefreshed1">
               <thead>
                 <tr>
@@ -162,7 +227,7 @@
                       @endforeach
                     </td>
                     <td>
-                      <form action="{{ route('Monitoring_Table_DominoQQ-game')}}" target="_blank">
+                      <form action="{{ route('Monitoring_Table_DominoQ-game')}}" target="_blank">
                         <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                         <input type="hidden" name="name_table" value="{{ $tb->name }}">
                         <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>

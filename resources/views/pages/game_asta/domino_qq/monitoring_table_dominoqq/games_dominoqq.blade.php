@@ -11,39 +11,43 @@
 
 
 <style> /*wew*/
-    #gameContainer{
-        float: left;
-    }
-    #main{
-        float: right;
-    }
+  #gameContainer{
+      float: left;
+  }
+  #main{
+      float: right;
+  }
 </style>
-  <script>
-    var gameInstance = UnityLoader.instantiate("gameContainer", "/game/dmq/Build/DMQWeb.json", {onProgress: UnityProgress});
-    
-    function OnAppReady(){
-      console.log("### application is loaded");
-      
-      var _username = '{{ $username }}';
-      var _password = '{{ $password }}';
-      var _idtable = {{ $idtable }};
+<script>
+  var gameInstance = UnityLoader.instantiate("gameContainer", "/game/dmq/Build/DMQWeb.json", {onProgress: UnityProgress});
+  
+  function OnAppReady(){
+    console.log("### application is loaded");
+    // var nametable = "huawww";
+    // var idtable = '<?php echo $_SESSION['bebas'];?>';
+        
+    // console.log("========== ini PARAM 1.1");
+    // var param = {id: idtable, name: nametable};
+    var _username = '{{ $username }}';
+    var _password = '{{ $password }}';
+    var _idtable = {{ $idtable }};
 
-      var param = { username: _username, password: _password, roomid: _idtable };
-      console.log("========== ini PARAM 2", param);
-      console.log("========== ini PARAM 2 str ; " + JSON.stringify(param));
-      gameInstance.SendMessage("NetworkManager", "GetDataFromWeb", JSON.stringify(param)); 
-    }
-    // function f1(value){
-    //       console.log("========== ini PARAM 1");
-    //       var nametable = value.options[value.selectedIndex].text;
-    //       var idtable = value.options[value.selectedIndex].value;
-    //       console.log("========== ini PARAM 1.1");
-    //       var param = {id: idtable, name: nametable};
-    //       console.log("========== ini PARAM 2", param);
-    //       console.log("========== ini PARAM 2 str ; " + JSON.stringify(param));
-    //       gameInstance.SendMessage("GameNetwork", "GetDataFromWeb", JSON.stringify(param)); 
-    // } /*wew*/
-  </script>
+    var param = { username: _username, password: _password, roomid: _idtable };
+    console.log("========== ini PARAM 2", param);
+    console.log("========== ini PARAM 2 str ; " + JSON.stringify(param));
+    gameInstance.SendMessage("NetworkManager", "GetDataFromWeb", JSON.stringify(param)); 
+  }
+  // function f1(value){
+  //       console.log("========== ini PARAM 1");
+  //       var nametable = value.options[value.selectedIndex].text;
+  //       var idtable = value.options[value.selectedIndex].value;
+  //       console.log("========== ini PARAM 1.1");
+  //       var param = {id: idtable, name: nametable};
+  //       console.log("========== ini PARAM 2", param);
+  //       console.log("========== ini PARAM 2 str ; " + JSON.stringify(param));
+  //       gameInstance.SendMessage("GameNetwork", "GetDataFromWeb", JSON.stringify(param)); 
+  // } /*wew*/
+</script>
 
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
