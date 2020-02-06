@@ -20,7 +20,8 @@ use App\ConfigText;
 use App\ItemsGold;
 use App\ItemPoint;
 use File;
-use Storage;    
+use Storage; 
+use Illuminate\Support\Facades\Input;   
 
 class ResellerController extends Controller
 {
@@ -490,15 +491,124 @@ public function detailTransaction(Request $request, $month, $year)
 //------ Index Transaction Day Reseller --------//
     public function TransactionDayReseller() 
     {
-        return view('pages.reseller.transaction.transaction_day_reseller');
-    }
-
-    public function searchTransactionDayReseller(Request $request)
-    {
-        
+        $datenow = Carbon::now('GMT+7')->toDateString();
+        return view('pages.reseller.transaction.transaction_day_reseller', compact('datenow'));
     }
 //------ End Index Transaction Day Reseller --------//
+
+// ---- Search TransactionDayReseller -------//
+    public function searchTransactionDayReseller(Request $request)
+    {
+        $time       = $request->choose_time;
+        $minDate    = $request->inputMinDate;
+        $maxDate    = $request->inputMaxDate;
+        $namecolumn = $request->namecolumn;
+        $datenow    = Carbon::now('GMT+7')->toDateString();        
+    }
+// ---- End Search TransactionDayReseller -------//
 //****************************************** Menu Transaction Day Reseller ******************************************//
+
+
+
+
+//****************************************** Add Transaction Reseller ******************************************//
+//------ Index Add Transaction Reseller --------//
+    public function AddTransactionReseller() 
+    {
+        return view('pages.reseller.transaction.add_transaction_reseller');
+    }
+//------ End Index Transaction Day Reseller --------//
+
+// ---- Search Add Transaction Reseller -------//
+    public function searchAddTransactionReseller(Request $request)
+    {
+        $searhUser   = $request->inputPlayer;
+        $sorting     = $request->sorting;
+        $namecolumn  = $request->namecolumn;
+        $getUsername = Input::get('inputPlayer');
+        $menu        = MenuClass::menuName('Transaction');
+        $mainmenu    = MenuClass::menuName('Add Transaction');
+
+        //Sorting
+        if($sorting == NULL): 
+          $sorting = 'desc';
+        endif;
+        
+        //Column name 
+        if($namecolumn == NULL):
+          $namecolumn = 'asta_db.reseller.reseller_id';
+        endif;
+
+        // for sorting data
+        if(Input::get('sorting') === 'asc'):
+          $sortingorder = 'desc';
+        else:
+          $sortingorder = 'asc';
+        endif;
+
+
+        // query database
+        $currency_agen = Reseller::orderby($namecolumn, $sorting);
+
+
+        // search with username or user id
+        if($searhUser == NULL):
+            $add_transaction = $currency_agen->paginate(20); 
+        elseif(!is_numeric($searhUser)):
+            $add_transaction = $currency_agen->where('asta_db.user.username', '=', $searhUser)
+                               ->paginate(20); 
+        elseif(is_numeric($searhUser)):
+            $add_transaction = $currency_agen->where('asta_db.user_stat.user_id', '=', $searhUser)
+                               ->paginate(20);             
+        endif;
+
+        // for action name
+        $action       = ConfigText::select(
+                          'name',
+                          'value'
+                        ) 
+                        ->where('id', '=', 11)
+                        ->first();
+
+        $value               = str_replace(':', ',', $action->value);
+        $actionbalance       = explode(",", $value);
+        $actblnc = [
+          $actionbalance[10] => $actionbalance[11],
+          $actionbalance[12] => $actionbalance[13],
+          $actionbalance[20] => $actionbalance[21]
+        ];  
+
+        $add_transaction->appends($request->all());
+
+        return view('pages.reseller.transaction.add_transaction_reseller', compact('add_transaction', 'getUsername', 'sortingorder', 'actblnc', 'menu', 'mainmenu'));
+    }
+// ---- End Search Add Transaction Reseller -------//
+
+// --- UpdateGold Reseller ----//
+    public function UpdateGoldReseller(Reqeust $request)
+    {
+        $agen_id       = $request->agen_id;
+        $columnname    = $request->columnname;
+        $valuecurrency = $request->currency;
+        $type          = $request->type;
+        $plusminus     = $request->operator_aritmatika;
+        $description   = $request->description;
+
+        $goldreseller = Reseller::where('reseller_id', '=', $agen_id)->first();
+        if($plusminus == "+"):
+            $totalbalance = $goldreseller->gold + $valuecurrency;
+        elseif($plusminus == "-"):
+            $totalbalance = $goldreseller->gold - $valuecurrency;
+        endif;
+        Reseller::where('reseller_id', '=', $agen_id )->update([
+            'gold' => $totalbalance
+        ]);
+        return back()->with('success', alertTranslate('Successful update'));
+    }
+// --- End UpdateGold Reseller ----//
+
+
+//****************************************** Add Transaction Reseller ******************************************//
 
 
 

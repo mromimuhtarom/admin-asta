@@ -24,32 +24,13 @@
   </div>
 </div>
 @endif
+<!-- Search -->
 <div class="search bg-blue-dark" style="margin-bottom:3%;">
     <div class="table-header w-100 h-100">
 			<form action="{{ route('TransactionDay-search')}}">
             <div class="row h-100 w-100">
-                {{-- <div class="col">
-                    <select name="choose_time" id="time" class="form-control">
-												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
-												<option value="today">{{ translate_MenuTransaction('Today') }}</option>
-												<option value="week">{{ translate_MenuTransaction('Week') }}</option>
-												<option value="month">{{ translate_MenuTransaction('Month') }}</option>
-												<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
-                    </select>
-                </div>
-                <div class="col">
-										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="">
-                </div>
-                <div class="col">
-                    <input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="">
-                </div>
-                <div class="col">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
-								</div> --}}
+
 								@if (Request::is('Transaction/Transaction_Day/Transaction_Day-search*'))
-									{{-- <div class="col">
-										<input type="text" class="form-control" id="username" placeholder="Player ID / Username" name="inputPlayer" value="{{ $searchUser }}">
-									</div> --}}
 									<div class="col">
 										<select name="choose_time" id="time" class="form-control">
 											<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
@@ -92,6 +73,9 @@
         </form>
     </div>
 </div>
+<!-- End Search -->
+
+
 @if (Request::is('Transaction/Transaction_Day/Transaction_Day-search*'))
 {{-- @if ($time == "today") --}}
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
