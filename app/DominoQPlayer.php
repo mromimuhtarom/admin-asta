@@ -12,7 +12,4 @@ class DominoQPlayer extends Model
 
     public $timestamps      =   false;
 
-    public function DominoQTable(){
-        return $this->belongsTo(DominoQTable::class, 'table_id');
-    }
 }

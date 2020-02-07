@@ -480,6 +480,8 @@ Route::middleware('authenticated')->group(function(){
             Route::group(['prefix'  =>  'Monitoring_Table_DominoS'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino Susun')->group(function(){
                    Route::get('Monitoring_Domino_Susun-view', 'DominoSusunMonitoringTableController@index')->name('Monitoring_Table_DominoS');
+                   Route::get('Monitoring_Domino_Susun-intermediate', 'DominoSusunMonitoringTableController@indexIntermediate')->name('Monitoring_Table_DominoS-intermediate');
+                   Route::get('Monitoring_Domino_Susun-pro', 'DominoSusunMonitoringTableController@indexPro')->name('Monitoring_Table_DominoS-pro');
                    Route::get('Monitoring_Domino_Susun-Game', 'DominoSusunMonitoringTableController@Game')->name('Monitoring_Table_DominoS-game'); 
                 });
             });

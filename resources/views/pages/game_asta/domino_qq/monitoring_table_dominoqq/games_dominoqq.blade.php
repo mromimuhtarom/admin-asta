@@ -23,11 +23,7 @@
   
   function OnAppReady(){
     console.log("### application is loaded");
-    // var nametable = "huawww";
-    // var idtable = '<?php echo $_SESSION['bebas'];?>';
-        
-    // console.log("========== ini PARAM 1.1");
-    // var param = {id: idtable, name: nametable};
+    
     var _username = '{{ $username }}';
     var _password = '{{ $password }}';
     var _idtable = {{ $idtable }};

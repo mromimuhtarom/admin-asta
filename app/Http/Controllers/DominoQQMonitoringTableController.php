@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\DominoQTable;
 use Session;
+use App\DominoQPlayer;
+
 
 class DominoQQMonitoringTableController extends Controller
 {
@@ -16,33 +18,93 @@ class DominoQQMonitoringTableController extends Controller
 
         // $table                  = DominoQTable::where('room_id', '=', 1)->get();
         //room Novice / Pemula
-        $onlinenovice    = DominoQPlayer::join('DominoQTable', 'DominoQTable.table_id', '=', 'DominoQPlayer.table_id')
-                                    ->where('room_id', '=', 2)
+        $onlinenovice    = DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                                    ->where('room_id', '=', 1)
                                     ->get();
 
-        $dmqPlayersNovice = DominoQTable::where('room_id', '=', 2)
+        $dmqPlayersNovice = DominoQTable::where('room_id', '=', 1)
                             ->paginate(20);
+                
 
         $dmqPlayersNovice->appends($request->all());
 
         //room Intermediate / Menengah
-        $onlineintermediate =   DominoQPlayer::join('DominoQTable', 'DominoQTable.table_id', '=', 'DominoQPlayer.table_id')
-                                ->where('room_id', '=', 4)
+        $onlineintermediate =   DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                                ->where('room_id', '=', 2)
                                 ->get();
 
         //room Pro / Ahli
-        $onlinepro  =   DominoQPlayer::join('DominoQTable', 'DominoQTable.table_id', '=', 'DominoQPlayer.table_id')
-                        ->where('room_id', '=', 6)
+        $onlinepro  =   DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                        ->where('room_id', '=', 3)
                         ->get();
         
-        $dmqPlayersPro  =   DominoQTable::where('room_id', '=', 6)
+        $dmqPlayersPro  =   DominoQTable::where('room_id', '=', 3)
                             ->paginate(20);
         $dmqPlayersPro->appends($request->all());
 
         //all online
         $onlinedmq  =   DominoQPlayer::all();
+        
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('checked', 'table', 'dmqPlayersNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedmq'));
+    }
 
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('checked', 'table', 'dominoQPlayerNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedmq'));
+    public function indexIntermediate(Request $request)
+    {
+        $checked    =   $request->checkauto;
+
+        //room Novice / Pemula
+        $onlinenovice   =   DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                            ->where('room_id', '=', 1)
+                            ->get();
+
+        //room Intermediate / Menengah
+        $onlineintermediate =   DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                                ->where('room_id', '=', 2)
+                                ->get();
+        
+        $dmqPlayersintermediate =   DominoQTable::where('room_id', '=', 2)
+                                    ->paginate(20);
+
+        $dmqPlayersintermediate->appends($request->all());
+
+        //room Pro
+        $onlinepro = DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                                    ->where('room_id', '=', 3)
+                                    ->get();
+
+        // all online
+        $onlinedmq  =   DominoQPlayer::all();
+
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('checked', 'table', 'dmqPlayersintermediate', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedmq'));
+    }
+
+    public function indexPro(Request $request)
+    {
+        $checked = $request->checkauto;
+
+        //room Novice
+        $onlinenovice = DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                                        ->where('room_id', '=', 1)
+                                        ->get();
+        //room Intermediate
+        $onlineintermediate = DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                                                ->where('room_id', '=', 2)
+                                                ->get();
+
+        //room Pro
+        $onlinepro  =   DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
+                                        ->where('room_id', '=', 3)
+                                        ->get();
+
+        $dmqPlayersPro  =   DominoQTable::where('room_id', '=', 3)
+                            ->paginate(20);
+
+        $dmqPlayersPro->appends($request->all());
+
+        //all online
+        $onlinedmq  =   DominoQPlayer::all();
+
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('checked', 'table', 'dmqPlayersPro', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedmq'));
     }
 
     public function Game(Request $request)

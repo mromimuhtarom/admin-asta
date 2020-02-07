@@ -45,6 +45,7 @@
                 </table>
               </div>
 
+              {{-- Table Novice  --}}
               <div class="@if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-view*')) tableactive @endif" style="border:2px solid black;width:auto;float:left;margin-right:5%;">
                 <table border="0" width="100%" style="">
                   <tr class="border-bottom" style="padding-left:2%;padding-right:2%;">
@@ -80,6 +81,8 @@
                 </table>
               </div>
 
+
+              {{-- Table Intermediate --}}
               <div class="@if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*')) tableactive @endif" style="border:2px solid black;width:auto;float:left;margin-right:5%;">
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:5%;padding-right:5%;">
@@ -115,7 +118,8 @@
                   </tr>
                 </table>
               </div>
-
+              
+              {{-- Table pro --}}
               <div class="@if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-pro*')) tableactive @endif" style="border:2px solid black;width:auto;float:left;">
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:2%;padding-right:2%;">
@@ -165,6 +169,7 @@
         </div>
 
         
+        {{-- TABLE NOVICE --}}
         @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-view*'))
           <div class="custom-scroll table-responsive" style="height:800px;">
             <div class="table-outer">
@@ -236,6 +241,8 @@
             <div style="display: flex;justify-content: center;">{{ $tpkPlayersnovice->links() }}</div>                    
 
           </div>
+
+          {{-- TABLE INTERMEDIATE --}}
         @elseif(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*'))
           <div class="custom-scroll table-responsive" style="height:800px;">
             <div class="table-outer" id="Novice">
@@ -307,6 +314,8 @@
             <div style="display: flex;justify-content: center;">{{ $tpkPlayersintermediate->links() }}</div>                    
 
           </div>
+
+        {{-- TABLE PRO --}}
         @elseif(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-pro*'))
           <div class="custom-scroll table-responsive" style="height:800px;">
             <div class="table-outer" id="Novice">
