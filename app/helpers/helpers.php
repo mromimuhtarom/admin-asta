@@ -264,6 +264,20 @@ function bgtplayeronline($table_id)
   return $a;
 }
 
+function dmqplayeronline($table_id)
+{
+  $a = DB::table('dmq_player')->where('table_id', '=', $table_id)->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.dmq_player.user_id')->get();
+
+  return $a;
+}
+
+function dmsplayeronline($table_id)
+{
+  $a  = DB::table('dms_player')->where('table_id', '=', $table_id)->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.dms_player.user_id')->get();
+
+  return $a;
+}
+
 function iconsorting($fieldname)
 {
   if(isset($_GET['namecolumn'])):

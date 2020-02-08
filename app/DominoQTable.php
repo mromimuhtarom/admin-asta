@@ -16,7 +16,5 @@ class DominoQTable extends Model
         return $this->belongsTo(DominoQRoom::class);
     }
 
-    public function DominoQPlayer() {
-        return $this->hasMany(DominoQPlayer::class, 'table_id', 'table_id')->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.dmq_player.user_id');
-    }
+
 }

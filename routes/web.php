@@ -480,6 +480,8 @@ Route::middleware('authenticated')->group(function(){
             Route::group(['prefix'  =>  'Monitoring_Table_DominoS'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino Susun')->group(function(){
                    Route::get('Monitoring_Domino_Susun-view', 'DominoSusunMonitoringTableController@index')->name('Monitoring_Table_DominoS');
+                   Route::get('Monitoring_Domino_Susun-intermediate', 'DominoSusunMonitoringTableController@indexIntermediate')->name('Monitoring_Table_DominoS-intermediate');
+                   Route::get('Monitoring_Domino_Susun-pro', 'DominoSusunMonitoringTableController@indexPro')->name('Monitoring_Table_DominoS-pro');
                    Route::get('Monitoring_Domino_Susun-Game', 'DominoSusunMonitoringTableController@Game')->name('Monitoring_Table_DominoS-game'); 
                 });
             });
@@ -542,7 +544,9 @@ Route::middleware('authenticated')->group(function(){
             Route::group(['prefix' => 'Monitoring_Table_DominoQ'], function() {
                 Route::middleware('page_denied:Monitoring Table Domino QQ')->group(function(){
                     Route::get('Monitoring_Domino_QQ-view', 'DominoQQMonitoringTableController@index')->name('Monitoring_Table_DominoQ');
-                    Route::get('Monitoring_Domino_QQ-Game', 'DominoQQMonitoringTableController@Game')->name('Monitoring_Table_DominoQQ-game');
+                    Route::get('Monitoring_Domino_QQ-intermediate', 'DominoQQMonitoringTableController@indexIntermediate')->name('Monitoring_Table_DominoQ-intermediate');
+                    Route::get('Monitoring_Domino_QQ-pro', 'DominoQQMonitoringTableController@indexPro')->name('Monitoring_Table_DominoQ-pro');
+                    Route::get('Monitoring_Domino_QQ-Game', 'DominoQQMonitoringTableController@Game')->name('Monitoring_Table_DominoQ-game');
                 });
             });
 
