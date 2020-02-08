@@ -477,6 +477,7 @@ public function detailTransaction(Request $request, $month, $year)
                     ->where('shop_type', '=', 2)
                     ->orderby('datetime', 'ASC')
                     ->get();
+    
     $startDate      = Carbon::now('GMT+7')->toDateString();
     $endDate        = Carbon::now('GMT+7')->toDateString();
     
@@ -503,9 +504,203 @@ public function detailTransaction(Request $request, $month, $year)
         $minDate    = $request->inputMinDate;
         $maxDate    = $request->inputMaxDate;
         $namecolumn = $request->namecolumn;
-        $datenow    = Carbon::now('GMT+7')->toDateString();        
+        $datenow    = Carbon::now('GMT+7')->toDateString(); 
+    
+        // Sorting table
+        if($namecolumn == NULL):
+            $namecolumn = 'asta_db.reseller_transaction_day.date_created';
+        endif;
+
+        if(Input::get('sorting') === 'asc'):
+            $sortingorder = 'desc';
+        else:
+            $sortingorder = 'asc';
+        endif;
+        
+        if($time == 'Day'):
+            $transactionday = ResellerTransactionDay::join('reseller', 'reseller.reseller_id', '=', 'reseller_transaction_day.reseller_id')
+                              ->select(
+                                  'reseller.username',
+                                  'reseller_transaction_day.reseller_id',
+                                  'reseller_transaction_day.date_created',
+                                  DB::raw('sum(reseller_transaction_day.buy_gold) as buy_gold'),
+                                  DB::raw('sum(reseller_transaction_day.buy_amount) as buy_amount'),
+                                  DB::raw('sum(reseller_transaction_day.sell_gold) as sell_gold'),
+                                  DB::raw('sum(reseller_transaction_day.reward_gold) as reward_gold'),
+                                  DB::raw('sum(reseller_transaction_day.correction_gold) as correction_gold'),
+                                  DB::raw('max(date(reseller_transaction_day.date_created)) As maxDate'),
+                                  DB::raw('min(date(reseller_transaction_day.date_created)) As minDate'),
+                                  DB::raw(' YEARWEEK(reseller_transaction_day.date_created) As yearperweek')
+                              );
+            if($minDate != NULL && $maxDate != NULL):
+                $history = $transactionday->whereBetween('reseller_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('DATE(reseller_transaction_day.date_created)'))
+                           ->paginate(20);
+            elseif($minDate != NULL):
+                $history = $transactionday->where('reseller_transaction_day.date_created', '>=', $minDate)
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('DATE(reseller_transaction_day.date_created)'))
+                           ->paginate(20);
+            elseif($maxDate != NULL):
+                $history = $transactionday->where('reseller_transaction_day.date_created', '<=', $maxDate)
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('DATE(reseller_transaction_day.date_created)'))
+                           ->paginate(20);
+            else:
+                $history = $transactionday->groupBy(DB::raw('DATE(reseller_transaction_day.date_created)'))
+                           ->paginate(20);
+            endif;
+
+            return view('pages.reseller.transaction.transaction_day_reseller', compact('history', 'time', 'minDate', 'maxDate', 'sortingorder', 'namecolumn'));
+        elseif($time == 'Week'):
+            $transactionday = ResellerTransactionDay::join('reseller', 'reseller.reseller_id', '=', 'reseller_transaction_day.reseller_id')
+                              ->select(
+                                  'reseller.username',
+                                  'reseller_transaction_day.reseller_id',
+                                  'reseller_transaction_day.date_created',
+                                  DB::raw('sum(reseller_transaction_day.buy_gold) as buy_gold'),
+                                  DB::raw('sum(reseller_transaction_day.buy_amount) as buy_amount'),
+                                  DB::raw('sum(reseller_transaction_day.sell_gold) as sell_gold'),
+                                  DB::raw('sum(reseller_transaction_day.reward_gold) as reward_gold'),
+                                  DB::raw('sum(reseller_transaction_day.correction_gold) as correction_gold'),
+                                  DB::raw('max(date(reseller_transaction_day.date_created)) As maxDate'),
+                                  DB::raw('min(date(reseller_transaction_day.date_created)) As minDate'),
+                                  DB::raw(' YEARWEEK(reseller_transaction_day.date_created) As yearperweek')
+                              );
+            if($minDate != NULL && $maxDate != NULL):
+                $history = $transactionday->whereBetween('reseller_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('YEARWEEK(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            elseif($minDate != NULL):
+                $history = $transactionday->where('reseller_transaction_day.date_created', '>=', $minDate)
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('YEARWEEK(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            elseif($maxDate != NULL):
+                $history = $transactionday->where('reseller_transaction_day.date_created', '<=', $maxDate)
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('YEARWEEK(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            else:
+                $history = $transactionday->groupBy(DB::raw('YEARWEEK(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            endif;
+
+            return view('pages.reseller.transaction.transaction_day_reseller', compact('history', 'time', 'minDate', 'maxDate', 'sortingorder', 'namecolumn'));
+        elseif($time == 'Month'):
+            $transactionday = ResellerTransactionDay::join('reseller', 'reseller.reseller_id', '=', 'reseller_transaction_day.reseller_id')
+                              ->select(
+                                  'reseller.username',
+                                  'reseller_transaction_day.reseller_id',
+                                  'reseller_transaction_day.date_created',
+                                  DB::raw('sum(reseller_transaction_day.buy_gold) as buy_gold'),
+                                  DB::raw('sum(reseller_transaction_day.buy_amount) as buy_amount'),
+                                  DB::raw('sum(reseller_transaction_day.sell_gold) as sell_gold'),
+                                  DB::raw('sum(reseller_transaction_day.reward_gold) as reward_gold'),
+                                  DB::raw('sum(reseller_transaction_day.correction_gold) as correction_gold'),
+                                  DB::raw('max(date(reseller_transaction_day.date_created)) As maxDate'),
+                                  DB::raw('min(date(reseller_transaction_day.date_created)) As minDate'),
+                                  DB::raw(' YEARWEEK(reseller_transaction_day.date_created) As yearperweek')
+                              );
+            if($minDate != NULL && $maxDate != NULL):
+                $history = $transactionday->whereBetween('reseller_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('month(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            elseif($minDate != NULL):
+                $history = $transactionday->where('reseller_transaction_day.date_created', '>=', $minDate)
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('month(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            elseif($maxDate != NULL):
+                $history = $transactionday->where('reseller_transaction_day.date_created', '<=', $maxDate)
+                           ->orderBy($namecolumn, $sortingorder)
+				           ->groupBy(DB::raw('month(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            else:
+                $history = $transactionday->groupBy(DB::raw('month(asta_db.reseller_transaction_day.date_created)'), DB::raw("WEEK('asta_db.reseller_transaction_day.date_created')"))
+                           ->paginate(20);
+            endif;
+
+            return view('pages.reseller.transaction.transaction_day_reseller', compact('history', 'time', 'minDate', 'maxDate', 'sortingorder', 'namecolumn'));
+        elseif($time == 'All time'):
+            $transactionday = ResellerTransactionDay::join('reseller', 'reseller.reseller_id', '=', 'reseller_transaction_day.reseller_id')
+                              ->select(
+                                  'reseller.username',
+                                  'reseller_transaction_day.reseller_id',
+                                  'reseller_transaction_day.buy_gold as buy_gold',
+                                  'reseller_transaction_day.buy_amount as buy_amount',
+                                  'reseller_transaction_day.sell_gold as sell_gold',
+                                  'reseller_transaction_day.reward_gold as reward_gold',
+                                  'reseller_transaction_day.correction_gold as correction_gold',
+                                  'reseller_transaction_day.date_created'
+                              );
+            if($minDate != NULL && $maxDate != NULL):
+                $history =  $transactionday->whereBetween('reseller_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                            ->orderBy($namecolumn, $sortingorder)
+                            ->paginate(20);
+            elseif($minDate != NULL):
+                $history =  $transactionday->where('reseller_transaction_day.date_created', '>=', $minDate)
+                            ->orderBy($namecolumn, $sortingorder)
+                            ->paginate(20);
+            elseif($maxDate != NULL):
+                $history =  $transactionday->where('reseller_transaction_day.date_created', '<=', $maxDate)
+                            ->orderBy($namecolumn, $sortingorder)
+                            ->paginate(20);
+            else:
+                $history =  $transactionday->orderBy($namecolumn, $sortingorder)
+                            ->paginate(20);
+            endif;
+             return view('pages.reseller.transaction.transaction_day_reseller', compact('history', 'time', 'minDate', 'maxDate', 'sortingorder', 'namecolumn'));
+        endif;
     }
 // ---- End Search TransactionDayReseller -------//
+
+// ---- Detail Transaction Day Reseller ------//
+    public function detailTransactionDayReseller(Request $request)
+    {
+        
+        $minDate    = $request->inputMaxDate;
+        $maxDate    = $request->inputMaxDate;
+        $namecolumn = $request->namecolumn;
+        $datenow    = Carbon::now('GMT+7');
+        
+        // Sorting table
+        if($namecolumn == NULL):
+            $namecolumn = 'reseller_transaction_day.date_created';
+        endif;
+
+        if(Input::get('sorting') === 'asc'):
+            $sortingorder = 'desc';
+        else:
+            $sortingorder = 'asc';
+        endif;
+        $datenow = 
+
+        $history = ResellerTransactionDay::join('reseller', 'reseller.reseller_id', '=', 'reseller_transaction_day.reseller_id')
+                        ->select(
+                            'reseller.username',
+                            'reseller_transaction_day.reseller_id',
+                            'reseller_transaction_day.buy_gold as buy_gold',
+                            'reseller_transaction_day.buy_amount as buy_amount',
+                            'reseller_transaction_day.sell_gold as sell_gold',
+                            'reseller_transaction_day.reward_gold as reward_gold',
+                            'reseller_transaction_day.correction_gold as correction_gold',
+                            'reseller_transaction_day.date_created'
+                        )
+                        ->whereBetween('reseller_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
+                        ->orderBy($namecolumn, $sortingorder)
+                        ->paginate(20);
+       
+        $time      = "Detail";
+
+
+        return view('pages.reseller.transaction.transaction_day_reseller', compact('history', 'minDate', 'maxDate', 'time', 'sortingorder', 'namecolumn', 'datenow'));
+
+    }
+// ---- End Detail Transaction Day Reseller ------//
 //****************************************** Menu Transaction Day Reseller ******************************************//
 
 
@@ -546,7 +741,6 @@ public function detailTransaction(Request $request, $month, $year)
           $sortingorder = 'asc';
         endif;
 
-
         // query database
         $currency_agen = Reseller::orderby($namecolumn, $sorting);
 
@@ -570,12 +764,13 @@ public function detailTransaction(Request $request, $month, $year)
                         ->where('id', '=', 11)
                         ->first();
 
-        $value               = str_replace(':', ',', $action->value);
-        $actionbalance       = explode(",", $value);
+        $value          = str_replace(':', ',', $action->value);
+        $actionbalance  = explode(",", $value);
         $actblnc = [
           $actionbalance[10] => $actionbalance[11],
           $actionbalance[12] => $actionbalance[13],
-          $actionbalance[20] => $actionbalance[21]
+          $actionbalance[20] => $actionbalance[21],
+          $actionbalance[22] => $actionbalance[23]
         ];  
 
         $add_transaction->appends($request->all());
@@ -585,7 +780,7 @@ public function detailTransaction(Request $request, $month, $year)
 // ---- End Search Add Transaction Reseller -------//
 
 // --- UpdateGold Reseller ----//
-    public function UpdateGoldReseller(Reqeust $request)
+    public function UpdateGoldReseller(Request $request)
     {
         $agen_id       = $request->agen_id;
         $columnname    = $request->columnname;
@@ -593,6 +788,7 @@ public function detailTransaction(Request $request, $month, $year)
         $type          = $request->type;
         $plusminus     = $request->operator_aritmatika;
         $description   = $request->description;
+        
 
         $goldreseller = Reseller::where('reseller_id', '=', $agen_id)->first();
         if($plusminus == "+"):
@@ -600,6 +796,8 @@ public function detailTransaction(Request $request, $month, $year)
         elseif($plusminus == "-"):
             $totalbalance = $goldreseller->gold - $valuecurrency;
         endif;
+
+        
         Reseller::where('reseller_id', '=', $agen_id )->update([
             'gold' => $totalbalance
         ]);
@@ -637,11 +835,30 @@ public function detailTransaction(Request $request, $month, $year)
                                 'asta_db.reseller_balance.balance',
                                 'asta_db.reseller_balance.datetime', 
                                 'asta_db.reseller.username', 
-                                'asta_db.action.action'
+                                'asta_db.reseller_balance.action_id'
                              )
-                             ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id')
-                             ->JOIN('asta_db.action', 'asta_db.action.id', '=', 'asta_db.reseller_balance.action_id');
-      
+                             ->JOIN('asta_db.reseller', 'asta_db.reseller_balance.reseller_id', '=', 'asta_db.reseller.reseller_id');
+        $action  = ConfigText::select(
+                        'name',
+                        'value'
+                    ) 
+                    ->where('id', '=', 11)
+                    ->first();
+        $value               = str_replace(':', ',', $action->value);
+        $actionbalance       = explode(",", $value);
+        $actblnc = [
+            $actionbalance[0]  => $actionbalance[1],
+            $actionbalance[2]  => $actionbalance[3],
+            $actionbalance[4]  => $actionbalance[5],
+            $actionbalance[6]  => $actionbalance[7],
+            $actionbalance[8]  => $actionbalance[9],
+            $actionbalance[10] => $actionbalance[11],
+            $actionbalance[12] => $actionbalance[13],
+            $actionbalance[14] => $actionbalance[15],
+            $actionbalance[16] => $actionbalance[17],
+            $actionbalance[18] => $actionbalance[19],
+            $actionbalance[20] => $actionbalance[21]
+        ];
       if($endDateComparison < $startDateComparison){
         return back()->with('alert', alertTranslate("end date can't be less than start date"));
       }
@@ -660,7 +877,7 @@ public function detailTransaction(Request $request, $month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
 
       }else if ($searchUsername != NULL && $startDate != NULL) {
 
@@ -676,7 +893,7 @@ public function detailTransaction(Request $request, $month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
 
@@ -692,7 +909,7 @@ public function detailTransaction(Request $request, $month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
       }else if($searchUsername != NULL) {
 
         if(is_numeric($searchUsername) !== true):
@@ -703,13 +920,13 @@ public function detailTransaction(Request $request, $month, $year)
                               ->get();
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
       } else if ($startDate != NULL && $endDate != NULL) {
           $balancedetails = $balanceReseller->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
                                             ->orderBy('asta_db.reseller_balance.datetime', 'asc')
                                             ->get();
                                             
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate'));
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
       }
     }
 //----- End Search Balance Reseller -----//
