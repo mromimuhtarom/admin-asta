@@ -50,14 +50,14 @@ class DominoSusunMonitoringTableController extends Controller
 
     public function indexIntermediate(Request $request)
     {
-        $checked        =   $request->checkauto;
+        $checked                =   $request->checkauto;
 
         //room Novice
-        $onlinenovice   =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
-                            ->where('room_id', '=', 1)
-                            ->get();
+        $onlinenovice           =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
+                                ->where('room_id', '=', 1)
+                                ->get();
 
-        $onlineintermediate =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
+        $onlineintermediate     =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
                                 ->where('room_id', '=', 2)
                                 ->get();
         
@@ -67,20 +67,20 @@ class DominoSusunMonitoringTableController extends Controller
         $dmsPlayersintermediate->appends($request->all());
 
         //room Pro
-        $onlinepro  =   DominoSPlayer::all();
+        $onlinepro              =   DominoSPlayer::all();
 
         //all online
-        $onlinedms  =   DominoSPlayer::all();
+        $onlinedms              =   DominoSPlayer::all();
 
         return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'table', 'dmsPlayersintermediate', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
     }
 
     public function indexPro(Request $request)
     {
-        $checked    =   $request->checkauto;
+        $checked            =   $request->checkauto;
 
         //room Novice
-        $onlinenovice   =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
+        $onlinenovice       =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
                                             ->where('room_id', '=', 1)
                                             ->get();
 
@@ -90,16 +90,16 @@ class DominoSusunMonitoringTableController extends Controller
                                                 ->get();
 
         //room Pro
-        $onlinepro  =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_table.table_id')
-                        ->paginate(20);
+        $onlinepro          =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_table.table_id')
+                                ->paginate(20);
 
-        $dmsPlayersPro  =   DominoSusunTable::where('room_id', '=', 3)
-                            ->paginate(20);
+        $dmsPlayersPro      =   DominoSusunTable::where('room_id', '=', 3)
+                                ->paginate(20);
 
         $dmsPlayersPro->appends($request->all());
 
         //all online
-        $onlinedms  =   DominoSPlayer::all();
+        $onlinedms          =   DominoSPlayer::all();
 
         return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'table', 'dmsPlayersPro', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
     }

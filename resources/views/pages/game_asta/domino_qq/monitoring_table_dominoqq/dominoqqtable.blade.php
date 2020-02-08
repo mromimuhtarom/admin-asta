@@ -41,7 +41,7 @@
                </table>
               </div>
              
-              {{-- TABLE NOVICE --}}
+              {{-- ROOM NOVICE --}}
               <div class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-view*')) tableactive @endif" style="border:2px solid black;width:auto;float:left;margin-right:5%;">
                 <table border="0" width="100%" style="">
                   <tr class="border-bottom" style="padding-left:2%;padding-right:2%;">
@@ -77,7 +77,7 @@
                 </table>
               </div>
 
-              {{-- TABLE INTERMEDIATE --}}
+              {{-- ROOM INTERMEDIATE --}}
               <div class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-intermediate*')) tableactive @endif" style="border:2px solid black; width:auto; float:left;margin-right:5%;">
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:5%;padding-right:5%;">
@@ -113,7 +113,7 @@
                 </table>
               </div>
               
-              {{-- TABLE PRO  --}}
+              {{-- ROOM PRO  --}}
               <div class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-pro*')) tableactive @endif" style="border:2px solid black;width:auto;float:left">
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:2%; padding-right:2%;">
