@@ -295,7 +295,9 @@ class TransactionPlayersController extends Controller
                         'asta_db.transaction_day.win as wintransaction',
                         'asta_db.transaction_day.lose as losetransaction',
                         'asta_db.transaction_day.turnover as turnovertransaction',
-                        'asta_db.transaction_day.fee as feetransaction'
+                        'asta_db.transaction_day.fee as feetransaction',
+                        'asta_db.transaction_day.prize as prizetransaction',
+                        DB::raw('asta_db.transaction_day.win - asta_db.transaction_day.lose + asta_db.transaction_day.prize as totalWinLose')                        
                        );
     if($game):
         $history = $transaction->wherebetween('asta_db.transaction_day.date_created', [$mindate." 00:00:00", $maxdate." 23:59:59"])

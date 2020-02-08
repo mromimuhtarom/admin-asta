@@ -97,55 +97,15 @@
 						</div>
 					</div>
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
-						{{-- <thead>
-							<tr>
-								@if ($time == "today" || $time == "all time")
-								<th class="th-sm">{{ translate_MenuTransaction('Username') }}</th>	
-								@elseif($time == "week" || $time == "month")
-								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
-								@endif
-								<th class="th-sm">{{ translate_MenuTransaction('Win') }}</th>
-								<th class="th-sm">{{ translate_MenuTransaction('Lose') }}</th>
-                				<th class="th-sm">{{ translate_MenuTransaction('Turn Over') }}</th>
-								<th class="th-sm">{{ translate_MenuTransaction('Fee') }}</th>
-								@if($time == "today" || $time == "all time")
-								<th class="th-sm">{{ translate_MenuTransaction('Date') }}</th>
-								@endif
-							</tr>
-						</thead>
-						<tbody>
-							@if ($time == "today" || $time == "all time")
-							@foreach($history as $hst)
-							<tr>
-                  <td>{{ $hst->username }}</td>
-									<td>{{ number_format($hst->win, 2) }}</td>
-									<td>{{ number_format($hst->lose, 2) }}</td>
-									<td>{{ number_format($hst->turnover, 2) }}</td>
-                  <td>{{ number_format($hst->fee, 2) }}</td>
-									<td>{{ $hst->date_created }}</td>
-							</tr>
-							@endforeach
-							@elseif($time == "week" || $time == "month")
-							@foreach($history as $hst)
-							<tr>
-								<td><a href="{{ route('detailTransactionDay', [$hst->minDate,$hst->maxDate]) }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
-								<td>{{ number_format($hst->totalWin, 2) }}</td>
-								<td>{{ number_format($hst->totalLose, 2) }}</td>
-								<td>{{ number_format($hst->totalTurnover, 2) }}</td>
-								<td>{{ number_format($hst->totalFee, 2) }}</td>
-							</tr>
-							@endforeach
-							@endif
-						</tbody> --}}
 						<thead>
 							<tr>
-								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.date_created">{{ translate_MenuTransaction("Date") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.date_created') }}"></i></a></td>
+								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=date">{{ translate_MenuTransaction("Date") }} <i class="fa fa-sort{{ iconsorting('date') }}"></i></a></td>
 								@if($time == "All time")
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.user_id">{{ translate_MenuTransaction("ID Player") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.user_id') }}"></i></a></td>
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction("Username") }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></td>
 								@elseif($time == "Detail")
-								<td><a href="{{ route('detailTransactionDay') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.user_id">{{ translate_MenuTransaction("ID Player") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.user_id') }}"></i></a></td>
-								<td><a href="{{ route('detailTransactionDay') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction("Username") }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></td>
+								<td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.user_id">{{ translate_MenuTransaction("ID Player") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.user_id') }}"></i></a></td>
+								<td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction("Username") }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></td>
 								@endif
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.debet">{{ translate_MenuTransaction("Cash Debit") }} <i class="fa fa-sort{{ iconsorting('debettransaction') }}"></i></a></td>
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.credit">{{ translate_MenuTransaction("Cash Credit") }} <i class="fa fa-sort{{ iconsorting('credittransaction') }}"></i></a></td>
@@ -178,8 +138,8 @@
 									<td>{{ number_format($trns_day->chip_debettransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->chip_credittransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->reward_goldtransaction, 2) }}</td>
-									<td>{{ number_format($trns_day->reward_pointtransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->reward_chiptransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->reward_pointtransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_gold, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_chip, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_point, 2) }}</td>
@@ -199,8 +159,8 @@
 									<td>{{ number_format($trns_day->chip_debettransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->chip_credittransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->reward_goldtransaction, 2) }}</td>
-									<td>{{ number_format($trns_day->reward_pointtransaction, 2) }}</td>
-									<td>{{ number_format($trns_day->reward_chiptransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->reward_chiptransaction, 2) }}add</td>
+									<td>{{ number_format($trns_day->reward_pointtransaction, 2) }}aa</td>
 									<td>{{ number_format($trns_day->correction_gold, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_chip, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_point, 2) }}</td>
@@ -235,40 +195,6 @@ $(document).ready(function() {
 	});
 });
   
-  // $('form input[type="date"]').prop("disabled", true);
-  // $("#time").click(function(e) {
-  //  e.preventDefault();
-	 
-	// 		if($(this).val() == 'today'){ 
-	// 			@php
-	// 				echo'var minDate = $("#minDate").val("'.$datenow.'");';
-	// 			echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
-	// 			@endphp
-	// 			$('form input[type="date"]').prop("readonly", true);
-	// 			$('form input[type="date"]').prop("disabled", false);
-				
-	// 		} else if($(this).val() == 'week'){
-	// 			var minDate = $("#minDate").val("");
-	// 			var maxDate = $("#maxDate").val("");
-	// 			$('form input[type="date"]').prop("disabled", true);
-			
-	// 		} else if($(this).val() == 'month'){
-	// 			var minDate = $("#minDate").val("");
-	// 			var maxDate = $("#maxDate").val("");
-	// 			$('form input[type="date"]').prop("disabled", true);
-			
-	// 		} else if($(this).val() == ''){
-	// 			var minDate = $("#minDate").val("");
-	// 			var maxDate = $("#maxDate").val("");
-	// 			$('form input[type="date"]').prop("disabled", true);
-			
-	// 		} else {
-	// 			var minDate = $("#minDate").val("");
-	// 			var maxDate = $("#maxDate").val("");
-	// 			$('form input[type="date"]').prop("readonly", false);
-	// 			$('form input[type="date"]').prop("disabled", false);
-	// 		}
-  //  });
 
 	table = $('table.table').dataTable({
 		"sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
@@ -293,51 +219,4 @@ $(document).ready(function() {
   });
 </script>		
 @endif
-
-<script>
-// $('#time').change(function(){
-//   if($(this).val() == 'today'){ // or this.value == 'volvo'
-// 		// $("#minDate").disa();
-// 		$('form input[type="date"]').prop("disabled", true);
-//   }
-// });
-
-// $('form input[type="date"]').prop("disabled", true);
-// $("#time").click(function(e) {
-//    e.preventDefault();
-	 
-// 	if($(this).val() == 'today'){ 
-// 		@php
-//    		echo'var minDate = $("#minDate").val("'.$datenow.'");';
-// 		echo'var maxDate = $("#maxDate").val("'.$datenow.'");';
-// 		@endphp
-// 		$('form input[type="date"]').prop("readonly", true);
-// 		$('form input[type="date"]').prop("disabled", false);
-  	
-// 	} else if($(this).val() == 'week'){
-// 		var minDate = $("#minDate").val("");
-// 		var maxDate = $("#maxDate").val("");
-// 		$('form input[type="date"]').prop("disabled", true);
-	
-// 	} else if($(this).val() == 'month'){
-// 		var minDate = $("#minDate").val("");
-// 		var maxDate = $("#maxDate").val("");
-// 		$('form input[type="date"]').prop("disabled", true);
-	
-// 	} else if($(this).val() == ''){
-// 		var minDate = $("#minDate").val("");
-// 		var maxDate = $("#maxDate").val("");
-// 		$('form input[type="date"]').prop("disabled", true);
-	
-// 	} else {
-// 		var minDate = $("#minDate").val("");
-// 		var maxDate = $("#maxDate").val("");
-// 		$('form input[type="date"]').prop("readonly", false);
-// 		$('form input[type="date"]').prop("disabled", false);
-// 	}
-// });
-
-
-
-</script>
 @endsection

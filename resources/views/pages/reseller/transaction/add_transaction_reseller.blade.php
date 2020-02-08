@@ -76,9 +76,9 @@
                         width="100%">
                         <thead>
                             <tr>
-                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.user_id') }}"></i></a></th>
-                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip">{{ Translate_menuPlayers('Chip') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
+                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.reseller_id">{{ TranslateReseller('Reseller ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.reseller_id') }}"></i></a></th>
+                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.username') }}"></i></a></th>
+                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.gold">{{ TranslateReseller('Gold') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,21 +87,22 @@
                                 <td>{{ $transaction->reseller_id }}</td>
                                 <td>{{ $transaction->username }}</td>
                                 <td>
-                                    <div class="row">
-                                        <div class="col">{{ number_format($transaction->chip, 2) }} </div>
+                                    <a href="#"data-toggle="modal" data-target="#modalChip{{ $transaction->reseller_id }}">{{ number_format($transaction->gold, 2) }}</a>
+                                    {{-- <div class="row">
+                                        <div class="col"> </div>
                                         @if($menu && $mainmenu)
                                         <div class="col" align="right">
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalChip{{ $transaction->user_id }}">
+                                                data-target="#modalChip{{ $transaction->reseller_id }}">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalChipMinus{{ $transaction->user_id }}">
+                                                data-target="#modalChipMinus{{ $transaction->reseller_id }}">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -120,33 +121,50 @@
 @foreach ($add_transaction as $transaction)
 
 <!-- Modal Insert -->
-<div class="modal fade" id="modalChip{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalChip{{ $transaction->reseller_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><i
-                        class="fa fa-plus-square"></i>Tambah Transaction Chip</h4>
+                    class="fa fa-plus-square"></i>{{ TranslateReseller('Add Transaction Gold') }}</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
             </div>
-            <form action="{{ route('AddTransaction-update') }}" method="post">
+            <form action="{{ route('Add_Transaction_Reseller-update') }}" method="post">
                 @csrf
                 <div class="modal-body">
+                    <table width="100%" border="1" style="margin-bottom:25px;">
+                        <tr>
+                            <td width="20%">{{ TranslateReseller('Reseller ID') }}</td>
+                            <td width="5%">:</td>
+                            <td width="75%">{{ $transaction->reseller_id }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ TranslateReseller('Username') }}</td>
+                            <td>:</td>
+                            <td>{{ $transaction->username }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ TranslateReseller('Gold') }}</td>
+                            <td>:</td>
+                            <td>{{ $transaction->gold }}</td>
+                        </tr>
+                    </table>
 
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <input type="hidden" name="operator_aritmatika" value="+">
-                                <input type="hidden" name="agen_id" value="{{ $transaction->user_id }}">
+                                <input type="hidden" name="agen_id" value="{{ $transaction->reseller_id }}">
                                 <input type="hidden" name="columnname" value="chip">
-                                <input type="number" step="0.01" min="0.01" name="currency" placeholder="Chip" class="form-control" required><br>
+                                <input type="number" step="0.01" min="0.01" name="currency" placeholder="{{ TranslateReseller('Gold') }}" class="form-control" required><br>
                                 <select name="type" class="form-control" id="">
                                     @foreach ($actblnc as $key => $act)
                                         <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
                                     @endforeach
                                 </select><br>
-                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Chip ditambah"></textarea>
+                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="{{ TranslateReseller('Reason Gold Is Minus') }}"></textarea>
                             </div>
                         </div>
                     </div>
@@ -164,49 +182,7 @@
     </div>
 </div>
 <!-- End Modal Insert -->
-
-<!-- Modal minus -->
-<div class="modal fade" id="modalChipMinus{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><i
-                        class="fa fa-plus-square"></i>Kurang Transaction Chip</h4>
-                <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="fa fa-remove"></i>
-                </button>
-            </div>
-            <form action="{{ route('AddTransaction-update') }}" method="post">
-                @csrf
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input type="hidden" name="operator_aritmatika" value="-">
-                                <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
-                                <input type="hidden" name="columnname" value="chip">
-                                <input type="number" step="0.01" min="0.01" name="currency" placeholder="Chip" class="form-control" required><br>
-                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Chip dikurangi"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn sa-btn-primary submit-data">
-                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
-                    </button>
-                    <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- End Modal minus -->
-
-    
+   
 @endforeach
 
 <script>
