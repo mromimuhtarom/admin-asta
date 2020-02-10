@@ -783,7 +783,7 @@ function alertTranslate($menu){
         "Data added"                                                    =>  "Data berhasil di tambahkan",
         "Operator Still use this role, wait until role didnott use"      =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
         "For Type Adjust number didnot allowed negative"  =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
-        "For type Bonus or Free number not alllowed negative number"    =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif"
+        "For type Bonus or Free number not allowed negative number"    =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif"
 
     ];
     return $array_menuContent[$menu];
