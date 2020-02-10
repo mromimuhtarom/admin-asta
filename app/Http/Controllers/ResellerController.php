@@ -968,11 +968,12 @@ public function detailTransaction(Request $request, $month, $year)
                 // ---- untuk keterangan di log admin -----//
                 $opmath = 'ditambahkan dengan';
             elseif($valuecurrency < 0):
+                $replaceminus = str_replace('-', '', $valuecurrency);
                 ResellerBalance::create([
                     'reseller_id'   =>  $agen_id,
                     'action_id'     =>  $type,
                     'debet'         =>  0,
-                    'credit'        =>  $valuecurrency,
+                    'credit'        =>  $replaceminus,
                     'balance'       =>  $totalbalance,
                     'datetime'      =>  Carbon::now('GMT+7')
                 ]);
