@@ -132,14 +132,6 @@ class Add_TransactionController extends Controller
       $storetransactionday = StoreTransactionDay::where('user_id', '=', $user_id)
                              ->where('date', '=', Carbon::now('GMT+7')->toDateString())
                              ->first();
-      
-      //untuk type bonus atau gratis
-      if($type == 6 || $type == 7):
-
-        //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
-        if($type < 0):
-          
-
 
       //VALIDASI FORM INPUT
 
@@ -147,15 +139,32 @@ class Add_TransactionController extends Controller
       //KONDISI PENJUMLAHAN DAN PENGURANGAN BALANCE
       //=== CHIP ===//
       if($columnname == 'chip'):
-        if( $plusminus == "+"):    
-          $plusminus       = "";
-          $totalbalance    = $stat->chip + $valuecurrency;
-          $op_math         = "ditambahkan";
-          if($storetransactionday):
-            $totalcorrection = $storetransactionday->correction_chip + $valuecurrency;
-          else:
-            $totalcorrection = $valuecurrency;
+        //untuk type bonus atau gratis
+        if($type == 6 || $type == 7):
+
+          //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
+          if($type < 0):
+            return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
           endif;
+
+          $totalbalance = $stat->chip + $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([
+            'chip'  =>  $totalbalance
+          ]);
+
+          Log::create([
+            'op_id' =>  Session::get('user')
+          ])
+
+        // if( $plusminus == "+"):    
+        //   $plusminus       = "";
+        //   $totalbalance    = $stat->chip + $valuecurrency;
+        //   $op_math         = "ditambahkan";
+        //   if($storetransactionday):
+        //     $totalcorrection = $storetransactionday->correction_chip + $valuecurrency;
+        //   else:
+        //     $totalcorrection = $valuecurrency;
+        //   endif;
           $validator       = Validator::make($request->all(), [
             'currency'    => 'required',
             'type'        => 'required',
