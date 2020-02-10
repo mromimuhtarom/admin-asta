@@ -159,8 +159,8 @@
 									<td>{{ number_format($trns_day->chip_debettransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->chip_credittransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->reward_goldtransaction, 2) }}</td>
-									<td>{{ number_format($trns_day->reward_chiptransaction, 2) }}add</td>
-									<td>{{ number_format($trns_day->reward_pointtransaction, 2) }}aa</td>
+									<td>{{ number_format($trns_day->reward_chiptransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->reward_pointtransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_gold, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_chip, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_point, 2) }}</td>
