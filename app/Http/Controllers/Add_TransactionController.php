@@ -531,7 +531,7 @@ class Add_TransactionController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Edit balance gold dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' gold. Dengan alasan: '. $description
           ]);
-        
+        endif; 
 
       //=== POINT ===//
       elseif($columnname == 'point'):
@@ -729,6 +729,8 @@ class Add_TransactionController extends Controller
             'desc'      =>  'Edit balance point dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' point. Dengan alasan: '. $description
           ]);
         endif;
+      endif;
+
 
       return back()->with('success', alertTranslate('Successful update'));
     }
