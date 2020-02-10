@@ -133,6 +133,12 @@ class Add_TransactionController extends Controller
                              ->where('date', '=', Carbon::now('GMT+7')->toDateString())
                              ->first();
       
+      //untuk type bonus atau gratis
+      if($type == 6 || $type == 7):
+
+        //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
+        if($type < 0):
+          
 
 
       //VALIDASI FORM INPUT
