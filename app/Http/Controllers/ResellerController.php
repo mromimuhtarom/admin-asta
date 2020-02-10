@@ -1297,7 +1297,7 @@ public function detailTransaction(Request $request, $month, $year)
             'datetime'    => Carbon::now('GMT+7')
           ]);
 
-        StoreTransaction::where('user_id', '=', $reseller_id)->where('shop_type', '=', $shop_type)->delete();
+          StoreTransaction::where('user_id', '=', $reseller_id)->where('shop_type', '=', $shop_type)->delete();
 
 
           Log::create([
