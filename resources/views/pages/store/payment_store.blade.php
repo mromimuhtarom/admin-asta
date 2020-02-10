@@ -86,8 +86,8 @@
               @if($menu && $mainmenu)
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $payment->id }}" class="deletepermission{{ $payment->id }} deleteIdAll"></td>
-                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->name }}</td>
-                <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strTypeTransaction($payment->type) }}</td>
+                <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->PaymentName }}</td>
+                <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-value="{{ $payment->IdType }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ ucwords(str_replace('_', ' ',$payment->PaymentType)) }}</td>
                 <td><a href="#" class="usertext" data-title="desc" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
                 <td><a href="#" class="stractive" data-title="status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($payment->status)) }}</td>
                 {{-- <td><a href="#" class="stractive" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td> --}}
@@ -280,14 +280,9 @@
         },
         source: [
           {value: '', text:'Pilih tipe pembayaran'},
-          {value: '1', text:'Bank Transfer'},
-          {value: '2', text:'Internet Banking' },
-          {value: '3', text:'Cash Digital'},
-          {value: '4', text:'Toko'},
-          {value: '5', text:'Akulaku'},
-          {value: '6', text:'Credit Card'},
-          {value: '7', text:'Manual Transfer'},
-          {value: '8', text:'Google play'}
+          @foreach($paymenttype as $pty)
+          {value: '{{ $pty->id }}', text:'{{ ucwords(str_replace("_", " ",$pty->name)) }}'},
+          @endforeach
         ]
       });
       

@@ -103,6 +103,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('RewardTransaction-view', 'RewardTransactionController@index')->name('Reward_Transaction');
                 Route::post('Reward-Transaction-Approve', 'RewardTransactionController@approve')->name('RewardTransaction-Approve');
                 Route::post('Reward-Transaction-Decline', 'RewardTransactionController@decline')->name('RewardTransaction-Decline');
+                Route::post('Reward-Transaction-DeliveryProgress', 'RewardTransactionController@DeliveryProgress')->name('RewardTransaction-DeliveryProgress');
             });
         });
 

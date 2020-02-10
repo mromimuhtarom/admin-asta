@@ -809,7 +809,7 @@ public function detailTransaction(Request $request, $month, $year)
 
             //---------- untuk yg insert ke table reseller_transaction_day ------------//
             if($resellertransactionday):
-                $totalrewardgold =  $resellertransactionday + $valuecurrency;
+                $totalrewardgold =  $resellertransactionday->reward_gold + $valuecurrency;
                 ResellerTransactionDay::where('reseller_id', '=', $agen_id)->update([
                     'date'            => Carbon::now('GMT+7')->toDateString(),
                     'date_created'    => Carbon::now('GMT+7'),
@@ -840,82 +840,65 @@ public function detailTransaction(Request $request, $month, $year)
             if($valuecurrency < 0):
                 return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
             endif;
-
-            //--------------- untuk menambahkan gold reseller ------------------// 
             $totalbalance = $valuecurrency;
-            Reseller::where('reseller_id', '=', $agen_id )->update([
-                'gold' => $totalbalance
-            ]);
-
-            if($goldreseller->gold > $valuecurrency):
-                
-                // ---- selisih gold yang dimiliki reseller dengan yang adjust ----//
-                $resellergold = $valuecurrency - $goldreseller->gold; 
-                
-                // ----- untuk total corection gold -----//                 
-                $total_correctiongold = $resellertransactionday->correction_gold + $resellergold;
-                
-                // ---- untuk keterangan di log admin -----//
-                $opmath = 'ditambahkan dengan';
-
-                // ------ untuk insert ke balance reseller ------//
+            $resellertransactionday = ResellerTransactionDay::where('reseller_id', '=', $agen_id)
+                                  ->where('date', '=', Carbon::now('GMT+7')->toDateString())
+                                  ->first();
+            $goldreseller = Reseller::where('reseller_id', '=', $agen_id)->first();
+           
+            //--- UNTUK BALANCE ---//
+            // --untuk yang valu curency lebih besar dri gold
+            if($valuecurrency > $goldreseller->gold):
+                $balancegoldtotal = $valuecurrency - $goldreseller->gold;
+                $opmath = "ditambahkan dengan";
                 ResellerBalance::create([
                     'reseller_id'   =>  $agen_id,
                     'action_id'     =>  $type,
-                    'debet'         =>  $resellergold,
+                    'debet'         =>  $balancegoldtotal,
                     'credit'        =>  0,
-                    'balance'       =>  $totalbalance,
+                    'balance'       =>  $valuecurrency,
                     'datetime'      =>  Carbon::now('GMT+7')
                 ]);
-            elseif($goldreseller->gold < $valuecurrency):
-                // --- validasi jika reseller miliki gold 0 ---//
-                if($goldreseller->gold == 0):
-                    return back()->with('alert', alertTranslate('balance cannot be reduced'));
-                endif;
-                
-                // ---- selisih gold yang dimiliki reseller dengan yang adjust ----//
-                $resellergold = $goldreseller->gold - $valuecurrency;
-                
-                // ----- untuk total corection gold -----// 
-                $total_correctiongold = $resellertransactionday->correction_gold - $resellergold;
-            
-                // ---- untuk keterangan di log admin -----//
-                $opmath = 'dikurangkan dengan';
-
-                // ------ untuk insert ke balance reseller ------//
+            elseif($valuecurrency < $goldreseller->gold):
+                $balancegoldtotal = $goldreseller->gold - $valuecurrency;
+                $opmath = "dikurangkan dengan";
                 ResellerBalance::create([
                     'reseller_id'   =>  $agen_id,
                     'action_id'     =>  $type,
                     'debet'         =>  0,
-                    'credit'        =>  $resellergold,
-                    'balance'       =>  $totalbalance,
+                    'credit'        =>  $balancegoldtotal,
+                    'balance'       =>  $valuecurrency,
                     'datetime'      =>  Carbon::now('GMT+7')
                 ]);
+                
             endif;
 
-
-            //---------- untuk yg insert ke table reseller_transaction_day ------------//
             if($resellertransactionday):
-                $tota_correctiongold = $resellertransactionday->correction_gold + $totalbalance;
+                $totaltransaction_day = $resellertransactionday->correction_gold + $valuecurrency;
                 ResellerTransactionDay::where('reseller_id', '=', $agen_id)->update([
-                    'date'            => Carbon::now('GMT+7')->toDateString(),
-                    'date_created'    => Carbon::now('GMT+7'),
-                    'correction_gold' => $total_correctiongold
+                    'date'            => Carbon::now('GMT+7'),
+                    'date_created'    => Carbon::now('GMT+7')->toDateString(),
+                    'correction_gold' => $totaltransaction_day 
                 ]);
             else:
                 ResellerTransactionDay::create([
-                    'date'            => Carbon::now('GMT+7')->toDateString(),
-                    'date_created'    => Carbon::now('GMT+7'),
+                    'date'            => Carbon::now('GMT+7'),
                     'reseller_id'     => $agen_id,
                     'correction_gold' => $valuecurrency,
+                    'date_created'    => Carbon::now('GMT+7')->toDateString()                    
                 ]);
             endif;
+
+            // ----UNTUK UPDATE GOLD ----//
+            Reseller::where('reseller_id', '=', $agen_id )->update([
+                'gold' => $valuecurrency
+            ]);
 
             Log::create([
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '2',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang '.$opmath.' '.$valuecurrency. ' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang '.$opmath.' '.$balancegoldtotal. ' koin. Dengan alasan: ' .$description
             ]);
 
         //---------- untuk type Correction --------//
@@ -1046,7 +1029,8 @@ public function detailTransaction(Request $request, $month, $year)
             $actionbalance[14] => $actionbalance[15],
             $actionbalance[16] => $actionbalance[17],
             $actionbalance[18] => $actionbalance[19],
-            $actionbalance[20] => $actionbalance[21]
+            $actionbalance[20] => $actionbalance[21],
+            $actionbalance[22] => $actionbalance[23],
         ];
       if($endDateComparison < $startDateComparison){
         return back()->with('alert', alertTranslate("end date can't be less than start date"));

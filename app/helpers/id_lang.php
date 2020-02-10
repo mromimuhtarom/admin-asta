@@ -283,7 +283,9 @@ function translate_menuTransaction($menu){
         'Point Spend'           =>  'Poin Di Pakai',
         'Point Expired'         =>  'Poin Kadaluarsa',
         'Transaction Day'       =>  'Transaksi Harian',
-        'Detail Information'    =>  'Detail Information' 
+        'Detail Information'    =>  'Detail Information',
+        'Are you sure want to Decline this Transaction' => 'aaa' ,
+        'Are you want to Approve this Transaction?'    => 'cc'
     ];
     return $array_menuContent[$menu];
 }
