@@ -35,7 +35,8 @@ class Add_TransactionController extends Controller
         $actblnc = [
           $actionbalance[10] => $actionbalance[11],
           $actionbalance[12] => $actionbalance[13],
-          $actionbalance[20] => $actionbalance[21]
+          $actionbalance[20] => $actionbalance[21],
+          $actionbalance[22] => $actionbalance[23],
         ];
         
         return view('pages.transaction.add_transaction', compact('actblnc'));
@@ -67,7 +68,6 @@ class Add_TransactionController extends Controller
         else:
           $sortingorder = 'asc';
         endif;
-
 
         // query database
         $currency_player = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
@@ -106,11 +106,12 @@ class Add_TransactionController extends Controller
         $actblnc = [
           $actionbalance[10] => $actionbalance[11],
           $actionbalance[12] => $actionbalance[13],
-          $actionbalance[20] => $actionbalance[21]
+          $actionbalance[20] => $actionbalance[21],
+          $actionbalance[22] => $actionbalance[23]
         ];  
 
         $add_transaction->appends($request->all());
-
+        
         return view('pages.transaction.add_transaction', compact('add_transaction', 'getUsername', 'sortingorder', 'actblnc', 'menu', 'mainmenu'));
     }
 
@@ -130,8 +131,6 @@ class Add_TransactionController extends Controller
       $storetransactionday = StoreTransactionDay::where('user_id', '=', $user_id)
                              ->where('date', '=', Carbon::now('GMT+7')->toDateString())
                              ->first();
-      
-
 
       //VALIDASI FORM INPUT
 
@@ -139,308 +138,598 @@ class Add_TransactionController extends Controller
       //KONDISI PENJUMLAHAN DAN PENGURANGAN BALANCE
       //=== CHIP ===//
       if($columnname == 'chip'):
-        if( $plusminus == "+"):    
-          $plusminus       = "";
-          $totalbalance    = $stat->chip + $valuecurrency;
-          $op_math         = "ditambahkan";
+
+        //untuk type bonus atau gratis
+        if($type == 6 || $type == 7):
+
+          //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
+          if($valuecurrency < 0):
+            return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
+          endif;
+
+          $totalbalance = $stat->chip + $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([
+            'chip'  =>  $totalbalance
+          ]);
+
           if($storetransactionday):
-            $totalcorrection = $storetransactionday->correction_chip + $valuecurrency;
+            $total_rewardchip =  $storetransactionday->reward_chip + $valuecurrency;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+                'date'            => Carbon::now('GMT+7')->toDateString(),
+                'date_created'    => Carbon::now('GMT+7'),
+                'reward_chip'     => $total_rewardchip
+            ]);
           else:
-            $totalcorrection = $valuecurrency;
-          endif;
-          $validator       = Validator::make($request->all(), [
-            'currency'    => 'required',
-            'type'        => 'required',
-            'description' => 'required'
-          ]);
-
-          if ($validator->fails()) :
-            return back()->withErrors($validator->errors());
+            StoreTransactionDay::create([
+                  'date'         => Carbon::now('GMT+7')->toDateString(),
+                  'date_created' => Carbon::now('GMT+7'),
+                  'user_id'      => $user_id,
+                  'reward_chip'  => $valuecurrency,
+              ]);
           endif;
 
-          //UPDATE DATABASE
-          $balance = BalanceChip::create([
-              'user_id'   => $user_id,
-              'action_id' => $type,
-              'game_id'   => 0,
-              'debit'     => $valuecurrency,
-              'credit'    => 0,
-              'balance'   => $totalbalance,
-              'datetime'  => Carbon::now('GMT+7')
+          Log::create([
+              'op_id'     =>  Session::get('userId'),
+              'action_id' =>  '2',
+              'datetime'  =>  Carbon::now('GMT+7'),
+              'desc'      =>  'Edit balance chip dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' chip. Dengan alasan: ' .$description
           ]);
-        else:
-          $plusminus       = "-";
-          $op_math         = "dikurang";
-          $totalbalance    = $stat->chip - $valuecurrency;
-          if($storetransactionday):
-            $totalcorrection = $storetransactionday->correction_chip - $valuecurrency;
-          else:
-            $totalcorrection = $plusminus.$valuecurrency;
-          endif;
-          $type            = 11;
 
-          //PREVENT BALANCE MINUS CHIP
-          if($stat->chip == 0):
-            return back()->with('alert', alertTranslate('balance cannot be reduced'));
+        //type adjust
+        elseif($type == 12):
+          //validasi untuk angka tidak dapat diperbolehkan negatif //
+          if($valuecurrency < 0 ):
+            return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
           endif;
 
-          if($stat->chip < $valuecurrency):
-            return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+          $totalbalance = $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([
+            'chip'  =>  '$totalbalance'
+          ]);
+          
+          if($stat->chip > $valuecurrency):
+
+            //Selisih chip yang dimiliki user dengan adjust//
+            $userchip = $valuecurrency - $stat->chip;
+
+            //Total correction chip//
+            $total_correctionchip = $storetransactionday->correction_chip + $userchip;
+
+            //Tambah keterangan di log admin//
+
+            $op_math = 'ditambahkan dengan';
+
+            //untuk balance reseller//
+            BalanceChip::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  $userchip,
+              'credit'    =>  0,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+          elseif($stat->chip < $valuecurrency):
+            //validasi jika user memiliki chip 0//
+            if($valuecurrency > 0):
+              return back()->with('alert', alertTranslate('balance cannot be reduced'));
+            endif;
+
+            //selisih chip yang dimiliki reseller dengan yang adjust//
+            $userchip = $stat->chip - $valuecurrency;
+
+            //untuk total correction chip//
+            $total_correctionchip = $storetransactionday->correction_chip - $userchip;
+
+            //untuk keterangan di log Admin//
+            $op_math = 'dikurangkan dengan';
+
+            // insert ke balance chip //
+            BalanceChip::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  0,
+              'credit'    =>  $userchip,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
           endif;
-
-          $validator = Validator::make($request->all(), [
-            'currency'    =>  'required',
-            'description' =>  'required'
-          ]);
-
-          if ($validator->fails()) :
-            return back()->withErrors($validator->errors());
-          endif;
-
-          //UPDATE DATABASE
-          $balance = BalanceChip::create([
-              'user_id'   => $user_id,
-              'action_id' => $type,
-              'game_id'   => 0,
-              'debit'     => 0,
-              'credit'    => $valuecurrency,
-              'balance'   => $totalbalance,
-              'datetime'  => Carbon::now('GMT+7')
-          ]);
-        endif;
-
-
-
-        // lari ke table store transaction day jika di tambah atau dikurang
-        if($storetransactionday):
-          StoreTransactionDay::where('user_id', '=', $user_id)->update([
-            'date'            => Carbon::now('GMT+7')->toDateString(),
-            'date_created'    => Carbon::now('GMT+7'),
-            'correction_chip' => $totalcorrection
-          ]);
-        else:
-          StoreTransactionDay::create([
-            'user_id'         => $user_id,
-            'date'            => Carbon::now('GMT+7')->toDateString(),
-            'date_created'    => Carbon::now('GMT+7'),
-            'correction_chip' => $valuecurrency
-          ]);
-        endif;
         
-        //RECORD LOG 
-        Log::create([
-          'op_id'     =>  Session::get('userId'),
-          'action_id' =>  '2',
-          'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'Edit balance Chip dengan ID ' .$user_id. ' jumlah yang '.$op_math.' '.$valuecurrency. ' chip. Dengan alasan: ' .$description
-        ]);
+          //Insert ke storetransactionday//
+          if($storetransactionday):
+            $total_correctionchip = $storetransactionday->correction_chip + $totalbalance;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+              'date'            =>  Carbon::now('GMT+7')->toDateString(),
+              'date_created'    =>  Carbon::now('GMT+7'),
+              'correction_chip' =>  $total_correctionchip
+            ]);
+          else:
+            StoreTransactionDay::create([
+              'date'            => Carbon::now('GMT+7')->toDateString(),
+              'date_created'    => Carbon::now('GMT+7'),
+              'user_id'         => $user_id,
+              'correction_chip' => $valuecurrency 
+            ]);
+          endif;
+          
+            Log::create([
+              'op_id'     =>  Session::get('userId'),
+              'action_id' =>  '2',
+              'datetime'  =>  Carbon::now('GMT+7'),
+              'desc'      =>  'Edit balance CHIP dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' Chip. Dengan alasan: ' .$description
+            ]);
+
+
+        //Untuk type correction//
+        elseif($type == 11):
+          //Untuk validasi jika angka input lebih besar dari angka di chip database untuk pengurangan//
+          $angka = str_replace('-', '', $valuecurrency);
+          
+          if($valuecurrency < 0):
+            if($stat->chip < $angka):
+              return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+            endif;
+          endif;
+
+          //Menambah chip user//
+          $totalbalance = $stat->chip + $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([  
+            'chip' => $totalbalance
+          ]);
+
+          //insert insert ke table store transaction day//
+          if($storetransactionday):
+            $total_correctionchip = $storetransactionday->correction_chip + $valuecurrency;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+              'date'            =>  Carbon::now('GMT+7')->toDateString(),
+              'date_created'    =>  Carbon::now('GMT+7'),
+              'correction_chip' =>  $total_correctionchip
+            ]);
+          else:
+            StoreTransactionDay::create([
+              'date'            => Carbon::now('GMT+7')->toDateString(),
+              'date_create'     => Carbon::now('GMT+7'),
+              'user_id'         => $user_id,
+              'correction_chip' => $valuecurrency
+            ]);
+          endif;
+          
+          //insert ke balance chip//
+          if($valuecurrency > 0):
+            BalanceChip::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  $valuecurrency,
+              'credit'    =>  0,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+
+            //LOG ADMIN
+            $op_math = 'ditambahkan dengan';
+          elseif($valuecurrency < 0):
+            $replaceminus = str_replace('-', '', $valuecurrency);
+            BalanceChip::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'debit'     =>  0,
+              'credit'    =>  $replaceminus,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+            //LOG ADMIN
+            $op_math = 'dikurangkan dengan';
+          endif;
+
+          Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '2',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Edit balance chip dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' chip. Dengan alasan: '. $description
+          ]);
+        endif;
+
+       
       
       //=== GOLD ===/
       elseif($columnname == 'gold'):
-        if( $plusminus == "+"): 
-          $plusminus       = "";
-          $totalbalance    = $stat->gold + $valuecurrency;
-          if($storetransactionday):
-            $totalcorrection = $storetransactionday->correction_gold + $valuecurrency;
-          else:
-            $totalcorrection = $valuecurrency;
+        //untuk type bonus atau gratis
+        if($type == 6 || $type == 7):
+
+          //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
+          if($valuecurrency < 0):
+            return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
           endif;
-          $op_math         = 'ditambahkan';
-          $validator       = Validator::make($request->all(), [
-            'currency'    => 'required',
-            'type'        => 'required',
-            'description' => 'required'
+
+          $totalbalance = $stat->gold + $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([
+            'gold'  =>  $totalbalance
           ]);
 
-          if ($validator->fails()) :
-            return back()->withErrors($validator->errors());
+          if($storetransactionday):
+            $total_rewardgold =  $storetransactionday->reward_gold + $valuecurrency;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+                'date'            => Carbon::now('GMT+7')->toDateString(),
+                'date_created'    => Carbon::now('GMT+7'),
+                'reward_gold'     => $total_rewardgold
+            ]);
+          else:
+            StoreTransactionDay::create([
+                  'date'         => Carbon::now('GMT+7')->toDateString(),
+                  'date_created' => Carbon::now('GMT+7'),
+                  'user_id'      => $user_id,
+                  'reward_gold'  => $valuecurrency,
+              ]);
           endif;
 
-          //UPDATE DATABASE
-          $balance = BalanceGold::create([
-              'user_id'   => $user_id,
-              'action_id' => $type,
-              'debit'     => $valuecurrency,
-              'credit'    => 0,
-              'balance'   => $totalbalance,
-              'datetime'  => Carbon::now('GMT+7')
+          Log::create([
+              'op_id'     =>  Session::get('userId'),
+              'action_id' =>  '2',
+              'datetime'  =>  Carbon::now('GMT+7'),
+              'desc'      =>  'Edit balance gold dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' gold. Dengan alasan: ' .$description
           ]);
 
-        else:
-          $plusminus = "-";
-          $totalbalance    = $stat->gold - $valuecurrency;
-          if($storetransactionday):
-            $totalcorrection = $storetransactionday->correction_gold - $valuecurrency;
-          else:
-            $totalcorrection = $plusminus.$valuecurrency;
+        //type adjust
+        elseif($type == 12):
+          //validasi untuk angka tidak dapat diperbolehkan negatif //
+          if($valuecurrency < 0 ):
+            return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
           endif;
-          $op_math         = 'dikurang';
-          $type            = 11;
 
-          $validator = Validator::make($request->all(), [
-            'currency'    =>  'required',
-            'description' =>  'required'
+          $totalbalance = $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([
+            'gold'  =>  '$totalbalance'
           ]);
           
-        //PREVENT BALANCE MINUS GOLD
-          if($stat->gold == 0):
-            return back()->with('alert', alertTranslate('balance cannot be reduced'));
+          if($stat->gold > $valuecurrency):
+
+            //Selisih chip yang dimiliki user dengan adjust//
+            $usergold = $valuecurrency - $stat->gold;
+
+            //Total correction chip//
+            $total_correctiongold = $storetransactionday->correction_gold + $usergold;
+
+            //Tambah keterangan di log admin//
+
+            $op_math = 'ditambahkan dengan';
+
+            //untuk balance reseller//
+            BalanceGold::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  $usergold,
+              'credit'    =>  0,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+          elseif($stat->gold < $valuecurrency):
+            //validasi jika user memiliki chip 0//
+            if($valuecurrency > 0):
+              return back()->with('alert', alertTranslate('balance cannot be reduced'));
+            endif;
+
+            //selisih chip yang dimiliki reseller dengan yang adjust//
+            $usergold = $stat->gold - $valuecurrency;
+
+            //untuk total correction chip//
+            $total_correctiongold = $storetransactionday->correction_gold - $usergold;
+
+            //untuk keterangan di log Admin//
+            $op_math = 'dikurangkan dengan';
+
+            // insert ke balance chip //
+            BalanceGold::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  0,
+              'credit'    =>  $usergold,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
           endif;
-
-          if($stat->gold < $valuecurrency):
-            return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
-          endif;
-
-
-          if ($validator->fails()) :
-            return back()->withErrors($validator->errors());
-          endif;
-
-          //UPDATE DATABASE
-          $balance = BalanceGold::create([
-              'user_id'   => $user_id,
-              'action_id' => $type,
-              'debit'     => 0,
-              'credit'    => $valuecurrency,
-              'balance'   => $totalbalance,
-              'datetime'  => Carbon::now('GMT+7')
-          ]);
-
-        endif;
-
-
-
-        // lari ke table store transaction day jika di tambah atau dikurang
-        if($storetransactionday):
-          // $gold = $storetransactionday->correction_gold + $valuecurrency;
-          StoreTransactionDay::where('user_id', '=', $user_id)->update([
-            'date'            => Carbon::now('GMT+7')->toDateString(),
-            'date_created'    => Carbon::now('GMT+7'),
-            'correction_gold' => $totalcorrection
-          ]);
-        else:
-          StoreTransactionDay::create([
-            'user_id'         => $user_id,
-            'date'            => Carbon::now('GMT+7')->toDateString(),
-            'date_created'    => Carbon::now('GMT+7'),
-            'correction_gold' => $valuecurrency
-          ]);
-        endif;
         
-        //RECORD LOG 
-        Log::create([
-          'op_id'     =>  Session::get('userId'),
-          'action_id' =>  '2',
-          'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'Edit balance koin dengan ID ' .$user_id. ' jumlah yang '.$op_math.' '.$valuecurrency. ' koin. Dengan alasan: ' .$description
-        ]);
+          //Insert ke storetransactionday//
+          if($storetransactionday):
+            $total_correctionchip = $storetransactionday->correction_gold + $totalbalance;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+              'date'            =>  Carbon::now('GMT+7')->toDateString(),
+              'date_created'    =>  Carbon::now('GMT+7'),
+              'correction_gold' =>  $total_correctiongold
+            ]);
+          else:
+            StoreTransactionDay::create([
+              'date'            => Carbon::now('GMT+7')->toDateString(),
+              'date_created'    => Carbon::now('GMT+7'),
+              'user_id'         => $user_id,
+              'correction_gold' => $valuecurrency 
+            ]);
+          endif;
+          
+            Log::create([
+              'op_id'     =>  Session::get('userId'),
+              'action_id' =>  '2',
+              'datetime'  =>  Carbon::now('GMT+7'),
+              'desc'      =>  'Edit balance gold dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' gold. Dengan alasan: ' .$description
+            ]);
 
+
+        //Untuk type correction//
+        elseif($type == 11):
+          //Untuk validasi jika angka input lebih besar dari angka di chip database untuk pengurangan//
+          $angka = str_replace('-', '', $valuecurrency);
+          
+          if($valuecurrency < 0):
+            if($stat->gold < $angka):
+              return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+            endif;
+          endif;
+
+          //Menambah chip user//
+          $totalbalance = $stat->gold + $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([  
+            'chip' => $totalbalance
+          ]);
+
+          //insert insert ke table store transaction day//
+          if($storetransactionday):
+            $total_correctiongold = $storetransactionday->correction_gold + $valuecurrency;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+              'date'            =>  Carbon::now('GMT+7')->toDateString(),
+              'date_created'    =>  Carbon::now('GMT+7'),
+              'correction_gold' =>  $total_correctiongold
+            ]);
+          else:
+            StoreTransactionDay::create([
+              'date'            => Carbon::now('GMT+7')->toDateString(),
+              'date_create'     => Carbon::now('GMT+7'),
+              'user_id'         => $user_id,
+              'correction_gold' => $valuecurrency
+            ]);
+          endif;
+          
+          //insert ke balance chip//
+          if($valuecurrency > 0):
+            BalanceGold::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  $valuecurrency,
+              'credit'    =>  0,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+
+            //LOG ADMIN
+            $op_math = 'ditambahkan dengan';
+          elseif($valuecurrency < 0):
+            $replaceminus = str_replace('-', '', $valuecurrency);
+            BalanceGold::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'debit'     =>  0,
+              'credit'    =>  $replaceminus,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+            //LOG ADMIN
+            $op_math = 'dikurangkan dengan';
+          endif;
+
+          Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '2',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Edit balance gold dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' gold. Dengan alasan: '. $description
+          ]);
+        
 
       //=== POINT ===//
       elseif($columnname == 'point'):
-        if( $plusminus == "+"): 
-          $plusminus       = "";
-          $totalbalance    = $stat->point + $valuecurrency;
-          if($storetransactionday):
-            $totalcorrection = $storetransactionday->correction_point + $valuecurrency;
-          else:
-            $totalcorrection = $valuecurrency;
-          endif;
-          $op_math         = 'ditambahkan';
+        //untuk type bonus atau gratis
+        if($type == 6 || $type == 7):
 
-          $validator = Validator::make($request->all(), [
-            'currency'    =>  'required',
-            'type'        =>  'required',
-            'description' =>  'required'
+          //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
+          if($valuecurrency < 0):
+            return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
+          endif;
+
+          $totalbalance = $stat->point + $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([
+            'point'  =>  $totalbalance
           ]);
 
-          if ($validator->fails()) :
-            return back()->withErrors($validator->errors());
-          endif;
-
-          //UPDATE DATABASE
-          $balance = BalancePoint::create([
-              'user_id'   => $user_id,
-              'game_id'   => 0,
-              'action_id' => $type,
-              'debit'     => $valuecurrency,
-              'credit'    => 0,
-              'balance'   => $totalbalance,
-              'datetime'  => Carbon::now('GMT+7')
-          ]);
-        else:
-          $plusminus       = "-";
-          $totalbalance    = $stat->point - $valuecurrency;
           if($storetransactionday):
-            $totalcorrection = $storetransactionday->correction_point - $valuecurrency;
+            $total_rewardgold =  $storetransactionday->reward_point + $valuecurrency;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+                'date'            => Carbon::now('GMT+7')->toDateString(),
+                'date_created'    => Carbon::now('GMT+7'),
+                'reward_point'    => $total_rewardpoint
+            ]);
           else:
-            $totalcorrection = $plusminus.$valuecurrency;
+            StoreTransactionDay::create([
+                  'date'         => Carbon::now('GMT+7')->toDateString(),
+                  'date_created' => Carbon::now('GMT+7'),
+                  'user_id'      => $user_id,
+                  'reward_point' => $valuecurrency,
+              ]);
           endif;
-          $op_math         = 'dikurang';
-          $type            = 11;
 
-          $validator = Validator::make($request->all(), [
-            'currency'    =>  'required',
-            'description' =>  'required'
+          Log::create([
+              'op_id'     =>  Session::get('userId'),
+              'action_id' =>  '2',
+              'datetime'  =>  Carbon::now('GMT+7'),
+              'desc'      =>  'Edit balance poin dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' poin. Dengan alasan: ' .$description
+          ]);
+
+        //type adjust
+        elseif($type == 12):
+          //validasi untuk angka tidak dapat diperbolehkan negatif //
+          if($valuecurrency < 0 ):
+            return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
+          endif;
+
+          $totalbalance = $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([
+            'point'  =>  '$totalbalance'
           ]);
           
-          //PREVENT BALANCE MINUS POINT
-          if($stat->point == 0):
-            return back()->with('alert', alertTranslate('balance cannot be reduced'));
+          if($stat->point > $valuecurrency):
+
+            //Selisih chip yang dimiliki user dengan adjust//
+            $userpoint = $valuecurrency - $stat->point;
+
+            //Total correction chip//
+            $total_correctionpoint = $storetransactionday->correction_point + $userpoint;
+
+            //Tambah keterangan di log admin//
+
+            $op_math = 'ditambahkan dengan';
+
+            //untuk balance reseller//
+            BalancePoint::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  $userpoint,
+              'credit'    =>  0,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+          elseif($stat->point < $valuecurrency):
+            //validasi jika user memiliki chip 0//
+            if($valuecurrency > 0):
+              return back()->with('alert', alertTranslate('balance cannot be reduced'));
+            endif;
+
+            //selisih chip yang dimiliki reseller dengan yang adjust//
+            $userpoint = $stat->point - $valuecurrency;
+
+            //untuk total correction chip//
+            $total_correctionpoint = $storetransactionday->correction_point - $userpoint;
+
+            //untuk keterangan di log Admin//
+            $op_math = 'dikurangkan dengan';
+
+            // insert ke balance chip //
+            BalancePoint::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  0,
+              'credit'    =>  $userpoint,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+          endif;
+        
+          //Insert ke storetransactionday//
+          if($storetransactionday):
+            $total_correctionpoint = $storetransactionday->correction_point + $totalbalance;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+              'date'              =>  Carbon::now('GMT+7')->toDateString(),
+              'date_created'      =>  Carbon::now('GMT+7'),
+              'correction_point'  =>  $total_correctionpoint
+            ]);
+          else:
+            StoreTransactionDay::create([
+              'date'            => Carbon::now('GMT+7')->toDateString(),
+              'date_created'    => Carbon::now('GMT+7'),
+              'user_id'         => $user_id,
+              'correction_point' => $valuecurrency 
+            ]);
+          endif;
+          
+            Log::create([
+              'op_id'     =>  Session::get('userId'),
+              'action_id' =>  '2',
+              'datetime'  =>  Carbon::now('GMT+7'),
+              'desc'      =>  'Edit balance point dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' point. Dengan alasan: ' .$description
+            ]);
+
+
+        //Untuk type correction//
+        elseif($type == 11):
+          //Untuk validasi jika angka input lebih besar dari angka di chip database untuk pengurangan//
+          $angka = str_replace('-', '', $valuecurrency);
+          
+          if($valuecurrency < 0):
+            if($stat->point < $angka):
+              return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+            endif;
           endif;
 
-          if($stat->point < $valuecurrency):
-            return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+          //Menambah chip user//
+          $totalbalance = $stat->point + $valuecurrency;
+          Stat::where('user_id', '=', $user_id)->update([  
+            'chip' => $totalbalance
+          ]);
+
+          //insert insert ke table store transaction day//
+          if($storetransactionday):
+            $total_correctionpoint = $storetransactionday->correction_point + $valuecurrency;
+            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+              'date'            =>  Carbon::now('GMT+7')->toDateString(),
+              'date_created'    =>  Carbon::now('GMT+7'),
+              'correction_point' =>  $total_correctionpoint
+            ]);
+          else:
+            StoreTransactionDay::create([
+              'date'            => Carbon::now('GMT+7')->toDateString(),
+              'date_create'     => Carbon::now('GMT+7'),
+              'user_id'         => $user_id,
+              'correction_point' => $valuecurrency
+            ]);
+          endif;
+          
+          //insert ke balance chip//
+          if($valuecurrency > 0):
+            BalancePoint::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  $valuecurrency,
+              'credit'    =>  0,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+
+            //LOG ADMIN
+            $op_math = 'ditambahkan dengan';
+          elseif($valuecurrency < 0):
+            $replaceminus = str_replace('-', '', $valuecurrency);
+            BalancePoint::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'debit'     =>  0,
+              'credit'    =>  $replaceminus,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
+            //LOG ADMIN
+            $op_math = 'dikurangkan dengan';
           endif;
 
-          if ($validator->fails()) :
-            return back()->withErrors($validator->errors());
-          endif;
-
-          //UPDATE DATABASE
-          $balance = BalancePoint::create([
-              'user_id'   => $user_id,
-              'game_id'   => 0,
-              'action_id' => $type,
-              'debit'     => 0,
-              'credit'    => $valuecurrency,
-              'balance'   => $totalbalance,
-              'datetime'  => Carbon::now('GMT+7')
+          Log::create([
+            'op_id'     =>  Session::get('userId'),
+            'action_id' =>  '2',
+            'datetime'  =>  Carbon::now('GMT+7'),
+            'desc'      =>  'Edit balance point dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' point. Dengan alasan: '. $description
           ]);
         endif;
-
-        // lari ke table store transaction day jika di tambah atau dikurang
-        if($storetransactionday):
-          // $point = $storetransactionday->correction_point + $valuecurrency;
-          StoreTransactionDay::where('user_id', '=', $user_id)->update([
-            'date'             => Carbon::now('GMT+7')->toDateString(),
-            'date_created'     => Carbon::now('GMT+7'),
-            'correction_point' => $totalcorrection
-          ]);
-        else:
-          StoreTransactionDay::create([
-            'user_id'          => $user_id,
-            'date'             => Carbon::now('GMT+7')->toDateString(),
-            'date_created'     => Carbon::now('GMT+7'),
-            'correction_point' => $valuecurrency
-          ]);
-        endif;
-
-        //RECORD LOG
-        Log::create([
-          'op_id'     =>  Session::get('userId'),
-          'action_id' =>  '2',
-          'datetime'  =>  Carbon::now('GMT+7'),
-          'desc'      =>  'Edit balance Poin dengan ID ' .$user_id. ' jumlah yang '. $op_math.' '.$valuecurrency. ' poin. Dengan alasan: ' .$description
-        ]);
-
-      endif;
-
-      Stat::where('user_id', '=', $user_id)->update([
-        $columnname => $totalbalance
-      ]);
 
       return back()->with('success', alertTranslate('Successful update'));
-
     }
 }
