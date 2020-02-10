@@ -158,7 +158,7 @@
                                 <input type="hidden" name="operator_aritmatika" value="+">
                                 <input type="hidden" name="agen_id" value="{{ $transaction->reseller_id }}">
                                 <input type="hidden" name="columnname" value="chip">
-                                <input type="number" step="0.01" min="0.01" name="currency" placeholder="{{ TranslateReseller('Gold') }}" class="form-control" required><br>
+                                <input type="number" name="currency" placeholder="{{ TranslateReseller('Gold') }}" class="form-control" required><br>
                                 <select name="type" class="form-control" id="">
                                     @foreach ($actblnc as $key => $act)
                                         <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
