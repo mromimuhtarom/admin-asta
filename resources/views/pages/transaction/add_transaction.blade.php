@@ -112,7 +112,7 @@
                                 </td>
                                 <td>
                                     <div class="row">
-                                        <div class="col"><a href="#" date-toggle="modal" data-target="#modalGold{{ $transaction->user_id }}">{{ number_format($transaction->gold, 2) }}</a></div>
+                                        <div class="col"><a href="#" data-toggle="modal" data-target="#modalGold{{ $transaction->user_id }}">{{ number_format($transaction->gold, 2) }}</a></div>
                                         {{-- @if($menu && $mainmenu)
                                         <div class="col" align="right">
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
@@ -150,7 +150,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel"><i
-                                class="fa fa-plus-square"></i>Tambah Transaction Chip</h4>
+                                class="fa fa-plus-square"></i>Transaction Chip</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -161,31 +161,36 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <div style="height:100px;overflow:auto;margin-bottom:20px;" class="border border-dark">
+                                        <div style="height:64px;overflow:auto;margin-bottom:20px;">
                                             <table width="100%" style="border:1px solid #dee2e6;">
-                                                <thead>
-                                                    <tr>
-                                                        <td>User ID</td>
-                                                        <td>Username</td>
-                                                        <td>Current Balance chip</td>
-                                                    </tr>
-                                                </thead>
+                                                <tr>
+                                                    <td width="20%">User ID</td>
+                                                    <td width="5%">:</td>
+                                                    <td width="75%">{{ $transaction->user_id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Username</td>
+                                                    <td>:</td>
+                                                    <td>{{ $transaction->username }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>balance Chip</td>
+                                                    <td>:</td>
+                                                    <td>{{ number_format($transaction->chip, 2) }}</td>
+                                                </tr>
                                             </table>
                                         </div>
-
-
-                                        
-
-                                        <input type="hidden" name="operator_aritmatika" value="+">
-                                        <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
-                                        <input type="hidden" name="columnname" value="chip">
-                                        <input type="number" step="0.01" min="0.01" name="currency" placeholder="Chip" class="form-control" required><br>
                                         <select name="type" class="form-control" id="">
                                             @foreach ($actblnc as $key => $act)
                                                 <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
                                             @endforeach
                                         </select><br>
-                                        <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Chip ditambah"></textarea>
+                                        <input type="hidden" name="operator_aritmatika" value="+">
+                                        <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+                                        <input type="hidden" name="columnname" value="chip">
+                                        <input type="number" name="currency" placeholder="Chip" class="form-control" required><br>
+                                        
+                                        <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +256,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Tambah Transaction Point</h4>
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Transaction Point</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -263,6 +268,25 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
+                                        <div style="height:64px;overflow:auto;margin-bottom:20px;">
+                                            <table width="100%" style="border:1px solid #dee2e6;">
+                                                <tr>
+                                                    <td width="20%">User ID</td>
+                                                    <td width="5%">:</td>
+                                                    <td width="75%">{{ $transaction->user_id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Username</td>
+                                                    <td>:</td>
+                                                    <td>{{ $transaction->username }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>balance Point</td>
+                                                    <td>:</td>
+                                                    <td>{{ number_format($transaction->point, 2) }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                         <input type="hidden" name="operator_aritmatika" value="+">
                                         <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                         <input type="hidden" name="columnname" value="point">
@@ -295,7 +319,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Kurang Transaction Point</h4>
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Transaction Point</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -349,6 +373,25 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
+                                <div style="height:64px;overflow:auto;margin-bottom:20px;">
+                                    <table width="100%" style="border:1px solid #dee2e6;">
+                                        <tr>
+                                            <td width="20%">User ID</td>
+                                            <td width="5%">:</td>
+                                            <td width="75%">{{ $transaction->user_id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Username</td>
+                                            <td>:</td>
+                                            <td>{{ $transaction->username }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>balance Gold</td>
+                                            <td>:</td>
+                                            <td>{{ number_format($transaction->gold, 2) }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
                                 <input type="hidden" name="operator_aritmatika" value="+">
                                 <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                 <input type="hidden" name="username" value="{{ $transaction->username }}">
