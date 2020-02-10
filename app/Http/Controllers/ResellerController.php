@@ -939,7 +939,7 @@ public function detailTransaction(Request $request, $month, $year)
 
             //---------- untuk yg insert ke table reseller_transaction_day ------------//
             if($resellertransactionday):
-                $tota_correctiongold = $resellertransactionday->correction_gold + $totalbalance;
+                $tota_correctiongold = $resellertransactionday->correction_gold + $valuecurrency;
                 ResellerTransactionDay::where('reseller_id', '=', $agen_id)->update([
                     'date'            => Carbon::now('GMT+7')->toDateString(),
                     'date_created'    => Carbon::now('GMT+7'),
