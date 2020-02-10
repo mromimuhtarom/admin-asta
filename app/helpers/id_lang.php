@@ -780,8 +780,10 @@ function alertTranslate($menu){
         "Max Buy table can't be Up to Max Buy room"                     =>  "table max buy tidak bisa diatas room max buy",
         "You didn't allow to delete your account"                       =>  "Kamu tidak diperbolehkan menghapus akunmu",
         "Data saved"                                                    =>  "Data tersimpan!",
-        'Data added'                                                    =>  "Data berhasil di tambahkan",
-        'Operator Still use this role, wait until role didnott use'      =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai"
+        "Data added"                                                    =>  "Data berhasil di tambahkan",
+        "Operator Still use this role, wait until role didnott use"      =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
+        "For Type Adjust number didnot allowed negative"  =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
+        "For type Bonus or Free number not alllowed negative number"    =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif"
 
     ];
     return $array_menuContent[$menu];
