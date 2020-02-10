@@ -237,7 +237,7 @@
                     </tr>
                     @php 
                       $loguser = App\LogUser::where('user_id', '=', $regis->user_id)->wherebetween('action_id', [25, 27])->get();
-                      
+
                     @endphp
                     @foreach($loguser as $log)
                     <tr>

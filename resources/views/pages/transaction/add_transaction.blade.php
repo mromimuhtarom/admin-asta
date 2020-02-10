@@ -89,8 +89,9 @@
                                 <td>{{ $transaction->username }}</td>
                                 <td>
                                     <div class="row">
-                                        <div class="col">{{ number_format($transaction->chip, 2) }} </div>
-                                        @if($menu && $mainmenu)
+                                        <div class="col"><a href="#" data-toggle="modal" data-target="#modalChip{{ $transaction->user_id }}">{{ number_format($transaction->chip, 2) }}</a></div>
+                                        
+                                        {{-- @if($menu && $mainmenu)
                                         <div class="col" align="right">
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
                                                 data-target="#modalChip{{ $transaction->user_id }}">
@@ -101,30 +102,18 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        @endif
+                                        @endif --}}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="row">
-                                        <div class="col">{{ number_format($transaction->point, 2) }}</div>
-                                        @if($menu && $mainmenu)
-                                        <div class="col" align="right">
-                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalPoint{{ $transaction->user_id }}">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalPointMinus{{ $transaction->user_id }}">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        @endif
+                                        <div class="col"><a href="#" data-toggle="modal" data-target="#modalPoint{{ $transaction->user_id }}">{{ number_format($transaction->point, 2) }}</a></div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="row">
-                                        <div class="col">{{ number_format($transaction->gold, 2) }}</div>
-                                        @if($menu && $mainmenu)
+                                        <div class="col"><a href="#" date-toggle="modal" data-target="#modalGold{{ $transaction->user_id }}">{{ number_format($transaction->gold, 2) }}</a></div>
+                                        {{-- @if($menu && $mainmenu)
                                         <div class="col" align="right">
                                             <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
                                                 data-target="#modalGold{{ $transaction->user_id }}">
@@ -135,7 +124,7 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        @endif
+                                        @endif --}}
                                     </div>
                                 </td>
                             </tr>
@@ -169,10 +158,24 @@
                     <form action="{{ route('AddTransaction-update') }}" method="post">
                         @csrf
                         <div class="modal-body">
-
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
+                                        <div style="height:100px;overflow:auto;margin-bottom:20px;" class="border border-dark">
+                                            <table width="100%" style="border:1px solid #dee2e6;">
+                                                <thead>
+                                                    <tr>
+                                                        <td>User ID</td>
+                                                        <td>Username</td>
+                                                        <td>Current Balance chip</td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+
+                                        
+
                                         <input type="hidden" name="operator_aritmatika" value="+">
                                         <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                         <input type="hidden" name="columnname" value="chip">
@@ -200,6 +203,7 @@
             </div>
         </div>
         <!-- End Modal Insert -->
+
         <!-- Modal minus -->
         <div class="modal fade" id="modalChipMinus{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
