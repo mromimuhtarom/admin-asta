@@ -433,7 +433,9 @@ function TranslateMenuItem($menu){
         'Emoticon'          =>  'Emoticon',
         'Create New Emoticon'=> 'Buat emotikon baru',
         'Create Emoticon'   =>  'Buat emotikon',
-        'Edit'              =>  'Ubah'
+        'Edit'              =>  'Ubah',
+        'Gift ID'           =>  'ID Gift',
+        'Emoticon ID'       =>  'Emotikon ID'
     ];
 
     return $array_menuContent[$menu];

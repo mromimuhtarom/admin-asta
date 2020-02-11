@@ -45,7 +45,7 @@ class DominoQQMonitoringTableController extends Controller
         //all online
         $onlinedmq  =   DominoQPlayer::all();
         
-        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('checked', 'table', 'dmqPlayersNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedmq'));
+        return view('pages.game_asta.domino_qq.monitoring_table_dominoqq.dominoqqtable', compact('checked', 'dmqPlayersNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedmq'));
     }
 
     public function indexIntermediate(Request $request)

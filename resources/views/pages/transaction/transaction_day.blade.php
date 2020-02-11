@@ -135,7 +135,7 @@
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_chip">{{ translate_MenuTransaction("Correction Chip") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_chip') }}"></i></a></td>
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_point">{{ translate_MenuTransaction("Correction Point") }} <i class="fa fa-sort{{ iconsorting('asta_db.store_transaction_day.correction_point') }}"></i></a></td>
 								@endif
-							</tr>
+							</tr> 
 						</thead>
 						<tbody>
 							@if($time == "All time" || $time == "Detail")

@@ -81,17 +81,25 @@
         <div class="custom-scroll table-responsive" style="height:900px;">
 
           <div class="table-outer">
+            <div class="row">
+                <!-- Button tambah bot baru -->
+                <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                    {{ Translate_menuPlayers('Total Record Entries is') }} {{ $emoticon->total() }}
+                </div>
+                            <!-- End Button tambah bot baru -->
+            </div> 
             <table class="table table-bordered">
               <thead>
                 <tr>
                   @if($menu && $mainmenu)
                     <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
                   @endif
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.id">{{ TranslateMenuItem('Emoticon ID') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.id') }}"></i></a></th>
                     <th style="width:10px;">{{ TranslateMenuItem('Image') }}</th>
-                    <th class="th-sm">{{ TranslateMenuItem('Title') }}</th>
-                    <th class="th-sm">{{ TranslateMenuItem('Price') }}</th>
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.name">{{ TranslateMenuItem('Title') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.name') }}"></i></a></th>
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.price">{{ TranslateMenuItem('Price') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.price') }}"></i></a></th>
                     {{-- <th class="th-sm">Category</th> --}}
-                    <th class="th-sm">{{ TranslateMenuItem('Status') }}</th>
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.status">{{ TranslateMenuItem('Status') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.status') }}"></i></a></th>
                     @if($menu && $mainmenu)
                     <th align="center" style="width:10px;">
                       <a  href="#" style="color:red;font-weight:bold;" 
@@ -109,6 +117,7 @@
                 @if($menu && $mainmenu)
                 <tr>
                     <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $emot->id }}" data-name="unity-asset/emoticon/{{ $emot->id }}.png" class="deletepermission{{ $emot->id }} deleteIdAll"></td>
+                    <td>{{ $emot->id }}</td>
                     <td >
                           <div class="media-container">
                             <form method="POST" action="{{ route('Emoticon-updateimage') }}" enctype="multipart/form-data">
@@ -176,6 +185,7 @@
               </tbody>
             </table>
           </div>
+          <div style="display: flex;justify-content: center;">{{ $emoticon->links() }}</div>
 
         </div>
 
@@ -306,6 +316,11 @@ $(".watermark-image").change(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+      "paging":false,
+      "bInfo":false,
+      "ordering":false,
+      "bLengthChange": false,
+      "searching": false,
     });
 
     $('#trash').hide();
@@ -325,7 +340,7 @@ $(".watermark-image").change(function() {
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
     "autoWidth" : true,
-    "paging": false,
+    "ordering":false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },

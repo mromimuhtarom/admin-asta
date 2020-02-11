@@ -14,19 +14,38 @@ use File;
 use Storage;
 use Response;
 use DB;
+use Illuminate\Support\Facades\Input;
 
 class EmoticonController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
+        $sorting    = $request->sorting;
+        $namecolumn = $request->namecolumn;
+        // if sorting variable is null
+        if($sorting == NULL):
+            $sorting = 'asc';
+        endif;
+
+        if($namecolumn == NULL):
+            $namecolumn = 'asta_db.emoticon.id';
+        endif;
+
+        if(Input::get('sorting') === 'asc'):
+            $sortingorder = 'desc';
+        else:
+            $sortingorder = 'asc';
+        endif;
         $emoticon = Emoticon::select(
                         'id',
                         'name',
                         'price',
                         'status'
                     )
-                    ->get();
+                    ->orderBy($namecolumn, $sortingorder)
+                    ->paginate(10);
+        $emoticon->appends($request->all());
         $menu     = MenuClass::menuName('Emoticon');
         $mainmenu = MenuClass::menuName('Item');
         $active   = ConfigText::select(
@@ -38,7 +57,7 @@ class EmoticonController extends Controller
         $value    = str_replace(':', ',', $active->value);
         $endis    = explode(",", $value);
         $timenow  = Carbon::now('GMT+7');
-        return view('pages.item.emoticon', compact('emoticon', 'menu', 'mainmenu', 'endis', 'timenow'));
+        return view('pages.item.emoticon', compact('emoticon', 'menu', 'mainmenu', 'endis', 'timenow', 'sortingorder', 'namecolumn'));
     }
 
   

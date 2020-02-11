@@ -115,6 +115,14 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idabout)->update([
                 'value' =>  $urlabout
             ]);
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Update konten tentang di tabel Pengaturan Info menu pengaturan umum'
+            ]);
+
             return back()->with('success', alertTranslate("Data Updated"));
 
         } else if ($contenttermofservice)
@@ -129,6 +137,14 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idtermofservice )->update([
                 'value' =>  $urltermofservice
             ]);
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Update konten term of service di tabel CS dan pengaturan legal menu pengaturan umum'
+            ]);
+
             return back()->with('success', alertTranslate("Data Updated"));
 
         } else if ($contentprivacypolicy)
@@ -143,6 +159,14 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idprivacypolicy )->update([
                 'value' =>  $urlprivacypolicy
             ]);
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Update konten Privacy Policy di tabel CS dan pengaturan legal menu pengaturan umum'
+            ]);
+
             return back()->with('success', alertTranslate('Data Updated'));
 
         } else if($contentastapoker) {
@@ -156,6 +180,14 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idastapoker )->update([
                 'value' =>  $urlastapoker
             ]);
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Update konten Info Asta Poker di tabel Pengaturan info menu pengaturan umum'
+            ]);
+
             return back()->with('success', alertTranslate('Data Updated'));
 
         } else if($contentbigtwo) {
@@ -170,6 +202,14 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $idbigtwo)->update([
                 'value' =>  $urlbigtwo
             ]);
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Update konten Info Big Two di tabel Pengaturan info menu pengaturan umum'
+            ]);
+
             return back()->with('success', alertTranslate('Data Updated'));
         
         } else if($contentdominoQQ) {
@@ -183,6 +223,14 @@ class GeneralSettingController extends Controller
             Config::where('id', '=', $iddominoQQ)->update([
                 'value'         =>  $urldominoQQ
             ]);
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Update konten Info Domino QQ di tabel Pengaturan info menu pengaturan umum'
+            ]);
+
             return back()->with('success', alertTranslate('Data Updated'));
         } else if($contentdominosusun) {
             $semanticTagleft    =   str_replace('[', '<', $contentdominosusun);
@@ -194,6 +242,13 @@ class GeneralSettingController extends Controller
             Storage::disk('s3')->put($PathS3, $semanticTagcloser);
             Config::where('id', '=', $iddominosusun)->update([
                      'value' =>  $urldominosusun
+            ]);
+
+            Log::create([
+                'op_id'     => Session::get('userId'),
+                'action_id' => '2',
+                'datetime'  => Carbon::now('GMT+7'),
+                'desc'      => 'Update konten Info Domino Susun di tabel Pengaturan info menu pengaturan umum'
             ]);
 
             return back()->with('success', alertTranslate('Data Updated'));

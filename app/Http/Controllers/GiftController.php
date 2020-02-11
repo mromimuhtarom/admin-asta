@@ -15,11 +15,29 @@ use File;
 use Validator;
 use App\ConfigText;
 use Response;
+use Illuminate\Support\Facades\Input;
 
 class GiftController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $sorting    = $request->sorting;
+        $namecolumn = $request->namecolumn;
+        // if sorting variable is null
+        if($sorting == NULL):
+            $sorting = 'asc';
+        endif;
+
+        if($namecolumn == NULL):
+            $namecolumn = 'asta_db.gift.id';
+        endif;
+
+        if(Input::get('sorting') === 'asc'):
+            $sortingorder = 'desc';
+        else:
+            $sortingorder = 'asc';
+        endif;
+
         $gifts        = Gift::select(
                             'id', 
                             'name', 
@@ -27,7 +45,10 @@ class GiftController extends Controller
                             'status', 
                             'category_id'
                         )
-                        ->get();
+                        ->orderBy($namecolumn, $sorting)
+                        ->paginate(10);
+
+        $gifts ->appends($request->all());
         $menu     = MenuClass::menuName('Table Gift');
         $mainmenu = MenuClass::menuName('Item');
         // ---- untuk gift category -----//
@@ -54,7 +75,7 @@ class GiftController extends Controller
 
         
 
-        return view('pages.item.tablegift', compact('gifts', 'menu', 'category', 'endis', 'mainmenu', 'timenow'));
+        return view('pages.item.tablegift', compact('gifts', 'menu', 'category', 'endis', 'mainmenu', 'timenow', 'sortingorder', 'namecolumn'));
     }
 
     
