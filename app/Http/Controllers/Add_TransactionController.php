@@ -182,11 +182,12 @@ class Add_TransactionController extends Controller
           if($valuecurrency < 0 ):
             return back()->with('alert', alertTranslate('For Type Adjust number did not allowed negative'));
           endif;
+
           
           $totalbalance = $valuecurrency;
           
-          $a = Stat::where('user_id', '=', $user_id)->update([
-            'chip'  =>  '$totalbalance'
+          Stat::where('user_id', '=', $user_id)->update([
+            'chip'  =>  $totalbalance
           ]);
           
           if($stat->chip > $valuecurrency):
@@ -380,7 +381,7 @@ class Add_TransactionController extends Controller
 
           $totalbalance = $valuecurrency;
           Stat::where('user_id', '=', $user_id)->update([
-            'gold'  =>  '$totalbalance'
+            'gold'  =>  $totalbalance
           ]);
           
           if($stat->gold > $valuecurrency):
@@ -577,7 +578,7 @@ class Add_TransactionController extends Controller
         
           $totalbalance = $valuecurrency;
           Stat::where('user_id', '=', $user_id)->update([
-            'point'  =>  '$totalbalance'
+            'point'  =>  $totalbalance
           ]);
 
           
