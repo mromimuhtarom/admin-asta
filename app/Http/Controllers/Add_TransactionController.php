@@ -177,13 +177,15 @@ class Add_TransactionController extends Controller
 
         //type adjust
         elseif($type == 12):
+
           //validasi untuk angka tidak dapat diperbolehkan negatif //
           if($valuecurrency < 0 ):
-            return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
+            return back()->with('alert', alertTranslate('For Type Adjust number did not allowed negative'));
           endif;
-
+          
           $totalbalance = $valuecurrency;
-          Stat::where('user_id', '=', $user_id)->update([
+          
+          $a = Stat::where('user_id', '=', $user_id)->update([
             'chip'  =>  '$totalbalance'
           ]);
           
@@ -211,11 +213,6 @@ class Add_TransactionController extends Controller
             ]);
 
           elseif($stat->chip < $valuecurrency):
-            //validasi jika user memiliki chip 0//
-            if($valuecurrency > 0):
-              return back()->with('alert', alertTranslate('balance cannot be reduced'));
-            endif;
-
             //selisih chip yang dimiliki reseller dengan yang adjust//
             $userchip = $stat->chip - $valuecurrency;
 
@@ -388,17 +385,17 @@ class Add_TransactionController extends Controller
           
           if($stat->gold > $valuecurrency):
 
-            //Selisih chip yang dimiliki user dengan adjust//
+            //Selisih gold yang dimiliki user dengan adjust//
             $usergold = $valuecurrency - $stat->gold;
 
-            //Total correction chip//
+            //Total correction gold//
             $total_correctiongold = $storetransactionday->correction_gold + $usergold;
 
             //Tambah keterangan di log admin//
 
             $op_math = 'ditambahkan dengan';
 
-            //untuk balance reseller//
+            //untuk balance gold//
             BalanceGold::create([
               'user_id'   =>  $user_id,
               'action_id' =>  $type,
@@ -410,21 +407,21 @@ class Add_TransactionController extends Controller
             ]);
 
           elseif($stat->gold < $valuecurrency):
-            //validasi jika user memiliki chip 0//
+            //validasi jika user memiliki gold 0//
             if($valuecurrency > 0):
               return back()->with('alert', alertTranslate('balance cannot be reduced'));
             endif;
 
-            //selisih chip yang dimiliki reseller dengan yang adjust//
+            //selisih gold yang dimiliki reseller dengan yang adjust//
             $usergold = $stat->gold - $valuecurrency;
 
-            //untuk total correction chip//
+            //untuk total correction gold//
             $total_correctiongold = $storetransactionday->correction_gold - $usergold;
 
             //untuk keterangan di log Admin//
             $op_math = 'dikurangkan dengan';
 
-            // insert ke balance chip //
+            // insert ke balance gold //
             BalanceGold::create([
               'user_id'   =>  $user_id,
               'action_id' =>  $type,
@@ -438,7 +435,7 @@ class Add_TransactionController extends Controller
         
           //Insert ke storetransactionday//
           if($storetransactionday):
-            $total_correctionchip = $storetransactionday->correction_gold + $totalbalance;
+            $total_correctiongold = $storetransactionday->correction_gold + $totalbalance;
             StoreTransactionDay::where('user_id', '=', $user_id)->update([
               'date'            =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'    =>  Carbon::now('GMT+7'),
@@ -472,10 +469,10 @@ class Add_TransactionController extends Controller
             endif;
           endif;
 
-          //Menambah chip user//
+          //Menambah gold user//
           $totalbalance = $stat->gold + $valuecurrency;
           Stat::where('user_id', '=', $user_id)->update([  
-            'chip' => $totalbalance
+            'gold' => $totalbalance
           ]);
 
           //insert insert ke table store transaction day//
@@ -495,7 +492,7 @@ class Add_TransactionController extends Controller
             ]);
           endif;
           
-          //insert ke balance chip//
+          //insert ke balance gold//
           if($valuecurrency > 0):
             BalanceGold::create([
               'user_id'   =>  $user_id,
@@ -538,7 +535,7 @@ class Add_TransactionController extends Controller
         //untuk type bonus atau gratis
         if($type == 6 || $type == 7):
 
-          //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
+          //validasi jika angka input lebih besar dari current balance point di database untuk pengurangan //
           if($valuecurrency < 0):
             return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
           endif;
@@ -577,25 +574,27 @@ class Add_TransactionController extends Controller
           if($valuecurrency < 0 ):
             return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
           endif;
-
+        
           $totalbalance = $valuecurrency;
           Stat::where('user_id', '=', $user_id)->update([
             'point'  =>  '$totalbalance'
           ]);
-          
-          if($stat->point > $valuecurrency):
 
-            //Selisih chip yang dimiliki user dengan adjust//
+          
+          
+          if($stat->point < $valuecurrency):
+
+            //Selisih point yang dimiliki user dengan adjust//
             $userpoint = $valuecurrency - $stat->point;
 
-            //Total correction chip//
+            //Total correction point//
             $total_correctionpoint = $storetransactionday->correction_point + $userpoint;
 
             //Tambah keterangan di log admin//
 
             $op_math = 'ditambahkan dengan';
 
-            //untuk balance reseller//
+            //untuk balance Point//
             BalancePoint::create([
               'user_id'   =>  $user_id,
               'action_id' =>  $type,
@@ -607,21 +606,17 @@ class Add_TransactionController extends Controller
             ]);
 
           elseif($stat->point < $valuecurrency):
-            //validasi jika user memiliki chip 0//
-            if($valuecurrency > 0):
-              return back()->with('alert', alertTranslate('balance cannot be reduced'));
-            endif;
-
-            //selisih chip yang dimiliki reseller dengan yang adjust//
+            
+            //selisih point yang dimiliki reseller dengan yang adjust//
             $userpoint = $stat->point - $valuecurrency;
 
-            //untuk total correction chip//
+            //untuk total correction point//
             $total_correctionpoint = $storetransactionday->correction_point - $userpoint;
 
             //untuk keterangan di log Admin//
             $op_math = 'dikurangkan dengan';
 
-            // insert ke balance chip //
+            // insert ke balance point //
             BalancePoint::create([
               'user_id'   =>  $user_id,
               'action_id' =>  $type,
@@ -669,10 +664,10 @@ class Add_TransactionController extends Controller
             endif;
           endif;
 
-          //Menambah chip user//
+          //Menambah poin user//
           $totalbalance = $stat->point + $valuecurrency;
           Stat::where('user_id', '=', $user_id)->update([  
-            'chip' => $totalbalance
+            'point' => $totalbalance
           ]);
 
           //insert insert ke table store transaction day//
@@ -692,7 +687,7 @@ class Add_TransactionController extends Controller
             ]);
           endif;
           
-          //insert ke balance chip//
+          //insert ke balance point//
           if($valuecurrency > 0):
             BalancePoint::create([
               'user_id'   =>  $user_id,
@@ -729,8 +724,10 @@ class Add_TransactionController extends Controller
             'desc'      =>  'Edit balance point dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' point. Dengan alasan: '. $description
           ]);
         endif;
+      endif;
+
 
       return back()->with('success', alertTranslate('Successful update'));
-        
+
     }
 }

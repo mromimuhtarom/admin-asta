@@ -19,14 +19,16 @@ class PaymentStoreController extends Controller
     {
         $menu        = MenuClass::menuName('Payment Store');
         $mainmenu    = MenuClass::menuName('Store');
-        $getPayments = Payment::select(
-                        'id', 
-                        'name', 
-                        'type',  
-                        'status',
-                        'desc'
+        $getPayments = Payment::join('asta_db.payment_type', 'asta_db.payment_type.id', '=', 'asta_db.payment.type')
+                       ->select(
+                        'asta_db.payment.id', 
+                        'asta_db.payment.name as PaymentName', 
+                        'asta_db.payment_type.name as PaymentType',
+                        'asta_db.payment.type as IdType',  
+                        'asta_db.payment.status',
+                        'asta_db.payment.desc'
                        )
-                       ->orderBy('id', 'desc')
+                       ->orderBy('asta_db.payment.id', 'desc')
                        ->get();
         $active      = ConfigText::select(
                         'name', 
@@ -36,8 +38,14 @@ class PaymentStoreController extends Controller
                        ->first();
         $value       = str_replace(':', ',', $active->value);
         $endis       = explode(",", $value);
+        $paymenttype = DB::table('payment_type')
+                       ->select(
+                           'id',
+                           'name'
+                       )
+                       ->get();
 
-        return view('pages.store.payment_store', compact('menu', 'getPayments', 'endis', 'mainmenu'));
+        return view('pages.store.payment_store', compact('menu', 'getPayments', 'endis', 'mainmenu', 'paymenttype'));
     }
 
  

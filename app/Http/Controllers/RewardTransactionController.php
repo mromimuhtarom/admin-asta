@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\StoreTransactionHist;
 use App\BalancePoint;
 use App\Stat;
+use App\StoreDelivery;
 
 
 class RewardTransactionController extends Controller
@@ -36,7 +37,8 @@ class RewardTransactionController extends Controller
                            'shop_type',
                            'item_type',
                            'item_price',
-                           'asta_db.store_transaction.id as strtrnsid'
+                           'asta_db.store_transaction.id as strtrnsid',
+                           'asta_db.store_transaction.id'
                        )
                        ->where('item_type', '=', 3)
                        ->where('asta_db.store_transaction.status', '=', 0)
@@ -142,5 +144,14 @@ class RewardTransactionController extends Controller
         ]);
 
         return back()->with('success', alertTranslate('Reject request Transaction has been successful'));
+    }
+
+    public function DeliveryProgress(Request $request)
+    {
+        $iddelivery = $request->idstore;
+        StoreDelivery::create([
+            'id'             => $iddelivery,
+            // 'transaction_id' => 
+        ]);
     }
 }

@@ -203,8 +203,9 @@
 					<i class="fa fa-remove"></i>
 				</button>
             </div>
-            <form action="{{ route('RewardTransaction-Decline')}}" method="POST">
-            @csrf
+            <form action="{{ route('RewardTransaction-DeliveryProgress')}}" method="POST">
+						@csrf
+								<input type="hidden" name="idstore" value="{{ $transaction->id }}">
                 <div class="modal-body" align="center">
 									<table width="100%">
 										<tr>
