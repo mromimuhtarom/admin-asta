@@ -33,11 +33,10 @@
 								@if (Request::is('Transaction/Transaction_Day/Transaction_Day-search*'))
 									<div class="col">
 										<select name="choose_time" id="time" class="form-control">
-											<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+												<option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
 												<option value="Day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
 												<option value="Week" @if($time == 'Week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
 												<option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
-												<option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
 										</select>
 									</div>
 									<div class="col">
@@ -52,11 +51,10 @@
 								@else 
 									<div class="col">
 										<select name="choose_time" id="time" class="form-control">
-											<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+											<option value="All time">{{ translate_MenuTransaction('All time') }}</option>
 											<option value="Day">{{ translate_MenuTransaction('Day') }}</option>
 											<option value="Week">{{ translate_MenuTransaction('Week') }}</option>
 											<option value="Month">{{ translate_MenuTransaction('Month') }}</option>
-											<option value="All time">{{ translate_MenuTransaction('All time') }}</option>
 										</select>
 									</div>
 									<div class="col">
@@ -119,9 +117,6 @@
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_gold">{{ translate_MenuTransaction("Correction Gold") }} <i class="fa fa-sort{{ iconsorting('correction_gold') }}"></i></a></td>
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_chip">{{ translate_MenuTransaction("Correction Chip") }} <i class="fa fa-sort{{ iconsorting('chip_correction') }}"></i></a></td>
 								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.store_transaction_day.correction_point">{{ translate_MenuTransaction("Correction Point") }} <i class="fa fa-sort{{ iconsorting('correction_point') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point">{{ translate_MenuTransaction("Point Get") }} <i class="fa fa-sort{{ iconsorting('point')}}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point_spend">{{ translate_MenuTransaction("Point Spend") }} <i class="fa fa-sort{{ iconsorting('point_spend') }}"></i></a></td>
-								<td><a href="{{ route('TransactionDay-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_point.point_expired">{{ translate_MenuTransaction("Point Expired") }} <i class="fa fa-sort{{ iconsorting('point_expired') }}"></i></a></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -143,9 +138,6 @@
 									<td>{{ number_format($trns_day->correction_gold, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_chip, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_point, 2) }}</td>
-									<td>{{ number_format($trns_day->point, 2) }}</td>
-									<td>{{ number_format($trns_day->point_spend, 2) }}</td>
-									<td>{{ number_format($trns_day->expired, 2) }}</td>
 								</tr>
 								@endforeach
 							@elseif($time == "Day" || $time == "Week" || $time == "Month")
@@ -164,9 +156,6 @@
 									<td>{{ number_format($trns_day->correction_gold, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_chip, 2) }}</td>
 									<td>{{ number_format($trns_day->correction_point, 2) }}</td>
-									<td>{{ number_format($trns_day->point, 2) }}</td>
-									<td>{{ number_format($trns_day->point_spend, 2) }}</td>
-									<td>{{ number_format($trns_day->expired, 2) }}</td>
 								</tr>
 								@endforeach
 							@endif

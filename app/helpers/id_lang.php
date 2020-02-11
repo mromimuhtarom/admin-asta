@@ -26,6 +26,7 @@ function translate_menu($menu){
       'User_Bank_Transaction'         => 'Transaksi Bank Pemain',
       'Reward_Transaction'            => 'Transaksi Barang',
       'Add_Transaction'               => 'Tambah transaksi',
+      'Transaction_Point'             => 'Transaksi Point',
       'Players'                       => 'Pemain',
       'Active_Players'                => 'Pemain aktif',
       'Report_Players'                => 'Laporan pemain',
