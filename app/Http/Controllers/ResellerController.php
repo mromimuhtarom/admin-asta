@@ -803,6 +803,15 @@ public function detailTransaction(Request $request, $month, $year)
             endif;
 
             $totalbalance = $goldreseller->gold + $valuecurrency;
+            ResellerBalance::create([
+                'reseller_id'   =>  $agen_id,
+                'action_id'     =>  $type,
+                'debet'         =>  $valuecurrency,
+                'credit'        =>  0,
+                'balance'       =>  $totalbalance,
+                'datetime'      =>  Carbon::now('GMT+7')
+            ]);
+
             Reseller::where('reseller_id', '=', $agen_id )->update([
                 'gold' => $totalbalance
             ]);
@@ -847,7 +856,7 @@ public function detailTransaction(Request $request, $month, $year)
             $goldreseller = Reseller::where('reseller_id', '=', $agen_id)->first();
            
             //--- UNTUK BALANCE ---//
-            // --untuk yang valu curency lebih besar dri gold
+            // --untuk yang valu currency lebih besar dri gold
             if($valuecurrency > $goldreseller->gold):
                 $balancegoldtotal = $valuecurrency - $goldreseller->gold;
                 $opmath = "ditambahkan dengan";
@@ -870,7 +879,16 @@ public function detailTransaction(Request $request, $month, $year)
                     'balance'       =>  $valuecurrency,
                     'datetime'      =>  Carbon::now('GMT+7')
                 ]);
-                
+            elseif($valuecurrency == $goldreseller->gold):
+                $opmath = "sama dengan";
+                ResellerBalance::create([
+                    'reseller_id'   =>  $agen_id,
+                    'action_id'     =>  $type,
+                    'debet'         =>  0,
+                    'credit'        =>  0,
+                    'balance'       =>  $valuecurrency,
+                    'datetime'      =>  Carbon::now('GMT+7')
+                ]);
             endif;
 
             if($resellertransactionday):

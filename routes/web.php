@@ -114,6 +114,15 @@ Route::middleware('authenticated')->group(function(){
                 Route::post('AddvalueCurrency', 'Add_TransactionController@update')->name('AddTransaction-update');
             });
         });
+
+        Route::group(['prefix'  =>  'Transaction_Point'], function() {
+            Route::middleware('page_denied:Transaction Point')->group(function(){
+                Route::get('Transaction_Point-view', 'TransactionPointController@index')->name('Transaction_Point');
+                Route::get('Transaction_Point-search', 'TransactionPointController@search')->name('TransactionPoint-search');
+                Route::get('Transaction_Point-search/detail', 'TransactionPointController@detail')->name('detailTransactionPoint');
+
+            });
+        });
     });
 
     Route::group(['prefix'  =>  'Players'], function() {

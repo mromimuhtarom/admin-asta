@@ -42,33 +42,9 @@ class TransactionDayController extends Controller
             $namecolumn = 'asta_db.store_transaction_day.date_created';
           endif;
 
-        if($time == "Day"){
+        if($time == "Day"){ 
 
-          //   $user_point = DB::table('user_point')->leftJoin('asta_db.store_transaction_day', 'asta_db.store_transaction_day.user_id', '=', 'asta_db.user_point.user_id')
-          //                 ->select(
-          //                   'asta_db.user_point.date as date_created',
-			    // 'asta_db.user_point.date as date',
-          //                   DB::raw('0 As debettransaction'),
-          //                   DB::raw('0 As credittransaction'),
-          //                   DB::raw('0 As gold_debettransaction'),
-          //                   DB::raw('0 As gold_credittransaction'),
-          //                   DB::raw('0 As chip_debettransaction'),
-          //                   DB::raw('0 As chip_credittransaction'),
-          //                   DB::raw('0 As reward_goldtransaction'),
-          //                   DB::raw('0 As reward_pointtransaction'),
-          //                   DB::raw('0 As reward_chiptransaction'),
-          //                   DB::raw('0 As correction_gold'),
-          //                   DB::raw('0 As correction_chip'),
-          //                   DB::raw('0 As correction_point'),
-          //                   DB::raw('sum(asta_db.user_point.point) As point'),
-          //                   DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
-          //                   DB::raw('sum(asta_db.user_point.point_expired) As expired'),
-          //                   DB::raw('max(date(asta_db.user_point.date)) As maxDate'),
-          //                   DB::raw('min(date(asta_db.user_point.date)) As minDate'),
-          //                   DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek')
-          //                 ); 
-
-            $Transaction = StoreTransactionDay::leftJoin('asta_db.user_point', 'asta_db.user_point.user_id', '=', 'asta_db.store_transaction_day.user_id')->select(
+            $Transaction = StoreTransactionDay::select(
                             'asta_db.store_transaction_day.date_created',
 			                      'asta_db.store_transaction_day.date as date',
                             DB::raw('sum(asta_db.store_transaction_day.debet) As debettransaction'),
@@ -83,53 +59,34 @@ class TransactionDayController extends Controller
                             DB::raw('sum(asta_db.store_transaction_day.correction_gold) As correction_gold'),
                             DB::raw('sum(asta_db.store_transaction_day.correction_chip) As correction_chip'),
                             DB::raw('sum(asta_db.store_transaction_day.correction_point) As correction_point'),
-                            DB::raw('sum(asta_db.user_point.point) As point'),
-                            DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
-                            DB::raw('sum(asta_db.user_point.point_expired) As expired'),
                             DB::raw('max(date(asta_db.store_transaction_day.date)) As maxDate'),
                             DB::raw('min(date(asta_db.store_transaction_day.date)) As minDate'),
                             DB::raw(' YEARWEEK(asta_db.store_transaction_day.date) As yearperweek')
                            );      
             if($minDate != NULL && $maxDate != NULL):
-
-		    // $userpointdate = $user_point->wherebetween('asta_db.user_point.date', [$minDate, $maxDate])
-				//      ->orderBy($namecolumn, $sortingorder)
-				//      ->groupBy(DB::raw('DATE(asta_db.user_point.date)'));
 		    
                     $history = $Transaction->wherebetween('asta_db.store_transaction_day.date', [$minDate, $maxDate])
 				                        ->groupBy(DB::raw('DATE(asta_db.store_transaction_day.date_created)'))
 				                        ->orderBy($namecolumn, $sortingorder)
-                                // ->union($userpointdate)
                                 ->paginate(20);
               
             elseif($minDate != NULL):
-		            // $userpointdate = $user_point->where('asta_db.user_point.date', '>=', $minDate)
-                //                 ->orderBy($namecolumn, $sortingorder)
-                //                 ->groupBy(DB::raw('DATE(asta_db.user_point.date)'));
 
                 $history = $Transaction->where('asta_db.store_transaction_day.date_created', '>=', $minDate." 00:00:00")
                             ->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('DATE(asta_db.store_transaction_day.date_created)'))
-			                      // ->union($userpointdate)
                             ->paginate(20);
             
             elseif($maxDate != NULL):
-		            // $userpointdate = $user_point->where('asta_db.user_point.date', '<=', $maxDate)
-                //                  ->orderBy($namecolumn, $sortingorder)
-				        //                  ->groupBy(DB::raw('DATE(asta_db.user_point.date)'));
 
                 $history = $Transaction->where('asta_db.store_transaction_day.date_created', '<=', $maxDate.' 23:59:59')
                             ->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('DATE(asta_db.store_transaction_day.date_created)'))
-			                      // ->union($userpointdate)
                             ->paginate(20);
 	          else:
-		            // $userpointdate = $user_point->orderBy($namecolumn, $sortingorder)
-				        //                  ->groupBy(DB::raw('DATE(asta_db.user_point.date)'));
 
                 $history = $Transaction->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('DATE(asta_db.store_transaction_day.date_created)'))
-			                      // ->union($userpointdate)
                             ->paginate(20);
 
             endif;
@@ -143,33 +100,7 @@ class TransactionDayController extends Controller
         else if($time == "Week"){
 
 
-            // $user_point = DB::table('user_point')->leftJoin('asta_db.store_transaction_day', 'asta_db.store_transaction_day.user_id', '=', 'asta_db.user_point.user_id')
-            //               ->select(
-            //                 'asta_db.user_point.date as date_created',
-			      //                 'asta_db.user_point.date as date',
-            //                 DB::raw('0 As debettransaction'),
-            //                 DB::raw('0 As credittransaction'),
-            //                 DB::raw('0 As gold_debettransaction'),
-            //                 DB::raw('0 As gold_credittransaction'),
-            //                 DB::raw('0 As chip_debettransaction'),
-            //                 DB::raw('0 As chip_credittransaction'),
-            //                 DB::raw('0 As reward_goldtransaction'),
-            //                 DB::raw('0 As reward_pointtransaction'),
-            //                 DB::raw('0 As reward_chiptransaction'),
-            //                 DB::raw('0 As correction_gold'),
-            //                 DB::raw('0 As correction_chip'),
-            //                 DB::raw('0 As correction_point'),
-            //                 DB::raw('sum(asta_db.user_point.point) As point'),
-            //                 DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
-            //                 DB::raw('sum(asta_db.user_point.point_expired) As expired'),
-            //                 DB::raw('max(date(asta_db.user_point.date)) As maxDate'),
-            //                 DB::raw('min(date(asta_db.user_point.date)) As minDate'),
-            //                 DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek')
-            //               ); 
-
-
-            $Transaction = StoreTransactionDay::leftJoin('asta_db.user_point', 'asta_db.user_point.user_id', '=', 'asta_db.store_transaction_day.user_id')
-			                     ->select(
+            $Transaction = StoreTransactionDay::select(
 				                        'asta_db.store_transaction_day.date_created',
                                 DB::raw('sum(asta_db.store_transaction_day.debet) As debettransaction'),
                                 DB::raw('sum(asta_db.store_transaction_day.credit) As credittransaction'),
@@ -183,9 +114,6 @@ class TransactionDayController extends Controller
                                 DB::raw('sum(asta_db.store_transaction_day.correction_gold) As correction_gold'),
                                 DB::raw('sum(asta_db.store_transaction_day.correction_chip) As correction_chip'),
                                 DB::raw('sum(asta_db.store_transaction_day.correction_point) As correction_point'),
-                                DB::raw('sum(asta_db.user_point.point) As point'),
-                                DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
-                                DB::raw('sum(asta_db.user_point.point_expired) As expired'),
                                 DB::raw('max(date(asta_db.store_transaction_day.date_created)) As maxDate'),
                                 DB::raw('min(date(asta_db.store_transaction_day.date_created)) As minDate'),
                                 DB::raw(' YEARWEEK(asta_db.store_transaction_day.date_created) As yearperweek')
@@ -193,44 +121,29 @@ class TransactionDayController extends Controller
                                 );
 
             if($minDate != NULL && $maxDate != NULL):
-        //    	$userpointdate = $user_point->wherebetween('asta_db.user_point.date', [$minDate, $maxDate])
-				//  ->orderBy($namecolumn, $sortingorder)
-				//  ->groupBy(DB::raw('YEARWEEK(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
 
                 $history = $Transaction->wherebetween('asta_db.store_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                             ->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('YEARWEEK(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-		                        // ->union($userpointdate)
                             ->paginate(20);
 
             elseif($minDate != NULL):
-           	// $userpointdate = $user_point->where('asta_db.user_point.date', '>=', $minDate)
-				    //                  ->orderBy($namecolumn, $sortingorder)
-				    //                  ->groupBy(DB::raw('YEARWEEK(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
 
                 $history = $Transaction->where('asta_db.store_transaction_day.date_created', '>=', $minDate." 00:00:00")
                             ->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('YEARWEEK(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-			                      // ->union($userpointdate)
                             ->paginate(20);
             
             elseif($maxDate != NULL):
-           	// $userpointdate = $user_point->where('asta_db.user_point.date', '<=', $maxDate)
-            //                  ->orderBy($namecolumn, $sortingorder)
-            //                  ->groupBy(DB::raw('YEARWEEK(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
 
                 $history = $Transaction->where('asta_db.store_transaction_day.date_created', '<=', $maxDate.' 23:59:59')
                             ->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('YEARWEEK(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-			                      // ->union($userpointdate)
                             ->paginate(20);
 	    else :
-           	// $userpointdate = $user_point->orderBy($namecolumn, $sortingorder)
-				    //                  ->groupBy(DB::raw('YEARWEEK(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
 
                 $history = $Transaction->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('YEARWEEK(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-			                      // ->union($userpointdate)
                             ->paginate(20);
 
             endif;
@@ -243,32 +156,8 @@ class TransactionDayController extends Controller
         }
         else if($time == "Month"){
 
-            // $user_point = DB::table('user_point')->leftJoin('asta_db.store_transaction_day', 'asta_db.store_transaction_day.user_id', '=', 'asta_db.user_point.user_id')
-            //               ->select(
-            //                 'asta_db.user_point.date as date_created',
-			      //                 'asta_db.user_point.date as date',
-            //                 DB::raw('0 As debettransaction'),
-            //                 DB::raw('0 As credittransaction'),
-            //                 DB::raw('0 As gold_debettransaction'),
-            //                 DB::raw('0 As gold_credittransaction'),
-            //                 DB::raw('0 As chip_debettransaction'),
-            //                 DB::raw('0 As chip_credittransaction'),
-            //                 DB::raw('0 As reward_goldtransaction'),
-            //                 DB::raw('0 As reward_pointtransaction'),
-            //                 DB::raw('0 As reward_chiptransaction'),
-            //                 DB::raw('0 As correction_gold'),
-            //                 DB::raw('0 As correction_chip'),
-            //                 DB::raw('0 As correction_point'),
-            //                 DB::raw('sum(asta_db.user_point.point) As point'),
-            //                 DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
-            //                 DB::raw('sum(asta_db.user_point.point_expired) As expired'),
-            //                 DB::raw('max(date(asta_db.user_point.date)) As maxDate'),
-            //                 DB::raw('min(date(asta_db.user_point.date)) As minDate'),
-            //                 DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek')
-            //               ); 
-
-            $Transaction = StoreTransactionDay::leftJoin('asta_db.user_point', 'asta_db.user_point.user_id', '=', 'asta_db.store_transaction_day.user_id')->select(
-					    'asta_db.store_transaction_day.date_created',
+            $Transaction = StoreTransactionDay::select(
+					                                  'asta_db.store_transaction_day.date_created',
                                             DB::raw('sum(asta_db.store_transaction_day.debet) As debettransaction'),
                                             DB::raw('sum(asta_db.store_transaction_day.credit) As credittransaction'),
                                             DB::raw('sum(asta_db.store_transaction_day.gold_debet) As gold_debettransaction'),
@@ -281,9 +170,6 @@ class TransactionDayController extends Controller
                                             DB::raw('sum(asta_db.store_transaction_day.correction_gold) As correction_gold'),
                                             DB::raw('sum(asta_db.store_transaction_day.correction_chip) As correction_chip'),
                                             DB::raw('sum(asta_db.store_transaction_day.correction_point) As correction_point'),
-                                            DB::raw('sum(asta_db.user_point.point) As point'),
-                                            DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
-                                            DB::raw('sum(asta_db.user_point.point_expired) As expired'),
                                             DB::raw('max(date(asta_db.store_transaction_day.date_created)) As maxDate'),
                                             DB::raw('min(date(asta_db.store_transaction_day.date_created)) As minDate'),
                                             DB::raw(' YEARWEEK(asta_db.store_transaction_day.date_created) As yearperweek')
@@ -291,46 +177,28 @@ class TransactionDayController extends Controller
                                         );
 
                 if($minDate != NULL && $maxDate != NULL):
-           	    // $userpointdate = $user_point->wherebetween('asta_db.user_point.date', [$minDate, $maxDate])
-				        //                  ->orderBy($namecolumn, $sortingorder)
-				        //                  ->groupBy(DB::raw('month(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
-
 
                 $history = $Transaction->wherebetween('asta_db.store_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                         ->orderBy($namecolumn, $sortingorder)
                         ->groupBy(DB::raw('month(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-			                  // ->union($userpointdate)
                         ->paginate(20);
                 elseif($minDate != NULL):
-
-           	// $userpointdate = $user_point->where('asta_db.user_point.date', '>=', $minDate)
-				    //                  ->orderBy($namecolumn, $sortingorder)
-				    //                  ->groupBy(DB::raw('month(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
 
                 $history = $Transaction->where('asta_db.store_transaction_day.date_created', '>=', $minDate." 00:00:00")
                         ->orderBy($namecolumn, $sortingorder)
                         ->groupBy(DB::raw('month(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-			                  // ->union($userpointdate)
                         ->paginate(20);
 
                 elseif($maxDate != NULL):
 
-           	// $userpointdate = $user_point->where('asta_db.user_point.date', '<=', $maxDate)
-				    //                  ->orderBy($namecolumn, $sortingorder)
-				    //                  ->groupBy(DB::raw('month(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
-
                 $history = $Transaction->where('asta_db.store_transaction_day.date_created', '<=', $maxDate.' 23:59:59')
                         ->orderBy($namecolumn, $sortingorder)
                         ->groupBy(DB::raw('month(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-			                  // ->union($userpointdate)
                         ->paginate(20);
 		            else:
-                // $userpointdate = $user_point->orderBy($namecolumn, $sortingorder)
-				        //                  ->groupBy(DB::raw('month(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"));
 
                 $history = $Transaction->orderBy($namecolumn, $sortingorder)
                         ->groupBy(DB::raw('month(asta_db.store_transaction_day.date_created)'), DB::raw("WEEK('asta_db.store_transaction_day.date_created')"))
-			                  // ->union($userpointdate)
                         ->paginate(20);
 
                 endif;
@@ -342,40 +210,13 @@ class TransactionDayController extends Controller
         }
         else if($time  == "All time"){
 
-            // $user_point = DB::table('user_point')->leftJoin('asta_db.store_transaction_day', 'asta_db.store_transaction_day.user_id', '=', 'asta_db.user_point.user_id')
-			      //               ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_point.user_id')
-            //               ->select(
-            //                 'store_transaction_day.id',
-            //                 'user_point.user_id',
-            //                 'user.username',
-            //                 'asta_db.user_point.date as date_created',
-			      //                 'asta_db.user_point.date as date',
-            //                 DB::raw('0 As debettransaction'),
-            //                 DB::raw('0 As credittransaction'),
-            //                 DB::raw('0 As gold_debettransaction'),
-            //                 DB::raw('0 As gold_credittransaction'),
-            //                 DB::raw('0 As chip_debettransaction'),
-            //                 DB::raw('0 As chip_credittransaction'),
-            //                 DB::raw('0 As reward_goldtransaction'),
-            //                 DB::raw('0 As reward_pointtransaction'),
-            //                 DB::raw('0 As reward_chiptransaction'),
-            //                 DB::raw('0 As correction_gold'),
-            //                 DB::raw('0 As correction_chip'),
-            //                 DB::raw('0 As correction_point'),
-            //                 DB::raw('asta_db.user_point.point As point'),
-            //                 DB::raw('asta_db.user_point.point_spend As point_spend'),
-            //                 DB::raw('asta_db.user_point.point_expired As expired')
-            //               ); 
-
 
             $transactionDay = StoreTransactionDay::leftJoin('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction_day.user_id')
-                          ->join('asta_db.user_point', 'asta_db.user_point.user_id', '=', 'asta_db.store_transaction_day.user_id')
                           ->select(
                               'store_transaction_day.id',
                               'store_transaction_day.user_id',
                               'user.username',
                               'asta_db.store_transaction_day.date as date_created',
-			                        'asta_db.user_point.date as date',
                               'store_transaction_day.debet as debettransaction',
                               'store_transaction_day.credit as credittransaction',
                               'store_transaction_day.gold_debet as gold_debettransaction',
@@ -387,20 +228,14 @@ class TransactionDayController extends Controller
                               'store_transaction_day.reward_chip as rewatd_chiptransaction',
                               'store_transaction_day.correction_gold as correction_gold',
                               'store_transaction_day.correction_chip as chip_correction',
-                              'store_transaction_day.correction_point as correction_point',
-                              'user_point.point as point',
-                              'user_point.point_spend as point_spend',
-                              'user_point.point_expired as point_expired'
+                              'store_transaction_day.correction_point as correction_point'
                           );
             
             $lang_id = '';
             if($minDate != NULL && $maxDate != NULL){
-           	// $userpointdate = $user_point->wherebetween('asta_db.user_point.date', [$minDate, $maxDate])
-				    //                   ->orderBy($namecolumn, $sortingorder);
 
                 $history = $transactionDay->wherebetween('asta_db.store_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                             ->orderBy($namecolumn, $sortingorder)
-			                      // ->union($userpointdate)
                             ->paginate(20);
 
                 $history->appends($request->all());
@@ -408,24 +243,18 @@ class TransactionDayController extends Controller
             }
             else if($minDate != NULL){
 
-           	// $userpointdate = $user_point->where('asta_db.user_point.date', '>=', $minDate)
-				    //                  ->orderBy($namecolumn, $sortingorder);
 
                 $history = $transactionDay->where('asta_db.store_transaction_day.date_created', '>=', $minDate." 00:00:00")
                             ->orderBy($namecolumn, $sortingorder)
-			                      // ->union($userpointdate)
                             ->paginate(20);
 
                 $history->appends($request->all());
                 return view('pages.transaction.transaction_day', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate', 'namecolumn', 'sortingorder'));
             }
             else if($maxDate != NULL){
-           	// $userpointdate = $user_point->where('asta_db.user_point.date', '<=', $maxDate)
-				    //                  ->orderBy($namecolumn, $sortingorder);
 
                 $history = $transactionDay->where('asta_db.store_transaction_day.date_created', '<=', $maxDate." 23:59:59")
                             ->orderBy($namecolumn, $sortingorder)
-			                      // ->union($userpointdate)
                             ->paginate(20);
 
                 $history->appends($request->all());
@@ -433,10 +262,7 @@ class TransactionDayController extends Controller
             }
             else{
 
-                // $userpointdate = $user_point->orderBy($namecolumn, $sortingorder);
-
                 $history = $transactionDay->orderBy($namecolumn, $sortingorder)
-			                    //  ->union($userpointdate)
                            ->paginate(20);
 
                 $history->appends($request->all());
@@ -477,42 +303,13 @@ class TransactionDayController extends Controller
           $sortingorder = 'asc';
         endif;
 
-          // $user_point = DB::table('user_point')->leftJoin('asta_db.store_transaction_day', 'asta_db.store_transaction_day.user_id', '=', 'asta_db.user_point.user_id')
-		      //           	  ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.user_point.user_id')
-          //               ->select(
-          //                   'store_transaction_day.id',
-          //                   'store_transaction_day.user_id',
-          //                   'user.username',
-          //                   'asta_db.user_point.date as date_created',
-			    //                   'asta_db.user_point.date as date',
-          //                   DB::raw('0 As debettransaction'),
-          //                   DB::raw('0 As credittransaction'),
-          //                   DB::raw('0 As gold_debettransaction'),
-          //                   DB::raw('0 As gold_credittransaction'),
-          //                   DB::raw('0 As chip_debettransaction'),
-          //                   DB::raw('0 As chip_credittransaction'),
-          //                   DB::raw('0 As reward_goldtransaction'),
-          //                   DB::raw('0 As reward_pointtransaction'),
-          //                   DB::raw('0 As reward_chiptransaction'),
-          //                   DB::raw('0 As correction_gold'),
-          //                   DB::raw('0 As correction_chip'),
-          //                   DB::raw('0 As correction_point'),
-          //                   DB::raw('asta_db.user_point.point As point'),
-          //                   DB::raw('asta_db.user_point.point_spend As point_spend'),
-          //                   DB::raw('asta_db.user_point.point_expired As expired')
-          //               )
-          //               ->wherebetween('asta_db.user_point.date', [$minDate, $maxDate])
-          //               ->orderBy($namecolumn, $sortingorder); 
-
 
         $history = StoreTransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction_day.user_id')
-                    ->leftjoin('asta_db.user_point', 'asta_db.user_point.user_id', '=', 'asta_db.store_transaction_day.user_id')
                     ->select(
                         'store_transaction_day.id',
                         'store_transaction_day.user_id',
                         'user.username',
                         'asta_db.store_transaction_day.date as date_created',
-                        'asta_db.user_point.date as date',
                         'store_transaction_day.debet as debettransaction',
                         'store_transaction_day.credit as credittransaction',
                         'store_transaction_day.gold_debet as gold_debettransaction',
@@ -524,14 +321,10 @@ class TransactionDayController extends Controller
                         'store_transaction_day.reward_chip as reward_chiptransaction',
                         'store_transaction_day.correction_gold as correction_gold',
                         'store_transaction_day.correction_chip as chip_correction',
-                        'store_transaction_day.correction_point as point_correction',
-                        'user_point.point as point',
-                        'user_point.point_spend as point_spend',
-                        'user_point.point_expired as point_expired'
+                        'store_transaction_day.correction_point as point_correction'
                     )
                     ->wherebetween('asta_db.store_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                     ->orderBy($namecolumn, $sortingorder)
-                    // ->union($user_point)
                     ->paginate(20);
      
         $time      = "Detail";
