@@ -101,6 +101,7 @@
                 <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.price">{{ TranslateMenuItem('Price') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.price') }}"></i></a></th>
                 <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.category_id">{{ TranslateMenuItem('Category') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.category_id') }}"></i></a></th>
                 <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.status">{{ TranslateMenuItem('Status') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.status') }}"></i></a></th>
+                <th class="th-sm">{{ TranslateMenuItem('See Detail Image') }}</th>
                 @if($menu && $mainmenu)
                 <th align="center" style="width:10px;">
                   <a  href="#" style="color:red;font-weight:bold;" 
@@ -159,6 +160,9 @@
                     <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate($gf->strCategory()) }}</a></td>
                     <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate(strEnabledDisabled($gf->status)) }}</a></td>
                     <td>
+                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $gf->id }}">{{ TranslateMenuItem('Detail Info') }}</button>
+                    </td>
+                    <td>
                         <a href="#" style="color:red;" class="delete{{ $gf->id }}" 
                             id="delete"
                             data-pk="{{ $gf->id }}"
@@ -181,6 +185,7 @@
                     <td>{{ $gf->price }}</td>
                     <td>{{ $gf->strCategory() }}</td>
                     <td>{{ strEnabledDisabled($gf->status) }}</td>
+                    <td></td>
                   
                 </tr>
                 @endif
@@ -310,6 +315,41 @@
     </div>
   </div>
 </div>
+
+@foreach ($gifts as $gf)
+<!-- Modal detail info -->
+<div class="modal fade" id="detailinfo{{ $gf->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Detail Info') }}</h5>
+				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fa fa-remove"></i>
+				</button>
+      </div>
+      <style>
+        #animation {
+          width:100px;
+          height:40px;
+          background: url('{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}') left center;
+          background-size: cover;
+          animation: play 1.5s steps(10) infinite;
+          display: inline-block;
+        }
+
+        @keyframes play {
+          100% { background-position: -1000px; }
+        }
+      </style>
+			<div class="modal-body" align="center">
+        <div id="animation"></div>
+        {{-- <div id="overlaytdt"><img src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" alt="Be patient..." /></div> --}}
+			</div> 
+		</div>
+	</div>
+</div>
+@endforeach
+<!-- End Modal detail info -->
 
 <script type="text/javascript">
   $(".watermark-image").change(function() {

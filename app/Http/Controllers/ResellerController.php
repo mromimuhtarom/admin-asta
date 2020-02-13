@@ -1378,6 +1378,7 @@ public function detailTransaction(Request $request, $month, $year)
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menolak permintaan transaksi di menu Transaksi Permintaan Agen dengan Agenid'. $reseller_id
         ]);
+
         return back()->with('success', alertTranslate("Declined Succesful"));
     }
 //------ End Request Transaction Decline -------//
@@ -1474,24 +1475,24 @@ public function detailTransaction(Request $request, $month, $year)
             $id_lst = $id->item_id;
         }
         
-          $id_new                 = $id_lst + 1;
-          $file                   = $request->file('file');
-          $file_wtr               = $request->file('file1');
-          $filebonus              = $request->file('filebonus');
-          $ekstensi_diperbolehkan = array('png');
-          $nama                   = $_FILES['file']['name'];
-          $nama_wtr               = $_FILES['file1']['name'];
-          $namafilebonus          = $_FILES['filebonus']['name'];
-          $x                      = explode('.', $nama);
-          $x_wtr                  = explode('.', $nama_wtr);
-          $x_bonus                = explode('.', $namafilebonus);
-          $ekstensi               = strtolower(end($x));
-          $ekstensi_wtr           = strtolower(end($x_wtr));
-          $ekstensi_bonus         = strtolower(end($x_bonus));
-          $ukuran                 = $_FILES['file']['size'];
-          $nama_file_unik         = $id_new.'.'.$ekstensi;
-          $imageBonusname         = $id_new.'-2.'.$ekstensi_bonus;
-        list($width, $height)                     = getimagesize($file);
+        $id_new                 = $id_lst + 1;
+        $file                   = $request->file('file');
+        $file_wtr               = $request->file('file1');
+        $filebonus              = $request->file('filebonus');
+        $ekstensi_diperbolehkan = array('png');
+        $nama                   = $_FILES['file']['name'];
+        $nama_wtr               = $_FILES['file1']['name'];
+        $namafilebonus          = $_FILES['filebonus']['name'];
+        $x                      = explode('.', $nama);
+        $x_wtr                  = explode('.', $nama_wtr);
+        $x_bonus                = explode('.', $namafilebonus);
+        $ekstensi               = strtolower(end($x));
+        $ekstensi_wtr           = strtolower(end($x_wtr));
+        $ekstensi_bonus         = strtolower(end($x_bonus));
+        $ukuran                 = $_FILES['file']['size'];
+        $nama_file_unik         = $id_new.'.'.$ekstensi;
+        $imageBonusname         = $id_new.'-2.'.$ekstensi_bonus;
+        list($width, $height)   = getimagesize($file);
        
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {

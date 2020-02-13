@@ -39,7 +39,7 @@
                   <tr>
                     <td>
                       
-                      <input onclick="toggleAutoRefresh(this);" @if($checked == 'checked'){{dd($checked)}} checked @endif  id="reloadCB autorefresh" type="checkbox" name="autorefresh" class="deletepermission">
+                      <input @if($checked == 'checked') checked @endif  id="autorefresh" type="checkbox" name="autorefresh" class="deletepermission">
                       <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('Auto Refresh') }}</div>
                     </td>
                   </tr>
@@ -71,7 +71,7 @@
                           <td>
                             <div style="float:right;margin-left:10%;">
                               <form action="{{ route('Monitoring_Table_Asta_Poker') }}">
-                                <input type="text" class="checkauto" name="checkauto" value="@if($checked === '#checked') #checked @endif">                            
+                                <input type="hidden" class="checkauto" name="checkauto" value="">                            
                                 <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-view*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable" style=""></i></button>
                               </form>
                             </div>
@@ -108,7 +108,7 @@
                           <td>
                             <div style="float:right">
                               <form action="{{ route('Monitoring_Table_Asta_Poker-intermediate') }}">
-                                <input type="text" class="checkauto" name="checkauto" value="@if($checked == '#checked') #checked @endif">                            
+                                <input type="hidden" class="checkauto" name="checkauto" value="">                            
                                 <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"></i></button>
                               </form>
                             </div>
@@ -144,7 +144,7 @@
                             <td>
                               <div style="float:right;">
                                 <form action="{{ route('Monitoring_Table_Asta_Poker-pro') }}">
-                                  <input type="text" class="checkauto" name="checkauto" value="@if($checked == '#checked') #checked @endif">
+                                  <input type="hidden" class="checkauto" name="checkauto" value="">
                                   <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-pro*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"></i></button>
                                 </form>
                               </div>
@@ -330,11 +330,6 @@
               <table class="table table-bordered" id="tablerefreshed1">
                 <thead>
                   <tr>
-                    {{-- <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th> --}}
                     <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
                     <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
                     <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }} </th>
@@ -396,28 +391,6 @@
   <!-- End Form Category -->
 
   <script type="text/javascript">
-    var reloading;
-    var refresh_time = 3000;
-    
-    function checkReloading() {
-        if (window.location.hash=="checked") {
-            reloading=setTimeout("window.location.reload();", refresh_time);
-            document.getElementById("reloadCB").checked=true;
-        }
-    }
-    
-    function toggleAutoRefresh(cb) {
-        if (cb.checked) {
-            window.location.replace("Monitor_Asta_Poker-intermediate?checkauto=checked");
-            $(".checkauto").val("checked");
-            reloading=setTimeout("window.location.reload();", refresh_time);
-        } else {
-            window.location.replace("");
-            clearTimeout(reloading);
-        }
-    }
-    
-    window.onload=checkReloading;
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
@@ -441,15 +414,26 @@
         });
         $('#autorefresh').click(function(){
             if($(this).prop("checked") == true){
-              
+              $(".checkauto").val("checked");
               setInterval(function(){
                 // $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
-                location.reload();
-              }, 5000);
+                // location.reload();
+                window.location.replace("?checkauto=checked");
+                reloading=setTimeout("window.location.reload();", refresh_time);
+              }, 300000);
             } else {
               $(".checkauto").val('');
             }
         });
+
+        if($('#autorefresh').prop("checked") == true)
+        {
+          $(".checkauto").val("checked");
+          setInterval(function(){
+            window.location.replace("?checkauto=checked");
+            reloading=setTimeout("window.location.reload();", refresh_time);
+          }, 300000);
+        }
     });
 
     table = $('table.table').dataTable({
