@@ -756,8 +756,10 @@ Route::middleware('authenticated')->group(function(){
             });
 
             Route::group(['prefix' => 'Store_reseller_report'], function(){
-                Route::middleware('page_denied:Store reseller report')->group(function)
-            })
+                Route::middleware('page_denied:Store reseller report')->group(function(){
+                   Route::get('StoreResellerReport-view', 'StoreResellrReportController@index')->name('Store_reseller_report');
+                });
+            });
         });
 
         Route::group(['prefix'  =>  'Reseller_Rank'], function() {
