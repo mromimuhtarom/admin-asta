@@ -1,10 +1,14 @@
 @extends('index')
 
 @section('content')
-    <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="#">
-    <script src="#"></script>
-    <script src="#"></script>
+    <link rel="shortcut icon" href="/game/bgt/TemplateData/favicon.ico">
+    <link rel="stylesheet" href="/game/bgt/TemplateData/style.css">
+    <script src="/game/bgt/TemplateData/UnityProgress.js"></script>
+    <script src="/game/bgt/Build/UnityLoader.js"></script>
+    <link rel="stylesheet" media="screen, print" href="/assets/vendors/vendors.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="/assets/app/app.bundle.css">
+    <script src="/assets/vendors/vendors.bundle.js"></script>
+	<script src="/assets/app/app.bundle.js"></script>
 
     <style>
         #gameContainer{
