@@ -47,17 +47,17 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th class="th-sm">{{ Translate_menuPlayers('Timestamp') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('ID Order') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('Purchase Date') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('User ID') }}</th>
 										<th class="th-sm">{{ Translate_menuPlayers('Username') }}</th>
 										<th class="th-sm">{{ translate_menuTransaction('Item') }}</th>
 										<th class="th-sm">{{ translate_menuTransaction('Quantity') }}</th>
 										<th class="th-sm">{{ translate_menuTransaction('Price') }}</th>
-										<th class="th-sm">{{ translate_menuTransaction('Detail Information') }}</th>
-										<th class="th-sm">{{ translate_menuTransaction('Status Payment') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('Transaction Type') }}</th>
 										@if ($menu && $mainmenu && $submenu)
 										<th class="th-sm">{{ translate_menuTransaction('Confirm request') }}</th>
 										@endif
-										<th class="th-sm">{{ translate_menuTransaction('Status') }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -65,7 +65,9 @@
 									
 									<tr>
 										@if ($menu && $mainmenu && $submenu)
+										<td>{{ $transaction->id }}</td>
 										<td>{{ $transaction->datetime }}</td>
+										<td>{{ $transaction->reseller_id }}</td>
 										<td>{{ $transaction->username }}</td>
 										@if ( $transaction->item_type == 1 )
 											@foreach ($item_gold as $chip)
@@ -88,7 +90,6 @@
 										@endif
 										<td>{{ $transaction->quantity }}</td>
 										<td>{{ $transaction->item_price }}</td>
-										<td>{{ $transaction->description }}</td>
 										<td>{{ $transaction->bankname }}{{ translate_menuTransaction('Bank Manual Transfer') }}</td>
 										<td>
 											<div>
@@ -98,13 +99,10 @@
 												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $transaction->id }}"><i class="fa fa-check"></i>{{ translate_menuTransaction('Approve') }}</button>
 											</div>
 										</td>
-										<td>
-											<div class="user-transaction-status">
-												<p>{{ translate_menuTransaction('Pending') }}</p>
-											</div>
-										</td>
 										@else
+										<td>{{ $transaction->id }}</td>
 										<td>{{ $transaction->datetime }}</td>
+										<td>{{ $transaction->userid }}</td>
 										<td>{{ $transaction->username }}</td>
 										@if ( $transaction->item_type == 1 )
 											@foreach ($item_gold as $chip)
@@ -127,7 +125,6 @@
 										@endif
 										<td>{{ $transaction->quantity }}</td>
 										<td>{{ $transaction->item_price }}</td>
-										<td>{{ $transaction->description }}</td>
 										<td>{{ $transaction->bankname }} {{ translate_menuTransaction('Bank Manual Transfer') }}</td>
 										<td>{{ translate_menuTransaction('Pending') }}</td>
 										@endif

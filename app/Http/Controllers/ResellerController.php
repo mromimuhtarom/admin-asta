@@ -1046,7 +1046,7 @@ public function detailTransaction(Request $request, $month, $year)
             $actionbalance[8]  => $actionbalance[9],
             $actionbalance[10] => $actionbalance[11],
             $actionbalance[12] => $actionbalance[13],
-            $actionbalance[12] => $actionbalance[15],
+            $actionbalance[14] => $actionbalance[15],
             $actionbalance[16] => $actionbalance[17],
             $actionbalance[18] => $actionbalance[19],
             $actionbalance[20] => $actionbalance[21],
@@ -1435,7 +1435,7 @@ public function detailTransaction(Request $request, $month, $year)
         $valueBonus= str_replace(':', ',', $bonusType->value);
         $bontype  = explode(",", $valueBonus);
         $timenow   = Carbon::now('GMT+7');
-        return view('pages.reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item', 'timenow', 'bontype'));
+        return view('pages.reseller.Store_reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item', 'timenow', 'bontype'));
     }
 // ------- End index Item Store Reseller -------- //
 

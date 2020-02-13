@@ -742,6 +742,20 @@ Route::middleware('authenticated')->group(function(){
             });
         });
 
+        Route::group(['prefix' => 'Store_Reseller'], function(){
+            Route::group(['prefix' => 'Item_Store_Reseller'], function(){
+                Route::middleware('page_denied:Item Store Reseller')->group(function(){
+                    Route::get('ItemStoreReseller-view', 'ResellerController@ItemStoreReseller')->name('Item_Store_Reseller');
+                    Route::post('ItemStoreReseller-create', 'ResellerController@ItemResellerstore')->name('ItemStoreReseller-create');
+                    Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
+                    Route::post('ItemStoreReselle-updateimageBonus', 'ResellerController@updateImageBonusitemstoreresller')->name('ItemStoreReseller-updateimageBonus');
+                    Route::post('ItemStoreReseller-updateimage', 'ResellerController@updateImageItemStoreReseller')->name('ItemStoreReseller-updateimage');
+                    Route::delete('ItemStore-delete', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-delete');
+                    Route::delete('ItemStore-deleteAll', 'ResellerController@deleteAllSelected')->name('ItemStore-deleteAllSelected');
+                });
+            });
+        });
+
         Route::group(['prefix'  =>  'Reseller_Rank'], function() {
             Route::middleware('page_denied:Reseller Rank')->group(function(){
                 Route::get('ResellerRank-view', 'ResellerController@ResellerRank')->name('Reseller_Rank');
@@ -764,19 +778,7 @@ Route::middleware('authenticated')->group(function(){
                 Route::get('RegisterReseller-view', 'ResellerController@RegisterReseller')->name('Register_Reseller');
                 Route::post('RegisterReseller-create', 'ResellerController@store')->name('RegisterReseller-create');
             });
-        });
-
-        Route::group(['prefix'  =>  'Item_Store_Reseller'], function() {
-            Route::middleware('page_denied:Item Store Reseller')->group(function(){
-                Route::get('ItemStoreReseller-view', 'ResellerController@ItemStoreReseller')->name('Item_Store_Reseller');
-                Route::post('ItemStoreReseller-create', 'ResellerController@ItemResellerstore')->name('ItemStoreReseller-create');
-                Route::post('ItemStore-update', 'ResellerController@updateItemstoreReseller')->name('ItemStore-update');
-                Route::post('ItemStoreReselle-updateimageBonus', 'ResellerController@updateImageBonusitemstoreresller')->name('ItemStoreReseller-updateimageBonus');
-                Route::post('ItemStoreReseller-updateimage', 'ResellerController@updateImageItemStoreReseller')->name('ItemStoreReseller-updateimage');
-                Route::delete('ItemStore-delete', 'ResellerController@destroyItemStoreReseller')->name('ItemStore-delete');
-                Route::delete('ItemStore-deleteAll', 'ResellerController@deleteAllSelected')->name('ItemStore-deleteAllSelected');
-            });
-        });        
+        });       
     });
 
     Route::group(['prefix' => 'Version_Asset_Apk'], function() {

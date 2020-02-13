@@ -122,7 +122,8 @@ function translate_menu($menu){
       'Monitoring_Table_Big_Two'      => 'Monitor Meja',
       'Novice_Big_Two'                => 'Pemula',
       'Intermediate_Big_Two'          => 'Menengah',
-      'Pro_Big_Two'                   => 'Ahli'
+      'Pro_Big_Two'                   => 'Ahli',
+      'Store_Reseller'                => 'Toko Agen'
     ];
 
     return $array_menu[$menu];
@@ -849,6 +850,20 @@ function TranslateTransactionHist($menu){
         "nothing"                   =>  "tidak ada",
         "tidak jelas"               =>  "tidak jelas",
     
+
+    ];
+    return $array_menuContent[$menu];
+};
+
+function TranslateTransaksiAgen($menu){
+
+    $array_menuContent = [
+        
+        "Purchase Date"   =>  "Tgl & Waktu pembelian",
+        "User ID"         =>  "ID Pengguna",
+        "ID Order"        =>  "ID Agen",
+        "Transaction Type"=>  "Tipe transaksi"
+
 
     ];
     return $array_menuContent[$menu];
