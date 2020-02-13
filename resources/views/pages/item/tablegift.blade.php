@@ -328,21 +328,40 @@
 				</button>
       </div>
       <style>
-        #animation {
-          width:100px;
-          height:40px;
-          background: url('{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}') left center;
-          background-size: cover;
-          animation: play 1.5s steps(10) infinite;
-          display: inline-block;
-        }
-
-        @keyframes play {
-          100% { background-position: -1000px; }
+        #image {
+          height: 256px;
+          width: 256px;
+          background: url("{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}") 0px 0px;
         }
       </style>
+      <script>
+        function animateScript() {
+          document.getElementById("image").style.backgroundPosition = '-256px 0px';
+        }
+
+        var tID; //we will use this variable to clear the setInterval()
+        function animateScript() {
+        var    position = 256; //start position for the image slicer
+        const  interval = 100; //100 ms of interval for the setInterval()
+        tID = setInterval ( () => {
+        document.getElementById("image").style.backgroundPosition = 
+        `-${position}px 0px`; 
+        //we use the ES6 template literal to insert the variable "position"
+        if (position < 1536)
+        { position = position + 256;}
+        //we increment the position by 256 each time
+        else
+        { position = 256; }
+        //reset the position to 256px, once position exceeds 1536px
+        }
+        , interval ); //end of setInterval
+        } //end of animateScript()
+      </script>
+        
 			<div class="modal-body" align="center">
-        <div id="animation"></div>
+        <div id="demo">
+          <p id="image" onmouseover="animateScript()"> </p>
+        </div>
         {{-- <div id="overlaytdt"><img src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" alt="Be patient..." /></div> --}}
 			</div> 
 		</div>
