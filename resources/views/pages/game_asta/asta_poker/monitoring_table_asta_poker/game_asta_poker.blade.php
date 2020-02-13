@@ -18,7 +18,7 @@
     </style>
     
     <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/15.json", {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/16.json", {onProgress: UnityProgress});
        
         function OnAppReady(){
             console.log("### application is loaded");

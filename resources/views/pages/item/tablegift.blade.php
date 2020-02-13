@@ -82,17 +82,25 @@
       <div class="custom-scroll table-responsive" style="height:900px;">
 
         <div class="table-outer">
+          <div class="row">
+              <!-- Button tambah bot baru -->
+              <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                  {{ Translate_menuPlayers('Total Record Entries is') }} {{ $gifts->total() }}
+              </div>
+                          <!-- End Button tambah bot baru -->
+          </div> 
           <table class="table table-bordered">
             <thead>
               <tr>
                 @if($menu && $mainmenu)
                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
                 @endif
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.id">{{ TranslateMenuItem('Gift ID') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.id') }}"></i></a></th>
                 <th style="width:10px;">{{ TranslateMenuItem('Image') }}</th>
-                <th class="th-sm">{{ TranslateMenuItem('Title') }}</th>
-                <th class="th-sm">{{ TranslateMenuItem('Price') }}</th>
-                <th class="th-sm">{{ TranslateMenuItem('Category') }}</th>
-                <th class="th-sm">{{ TranslateMenuItem('Status') }}</th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.name">{{ TranslateMenuItem('Title') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.name') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.price">{{ TranslateMenuItem('Price') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.price') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.category_id">{{ TranslateMenuItem('Category') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.category_id') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.status">{{ TranslateMenuItem('Status') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.status') }}"></i></a></th>
                 @if($menu && $mainmenu)
                 <th align="center" style="width:10px;">
                   <a  href="#" style="color:red;font-weight:bold;" 
@@ -109,7 +117,8 @@
                 @foreach($gifts as $gf)
                 @if($menu && $mainmenu)
                 <tr>
-                  <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
+                    <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
+                    <td>{{ $gf->id }}</td>
                     <td>
                           <div class="media-container">
                             <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
@@ -179,6 +188,7 @@
             </tbody>
           </table>
         </div>
+        <div style="display: flex;justify-content: center;">{{ $gifts->links() }}</div>
 
       </div>
 
@@ -318,6 +328,11 @@
     $('table.table').dataTable( {
       "lengthMenu": [[5, 25, 50, -1], [5, 25, 50, "All"]],
       "pagingType": "full_numbers",
+      "paging":false,
+      "bInfo":false,
+      "ordering":false,
+      "bLengthChange": false,
+      "searching": false,
     });
 
     $("#trash").hide();
@@ -337,7 +352,7 @@
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
     "autoWidth" : true,
-    "paging": false,
+    "ordering":false,
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },

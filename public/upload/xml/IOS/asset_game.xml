@@ -68,11 +68,11 @@
     <tpk name="tpk_game_img">
         <type>Image</type>
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/IOS/</link>
-        <ver>0.0.1</ver>
+        <ver>0.0.2</ver>
     </tpk>
     <tpk name="tpk_game_audio">
         <type>Audio</type>
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/IOS/</link>
-        <ver>0.0.1</ver>
+        <ver>0.0.2</ver>
     </tpk>
 </main_asset>
