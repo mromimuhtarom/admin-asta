@@ -19,6 +19,7 @@ class AstaPokerMonitoringTableController extends Controller
     public function index(Request $request)
     {
         $checked = $request->checkauto;
+      
         // room Novice / Pemula
         $onlineinvoice = TpkPlayer::join('tpk_table', 'tpk_table.table_id', '=', 'tpk_player.table_id')
                          ->where('room_id', '=', 2)

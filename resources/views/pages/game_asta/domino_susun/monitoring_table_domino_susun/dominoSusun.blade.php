@@ -372,6 +372,27 @@
         location.reload();        
         // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
       });
+
+            $('#autorefresh').click(function(){
+                if($(this).prop("checked") == true){
+                  $(".checkauto").val("checked");
+                  setInterval(function(){
+                    window.location.replace("?checkauto=checked");
+                    reloading=setTimeout("window.location.reload();", refresh_time);
+                  }, 300000);
+                } else {
+                  $(".checkauto").val('');
+                }
+            });
+
+            if($('#autorefresh').prop("checked") == true)
+            {
+              $(".checkauto").val("checked");
+              setInterval(function(){
+                window.location.replace("?checkauto=checked");
+                reloading=setTimeout("window.location.reload();", refresh_time);
+              }, 300000);
+            }
     });
 
     table = $('table.table').dataTable({
