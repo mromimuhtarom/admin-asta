@@ -38,7 +38,8 @@
                   </tr>
                   <tr>
                     <td>
-                      <input id="autorefresh"@if($checked == 'checked') checked @endif type="checkbox" name="autorefresh" class="deletepermission">
+                      
+                      <input onclick="toggleAutoRefresh(this);" @if($checked == 'checked'){{dd($checked)}} checked @endif  id="reloadCB autorefresh" type="checkbox" name="autorefresh" class="deletepermission">
                       <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('Auto Refresh') }}</div>
                     </td>
                   </tr>
@@ -53,6 +54,7 @@
                       <a href="{{ route('Monitoring_Table_Asta_Poker') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Novice') }}</b></a>
                     </td>
                   </tr>
+                  
                   <tr style="padding-left:2%;padding-right:2%;">
                     <td valign="top">
                       <table>
@@ -69,7 +71,7 @@
                           <td>
                             <div style="float:right;margin-left:10%;">
                               <form action="{{ route('Monitoring_Table_Asta_Poker') }}">
-                                <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">                            
+                                <input type="text" class="checkauto" name="checkauto" value="@if($checked === '#checked') #checked @endif">                            
                                 <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-view*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable" style=""></i></button>
                               </form>
                             </div>
@@ -106,7 +108,7 @@
                           <td>
                             <div style="float:right">
                               <form action="{{ route('Monitoring_Table_Asta_Poker-intermediate') }}">
-                                <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">                            
+                                <input type="text" class="checkauto" name="checkauto" value="@if($checked == '#checked') #checked @endif">                            
                                 <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-intermediate*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"></i></button>
                               </form>
                             </div>
@@ -118,7 +120,6 @@
                   </tr>
                 </table>
               </div>
-              
               {{-- Table pro --}}
               <div class="@if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-pro*')) tableactive @endif" style="border:2px solid black;width:auto;float:left;">
                 <table border="0" width="100%">
@@ -143,7 +144,7 @@
                             <td>
                               <div style="float:right;">
                                 <form action="{{ route('Monitoring_Table_Asta_Poker-pro') }}">
-                                  <input type="hidden" class="checkauto" name="checkauto" value="@if($checked == 'checked') checked @endif">
+                                  <input type="text" class="checkauto" name="checkauto" value="@if($checked == '#checked') #checked @endif">
                                   <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-pro*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable"></i></button>
                                 </form>
                               </div>
@@ -395,7 +396,28 @@
   <!-- End Form Category -->
 
   <script type="text/javascript">
-
+    var reloading;
+    var refresh_time = 3000;
+    
+    function checkReloading() {
+        if (window.location.hash=="checked") {
+            reloading=setTimeout("window.location.reload();", refresh_time);
+            document.getElementById("reloadCB").checked=true;
+        }
+    }
+    
+    function toggleAutoRefresh(cb) {
+        if (cb.checked) {
+            window.location.replace("Monitor_Asta_Poker-intermediate?checkauto=checked");
+            $(".checkauto").val("checked");
+            reloading=setTimeout("window.location.reload();", refresh_time);
+        } else {
+            window.location.replace("");
+            clearTimeout(reloading);
+        }
+    }
+    
+    window.onload=checkReloading;
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
@@ -413,16 +435,17 @@
         $('#refreshtable').on('click', function() {
           console.log('asas');
             var url = "{{ route('Monitoring_Table_Asta_Poker') }}"; 
-            // location.reload();
-             $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");        
+            location.reload();
+            //  $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");        
             // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
         });
         $('#autorefresh').click(function(){
             if($(this).prop("checked") == true){
-              $(".checkauto").val('checked');
+              
               setInterval(function(){
-                $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
-              }, 300000);
+                // $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
+                location.reload();
+              }, 5000);
             } else {
               $(".checkauto").val('');
             }
