@@ -3,7 +3,7 @@
 
 @section('page')
 	<li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('Reseller') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('Request_Transaction') }}</a></li>
+  	<li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('Request_Transaction') }}</a></li>
 @endsection
 
 
