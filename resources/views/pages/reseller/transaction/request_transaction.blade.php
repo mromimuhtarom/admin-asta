@@ -1,4 +1,4 @@
-@extends('index')
+	@extends('index')
 
 
 @section('page')

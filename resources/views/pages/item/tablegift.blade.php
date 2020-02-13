@@ -118,7 +118,7 @@
                                 <input type="hidden" name="pk" value="{{ $gf->id }}">
                                 <input type="file" name="file" id="media-input-wtr" class="upload{{ $gf->id }}" accept="image/*">
                                 <i class="fa fa-edit media-icon-wtr"></i>
-                                <p class="nav-name">Main image</p>
+                                <p class="nav-name">{{ TranslateMenuItem('Main Image') }}</p>
                                 
                               </span>
                               <span class="media-overlay-wtr1 med-ovlay{{ $gf->id }}">
@@ -191,7 +191,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Gift Store</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuItem('Create gift store') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -221,8 +221,8 @@
                     </tr>
                   </table>
                   
-                  <input type="text" class="form-control" name="title" placeholder="Name"><br>
-                  <input type="number" class="form-control" name="price" placeholder="Price"><br>
+                  <input type="text" class="form-control" name="title" placeholder="Nama"><br>
+                  <input type="number" class="form-control" name="price" placeholder="Harga"><br>
                   <select name="category" class="form-control">
                     <option>{{ TranslateMenuItem('Category') }}</option>
                     <option value="1">Makanan</option>

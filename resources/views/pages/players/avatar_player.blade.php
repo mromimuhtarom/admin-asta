@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">Player avatar</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">Player avatar</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('Avatar player') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('Avatar player') }}</a></li>
 @endsection
 
 @section('content')
@@ -50,7 +50,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
         <div class="widget-header">
-            <h2><strong><i class="fa fa-columns"></i> Avatar player </strong></h2>
+            <h2><strong><i class="fa fa-columns"></i>{{ Translate_menuPlayers('Avatar player') }}</strong></h2>
         </div>
     </header>
 
@@ -64,7 +64,7 @@
                         <div class="input-group">
                             @if($menu && $mainmenu)
                             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-plus"></i>Create new avatar
+                                <i class="fa fa-plus"></i>{{ Translate_menuPlayers('Create new avatar') }}
                             </button>
                             @endif
                         </div>
@@ -80,13 +80,13 @@
                         <thead>
                             <tr>
                                 @if($menu && $mainmenu)
-                                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; select all</th>
+                                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('Select All') }}</th>
                                 @endif
                                 <th>ID</th>
-                                <th style="width:5px;">Image</th>
-                                <th>name</th>
+                                <th style="width:5px;">{{ TranslateMenuItem('Image') }}</th>
+                                <th>{{ TranslateMenuGame('Name') }}</th>
                                 @if($menu && $mainmenu)
-                                <th>Aksi &nbsp; &nbsp;
+                                <th>{{ TranslateMenuGame('Action') }} &nbsp; &nbsp;
                                     <a href="#" style="color:red;font-weight:bold;"
                                         class="delete"
                                         id="trash"
@@ -111,8 +111,8 @@
                                           <span class="media-overlay-wtrAva med-ovlay{{ $ap->id }}">
                                             <input type="hidden" name="pk" value="{{ $ap->id }}">
                                             <input type="file" name="file" id="media-input-wtr" class="upload{{ $ap->id }}" accept="image/*">
-                                            <i class="fa fa-edit media-icon-wtr"></i>
-                                            <p class="nav-name">Main image</p>
+                                            <i class="fa fa-edit media-icon-wtr"></i>   
+                                            <p class="nav-name">{{ TranslateMenuItem('Main Image') }}</p>
                                           </span>
                                           <figure class="media-object">
                                             <img class="img-object-wtr imgupload{{ $ap->id }}" src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{ $ap->id }}.jpg?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
@@ -166,7 +166,7 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> Create Avatar player</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('Create new avatar') }}</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
@@ -190,7 +190,7 @@
                             </tr>
                             </table>
                             
-                            <input type="text" class="form-control" name="title" placeholder="Name"><br>
+                            <input type="text" class="form-control" name="title" placeholder="Nama"><br>
                         </div>
                     </div>
                     </div>

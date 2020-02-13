@@ -87,14 +87,14 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ TranslateReseller('Reseller ID')}}</th>
-                        <th>{{ Translate_menuPlayers('Username')}}</th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.reseller_id">{{ TranslateReseller('Reseller ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.reseller_id') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.username">{{ Translate_menuPlayers('Username')}}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.username') }}"></i></a></th>
                         {{-- <th>Description</th> --}}
-                        <th>{{ Translate_menuPlayers('Debit')}}</th>
-                        <th>{{ Translate_menuPlayers('Credit')}}</th>
-                        <th>{{ TranslateReseller('Balance')}}</th>
-                        <th>{{ TranslateMenuItem('Category')}}</th>
-                        <th>{{ Translate_menuPlayers('Timestamp')}}</th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.debet">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort"{{ iconsorting('asta_db.reseller_balance.debet') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort"{{ iconsorting('asta_db.reseller_balance.credit') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.balance">{{ TranslateReseller('Balance') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.balance') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.action_id">{{ TranslateMenuItem('Category') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.action_id') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class=" fa fa-sort{{ iconsorting('asta_db.reseller_balance.datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,7 +106,7 @@
                         <td>{{ number_format($bd->debet, 2) }}</td>
                         <td>{{ number_format($bd->credit, 2) }}</td>
                         <td>{{ number_format($bd->balance, 2) }}</td>
-                        <td>{{ $actblnc[$bd->action_id] }}</td> 
+                        <td>{{ ConfigTextTranslate($actblnc[$bd->action_id]) }}</td> 
                         <td>{{ $bd->datetime }}</td>
                     </tr>
                     @endforeach
@@ -115,7 +115,7 @@
     
         </div>
         <!-- end widget content -->
-                    
+        <div style="display: flex;justify-content: center;">{{ $balancedetails->links() }}</div>      
     </div>
     <!-- end widget div -->
                     
@@ -134,6 +134,9 @@
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
 			"autoWidth" : true,
+            "paging":false,
+            "bInfo":false,
+            "ordering":false,
 			"oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
 		},

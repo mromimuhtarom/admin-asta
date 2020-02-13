@@ -702,7 +702,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi '.$sts_user
+          'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi '.$sts_user. '. dengan alasan: '.$description
         ]);
 
         return back()->with('success', alertTranslate('Update status successfull'));

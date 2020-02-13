@@ -164,7 +164,6 @@
                                         {{ $item }} 
                                     @endforeach
                                 @else
-                                    
                                         {{ $history->hand_card }} 
                                 @endif
                             @endif
@@ -175,11 +174,11 @@
                           <td>{{ number_format($history->win_lose,2 ) }}</td>
                           @php
                           if($history->status === 0) {
-                              $status = 'Lose';
+                              $status = ConfigTextTranslate('Lose');
                           } else if($history->status === 1) {
-                              $status = 'Win';
+                              $status = ConfigTextTranslate('Win');
                           } else if($history->status === 2) {
-                              $status = 'Draw';
+                              $status = ConfigTextTranslate('Draw');
                           }
                           @endphp
                           <td>{{ $status }}</td>

@@ -150,7 +150,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel"><i
-                                class="fa fa-plus-square"></i>Transaction Chip</h4>
+                                class="fa fa-plus-square"></i>{{ alertTranslate("Transaction Chip") }}</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -164,17 +164,17 @@
                                         <div style="height:64px;overflow:auto;margin-bottom:20px;">
                                             <table width="100%" style="border:1px solid #dee2e6;">
                                                 <tr>
-                                                    <td width="20%">User ID</td>
+                                                    <td width="20%">{{ alertTranslate("User ID") }}</td>
                                                     <td width="5%">:</td>
                                                     <td width="75%">{{ $transaction->user_id }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Username</td>
+                                                    <td>{{ Translate_menuPlayers("Username") }}</td>
                                                     <td>:</td>
                                                     <td>{{ $transaction->username }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>balance Chip</td>
+                                                    <td>{{ alertTranslate("Balance Chip") }}</td>
                                                     <td>:</td>
                                                     <td>{{ number_format($transaction->chip, 2) }}</td>
                                                 </tr>
@@ -256,7 +256,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Transaction Point</h4>
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ alertTranslate("Transaction Point") }}</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -271,17 +271,17 @@
                                         <div style="height:64px;overflow:auto;margin-bottom:20px;">
                                             <table width="100%" style="border:1px solid #dee2e6;">
                                                 <tr>
-                                                    <td width="20%">User ID</td>
+                                                    <td width="20%">{{ alertTranslate("User ID") }}</td>
                                                     <td width="5%">:</td>
                                                     <td width="75%">{{ $transaction->user_id }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Username</td>
+                                                    <td>{{ Translate_menuPlayers("Username") }}</td>
                                                     <td>:</td>
                                                     <td>{{ $transaction->username }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>balance Point</td>
+                                                    <td>{{ alertTranslate("Balance Point") }}</td>
                                                     <td>:</td>
                                                     <td>{{ number_format($transaction->point, 2) }}</td>
                                                 </tr>
@@ -362,7 +362,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><i
-                        class="fa fa-plus-square"></i>Tambah Transaction Gold</h4>
+                        class="fa fa-plus-square"></i>{{ alertTranslate("Transaction Gold") }}</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
@@ -377,12 +377,12 @@
                                 <div style="height:64px;overflow:auto;margin-bottom:20px;">
                                     <table width="100%" style="border:1px solid #dee2e6;">
                                         <tr>
-                                            <td width="20%">User ID</td>
+                                            <td width="20%">{{ alertTranslate("User ID") }}</td>
                                             <td width="5%">:</td>
                                             <td width="75%">{{ $transaction->user_id }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Username</td>
+                                            <td>{{ Translate_menuPlayers("Username") }}</td>
                                             <td>:</td>
                                             <td>{{ $transaction->username }}</td>
                                         </tr>

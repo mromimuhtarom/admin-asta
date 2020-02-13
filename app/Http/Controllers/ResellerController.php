@@ -122,7 +122,7 @@ class ResellerController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '20',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$userid
             ]);
@@ -247,7 +247,7 @@ class ResellerController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '20',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Peringkat Agen dengan AgenID '.$id
             ]);
@@ -1018,6 +1018,8 @@ public function detailTransaction(Request $request, $month, $year)
       $startDateComparison = Carbon::parse($startDate)->timestamp;
       $endDateComparison   = Carbon::parse($endDate)->timestamp;
       $datenow             = Carbon::now('GMT+7');
+      $namecolumn          = $request->namecolumn;
+      $sorting             = $request->sorting;
       $balanceReseller     = ResellerBalance::select(
                                 'asta_db.reseller_balance.reseller_id',
                                 'asta_db.reseller_balance.debet',
@@ -1044,12 +1046,33 @@ public function detailTransaction(Request $request, $month, $year)
             $actionbalance[8]  => $actionbalance[9],
             $actionbalance[10] => $actionbalance[11],
             $actionbalance[12] => $actionbalance[13],
-            $actionbalance[14] => $actionbalance[15],
+            $actionbalance[12] => $actionbalance[15],
             $actionbalance[16] => $actionbalance[17],
             $actionbalance[18] => $actionbalance[19],
             $actionbalance[20] => $actionbalance[21],
             $actionbalance[22] => $actionbalance[23],
         ];
+
+        if(Input::get('sorting') === 'asc'):
+            $sortingorder = 'desc';
+        else:
+            $sortingorder = 'asc';
+        endif;
+
+        if($sorting == NULL):
+            $sorting = 'desc';
+        endif;
+
+        if($namecolumn == NULL):
+            $namecolumn = 'asta_db.reseller_balance.datetime';
+        endif;
+
+        if(Input::get('sorting') === 'asc'):
+            $sortingorder = 'desc';
+        else:
+            $sortingorder = 'asc';
+        endif;
+
       if($endDateComparison < $startDateComparison){
         return back()->with('alert', alertTranslate("end date can't be less than start date"));
       }
@@ -1059,65 +1082,72 @@ public function detailTransaction(Request $request, $month, $year)
         if(is_numeric($searchUsername) !== true):
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
                               ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                              ->get();
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(10);
         else:
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.reseller_id', '=', $searchUsername)
                               ->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                              ->get();
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(10);
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
+        $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc', 'searchUsername', 'sortingorder'));
 
       }else if ($searchUsername != NULL && $startDate != NULL) {
 
         if(is_numeric($searchUsername) !== true):
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
                               ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
-                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                              ->get();
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(10);
         else:
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', '=', $searchUsername)
                               ->WHERE('asta_db.reseller_balance.datetime', '>=', $startDate." 00:00:00")
-                              ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                              ->get();
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(10);
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
+        $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc', 'searchUsername', 'sortingorder'));
 
       }else if ($searchUsername != NULL && $endDate != NULL) {
 
         if(is_numeric($searchUsername) !== true):
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
                               ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
-                              ->orderBy('asta_db.reseller_balance.datetime', 'desc')
-                              ->get();
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(10);
         else:
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.reseller_id', '=', $searchUsername)
                               ->WHERE('asta_db.reseller_balance.datetime', '<=', $endDate." 23:59:59")
-                              ->orderBy('asta_db.reseller_balance.datetime', 'desc')
-                              ->get();
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(10);
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
+        $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc', 'searchUsername', 'sortingorder'));
       }else if($searchUsername != NULL) {
 
         if(is_numeric($searchUsername) !== true):
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
-                              ->get();
+                              ->orderBy($namecolumn, $sorting)
+                              ->paginate(10);
         else:
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.reseller_id', '=', $searchUsername)
-                              ->get();
+                                ->orderBy($namecolumn, $sorting)
+                                ->paginate(10);
         endif;
 
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
+        $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc', 'searchUsername', 'sortingorder'));
       } else if ($startDate != NULL && $endDate != NULL) {
           $balancedetails = $balanceReseller->wherebetween('asta_db.reseller_balance.datetime', [$startDate." 00:00:00", $endDate." 23:59:59"])
-                                            ->orderBy('asta_db.reseller_balance.datetime', 'asc')
-                                            ->get();
-                                            
-        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc'));
+                                            ->orderBy($namecolumn, $sorting)
+                                            ->paginate(10);
+        
+        $balancedetails->appends($request->all());
+        return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc', 'searchUsername', 'sortingorder'));
       }
     }
 //----- End Search Balance Reseller -----//
@@ -1282,7 +1312,7 @@ public function detailTransaction(Request $request, $month, $year)
                 'payment_id'    =>  $payment_id,
                 'datetime'      =>  $datetime,
                 'shop_type'     =>  $shop_type,
-                'item_type'     =>  4,
+                'item_type'     =>  20,
                 'item_price'    =>  $amount,
                 'action_date'   => Carbon::now('GMT+7')
         ]);
@@ -1338,7 +1368,7 @@ public function detailTransaction(Request $request, $month, $year)
             'payment_id'    =>  $payment_id,
             'datetime'      =>  $datetime,
             'shop_type'     =>  $shop_type,
-            'item_type'     =>  4,
+            'item_type'     =>  20,
             'item_price'    =>  $amount
         ]);
         StoreTransaction::where('user_id', '=', $reseller_id)->where('shop_type', '=', $shop_type)->delete();
@@ -1384,7 +1414,7 @@ public function detailTransaction(Request $request, $month, $year)
                         'name', 
                         'value'
                     )
-                    ->where('id', '=', 4)
+                    ->where('id', '=', 20)
                     ->first();
         $itemtype = ConfigText::select(
                         'name', 
@@ -1463,7 +1493,7 @@ public function detailTransaction(Request $request, $month, $year)
        
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 5242880)
+            if($ukuran < 52202880)
             {
                 if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
@@ -1574,7 +1604,7 @@ public function detailTransaction(Request $request, $month, $year)
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
-        //  return response()->json($pk, 400);
+        //  return response()->json($pk, 2000);
 
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
@@ -1646,7 +1676,7 @@ public function detailTransaction(Request $request, $month, $year)
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 5242880)
+            if($ukuran < 52202880)
             {
                 if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
                 {
@@ -1785,7 +1815,7 @@ public function detailTransaction(Request $request, $month, $year)
         
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '20',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Toko Agen dengan ID '.$getItemId
             ]);
@@ -1813,7 +1843,7 @@ public function detailTransaction(Request $request, $month, $year)
         //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '20',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$ids
         ]);
@@ -1827,7 +1857,7 @@ public function detailTransaction(Request $request, $month, $year)
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '20',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Peringkat Agen dengan ID '.$ids
         ]);

@@ -129,7 +129,7 @@
                                 @if ($bd->action_id == NULL)
                                 <td>{{ var_dump($bd->action_id) }}</td>
                                 @else    
-                                <td>{{ $actblnc[$bd->action_id] }}</td> 
+                                <td>{{ ConfigTextTranslate($actblnc[$bd->action_id]) }}</td> 
                                 @endif
                                 <td>{{ number_format($bd->debit, 2) }}</td>
                                 <td>{{ number_format($bd->credit, 2) }}</td>

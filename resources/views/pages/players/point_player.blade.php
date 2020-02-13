@@ -150,6 +150,7 @@
                     @endif     
 
                 </thead>
+                
                 <tbody>
                     @foreach ($balancedetails as $bd)
                     @php
@@ -166,7 +167,7 @@
                         @if($bd->action_id == NULL)
                         <td></td>
                         @else 
-                        <td>{{ $actblnc[$bd->action_id] }}</td>
+                        <td>{{ ConfigTextTranslate($actblnc[$bd->action_id]) }}</td>
                         @endif
                         <td>{{ number_format($bd->debit, 2) }}</td>
                         <td>{{ number_format($bd->credit, 2) }}</td>

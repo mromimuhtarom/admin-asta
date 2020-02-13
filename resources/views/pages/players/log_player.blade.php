@@ -126,7 +126,7 @@
                     <tr>
                         <td>{{ $log->user_id}}</td>
                         <td>{{ $log->username }}</td>
-                        <td>{{ $log->action }}</td>
+                        <td>{{ Translateaction_id($log->action) }}</td>
                         <td>{{ $log->desc }}</td>
                         <td>{{ $log->datetime }}</td>
                     </tr>

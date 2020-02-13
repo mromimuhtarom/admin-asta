@@ -151,8 +151,6 @@ function translate_MenuContentAdmin($menu){
         'Decline Admin'                 =>  'Tolak admin',
         'Approve Admin'                 =>  'Terima admin',
         'Change Password Admin'         =>  'Ganti katasandi admin',
-
-
         'Choose Role'                   =>  'Pilih peran',
         'Choose Log Type'               =>  'Pilih Tipe Log',
         'Players Online'                =>  'Pemain online',
@@ -392,7 +390,9 @@ function Translate_menuPlayers($menu){
         'Edit'                      =>  'Edit',
         'Main'                      =>  'Utama',
         'Confirmation'              =>  'Konfirmasi',
-        'Lobby'                     =>  'Lobi'
+        'Lobby'                     =>  'Lobi',
+        'Create new avatar'         =>  'Buat avatar baru',
+        'Avatar player'             =>  'Avatar pemain'     
 
     ];
     return $array_menuContent[$menu];
@@ -417,7 +417,7 @@ function TranslateMenuItem($menu){
         'Save Gift'         =>  'Simpan gift',
         'Save'              =>  'Simpan',
         'Cancel'            =>  'Batal',
-        'Edit Gift'         =>  'Edit gift',
+        'Edit Gift'         =>  'Ubah gift',
         'Create gift store' =>  'Buat toko gift',
         'DeleteData'        =>  'Hapus data',
         'Are you sure want to delete it' => 'Apakah anda yakin akan menghapusnya?',
@@ -428,7 +428,7 @@ function TranslateMenuItem($menu){
         'Choose Game'       =>  'Pilih game',
         'Username'          =>  'Nama pengguna',
         'Action Game'       =>  'Aksi game',
-        'Date'              =>  'date',
+        'Date'              =>  'Tanggal',
         'Description'       =>  'Deskripsi',
         'Emoticon'          =>  'Emoticon',
         'Create New Emoticon'=> 'Buat emotikon baru',
@@ -570,7 +570,7 @@ function TranslateMenuToko($menu){
         'Success'           =>  'Sukses',
         'Decline'           =>  'Ditolak',
         'Received And Sent' =>  'Terima & Dikirm',
-        'Payment Type'      =>  'Tipe Pembayaran'
+        'Payment Type'      =>  'Tipe Pembayaran',
 
     ];
 
@@ -585,7 +585,7 @@ function TranslateMenuFeedback($menu){
         'Feedback'                  =>  'Umpan balik',
         'Abuse Transaction Report'  =>  'Laporan penyalahgunaan Transaksi',
         'Report Abuse Player'       =>  'Laporan penyalahgunaan pemain',
-        'Image Proof'               =>  'Image proof',
+        'Image Proof'               =>  'Bukti gambar',
         'Rating'                    =>  'Penilaian',
         'Message'                   =>  'Pesan',
         'User ID sender'            =>  'ID pengirim',
@@ -691,7 +691,9 @@ function ConfigTextTranslate($menu){
         "Bet"                                               =>   "Taruhan",
         "Win"                                               =>   "Menang",
         "Lose"                                              =>   "Kalah",
-        "Transfer Out"                                      =>   "Transfer Out",
+        "Draw"                                              =>   "Seri",
+        "Transfer In"                                       =>   "Transfer masuk",
+        "Transfer Out"                                      =>   "Transfer Keluar",
         "Free"                                              =>   "Gratis",
         "Bonus"                                             =>   "Bonus",
         "Gift"                                              =>   "Hadiah",
@@ -751,7 +753,7 @@ function alertTranslate($menu){
         "Username or Password are wrong!!"                              =>  "Username dan katasandi salah!!",
         "You are already Log Out"                                       =>  "Kamu sudah keluar",
         "Update status successfull"                                     =>  "Memperbarui status berhasil",
-        "Input Data successfull with "                                   =>  "Input data berhasil dengan",
+        "Input Data successfull with "                                  =>  "Input data berhasil dengan",
         "Number of inputs filled in player ID can't be NULL"            =>  "Jumlah input yang diisi ID pemain tidak boleh NULL",
         "You must to Choose Status"                                     =>  "Kamu harus memilih status",
         "Data input successfull"                                        =>  "Data berhasil di input", 
@@ -786,13 +788,69 @@ function alertTranslate($menu){
         "Data added"                                                    =>  "Data berhasil di tambahkan",
         "Operator Still use this role, wait until role didnott use"      =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
         "For Type Adjust number didnot allowed negative"  =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
-        "For type Bonus or Free number not allowed negative number"    =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif"
-
+        "For type Bonus or Free number not allowed negative number"    =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif",
+        "User ID"                                                       =>  "ID Pengguna",
+        "Balance Chip"                                                  =>  "Saldo chip",
+        "Balance Point"                                                 =>  "Saldo Point",
+        "Balance Gold"                                                  =>  "Saldo Koin",
+        "Transaction Chip"                                              =>  "Transaksi Chip",
+        "Transaction Gold"                                              =>  "Transaksi Koin",
+        "Transaction Point"                                             =>  "Transaksi Poin",
     ];
     return $array_menuContent[$menu];
 };
 
+function Translateaction_id($menu){
 
+    $array_menuContent  =   [
+        
+        "Change Password Admin"     =>      "Ubah password admin",
+        "Edit Admin"                =>      "Ubah admin",
+        "Create Admin"              =>      "Buat admin",
+        "Delete Admin"              =>      "Hapus admin",
+        "Approve Admin"             =>      "Setujui admin",
+        "Decline Admin"             =>      "Tolak admin",
+        "Log In Admin"              =>      "Admin login",
+        "Log Out Admin"             =>      "Admin logout",
+        "Buy chip with gold"        =>      "Beli chip dengan koin",
+        "Daily Award"               =>      "Hadiah harian",
+        "Bot Join Table"            =>      "Bot join Table",
+        "Join Game"                 =>      "Bergabung dengan game",
+        "Sitout Game"               =>      "Sitout Game",
+        "Register User"             =>      "Daftar Pengguna",
+        "Give Gold"                 =>      "Beri Koin",
+        "Buy Gold"                  =>      "Beli Koin",
+        "Skilled Bonus Gold"        =>      "Bonus Koin Ahli",
+        "Newbie Bonus Gold"         =>      "Bonus Koin Pemula",
+        "Create Player"             =>      "Buat Pemain",
+        "Delete Player"             =>      "Hapus Pemain",
+        "Edit Player"               =>      "Ubah Pemain",
+        "Change Password Player"    =>      "Ubah Password Pemain",
+        "Login Player"              =>      "Pemain login",
+        "Approve Account Player"    =>      "Akun pemain disetujui",
+        "Banned Account Player"     =>      "Akun pemain terlarang",
+        "Problem Account Player"    =>      "Akun pemain bermasalah",
+        "Upgrade Account"           =>      "Tingkatkan akun"
+    ];
+    return $array_menuContent[$menu];
+};
+
+function TranslateTransactionHist($menu){
+
+    $array_menuContent = [
+        
+        "success"                   =>  "sukses",
+        "pending"                   =>  "tunda",
+        "Decline"                   =>  "ditolak",
+        "Approve"                   =>  "disetujui",
+        "GPA.3355-0553-1720-23050"  =>  "GPA.3355-0553-1720-23050",
+        "nothing"                   =>  "tidak ada",
+        "tidak jelas"               =>  "tidak jelas",
+    
+
+    ];
+    return $array_menuContent[$menu];
+};
 
 
 ?>

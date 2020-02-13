@@ -314,7 +314,7 @@ class Add_TransactionController extends Controller
           else:
             StoreTransactionDay::create([
               'date'            => Carbon::now('GMT+7')->toDateString(),
-              'date_create'     => Carbon::now('GMT+7'),
+              'date_created'    => Carbon::now('GMT+7'),
               'user_id'         => $user_id,
               'correction_chip' => $valuecurrency
             ]);

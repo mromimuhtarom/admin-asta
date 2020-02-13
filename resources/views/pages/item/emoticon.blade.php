@@ -217,8 +217,8 @@
                     </td>
                   </tr>
                 </table>
-                  <input type="text" class="form-control" name="title" placeholder="Name"><br>
-                  <input type="number" class="form-control" name="price" placeholder="Price"><br>
+                  <input type="text" class="form-control" name="title" placeholder="Nama"><br>
+                  <input type="number" class="form-control" name="price" placeholder="Harga"><br>
               </div>
             </div>
           </div>

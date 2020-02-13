@@ -168,7 +168,7 @@
                         <td>
                             <button type="button" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
                         </td>
-                        <td>{{ strStatusApdec($tr->status) }}</td>
+                        <td>{{ TranslateTransactionHist(strStatusApdec($tr->status)) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
