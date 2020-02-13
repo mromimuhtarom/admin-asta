@@ -1414,7 +1414,7 @@ public function detailTransaction(Request $request, $month, $year)
                         'name', 
                         'value'
                     )
-                    ->where('id', '=', 20)
+                    ->where('id', '=', 4)
                     ->first();
         $itemtype = ConfigText::select(
                         'name', 
@@ -1422,7 +1422,9 @@ public function detailTransaction(Request $request, $month, $year)
                     )
                     ->where('id', '=', 5)
                     ->first();
+    
         $value     = str_replace(':', ',', $active->value);
+        
         $endis     = explode(",", $value);
         $valueitem = str_replace(':', ',', $itemtype->value);
         $item      = explode(",", $valueitem);

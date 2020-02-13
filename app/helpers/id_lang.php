@@ -123,7 +123,9 @@ function translate_menu($menu){
       'Novice_Big_Two'                => 'Pemula',
       'Intermediate_Big_Two'          => 'Menengah',
       'Pro_Big_Two'                   => 'Ahli',
-      'Store_Reseller'                => 'Toko Agen'
+      'Store_Reseller'                => 'Toko Agen',
+      'Store_reseller_report'         => 'Laporan Toko Agen'
+      
     ];
 
     return $array_menu[$menu];
