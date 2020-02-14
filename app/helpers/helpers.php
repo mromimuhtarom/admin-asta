@@ -37,8 +37,8 @@ function time_elapsed_string($datetime, $full = false) {
 
 //kondisi disabled dan enabled (view emoticon, tablegift, slidebanner, stores .blade)
 function strEnabledDisabled ($val) {
-  $config        = DB::table('config_text')->where('id', '=', 4)->first();
-  $value         = str_replace(':', ',', $config->value);
+  $config      = DB::table('config_text')->where('id', '=', 4)->first();
+  $value       = str_replace(':', ',', $config->value);
   $statusendis = explode(",", $value);
 
 	if($val == $statusendis[0] ) {
@@ -50,31 +50,40 @@ function strEnabledDisabled ($val) {
 
 //kondisi select type item bonus(chip store, gold store)
 function strItemBonType($val) {
-  if($val == 1) {
-    return 'Chip';
-  } else if($val == 2){
-    return 'Gold';
+  $config   = DB::table('config_text')->where('id', '=', 5)->first();
+  $value    = str_replace(':', ',', $config->value);
+  $itemtype = explode(",", $value);
+  if($val == $itemtype[0]) {
+    return $itemtype[1];
+  } else if($val == $itemtype[2]){
+    return $itemtype[3];
   } else {
-    return 'Good';
+    return $itemtype[5];
   }
 }
 
 //kondisi transactionType mingguan dan bulanan (view reseller_rank.blade) 
 function strTransactionType ($val) {
-  if($val == 1) {
-    return 'Monthly';
-  } else if($val == 2) {
-    return 'Weekly';
+  $config           = DB::table('config_text')->where('id', '=', 10)->first();
+  $value            = str_replace(':', ',', $config->value);
+  $resellerranktype = explode(",", $value);
+  if($val == $resellerranktype[0]) {
+    return $resellerranktype[1];
+  } else if($val == $resellerranktype[2]) {
+    return $resellerranktype[3];
   }
 }
 
 
 //kondisi On atau Of maintenance (general_setting.blade.php)
 function strMaintenanceOnOff($val) {
-  if($val == 1) {
-    return 'On';
-  } else if($val == 0) {
-    return 'Off';
+  $config            = DB::table('config_text')->where('id', '=', 9)->first();
+  $value             = str_replace(':', ',', $config->value);
+  $maintenancestatus = explode(",", $value);
+  if($val == $maintenancestatus[0]) {
+    return $maintenancestatus[1];
+  } else if($val == $maintenancestatus[2]) {
+    return $maintenancestatus[3];
   }
 }
 
