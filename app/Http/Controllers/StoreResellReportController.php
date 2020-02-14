@@ -27,6 +27,7 @@ class StoreResellReportController extends Controller
     {
         $transactions   =   DB::table('asta_db.store_transaction_hist')
                             ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction_hist.user_id')
+                            ->LeftJoin('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction_hist.payment_id')
                             ->select(
                                 'asta_db.reseller.reseller_id',
                                 'asta_db.reseller.username',
@@ -36,7 +37,11 @@ class StoreResellReportController extends Controller
                                 'asta_db.store_transaction_hist.item_price',
                                 'asta_db.store_transaction_hist.description',
                                 'asta_db.store_transaction_hist.id',
-                                'asta_db.store_transaction_hist.item_type'
+                                'asta_db.store_transaction_hist.item_type',
+                                'asta_db.store_transaction_hist.action_date',
+                                'asta_db.store_transaction_hist.payment_id',
+                                'asta_db.payment.name as paymentname',
+                                'asta_db.store_transaction_hist.status'
                             )
                             ->where('asta_db.store_transaction_hist.shop_type', '=', 2)
                             ->orderBy('asta_db.store_transaction_hist.datetime', 'ASC')
