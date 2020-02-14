@@ -37,10 +37,14 @@ function time_elapsed_string($datetime, $full = false) {
 
 //kondisi disabled dan enabled (view emoticon, tablegift, slidebanner, stores .blade)
 function strEnabledDisabled ($val) {
-	if($val == 0) {
-		return 'Disabled';
+  $config        = DB::table('config_text')->where('id', '=', 4)->first();
+  $value         = str_replace(':', ',', $config->value);
+  $statusendis = explode(",", $value);
+
+	if($val == $statusendis[0] ) {
+		return $statusendis[1];
 	} else {
-		return 'Enabled';
+		return $statusendis[3];
 	}
 }
 
