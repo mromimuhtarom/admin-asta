@@ -17,8 +17,8 @@ class PaymentStoreController extends Controller
 
     public function index()
     {
-        $menu        = MenuClass::menuName('Payment Store');
-        $mainmenu    = MenuClass::menuName('Store');
+        $menu        = MenuClass::menuName('L_PAYMENT_STORE');
+        $mainmenu    = MenuClass::menuName('L_STORE');
         $getPayments = Payment::join('asta_db.payment_type', 'asta_db.payment_type.id', '=', 'asta_db.payment.type')
                        ->select(
                         'asta_db.payment.id', 

@@ -25,8 +25,8 @@ class AvatarPlayerController extends Controller
                                 'path'
                             )
                             ->get();
-        $menu           =   MenuClass::menuName('Avatar player');
-        $mainmenu       =   MenuClass::menuName('Players');
+        $menu           =   MenuClass::menuName('L_AVATAR_PLAYER');
+        $mainmenu       =   MenuClass::menuName('L_PLAYERS');
         $timenow        =   Carbon::now('GMT+7');
 
         // --- Disabled Enabled --- //

@@ -65,9 +65,9 @@ class StoreResellReportController extends Controller
                         )
                         ->get();
 
-        $menu       =   MenuClass::menuName('Request Transaction');
-        $submenu    =   MenuClass::menuName('Reseller Transaction');
-        $mainmenu   =   MenuClass::menuName('Reseller');
+        $menu       =   MenuClass::menuName('L_REQUEST_TRANSACTION');
+        $submenu    =   MenuClass::menuName('L_RESELLER_TRANSACTION');
+        $mainmenu   =   MenuClass::menuName('L_RESELLER');
 
 
         return view('pages.reseller.Store_reseller.Store_reseller_report', compact('item_gold', 'item_cash', 'item_point', 'transactions', 'menu', 'mainmenu', 'submenu'));

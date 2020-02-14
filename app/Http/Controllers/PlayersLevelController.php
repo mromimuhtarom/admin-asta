@@ -17,8 +17,8 @@ class PlayersLevelController extends Controller
     {
         $playerslevel = PlayerLevel::all();
         $playersrank = PlayerRank::all();
-        $menu        = MenuClass::menuName('Players');
-        $mainmenu    = MenuClass::menuName('Players Level');
+        $menu        = MenuClass::menuName('L_PLAYERS');
+        $mainmenu    = MenuClass::menuName('L_PLAYERS_LEVEL');
         return view('pages.players.players_level', compact('playerslevel', 'playersrank', 'menu', 'mainmenu'));
     }
 

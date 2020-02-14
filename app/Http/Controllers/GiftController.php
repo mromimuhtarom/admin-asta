@@ -49,8 +49,8 @@ class GiftController extends Controller
                         ->paginate(10);
 
         $gifts ->appends($request->all());
-        $menu     = MenuClass::menuName('Table Gift');
-        $mainmenu = MenuClass::menuName('Item');
+        $menu     = MenuClass::menuName('L_TABLE_GIFT');
+        $mainmenu = MenuClass::menuName('L_ITEM');
         // ---- untuk gift category -----//
         $giftcategory = ConfigText::select(
                             'name', 

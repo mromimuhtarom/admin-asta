@@ -37,8 +37,8 @@ class GameSettingController extends Controller
         $dmq   = DmqConfig::all();
         // ****End Domino QQ ****//
         
-        $menu     = MenuClass::menuName('Game Setting');
-        $mainmenu = MenuClass::menuName('Games');
+        $menu     = MenuClass::menuName('L_GAME_SETTING');
+        $mainmenu = MenuClass::menuName('L_GAMES');
         return view('pages.game_asta.game_setting', compact('tpk', 'bgt', 'dms', 'dmq', 'mainmenu', 'menu'));
     }
 

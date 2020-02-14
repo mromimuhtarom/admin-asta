@@ -19,8 +19,8 @@ class RoleController extends Controller
     
     public function index()
     {
-        $menu     = MenuClass::menuName('Role Admin');
-        $mainmenu = MenuClass::menuName('Admin');
+        $menu     = MenuClass::menuName('L_ROLE_ADMIN');
+        $mainmenu = MenuClass::menuName('L_ADMIN');
         $roles    = Role::select('role_id', 'name')->get();
         return view('pages.admin.role_admin', compact('roles', 'menu', 'mainmenu'));
     }
@@ -89,8 +89,8 @@ class RoleController extends Controller
         $op_id   = Session::get('userId');
         $role_op = User::where('op_id', '=', $op_id)->first();
         $roles          = $roles->toArray();
-        $menu           = MenuClass::menuName('Role Admin');
-        $mainmenuaccess = MenuClass::menuName('Admin');
+        $menu           = MenuClass::menuName('L_ROLE_ADMIN');
+        $mainmenuaccess = MenuClass::menuName('L_ADMIN');
         $roletype       = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
         $value          = str_replace(':', ',', $roletype->value);
         $type           = explode(",", $value);

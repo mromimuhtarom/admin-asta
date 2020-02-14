@@ -25,7 +25,7 @@ class ChipController extends Controller
     public function registerplayerchip(Request $request)
     {
         $searchUser   = $request->inputPlayer;
-        $menus1       = MenuClass::menuName('Balance Chip');
+        $menus1       = MenuClass::menuName('L_CHIP_PLAYERS');
         $game         = Game::all();
         $action       = ConfigText::select(
                           'name',
@@ -92,7 +92,7 @@ class ChipController extends Controller
         $sorting      = $request->sorting;
         $namecolumn   = $request->namecolumn;
 
-        $menus1       = MenuClass::menuName('Balance Chip');
+        $menus1       = MenuClass::menuName('L_CHIP_PLAYERS');
         $game         = Game::all();
         $datenow      = Carbon::now('GMT+7');
         $action       = ConfigText::select(

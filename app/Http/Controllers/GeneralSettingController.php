@@ -23,8 +23,8 @@ class GeneralSettingController extends Controller
      */
     public function index()
     {
-        $menu               = MenuClass::menuName('General Setting');
-        $mainmenu           = MenuClass::menuName('Settings');
+        $menu               = MenuClass::menuName('L_GENERAL_SETTING');
+        $mainmenu           = MenuClass::menuName('L_SETTINGS');
         // system settings
         $getMaintenance          = Config::select('id', 'name', 'value')->where('id', '=', '101')->first();
         $getPointExpired         = Config::select('id', 'name', 'value')->where('id', '=', '102')->first();

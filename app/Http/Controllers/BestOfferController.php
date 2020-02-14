@@ -14,8 +14,8 @@ class BestOfferController extends Controller
      */
     public function index()
     {
-        $menu     = MenuClass::menuName('Best Offer');
-        $mainmenu = MenuClass::menuName('Store');
+        $menu     = MenuClass::menuName('L_BEST_OFFER');
+        $mainmenu = MenuClass::menuName('L_STORE');
         return view('pages.Maintenance.underconstruction');
     }
 

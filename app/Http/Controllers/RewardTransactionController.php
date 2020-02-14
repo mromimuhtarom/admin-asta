@@ -19,8 +19,8 @@ class RewardTransactionController extends Controller
 {
     public function index()
     {
-        $menu          = MenuClass::menuName('Reward Transaction');
-        $mainmenu      = MenuClass::menuName('Transaction');
+        $menu          = MenuClass::menuName('L_REWARD_TRANSACTION');
+        $mainmenu      = MenuClass::menuName('L_TRANSACTION');
         $transaction = StoreTransaction::where('shop_type', '=', 1)
                        ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction.user_id')
                        ->join('asta_db.item_point', 'asta_db.item_point.item_id', '=', 'asta_db.store_transaction.item_id')

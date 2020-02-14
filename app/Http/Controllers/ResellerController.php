@@ -30,8 +30,8 @@ class ResellerController extends Controller
 //---------- Index List Reseller --------- //
     public function index()
     {
-        $menu     = MenuClass::menuName('List Reseller');
-        $mainmenu = MenuClass::menuName('Reseller');
+        $menu     = MenuClass::menuName('L_LIST_RESELLER');
+        $mainmenu = MenuClass::menuName('L_RESELLER');
         $rank     = ResellerRank::all();
         $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
         return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank', 'mainmenu'));
@@ -140,8 +140,8 @@ class ResellerController extends Controller
     public function ResellerRank()
     {
         $rank        = ResellerRank::select('id', 'name', 'gold', 'type', 'bonus')->get();
-        $menu        = MenuClass::menuName('Rank Reseller');
-        $mainmenu    = MenuClass::menuName('Reseller');
+        $menu        = MenuClass::menuName('L_RESELLER_RANK');
+        $mainmenu    = MenuClass::menuName('L_RESELLER');
         $configtype  = ConfigText::where('id', '=', 10) ->select('value')->first();
         $replacetype = str_replace(':', ',', $configtype->value);
         $explodetype = explode(',', $replacetype);
@@ -721,8 +721,8 @@ public function detailTransaction(Request $request, $month, $year)
         $sorting     = $request->sorting;
         $namecolumn  = $request->namecolumn;
         $getUsername = Input::get('inputPlayer');
-        $menu        = MenuClass::menuName('Transaction');
-        $mainmenu    = MenuClass::menuName('Add Transaction');
+        $menu        = MenuClass::menuName('L_RESELLER_TRANSACTION');
+        $mainmenu    = MenuClass::menuName('L_ADD_TRANSACTION_RESELLER');
 
         //Sorting
         if($sorting == NULL): 
@@ -1157,8 +1157,8 @@ public function detailTransaction(Request $request, $month, $year)
 //------ Index Register Reseller ------//
     public function RegisterReseller()
     {
-        $menu     = MenuClass::menuName('Register Reseller');
-        $mainmenu = MenuClass::menuName('Reseller');
+        $menu     = MenuClass::menuName('L_REGISTER_RESELLER');
+        $mainmenu = MenuClass::menuName('L_RESELLER');
         return view('pages.reseller.register_reseller', compact('menu', 'mainmenu'));
     }
 //------ End Register Reseller -------//
@@ -1254,9 +1254,9 @@ public function detailTransaction(Request $request, $month, $year)
                          )
                          ->get();
                         
-        $menu     = MenuClass::menuName('Request Transaction');
-        $submenu  = MenuClass::menuName('Reseller Transaction');
-        $mainmenu = MenuClass::menuName('Reseller');
+        $menu     = MenuClass::menuName('L_REQUEST_TRANSACTION');
+        $submenu  = MenuClass::menuName('L_RESELLER_TRANSACTION');
+        $mainmenu = MenuClass::menuName('L_RESELLER');
         return view('pages.reseller.transaction.request_transaction', compact('item_gold', 'item_cash', 'item_point', 'transactions', 'menu', 'mainmenu', 'submenu'));
     }
 //------ End Index Request Transaction ------//
@@ -1390,8 +1390,8 @@ public function detailTransaction(Request $request, $month, $year)
 // ------- index Item Store Reseller -------- //
     public function ItemStoreReseller()
     {
-        $menu     = MenuClass::menuName('Item Store Reseller');
-        $mainmenu = MenuClass::menuName('Reseller');
+        $menu     = MenuClass::menuName('L_ITEM_STORE_RESELLER');
+        $mainmenu = MenuClass::menuName('L_RESELLER');
         
         $getItems = ItemsCash::select(
                         'item_id',

@@ -311,8 +311,8 @@ class PlayersController extends Controller
         $typeconverttocomma = str_replace(':', ',', $player_type->value);
         $plyr_type        = explode(",", $typeconverttocomma); 
 
-        $menu          = MenuClass::menuName('Registered Players');
-        $mainmenu      = MenuClass::menuName('Players');
+        $menu          = MenuClass::menuName('L_REGISTERED_PLAYERS');
+        $mainmenu      = MenuClass::menuName('L_PLAYERS');
         $player_status = ConfigText::where('id', '=', 8)
                          ->select(
                             'name', 
@@ -781,8 +781,8 @@ class PlayersController extends Controller
     $minDate  = $request->inputMinDate;
     $maxDate  = $request->inputMaxDate;
     $datenow  = Carbon::now('GMT+7');
-    $menu     = MenuClass::menuName('Guest');
-    $mainmenu = MenuClass::menuName('Players');
+    $menu     = MenuClass::menuName('L_GUEST');
+    $mainmenu = MenuClass::menuName('L_PLAYERS');
   
     if($status == 'nonused')
     {

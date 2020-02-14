@@ -20,8 +20,8 @@ class GoodsStoreController extends Controller
 
     public function index()
     {
-        $menu     = MenuClass::menuName('Goods Store');
-        $mainmenu = MenuClass::menuName('Store');
+        $menu     = MenuClass::menuName('L_GOODS _STORE');
+        $mainmenu = MenuClass::menuName('L_STORE');
         $itemGood = ItemPoint::select(
                         'item_id',
                         'name',

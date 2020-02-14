@@ -22,8 +22,8 @@ class UserAdminController extends Controller
      */
     public function index()
     {
-        $menu     = MenuClass::menuName('User Admin');
-        $mainmenu = MenuClass::menuName('Admin');
+        $menu     = MenuClass::menuName('L_USER_ADMIN');
+        $mainmenu = MenuClass::menuName('L_ADMIN');
         $admin    = User::join('asta_db.adm_role', 'asta_db.adm_role.role_id', '=', 'asta_db.operator.role_id')
                     ->select(
                      'asta_db.operator.op_id',

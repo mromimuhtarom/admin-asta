@@ -26,8 +26,8 @@ class User_Banking_TransactionController extends Controller
      */
     public function index()
     {
-        $menu          = MenuClass::menuName('User Bank Transaction');
-        $mainmenu      = MenuClass::menuName('Transaction');
+        $menu          = MenuClass::menuName('L_USER_BANK_TRANSACTION');
+        $mainmenu      = MenuClass::menuName('L_TRANSACTION');
         $transaction = StoreTransaction::where('shop_type', '=', 1)
                        ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction.user_id')
                        ->join('asta_db.payment','asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')

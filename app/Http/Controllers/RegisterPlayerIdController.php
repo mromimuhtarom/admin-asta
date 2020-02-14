@@ -16,8 +16,8 @@ class RegisterPlayerIdController extends Controller
 {
     public function index()
     {
-        $menu     = MenuClass::menuName('Register Player ID');
-        $mainmenu = MenuClass::menuName('Players');
+        $menu     = MenuClass::menuName('L_REGISTER_PLAYER_ID');
+        $mainmenu = MenuClass::menuName('L_PLAYERS');
         $usertype = ConfigText::select(
                         'name', 
                         'value'

@@ -24,8 +24,8 @@ class GoldStoreController extends Controller
      */
     public function index()
     {
-        $menu     = MenuClass::menuName('Gold Store');
-        $mainmenu = MenuClass::menuName('Store');
+        $menu     = MenuClass::menuName('L_GOLD_STORE');
+        $mainmenu = MenuClass::menuName('L_STORE');
         $getGolds = ItemsCash::select(
                         'item_id',
                         'name',

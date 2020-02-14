@@ -46,8 +46,8 @@ class EmoticonController extends Controller
                     ->orderBy($namecolumn, $sortingorder)
                     ->paginate(10);
         $emoticon->appends($request->all());
-        $menu     = MenuClass::menuName('Emoticon');
-        $mainmenu = MenuClass::menuName('Item');
+        $menu     = MenuClass::menuName('L_EMOTICON');
+        $mainmenu = MenuClass::menuName('L_ITEM');
         $active   = ConfigText::select(
                         'name', 
                         'value'

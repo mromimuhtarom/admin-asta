@@ -49,8 +49,8 @@ class Add_TransactionController extends Controller
         $sorting     = $request->sorting;
         $namecolumn  = $request->namecolumn;
         $getUsername = Input::get('inputPlayer');
-        $menu        = MenuClass::menuName('Transaction');
-        $mainmenu    = MenuClass::menuName('Add Transaction');
+        $menu        = MenuClass::menuName('L_TRANSACTION');
+        $mainmenu    = MenuClass::menuName('L_ADD_TRANSACTION');
 
         //Sorting
         if($sorting == NULL): 

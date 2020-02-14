@@ -22,8 +22,8 @@ class PushNotificationController extends Controller
      */
     public function index()
     {
-        $menu          = MenuClass::menuName('Push Notification');
-        $mainmenu      = MenuClass::menuName('Notification');
+        $menu          = MenuClass::menuName('L_PUSH_NOTIFICATION');
+        $mainmenu      = MenuClass::menuName('L_NOTIFICATION');
         $notifications = PushNotification::select(
                             'msg',
                             'type',

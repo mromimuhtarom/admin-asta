@@ -15,10 +15,14 @@
       #main{
           float: right;
       }
+      canvas {
+          width: 100%;
+          height: auto;
+      }
     </style>
     
     <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/16.json", {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/TPK.json", {onProgress: UnityProgress});
        
         function OnAppReady(){
             console.log("### application is loaded");
@@ -46,7 +50,7 @@
         // } /*wew*/
     </script>
 
-      <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+  <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
         <h2><strong><i class="fa fa-puzzle-piece"></i>{{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>				
@@ -55,24 +59,13 @@
 
     <div>
       
-      <div class="widget-body">
-        <div class="widget-body-toolbar">
-          <div class="row">
-            <!-- Button tambah data baru -->
-            <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-
-            </div>
-            <!-- End Button tambah data baru -->
-          </div>
-        </div>
-
-        
+      <div class="widget-body" style="padding-bottom:0;">     
         
         <div class="custom-scroll table-responsive" style="height:800px;">
-          <div class="table-outer">
+          <div class="table-outer" style="padding-right:0;overflow-y:hidden">
 
-            <div class="webgl-content">
-                <div id="gameContainer" style="width: 960px; height: 600px"></div>
+            <div class="webgl-content" style="width: 80%; height: 80%">
+                <div id="gameContainer" style="width: 100%; height:auto;margin-right:1%"></div>
                 <div class="footer">
                     <div class="webgl-logo"></div>
                     <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
@@ -82,7 +75,9 @@
                         
           </div>
         </div>
-      
+
       </div>
+
     </div>
+
   </div>

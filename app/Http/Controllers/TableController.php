@@ -32,9 +32,9 @@ class TableController extends Controller
     
     public function index()
     {
-        $menu     = MenuClass::menuName('Table Asta Poker');
-        $mainmenu = MenuClass::menuName('Games');
-        $submenu  = MenuClass::menuName('Asta Poker');
+        $menu     = MenuClass::menuName('L_TABLE_ASTA_POKER');
+        $mainmenu = MenuClass::menuName('L_GAMES');
+        $submenu  = MenuClass::menuName('L_ASTA_POKER');
         $tables = TpkTable::join('asta_db.tpk_room', 'asta_db.tpk_room.room_id', '=', 'asta_db.tpk_table.room_id')
                   ->select(
                       'asta_db.tpk_room.name as roomname',
@@ -56,9 +56,9 @@ class TableController extends Controller
 
     public function BigTwoindex()
     {
-        $menu     = MenuClass::menuName('Table Big Two');
-        $mainmenu = MenuClass::menuName('Games');
-        $submenu  = MenuClass::menuName('Big Two');
+        $menu     = MenuClass::menuName('L_TABLE_BIG_TWO');
+        $mainmenu = MenuClass::menuName('L_GAMES');
+        $submenu  = MenuClass::menuName('L_BIG_TWO');
         $tables = BigTwoTable::join('asta_db.bgt_room', 'bgt_room.room_id', '=', 'asta_db.bgt_table.room_id')
                 ->select(
                     'asta_db.bgt_room.name as roomname',
@@ -80,9 +80,9 @@ class TableController extends Controller
 
     public function DominoSusunindex()
     {
-        $menu     = MenuClass::menuName('Table Domino Susun');
-        $mainmenu = MenuClass::menuName('Games');
-        $submenu  = MenuClass::menuName('Domino Susun');
+        $menu     = MenuClass::menuName('L_TABLE_DOMINO_SUSUN');
+        $mainmenu = MenuClass::menuName('L_GAMES');
+        $submenu  = MenuClass::menuName('L_DOMINO_SUSUN');
         $tables   = DominoSusunTable::join('asta_db.dms_room', 'asta_db.dms_room.room_id', '=', 'asta_db.dms_table.room_id')
                     ->select(
                         'asta_db.dms_room.name as roomname',
@@ -105,9 +105,9 @@ class TableController extends Controller
 
     public function DominoQindex()
     {
-        $menu     = MenuClass::menuName('Table Domino QQ');
-        $mainmenu = MenuClass::menuName('Games');
-        $submenu  = MenuClass::menuName('Domino QQ');
+        $menu     = MenuClass::menuName('L_TABLE_DOMINO_QQ');
+        $mainmenu = MenuClass::menuName('L_GAMES');
+        $submenu  = MenuClass::menuName('L_DOMINO_QQ');
         $tables   = DominoQTable::join('asta_db.dmq_room', 'asta_db.dmq_room.room_id', '=', 'asta_db.dmq_table.room_id')
                     ->select(
                         'asta_db.dmq_room.name as roomname',

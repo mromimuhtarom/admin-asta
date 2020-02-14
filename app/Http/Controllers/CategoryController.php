@@ -35,9 +35,9 @@ class CategoryController extends Controller
                         'room_id'
                     )
                     ->get();
-        $menu     = MenuClass::menuName('Category Asta Poker');
-        $submenu  = MenuClass::menuName('Asta Poker');
-        $mainmenu = MenuClass::menuName('Games');
+        $menu     = MenuClass::menuName('L_CATEGORY_ASTA_POKER');
+        $submenu  = MenuClass::menuName('L_ASTA_POKER');
+        $mainmenu = MenuClass::menuName('L_GAMES');
         return view('pages.game_asta.asta_poker.category', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
@@ -53,9 +53,9 @@ class CategoryController extends Controller
                     )
                     ->get();
         
-        $menu     = MenuClass::menuName('Category Big Two');
-        $submenu  = MenuClass::menuName('Big Two');
-        $mainmenu = MenuClass::menuName('Games');
+        $menu     = MenuClass::menuName('L_CATEGORY_BIG_TWO');
+        $submenu  = MenuClass::menuName('L_BIG_TWO');
+        $mainmenu = MenuClass::menuName('L_GAMES');
         return view('pages.game_asta.big_two.bigTwoCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
@@ -70,9 +70,9 @@ class CategoryController extends Controller
                         'room_id'
                     )
                     ->get();
-        $menu     = MenuClass::menuName('Category Domino Susun');
-        $submenu  = MenuClass::menuName('Domino Susun');
-        $mainmenu = MenuClass::menuName('Games');
+        $menu     = MenuClass::menuName('L_CATEGORY_DOMINO_SUSUN');
+        $submenu  = MenuClass::menuName('L_DOMINO_SUSUN');
+        $mainmenu = MenuClass::menuName('L_GAMES');
         return view('pages.game_asta.domino_susun.dominoSusunCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 
@@ -87,9 +87,9 @@ class CategoryController extends Controller
                         'room_id'
                     )
                     ->get();
-        $menu     = MenuClass::menuName('Category Domino QQ');
-        $submenu  = MenuClass::menuName('Domino QQ');
-        $mainmenu = MenuClass::menuName('Games');
+        $menu     = MenuClass::menuName('L_CATEGORY_DOMINO_QQ');
+        $submenu  = MenuClass::menuName('L_DOMINO_QQ');
+        $mainmenu = MenuClass::menuName('L_GAMES');
         return view('pages.game_asta.domino_qq.dominoQCategory', compact('category', 'menu', 'submenu', 'mainmenu'));
     }
 

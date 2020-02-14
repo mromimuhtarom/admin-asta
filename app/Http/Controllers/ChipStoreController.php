@@ -20,8 +20,8 @@ class ChipStoreController extends Controller
     
     public function index()
     {
-        $menu     = MenuClass::menuName('Chip Store');
-        $mainmenu = MenuClass::menuName('Store');
+        $menu     = MenuClass::menuName('L_CHIP_STORE');
+        $mainmenu = MenuClass::menuName('L_STORE');
         $items    = ItemsGold::select(
                         'item_id',
                         'name',
