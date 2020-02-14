@@ -121,7 +121,7 @@
                     <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
                     <td>{{ $gf->id }}</td>
                     <td>
-                          <div class="media-container">
+                          {{-- <div class="media-container">
                             <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
                               {{  csrf_field() }}
                               <span class="media-overlay-wtr med-ovlay{{ $gf->id }}">
@@ -138,9 +138,9 @@
                                 <div class="nav-name">Watermark</div>
                               </span>
                                 <figure class="media-object">
-                                  {{-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
-                                  {{-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" --}}
-                                  <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                                  <!-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> -->
+                                  <!-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" -->
+                                  <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> -->
                                   <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                                   <img class="img-object-wtr2 imgupload2{{ $gf->id }}" src="http://placehold.jp/80x100.png">
                                 </figure>
@@ -153,7 +153,28 @@
                             </form>
                               <button class="cancel-upload{{ $gf->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
                               <button class="edit-profile{{ $gf->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit Gift') }}</button>
-                            </div>
+                            </div> --}}
+                        <div class="media-container" align="center">
+                          <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
+                            {{  csrf_field() }}
+                            <span class="media-overlay-wtrAva med-ovlayBonus{{ $gf->id }}">
+                              <input type="hidden" name="pk" value="{{ $gf->id }}">
+                              <input type="file" name="file" id="media-input-wtr" class="uploadBonus{{ $gf->id }}" accept="image/*">
+                              <i class="fa fa-edit media-icon-wtr"></i>
+                              <p class="nav-name">Main image</p>
+                            </span>
+                            <figure class="media-object">
+                              <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> 
+                              <img class="img-object-wtr1Ava uploadBonusImg1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
+                            </figure>
+                           
+                          </div>
+                          <div class="media-control" align="center" style="margin-top:-1%">
+                            <button class="save-ImgBonus{{ $gf->id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                          </form>
+                            <button class="cancel-ImgBonus{{ $gf->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
+                            <button class="edit-ImgBonus{{ $gf->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                        </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('TableGift-update') }}">{{ $gf->name }}</a></td>
                     <td><a href="#" class="usertext" data-name="price" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('TableGift-update') }}">{{ number_format($gf->price, 2) }}</a></td>
@@ -227,12 +248,12 @@
                         </div><br>
                           <input type='file' class="main-image" name="file" onchange="readURL(this);"/>
                       </td>
-                      <td align="center">
+                      {{-- <td align="center">
                         <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
                           <img id="blah1" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
                         </div><br>
                           <input type='file' class="watermark-image" name="file1"/>
-                      </td>
+                      </td> --}}
                     </tr>
                   </table>
                   
@@ -322,45 +343,45 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Detail Info') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ TranslateMenuItem('Detail Image') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
       </div>
       <style>
-        #image {
-          height: 256px;
-          width: 256px;
-          background: url("{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}") 0px 0px;
+        #image{{ $gf->id }} {
+          height: 320px;
+          width: 320px;
+          background: url("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/{{ $gf->id }}.png") 0px 0px;
         }
       </style>
       <script>
-        function animateScript() {
-          document.getElementById("image").style.backgroundPosition = '-256px 0px';
-        }
-
         var tID; //we will use this variable to clear the setInterval()
-        function animateScript() {
-        var    position = 256; //start position for the image slicer
-        const  interval = 100; //100 ms of interval for the setInterval()
+        function stopAnimate{{ $gf->id }}() {
+        clearInterval(tID);
+        } //end of stopAnimate()
+        function animateScript{{ $gf->id }}() {
+        var    position = 320; //start position for the image slicer
+        const  interval = 80; //80 ms of interval for the setInterval()
+        const  diff = 320;     //diff as a variable for position offset
         tID = setInterval ( () => {
-        document.getElementById("image").style.backgroundPosition = 
-        `-${position}px 0px`; 
-        //we use the ES6 template literal to insert the variable "position"
-        if (position < 1536)
-        { position = position + 256;}
-        //we increment the position by 256 each time
-        else
-        { position = 256; }
-        //reset the position to 256px, once position exceeds 1536px
-        }
+          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = 
+          `-${position}px 0px`; 
+          //we use the ES6 template literal to insert the variable "position"
+          if (position < 10000)
+          { position = position + diff;}
+          //we increment the position by 320 each time
+          else
+          { position = 320; }
+          //reset the position to 320px, once position exceeds 1536px
+          }
         , interval ); //end of setInterval
         } //end of animateScript()
       </script>
         
 			<div class="modal-body" align="center">
         <div id="demo">
-          <p id="image" onmouseover="animateScript()"> </p>
+          <p id="image{{ $gf->id }}" class="border border-dark"  onmouseover="animateScript{{ $gf->id }}()" onmouseout="stopAnimate{{ $gf->id }}()"> </p>
         </div>
         {{-- <div id="overlaytdt"><img src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" alt="Be patient..." /></div> --}}
 			</div> 
@@ -496,62 +517,111 @@
 
             @php
               foreach($gifts as $gf) {
-                echo'$(".save-profile'.$gf->id.'").hide(0);';
-                  echo'$(".med-ovlay'.$gf->id.'").hide(0);';
-                  echo'$(".imgupload'.$gf->id.'").show();';
-                  echo'$(".imgupload1'.$gf->id.'").hide(0);';
-                  echo'$(".imgupload2'.$gf->id.'").hide(0);';
-                  echo'$(".cancel-upload'.$gf->id.'").hide(0);';
+              //   echo'$(".save-profile'.$gf->id.'").hide(0);';
+              //     echo'$(".med-ovlay'.$gf->id.'").hide(0);';
+              //     echo'$(".imgupload'.$gf->id.'").show();';
+              //     echo'$(".imgupload1'.$gf->id.'").hide(0);';
+              //     echo'$(".imgupload2'.$gf->id.'").hide(0);';
+              //     echo'$(".cancel-upload'.$gf->id.'").hide(0);';
 
-                  echo'$(".edit-profile'.$gf->id.'").on("click", function() {';
+              //     echo'$(".edit-profile'.$gf->id.'").on("click", function() {';
+              //       echo'$(this).hide(0);';
+              //       echo'$(".imgupload'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".imgupload1'.$gf->id.'").fadeIn(300);';
+              //       echo'$(".imgupload2'.$gf->id.'").fadeIn(300);';
+              //       echo'$(".med-ovlay'.$gf->id.'").fadeIn(300);';
+              //       echo'$(".cancel-upload'.$gf->id.'").fadeIn(300);';
+              //       echo'$(".save-profile'.$gf->id.'").fadeIn(300);';
+              //     echo'});';
+
+              //     echo'$(".save-profile'.$gf->id.'").on("click", function() {';
+              //       echo'$(this).hide(0);';
+              //       echo'$(".cancel-upload'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".med-ovlay'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".imgupload'.$gf->id.'").fadeIn(300);';
+              //       echo'$(".imgupload1'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".imgupload2'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".edit-profile'.$gf->id.'").fadeIn(300);';
+              //     echo'});';
+
+              //     echo'$(".cancel-upload'.$gf->id.'").on("click", function() {';
+              //       echo'$(this).hide(0);';
+              //       echo'$(".med-ovlay'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".imgupload'.$gf->id.'").fadeIn(300);';
+              //       echo'$(".imgupload1'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".imgupload2'.$gf->id.'").fadeOut(300);';
+              //       echo'$(".edit-profile'.$gf->id.'").fadeIn(300);';
+              //       echo'$(".save-profile'.$gf->id.'").hide(0);';
+              //     echo'});';
+
+              //     echo'$(".upload'.$gf->id.'").change(function() {';
+              //       echo'if (this.files && this.files[0]) {';
+              //         echo'var reader = new FileReader();';
+
+              //         echo'reader.onload = function(e) {';
+              //           echo'$(".imgupload1'.$gf->id.'").attr("src", e.target.result);';
+              //         echo'};';
+
+              //         echo'reader.readAsDataURL(this.files[0]);';
+              //     echo'}';
+              //   echo'});';
+              //   echo'$(".upload1'.$gf->id.'").change(function() {';
+              //       echo'if (this.files && this.files[0]) {';
+              //         echo'var reader = new FileReader();';
+
+              //         echo'reader.onload = function(e) {';
+              //           echo'$(".imgupload2'.$gf->id.'").attr("src", e.target.result);';
+              //         echo'};';
+
+              //         echo'reader.readAsDataURL(this.files[0]);';
+              //     echo'}';
+              //   echo'});';
+              // }
+
+
+                //JS BAGIAN IMAGE BONUS
+                echo'$(".save-ImgBonus'.$gf->id.'").hide(0);';
+                  echo'$(".med-ovlayBonus'.$gf->id.'").hide(0);';
+                  echo'$(".imgupload'.$gf->id.'").show();';
+                  echo'$(".uploadBonusImg1'.$gf->id.'").show(0);';
+                  echo'$(".cancel-ImgBonus'.$gf->id.'").hide(0);';
+
+                  echo'$(".edit-ImgBonus'.$gf->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
                     echo'$(".imgupload'.$gf->id.'").fadeOut(300);';
-                    echo'$(".imgupload1'.$gf->id.'").fadeIn(300);';
-                    echo'$(".imgupload2'.$gf->id.'").fadeIn(300);';
-                    echo'$(".med-ovlay'.$gf->id.'").fadeIn(300);';
-                    echo'$(".cancel-upload'.$gf->id.'").fadeIn(300);';
-                    echo'$(".save-profile'.$gf->id.'").fadeIn(300);';
+                    echo'$(".uploadBonusImg1'.$gf->id.'").fadeIn(300);';
+                    echo'$(".med-ovlayBonus'.$gf->id.'").fadeIn(300);';
+                    echo'$(".save-ImgBonus'.$gf->id.'").fadeIn(300);';
+                    echo'$(".cancel-ImgBonus'.$gf->id.'").fadeIn(300);';
                   echo'});';
 
-                  echo'$(".save-profile'.$gf->id.'").on("click", function() {';
+                  echo'$(".save-ImgBonus'.$gf->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
-                    echo'$(".cancel-upload'.$gf->id.'").fadeOut(300);';
-                    echo'$(".med-ovlay'.$gf->id.'").fadeOut(300);';
+                    echo'$(".med-ovlayBonus'.$gf->id.'").fadeOut(300);';
+                    echo'$(".edit-ImgBonus'.$gf->id.'").fadeIn(300);';
+                    echo'$(".cancel-ImgBonus'.$gf->id.'").fadeOut(300);';
                     echo'$(".imgupload'.$gf->id.'").fadeIn(300);';
-                    echo'$(".imgupload1'.$gf->id.'").fadeOut(300);';
-                    echo'$(".imgupload2'.$gf->id.'").fadeOut(300);';
-                    echo'$(".edit-profile'.$gf->id.'").fadeIn(300);';
+                    echo'$(".uploadBonusImg1'.$gf->id.'").fadeOut(300);';
                   echo'});';
 
-                  echo'$(".cancel-upload'.$gf->id.'").on("click", function() {';
+                  echo'$(".cancel-ImgBonus'.$gf->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
-                    echo'$(".med-ovlay'.$gf->id.'").fadeOut(300);';
+                    echo'$(".med-ovlayBonus'.$gf->id.'").fadeOut(300);';
                     echo'$(".imgupload'.$gf->id.'").fadeIn(300);';
-                    echo'$(".imgupload1'.$gf->id.'").fadeOut(300);';
-                    echo'$(".imgupload2'.$gf->id.'").fadeOut(300);';
-                    echo'$(".edit-profile'.$gf->id.'").fadeIn(300);';
-                    echo'$(".save-profile'.$gf->id.'").hide(0);';
+                    echo'$(".uploadBonusImg1'.$gf->id.'").fadeOut(300);';
+                    echo'$(".edit-ImgBonus'.$gf->id.'").fadeIn(300);';
+                    echo'$(".save-ImgBonus'.$gf->id.'").hide(0);';
                   echo'});';
 
-                  echo'$(".upload'.$gf->id.'").change(function() {';
+                //JS MAIN IMAGE BONUS
+                echo'$(".uploadBonus'.$gf->id.'").change(function() {';
                     echo'if (this.files && this.files[0]) {';
                       echo'var reader = new FileReader();';
-
+		
                       echo'reader.onload = function(e) {';
-                        echo'$(".imgupload1'.$gf->id.'").attr("src", e.target.result);';
+                        echo'$(".uploadBonusImg1'.$gf->id.'").attr("src", e.target.result);';
                       echo'};';
-
-                      echo'reader.readAsDataURL(this.files[0]);';
-                  echo'}';
-                echo'});';
-                echo'$(".upload1'.$gf->id.'").change(function() {';
-                    echo'if (this.files && this.files[0]) {';
-                      echo'var reader = new FileReader();';
-
-                      echo'reader.onload = function(e) {';
-                        echo'$(".imgupload2'.$gf->id.'").attr("src", e.target.result);';
-                      echo'};';
-
+		
                       echo'reader.readAsDataURL(this.files[0]);';
                   echo'}';
                 echo'});';

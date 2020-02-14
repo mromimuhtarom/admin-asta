@@ -195,7 +195,7 @@
                           @endforeach
                         </td>
                         <td class="th-sm">
-                          <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}" target="_blank">
+                          <form action="{{ route('Monitoring_Table_Big_Two-game')}}" target="_blank">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
                             <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
@@ -213,7 +213,7 @@
                           @endforeach
                         </td>
                         <td class="th-sm">
-                          <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
+                          <form action="{{ route('Monitoring_Table_Big_Two-game')}}">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
                             <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
@@ -266,7 +266,7 @@
                           @endforeach
                         </td>
                         <td class="th-sm">
-                          <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}" target="_blank">
+                          <form action="{{ route('Monitoring_Table_Big_Two-game')}}" target="_blank">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
                             <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
@@ -284,7 +284,7 @@
                           @endforeach
                         </td>
                         <td class="th-sm">
-                          <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
+                          <form action="{{ route('Monitoring_Table_Big_Two-game')}}">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
                             <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
@@ -337,7 +337,7 @@
                           @endforeach
                         </td>
                         <td class="th-sm">
-                          <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}" target="_blank">
+                          <form action="{{ route('Monitoring_Table_Big_Two-game')}}" target="_blank">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
                             <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
@@ -355,7 +355,7 @@
                           @endforeach
                         </td>
                         <td class="th-sm">
-                          <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
+                          <form action="{{ route('Monitoring_Table_Big_Two-game')}}">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
                             <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>

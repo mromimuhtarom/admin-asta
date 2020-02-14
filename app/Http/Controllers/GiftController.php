@@ -105,14 +105,14 @@ class GiftController extends Controller
         }
         $id_new                                   = $id_last + 1;
         $file                                     = $request->file('file');
-        $file_wtr                                 = $request->file('file1');
+        // $file_wtr                                 = $request->file('file1');
         $ekstensi_diperbolehkan                   = array('png');
         $filename1                                = $file->getClientOriginalName();
         $filename2                                = $file->getClientOriginalName();
         $x                                        = explode('.', $filename1);
-        $x_wtr                                    = explode('.', $filename2);
+        // $x_wtr                                    = explode('.', $filename2);
         $ekstensi                                 = strtolower(end($x));
-        $ekstensi_wtr                             = strtolower(end($x_wtr));
+        // $ekstensi_wtr                             = strtolower(end($x_wtr));
         $ukuran                                   = $_FILES['file']['size'];
         $nama_file_unik                           = $id_new.'.'.$ekstensi;
         list($width, $height)                     = getimagesize($file);
@@ -139,71 +139,71 @@ class GiftController extends Controller
                             return back()->withErrors($validator->errors());
                         }
 
-                        if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
-                        {
-                            list($width_watermark, $height_watermark) = getimagesize($file_wtr);
-                        // watermark image
-                            // Menetapkan nama thumbnail
+                        // if($file_wtr && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                        // {
+                        //     list($width_watermark, $height_watermark) = getimagesize($file_wtr);
+                        // // watermark image
+                        //     // Menetapkan nama thumbnail
                     
-                            $folder = "../public/upload/gifts/";
-                            $thumbnail = $folder.$nama_file_unik;
+                        //     $folder = "../public/upload/gifts/";
+                        //     $thumbnail = $folder.$nama_file_unik;
     
                             
 
-                        // Memuat gambar utama
-                            $rootpath_main    = '../public/upload/gifts/image1/';
-                            $upload_imagemain = '../public/upload/gifts/image1';
-                            $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                            $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
-                            $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                        // // Memuat gambar utama
+                        //     $rootpath_main    = '../public/upload/gifts/image1/';
+                        //     $upload_imagemain = '../public/upload/gifts/image1';
+                        //     $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                        //     $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                        //     $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
                         
 
-                        // Memuat gambar watermark
-                            $rootpath_wtr    = '../public/upload/gifts/image2/';
-                            $upload_imagewtr = '../public/upload/gifts/image2';
-                            $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                            $putfile_wtr     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
-                            $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                        // // Memuat gambar watermark
+                        //     $rootpath_wtr    = '../public/upload/gifts/image2/';
+                        //     $upload_imagewtr = '../public/upload/gifts/image2';
+                        //     $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                        //     $putfile_wtr     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                        //     $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
-                            // mendapatkan lebar dan tinggi dari gambar watermark
-                            $water_width     = imagesx($watermark);
-                            $water_height    = imagesy($watermark);
+                        //     // mendapatkan lebar dan tinggi dari gambar watermark
+                        //     $water_width     = imagesx($watermark);
+                        //     $water_height    = imagesy($watermark);
 
-                            // mendapatkan lebar dan tinggi dari gambar utama
-                            $main_width      = imagesx($source);
-                            $main_height     = imagesy($source);
+                        //     // mendapatkan lebar dan tinggi dari gambar utama
+                        //     $main_width      = imagesx($source);
+                        //     $main_height     = imagesy($source);
 
-                            // Menetapkan posisi gambar watermark
-                            $pos_x           = $width - $width_watermark;
-                            $pos_y           = $height - $height_watermark;
-                            $copy_wtr        = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                        //     // Menetapkan posisi gambar watermark
+                        //     $pos_x           = $width - $width_watermark;
+                        //     $pos_y           = $height - $height_watermark;
+                        //     $copy_wtr        = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                     
-                            imagealphablending($source, false);
-                            imagesavealpha($source, true);
-                            imagecolortransparent($source); 
+                        //     imagealphablending($source, false);
+                        //     imagesavealpha($source, true);
+                        //     imagecolortransparent($source); 
                         
-                            $tery = image_data($source);
+                        //     $tery = image_data($source);
                             
-                            $awsPath =  "unity-asset/gift/" . $nama_file_unik;
+                        //     $awsPath =  "unity-asset/gift/" . $nama_file_unik;
 
-                            $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
-                            Storage::disk('s3')->put($awsPath, $tery);
+                        //     $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                        //     Storage::disk('s3')->put($awsPath, $tery);
 
-                            //DELETE FILE LOCAL SETELAH DI MERGE
-                            $path = '../public/upload/gifts/image1/'.$nama_file_unik;
-                            File:: delete($path);
+                        //     //DELETE FILE LOCAL SETELAH DI MERGE
+                        //     $path = '../public/upload/gifts/image1/'.$nama_file_unik;
+                        //     File:: delete($path);
 
-                            $path = '../public/upload/gifts/image2/'.$nama_file_unik;
-                            File:: delete($path);
+                        //     $path = '../public/upload/gifts/image2/'.$nama_file_unik;
+                        //     File:: delete($path);
 
-                        // end watermark image
-                        } else {
+                        // // end watermark image
+                        // } else {
                             // $rootpath   = '../../asta-api/upload/gifts';
                             //$image_main = Storage::createLocalDriver(['root' => $rootpath]);
                             $rootpath = 'unity-asset/gift/' . $nama_file_unik;
                             $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                             //$image_main->put($nama_file_unik, file_get_contents($file));
-                        }
+                        // }
                             
                         $gift = Gift::create([
                             'id'          => $id_new,
@@ -281,11 +281,11 @@ class GiftController extends Controller
         $file_wtr               = $request->file('file1');
         $ekstensi_diperbolehkan = array('png');
         $nama                   = $_FILES['file']['name'];
-        $nama_wtr               = $_FILES['file1']['name'];
+        // $nama_wtr               = $_FILES['file1']['name'];
         $x                      = explode('.', $nama);
-        $x_wtr                  = explode('.', $nama_wtr);
+        // $x_wtr                  = explode('.', $nama_wtr);
         $ekstensi               = strtolower(end($x));
-        $ekstensi_wtr           = strtolower(end($x_wtr));
+        // $ekstensi_wtr           = strtolower(end($x_wtr));
         $ukuran                 = $_FILES['file']['size'];
         $filename               = $id->id;
         $nama_file_unik         = $filename.'.'.$ekstensi;
@@ -296,65 +296,65 @@ class GiftController extends Controller
 
             if($ukuran < 5242880)
             {            
-                if($file_wtr  && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
-                {
-                    list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
-                    // Menetapkan nama thumbnail
-                    $folder    = "../public/upload/gifts/";
-                    $thumbnail = $folder.$nama_file_unik;
+                // if($file_wtr  && in_array($ekstensi_wtr, $ekstensi_diperbolehkan) === true)
+                // {
+                //     list($width_watermark, $height_watermark)   = getimagesize($file_wtr);
+                //     // Menetapkan nama thumbnail
+                //     $folder    = "../public/upload/gifts/";
+                //     $thumbnail = $folder.$nama_file_unik;
 
-                    // Memuat gambar utama
-                        $rootpath_main    = '../public/upload/gifts/image1/';
-                        $upload_imagemain = '../public/upload/gifts/image1';
-                        $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
-                        $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
-                        $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
+                //     // Memuat gambar utama
+                //         $rootpath_main    = '../public/upload/gifts/image1/';
+                //         $upload_imagemain = '../public/upload/gifts/image1';
+                //         $mainimage        = Storage::createLocalDriver(['root' => $upload_imagemain ]);
+                //         $putfile_main     = $mainimage->put($nama_file_unik, file_get_contents($file));
+                //         $source           = imagecreatefrompng($rootpath_main.$nama_file_unik);
 
-                    // Memuat gambar watermark
-                        $rootpath_wtr    = '../public/upload/gifts/image2/';
-                        $upload_imagewtr = '../public/upload/gifts/image2';
-                        $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
-                        $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
-                        $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
+                //     // Memuat gambar watermark
+                //         $rootpath_wtr    = '../public/upload/gifts/image2/';
+                //         $upload_imagewtr = '../public/upload/gifts/image2';
+                //         $watermarkimage  = Storage::createLocalDriver(['root' => $upload_imagewtr]);
+                //         $putfile_str     = $watermarkimage->put($nama_file_unik, file_get_contents($file_wtr));
+                //         $watermark       = imagecreatefrompng($rootpath_wtr.$nama_file_unik);
 
-                    // mendapatkan lebar dan tinggi dari gambar watermark
-                    $water_width  = imagesx($watermark);
-                    $water_height = imagesy($watermark);
+                //     // mendapatkan lebar dan tinggi dari gambar watermark
+                //     $water_width  = imagesx($watermark);
+                //     $water_height = imagesy($watermark);
 
-                    // mendapatkan lebar dan tinggi dari gambar utama
-                    $main_width  = imagesx($source);
-                    $main_height = imagesy($source);
+                //     // mendapatkan lebar dan tinggi dari gambar utama
+                //     $main_width  = imagesx($source);
+                //     $main_height = imagesy($source);
 
-                    // Menetapkan posisi gambar watermark
-                    // $dime_x = -180;
-                    // $dime_y = 200;
-                    // menyalin kedua gambar
-                    // imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
-                    $pos_x = $width - $width_watermark;
-                    $pos_y = $height - $height_watermark;
-                    imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                //     // Menetapkan posisi gambar watermark
+                //     // $dime_x = -180;
+                //     // $dime_y = 200;
+                //     // menyalin kedua gambar
+                //     // imagecopy($source, $watermark, imagesx($source) - $main_width - $dime_x, imagesy($source) - $water_height - $dime_y, 0, 0, imagesx($watermark), imagesy($watermark));
+                //     $pos_x = $width - $width_watermark;
+                //     $pos_y = $height - $height_watermark;
+                //     imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
                     
-                    imagealphablending($source, false);
-                    imagesavealpha($source, true);
-                    imagecolortransparent($source);
+                //     imagealphablending($source, false);
+                //     imagesavealpha($source, true);
+                //     imagecolortransparent($source);
                     
-                    $tery = image_data($source);
-                    $awsPath = "unity-asset/gift/" . $nama_file_unik;
-                    $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
+                //     $tery = image_data($source);
+                //     $awsPath = "unity-asset/gift/" . $nama_file_unik;
+                //     $merge = imagecopy($source, $watermark, $pos_x, 0, 0, 0, $width_watermark, $height_watermark);
 
-                    Storage::disk('s3')->put($awsPath, $tery);
+                //     Storage::disk('s3')->put($awsPath, $tery);
 
 
-                    //DELETE FILE LOCAL SETELAH DI MERGE
-                    $path = '../public/upload/gifts/image1/'.$pk.'.png';
-                    File:: delete($path);
+                //     //DELETE FILE LOCAL SETELAH DI MERGE
+                //     $path = '../public/upload/gifts/image1/'.$pk.'.png';
+                //     File:: delete($path);
 
-                    $path = '../public/upload/gifts/image2/'.$pk.'.png';
-                    File:: delete($path);
+                //     $path = '../public/upload/gifts/image2/'.$pk.'.png';
+                //     File:: delete($path);
 
-                    // imagepng($source, $thumbnail);
-                    // imagedestroy($source);
-                } else {
+                //     // imagepng($source, $thumbnail);
+                //     // imagedestroy($source);
+                // } else {
                     $rootpath   = 'unity-asset/gift/' . $nama_file_unik;
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
@@ -362,7 +362,7 @@ class GiftController extends Controller
                     File:: delete($path);
                     $path1 = '../public/upload/gifts/image2/'.$nama_file_unik;
                     File::delete($path1);
-                }
+                // }
 
                     Gift::where('id', '=', $pk)->update([
                         'img_ver' =>  $imageversion,

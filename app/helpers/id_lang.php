@@ -439,8 +439,9 @@ function TranslateMenuItem($menu){
         'Edit'              =>  'Ubah',
         'Gift ID'           =>  'ID Gift',
         'Emoticon ID'       =>  'Emotikon ID',
-        'See Detail Image'  =>  'Lihat Detail Gambar / Gif',
-        'Detail Info'       =>  'Detail Info'
+        'See Detail Image'  =>  'Lihat Detail Gambar',
+        'Detail Info'       =>  'Detail Info',
+        'Detail Image'      =>  'Detail Gambar'
     ];
 
     return $array_menuContent[$menu];

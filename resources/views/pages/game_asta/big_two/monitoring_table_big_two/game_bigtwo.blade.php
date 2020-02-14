@@ -1,6 +1,4 @@
-@extends('index')
 
-@section('content')
     <link rel="shortcut icon" href="/game/bgt/TemplateData/favicon.ico">
     <link rel="stylesheet" href="/game/bgt/TemplateData/style.css">
     <script src="/game/bgt/TemplateData/UnityProgress.js"></script>
@@ -20,7 +18,7 @@
     </style>
 
     <script>
-        var gameInstance = UnityLoader.instance("gameContainer", "", {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Big Two Web v.17.4.json", {onProgress: UnityProgress});
 
         function OnAppReady(){
             console.log("### application is loaded");
@@ -70,6 +68,3 @@
     </div>
 
 </div>
-
-
-@endsection

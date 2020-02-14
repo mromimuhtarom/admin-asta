@@ -20,6 +20,7 @@ class BigTwoMonitoringTableController extends Controller
         $checked = $request->checkauto;
         // dd($checked);
 
+
         // room Novice / Pemula
         $onlineinvoice = BigTwoPlayer::join('bgt_table', 'bgt_table.table_id', '=', 'bgt_player.table_id')
                          ->where('room_id', '=', 1)

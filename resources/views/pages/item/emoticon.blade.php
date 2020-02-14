@@ -100,6 +100,7 @@
                     <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.price">{{ TranslateMenuItem('Price') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.price') }}"></i></a></th>
                     {{-- <th class="th-sm">Category</th> --}}
                     <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.status">{{ TranslateMenuItem('Status') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.status') }}"></i></a></th>
+                    <th class="th-sm"{{ TranslateMenuItem('See Detail Image') }}></th>
                     @if($menu && $mainmenu)
                     <th align="center" style="width:10px;">
                       <a  href="#" style="color:red;font-weight:bold;" 
@@ -119,7 +120,7 @@
                     <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $emot->id }}" data-name="unity-asset/emoticon/{{ $emot->id }}.png" class="deletepermission{{ $emot->id }} deleteIdAll"></td>
                     <td>{{ $emot->id }}</td>
                     <td >
-                          <div class="media-container">
+                          {{-- <div class="media-container">
                             <form method="POST" action="{{ route('Emoticon-updateimage') }}" enctype="multipart/form-data">
                               {{  csrf_field() }}
                               <span class="media-overlay-wtr med-ovlay{{ $emot->id }}">
@@ -136,8 +137,8 @@
                                 <div class="nav-name">Watermark</div>
                               </span>
                                 <figure class="media-object">
-                                  {{-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> --}}
-                                  {{-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" --}}
+                                  <!-- <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ route('imageshowgift', $emot->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> -->
+                                  <!-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$emot->id.'.png'}}?{{ $timenow }}" -->
                                   <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ route('imageshowemoticon', $emot->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                                   <img class="img-object-wtr1 imgupload1{{ $emot->id }}" src="http://placehold.jp/80x100.png">
                                   <img class="img-object-wtr2 imgupload2{{ $emot->id }}" src="http://placehold.jp/80x100.png">
@@ -151,11 +152,36 @@
                             </form>
                               <button class="cancel-upload{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
                               <button class="edit-profile{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit') }}</button>
-                            </div>
+                            </div> --}}
+
+                        <div class="media-container" align="center">
+                          <form method="POST" action="{{ route('Emoticon-updateimage') }}" enctype="multipart/form-data">
+                            {{  csrf_field() }}
+                            <span class="media-overlay-wtrAva med-ovlayBonus{{ $emot->id }}">
+                              <input type="hidden" name="pk" value="{{ $emot->id }}">
+                              <input type="file" name="file" id="media-input-wtr" class="uploadBonus{{ $emot->id }}" accept="image/*">
+                              <i class="fa fa-edit media-icon-wtr"></i>
+                              <p class="nav-name">Main image</p>
+                            </span>
+                            <figure class="media-object">
+                              <img class="img-object-wtr imgupload{{ $emot->id }}" src="{{ route('imageshowgift', $emot->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> 
+                              <img class="img-object-wtr1Ava uploadBonusImg1{{ $emot->id }}" src="http://placehold.jp/80x100.png">
+                            </figure>
+                           
+                          </div>
+                          <div class="media-control" align="center" style="margin-top:-1%">
+                            <button class="save-ImgBonus{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                          </form>
+                            <button class="cancel-ImgBonus{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
+                            <button class="edit-ImgBonus{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                        </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $emot->id }}" data-type="text" data-url="{{ route('Emoticon-update') }}">{{ $emot->name }}</a></td>
                     <td><a href="#" class="usertext" data-name="price" data-title="price" data-pk="{{ $emot->id }}" data-type="number" data-url="{{ route('Emoticon-update') }}">{{ $emot->price }}</a></td>
                     <td><a href="#" class="status" data-name="status" data-pk="{{ $emot->id }}" data-type="select" data-value="{{ $emot->status }}" data-url="{{ route('Emoticon-update') }}" data-title="Select type">{{ ConfigTextTranslate(strEnabledDisabled($emot->status)) }}</a></td>
+                    <td>
+                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $emot->id }}">{{ TranslateMenuItem('Detail Info') }}</button>
+                    </td>
                     <td>
                         <a href="#" style="color:red;" class="delete{{ $emot->id }}" 
                             id="delete"
@@ -219,12 +245,12 @@
                         </div><br>
                         <input type='file' class="main-image" name="file" onchange="readURL(this);"/>
                     </td>
-                    <td align="center">
+                    {{-- <td align="center">
                       <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
                         <img id="blah1" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
                       </div><br>
                       <input type='file' class="watermark-image" name="file1" />
-                    </td>
+                    </td> --}}
                   </tr>
                 </table>
                   <input type="text" class="form-control" name="title" placeholder="Nama"><br>
@@ -299,6 +325,60 @@
     </div>
   </div>
 </div>
+
+@foreach ($emoticon as $emot)
+<!-- Modal detail info -->
+<div class="modal fade" id="detailinfo{{ $emot->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">{{ TranslateMenuItem('Detail Image') }}</h5>
+				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fa fa-remove"></i>
+				</button>
+      </div>
+      <style>
+        #image{{ $emot->id }} {
+          height: 200px;
+          width: 200px;
+          background: url("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/emoticon/{{ $emot->id }}.png") 0px 0px;
+        }
+      </style>
+      <script>
+        var tID; //we will use this variable to clear the setInterval()
+        function stopAnimate{{ $emot->id }}() {
+        clearInterval(tID);
+        } //end of stopAnimate()
+        function animateScript{{ $emot->id }}() {
+        var    position = 200; //start position for the image slicer
+        const  interval = 80; //80 ms of interval for the setInterval()
+        const  diff = 200;     //diff as a variable for position offset
+        tID = setInterval ( () => {
+          document.getElementById("image{{ $emot->id }}").style.backgroundPosition = 
+          `-${position}px 0px`; 
+          //we use the ES6 template literal to insert the variable "position"
+          if (position < 10000)
+          { position = position + diff;}
+          //we increment the position by 320 each time
+          else
+          { position = 200; }
+          //reset the position to 320px, once position exceeds 1536px
+          }
+        , interval ); //end of setInterval
+        } //end of animateScript()
+      </script>
+        
+			<div class="modal-body" align="center">
+        <div id="demo">
+          <p id="image{{ $emot->id }}" class="border border-dark"  onmouseover="animateScript{{ $emot->id }}()" onmouseout="stopAnimate{{ $emot->id }}()"> </p>
+        </div>
+        {{-- <div id="overlaytdt"><img src="{{ route('imageshowgift', $emot->id) }}?{{ $timenow }}" alt="Be patient..." /></div> --}}
+			</div> 
+		</div>
+	</div>
+</div>
+@endforeach
+<!-- End Modal detail info -->
 
 <script type="text/javascript">
 $(".watermark-image").change(function() {
@@ -406,62 +486,110 @@ $(".watermark-image").change(function() {
 
             @php
               foreach($emoticon as $emot) {
-                echo'$(".save-profile'.$emot->id.'").hide(0);';
-                  echo'$(".med-ovlay'.$emot->id.'").hide(0);';
-                  echo'$(".imgupload'.$emot->id.'").show();';
-                  echo'$(".imgupload1'.$emot->id.'").hide(0);';
-                  echo'$(".imgupload2'.$emot->id.'").hide(0);';
-                  echo'$(".cancel-upload'.$emot->id.'").hide(0);';
+              //   echo'$(".save-profile'.$emot->id.'").hide(0);';
+              //     echo'$(".med-ovlay'.$emot->id.'").hide(0);';
+              //     echo'$(".imgupload'.$emot->id.'").show();';
+              //     echo'$(".imgupload1'.$emot->id.'").hide(0);';
+              //     echo'$(".imgupload2'.$emot->id.'").hide(0);';
+              //     echo'$(".cancel-upload'.$emot->id.'").hide(0);';
 
-                  echo'$(".edit-profile'.$emot->id.'").on("click", function() {';
+              //     echo'$(".edit-profile'.$emot->id.'").on("click", function() {';
+              //       echo'$(this).hide(0);';
+              //       echo'$(".imgupload'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".imgupload1'.$emot->id.'").fadeIn(300);';
+              //       echo'$(".imgupload2'.$emot->id.'").fadeIn(300);';
+              //       echo'$(".med-ovlay'.$emot->id.'").fadeIn(300);';
+              //       echo'$(".cancel-upload'.$emot->id.'").fadeIn(300);';
+              //       echo'$(".save-profile'.$emot->id.'").fadeIn(300);';
+              //     echo'});';
+
+              //     echo'$(".save-profile'.$emot->id.'").on("click", function() {';
+              //       echo'$(this).hide(0);';
+              //       echo'$(".cancel-upload'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".med-ovlay'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".imgupload'.$emot->id.'").fadeIn(300);';
+              //       echo'$(".imgupload1'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".imgupload2'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".edit-profile'.$emot->id.'").fadeIn(300);';
+              //     echo'});';
+
+              //     echo'$(".cancel-upload'.$emot->id.'").on("click", function() {';
+              //       echo'$(this).hide(0);';
+              //       echo'$(".med-ovlay'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".imgupload'.$emot->id.'").fadeIn(300);';
+              //       echo'$(".imgupload1'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".imgupload2'.$emot->id.'").fadeOut(300);';
+              //       echo'$(".edit-profile'.$emot->id.'").fadeIn(300);';
+              //       echo'$(".save-profile'.$emot->id.'").hide(0);';
+              //     echo'});';
+
+              //     echo'$(".upload'.$emot->id.'").change(function() {';
+              //       echo'if (this.files && this.files[0]) {';
+              //         echo'var reader = new FileReader();';
+
+              //         echo'reader.onload = function(e) {';
+              //           echo'$(".imgupload1'.$emot->id.'").attr("src", e.target.result);';
+              //         echo'};';
+
+              //         echo'reader.readAsDataURL(this.files[0]);';
+              //     echo'}';
+              //   echo'});';
+              //   echo'$(".upload1'.$emot->id.'").change(function() {';
+              //       echo'if (this.files && this.files[0]) {';
+              //         echo'var reader = new FileReader();';
+
+              //         echo'reader.onload = function(e) {';
+              //           echo'$(".imgupload2'.$emot->id.'").attr("src", e.target.result);';
+              //         echo'};';
+
+              //         echo'reader.readAsDataURL(this.files[0]);';
+              //     echo'}';
+              //   echo'});';
+              // }
+
+                //JS BAGIAN IMAGE BONUS
+                echo'$(".save-ImgBonus'.$emot->id.'").hide(0);';
+                  echo'$(".med-ovlayBonus'.$emot->id.'").hide(0);';
+                  echo'$(".imgupload'.$emot->id.'").show();';
+                  echo'$(".uploadBonusImg1'.$emot->id.'").show(0);';
+                  echo'$(".cancel-ImgBonus'.$emot->id.'").hide(0);';
+
+                  echo'$(".edit-ImgBonus'.$emot->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
                     echo'$(".imgupload'.$emot->id.'").fadeOut(300);';
-                    echo'$(".imgupload1'.$emot->id.'").fadeIn(300);';
-                    echo'$(".imgupload2'.$emot->id.'").fadeIn(300);';
-                    echo'$(".med-ovlay'.$emot->id.'").fadeIn(300);';
-                    echo'$(".cancel-upload'.$emot->id.'").fadeIn(300);';
-                    echo'$(".save-profile'.$emot->id.'").fadeIn(300);';
+                    echo'$(".uploadBonusImg1'.$emot->id.'").fadeIn(300);';
+                    echo'$(".med-ovlayBonus'.$emot->id.'").fadeIn(300);';
+                    echo'$(".save-ImgBonus'.$emot->id.'").fadeIn(300);';
+                    echo'$(".cancel-ImgBonus'.$emot->id.'").fadeIn(300);';
                   echo'});';
 
-                  echo'$(".save-profile'.$emot->id.'").on("click", function() {';
+                  echo'$(".save-ImgBonus'.$emot->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
-                    echo'$(".cancel-upload'.$emot->id.'").fadeOut(300);';
-                    echo'$(".med-ovlay'.$emot->id.'").fadeOut(300);';
+                    echo'$(".med-ovlayBonus'.$emot->id.'").fadeOut(300);';
+                    echo'$(".edit-ImgBonus'.$emot->id.'").fadeIn(300);';
+                    echo'$(".cancel-ImgBonus'.$emot->id.'").fadeOut(300);';
                     echo'$(".imgupload'.$emot->id.'").fadeIn(300);';
-                    echo'$(".imgupload1'.$emot->id.'").fadeOut(300);';
-                    echo'$(".imgupload2'.$emot->id.'").fadeOut(300);';
-                    echo'$(".edit-profile'.$emot->id.'").fadeIn(300);';
+                    echo'$(".uploadBonusImg1'.$emot->id.'").fadeOut(300);';
                   echo'});';
 
-                  echo'$(".cancel-upload'.$emot->id.'").on("click", function() {';
+                  echo'$(".cancel-ImgBonus'.$emot->id.'").on("click", function() {';
                     echo'$(this).hide(0);';
-                    echo'$(".med-ovlay'.$emot->id.'").fadeOut(300);';
+                    echo'$(".med-ovlayBonus'.$emot->id.'").fadeOut(300);';
                     echo'$(".imgupload'.$emot->id.'").fadeIn(300);';
-                    echo'$(".imgupload1'.$emot->id.'").fadeOut(300);';
-                    echo'$(".imgupload2'.$emot->id.'").fadeOut(300);';
-                    echo'$(".edit-profile'.$emot->id.'").fadeIn(300);';
-                    echo'$(".save-profile'.$emot->id.'").hide(0);';
+                    echo'$(".uploadBonusImg1'.$emot->id.'").fadeOut(300);';
+                    echo'$(".edit-ImgBonus'.$emot->id.'").fadeIn(300);';
+                    echo'$(".save-ImgBonus'.$emot->id.'").hide(0);';
                   echo'});';
 
-                  echo'$(".upload'.$emot->id.'").change(function() {';
+                //JS MAIN IMAGE BONUS
+                echo'$(".uploadBonus'.$emot->id.'").change(function() {';
                     echo'if (this.files && this.files[0]) {';
                       echo'var reader = new FileReader();';
-
+		
                       echo'reader.onload = function(e) {';
-                        echo'$(".imgupload1'.$emot->id.'").attr("src", e.target.result);';
+                        echo'$(".uploadBonusImg1'.$emot->id.'").attr("src", e.target.result);';
                       echo'};';
-
-                      echo'reader.readAsDataURL(this.files[0]);';
-                  echo'}';
-                echo'});';
-                echo'$(".upload1'.$emot->id.'").change(function() {';
-                    echo'if (this.files && this.files[0]) {';
-                      echo'var reader = new FileReader();';
-
-                      echo'reader.onload = function(e) {';
-                        echo'$(".imgupload2'.$emot->id.'").attr("src", e.target.result);';
-                      echo'};';
-
+		
                       echo'reader.readAsDataURL(this.files[0]);';
                   echo'}';
                 echo'});';
