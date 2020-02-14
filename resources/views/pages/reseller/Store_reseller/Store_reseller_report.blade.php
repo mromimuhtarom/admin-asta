@@ -70,17 +70,26 @@
                                     <td>{{ $transaction->item_name }}</td>
                                     <td>{{ $transaction->quantity }}</td>
                                     <td>
-                                        <div>
-                                            <button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $transaction->id }}"><i class="fa fa-remove"></i>{{ translate_menuTransaction('Decline') }}</button>
-                                      {{-- </div>
-                                        <div> --}}
-                                            <button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $transaction->id }}"><i class="fa fa-check"></i>{{ translate_menuTransaction('Approve') }}</button>
-                                        </div>
-                                    </td>
+                                      @if($transaction->item_type == 1)
+                                          <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
+                                      @elseif($transaction->item_type == 2)
+                                          @if($transaction->status == 1)
+                                              <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
+                                          @elseif($transaction->status == 2)
+                                              <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
+                                          @endif
+                                      @elseif($transaction->item_type == 3)
+                                          @if($transaction->status == 1)
+                                              <span style="color:green">{{ TranslateMenuToko('Received And Sent') }}</span>
+                                          @elseif($transaction->status == 2)
+                                              <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
+                                          @endif
+                                      @endif
+                                  </td> 
                                     <td>{{ $transaction->description }}</td>
                                     <td>{{ $transaction->item_price }}</td>
                                     <td>
-                                        <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo">{{ translate_MenuTransaction('Detail Info') }}</button>
+                                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $transaction->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
                                     </td>
                                     
                                     @else
@@ -94,7 +103,7 @@
                                     <td>{{ $transaction->description }}</td>
                                     <td>{{ $transaction->item_price }}</td>
                                     <td>
-                                        <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo">{{ translate_MenuTransaction('Detail Info') }}</button>
+                                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $transaction->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
                                     </td>
                                     @endif
                                 </tr>
@@ -111,42 +120,50 @@
 </div>
 <!-- End Table 1 -->
 
-<!-- Modal decline -->
+
+<!-- Modal detail info -->
 @foreach ($transactions as $transaction)
-<div class="modal fade" id="decline{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailinfo{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_menuTransaction('Decline Transaction') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Detail Info') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
-            </div>
-            <form action="" method="POST">
-            @csrf
-                <div class="modal-body" align="center">
-										<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
-                                        {{ translate_menuTransaction('Are you sure want to Decline this Transaction') }}
-                                        <input type="hidden" name="declineId" value="{{ $transaction->id }}">
-										<input type="hidden" name="date_time" value="{{ $transaction->datetime }}">
-										{{-- <input type="hidden" name="userid" value="{{ $transaction->userid }}"> --}}
-										<input type="hidden" name="username" value="{{ $transaction->username }}">
-										<input type="hidden" name="item_name" value="{{ $transaction->item_name }}">
-										<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
-										{{-- <input type="hidden" name="datetime" value="{{ $transaction->datetime }}"> --}}
-										<input type="hidden" name="shop_type" value="{{ $transaction->description }}">
-										<input type="hidden" name="item_price" value="{{ $transaction->item_price }}">
-			    </div>
-			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i> {{ translate_menuTransaction('Yes') }}</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_menuTransaction('No') }}</button>
-                </div>
-            </form>
+			</div>
+			<div class="modal-body">
+                @if($transaction->item_type == 2)
+                    @if($transaction->payment_id == 23)
+                        <label for="tgl_pembelian">
+                            {{ TranslateMenuToko('Date Request') }}
+                        </label>
+                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $transaction->datetime }}" disabled>
+                        <label for="tipe_pembayaran">
+                            {{ TranslateMenuToko('Payment Type')}}
+                        </label>
+                        <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $transaction->paymentname }}" disabled>
+                    @else 
+                        <label for="tgl_pembelian">
+                            {{ TranslateMenuToko('Date Request') }}
+                        </label>
+                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $transaction->datetime }}" disabled>
+                        <label for="tgl_disetujui">
+                            {{ TranslateMenuToko('Date approve and Decline')}}
+                        </label>
+                        <input type="text" name="" id="tgl_disetujui" class="form-control" value="{{ $transaction->action_date }}" disabled>
+                        <label for="tipe_pembayaran">
+                            {{ TranslateMenuToko('Payment Type')}}
+                        </label>
+                        <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $transaction->paymentname }}" disabled>
+                    @endif
+                @endif
+			</div> 
 		</div>
 	</div>
 </div>
 @endforeach
-<!-- End Modal decline -->
+
 
 
 <script>
