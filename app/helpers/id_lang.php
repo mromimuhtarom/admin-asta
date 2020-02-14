@@ -61,11 +61,11 @@ function translate_menu($menu){
       'L_TABLE_BIG_TWO'                 => 'Table Big Two',
       'L_CATEGORY_BIG_TWO'              => 'Kategori Big Two',
       'L_SEASON_BIG_TWO'                => 'Musim Big Two',
-      'L_SEASON_REWARD_BIG_TWO'         => 'Hadiah musim Big Two',
+      'L_SEASON_REWARD_BIG _TWO'         => 'Hadiah musim Big Two',
       'L_TOURNAMENT_BIG_TWO'            => 'Turnamen Big Two',
       'L_JACKPOT_PAYTABLE_BIG_TWO'      => 'Jackpot Paytable Big Two',
       'L_DOMINO_SUSUN'                  => 'Domino susun',
-      'L_TABLE_DOMINO SUSUN'            => 'Table domino susun',
+      'L_TABLE_DOMINO_SUSUN'            => 'Table domino susun',
       'L_CATEGORY_DOMINO_SUSUN'         => 'Kategori domino susun',
       'L_SEASON_DOMINO_SUSUN'           => 'Musim domino susun',
       'L_SEASON_REWARD_DOMINO_SUSUN'    => 'Hadiah musim Domino susun',
@@ -100,7 +100,7 @@ function translate_menu($menu){
       'L_RESELLER_TRANSACTION'          => 'Transaksi Agen',
       'L_TRANSACTION_DAY_RESELLER'      => 'Transaksi Harian Agen',
       'L_REQUEST_TRANSACTION'           => 'Transaksi permintaan',
-      'L_ADD_TRANSACTION'               => 'Tambah Transaksi',
+      'L_ADD_TRANSACTION_RESELLER'               => 'Tambah Transaksi',
       'L_REPORT_TRANSACTION'            => 'Laporan Transaksi',
       'L_BALANCE_RESELLER'              => 'Saldo agen',
       'L_ITEM_STORE_RESELLER'           => 'Toko item agen',
@@ -428,7 +428,8 @@ function TranslateMenuItem($menu){
         'Gift ID'           =>  'ID Gift',
         'Emoticon ID'       =>  'Emotikon ID',
         'See Detail Image'  =>  'Lihat Detail Gambar / Gif',
-        'Detail Info'       =>  'Detail Info'
+        'Detail Info'       =>  'Detail Info',
+        'Detail Image'       =>  'Detail Gambar'
     ];
 
     return $array_menuContent[$menu];
