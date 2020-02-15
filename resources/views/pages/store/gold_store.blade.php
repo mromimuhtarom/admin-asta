@@ -2,8 +2,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ Translate_menu('Store')}}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ Translate_menu('Gold_Store')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ Translate_menu('L_STORE')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ Translate_menu('L_GOLD_STORE')}}</a></li>
 @endsection
 
 
@@ -66,7 +66,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i>{{ Translate_menu('Gold_Store')}}</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i>{{ Translate_menu('L_GOLD_STORE')}}</strong></h2>				
     </div>
   </header>
 

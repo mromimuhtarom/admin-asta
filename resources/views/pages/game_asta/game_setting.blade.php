@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">{{ Translate_menu('Settings')}}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">{{ Translate_menu('Game_Setting')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">{{ Translate_menu('L_SETTINGS')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Game_Setting') }}">{{ Translate_menu('L_GAME_SETTING')}}</a></li>
 @endsection
 
 
@@ -26,7 +26,7 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">{{ Translate_menu('Settings')}}</th>
+                    <th class="th-sm">{{ Translate_menu('L_SETTINGS')}}</th>
                     <th class="th-sm">{{ TranslateMenuGame('Name')}}</th></th>
                   </tr>
                 </thead>
@@ -70,7 +70,7 @@
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
-                    <th class="th-sm">{{ Translate_Menu('Settings')}}</th>
+                    <th class="th-sm">{{ Translate_Menu('L_SETTINGS')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -114,7 +114,7 @@
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
-                    <th class="th-sm">{{ Translate_Menu('Settings')}}</th>
+                    <th class="th-sm">{{ Translate_Menu('L_SETTINGS')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,7 +157,7 @@
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
-                    <th class="th-sm">{{ Translate_Menu('Settings')}}</th>
+                    <th class="th-sm">{{ Translate_Menu('L_SETTINGS')}}</th>
                   </tr>
                 </thead>
                 <tbody>
