@@ -363,11 +363,7 @@ function Translate_menuPlayers($menu){
         'Register Form'             =>  'Form pendaftaran',
         'IP'                        =>  'Alamat IP',
         'L_PLAYER'                  =>  'Pemain',
-<<<<<<< HEAD
         'L_GUEST'                     =>  'Guest',
-=======
-        'L_GUEST'                   =>  'Guest',
->>>>>>> 75da762e6a057d9c3fa33c3ed99e4c1a2c05cea2
         'L_APPROVE'                 =>  'Setuju',
         'L_BANNED'                  =>  'Dilarang',
         'L_PROBLEM'                 =>  'Bermasalah',

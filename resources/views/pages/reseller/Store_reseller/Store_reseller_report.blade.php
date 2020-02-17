@@ -32,11 +32,7 @@
     
         <header>
             <div class="widget-header">	
-<<<<<<< HEAD
                 <h2><strong>{{ translate_menu('L_STORE_RESELLER_REPORT') }}</strong></h2>				
-=======
-                <h2><strong>{{ translate_menu('L_REQUEST_TRANSACTION') }}</strong></h2>				
->>>>>>> 75da762e6a057d9c3fa33c3ed99e4c1a2c05cea2
             </div>
         </header>
     
