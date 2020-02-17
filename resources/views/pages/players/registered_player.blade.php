@@ -301,11 +301,11 @@
   });
 
   @foreach ($regis as $rg ) {
-  $("#description").keyup(function(e) {
+  $("#description").onclick(function(e) {
     e.preventDefault();
     var statusPlayer = $('#status_player').val();
     var description  = $(this).val();
-    console.log(description);
+  
     @php
     $a  = "status_player";
     $b  = "description";
