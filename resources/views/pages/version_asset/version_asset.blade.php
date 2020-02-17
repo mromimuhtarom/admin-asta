@@ -33,7 +33,7 @@
 @endif
 <div class="settings-table">
     <div>
-        <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+        <div class="jarviswidget jarviswidget-color-blue-dark no-padding" style="width:800px;" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
             <header>
                 <div class="widget-header">
                     <h2><strong>Android</strong></h2>
@@ -87,15 +87,19 @@
                                 <tbody>
                                 @foreach ($xml_andro->children() as $key => $xl)
                                     @if ($menu)
+                                    @php 
+                                    $ckbox = str_replace('.','_', $xl['name']);
+                                    @endphp
                                     <tr>
-                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl['name'].'1' }} deleteIdAll"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $xl['name'] }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
+                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $ckbox.'1' }} deleteIdAll"></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $ckbox }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->ver }}</a></td>
                                         <td>
-                                          <a href="#" style="color:red;" class="delete{{ $xl['name'].'1' }}" 
+                                          
+                                          <a href="#" style="color:red;" class="delete{{ $ckbox.'1' }}" 
                                               id="delete"
                                               data-pk="{{ $xl['name'] }}"
                                               data-name="{{ $key }}"
@@ -628,7 +632,10 @@
 <!-- ==================================================================== MODAL EDIT ASSET ======================================================================== -->
 <!-- Modal edit asset android -->
 @foreach ($xml_andro->children() as $xl)
-<div class="modal fade" id="ModalAssetAndro{{ $xl['name'] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+@php 
+$ckbox = str_replace('.','_', $xl['name']);
+@endphp
+<div class="modal fade" id="ModalAssetAndro{{ $ckbox  }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -1199,20 +1206,21 @@
     @php
             $a = 1;
             foreach($xml_andro->children() as $xl) {
-              echo'$(".delete'.$xl['name'].$a.'").hide();';
-              echo'$(".deletepermission'.$xl['name'].$a.'").on("click", function() {';
-                echo 'if($( ".deletepermission'.$xl['name'].$a.':checked" ).length > 0)';
+              $ckbox = str_replace('.','_', $xl['name']);
+              echo'$(".delete'.$ckbox.$a.'").hide();';
+              echo'$(".deletepermission'.$ckbox.$a.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$ckbox.$a.':checked" ).length > 0)';
                 echo '{';
-                  echo '$(".delete'.$xl['name'].$a.'").show();';
+                  echo '$(".delete'.$ckbox.$a.'").show();';
                 echo'}';
                 echo'else';
                 echo'{';
-                  echo'$(".delete'.$xl['name'].$a.'").hide();';
+                  echo'$(".delete'.$ckbox.$a.'").hide();';
                 echo'}';
 
               echo '});';
 
-              echo'$(".delete'.$xl['name'].$a.'").click(function(e) {';
+              echo'$(".delete'.$ckbox.$a.'").click(function(e) {';
                 echo'e.preventDefault();';
 
                 echo"var id    = $(this).attr('data-pk');";

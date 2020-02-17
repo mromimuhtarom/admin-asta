@@ -160,9 +160,20 @@ class Add_TransactionController extends Controller
             'chip'  =>  $totalbalance
           ]);
 
+            //untuk balance reseller//
+            BalanceChip::create([
+              'user_id'   =>  $user_id,
+              'action_id' =>  $type,
+              'game_id'   =>  0,
+              'debit'     =>  $valuecurrency,
+              'credit'    =>  0,
+              'balance'   =>  $totalbalance,
+              'datetime'  =>  Carbon::now('GMT+7')
+            ]);
+
           if($storetransactionday):
             $total_rewardchip =  $storetransactionday->reward_chip + $valuecurrency;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
                 'date'            => Carbon::now('GMT+7')->toDateString(),
                 'date_created'    => Carbon::now('GMT+7'),
                 'reward_chip'     => $total_rewardchip
@@ -198,7 +209,7 @@ class Add_TransactionController extends Controller
           if($stat->chip > $valuecurrency):
 
             //Selisih chip yang dimiliki user dengan adjust//
-            $userchip = $stat->chip - $valuecurrency;
+            $userchip   = $stat->chip - $valuecurrency;
             $resultdiff = -$userchip;
             
             //Total correction chip//
@@ -265,7 +276,7 @@ class Add_TransactionController extends Controller
           //Insert ke storetransactionday//
           if($storetransactionday):
             $total_correctionchip = $storetransactionday->correction_chip + $resultdiff;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
               'date'            =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'    =>  Carbon::now('GMT+7'),
               'correction_chip' =>  $total_correctionchip
@@ -307,7 +318,7 @@ class Add_TransactionController extends Controller
           //insert insert ke table store transaction day//
           if($storetransactionday):
             $total_correctionchip = $storetransactionday->correction_chip + $valuecurrency;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
               'date'            =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'    =>  Carbon::now('GMT+7'),
               'correction_chip' =>  $total_correctionchip
@@ -376,9 +387,20 @@ class Add_TransactionController extends Controller
             'gold'  =>  $totalbalance
           ]);
 
+          
+          //untuk balance gold//
+          BalanceGold::create([
+            'user_id'   =>  $user_id,
+            'action_id' =>  $type,
+            'debit'     =>  $valuecurrency,
+            'credit'    =>  0,
+            'balance'   =>  $totalbalance,
+            'datetime'  =>  Carbon::now('GMT+7')
+          ]);
+
           if($storetransactionday):
             $total_rewardgold =  $storetransactionday->reward_gold + $valuecurrency;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
                 'date'            => Carbon::now('GMT+7')->toDateString(),
                 'date_created'    => Carbon::now('GMT+7'),
                 'reward_gold'     => $total_rewardgold
@@ -407,17 +429,13 @@ class Add_TransactionController extends Controller
           endif;
 
           $totalbalance = $valuecurrency;
-          Stat::where('user_id', '=', $user_id)->update([
-            'gold'  =>  $totalbalance
-          ]);
           
           if($stat->gold > $valuecurrency):
 
             //Selisih gold yang dimiliki user dengan adjust//
-            $usergold = $valuecurrency - $stat->gold;
+            $usergold = $stat->gold - $valuecurrency;
+            $resultdiff = -$usergold;
 
-            //Total correction gold//
-            $total_correctiongold = $storetransactionday->correction_gold + $usergold;
 
             //Tambah keterangan di log admin//
 
@@ -427,7 +445,6 @@ class Add_TransactionController extends Controller
             BalanceGold::create([
               'user_id'   =>  $user_id,
               'action_id' =>  $type,
-              'game_id'   =>  0,
               'debit'     =>  $usergold,
               'credit'    =>  0,
               'balance'   =>  $totalbalance,
@@ -438,10 +455,10 @@ class Add_TransactionController extends Controller
             
 
             //selisih gold yang dimiliki reseller dengan yang adjust//
-            $usergold = $stat->gold - $valuecurrency;
+            // $usergold = $stat->gold - $valuecurrency;
+            $usergold = $valuecurrency - $stat->gold;
+            $resultdiff = $usergold;
 
-            //untuk total correction gold//
-            $total_correctiongold = $storetransactionday->correction_gold - $usergold;
 
             //untuk keterangan di log Admin//
             $op_math = 'dikurangkan dengan';
@@ -450,7 +467,6 @@ class Add_TransactionController extends Controller
             BalanceGold::create([
               'user_id'   =>  $user_id,
               'action_id' =>  $type,
-              'game_id'   =>  0,
               'debit'     =>  0,
               'credit'    =>  $usergold,
               'balance'   =>  $totalbalance,
@@ -459,7 +475,7 @@ class Add_TransactionController extends Controller
 
             elseif($stat->gold == $valuecurrency):  
               //untuk total correction gold//
-              $total_correctiongold = $storetransactionday->correction_gold - $usergold;
+              $resultdiff = 0;
   
               //untuk keterangan di log Admin//
               $op_math = 'diisi dengan';
@@ -468,7 +484,6 @@ class Add_TransactionController extends Controller
               BalanceGold::create([
                 'user_id'   =>  $user_id,
                 'action_id' =>  $type,
-                'game_id'   =>  0,
                 'debit'     =>  0,
                 'credit'    =>  0,
                 'balance'   =>  $valuecurrency,
@@ -478,8 +493,8 @@ class Add_TransactionController extends Controller
         
           //Insert ke storetransactionday//
           if($storetransactionday):
-            $total_correctiongold = $storetransactionday->correction_gold + $totalbalance;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            $total_correctiongold = $storetransactionday->correction_gold + $resultdiff;
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
               'date'            =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'    =>  Carbon::now('GMT+7'),
               'correction_gold' =>  $total_correctiongold
@@ -492,6 +507,10 @@ class Add_TransactionController extends Controller
               'correction_gold' => $valuecurrency 
             ]);
           endif;
+
+          Stat::where('user_id', '=', $user_id)->update([
+            'gold'  =>  $totalbalance
+          ]);
           
             Log::create([
               'op_id'     =>  Session::get('userId'),
@@ -521,7 +540,7 @@ class Add_TransactionController extends Controller
           //insert insert ke table store transaction day//
           if($storetransactionday):
             $total_correctiongold = $storetransactionday->correction_gold + $valuecurrency;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
               'date'            =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'    =>  Carbon::now('GMT+7'),
               'correction_gold' =>  $total_correctiongold
@@ -540,7 +559,6 @@ class Add_TransactionController extends Controller
             BalanceGold::create([
               'user_id'   =>  $user_id,
               'action_id' =>  $type,
-              'game_id'   =>  0,
               'debit'     =>  $valuecurrency,
               'credit'    =>  0,
               'balance'   =>  $totalbalance,
@@ -588,9 +606,20 @@ class Add_TransactionController extends Controller
             'point'  =>  $totalbalance
           ]);
 
+          //untuk balance Point//
+          BalancePoint::create([
+            'user_id'   =>  $user_id,
+            'action_id' =>  $type,
+            'game_id'   =>  0,
+            'debit'     =>  $valuecurrency,
+            'credit'    =>  0,
+            'balance'   =>  $totalbalance,
+            'datetime'  =>  Carbon::now('GMT+7')
+          ]);
+
           if($storetransactionday):
             $total_rewardpoint =  $storetransactionday->reward_point + $valuecurrency;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
                 'date'            => Carbon::now('GMT+7')->toDateString(),
                 'date_created'    => Carbon::now('GMT+7'),
                 'reward_point'    => $total_rewardpoint
@@ -619,19 +648,14 @@ class Add_TransactionController extends Controller
           endif;
         
           $totalbalance = $valuecurrency;
-          Stat::where('user_id', '=', $user_id)->update([
-            'point'  =>  $totalbalance
-          ]);
-
+        
           
-          
-          if($stat->point < $valuecurrency):
+          if($stat->point > $valuecurrency):
 
             //Selisih point yang dimiliki user dengan adjust//
-            $userpoint = $valuecurrency - $stat->point;
-
-            //Total correction point//
-            $total_correctionpoint = $storetransactionday->correction_point + $userpoint;
+            $userpoint = $stat->point - $valuecurrency;
+            $resultdiff = -$userpoint;
+            
 
             //Tambah keterangan di log admin//
 
@@ -651,10 +675,9 @@ class Add_TransactionController extends Controller
           elseif($stat->point < $valuecurrency):
             
             //selisih point yang dimiliki reseller dengan yang adjust//
-            $userpoint = $stat->point - $valuecurrency;
+            $userpoint = $valuecurrency- $stat->point;
+            $resultdiff = $userpoint;
 
-            //untuk total correction point//
-            $total_correctionpoint = $storetransactionday->correction_point - $userpoint;
 
             //untuk keterangan di log Admin//
             $op_math = 'dikurangkan dengan';
@@ -671,9 +694,7 @@ class Add_TransactionController extends Controller
             ]);
 
           elseif($stat->point == $valuecurrency):
-            
-            //untuk total correction point//
-            $total_correctionpoint = $storetransactionday->correction_point - $userpoint;
+            $resultdiff = $valuecurrency;
     
             //untuk keterangan di log Admin//
             $op_math = 'diisi dengan';
@@ -692,8 +713,8 @@ class Add_TransactionController extends Controller
         
           //Insert ke storetransactionday//
           if($storetransactionday):
-            $total_correctionpoint = $storetransactionday->correction_point + $totalbalance;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            $total_correctionpoint = $storetransactionday->correction_point + $resultdiff;
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
               'date'              =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'      =>  Carbon::now('GMT+7'),
               'correction_point'  =>  $total_correctionpoint
@@ -706,6 +727,10 @@ class Add_TransactionController extends Controller
               'correction_point' => $valuecurrency 
             ]);
           endif;
+
+          Stat::where('user_id', '=', $user_id)->update([
+            'point'  =>  $totalbalance
+          ]);
           
             Log::create([
               'op_id'     =>  Session::get('userId'),
@@ -735,7 +760,7 @@ class Add_TransactionController extends Controller
           //insert insert ke table store transaction day//
           if($storetransactionday):
             $total_correctionpoint = $storetransactionday->correction_point + $valuecurrency;
-            StoreTransactionDay::where('user_id', '=', $user_id)->update([
+            StoreTransactionDay::where('user_id', '=', $user_id)->where('date', '=', Carbon::now('GMT+7')->toDateString())->update([
               'date'            =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'    =>  Carbon::now('GMT+7'),
               'correction_point' =>  $total_correctionpoint

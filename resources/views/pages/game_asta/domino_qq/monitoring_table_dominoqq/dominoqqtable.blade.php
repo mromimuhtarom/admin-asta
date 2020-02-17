@@ -395,7 +395,7 @@
                   // location.reload();
                   window.location.replace("?checkauto=checked");
                   reloading=setTimeout("window.location.reload();", refresh_time);
-                }, 3000);
+                }, 300000);
                 
               } else {
                 window.location.replace("?checkauto=");
@@ -410,7 +410,7 @@
             setInterval(function(){
               window.location.replace("?checkauto=checked");
               reloading=setTimeout("window.location.reload();", refresh_time);
-            }, 3000);
+            }, 300000);
           } else {
             $(".checkauto").val('');
             clearTimeout(reloading);

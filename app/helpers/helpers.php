@@ -249,9 +249,9 @@ function strtohex($x)
 
 function strNormalFast ($val) {
 	if($val == 7) {
-		return 'Normal';
-	} else if($val == 15) {
 		return 'Fast';
+	} else if($val == 15) {
+		return 'Normal';
 	} else {
     return $val;
   }

@@ -180,7 +180,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '3',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Menambahkan data di menu Meja Asta Poker dengan nama '.$request->tableName
+        'desc'      => 'Menambahkan data di menu Meja Asta Poker dengan nama meja '.$request->tableName
         ]);
 
         return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('Data Added'));
@@ -237,7 +237,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Meja Big Two dengan nama '.$request->tableName
+            'desc'      => 'Menambahkan data di menu Meja Big Two dengan nama meja '.$request->tableName
         ]);
  
         return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data Added'));
@@ -298,7 +298,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Meja Domino Susun dengan nama'.$request->tableName
+            'desc'      => 'Menambahkan data di menu Meja Domino Susun dengan nama meja'.$request->tableName
           ]);
 
        return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data Added'));
@@ -361,7 +361,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Meja Domino QQ dengan nama '.$request->tableName
+            'desc'      => 'Menambahkan data di menu Meja Domino QQ dengan nama meja '.$request->tableName
           ]);
 
        return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data Added'));
@@ -455,16 +455,22 @@ class TableController extends Controller
                 break;
             case "timer":
                 $name = "Timer";
+                if($value == 7 ):
+                    $value = 'Fast';
+                elseif($value == 8):
+                    $value = 'Normal';
+                endif;
                 break;
             default:
               "";
         }
+        $tpktable = DB::table('tpk_table')->where('table_id', '=', $pk)->first();
   
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' idi menu Meja Asta Poker dengan RuangID '.$pk.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' di menu Meja Asta Poker dengan Nama meja '.$tpktable->name.' menjadi '. $value
         ]);
     }
 
@@ -533,6 +539,14 @@ class TableController extends Controller
                 break;
             case "max_buy":
                 $name = "Max Buy";
+                break;
+            case "timer":
+                $name = "Timer";
+                if($value == 7 ):
+                    $value = 'Fast';
+                elseif($value == 8):
+                    $value = 'Normal';
+                endif;
                 break;
             default:
             "";
@@ -633,6 +647,14 @@ class TableController extends Controller
             case "max_buy":
                 $name = "Max Buy";
                 break;
+            case "timer":
+                $name = "Timer";
+                if($value == 7 ):
+                    $value = 'Fast';
+                elseif($value == 8):
+                    $value = 'Normal';
+                endif;
+                break;
             default:
             "";
         }
@@ -722,6 +744,14 @@ class TableController extends Controller
                 break;
             case "total_bet":
                 $name = "Total Bet";
+                break;
+            case "timer":
+                $name = "Timer";
+                if($value == 7 ):
+                    $value = 'Fast';
+                elseif($value == 8):
+                    $value = 'Normal';
+                endif;
                 break;
             default:
             "";

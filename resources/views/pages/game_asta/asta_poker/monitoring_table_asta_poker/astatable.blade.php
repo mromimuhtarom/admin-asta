@@ -71,7 +71,7 @@
                           <td>
                             <div style="float:right;margin-left:10%;">
                               <form action="{{ route('Monitoring_Table_Asta_Poker') }}">
-                                <input type="text" class="checkauto" name="checkauto" value="">                            
+                                <input type="hidden" class="checkauto" name="checkauto" value="">                            
                                 <button type="submit" class="btn bg-blue-light text-white btntablearrow @if(Request::is('Game/Asta-Poker/Monitoring_Table_Asta_Poker/Monitor_Asta_Poker-view*')) btnactivetable @endif"><i class="fa fa-arrow-down icontable" style=""></i></button>
                               </form>
                             </div>
@@ -421,7 +421,7 @@
                 // location.reload();
                 window.location.replace("?checkauto=checked");
                 reloading=setTimeout("window.location.reload();", refresh_time);
-              }, 3000);
+              }, 300000);
               
             } else {
               window.location.replace("?checkauto=");
@@ -436,7 +436,7 @@
           setInterval(function(){
             window.location.replace("?checkauto=checked");
             reloading=setTimeout("window.location.reload();", refresh_time);
-          }, 3000);
+          }, 300000);
         } else {
           $(".checkauto").val('');
           clearTimeout(reloading);

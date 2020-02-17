@@ -168,7 +168,8 @@
 													<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
 													<input type="hidden" name="price" value="{{ $transaction->item_price }}">										
 													<input type="hidden" name="item_name" value="{{ $gold->name }}">
-													<input type="text" name="item_id" value="{{ $transaction->item_id }}">
+													<input type="hidden" name="username" value="{{ $transaction->username }}">
+													<input type="hidden" name="item_id" value="{{ $transaction->item_id }}">
 													<input type="hidden" name="desc" value="{{ $transaction->description }}">
 													<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
 													<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
@@ -214,7 +215,8 @@
 						@endif
 					@endforeach
 					@endif
-					<input type="text" name="item_id" value="{{ $transaction->item_id }}">
+					<input type="hidden" name="username" value="{{ $transaction->username }}">
+					<input type="hidden" name="item_id" value="{{ $transaction->item_id }}">
 					<input type="hidden" name="desc" value="{{ $transaction->description }}">
 					<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
 					<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">

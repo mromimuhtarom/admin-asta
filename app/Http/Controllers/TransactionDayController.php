@@ -157,7 +157,7 @@ class TransactionDayController extends Controller
         else if($time == "Month"){
 
             $Transaction = StoreTransactionDay::select(
-					                                  'asta_db.store_transaction_day.date_created',
+					                        'asta_db.store_transaction_day.date_created',
                                             DB::raw('sum(asta_db.store_transaction_day.debet) As debettransaction'),
                                             DB::raw('sum(asta_db.store_transaction_day.credit) As credittransaction'),
                                             DB::raw('sum(asta_db.store_transaction_day.gold_debet) As gold_debettransaction'),
@@ -211,12 +211,12 @@ class TransactionDayController extends Controller
         else if($time  == "All time"){
 
 
-            $transactionDay = StoreTransactionDay::leftJoin('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction_day.user_id')
+            $transactionDay = StoreTransactionDay::join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction_day.user_id')
                           ->select(
                               'store_transaction_day.id',
                               'store_transaction_day.user_id',
                               'user.username',
-                              'asta_db.store_transaction_day.date as date_created',
+                              'asta_db.store_transaction_day.date_created as date_created',
                               'store_transaction_day.debet as debettransaction',
                               'store_transaction_day.credit as credittransaction',
                               'store_transaction_day.gold_debet as gold_debettransaction',
@@ -225,15 +225,15 @@ class TransactionDayController extends Controller
                               'store_transaction_day.chip_credit as chip_credit',
                               'store_transaction_day.reward_gold as reward_goldtransaction',
                               'store_transaction_day.reward_point as reward_pointtransaction',
-                              'store_transaction_day.reward_chip as rewatd_chiptransaction',
+                              'store_transaction_day.reward_chip as reward_chiptransaction',
                               'store_transaction_day.correction_gold as correction_gold',
-                              'store_transaction_day.correction_chip as chip_correction',
+                              'store_transaction_day.correction_chip as correction_chip',
                               'store_transaction_day.correction_point as correction_point'
                           );
             
             $lang_id = '';
             if($minDate != NULL && $maxDate != NULL){
-
+                
                 $history = $transactionDay->wherebetween('asta_db.store_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                             ->orderBy($namecolumn, $sortingorder)
                             ->paginate(20);
@@ -320,8 +320,8 @@ class TransactionDayController extends Controller
                         'store_transaction_day.reward_point as reward_pointtransaction',
                         'store_transaction_day.reward_chip as reward_chiptransaction',
                         'store_transaction_day.correction_gold as correction_gold',
-                        'store_transaction_day.correction_chip as chip_correction',
-                        'store_transaction_day.correction_point as point_correction'
+                        'store_transaction_day.correction_chip as correction_chip',
+                        'store_transaction_day.correction_point as correction_point'
                     )
                     ->wherebetween('asta_db.store_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                     ->orderBy($namecolumn, $sortingorder)

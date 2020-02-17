@@ -80,12 +80,16 @@ class VersionAssetController extends Controller
         $xml->save('../public/upload/xml/Android/asset_game.xml');
         $PathS3   = 'unity-asset/XML/Android/asset_game.xml';
         $xmllocal = "../public/upload/xml/Android/asset_game.xml";
-
         //upload file
-        $uploadFile = $replacepath . $name;
+        $filename = $_FILES['fileAdr']['name'];
+        $x                                        = explode('.', $filename);
+        $ekstensi                                 = strtolower(end($x));
+
+        $uploadFile = $replacepath . $name.'.'.$ekstensi ;
+    
         Storage::disk('s3')->put($uploadFile, file_get_contents($file));
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
-
+      
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
@@ -408,7 +412,7 @@ class VersionAssetController extends Controller
         $link       = $request->Link;
         $version    = $request->Version;
         $gamep      = simplexml_load_file("../public/upload/xml/Android/asset_game.xml");
-
+        $filename   = $_FILES['fileEditADR']['name'];
         foreach($gamep->children() as $gamew)
         {
             
@@ -432,7 +436,7 @@ class VersionAssetController extends Controller
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
 
         //update file to aws s3
-        $uploadFile = $replacepath . $name;
+        $uploadFile = $replacepath . $name.'.'.$filename;
         Storage::disk('s3')->put($uploadFile, file_get_contents($file));
 
         Log::create([

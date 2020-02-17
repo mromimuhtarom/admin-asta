@@ -144,7 +144,7 @@
 									<td>{{ $trns_day->date_created }}</td>
 									<td>{{ $trns_day->user_id }}</td>
 									<td>{{ $trns_day->username }}</td>
-									<td>{{ number_format($trns_day->debettransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->debet, 2) }}</td>
 									<td>{{ number_format($trns_day->credittransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->gold_debettransaction, 2) }}</td>
 									<td>{{ number_format($trns_day->gold_credittransaction, 2) }}</td>

@@ -87,6 +87,7 @@ class User_Banking_TransactionController extends Controller
         $item_type      = $request->item_type;
         $description    = $request->description;
         $item_id        = $request->item_id;
+        $username       = $request->username;
 
         StoreTransactionHist::create([
             'user_id'       =>  $user_id,
@@ -116,7 +117,7 @@ class User_Banking_TransactionController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '6',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menolak permintaan transaksi dengan Penggunaid'. $user_id
+            'desc'      => 'Menolak permintaan transaksi di menu Transaksi Bank Pemain dengan nama pemain'. $username
         ]);
         return back()->with('success','Declined Succesful');
     }
@@ -136,6 +137,7 @@ class User_Banking_TransactionController extends Controller
         $item_type      = $request->item_type;
         $description    = $request->description;
         $item_id        = $request->item_id;
+        $username       = $request->username;
 
         StoreTransactionHist::create([
             'user_id'       => $user_id,
@@ -160,7 +162,6 @@ class User_Banking_TransactionController extends Controller
 
         BalanceGold::create([
             'user_id'   =>  $user_id,
-            'game_id'   =>  0,
             'action_id' =>  10,
             'debit'     =>  0,
             'credit'    =>  $itemid->item_get,
@@ -182,7 +183,7 @@ class User_Banking_TransactionController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '5',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan Transaksi dengan PenggunaID'. $user_id
+            'desc'      => 'Menerima permintaan Transaksi di menu Transaksi Bank Pemain dengan Nama Pemain'. $username
         ]);
 
 

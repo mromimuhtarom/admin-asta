@@ -102,14 +102,14 @@
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>
 							<tr>
-                                @if($time == "Day" || $time == "Week" || $time == "Month" || $time == "All Time")
+                                @if($time == "Day" || $time == "Week" || $time == "Month" || $time == "All time")
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction_day.date_created">{{ TranslateReseller('Date Created') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction_day.date_created') }}"></i></a></td>
                                 @endif
-                                @if($time == "All Time" )
+                                @if($time == "All time" )
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction_day.reseller_id">{{ TranslateReseller('Reseller ID') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction_day.reseller_id') }}"></i></a></td>
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller.username">{{ TranslateReseller('Username') }} <i class="fa fa-sort{{ iconsorting('reseller.username') }}"></i></a></td>
                                 @endif
-                                @if($time == "Day" || $time == "Week" || $time == "Month" || $time == "All Time")
+                                @if($time == "Day" || $time == "Week" || $time == "Month" || $time == "All time")
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_gold">{{ TranslateReseller('Buy Gold') }} <i class="fa fa-sort{{ iconsorting('buy_gold') }}"></i></a></td>
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_amount">{{ TranslateReseller('Buy Amount') }} <i class="fa fa-sort{{ iconsorting('buy_amount') }}"></i></a></td>
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=sell_gold">{{ TranslateReseller('Sell Gold') }} <i class="fa fa-sort{{ iconsorting('sell_gold') }}"></i></a></td>
