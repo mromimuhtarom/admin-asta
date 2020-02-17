@@ -243,6 +243,7 @@
                                     <th>{{ Translate_menuPlayers('Card') }}</th>
                                 </tr>
                             </thead>
+                            @if($history->gameplay_log)
                             <tbody>
                                 @php 
                                 $arrayjson_decode = array_gameplaylog($history->gameplay_log)
@@ -291,6 +292,7 @@
                                 @endif
                                 @endforeach                 
                             </tbody>
+                            @endif
                         </table>  
                     @elseif($history->gamename === 'Texas Poker') 
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
@@ -304,12 +306,17 @@
                                     <th>{{ Translate_menuPlayers('Card Table') }}</th>
                                 </tr>
                             </thead>
+                            @php 
+                            $history1 = DB::table('tpk_round')->where('round_id', '=', 13040)->first();
+                            @endphp
+                            {{-- {{ dd(empty($history1->gameplay_log)) }} --}}
+                            @if(!empty($history->gameplay_log))
                             <tbody>
                                 @php 
                                 $inputMinDate = "2019-10-18";
                                 $inputMaxDate = "2019-10-18";
                                 // $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 5120)->first();
-                                $arrayjson_decode = array_gameplaylog($history->gameplay_log);
+                                $arrayjson_decode = array_gameplaylog($history1->gameplay_log);
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
                                 @if ($row['game_state'] === 'NEW_ROUND')
@@ -360,6 +367,7 @@
                                 @endif
                                 @endforeach                 
                             </tbody>
+                            @endif
                         </table>     
                     @elseif($history->gamename === 'Domino QQ') 
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
@@ -372,6 +380,7 @@
                                     <th>{{ Translate_menuPlayers('Card') }}</th>
                                 </tr>
                             </thead>
+                            @if($history->gameplay_log)
                             <tbody>
                                 @php 
                                 $inputMinDate = "2019-10-24";
@@ -437,6 +446,7 @@
                                 @endif
                                 @endforeach                 
                             </tbody>
+                            @endif
                     </table>     
                     @elseif($history->gamename === 'Domino Susun') 
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
@@ -449,6 +459,7 @@
                                     <th>{{ Translate_menuPlayers('Domino') }}</th>
                                 </tr>
                             </thead>
+                            @if($history->gameplay_log)
                             <tbody>
                                 @php 
                                 $arrayjson_decode = array_gameplaylog($history->gameplay_log);
@@ -513,6 +524,7 @@
                                 @endif
                                 @endforeach                 
                             </tbody>
+                            @endif
                     </table>                              
                     @endif                        
                 </div>

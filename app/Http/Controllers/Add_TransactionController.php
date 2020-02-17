@@ -194,17 +194,14 @@ class Add_TransactionController extends Controller
           
           $totalbalance = $valuecurrency;
           
-          Stat::where('user_id', '=', $user_id)->update([
-            'chip'  =>  $totalbalance
-          ]);
           
           if($stat->chip > $valuecurrency):
 
             //Selisih chip yang dimiliki user dengan adjust//
-            $userchip = $valuecurrency - $stat->chip;
-
+            $userchip = $stat->chip - $valuecurrency;
+            $resultdiff = -$userchip;
+            
             //Total correction chip//
-            $total_correctionchip = $storetransactionday->correction_chip + $userchip;
 
             //Tambah keterangan di log admin//
 
@@ -223,10 +220,10 @@ class Add_TransactionController extends Controller
 
           elseif($stat->chip < $valuecurrency):
             //selisih chip yang dimiliki reseller dengan yang adjust//
-            $userchip = $stat->chip - $valuecurrency;
+            $userchip = $valuecurrency - $stat->chip;
+            $resultdiff = $userchip;
 
             //untuk total correction chip//
-            $total_correctionchip = $storetransactionday->correction_chip - $userchip;
 
             //untuk keterangan di log Admin//
             $op_math = 'dikurangkan dengan';
@@ -244,7 +241,7 @@ class Add_TransactionController extends Controller
 
             elseif($stat->chip == $valuecurrency):
               //untuk total correction chip//
-              $total_correctionchip = $storetransactionday->correction_chip - $userchip;
+              $resultdiff = 0;
   
               //untuk keterangan di log Admin//
               $op_math = 'diisi dengan';
@@ -260,10 +257,14 @@ class Add_TransactionController extends Controller
                 'datetime'  =>  Carbon::now('GMT+7')
               ]);
           endif;
+
+          Stat::where('user_id', '=', $user_id)->update([
+            'chip'  =>  $totalbalance
+          ]);
         
           //Insert ke storetransactionday//
           if($storetransactionday):
-            $total_correctionchip = $storetransactionday->correction_chip + $totalbalance;
+            $total_correctionchip = $storetransactionday->correction_chip + $resultdiff;
             StoreTransactionDay::where('user_id', '=', $user_id)->update([
               'date'            =>  Carbon::now('GMT+7')->toDateString(),
               'date_created'    =>  Carbon::now('GMT+7'),

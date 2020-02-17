@@ -373,26 +373,35 @@
         // $('table#tablerefreshed1').fadeOut('slow').load(url + ' #tablerefreshed1').fadeIn("slow") //note: the space before #div1 is very important
       });
 
-            $('#autorefresh').click(function(){
-                if($(this).prop("checked") == true){
-                  $(".checkauto").val("checked");
-                  setInterval(function(){
-                    window.location.replace("?checkauto=checked");
-                    reloading=setTimeout("window.location.reload();", refresh_time);
-                  }, 300000);
-                } else {
-                  $(".checkauto").val('');
-                }
-            });
-
-            if($('#autorefresh').prop("checked") == true)
-            {
+        $('#autorefresh').click(function(){
+            var reloading;
+            if($(this).prop("checked") == true){
               $(".checkauto").val("checked");
               setInterval(function(){
+                // $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
+                // location.reload();
                 window.location.replace("?checkauto=checked");
                 reloading=setTimeout("window.location.reload();", refresh_time);
-              }, 300000);
+              }, 3000);
+              
+            } else {
+              window.location.replace("?checkauto=");
+              $(".checkauto").val('');
+              clearTimeout(reloading);
             }
+        });
+
+        if($('#autorefresh').prop("checked") == true)
+        {
+          $(".checkauto").val("checked");
+          setInterval(function(){
+            window.location.replace("?checkauto=checked");
+            reloading=setTimeout("window.location.reload();", refresh_time);
+          }, 3000);
+        } else {
+          $(".checkauto").val('');
+          clearTimeout(reloading);
+        }
     });
 
     table = $('table.table').dataTable({

@@ -2,9 +2,9 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Transaction_Day_Reseller') }}">{{ translate_menu('Reseller') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Transaction_Day_Reseller') }}">{{ translate_menu('Reseller-Transaction') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Transaction_Day_Reseller') }}">{{ translate_menu('Transaction_Day_Reseller') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Transaction_Day_Reseller') }}">{{ translate_menu('L_RESELLER') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Transaction_Day_Reseller') }}">{{ translate_menu('L_RESELLER_TRANSACTION') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Transaction_Day_Reseller') }}">{{ translate_menu('L_TRANSACTION_DAY_RESELLER') }}</a></li>
 @endsection
 
 

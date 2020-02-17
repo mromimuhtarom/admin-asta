@@ -1,0 +1,13 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Asta Game",
+"dataUrl": "Big Two Web v.17.4_14.data.unityweb",
+"wasmCodeUrl": "Big Two Web v.17.4_14.wasm.code.unityweb",
+"wasmFrameworkUrl": "Big Two Web v.17.4_14.wasm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"}
+}

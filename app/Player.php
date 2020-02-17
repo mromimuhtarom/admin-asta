@@ -15,9 +15,9 @@ class Player extends Model
     protected $primaryKey   = 'asta_db.user.user_id';
 
     public $statusUser = [
-        '1' => 'Approve',
-        '2' => 'Banned',
-        '3' => 'Problem',
+        '1' => 'L_APPROVE',
+        '2' => 'L_BANNED',
+        '3' => 'L_PROBLEM',
     ];
 
     public function strStatus() {

@@ -1,8 +1,7 @@
 @extends('index')
 
 @section('pages')
-  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('Settings')}}</a></li> 
-  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('General_Setting')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Version_Asset_Apk') }}">{{ translate_menu('L_VERSION_ASSET_APK')}}</a></li> 
 @endsection
 
 @if (count($errors) > 0)
@@ -47,7 +46,6 @@
 
                                 <div class="row">
                         
-                                  <!-- Button tambah bot baru -->
                                   <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                                     <div class="input-group">
                                       @if($menu)
@@ -492,8 +490,9 @@
                         <input class="form-control" name="Name" placeholder="Name"><br>
                           <select name="Type" class="form-control">
                             <option>{{ translate_menuTransaction('Type')}}</option>
-                            <option value="Audio">Audio</option>
-                            <option value="Image">{{ TranslateMenuItem('Image')}}</option>
+                            <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
+                            <option value="Image">{{ TranslateVersionAsetApk('L_IMAGE')}}</option>
+                            <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
                           </select>
                         <br>
                           <input class="form-control" name="Link" placeholder="Link"><br>
@@ -545,8 +544,9 @@
                   <input class="form-control" name="Name" placeholder="Name"><br>
                     <select name="Type" class="form-control">
                       <option>Type</option>
-                      <option value="Audio">Audio</option>
-                      <option value="Image">{{ TranslateMenuItem('Image')}}</option>
+                      <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
+                      <option value="Image">{{ TranslateVersionAsetApk('L_IMAGE')}}</option>
+                      <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
                     </select>
                   <br>
                     <input class="form-control" name="Link" placeholder="Link"><br>
@@ -598,9 +598,10 @@
                   <br>
                   <input class="form-control" name="Name" placeholder="Name"><br>
                     <select name="Type" class="form-control">
-                      <option>Type</option>
-                      <option value="Audio">Audio</option>
-                      <option value="Image">{{ TranslateMenuItem('Image')}}</option>
+                      <option>{{ translate_menuTransaction('Type')}}</option>
+                      <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
+                      <option value="Image">{{ TranslateVersionAsetApk('L_IMAGE')}}</option>
+                      <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
                     </select>
                   <br>
                     <input class="form-control" name="Link" placeholder="Link"><br>
@@ -656,8 +657,9 @@
                   <input value="{{ $xl['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
-                      <option @if( $xl->type == 'Audio' ) selected @endif value="Audio">Audio </option>
-                      <option @if( $xl->type == 'Image' ) selected @endif value="Image">{{ TranslateMenuItem('Image')}}</option>
+                      <option @if( $xl->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>
+                      <option @if( $xl->type == 'Image' ) selected @endif value="Image">{{ TranslateVersionAsetApk('L_IMAGE') }}</option>
+                      <option @if( $xl->type == 'Scene' ) selected @endif value="Scene">{{ TranslateVersionAsetApk('L_SCENE') }}</option>
                     </select>
                   <br>
                   <input readonly value="{{ $xl->link }}" class="form-control" name="Link" placeholder="Link"><br>
@@ -712,8 +714,9 @@
                   <input value="{{ $xl_ios['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
-                      <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">Audio </option>
-                      <option @if( $xl_ios->type == 'Image' ) selected @endif value="Image">{{ TranslateMenuItem('Image')}}</option>
+                      <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>
+                      <option @if( $xl_ios->type == 'Image' ) selected @endif value="Image">{{ TranslateVersionAsetApk('L_IMAGE') }}</option>
+                      <option @if( $xl_ios->type == 'Scene' ) selected @endif value="Scene">{{ TranslateVersionAsetApk('L_SCENE') }}</option>
                     </select>
                   <br>
                   <input readonly value="{{ $xl_ios->link }}" class="form-control" name="Link" placeholder="Link"><br>
@@ -768,8 +771,9 @@
                   <input value="{{ $xl_ios['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
-                      <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">Audio </option>
-                      <option @if( $xl_ios->type == 'Image' ) selected @endif value="Image">{{ TranslateMenuItem('Image')}}</option>
+                      <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>
+                      <option @if( $xl_ios->type == 'Image' ) selected @endif value="Image">{{ TranslateVersionAsetApk('L_IMAGE') }}</option>
+                      <option @if( $xl_ios->type == 'Scene' ) selected @endif value="Image">{{ TranslateVersionAsetApk('L_SCENE') }}</option>
                     </select>
                   <br>
                   <input readonly value="{{ $xl_ios->link }}" class="form-control" name="Link" placeholder="Link"><br>

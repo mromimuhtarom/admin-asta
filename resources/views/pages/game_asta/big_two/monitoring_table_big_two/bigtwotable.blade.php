@@ -242,7 +242,7 @@
                 <thead>
                   <tr>
                     {{-- <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
+                    <th class="th-sm" style="background-color:#ffffff;"><a href="{ { route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
                     <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
                     <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
                     <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th> --}}
@@ -396,26 +396,35 @@
             location.reload();   
           });
 
-            $('#autorefresh').click(function(){
-                if($(this).prop("checked") == true){
-                  $(".checkauto").val("checked");
-                  setInterval(function(){
-                    window.location.replace("?checkauto=checked");
-                    reloading=setTimeout("window.location.reload();", refresh_time);
-                  }, 300000);
-                } else {
-                  $(".checkauto").val('');
-                }
-            });
+          $('#autorefresh').click(function(){
+              var reloading;
+              if($(this).prop("checked") == true){
+                $(".checkauto").val("checked");
+                setInterval(function(){
+                  // $("#tablerefreshed1").load('{{ route("Monitoring_Table_Asta_Poker") }}' + " #tablerefreshed1");
+                  // location.reload();
+                  window.location.replace("?checkauto=checked");
+                  reloading=setTimeout("window.location.reload();", refresh_time);
+                }, 3000);
+                
+              } else {
+                window.location.replace("?checkauto=");
+                $(".checkauto").val('');
+                clearTimeout(reloading);
+              }
+          });
 
-            if($('#autorefresh').prop("checked") == true)
-            {
-              $(".checkauto").val("checked");
-              setInterval(function(){
-                window.location.replace("?checkauto=checked");
-                reloading=setTimeout("window.location.reload();", refresh_time);
-              }, 300000);
-            }
+          if($('#autorefresh').prop("checked") == true)
+          {
+            $(".checkauto").val("checked");
+            setInterval(function(){
+              window.location.replace("?checkauto=checked");
+              reloading=setTimeout("window.location.reload();", refresh_time);
+            }, 3000);
+          } else {
+            $(".checkauto").val('');
+            clearTimeout(reloading);
+          }
         });
     
         table = $('table.table').dataTable({

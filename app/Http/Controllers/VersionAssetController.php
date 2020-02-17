@@ -15,7 +15,7 @@ class VersionAssetController extends Controller
     
     public function index()
     {
-        $menu        = MenuClass::menuName('Version Asset Apk');
+        $menu        = MenuClass::menuName('L_VERSION_ASSET_APK');
         $xml_andro   = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
         $xml_ios     = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/IOS/asset_game.xml");
         $xml_windows = simplexml_load_file("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Windows/asset_game.xml");
@@ -207,8 +207,8 @@ class VersionAssetController extends Controller
         $infoTag->appendChild($version_xml);
         $rootTag->appendChild($infoTag);
 
-        $xml->save('../public/upload/xml/Windows/asset_game.xml');
-        $xmllocal = "../public/upload/xml/Windows/asset_game.xml";
+        $xml->save('../public/upload/xml/IOS/asset_gameWINDOWS.xml');
+        $xmllocal = "../public/upload/xml/IOS/asset_gameWINDOWS.xml";
         
         //upload xml
         $PathS3   = 'unity-asset/XML/Windows/asset_game.xml';

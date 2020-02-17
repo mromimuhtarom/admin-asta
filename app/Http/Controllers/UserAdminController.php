@@ -51,7 +51,7 @@ class UserAdminController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'username' => 'required|regex:/^\S*$/u',
+            'username' => 'required|operator, username|regex:/^\S*$/u',
             'role'     => 'required|integer',
             'fullname' => 'required',
         ]);
@@ -110,25 +110,35 @@ class UserAdminController extends Controller
     
     public function updatepassword(Request $request) 
     {
-        $pk = $request->userid;
-        $password = $request->password;
-        
+        $pk           = $request->userid;
+        $password     = $request->password;
+        $passwordself = $request->passwordself;
+        $op_id        = Session::get('userId'); 
+        $username     = Session::get('username');
+
         if($password != '') {
-            User::where('op_id', '=', $pk)->update([
-                'userpass' => bcrypt($password)
-            ]);
-        
-  
-  
-            Log::create([
-                'op_id'     => Session::get('userId'),
-                'action_id' => '1',
-                'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan PenggunaId '.$pk.' menjadi '. $password
-            ]);
-            return redirect()->route('User_Admin')->with('success', alertTranslate('Reset Password Successfully'));
+            // untuk validasi password akun sendiri
+            $retriveuser = DB::table('operator')->where('op_id', '=', $op_id)->first();
+
+            if ($username === $retriveuser->username && password_verify($passwordself, $retriveuser->userpass)) :
+                User::where('op_id', '=', $pk)->update([
+                    'userpass' => bcrypt($password)
+                ]);
+                $operator = User::where('op_id', '=', $pk)->first();          
+    
+    
+                Log::create([
+                    'op_id'     => Session::get('userId'),
+                    'action_id' => '1',
+                    'datetime'  => Carbon::now('GMT+7'),
+                    'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna '.$operator->username
+                ]);
+                return redirect()->route('User_Admin')->with('success', alertTranslate('L_RESET_PASSWORD_SUCCESS'));
+            else :
+                return redirect()->route('User_Admin')->with('alert', alertTranslate('L_PASSWORD_FAILED'));
+            endif;
         }
-        return redirect()->route('User_Admin')->with('alert', alertTranslate('Password is Null'));
+        return redirect()->route('User_Admin')->with('alert', alertTranslate('L_PASSWORD_NULL'));
     }
 
    

@@ -152,7 +152,7 @@
                 @if($menu && $mainmenu)
                 <tr>
                     <td align="center"><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $adm->op_id }}" class="deletepermission{{ $adm->op_id }} deleteIdAll"></td>
-                    <td><a href="#" class="usertext" data-name="username" data-title="Username" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->username }}</a></td>
+                    <td>{{ $adm->username }}</td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->op_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
                     <td><a href="#" class="password{{ $adm->op_id }} btn btn-primary" id="password" data-pk="{{ $adm->op_id }}" data-toggle="modal" data-target="#reset-password"><i class="fa fa-key"></i> {{ translate_MenuContentAdmin('Reset Password')}}</a></td>
@@ -251,7 +251,8 @@
             <form action="{{ route('UserAdmin-updatepassword') }}" method="post">
               {{ csrf_field() }}
               <input type="hidden" name="userid" id="userid" value="">
-              <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
+              <input type="password" class="form-control" name="passwordself" placeholder="{{ TranslatePlaceholdertxt('L_PASSWORD_SELF') }}" value="" required/><br>
+              <input type="password" class="form-control" name="password" placeholder="{{ TranslatePlaceholdertxt('L_PASSWORD_WANT_CHANGE') }}" value="" required/>
           </div>
           <div class="modal-footer">
             <button type="submit" class="button_example-yes btn sa-btn-primary submit-data"><i class="fa fa-key"></i>{{ translate_MenuContentAdmin('Reset Password')}}</button>

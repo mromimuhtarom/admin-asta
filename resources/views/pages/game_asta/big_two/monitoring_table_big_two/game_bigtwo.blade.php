@@ -6,7 +6,7 @@
     <link rel="stylesheet" media="screen, print" href="/assets/vendors/vendors.bundle.css">
     <link rel="stylesheet" media="screen, print" href="/assets/app/app.bundle.css">
     <script src="/assets/vendors/vendors.bundle.js"></script>
-	<script src="/assets/app/app.bundle.js"></script>
+	  <script src="/assets/app/app.bundle.js"></script>
 
     <style>
         #gameContainer{
@@ -22,14 +22,14 @@
     </style>
 
     <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/bgt/Build/Big Two Web v.17.4_13.json", {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/bgt/Build/Big Two Web v.17.4_14.json", {onProgress: UnityProgress});
 
         function OnAppReady(){
             console.log("### application is loaded");
             var nametable = '{{ $name_table }}';
-            var idtable = '{{ $idtable }}';
-            var user = '{{ $username }}';
-            var pass = '{{ $password }}';
+            var idtable   = '{{ $idtable }}';
+            var user      = '{{ $username }}';
+            var pass      = '{{ $password }}';
 
             console.log("========= ini PARAM 1.1");
             var param = {id: idtable, name: nametable, username: user, password: pass};
