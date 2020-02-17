@@ -126,7 +126,7 @@
                         <tr>
                           <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
-                          <td>{{ $action_report_player[$login->action_id] }} pemain</td>
+                          <td> pemain {{ ConfigTextTranslate($action_report_player[$login->action_id]) }}</td>
                           <td>{{ $login->datetime }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>
