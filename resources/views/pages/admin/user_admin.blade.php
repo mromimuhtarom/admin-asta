@@ -317,7 +317,7 @@
         $('.role').editable({
           mode:'inline',
           source: [
-                {value: '', text: 'Choose Role Type'},
+                {value: '', text: "{{ TranslatePlaceHoldertxt('L_CHOOSE_ROLE_ADMIN')}}"},
                   @php
                     $roles = DB::table('asta_db.adm_role')->get();
                     foreach($roles as $role) {

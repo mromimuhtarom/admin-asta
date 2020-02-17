@@ -373,7 +373,7 @@ function Translate_menuPlayers($menu){
         'Create player level'       =>  'Buat level pemain',
         'Level'                     =>  'Maks Level',
         'Experience'                =>  'Maks Pengalaman',
-        'Player Rank'               =>  'Peringkat player',
+        'Player Rank'               =>  'Peringkat pemain',
         'Create Rank Player'        =>  'Buat peringkat pemain',
         'Save Avatar'               =>  'Simpan avatar',
         'Edit Avatar'               =>  'Ubah avatar',
@@ -885,7 +885,8 @@ function TranslatePlaceholdertxt($placeholder) {
         
         "L_PASSWORD"             => "Kata Sandi",
         "L_PASSWORD_WANT_CHANGE" => "Kata Sandi yang mau di ganti",
-        "L_PASSWORD_SELF"        => "Massukan Kata Sandi yang sedang login"
+        "L_PASSWORD_SELF"        => "Massukan Kata Sandi yang sedang login",
+        "L_CHOOSE_ROLE_ADMIN"    => "Pilih tipe peran"
 
 
     ];
