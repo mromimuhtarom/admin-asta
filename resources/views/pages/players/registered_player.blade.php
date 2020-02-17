@@ -225,7 +225,7 @@
   
           <div class="row">
             <div class="col-12">
-              <div class="form-group">
+              <div class="form-group" id="formGroup">
                 <div style="height:100px;overflow:auto;margin-bottom:20px;" class="border border-dark">
                   <table width="100%" style="border:1px solid #dee2e6;">
                     <tr style="background-color:#f5f5f5;">
@@ -300,28 +300,26 @@
     });
   });
 
-  @foreach ($regis as $rg ) {
-  $("#description").onclick(function(e) {
+  $("#formGroup").onclick(function(e) {
     e.preventDefault();
-    var statusPlayer = $('#status_player').val();
+    console.log(description);
     var description  = $(this).val();
-  
+    var statusPlayer = $('#status_player').val();
+    
     @php
     $a  = "status_player";
     $b  = "description";
     
         echo  'var descriptionValue = $(this).val();';
         echo  'var lblErrorDesc = document.getElementById("lblErrorDesc");';
-  
-          echo 'if(descriptionValue !== null) {';
+          echo 'if(descriptionValue != null) {';
             echo 'lblErrorDesc.innerHTML = "";';
           echo '}else{';
             echo 'lblErrorDesc.innerHTML = "kolom alasan tidak boleh kosong.";';
           echo '}';
+
     @endphp
   });
-  }
-  @endforeach
 
   
   table = $('table.table').dataTable({

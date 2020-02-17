@@ -47,8 +47,10 @@ class ChipController extends Controller
           $actionbalance[14] => $actionbalance[15],
           $actionbalance[16] => $actionbalance[17],
           $actionbalance[18] => $actionbalance[19],
-          $actionbalance[20] => $actionbalance[21]
+          $actionbalance[20] => $actionbalance[21],
+          $actionbalance[22] => $actionbalance[23]
         ];
+      
 
         $getMindate  = Input::get('inputMinDate');
         $getMaxdate  = Input::get('inputMaxDate');
@@ -133,9 +135,10 @@ class ChipController extends Controller
           $actionbalance[14] => $actionbalance[15],
           $actionbalance[16] => $actionbalance[17],
           $actionbalance[18] => $actionbalance[19],
-          $actionbalance[20] => $actionbalance[21]
+          $actionbalance[20] => $actionbalance[21],
+          $actionbalance[22] => $actionbalance[23]
         ];
-
+    
         // if ($validator->fails()) {
         //   return back()->withErrors($validator->errors());
         // }
