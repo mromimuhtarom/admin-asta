@@ -121,39 +121,6 @@
                     <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
                     <td>{{ $gf->id }}</td>
                     <td>
-                          {{-- <div class="media-container">
-                            <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
-                              {{  csrf_field() }}
-                              <span class="media-overlay-wtr med-ovlay{{ $gf->id }}">
-                                <input type="hidden" name="pk" value="{{ $gf->id }}">
-                                <input type="file" name="file" id="media-input-wtr" class="upload{{ $gf->id }}" accept="image/*">
-                                <i class="fa fa-edit media-icon-wtr"></i>
-                                <p class="nav-name">{{ TranslateMenuItem('Main Image') }}</p>
-                                
-                              </span>
-                              <span class="media-overlay-wtr1 med-ovlay{{ $gf->id }}">
-                                <input type="hidden" name="pk" value="{{ $gf->id }}">
-                                <input type="file" name="file1" id="media-input-wtr1" class="upload1{{ $gf->id }}">
-                                <i class="fa fa-edit media-icon-wtr1"></i>
-                                <div class="nav-name">Watermark</div>
-                              </span>
-                                <figure class="media-object">
-                                  <!-- <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> -->
-                                  <!-- src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/gift/'.$gf->id.'.png'}}?{{ $timenow }}" -->
-                                  <img class="img-object-wtr imgupload{{ $gf->id }}" src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;"> -->
-                                  <img class="img-object-wtr1 imgupload1{{ $gf->id }}" src="http://placehold.jp/80x100.png">
-                                  <img class="img-object-wtr2 imgupload2{{ $gf->id }}" src="http://placehold.jp/80x100.png">
-                                </figure>
-                              <figure>
-                                
-                              </figure>
-                          </div>
-                            <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $gf->id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuItem('Save Gift') }}</button>
-                            </form>
-                              <button class="cancel-upload{{ $gf->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                              <button class="edit-profile{{ $gf->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('Edit Gift') }}</button>
-                            </div> --}}
                         <div class="media-container" align="center">
                           <form method="POST" action="{{ route('TableGift-updateimage') }}" enctype="multipart/form-data">
                             {{  csrf_field() }}

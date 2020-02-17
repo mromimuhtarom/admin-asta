@@ -1,4 +1,4 @@
-@extends('index')
+ @extends('index')
 
 @section('page')
   <li class="breadcrumb-item"><a href="{{ route('Table_Asta_Poker') }}">Asta Poker</a></li>
@@ -75,8 +75,6 @@
             
           </div>
           
-            
-  
         </div>
         
         <div class="custom-scroll table-responsive" style="height:800px; margin-right:1%;">
@@ -324,7 +322,7 @@
               echo 'if( maxbuyValue <= '.$ct->max_buy.') {';
                   echo 'lblErrormaxbuy.innerHTML = "";';
               echo '}else{';
-                  echo 'lblErrormaxbuy.innerHTML = "Max buy table kurang dari max buy di kategori.";';
+                  echo 'lblErrormaxbuy.innerHTML = "Max buy table harus kurang dari max buy di kategori.";';
               echo '}';
             echo '}';
           }
@@ -391,7 +389,7 @@
             }
           },
           source: [
-            {value: '', text: 'Choose Timer'},
+            {value: '', text: "{{ TranslateChoices('L_CHOOSE_TIMER') }}"},
             {value: '7', text: 'Normal'},
             {value: '15', text: 'Fast'},
           ]
@@ -401,7 +399,7 @@
           value: '',
           mode: 'inline',
           source: [
-            {value: '', text: 'Choose Category'},
+            {value: '', text: "{{ TranslateChoices('L_CHOOSE_CATEGORY') }}" },
             @php
             foreach($category as $ct) {
             echo '{value:"'.$ct->room_id.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';

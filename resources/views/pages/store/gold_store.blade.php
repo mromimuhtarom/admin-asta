@@ -558,7 +558,7 @@ $(".watermark-image").change(function() {
           }
         },
 				source: [
-                  {value: '', text: 'choose type bonus'},
+                  {value: '', text: 'pilih tipe bonus'},
                   @php
                       echo '{value:"'.$bontype[0].'", text: "'.ConfigTextTranslate($bontype[1]).'"}, ';
                       echo '{value:"'.$bontype[2].'", text: "'.ConfigTextTranslate($bontype[3]).'"}, ';

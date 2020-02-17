@@ -357,7 +357,7 @@
             }
           },
           source: [
-            {value: '', text: 'Choose Category'},
+            {value: '', text: "{{ TranslateChoices('L_CHOOSE_CATEGORY') }}"},
             @php
             foreach($category as $ct) {
             echo '{value:"'.$ct->room_id.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';
@@ -375,7 +375,7 @@
             }
           },
           source: [
-            {value: '', text: 'Choose Timer'},
+            {value: '', text: "{{ TranslateChoices('L_CHOOSE_TIMER') }}"},
             {value: '7', text: 'Normal'},
             {value: '15', text: 'Fast'},
           ]

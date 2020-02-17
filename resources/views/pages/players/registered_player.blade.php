@@ -251,8 +251,9 @@
                   </table> 
                 </div>           
                   <input type="hidden" name="player_id" value="{{ $regis->user_id}}">
-                  <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
-                  <select name="status_player" class="form-control" id="">
+                  <textarea name="description" class="form-control" id="description{{ $regis->user_id }}" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
+                  <span id="lblErrorDesc" style="color: red"></span> 
+                  <select name="status_player" class="form-control" id="status_player{{ $regis->user_id }}">
                     <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
                     @if ($regis->status == 1)
                     <option value="{{ $plyr_status[2] }}" @if($regis->status == $plyr_status[2]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
@@ -264,7 +265,6 @@
                     <option value="{{ $plyr_status[0] }}" @if($regis->status == $plyr_status[0]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
                     <option value="{{ $plyr_status[2] }}" @if($regis->status == $plyr_status[2]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
                     @endif
-
                   </select>
               </div>
             </div>
@@ -299,6 +299,30 @@
       "bInfo": false
     });
   });
+
+  @foreach ($regis as $rg ) {
+  $("#description").keyup(function(e) {
+    e.preventDefault();
+    var statusPlayer = $('#status_player').val();
+    var description  = $(this).val();
+    console.log(description);
+    @php
+    $a  = "status_player";
+    $b  = "description";
+    
+        echo  'var descriptionValue = $(this).val();';
+        echo  'var lblErrorDesc = document.getElementById("lblErrorDesc");';
+  
+          echo 'if(descriptionValue !== null) {';
+            echo 'lblErrorDesc.innerHTML = "";';
+          echo '}else{';
+            echo 'lblErrorDesc.innerHTML = "kolom alasan tidak boleh kosong.";';
+          echo '}';
+    @endphp
+  });
+  }
+  @endforeach
+
   
   table = $('table.table').dataTable({
     "sDom": "<'dt-toolbar d-flex'<><'ml-auto hidden-xs show-control'>>",

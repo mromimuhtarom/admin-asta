@@ -40,7 +40,7 @@
                         <option value="{{ $act->id }}">{{ $act->action }}</option>                                
                         @endforeach --}}
                         <option value="{{ $AbusetrnsType[0] }}">{{ translate_menu($AbusetrnsType[1]) }} Pemain</option>
-                        <option value="{{ $AbusetrnsType[2] }}">{{ $AbusetrnsType[3]}} Pemain</option>
+                        <option value="{{ $AbusetrnsType[2] }}">{{ translate_menu($AbusetrnsType[3]) }} Pemain</option>
                     </select>
                 </div>
                 @if (Request::is('FeedBack/Abuse_Transaction_Report/AbuseTransactionReport-search'))

@@ -363,7 +363,7 @@ function Translate_menuPlayers($menu){
         'Register Form'             =>  'Form pendaftaran',
         'IP'                        =>  'Alamat IP',
         'L_PLAYER'                  =>  'Pemain',
-        'L_GUEST'                     =>  'Guest',
+        'L_GUEST'                   =>  'Guest',
         'L_APPROVE'                 =>  'Setuju',
         'L_BANNED'                  =>  'Dilarang',
         'L_PROBLEM'                 =>  'Bermasalah',
@@ -427,7 +427,7 @@ function TranslateMenuItem($menu){
         'Gift ID'           =>  'ID Gift',
         'Emoticon ID'       =>  'Emotikon ID',
         'See Detail Image'  =>  'Lihat Detail Gambar / Gif',
-        'Detail Info'       =>  'Detail Info',
+        'Detail Info'       =>  'Preview',
         'Detail Image'      =>  'Detail Gambar'
     ];
 
@@ -709,8 +709,6 @@ function ConfigTextTranslate($menu){
         "L_ACTION"                                            =>   "Aksi",
         "L_CORRECTION"                                        =>   "Koreksi",
         "L_ADJUST"                                            =>   "Penyesuaian",
-        "Lose"                                                =>   "Kalah",
-        "Win"                                                 =>   "Menang",
         // "1"                                                 =>  "1",
         "" => ""
 
@@ -755,8 +753,8 @@ function alertTranslate($menu){
         "Number of inputs filled in player ID can't be NULL"            =>  "Jumlah input yang diisi ID pemain tidak boleh NULL",
         "You must to Choose Status"                                     =>  "Kamu harus memilih status",
         "Data input successfull"                                        =>  "Data berhasil di input", 
-        "L_RESET_PASSWORD_SUCCESS"                                   =>  "Setel ulang password berhasil",
-        "L_PASSWORD_NULL"                                              =>  "Katasandi NULL",
+        "Reset Password Successfully"                                   =>  "Setel ulang password berhasil",
+        "Password is NULL"                                              =>  "Katasandi NULL",
         "REGISTER SUCCESSFULL"                                          =>  "Pendaftaran sukses",
         "Approved Successful"                                           =>  "BERHASIL DISETUJUI",
         "Declined Successful"                                           =>  "DITOLAK BERHASIL",
@@ -794,7 +792,6 @@ function alertTranslate($menu){
         "Transaction Chip"                                              =>  "Transaksi Chip",
         "Transaction Gold"                                              =>  "Transaksi Koin",
         "Transaction Point"                                             =>  "Transaksi Poin",
-        "L_PASSWORD_FAILED"                                             =>  "Password tidak cocok silahkan coba lagi"
     ];
     return $array_menuContent[$menu];
 };
@@ -866,32 +863,14 @@ function TranslateTransaksiAgen($menu){
 };
 
 
-function TranslateVersionAsetApk($menu)
-{
+function TranslateChoices($menu){
+
     $array_menuContent = [
-        
-        "L_IMAGE"   =>  "Gambar",
-        "L_AUDIO"   =>  "Suara",
-        "L_SCENE"   =>  "Scene"   
 
-
+        "L_CHOOSE_CATEGORY"   =>   "Pilih kategori",
+        "L_CHOOSE_TIMER"      =>   "Pilih timer",
     ];
     return $array_menuContent[$menu];
-}
-
-
-function TranslatePlaceholdertxt($placeholder) {
-    $array_menuContent = [
-        
-        "L_PASSWORD"             => "Kata Sandi",
-        "L_PASSWORD_WANT_CHANGE" => "Kata Sandi yang mau di ganti",
-        "L_PASSWORD_SELF"        => "Massukan Kata Sandi yang sedang login"
-
-
-    ];
-    return $array_menuContent[$placeholder];
-}
-
-
+};
 
 ?>
