@@ -222,7 +222,7 @@
                     </label>
                     <input type="text" name="" id="kode_pengiriman" class="form-control">
                 @elseif($tr->item_type == 2)
-                    @if($tr->paym   ent_id == 23)
+                    @if($tr->payment_id == 23)
                         <label for="tgl_pembelian">
                             {{ TranslateMenuToko('Date Request') }}
                         </label>

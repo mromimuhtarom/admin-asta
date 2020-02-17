@@ -175,13 +175,24 @@ function strFormatMoney($val){
 
 //Menu type (view role_edit.blade.php)
 function strMenuType ($val) {
-    if($val == 0) {
-        return 'The Menu Can\'t be Accessed and can\'t be edited';
-    } else if ($val == 1) {
-        return 'The Menu Can be Accessed and can\'t be edited';
-    } else if ($val == 2) {
-        return 'The Menu Can be Accessed and edited';
+    $config            = DB::table('config_text')->where('id', '=', 6)->first();
+    $value             = str_replace(':', ',', $config->value);
+    $rolestatus        = explode(",", $value);
+    if($val == $rolestatus[0]) {
+      return $rolestatus[1];
+    } else if($val == $rolestatus[2]) {
+      return $rolestatus[3];
+    } else if($val == $rolestatus[4]) {
+      return $rolestatus[5];
     }
+  
+    // if($val == 0) {
+    //     return 'The Menu Can\'t be Accessed and can\'t be edited';
+    // } else if ($val == 1) {
+    //     return 'The Menu Can be Accessed and can\'t be edited';
+    // } else if ($val == 2) {
+    //     return 'The Menu Can be Accessed and edited';
+    // }
 }
 
 //

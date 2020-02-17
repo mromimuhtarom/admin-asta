@@ -26,7 +26,7 @@ function translate_menu($menu){
       'L_USER_BANK_TRANSACTION'         => 'Transaksi Bank Pemain',
       'L_REWARD_TRANSACTION'            => 'Transaksi Barang',
       'L_ADD_TRANSACTION'               => 'Tambah transaksi',
-      'L_TRANSACTION_POINT'              => 'Transaksi Point',
+      'L_TRANSACTION_POINT'             => 'Transaksi Point',
       'L_PLAYERS'                       => 'Pemain',
       'L_ACTIVE_PLAYERS'                => 'Pemain aktif',
       'L_REPORT_PLAYERS'                => 'Laporan pemain',
@@ -39,7 +39,7 @@ function translate_menu($menu){
       'L_GOLD_PLAYERS'                  => 'Koin pemain',
       'L_POINT_PLAYERS'                 => 'Poin pemain',
       'L_REGISTER_PLAYER_ID'            => 'ID pemain terdaftar',
-      'L_LOG_PLAYER'                   => 'Catatan Pemain',
+      'L_LOG_PLAYER'                    => 'Catatan Pemain',
       'L_TRANSACTION_PLAYERS'           => 'Transaksi pemain',
       'L_PLAYERS_LEVEL'                 => 'Level pemain',
       'L_AVATAR_PLAYER'                 => 'avatar pemain',
@@ -48,7 +48,7 @@ function translate_menu($menu){
       'L_TABLE_GIFT'                    => 'Table gift',
       'L_REPORT_GIFT'                   => 'Laporan gift',
       'L_EMOTICON'                      => 'Emoticon',
-      'L_GAMES'                          => 'Permainan',
+      'L_GAMES'                         => 'Permainan',
       'L_ASTA_POKER'                    => 'Asta-Poker',
       'L_TABLE_ASTA_POKER'              => 'Table Asta poker',
       'L_CATEGORY_ASTA_POKER'           => 'Kategori',
@@ -201,7 +201,6 @@ function translate_menuTransaction($menu){
         'Month'                 =>  'Bulanan',
         'All time'              =>  'Sepanjang waktu',
         'Game'                  =>  'Permainan',
-
         'Time Stamp'            =>  'Waktu',
         'Bank Transaction'      =>  'Transaksi Bank',
         'Bank Manual Transfer'  =>  'Transaksi bank manual',
@@ -268,7 +267,7 @@ function translate_menuTransaction($menu){
         'Reward Point'          =>  'Reward Poin',
         'Correction Gold'       =>  'Koreksi Koin',
         'Correction Chip'       =>  'Koreksi Chip',
-        'Correction Point'       =>  'Koreksi Poin', 
+        'Correction Point'      =>  'Koreksi Poin', 
         'Point Get'             =>  'Point Di Dapat',
         'Point Spend'           =>  'Poin Di Pakai',
         'Point Expired'         =>  'Poin Kadaluarsa',
@@ -364,7 +363,11 @@ function Translate_menuPlayers($menu){
         'Register Form'             =>  'Form pendaftaran',
         'IP'                        =>  'Alamat IP',
         'L_PLAYER'                  =>  'Pemain',
+<<<<<<< HEAD
         'L_GUEST'                     =>  'Guest',
+=======
+        'L_GUEST'                   =>  'Guest',
+>>>>>>> 75da762e6a057d9c3fa33c3ed99e4c1a2c05cea2
         'L_APPROVE'                 =>  'Setuju',
         'L_BANNED'                  =>  'Dilarang',
         'L_PROBLEM'                 =>  'Bermasalah',
@@ -429,7 +432,7 @@ function TranslateMenuItem($menu){
         'Emoticon ID'       =>  'Emotikon ID',
         'See Detail Image'  =>  'Lihat Detail Gambar / Gif',
         'Detail Info'       =>  'Detail Info',
-        'Detail Image'       =>  'Detail Gambar'
+        'Detail Image'      =>  'Detail Gambar'
     ];
 
     return $array_menuContent[$menu];
@@ -651,8 +654,8 @@ function TranslateReseller($menu){
         'Choose a file'          => 'pilih file',
         'Create new reseller'    => 'buat agen baru',
         'Select All'             => 'Pilih semua',
-        'Weekly'                 => 'Mingguan',
-        'Monthly'                => 'Bulanan',
+        'L_WEEKLY'               => 'Mingguan',
+        'L_MONTHLY'              => 'Bulanan',
         'Create new'             => 'Buat baru',
         'Username / Reseller ID' => 'Nama Agent / ID Agen',
         'Gold'                   => 'Koin',
@@ -677,9 +680,9 @@ function ConfigTextTranslate($menu){
 
     $array_menuContent = [
 
-        "L_THE MENU CAN'T BE ACCESSED AND CAN'T BE EDITED"    =>   "Menu tidak dapat diakses dan tidak dapat diubah",
-        "L_THE MENU CAN BE ACCESSED AND CAN'T BE EDITED"      =>   "Menu dapat diakses dan tidak dapat diubah",
-        "L_THE MENU CAN BE ACCESSED AND EDITED"               =>   "Menu dapat diakses dan dapat di ubah",
+        "L_CAN'T_ACCESSED_AND_CAN'T_EDITED"    =>   "Menu tidak dapat diakses dan tidak dapat diubah",
+        "L_CAN_ACCESSED_AND_CAN'T_EDITED"      =>   "Menu dapat diakses dan tidak dapat diubah",
+        "L_CAN_ACCESSED_EDITED"                =>   "Menu dapat diakses dan dapat di ubah",
         "L_LOGIN"                                             =>   "Masuk",
         "L_LOGOUT"                                            =>   "Keluar",
         "L_PENDING"                                           =>   "Tunda",
@@ -689,8 +692,8 @@ function ConfigTextTranslate($menu){
         "L_WIN"                                               =>   "Menang",
         "L_LOSE"                                              =>   "Kalah",
         "L_DRAW"                                              =>   "Seri",
-        "L_TRANSFER IN"                                       =>   "Transfer masuk",
-        "L_TRANSFER OUT"                                      =>   "Transfer Keluar",
+        "L_TRANSFER_IN"                                       =>   "Transfer masuk",
+        "L_TRANSFER_OUT"                                      =>   "Transfer Keluar",
         "L_FREE"                                              =>   "Gratis",
         "L_BONUS"                                             =>   "Bonus",
         "L_GIFT"                                              =>   "Hadiah",
@@ -785,9 +788,9 @@ function alertTranslate($menu){
         "You didn't allow to delete your account"                       =>  "Kamu tidak diperbolehkan menghapus akunmu",
         "Data saved"                                                    =>  "Data tersimpan!",
         "Data added"                                                    =>  "Data berhasil di tambahkan",
-        "Operator Still use this role, wait until role didnott use"      =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
+        "Operator Still use this role, wait until role didnott use"     =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
         "For Type Adjust number didnot allowed negative"  =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
-        "For type Bonus or Free number not allowed negative number"    =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif",
+        "For type Bonus or Free number not allowed negative number"     =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif",
         "User ID"                                                       =>  "ID Pengguna",
         "Balance Chip"                                                  =>  "Saldo chip",
         "Balance Point"                                                 =>  "Saldo Point",

@@ -207,7 +207,7 @@
                       <td>{{ $itm->name }}</td>
                       <td>{{ $itm->strItemType() }}</td>
                       <td>{{ $itm->item_get }}</td>
-                      <td>{{ strItemBonType($itm->bonus_type)}}</td>
+                      <td>{{ ConfigTextTranslate(strItemBonType($itm->bonus_type)) }}</td>
                       <td>
                         <div class="media-container">
                           <figure class="media-object">

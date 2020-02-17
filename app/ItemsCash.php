@@ -12,14 +12,14 @@ class ItemsCash extends Model
 
     public $itemTypes = [
         '0' => 'None',
-        '1' => 'Chip',
-        '2' => 'Gold',
-        '3' => 'Goods'
+        '1' => 'L_CHIP',
+        '2' => 'L_GOLD',
+        '3' => 'L_GOODS'
     ];
 
     public $shopType = [
-        '1' =>  'User',
-        '2' =>  'Reseller'
+        '1' =>  'L_USER',
+        '2' =>  'L_RESELLER'
     ];
 
     public function strItemType()

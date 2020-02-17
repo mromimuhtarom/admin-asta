@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('Settings') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('General_Setting') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('L_SETTINGS') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('L_GENERAL_SETTING') }}</a></li>
 @endsection
 
 
@@ -40,7 +40,7 @@
                 <thead>
                   <tr>
                     <th class="th-sm">{{ TranslateMenuGame('Name') }}</th>
-                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
+                    <th class="th-sm">{{ translate_menu('L_SETTINGS') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -151,7 +151,7 @@
                 <thead>
                   <tr>
                     <th class="th-sm">{{ translateMenuGame('Name') }}</th>
-                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
+                    <th class="th-sm">{{ translate_menu('L_SETTINGS') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -194,7 +194,7 @@
                 <thead>
                   <tr>
                     <th class="th-sm">{{ translateMenuGame('Name') }}</th>
-                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
+                    <th class="th-sm">{{ translate_menu('L_SETTINGS') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -294,7 +294,7 @@
                 <thead>
                   <tr>
                     <th class="th-sm">{{ translateMenuGame('Name') }}</th>
-                    <th class="th-sm">{{ translate_menu('Settings') }}</th>
+                    <th class="th-sm">{{ translate_menu('L_SETTINGS') }}</th>
                   </tr>
                 </thead>
                 <tbody>

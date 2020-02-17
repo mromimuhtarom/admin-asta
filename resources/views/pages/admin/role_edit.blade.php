@@ -36,7 +36,7 @@
                     @foreach($mainmenu as $mnmnu)   
                       @if($mnmnu->name !== 'Version Asset Apk' &&  $mnmnu->role_id !== 11 && $mnmnu->role_id !== 29)            
                         <tr>
-                          <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ $mnmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                          <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($mnmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                           <td>
                             <div class="namedetail{{ $mnmnu->menu_id }}" style="color:red;">Detail3 ... <i class="fa fa-hand-o-down"></i></div>
                             <!-- sub menu pertama -->
@@ -47,14 +47,14 @@
                                     <td width="70%"><b>Type</b></td>
                                   </tr>
                                   <tr>
-                                    <td>{{ $mnmnu->name }}</td>
+                                    <td>{{ translate_menu($mnmnu->name) }}</td>
                                     <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a></td>
                                   </tr>
                                   @foreach($mnmnu['rolemenu'] as $sbmnu)
                                     @if ($sbmnu->role_id == $mnmnu->role_id)
                                       @if (!$sbmnu['rolemenu']->isEMPTY())
                                         <tr>
-                                          <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ $sbmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                                          <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($sbmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                                           <td>
                                             <div class="namedetailsub{{ $sbmnu->menu_id }}" style="color:red;">Detail4 ... <i class="fa fa-hand-o-down"></i></div>
                                             
@@ -65,14 +65,14 @@
                                                 <td >Type</td>
                                               </tr>
                                               <tr>
-                                                <td>{{ $sbmnu->name }}</td>
+                                                <td>{{ translate_menu($sbmnu->name) }}</td>
                                                 <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a></td>
                                               </tr>
                                               @foreach ($sbmnu['rolemenu'] as $sbt)
                                                 @if ($sbt->role_id == $sbmnu->role_id)
                                                   @if (!$sbt['rolemenu']->isEMPTY())
                                                     <tr>
-                                                      <td><a href="" class="submenue{{ $sbt->menu_id }}" style="text-decoration:underline;">{{ $sbt->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                                                      <td><a href="" class="submenue{{ $sbt->menu_id }}" style="text-decoration:underline;">{{ translate_menu($sbt->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                                                       <td>
                                                         <div class="namedetailsube{{ $sbt->menu_id }}" style="color:red;">Detail4 ... <i class="fa fa-hand-o-down"></i></div>
                                             
@@ -83,13 +83,13 @@
                                                               <td >Type</td>
                                                             </tr>  
                                                             <tr>
-                                                              <td>{{ $sbt->name }}</td>
+                                                              <td>{{ translate_menu($sbt->name) }}</td>
                                                               <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbt->type)) }}</a></td>
                                                             </tr>
                                                             @foreach ($sbt['rolemenu'] as $sbe)
                                                               @if ($sbe->role_id == $sbt->role_id)
                                                                 <tr>
-                                                                  <td>{{ $sbe->name }}tt</td>
+                                                                  <td>{{ translate_menu($sbe->name) }}tt</td>
                                                                   <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbe->type }}" data-pk="{{ $sbe->menu_id }}" data-url="{{ route('Role-menu-edit', $sbe->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbe->type)) }}</a></td>
                                                                 </tr>                                 
                                                               @endif                            
@@ -101,7 +101,7 @@
                                                     </tr>
                                                   @else
                                                     <tr>
-                                                      <td>{{ $sbt->name }}aa</td>
+                                                      <td>{{ translate_menu($sbt->name) }}</td>
                                                       <td><a href="#" class="type" id="type" data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbt->type)) }}</a></td>
                                                     </tr>
                                                   @endif
@@ -114,7 +114,7 @@
                                         </tr>
                                       @else 
                                         <tr>
-                                          <td>{{ $sbmnu->name }}</td>
+                                          <td>{{ translate_menu($sbmnu->name) }}</td>
                                           <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a></td>
                                         </tr>
                                       @endif
@@ -129,7 +129,7 @@
                                     <td width="50%"><b>Type</b></td>
                                   </tr>
                                   <tr>
-                                    <td>{{ $mnmnu->name }}</td>
+                                    <td>{{ translate_menu($mnmnu->name) }}</td>
                                     <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a></td>
                                   </tr>
                               </table>
@@ -138,7 +138,7 @@
                         </tr>
                       @elseif ($role_op->role_id === 11 || $role_op->role_id === 29)
                         <tr>
-                            <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ $mnmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                            <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($mnmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                             <td>
                               <div class="namedetail{{ $mnmnu->menu_id }}" style="color:red;">Detail5 ... <i class="fa fa-hand-o-down"></i></div>
 
@@ -146,11 +146,11 @@
                               @if (!$mnmnu['rolemenu']->isEMPTY())
                                 <table width="100%" class="submenu{{ $mnmnu->menu_id }}" style="display:none; border:1px solid #dee2e6;">
                                     <tr style="background-color:#f5f5f5;">
-                                      <td width="30%"><b>Menu Namebb</b></td>
+                                      <td width="30%"><b>Menu Name</b></td>
                                       <td width="70%"><b>Type</b></td>
                                     </tr>
                                     <tr>
-                                      <td>{{ $mnmnu->name }}hh</td>
+                                      <td>{{ translate_menu($mnmnu->name) }}hh</td>
                                       <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a></td>
                                     </tr>
                                     @foreach($mnmnu['rolemenu'] as $sbmnu)
@@ -158,7 +158,7 @@
                                         @if (!$sbmnu['rolemenu']->isEMPTY())
                                           <!-- sub menu ketiga -->
                                           <tr>
-                                            <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ $sbmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                                            <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($sbmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                                             <td>
                                               <div class="namedetailsub{{ $sbmnu->menu_id }}" style="color:red;">Detail1 ... <i class="fa fa-hand-o-down"></i></div>
                                               <!-- ======================= sub menu kedua ============================= -->
@@ -168,14 +168,14 @@
                                                   <td>Type</td>
                                                 </tr>
                                                 <tr>
-                                                  <td>{{ $sbmnu->name }}ii</td>
+                                                  <td>{{ translate_menu($sbmnu->name) }}ii</td>
                                                   <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a></td>
                                                 </tr>
                                                 @foreach ($sbmnu['rolemenu'] as $sbt)
                                                   @if ($sbt->role_id == $sbmnu->role_id)
                                                     @if (!$sbt['rolemenu']->isEMPTY())
                                                       <tr>
-                                                        <td><a href="" class="submenue{{ $sbt->menu_id }}" style="text-decoration:underline;">{{ $sbt->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                                                        <td><a href="" class="submenue{{ $sbt->menu_id }}" style="text-decoration:underline;">{{ translate_menu($sbt->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                                                         <td>
                                                           <div class="namedetailsube{{ $sbt->menu_id }}" style="color:red;">Detail4 ... <i class="fa fa-hand-o-down"></i></div>
                                               
@@ -186,13 +186,13 @@
                                                                 <td >Type</td>
                                                               </tr>  
                                                               <tr>
-                                                                <td>{{ $sbt->name }}</td>
+                                                                <td>{{ translate_menu($sbt->name) }}</td>
                                                                 <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbt->type)) }}</a></td>
                                                               </tr>
                                                               @foreach ($sbt['rolemenu'] as $sbe)
                                                                 @if ($sbe->role_id == $sbt->role_id)
                                                                   <tr>
-                                                                    <td>{{ $sbe->name }}tt</td>
+                                                                    <td>{{ translate_menu($sbe->name) }}tt</td>
                                                                     <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbe->type }}" data-pk="{{ $sbe->menu_id }}" data-url="{{ route('Role-menu-edit', $sbe->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbe->type)) }}</a></td>
                                                                   </tr>                                 
                                                                 @endif                            
@@ -204,7 +204,7 @@
                                                       </tr>
                                                     @else
                                                       <tr>
-                                                        <td>{{ $sbt->name }}aa</td>
+                                                        <td>{{ translate_menu($sbt->name) }}aa</td>
                                                         <td><a href="#" class="type" id="type" data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbt->type)) }}</a></td>
                                                       </tr>
                                                     @endif
@@ -216,7 +216,7 @@
                                           </tr>
                                         @else 
                                           <tr>
-                                            <td>{{ $sbmnu->name }}MM</td>
+                                            <td>{{ translate_menu($sbmnu->name) }}MM</td>
                                             <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a></td>
                                           </tr>
                                         @endif
@@ -230,7 +230,7 @@
                                       <td width="50%"><b>Type</b></td>
                                     </tr>
                                     <tr>
-                                      <td>{{ $mnmnu->name }}</td>
+                                      <td>{{ translate_menu($mnmnu->name) }}</td>
                                       <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a></td>
                                     </tr>
                                 </table>
@@ -240,7 +240,7 @@
                         </tr>
                       @elseif($mnmnu->role_id === 11 || $mnmnu->role_id === 29)
                         <tr>
-                            <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ $mnmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                            <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($mnmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                             <td>
                               <div class="namedetail{{ $mnmnu->menu_id }}" style="color:red;">Detail6 ... <i class="fa fa-hand-o-down"></i></div>
                               <!-- ======================= sub menu pertama ============================= -->
@@ -251,14 +251,14 @@
                                       <td width="50%"><b>Type</b></td>
                                     </tr>
                                     <tr>
-                                      <td>{{ $mnmnu->name }}</td>
+                                      <td>{{ translate_menu($mnmnu->name) }}</td>
                                       <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a></td>
                                     </tr>
                                     @foreach($mnmnu['rolemenu'] as $sbmnu)
                                       @if ($sbmnu->role_id == $mnmnu->role_id)
                                         @if (!$sbmnu['rolemenu']->isEMPTY())
                                           <tr>
-                                            <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ $sbmnu->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                                            <td><a href="" class="submenut{{ $sbmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($sbmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                                             <td>
                                               <div class="namedetailsub{{ $sbmnu->menu_id }}" style="color:red;">Detail7 ... <i class="fa fa-hand-o-down"></i></div>
                                               <!-- ======================= sub menu kedua ============================= -->
@@ -268,14 +268,14 @@
                                                   <td>Type</td>
                                                 </tr>
                                                 <tr>
-                                                  <td>{{ $sbmnu->name }}</td>
+                                                  <td>{{ translate_menu($sbmnu->name) }}</td>
                                                   <td><a href="#" class="type" id="type" data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a></td>
                                                 </tr>
                                                 @foreach ($sbmnu['rolemenu'] as $sbt)
                                                   @if ($sbt->role_id == $sbmnu->role_id)
                                                     @if (!$sbt['rolemenu']->isEMPTY())
                                                       <tr>
-                                                        <td><a href="" class="submenue{{ $sbt->menu_id }}" style="text-decoration:underline;">{{ $sbt->name }} <i class="fa fa-hand-o-right"></i></a></td>
+                                                        <td><a href="" class="submenue{{ $sbt->menu_id }}" style="text-decoration:underline;">{{ translate_menu($sbt->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                                                         <td>
                                                           <div class="namedetailsube{{ $sbt->menu_id }}" style="color:red;">Detail4 ... <i class="fa fa-hand-o-down"></i></div>
                                               
@@ -286,13 +286,13 @@
                                                                 <td >Type</td>
                                                               </tr>  
                                                               <tr>
-                                                                <td>{{ $sbt->name }}</td>
+                                                                <td>{{ translate_menu($sbt->name) }}</td>
                                                                 <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbt->type)) }}</a></td>
                                                               </tr>
                                                               @foreach ($sbt['rolemenu'] as $sbe)
                                                                 @if ($sbe->role_id == $sbt->role_id)
                                                                   <tr>
-                                                                    <td>{{ $sbe->name }}tt</td>
+                                                                    <td>{{ translate_menu($sbe->name) }}tt</td>
                                                                     <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbe->type }}" data-pk="{{ $sbe->menu_id }}" data-url="{{ route('Role-menu-edit', $sbe->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbe->type)) }}</a></td>
                                                                   </tr>                                 
                                                                 @endif                            
@@ -304,7 +304,7 @@
                                                       </tr>
                                                     @else
                                                       <tr>
-                                                        <td>{{ $sbt->name }}aa</td>
+                                                        <td>{{ translate_menu($sbt->name) }}aa</td>
                                                         <td><a href="#" class="type" id="type" data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbt->type)) }}</a></td>
                                                       </tr>
                                                     @endif
@@ -316,7 +316,7 @@
                                           </tr>
                                         @else 
                                           <tr>
-                                            <td>{{ $sbmnu->name }}</td>
+                                            <td>{{ translate_menu($sbmnu->name) }}</td>
                                             <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a></td>
                                           </tr>
                                         @endif
@@ -330,7 +330,7 @@
                                       <td width="50%"><b>Type</b></td>
                                     </tr>
                                     <tr>
-                                      <td>{{ $mnmnu->name }}</td>
+                                      <td>{{ translate_menu($mnmnu->name) }}</td>
                                       <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a></td>
                                     </tr>
                                 </table>

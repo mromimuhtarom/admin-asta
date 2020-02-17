@@ -174,11 +174,11 @@
                           <td>{{ number_format($history->win_lose,2 ) }}</td>
                           @php
                           if($history->status === 0) {
-                              $status = ConfigTextTranslate('Lose');
+                              $status = ConfigTextTranslate('L_LOSE');
                           } else if($history->status === 1) {
-                              $status = ConfigTextTranslate('Win');
+                              $status = ConfigTextTranslate('L_WIN');
                           } else if($history->status === 2) {
-                              $status = ConfigTextTranslate('Draw');
+                              $status = ConfigTextTranslate('L_DRAW');
                           }
                           @endphp
                           <td>{{ $status }}</td>

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">{{ translate_menu('Reseller')}}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">{{ translate_menu('Item_Store_Reseller')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">{{ translate_menu('L_RESELLER')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Item_Store_Reseller') }}">{{ translate_menu('L_ITEM_STORE_RESELLER')}}</a></li>
 @endsection
 
 
@@ -66,7 +66,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i>{{ translate_menu('Item_Store_Reseller')}}</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i>{{ translate_menu('L_ITEM_STORE_RESELLER')}}</strong></h2>				
     </div>
   </header>
 
@@ -81,7 +81,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoldStore">
-                <i class="fa fa-plus"></i> Buat baru {{ translate_menu('Item_Store_Reseller')}}
+                <i class="fa fa-plus"></i> Buat baru {{ translate_menu('L_ITEM_STORE_RESELLER')}}
               </button>
               @endif
             </div>
@@ -281,7 +281,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new')}} {{ translate_menu('Item_Store_Reseller')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new')}} {{ translate_menu('L_ITEM_STORE_RESELLER')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>

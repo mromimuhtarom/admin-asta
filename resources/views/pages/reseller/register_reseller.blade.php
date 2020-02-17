@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Register_Reseller') }}">{{ translate_menu('Reseller')}}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Register_Reseller') }}">{{ translate_menu('Register_Reseller')}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Register_Reseller') }}">{{ translate_menu('L_RESELLER')}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Register_Reseller') }}">{{ translate_menu('L_REGISTER_RESELLER')}}</a></li>
 @endsection
 
 
@@ -21,7 +21,7 @@
 @if($menu && $mainmenu)
 <div class="input-insert bg-blue-dark">
     <div class="row">
-        <div class="col" align="center" style="color:white; font-size:30px; font-weight:bold; font-family:Century Gothic;"><i class="fa fa-plus-square"></i> {{ translate_menu('Register_Reseller')}}</div>
+        <div class="col" align="center" style="color:white; font-size:30px; font-weight:bold; font-family:Century Gothic;"><i class="fa fa-plus-square"></i> {{ translate_menu('L_REGISTER_RESELLER')}}</div>
         <div class="w-100"><p>&nbsp;</p></div>
         <div class="col">
             <div class="table-header w-100 h-100">
