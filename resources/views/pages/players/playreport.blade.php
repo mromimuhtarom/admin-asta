@@ -306,9 +306,6 @@
                                     <th>{{ Translate_menuPlayers('Card Table') }}</th>
                                 </tr>
                             </thead>
-                            @php 
-                            $history1 = DB::table('tpk_round')->where('round_id', '=', 13040)->first();
-                            @endphp
                             {{-- {{ dd(empty($history1->gameplay_log)) }} --}}
                             @if(!empty($history->gameplay_log))
                             <tbody>
@@ -316,7 +313,7 @@
                                 $inputMinDate = "2019-10-18";
                                 $inputMaxDate = "2019-10-18";
                                 // $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 5120)->first();
-                                $arrayjson_decode = array_gameplaylog($history1->gameplay_log);
+                                $arrayjson_decode = array_gameplaylog($history->gameplay_log);
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
                                 @if ($row['game_state'] === 'NEW_ROUND')
