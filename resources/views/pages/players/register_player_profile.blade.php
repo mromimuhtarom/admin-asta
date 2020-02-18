@@ -46,7 +46,7 @@
                                 // if (is_numeric($profile->avatar)) {
                                 //     $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
                                 // } else {
-                                    $avatar = route('image-profile', $profile->user_id);
+                                  $avatar = route('image-profile', $profile->avatar_id);
                                   // } else
                                   // {
                                   //   $avatar= "/images/profile/empty_profile.png";
@@ -56,7 +56,7 @@
                                 // }
                             @endphp
                             {{-- {{ $avatar }} --}}
-                        <img src="{{ $avatar }}" class="border border-dark rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
+                                  <img src="{{ route('image-profile', $profile->avatar_id) }}" class="border border-dark rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
                          
                         </div>
                         <div class="col-sm-6 col-8">
@@ -171,7 +171,7 @@
                     $join_date = $dvc->date;
                 }
                 @endphp
-                <td>{{ $join_date }}</td>
+                <td>{{ date("d-m-Y H:i:s", strtotime($join_date)) }}</td>
             </tr>
             @endforeach
           </tbody>

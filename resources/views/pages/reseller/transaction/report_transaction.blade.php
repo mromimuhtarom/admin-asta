@@ -202,8 +202,8 @@
                         }
                         @endphp
                         <td>{{ $status }}</td>
-                        <td>{{ $tr->datetime }}</td>
-                        <td>{{ $tr->action_date }}</td>
+                        <td>{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}</td>
+                        <td>{{ date("d-m-Y H:i:s", strtotime($tr->action_date)) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
