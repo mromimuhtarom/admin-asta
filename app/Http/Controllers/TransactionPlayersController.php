@@ -149,7 +149,7 @@ class TransactionPlayersController extends Controller
 
         } else if($time == "month")
         {
-            $Transaction= $transaction_day->leftJoin('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
+            $Transaction= $transaction_day->Join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
                            ->select(
                             'asta_db.transaction_day.date_created',
                             'asta_db.game.desc',
@@ -216,7 +216,7 @@ class TransactionPlayersController extends Controller
             if($game != NULL && $minDate != NULL && $maxDate != NULL)
             {
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                           ->where('asta_dn.transaction_day.game_id', '=', $game)
+                           ->where('asta_db.transaction_day.game_id', '=', $game)
                            ->orderBy($namecolumn, $sortingorder)   
                            ->paginate(20);
                         

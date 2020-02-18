@@ -31,19 +31,19 @@
 				@if (Request::is('Players/Transaction_Players/Banking-search*'))
                 	<div class="col">
                     	<select name="choose_time" id="time" class="form-control">
-												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
-												<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
-												<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
-												<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>							
-                    	</select>
+							<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
+							<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
+							<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
+							<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
+						</select>
 					</div>
 					<div class="col">
                     	<select name="game_name" id="gamename" class="form-control">
-												<option value="">{{ translate_MenuTransaction('Choose Game') }}</option>
-												@foreach ($gamename as $gm)
-												<option value="{{ $gm->id }}" @if($game == $gm->id) selected @endif>{{ $gm->desc }}</option>														
-												@endforeach
-                		</select>
+							<option value="">{{ translate_MenuTransaction('All Game') }}</option>
+								@foreach ($gamename as $gm)
+									<option value="{{ $gm->id }}" @if($game == $gm->id) selected @endif>{{ $gm->desc }}</option>														
+								@endforeach
+                    	</select>
 					</div>
                 	<div class="col">
 						<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $minDate }}">
@@ -159,7 +159,7 @@
 										<td>{{ number_format($hst->prizetransaction, 2) }}</td>
 										@endif
 										<td>{{ number_format($hst->totalWinLose, 2) }}</td>
-										<td>{{ $hst->date_created }}</td>
+										<td>{{ date("d-m-Y H:i:s", strtotime($hst->date_created)) }}</td>
 								</tr>
 								@endforeach
 							@elseif($time == "day" || $time == "week" || $time == "month")
