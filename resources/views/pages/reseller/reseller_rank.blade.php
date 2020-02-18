@@ -104,7 +104,7 @@
               <td>{{ $rk->id}}</td>
               <td>{{ $rk->name }}</td>
               <td>{{ number_format($rk->gold, 2) }}</td>
-              <td>{{ strTransactionType($rk->type) }}</td>
+              <td>{{ TranslateReseller(strTransactionType($rk->type)) }}</td>
               <td>{{ number_format($rk->bonus, 2) }}</td>
             </tr>
             @endif
@@ -268,9 +268,9 @@ table = $('table.table').dataTable({
         }
       },
       source: [
-        {value: '', text: 'Choose Type'},
+        {value: '', text: "{{ TranslatePlaceholdertxt('L_CHOOSE_TYPE') }}"},
         @php
-          echo'{value: "'.$explodetype[0].'", text:"'.$explodetype[1].'"},';
+          echo'{value: "'.$explodetype[0].'", text:"'TranslatePlaceholdertxt(.$explodetype[1].)'"},';
           echo'{value: "'.$explodetype[2].'", text:"'.$explodetype[3].'"}';
         @endphp
       ]

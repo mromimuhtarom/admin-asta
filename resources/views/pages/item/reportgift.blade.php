@@ -29,8 +29,30 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('ReportGift-search') }}">
             <div class="row h-100 w-100">
+              @if(Request::is('Item/Report_Gift/ReportGift/ReportGift-search*') || Request::is('Item/Report_Gift/ReportGift/ReportGift-all*'))
                 <div class="col">
                     <input type="text" name="username" class="left" placeholder="username">
+                </div>
+                <div class="col">
+                    <select name="action" id="" class="form-control">
+                        <option value="">{{ TranslateMenuItem('Choose Game') }}</option>
+                        @foreach($game as $gm)
+                          <option value="{{ $gm->id }}" @if($action == $gm->id) selected @endif>{{ $gm->desc }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="sampai"  value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                </div>
+              @else
+                <div class="col">
+                  <input type="text" name="username" class="left" placeholder="username">
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
@@ -49,6 +71,7 @@
                 <div class="col">
                     <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
                 </div>
+              @endif
             </div>
         </form>
     </div>

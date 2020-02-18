@@ -60,7 +60,7 @@
 											@foreach ($item_gold as $chip)
 												@if ($trns->item_id == $chip->item_id)
 													<tr>
-														<td>{{ $trns->datetime }}</td>
+														<td>{{ date("d-m-Y H:i:s", strtotime($trns->datetime)) }}</td>
 														<td>{{ $trns->username }}</td>
 														<td>{{ $chip->name }}</td>	
 														<td>{{ $trns->quantity }}</td>
@@ -83,7 +83,7 @@
 											@foreach ($item_cash as $gold)
 												@if ($trns->item_id == $gold->item_id)
 													<tr>
-														<td>{{ $trns->datetime }}</td>
+														<td>{{ date("d-m-Y H:i:s", strtotime($trns->datetime)) }}</td>
 														<td>{{ $trns->username }}</td>
 														<td>{{ $gold->name }}</td>
 														<td>{{ $trns->quantity }}</td>

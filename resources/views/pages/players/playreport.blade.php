@@ -46,7 +46,7 @@
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <select name="inputGame" class="form-control">
-                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="">{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->desc }}" @if($getgame == $gm->desc) selected @endif;>{{ $gm->desc }}</option>
                                 @endforeach
@@ -67,7 +67,7 @@
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <select name="inputGame" class="form-control">
-                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="">{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->desc }}">{{ $gm->desc }}</option>
                                 @endforeach
@@ -182,7 +182,7 @@
                           }
                           @endphp
                           <td>{{ $status }}</td>
-                          <td>{{ $history->datetimeround }}</td>
+                          <td>{{ date("d-m-Y H:i:s", strtotime($history->datetimeround)) }}</td>
                           {{-- <td>{{ $history->countryname }}</td> --}}
                         </tr>
                         @endforeach

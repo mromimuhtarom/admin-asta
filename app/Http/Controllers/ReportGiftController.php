@@ -17,10 +17,12 @@ class ReportGiftController extends Controller
         return view('pages.item.reportgift', compact('game', 'datenow'));
     }
 
-    public function search()
+    public function search(Request $request)
     {
+        $action  = $request->action;
         $datenow = Carbon::now('GMT+7');
         $game    = Game::select('id', 'desc')->get();
-        return view('pages.item.reportgift_detail', compact('datenow', 'game'));
+
+        return view('pages.item.reportgift_detail', compact('datenow', 'game', 'action'));
     }
 }

@@ -176,7 +176,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a href="">{{ $notification->date }}</a></td>
+                    <td><a href="">{{ date("d-m-Y H:i:s", strtotime($notification->date)) }}</a></td>
                     <td>
                       <a href="#" style="color:red;" class="delete{{ $notification->id }}" 
                       id="delete" 
@@ -191,7 +191,7 @@
                 <tr>
                     <td>{{ $notification->msg }}</td>
                     <td>{{ $notification->type }}</td>
-                    <td>{{ $notification->date }}</td>
+                    <td>{{ date("d-m-Y H:i:s", strtotime($notification->date)) }}</td>
                 </tr>
                 @endif
                 @endforeach

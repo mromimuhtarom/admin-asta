@@ -47,7 +47,7 @@
                     </div>
                     <div class="col" style="padding-left:3%;">
                         <select name="inputGame" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                            <option value="">{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
                             @foreach ($game as $gm)
                             <option value="{{ $gm->id }}" @if($inputGame == $gm->id) selected @endif;>{{ $gm->desc }}</option>
                             @endforeach
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col" style="padding-left:3%;">
                         <select name="inputGame" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                            <option value="">{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
                             @foreach ($game as $gm)
                             <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                             @endforeach
@@ -161,7 +161,7 @@
                                 @else
                                 <td>Null</td>
                                 @endif
-                                <td>{{ $ol->date_login}}</td>
+                                <td>{{ date("d-m-Y H:i:s", strtotime($ol->date_login)) }}</td>
                             </tr>
                             @endforeach
                         </tbody>

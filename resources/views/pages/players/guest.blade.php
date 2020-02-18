@@ -95,7 +95,6 @@
           <div class="jarviswidget-editbox">
             <!-- This area used as dropdown edit box -->
             
-  
           </div>
           <!-- end widget edit box -->
   
@@ -148,7 +147,7 @@
                       @else
                       <td>{{ $gs->device_key }}</td>
                       @endif
-                      <td>{{ $gs->expired_date }}</td>
+                      <td>{{ date("d-m-Y H:i:s", strtotime($gs->expired_date)) }}</td>
                       <td>{{ $gs->status }}</td>
                     </tr>
                 @endforeach

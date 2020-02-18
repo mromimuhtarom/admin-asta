@@ -178,7 +178,7 @@
             <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->gold, 2) }}</a></td>
             {{-- <td><a href="#"class="status" data-title="Status" data-name="status" data-pk="{{ $regis->user_id }}" data-value="{{ $regis->status }}" data-type="select" data-url="{{ route('RegisteredPlayer1-update') }}">{{ $regis->strStatus() }}</a></td> --}}
             <td><a href="#"class="status" data-toggle="modal" data-target="#ModalBanned{{ $regis->user_id }}">{{ Translate_menuPlayers($regis->strStatus()) }}</a></td>
-            <td>{{ $regis->join_date }}</td>
+            <td>{{ date("d-m-Y H:i:s", strtotime($regis->join_date)) }}</td>
             <td>{{ $user_type }}</td>
             <td>{{ $regis->countryname }}</td>
         </tr>   
@@ -191,7 +191,7 @@
             <td><a href="{{ route('point_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->point, 2) }}</a></td>
             <td><a href="{{ route('gold_detail') }}?inputPlayer={{ $regis->user_id }}">{{ number_format($regis->gold, 2) }}</a></td>
             <td>{{ $regis->strStatus() }}</td>
-            <td>{{ $regis->join_date }}</td>
+            <td>{{ date("d-m-Y H:i:s", strtotime($regis->join_date)) }}</td>
             <td>{{ $user_type }}</td>
             <td>{{ $regis->countryname }}</td>
         </tr>   
@@ -245,7 +245,7 @@
                       <td>{{ $log->user_id }}</td>
                       <td>{{ $regis->username}}</td>
                       <td>{{ status_player($log->action_id) }}</td>
-                      <td>{{ $log->datetime }}</td>
+                      <td>{{ date("d-m-Y H:i:s", strtotime($log->datetime)) }}</td>
                       <td>{{ $log->description }}</td>
                     </tr>
                     @endforeach

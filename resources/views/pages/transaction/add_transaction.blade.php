@@ -295,7 +295,7 @@
                                         <input type="hidden" name="operator_aritmatika" value="+">
                                         <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                         <input type="hidden" name="columnname" value="point">
-                                        <input type="number" step="0.01" min="0.01" name="currency" placeholder="Point" class="form-control" required><br>
+                                        <input type="number" name="currency" placeholder="Point" class="form-control" required><br>
                                         
                                         <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Point ditambah"></textarea>
                                     </div>
@@ -402,7 +402,7 @@
                                 <input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
                                 <input type="hidden" name="username" value="{{ $transaction->username }}">
                                 <input type="hidden" name="columnname" value="gold">
-                                <input type="number" step="0.01" min="0.01" name="currency" placeholder="Gold" class="form-control" required><br>
+                                <input type="number" name="currency" placeholder="Gold" class="form-control" required><br>
                                 
                                 <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Alasan Koin ditambah"></textarea>
                             </div>

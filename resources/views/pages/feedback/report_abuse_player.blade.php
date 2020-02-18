@@ -99,7 +99,7 @@
 			
 		     @endforeach
                     <td>{{ $pplayer->reason }}</td>
-                      <td>{{ $pplayer->date }}</td>
+                      <td>{{ date("d-m-Y H:i:s", strtotime($pplayer->date)) }}</td>
                     </tr>
                     @endforeach
             </tbody>

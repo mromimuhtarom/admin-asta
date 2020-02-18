@@ -134,7 +134,7 @@
                                 <td>{{ number_format($bd->debit, 2) }}</td>
                                 <td>{{ number_format($bd->credit, 2) }}</td>
                                 <td>{{ number_format($bd->balance, 2) }}</td>
-                                <td>{{ $bd->datetime }}</td>
+                                <td>{{ date("d-m-Y H:i:s", strtotime($bd->datetime)) }}</td>
                             </tr>
                             @endforeach
                     </tbody>

@@ -275,7 +275,8 @@ function translate_menuTransaction($menu){
         'Transaction Day'       =>  'Transaksi Harian',
         'Detail Information'    =>  'Detail Information',
         'Are you sure want to Decline this Transaction' => 'aaa' ,
-        'Are you want to Approve this Transaction?'    => 'cc'
+        'Are you want to Approve this Transaction?'    => 'cc',
+        'L_TRANSPLAYER'         =>  'Transaksi pemain'
     ];
     return $array_menuContent[$menu];
 }
@@ -298,7 +299,7 @@ function Translate_menuPlayers($menu){
         'Point Players'             =>  'Poin pemain',
         'Guest'                     =>  'Guest',
         'Choose Register Type'      =>  'Pilih tipe pendaftaran',
-        'Choose Game'               =>  'Pilih game',
+        'L_ALLGAMES'                =>  'Semua game',
         'Choose Log Type'           =>  'Pilih tipe Log',
         'Choose status'             =>  'Pilih status',
         'Choose User Type'          =>  'Pilih tipe pengguna',
@@ -428,7 +429,7 @@ function TranslateMenuItem($menu){
         'Gift ID'           =>  'ID Gift',
         'Emoticon ID'       =>  'Emotikon ID',
         'See Detail Image'  =>  'Lihat Detail Gambar / Gif',
-        'Detail Info'       =>  'Detail Info',
+        'Detail Info'       =>  'preview gambar',
         'Detail Image'      =>  'Detail Gambar'
     ];
 
@@ -888,11 +889,22 @@ function TranslatePlaceholdertxt($placeholder) {
         "L_PASSWORD"             => "Kata Sandi",
         "L_PASSWORD_WANT_CHANGE" => "Kata Sandi yang mau di ganti",
         "L_PASSWORD_SELF"        => "Massukan Kata Sandi yang sedang login",
-        "L_CHOOSE_ROLE_ADMIN"    => "Pilih tipe peran"
+        "L_CHOOSE_ROLE_ADMIN"    => "Pilih tipe peran",
+        "L_CHOOSE_TYPE"          => "Pilih tipe"
 
 
     ];
     return $array_menuContent[$placeholder];
+}
+
+function TranslateChoices($menu) {
+    $array_menuContent = [
+
+        "L_CHOOSE_TIMER"    =>  "Pilih waktu",
+        "L_CHOOSE_CATEGORY" =>  "Pilih kategori",
+        ""
+    ];
+    return $array_menuContent[$menu];
 }
 
 

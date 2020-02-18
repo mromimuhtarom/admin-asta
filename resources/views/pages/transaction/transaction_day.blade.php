@@ -141,7 +141,7 @@
 							@if($time == "All time" || $time == "Detail")
 								@foreach ($history as $trns_day)
 								<tr>
-									<td>{{ $trns_day->date_created }}</td>
+									<td>{{ date("d-m-Y H:i:s", strtotime($trns_day->date_created)) }}</td>
 									<td>{{ $trns_day->user_id }}</td>
 									<td>{{ $trns_day->username }}</td>
 									<td>{{ number_format($trns_day->debet, 2) }}</td>

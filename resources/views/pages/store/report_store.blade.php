@@ -134,7 +134,7 @@
                 <tbody>
                     @foreach($transactions as $tr)
                     <tr>
-                        <td>{{ $tr->datetime }}</td>
+                        <td>{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}</td>
                         <td>{{ $tr->user_id }}</td>
                         <td>{{ $tr->username }}</td>
                         <td>{{ $tr->item_name }}</td>
@@ -200,7 +200,7 @@
                     <label for="tgl_pembelian">
                         {{ TranslateMenuToko('Date Request') }}
                     </label>
-                    <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $tr->datetime }}" disabled>
+                    <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" disabled>
                     <label for="tgl_disetujui">
                         {{ TranslateMenuToko('Date approve and Decline')}}
                     </label>
@@ -226,7 +226,7 @@
                         <label for="tgl_pembelian">
                             {{ TranslateMenuToko('Date Request') }}
                         </label>
-                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $tr->datetime }}" disabled>
+                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" disabled>
                         <label for="tipe_pembayaran">
                             {{ TranslateMenuToko('Payment Type')}}
                         </label>
@@ -235,7 +235,7 @@
                         <label for="tgl_pembelian">
                             {{ TranslateMenuToko('Date Request') }}
                         </label>
-                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $tr->datetime }}" disabled>
+                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" disabled>
                         <label for="tgl_disetujui">
                             {{ TranslateMenuToko('Date approve and Decline')}}
                         </label>
@@ -249,7 +249,7 @@
                         <label for="tgl_pembelian">
                             {{ TranslateMenuToko('Date Request') }}
                         </label>
-                        <input type="text" class="form-control" name="" value="{{ $tr->datetime }}" id="tgl_pembelian" disabled>
+                        <input type="text" class="form-control" name="" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" id="tgl_pembelian" disabled>
                 @endif
 			</div> 
 		</div>
