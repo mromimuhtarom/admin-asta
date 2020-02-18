@@ -31,16 +31,15 @@
 							@if (Request::is('Players/Transaction_Players/Banking-search*'))
                 <div class="col">
                     <select name="choose_time" id="time" class="form-control">
-												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
 												<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
 												<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
 												<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
-												<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
                     </select>
 								</div>
 								<div class="col">
                     <select name="game_name" id="gamename" class="form-control">
-												<option value="">{{ translate_MenuTransaction('Choose Game') }}</option>
+												<option value="">{{ translate_MenuTransaction('All Game') }}</option>
 												@foreach ($gamename as $gm)
 												<option value="{{ $gm->id }}" @if($game == $gm->id) selected @endif>{{ $gm->desc }}</option>														
 												@endforeach
@@ -58,11 +57,10 @@
 							@else
 							  <div class="col">
                     <select name="choose_time" id="time" class="form-control">
-												<option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+												<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
 												<option value="day">{{ translate_MenuTransaction('Day') }}</option>
 												<option value="week">{{ translate_MenuTransaction('Week') }}</option>
 												<option value="month">{{ translate_MenuTransaction('Month') }}</option>
-												<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
                     </select>
 								</div>
 								<div class="col">

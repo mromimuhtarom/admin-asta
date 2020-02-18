@@ -251,8 +251,8 @@
                   </table> 
                 </div>           
                   <input type="hidden" name="player_id" value="{{ $regis->user_id}}">
-                  <textarea name="description" class="form-control" id="description{{ $regis->user_id }}" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
-                  <span id="lblErrorDesc" style="color: red"></span> 
+                  <textarea name="description" class="form-control" id="descriptionallow{{ $regis->user_id }}" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
+                  <span id="lblErrorDesc" style="color: red">ss</span> 
                   <select name="status_player" class="form-control" id="status_player{{ $regis->user_id }}">
                     <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
                     @if ($regis->status == 1)
@@ -288,7 +288,9 @@
 @endforeach
 
 <script type="text/javascript">
+
 	$(document).ready(function() {
+
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
@@ -296,29 +298,14 @@
       "ordering": false,
       "bLengthChange": false,
       "bFilter": false,
-      "bInfo": false
+      "bInfo": false,
     });
-  });
-
-  $("#formGroup").onclick(function(e) {
-    e.preventDefault();
-    console.log(description);
-    var description  = $(this).val();
-    var statusPlayer = $('#status_player').val();
+    @foreach($registerPlayer as $regis)
+    $('#status_player{{ $regis->user_id }}').on('click', function(e) {
+      console.log("dfg");
+    }
+    @endforeach
     
-    @php
-    $a  = "status_player";
-    $b  = "description";
-    
-        echo  'var descriptionValue = $(this).val();';
-        echo  'var lblErrorDesc = document.getElementById("lblErrorDesc");';
-          echo 'if(descriptionValue != null) {';
-            echo 'lblErrorDesc.innerHTML = "";';
-          echo '}else{';
-            echo 'lblErrorDesc.innerHTML = "kolom alasan tidak boleh kosong.";';
-          echo '}';
-
-    @endphp
   });
 
   
@@ -349,6 +336,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
+      },
     responsive: false
   });
 </script>
