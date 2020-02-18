@@ -260,7 +260,7 @@ class PlayersController extends Controller
  //  ---------- Profile Image --------- //
     public function ImageProfilePlayer($user_id)
     {
-      $rootpath = '../../asta-api/profile_player';
+      $rootpath = '../unity-asset/profile_player';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
       // $file = Storage::exists($client->get($user_id.'.jpg'));
       $file_exists = $client->exists($user_id.'.jpg');      
