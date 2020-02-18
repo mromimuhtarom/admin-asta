@@ -45,7 +45,7 @@ class DominoSusunMonitoringTableController extends Controller
         //all online
         $onlinedms  =   DominoSPlayer::all();
 
-        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'table', 'dmsPlayersNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
+        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'dmsPlayersNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
     }
 
     public function indexIntermediate(Request $request)
@@ -72,7 +72,7 @@ class DominoSusunMonitoringTableController extends Controller
         //all online
         $onlinedms              =   DominoSPlayer::all();
 
-        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'table', 'dmsPlayersintermediate', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
+        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'dmsPlayersintermediate', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
     }
 
     public function indexPro(Request $request)
@@ -101,7 +101,7 @@ class DominoSusunMonitoringTableController extends Controller
         //all online
         $onlinedms          =   DominoSPlayer::all();
 
-        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'table', 'dmsPlayersPro', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
+        return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'dmsPlayersPro', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
     }
 
     public function Game(Request $request)

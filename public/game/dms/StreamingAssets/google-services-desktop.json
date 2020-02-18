@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 1
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "513907686697-vf575v1f6j8o80fud9djl5odebmt1v5n.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsmD3iuxXpITmn1naFYi-lBvfwOCfHv7A"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:513907686697:ios:561af727af5781b737cb38", 
+        "android_client_info": {
+          "package_name": "com.asta.astagame"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "astagame-f4960.appspot.com", 
+    "project_id": "astagame-f4960", 
+    "firebase_url": "https://astagame-f4960.firebaseio.com", 
+    "project_number": "513907686697"
+  }
+}

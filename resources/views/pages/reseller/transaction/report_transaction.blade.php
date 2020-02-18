@@ -171,7 +171,7 @@
                     <tr>
                         <th>{{ TranslateReseller('Reseller ID')}}</th>
                         <th>{{ Translate_menuPlayers('Username')}}</th>
-                        <th>{{ translate_menu('Item')}}</th>
+                        <th>{{ translate_menu('L_ITEM')}}</th>
                         <th>{{ translate_menuTransaction('Quantity')}}</th>
                         <th>{{ TranslateMenuItem('Price')}}</th>
                         {{-- <th>Gold</th> --}}

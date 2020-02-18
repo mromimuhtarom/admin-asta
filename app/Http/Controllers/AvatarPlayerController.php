@@ -108,7 +108,7 @@ class AvatarPlayerController extends Controller
                         'datetime'  =>  Carbon::now('GMT+7'),
                         'desc'      =>  'Membuat insert baru di menu Avatar player dengan nama '. $request->title
                     ]);
-                    return redirect()->route('avatar_player')->with('success', alertTranslate('Insert Data successfull'));
+                    return redirect()->route('avatar_player')->with('success', alertTranslate('L_INSERT_SUCCESSFULL'));
                 }
         } else {
             return redirect()->route('avatar_player')->with('alert', alertTranslate('File extensions are not allowed, you must use .jpg'));

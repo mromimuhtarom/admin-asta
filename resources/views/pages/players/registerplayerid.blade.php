@@ -53,7 +53,7 @@
                           <option value="">{{ Translate_menuPlayers('Choose User Type') }}</option>
                           <option value="{{ $type[0] }}">{{ ConfigTextTranslate($type[1]) }}</option>
                           <option value="{{ $type[2] }}">{{ ConfigTextTranslate($type[3]) }}</option>
-                          <option value="{{ $type[4] }}">{{ ConfigTextTranslate($type[5]) }}</option>
+                          {{-- <option value="{{ $type[4] }}">{{ ConfigTextTranslate($type[5]) }}</option> --}}
                       </select>&nbsp;
                   </td>
               </tr>
@@ -63,17 +63,17 @@
               <tr>
                   <td>{{ Translate_menuPlayers('Player ID used') }} : {{ number_format($playerused->countuserid) }}</td>
                   <td> {{ Translate_menuPlayers('Guest ID used') }} : {{ number_format($guestused->countuserid) }}</td>
-                  <td>{{ Translate_menuPlayers('Bot ID used') }} : {{ number_format($botused->countuserid) }}</td>
+                  {{-- <td>{{ Translate_menuPlayers('Bot ID used') }} : {{ number_format($botused->countuserid) }}</td> --}}
               </tr>
               <tr>
                   <td>{{ Translate_menuPlayers('Player ID didnt use') }} : {{ number_format($playernotused->countuserid) }}</td>
                   <td>{{ Translate_menuPlayers('Guest ID didnt use') }} : {{ number_format($guestnotused->countuserid) }} </td>
-                  <td>{{ Translate_menuPlayers('Bot ID didnt use') }} : {{ number_format($botnotused->countuserid) }}</td>
+                  {{-- <td>{{ Translate_menuPlayers('Bot ID didnt use') }} : {{ number_format($botnotused->countuserid) }}</td> --}}
               </tr>
               <tr>
                   <td>{{ Translate_menuPlayers('Total Player ID') }} : {{ number_format($totalplayer->countuserid) }}</td>
                   <td>{{ Translate_menuPlayers('Total Guest ID') }} : {{ number_format($totalguest->countuserid) }} </td>
-                  <td>{{ Translate_menuPlayers('Total Bot ID') }} : {{ number_format($totalbot->countuserid) }}</td>
+                  {{-- <td>{{ Translate_menuPlayers('Total Bot ID') }} : {{ number_format($totalbot->countuserid) }}</td> --}}
               </tr>
           </table>
       </form>
@@ -85,17 +85,17 @@
           <tr>
               <td>{{ Translate_menuPlayers('Player ID used') }} : {{ number_format($playerused->countuserid) }}</td>
               <td>{{ Translate_menuPlayers('Guest ID used') }}: {{ number_format($guestused->countuserid) }}</td>
-              <td>{{ Translate_menuPlayers('Bot ID used') }}: {{ number_format($botused->countuserid) }}</td>
+              {{-- <td>{{ Translate_menuPlayers('Bot ID used') }}: {{ number_format($botused->countuserid) }}</td> --}}
           </tr>
           <tr>
               <td>{{ Translate_menuPlayers('Player ID didnt use') }} : {{ number_format($playernotused->countuserid) }}</td>
               <td>{{ Translate_menuPlayers('Guest ID didnt use') }}  : {{ number_format($guestnotused->countuserid) }} </td>
-              <td>{{ Translate_menuPlayers('Bot ID didnt use') }}: {{ number_format($botnotused->countuserid) }}</td>
+              {{-- <td>{{ Translate_menuPlayers('Bot ID didnt use') }}: {{ number_format($botnotused->countuserid) }}</td> --}}
           </tr>
           <tr>
               <td>{{ Translate_menuPlayers('Total Player ID') }}: {{ number_format($totalplayer->countuserid) }}</td>
               <td>{{ Translate_menuPlayers('Total Guest ID') }} : {{ number_format($totalguest->countuserid) }} </td>
-              <td>{{ Translate_menuPlayers('Total Bot ID') }} : {{ number_format($totalbot->countuserid) }}</td>
+              {{-- <td>{{ Translate_menuPlayers('Total Bot ID') }} : {{ number_format($totalbot->countuserid) }}</td> --}}
           </tr>
       </table>
       @endif
