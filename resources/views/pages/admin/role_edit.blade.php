@@ -363,7 +363,7 @@
             mode: 'inline',
             value: '',
             source: [
-                {value: '', text: 'Choose for role type'},
+                {value: '', text: "{{ TranslatePlaceholdertxt('L_CHOOSE_ROLE_ADMIN') }}"},
                 @php
                 echo '{value: "'.$type[0].'", text: "'.ConfigTextTranslate($type[1]).'"},';
                 echo '{value: "'.$type[2].'", text: "'.ConfigTextTranslate($type[3]).'"},';

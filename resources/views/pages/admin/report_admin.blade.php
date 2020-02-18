@@ -51,8 +51,8 @@
                         <div class="col" style="padding-left:1%;">
                             <select name="logType" class="form-control">
                                 <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
-                                <option value="{{ $logonlinetype[0] }}">{{ $logonlinetype[1]}} {{ translate_MenuContentAdmin('Admin') }}</option>
-                                <option value="{{ $logonlinetype[2] }}">{{ $logonlinetype[3]}} {{ translate_MenuContentAdmin('Admin') }}</option>
+                                <option value="{{ $logonlinetype[0] }}">{{ ConfigTextTranslate($logonlinetype[1]) }} {{ translate_MenuContentAdmin('Admin') }}</option>
+                                <option value="{{ $logonlinetype[2] }}">{{ ConfigTextTranslate($logonlinetype[3]) }} {{ translate_MenuContentAdmin('Admin') }}</option>
                             </select>
                         </div>
                         <div class="col" style="padding-left:1%;">
