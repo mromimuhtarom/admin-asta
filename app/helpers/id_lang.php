@@ -274,7 +274,8 @@ function translate_menuTransaction($menu){
         'Transaction Day'       =>  'Transaksi Harian',
         'Detail Information'    =>  'Detail Information',
         'Are you sure want to Decline this Transaction' => 'aaa' ,
-        'Are you want to Approve this Transaction?'    => 'cc'
+        'Are you want to Approve this Transaction?'    => 'cc',
+        'L_TRANSPLAYER'         =>  'Transaksi pemain'
     ];
     return $array_menuContent[$menu];
 }
@@ -892,6 +893,16 @@ function TranslatePlaceholdertxt($placeholder) {
 
     ];
     return $array_menuContent[$placeholder];
+}
+
+function TranslateChoices($menu) {
+    $array_menuContent = [
+
+        "L_CHOOSE_TIMER"    =>  "Pilih waktu",
+        "L_CHOOSE_CATEGORY" =>  "Pilih kategori",
+        ""
+    ];
+    return $array_menuContent[$menu];
 }
 
 

@@ -182,7 +182,7 @@
                           }
                           @endphp
                           <td>{{ $status }}</td>
-                          <td>{{ $history->datetimeround }}</td>
+                          <td>{{ date("d-m-Y H:i:s", strtotime($history->datetimeround)) }}</td>
                           {{-- <td>{{ $history->countryname }}</td> --}}
                         </tr>
                         @endforeach
