@@ -100,8 +100,8 @@ function translate_menu($menu){
       'L_RESELLER_TRANSACTION'          => 'Transaksi Agen',
       'L_TRANSACTION_DAY_RESELLER'      => 'Transaksi Harian Agen',
       'L_REQUEST_TRANSACTION'           => 'Transaksi permintaan',
-      'L_ADD_TRANSACTION_RESELLER'               => 'Tambah Transaksi',
-      'L_REPORT_TRANSACTION'            => 'Laporan Transaksi',
+      'L_ADD_TRANSACTION_RESELLER'      => 'Tambah Transaksi',
+      'L_REPORT_TRANSACTION'            => 'Laporan Transaksi Pembelian',
       'L_BALANCE_RESELLER'              => 'Saldo agen',
       'L_ITEM_STORE_RESELLER'           => 'Toko item agen',
       'L_RESELLER_RANK'                 => 'Rank agen',
@@ -724,6 +724,7 @@ function alertTranslate($menu){
     $array_menuContent = [
 
         "insert data successful"                                        =>  "memasukan data berhasil",
+        'L_INSERT_SUCCESSFULL'                                          =>  "Memasukan data berhasil",
         "Successful image"                                              =>  "Gambar berhasil",
         "Failed"                                                        =>  "Gagal",
         "end date can't be less than start date"                        =>  "Tanggal akhir tidak boleh sebelum tanggal mulai",

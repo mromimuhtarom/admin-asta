@@ -27,8 +27,8 @@ class PlayersLevelController extends Controller
         $level      = $request->level;
         $experience = $request->experience;
 
-        $level = PlayerLevel::where('level', '=', $level)->first();
-        if($level):
+        $levels = PlayerLevel::where('level', '=', $level)->first();
+        if($levels):
             return back()->with('alert', 'level is already used please use another level');
         endif;
 
@@ -51,6 +51,7 @@ class PlayersLevelController extends Controller
     {
         $name = $request->name;
         $level = $request->level;
+        
 
         PlayerRank::create([
             'name'  =>  $name,
