@@ -7,6 +7,7 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+
  <!-- Response Status -->
  @if (count($errors) > 0)
  <div class="error-val">
@@ -251,9 +252,9 @@
                   </table> 
                 </div>           
                   <input type="hidden" name="player_id" value="{{ $regis->user_id}}">
-                  <textarea name="description" class="form-control" id="descriptionallow{{ $regis->user_id }}" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
-                  <span id="lblErrorDesc" style="color: red"></span> 
-                  <select name="status_player" class="form-control" id="status_player{{ $regis->user_id }}">
+                  <textarea name="description" class="form-control" onkeyup="myDesc{{ $regis->user_id }}()" id="descriptionallow{{ $regis->user_id }}" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
+                  <span id="lblErrorDesc{{ $regis->user_id }}" style="color: red"></span> 
+                  <select name="status_player" class="form-control" onclick="myFunction{{ $regis->user_id }}()" class="status_player">
                     <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
                     @if ($regis->status == 1)
                     <option value="{{ $plyr_status[2] }}" @if($regis->status == $plyr_status[2]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
@@ -287,10 +288,25 @@
 <!-- End Modal Insert -->
 @endforeach
 
+
 <script type="text/javascript">
-
+@foreach($registerPlayer as $regis)
+   function myFunction{{ $regis->user_id }}() {
+      if(document.getElementById("descriptionallow{{ $regis->user_id }}").value === "") {
+        document.getElementById("lblErrorDesc{{ $regis->user_id }}").innerHTML = "{{ translate_MenuContentAdmin('L_DESCRIPTION_NULL') }}";
+      } else {
+        document.getElementById("lblErrorDesc{{ $regis->user_id }}").innerHTML = "";
+      }
+   }
+   function myDesc{{ $regis->user_id }}() {
+      if(document.getElementById("descriptionallow{{ $regis->user_id }}").value === "") {
+        document.getElementById("lblErrorDesc{{ $regis->user_id }}").innerHTML = "{{ translate_MenuContentAdmin('L_DESCRIPTION_NULL') }}";
+      } else {
+        document.getElementById("lblErrorDesc{{ $regis->user_id }}").innerHTML = "";
+      }
+   }
+@endforeach
 	$(document).ready(function() {
-
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
@@ -300,19 +316,6 @@
       "bFilter": false,
       "bInfo": false,
     });
-    @php
-      foreach($registerPlayer as $regis)
-      {
-        echo"$('#status_player".$regis->user_id."}}').on('click', function(e) {";
-          echo"console.log('dfg');";
-              echo 'if($("#descriptionallow'.$regis->user_id.'").val()) {';
-                  echo 'lblErrormaxbuy.innerHTML = "aa";';
-              echo '}else{';
-                  echo 'lblErrormaxbuy.innerHTML = "Max buy table harus kurang dari max buy di kategori.";';
-              echo '}';
-        echo"});";
-      }    
-    @endphp
   });
 
   
