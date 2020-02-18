@@ -252,7 +252,7 @@
                 </div>           
                   <input type="hidden" name="player_id" value="{{ $regis->user_id}}">
                   <textarea name="description" class="form-control" id="descriptionallow{{ $regis->user_id }}" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
-                  <span id="lblErrorDesc" style="color: red">ss</span> 
+                  <span id="lblErrorDesc" style="color: red"></span> 
                   <select name="status_player" class="form-control" id="status_player{{ $regis->user_id }}">
                     <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
                     @if ($regis->status == 1)
@@ -300,12 +300,19 @@
       "bFilter": false,
       "bInfo": false,
     });
-    @foreach($registerPlayer as $regis)
-    $('#status_player{{ $regis->user_id }}').on('click', function(e) {
-      console.log("dfg");
-    }
-    @endforeach
-    
+    @php
+      foreach($registerPlayer as $regis)
+      {
+        echo"$('#status_player".$regis->user_id."}}').on('click', function(e) {";
+          echo"console.log('dfg');";
+              echo 'if($("#descriptionallow'.$regis->user_id.'").val()) {';
+                  echo 'lblErrormaxbuy.innerHTML = "aa";';
+              echo '}else{';
+                  echo 'lblErrormaxbuy.innerHTML = "Max buy table harus kurang dari max buy di kategori.";';
+              echo '}';
+        echo"});";
+      }    
+    @endphp
   });
 
   

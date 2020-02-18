@@ -149,7 +149,7 @@ class TransactionPlayersController extends Controller
 
         } else if($time == "month")
         {
-            $Transaction= $transaction_day->Join('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
+            $Transaction= $transaction_day->leftJoin('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
                            ->select(
                             'asta_db.transaction_day.date_created',
                             'asta_db.game.desc',

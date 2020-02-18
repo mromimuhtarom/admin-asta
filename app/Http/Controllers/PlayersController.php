@@ -330,7 +330,7 @@ class PlayersController extends Controller
         }
         $register = Player::leftjoin('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                     ->join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                    ->join('asta_db.user_level', 'asta_db.user_level.level', '=', 'asta_db.user_stat.level_id')
+                    ->leftJoin('asta_db.user_level', 'asta_db.user_level.level', '=', 'asta_db.user_stat.level_id')
                     ->select(
                       'asta_db.user.username', 
                       'asta_db.user.user_id',
