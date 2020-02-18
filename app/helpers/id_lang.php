@@ -174,6 +174,7 @@ function translate_MenuContentAdmin($menu){
         'No'                            =>  'Tidak',
         'Delete all selected Data'      =>  'Hapus semua data terpilih?',
         'Are You Sure Want To Delete all selected?'  =>  'Apakah anda yakin akan menghapus semua data yang dipilih?',
+        'L_DESCRIPTION_NULL'            =>  'Deskripsi tidak boleh kosong'
     ];
 
     return $array_menuContent[$menu];
