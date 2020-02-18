@@ -66,7 +66,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>{{ translate_menu('Balance_Reseller')}}</h2>
+            <h2>{{ translate_menu('L_BALANCE_RESELLER')}}</h2>
         </div>
     
         <div class="widget-toolbar">

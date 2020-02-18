@@ -39,7 +39,7 @@
                         </div>
                         <div class="col" >
                             <select name="inputGame" class="form-control">
-                                <option value="" @if($getGame == NULL) selected @endif>{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="" @if($getGame == NULL) selected @endif>{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
                                 <option value="0" @if($getGame == '0') selected @endif>Utama</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}" @if($getGame == $gm->id) selected @endif>{{ $gm->desc }}</option>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col" >
                             <select name="inputGame" class="form-control">
-                                <option value="">{{ Translate_menuPlayers('Choose Game') }}</option>
+                                <option value="">{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
                                 <option value="0">{{ Translate_menuPlayers('Main') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}">{{ $gm->desc }}</option>

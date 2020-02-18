@@ -62,7 +62,7 @@
 								<tbody>
 									@foreach ($transaction as $trns)
 										<tr>
-											<td>{{ $trns->datetime }}</td>
+											<td>{{ date("d-m-Y H:i:s", strtotime($trns->datetime)) }}</td>
 											<td>{{ $trns->username }}</td>
 											<td>{{ $trns->item_name }}</td>	
 											<td>{{ $trns->quantity }}</td>
