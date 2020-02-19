@@ -33,7 +33,7 @@ class UserAdminController extends Controller
                      'asta_db.operator.role_id',
                      'asta_db.adm_role.name'
                     )
-                    ->get();
+                    ->paginate(20);
         $role   = DB::table('asta_db.adm_role')
                   ->select(
                      'role_id',

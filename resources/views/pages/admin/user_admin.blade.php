@@ -123,6 +123,13 @@
         <div id="frm-testing" class="custom-scroll table-responsive" style="height:800px;">
           
           <div class="table-outer">
+            <div class="row">
+                <!-- Button tambah bot baru -->
+                <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                    {{ Translate_menuPlayers('Total Record Entries is') }} {{ $admin->total() }}
+                </div>
+                            <!-- End Button tambah bot baru -->
+            </div>  
             <table id="testing" class="table table-bordered">
               <thead>
                 <tr>
@@ -177,7 +184,8 @@
               </tbody>
             </table>
           </div>
-        
+
+          <div style="display: flex;justify-content: center;">{{ $admin->links() }}</div>   
         </div>
       
       </div>
@@ -272,6 +280,11 @@
       $('table.table').dataTable( {
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+        "paging":false,
+        "bInfo":false,
+        "ordering":false,
+        "bLengthChange": false,
+        "searching": false,
       });
 
       $("#trash").hide();
@@ -292,6 +305,7 @@
     table = $('table.table').dataTable({
       "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
       "paging": false,
+      "ordering"  : false,
       "autoWidth" : true,
       "classes": {
         "sWrapper": "dataTables_wrapper dt-bootstrap4"
