@@ -12,6 +12,7 @@ use Session;
 use Carbon\Carbon;
 use App\Classes\MenucLass;
 use Validator;
+use App\Role;
 
 class UserAdminController extends Controller
 {
@@ -51,10 +52,11 @@ class UserAdminController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'username' => 'required|operator, username|regex:/^\S*$/u',
+            'username' => 'required|unique:operator,username|regex:/^\S*$/u',
             'role'     => 'required|integer',
             'fullname' => 'required',
         ]);
+        
         
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
@@ -80,20 +82,22 @@ class UserAdminController extends Controller
       $pk    = $request->pk;
       $name  = $request->name;
       $value = $request->value;
+      $user  = User::where('op_id', '=', $pk)->first();
 
       User::where('op_id', '=', $pk)->update([
         $name => $value
       ]);
 
       switch ($name) {
-          case "firstName":
-              $name = "First Name";
+          case "fullname":
+              $name_column       = TranslateColumnName("L_FULLNAME");
+              $beforevaluecolumn = $user->fullname;
               break;
-          case "lastName":
-              $name = "Last Name";
-              break;
-          case "roleId":
-              $name = "Role";
+          case "role_id":
+              $name_column       = TranslateColumnName("L_ROLETYPE");
+              $beforevaluecolumn = $user->firstname;
+              $role              = Role::where('role_id', '=', $value)->first();
+              $value             = $role->name;
               break;
           default:
             "";
@@ -104,7 +108,7 @@ class UserAdminController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Pengguna Admin dengan PenggunaId '.$pk.' menjadi '. $value
+        'desc'      => 'Edit '.$name_column.' di menu Pengguna Admin dengan Nama Pengguna '.$user->username.' dari '.$beforevaluecolumn.' menjadi '. $value
       ]);
     }
     
@@ -133,7 +137,12 @@ class UserAdminController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna '.$operator->username
                 ]);
-                return redirect()->route('User_Admin')->with('success', alertTranslate('L_RESET_PASSWORD_SUCCESS'));
+
+                if($username === $retriveuser->username):
+                     return redirect()->route('logout')->with('alert', alertTranslate("L_LOGOUT_CHANGE_PASSWORD"));
+                else:
+                    return redirect()->route('User_Admin')->with('success', alertTranslate('L_RESET_PASSWORD_SUCCESS'));
+                endif;
             else :
                 return redirect()->route('User_Admin')->with('alert', alertTranslate('L_PASSWORD_FAILED'));
             endif;
@@ -150,13 +159,14 @@ class UserAdminController extends Controller
         {
             if($userid != '')
             {
+                $operator = User::where('op_id', '=', $userid)->first();
                 DB::table('asta_db.operator')->where('op_id', '=', $userid)->delete();
     
                 Log::create([
                     'op_id'     => Session::get('userId'),
                     'action_id' => '4',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$userid
+                    'desc'      => 'Hapus di menu Pengguna Admin dengan Nama Pengguna '.$operator->username
                 ]);
                 return redirect()->route('User_Admin')->with('success','Data Deleted');
             }
@@ -168,13 +178,14 @@ class UserAdminController extends Controller
 
     public function deleteAll(Request $request)
     {
-        $ids =   $request->userIdAll;
+        $ids      = $request->userIdAll;
+        $username = $request->usernameAll;
         DB::table('asta_db.operator')->whereIn('op_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$ids
+            'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$username
         ]);
         return redirect()->route('User_Admin')->with('success', alertTranslate("Data deleted"));
     }

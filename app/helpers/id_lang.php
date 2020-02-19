@@ -797,7 +797,8 @@ function alertTranslate($menu){
         "Transaction Chip"                                              =>  "Transaksi Chip",
         "Transaction Gold"                                              =>  "Transaksi Koin",
         "Transaction Point"                                             =>  "Transaksi Poin",
-        "L_PASSWORD_FAILED"                                             =>  "Password tidak cocok silahkan coba lagi"
+        "L_PASSWORD_FAILED"                                             =>  "Password tidak cocok silahkan coba lagi",
+        "L_LOGOUT_CHANGE_PASSWORD"                                      =>  "Password anda telah di ganti"
     ];
     return $array_menuContent[$menu];
 };
@@ -902,6 +903,16 @@ function TranslateChoices($menu) {
 
         "L_CHOOSE_TIMER"    =>  "Pilih waktu",
         "L_CHOOSE_CATEGORY" =>  "Pilih kategori",
+        ""
+    ];
+    return $array_menuContent[$menu];
+}
+
+function TranslateColumnName($menu) {
+    $array_menuContent = [
+
+        "L_FULLNAME"    =>  "Nama Lengkap",
+        "L_ROLETYPE" =>  "Tipe Peran",
         ""
     ];
     return $array_menuContent[$menu];
