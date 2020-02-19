@@ -43,6 +43,7 @@ class LoginController extends Controller
             Session::put('dealerId', '1');
             Session::put('username',Auth::user()->username);
             Session::put('fullname',Auth::user()->fullname);
+            Session::put('passwordlogin',Auth::user()->userpass);
             Session::put('roleId',Auth::user()->role_id);
             Session::put('login1',TRUE);
             $username   = $request->username;

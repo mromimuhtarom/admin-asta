@@ -137,7 +137,7 @@ class UserAdminController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna '.$operator->username
                 ]);
-
+                
                 if($username === $retriveuser->username):
                      return redirect()->route('logout')->with('alert', alertTranslate("L_LOGOUT_CHANGE_PASSWORD"));
                 else:
