@@ -69,7 +69,7 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
+                    <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Experience') }} (Xp)</th>
                     <th align="center">
@@ -156,7 +156,7 @@
                 <thead>
                   <tr>
                     @if($menu && $mainmenu)
-                      <th><input id="checkAllrank" type="checkbox" name="deletepermissionrank" class="deletepermissionrank">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
+                      <th><input id="checkAllrank" type="checkbox" name="deletepermissionrank" class="deletepermissionrank">&nbsp; &nbsp;{{ translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
                     @endif
                     <th class="th-sm">ID</th>
                     <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
@@ -295,21 +295,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ translate_MenuContentAdmin('Delete Data')}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ translate_MenuContentAdmin('L_DELETE_DATA')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
-            {{ translate_MenuContentAdmin('Are You Sure Want To Delete It?')}}
+            {{ translate_MenuContentAdmin('L_QUESTION_DELETE_ALL')}}
             <form action="{{ route('playerslevel_delete') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
               <input type="hidden" name="level" id="level" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuContentAdmin('No')}}</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuContentAdmin('L_NO')}}</button>
           </div>
             </form>
         </div>
@@ -322,21 +322,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ translate_MenuContentAdmin('Delete Data')}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ translate_MenuContentAdmin('L_DELETE_DATA')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
-            {{ translate_MenuContentAdmin('Are You Sure Want To Delete It?')}}
+            {{ translate_MenuContentAdmin('L_QUESTION_DELETE')}}
             <form action="{{ route('playersrank_delete') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
               <input type="hidden" name="id" id="rank" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuContentAdmin('No')}}</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuContentAdmin('L_NO')}}</button>
           </div>
             </form>
         </div>
@@ -351,21 +351,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete all selected Data')}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('L_STATEMENT_DELETE_ALL')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
-            {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
+            {{ translate_MenuContentAdmin('L_QUESTION_DELETE_ALL')}}
             <form action="{{ route('playerslevel_deleteall') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="levelAll" id="levelAll" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('No')}}</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('L_NO')}}</button>
           </div>
             </form>
         </div>
@@ -378,21 +378,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete all selected Data')}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('L_STATEMENT_DELETE_ALL')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i>
             </button>
           </div>
           <div class="modal-body">
-            {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
+            {{ translate_MenuContentAdmin('L_QUESTION_DELETE_ALL')}}
             <form action="{{ route('playersrank_deleteall') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="id" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('No')}}</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('L_NO')}}</button>
           </div>
             </form>
         </div>

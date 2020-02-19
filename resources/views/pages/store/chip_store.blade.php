@@ -383,10 +383,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
-            <i class="fa fa-save"></i>{{ Translate_MenuContentAdmin('Save')}}
+            <i class="fa fa-save"></i>{{ Translate_MenuContentAdmin('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i>{{ Translate_MenuContentAdmin('Cancel')}}
+            <i class="fa fa-remove"></i>{{ Translate_MenuContentAdmin('L_CANCEL')}}
           </button>
         </div>
       </form>

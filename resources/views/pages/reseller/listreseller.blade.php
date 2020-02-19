@@ -51,7 +51,7 @@
                 <th class="th-sm">{{ TranslateReseller('Saldo gold')}}</th>
                 <th class="th-sm">{{ Translate_menuPlayers('Rank')}}</th>
                 @if($menu && $mainmenu)
-                <th class="th-sm">{{ translate_MenuContentAdmin('Reset Password')}}</th>
+                <th class="th-sm">{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</th>
                 <th class="th-sm" style="width:90px;">
                   <a  href="#" style="color:red;font-weight:bold;" 
                         class="delete" 
@@ -75,7 +75,7 @@
                   <td><a href="#" class="usertext" data-name="email" data-pk="{{ $rsl->reseller_id }}" data-type="email" data-url="{{ route('ListReseller-update') }}">{{ $rsl->email }}</a></td>
                   <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rsl->reseller_id }}" data-type="number" data-url="{{ route('ListReseller-update') }}">{{ number_format($rsl->gold, 2) }}</a></td>
                   <td><a href="#" class="rank" data-name="rank_id" data-value="{{ $rsl->rank_id }}" data-pk="{{ $rsl->reseller_id }}" data-type="select" data-url="{{ route('ListReseller-update') }}">{{ $rsl->rankname }}</a></td>
-                  <td><a href="#" class="password{{ $rsl->reseller_id }} btn btn-primary" id="password" data-pk="{{ $rsl->reseller_id }}" data-toggle="modal" data-target="#reset-password">{{ translate_MenuContentAdmin('Reset Password')}}</a></td>
+                  <td><a href="#" class="password{{ $rsl->reseller_id }} btn btn-primary" id="password" data-pk="{{ $rsl->reseller_id }}" data-toggle="modal" data-target="#reset-password">{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</a></td>
                   <td>
                     <a href="#" style="color:red;" class="delete{{ $rsl->reseller_id }}" 
                       id="delete" 
@@ -113,7 +113,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuContentAdmin('Reset Password')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           × 
         </button>
@@ -125,7 +125,7 @@
           <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes submit-data">{{ translate_MenuContentAdmin('Reset Password')}}</button>
+        <button type="submit" class="button_example-yes submit-data">{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</button>
         <button type="button" class="button_example-no" data-dismiss="modal">{{ TranslateMenuItem('No')}}</button>
       </div>
         </form>
@@ -142,7 +142,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete Data') }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('L_DELETE_DATA') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
@@ -169,13 +169,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete all selected Data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('L_STATEMENT_DELETE_ALL')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
+        {{ translate_MenuContentAdmin('L_QUESTION_DELETE_ALL')}}
         <form action="{{ route('ListReseller-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
