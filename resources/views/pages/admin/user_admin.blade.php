@@ -151,7 +151,7 @@
                 @foreach($admin as $adm)
                 @if($menu && $mainmenu)
                 <tr>
-                    <td align="center"><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $adm->op_id }}" class="deletepermission{{ $adm->op_id }} deleteIdAll"></td>
+                    <td align="center"><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $adm->op_id }}" data-username="{{ $adm->username }}" class="deletepermission{{ $adm->op_id }} deleteIdAll"></td>
                     <td>{{ $adm->username }}</td>
                     <td><a href="#" class="usertext" data-name="fullname" data-title="Full Name" data-pk="{{ $adm->op_id }}" data-type="text" data-url="{{ route('UserAdmin-update') }}">{{ $adm->fullname }}</a></td>
                     <td><a href="#" class="role" data-name="role_id" data-title="Role" data-pk="{{ $adm->op_id }}" data-type="select" data-url="{{ route('UserAdmin-update') }}">{{ $adm->name }}</a></td>
@@ -227,6 +227,7 @@
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+                  <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
           </div>
           <div class="modal-footer">
             <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
@@ -370,10 +371,16 @@
         $('.delete').click(function(e) {
           e.preventDefault();
               var allVals = []; 
+              var allUsername = [];
               $(".deleteIdAll:checked").each(function() {  
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(","); 
                   $("#idDeleteAll").val(join_selected_values);
+                  
+                  // untuk dapatain username
+                  allUsername.push($(this).attr('data-username'));
+                  var join_selected_username = allUsername.join(",");
+                  $("#userDeleteAll").val(join_selected_username);
               }); 
         }); 
         

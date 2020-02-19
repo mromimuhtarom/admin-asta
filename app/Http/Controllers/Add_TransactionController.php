@@ -191,7 +191,7 @@ class Add_TransactionController extends Controller
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance chip dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' chip. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance chip di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' chip. Dengan alasan: ' .$description
           ]);
 
         //type adjust
@@ -294,7 +294,7 @@ class Add_TransactionController extends Controller
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance CHIP dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' Chip. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance CHIP di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' Chip. Dengan alasan: ' .$description
             ]);
 
 
@@ -366,7 +366,7 @@ class Add_TransactionController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '2',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit balance chip dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' chip. Dengan alasan: '. $description
+            'desc'      =>  'Edit balance chip di menu tambah transaksi dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' chip. Dengan alasan: '. $description
           ]);
         endif;
 
@@ -418,7 +418,7 @@ class Add_TransactionController extends Controller
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance gold dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' gold. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance gold di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' gold. Dengan alasan: ' .$description
           ]);
 
         //type adjust
@@ -516,7 +516,7 @@ class Add_TransactionController extends Controller
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance gold dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' gold. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance gold di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' gold. Dengan alasan: ' .$description
             ]);
 
 
@@ -587,7 +587,7 @@ class Add_TransactionController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '2',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit balance gold dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' gold. Dengan alasan: '. $description
+            'desc'      =>  'Edit balance gold di menu tambah transaksi dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' gold. Dengan alasan: '. $description
           ]);
         endif;
 
@@ -637,7 +637,7 @@ class Add_TransactionController extends Controller
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance poin dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' poin. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance poin di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' poin. Dengan alasan: ' .$description
           ]);
 
         //type adjust
@@ -736,7 +736,7 @@ class Add_TransactionController extends Controller
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance point dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' point. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance point di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' point. Dengan alasan: ' .$description
             ]);
 
 
@@ -808,7 +808,7 @@ class Add_TransactionController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '2',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit balance point dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' point. Dengan alasan: '. $description
+            'desc'      =>  'Edit balance point di menu tambah transaksi dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' point. Dengan alasan: '. $description
           ]);
         endif;
       endif;

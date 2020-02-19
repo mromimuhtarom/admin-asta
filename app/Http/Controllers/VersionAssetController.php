@@ -38,7 +38,8 @@ class VersionAssetController extends Controller
     public function store(Request $request)
     {   
     
-        $file       = $request->fileAdr;
+        $file             = $request->fileAdr;
+
         $xml = new \DomDocument("1.0");
         // $xml->load("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
         $xml->load("../public/upload/xml/Android/asset_game.xml");
@@ -56,11 +57,13 @@ class VersionAssetController extends Controller
             return back()->withErrors($validator->errors());
         endif;
 
-        $type           = $request->Type;
-        $link           = $request->Link;
-        $version        = $request->Version;
-        $tagelement     = $request->FolderName;
-        $name           = $request->Name;
+        $type             = $request->Type;
+        $link             = $request->Link;
+        $version          = $request->Version;
+        $tagelement       = $request->FolderName;
+        $name             = $request->Name;
+        $x                = explode('.', $name);
+        $namafilenoformat = str_replace('.'.end($x), '', $name);
 
         $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
 
@@ -71,7 +74,7 @@ class VersionAssetController extends Controller
         $link_xml       = $xml->createElement("link", $link);
         $version_xml    = $xml->createElement("ver", $version);
 
-        $infoTag->setAttribute('name', $name);
+        $infoTag->setAttribute('name', $namafilenoformat);
         $infoTag->appendChild($type_xml);
         $infoTag->appendChild($link_xml);
         $infoTag->appendChild($version_xml);
@@ -406,13 +409,17 @@ class VersionAssetController extends Controller
     //FUNCTION UPDATE ASSET ANDROID
     public function updateAssetAndroid (Request $request)
     {
-        $pk         = $request->pk;
-        $file       = $request->fileEditADR;
-        $name       = $request->Name;
-        $link       = $request->Link;
-        $version    = $request->Version;
-        $gamep      = simplexml_load_file("../public/upload/xml/Android/asset_game.xml");
-        $filename   = $_FILES['fileEditADR']['name'];
+        $pk               = $request->pk;
+        $file             = $request->fileEditADR;
+        $filename         = $file->getClientOriginalName();
+        $x                = explode('.', $filename);
+        $namafilenoformat = str_replace('.'.end($x), '', $filename);
+        $name             = $request->Name;
+        $link             = $request->Link;
+        $version          = $request->Version;
+        $gamep            = simplexml_load_file("../public/upload/xml/Android/asset_game.xml");
+    
+
         foreach($gamep->children() as $gamew)
         {
             
@@ -420,7 +427,7 @@ class VersionAssetController extends Controller
                 {
                     
                     $gamew->ver = $version;
-                    $gamew['name'] = $name;
+                    $gamew['name'] = $namafilenoformat;
                     // break;
                 }
                
@@ -436,7 +443,8 @@ class VersionAssetController extends Controller
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
 
         //update file to aws s3
-        $uploadFile = $replacepath . $name.'.'.$filename;
+        $uploadFile = $replacepath . $filename;
+        
         Storage::disk('s3')->put($uploadFile, file_get_contents($file));
 
         Log::create([

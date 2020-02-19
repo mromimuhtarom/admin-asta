@@ -483,7 +483,7 @@
                   <div class="col-12">
                     <div class="form-group"><br>
                         <div class="form-group">
-                            <input type="file" name="fileAdr" id="file" class="input-file">
+                            <input type="file" name="fileAdr" id="file" onchange="document.getElementById('namefileadr').value = this.value.split('\\').pop().split('/').pop()" class="input-file">
                             <label for="file" class="btn btn-tertiary js-labelFile">
                               <i class="icon fa fa-check"></i>
                               <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -491,7 +491,7 @@
                           </div>
                         <br>
                         <br>
-                        <input class="form-control" name="Name" placeholder="Name"><br>
+                        <input class="form-control" name="Name" id="namefileadr" placeholder="Name"><br>
                           <select name="Type" class="form-control">
                             <option>{{ translate_menuTransaction('Type')}}</option>
                             <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
@@ -653,7 +653,7 @@ $ckbox = str_replace('.','_', $xl['name']);
               <div class="form-group" align="center"><br>
                   <input type="hidden" value="{{ $xl['name'] }}" name="pk">
                   <div class="form-group">
-                      <input type="file" name="fileEditADR" id="file3{{ $xl['name'] }}" class="input-file">
+                      <input type="file" name="fileEditADR" onchange="document.getElementById('nameandro{{ $xl['name'] }}').value = this.value.split('\\').pop().split('/').pop()" id="file3{{ $xl['name'] }}" class="input-file">
                       <label for="file3{{ $xl['name'] }}" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
                         <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -661,7 +661,7 @@ $ckbox = str_replace('.','_', $xl['name']);
                     </div>
                   <br>
                   <br>
-                  <input value="{{ $xl['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
+                  <input value="{{ $xl['name'] }}" class="form-control" id="nameandro{{ $xl['name'] }}" name="Name" placeholder="Name"><br>
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
                       <option @if( $xl->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>

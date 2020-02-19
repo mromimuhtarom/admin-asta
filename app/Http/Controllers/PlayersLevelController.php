@@ -59,7 +59,7 @@ class PlayersLevelController extends Controller
         ]);
 
         Log::create([
-            'op_id'     => Session::get('user_id'),
+            'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menambahkan data peringkat pemain di menu level pemain dengan nama level '.$name
@@ -88,9 +88,9 @@ class PlayersLevelController extends Controller
             default:
                 "";
         }
-
+    
         Log::create([
-            'op_id'     => Session::get('user_id'),
+            'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Edit '.$name.' data level pemain di menu Level Pemain dengan level '.$pk.' menjadi '. $value
@@ -119,7 +119,7 @@ class PlayersLevelController extends Controller
                 "";
         }
         Log::create([
-            'op_id'     => Session::get('user_id'),
+            'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Edit '.$name.' data peringkat pemain di menu Level Pemain dengan level '.$pk.' menjadi '. $value

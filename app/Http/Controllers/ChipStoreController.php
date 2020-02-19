@@ -195,7 +195,7 @@ class ChipStoreController extends Controller
                 ]);
 
                 Log::create([
-                    'op_id'     => Session::get('user_id'),
+                    'op_id'     => Session::get('userId'),
                     'action_id' => '3',
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Menambahkan data di menu Toko Chip dengan title '. $chip->name

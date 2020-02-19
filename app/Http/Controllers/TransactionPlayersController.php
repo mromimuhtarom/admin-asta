@@ -149,6 +149,7 @@ class TransactionPlayersController extends Controller
 
         } else if($time == "month")
         {
+            
             $Transaction= $transaction_day->leftJoin('asta_db.game', 'asta_db.game.id', '=', 'asta_db.transaction_day.game_id')
                            ->select(
                             'asta_db.transaction_day.date_created',
@@ -175,12 +176,13 @@ class TransactionPlayersController extends Controller
                            ->orderBy($namecolumn, $sortingorder)
                            ->groupBy(DB::raw('month(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))                                                              
                            ->paginate(20);
+    
             elseif($minDate != NULL && $maxDate != NULL):
                 $history = $Transaction->wherebetween('asta_db.transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
-                           ->where('game_id', '=', $game)
                            ->orderBy($namecolumn, $sortingorder)
                            ->groupBy(DB::raw('month(asta_db.transaction_day.date_created)'), DB::raw("WEEK('asta_db.transaction_day.date_created')"))
                            ->paginate(20);
+              
             // Search berdasarkan time, tanggal minimal tanggal maksimal
             elseif($minDate != NULL):
                 $history = $Transaction->where('asta_db.transaction_day.date_created', '>=', $minDate." 00:00:00")

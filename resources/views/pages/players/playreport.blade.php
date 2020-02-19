@@ -163,8 +163,10 @@
                                     @foreach (bgtcard($history->hand_card_round) as $item)
                                         {{ $item }} 
                                     @endforeach
-                                @else
-                                        {{ $history->hand_card }} 
+                                @elseif($_GET['inputGame'] === 'Domino QQ')
+                                        {{ $history->hand_card_round }} 
+                                @elseif($_GET['inputGame'] === 'Domino Susun')
+                                        {{ $history->hand_card_round }} 
                                 @endif
                             @endif
                             

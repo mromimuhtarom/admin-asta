@@ -422,10 +422,10 @@ class TableController extends Controller
                 $name => $value
             ]);
         } else 
-        {
+        { 
             TpkTable::where('table_id', '=', $pk)->update([
                 $name => $value
-              ]);
+            ]);
         }
   
         switch ($name) {
@@ -552,11 +552,12 @@ class TableController extends Controller
             "";
         }
 
+    $bgttable = DB::table('bgt_table')->where('table_id', '=', $pk)->first();
     Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Meja Big Two dengan RuangID '.$pk.' to '. $value
+        'desc'      => 'Edit '.$name.' di menu Meja Big Two dengan Nama meja '.$bgttable->name.' menjadi '. $value
     ]);
     }
 
@@ -659,11 +660,12 @@ class TableController extends Controller
             "";
         }
 
+    $dmstable = DB::table('dms_table')->where('table_id', '=', $pk)->first();
     Log::create([
         'op_id' => Session::get('userId'),
         'action_id'   => '2',
         'datetime'        => Carbon::now('GMT+7'),
-        'desc' => 'Edit '.$name.' di menu Meja Domino Susun dengan RuangID '.$pk.' menjadi '. $value
+        'desc' => 'Edit '.$name.' di menu Meja Domino Susun dengan Nama meja '.$dmstable->name.' menjadi '. $value
     ]);
     }
 
@@ -757,11 +759,12 @@ class TableController extends Controller
             "";
         }
 
+    $dmqtable = DB::table('dms_table')->where('table_id', '=', $pk)->first();
     Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Meja Domino QQ dengan RuangID '.$pk.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Meja Domino QQ dengan Nama meja '.$dmqtable->name.' menjadi '. $value
     ]);
     }
 
@@ -772,11 +775,12 @@ class TableController extends Controller
         if($tableid != '')
         {
             TpkTable::where('table_id', '=', $tableid)->delete();
+            $tpk_table = TpkTable::where('table_id', '=', $tableid)->first();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Asta Poker dengan RuangID '.$tableid
+                'desc'      => 'Hapus di menu Meja Asta Poker dengan nama meja '.$tpk_table->name
             ]);
             return redirect()->route('Table_Asta_Poker')->with('success', alertTranlsate('Data deleted'));
         }
@@ -803,11 +807,12 @@ class TableController extends Controller
         if($tableid != '')
         {
             BigTwoTable::where('table_id', '=', $tableid)->delete();
+            $bgt_table = BigTwoTable::where('table_id', '=', $tableid)->first();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Big Two dengan RuangID '.$tableid
+                'desc'      => 'Hapus di menu Meja Big Two dengan nama meja '.$bgt_table->name
             ]);
             return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data deleted'));
         }
@@ -834,12 +839,12 @@ class TableController extends Controller
         if($tableid != '')
         {
             DominoSusunTable::where('table_id', '=', $tableid)->delete();
-
+            $dms_table = DominoSusunTable::where('table_id', '=', $tableid)->first();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Domino Susun dengan RuangID '.$tableid
+                'desc'      => 'Hapus di menu Meja Domino Susun dengan nama meja '.$dms_table->name
             ]);
             return redirect()->route('Table_Domino_Susun')->with('success', alertTranlsate('Data deleted'));
         }
@@ -866,12 +871,12 @@ class TableController extends Controller
         if($tableid != '')
         {
             DominoQTable::where('table_id', '=', $tableid)->delete();
-
+            $dmq_table = DominoQTable::where('table_id', '=', $tableid)->first();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Domino QQ dengan RuangID '.$tableid
+                'desc'      => 'Hapus di menu Meja Domino QQ dengan RuangID '.$dmq_table->name
             ]);
             return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data deleted'));
         }
