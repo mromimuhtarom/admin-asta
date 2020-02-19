@@ -185,7 +185,7 @@ class UserAdminController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Pengguna Admin dengan PenggunaID '.$username
+            'desc'      => 'Hapus di menu Pengguna Admin dengan nama pengguna '.$username
         ]);
         return redirect()->route('User_Admin')->with('success', alertTranslate("Data deleted"));
     }

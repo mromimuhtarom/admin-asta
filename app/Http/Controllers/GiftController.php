@@ -483,19 +483,18 @@ class GiftController extends Controller
     {
         $ids        =   $request->userIdAll;
         $imageid    =   $request->imageid;
+        $currentname =  $request->usernameAll;
         
         //DELETE
         Storage::disk('s3')->delete(explode(",", $imageid));
         DB::table('asta_db.gift')->whereIn('id', explode(",", $ids))->delete();
         
-        $currentname = Gift::where('id', '=', $ids)->first();
-
         //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Toko Hadiah dengan nama '.$currentname->name
+            'desc'      => 'Hapus di menu Toko Hadiah dengan nama '.$currentname
         ]);
         return redirect()->route('Table_Gift')->with('succes', alertTranslate('Data deleted'));
     }
