@@ -2,7 +2,7 @@
 
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('L_ADMIN') }}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('Log Admin') }}</a></li>
 @endsection
 
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col">
                         <select name="action" id="" class="form-control">
-                            <option value="">{{ translate_MenuContentAdmin('Choose Action') }}</option>
+                            <option value="">{{ translate_MenuContentAdmin('L_CHOOSE_ACTION') }}</option>
                             @foreach($actionSearch as $action)
                             <option value="{{ $action->id }}" @if($inputAction == $action->id) selected @endif;>{{ translate_MenuContentAdmin($action->action) }}</option>
                             @endforeach
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
-                        <option value="">{{ translate_MenuContentAdmin('Choose Action') }}</option>
+                        <option value="">{{ translate_MenuContentAdmin('L_CHOOSE_ACTION') }}</option>
                         @foreach($actionSearch as $action)
                         <option value="{{ $action->id}}">{{ translate_MenuContentAdmin($action->action) }}</option>
                         @endforeach
@@ -66,7 +66,7 @@
                 </div>
                 @endif
                 <div class="col">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('Search') }}</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('L_SEARCH') }}</button>
                 </div>
             </div>
         </form>
@@ -102,11 +102,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
-                        <th>{{ translate_MenuContentAdmin('Admin ID') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Username') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Action') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Date') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Description') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_ADMIN_ID') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_USERNAME') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_ACTION') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_DATE') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_DESCRIPTION') }}</th>
                     </tr>
                 </thead>
                 <tbody>

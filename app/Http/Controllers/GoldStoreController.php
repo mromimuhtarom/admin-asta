@@ -261,6 +261,7 @@ class GoldStoreController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = ItemsCash::where('item_id', '=', $pk)->first();
 
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
@@ -289,7 +290,7 @@ class GoldStoreController extends Controller
                 break;
             case "trans_type":
                 $name = "Transaksi Pembayaran";
-                 $value = strTypeTransaction($type);
+                 $value = strTypeTransaction($value);
                 break;
             case "order":
                 $name = "Memesan";
@@ -316,7 +317,7 @@ class GoldStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Toko Koin dengan ID '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' di menu Toko Koin dengan ID '.$currentname->name.' menjadi '. $value
         ]);
     }
 

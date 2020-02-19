@@ -65,7 +65,7 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('Select All')}}</th>
+                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
                 @endif
                 <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
                 <th class="th-sm">{{ translate_menuTransaction('Type')}}e</th>
@@ -203,7 +203,7 @@
         </button>
       </div>
       <div class="modal-body">
-        {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
+        {{ translate_MenuContentAdmin('L_QUESTION_DELETE_ALL')}}
         <form action="{{ route('PaymentStore-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
