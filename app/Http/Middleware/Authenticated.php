@@ -35,56 +35,62 @@ class Authenticated
                       ->first();
         
         if(Session::get('login1')) {
-            $op              = Session::get('userId');
-            $operator_active = OperatorActive::where('op_id', '=', $op)->first();
-            $cahce_op        = OperatorActive::where('op_id', '=', $op_idcache)->first();
-            $operator        = User::where('op_id', '=', $op_idcache)->first();
+            $op                 = Session::get('userId');
+            $operator_active    = OperatorActive::where('op_id', '=', $op)->first();
+            $cahce_op           = OperatorActive::where('op_id', '=', $op_idcache)->first();
+            $operator           = User::where('op_id', '=', $op_idcache)->first();
+            $operator_changepwd = User::where('op_id', '=', $op )->first();
             Artisan::call('route:clear');
             Artisan::call('config:clear');
             Artisan::call('view:clear');
 
-            
-            // untuk delete jika date_update melebihi 15 menit
-            $op_active = OperatorActive::where('date_update', '<', DB::raw('DATE_SUB(NOW(),INTERVAL 60 MINUTE)'))->first();
-                if($op_active)
-                {
-                    OperatorActive::where('date_update', '<', DB::raw('NOW() + INTERVAL 60 MINUTE'))->delete();
-                }
-            //End untuk delete jika date_update melebihi 15 menit
+            // ------ untuk jika password telah di ganti maka langsung logout ----- //
+            if(Session::get('passwordlogin') !== $operator_changepwd->userpass):
+                return redirect()->route('logout');
+            else:
+                // untuk delete jika date_update melebihi 15 menit
+                $op_active = OperatorActive::where('date_update', '<', DB::raw('DATE_SUB(NOW(),INTERVAL 60 MINUTE)'))->first();
+                    if($op_active)
+                    {
+                        OperatorActive::where('date_update', '<', DB::raw('NOW() + INTERVAL 60 MINUTE'))->delete();
+                    }
+                //End untuk delete jika date_update melebihi 15 menit
 
-            if ($operator_active)
-            {
-                OperatorActive::where('op_id', '=', $op)->update([
-                    'op_id'       => $op,
-                    'date_update' => Carbon::now('GMT+7'),
-                    'ip'          => request()->ip()
-                ]);
-            } else {
-                if($cahce_op)
+                if ($operator_active)
                 {
-                    Db::table('asta_db.operator_active')->update([
+                    OperatorActive::where('op_id', '=', $op)->update([
+                        'op_id'       => $op,
                         'date_update' => Carbon::now('GMT+7'),
                         'ip'          => request()->ip()
                     ]);
                 } else {
-                    if($op_idcache)
+                    if($cahce_op)
                     {
-                        LogOnline::create([
-                            'user_id'   => $op_idcache,
-                            'action_id' => 2,
-                            'desc'      => 'user '.$operator->username.' Logout in web Admin',
-                            'datetime'  => Carbon::now('GMT+7'),
-                            'ip'        => request()->ip(),
-                            'type'      => 1
+                        Db::table('asta_db.operator_active')->update([
+                            'date_update' => Carbon::now('GMT+7'),
+                            'ip'          => request()->ip()
                         ]);
-                    }
-                    OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
-                    Cache::flush();
-                    return redirect()->route('logout')->with('alert','Please Login First');
-                } 
-                
-            }
-            return $next($request);
+                    } else {
+                        if($op_idcache)
+                        {
+                            LogOnline::create([
+                                'user_id'   => $op_idcache,
+                                'action_id' => 2,
+                                'desc'      => 'user '.$operator->username.' Logout in web Admin',
+                                'datetime'  => Carbon::now('GMT+7'),
+                                'ip'        => request()->ip(),
+                                'type'      => 1
+                            ]);
+                        }
+                        OperatorActive::where('session_id', '=', $session_id)->where('op_id', '=', $op_idcache)->delete();
+                        Cache::flush();
+                        return redirect()->route('logout')->with('alert','Please Login First');
+                    } 
+                    
+                }
+                return $next($request);
+            endif;
+            // ------ akhiran untuk jika password telah di ganti maka langsung logout ----- //
         } 
         if($logout)
         {
