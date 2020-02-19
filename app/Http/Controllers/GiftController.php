@@ -440,7 +440,6 @@ class GiftController extends Controller
             "";
       }
 
-
       Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',

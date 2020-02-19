@@ -294,7 +294,7 @@
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
           <input type="hidden" name="imageid" id="idDeleteAllimage" value="">
-          <input type="text" name="usernameAll" id="userDeleteAll" value="">
+          <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
