@@ -241,6 +241,7 @@ class PlayersController extends Controller
                   ->select(
                     'asta_db.user.username',
                     'asta_db.user.email',
+                    'asta_db.user.avatar_id',
                     'asta_db.user.country_code',
                     'asta_db.user_stat.chip',
                     'asta_db.user_stat.point',
@@ -260,15 +261,15 @@ class PlayersController extends Controller
  //  ---------- Profile Image --------- //
     public function ImageProfilePlayer($user_id)
     {
-      $rootpath = '../../asta-api/profile_player';
+      // http://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{$profile->avatar_id}}.jpg
+      $rootpath = 'http://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/'.$user_id.'.jpg';
       $client = Storage::createLocalDriver(['root' => $rootpath]);
-      // $file = Storage::exists($client->get($user_id.'.jpg'));
-      $file_exists = $client->exists($user_id.'.jpg');      
+      $file = Storage::exists($client->get($user_id.'.jpg'));
+      $file_exists = $client->exists($rootpath);      
       
 
       if($file_exists === false)
       {  
-        
         $rootpath_empty = '../public/images/profile';
         $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
         $file_empty     = $client_empty->get('empty_profile.png');
@@ -276,15 +277,17 @@ class PlayersController extends Controller
 
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
+        
         return $response_empty;
 
       } else if($file_exists === true){
+        
         $file     = $client->get($user_id.'.jpg');
         $type     = $client->mimeType($user_id.'.jpg');
         $response = Response::make($file, 200);
         $response->header("Content-Type", $type);
+        
         return $response;
-
       }
       
     }
