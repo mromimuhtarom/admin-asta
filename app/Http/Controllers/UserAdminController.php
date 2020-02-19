@@ -152,7 +152,8 @@ class UserAdminController extends Controller
                     'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna '.$operator->username
                 ]);
                 
-                if($username === $retriveuser->username):
+                $useredit = DB::table('operator')->where('op_id', '=', $pk)->first();
+                if($username === $useredit->username):
                      return redirect()->route('logout')->with('alert', alertTranslate("L_LOGOUT_CHANGE_PASSWORD"));
                 else:
                     return redirect()->route('User_Admin')->with('success', alertTranslate('L_RESET_PASSWORD_SUCCESS'));

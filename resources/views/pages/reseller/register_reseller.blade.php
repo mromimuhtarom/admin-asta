@@ -29,7 +29,7 @@
                     @csrf
                     <table border="0" width="100%" height="100%" style="color:white; font-family:Century Gothic;">
                         <tr>
-                            <td>{{ translate_menuContentAdmin('Full Name')}}<p>&nbsp;</p></td>
+                            <td>{{ translate_menuContentAdmin('L_FULLNAME')}}<p>&nbsp;</p></td>
                             <td>
                                     <input type="text" name="firstName" class="form-control" placeholder="First Name" value="{{ old('fullname') }}" required>
                                     <p>&nbsp;</p>
@@ -41,7 +41,7 @@
                             </td>
                         </tr>
                         <tr style="">
-                            <td>{{ translate_menuContentAdmin('Username')}}<p>&nbsp;</p> </td>
+                            <td>{{ translate_menuContentAdmin('L_USERNAME')}}<p>&nbsp;</p> </td>
                             <td colspan="3">
                                     <input type="text" name="username" class="form-control" value="{{ old('username') }}" required>
                                     <p>&nbsp;</p>

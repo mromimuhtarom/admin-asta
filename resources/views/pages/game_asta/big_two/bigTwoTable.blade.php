@@ -66,7 +66,7 @@
               <thead>
                 <tr>
                   @if($menu && $mainmenu && $submenu)
-                  <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{translate_MenuContentAdmin('Select All')}}</th>
+                  <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
                   @endif
                   <th class="th-sm">{{ TranslateMenuGame('Table Name') }}</th>
                   <th class="th-sm">{{ TranslateMenuGame('Group') }}</th>
@@ -217,21 +217,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('Delete all selected Data')}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ translate_MenuContentAdmin('L_STATEMENT_DELETE_ALL')}}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          {{ translate_MenuContentAdmin('Are You Sure Want To Delete all selected?')}}
+          {{ translate_MenuContentAdmin('L_QUESTION_DELETE_ALL')}}
           <form action="{{ route('BigTwoTable-deleteAllB2') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
                 <input type="hidden" name="AstaAll" id="AstaAll" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('Yes')}}</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('No')}}</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> {{ translate_MenuContentAdmin('L_NO')}}</button>
         </div>
           </form>
       </div>
