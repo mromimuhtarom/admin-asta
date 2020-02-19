@@ -63,9 +63,9 @@ class EmoticonController extends Controller
   
     public function store(Request $request)
     {
-        $id                     = Emoticon::select('id')
-                                  ->orderBy('id', 'desc')
-                                  ->first();
+        $id        = Emoticon::select('id')
+                    ->orderBy('id', 'desc')
+                    ->first();
         $validator = Validator::make($request->all(),[
             'title'    => 'required',
             'price'    => 'required|integer',
@@ -127,7 +127,7 @@ class EmoticonController extends Controller
                             'op_id'     => Session::get('userId'),
                             'action_id' => '3',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Menambahkan data di menu Emotikon dengan judul '. $emoticon->subject
+                            'desc'      => 'Menambahkan data di menu Emotikon dengan nama '.$emoticon->name
                         ]);
                         return redirect()->route('Emoticon')->with('success', alertTranslate('insert data successful'));
                     }
@@ -249,6 +249,7 @@ class EmoticonController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname    =   Emoticon::where('id', '=', $pk)->first();
 
         Emoticon::where('id', '=', $pk)->update([
           $name => $value
@@ -278,7 +279,7 @@ class EmoticonController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Emotikon dengan Id '.$pk.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Emotikon dengan Judul '.$currentname->name.' menjadi '. $value
       ]);
     }
 
@@ -294,6 +295,8 @@ class EmoticonController extends Controller
         $gifts  = Emoticon::select('id')
                  ->where('id', '=', $id)
                  ->first();
+        
+        $currentname = Emoticon::where('id', '=', $id)->first();
 
         $pathS3 = 'unity-asset/emoticon/' . $id . '.png';
 
@@ -307,7 +310,7 @@ class EmoticonController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Emotikon dengan ID '.$id
+                'desc'      => 'Hapus di menu Emotikon dengan nama '.$currentname->name
             ]);
 
             return redirect()->route('Emoticon')->with('success', alertTranslate('Data deleted'));
@@ -317,8 +320,9 @@ class EmoticonController extends Controller
 
     public function deleteAllSelected(Request $request)
     {
-        $ids        =   $request->userIdAll;
-        $imageid    =   $request->imageid;
+        $ids         =   $request->userIdAll;
+        $imageid     =   $request->imageid;
+        $currentname =   $request->usernameAll;
 
         //DELETE
         Storage::disk('s3')->delete(explode(",", $imageid));
@@ -328,7 +332,7 @@ class EmoticonController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Menghapus data yang dipilih di menu emoticon dengan id '.$imageid
+            'desc'      =>  'Menghapus data yang dipilih di menu emoticon dengan nama '.$currentname
         ]);
         return redirect()->route('Emoticon')->with('success', alertTranslate('Data deleted'));
     }

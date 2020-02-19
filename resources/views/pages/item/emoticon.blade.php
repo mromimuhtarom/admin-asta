@@ -117,7 +117,7 @@
                 @foreach($emoticon as $emot)
                 @if($menu && $mainmenu)
                 <tr>
-                    <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $emot->id }}" data-name="unity-asset/emoticon/{{ $emot->id }}.png" class="deletepermission{{ $emot->id }} deleteIdAll"></td>
+                    <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $emot->id }}" data-username="{{ $emot->name }}" data-name="unity-asset/emoticon/{{ $emot->id }}.png" class="deletepermission{{ $emot->id }} deleteIdAll"></td>
                     <td>{{ $emot->id }}</td>
                     <td >
                         <div class="media-container" align="center">
@@ -280,8 +280,9 @@
         <form action="{{ route('Emoticon-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
-          <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+          <input type="text" name="userIdAll" id="idDeleteAll" value="">
           <input type="text" name="imageid" id="idDeleteAllimage" value="">
+          <input type="text" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -364,7 +365,7 @@ $(".watermark-image").change(function() {
       "pagingType": "full_numbers",
       "paging":false,
       "bInfo":false,
-      "ordering":false,
+      "order": [[3, "asc"]],
       "bLengthChange": false,
       "searching": false,
     });
@@ -386,7 +387,7 @@ $(".watermark-image").change(function() {
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
     "autoWidth" : true,
-    "ordering":false,
+    "order": [[3, "asc"]],
     "classes": {
       "sWrapper": "dataTables_wrapper dt-bootstrap4"
     },
@@ -567,10 +568,16 @@ $(".watermark-image").change(function() {
             $('.delete').click(function(e) {
               e.preventDefault();
               var allVals = [];
+              var allUsername = [];
                 $(".deleteIdAll:checked").each(function() {
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(",");
                   $('#idDeleteAll').val(join_selected_values);
+
+                  //untuk get username ketika multiple delete
+                  allUsername.push($(this).attr('data-username'));
+                  var join_selected_username = allUsername.join(",");
+                  $('#userDeleteAll').val(join_selected_username);
                 });
 
               var allimage = [];
@@ -579,6 +586,7 @@ $(".watermark-image").change(function() {
                   var join_selected_image = allimage.join(",");
                   $('#idDeleteAllimage').val(join_selected_image);
                 });
+                
             });
 
             //hide and show icon delete all

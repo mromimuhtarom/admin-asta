@@ -228,7 +228,7 @@
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
-                  <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
+                  <input type="text" name="usernameAll" id="userDeleteAll" value="">
           </div>
           <div class="modal-footer">
             <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>

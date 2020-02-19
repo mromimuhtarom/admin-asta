@@ -118,7 +118,7 @@
                 @foreach($gifts as $gf)
                 @if($menu && $mainmenu)
                 <tr>
-                    <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
+                  <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gf->id }}" data-username="{{ $gf->name }}" data-name="unity-asset/gift/{{ $gf->id }}.png" class="deletepermission{{ $gf->id }} deleteIdAll"></td> 
                     <td>{{ $gf->id }}</td>
                     <td>
                         <div class="media-container" align="center">
@@ -293,7 +293,8 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
-          <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -546,7 +547,7 @@
               // }
 
 
-                //JS BAGIAN IMAGE BONUS
+                //JQuery BAGIAN IMAGE BONUS
                 echo'$(".save-ImgBonus'.$gf->id.'").hide(0);';
                   echo'$(".med-ovlayBonus'.$gf->id.'").hide(0);';
                   echo'$(".imgupload'.$gf->id.'").show();';
@@ -599,10 +600,16 @@
             $('.delete').click(function(e) {
               e.preventDefault();
               var allVals = [];
+              var allUsername = [];
                 $(".deleteIdAll:checked").each(function() {
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(",");
                   $('#idDeleteAll').val(join_selected_values);
+
+                  //untuk get username
+                  allUsername.push($(this).attr('data-username'));
+                  var join_selected_username = allUsername.join(",");
+                  $("#userDeleteAll").val(join_selected_username);
               });
 
               var allimage = [];
