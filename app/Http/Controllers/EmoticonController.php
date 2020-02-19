@@ -249,6 +249,7 @@ class EmoticonController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        
 
         Emoticon::where('id', '=', $pk)->update([
           $name => $value
@@ -278,7 +279,7 @@ class EmoticonController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Emotikon dengan Id '.$pk.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Emotikon dengan Judul '.$pk.' menjadi '. $value
       ]);
     }
 

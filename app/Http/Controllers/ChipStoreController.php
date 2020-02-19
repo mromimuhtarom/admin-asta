@@ -161,16 +161,26 @@ class ChipStoreController extends Controller
                             // imagepng($source, $thumbnail);
                             // imagedestroy($source);
                         // end watermark image
-                  } else 
-                  {
+                  } else {
+                      
                     $rootpath   = 'unity-asset/store/chip/' .$nama_file_unik;
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                   }
 
-                  //Upload image bonus to aws
-                  $awsPath = "unity-asset/store/chip/" . $imageBonusname;
-                  Storage::disk('s3')->put($awsPath, file_get_contents($filebonus));
+                  if($filebonus != NULL){
+
+                    //Upload image bonus to aws
+                    $awsPath = "unity-asset/store/chip/" . $imageBonusname;
+                    Storage::disk('s3')->put($awsPath, file_get_contents($filebonus));
+
+                  } else {
+
+                    $rootpath   = 'unity-asset/store/chip/' .$nama_file_unik;
+                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                    $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                  }
+                  
                   
                   //Simpan ke database
                   $chip = ItemsGold::create([

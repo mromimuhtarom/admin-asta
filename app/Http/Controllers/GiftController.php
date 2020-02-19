@@ -370,12 +370,14 @@ class GiftController extends Controller
                         'height'  =>  $height
                     ]);
 
+                    $currentname = Gift::where('id', '=', $pk)->first();
+
 
                     Log::create([
                         'op_id'     => Session::get('userId'),
                         'action_id' => '2',
                         'datetime'  => Carbon::now('GMT+7'),
-                        'desc'      => 'Update gambar di menu Toko Hadiah dengan ID '.$pk
+                        'desc'      => 'Update gambar di menu Toko Hadiah dengan nama '.$currentname->name
                     ]);
                     return redirect()->route('Table_Gift')->with('success', alertTranslate('Update image successfull'));
             }
@@ -395,13 +397,15 @@ class GiftController extends Controller
 
     public function update(Request $request)
     {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+        $pk          = $request->pk;
+        $name        = $request->name;
+        $value       = $request->value;
+        $currentname = Gift::where('id', '=', $pk)->first();
+
         Gift::where('id', '=', $pk)->update([
           $name => $value
         ]);
-
+        
     
         $timenow = Carbon::now('GMT+7');
 
@@ -441,7 +445,7 @@ class GiftController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Toko Hadiah dengan Id '.$pk.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Toko Hadiah dengan nama '.$currentname->name.' menjadi '. $value
       ]);
     }
 
@@ -452,6 +456,8 @@ class GiftController extends Controller
         $gifts = Gift::select('id')
                  ->where('id', '=', $id)
                  ->first();
+                 
+        $currentname = Gift::where('id', '=', $id)->first();
 
         $pathS3 = 'unity-asset/gift/' . $id .'.png';
         
@@ -465,7 +471,7 @@ class GiftController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Toko Hadiah dengan ID '.$id
+                'desc'      => 'Hapus di menu Toko Hadiah dengan nama '.$currentname->name
             ]);
             return redirect()->route('Table_Gift')->with('success', alertTranslate('Data deleted'));
         }
@@ -482,12 +488,14 @@ class GiftController extends Controller
         Storage::disk('s3')->delete(explode(",", $imageid));
         DB::table('asta_db.gift')->whereIn('id', explode(",", $ids))->delete();
         
+        $currentname = Gift::where('id', '=', $ids)->first();
+
         //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Toko Hadiah dengan ID '.$ids
+            'desc'      => 'Hapus di menu Toko Hadiah dengan nama '.$currentname->name
         ]);
         return redirect()->route('Table_Gift')->with('succes', alertTranslate('Data deleted'));
     }
