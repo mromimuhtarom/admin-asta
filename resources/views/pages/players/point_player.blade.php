@@ -204,7 +204,6 @@
         "ordering":false,
         "bLengthChange": false,
         "searching": false,
-        "ordering": false,
         "order": [[ 6, "desc" ]],
         "oLanguage": {
                 "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'

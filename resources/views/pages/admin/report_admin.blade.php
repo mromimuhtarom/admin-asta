@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_MenuContentAdmin('Report Admin') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_menu('L_REPORT_ADMIN') }}</a></li>
 @endsection
 
 @section('content')
@@ -33,9 +33,9 @@
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <select name="logType" class="form-control">
-                                <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
-                                <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;> {{ translate_MenuContentAdmin('Admin') }} {{ ConfigTextTranslate($logonlinetype[1]) }}</option>
-                                <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;> {{ translate_MenuContentAdmin('Admin') }} {{ ConfigTextTranslate($logonlinetype[3]) }}</option>
+                                <option value="">{{ translate_MenuContentAdmin('L_CHOOSE_LOG_TYPE') }}</option>
+                                <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;> {{ translate_MenuContentAdmin('L_ADMIN') }} {{ ConfigTextTranslate($logonlinetype[1]) }}</option>
+                                <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;> {{ translate_MenuContentAdmin('L_ADMIN') }} {{ ConfigTextTranslate($logonlinetype[3]) }}</option>
                             </select>
                         </div>
                         <div class="col" style="padding-left:1%;">
@@ -50,9 +50,9 @@
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <select name="logType" class="form-control">
-                                <option value="">{{ translate_MenuContentAdmin('Choose Log Type') }}</option>
-                                <option value="{{ $logonlinetype[0] }}">{{ ConfigTextTranslate($logonlinetype[1]) }} {{ translate_MenuContentAdmin('Admin') }}</option>
-                                <option value="{{ $logonlinetype[2] }}">{{ ConfigTextTranslate($logonlinetype[3]) }} {{ translate_MenuContentAdmin('Admin') }}</option>
+                                <option value="">{{ translate_MenuContentAdmin('L_CHOOSE_LOG_TYPE') }}</option>
+                                <option value="{{ $logonlinetype[0] }}">{{ ConfigTextTranslate($logonlinetype[1]) }} {{ translate_MenuContentAdmin('L_ADMIN') }}</option>
+                                <option value="{{ $logonlinetype[2] }}">{{ ConfigTextTranslate($logonlinetype[3]) }} {{ translate_MenuContentAdmin('L_ADMIN') }}</option>
                             </select>
                         </div>
                         <div class="col" style="padding-left:1%;">
@@ -63,7 +63,7 @@
                         </div>
                     @endif
                     <div class="col" style="padding-left:1%;">
-                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('Search') }}</button>
+                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('L_SEARCH') }}</button>
                     </div>
                 </div>
             </form>
@@ -76,7 +76,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2>{{ translate_MenuContentAdmin('Admin Report') }}</h2>
+            <h2>{{ translate_MenuContentAdmin('L_ADMIN_REPORT') }}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -97,11 +97,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ translate_MenuContentAdmin('Admin ID') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Username') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Status') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Time Stamp') }}</th>
-                        <th>{{ translate_MenuContentAdmin('Ip') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_ADMIN_ID') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_USERNAME') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_STATUS') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_TIMESTAMP') }}</th>
+                        <th>{{ translate_MenuContentAdmin('L_IP') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -109,7 +109,7 @@
                         <tr>
                           <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
-                          <td>{{ translate_MenuContentAdmin('Admin') }} {{ ConfigTextTranslate($action_report_admin[$login->action_id]) }}</td>
+                          <td>{{ translate_MenuContentAdmin('L_ADMIN') }} {{ ConfigTextTranslate($action_report_admin[$login->action_id]) }}</td>
                           <td>{{ $login->datetime }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>
