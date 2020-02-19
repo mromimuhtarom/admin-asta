@@ -21,8 +21,21 @@ class UserAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $sortingorder = $request->sorting;
+        $namecolumn   = $request->namecolumn;
+
+        if($sortingorder == 'asc'):
+            $sortingorder = 'desc';
+        elseif($sortingorder == NULL || $sortingorder == 'desc'):
+            $sortingorder = 'asc';
+        endif;
+
+        if($namecolumn == NULL):
+            $namecolumn = 'username';
+        endif;
+
         $menu     = MenuClass::menuName('L_USER_ADMIN');
         $mainmenu = MenuClass::menuName('L_ADMIN');
         $admin    = User::join('asta_db.adm_role', 'asta_db.adm_role.role_id', '=', 'asta_db.operator.role_id')
@@ -33,6 +46,7 @@ class UserAdminController extends Controller
                      'asta_db.operator.role_id',
                      'asta_db.adm_role.name'
                     )
+                    ->orderBy($namecolumn, $sortingorder)
                     ->paginate(20);
         $role   = DB::table('asta_db.adm_role')
                   ->select(
@@ -40,7 +54,7 @@ class UserAdminController extends Controller
                      'name'
                   )
                   ->get();
-        return view('pages.admin.user_admin', compact('admin', 'role', 'menu', 'mainmenu'));
+        return view('pages.admin.user_admin', compact('admin', 'role', 'menu', 'mainmenu', 'sortingorder', 'namecolumn'));
     }
 
     /**

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Admin') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_MenuContentAdmin('Active Admin') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ACTIVE_ADMIN') }}</a></li>
 @endsection
 
 @section('content') <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-2"
@@ -10,7 +10,7 @@
     <header>
       <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-        <h2>{{ translate_MenuContentAdmin('Players Online') }}</h2>
+        <h2>{{ translate_MenuContentAdmin('L_PLAYERS_ONLINE') }}</h2>
       </div>
 
         <div class="widget-toolbar">
@@ -33,9 +33,9 @@
             <table id="online-players" class="table table-striped table-bordered table-hover" width="100%">
               <thead>
                 <tr>
-                  <th>{{ translate_MenuContentAdmin('User Admin') }}</th>
-                  <th>{{ translate_MenuContentAdmin('Date Login') }}</th>
-                  <th>{{ translate_MenuContentAdmin('Ip') }}</th>
+                  <th>{{ translate_MenuContentAdmin('L_USERNAME') }}</th>
+                  <th>{{ translate_MenuContentAdmin('L_DATE_LOGIN') }}</th>
+                  <th>{{ translate_MenuContentAdmin('L_IP') }}</th>
                 </tr>
               </thead>
               <tbody>
