@@ -27,7 +27,7 @@ class TransactionPointController extends Controller
 
         // Sorting table
   
-          if(Input::get('sorting') === 'asc'):
+          if(Input::get('sorting') === 'asc' || Input::get('sorting') === NULL):
             $sortingorder = 'desc';
           else:
             $sortingorder = 'asc';
@@ -139,7 +139,9 @@ class TransactionPointController extends Controller
                                             DB::raw('sum(asta_db.user_point.point_expired) As expired'),
                                             DB::raw('max(date(asta_db.user_point.date)) As maxDate'),
                                             DB::raw('min(date(asta_db.user_point.date)) As minDate'),
-                                            DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek')
+                                            DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek'),
+                                            DB::raw('MONTHNAME(asta_db.user_point.date) As groupdate'), 
+                                            DB::raw('YEAR(asta_db.user_point.date) AS year')
 
                                         );
 

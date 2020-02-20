@@ -2,8 +2,8 @@
 
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('L_ADMIN') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_MenuContentAdmin('Log Admin') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_menu('L_LOG_ADMIN') }}</a></li>
 @endsection
 
 @section('content')
@@ -81,7 +81,7 @@
     <header>
         <div class="widget-header">
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2>{{ translate_MenuContentAdmin('Log Admin') }}</h2>
+            <h2>{{ translate_menu('L_LOG_ADMIN') }}</h2>
         </div>
 
         <div class="widget-toolbar">

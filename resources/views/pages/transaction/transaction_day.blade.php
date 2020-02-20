@@ -158,7 +158,25 @@
 									<td>{{ number_format($trns_day->correction_point, 2) }}</td>
 								</tr>
 								@endforeach
-							@elseif($time == "Day" || $time == "Week" || $time == "Month")
+							@elseif($time == "Month"):
+								@foreach($history as $trns_day)
+								<tr>
+									<td><a href="{{ route('detailTransactionDay') }}?minDate={{ $trns_day->minDate }}&maxDate={{ $trns_day->maxDate }}">{{ $trns_day->groupdate }} {{ $trns_day->year }}</a></td>
+									<td>{{ number_format($trns_day->debettransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->credittransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->gold_debettransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->gold_credittransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->chip_debettransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->chip_credittransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->reward_goldtransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->reward_chiptransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->reward_pointtransaction, 2) }}</td>
+									<td>{{ number_format($trns_day->correction_gold, 2) }}</td>
+									<td>{{ number_format($trns_day->correction_chip, 2) }}</td>
+									<td>{{ number_format($trns_day->correction_point, 2) }}</td>
+								</tr>
+								@endforeach
+							@elseif($time == "Day" || $time == "Week")
 								@foreach($history as $trns_day)
 								<tr>
 									<td><a href="{{ route('detailTransactionDay') }}?minDate={{ $trns_day->minDate }}&maxDate={{ $trns_day->maxDate }}">{{ $trns_day->minDate }} - {{ $trns_day->maxDate }}</a></td>

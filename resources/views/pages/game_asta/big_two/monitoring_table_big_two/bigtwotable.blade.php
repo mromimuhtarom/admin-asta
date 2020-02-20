@@ -12,7 +12,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header class="border border-light">
       {{-- <div>	 --}}
-        <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>
+        <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('Asta Big Two Table') }}</strong></h2>
         <span style="background-color:#fffffe;margin-right:1%;margin-left:1%;color:black;margin-top:auto;margin-bottom:auto;padding-right:1%;padding-left:1%;">
           <i class="fa fa-user-circle" style="color:#00ff34"></i> {{ count($onlinebgt) }}
         </span>

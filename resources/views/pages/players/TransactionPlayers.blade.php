@@ -162,7 +162,29 @@
 										<td>{{ date("d-m-Y H:i:s", strtotime($hst->date_created)) }}</td>
 								</tr>
 								@endforeach
-							@elseif($time == "day" || $time == "week" || $time == "month")
+
+							@elseif($time == "month")
+								@foreach($history as $hst)
+								<tr>
+									@if($game != NULL)
+									<td><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}&game_name={{ $hst->game_id }}">{{ $hst->groupdate }} {{ $hst->year }}</a></td>
+									<td>{{ $hst->desc }}</td>
+									@else
+									<td><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}&game_name=">{{ $hst->groupdate }} {{ $hst->year }}</a></td>
+									@endif
+								  <td>{{ number_format($hst->wintransaction, 2) }} {{ $hst->totalWin }}</td>
+									<td>{{ number_format($hst->losetransaction, 2) }}</td>
+									<td>{{ number_format($hst->turnovertransaction, 2) }}</td>
+									<td>{{ number_format($hst->feetransaction, 2) }}</td>
+									@if ($hst->prizetransaction == NULL)
+									<td></td>
+									@else
+									<td>{{ number_format($hst->prizetransaction, 2)}}</td>
+									@endif
+									<td>{{ number_format($hst->totalWinLose, 2) }}</td>
+								</tr>
+								@endforeach
+							@elseif($time == "day" || $time == "week")
 								@foreach($history as $hst)
 								<tr>
 									@if($game != NULL)

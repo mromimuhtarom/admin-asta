@@ -167,6 +167,8 @@ class TransactionDayController extends Controller
                                             DB::raw('sum(asta_db.store_transaction_day.reward_gold) As reward_goldtransaction'),
                                             DB::raw('sum(asta_db.store_transaction_day.reward_point) As reward_pointtransaction'),
                                             DB::raw('sum(asta_db.store_transaction_day.reward_chip) As reward_chiptransaction'),
+                                            DB::raw('MONTHNAME(asta_db.store_transaction_day.date_created) As groupdate'), 
+                                            DB::raw('YEAR(asta_db.store_transaction_day.date_created) AS year'), 
                                             DB::raw('sum(asta_db.store_transaction_day.correction_gold) As correction_gold'),
                                             DB::raw('sum(asta_db.store_transaction_day.correction_chip) As correction_chip'),
                                             DB::raw('sum(asta_db.store_transaction_day.correction_point) As correction_point'),
