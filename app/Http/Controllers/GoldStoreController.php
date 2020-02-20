@@ -428,7 +428,7 @@ class GoldStoreController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Update gambar di menu Toko Koin dengan judul '.$currentname->name. ' menjadi '.$pk. '.png'
+                    'desc'      => 'Update gambar di menu Toko Koin pada judul '.$currentname->name
                 ]);
                 return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));
             } else  {
@@ -492,6 +492,9 @@ class GoldStoreController extends Controller
 
         $pathS3       = 'unity-asset/store/gold/'.$getGoldId.'.png';
         $awsPath      = 'unity-asset/store/gold' .$getGoldId. '-2.png';
+
+        $currentname = ItemsCash::where('item_id', '=', $getGoldId)->first();
+
         if($getGoldId != '')
         {
             //DELETE ON AWS
@@ -505,7 +508,7 @@ class GoldStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar atau foto di menu Toko Koin dengan ID '.$getGoldId
+                'desc'      => 'Hapus gambar di menu Toko Koin dengan nama '.$currentname->name
             ]);
 
             $path = '../public/upload/Gold/'.$getGoldId.'.png';
@@ -522,7 +525,7 @@ class GoldStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar atau foto di menu Toko Koin Reseller dengan ID '.$goldreseller
+                'desc'      => 'Hapus gambar di menu Toko Koin dengan nama '.$currentname->name
             ]);
             return redirect()->route('Gold_Store_Reseller')->with('success', alertTranslate('Data deleted'));
         } else if ($getGoldId == NULL)
@@ -540,6 +543,7 @@ class GoldStoreController extends Controller
         $ids        =   $request->userIdAll;
         $imageid    =   $request->imageid;
         $imgIdBonus =   $request->imageidBonus;
+        $currentname =  $request->usernameAll;
 
         //DELETE ON AWS
         Storage::disk('s3')->delete(explode(",", $imageid));
@@ -555,7 +559,7 @@ class GoldStoreController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus gambar dan data yang dipilih di menu toko koin dengan id '.$ids
+            'desc'      =>  'Hapus gambar yang dipilih di menu toko koin dengan nama '.$currentname
         ]);
         return redirect()->route('Gold_Store')->with('success', alertTranslate('Data deleted'));
     }
