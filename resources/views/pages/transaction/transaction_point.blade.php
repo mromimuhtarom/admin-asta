@@ -131,7 +131,16 @@
 									<td>{{ number_format($trns_day->expired, 2) }}</td>
 								</tr>
 								@endforeach
-							@elseif($time == "Day" || $time == "Week" || $time == "Month")
+							@elseif($time == "Month")
+								@foreach($history as $trns_day)
+								<tr>
+									<td><a href="{{ route('detailTransactionPoint') }}?minDate={{ $trns_day->minDate }}&maxDate={{ $trns_day->maxDate }}">{{ $trns_day->groupdate }} {{ $trns_day->year }}</a></td>
+									<td>{{ number_format($trns_day->point, 2) }}</td>
+									<td>{{ number_format($trns_day->point_spend, 2) }}</td>
+									<td>{{ number_format($trns_day->expired, 2) }}</td>
+								</tr>
+								@endforeach
+							@elseif($time == "Day" || $time == "Week")
 								@foreach($history as $trns_day)
 								<tr>
 									<td><a href="{{ route('detailTransactionPoint') }}?minDate={{ $trns_day->minDate }}&maxDate={{ $trns_day->maxDate }}">{{ $trns_day->minDate }} - {{ $trns_day->maxDate }}</a></td>

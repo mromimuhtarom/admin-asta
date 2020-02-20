@@ -161,8 +161,9 @@ class TransactionPlayersController extends Controller
                             DB::raw('sum(asta_db.transaction_day.turnover) As turnovertransaction'),
                             DB::raw('sum(asta_db.transaction_day.prize) As prizetransaction'),
                             DB::raw('sum(asta_db.transaction_day.win) + sum(asta_db.transaction_day.fee) - sum(asta_db.transaction_day.lose) - sum(asta_db.transaction_day.prize) as totalWinLose '),
-                            DB::raw('month(asta_db.transaction_day.date_created) As month'), 
-                            DB::raw('YEARWEEK(asta_db.transaction_day.date_created) AS yearperweek'), 
+                            DB::raw('MONTHNAME(asta_db.transaction_day.date_created) As groupdate'), 
+                            DB::raw('YEARWEEK(asta_db.transaction_day.date_created) AS yearperweek'),
+                            DB::raw('YEAR(asta_db.transaction_day.date_created) AS year'), 
                             DB::raw('max(date(asta_db.transaction_day.date_created)) As maxDate'), 
                             DB::raw('min(date(asta_db.transaction_day.date_created)) As minDate')
                             );
