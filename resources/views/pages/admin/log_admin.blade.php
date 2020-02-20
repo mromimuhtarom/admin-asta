@@ -115,7 +115,7 @@
                         <td>{{ $log->op_id }}</td>
                         <td>{{ $log->username }}</td>
                         <td>{{ $log->action }}</td>
-                        <td>{{ $log->datetime }}</td>
+                        <td>{{ date("d-m-Y H:i:s", strtotime($log->datetime)) }}</td>
                         <td>{{ $log->desc }}</td>
                     </tr>
                     @endforeach

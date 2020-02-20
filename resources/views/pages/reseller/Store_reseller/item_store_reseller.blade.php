@@ -130,11 +130,11 @@
               @if($menu && $mainmenu)
                 @if($gold->status === 0)
                   <tr>
-                    <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" data-bonus="unity-asset/store/gold/{{ $gold->item_id }}-2.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-username="{{ $gold->name }}" data-pk="{{ $gold->item_id }}" data-name="unity-asset/store/gold/{{ $gold->item_id }}.png" data-bonus="unity-asset/store/gold/{{ $gold->item_id }}-2.png" class="deletepermission{{ $gold->item_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="order" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->order }}</a></td>
                     <td>
                       <div class="media-container">
-                          <form method="POST" action="{{ route('GoldStore-updateimage') }}" enctype="multipart/form-data">
+                          <form method="POST" action="{{ route('ItemStoreReseller-updateimage') }}" enctype="multipart/form-data">
                             {{  csrf_field() }}
                             <span class="media-overlay-wtr med-ovlay{{ $gold->item_id}}">
                                 <input type="hidden" name="pk" value="{{ $gold->item_id }}">
@@ -425,8 +425,9 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
-          <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="imageid" id="idDeleteAllimage" value="">
           <input type="hidden" name="imageidBonus" id="idDeleteAllBonus" value="">
+          <input type="text" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -723,10 +724,16 @@ $(".watermark-image").change(function() {
        $('.delete').click(function(e) {
           e.preventDefault();
           var allVals = [];
+          var allUsername = [];
             $(".deleteIdAll:checked").each(function() {
               allVals.push($(this).attr('data-pk'));
               var join_selected_values = allVals.join(",");
               $('#idDeleteAll').val(join_selected_values);
+
+              //untuk get username ketika multiple delete
+              allUsername.push($(this).attr('data-username'));
+              var join_selected_username = allUsername.join(",");
+              $('#userDeleteAll').val(join_selected_username);
           });
 
           var allimage = [];

@@ -38,11 +38,10 @@
                     @if (Request::is('Reseller/Reseller-Transaction/Transaction_Day_Reseller/TransactionDayReseller-search*'))
                         <div class="col">
                             <select name="choose_time" id="time" class="form-control">
-                                <option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+                                    <option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
                                     <option value="Day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
                                     <option value="Week" @if($time == 'Week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
                                     <option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
-                                    <option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
                             </select>
                         </div>
                         <div class="col">
@@ -57,11 +56,10 @@
                     @else 
                         <div class="col">
                             <select name="choose_time" id="time" class="form-control">
-                                <option value="">{{ translate_MenuTransaction('Choose Time') }}</option>
+                                <option value="All time">{{ translate_MenuTransaction('All time') }}</option>
                                 <option value="Day">{{ translate_MenuTransaction('Day') }}</option>
                                 <option value="Week">{{ translate_MenuTransaction('Week') }}</option>
                                 <option value="Month">{{ translate_MenuTransaction('Month') }}</option>
-                                <option value="All time">{{ translate_MenuTransaction('All time') }}</option>
                             </select>
                         </div>
                         <div class="col">
@@ -131,7 +129,7 @@
 							@if($time == "All time" || $time == "Detail")
 								@foreach ($history as $trns_day)
 								<tr>
-                                    <td>{{ $trns_day->date_created }}</td>
+                                    <td>{{ date("d-m-Y H:i:s", strtotime($trns_day->date_created)) }}</td>
                                     <td>{{ $trns_day->reseller_id }}</td>
                                     <td>{{ $trns_day->username }}</td>
                                     <td>{{ number_format($trns_day->buy_gold, 2) }}</td>

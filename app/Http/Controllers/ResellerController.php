@@ -795,6 +795,7 @@ public function detailTransaction(Request $request, $month, $year)
                                   ->first();
         $goldreseller = Reseller::where('reseller_id', '=', $agen_id)->first();
 
+
         // untuk type bonus atau free
         if($type == 6 || $type == 7):
 
@@ -838,7 +839,7 @@ public function detailTransaction(Request $request, $month, $year)
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '2',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Edit balance koin dengan nama agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, dengan jumlah yang ditambahkan '.$valuecurrency.' menjadi '.$totalbalance.' koin. Dengan alasan: ' .$description
             ]);
 
 
@@ -871,7 +872,7 @@ public function detailTransaction(Request $request, $month, $year)
                 ]);
             elseif($valuecurrency < $goldreseller->gold):
                 $balancegoldtotal = $goldreseller->gold - $valuecurrency;
-                $opmath = "dikurangkan dengan";
+                $opmath = "dikurangi dengan";
                 ResellerBalance::create([
                     'reseller_id'   =>  $agen_id,
                     'action_id'     =>  $type,
@@ -910,14 +911,14 @@ public function detailTransaction(Request $request, $month, $year)
 
             // ----UNTUK UPDATE GOLD ----//
             Reseller::where('reseller_id', '=', $agen_id )->update([
-                'gold' => $valuecurrency
-            ]);
+                                'gold' => $valuecurrency
+                                ]);
 
             Log::create([
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '2',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang '.$opmath.' '.$balancegoldtotal. ' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Edit balance koin dengan nama Agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, jumlah balance '.$opmath.' '.$balancegoldtotal.' koin, hasil penyesuaian menjadi '.$valuecurrency.'. Dengan alasan: ' .$description
             ]);
 
         //---------- untuk type Correction --------//
@@ -941,11 +942,11 @@ public function detailTransaction(Request $request, $month, $year)
 
             //---------- untuk yg insert ke table reseller_transaction_day ------------//
             if($resellertransactionday):
-                $tota_correctiongold = $resellertransactionday->correction_gold + $valuecurrency;
+                $total_correctiongold = $resellertransactionday->correction_gold + $valuecurrency;
                 ResellerTransactionDay::where('reseller_id', '=', $agen_id)->update([
                     'date'            => Carbon::now('GMT+7')->toDateString(),
                     'date_created'    => Carbon::now('GMT+7'),
-                    'correction_gold' => $tota_correctiongold
+                    'correction_gold' => $total_correctiongold
                 ]);
             else:
                 ResellerTransactionDay::create([
@@ -981,14 +982,14 @@ public function detailTransaction(Request $request, $month, $year)
                 ]);
 
                 // ---- untuk keterangan di log admin -----//
-                $opmath = 'dikurangkan dengan';
+                $opmath = 'dikurangi dengan';
             endif;
             
             Log::create([
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '2',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang '.$opmath.' '.$valuecurrency. ' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Edit balance koin dengan nama Agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, jumlah balance '.$opmath.' '.$valuecurrency.' koin, hasil koreksi menjadi '.$totalbalance.' . Dengan alasan: '.$description
             ]);
         endif;
 
@@ -1608,6 +1609,7 @@ public function detailTransaction(Request $request, $month, $year)
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname    =   ItemsCash::where('item_id', '=', $pk)->first();
         //  return response()->json($pk, 2000);
 
         ItemsCash::where('item_id', '=', $pk)->update([
@@ -1617,21 +1619,32 @@ public function detailTransaction(Request $request, $month, $year)
         switch ($name) {
             case "name":
                 $name = "Nama";
+                $currentvalue = $currentname->name;
                 break;
             case "item_get":
                 $name = "Koin didapatkan";
+                $currentvalue = $currentname->item_get;
                 break;
             case "price":
                 $name = "Harga Uang Tunai";
+                $currentvalue = $currentname->price;
                 break;
             case "google_key":
                 $name = "Kunci Google";
+                $currentvalue = $currentname->google_key;
                 break;
             case "status":
                 $name = "Status";
+                $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
+                if($value == 0):
+                    $value = 'Non Aktif';
+                else:
+                    $value = 'Aktif';
+                endif;
                 break;
             case "bonus_type":
                 $name = "Item Bonus";
+                $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
                 if($value == 1):
                     $value = 'chip';
                 elseif($value == 2):
@@ -1644,6 +1657,7 @@ public function detailTransaction(Request $request, $month, $year)
             case "trans_type":
                 $name = "Jenis Pembayaran";
                 $value = strTypeTransaction($value);
+                $currentvalue   =   strTypeTransaction($currentname->bonus_type);
                 break;
             default:
             "";
@@ -1653,7 +1667,7 @@ public function detailTransaction(Request $request, $month, $year)
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Toko Barang dengan ID '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' di menu Toko Barang dengan nama '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 // ------- End Update Item Store Reseller -------- //
@@ -1734,11 +1748,14 @@ public function detailTransaction(Request $request, $month, $year)
                     File::delete($path);    
                     // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }
+
+                $currentname = ItemsCash::where('item_id', '=', $pk)->first();
+
                 Log::create([
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Edit gambar di menu Toko Agen dengan ID '.$pk.' menjadi '.$nama_file_unik
+                    'desc'      => 'Ubah gambar di menu Toko Agen dengan nama '.$currentname->name
                 ]);
                 return redirect()->route('Item_Store_Reseller')->with('success','Update Image successfull');
 
@@ -1783,12 +1800,14 @@ public function detailTransaction(Request $request, $month, $year)
             $awsPath   = '/unity-asset/store/gold/'.$finalname;
             Storage::disk('s3')->put($awsPath, file_get_contents($fileBonus));
 
+            $currentname = ItemsCash::where('item_id', '=', $pk)->first();
+
             //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '2',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit gambar bonus di menu Toko Item Agen dengan ID '.$pk.' menjadi '.$finalname
+                'desc'      => 'Ubah gambar bonus di menu Toko Item Agen dengan nama '.$currentname->name
             ]);
             
             return redirect()->route('Item_Store_Reseller')->with('success','Update Image Successfull');
@@ -1816,12 +1835,14 @@ public function detailTransaction(Request $request, $month, $year)
             ]);
 
             Storage::disk('s3')->delete([$pathS3, $pathS3_bonus]);
+
+            $currentname = ItemsCash::where('item_id', '=', $getItemId)->first();
         
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '20',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Toko Agen dengan ID '.$getItemId
+                'desc'      => 'Hapus item di menu Toko Agen dengan nama '.$currentname->name
             ]);
             return redirect()->route('Item_Store_Reseller')->with('success','Data Deleted');
         } else if($getItemId  == NULL )
@@ -1836,6 +1857,8 @@ public function detailTransaction(Request $request, $month, $year)
         $ids      =   $request->userIdAll;
         $imageid  =   $request->imageid;
         $imgIdBonus =   $request->imageidBonus;
+        $currentname=   $request->usernameAll;
+        
         
         //DELETE
         Storage::disk('s3')->delete(explode(",", $imageid));  
@@ -1849,7 +1872,7 @@ public function detailTransaction(Request $request, $month, $year)
             'op_id'     => Session::get('userId'),
             'action_id' => '20',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$ids
+            'desc'      => 'Hapus item yang terpilih di menu Daftar Agen dengan nama '.$currentname
         ]);
         return redirect()->route('Item_Store_Reseller')->with('success', 'Data deleted');
     }
