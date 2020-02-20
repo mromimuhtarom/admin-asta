@@ -262,6 +262,7 @@ class GoldStoreController extends Controller
         $name  = $request->name;
         $value = $request->value;
         $currentname = ItemsCash::where('item_id', '=', $pk)->first();
+        
 
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
@@ -269,44 +270,54 @@ class GoldStoreController extends Controller
 
         switch ($name) {
             case "name":
-                $name = "Nama";
+                $name = "Judul";
+                $currentvalue = $currentname->name;
                 break;
             case "item_get":
                 $name = "Koin didapatkan";
+                $currentvalue = $currentname->item_get;
                 break;
             case "price":
                 $name = "Harga Uang Tunai";
+                $currentvalue = $currentname->price;
                 break;
             case "google_key":
                 $name = "Kunci Google";
+                $currentvalue = $currentname->google_key;
                 break;
             case "status":
                 $name = "Status";
+                $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
                 if($value == 0):
-                    $value = 'Disabled';
+                    $value = 'Non Aktif';
                 else:
-                    $value = 'enabled';
+                    $value = 'Aktif';
                 endif;
                 break;
             case "trans_type":
                 $name = "Transaksi Pembayaran";
                  $value = strTypeTransaction($value);
+                 $currentvalue = strTypeTransaction($currentname->trans_type);
                 break;
             case "order":
                 $name = "Memesan";
+                $currentvalue = $currentname->order;
                 break;
             case "bonus_type":
                 $name = "Item Bonus";
-                if($value == 1):
+                $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
+                
+                if($value == 1 || $currentname->bonus_type == 1):
                     $value = 'Chip';
-                elseif($value == 2):
+                elseif($value == 2 || $currentname->bonus_type == 2):
                     $value = 'Koin';
-                elseif($value == 3):
+                elseif($value == 3 || $currentname->bonus_type == 3):
                     $value = 'Barang';
                 endif;
                 break;
             case "bonus_get":
                 $name = "Item Bonus yang di dapatkan";
+                $currentvalue = $currentname->bonus_get;
                 break;
             default:
             "";
@@ -317,7 +328,7 @@ class GoldStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Toko Koin dengan ID '.$currentname->name.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' di menu Toko Koin dengan judul item '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 
@@ -411,14 +422,15 @@ class GoldStoreController extends Controller
                     // return redirect()->route('Gold_Store')->with('alert','Upload Image Failed');
                 }
 
+                $currentname = ItemsCash::where('item_id', '=', $pk)->first();
 
                 Log::create([
                     'op_id'     => Session::get('userId'),
                     'action_id' => '2',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Update gambar di menu Toko Koin dengan ID '.$pk
+                    'desc'      => 'Update gambar di menu Toko Koin dengan judul '.$currentname->name. ' menjadi '.$pk. '.png'
                 ]);
-                return redirect()->route('Gold_Store')->with('success', alertTranslate('Update image successfull'));
+                return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));
             } else  {
                 return redirect()->route('Gold_Store')->with('alert', alertTranslate("Size Image it's too Big"));
             }
@@ -455,12 +467,13 @@ class GoldStoreController extends Controller
             $awsPath   = '/unity-asset/store/gold/'.$finalname;
             Storage::disk('s3')->put($awsPath, file_get_contents($fileBonus));
 
+            $currentname = ItemsCash::where('item_id', '=', $pk)->first();
             //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '2',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit gambar bonus di menu Toko Gold dengan ID '.$pk.' menjadi '.$finalname
+                'desc'      => 'Edit gambar bonus di menu Toko Gold dengan nama '.$currentname->name.' menjadi '.$finalname
             ]);
             
             return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));

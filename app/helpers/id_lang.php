@@ -730,7 +730,7 @@ function alertTranslate($menu){
         "Successful update"                                             =>  "Update sukses",
         "Name can't be NULL"                                            =>  "Nama tidak bisa menjadi NULL",
         "File extensions are not allowed, you must use .jpg"            =>  "Ekstensi file tidak diperbolehkan, harus menggunakan .jpg",
-        "Update image successfull"                                      =>  "Update gambar sukses",
+        "Update Image Successfull"                                      =>  "Update gambar sukses",
         "format must be jpg and pictorial"                              =>  "Format gambar harus jpg",
         "Data deleted"                                                  =>  "Data terhapus",
         "Something wrong"                                               =>  "Ada sesuatu yang salah",
