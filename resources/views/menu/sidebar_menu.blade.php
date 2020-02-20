@@ -18,7 +18,7 @@
                         @if(!$sb['children']->isEMPTY())
                         @if($menuname->RoleType1($sb->name) || $menuname->RoleType2($sb->name))
                             <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
-                                <a href="" title="{{ $sb->name }}"> {{ translate_menu($sb->name) }}
+                                <a href="" title="{{ translate_menu($sb->name) }}"> {{ translate_menu($sb->name) }}
                                     <b class="collapse-sign">
                                         <em class="fa fa-plus-square-o"></em>
                                         <em class="fa fa-minus-square-o"></em>
@@ -30,7 +30,7 @@
                                     <ul aria-expanded="true" class="sa-sub-nav-second-level">   
                                         @if(!$smk['children']->isEMPTY())
                                             <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
-                                                <a href="" title="{{ $smk->name }}"> {{ translate_menu($smk->name) }}
+                                                <a href="" title="{{ translate_menu($smk->name) }}"> {{ translate_menu($smk->name) }}
                                                     <b class="collapse-sign">
                                                         <em class="fa fa-plus-square-o"></em>
                                                         <em class="fa fa-minus-square-o"></em>
@@ -42,7 +42,7 @@
                                                     <ul aria-expanded="true" class="sa-nav-forth-level">   
                                                         @if($menuname->RoleType1($sme->name) || $menuname->RoleType2($sme->name))                 
                                                         <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/'.$sme->route.'/*') ? 'active' : null }}">
-                                                            <a href="{{ route($sme->route) }}" title="{{ $sme->name }}"> {{ translate_menu($sme->name) }}</a> 
+                                                            <a href="{{ route($sme->route) }}" title="{{ translate_menu($sme->name) }}"> {{ translate_menu($sme->name) }}</a> 
                                                         </li>
                                                         @endif
                                                     </ul>                    
@@ -53,7 +53,7 @@
                                         @else 
                                             @if($menuname->RoleType1($smk->name) || $menuname->RoleType2($smk->name))                 
                                             <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/'.$smk->route.'/*') ? 'active' : null }}">
-                                                <a href="{{ route($smk->route) }}" title="{{ $smk->name }}"> {{ translate_menu($smk->name) }}</a> 
+                                                <a href="{{ route($smk->route) }}" title="{{ translate_menu($smk->name) }}"> {{ translate_menu($smk->name) }}</a> 
                                             </li>
                                             @endif
                                         @endif
@@ -67,7 +67,7 @@
                             @if ($menuname->RoleType1($sb->name) || $menuname->RoleType2($sb->name))
                             @if($sb->name === 'Abuse Transaction Report')
                                 <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
-                                    <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> 
+                                    <a   href="{{ route($sb->route) }}" title="{{ translate_menu($sb->name) }}"> 
                                         {{ translate_menu($sb->name) }} 
                                         @if($transaction_report_read->hitung !== 0)
                                             <span class="badge bg-red pull-right inbox-badge">{{ $transaction_report_read->hitung }}</span>
@@ -76,7 +76,7 @@
                                 </li>
                             @else 
                                 <li class="{{ Request::is($mnu->route.'/'.$sb->route.'/*') ? 'active' : null }}">
-                                    <a   href="{{ route($sb->route) }}" title="{{ $sb->name }}"> {{ translate_menu($sb->name) }}</a>                         
+                                    <a   href="{{ route($sb->route) }}" title="{{ translate_menu($sb->name) }}"> {{ translate_menu($sb->name) }}</a>                         
                                 </li>
                             @endif
                             @endif

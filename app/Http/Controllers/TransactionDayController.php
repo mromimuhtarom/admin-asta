@@ -32,7 +32,7 @@ class TransactionDayController extends Controller
 
         // Sorting table
   
-          if(Input::get('sorting') === 'asc'):
+          if(Input::get('sorting') === 'asc' || Input::get('sorting') === NULL):
             $sortingorder = 'desc';
           else:
             $sortingorder = 'asc';
