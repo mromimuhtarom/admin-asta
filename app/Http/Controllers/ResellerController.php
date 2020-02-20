@@ -794,6 +794,7 @@ public function detailTransaction(Request $request, $month, $year)
                                   ->first();
         $goldreseller = Reseller::where('reseller_id', '=', $agen_id)->first();
 
+
         // untuk type bonus atau free
         if($type == 6 || $type == 7):
 
@@ -837,7 +838,7 @@ public function detailTransaction(Request $request, $month, $year)
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '2',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Edit balance koin dengan nama agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, dengan jumlah yang ditambahkan '.$valuecurrency.' menjadi '.$totalbalance.' koin. Dengan alasan: ' .$description
             ]);
 
 
@@ -870,7 +871,7 @@ public function detailTransaction(Request $request, $month, $year)
                 ]);
             elseif($valuecurrency < $goldreseller->gold):
                 $balancegoldtotal = $goldreseller->gold - $valuecurrency;
-                $opmath = "dikurangkan dengan";
+                $opmath = "dikurangi dengan";
                 ResellerBalance::create([
                     'reseller_id'   =>  $agen_id,
                     'action_id'     =>  $type,
@@ -909,14 +910,14 @@ public function detailTransaction(Request $request, $month, $year)
 
             // ----UNTUK UPDATE GOLD ----//
             Reseller::where('reseller_id', '=', $agen_id )->update([
-                'gold' => $valuecurrency
-            ]);
+                                'gold' => $valuecurrency
+                                ]);
 
             Log::create([
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '2',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang '.$opmath.' '.$balancegoldtotal. ' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Edit balance koin dengan nama Agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, jumlah balance '.$opmath.' '.$balancegoldtotal.' koin, hasil penyesuaian menjadi '.$valuecurrency.'. Dengan alasan: ' .$description
             ]);
 
         //---------- untuk type Correction --------//
@@ -940,11 +941,11 @@ public function detailTransaction(Request $request, $month, $year)
 
             //---------- untuk yg insert ke table reseller_transaction_day ------------//
             if($resellertransactionday):
-                $tota_correctiongold = $resellertransactionday->correction_gold + $valuecurrency;
+                $total_correctiongold = $resellertransactionday->correction_gold + $valuecurrency;
                 ResellerTransactionDay::where('reseller_id', '=', $agen_id)->update([
                     'date'            => Carbon::now('GMT+7')->toDateString(),
                     'date_created'    => Carbon::now('GMT+7'),
-                    'correction_gold' => $tota_correctiongold
+                    'correction_gold' => $total_correctiongold
                 ]);
             else:
                 ResellerTransactionDay::create([
@@ -980,14 +981,14 @@ public function detailTransaction(Request $request, $month, $year)
                 ]);
 
                 // ---- untuk keterangan di log admin -----//
-                $opmath = 'dikurangkan dengan';
+                $opmath = 'dikurangi dengan';
             endif;
             
             Log::create([
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '2',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance KOIN dengan Agen ID ' .$agen_id. ' jumlah yang '.$opmath.' '.$valuecurrency. ' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Edit balance koin dengan nama Agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, jumlah balance '.$opmath.' '.$valuecurrency.' koin, hasil koreksi menjadi '.$totalbalance.' . Dengan alasan: '.$description
             ]);
         endif;
 
