@@ -117,12 +117,20 @@ class UserAdminController extends Controller
             "";
       }
 
+      $logdescnamecolumn = str_replace('{1}', $name_column, TranslateLogDesc('L_COMMON_DESC'));
+      $menuname          = str_replace('{2}', translate_menu('L_USER_ADMIN'), $logdescnamecolumn);
+      $firstcolomnname   = str_replace('{3}', translate_MenuContentAdmin('L_USERNAME'), $menuname);
+      $firstcolumnvalue  = str_replace('{4}', $user->username, $firstcolomnname);
+      $namecolumnforedit = str_replace('{5}', $name_column, $firstcolumnvalue);
+      $valuebeforeedit   = str_replace('{6}', $beforevaluecolumn, $namecolumnforedit);
+      $valueafteredit    = str_replace('{7}', $value, $valuebeforeedit);
+
 
       Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name_column.' di menu Pengguna Admin dengan Nama Pengguna '.$user->username.' dari '.$beforevaluecolumn.' menjadi '. $value
+        'desc'      => $valueafteredit
       ]);
     }
     
@@ -143,13 +151,13 @@ class UserAdminController extends Controller
                     'userpass' => bcrypt($password)
                 ]);
                 $operator = User::where('op_id', '=', $pk)->first();          
-    
-    
+                $replaceuseradmin = str_replace('{1}', $operator->username, TranslateLogDesc('L_PASSWORD'));
+                
                 Log::create([
                     'op_id'     => Session::get('userId'),
                     'action_id' => '1',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna '.$operator->username
+                    'desc'      => $replaceuseradmin
                 ]);
                 
                 $useredit = DB::table('operator')->where('op_id', '=', $pk)->first();
