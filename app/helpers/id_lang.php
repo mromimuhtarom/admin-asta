@@ -908,6 +908,14 @@ function TranslateColumnName($menu) {
     return $array_menuContent[$menu];
 }
 
+function TranslateLogDesc($menu) {
+    $array_menuContent = [
+        "L_COMMON_DESC"    =>  "Edit {1} di menu {2} dengan {3} {4} , dari {5} {6} menjadi {7}",
+        "L_PASSWORD"       =>  "Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna {1}"
+    ];
+    return $array_menuContent[$menu];
+}
+
 
 
 ?>
