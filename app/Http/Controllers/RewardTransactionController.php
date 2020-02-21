@@ -24,7 +24,11 @@ class RewardTransactionController extends Controller
         $transaction = StoreTransaction::where('shop_type', '=', 1)
                        ->join('asta_db.user', 'asta_db.user.user_id', '=', 'asta_db.store_transaction.user_id')
                        ->join('asta_db.item_point', 'asta_db.item_point.item_id', '=', 'asta_db.store_transaction.item_id')
+                       ->join('asta_db.store_delivery', 'asta_db.store_delivery.transaction_id', '=', 'asta_db.store_transaction.id')
                        ->select(
+                           'asta_db.store_delivery.address',
+                           'asta_db.store_delivery.zip_code',
+                           'asta_db.store_delivery.phone',
                            'asta_db.store_transaction.user_id',
                            'username',
                            'asta_db.store_transaction.item_id',

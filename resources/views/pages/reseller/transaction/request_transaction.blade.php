@@ -9,6 +9,12 @@
 
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
+<style>
+.imgbank {
+	width: 100%;
+	height:auto;
+}
+</style>
 @if (count($errors) > 0)
 <div class="error-val">
   <div class="alert alert-danger">
@@ -41,6 +47,86 @@
 		
 			<div>
 				<div class="widget-body">
+					<div class="widget-body-toolbar">
+						
+						<div class="row">
+							
+							<div class="col">
+								<div class="input-group">
+									<table border="0">
+											@php 
+											$columns = 5;
+											$rest = $columns-(count($payment)%$columns);
+											@endphp
+											<tr height="20px">
+												<td style="padding-right:25px;">
+													<table>
+														<tr>
+															<td><input type="checkbox" name="" id="" style="float:left;"></td>
+															<td><b style="float:left;">ALL Bank</b></td>
+														</tr>
+													</table>
+												</td>
+												{{-- {{ $payment[$i]->id }} --}}
+												@for($i=0; $i<=12; $i++)
+												@if($i < count($payment))
+												<td width="30px" style="padding-right:25px;padding-bottom:7px;">
+													<table>
+														<tr>
+															<td><input type="checkbox" name="" id="" style="float:left;"></td>
+															<td valign="middle">														
+																{{ $payment[$i]->name }}
+																{{-- <div style="width:50px;height:20px;float:left;margin-left:2px;"><img class="imgbank" style="border-radius:5px;" src="/upload/bank/bca.png" alt="" width="85"height="40"></div> --}}
+															</td>
+														</tr>
+													</table>
+												</td>
+												@endif
+												@endfor
+											</tr>
+											@for($i=13; $i <count($payment); $i++)
+											{{-- {{ $i%$columns }} --}}
+											@if($i%$columns == 3)
+											</tr><tr height="20px">
+											@endif
+											<td width="30px" style="padding-right:25px;padding-bottom:7px;">
+												<table>
+													<tr>
+														<td><input type="checkbox" name="" id="" style="float:left;"></td>
+														<td valign="middle">
+															{{ $payment[$i]->name }}
+															{{-- <div style="width:50px;height:20px;float:left;margin-left:2px;"><img class="imgbank" style="border-radius:5px;" src="/upload/bank/bca.png" alt="" width="85"height="40"></div> --}}
+														</td>
+													</tr>
+												</table>
+											</td>
+											@endfor
+											{{-- @foreach($payment as $py)
+
+											@if(!($i%$columns))
+											</tr><tr height="20px">
+											@endif
+											@if($i == 4)
+											</tr><tr>
+											@endif
+											<td  style="padding-right:25px;">
+												<table>
+													<tr>
+														<td><input type="checkbox" name="" id="" style="float:left;"></td>
+														<td valign="middle"><div style="width:50px;height:20px;float:left;margin-left:2px;"><img class="imgbank" style="border-radius:5px;" src="/upload/bank/bca.png" alt="" width="85"height="40"></div></td>
+													</tr>
+												</table>
+											</td>
+											@php $i++; @endphp
+											@endforeach --}}
+										{{-- </tr> --}}
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
 					<div class="custom-scroll table-responsive" style="height:800px;">
 						
 						<div class="table-outer">
@@ -269,7 +355,7 @@
   });
 
   table = $('table.table').dataTable({
-    "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
+    "sDom": "<'dt-toolbar-footer d-flex'<'hidden-xs'><'ml-auto'p>>",
     "autoWidth" : true,
     "paging": false,
     "classes": {

@@ -251,7 +251,7 @@
 					<i class="fa fa-remove"></i>
 				</button>
 			</div>
-			@php 
+			{{-- @php 
 			$user_info = DB::table('user_info')
 									 ->leftJoin('country', 'country.iso_code_2', '=', 'user_info.country_code')
 									 ->leftJoin('province', 'province.province_code', '=', 'user_info.province_code')
@@ -264,56 +264,56 @@
 									 )
 									 ->where('user_id', '=', $transaction->user_id)
 									 ->first();
-			@endphp
+			@endphp --}}
 			<div class="modal-body" align="center">
 				<table width="100%"">
 					<tr>
 						<td width="30%">{{ translate_MenuTransaction('Full Name') }}</td>
 						<td width="10%">:</td>
 						<td width="60%">
-								<input type="text" value="{{ $user_info->fullname }}" class="form-control" disabled>
+								<input type="text" value="{{ $transaction->username }}" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
 						<td>{{ translate_MenuTransaction('Email') }}</td>
 						<td>:</td>
 						<td>
-							<input type="text" value="{{ decryptaes256($user_info->email) }}" class="form-control" disabled>
+								<input type="text" value="{{ decryptaes256($transaction->email) }}" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
 						<td>{{ translate_MenuTransaction('Phone') }}</td>
 						<td>:</td>
 						<td>
-							<input type="text" value="{{ decryptaes256($user_info->phone) }}" class="form-control" disabled>
+							<input type="text" value="{{-- decryptaes256($user_info->phone) --}}{{ $transaction->phone }}" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
 						<td valign="top">{{ translate_MenuTransaction('Address') }}</td>
 						<td valign="top">:</td>
 						<td>
-							<textarea class="form-control" disabled>{{ $user_info->address }}</textarea>
+							<textarea class="form-control" disabled>{{ $transaction->address }}</textarea>
 						</td>
 					</tr>
 					<tr>
 						<td>{{ translate_MenuTransaction('Province') }}</td>
 						<td>:</td>
 						<td>
-							<input type="text" value="{{ $user_info->province_name }}" class="form-control" disabled>
+							<input type="text" value="" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
 						<td>{{ translate_MenuTransaction('City') }}</td>
 						<td>:</td>
 						<td>
-							<input type="text" value="{{ $user_info->cityname }}" class="form-control" disabled>
+							<input type="text" value="" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
 						<td>{{ translate_MenuTransaction('Postal Code') }}</td>
 						<td>:</td>
 						<td>
-							<input type="text" value="{{ $user_info->zip_code }}" class="form-control" disabled>
+							<input type="text" value="{{ $transaction->zip_code }}" class="form-control" disabled>
 						</td>
 					</tr>
 				</table>

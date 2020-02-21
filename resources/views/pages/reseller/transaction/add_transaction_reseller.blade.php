@@ -82,8 +82,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{$a = 1}}
                             @foreach ($add_transaction as $transaction)
                             <tr>
+                                {{  $a  }}
+                                @php $a++; @endphp
                                 <td>{{ $transaction->reseller_id }}</td>
                                 <td>{{ $transaction->username }}</td>
                                 <td>

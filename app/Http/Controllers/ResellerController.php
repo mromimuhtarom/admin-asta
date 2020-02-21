@@ -19,6 +19,7 @@ use App\ItemsCash;
 use App\ConfigText;
 use App\ItemsGold;
 use App\ItemPoint;
+use App\Payment;
 use File;
 use Storage; 
 use Illuminate\Support\Facades\Input;   
@@ -1210,6 +1211,7 @@ public function detailTransaction(Request $request, $month, $year)
 //----- Index Request Transaction -----//
     public function RequestTransaction()
     {
+        $payment      = Payment::where('status', '=', 1)->get();
         $transactions = DB::table('asta_db.store_transaction')
                         ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
                         ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
@@ -1252,11 +1254,10 @@ public function detailTransaction(Request $request, $month, $year)
                             'name'
                          )
                          ->get();
-                        
         $menu     = MenuClass::menuName('L_REQUEST_TRANSACTION');
         $submenu  = MenuClass::menuName('L_RESELLER_TRANSACTION');
         $mainmenu = MenuClass::menuName('L_RESELLER');
-        return view('pages.reseller.transaction.request_transaction', compact('item_gold', 'item_cash', 'item_point', 'transactions', 'menu', 'mainmenu', 'submenu'));
+        return view('pages.reseller.transaction.request_transaction', compact('item_gold', 'item_cash', 'item_point', 'transactions', 'menu', 'mainmenu', 'submenu', 'payment'));
     }
 //------ End Index Request Transaction ------//
 
