@@ -270,8 +270,8 @@ table = $('table.table').dataTable({
       source: [
         {value: '', text: "{{ TranslatePlaceholdertxt('L_CHOOSE_TYPE') }}"},
         @php
-          echo'{value: "'.$explodetype[0].'", text:"'TranslatePlaceholdertxt(.$explodetype[1].)'"},';
-          echo'{value: "'.$explodetype[2].'", text:"'.$explodetype[3].'"}';
+          echo'{value: "'.$explodetype[0].'", text:"'.TranslateReseller($explodetype[1]).'"},';
+          echo'{value: "'.$explodetype[2].'", text:"'.TranslateReseller($explodetype[3]).'"}';
         @endphp
       ]
     })

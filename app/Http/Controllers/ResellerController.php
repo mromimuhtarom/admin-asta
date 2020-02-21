@@ -189,51 +189,49 @@ class ResellerController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentstatus = ResellerRank::where('id', '=', $pk)->first();
     
-        
-
         ResellerRank::where('id', '=', $pk)->update([
           $name => $value
         ]);
+
+        
         
         switch($name) {
             case "order_id":
                 $name = 'ID Pemesanan';
+                $currentvalue = $currentstatus->id;
                 break;            
             case "name":
                 $name = "Nama";
+                $currentvalue = $currentstatus->name;
                 break;
             
-            case "gold_group":
+            case "gold":
                 $name = "Grup Koin";
+                $currentvalue = $currentstatus->gold;
                 break;
             
-            case "accumulate_type":
+            case "type":
                 $name = "Jenis Akumulasi";
+                $currentvalue = TranslateReseller(strTransactionType($currentstatus->type));
+                $value = TranslateReseller(strTransactionType($value));
                 break;
 
             case "bonus":
                 $name = "Bonus";
-                break;
-            case "type":
-                $name = "Type";
-                if($value == 1):
-                    $value = 'Bulanan';
-                else:
-                    $value = 'Mingguan';
-                endif;
+                $currentvalue = $currentstatus->bonus;
                 break;
             
             default:
                 "";
         }
 
-
         Log::create([
             'op_id' => Session::get('userId'),
             'action_id'   => '2',
             'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit '.$name.' di menu Peringkat Agen dengan Order ID '.$pk.' menjadi '.$value
+            'desc' => 'Edit '.$name.' di menu Peringkat Agen dengan nama '.$currentstatus->name.' dari '.$currentvalue.' menjadi '.$value
         ]);
     }
 //-------- End Update Reseller Rank ---------//
@@ -1416,12 +1414,14 @@ public function detailTransaction(Request $request, $month, $year)
                     ->where('status', '!=', 2)
                     ->orderBy('order', 'asc')
                     ->get();
+
         $active   = ConfigText::select(
                         'name', 
                         'value'
                     )
                     ->where('id', '=', 4)
                     ->first();
+
         $itemtype = ConfigText::select(
                         'name', 
                         'value'
@@ -1443,6 +1443,7 @@ public function detailTransaction(Request $request, $month, $year)
         $valueBonus= str_replace(':', ',', $bonusType->value);
         $bontype  = explode(",", $valueBonus);
         $timenow   = Carbon::now('GMT+7');
+        
         return view('pages.reseller.Store_reseller.item_store_reseller', compact('getItems', 'menu', 'endis', 'mainmenu', 'item', 'timenow', 'bontype'));
     }
 // ------- End index Item Store Reseller -------- //

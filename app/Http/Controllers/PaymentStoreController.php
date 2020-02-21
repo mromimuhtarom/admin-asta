@@ -53,8 +53,7 @@ class PaymentStoreController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'title'             => 'required',
-            'transactionType'   => 'required|integer|between:1,8'
-            
+            'transactionType'   => 'required'
         ]);
         
         if ($validator->fails()) {
@@ -82,6 +81,7 @@ class PaymentStoreController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = Payment::where('id', '=', $pk)->first();
 
         Payment::where('id', '=', $pk)->update([
             $name => $value
@@ -90,21 +90,30 @@ class PaymentStoreController extends Controller
         switch ($name) {
             case "name":
                 $name = "Nama";
+                $currentvalue = $currentname->name;
                 break;
+
             case "type":
                 $name  = "Tipe Transaksi";
                 $value = strTypeTransaction($value);
+                $currentvalue = strTypeTransaction($currentname->type);
                 break;
+
             case "desc":
                 $name = "Deskripsi";
+                $currentvalue = $currentname->desc;
                 break;
+
             case "status":
                 $name = "Status";
+                $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
+                
                 if($value == 0):
                     $value = 'Disabled';
                 else: 
                     $value = 'Enabled';
                 endif;
+                
                 break;
             default:
             "";
@@ -114,7 +123,7 @@ class PaymentStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Toko Pembayaran dengan ID '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' di menu Toko Pembayaran dengan nama '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 
@@ -122,6 +131,8 @@ class PaymentStoreController extends Controller
     public function destroy(Request $request)
     {
         $getPaymentId = $request->userid;
+        $currentname = Payment::where('id', '=', $getPaymentId)->first();
+        
         if($getPaymentId != '')
         {
             Payment::where('id', '=', $getPaymentId)->delete();
@@ -129,7 +140,7 @@ class PaymentStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Toko Pembayaran dengan ID '.$getPaymentId
+                'desc'      => 'Hapus di menu Toko Pembayaran dengan name '.$currentname->name
             ]);
             return redirect()->route('Payment_Store')->with('success', alertTranslate('Data deleted'));
         }
