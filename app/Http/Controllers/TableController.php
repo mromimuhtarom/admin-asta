@@ -378,7 +378,7 @@ class TableController extends Controller
         $room         = TpkRoom::where('room_id', '=', $findcategory->room_id)->first();
         $bbvalidation = $findcategory->min_buy / 10;
         $sbvalidation = $bbvalidation / 2;
-        
+        $currentname = TpkTable::where('table_id', '=', $pk)->first();
   
         if($name == 'big_blind')
         {
@@ -428,39 +428,48 @@ class TableController extends Controller
                 $name => $value
             ]);
         }
+        
   
         switch ($name) {
             case "name":
                 $name = "Nama Meja";
+                $currentvalue = $currentname->name;
                 break;
             case "room_id":
-                $name = "ID Ruang";
+                $name = "Nama Ruang";
+                $queryroom = TpkRoom::where('room_id', '=', $currentname->room_id)->first();
+                $currentvalue = $queryroom->name;
+                $tablename = TpkRoom::where('room_id', '=', $value)->first();
+                $value = $tablename->name;
                 break;
             case "max_player":
                 $name = "Maksimal Pemain";
+                $currentvalue = $currentname->max_player;
                 break;
             case "small_blind":
                 $name = "Small  Blind";
+                $currentvalue = $currentname->small_blind;
                 break;
             case "big_blind":
                 $name = "Big Blind";
+                $currentvalue = $currentname->big_blind;
                 break;
             case "jackpot":
                 $name = "Jackpot";
+                $currentvalue = $currentname->jackpot;
                 break;
             case "min_buy":
                 $name = "Min Buy";
+                $currentvalue = $currentname->min_buy;
                 break;
             case "max_buy":
                 $name = "Max Buy";
+                $currentvalue = $currentname->max_buy;
                 break;
             case "timer":
                 $name = "Timer";
-                if($value == 7 ):
-                    $value = 'Fast';
-                elseif($value == 8):
-                    $value = 'Normal';
-                endif;
+                $currentvalue = strNormalFast($currentname->timer);
+                $value = strNormalFast($value);
                 break;
             default:
               "";
@@ -471,7 +480,7 @@ class TableController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu Meja Asta Poker dengan Nama meja '.$tpktable->name.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' di menu Meja Asta Poker dengan Nama meja '.$tpktable->name.'. Dari '.$currentvalue.' menjadi '.$value
         ]);
     }
 
