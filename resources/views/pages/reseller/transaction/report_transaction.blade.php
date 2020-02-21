@@ -169,17 +169,16 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ TranslateReseller('Reseller ID')}}</th>
-                        <th>{{ Translate_menuPlayers('Username')}}</th>
-                        <th>{{ translate_menu('L_ITEM')}}</th>
-                        <th>{{ translate_menuTransaction('Quantity')}}</th>
-                        <th>{{ TranslateMenuItem('Price')}}</th>
-                        {{-- <th>Gold</th> --}}
-                        {{-- <th>Gold Bonus</th> --}}
-                        <th>{{ TranslateMenuToko('Bonus Item')}}</th>
-                        <th>{{ Translate_menuPlayers('Status')}}</th>
-                        <th>{{ TranslateMenuToko('Date Request')}}</th>
-                        <th>{{ TranslateMenuToko('Date approve and Decline')}}</th>
+                        <th>{{ TranslateReseller('L_ORDER_ID') }}</th>
+                        <th>{{ TranslateReseller('L_USERNAME') }}</th>
+                        <th>{{ TranslateReseller('L_ITEM_NAME') }}</th>
+                        <th>{{ TranslateReseller('L_QUANTITY') }}</th>
+                        <th>{{ TranslateReseller('L_PRICE_ITEM') }}</th>
+                        <th>{{ TranslateReseller('L_BONUS_ITEM') }}</th>
+                        <th>{{ TranslateReseller('L_CONFIRMATION_REQUEST') }}</th>
+                        <th>{{ TranslateReseller('L_DATE_REQUEST') }}</th>
+                        <th>{{ TranslateReseller('L_DATE_APPROVE_DECLINE') }}</th>
+                        <th>{{ TranslateReseller('L_INFORMATION_DETAIL') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -192,18 +191,18 @@
                         <td>{{ $tr->item_price }}</td>
                         {{-- <td>{{ $tr->gold }}</td> --}}
                         <td></td>
-                        @php
-                        if($tr->status == 2)
-                        {
-                            $status = 'Approve';
-                        } else if($tr->status == 0)
-                        {
-                            $status = "Decline";
-                        }
-                        @endphp
-                        <td>{{ $status }}</td>
+                        <td>
+                            @if($tr->status == 2)
+                                <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
+                            @elseif($tr->status == 0)
+                                <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
+                            @endif
+                        </td>
                         <td>{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}</td>
                         <td>{{ date("d-m-Y H:i:s", strtotime($tr->action_date)) }}</td>
+                        <td>
+                            <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -217,6 +216,49 @@
                     
 </div>
     <!-- end widget -->
+
+
+
+<!-- Modal detail info -->
+@foreach ($transactions as $transaction)
+<div class="modal fade" id="detailinfo{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Detail Info') }}</h5>
+				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fa fa-remove"></i>
+				</button>
+			</div>
+			<div class="modal-body">
+                    @if($transaction->payment_id == 23)
+                        <label for="tgl_pembelian">
+                            {{ TranslateMenuToko('Date Request') }}
+                        </label>
+                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $transaction->datetime }}" disabled>
+                        <label for="tipe_pembayaran">
+                            {{ TranslateMenuToko('Payment Type')}}
+                        </label>
+                        <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $transaction->paymentname }}" disabled>
+                    @else 
+                        <label for="tgl_pembelian">
+                            {{ TranslateMenuToko('Date Request') }}
+                        </label>
+                        <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $transaction->datetime }}" disabled>
+                        <label for="tgl_disetujui">
+                            {{ TranslateMenuToko('Date approve and Decline')}}
+                        </label>
+                        <input type="text" name="" id="tgl_disetujui" class="form-control" value="{{ $transaction->action_date }}" disabled>
+                        <label for="tipe_pembayaran">
+                            {{ TranslateMenuToko('Payment Type')}}
+                        </label>
+                        <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $transaction->paymentname }}" disabled>
+                    @endif
+			</div> 
+		</div>
+	</div>
+</div>
+@endforeach
 <script>
     var responsiveHelper_dt_basic = responsiveHelper_dt_basic || undefined;
 			

@@ -654,9 +654,21 @@ function TranslateReseller($menu){
         'Sell Gold'              => 'Jual Koin',
         'Reward Gold'            => 'Reward Koin',
         'Correction Gold'        => 'Koreksi Koin',
-        'Username'               => 'Nama Reseller',
-        'Reseller ID'            => 'ID Agen',
-        'Add Transaction Gold'   => 'Tambah Transaksi Koin'
+        'L_USERNAME'               => 'Nama Reseller',
+        'L_RESELLER_ID'            => 'ID Agen',
+        'Add Transaction Gold'   => 'Tambah Transaksi Koin',
+        'L_ORDER_ID'             => 'Order ID',
+        'L_DATE_APPROVE'         => 'Tgl & waktu di setujui',
+        'L_ITEM_NAME'            => 'Nama Item',
+        'L_QUANTITY'             => 'Jumlah Item',
+        'L_PRICE_ITEM'           => 'Harga Barang',
+        'L_BONUS_ITEM'           => 'Bonus Item',
+        'L_DATE_REQUEST'         => 'Tanggal Pembelian',
+        'L_DATE_APPROVE_DECLINE' => 'Tanggal di setujui atau di tolak',
+        'L_CONFIRMATION_REQUEST' => 'Konfirmasi Pemintaan',
+        'L_INFORMATION_DETAIL'   => 'Informasi Detail'
+
+
 
     
     ];

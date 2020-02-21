@@ -11,7 +11,7 @@ class TpkTable extends Model
 
     protected $table = 'asta_db.tpk_table';
     protected $guarded = [];
-    protected $primaryKey = 'tableid';
+    protected $primaryKey = 'table_id';
 
     public function room(){
         return $this->belongsTo(Room::class);

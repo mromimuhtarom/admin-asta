@@ -378,6 +378,7 @@ class TableController extends Controller
         $room         = TpkRoom::where('room_id', '=', $findcategory->room_id)->first();
         $bbvalidation = $findcategory->min_buy / 10;
         $sbvalidation = $bbvalidation / 2;
+        
   
         if($name == 'big_blind')
         {
@@ -423,7 +424,7 @@ class TableController extends Controller
             ]);
         } else 
         { 
-            TpkTable::where('table_id', '=', $pk)->update([
+            DB::table('tpk_table')->where('table_id', '=', $pk)->update([
                 $name => $value
             ]);
         }
@@ -432,7 +433,7 @@ class TableController extends Controller
             case "name":
                 $name = "Nama Meja";
                 break;
-            case "roomid":
+            case "room_id":
                 $name = "ID Ruang";
                 break;
             case "max_player":

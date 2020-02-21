@@ -73,7 +73,7 @@
 												<td width="30px" style="padding-right:25px;padding-bottom:7px;">
 													<table>
 														<tr>
-															<td><input type="checkbox" name="" id="" style="float:left;"></td>
+															<td><input type="checkbox" name="bankname" id="bankname" style="float:left;"></td>
 															<td valign="middle">														
 																{{ $payment[$i]->name }}
 																{{-- <div style="width:50px;height:20px;float:left;margin-left:2px;"><img class="imgbank" style="border-radius:5px;" src="/upload/bank/bca.png" alt="" width="85"height="40"></div> --}}
@@ -92,7 +92,7 @@
 											<td width="30px" style="padding-right:25px;padding-bottom:7px;">
 												<table>
 													<tr>
-														<td><input type="checkbox" name="" id="" style="float:left;"></td>
+														<td><input type="checkbox" name="bankname" id="bankname" style="float:left;"></td>
 														<td valign="middle">
 															{{ $payment[$i]->name }}
 															{{-- <div style="width:50px;height:20px;float:left;margin-left:2px;"><img class="imgbank" style="border-radius:5px;" src="/upload/bank/bca.png" alt="" width="85"height="40"></div> --}}
@@ -352,6 +352,9 @@
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
     });
+		$('input[type="checkbox"]').on('change', function() {
+			$('input[type="checkbox"]').not(this).prop('checked', false);
+		});
   });
 
   table = $('table.table').dataTable({

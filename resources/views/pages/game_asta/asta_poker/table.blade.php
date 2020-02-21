@@ -121,7 +121,7 @@
                     <td><a href="#" class="usertext" data-title="Jackpot" data-name="jackpot" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->jackpot, 2) }}</a></td>
                     <td><a href="#" class="usertext" data-title="Min Buy" data-name="min_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->min_buy, 2) }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Buy" data-name="max_buy" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update') }}">{{ number_format($tb->max_buy, 2) }}</a></td>
-                    <td><a href="#" class="timertable" data-title="Timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('Table-update') }}">{{ strNormalFast($tb->timer) }}</a></td>
+                    <td><a href="#" class="timertable" data-title="Timer" data-name="timer" data-pk="{{ $tb->table_id }}" data-type="select" data-value="{{ $tb->timer }}" data-url="{{ route('Table-update') }}">{{ strNormalFast($tb->timer) }}</a></td>
                     <td><a href="#" style="color:red;" class="delete{{ $tb->table_id }}" id="delete" data-pk="{{ $tb->table_id }}" data-toggle="modal" data-target="#delete-table"><i class="fa fa-times"></i></a></td>
                   </tr>
                   @else 
@@ -390,8 +390,8 @@
           },
           source: [
             {value: '', text: "{{ TranslateChoices('L_CHOOSE_TIMER') }}"},
-            {value: '7', text: 'Normal'},
-            {value: '15', text: 'Fast'},
+            {value: '7', text: 'Fast'},
+            {value: '15', text: 'Normal'},
           ]
         });
 

@@ -65,6 +65,7 @@ class VersionAssetController extends Controller
         $x                = explode('.', $name);
         $namafilenoformat = str_replace('.'.end($x), '', $name);
 
+
         $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
 
         $rootTag        = $xml->getElementsByTagName("main_asset")->item(0);
@@ -74,7 +75,7 @@ class VersionAssetController extends Controller
         $link_xml       = $xml->createElement("link", $link);
         $version_xml    = $xml->createElement("ver", $version);
 
-        $infoTag->setAttribute('name', $namafilenoformat);
+        $infoTag->setAttribute('name', $name);
         $infoTag->appendChild($type_xml);
         $infoTag->appendChild($link_xml);
         $infoTag->appendChild($version_xml);
@@ -85,8 +86,8 @@ class VersionAssetController extends Controller
         $xmllocal = "../public/upload/xml/Android/asset_game.xml";
         //upload file
         $filename = $_FILES['fileAdr']['name'];
-        $x                                        = explode('.', $filename);
-        $ekstensi                                 = strtolower(end($x));
+        $x        = explode('.', $filename);
+        $ekstensi = strtolower(end($x));
 
         $uploadFile = $replacepath . $name.'.'.$ekstensi ;
     
@@ -411,15 +412,10 @@ class VersionAssetController extends Controller
     {
         $pk               = $request->pk;
         $file             = $request->fileEditADR;
-        $filename         = $file->getClientOriginalName();
-        $x                = explode('.', $filename);
-        $namafilenoformat = str_replace('.'.end($x), '', $filename);
         $name             = $request->Name;
         $link             = $request->Link;
         $version          = $request->Version;
         $gamep            = simplexml_load_file("../public/upload/xml/Android/asset_game.xml");
-    
-
         foreach($gamep->children() as $gamew)
         {
             
@@ -427,7 +423,7 @@ class VersionAssetController extends Controller
                 {
                     
                     $gamew->ver = $version;
-                    $gamew['name'] = $namafilenoformat;
+                    $gamew['name'] = $name;
                     // break;
                 }
                
@@ -443,7 +439,7 @@ class VersionAssetController extends Controller
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
 
         //update file to aws s3
-        $uploadFile = $replacepath . $filename;
+        $uploadFile = $replacepath.$name;
         
         Storage::disk('s3')->put($uploadFile, file_get_contents($file));
 

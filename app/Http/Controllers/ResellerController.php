@@ -283,9 +283,12 @@ class ResellerController extends Controller
         $datenow           = Carbon::now('GMT+7');
         $reportTransaction = DB::table('asta_db.store_transaction_hist')
                              ->JOIN('asta_db.reseller', 'asta_db.store_transaction_hist.user_id', '=', 'asta_db.reseller.reseller_id')
+                             ->LeftJoin('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction_hist.payment_id')
                              ->select(  
                                  'asta_db.store_transaction_hist.user_id',
                                  'asta_db.reseller.username',
+                                 'asta_db.store_transaction_hist.payment_id',
+                                 'asta_db.payment.name as paymentname',
                                  'asta_db.store_transaction_hist.item_name',
                                  'asta_db.store_transaction_hist.quantity',
                                  'asta_db.store_transaction_hist.item_price',
@@ -370,7 +373,7 @@ class ResellerController extends Controller
                                     ->get();
                 endif;
         
-              //   $transactions->appends($request->all());
+                //   $transactions->appends($request->all());
                 return view('pages.reseller.transaction.report_transaction', compact('transactions', 'startDate', 'endDate'));
             } else if ($startDate != NULL && $endDate != NULL) {
                     $transactions =   $reportTransaction->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
