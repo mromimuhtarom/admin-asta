@@ -238,7 +238,7 @@ class CategoryController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
-  
+        $currentname = TpkRoom::where('room_id', '=', $pk)->first();
   
         TpkRoom::where('room_id', '=', $pk)->update([
             $name => $value 
@@ -247,15 +247,20 @@ class CategoryController extends Controller
         switch ($name) {
             case "name":
                 $name = "Nama Ruang";
+                $currentvalue = $currentname->name;
                 break;
             case "min_buy":
                 $name = "Minimal Beli";
+                $currentvalue = $currentname->min_buy;
                 break;
             case "max_buy":
                 $name = "Maksimal Beli";
+                $currentvalue = $currentname->max_buy;
                 break;
             case "timer":
                 $name = "Pengatur Waktu";
+                $currentvalue = strNormalFast($currentname->timer);
+                $value = strNormalFast($value);
                 break;
             default:
               "";
@@ -265,7 +270,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.'di menu Kategori Asta Poker dengan Ruangid '.$pk.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' di menu Kategori Asta Poker dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 
