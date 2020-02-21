@@ -202,23 +202,21 @@ class ChipStoreController extends Controller
                 ]);
 
                 return redirect()->route('Chip_Store')->with('success', alertTranslate('insert data successful'));
+
               } else {
                 return redirect()->route('Chip_Store')->with('alert', alertTranslate("Size Image it's too Big"));
               }
           } else {
             return redirect()->route('Chip_Store')->with('alert', alertTranslate('Image must be in png'));
           }
-
-         
     }
 
-    
     public function update(Request $request)
     {
-
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = ItemsGold::where('item_id', '=', $pk)->first();
 
         ItemsGold::where('item_id', '=', $pk)->update([
             $name =>$value
@@ -227,15 +225,19 @@ class ChipStoreController extends Controller
         switch ($name) {
           case "name":
               $name = "Nama Chip";
+              $currentvalue = $currentname->name; 
               break;
           case "item_get":
               $name = "Chip Dapatkan";
+              $currentvalue = $currentname->item_get;
               break;
           case "price":
               $name = "Harga";
+              $currentvalue = $currentname->price;
               break;
           case "status":
               $name = "Status";
+              $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
               if($value == 0):
                 $value = 'Disabled';
               else:
@@ -244,9 +246,11 @@ class ChipStoreController extends Controller
               break;
           case "order":
               $name = "Memesan";
+              $currentvalue = $currentname->value;
               break;
           case "bonus_type":
                $name = "Item Bonus";
+               $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
                if($value == 1):
                   $value = 'Chip';
                elseif($value == 2):
@@ -257,6 +261,7 @@ class ChipStoreController extends Controller
                break;
           case "bonus_get":
                $name = "Item Bonus yang di dapatkan";
+               $currentvalue = $currentname->bonus_get;
                break;
           default:
             "";
@@ -267,7 +272,7 @@ class ChipStoreController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Toko Chip dengan ID '.$pk.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Toko Chip dengan nama item '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
       ]);
     }
 
@@ -349,9 +354,9 @@ class ChipStoreController extends Controller
                             $path = '../public/upload/Chip/image1/'.$nama_file_unik;
                             File::delete($path);
                             $path1 = '../public/upload/Chip/image2/'.$nama_file_unik;
-                            File::delete($path1);
-                           
+                            File::delete($path1);   
                 } else {
+
                     $rootpath   = 'unity-asset/store/chip/'.$nama_file_unik;
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
 
@@ -412,13 +417,11 @@ class ChipStoreController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Edit gambar bonus di menu Toko Chip dengan ID '.$pk.' menjadi '.$finalname
             ]);
-            
+
             return redirect()->route('Chip_Store')->with('success', alertTranslate('Update image successfull'));
         } else {
             return redirect()->route('Chip_Store')->with('alert', alertTranslate('Image must be in png'));
         }
-
-
     }
 
     public function ImageItem($item_id)
@@ -438,12 +441,15 @@ class ChipStoreController extends Controller
 
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
+        
         return $response_empty;
+
       } else if($file_exists_gold  === true){
         $file_gold = $client->get($item_id.'.png');
         $type_gold = $client->mimeType($item_id.'.png');
         $response  = Response::make($file_gold, 200);
         $response->header("Content-Type", $type_gold);
+        
         return $response;
 
       }      
@@ -455,6 +461,8 @@ class ChipStoreController extends Controller
         $id = $request->id;
         $pathS3  = 'unity-asset/store/chip/' . $id . '.png';
         $Awspath = 'unity-asset/store/chip/' . $id . '-2.png';
+
+        $currentname = ItemsGold::where('item_id', '=', $id)->first();
 
         if($id != '')
         {
@@ -474,7 +482,7 @@ class ChipStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar atau foto di menu Toko Chip dengan ID '.$id
+                'desc'      => 'Hapus gambar di menu Toko Chip dengan nama '.$currentname->name
             ]);
 
             return redirect()->route('Chip_Store')->with('success', alertTranslate('Data deleted'));
@@ -487,6 +495,7 @@ class ChipStoreController extends Controller
         $ids        =   $request->userIdAll;
         $imageid    =   $request->imageid;
         $imgIdBonus =   $request->imageidBonus;
+        $currentname = $request->usernameAll;
 
         //DELETE ON AWS
         Storage::disk('s3')->delete(explode(",", $imageid));
@@ -502,7 +511,7 @@ class ChipStoreController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus gambar dan data yang dipilih dimenu Toko barang dengan id '.$ids
+            'desc'      =>  'Hapus item yang dipilih dimenu Toko Chip dengan nama '.$currentname
         ]);
         return redirect()->route('Chip_Store')->with('success', alertTranslate('Data deleted'));
     }

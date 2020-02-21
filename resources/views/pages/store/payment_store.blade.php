@@ -140,14 +140,17 @@
           <div class="form-group">
             <select class="custom-select" name="transactionType">
               <option selected>{{ TranslateMenuToko('Transaction type')}}</option>
-              <option value="1">{{ TranslateMenuToko('Bank Transfer')}}</option>
+              @foreach ($paymenttype as $pt)
+                <option value="{{ $pt->id }}">{{ $pt->name }}</option>    
+              @endforeach
+              {{-- <option value="1">{{ TranslateMenuToko('Bank Transfer')}}</option>
               <option value="2">{{ TranslateMenuToko('Internet Banking')}}</option>
               <option value="3">{{ TranslateMenuToko('Cash Digital')}}</option>
               <option value="4">{{ TranslateMenuToko('Shop')}}</option>
               <option value="5">Akulaku</option>
               <option value="6">{{ TranslateMenuToko('Credit card')}}</option>
               <option value="7">{{ TranslateMenuToko('Manual transfer')}}</option>
-              <option value="8">Google Play</option>
+              <option value="8">Google Play</option> --}}
             </select>
           </div>
         </div>

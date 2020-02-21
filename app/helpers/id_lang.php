@@ -656,7 +656,8 @@ function TranslateReseller($menu){
         'Correction Gold'        => 'Koreksi Koin',
         'Username'               => 'Nama Reseller',
         'Reseller ID'            => 'ID Agen',
-        'Add Transaction Gold'   => 'Tambah Transaksi Koin'
+        'Add Transaction Gold'   => 'Tambah Transaksi Koin',
+        ''                       => ''
 
     
     ];
@@ -778,7 +779,7 @@ function alertTranslate($menu){
         "Data saved"                                                    =>  "Data tersimpan!",
         "Data added"                                                    =>  "Data berhasil di tambahkan",
         "Operator Still use this role, wait until role didnott use"     =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
-        "For Type Adjust number didnot allowed negative"  =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
+        "For Type Adjust number didnot allowed negative"                =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
         "For type Bonus or Free number not allowed negative number"     =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif",
         "User ID"                                                       =>  "ID Pengguna",
         "Balance Chip"                                                  =>  "Saldo chip",
@@ -788,7 +789,8 @@ function alertTranslate($menu){
         "Transaction Gold"                                              =>  "Transaksi Koin",
         "Transaction Point"                                             =>  "Transaksi Poin",
         "L_PASSWORD_FAILED"                                             =>  "Password tidak cocok silahkan coba lagi",
-        "L_LOGOUT_CHANGE_PASSWORD"                                      =>  "Password anda telah di ganti"
+        "L_LOGOUT_CHANGE_PASSWORD"                                      =>  "Password anda telah di ganti",
+        "Update image successfull"                                      =>  "Update gambar berhasil"
     ];
     return $array_menuContent[$menu];
 };
@@ -881,7 +883,10 @@ function TranslatePlaceholdertxt($placeholder) {
         "L_PASSWORD_WANT_CHANGE" => "Kata Sandi yang mau di ganti",
         "L_PASSWORD_SELF"        => "Massukan Kata Sandi yang sedang login",
         "L_CHOOSE_ROLE_ADMIN"    => "Pilih tipe peran",
-        "L_CHOOSE_TYPE"          => "Pilih tipe"
+        "L_CHOOSE_TYPE"          => "Pilih tipe",
+        "L_MONTHLY"              => "Bulanan",
+        "L_WEEKLY"               => "Mingguan",
+        
 
 
     ];
