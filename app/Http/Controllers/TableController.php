@@ -490,6 +490,8 @@ class TableController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = BigTwoTable::where('table_id', '=', $pk)->first();
+
         if($name == 'min_buy')
         {
             $validasiminbuy = BigTwoTable::where('table_id', '=', $pk)->first();
@@ -523,40 +525,51 @@ class TableController extends Controller
             ]); 
         } else 
         {
-            BigTwoTable::where('table_id', '=', $pk)->update([
-                $name => $value 
+            DB::table('bgt_table')->where('table_id', '=', $pk)->update([
+                $name => $value
             ]);
+            return response()->json($value, 400);
+            // BigTwoTable::where('table_id', '=', $pk)->update([
+            //     $name => $value 
+            // ]);
         } 
 
         switch ($name) {
             case "name":
                 $name = "Table Name";
+                $currentvalue = $currentname->name;
                 break;
-            case "roomid":
-                $name = "room id";
+            case "room_id":
+                $name = "Nama ruang";
+                $queryroom = BigTwoRoom::where('room_id', '=', $currentname->room_id)->first();
+                $currentvalue = $queryroom->name;
+                $tablename = BigTwoRoom::where('room_id', '=', $value)->first();
+                $value = $tablename->name;
                 break;
             case "turn":
                 $name = "turn";
+                $currentvalue = $currentname->turn;
                 break;
             case "total_bet":
                 $name = "Total Bet";
+                $currentvalue = $currentname->total_bet;
                 break;
             case "stake":
                 $name = "Stake";
+                $currentvalue = $currentname->stake;
                 break;
             case "min_buy":
                 $name = "Min Buy";
+                $currentvalue = $currentname->min_buy;
                 break;
             case "max_buy":
                 $name = "Max Buy";
+                $currentvalue = $currentname->max_buy;
                 break;
             case "timer":
                 $name = "Timer";
-                if($value == 7 ):
-                    $value = 'Fast';
-                elseif($value == 8):
-                    $value = 'Normal';
-                endif;
+                $currentvalue = strNormalFast($currentname->timer);
+                $value = strNormalFast($value);
                 break;
             default:
             "";
@@ -567,7 +580,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Meja Big Two dengan Nama meja '.$bgttable->name.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Meja Big Two dengan Nama meja '.$bgttable->name.'. Dari '.$currentvalue.' menjadi '.$value
     ]);
     }
 
