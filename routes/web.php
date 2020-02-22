@@ -740,6 +740,13 @@ Route::middleware('authenticated')->group(function(){
                     Route::get('ReportTransaction-search/{month}/{year}/detail', 'ResellerController@detailTransaction')->name('detailResellerTransaction');
                 });
             });
+
+            Route::group(['prefix'  =>  'Sales_Report_Transaction_Reseller'], function() {
+                Route::middleware('page_denied:L_SALES_REPORT_TRANSACTION_RESELLER')->group(function(){
+                    Route::get('Salesreportreseller-view', 'SalesReportResellerController@index')->name('Sales_Report_Transaction_Reseller');
+                    Route::get('Salesreportreseller-search', 'SalesReportResellerController@search')->name('Sales_Report_Reseller-search');
+                });
+            });
         });
 
         Route::group(['prefix' => 'Store_Reseller'], function(){
