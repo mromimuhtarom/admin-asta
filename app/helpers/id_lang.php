@@ -624,7 +624,7 @@ function TranslateReseller($menu){
 
     $array_menuContent = [
 
-        'Reseller ID'            => 'ID agen',
+        'L_RESELLER_ID'            => 'ID agen',
         'Phone'                  => 'Telefon',
         'Saldo gold'             => 'Saldo koin',
         'Report Transaction'     => 'Laporan transaksi',
@@ -655,7 +655,7 @@ function TranslateReseller($menu){
         'Sell Gold'              => 'Jual Koin',
         'Reward Gold'            => 'Reward Koin',
         'Correction Gold'        => 'Koreksi Koin',
-        'L_USERNAME'               => 'Nama Reseller',
+        'L_USERNAME_RESELLER'    => 'Nama Reseller',
         'L_RESELLER_ID'            => 'ID Agen',
         'Add Transaction Gold'   => 'Tambah Transaksi Koin',
         'L_ORDER_ID'             => 'Order ID',
@@ -667,7 +667,12 @@ function TranslateReseller($menu){
         'L_DATE_REQUEST'         => 'Tanggal Pembelian',
         'L_DATE_APPROVE_DECLINE' => 'Tanggal di setujui atau di tolak',
         'L_CONFIRMATION_REQUEST' => 'Konfirmasi Pemintaan',
-        'L_INFORMATION_DETAIL'   => 'Informasi Detail'
+        'L_INFORMATION_DETAIL'   => 'Informasi Detail',
+        'L_DATE_SELL'            => 'Tanggal Penjualan',
+        'L_PLAYER_ID'            => 'ID Pemain',
+        'L_USERNAME_PLAYER'      => 'Nama Pemain',
+        'L_STATUS'               => 'Status',
+        'L_TOTAL_GOLD'           => 'Total Koin'
 
 
 
