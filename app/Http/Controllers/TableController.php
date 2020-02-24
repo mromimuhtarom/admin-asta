@@ -528,7 +528,7 @@ class TableController extends Controller
             DB::table('bgt_table')->where('table_id', '=', $pk)->update([
                 $name => $value
             ]);
-            return response()->json($value, 400);
+            // return response()->json($value, 400);
             // BigTwoTable::where('table_id', '=', $pk)->update([
             //     $name => $value 
             // ]);
@@ -594,6 +594,7 @@ class TableController extends Controller
         $room        = DominoSusunRoom::where('room_id', '=', $dmsroom->room_id)->first();
         $countminbuy = $dmsroom->stake * 10;
         $countmaxbuy = $countminbuy * 4;
+        $currentname = DominoSusunTable::where('table_id', '=', $pk)->first();
   
         if($name == 'min_buy')
         {
@@ -637,47 +638,60 @@ class TableController extends Controller
             ]);
 
         } else 
-        {
-            DominoSusunTable::where('table_id', '=', $pk)->update([
-                $name => $value 
+        {   
+            DB::table('dms_table')->where('table_id', '=', $pk)->update([
+                $name => $value
             ]);
+    
+            // DominoSusunTable::where('table_id', '=', $pk)->update([
+            //     $name => $value 
+            // ]);
         } 
 
         switch ($name) {
             case "name":
                 $name = "Table Name";
+                $currentvalue = $currentname->name;
                 break;
-            case "roomid":
-                $name = "room id";
+            case "room_id":
+                $name = "nama ruang";
+                $queryroom = DominoSusunRoom::where('room_id', '=', $currentname->room_id)->first();
+                $currentvalue = $queryroom->name;
+                $tablename = DominoSusunRoom::where('room_id', '=', $value)->first();
+                $value = $tablename->name;
                 break;
             case "max_player":
                 $name = "Max Player";
+                $currentvalue = $currentname->max_player;
                 break;
             case "game_state":
                 $name = "Game State";
+                $currentvalue = $currentname->game_state;
                 break;
             case "turn":
                 $name = "Turn";
+                $currentvalue = $currentname->turn;
                 break;
             case "total_bet":
                 $name = "Total Bet";
+                $currentvalue = $currentname->total_bet;
                 break;
             case "stake":
                 $name = "Stake & Stake Pass";
+                $currentvalue = $currentname->stake;
                 break;
             case "min_buy":
                 $name = "Min Buy";
+                $currentvalue = $currentname->min_buy;
                 break;
             case "max_buy":
                 $name = "Max Buy";
+                $currentvalue = $currentname->max_buy;
                 break;
             case "timer":
                 $name = "Timer";
-                if($value == 7 ):
-                    $value = 'Fast';
-                elseif($value == 8):
-                    $value = 'Normal';
-                endif;
+                $currentvalue = strNormalFast($currentname->timer);
+                $value = strNormalFast($value);
                 break;
             default:
             "";
@@ -687,8 +701,8 @@ class TableController extends Controller
     Log::create([
         'op_id' => Session::get('userId'),
         'action_id'   => '2',
-        'datetime'        => Carbon::now('GMT+7'),
-        'desc' => 'Edit '.$name.' di menu Meja Domino Susun dengan Nama meja '.$dmstable->name.' menjadi '. $value
+        'datetime'    => Carbon::now('GMT+7'),
+        'desc'        => 'Edit '.$name.' di menu Meja Domino Susun dengan Nama meja '.$dmstable->name.'. Dari '.$currentvalue.' menjadi '. $value
     ]);
     }
 
@@ -702,6 +716,7 @@ class TableController extends Controller
         $room        = DominoQRoom::where('room_id', '=', $dmqtable->room_id)->first();
         $countminbuy = $dmqtable->stake * 10;
         $countmaxbuy = $countminbuy * 2;
+        $currentname = DominoQTable::where('table_id', '=', $pk)->first();
   
         if($name == 'min_buy')
         {
@@ -746,48 +761,57 @@ class TableController extends Controller
             ]);
         } else 
         {
-            DominoQTable::where('table_id', '=', $pk)->update([
-                $name => $value 
+            DB::table('dmq_table')->where('table_id', '=', $pk)->update([
+                $name => $value
             ]);
+            // DominoQTable::where('table_id', '=', $pk)->update([
+            //     $name => $value 
+            // ]);
         }
 
         switch ($name) {
             case "name":
                 $name = "Table Name";
+                $currentvalue = $currentname->name;
                 break;
-            case "roomid":
+            case "room_id":
                 $name = "room id";
+                $queryroom = DominoQRoom::where('room_id', '=', $currentname->room_id)->first();
+                $currentvalue = $queryroom->name;
+                $tablename = DominoQRoom::where('room_id', '=', $value)->first();
+                $value = $tablename->name;
                 break;
             case "max_player":
                 $name = "Max Player";
+                $currentvalue = $currentname->max_player;
                 break;
             case "game_state":
                 $name = "Game State";
+                $currentvalue = $currentname->game_state;
                 break;
             case "turn":
                 $name = "Turn";
+                $currentvalue = $currentname->turn;
                 break;
             case "total_bet":
                 $name = "Total Bet";
+                $currentvalue = $currentname->total_bet;
                 break;
             case "timer":
                 $name = "Timer";
-                if($value == 7 ):
-                    $value = 'Fast';
-                elseif($value == 8):
-                    $value = 'Normal';
-                endif;
+                $currentvalue = strNormalFast($currentname->timer);
+                $value = strNormalFast($value);
                 break;
             default:
             "";
         }
 
-    $dmqtable = DB::table('dms_table')->where('table_id', '=', $pk)->first();
+    $dmqtable = DB::table('dmq_table')->where('table_id', '=', $pk)->first();
     Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Meja Domino QQ dengan Nama meja '.$dmqtable->name.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' di menu Meja Domino QQ dengan Nama meja '.$dmqtable->name.'. Dari '.$currentvalue.' menjadi '. $value
     ]);
     }
 
@@ -813,12 +837,14 @@ class TableController extends Controller
     public function deleteAllSelectedTpk(Request $request)
     {
         $ids    =   $request->AstaAll;
+        $currentname = $request->usernameAll;
+
         DB::table('asta_db.tpk_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu table asta poker' .$ids
+            'desc'      =>  'Hapus di menu table asta poker dengan nama meja' .$currentname
         ]);
         return redirect()->route('Table_Asta_Poker')->with('succes', alertTranslate('Data deleted'));
     }
@@ -827,10 +853,12 @@ class TableController extends Controller
     public function BigTwodestroy(Request $request)
     {
         $tableid = $request->tableid;
+        
         if($tableid != '')
-        {
-            BigTwoTable::where('table_id', '=', $tableid)->delete();
+        {   
             $bgt_table = BigTwoTable::where('table_id', '=', $tableid)->first();
+            BigTwoTable::where('table_id', '=', $tableid)->delete();
+            
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
@@ -845,12 +873,14 @@ class TableController extends Controller
     public function BigTwoDeleteAll(Request $request)
     {
         $ids    =   $request->AstaAll;
+        $currentname = $request->usernameAll;
+
         DB::table('asta_db.bgt_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu table Big two' .$ids
+            'desc'      => 'Hapus di menu table Big two dengan nama' .$currentname
         ]);
         return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data deleted'));
     }
@@ -877,12 +907,14 @@ class TableController extends Controller
     public function DominoSDeleteAll(Request $request)
     {
         $ids    =   $request->AstaAll;
+        $currentname = $request->usernameAll;
+
         DB::table('asta_db.dms_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu table Domino susun' .$ids
+            'desc'      =>  'Hapus di menu table Domino susun dengan nama meja ' .$currentname
         ]);
         return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data deleted'));
     }
@@ -909,12 +941,14 @@ class TableController extends Controller
     public function DominoQDeleteAll(Request $request)
     {
         $ids    =   $request->AstaAll;
+        $currentname = $request->usernameAll;
+
         DB::table('asta_db.dmq_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu table Domino QQ' .$ids
+            'desc'      =>  'Hapus di menu table Domino QQ dengan nama meja' .$currentname
         ]);
         return redirect()->route('Table_Domino_QQ')->with('succes', alertTranslate('Data deleted'));
     

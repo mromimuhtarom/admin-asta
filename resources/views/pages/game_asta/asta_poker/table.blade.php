@@ -112,7 +112,7 @@
                 @foreach($tables as $tb)
                 @if($menu && $mainmenu && $submenu)
                   <tr>
-                  <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" id="deletepermission[]" data-pk="{{ $tb->table_id }}" class="deletepermission{{ $tb->table_id }} deleteIdAll"></td>
+                    <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" id="deletepermission[]" data-pk="{{ $tb->table_id }}" data-username="{{ $tb->name }}" class="deletepermission{{ $tb->table_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('Table-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Table Name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('Table-update')}}">{{ $tb->roomname }}</a></td>
                     <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('Table-update')}}">{{ $tb->max_player }}</a></td>
@@ -249,7 +249,8 @@
           <form action="{{ route('Table-deleteAllTpk') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
-                <input type="hidden" name="AstaAll" id="AstaAll" value="">
+            <input type="hidden" name="AstaAll" id="AstaAll" value="">
+            <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
         </div>
         <div class="modal-footer">
           <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
@@ -418,10 +419,16 @@
         $('.delete').click(function(e) {
           e.preventDefault();
           var allVals = [];
+          var allUsername = [];
           $(".deleteIdAll:checked").each(function() {
             allVals.push($(this).attr('data-pk'));
             var join_selected_values = allVals.join(",");
             $("#AstaAll").val(join_selected_values);
+          
+            //untuk get username ketika multiple delete
+            allUsername.push($(this).attr('data-username'));
+            var join_selected_username = allUsername.join(",");
+            $('#userDeleteAll').val(join_selected_username);
           });
         });
 
