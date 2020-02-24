@@ -73,6 +73,7 @@ class PlayersLevelController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = PlayerLevel::where('level', '=', $pk)->first();
 
         PlayerLevel::where('level', '=', $pk)->update([
             $name   =>  $value
@@ -81,9 +82,11 @@ class PlayersLevelController extends Controller
         switch($name){
             case "level":
                 $name = "Level";
+                $currentvalue = $currentname->level;
                 break;
             case "experience":
                 $name = "Experience";
+                $currentvalue = $currentname->experience;
                 break;
             default:
                 "";
@@ -93,7 +96,7 @@ class PlayersLevelController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' data level pemain di menu Level Pemain dengan level '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' data level pemain di menu Level Pemain dengan level '.$pk.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
 
     }
@@ -103,6 +106,7 @@ class PlayersLevelController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = PlayerRank::where('id', '=', $pk)->first();
 
         PlayerRank::where('id', '=', $pk)->update([
             $name   =>  $value
@@ -111,9 +115,11 @@ class PlayersLevelController extends Controller
         switch($name){
             case "name":
                 $name = "Nama";
+                $currentvalue = $currentname->name;
                 break;
             case "level":
                 $name = "Level";
+                $currentvalue = $currentname->level;
                 break;
             default:
                 "";
@@ -122,7 +128,7 @@ class PlayersLevelController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' data peringkat pemain di menu Level Pemain dengan level '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' peringkat pemain di menu Level Pemain dengan level '.$pk.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
 
     }
@@ -172,13 +178,14 @@ class PlayersLevelController extends Controller
     public function delete_all(Request $request)
     {
         $levelall = $request->levelAll;
+        $currentname = $request->usernameAll;
         
         DB::table('asta_db.user_level')->whereIn('level', explode(",", $levelall))->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus data Level pemain di menu Level Pemain dengan level '.$levelall
+            'desc'      => 'Hapus data Level pemain di menu Level Pemain dengan level '.$currentname
         ]);
         return redirect()->route('Players_Level')->with('success', alertTranslate('Data deleted'));        
     }
@@ -186,13 +193,14 @@ class PlayersLevelController extends Controller
     public function delete_allRank(Request $request)
     {
         $id = $request->id;
+        $currentname = $request->usernameAll;
         
         DB::table('asta_db.user_rank')->whereIn('id', explode(",", $id))->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus data Peringkat pemain di menu Level Pemain dengan id '.$id
+            'desc'      => 'Hapus data Peringkat pemain di menu Level Pemain dengan id '.$curentname
         ]);
         return redirect()->route('Players_Level')->with('success', AlertTranslate('Data deleted'));        
     }

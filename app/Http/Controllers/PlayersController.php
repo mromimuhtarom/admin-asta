@@ -655,6 +655,7 @@ class PlayersController extends Controller
         $plyr_id     = $request->player_id;
         $description = $request->description;
         $sts_plyr    = $request->status_player;
+        $currentname = Player::where('user_id', '=', $plyr_id)->first();
 
         $validator = Validator::make($request->all(),[
           'status_player' => 'required',
@@ -682,14 +683,17 @@ class PlayersController extends Controller
           case '1':
             $sts_plyr = 25;
             $sts_user = "setuju";
+            $currentvalue = statusRegisteredPlayers($currentname->status);
             break;
           case '2':
             $sts_plyr = 26;
             $sts_user = "dilarang";
+            $currentvalue = statusRegisteredPlayers($currentname->status);
             break;
           case '3':
             $sts_plyr = 27;
             $sts_user = "bermasalah";
+            $currentvalue = statusRegisteredPlayers($currentname->status);
             break;
         endswitch;
 
@@ -705,7 +709,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Status di menu Pemain terdaftar dengan Pengguna ID '.$plyr_id.' menjadi '.$sts_user. '. dengan alasan: '.$description
+          'desc'      => 'Edit Status di menu Pemain terdaftar dengan nama pengguna '.$currentname->username.'. Dari '.$currentvalue.' menjadi '.$sts_user. '. dengan alasan: '.$description
         ]);
 
         return back()->with('success', alertTranslate('Update status successfull'));
