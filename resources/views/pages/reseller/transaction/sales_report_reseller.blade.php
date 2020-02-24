@@ -26,17 +26,13 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('Sales_Report_Reseller-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
+                @if (Request::is('Reseller/Reseller-Transaction/Sales_Report_Transaction_Reseller/Salesreportreseller-view'))
                 <div class="col">
-                    <input type="text" name="inputUsername" class="left" placeholder="username / Reseller ID">
+                    <input type="text" name="inputUsernameReseller" class="form-control" placeholder="username / Reseller ID">
                 </div>
                 <div class="col" style="padding-left:3%;">
-                    <select name="choosedate" id="" class="form-control" required>
-                        <option value="">{{ TranslateMenuToko('Choose type date')}}</option>
-                        <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
-                        <option value="request">{{ TranslateMenuToko('Date Request')}}</option>
-                    </select>
+                    <input type="text" name="inputUsernamePlayer" class="form-control" placeholder="username Player / Player ID">
                 </div>
-                @if (Request::is('Reseller/Reseller-Transaction/Sales_Report_Transaction_Reseller/Salesreportreseller-view'))
                 <div class="col" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
@@ -44,6 +40,12 @@
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                 </div>
                 @else
+                <div class="col">
+                    <input type="text" name="inputUsernameReseller" class="form-control" value="{{ $searchUsernameReseller }}" placeholder="username / Reseller ID">
+                </div>
+                <div class="col" style="padding-left:3%;">
+                    <input type="text" name="inputUsernamePlayer" class="form-control" value="{{ $searchUsernamePlayer }}" placeholder="username Player / Player ID">
+                </div>
                 <div class="col" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $startDate }}">
                 </div>
@@ -67,7 +69,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>{{ TranslateReseller('Report Transaction')}}</h2>
+            <h2>{{ translate_menu('L_SALES_REPORT_TRANSACTION_RESELLER')}}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -84,44 +86,43 @@
                     
         <!-- widget content -->
         <div class="widget-body p-0">
-                    
+            <div class="row">
+                <!-- Button tambah bot baru -->
+                <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                    {{ Translate_menuPlayers('Total Record Entries is') }} {{ $transaction->total() }}
+                </div>
+                            <!-- End Button tambah bot baru -->
+            </div>
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ TranslateReseller('L_ORDER_ID') }}</th>
-                        <th>{{ TranslateReseller('L_USERNAME') }}</th>
-                        <th>{{ TranslateReseller('L_ITEM_NAME') }}</th>
-                        <th>{{ TranslateReseller('L_QUANTITY') }}</th>
-                        <th>{{ TranslateReseller('L_PRICE_ITEM') }}</th>
-                        <th>{{ TranslateReseller('L_BONUS_ITEM') }}</th>
-                        <th>{{ TranslateReseller('L_CONFIRMATION_REQUEST') }}</th>
-                        <th>{{ TranslateReseller('L_DATE_REQUEST') }}</th>
-                        <th>{{ TranslateReseller('L_DATE_APPROVE_DECLINE') }}</th>
-                        <th>{{ TranslateReseller('L_INFORMATION_DETAIL') }}</th>
+                        <th><a href="{{ route('Sales_Report_Reseller-search')}}?inputUsernameReseller={{ $searchUsernameReseller }}&inputUsernamePlayer={{ $searchUsernamePlayer }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction.reseller_id">{{ TranslateReseller('L_RESELLER_ID') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction.reseller_id') }}"></i></a></th>
+                        <th><a href="{{ route('Sales_Report_Reseller-search')}}?inputUsernameReseller={{ $searchUsernameReseller }}&inputUsernamePlayer={{ $searchUsernamePlayer }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=reseller.username">{{ TranslateReseller('L_USERNAME_RESELLER') }} <i class="fa fa-sort{{ iconsorting('reseller.username') }}"></i></a></th>
+                        <th><a href="{{ route('Sales_Report_Reseller-search')}}?inputUsernameReseller={{ $searchUsernameReseller }}&inputUsernamePlayer={{ $searchUsernamePlayer }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction.datetime">{{ TranslateReseller('L_DATE_SELL') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction.datetime') }}"></i></a></th>
+                        <th><a href="{{ route('Sales_Report_Reseller-search')}}?inputUsernameReseller={{ $searchUsernameReseller }}&inputUsernamePlayer={{ $searchUsernamePlayer }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction.user_id">{{ TranslateReseller('L_PLAYER_ID') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction.user_id') }}"></i></a></th>
+                        <th><a href="{{ route('Sales_Report_Reseller-search')}}?inputUsernameReseller={{ $searchUsernameReseller }}&inputUsernamePlayer={{ $searchUsernamePlayer }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=user.username">{{ TranslateReseller('L_USERNAME_PLAYER') }} <i class="fa fa-sort{{ iconsorting('user.username') }}"></i></a></th>
+                        <th><a href="{{ route('Sales_Report_Reseller-search')}}?inputUsernameReseller={{ $searchUsernameReseller }}&inputUsernamePlayer={{ $searchUsernamePlayer }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction.amount">{{ TranslateReseller('L_TOTAL_GOLD') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction.amount') }}"></i></a></th>
+                        <th><a href="{{ route('Sales_Report_Reseller-search')}}?inputUsernameReseller={{ $searchUsernameReseller }}&inputUsernamePlayer={{ $searchUsernamePlayer }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction.status">{{ TranslateReseller('L_STATUS') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction.status') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($transactions as $tr) --}}
+                    @foreach($transaction as $tr)
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo nanti">{{ translate_MenuTransaction('Detail Info') }}</button>
-                        </td>
+                        <td>{{ $tr->reseller_id}}</td>
+                        <td>{{ $tr->resellerUsername }}</td>
+                        <td>{{ $tr->datetime }}</td>
+                        <td>{{ $tr->user_id }}</td>
+                        <td>{{ $tr->playerUsername }}</td>
+                        <td>{{ $tr->amount }}</td>
+                        <td>{{ $tr->status }}</td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
     
         </div>
         <!-- end widget content -->
+        <div style="display: flex;justify-content: center;">{{ $transaction->links() }}</div>                    
                     
     </div>
     <!-- end widget div -->
@@ -184,6 +185,11 @@
 		    "t"+
 			"<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
         "bSort" : false,
+        "paging":false,
+        "bInfo":false,
+        "ordering":false,
+        "bLengthChange": false,
+        "searching": false,
 		"autoWidth" : true,
 		"oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
