@@ -819,17 +819,18 @@ class TableController extends Controller
     public function destroy(Request $request)
     {
         $tableid = $request->tableid;
+
         if($tableid != '')
         {
-            TpkTable::where('table_id', '=', $tableid)->delete();
             $tpk_table = TpkTable::where('table_id', '=', $tableid)->first();
+            TpkTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Asta Poker dengan nama meja '.$tpk_table->name
             ]);
-            return redirect()->route('Table_Asta_Poker')->with('success', alertTranlsate('Data deleted'));
+            return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('Data deleted'));
         }
         return redirect()->route('Table_Asta_Poker')->with('alert', alertTranslate('Something wrong'));                
     }
