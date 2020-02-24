@@ -162,6 +162,7 @@ class AvatarPlayerController extends Controller
         $pk     =   $request->pk;
         $name   =   $request->name;
         $value  =   $request->value;
+        $currentname = AvatarPlayer::where('id', '=', $pk)->first();
         
         AvatarPlayer::where('id', '=', $pk)->update([
             $name => $value,
@@ -172,6 +173,7 @@ class AvatarPlayerController extends Controller
         switch($name) {
             case 'name':
                 $name = "Nama";
+                $currentvalue = $currentname->name;
             break;
         default:
             "";
@@ -181,7 +183,7 @@ class AvatarPlayerController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '2',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit '.$name.' di menu Avatar player dengan Id '.$pk.' menjadi '. $value
+            'desc'      =>  'Edit '.$name.' di menu Avatar player dengan nama '.$currentvalue.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 
@@ -213,6 +215,7 @@ class AvatarPlayerController extends Controller
     {
         $ids    =   $request->userIdAll;
         $imageid=   $request->imageid;
+        $currentname = $request->usernameAll;
         
         //DELETE 
         Storage::disk('s3')->delete(explode(",", $imageid));
@@ -223,7 +226,7 @@ class AvatarPlayerController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '4',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu avatar player dengan ID ' .$ids
+            'desc'      =>  'Hapus di menu avatar player dengan nama ' .$currentname
         ]);
         return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
     }
