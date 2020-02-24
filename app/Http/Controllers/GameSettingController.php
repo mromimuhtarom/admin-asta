@@ -44,9 +44,10 @@ class GameSettingController extends Controller
 
     public function updateTpk(Request $request)
     {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+        $pk          = $request->pk;
+        $name        = $request->name;
+        $value       = $request->value;
+        $currentname = TpkConfig::where('id', '=', $pk)->first();
 
         TpkConfig::where('id', '=', $pk)->update([
             $name => $value
@@ -56,16 +57,17 @@ class GameSettingController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => 2,
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit Setting Asta Poker in menu Game Setting with ID '.$pk.' to '. $value
+            'desc'      => 'Edit Setting Asta Poker in menu Game Setting with name '.$currentname->name.'. From '.$currentname->value.' to '. $value
         ]);
 
     }
 
     public function updateBgt(Request $request)
     {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+        $pk             = $request->pk;
+        $name           = $request->name;
+        $value          = $request->value;
+        $currentname    =   BgtConfig::where('id', '=', $pk)->first();
 
         BgtConfig::where('id', '=', $pk)->update([
             $name   =>  $value
@@ -75,15 +77,16 @@ class GameSettingController extends Controller
             'op_id' =>  Session::get('userId'),
             'action_id' =>  2,
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'  =>  'Edit Setting Asta Big Two in menu Game Setting with ID '.$pk.' to '.$value  
+            'desc'  =>  'Edit Setting Asta Big Two in menu Game Setting with name '.$currentname->name.'. From '.$currentname->value.' to '.$value  
         ]);
     }
 
     public function updateDms(Request $request)
     {
-        $pk = $request->pk;
-        $name = $request->name;
-        $value = $request->value;
+        $pk             = $request->pk;
+        $name           = $request->name;
+        $value          = $request->value;
+        $currentname    = DmsConfig::where('id', '=', $pk)->first();
 
         DmsConfig::where('id', '=', $pk)->update([
             $name => $value
@@ -93,15 +96,16 @@ class GameSettingController extends Controller
             'op_id' =>  Session::get('userId'),
             'action_id' =>  2,
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit Pengaturan Domino Susun di menu Pengaturan Game dengan ID '.$pk.' menjadi '.$value
+            'desc'      =>  'Edit Domino Susun Setting in menu Game Settings with name '.$currentname->name.'. From '.$currentname->value.' to '.$value
         ]);
     }
 
     public function updateDmq(Request $request)
     {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+        $pk             = $request->pk;
+        $name           = $request->name;
+        $value          = $request->value;
+        $currentname    = DmqConfig::where('id', '=', $pk)->first();
 
         DmqConfig::where('id', '=', $pk)->update([
             $name   =>  $value
@@ -111,7 +115,7 @@ class GameSettingController extends Controller
             'op_id' =>  Session::get('userId'),
             'action_id' =>  2,
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit pengaturan Domino QQ di menu Pengaturan Game dengan ID '.$pk.' menjadi '.$value
+            'desc'      =>  'Edit Domino QQ Setting in menu Game Settings with name '.$currentname->name.'. From '.$currentname->value.' to '.$value
         ]);
     }
 }
