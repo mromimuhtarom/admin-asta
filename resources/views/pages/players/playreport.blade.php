@@ -306,7 +306,7 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ number_format($player['chip'], 2) }}</td>
                                     <td>
                                         @if($player['card'] !== "")
                                             @foreach (bgtcard($player['card']) as $bgtcard)
@@ -346,7 +346,7 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $endplayer['status'] }}</td>
-                                    <td>{{ $endplayer['chip'] }}</td>
+                                    <td>{{ number_format($endplayer['chip'], 2) }}</td>
                                     <td>
                                         @if($endplayer['card'] !== "")
                                             @foreach (bgtcard($endplayer['card']) as $bgtcard)
@@ -370,6 +370,7 @@
                                     <th>{{ Translate_menuPlayers('Username') }}</th>
                                     <th>{{ Translate_menuPlayers('Action') }}</th>
                                     <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                    <th>{{ Translate_menuPlayers('Bet') }}</th>
                                     <th>{{ Translate_menuPlayers('Card') }}</th>
                                     <th>{{ Translate_menuPlayers('Card Table') }}</th>
                                 </tr>
@@ -394,7 +395,8 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ number_format($player['chip'], 2) }}</td>
+                                    <td>{{ number_format($player['bet'], 2) }}</td>
                                     {{-- <td>{{ cardreadpopup(tpkcard($player['card'])) }}</td>
                                     <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td> --}}
                                     <td>
@@ -423,7 +425,8 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $action_plyr['action']}}</td>
-                                    <td>{{ $action_plyr['chip']}}</td>
+                                    <td>{{ number_format($action_plyr['chip'], 2)}}</td>
+                                    <td>{{ number_format($action_plyr['bet'], 2) }}</td>
                                     <td>
                                         @if($action_plyr['card'] !== "")
                                             @foreach (tpkcard($action_plyr['card']) as $tpkimg)
@@ -452,7 +455,8 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $endplayer['status'] }}</td>
-                                    <td>{{ $endplayer['chip'] }}</td>
+                                    <td>{{ number_format($endplayer['chip'], 2) }}</td>
+                                    <td>{{ number_format($endplayer['totalbet'], 2) }}</td>
                                     <td>
                                         @if($endplayer['card'] !== "")
                                             @foreach (tpkcard($endplayer['card']) as $tpkimg)
@@ -484,6 +488,7 @@
                                     <th>{{ Translate_menuPlayers('Username') }}</th>
                                     <th>{{ Translate_menuPlayers('Action') }}</th>
                                     <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                    <th>{{ Translate_menuPlayers('Bet') }}</th>
                                     <th>{{ Translate_menuPlayers('Card') }}</th>
                                 </tr>
                             </thead>
@@ -506,7 +511,8 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ number_format($player['chip'], 2) }}</td>
+                                    <td>{{ number_format($player['totalBet'], 2) }}</td>
                                     @if ($player['card'] != '[]')
                                         <td>{{ $player['card']  }}</td>
                                     @else 
@@ -520,7 +526,8 @@
                                     <td>{{ $player['seat_id'] }}</td>
                                     <td>{{ $player['username'] }}</td>
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ number_format($player['chip'], 2) }}</td>
+                                    <td>{{ number_format($player['totalBet'], 2) }}</td>
                                     <td>
                                         @if ($player['card'] != '[]')
                                             @foreach (dmscard($player['card']) as $carddmq)
@@ -539,7 +546,8 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $row['action']}}</td>
-                                    <td>{{ $row['player']['chip']}}</td>
+                                    <td>{{ number_format($row['player']['chip'], 2) }}</td>
+                                    <td>{{ $row['bet'] }}</td>
                                     <td></td>
                                 </tr>  
                                 @elseif ($row['game_state'] === 'ACTION_DONE')
@@ -548,7 +556,8 @@
                                     <td>{{ $player['seat_id'] }}</td>
                                     <td>{{ $player['username'] }}</td>
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
+                                    <td>{{ number_format($player['chip'], 2) }}</td>
+                                    <td>{{ number_format($player['totalBet'], 2)}}</td>
                                     <td>
                                         @if ($player['card'] != '[]')
                                             @foreach (dmscard($player['card']) as $carddmq)
@@ -563,7 +572,7 @@
                                     <td>{{ $row['winner']['seat_id'] }}</td>
                                     <td>{{ $row['winner']['username'] }}</td>
                                     <td>{{ $row['game_state']}}</td>
-                                    <td>{{ $row['winner']['chip']}}</td>
+                                    <td>{{ number_format($row['winner']['chip'], 2) }}</td>
                                     <td></td>
                                 </tr>  
                                 @endif
