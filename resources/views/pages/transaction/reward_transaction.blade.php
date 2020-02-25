@@ -132,14 +132,13 @@
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
-      </div>
+      			</div>
             <form action="{{ route('RewardTransaction-Approve')}}" method="POST">
             @csrf
 			    <div class="modal-body" align="center">
 						{{ translate_MenuTransaction('Are you sure want to Approve this Transaction?') }}
 						<input type="hidden" name="description" value="On Process">
-          	<input type="hidden" name="approveId" value="{{ $transaction->strtrnsid }}">
-
+          				<input type="hidden" name="approveId" value="{{ $transaction->strtrnsid }}">
 			    </div>
 			    <div class="modal-footer">
 				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>

@@ -892,15 +892,15 @@ class TableController extends Controller
         $tableid = $request->tableid;
         if($tableid != '')
         {
-            DominoSusunTable::where('table_id', '=', $tableid)->delete();
             $dms_table = DominoSusunTable::where('table_id', '=', $tableid)->first();
+            DominoSusunTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Domino Susun dengan nama meja '.$dms_table->name
             ]);
-            return redirect()->route('Table_Domino_Susun')->with('success', alertTranlsate('Data deleted'));
+            return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data deleted'));
         }
         return redirect()->route('Table_Domino_Susun')->with('alert', alertTranslate('Something wrong'));                
     }
@@ -926,13 +926,13 @@ class TableController extends Controller
         $tableid = $request->tableid;
         if($tableid != '')
         {
-            DominoQTable::where('table_id', '=', $tableid)->delete();
             $dmq_table = DominoQTable::where('table_id', '=', $tableid)->first();
+            DominoQTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Domino QQ dengan RuangID '.$dmq_table->name
+                'desc'      => 'Hapus di menu Meja Domino QQ dengan nama ruang '.$dmq_table->name
             ]);
             return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data deleted'));
         }

@@ -81,7 +81,6 @@ class Add_TransactionController extends Controller
                            ->where('asta_db.user.status', '=', 2)
                            ->orderby($namecolumn, $sorting);
 
-
         // search with username or user id
         if($searhUser == NULL):
             $add_transaction = $currency_player->paginate(20); 
@@ -125,8 +124,9 @@ class Add_TransactionController extends Controller
       $type          = $request->type;
       $plusminus     = $request->operator_aritmatika;
       $description   = $request->description;
-      
       $stat = Stat::where('user_id', '=', $user_id)->first();
+
+      $currentname = Player::where('user_id', '=', $user_id)->first();
 
       $storetransactionday = StoreTransactionDay::where('user_id', '=', $user_id)
                              ->where('date', '=', Carbon::now('GMT+7')->toDateString())
@@ -187,11 +187,13 @@ class Add_TransactionController extends Controller
               ]);
           endif;
 
+          $currentvalue = str_replace('.00', '', $stat->chip);
+
           Log::create([
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance chip di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' chip. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance CHIP di menu tambah transaksi dengan username '.$currentname->username.'. Dari balance '.$currentvalue.' ditambahkan dengan '.$valuecurrency. ' chip, menjadi '.$totalbalance.' Dengan alasan: ' .$description
           ]);
 
         //type adjust
@@ -216,7 +218,7 @@ class Add_TransactionController extends Controller
 
             //Tambah keterangan di log admin//
 
-            $op_math = 'ditambahkan dengan';
+            $op_math = 'dikurangi dengan';
 
             //untuk balance reseller//
             BalanceChip::create([
@@ -237,7 +239,7 @@ class Add_TransactionController extends Controller
             //untuk total correction chip//
 
             //untuk keterangan di log Admin//
-            $op_math = 'dikurangkan dengan';
+            $op_math = 'ditambah';
 
             // insert ke balance chip //
             BalanceChip::create([
@@ -289,12 +291,14 @@ class Add_TransactionController extends Controller
               'correction_chip' => $valuecurrency 
             ]);
           endif;
-          
+
+          $currentvalue = str_replace('.00', '', $stat->chip);
+            
             Log::create([
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance CHIP di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' Chip. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance CHIP di menu tambah transaksi dengan username ' .$currentname->username. '. Dari balance '.$currentvalue.' chip, ' .$op_math.' '.$userchip. ' Chip, penyesuaian menjadi '.$totalbalance.' chip. Dengan alasan: ' .$description
             ]);
 
 
@@ -346,7 +350,7 @@ class Add_TransactionController extends Controller
 
 
             //LOG ADMIN
-            $op_math = 'ditambahkan dengan';
+            $op_math = 'ditambah';
           elseif($valuecurrency < 0):
             $replaceminus = str_replace('-', '', $valuecurrency);
             BalanceChip::create([
@@ -359,14 +363,16 @@ class Add_TransactionController extends Controller
             ]);
 
             //LOG ADMIN
-            $op_math = 'dikurangkan dengan';
+            $op_math = 'dikurangi';
           endif;
+
+          $currentvalue = str_replace('.00', '', $stat->chip);
 
           Log::create([
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '2',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit balance chip di menu tambah transaksi dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' chip. Dengan alasan: '. $description
+            'desc'      =>  'Edit balance CHIP di menu tambah transaksi dengan username '.$currentname->username.'. Dari balance '.$currentvalue.' chip, '.$op_math.' '.$valuecurrency.' chip, koreksi menjadi '.$totalbalance. ' chip. Dengan alasan: '. $description
           ]);
         endif;
 
@@ -414,11 +420,13 @@ class Add_TransactionController extends Controller
               ]);
           endif;
 
+          $currentvalue = str_replace('.00', '', $stat->gold);
+
           Log::create([
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance gold di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' gold. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance KOIN di menu tambah transaksi dengan username ' .$currentname->username.'. Dari balance '.$currentvalue.' ditambahkan dengan '.$valuecurrency.' koin, menjadi '.$totalbalance.' koin. Dengan alasan: ' .$description
           ]);
 
         //type adjust
@@ -439,7 +447,7 @@ class Add_TransactionController extends Controller
 
             //Tambah keterangan di log admin//
 
-            $op_math = 'ditambahkan dengan';
+            $op_math = 'dikurangi dengan';
 
             //untuk balance gold//
             BalanceGold::create([
@@ -461,7 +469,7 @@ class Add_TransactionController extends Controller
 
 
             //untuk keterangan di log Admin//
-            $op_math = 'dikurangkan dengan';
+            $op_math = 'ditambah';
 
             // insert ke balance gold //
             BalanceGold::create([
@@ -511,12 +519,14 @@ class Add_TransactionController extends Controller
           Stat::where('user_id', '=', $user_id)->update([
             'gold'  =>  $totalbalance
           ]);
+
+          $currentvalue = str_replace('.00', '', $stat->gold);
           
             Log::create([
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance gold di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' gold. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance koin di menu tambah transaksi dengan username ' .$currentname->username.' . Dari balance '.$currentvalue.' koin, '.$op_math.' '.$usergold.' koin, penyesuaian menjadi '.$totalbalance.' koin. Dengan alasan: ' .$description
             ]);
 
 
@@ -567,7 +577,7 @@ class Add_TransactionController extends Controller
 
 
             //LOG ADMIN
-            $op_math = 'ditambahkan dengan';
+            $op_math = 'ditambahkan';
           elseif($valuecurrency < 0):
             $replaceminus = str_replace('-', '', $valuecurrency);
             BalanceGold::create([
@@ -580,14 +590,16 @@ class Add_TransactionController extends Controller
             ]);
 
             //LOG ADMIN
-            $op_math = 'dikurangkan dengan';
+            $op_math = 'dikurangi';
           endif;
+
+          $currentvalue = str_replace('.00', '', $stat->gold);
 
           Log::create([
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '2',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit balance gold di menu tambah transaksi dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' gold. Dengan alasan: '. $description
+            'desc'      =>  'Edit balance koin di menu tambah transaksi dengan username '.$currentname->username.'. Dari balance '.$currentvalue.' koin, '.$op_math.' '.$valuecurrency.' koin, koreksi menjadi '.$totalbalance.' koin. Dengan alasan: '. $description
           ]);
         endif;
 
@@ -633,11 +645,13 @@ class Add_TransactionController extends Controller
               ]);
           endif;
 
+          $currentvalue = str_replace('.00', '', $stat->point);
+
           Log::create([
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance poin di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ditambahkan dengan '.$valuecurrency. ' poin. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance POINT di menu tambah transaksi dengan username ' .$currentname->username. '. Dari balance '.$currentvalue.' ditambahkan dengan '.$valuecurrency. ' poin. menjadi '.$totalbalance.' poin. Dengan alasan: ' .$description
           ]);
 
         //type adjust
@@ -659,7 +673,7 @@ class Add_TransactionController extends Controller
 
             //Tambah keterangan di log admin//
 
-            $op_math = 'ditambahkan dengan';
+            $op_math = 'dikurangi dengan';
 
             //untuk balance Point//
             BalancePoint::create([
@@ -680,7 +694,7 @@ class Add_TransactionController extends Controller
 
 
             //untuk keterangan di log Admin//
-            $op_math = 'dikurangkan dengan';
+            $op_math = 'ditambah';
 
             // insert ke balance point //
             BalancePoint::create([
@@ -731,12 +745,14 @@ class Add_TransactionController extends Controller
           Stat::where('user_id', '=', $user_id)->update([
             'point'  =>  $totalbalance
           ]);
+
+          $currentvalue = str_replace('.00', '', $stat->point);
           
             Log::create([
               'op_id'     =>  Session::get('userId'),
               'action_id' =>  '2',
               'datetime'  =>  Carbon::now('GMT+7'),
-              'desc'      =>  'Edit balance point di menu tambah transaksi dengan user ID ' .$user_id. ' jumlah yang ' .$op_math.' '.$valuecurrency. ' point. Dengan alasan: ' .$description
+              'desc'      =>  'Edit balance POINT di menu tambah transaksi dengan username ' .$currentname->username. '. Dari balance '.$currentvalue.' poin, '.$op_math.' '.$userpoint. ' point, penyesuaian menjadi '.$totalbalance.' point. Dengan alasan: ' .$description
             ]);
 
 
@@ -788,7 +804,7 @@ class Add_TransactionController extends Controller
 
 
             //LOG ADMIN
-            $op_math = 'ditambahkan dengan';
+            $op_math = 'ditambah';
           elseif($valuecurrency < 0):
             $replaceminus = str_replace('-', '', $valuecurrency);
             BalancePoint::create([
@@ -801,14 +817,16 @@ class Add_TransactionController extends Controller
             ]);
 
             //LOG ADMIN
-            $op_math = 'dikurangkan dengan';
+            $op_math = 'dikurangi';
           endif;
+
+          $currentvalue = str_replace('.00', '', $stat->point);
 
           Log::create([
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '2',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit balance point di menu tambah transaksi dengan user ID '.$user_id.' jumlah yang '.$op_math.' '.$valuecurrency. ' point. Dengan alasan: '. $description
+            'desc'      =>  'Edit balance POINT di menu tambah transaksi dengan username '.$currentname->username.'. Dari balance '.$currentvalue.' poin, '.$op_math.' '.$valuecurrency. ' point, koreksi menjadi '.$totalbalance.' point. Dengan alasan: '. $description
           ]);
         endif;
       endif;

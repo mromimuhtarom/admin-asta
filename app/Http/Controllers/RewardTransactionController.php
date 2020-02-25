@@ -87,7 +87,7 @@ class RewardTransactionController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '5',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $user_id
+            'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan nama pengguna '. $user_id
         ]);
 
         return back()->with('success', alertTranslate("Receiving request Transaction has been successful"));
