@@ -406,6 +406,31 @@ function dmscard($array) {
   else:
     $resCard[]= '';
   endif;
+
+  return $resCard;
+
+}
+function dmscardnobrackets($array) {
+  if($array !== '[]'):
+    $arraycard = explode(',', $array);
+    $cards = [
+     "0_0", "1_0", "2_0", "3_0", "4_0", "5_0", "6_0",  //0
+     "1_1", "1_2", "1_3", "1_4", "1_5", "1_6",         //7
+     "2_2", "2_3", "2_4", "2_5", "2_6",                //13
+     "3_3", "3_4", "3_5", "3_6",                       //18
+     "4_4", "4_5", "4_6",                              //22
+     "5_5", "5_6",                                     //25
+     "6_6"                                             //27
+    ];
+    for ($i = 0; $i < count($arraycard); $i++){
+      // resCard[i]=cards[array[i]];
+      // $resCard.push($cards[$arraycard[$i]]);
+      $resCard[] = $cards[$arraycard[$i]];
+    }
+  else:
+    $resCard[]= '';
+  endif;
+  
   return $resCard;
 
 }

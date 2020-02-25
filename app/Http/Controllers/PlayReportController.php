@@ -163,6 +163,7 @@ class PlayReportController extends Controller
               $gettableroundplayer = 'bgt_round_player';
        endif;
 
+       
       if($inputName != NULL && $inputRoundID != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
        if($inputGame == 'Domino QQ') {
               if(is_numeric($inputName) !== true):
@@ -226,6 +227,7 @@ class PlayReportController extends Controller
         $player_history->appends($request->all());
         return view('pages.players.playreport', compact('player_history', 'player_username', 'menus1', 'inputName', 'inputMinDate', 'inputMaxDate', 'game', 'sortingorder', 'getMindate', 'getMaxdate', 'getusername', 'getgame', 'getroundid'));
       } else if($inputRoundID != NULL && $inputMinDate != NULL && $inputMaxDate != NULL && $inputGame != NULL) {
+        
         if($inputGame == 'Domino QQ'):
         $player_history = $tbdmq->wherebetween('asta_db.dmq_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
               ->where('asta_db.dmq_round.round_id', '=', $inputRoundID)
