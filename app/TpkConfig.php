@@ -10,11 +10,11 @@ class TpkConfig extends Model
     protected $guarded   = [];
     public    $timestamps = false;
 
-    public function strname()
-    {
-        $name = str_replace('_', ' ', $this->name);
-        $capitalletters = ucwords($name);
+    // public function strname()
+    // {
+    //     $name = str_replace('_', ' ', $this->name);
+    //     $capitalletters = ucwords($name);
 
-        return $capitalletters;
-    }
+    //     return $capitalletters;
+    // }
 }

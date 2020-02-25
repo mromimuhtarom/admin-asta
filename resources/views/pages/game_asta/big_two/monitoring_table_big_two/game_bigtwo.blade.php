@@ -22,7 +22,7 @@
     </style>
 
     <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/bgt/Build/Big Two Web v.17.4_14.json", {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/bgt/Build/Big Two Web v.17.13.json", {onProgress: UnityProgress});
 
         function OnAppReady(){
             console.log("### application is loaded");
