@@ -430,6 +430,16 @@ function status_player($val) {
   }
 }
 
+function statusRegisteredPlayers($val) {
+  if($val == 1){
+    return "Setuju";
+  }else if($val == 2){
+    return "Dilarang";
+  }else if($val == 3){
+    return "Bermasalah";
+  }
+}
+
 
 
 ?>

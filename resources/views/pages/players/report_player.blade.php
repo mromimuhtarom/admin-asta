@@ -127,7 +127,7 @@
                           <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
                           <td> pemain {{ ConfigTextTranslate($action_report_player[$login->action_id]) }}</td>
-                          <td>{{ $login->datetime }}</td>
+                          <td>{{ date("d-m-Y H:i:s", strtotime($login->datetime)) }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>
                         @endforeach

@@ -257,11 +257,6 @@ class CategoryController extends Controller
                 $name = "Maksimal Beli";
                 $currentvalue = $currentname->max_buy;
                 break;
-            case "timer":
-                $name = "Pengatur Waktu";
-                $currentvalue = strNormalFast($currentname->timer);
-                $value = strNormalFast($value);
-                break;
             default:
               "";
         }
@@ -280,6 +275,7 @@ class CategoryController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = BigTwoRoom::where('room_id', '=', $pk)->first();
 
         BigTwoRoom::where('room_id', '=', $pk)->update([
             $name => $value 
@@ -288,15 +284,15 @@ class CategoryController extends Controller
         switch ($name) {
             case "name":
                 $name = "Nama Ruang";
+                $currentvalue = $currentname->name;
                 break;
             case "min_buy":
                 $name = "Minimal Beli";
+                $currentvalue = $currentname->min_buy;
                 break;
             case "max_buy":
                 $name = "Maksimal Beli";
-                break;
-            case "timer":
-                $name = "Pengatur Waktu";
+                $currentvalue = $currentname->max_buy;
                 break;
             default:
               "";
@@ -306,7 +302,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu KategorI Big Two dengan Ruangid '.$pk.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' di menu KategorI Big Two dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
 
         
@@ -317,6 +313,7 @@ class CategoryController extends Controller
         $pk          = $request->pk;
         $name        = $request->name;
         $value       = $request->value;
+        $currentname = DominoSusunRoom::where('room_id', '=', $pk)->first();
 
         DominoSusunRoom::where('room_id', '=', $pk)->update([
             $name => $value 
@@ -325,15 +322,15 @@ class CategoryController extends Controller
         switch ($name) {
             case "name":
                 $name = "Nama Ruang";
+                $currentvalue = $currentname->name;
                 break;
             case "min_buy":
                 $name = "Minimal Beli";
+                $currentvalue = $currentname->min_buy;
                 break;
             case "max_buy":
                 $name = "Maksimal Beli";
-                break;
-            case "timer":
-                $name = "Pengatur Waktu";
+                $currentvalue = $currentname->max_buy;
                 break;
             default:
               "";
@@ -343,7 +340,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu Kategory Domino Susun dengan Ruangid '.$pk.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' di menu Kategory Domino Susun dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 
@@ -353,6 +350,7 @@ class CategoryController extends Controller
         $pk          = $request->pk;
         $name        = $request->name;
         $value       = $request->value;
+        $currentname = DominoQRoom::where('room_id', '=', $pk)->first();
         
         DominoQRoom::where('room_id', '=', $pk)->update([
             $name => $value 
@@ -361,25 +359,23 @@ class CategoryController extends Controller
         switch ($name) {
             case "name":
                 $name = "Nama Ruang";
+                $currentvalue = $currentname->name;
                 break;
             case "min_buy":
                 $name = "Minimal Beli";
+                $currentvalue = $currentname->min_buy;
                 break;
             case "max_buy":
                 $name = "Maksimal Beli";
+                $currentvalue = $currentname->max_buy;
                 break;
-            case "timer":
-                $name = "Pengatur Waktu";
-                break;
-            default:
-              "";
         }
   
         Log::create([
           'op_id'       => Session::get('userId'),
           'action_id'   => '2',
           'datetime'    => Carbon::now('GMT+7'),
-          'desc' => 'Edit '.$name.' di menu KategorI Domino QQ dengan Ruangid '.$pk.' menjadi '. $value
+          'desc' => 'Edit '.$name.' di menu KategorI Domino QQ dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 

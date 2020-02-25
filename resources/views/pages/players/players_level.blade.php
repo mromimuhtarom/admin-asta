@@ -87,7 +87,7 @@
                     @foreach ($playerslevel as $level)
                       @if($menu && $mainmenu)
                         <tr>
-                          <td><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $level->level }}" class="deleteplayerslevel{{ $level->level }} deleteIdAll"></td>
+                          <td><input type="checkbox" name="deletepermission[]" id="deletepermission[]"data-pk="{{ $level->level }}" data-username="{{ $level->level }}" class="deleteplayerslevel{{ $level->level }} deleteIdAll"></td>
                           <td><a href="#" class="inlinelevel" data-name="level" data-title="level" data-pk="{{ $level->level }}" data-type="text" data-url="{{ route('playerslevel_update') }}">{{ $level->level}}</a></td>
                           <td><a href="#" class="inlinelevel" data-name="experience" data-title="experience" data-pk="{{ $level->level }}" data-type="text" data-url="{{ route('playerslevel_update') }}">{{ number_format($level->experience)}}</a></td>
                           <td>
@@ -178,7 +178,7 @@
                     @foreach ($playersrank as $rank)
                       @if($menu && $mainmenu)
                         <tr>
-                          <td><input type="checkbox" name="deletepermissionrank[]" id="deletepermissionrank[]"data-pk="{{ $rank->id }}" class="deleteplayersrank{{ $rank->id }} deleteIdAllrank"></td>
+                          <td><input type="checkbox" name="deletepermissionrank[]" data-username="{{ $rank->name }}" id="deletepermissionrank[]"data-pk="{{ $rank->id }}" class="deleteplayersrank{{ $rank->id }} deleteIdAllrank"></>
                           <td>{{ $rank->id }}</td>
                           <td><a href="#" class="inlinelevel" data-name="name" data-title="name" data-pk="{{ $rank->id }}" data-type="text" data-url="{{ route('playersrank_update') }}">{{ $rank->name }}</a></td>
                           <td><a href="#" class="inlinelevel" data-name="level" data-title="level" data-pk="{{ $rank->id }}" data-type="text" data-url="{{ route('playersrank_update') }}">{{ $rank->level }}</a></td>
@@ -362,6 +362,7 @@
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="levelAll" id="levelAll" value="">
+                  <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
           </div>
           <div class="modal-footer">
             <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
@@ -389,6 +390,7 @@
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="id" id="id" value="">
+                  <input type="hidden" name="usernameAll" id="userAll" value="">
           </div>
           <div class="modal-footer">
             <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>
@@ -490,10 +492,16 @@
         $('.delete').click(function(e) {
           e.preventDefault();
               var allVals = []; 
+              var allUsername = [];
               $(".deleteIdAll:checked").each(function() {  
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(","); 
                   $("#levelAll").val(join_selected_values);
+
+                  //untuk get nama ketika multiple delete
+                  allUsername.push($(this).attr('data-username'));
+                  var join_selected_username = allUsername.join(",");
+                  $("#userDeleteAll").val(join_selected_username);
               }); 
         }); 
         
@@ -532,11 +540,18 @@
       @endphp
         $('.deleterank').click(function(e) {
           e.preventDefault();
-              var allVals = []; 
+              var allVals = [];
+              var allUsername = [];
               $(".deleteIdAllrank:checked").each(function() {  
                   allVals.push($(this).attr('data-pk'));
                   var join_selected_values = allVals.join(","); 
                   $("#id").val(join_selected_values);
+
+                  //untuk get name ketika delete multiple
+                  allUsername.push($(this).attr('data-username'));
+                  var join_selected_username = allUsername.join(",");
+                  $("#userAll").val(join_selected_username);
+                 
               }); 
         }); 
         
