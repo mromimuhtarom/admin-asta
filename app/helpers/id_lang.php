@@ -375,7 +375,8 @@ function Translate_menuPlayers($menu){
         'Confirmation'              =>  'Konfirmasi',
         'Lobby'                     =>  'Lobi',
         'Create new avatar'         =>  'Buat avatar baru',
-        'Avatar player'             =>  'Avatar pemain'     
+        'Avatar player'             =>  'Avatar pemain',
+        'L_CARD'                    =>  'Kartu'     
 
     ];
     return $array_menuContent[$menu];
@@ -672,7 +673,8 @@ function TranslateReseller($menu){
         'L_PLAYER_ID'            => 'ID Pemain',
         'L_USERNAME_PLAYER'      => 'Nama Pemain',
         'L_STATUS'               => 'Status',
-        'L_TOTAL_GOLD'           => 'Total Koin'
+        'L_TOTAL_GOLD'           => 'Total Koin',
+        'L_USERNAME'             => 'Nama Reseller'
 
 
 
@@ -936,6 +938,26 @@ function TranslateLogDesc($menu) {
         "L_PASSWORD"       =>  "Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna {1}"
     ];
     return $array_menuContent[$menu];
+}
+
+function TranslateGameSetting($menu)
+{
+    $array_menuContent = [
+        "bet_fee"    =>  "Pajak Taruhan",
+        "bet_point"  =>  "Point Trauhan",
+        "countdown"  =>  "Hitungan Mundur",
+        "jp_fee"     =>  "Pajak Jackpot",
+        "jp_flush"   =>  "Jackpot Flush",
+        "jp_four_kind"  =>  "Jackpot 4 Kind",
+        "jp_fullhouse"  =>  "Jackpot Full House",
+        "jp_royal_flush" => "Jackpot Royal Flush",
+        "jp_straight_flush" =>  "Jackpot Straight Flush",
+        "lose_exp"      =>  $menu,
+        "timer_fast"    =>  $menu,
+        "timer_normal"  =>  $menu
+    ];
+    return $array_menuContent[$menu];
+
 }
 
 

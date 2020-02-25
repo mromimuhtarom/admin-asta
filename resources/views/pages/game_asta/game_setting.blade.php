@@ -33,7 +33,7 @@
                 <tbody>
                     @foreach($tpk as $tpk)
                     <tr>
-                        <td>{{ $tpk->strname() }}</td>
+                        <td>{{ $tpk->name }}</td>
                         @if($menu && $mainmenu )
                         <td><a href="#" class="inlineSetting" data-type="number" data-name="value" data-pk="{{ $tpk->id }}" data-url="{{ route('GameSetting-updateTpk') }}">{{ $tpk->value }}</a></td>
                         @else 
@@ -76,7 +76,7 @@
                 <tbody>
                     @foreach($bgt as $bgt)
                     <tr>
-                        <td>{{ $bgt->strname() }}</td>
+                        <td>{{ $bgt->name }}</td>
                         @if ($menu && $mainmenu)
                         <td><a href="" class="inlineSetting" data-name="value" data-pk="{{ $bgt->id }}" data-type="number" data-url="{{ route('GameSetting-updateBgt') }}">{{ $bgt->value }}</a></td>
                         @else
@@ -120,7 +120,7 @@
                 <tbody>
                     @foreach($dms as $dms)
                     <tr>
-                        <td>{{ $dms->strname() }}</td>
+                        <td>{{ $dms->name }}</td>
                         @if ($menu && $mainmenu)
                         <td><a href="" class="inlineSetting" data-pk="{{ $dms->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDms') }}">{{ $dms->value }}</a></td>
                         @else 
@@ -163,7 +163,7 @@
                 <tbody>
                     @foreach($dmq as $dmq)
                     <tr>
-                        <td>{{ $dmq->strname() }}</td>
+                        <td>{{ $dmq->name }}</td>
                         @if ($menu && $mainmenu)
                         <td><a href=""class="inlineSetting" data-pk="{{ $dmq->id }}" data-name="value" data-type="number" data-url="{{ route('GameSetting-updateDmq') }}">{{ $dmq->value}}</a></td>
                         @else 

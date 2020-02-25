@@ -154,17 +154,44 @@
                           <td>
                             @if (isset($_GET['inputGame']))
                                 @if($_GET['inputGame'] === 'Texas Poker')
-                                    @foreach (tpkcard($history->hand_card_round) as $card)
+                                    @php 
+                                    $arrayjson_decode = array_gameplaylog($history->gameplay_log);
+                                    @endphp
+                                    @foreach($arrayjson_decode as $row)
+                                    @if ($row['game_state'] === 'END_ROUND')
+                                        @foreach ($row['player'] as $endplayer)
+                                            @if($endplayer['user_id'] == $history->user_id)
+                                                {{ str_replace(',', ' ', $endplayer['typecard']) }}
+                                            @endif
+                                        @endforeach 
+                                    @endif
+                                    @endforeach
+                                    {{-- @foreach (tpkcard($history->hand_card_round) as $card)
                                         {{ $card }}, 
-                                    @endforeach
+                                    @endforeach --}}
                                 @elseif($_GET['inputGame'] === 'Big Two')
-                                    @foreach (bgtcard($history->hand_card_round) as $item)
+                                    {{-- @foreach (bgtcard($history->hand_card_round) as $item)
                                         {{ $item }} 
-                                    @endforeach
+                                    @endforeach --}}
+                                    @if($history->hand_card_round != '-')
+                                    {{ count(bgtcard($history->hand_card_round))}} {{ Translate_menuPlayers('L_CARD') }} 
+                                    @endif
+                                    
                                 @elseif($_GET['inputGame'] === 'Domino QQ')
                                         {{ $history->hand_card_round }} 
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
-                                        {{ $history->hand_card_round }} 
+                                    @if($history->hand_card_round != '[]')
+                                        @php
+                                        $arrayjson_decode = array_gameplaylog($history->gameplay_log);
+                                        @endphp
+                                        @foreach($arrayjson_decode as $field => $row)
+                                            @if ($row['game_state'] === 'ACTION_DONE')
+                                                @foreach ($row['players'] as $key => $player) 
+                                                   {{ count(dmscard($history->hand_card_round)) }} {{ Translate_menuPlayers('L_CARD') }} = {{ $player['card'] }}
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 @endif
                             @endif
                             
@@ -260,7 +287,14 @@
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ cardreadpopup(bgtcard($player['card'])) }}</td>
+                                    <td>
+                                        @if($player['card'] !== "")
+                                            @foreach (bgtcard($player['card']) as $bgtcard)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $bgtcard }}.png">
+                                            @endforeach
+                                        @endif
+                                        {{-- {{ cardreadpopup(bgtcard($player['card'])) }} --}}
+                                    </td>
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'PLAYER_ACTION')
@@ -273,7 +307,14 @@
                                     @endforeach
                                     <td>{{ $row['action']}}</td>
                                     <td></td>
-                                    <td>{{ cardreadpopup(bgtcard($row['player']['card'])) }}</td>
+                                    <td>
+                                        @if($row['player']['card'] !== "")
+                                            @foreach (bgtcard($row['player']['card']) as $bgtcard)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $bgtcard }}.png">
+                                            @endforeach
+                                        @endif
+                                        {{-- {{ cardreadpopup(bgtcard($row['player']['card'])) }} --}}
+                                    </td>
                                 </tr>  
                                 @elseif ($row['game_state'] === 'END_ROUND')
                                 @foreach ($row['player'] as $endplayer)
@@ -286,7 +327,14 @@
                                     @endforeach
                                     <td>{{ $endplayer['status'] }}</td>
                                     <td>{{ $endplayer['chip'] }}</td>
-                                    <td>{{ cardreadpopup(bgtcard($endplayer['card'])) }}</td>
+                                    <td>
+                                        @if($endplayer['card'] !== "")
+                                            @foreach (bgtcard($endplayer['card']) as $bgtcard)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $bgtcard }}.png">
+                                            @endforeach
+                                        @endif
+                                        {{-- {{ cardreadpopup(bgtcard($endplayer['card'])) }} --}}
+                                    </td>
                                 </tr>
                                 @endforeach     
                                 @endif
@@ -327,8 +375,22 @@
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ cardreadpopup(tpkcard($player['card'])) }}</td>
-                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td>
+                                    {{-- <td>{{ cardreadpopup(tpkcard($player['card'])) }}</td>
+                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td> --}}
+                                    <td>
+                                        @if($player['card'] !== "")
+                                            @foreach (tpkcard($player['card']) as $tpkimg)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkimg }}.png">    
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($row['cardtable'] !== "")
+                                            @foreach (tpkcard($row['cardtable']) as $tpkcardtable)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
+                                            @endforeach
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'TURN_BET')
@@ -342,8 +404,22 @@
                                     @endforeach
                                     <td>{{ $action_plyr['action']}}</td>
                                     <td>{{ $action_plyr['chip']}}</td>
-                                    <td>{{ cardreadpopup(tpkcard($action_plyr['card'])) }}</td>
-                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td>
+                                    <td>
+                                        @if($action_plyr['card'] !== "")
+                                            @foreach (tpkcard($action_plyr['card']) as $tpkimg)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkimg }}.png">    
+                                            @endforeach
+                                        @endif
+                                        {{-- {{ cardreadpopup(tpkcard($action_plyr['card'])) }} --}}
+                                    </td>
+                                    <td>
+                                        @if($row['cardtable'] !== "")
+                                            @foreach (tpkcard($row['cardtable']) as $tpkcardtable)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
+                                            @endforeach
+                                        @endif
+                                        {{-- {{ cardreadpopup(tpkcard($row['cardtable'])) }} --}}
+                                    </td>
                                 </tr> 
                                 @endforeach 
                                 @elseif ($row['game_state'] === 'END_ROUND')
@@ -357,8 +433,22 @@
                                     @endforeach
                                     <td>{{ $endplayer['status'] }}</td>
                                     <td>{{ $endplayer['chip'] }}</td>
-                                    <td>{{ cardreadpopup(tpkcard($endplayer['card'])) }}</td>
-                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td>
+                                    <td>
+                                        @if($endplayer['card'] !== "")
+                                            @foreach (tpkcard($endplayer['card']) as $tpkimg)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkimg }}.png">    
+                                            @endforeach
+                                        @endif
+                                        {{-- {{ cardreadpopup(tpkcard($endplayer['card'])) }} --}}
+                                    </td>
+                                    <td>
+                                        @if($row['cardtable'] !== "")
+                                            @foreach (tpkcard($row['cardtable']) as $tpkcardtable)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
+                                            @endforeach
+                                        @endif
+                                        {{-- {{ cardreadpopup(tpkcard($row['cardtable'])) }} --}}
+                                    </td>
                                 </tr>
                                 @endforeach     
                                 @endif
