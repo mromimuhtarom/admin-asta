@@ -178,7 +178,25 @@
                                     @endif
                                     
                                 @elseif($_GET['inputGame'] === 'Domino QQ')
-                                        {{ $history->hand_card_round }} 
+                                    @if($history->hand_card_round != '[]')
+                                        @php
+                                            $arrayjson_decode = array_gameplaylog($history->gameplay_log);
+                                        @endphp
+                                        @foreach($arrayjson_decode as $field => $row)
+                                            @if ($row['game_state'] === 'ACTION_DONE')
+                                                @foreach ($row['players'] as $key => $player) 
+                                                    @if($player['user_id'] == $history->user_id)
+                                                        @if ($player['typecard'] == 'COMMON')
+                                                        {{ $player['typecard'] }} {{ $player['combo'] }} 
+                                                        @else
+                                                        {{ str_replace('_', ' ',$player['typecard']) }} 
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                        {{-- {{ $history->hand_card_round }}  --}}
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
                                     @if($history->hand_card_round != '[]')
                                         @php
@@ -187,7 +205,9 @@
                                         @foreach($arrayjson_decode as $field => $row)
                                             @if ($row['game_state'] === 'ACTION_DONE')
                                                 @foreach ($row['players'] as $key => $player) 
-                                                   {{ count(dmscard($history->hand_card_round)) }} {{ Translate_menuPlayers('L_CARD') }} = {{ $player['card'] }}
+                                                    @if($player['user_id'] == $history->user_id)
+                                                        {{ count(dmscard($history->hand_card_round)) }} {{ Translate_menuPlayers('L_CARD') }} = {{ $player['handTotal'] }}
+                                                    @endif
                                                 @endforeach
                                             @endif
                                         @endforeach
@@ -487,7 +507,11 @@
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['card'] }}</td>
+                                    @if ($player['card'] != '[]')
+                                        <td>{{ $player['card']  }}</td>
+                                    @else 
+                                        <td></td>                                        
+                                    @endif
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'DRAW')
@@ -497,7 +521,13 @@
                                     <td>{{ $player['username'] }}</td>
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['card'] }}</td>
+                                    <td>
+                                        @if ($player['card'] != '[]')
+                                            @foreach (dmscard($player['card']) as $carddmq)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddmq }}.png">    
+                                            @endforeach
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @elseif($row['game_state'] === 'PLAYER_ACTION' && $row['action'] !== 'ALL_IN')
@@ -519,7 +549,13 @@
                                     <td>{{ $player['username'] }}</td>
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['card'] }}</td>
+                                    <td>
+                                        @if ($player['card'] != '[]')
+                                            @foreach (dmscard($player['card']) as $carddmq)
+                                                <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddmq }}.png">    
+                                            @endforeach
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @elseif($row['game_state'] === 'PLAYER_WIN')     
@@ -552,7 +588,7 @@
                                 $arrayjson_decode = array_gameplaylog($history->gameplay_log);
                                 @endphp                   
                                 @foreach($arrayjson_decode as $row)
-                                @if ($row['game_state'] === 'READY')
+                                @if ($row['game_state'] === 'NEW_ROUND')
                                 @foreach ($row['players'] as $key => $player) 
                                 <tr>
                                     <td>{{ $player['seat_id'] }}</td>
@@ -563,7 +599,11 @@
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
+                                    @if($player['hand'] !== '[]')
                                     <td>{{ $player['hand'] }}</td>
+                                    @else 
+                                    <td></td>
+                                    @endif
                                 </tr>
                                 @endforeach  
                                 @elseif($row['game_state'] === 'DRAW')
@@ -586,9 +626,17 @@
                                     @endforeach
                                     <td>{{ $row['action']}}</td>                                  
                                     <td></td>
+                                    <!------ card domino susun ----->
                                     @if ($row['action'] !== 'PASS')
-                                    <td>{{ $row['domino']}}</td>
+                                    <td>
+                                        @foreach (dmscardnobrackets($row['domino']) as $carddms)
+                                         <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddms }}.png">    
+                                        @endforeach
+                                    </td>
+                                    @else 
+                                    <td></td>
                                     @endif  
+                                    <!------ end card domino susun ----->
                                 </tr>  
                                 @elseif ($row['game_state'] === 'ACTION_DONE')
                                 @foreach ($row['players'] as $key => $player) 
@@ -597,7 +645,11 @@
                                     <td>{{ $player['username'] }}</td>
                                     <td>{{ $row['game_state'] }}</td>
                                     <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['hand'] }}</td>
+                                    <td>
+                                        @foreach (dmscard($player['hand']) as $carddms)
+                                            <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddms }}.png"> 
+                                        @endforeach
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @elseif($row['game_state'] === 'PLAYER_WIN')     
