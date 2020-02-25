@@ -105,18 +105,17 @@ class RoleController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = Role::where('role_id', '=', $pk)->first();
   
-    
         Role::where('role_id', '=', $pk)->update([
           $name => $value
         ]);      
-  
   
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di Menu Peran Admin dengan PeranId'.$pk.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' di Menu Peran Admin dengan nama peran '.$currentname->name.' menjadi '. $value
         ]);
     }
 
@@ -143,11 +142,11 @@ class RoleController extends Controller
         ];
 
         if($value == 0) :
-          $value = $type[1];
+          $value = ConfigTextTranslate($type[1]);
         elseif($value == 1):
-          $value = $type[3];
+          $value = ConfigTextTranslate($type[3]);
         elseif($value == 2):
-          $value = $type[5];
+          $value = ConfigTextTranslate($type[5]);
         endif;
         
 
@@ -155,7 +154,7 @@ class RoleController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan nama peran '.$role->name.' di nama menu '.$menuname->name.' dengan type '. $value
+          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan nama peran '.$role->name.' di nama menu '.translate_menu($menuname->name).' dengan type '. $value
         ]);
     }
 
