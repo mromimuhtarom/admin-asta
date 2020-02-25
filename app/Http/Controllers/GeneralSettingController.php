@@ -317,6 +317,7 @@ class GeneralSettingController extends Controller
         $pk    = $request->pk; //get data-pk
         $name  = $request->name; //get data-name
         $value = $request->value; //get data-value
+        $currentname = Config::where('id', '=', $pk)->first();
 
         Config::where('id', '=', $pk)->update([
             $name => $value
@@ -327,45 +328,63 @@ class GeneralSettingController extends Controller
         switch ($config_data->name) {
             case "fb_url":
                 $name = "Facebook";
+                $currentvalue = $currentname->value;
                 break;
             case "twitter_url":
                 $name = "Twitter";
+                $currentvalue = $currentname->value;
+                break;
+            case "ig_url":
+                $name = "Instagram";
+                $currentvalue = $currentname->value;
                 break;
             case "award_signup":
                 $name = "Hadiah sign up";
+                $currentvalue = $currentname->value;
                 break;
             case "award_daily_chips":
                 $name = "Hadiah chip harian";
+                $currentvalue = $currentname->value;
                 break;
             case "award_daily_chip_guest":
                 $name = "Hadiah chip harian guest";
+                $currentvalue = $currentname->value;
                 break;
             case "award_daily_days":
                 $name = "Hadiah harian";
+                $currentvalue = $currentname->value;
                 break;
             case "award_daily_multiply":
                 $name = "Hadiah berlipat harian";
+                $currentvalue = $currentname->value;
                 break;
             case "maintenance":
                 $name = "Pemeliharaan";
+                $currentvalue = $currentname->value;
                 break;
             case "termOfService":
                 $name = "Term Of Service URL";
+                $currentvalue = $currentname->value;
                 break;
             case "about":
                 $name = "About Url";
+                $currentvalue = $currentname->value;
                 break;
             case "pokerWeb":
                 $name = "Poker Web";
+                $currentvalue = $currentname->value;
                 break;
             case "point_expired":
                 $name = "Masa aktif pemain";
+                $currentvalue = $currentname->value;
                 break;
             case "BCA":
                 $name = "BCA";
+                $currentvalue = $currentname->value;
                 break;
             case "privacyPolicy":
                 $name = "Privacy Policy Url";
+                $currentvalue = $currentname->value;
                 break;
             default:
               "";
@@ -375,7 +394,7 @@ class GeneralSettingController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '2',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Pengaturan Umum  menjadi '. $value
+            'desc'      => 'Edit '.$name.' di menu Pengaturan Umum dari '.$currentvalue.' menjadi '. $value
         ]);
     }
 }

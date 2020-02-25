@@ -109,7 +109,8 @@ class UserAdminController extends Controller
               break;
           case "role_id":
               $name_column       = TranslateColumnName("L_ROLETYPE");
-              $beforevaluecolumn = $user->firstname;
+              $role = Role::where('role_id', '=', $user->role_id)->first();
+              $beforevaluecolumn = $role->name;
               $role              = Role::where('role_id', '=', $value)->first();
               $value             = $role->name;
               break;
