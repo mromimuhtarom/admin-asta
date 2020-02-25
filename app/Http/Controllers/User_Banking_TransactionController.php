@@ -117,7 +117,7 @@ class User_Banking_TransactionController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '6',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menolak permintaan transaksi di menu Transaksi Bank Pemain dengan nama pemain'. $username
+            'desc'      => 'Menolak permintaan transaksi di menu Transaksi Bank Pemain dengan nama pemain '. $username
         ]);
         return back()->with('success','Declined Succesful');
     }
@@ -183,7 +183,7 @@ class User_Banking_TransactionController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '5',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan Transaksi di menu Transaksi Bank Pemain dengan Nama Pemain'. $username
+            'desc'      => 'Menerima permintaan Transaksi di menu Transaksi Bank Pemain dengan Nama Pemain '. $username
         ]);
 
 
