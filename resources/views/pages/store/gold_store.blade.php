@@ -176,7 +176,7 @@
                             <p class="nav-name">Main image</p>
                           </span>
                           <figure class="media-object">
-                            <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                            <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ route('imageItemBonusGold', $gold->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                             <img class="img-object-wtr1Ava uploadBonusImg1{{ $gold->item_id }}" src="http://placehold.jp/80x100.png">
                           </figure>
                          
@@ -221,7 +221,7 @@
                     <td>
                       <div class="media-container">
                         <figure class="media-object">
-                            <img class="img-object uploadBonus{{ $gold->item_id }}" src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                            <img class="img-object uploadBonus{{ $gold->item_id }}" src="{{ route('imageItemBonusGold', $gold->item_id) }}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
                         </figure>
                       </div> 
                     </td>
@@ -250,7 +250,7 @@
                 <td>
                   <div class="media-container">
                       <figure class="media-object">
-                         <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ route('imageItemGold', $gold->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
+                         <img class="img-object uploadBonusImg{{ $gold->item_id }}" src="{{ route('imageItemBonusGold', $gold->item_id) }}?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
                       </figure>
                   </div>
                 </td>

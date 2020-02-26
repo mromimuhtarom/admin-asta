@@ -349,14 +349,17 @@ class GoodsStoreController extends Controller
 
     public function ImageItem($item_id)
     {
-      $rootpath         = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png';
-
-      $file_exists_goods = file_exists($rootpath);
+      $rootpath         = get_headers('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png');
+      $url              = substr($rootpath[0], 9, 3);
       
 
-      if($file_exists_goods  === false)
+      if(intval($url) === 200)
       {  
-        
+        $file_goods =   file_get_contents('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png');
+
+        return $file_goods;
+      } else {
+
         $rootpath_empty = '../public/images/image_not_found/';
         $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
         $file_empty     = $client_empty->get('not_found.png');
@@ -364,15 +367,8 @@ class GoodsStoreController extends Controller
 
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
+        
         return $response_empty;
-
-      } else if($file_exists_goods  === true){
-        $file_goods     = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png';
-        $type_goods     = $client->mimeType($item_id.'.png');
-        $response = Response::make($file_goods, 200);
-        $response->header("Content-Type", $type_goods);
-        return $response;
-
       }      
     }
 

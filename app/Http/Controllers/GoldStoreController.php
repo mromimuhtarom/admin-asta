@@ -228,51 +228,53 @@ class GoldStoreController extends Controller
 
     public function ImageItem($item_id)
     {
-      $rootpath         = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'.png';
-    //   $client           = Storage::createLocalDriver(['root' => $rootpath]);
-      $file_exists_gold = file_exists($rootpath);
-      
-    //Pengecekan gambar gold pada aws
-      if($file_exists_gold  === true)
-      {  
-        $file_gold     = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'.png';
+        $rootpath = get_headers('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'.png');
+        $url      = substr($rootpath[0], 9, 3);
 
-        return $file_gold;
+        //Pengecekan gambar gold pada aws
+        if(intval($url) === 200)
+        {  
+            $file_gold  = file_get_contents('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'.png');
 
-      } else if($file_exists_gold  === false){
-        $rootpath_empty = '../public/images/image_not_found';
-        $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
-        $file_empty     = $client_empty->get('not_found.png');
-        $type_empty     = $client_empty->mimeType('not_found.png');
+            return $file_gold;
 
-        $response_empty = Response::make($file_empty, 200);
-        $response_empty->header("Content-Type", $type_empty);
-        
-        return $response_empty;
-      }
-      
-      //Pengecekan gambar gold bonus pada aws
-      $rootpathBonus        =   'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'-2.png';
-      $file_exists_bonus    =   file_exists($rootpathBonus);
+        } else {
 
-        if($file_exists_bonus === false):
-            $rootpath_empty =   '../public/images/image_not_found/';
-            $client_empty   =   Storage::createLocalDriver(['root' => $rootpath_empty]);
-            $file_empty     =   $client_empty->get('not_found.png');
-            $type_empty     =   $client_empty->mimeType('not_found.png');
+            $rootpath_empty = '../public/images/image_not_found';
+            $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
+            $file_empty     = $client_empty->get('not_found.png');
+            $type_empty     = $client_empty->mimeType('not_found.png');
 
-            $response_empty =   Response::make($file_empty, 200);
+            $response_empty = Response::make($file_empty, 200);
             $response_empty->header("Content-Type", $type_empty);
-
+            
             return $response_empty;
-
-        elseif($file_exists_bonus === true):
-            $file_bonus =   'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'-2.png';
-
-            return $file_bonus;
-        endif;
+        }
+        
     }
 
+    public function ImageItemBonus($item_id)
+    {
+        //Pengecekan gambar gold bonus pada aws
+        $rootpathBonus =   get_headers('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'-2.png');
+        $url           =   substr($rootpathBonus[0], 9, 3);
+
+            if(intval($url) === 200):
+                $file_bonus = file_get_contents('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'-2.png');
+
+                return $file_bonus;
+            else:
+                $rootpath_empty =   '../public/images/image_not_found/';
+                $client_empty   =   Storage::createLocalDriver(['root' => $rootpath_empty]);
+                $file_empty     =   $client_empty->get('not_found.png');
+                $type_empty     =   $client_empty->mimeType('not_found.png');
+
+                $response_empty =   Response::make($file_empty, 200);
+                $response_empty->header("Content-Type", $type_empty);
+
+                return $response_empty;
+            endif;
+    }
     
     public function update(Request $request)
     {
