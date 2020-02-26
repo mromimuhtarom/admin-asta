@@ -197,11 +197,7 @@ class ResellerController extends Controller
 
         
         
-        switch($name) {
-            case "order_id":
-                $name = 'ID Pemesanan';
-                $currentvalue = $currentstatus->id;
-                break;            
+        switch($name) {           
             case "name":
                 $name = "Nama";
                 $currentvalue = $currentstatus->name;

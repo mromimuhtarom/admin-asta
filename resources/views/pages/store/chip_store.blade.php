@@ -198,7 +198,7 @@
                         <div class="media-container">
                               <figure class="media-object">
                                 {{-- <img class="img-object imgupload{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;"> --}}
-                                <img class="img-object imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
+                                <img class="img-object imgupload{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id )}}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                                 <img class="img-object-wtr1 imgupload1{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
                                 <img class="img-object-wtr2 imgupload2{{ $itm->item_id }}" src="http://placehold.jp/80x100.png">
                               </figure>      
@@ -211,7 +211,7 @@
                       <td>
                         <div class="media-container">
                           <figure class="media-object">
-                              <img class="img-object uploadBonus{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'-2.png'}}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                              <img class="img-object uploadBonus{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                           </figure>
                         </div>                        
                       </td>
@@ -227,7 +227,7 @@
                     <td>
                         <div class="media-container">
                             <figure class="media-object">
-                              <img class="img-object-normal imgupload{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'.png'}}?{{ $timenow }}" style="  display: block;margin-left: auto;margin-right: auto;">
+                              <img class="img-object-normal imgupload{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="display: block;margin-left: auto;margin-right: auto;">
                             </figure>
                         </div>
                     </td>
@@ -238,7 +238,7 @@
                     <td>
                         <div class="media-container">
                           <figure class="media-object">
-                              <img class="img-object uploadBonus{{ $itm->item_id }}" src="{{ 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/chip/'.$itm->item_id.'-2.png'}}?{{ $timenow }}" style="margin-left: auto;margin-right: auto;">
+                              <img class="img-object uploadBonus{{ $itm->item_id }}" src="{{ route('imageItemChip', $itm->item_id) }}?{{ $timenow }}" style="display: block; margin-left: auto;margin-right: auto;">
                           </figure>
                         </div>                        
                     </td>

@@ -351,13 +351,13 @@ class GoodsStoreController extends Controller
     {
       $rootpath         = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png';
 
-      $file_exists_gold = file_exists($rootpath);
+      $file_exists_goods = file_exists($rootpath);
       
 
-      if($file_exists_gold  === false)
+      if($file_exists_goods  === false)
       {  
         
-        $rootpath_empty = '../public/images/image_not_found';
+        $rootpath_empty = '../public/images/image_not_found/';
         $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
         $file_empty     = $client_empty->get('not_found.png');
         $type_empty     = $client_empty->mimeType('not_found.png');
@@ -365,11 +365,12 @@ class GoodsStoreController extends Controller
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
         return $response_empty;
-      } else if($file_exists_gold  === true){
-        $file_gold     = $client->get($item_id.'.png');
-        $type_gold     = $client->mimeType($item_id.'.png');
-        $response = Response::make($file_gold, 200);
-        $response->header("Content-Type", $type_gold);
+
+      } else if($file_exists_goods  === true){
+        $file_goods     = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/goods/'.$item_id.'.png';
+        $type_goods     = $client->mimeType($item_id.'.png');
+        $response = Response::make($file_goods, 200);
+        $response->header("Content-Type", $type_goods);
         return $response;
 
       }      

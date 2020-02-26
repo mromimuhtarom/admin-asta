@@ -84,7 +84,7 @@
             @if($menu && $mainmenu)
             <tr>
                 <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $rk->id }}" class="deletepermission{{ $rk->id }} deleteIdAll"></td>
-                <td><a href="#" class="usertext" data-name="id" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->id }}</a></td>
+                <td>{{ $rk->id }}</td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $rk->id }}" data-type="text" data-url="{{ route('ResellerRank-update') }}">{{ $rk->name }}</a></td>
                 <td><a href="#" class="usertext" data-name="gold" data-pk="{{ $rk->id }}" data-type="number" data-url="{{ route('ResellerRank-update') }}">{{ number_format($rk->gold, 2) }}</a></td>
                 <td><a href="#" class="typeday" data-name="type" data-pk="{{ $rk->id }}" data-type="select" data-url="{{ route('ResellerRank-update') }}">{{ TranslateReseller(strTransactionType($rk->type)) }}</a></td>

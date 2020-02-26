@@ -175,15 +175,14 @@ class GoldStoreController extends Controller
 
                     Storage::disk('s3')->put($awsPath, $temp);
 
-
                     $path = '../public/upload/Gold/image1/'.$nama_file_unik;
                     File::delete($path);
                     $path1 = '../public/upload/Gold/image2/'.$nama_file_unik;
                     File::delete($path1);
                     // imagepng($source, $thumbnail);
                     // imagedestroy($source);
-                  } else 
-                  {
+                  } else {
+
                     $rootpath   = 'unity-asset/store/gold/'.$nama_file_unik;
                     // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
@@ -233,10 +232,14 @@ class GoldStoreController extends Controller
     //   $client           = Storage::createLocalDriver(['root' => $rootpath]);
       $file_exists_gold = file_exists($rootpath);
       
-
-      if($file_exists_gold  === false)
+    //Pengecekan gambar gold pada aws
+      if($file_exists_gold  === true)
       {  
-        
+        $file_gold     = 'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'.png';
+
+        return $file_gold;
+
+      } else if($file_exists_gold  === false){
         $rootpath_empty = '../public/images/image_not_found';
         $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
         $file_empty     = $client_empty->get('not_found.png');
@@ -244,15 +247,30 @@ class GoldStoreController extends Controller
 
         $response_empty = Response::make($file_empty, 200);
         $response_empty->header("Content-Type", $type_empty);
+        
         return $response_empty;
-      } else if($file_exists_gold  === true){
-        $file_gold     = $client->get($item_id.'.png');
-        $type_gold     = $client->mimeType($item_id.'.png');
-        $response = Response::make($file_gold, 200);
-        $response->header("Content-Type", $type_gold);
-        return $response;
+      }
+      
+      //Pengecekan gambar gold bonus pada aws
+      $rootpathBonus        =   'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'-2.png';
+      $file_exists_bonus    =   file_exists($rootpathBonus);
 
-      }      
+        if($file_exists_bonus === false):
+            $rootpath_empty =   '../public/images/image_not_found/';
+            $client_empty   =   Storage::createLocalDriver(['root' => $rootpath_empty]);
+            $file_empty     =   $client_empty->get('not_found.png');
+            $type_empty     =   $client_empty->mimeType('not_found.png');
+
+            $response_empty =   Response::make($file_empty, 200);
+            $response_empty->header("Content-Type", $type_empty);
+
+            return $response_empty;
+
+        elseif($file_exists_bonus === true):
+            $file_bonus =   'https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/store/gold/'.$item_id.'-2.png';
+
+            return $file_bonus;
+        endif;
     }
 
     
