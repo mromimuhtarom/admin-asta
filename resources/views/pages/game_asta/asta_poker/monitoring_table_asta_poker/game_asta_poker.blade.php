@@ -22,7 +22,7 @@
     </style>
     
     <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/TPK.json", {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", "/game/asta_poker/Build/TPK.1.json", {onProgress: UnityProgress});
        
         function OnAppReady(){
             console.log("### application is loaded");

@@ -99,45 +99,50 @@ class EmoticonController extends Controller
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)
         {
-            if($ukuran < 5242880)
-            {
+            if($height == 200):
+                if($ukuran < 5242880)
+                {
+                    
+                        if($request->title == NULL){
+                            return redirect()->route('Emoticon')->with('alert', alertTranslate("Name can't be NULL") );
+                        } else if($request->price == NULL) {
+                            return redirect()->route('Emoticon')->with('alert', alertTranslate("Price can't be NULL"));
+                        } 
+                    
+                        else {
+                                $rootpath   = 'unity-asset/emoticon/' . $nama_file_unik;
+                                // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                                $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
+                            // }
+
+                            $emoticon = Emoticon::create([
+                                'id'          => $id_new,
+                                'name'        => $request->title,
+                                'price'       => $request->price,
+                                'category_id' => 1,
+                                'img_ver'     => 0,
+                                'status'      => 1
+                            ]);
+
+                            Log::create([
+                                'op_id'     => Session::get('userId'),
+                                'action_id' => '3',
+                                'datetime'  => Carbon::now('GMT+7'),
+                                'desc'      => 'Menambahkan data di menu Emotikon dengan nama '.$emoticon->name
+                            ]);
+                            return redirect()->route('Emoticon')->with('success', alertTranslate('insert data successful'));
+                        }
                 
-                    if($request->title == NULL){
-                        return redirect()->route('Emoticon')->with('alert', alertTranslate("Name can't be NULL") );
-                    } else if($request->price == NULL) {
-                        return redirect()->route('Emoticon')->with('alert', alertTranslate("Price can't be NULL"));
-                    } 
-                   
-                    else {
-                            $rootpath   = 'unity-asset/emoticon/' . $nama_file_unik;
-                            // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                            $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
-                        // }
-
-                        $emoticon = Emoticon::create([
-                            'id'          => $id_new,
-                            'name'        => $request->title,
-                            'price'       => $request->price,
-                            'category_id' => 1,
-                            'img_ver'     => 0,
-                            'status'      => 1
-                        ]);
-
-                        Log::create([
-                            'op_id'     => Session::get('userId'),
-                            'action_id' => '3',
-                            'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Menambahkan data di menu Emotikon dengan nama '.$emoticon->name
-                        ]);
-                        return redirect()->route('Emoticon')->with('success', alertTranslate('insert data successful'));
-                    }
-            
-            }
-            else
-            {
-                return redirect()->route('Emoticon')->with('alert', alertTranslate("Size Image it's too Big"));
-                // echo 'Ukuran file terlalu besar';
-            }
+                }
+                else
+                {
+                    return redirect()->route('Emoticon')->with('alert', alertTranslate("Size Image it's too Big"));
+                    // echo 'Ukuran file terlalu besar';
+                }
+            else:
+                $translatealertimage = str_replace('{1}', '200 px', alertTranslate("L_HEIGHT_IMAGE"));
+                return back()->with('alert', $translatealertimage);
+            endif;
         }
         else
         {
@@ -178,42 +183,46 @@ class EmoticonController extends Controller
 
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true )
         {
+            if($height == 200):
+                if($ukuran < 5242880)
+                {
+                
+                            $rootpath   = 'unity-asset/emoticon/' . $nama_file_unik;
+                            // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
+                            $path = '../public/upload/emoticon/image1/'.$pk.'.png';
+                            File::delete($path);
+                            $path1 = '../public/upload/emoticon/image2/'.$pk.'.png';
+                            File::delete($path1);
+                        // }
+                            // end watermark image
+                        Emoticon::where('id', '=', $pk)->update([
+                            'img_ver' =>  $imageversion 
+                        ]);
 
-            if($ukuran < 5242880)
-            {
-               
-                        $rootpath   = 'unity-asset/emoticon/' . $nama_file_unik;
-                        // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
-                        $path = '../public/upload/emoticon/image1/'.$pk.'.png';
-                        File::delete($path);
-                        $path1 = '../public/upload/emoticon/image2/'.$pk.'.png';
-                        File::delete($path1);
+                        Log::create([
+                            'op_id'     => Session::get('userId'),
+                            'action_id' => '2',
+                            'datetime'  => Carbon::now('GMT+7'),
+                            'desc'      => 'Edit gambar di menu Emotikon dengan ID '.$pk
+                        ]);
+                        return redirect()->route('Emoticon')->with('success', alertTranslate('Update image successfull'));
+
                     // }
-                        // end watermark image
-                    Emoticon::where('id', '=', $pk)->update([
-                        'img_ver' =>  $imageversion 
-                    ]);
-
-                    Log::create([
-                        'op_id'     => Session::get('userId'),
-                        'action_id' => '2',
-                        'datetime'  => Carbon::now('GMT+7'),
-                        'desc'      => 'Edit gambar di menu Emotikon dengan ID '.$pk
-                    ]);
-                    return redirect()->route('Emoticon')->with('success', alertTranslate('Update image successfull'));
-
-                // }
-                // else
-                // {
-                //     return redirect()->route('Emoticon')->with('alert','Gagal Upload File');
-                //     // echo "Gagal Upload File";
-                // }
-            }
-            else
-            {
-                return redirect()->route('Emoticon')->with('alert', alertTranslate("Size Image it's too Big"));
-                // echo 'Ukuran file terlalu besar';
-            }
+                    // else
+                    // {
+                    //     return redirect()->route('Emoticon')->with('alert','Gagal Upload File');
+                    //     // echo "Gagal Upload File";
+                    // }
+                }
+                else
+                {
+                    return redirect()->route('Emoticon')->with('alert', alertTranslate("Size Image it's too Big"));
+                    // echo 'Ukuran file terlalu besar';
+                }
+            else:
+                $translatealertimage = str_replace('{1}', '320 px', alertTranslate("L_HEIGHT_IMAGE"));
+                return back()->with('alert', $translatealertimage);
+            endif;
         }
         else
         {
