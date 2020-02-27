@@ -262,14 +262,17 @@ class PlayersController extends Controller
     public function ImageProfilePlayer($user_id)
     {
       // http://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{$profile->avatar_id}}.jpg
-      $rootpath = 'http://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/'.$user_id.'.jpg';
-      $client = Storage::createLocalDriver(['root' => $rootpath]);
-      $file = Storage::exists($client->get($user_id.'.jpg'));
-      $file_exists = $client->exists($rootpath);      
+      $rootpath = get_headers('http://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/'.$user_id.'.jpg');
+      $url      = substr($rootpath[0], 9, 3);     
       
-
-      if($file_exists === false)
+      if(intval($url) === 200)
       {  
+        $file_ava = file_get_contents('http://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/'.$user_id.'.jpg');
+
+        return $file_ava;
+
+      } else {
+        
         $rootpath_empty = '../public/images/profile';
         $client_empty   = Storage::createLocalDriver(['root' => $rootpath_empty]);
         $file_empty     = $client_empty->get('empty_profile.png');
@@ -279,15 +282,6 @@ class PlayersController extends Controller
         $response_empty->header("Content-Type", $type_empty);
         
         return $response_empty;
-
-      } else if($file_exists === true){
-        
-        $file     = $client->get($user_id.'.jpg');
-        $type     = $client->mimeType($user_id.'.jpg');
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
-        
-        return $response;
       }
       
     }
@@ -1038,6 +1032,8 @@ class PlayersController extends Controller
         {
           echo 'Failed';
         }
+
+        // $rootpath = get_headers('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/unity-asset/profile_player/'.$user)
     }
   
     public function avatarplayer(Request $request)

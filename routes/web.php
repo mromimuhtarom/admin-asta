@@ -5,8 +5,13 @@ Route::post('login', 'LoginController@login')->name('login');
 Route::get('/avatars/{avatar}', 'PlayersController@avatar')->name('imageAvatar');
 // Item image
 Route::get('image-item/Gold/{item_id}.png', 'GoldStoreController@ImageItem')->name('imageItemGold');
+Route::get('image-itemBonus/Gold/{item_id}', 'GoldStoreController@ImageItemBonus')->name('imageItemBonusGold');
 Route::get('image-item/Chip/{item_id}.png', 'ChipStoreController@ImageItem')->name('imageItemChip');
+Route::get('image-itemBonus/Chip/{item_id}.png', 'ChipStoreController@ImageItemBonus')->name('imageItemBonusChip');
 Route::get('image-item/Goods/{item_id}.png', 'GoodsStoreController@ImageItem')->name('imageItemGoods');
+//Item Image Store reseller
+Route::get('image-itemStoreReseller/StoreReseller/{item_id}.png', 'ResellerController@ImageItemStoreReseller')->name('imageStoRess');
+Route::get('image-itemBonusStoreReseller/StoreReseller/{item_id}.png', 'ResellerController@ImageItemBonusStoreReseller')->name('imageBonusStoRess');
 // image gift
 Route::get('image-gift/{gift_id}', 'GiftController@ImageGift')->name('imageshowgift');
 Route::get('image-avatar/{avatar_id', 'AvatarPlayerController@ImageAvatar')->name('imageshowavatar');
