@@ -164,7 +164,11 @@ function translate_MenuContentAdmin($menu){
         'L_NO'                   => 'Tidak',
         'L_STATEMENT_DELETE_ALL' => 'Hapus semua data terpilih?',
         'L_QUESTION_DELETE_ALL'  => 'Apakah anda yakin akan menghapus semua data yang dipilih?',
-        'L_DESCRIPTION_NULL'     => 'Deskripsi tidak boleh kosong'
+        'L_DESCRIPTION_NULL'     => 'Deskripsi tidak boleh kosong',
+        'L_EDIT_USER_ADMIN'      => 'Edit pengguna admin',
+        'L_EDIT_ROLE_ADMIN'      => 'Edit peran admin',
+        'L_EDIT_USER_BANK_TRANSACTION'  =>  'Edit transaksi bank pengguna',
+        ''
     ];
 
     return $array_menuContent[$menu];
