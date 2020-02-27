@@ -102,11 +102,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
-                        <th>{{ translate_MenuContentAdmin('L_ADMIN_ID') }}</th>
-                        <th>{{ translate_MenuContentAdmin('L_USERNAME') }}</th>
-                        <th>{{ translate_MenuContentAdmin('L_ACTION') }}</th>
-                        <th>{{ translate_MenuContentAdmin('L_DATE') }}</th>
-                        <th>{{ translate_MenuContentAdmin('L_DESCRIPTION') }}</th>
+                        <th><a href="{{ route('Log-search') }}?username={{ $searchUser }}&action={{ $inputAction }}&dari={{ $minDate }}&sampai={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_operator.op_id">{{ translate_MenuContentAdmin('L_ADMIN_ID') }} <i class="fa fa-sort{{ iconsorting('asta_db.log_operator.op_id') }}"></i></a></th>
+                        <th><a href="{{ route('Log-search') }}?username={{ $searchUser }}&action={{ $inputAction }}&dari={{ $minDate }}&sampai={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_operator.username">{{ translate_MenuContentAdmin('L_USERNAME') }} <i class="fa fa-sort{{ iconsorting('asta_db.log_operator.username') }}"></i></a></th>
+                        <th><a href="{{ route('Log-search') }}?username={{ $searchUser }}&action={{ $inputAction }}&dari={{ $minDate }}&sampai={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_operator.action_id">{{ translate_MenuContentAdmin('L_ACTION') }} <i class="fa fa-sort{{ iconsorting('asta_db.log_operator.action_id') }}"></i></a></th>
+                        <th><a href="{{ route('Log-search') }}?username={{ $searchUser }}&action={{ $inputAction }}&dari={{ $minDate }}&sampai={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_operator.datetime">{{ translate_MenuContentAdmin('L_DATE') }} <i class="fa fa-sort{{ iconsorting('asta_db.log_operator.datetime') }}"></i></a></th>
+                        <th><a href="{{ route('Log-search') }}?username={{ $searchUser }}&action={{ $inputAction }}&dari={{ $minDate }}&sampai={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.log_operator.desc">{{ translate_MenuContentAdmin('L_DESCRIPTION') }} <i class="fa fa-sort{{ iconsorting('asta_db.log_operator.desc') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,6 +124,7 @@
 
         </div>
         <!-- end widget content -->
+        <div style="display: flex;justify-content: center;">{{ $logs->links() }}</div>                    
 
     </div>
     <!-- end widget div -->
@@ -142,7 +143,11 @@
         "sDom": "<'dt-toolbar d-flex'<l><'ml-auto hidden-xs show-control'>r>" +
             "t" +
             "<'dt-toolbar-footer d-flex'<'hidden-xs'i><'ml-auto'p>>",
-        "autoWidth": true,
+        "paging":false,
+        "bInfo":false,
+        "ordering":false,
+        "bLengthChange": false,
+        "searching": false,
         "oLanguage": {
             "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'
         },

@@ -152,7 +152,7 @@
               <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.join_date">{{ Translate_menuPlayers('Date Created') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.join_date') }}"></i></a></th>
               <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_type">{{ Translate_menuPlayers('Register Form') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_type') }}"></i></a></th>
               {{-- <th class="th-sm">Device</th> --}}
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.country.name">{{ Translate_menuPlayers('Country') }}<i class="fa fa-sort{{ iconsorting('asta_db.country.name') }}"></i></a></th>
+              {{-- <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.country.name">{{ Translate_menuPlayers('Country') }}<i class="fa fa-sort{{ iconsorting('asta_db.country.name') }}"></i></a></th> --}}
             </tr>
           </thead>
 <tbody>
@@ -180,7 +180,7 @@
             <td><a href="#"class="status" data-toggle="modal" data-target="#ModalBanned{{ $regis->user_id }}">{{ Translate_menuPlayers($regis->strStatus()) }}</a></td>
             <td>{{ date("d-m-Y H:i:s", strtotime($regis->join_date)) }}</td>
             <td>{{ $user_type }}</td>
-            <td>{{ $regis->countryname }}</td>
+            {{-- <td>{{ $regis->countryname }}</td> --}}
         </tr>   
       @else
         <tr>
@@ -193,7 +193,7 @@
             <td>{{ $regis->strStatus() }}</td>
             <td>{{ date("d-m-Y H:i:s", strtotime($regis->join_date)) }}</td>
             <td>{{ $user_type }}</td>
-            <td>{{ $regis->countryname }}</td>
+            {{-- <td>{{ $regis->countryname }}</td> --}}
         </tr>   
       @endif
     @endforeach

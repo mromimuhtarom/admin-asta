@@ -369,8 +369,8 @@
                                     <th>{{ Translate_menuPlayers('Sit') }}</th>
                                     <th>{{ Translate_menuPlayers('Username') }}</th>
                                     <th>{{ Translate_menuPlayers('Action') }}</th>
-                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
                                     <th>{{ Translate_menuPlayers('Bet') }}</th>
+                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
                                     <th>{{ Translate_menuPlayers('Card') }}</th>
                                     <th>{{ Translate_menuPlayers('Card Table') }}</th>
                                 </tr>
@@ -395,8 +395,8 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ number_format($player['chip'], 2) }}</td>
                                     <td>{{ number_format($player['bet'], 2) }}</td>
+                                    <td>{{ number_format($player['chip'], 2) }}</td>
                                     {{-- <td>{{ cardreadpopup(tpkcard($player['card'])) }}</td>
                                     <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td> --}}
                                     <td>
@@ -468,6 +468,11 @@
                                     <td>
                                         @if($row['cardtable'] !== "")
                                             @foreach (tpkcard($row['cardtable']) as $tpkcardtable)
+                                                {{-- @foreach (tpkcard($endplayer['card']) as $tpkimg)
+                                                    @if($tpkcardtable == $tpkimg)
+                                                        <img style="border:2px solid yellow;width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
+                                                    @endif
+                                                @endforeach --}}
                                                 <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
                                             @endforeach
                                         @endif

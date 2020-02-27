@@ -376,7 +376,8 @@ function Translate_menuPlayers($menu){
         'Lobby'                     =>  'Lobi',
         'Create new avatar'         =>  'Buat avatar baru',
         'Avatar player'             =>  'Avatar pemain',
-        'L_CARD'                    =>  'Kartu'     
+        'L_CARD'                    =>  'Kartu',
+             
 
     ];
     return $array_menuContent[$menu];
@@ -676,8 +677,6 @@ function TranslateReseller($menu){
         'L_TOTAL_GOLD'           => 'Total Koin',
         'L_USERNAME'             => 'Nama Reseller'
 
-
-
     
     ];
     return $array_menuContent[$menu];
@@ -809,7 +808,8 @@ function alertTranslate($menu){
         "Transaction Point"                                             =>  "Transaksi Poin",
         "L_PASSWORD_FAILED"                                             =>  "Password tidak cocok silahkan coba lagi",
         "L_LOGOUT_CHANGE_PASSWORD"                                      =>  "Password anda telah di ganti",
-        "Update image successfull"                                      =>  "Update gambar berhasil"
+        "Update image successfull"                                      =>  "Update gambar berhasil",
+        'L_HEIGHT_IMAGE'                                                =>  "Tinggi gambar tidak boleh kurang atau lebih dari {1}"
     ];
     return $array_menuContent[$menu];
 };
