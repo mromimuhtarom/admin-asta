@@ -86,7 +86,7 @@ class UserAdminController extends Controller
               'op_id'     => Session::get('userId'),
               'action_id' => '3',
               'datetime'  => Carbon::now('GMT+7'),
-              'desc'      => 'Menambahkan data di menu Pengguna Admin dengan Nama pengguna '. $user->username
+              'desc'      => 'L_LOG_CREATE.L_USER_ADMIN.('.$user->username.')'
           ]);
           return redirect()->route('User_Admin')->with('success', alertTranslate('insert data successful'));
     }
@@ -98,17 +98,18 @@ class UserAdminController extends Controller
       $value = $request->value;
       $user  = User::where('op_id', '=', $pk)->first();
 
+
       User::where('op_id', '=', $pk)->update([
         $name => $value
       ]);
 
       switch ($name) {
           case "fullname":
-              $name_column       = TranslateColumnName("L_FULLNAME");
+              $name_column       = "L_FULLNAME";
               $beforevaluecolumn = $user->fullname;
               break;
           case "role_id":
-              $name_column       = TranslateColumnName("L_ROLETYPE");
+              $name_column       = "L_ROLETYPE";
               $role = Role::where('role_id', '=', $user->role_id)->first();
               $beforevaluecolumn = $role->name;
               $role              = Role::where('role_id', '=', $value)->first();
@@ -118,21 +119,22 @@ class UserAdminController extends Controller
             "";
       }
 
-      $logdescnamecolumn = str_replace('{1}', $name_column, TranslateLogDesc('L_COMMON_DESC'));
-      $menuname          = str_replace('{2}', translate_menu('L_USER_ADMIN'), $logdescnamecolumn);
-      $firstcolomnname   = str_replace('{3}', translate_MenuContentAdmin('L_USERNAME'), $menuname);
-      $firstcolumnvalue  = str_replace('{4}', $user->username, $firstcolomnname);
-      $namecolumnforedit = str_replace('{5}', $name_column, $firstcolumnvalue);
-      $valuebeforeedit   = str_replace('{6}', $beforevaluecolumn, $namecolumnforedit);
-      $valueafteredit    = str_replace('{7}', $value, $valuebeforeedit);
-
+    //   $logdescnamecolumn = str_replace('{1}', $name_column, TranslateLogDesc('L_COMMON_DESC'));
+    //   $menuname          = str_replace('{2}', translate_menu('L_USER_ADMIN'), $logdescnamecolumn);
+    //   $firstcolomnname   = str_replace('{3}', translate_MenuContentAdmin('L_USERNAME'), $menuname);
+    //   $firstcolumnvalue  = str_replace('{4}', $user->username, $firstcolomnname);
+    //   $namecolumnforedit = str_replace('{5}', $name_column, $firstcolumnvalue);
+    //   $valuebeforeedit   = str_replace('{6}', $beforevaluecolumn, $namecolumnforedit);
+    //   $valueafteredit    = str_replace('{7}', $value, $valuebeforeedit);
+        // Edit {1} di menu {2} dengan {3} {4} , dari {5} {6} menjadi {7}
 
       Log::create([
         'op_id'     => Session::get('userId'),
         'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => $valueafteredit
+        'desc'      => "L_LOG_EDIT ".$name_column." (".$user->username.") ".$beforevaluecolumn." => ".$value
       ]);
+            
     }
     
     public function updatepassword(Request $request) 
