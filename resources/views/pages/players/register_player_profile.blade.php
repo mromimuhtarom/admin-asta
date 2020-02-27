@@ -85,17 +85,17 @@
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Gold <i class="fa fa-cubes"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->gold }}</span>
+                                        Gold <i class="fa fa-cubes"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->gold) }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Chip <i class="fa fa-database"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->chip }}</span>
+                                        Chip <i class="fa fa-database"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->chip) }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Point <i class="fa fa-tags"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->point }}</span>
+                                        Point <i class="fa fa-tags"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->point) }}</span>
                                     </p>
                                 </li>
                             </ul>
