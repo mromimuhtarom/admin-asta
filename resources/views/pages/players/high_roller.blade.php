@@ -37,7 +37,7 @@
               <tr>
                 <th data-hide="phone">{{ Translate_menuPlayers('Bank Account') }}</th>
                 <th data-hide="phone,tablet">{{ Translate_menuPlayers('Players') }}</th>
-                <th data-hide="phone,tablet">{{ Translate_menuPlayers('Country') }}</th>
+                {{-- <th data-hide="phone,tablet">{{ Translate_menuPlayers('Country') }}</th> --}}
                 <th data-hide="phone,tablet">{{ Translate_menuPlayers('Gold Coins') }}</th>
               </tr>
             </thead>
@@ -46,7 +46,7 @@
               <tr>
                 <td>{{ number_format($plyr->chip, 2) }}</td>
                 <td>{{ $plyr->username }}</td>
-                <td>{{ $plyr->name }}</td>
+                {{-- <td>{{ $plyr->name }}</td> --}}
                 <td>{{ number_format($plyr->gold, 2)}}</td>
               </tr>
               @endforeach

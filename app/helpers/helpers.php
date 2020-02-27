@@ -346,6 +346,28 @@ function tpkcard($array) {
 
 }
 
+function statuscard($typecard, $cardarray) {
+
+  if($typecard == 'One Pair'):
+    $arraycard = explode(',', $cardarray);
+
+    for($a = 0; $a < count($arraycard); $a++):
+      // if():
+      //   return 
+      // endif;
+    endfor;
+  elseif($typecard == 'Two Pair'):
+  elseif($typecard == 'Straight'):
+  elseif($typecard == 'High Card'):
+  elseif($typecard == 'Three Of A Kind'):
+  elseif($typecard == 'Four of a Kind'):
+  elseif($typecard == 'Flush'):
+  elseif($typecard == 'Fullhouse'):
+
+
+  endif;
+}
+
 function cardreadpopup($array) {
   
   $a = json_encode($array);

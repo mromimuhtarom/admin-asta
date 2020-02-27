@@ -714,8 +714,8 @@ Route::middleware('authenticated')->group(function(){
         });
 
         Route::group(['prefix' => 'Reseller-Transaction'], function() {
-            Route::group(['prefix' => 'L_TRANSACTION_DAY_RESELLER'], function() {
-                Route::middleware('page_denied:Transaction Day Reseller')->group(function() {
+            Route::group(['prefix' => 'Transaction_Day_Reseller'], function() {
+                Route::middleware('page_denied:L_TRANSACTION_DAY_RESELLER')->group(function() {
                     Route::get('TransactionDayReseller-view', 'ResellerController@TransactionDayReseller')->name('Transaction_Day_Reseller');
                     Route::get('TransactionDayReseller-search', 'ResellerController@searchTransactionDayReseller')->name('Transaction_Day_Reseller-search');
                     Route::get('TransactionDayReseller-search/detail', 'ResellerController@detailTransactionDayReseller')->name('Transaction_Day_Reseller-detail');

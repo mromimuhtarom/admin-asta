@@ -43,7 +43,7 @@
                 @if($menu && $mainmenu)
                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('Select All')}}</th></th>
                 @endif
-                <th class="th-sm">{{ TranslateReseller('Reseller ID')}}</th>
+                <th class="th-sm">{{ TranslateReseller('L_RESELLER_ID')}}</th>
                 <th class="th-sm">{{ Translate_menuPlayers('Username')}}</th>
                 <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
                 <th class="th-sm">{{ TranslateReseller('Phone')}}</th>

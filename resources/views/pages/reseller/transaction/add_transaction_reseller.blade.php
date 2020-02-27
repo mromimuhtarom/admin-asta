@@ -76,17 +76,15 @@
                         width="100%">
                         <thead>
                             <tr>
-                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.reseller_id">{{ TranslateReseller('Reseller ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.reseller_id') }}"></i></a></th>
+                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.reseller_id">{{ TranslateReseller('L_RESELLER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.reseller_id') }}"></i></a></th>
                                 <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.username') }}"></i></a></th>
                                 <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.gold">{{ TranslateReseller('Gold') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{$a = 1}}
+                            
                             @foreach ($add_transaction as $transaction)
                             <tr>
-                                {{  $a  }}
-                                @php $a++; @endphp
                                 <td>{{ $transaction->reseller_id }}</td>
                                 <td>{{ $transaction->username }}</td>
                                 <td>
@@ -139,12 +137,12 @@
                 <div class="modal-body">
                     <table width="100%" border="1" style="margin-bottom:25px;">
                         <tr>
-                            <td width="20%">{{ TranslateReseller('Reseller ID') }}</td>
+                            <td width="20%">{{ TranslateReseller('L_RESELLER_ID') }}</td>
                             <td width="5%">:</td>
                             <td width="75%">{{ $transaction->reseller_id }}</td>
                         </tr>
                         <tr>
-                            <td>{{ TranslateReseller('Username') }}</td>
+                            <td>{{ TranslateReseller('L_USERNAME') }}</td>
                             <td>:</td>
                             <td>{{ $transaction->username }}</td>
                         </tr>
