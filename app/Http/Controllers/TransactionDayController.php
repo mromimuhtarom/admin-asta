@@ -224,7 +224,7 @@ class TransactionDayController extends Controller
                               'store_transaction_day.gold_debet as gold_debettransaction',
                               'store_transaction_day.gold_credit as gold_credittransaction',
                               'store_transaction_day.chip_debet as chip_debettransaction',
-                              'store_transaction_day.chip_credit as chip_credit',
+                              'store_transaction_day.chip_credit as chip_credittransaction',
                               'store_transaction_day.reward_gold as reward_goldtransaction',
                               'store_transaction_day.reward_point as reward_pointtransaction',
                               'store_transaction_day.reward_chip as reward_chiptransaction',

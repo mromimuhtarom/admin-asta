@@ -114,7 +114,6 @@ function translate_menu($menu){
       'L_MONITORING_TABLE_BIG_TWO'          => 'Monitor Meja',
       'L_STORE_RESELLER'                    => 'Toko Agen',
       'L_STORE_RESELLER_REPORT'             => 'Laporan Toko Agen'
-      
     ];
 
     return $array_menu[$menu];
@@ -974,8 +973,11 @@ function TranslateColumnName($menu) {
 
 function TranslateLogDesc($menu) {
     $array_menuContent = [
-        "L_COMMON_DESC"    =>  "Edit {1} di menu {2} dengan {3} {4} , dari {5} {6} menjadi {7}",
-        "L_PASSWORD"       =>  "Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna {1}"
+        "L_LOG_CREATE"          =>  "Menambahkan data di menu",
+        "L_LOG_EDIT"            =>  "Edit",
+        "L_LOG_EDIT_PASSWORD"   =>  "Edit kata sandi  dengan nama pengguna",
+        "L_LOG_DELETE"          =>  "Hapus"
+        // "L_PASSWORD"      =>  "Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna {1}"
     ];
     return $array_menuContent[$menu];
 }

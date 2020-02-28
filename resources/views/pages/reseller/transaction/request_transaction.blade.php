@@ -62,7 +62,7 @@
 												<td style="padding-right:25px;">
 													<table>
 														<tr>
-															<td><input type="checkbox" name="" id="" style="float:left;"></td>
+															<td><input class="bankname" type="checkbox" @if($chk === 'chhckall_bank')checked @endif value="all_bank" name="all_bank" id="all_bank" style="float:left;" onclick="cbChange(this)"></td>
 															<td><b style="float:left;">ALL Bank</b></td>
 														</tr>
 													</table>
@@ -73,7 +73,7 @@
 												<td width="30px" style="padding-right:25px;padding-bottom:7px;">
 													<table>
 														<tr>
-															<td><input type="checkbox" name="bankname" id="bankname" style="float:left;"></td>
+															<td><input type="checkbox" @if($chk === 'chhck'.$payment[$i]->id)checked @endif value="{{ $payment[$i]->id }}" class="bankname" name="bankname" id="bankname{{$i}}" style="float:left;" onclick="cbChange(this)"></td>
 															<td valign="middle">														
 																{{ $payment[$i]->name }}
 																{{-- <div style="width:50px;height:20px;float:left;margin-left:2px;"><img class="imgbank" style="border-radius:5px;" src="/upload/bank/bca.png" alt="" width="85"height="40"></div> --}}
@@ -92,7 +92,7 @@
 											<td width="30px" style="padding-right:25px;padding-bottom:7px;">
 												<table>
 													<tr>
-														<td><input type="checkbox" name="bankname" id="bankname" style="float:left;"></td>
+														<td><input type="checkbox" @if($chk === 'chhck'.$payment[$i]->id)checked @endif value="{{ $payment[$i]->id }}" class="bankname" name="bankname" id="bankname{{$i}}" style="float:left;" onclick="cbChange(this)"></td>
 														<td valign="middle">
 															{{ $payment[$i]->name }}
 															{{-- <div style="width:50px;height:20px;float:left;margin-left:2px;"><img class="imgbank" style="border-radius:5px;" src="/upload/bank/bca.png" alt="" width="85"height="40"></div> --}}
@@ -101,6 +101,49 @@
 												</table>
 											</td>
 											@endfor
+											<script>
+												function cbChange(obj) {
+													var cbs = document.getElementsByClassName("bankname");
+													for (var i = 0; i < cbs.length; i++) {
+															if(cbs[i].checked == true){
+																var valuechk = cbs[i].value;
+																// console.log(valuechk);
+																var url = "{{ route('Request_Transaction') }}?bankname="+obj.value+"&checkbox=chhck"+obj.value;
+																window.location.href=url;
+																cbs[i].checked = false;
+															} else {
+																
+															}
+													}
+													obj.checked = true;
+															
+												}
+
+													function myFunction() {
+														console.log("jjj");
+														var checkBox = document.getElementById("all_bank");
+														if (checkBox.checked == true){
+															var valuechk = checkBox.value(); 
+															var url = "{{ route('Request_Transaction') }}?bankname="+valuechk+"&checkbox=chhck{{$i}}";
+															window.location.href=url;
+														} else {
+															text.style.display = "none";
+														}
+													}
+													@for($i=0; $i <count($payment); $i++)
+													function myFunction{{$i}}() {
+														console.log('dfgh');
+														var checkBox = document.getElementById("bankname{{$i}}");
+														if (checkBox.checked == true){
+															var valuechk = checkBox.value(); 
+															var url = "{{ route('Request_Transaction') }}?bankname="+valuechk+"&checkbox=chhck{{$i}}";
+															window.location.href=url;
+														} else {
+															text.style.display = "none";
+														}
+													}
+													@endfor
+											</script>
 											{{-- @foreach($payment as $py)
 
 											@if(!($i%$columns))
@@ -352,9 +395,21 @@
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
       "pagingType": "full_numbers",
     });
-		$('input[type="checkbox"]').on('change', function() {
+		function oneCheck() {
 			$('input[type="checkbox"]').not(this).prop('checked', false);
-		});
+		};
+
+		// @for($i=0; $i <count($payment); $i++)
+		// $("#bankname{{$i}}").click(function() { 
+		// 		if ($("#bankname{{$i}}").is(":checked")) { 
+		// 				var valuechk = $("#bankname{{$i}}").val(); 
+		// 				var url = "{{ route('Request_Transaction') }}?bankname="+valuechk+"&checkbox=chhck{{$i}}";
+		// 				window.location.href=url;
+		// 		} else { 
+		// 					alert("aaad"); 
+		// 		} 
+		// }); 
+		// @endfor
   });
 
   table = $('table.table').dataTable({

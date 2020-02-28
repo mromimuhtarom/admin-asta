@@ -1208,33 +1208,65 @@ public function detailTransaction(Request $request, $month, $year)
 
 //****************************************** Menu Request Transaction ******************************************//
 //----- Index Request Transaction -----//
-    public function RequestTransaction()
+    public function RequestTransaction(Request $request)
     {
-        $payment      = Payment::where('status', '=', 1)->get();
-        $transactions = DB::table('asta_db.store_transaction')
-                        ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
-                        ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
-                        ->join('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
-                        ->select(
-                            'asta_db.reseller.reseller_id',
-                            'asta_db.reseller.username',
-                            'asta_db.payment.name as bankname',
-                            'item_cash.name as item_name',
-                            'asta_db.store_transaction.item_id',
-                            'item_cash.item_get',
-                            'asta_db.store_transaction.datetime',
-                            'asta_db.store_transaction.quantity',
-                            'asta_db.store_transaction.item_price',
-                            'asta_db.store_transaction.description',
-                            'asta_db.store_transaction.shop_type',
-                            'asta_db.store_transaction.id',
-                            'asta_db.store_transaction.payment_id',
-                            'asta_db.store_transaction.item_type'
-                        )
-                        ->where('asta_db.store_transaction.status', '=', 0)
-                        ->where('asta_db.store_transaction.shop_type', '=', 2)
-                        ->orderBy('asta_db.store_transaction.datetime', 'ASC')
-                        ->get();
+        $allbank  = $request->allbank;
+        $bankname = $request->bankname;
+        $chk      = $request->checkbox;
+        // dd($bankname);
+        $payment      = Payment::where('status', '=', 1)->where('type', '=', 1)->get();
+        if($bankname != 'all_bank'):
+            $transactions = DB::table('asta_db.store_transaction')
+                            ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
+                            ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
+                            ->join('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
+                            ->select(
+                                'asta_db.reseller.reseller_id',
+                                'asta_db.reseller.username',
+                                'asta_db.payment.name as bankname',
+                                'item_cash.name as item_name',
+                                'asta_db.store_transaction.item_id',
+                                'item_cash.item_get',
+                                'asta_db.store_transaction.datetime',
+                                'asta_db.store_transaction.quantity',
+                                'asta_db.store_transaction.item_price',
+                                'asta_db.store_transaction.description',
+                                'asta_db.store_transaction.shop_type',
+                                'asta_db.store_transaction.id',
+                                'asta_db.store_transaction.payment_id',
+                                'asta_db.store_transaction.item_type'
+                            )
+                            ->where('asta_db.store_transaction.status', '=', 0)
+                            ->where('asta_db.store_transaction.shop_type', '=', 2)
+                            ->where('asta_db.payment.id', '=', $bankname)
+                            ->orderBy('asta_db.store_transaction.datetime', 'ASC')
+                            ->get();
+        elseif($bankname == 'all_bank'):
+            $transactions = DB::table('asta_db.store_transaction')
+                            ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
+                            ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
+                            ->join('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
+                            ->select(
+                                'asta_db.reseller.reseller_id',
+                                'asta_db.reseller.username',
+                                'asta_db.payment.name as bankname',
+                                'item_cash.name as item_name',
+                                'asta_db.store_transaction.item_id',
+                                'item_cash.item_get',
+                                'asta_db.store_transaction.datetime',
+                                'asta_db.store_transaction.quantity',
+                                'asta_db.store_transaction.item_price',
+                                'asta_db.store_transaction.description',
+                                'asta_db.store_transaction.shop_type',
+                                'asta_db.store_transaction.id',
+                                'asta_db.store_transaction.payment_id',
+                                'asta_db.store_transaction.item_type'
+                            )
+                            ->where('asta_db.store_transaction.status', '=', 0)
+                            ->where('asta_db.store_transaction.shop_type', '=', 2)
+                            ->orderBy('asta_db.store_transaction.datetime', 'ASC')
+                            ->get();
+        endif;
 
             $item_gold = ItemsGold::select(
                             'item_id', 
@@ -1256,7 +1288,7 @@ public function detailTransaction(Request $request, $month, $year)
         $menu     = MenuClass::menuName('L_REQUEST_TRANSACTION');
         $submenu  = MenuClass::menuName('L_RESELLER_TRANSACTION');
         $mainmenu = MenuClass::menuName('L_RESELLER');
-        return view('pages.reseller.transaction.request_transaction', compact('item_gold', 'item_cash', 'item_point', 'transactions', 'menu', 'mainmenu', 'submenu', 'payment'));
+        return view('pages.reseller.transaction.request_transaction', compact('chk', 'bankname', 'allbank', 'item_gold', 'item_cash', 'item_point', 'transactions', 'menu', 'mainmenu', 'submenu', 'payment'));
     }
 //------ End Index Request Transaction ------//
 
