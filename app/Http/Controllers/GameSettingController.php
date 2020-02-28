@@ -55,9 +55,9 @@ class GameSettingController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => 2,
+            'action_id' => '25',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit Setting Asta Poker in menu Game Setting with name '.$currentname->name.'. From '.$currentname->value.' to '. $value
+            'desc'      => 'Edit Pengaturan Asta Poker dengan nama '.$currentname->name.'. '.$currentname->value.' => '. $value
         ]);
 
     }
@@ -75,9 +75,9 @@ class GameSettingController extends Controller
 
         Log::create([
             'op_id' =>  Session::get('userId'),
-            'action_id' =>  2,
+            'action_id' => '25',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'  =>  'Edit Setting Asta Big Two in menu Game Setting with name '.$currentname->name.'. From '.$currentname->value.' to '.$value  
+            'desc'  =>  'Edit Pengaturan Asta Big Two dengan nama '.$currentname->name.'. '.$currentname->value.' => '.$value  
         ]);
     }
 
@@ -94,9 +94,9 @@ class GameSettingController extends Controller
 
         Log::create([
             'op_id' =>  Session::get('userId'),
-            'action_id' =>  2,
+            'action_id' =>  '25',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit Domino Susun Setting in menu Game Settings with name '.$currentname->name.'. From '.$currentname->value.' to '.$value
+            'desc'      =>  'Edit Pengaturan Domino Susun dengan nama '.$currentname->name.'. '.$currentname->value.' => '.$value
         ]);
     }
 
@@ -113,9 +113,9 @@ class GameSettingController extends Controller
 
         Log::create([
             'op_id' =>  Session::get('userId'),
-            'action_id' =>  2,
+            'action_id' =>  '25',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit Domino QQ Setting in menu Game Settings with name '.$currentname->name.'. From '.$currentname->value.' to '.$value
+            'desc'      =>  'Edit pengaturan domino qq dengan nama '.$currentname->name.'. '.$currentname->value.' => '.$value
         ]);
     }
 }

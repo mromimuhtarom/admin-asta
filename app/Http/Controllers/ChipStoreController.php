@@ -196,7 +196,7 @@ class ChipStoreController extends Controller
 
                 Log::create([
                     'op_id'     => Session::get('userId'),
-                    'action_id' => '3',
+                    'action_id' => '26',
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Menambahkan data di menu Toko Chip dengan title '. $chip->name
                 ]);
@@ -270,9 +270,9 @@ class ChipStoreController extends Controller
       //RECORD LOG
       Log::create([
         'op_id'     => Session::get('userId'),
-        'action_id' => '2',
+        'action_id' => '26',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Toko Chip dengan nama item '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' dengan nama item '.$currentname->name.'. '.$currentvalue.' => '. $value
       ]);
     }
 
@@ -369,9 +369,9 @@ class ChipStoreController extends Controller
 
                 Log::create([
                     'op_id'     => Session::get('userId'),
-                    'action_id' => '2',
+                    'action_id' => '26',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Edit gambar di menu Toko Chip dengan ID '.$pk.' menjadi '.$nama_file_unik
+                    'desc'      => 'Edit gambar chip dengan ID '.$pk.' => '.$nama_file_unik
                 ]);
 
                 return redirect()->route('Chip_Store')->with('success', alertTranslate('Update image successfull'));
@@ -413,9 +413,9 @@ class ChipStoreController extends Controller
             //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '26',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit gambar bonus di menu Toko Chip dengan ID '.$pk.' menjadi '.$finalname
+                'desc'      => 'Edit gambar bonus chip dengan ID '.$pk.' => '.$finalname
             ]);
 
             return redirect()->route('Chip_Store')->with('success', alertTranslate('Update image successfull'));
@@ -498,9 +498,9 @@ class ChipStoreController extends Controller
             //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '26',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar di menu Toko Chip dengan nama '.$currentname->name
+                'desc'      => 'Hapus gambar Chip dengan nama '.$currentname->name
             ]);
 
             return redirect()->route('Chip_Store')->with('success', alertTranslate('Data deleted'));
@@ -527,9 +527,9 @@ class ChipStoreController extends Controller
         //RECORD LOG
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '26',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus item yang dipilih dimenu Toko Chip dengan nama '.$currentname
+            'desc'      =>  'Hapus item chip yang dipilih dengan nama '.$currentname
         ]);
         return redirect()->route('Chip_Store')->with('success', alertTranslate('Data deleted'));
     }

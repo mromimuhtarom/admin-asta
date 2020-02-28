@@ -212,9 +212,9 @@ class GoldStoreController extends Controller
         
                   Log::create([
                     'op_id' => Session::get('userId'),
-                    'action_id' => '3',
+                    'action_id' => '27',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Menambahkan data baru di menu Toko Koin dengan judul '. $gold->name
+                    'desc'      => 'Menambahkan data baru dengan judul '. $gold->name
                   ]);
         
                 return redirect()->route('Gold_Store')->with('success', alertTranslate("Data Added"));
@@ -346,9 +346,9 @@ class GoldStoreController extends Controller
         //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '27',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Toko Koin dengan judul item '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' dengan judul item '.$currentname->name.'. '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -446,9 +446,9 @@ class GoldStoreController extends Controller
 
                 Log::create([
                     'op_id'     => Session::get('userId'),
-                    'action_id' => '2',
+                    'action_id' => '27',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Update gambar di menu Toko Koin pada judul '.$currentname->name
+                    'desc'      => 'Update gambar Koin dengan judul '.$currentname->name
                 ]);
                 return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));
             } else  {
@@ -491,9 +491,9 @@ class GoldStoreController extends Controller
             //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '27',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit gambar bonus di menu Toko Gold dengan nama '.$currentname->name.' menjadi '.$finalname
+                'desc'      => 'Edit gambar bonus koin dengan nama '.$currentname->name.' => '.$finalname
             ]);
             
             return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));
@@ -526,9 +526,9 @@ class GoldStoreController extends Controller
             //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '27',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar di menu Toko Koin dengan nama '.$currentname->name
+                'desc'      => 'Hapus gambar Koin dengan nama '.$currentname->name
             ]);
 
             $path = '../public/upload/Gold/'.$getGoldId.'.png';
@@ -577,9 +577,9 @@ class GoldStoreController extends Controller
         //RECORD LOG
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '27',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus gambar yang dipilih di menu toko koin dengan nama '.$currentname
+            'desc'      =>  'Hapus gambar koin yang dipilih dengan nama '.$currentname
         ]);
         return redirect()->route('Gold_Store')->with('success', alertTranslate('Data deleted'));
     }

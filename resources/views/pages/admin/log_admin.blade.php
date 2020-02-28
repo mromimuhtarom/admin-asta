@@ -54,7 +54,7 @@
                     <select name="action" id="" class="form-control">
                         <option value="">{{ translate_MenuContentAdmin('L_CHOOSE_ACTION') }}</option>
                         @foreach($actionSearch as $action)
-                        <option value="{{ $action->id}}">{{ translate_MenuContentAdmin($action->action) }}</option>
+                            <option value="{{ $action->id}}">{{ translate_MenuContentAdmin($action->action) }}</option>
                         @endforeach
                     </select>
                 </div>   
@@ -114,7 +114,7 @@
                     <tr>
                         <td>{{ $log->op_id }}</td>
                         <td>{{ $log->username }}</td>
-                        <td>{{ $log->action }}</td>
+                        <td>{{ translate_MenuContentAdmin($log->action) }}</td>
                         <td>{{ date("d-m-Y H:i:s", strtotime($log->datetime)) }}</td>
                         <td>{{ $log->desc }}</td>
                     </tr>

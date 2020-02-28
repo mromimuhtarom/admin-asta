@@ -268,8 +268,6 @@ class GiftController extends Controller
       
     }
 
-
-
     public function updateimage(Request $request)
     {
         $pk                     = $request->pk;

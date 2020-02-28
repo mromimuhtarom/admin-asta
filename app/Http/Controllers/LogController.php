@@ -36,7 +36,7 @@ class LogController extends Controller
         $namecolumn   = $request->namecolumn;
   
         $actionSearch = Action::select('action', 'id')  
-                        ->whereBetween('id', [1, 6])
+                        ->whereBetween('id', [1, 37])
                         ->get();
         $logOperator  = Log::select(
                                 'asta_db.log_operator.datetime',
