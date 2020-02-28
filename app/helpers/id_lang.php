@@ -165,10 +165,6 @@ function translate_MenuContentAdmin($menu){
         'L_STATEMENT_DELETE_ALL' => 'Hapus semua data terpilih?',
         'L_QUESTION_DELETE_ALL'  => 'Apakah anda yakin akan menghapus semua data yang dipilih?',
         'L_DESCRIPTION_NULL'     => 'Deskripsi tidak boleh kosong',
-        'L_EDIT_USER_ADMIN'      => 'Edit pengguna admin',
-        'L_EDIT_ROLE_ADMIN'      => 'Edit peran admin',
-        'L_EDIT_USER_BANK_TRANSACTION'  =>  'Edit transaksi bank pengguna',
-        ''
     ];
 
     return $array_menuContent[$menu];
@@ -937,8 +933,10 @@ function TranslateColumnName($menu) {
 
 function TranslateLogDesc($menu) {
     $array_menuContent = [
-        "L_LOG_CREATE"    =>  "Menambahkan data di menu",
-        "L_LOG_EDIT"      =>  "Edit",
+        "L_LOG_CREATE"          =>  "Menambahkan data di menu",
+        "L_LOG_EDIT"            =>  "Edit",
+        "L_LOG_EDIT_PASSWORD"   =>  "Edit kata sandi  dengan nama pengguna",
+        "L_LOG_DELETE"          =>  "Hapus"
         // "L_PASSWORD"      =>  "Edit kata sandi di menu Pengguna Admin dengan Nama Pengguna {1}"
     ];
     return $array_menuContent[$menu];
