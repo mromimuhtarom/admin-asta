@@ -58,9 +58,9 @@ class RoleController extends Controller
               DB::table('asta_db.adm_access')->insert($menuId);
               Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '3',
+                'action_id' => '2',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Menambahkan data Peran di Menu Peran Admin dengan Nama Peran '.$role
+                'desc'      => 'Menambahkan data ('.$role.')'
               ]);
               return redirect()->route('Role_Admin')->with('success', alertTranslate('insert data successful'));  
         }
@@ -115,7 +115,7 @@ class RoleController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di Menu Peran Admin dengan nama peran '.$currentname->name.' menjadi '. $value
+          'desc'      => 'Edit Nama Role '.$currentname->name.' => '. $value
         ]);
     }
 
@@ -154,7 +154,7 @@ class RoleController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Tipe Peran Aksses di menu Peran Admin dengan nama peran '.$role->name.' di nama menu '.translate_menu($menuname->name).' dengan type '. $value
+          'desc'      => 'Edit Tipe Peran Aksses nama peran:'.$role->name.' ('.translate_menu($menuname->name).') '.translate_menu($menuname->name).' dengan type '. $value
         ]);
     }
 

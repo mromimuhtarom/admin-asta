@@ -86,7 +86,7 @@ class UserAdminController extends Controller
               'op_id'     => Session::get('userId'),
               'action_id' => '1',
               'datetime'  => Carbon::now('GMT+7'),
-              'desc'      => 'Menambahkan data dengan nama pengguna ('.$user->username.')'
+              'desc'      => 'Menambahkan data ('.$user->username.')'
           ]);
           return redirect()->route('User_Admin')->with('success', alertTranslate('insert data successful'));
     }
@@ -160,7 +160,7 @@ class UserAdminController extends Controller
                     'op_id'     => Session::get('userId'),
                     'action_id' => '1',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Ubah kata sandi ('.$operator->username.')'
+                    'desc'      => 'Edit kata sandi ('.$operator->username.')'
                 ]);
                 
                 $useredit = DB::table('operator')->where('op_id', '=', $pk)->first();
