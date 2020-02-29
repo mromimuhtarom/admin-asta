@@ -178,7 +178,7 @@ class TableController extends Controller
 
         Log::create([
         'op_id'     => Session::get('userId'),
-        'action_id' => '3',
+        'action_id' => '13',
         'datetime'  => Carbon::now('GMT+7'),
         'desc'      => 'Menambahkan data di menu Meja Asta Poker dengan nama meja '.$request->tableName
         ]);
@@ -235,7 +235,7 @@ class TableController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '16',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menambahkan data di menu Meja Big Two dengan nama meja '.$request->tableName
         ]);
@@ -296,7 +296,7 @@ class TableController extends Controller
 
           Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '19',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menambahkan data di menu Meja Domino Susun dengan nama meja'.$request->tableName
           ]);
@@ -359,7 +359,7 @@ class TableController extends Controller
 
           Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '22',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Menambahkan data di menu Meja Domino QQ dengan nama meja '.$request->tableName
           ]);
@@ -427,9 +427,9 @@ class TableController extends Controller
             DB::table('tpk_table')->where('table_id', '=', $pk)->update([
                 $name => $value
             ]);
+    
         }
         
-  
         switch ($name) {
             case "name":
                 $name = "Nama Meja";
@@ -478,9 +478,9 @@ class TableController extends Controller
   
         Log::create([
           'op_id'     => Session::get('userId'),
-          'action_id' => '2',
+          'action_id' => '13',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu Meja Asta Poker dengan Nama meja '.$tpktable->name.'. Dari '.$currentvalue.' menjadi '.$value
+          'desc'      => 'Edit '.$name.' dengan nama meja '.$tpktable->name.'. '.$currentvalue.' => '.$value
         ]);
     }
 
@@ -578,9 +578,9 @@ class TableController extends Controller
     $bgttable = DB::table('bgt_table')->where('table_id', '=', $pk)->first();
     Log::create([
         'op_id'     => Session::get('userId'),
-        'action_id' => '2',
+        'action_id' => '16',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Meja Big Two dengan Nama meja '.$bgttable->name.'. Dari '.$currentvalue.' menjadi '.$value
+        'desc'      => 'Edit '.$name.' dengan Nama meja '.$bgttable->name.'. '.$currentvalue.' => '.$value
     ]);
     }
 
@@ -700,9 +700,9 @@ class TableController extends Controller
     $dmstable = DB::table('dms_table')->where('table_id', '=', $pk)->first();
     Log::create([
         'op_id' => Session::get('userId'),
-        'action_id'   => '2',
+        'action_id'   => '19',
         'datetime'    => Carbon::now('GMT+7'),
-        'desc'        => 'Edit '.$name.' di menu Meja Domino Susun dengan Nama meja '.$dmstable->name.'. Dari '.$currentvalue.' menjadi '. $value
+        'desc'        => 'Edit '.$name.' dengan Nama meja '.$dmstable->name.'. '.$currentvalue.' => '. $value
     ]);
     }
 
@@ -809,9 +809,9 @@ class TableController extends Controller
     $dmqtable = DB::table('dmq_table')->where('table_id', '=', $pk)->first();
     Log::create([
         'op_id'     => Session::get('userId'),
-        'action_id' => '2',
+        'action_id' => '22',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Meja Domino QQ dengan Nama meja '.$dmqtable->name.'. Dari '.$currentvalue.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' dengan Nama meja '.$dmqtable->name.'. '.$currentvalue.' => '. $value
     ]);
     }
 
@@ -826,7 +826,7 @@ class TableController extends Controller
             TpkTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '13',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Asta Poker dengan nama meja '.$tpk_table->name
             ]);
@@ -843,7 +843,7 @@ class TableController extends Controller
         DB::table('asta_db.tpk_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '13',
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus di menu table asta poker dengan nama meja' .$currentname
         ]);
@@ -862,7 +862,7 @@ class TableController extends Controller
             
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '16',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Big Two dengan nama meja '.$bgt_table->name
             ]);
@@ -879,7 +879,7 @@ class TableController extends Controller
         DB::table('asta_db.bgt_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '16',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu table Big two dengan nama' .$currentname
         ]);
@@ -896,7 +896,7 @@ class TableController extends Controller
             DominoSusunTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '16',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Domino Susun dengan nama meja '.$dms_table->name
             ]);
@@ -913,7 +913,7 @@ class TableController extends Controller
         DB::table('asta_db.dms_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '16',
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus di menu table Domino susun dengan nama meja ' .$currentname
         ]);
@@ -930,7 +930,7 @@ class TableController extends Controller
             DominoQTable::where('table_id', '=', $tableid)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '22',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Domino QQ dengan nama ruang '.$dmq_table->name
             ]);
@@ -947,7 +947,7 @@ class TableController extends Controller
         DB::table('asta_db.dmq_table')->whereIn('table_id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '22',
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus di menu table Domino QQ dengan nama meja' .$currentname
         ]);

@@ -263,9 +263,9 @@ class CategoryController extends Controller
   
         Log::create([
           'op_id'     => Session::get('userId'),
-          'action_id' => '2',
+          'action_id' => '14',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu Kategori Asta Poker dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' dengan nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -300,9 +300,9 @@ class CategoryController extends Controller
   
         Log::create([
           'op_id'     => Session::get('userId'),
-          'action_id' => '2',
+          'action_id' => '17',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu KategorI Big Two dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' dengan nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
         ]);
 
         
@@ -338,9 +338,9 @@ class CategoryController extends Controller
   
         Log::create([
           'op_id'     => Session::get('userId'),
-          'action_id' => '2',
+          'action_id' => '20',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' di menu Kategory Domino Susun dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+          'desc'      => 'Edit '.$name.' dengan nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -373,9 +373,9 @@ class CategoryController extends Controller
   
         Log::create([
           'op_id'       => Session::get('userId'),
-          'action_id'   => '2',
+          'action_id'   => '23',
           'datetime'    => Carbon::now('GMT+7'),
-          'desc' => 'Edit '.$name.' di menu KategorI Domino QQ dengan nama table '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+          'desc' => 'Edit '.$name.' nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -388,7 +388,7 @@ class CategoryController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '14',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Kategori Asta Poker dengan RuangID '.$roomid
             ]);
@@ -408,7 +408,7 @@ class CategoryController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '17',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Kategori Asta Big Two dengan RuangID '.$roomid
             ]);
@@ -427,7 +427,7 @@ class CategoryController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '20',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Kategory Domino Susun dengan RuangID '.$roomid
             ]);
@@ -446,7 +446,7 @@ class CategoryController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '23',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Kategori Domino QQ dengan RuangID '.$roomid
             ]);
