@@ -166,7 +166,7 @@ class GoodsStoreController extends Controller
     
                 Log::create([
                     'op_id'     => Session::get('userId'),
-                    'action_id' => '3',
+                    'action_id' => '28',
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Menambahkan data di menu Toko Barang dengan nama '. $goods->name
                 ]);
@@ -223,9 +223,9 @@ class GoodsStoreController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '28',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name. ' di menu Toko Barang dengan ID '.$pk.' menjadi '.$value
+            'desc'      => 'Edit '.$name. ' dengan ID '.$pk.' menjadi '.$value
         ]);
     }
 
@@ -328,7 +328,7 @@ class GoodsStoreController extends Controller
                 }
                 Log::create([
                     'op_id'     => Session::get('userId'),
-                    'action_id' => '2',
+                    'action_id' => '29',
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Update gambar di menu Toko Barang dengan ID '.$pk
                 ]);
