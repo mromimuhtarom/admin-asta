@@ -191,6 +191,7 @@ class GoodsStoreController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
+        $currentname = ItemPoint::where('item_id', '=', $pk)->first();
 
         ItemPoint::where('item_id', '=', $pk)->update([
             $name => $value
@@ -199,15 +200,19 @@ class GoodsStoreController extends Controller
         switch ($name) {
             case 'nama':
                 $name = 'Nama';
+                $currentvalue = $currentname->name;
                 break;
             case 'price':
                 $name = 'Price';
+                $currentvalue = $currentname->price;
                 break;
             case 'qty':
                 $name = 'Kuantitas';
+                $currentvalue = $currentname->qty;
                 break;
             case 'status':
                 $name = 'Status';
+                $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
                 if($value == 0):
                     $value = 'Disabled';
                 else:
@@ -216,6 +221,7 @@ class GoodsStoreController extends Controller
                 break;
             case 'order':
                 $name = 'Memesan';
+                $currentvalue = $currentname->order;
                 break;            
             default:
                 "";
@@ -225,7 +231,7 @@ class GoodsStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '28',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name. ' dengan ID '.$pk.' menjadi '.$value
+            'desc'      => 'Edit '.$name. ' dengan nama item '.$currentname->name.'. '.$currentvalue.' => '.$value
         ]);
     }
 
@@ -326,11 +332,14 @@ class GoodsStoreController extends Controller
                     // File::delete($path);    
                     // return redirect()->route('Goods_Store')->with('alert','Gagal Upload File');
                 }
+
+                $currentname = ItemCash::where('item_id', '=', $pk)->first();
+
                 Log::create([
                     'op_id'     => Session::get('userId'),
                     'action_id' => '29',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Update gambar di menu Toko Barang dengan ID '.$pk
+                    'desc'      => 'Update gambar Barang dengan nama '.$currentname->name
                 ]);
                 return redirect()->route('Goods_Store')->with('success', alertTranslate('Update image successfull'));
 
@@ -379,21 +388,23 @@ class GoodsStoreController extends Controller
         $goods = ItemPoint::where('item_id', '=', $id)->first();
 
         $pathS3 = 'unity-asset/store/goods/'.$id.'.png';
+        $currentname = ItemCash::where('item_id', '=', $getId)->first();
 
         if($id != '')
         {
             ItemPoint::where('item_id', '=', $id)->update([
                 'status' => 2
             ]);
+
             $path = '../public/upload/Goods/'.$goods->item_id.'.png';
             File::delete($path);
             Storage::disk('s3')->delete($pathS3);
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '28',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar dan data di menu Toko Barang dengan ID '.$id
+                'desc'      => 'Hapus gambar Barang dengan nama '.$currentname->name
             ]);
 
             return redirect()->route('Goods_Store')->with('success', alertTranslate('Data deleted'));
@@ -405,9 +416,11 @@ class GoodsStoreController extends Controller
     {
         $ids        =   $request->userIdAll;
         $imageid    =   $request->imageid;
+        $currentname = $request->usernameAll;
 
         //DELETE
         Storage::disk('s3')->delete(explode(",", $imageid));
+
         DB::table('asta_db.item_point')->whereIn('item_id', explode(",", $ids))->update([
             'status'    => 2
         ]);
@@ -415,10 +428,11 @@ class GoodsStoreController extends Controller
         //RECORD LOG
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '28',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus gambar dan data yang dipilih di menu Toko barang dengan id '.$ids
+            'desc'      =>  'Hapus gambar barang yang dipilih dengan nama '.$currentname
         ]);
+        
         return redirect()->route('Goods_Store')->with('success', alertTranslate('Data deleted'));
     }
 }
