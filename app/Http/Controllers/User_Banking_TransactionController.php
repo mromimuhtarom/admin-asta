@@ -115,9 +115,9 @@ class User_Banking_TransactionController extends Controller
         ]);
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '6',
+            'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menolak permintaan transaksi di menu Transaksi Bank Pemain dengan nama pemain '. $username
+            'desc'      => 'Menolak permintaan ('. $username.')'
         ]);
         return back()->with('success','Declined Succesful');
     }
@@ -181,9 +181,9 @@ class User_Banking_TransactionController extends Controller
         StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $declineOrderId)->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '5',
+            'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan Transaksi di menu Transaksi Bank Pemain dengan Nama Pemain '. $username
+            'desc'      => 'Menerima permintaan ('. $username.')'
         ]);
 
 

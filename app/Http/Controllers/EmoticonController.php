@@ -126,9 +126,9 @@ class EmoticonController extends Controller
 
                             Log::create([
                                 'op_id'     => Session::get('userId'),
-                                'action_id' => '3',
+                                'action_id' => '12',
                                 'datetime'  => Carbon::now('GMT+7'),
-                                'desc'      => 'Menambahkan data di menu Emotikon dengan nama '.$emoticon->name
+                                'desc'      => 'Menambahkan data ('.$emoticon->name.')'
                             ]);
                             return redirect()->route('Emoticon')->with('success', alertTranslate('insert data successful'));
                         }
@@ -199,11 +199,12 @@ class EmoticonController extends Controller
                             'img_ver' =>  $imageversion 
                         ]);
 
+                        $emoticon = Emoticon::where('id', '=', $pk)->first();
                         Log::create([
                             'op_id'     => Session::get('userId'),
-                            'action_id' => '2',
+                            'action_id' => '12',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Edit gambar di menu Emotikon dengan ID '.$pk
+                            'desc'      => 'Edit gambar ('.$emoticon->name.')'
                         ]);
                         return redirect()->route('Emoticon')->with('success', alertTranslate('Update image successfull'));
 
@@ -266,17 +267,22 @@ class EmoticonController extends Controller
 
         switch ($name) {
           case "name":
-              $name = "Nama";
+              $name         = "Nama";
+              $currentvalue = $currentname->name;
               break;
           case "price":
-              $name = "Harga";
+              $name         = "Harga";
+              $currentvalue = $currentname->price;
               break;
           case "status":
-              $name = "Status";
-              if($value == 0):
-                $value = 'disabled';
+              $name          = "Status";
+              $currentnumber = $currentname->status;
+              if($value == 0 || $currentnumber == 0):
+                $value        = 'disabled';
+                $currentvalue = 'disabled';
               else:
-                $value = 'enabled';
+                $value        = 'enabled';
+                $currentvalue = 'enabled';
               endif;
             break;
           default:
@@ -286,9 +292,9 @@ class EmoticonController extends Controller
 
       Log::create([
         'op_id'     => Session::get('userId'),
-        'action_id' => '2',
+        'action_id' => '12',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Emotikon dengan Judul '.$currentname->name.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' ('.$currentname->name.') '.$currentvalue.' => '. $value
       ]);
     }
 
@@ -317,9 +323,9 @@ class EmoticonController extends Controller
             Storage::disk('s3')->delete($pathS3);
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '12',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Emotikon dengan nama '.$currentname->name
+                'desc'      => 'Hapus data ('.$currentname->name.')'
             ]);
 
             return redirect()->route('Emoticon')->with('success', alertTranslate('Data deleted'));
@@ -339,9 +345,9 @@ class EmoticonController extends Controller
 
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '12',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Menghapus data yang dipilih di menu emoticon dengan nama '.$currentname
+            'desc'      =>  'Hapus data ('.$currentname.')'
         ]);
         return redirect()->route('Emoticon')->with('success', alertTranslate('Data deleted'));
     }

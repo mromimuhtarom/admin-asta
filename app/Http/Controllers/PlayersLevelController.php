@@ -39,9 +39,9 @@ class PlayersLevelController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '9',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data level pemain di menu level pemain dengan level '.$level
+            'desc'      => 'Menambahkan data level pemain ('.$level.')'
         ]);
 
         return back()->with('success', alertTranslate("Data input successfull"));
@@ -60,9 +60,9 @@ class PlayersLevelController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '9',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data peringkat pemain di menu level pemain dengan nama level '.$name
+            'desc'      => 'Menambahkan data peringkat pemain ('.$name.')'
         ]);
 
         return back()->with('success', alertTranslate('Data input successfull'));
@@ -94,9 +94,9 @@ class PlayersLevelController extends Controller
     
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '9',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' data level pemain di menu Level Pemain dengan level '.$pk.'. Dari '.$currentvalue.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' data level pemain ('.$pk.') '.$currentvalue.' => '. $value
         ]);
 
     }
@@ -126,9 +126,9 @@ class PlayersLevelController extends Controller
         }
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '9',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' peringkat pemain di menu Level Pemain dengan level '.$pk.'. Dari '.$currentvalue.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' peringkat pemain ('.$pk.') '.$currentvalue.' => '. $value
         ]);
 
     }
@@ -144,9 +144,9 @@ class PlayersLevelController extends Controller
     
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '9',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus data level pemain di menu Level Pemain dengan Level '.$level
+                'desc'      => 'Hapus data level pemain ('.$level.')'
             ]);
             return redirect()->route('Players_Level')->with('success', alertTranslate("Data deleted"));
         }
@@ -161,13 +161,14 @@ class PlayersLevelController extends Controller
    
         if($id != '')
         {
+            $user_rank = DB::table('asta_db.user_rank')->where('id', '=', $id)->first();
             DB::table('asta_db.user_rank')->where('id', '=', $id)->delete();
     
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '9',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus data peringkat pemain di menu Level Pemain dengan ID '.$id
+                'desc'      => 'Hapus data peringkat pemain ('.$user_rank.')'
             ]);
             return redirect()->route('Players_Level')->with('success', alertTranslate('Data deleted'));
         }
@@ -185,7 +186,7 @@ class PlayersLevelController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus data Level pemain di menu Level Pemain dengan level '.$currentname
+            'desc'      => 'Hapus data Level pemain ('.$currentname.')'
         ]);
         return redirect()->route('Players_Level')->with('success', alertTranslate('Data deleted'));        
     }
@@ -200,7 +201,7 @@ class PlayersLevelController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus data Peringkat pemain di menu Level Pemain dengan id '.$curentname
+            'desc'      => 'Hapus data Peringkat pemain ('.$curentname.')'
         ]);
         return redirect()->route('Players_Level')->with('success', AlertTranslate('Data deleted'));        
     }

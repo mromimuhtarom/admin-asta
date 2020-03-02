@@ -395,16 +395,16 @@
                                     @endif
                                     @endforeach
                                     <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ number_format($player['bet'], 2) }}</td>
+                                    <td>{{--{{ number_format($player['bet'], 2) }}--}}</td>
                                     <td>{{ number_format($player['chip'], 2) }}</td>
                                     {{-- <td>{{ cardreadpopup(tpkcard($player['card'])) }}</td>
                                     <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td> --}}
                                     <td>
-                                        @if($player['card'] !== "")
+                                        {{-- @if($player['card'] !== "")
                                             @foreach (tpkcard($player['card']) as $tpkimg)
                                                 <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkimg }}.png">    
                                             @endforeach
-                                        @endif
+                                        @endif --}}
                                     </td>
                                     <td>
                                         @if($row['cardtable'] !== "")

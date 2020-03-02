@@ -126,7 +126,7 @@ class RoleController extends Controller
         $name  = $request->name;
         $value = $request->value;
 
-
+        $currentvalue = DB::table('adm_access')->where('menu_id', '=', $pk)->where('role_id', '=', $role->role_id)->first();
         DB::table('asta_db.adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
           $name => $value
         ]);
@@ -141,20 +141,27 @@ class RoleController extends Controller
           $type[4] => $type[5]
         ];
 
-        if($value == 0) :
-          $value = ConfigTextTranslate($type[1]);
-        elseif($value == 1):
-          $value = ConfigTextTranslate($type[3]);
-        elseif($value == 2):
-          $value = ConfigTextTranslate($type[5]);
+        if($currentvalue->type == '0'):
+          $currentvalue1 = ConfigTextTranslate($type[1]);
+        elseif($currentvalue->type == '1'):
+          $currentvalue1 = ConfigTextTranslate($type[3]);
+        elseif($currentvalue->type == '2'):
+          $currentvalue1 = ConfigTextTranslate($type[5]);
         endif;
-        
+
+        if($value == 0) :
+          $value        = ConfigTextTranslate($type[1]);
+        elseif($value == 1): 
+          $value        = ConfigTextTranslate($type[3]);
+        elseif($value == 2): 
+          $value        = ConfigTextTranslate($type[5]);
+        endif;      
 
         Log::create([
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Tipe Peran Aksses nama peran:'.$role->name.' ('.translate_menu($menuname->name).') '.translate_menu($menuname->name).' dengan type '. $value
+          'desc'      => 'Edit Tipe Peran Aksses nama peran: '.$role->name.' ('.translate_menu($menuname->name).') '.$currentvalue1.' => '. $value
         ]);
     }
 
@@ -166,14 +173,15 @@ class RoleController extends Controller
         if(!$operator) {
           if($userid != '')
           {
+              $rolename = DB::table('asta_db.adm_role')->where('role_id', '=', $userid)->first();
               DB::table('asta_db.adm_role')->where('role_id', '=', $userid)->delete();
               DB::table('asta_db.adm_access')->where('role_id', '=', $userid)->delete();
 
               Log::create([
                   'op_id'     => Session::get('userId'),
-                  'action_id' => '4',
+                  'action_id' => '2',
                   'datetime'  => Carbon::now('GMT+7'),
-                  'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$userid
+                  'desc'      => 'Hapus data Nama Peran '.$rolename->name
               ]);
               return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
           }
@@ -185,17 +193,18 @@ class RoleController extends Controller
     //DELETE ALL SELECTED 
     public function deleteAllSelected(Request $request)
     {
-      $ids  = $request->userIdAll;
+      $ids         = $request->userIdAll;
+      $rolenameall = $request->rolenameAll;
       
       DB::table('asta_db.adm_role')->whereIn('role_id', explode(",", $ids))->delete();
       DB::table('asta_db.adm_access')->whereIn('role_id', explode(",", $ids))->delete();
 
       Log::create([
         'op_id'     => Session::get('userId'),
-        'action_id' => '4',
+        'action_id' => '2',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Hapus di menu Peran Admin dengan Peran ID '.$ids
-    ]);
+        'desc'      => 'Hapus data ('.$rolenameall.')'
+      ]);
 
       return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
     }

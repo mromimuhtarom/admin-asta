@@ -133,7 +133,7 @@
             @foreach($roles as $role)
             @if($menu && $mainmenu)
             <tr>
-                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $role->role_id }}" class="deletepermission{{ $role->role_id }} deleteIdAll"></td>
+                <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $role->role_id }}" data-rolename="{{ $role->name }}" class="deletepermission{{ $role->role_id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-name="name" data-pk="{{ $role->role_id }}" data-type="text" data-url="{{ route('Role-update') }}">{{ $role->name }}</a></td>
                 <td><a href="{{ route('Role-menu', $role->role_id) }}" class="myButton"><i class="fa fa-eye"></i>{{ translate_MenuContentAdmin('L_VIEW_EDIT') }}</a></td>
                 <td align="center">
@@ -205,6 +205,8 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+          <input type="hidden" name="rolenameAll" id="rolenameAll" value="">
+
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i>{{ translate_MenuContentAdmin('L_YES') }}</button>
@@ -295,10 +297,15 @@
       $('#trash').click(function(e){
           e.preventDefault();
             var allVals = [];
+            var allrolenameVals = [];
             $(".deleteIdAll:checked").each(function() {
               allVals.push($(this).attr('data-pk'));
               var join_selected_values = allVals.join(",");
               $("#idDeleteAll").val(join_selected_values);
+
+              allrolenameVals.push($(this).attr('data-rolename'));
+              var join_selected_values_rolename = allrolenameVals.join(",");
+              $("#rolenameAll").val(join_selected_values_rolename);
             });
       });
 

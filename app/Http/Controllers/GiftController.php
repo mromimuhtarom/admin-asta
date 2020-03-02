@@ -220,9 +220,9 @@ class GiftController extends Controller
 
                         Log::create([
                             'op_id'     => Session::get('userId'),
-                            'action_id' => '3',
+                            'action_id' => '11',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Membuat insert baru di menu Toko Gift dengan judul'. $gift->subject
+                            'desc'      => 'Menambahkan data ('. $gift->subject.')'
                         ]);
                         return redirect()->route('Table_Gift')->with('success', alertTranslate("insert data successful"));
                     }
@@ -267,6 +267,8 @@ class GiftController extends Controller
         return $linkimage;
       
     }
+
+
 
     public function updateimage(Request $request)
     {
@@ -380,9 +382,9 @@ class GiftController extends Controller
 
                         Log::create([
                             'op_id'     => Session::get('userId'),
-                            'action_id' => '2',
+                            'action_id' => '11',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Update gambar di menu Toko Hadiah dengan nama '.$currentname->name
+                            'desc'      => 'Edit gambar ('.$currentname->name.')'
                         ]);
                         return redirect()->route('Table_Gift')->with('success', alertTranslate('Update image successfull'));
                 }
@@ -392,7 +394,7 @@ class GiftController extends Controller
                     // echo 'Ukuran file terlalu besar';
                 }
             else:
-                 $translatealertimage = str_replace('{1}', '320 px', alertTranslate("L_HEIGHT_IMAGE"));
+                $translatealertimage = str_replace('{1}', '320 px', alertTranslate("L_HEIGHT_IMAGE"));
                 return back()->with('alert', $translatealertimage);
             endif;
         }
@@ -421,28 +423,38 @@ class GiftController extends Controller
         switch ($name) {
               case "name":
               $name = "Nama";
+              $curerrentvalue = $currentname->name;
               break;
           case "price":
               $name = "Harga Chip";
+              $curerrentvalue = $currentname->price;
               break;
           case "category_id":
               $name = "Category";
-              if($value == 1):
-                $value = 'makanan';
-                elseif($value == 2):
-                    $value = 'minuman';
-                elseif($value == 3):
-                    $value = 'item';
+              $curerrentvalue = $currentname->category_id;
+              if($value == 1 || $curerrentvalue == 1):
+                $value          = 'makanan';
+                $curerrentvalue = 'makanan';
+                elseif($value == 2 || $curerrentvalue == 2):
+                    $value          = 'minuman';
+                    $curerrentvalue = 'minuman';
+                elseif($value == 3 || $curerrentvalue == 3):
+                    $value          = 'item';
+                    $curerrentvalue = 'item';
                 else:
-                    $value = 'aksi';
+                    $value          = 'aksi';
+                    $curerrentvalue = 'aksi';
                 endif;
               break;
           case "status":
-              $name = "Status";
-              if($value == 0):
-                $value = 'disabled';
+              $name           = "Status";
+              $curerrentvalue = $currentname->status;
+              if($value == 0 || $curerrentvalue == 0):
+                $value          = 'disabled';
+                $curerrentvalue = 'disabled';
               else:
-                $value = 'enabled';
+                $value          = 'enabled';
+                $curerrentvalue = 'enabled';
               endif;
               break;
           default:
@@ -451,9 +463,9 @@ class GiftController extends Controller
 
       Log::create([
         'op_id'     => Session::get('userId'),
-        'action_id' => '2',
+        'action_id' => '11',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' di menu Toko Hadiah dengan nama '.$currentname->name.' menjadi '. $value
+        'desc'      => 'Edit '.$name.' ('.$currentname->name.') '.$curerrentvalue .' => '. $value
       ]);
     }
 
@@ -479,7 +491,7 @@ class GiftController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '4',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Toko Hadiah dengan nama '.$currentname->name
+                'desc'      => 'Hapus data ('.$currentname->name.')'
             ]);
             return redirect()->route('Table_Gift')->with('success', alertTranslate('Data deleted'));
         }
@@ -502,7 +514,7 @@ class GiftController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Toko Hadiah dengan nama '.$currentname
+            'desc'      => 'Hapus data ('.$currentname.')'
         ]);
         return redirect()->route('Table_Gift')->with('succes', alertTranslate('Data deleted'));
     }

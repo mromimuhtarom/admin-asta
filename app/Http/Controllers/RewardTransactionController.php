@@ -85,9 +85,9 @@ class RewardTransactionController extends Controller
         // StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $approveid)->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '5',
+            'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan Transaksi dimenu Reward Transaksi dengan nama pengguna '. $user_id
+            'desc'      => 'Menerima permintaan ('. $user_id.')'
         ]);
 
         return back()->with('success', alertTranslate("Receiving request Transaction has been successful"));
@@ -142,9 +142,9 @@ class RewardTransactionController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '6',
+            'action_id' => '4',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menolak permintaan Transaksi dimenu Reward Transaksi dengan PenggunaID'. $user_id
+            'desc'      => 'Menolak permintaan ('. $user_id.')'
         ]);
 
         return back()->with('success', alertTranslate('Reject request Transaction has been successful'));

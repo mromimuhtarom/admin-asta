@@ -145,9 +145,9 @@ class AvatarPlayerController extends Controller
             //RECORD LOG
             Log::create([
                 'op_id'     =>  Session::get('userId'),
-                'action_id' =>  '3',
+                'action_id' =>  '10',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Update gambar di menu avatar player dengan ID'.$pk
+                'desc'      =>  'Edit gambar di menu avatar ('.$id->name.')'
             ]);
             return redirect()->route('avatar_player')->with('success', alertTranslate('Update image successfull'));
         }
@@ -181,9 +181,9 @@ class AvatarPlayerController extends Controller
 
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '2',
+            'action_id' =>  '10',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Edit '.$name.' di menu Avatar player dengan nama '.$currentvalue.'. Dari '.$currentvalue.' menjadi '. $value
+            'desc'      =>  'Edit '.$name.' ('.$currentvalue.') '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -202,9 +202,9 @@ class AvatarPlayerController extends Controller
             AvatarPlayer::where('id', '=', $id)->delete();
             Log::create([
                 'op_id'     =>  Session::get('userId'),
-                'action_id' =>  '4',
+                'action_id' =>  '10',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Hapus di menu Avatar player dengan ID '.$id
+                'desc'      =>  'Hapus data ('.$avatarPlayer->name.')'
             ]);
             return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
         }
@@ -224,9 +224,9 @@ class AvatarPlayerController extends Controller
         //RECORD LOG
         Log::create([
             'op_id'     =>  Session::get('userId'),
-            'action_id' =>  '4',
+            'action_id' =>  '10',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu avatar player dengan nama ' .$currentname
+            'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
         return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
     }

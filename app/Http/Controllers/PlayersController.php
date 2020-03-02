@@ -701,9 +701,9 @@ class PlayersController extends Controller
         
         Log::create([
           'op_id'     => Session::get('userId'),
-          'action_id' => '2',
+          'action_id' => '6',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Status di menu Pemain terdaftar dengan nama pengguna '.$currentname->username.'. Dari '.$currentvalue.' menjadi '.$sts_user. '. dengan alasan: '.$description
+          'desc'      => 'Edit Status ('.$currentname->username.') '.$currentvalue.' => '.$sts_user. ' dengan alasan: '.$description
         ]);
 
         return back()->with('success', alertTranslate('Update status successfull'));
