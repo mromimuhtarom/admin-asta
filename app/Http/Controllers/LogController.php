@@ -20,7 +20,7 @@ class LogController extends Controller
     public function index()
     {
         $actionSearch = Action::select('action', 'id')
-                        ->whereBetween('id', [1, 6])
+                        ->whereBetween('id', [1, 37])
                         ->get();
         $datenow = Carbon::now('GMT+7');
         return view('pages.admin.log_admin', compact('actionSearch', 'datenow'));

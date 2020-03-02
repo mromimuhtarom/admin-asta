@@ -180,7 +180,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '13',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Menambahkan data di menu Meja Asta Poker dengan nama meja '.$request->tableName
+        'desc'      => 'Menambahkan data ('.$request->tableName.')'
         ]);
 
         return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('Data Added'));
@@ -237,7 +237,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '16',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Meja Big Two dengan nama meja '.$request->tableName
+            'desc'      => 'Menambahkan data ('.$request->tableName.')'
         ]);
  
         return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data Added'));
@@ -298,7 +298,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '19',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Meja Domino Susun dengan nama meja'.$request->tableName
+            'desc'      => 'Menambahkan data ('.$request->tableName.')'
           ]);
 
        return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data Added'));
@@ -361,7 +361,7 @@ class TableController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '22',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Meja Domino QQ dengan nama meja '.$request->tableName
+            'desc'      => 'Menambahkan data ('.$request->tableName.')'
           ]);
 
        return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data Added'));
@@ -480,7 +480,7 @@ class TableController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '13',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' dengan nama meja '.$tpktable->name.'. '.$currentvalue.' => '.$value
+          'desc'      => 'Edit '.$name.' ('.$tpktable->name.') '.$currentvalue.' => '.$value
         ]);
     }
 
@@ -580,7 +580,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '16',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' dengan Nama meja '.$bgttable->name.'. '.$currentvalue.' => '.$value
+        'desc'      => 'Edit '.$name.' ('.$bgttable->name.') '.$currentvalue.' => '.$value
     ]);
     }
 
@@ -702,7 +702,7 @@ class TableController extends Controller
         'op_id' => Session::get('userId'),
         'action_id'   => '19',
         'datetime'    => Carbon::now('GMT+7'),
-        'desc'        => 'Edit '.$name.' dengan Nama meja '.$dmstable->name.'. '.$currentvalue.' => '. $value
+        'desc'        => 'Edit '.$name.' ('.$dmstable->name.') '.$currentvalue.' => '. $value
     ]);
     }
 
@@ -811,7 +811,7 @@ class TableController extends Controller
         'op_id'     => Session::get('userId'),
         'action_id' => '22',
         'datetime'  => Carbon::now('GMT+7'),
-        'desc'      => 'Edit '.$name.' dengan Nama meja '.$dmqtable->name.'. '.$currentvalue.' => '. $value
+        'desc'      => 'Edit '.$name.' ('.$dmqtable->name.') '.$currentvalue.' => '. $value
     ]);
     }
 
@@ -845,7 +845,7 @@ class TableController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '13',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu table asta poker dengan nama meja' .$currentname
+            'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
         return redirect()->route('Table_Asta_Poker')->with('succes', alertTranslate('Data deleted'));
     }
@@ -864,7 +864,7 @@ class TableController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '16',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Big Two dengan nama meja '.$bgt_table->name
+                'desc'      => 'Hapus data ('.$bgt_table->name.')'
             ]);
             return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data deleted'));
         }
@@ -898,7 +898,7 @@ class TableController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '16',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Domino Susun dengan nama meja '.$dms_table->name
+                'desc'      => 'Hapus data ('.$dms_table->name.')'
             ]);
             return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data deleted'));
         }
@@ -915,7 +915,7 @@ class TableController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '16',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu table Domino susun dengan nama meja ' .$currentname
+            'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
         return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data deleted'));
     }
@@ -932,7 +932,7 @@ class TableController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '22',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Meja Domino QQ dengan nama ruang '.$dmq_table->name
+                'desc'      => 'Hapus data ('.$dmq_table->name.')'
             ]);
             return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data deleted'));
         }
@@ -949,7 +949,7 @@ class TableController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '22',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus di menu table Domino QQ dengan nama meja' .$currentname
+            'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
         return redirect()->route('Table_Domino_QQ')->with('succes', alertTranslate('Data deleted'));
     
