@@ -62,15 +62,10 @@ class GoldStoreController extends Controller
         $valueBonus= str_replace(':', ',', $bonusType->value);
         $bontype  = explode(",", $valueBonus);
         $timenow   = Carbon::now('GMT+7');
+
         return view('pages.store.gold_store', compact('menu', 'getGolds', 'endis', 'mainmenu', 'timenow', 'bontype'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $title          = $request->title;
@@ -543,9 +538,9 @@ class GoldStoreController extends Controller
             ]);
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '27',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar di menu Toko Koin dengan nama '.$currentname->name
+                'desc'      => 'Hapus gambar Koin dengan nama '.$currentname->name
             ]);
             return redirect()->route('Gold_Store_Reseller')->with('success', alertTranslate('Data deleted'));
         } else if ($getGoldId == NULL)

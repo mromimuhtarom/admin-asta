@@ -85,7 +85,7 @@
               @foreach($getPayments as $payment)
               @if($menu && $mainmenu)
               <tr>
-                <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $payment->id }}" class="deletepermission{{ $payment->id }} deleteIdAll"></td>
+                <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $payment->id }}" data-username="{{ $payment->PaymentName }}" class="deletepermission{{ $payment->id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->PaymentName }}</td>
                 <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-value="{{ $payment->IdType }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ ucwords(str_replace('_', ' ',$payment->PaymentType)) }}</td>
                 <td><a href="#" class="usertext" data-title="desc" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
@@ -211,6 +211,7 @@
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
+          <input type="hidden" name="usernameAll" id="userDeleteAll" valie="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
@@ -313,10 +314,16 @@
     $('.delete').click(function(e) {
       e.preventDefault();
       var allVals = [];
+      var allUsername = [];
       $('.deleteIdAll:checked').each(function() {
         allVals.push($(this).attr('data-pk'));
         var join_selected_values = allVals.join(",");
         $('#idDeleteAll').val(join_selected_values);
+
+        //untuk get username ketika multiple delete
+        allUsername.push($(this).attr('data-username'));
+        var join_selected_username = allUsername.join(",");
+        $('#userDeleteAll').val(join_selected_username);
       });
     });
 

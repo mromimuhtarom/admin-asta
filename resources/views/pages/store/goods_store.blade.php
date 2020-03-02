@@ -115,7 +115,7 @@
               @if($menu && $mainmenu)
                 @if($goods->status === 0)
                   <tr>
-                    <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $goods->item_id }}" data-name="unity-asset/store/goods/{{ $goods->item_id }}.png" class="deletepermission{{ $goods->item_id }} deleteIdAll"></td>
+                    <td align="center"><input type="checkbox" name="deletepermission[]" data-username="{{ $goods->name }}" data-pk="{{ $goods->item_id }}" data-name="unity-asset/store/goods/{{ $goods->item_id }}.png" class="deletepermission{{ $goods->item_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-name="order" data-title="order" data-pk="{{ $goods->item_id }}" data-type="number" data-url="{{ route('GoodsStore-update') }}">{{ $goods->order }}</a></td>
                     <td>
                       <div class="media-container">
@@ -325,6 +325,7 @@
           {{ csrf_field() }}
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
           <input type="hidden"  name="imageid" id="idDeleteAllimage" value="">
+          <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
@@ -531,10 +532,16 @@ $(".watermark-image").change(function() {
        $('.delete').click(function(e) {
           e.preventDefault();
           var allVals = [];
+          var allUsername = [];
             $(".deleteIdAll:checked").each(function() {
               allVals.push($(this).attr('data-pk'));
               var join_selected_values = allVals.join(",");
               $('#idDeleteAll').val(join_selected_values);
+
+              //untuk get username ketika multiple delete
+              allUsername.push($(this).attr('data-username'));
+              var join_selected_username = allUsername.join(",");
+              $('#userDeleteAll').val(join_selected_username);
           });
 
           var allimage = [];

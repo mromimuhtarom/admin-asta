@@ -67,9 +67,9 @@ class PaymentStoreController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '29',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Toko Pembayaran dengan Nama '. $request->title
+            'desc'      => 'Menambahkan data Pembayaran dengan Nama '. $request->title
         ]);
 
         return redirect()->route('Payment_Store')->with('success', alertTranslate('Data Added'));
@@ -121,9 +121,9 @@ class PaymentStoreController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '29',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Toko Pembayaran dengan nama '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' dengan nama '.$currentname->name.'. '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -138,7 +138,7 @@ class PaymentStoreController extends Controller
             Payment::where('id', '=', $getPaymentId)->delete();
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '29',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Toko Pembayaran dengan name '.$currentname->name
             ]);
@@ -150,12 +150,14 @@ class PaymentStoreController extends Controller
     public function deleteAllSelectedpayment(Request $request)
     {
         $ids    =   $request->userIdAll;
+        $currentname = $request->usernameAll;
+
         DB::table('asta_db.payment')->whereIn('id', explode(",", $ids))->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '29',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Toko Pembayaran dengan ID '.$ids
+            'desc'      => 'Hapus data yang dipilih dengan nama '.$currentname
         ]);
         return redirect()->route('Payment_Store')->with('succes', alertTranslate('Data deleted'));
     }
