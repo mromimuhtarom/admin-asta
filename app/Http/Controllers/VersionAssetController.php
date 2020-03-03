@@ -38,7 +38,8 @@ class VersionAssetController extends Controller
     public function store(Request $request)
     {   
     
-        $file             = $request->fileAdr;
+        $file  = $request->fileAdr;
+        
 
         $xml = new \DomDocument("1.0");
         // $xml->load("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
@@ -89,7 +90,8 @@ class VersionAssetController extends Controller
         $x        = explode('.', $filename);
         $ekstensi = strtolower(end($x));
 
-        $uploadFile = $replacepath . $name.'.'.$ekstensi ;
+        $uploadFile = $replacepath . $name;
+
     
         Storage::disk('s3')->put($uploadFile, file_get_contents($file));
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));

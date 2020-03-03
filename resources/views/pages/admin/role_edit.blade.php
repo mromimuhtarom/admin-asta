@@ -66,7 +66,12 @@
                                               </tr>
                                               <tr>
                                                 <td>{{ translate_menu($sbmnu->name) }}</td>
-                                                <td><a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a></td>
+                                                <td>
+                                                      <div style="float:left;margin:2%;"><input @if($sbmnu->type == 0) checked @endif type="checkbox" name="typerole" id="denied" value="denied">Tutup</div>
+                                                      <div style="float:left;margin:2%;"><input @if($sbmnu->type == 1) checked @endif type="checkbox" name="typerole" id="access" value="access">Akses</div>
+                                                      <div style="float:left;margin:2%;"><input @if($sbmnu->type == 2) checked @endif type="checkbox" name="typerole" id="edit" value="edit">Edit</div>
+                                                  {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a> --}}
+                                                </td>
                                               </tr>
                                               @foreach ($sbmnu['rolemenu'] as $sbt)
                                                 @if ($sbt->role_id == $sbmnu->role_id)
