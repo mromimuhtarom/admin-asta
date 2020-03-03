@@ -853,7 +853,8 @@ function alertTranslate($menu){
         "L_PASSWORD_FAILED"                                             =>  "Password tidak cocok silahkan coba lagi",
         "L_LOGOUT_CHANGE_PASSWORD"                                      =>  "Password anda telah di ganti",
         "Update image successfull"                                      =>  "Update gambar berhasil",
-        'L_HEIGHT_IMAGE'                                                =>  "Tinggi gambar tidak boleh kurang atau lebih dari {1}"
+        'L_HEIGHT_IMAGE'                                                =>  "Tinggi gambar tidak boleh kurang atau lebih dari {1}",
+        "L_RESET_PASS_SUCCESSFULLY"                                     =>  "Atur ulang katasandi berhasil"
     ];
     return $array_menuContent[$menu];
 };
