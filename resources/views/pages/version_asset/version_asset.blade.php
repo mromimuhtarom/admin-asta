@@ -129,7 +129,7 @@
     </div>
 
     <div>
-        <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+        <div class="jarviswidget jarviswidget-color-blue-dark no-padding" style="width:800px;" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
             <header>
                 <div class="widget-header">
                     <h2><strong>IOS</strong></h2>
@@ -184,16 +184,19 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($xml_ios->children() as $key => $xl_ios)
+                                    @php 
+                                    $ckbox = str_replace('.','_', $xl_ios['name']);
+                                    @endphp
                                     @if ($menu)
                                     <tr>
-                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl_ios['name'] }}" data-link="{{ $xl_ios->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl_ios['name'].'2'}} deleteIdAll2"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $xl_ios['name'] }}"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
+                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl_ios['name'] }}" data-link="{{ $xl_ios->link }}" data-name="{{ $key }}" class="deletepermission{{ $ckbox.'2'}} deleteIdAll2"></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $ckbox }}"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->ver }}</a></td>
                                         <td>
-                                          <a href="#" style="color:red;" class="delete{{ $xl_ios['name'].'2' }}" 
+                                          <a href="#" style="color:red;" class="delete{{ $ckbox.'2' }}" 
                                               id="delete"
                                               data-pk="{{ $xl_ios['name']}}"
                                               data-name="{{ $key }}"
@@ -224,7 +227,7 @@
 </div>
 <div class="settings-table" style="margin-top:10px;">
     <div>
-        <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
+        <div class="jarviswidget jarviswidget-color-blue-dark no-padding" style="width:800px;" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
             <header>
                 <div class="widget-header">
                     <h2><strong>Windows</strong></h2>
@@ -278,16 +281,19 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($xml_windows->children() as $key => $xl)
+                                    @php 
+                                    $ckbox = str_replace('.','_', $xl['name']);
+                                    @endphp
                                     @if ($menu)
                                     <tr>
-                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $xl['name'] }}3 deleteIdAll3"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetWindows{{ $xl['name'] }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
+                                        <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $ckbox }}3 deleteIdAll3"></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetWindows{{ $ckbox }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->ver }}</a></td>
                                         <td>
-                                          <a href="#" style="color:red;" class="delete{{ $xl['name'] }}3" 
+                                          <a href="#" style="color:red;" class="delete{{ $ckbox }}3" 
                                               id="delete"
                                               data-pk3="{{ $xl['name'] }}"
                                               data-name3="{{ $key }}"
@@ -537,7 +543,7 @@
             <div class="col-12">
               <div class="form-group" align="center"><br>
                   <div class="form-group">
-                      <input type="file" name="fileIOS" id="file2" class="input-file">
+                      <input type="file" name="fileIOS" id="file2" onchange="document.getElementById('namefileios').value = this.value.split('\\').pop().split('/').pop()" class="input-file">
                       <label for="file2" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
                         <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -545,7 +551,7 @@
                     </div>
                   <br>
                   <br>
-                  <input class="form-control" name="Name" placeholder="Name"><br>
+                  <input class="form-control" name="Name" id="namefileios" placeholder="Name"><br>
                     <select name="Type" class="form-control">
                       <option>Type</option>
                       <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
@@ -592,7 +598,7 @@
             <div class="col-12">
               <div class="form-group" align="center"><br>
                   <div class="form-group">
-                      <input type="file" name="fileWindows" id="file10" class="input-file">
+                      <input type="file" name="fileWindows" onchange="document.getElementById('namefilewindows').value = this.value.split('\\').pop().split('/').pop()" id="file10" class="input-file">
                       <label for="file10" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
                         <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -600,7 +606,7 @@
                     </div>
                   <br>
                   <br>
-                  <input class="form-control" name="Name" placeholder="Name"><br>
+                  <input class="form-control" name="Name" id="namefilewindows" placeholder="Name"><br>
                     <select name="Type" class="form-control">
                       <option>{{ translate_menuTransaction('Type')}}</option>
                       <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
@@ -692,7 +698,10 @@ $ckbox = str_replace('.','_', $xl['name']);
 
 <!-- Modal edit asset IOS -->
 @foreach ($xml_ios->children() as $xl_ios)
-<div class="modal fade" id="ModalAssetIos{{ $xl_ios['name'] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+@php 
+$ckbox = str_replace('.','_', $xl_ios['name']);
+@endphp
+<div class="modal fade" id="ModalAssetIos{{ $ckbox  }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -710,7 +719,7 @@ $ckbox = str_replace('.','_', $xl['name']);
               <div class="form-group" align="center"><br>
                 <input type="hidden" value="{{ $xl_ios['name'] }}" name="pk">
                 <div class="form-group">
-                    <input type="file" name="fileEditIOS" id="file4{{ $xl_ios['name'] }}" class="input-file">
+                    <input type="file" name="fileEditIOS" id="file4{{ $xl_ios['name'] }}" onchange="document.getElementById('nameios{{ $xl_ios['name'] }}').value = this.value.split('\\').pop().split('/').pop()" id="file3{{ $xl['name'] }}" id="file4{{ $xl_ios['name'] }}" class="input-file">
                     <label for="file4{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
                       <i class="icon fa fa-check"></i>
                       <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -718,7 +727,7 @@ $ckbox = str_replace('.','_', $xl['name']);
                   </div>
                   <br>
                   <br>
-                  <input value="{{ $xl_ios['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
+                  <input value="{{ $xl_ios['name'] }}" class="form-control" name="Name" id="nameios{{ $xl_ios['name'] }}" placeholder="Name"><br>
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
                       <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>
@@ -767,7 +776,7 @@ $ckbox = str_replace('.','_', $xl['name']);
               <div class="form-group" align="center"><br>
                 <input type="hidden" value="{{ $xl_ios['name'] }}" name="pk">
                 <div class="form-group">
-                    <input type="file" name="fileEditIOS" id="file7{{ $xl_ios['name'] }}" class="input-file">
+                    <input type="file" name="fileEditIOS" id="file7{{ $xl_ios['name'] }}" onchange="document.getElementById('namewindows{{ $xl_ios['name'] }}').value = this.value.split('\\').pop().split('/').pop()" id="file3{{ $xl['name'] }}" id="file4{{ $xl_ios['name'] }}" class="input-file">
                     <label for="file7{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
                       <i class="icon fa fa-check"></i>
                       <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
@@ -775,7 +784,7 @@ $ckbox = str_replace('.','_', $xl['name']);
                   </div>
                   <br>
                   <br>
-                  <input value="{{ $xl_ios['name'] }}" class="form-control" name="Name" placeholder="Name"><br>
+                  <input value="{{ $xl_ios['name'] }}" class="form-control" id="namewindows{{ $xl_ios['name'] }}" name="Name" placeholder="Name"><br>
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
                       <option @if( $xl_ios->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>
@@ -877,9 +886,9 @@ $ckbox = str_replace('.','_', $xl['name']);
           <form action="{{ route('VersionAssetApkIOS-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
-            <input type="hidden" name="name" id="id1" value="">
-            <input type="hidden" name="id" id="name1" value="">
-            <input type="hidden" name="link" id="link1" value="">
+            <input type="text" name="name" id="id1" value="">
+            <input type="text" name="id" id="name1" value="">
+            <input type="text" name="link" id="link1" value="">
         </div>
         <div class="modal-footer">
           <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
@@ -1237,20 +1246,22 @@ $ckbox = str_replace('.','_', $xl['name']);
     @php
             $b = 2;
             foreach($xml_ios->children() as $xl_ios) {
-              echo'$(".delete'.$xl_ios['name'].$b.'").hide();';
-              echo'$(".deletepermission'.$xl_ios['name'].$b.'").on("click", function() {';
-                echo 'if($( ".deletepermission'.$xl_ios['name'].$b.':checked" ).length > 0)';
+              $ckbox = str_replace('.','_', $xl_ios['name']);
+              echo'$(".delete'.$ckbox.$b.'").hide();';
+              echo'$(".deletepermission'.$ckbox.$b.'").on("click", function() {';
+              echo 'console.log("'.$ckbox.$b.'");';
+                echo 'if($( ".deletepermission'.$ckbox.$b.':checked" ).length > 0)';
                 echo '{';
-                  echo '$(".delete'.$xl_ios['name'].$b.'").show();';
+                  echo '$(".delete'.$ckbox.$b.'").show();';
                 echo'}';
                 echo'else';
                 echo'{';
-                  echo'$(".delete'.$xl_ios['name'].$b.'").hide();';
+                  echo'$(".delete'.$ckbox.$b.'").hide();';
                 echo'}';
 
               echo '});';
 
-              echo'$(".delete'.$xl_ios['name'].$b.'").click(function(e) {';
+              echo'$(".delete'.$ckbox.$b.'").click(function(e) {';
                 echo'e.preventDefault();';
                   
                 echo"var id   = $(this).attr('data-pk');";
@@ -1268,21 +1279,22 @@ $ckbox = str_replace('.','_', $xl['name']);
     //checkbox delete permission Windows
     @php
             $c = 3;
-            foreach($xml_windows->children() as $xl_ios) {
-              echo'$(".delete'.$xl_ios['name'].$c.'").hide();';
-              echo'$(".deletepermission'.$xl_ios['name'].$c.'").on("click", function() {';
-                echo 'if($( ".deletepermission'.$xl_ios['name'].$c.':checked" ).length > 0)';
+            foreach($xml_windows->children() as $xl_windows) {
+              $ckbox = str_replace('.','_', $xl_windows['name']);
+              echo'$(".delete'.$ckbox.$c.'").hide();';
+              echo'$(".deletepermission'.$ckbox.$c.'").on("click", function() {';
+                echo 'if($( ".deletepermission'.$ckbox.$c.':checked" ).length > 0)';
                 echo '{';
-                  echo '$(".delete'.$xl_ios['name'].$c.'").show();';
+                  echo '$(".delete'.$ckbox.$c.'").show();';
                 echo'}';
                 echo'else';
                 echo'{';
-                  echo'$(".delete'.$xl_ios['name'].$c.'").hide();';
+                  echo'$(".delete'.$ckbox.$c.'").hide();';
                 echo'}';
 
               echo '});';
 
-              echo'$(".delete'.$xl_ios['name'].$c.'").click(function(e) {';
+              echo'$(".delete'.$ckbox.$c.'").click(function(e) {';
                 echo'e.preventDefault();';
                   
                 echo"var id   = $(this).attr('data-pk3');";

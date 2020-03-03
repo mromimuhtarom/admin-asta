@@ -110,30 +110,34 @@ class VersionAssetController extends Controller
     // FUNCTION STORE ASSET IOS
     public function storeIos(Request $request)
     {
-        $file       = $request->fileIOS;
+        $file  = $request->fileIOS;
+        
+
+        $xml = new \DomDocument("1.0");
+        // $xml->load("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
+        $xml->load("../public/upload/xml/IOS/asset_game.xml");
         $validator  = Validator::make($request->all(), [
             'fileIOS'       => 'required',
             'Name'          => 'required',
             'Type'          => 'required',
             'Link'          => 'required',
             'Version'       => 'required',
-            'FolderName'    => 'required'
-            
+            'FolderName'    => 'required'          
         ]);
+
 
         if($validator->fails()):
             return back()->withErrors($validator->errors());
         endif;
-        
 
-        $xml = new \DomDocument("1.0");
-        $xml->load("../public/upload/xml/IOS/asset_game.xml");
-        
-        $type           = $request->Type;
-        $link           = $request->Link;
-        $version        = $request->Version;
-        $tagelement     = $request->FolderName;
-        $name           = $request->Name;
+        $type             = $request->Type;
+        $link             = $request->Link;
+        $version          = $request->Version;
+        $tagelement       = $request->FolderName;
+        $name             = $request->Name;
+        $x                = explode('.', $name);
+        $namafilenoformat = str_replace('.'.end($x), '', $name);
+
 
         $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
 
@@ -151,23 +155,26 @@ class VersionAssetController extends Controller
         $rootTag->appendChild($infoTag);
 
         $xml->save('../public/upload/xml/IOS/asset_game.xml');
-        $xmllocal = "../public/upload/xml/IOS/asset_game.xml";
-        
-        //upload xml
         $PathS3   = 'unity-asset/XML/IOS/asset_game.xml';
-        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
-
+        $xmllocal = "../public/upload/xml/IOS/asset_game.xml";
         //upload file
-        $uploadFile = $replacepath . $name;
-        Storage::disk('s3')->put($uploadFile, file_get_contents($file));
+        $filename = $_FILES['fileIOS']['name'];
+        $x        = explode('.', $filename);
+        $ekstensi = strtolower(end($x));
 
-        
+        $uploadFile = $replacepath . $name;
+
+    
+        Storage::disk('s3')->put($uploadFile, file_get_contents($file));
+        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
+      
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Versi Aset APK untuk IOS dengan Nama '. $name
+            'desc'      => 'Menambahkan data di menu Versi Aset APK untuk android dengan Nama '. $name
         ]);
+        
         return back()->with('success', alertTranslate("Data saved"));
 
     }
@@ -177,30 +184,34 @@ class VersionAssetController extends Controller
         // FUNCTION STORE ASSET Windows
     public function storeWindows(Request $request)
     {
-        // $file       = $request->fileWindows;
+        $file  = $request->fileWindows;
+        
+
+        $xml = new \DomDocument("1.0");
+        // $xml->load("https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/XML/Android/asset_game.xml");
+        $xml->load("../public/upload/xml/IOS/asset_gameWINDOWS.xml");
         $validator  = Validator::make($request->all(), [
-            // 'fileWindows'   => 'required',
+            'fileWindows'       => 'required',
             'Name'          => 'required',
             'Type'          => 'required',
             'Link'          => 'required',
             'Version'       => 'required',
-            'FolderName'    => 'required'
-            
+            'FolderName'    => 'required'          
         ]);
+
 
         if($validator->fails()):
             return back()->withErrors($validator->errors());
         endif;
-        
 
-        $xml = new \DomDocument("1.0");
-        $xml->load("../public/upload/xml/Windows/asset_game.xml");
-        
-        $type           = $request->Type;
-        $link           = $request->Link;
-        $version        = $request->Version;
-        $tagelement     = $request->FolderName;
-        $name           = $request->Name;
+        $type             = $request->Type;
+        $link             = $request->Link;
+        $version          = $request->Version;
+        $tagelement       = $request->FolderName;
+        $name             = $request->Name;
+        $x                = explode('.', $name);
+        $namafilenoformat = str_replace('.'.end($x), '', $name);
+
 
         $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
 
@@ -218,23 +229,26 @@ class VersionAssetController extends Controller
         $rootTag->appendChild($infoTag);
 
         $xml->save('../public/upload/xml/IOS/asset_gameWINDOWS.xml');
-        $xmllocal = "../public/upload/xml/IOS/asset_gameWINDOWS.xml";
-        
-        //upload xml
         $PathS3   = 'unity-asset/XML/Windows/asset_game.xml';
-        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
-
+        $xmllocal = "../public/upload/xml/IOS/asset_gameWINDOWS.xml";
         //upload file
-        // $uploadFile = $replacepath . $name;
-        // Storage::disk('s3')->put($uploadFile, file_get_contents($file));
+        $filename = $_FILES['fileWindows']['name'];
+        $x        = explode('.', $filename);
+        $ekstensi = strtolower(end($x));
 
-        
+        $uploadFile = $replacepath . $name;
+
+    
+        Storage::disk('s3')->put($uploadFile, file_get_contents($file));
+        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
+      
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Versi Aset APK untuk Windows dengan Nama '. $name
+            'desc'      => 'Menambahkan data di menu Versi Aset APK untuk android dengan Nama '. $name
         ]);
+        
         return back()->with('success', alertTranslate("Data saved"));
 
     }
@@ -581,6 +595,7 @@ class VersionAssetController extends Controller
         $id     =   $request->name;
         $link   =   $request->Link;
         $xml    =   new \DomDocument("1.0", "UTF-8");
+ 
         $xml->load('../public/upload/xml/Android/asset_game.xml');
         $xpath  =   new \DOMXPATH($xml);
 
@@ -618,52 +633,91 @@ class VersionAssetController extends Controller
     //FUNCTION DELETE ASSET IOS
     public function destroyIOS(Request $request)
     {
-            $tag    =   $request->id;
-            $id     =   $request->name;
-            $link   =   $request->link;
-            $xml    =   new \DomDocument("1.0", "UTF-8");
-            $xml->load('../public/upload/xml/IOS/asset_game.xml');
-            $xpath  =   new \DOMXPATH($xml);
+            // $tag    =   $request->id;
+            // $id     =   $request->name;
+            // $link   =   $request->link;
+            // $xml    =   new \DomDocument("1.0", "UTF-8");
+            // $xml->load('../public/upload/xml/IOS/asset_game.xml');
+            // $xpath  =   new \DOMXPATH($xml);
 
-            foreach($xpath->query("/main_asset/".$tag."[@name = '$id']") as $node)
-            {
-                $node->parentNode->removeChild($node);
-            }
+            // foreach($xpath->query("/main_asset/".$tag."[@name = '$id']") as $node)
+            // {
+            //     $node->parentNode->removeChild($node);
+            // }
 
-            $xml->formatoutput = true;
+            // $xml->formatoutput = true;
 
-            //delete file in aws s3
-            $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
-            $deleteFile = $replacepath . $id;
-            Storage::disk('s3')->delete($deleteFile);
+            // //delete file in aws s3
+            // $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
+            // $deleteFile = $replacepath . $id;
+            // Storage::disk('s3')->delete($deleteFile);
 
 
-            //save xml local
-            $xml->save('../public/upload/xml/IOS/asset_game.xml');
-            $xmllocal = '../public/upload/xml/IOS/asset_game.xml';
+            // //save xml local
+            // $xml->save('../public/upload/xml/IOS/asset_game.xml');
+            // $xmllocal = '../public/upload/xml/IOS/asset_game.xml';
 
-            //save xml into aws s3
-            $PathS3   = 'unity-asset/XML/IOS/asset_game.xml';
-            Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
+            // //save xml into aws s3
+            // $PathS3   = 'unity-asset/XML/IOS/asset_game.xml';
+            // Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
 
-            Log::create([
-                'op_id'     => Session::get('userId'),
-                'action_id' => '4',
-                'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
-            ]);
-            return back()->with('success', alertTranslate('Data deleted'));
+            // Log::create([
+            //     'op_id'     => Session::get('userId'),
+            //     'action_id' => '4',
+            //     'datetime'  => Carbon::now('GMT+7'),
+            //     'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
+            // ]);
+            // return back()->with('success', alertTranslate('Data deleted'));
+
+        $tag    =   $request->id;
+        $id     =   $request->names;
+        $link   =   $request->Link;
+        $xml    =   new \DomDocument("1.0", "UTF-8");
+        $xml->load('../public/upload/xml/IOS/asset_game.xml');
+        $xpath  =   new \DOMXPATH($xml);
+        
+
+        foreach($xpath->query("/main_asset/".$tag."[@name = '$id']") as $node )
+        {
+            $node->parentNode->removeChild($node);
+        }
+
+        $xml->formatoutput = true;
+
+        //delete file in aws s3
+        $replacepath = str_replace('https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/', '', $link);
+        $deleteFile = $replacepath . $id;
+        Storage::disk('s3')->delete($deleteFile);
+
+        //save xml local
+        $xml->save('../public/upload/xml/IOS/asset_game.xml');
+        $xmllocal = "../public/upload/xml/IOS/asset_game.xml";
+
+        //save xml into aws s3
+        $PathS3   = 'unity-asset/XML/IOS/asset_game.xml';
+        Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));    
+        
+
+        Log::create([
+            'op_id'     => Session::get('userId'),
+            'action_id' => '4',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Hapus di menu Versi Aset APK untuk Android dengan nama '.$id
+        ]);
+        return back()->with('success', alertTranslate('Data deleted'));
 
     }
 
     //FUNCTION DELETE ASSET Windows
     public function destroyWindows(Request $request)
     {
+
             $tag    =   $request->id;
             $id     =   $request->name;
             $link   =   $request->link;
+   
             $xml    =   new \DomDocument("1.0", "UTF-8");
-            $xml->load('../public/upload/xml/Windows/asset_game.xml');
+            $xml->load('../public/upload/xml/IOS/asset_gameWINDOWS.xml');
             $xpath  =   new \DOMXPATH($xml);
 
             foreach($xpath->query("/main_asset/".$tag."[@name = '$id']") as $node)
@@ -680,8 +734,8 @@ class VersionAssetController extends Controller
 
 
             //save xml local
-            $xml->save('../public/upload/xml/Windows/asset_game.xml');
-            $xmllocal = '../public/upload/xml/Windows/asset_game.xml';
+            $xml->save('../public/upload/xml/IOS/asset_gameWINDOWS.xml');
+            $xmllocal = '../public/upload/xml/IOS/asset_gameWINDOWS.xml';
 
             //save xml into aws s3
             $PathS3   = 'unity-asset/XML/Windows/asset_game.xml';
