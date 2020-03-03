@@ -96,9 +96,9 @@ class VersionAssetController extends Controller
       
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Versi Aset APK untuk android dengan Nama '. $name
+            'desc'      => 'Menambahkan data untuk android dengan Nama '. $name
         ]);
         
         return back()->with('success', alertTranslate("Data saved"));
@@ -162,9 +162,9 @@ class VersionAssetController extends Controller
         
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Versi Aset APK untuk IOS dengan Nama '. $name
+            'desc'      => 'Menambahkan data untuk IOS dengan Nama '. $name
         ]);
         return back()->with('success', alertTranslate("Data saved"));
 
@@ -229,9 +229,9 @@ class VersionAssetController extends Controller
         
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Versi Aset APK untuk Windows dengan Nama '. $name
+            'desc'      => 'Menambahkan data untuk Windows dengan Nama '. $name
         ]);
         return back()->with('success', alertTranslate("Data saved"));
 
@@ -287,9 +287,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Versi Aset APK untuk Android dengan nama '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' asset Android dengan nama '.$pk.' => '. $value
           ]);
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
     }
@@ -342,9 +342,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Versi Aset APK untuk IOS dengan nama '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' Asset IOS dengan nama '.$pk.' => '. $value
           ]);
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
     }   
@@ -397,9 +397,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Versi Aset APK untuk IOS dengan nama '.$pk.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' asset IOS dengan nama '.$pk.' => '. $value
           ]);
         Storage::disk('s3')->put($PathS3, file_get_contents($xmllocal));
     }   
@@ -445,9 +445,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Update FILE aset  di menu Versi Aset APK untuk Android dengan nama '.$pk
+            'desc'      => 'Update FILE aset untuk Android dengan nama '.$pk
           ]);
         return back()->with('success', alertTranslate('Data input successfull'));
     }
@@ -487,9 +487,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Update FILE aset  di menu Versi Aset APK untuk IOS dengan nama '.$pk
+            'desc'      => 'Update FILE asset untuk IOS dengan nama '.$pk
           ]);
         return back()->with('success', alertTranslate('Data input successfull'));
     }
@@ -526,9 +526,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Update FILE aset  di menu Versi Aset APK untuk Windows dengan nama '.$pk
+            'desc'      => 'Update FILE aset untuk Windows dengan nama '.$pk
           ]);
         return back()->with('success', alertTranslate('Data input successfull'));
     }
@@ -545,9 +545,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Update FILE Bahasa  di menu Versi Aset APK untuk bahasa Indonesia'
+            'desc'      => 'Update FILE Bahasa untuk bahasa Indonesia'
           ]);
         return back()->with('success', alertTranslate('Data input successfull'));
     }
@@ -563,9 +563,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Update FILE Bahasa  di menu Versi Aset APK untuk bahasa Indonesia'
+            'desc'      => 'Update FILE Bahasa APK untuk bahasa Indonesia'
           ]);
         return back()->with('success', alertTranslate('Data input successfull'));
     }
@@ -605,9 +605,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Versi Aset APK untuk Android dengan nama '.$id
+            'desc'      => 'Hapus Versi Aset untuk Android dengan nama '.$id
         ]);
         return back()->with('success', alertTranslate('Data deleted'));
 
@@ -646,9 +646,9 @@ class VersionAssetController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '37',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
+                'desc'      => 'Hapus asset untuk IOS dengan nama '.$id
             ]);
             return back()->with('success', alertTranslate('Data deleted'));
 
@@ -687,9 +687,9 @@ class VersionAssetController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '37',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Versi Aset APK untuk Windows dengan nama '.$id
+                'desc'      => 'Hapus Versi Aset untuk Windows dengan nama '.$id
             ]);
             return back()->with('success', alertTranslate('Data deleted'));
 
@@ -740,9 +740,9 @@ class VersionAssetController extends Controller
         
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Versi Aset APK untuk Android dengan nama '.$id
+            'desc'      => 'Hapus asset untuk Android dengan nama '.$id
         ]);
         return back()->with('success', alertTranslate('Data deleted'));
 
@@ -794,9 +794,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
+            'desc'      => 'Hapus asset yang dipilih untuk IOS dengan nama '.$id
         ]);
         return back()->with('success', alertTranslate('Data deleted'));
     }
@@ -848,9 +848,9 @@ class VersionAssetController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '37',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Hapus di menu Versi Aset APK untuk IOS dengan nama '.$id
+            'desc'      => 'Hapus Versi Aset APK untuk IOS dengan nama '.$id
         ]);
         return back()->with('success', alertTranslate('Data deleted'));
     }
