@@ -26,6 +26,50 @@
   </div>
 @endif
 
+@if (\Session::has('alert'))
+<div class="alert alert-danger">
+  <p>{{\Session::get('alert')}}</p>
+</div>
+@endif
+
+
+<!--- Content Search --->
+<div class="search bg-blue-dark" style="margin-bottom: 2%;">
+    <div class="table-header w-100 h-100">
+        <form action="{{ route('StoreResellerReport-search') }}" method="get" role="search">
+            <div class="row h-100 w-100 no-gutters">
+                @if (Request::is('Reseller/Store_Reseller/Store_reseller_report/StoreResellerReport-view'))
+                <div class="col">
+                    <input type="text" name="inputUsernameReseller" class="form-control" placeholder="username / Reseller ID">
+                </div>
+                <div class="col" style="padding-left:3%;">
+                    <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
+                </div>
+                <div class="col" style="padding-left:3%;">
+                    <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
+                </div>
+                @else
+                <div class="col">
+                  <input type="text" name="inputUsernameReseller" class="form-control" value="{{ $usernameReseller }}" placeholder="username / Reseller ID">
+                </div>
+                <div class="col" style="padding-left:3%;">
+                  <input type="date" class="form-control" name="inputMinDate" value="{{ $minDate }}">
+                </div>
+                <div class="col" style="padding-left:3%;">
+                  <input type="date" class="form-control" name="inputMaxDate" value="{{ $maxDate }}">
+                </div>
+                @endif
+                <div class="col" style="padding-left:3%;">
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> 
+<!--- End Content Search --->   
+
+
+@if (Request::is('Reseller/Store_Reseller/Store_reseller_report/StoreResellerReport-search'))
 <!-- Table 1 -->
 <div>
     <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
@@ -41,76 +85,44 @@
                 <div class="custom-scroll table-responsive" style="height:800px;">
                     
                     <div class="table-outer">
+                        <div class="row">
+                            <!-- Button tambah bot baru -->
+                            <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
+                                {{ Translate_menuPlayers('Total Record Entries is') }} {{ $transactions->total() }}
+                            </div>
+                                        <!-- End Button tambah bot baru -->
+                        </div>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="th-sm">ID Order</th>
-                                    <th class="th-sm">Tgl & waktu disetujui</th>
-                                    <th class="th-sm">ID Agen</th>
-                                    <th class="th-sm">Username</th>
-                                    <th class="th-sm">Nama Item</th>
-                                    <th class="th-sm">Jumlah Item</th>
-                                    @if ($menu && $mainmenu && $submenu)
-                                    <th class="th-sm">{{ translate_menuTransaction('Confirm request') }}</th>
-                                    @endif
-                                    <th class="th-sm">Deskripsi</th>
-                                    <th class="th-sm">Harga barang</th>
-                                    <th class="th-sm">Informasi status</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_ORDER_TRANSACTION') }}</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_DATE_BUY_SELL') }}</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_RESELLER_ID') }}</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_USERNAME_RESELLER') }}</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_ACTION') }}</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_QUANTITY') }}</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_STATUS_TRANSACTION') }}</th>
+                                    <th class="th-sm">{{ TranslateReseller('L_INFORMATION_DETAIL') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($transactions as $transaction)
-                                
                                 <tr>
-                                    @if ($menu && $mainmenu && $submenu)
-                                    <td>{{ $transaction->id }}</td>
-                                    <td>{{ $transaction->datetime }}</td>
+                                    <td>{{ $transaction->order_id }}</td>
+                                    <td>{{ $transaction->transaction_date }}</td>
                                     <td>{{ $transaction->reseller_id }}</td>
-                                    <td>{{ $transaction->username }}</td>
-                                    <td>{{ $transaction->item_name }}</td>
+                                    <td>{{ $transaction->reseller_username}}</td>
+                                    <td></td>
                                     <td>{{ $transaction->quantity }}</td>
-                                    <td>
-                                      @if($transaction->item_type == 1)
-                                          <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
-                                      @elseif($transaction->item_type == 2)
-                                          @if($transaction->status == 1)
-                                              <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
-                                          @elseif($transaction->status == 2)
-                                              <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
-                                          @endif
-                                      @elseif($transaction->item_type == 3)
-                                          @if($transaction->status == 1)
-                                              <span style="color:green">{{ TranslateMenuToko('Received And Sent') }}</span>
-                                          @elseif($transaction->status == 2)
-                                              <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
-                                          @endif
-                                      @endif
-                                  </td> 
-                                    <td>{{ $transaction->description }}</td>
-                                    <td>{{ $transaction->item_price }}</td>
-                                    <td>
-                                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $transaction->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
-                                    </td>
-                                    
-                                    @else
-                                    <td>{{ $transaction->id }}</td>
-                                    <td>{{ $transaction->datetime }}</td>
-                                    <td>{{ $transaction->userid }}</td>
-                                    <td>{{ $transaction->username }}</td>
-                                    <td>{{ $transaction->item_name }}</td>
-                                    <td>{{ $transaction->quantity }}</td>
-                                    <td>{{ translate_menuTransaction('Pending') }}</td>
-                                    <td>{{ $transaction->description }}</td>
-                                    <td>{{ $transaction->item_price }}</td>
-                                    <td>
-                                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $transaction->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
-                                    </td>
-                                    @endif
+                                    <td>{{ $transaction->transaction_status }}</td>
+                                    <td><button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo nanti">{{ translate_MenuTransaction('Detail Info') }}</button></td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+                    
+                    <div style="display: flex;justify-content: center;">{{ $transactions->links() }}</div>                    
             
                 </div>
             
@@ -119,10 +131,12 @@
     </div>
 </div>
 <!-- End Table 1 -->
+@endif
+
 
 
 <!-- Modal detail info -->
-@foreach ($transactions as $transaction)
+{{-- @foreach ($transactions as $transaction)
 <div class="modal fade" id="detailinfo{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -162,7 +176,7 @@
 		</div>
 	</div>
 </div>
-@endforeach
+@endforeach --}}
 
 
 
@@ -171,13 +185,18 @@
       $('table.table').dataTable( {
         "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
         "pagingType": "full_numbers",
+        "paging":false,
+        "bInfo":false,
+        "ordering":false,
+        "bLengthChange": false,
+        "searching": false,
       });
     });
   
     table = $('table.table').dataTable({
       "sDom": "t"+"<'dt-toolbar-footer d-flex test'>",
       "autoWidth" : true,
-      "paging": false,
+      "ordering":false,
       "classes": {
         "sWrapper": "dataTables_wrapper dt-bootstrap4"
       },

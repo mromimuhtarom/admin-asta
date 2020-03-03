@@ -34,7 +34,7 @@ class ResellerController extends Controller
         $menu     = MenuClass::menuName('L_LIST_RESELLER');
         $mainmenu = MenuClass::menuName('L_RESELLER');
         $rank     = ResellerRank::all();
-        $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
+        $reseller = Reseller::leftjoin('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
         return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank', 'mainmenu'));
     }
 //-------- End Index List Reseller ------ //
@@ -42,10 +42,11 @@ class ResellerController extends Controller
 //-------- Update List Reseller ---------//
     public function update(Request $request)
     {
-        $pk = $request->pk;
-        $name = $request->name;
+        $pk    = $request->pk;
+        $name  = $request->name;
         $value = $request->value;
 
+        $reseller = Reseller::where('reseller_id', '=', $pk)->first();
         Reseller::where('reseller_id', '=', $pk)->update([
             $name => $value
         ]);
@@ -53,26 +54,33 @@ class ResellerController extends Controller
         switch($name) {
             case "username":
                 $name = 'Nama Pengguna';
+                $currentvalue = $reseller->username;
                 break;
             
             case "name":
                 $name = "Nama";
+                $currentvalue = $reseller->name;
                 break;
             
             case "phone":
                 $name = "Telepon";
+                $currentvalue = $reseller->phone;
                 break;
             
             case "email":
                 $name = "Email";
+                $currentvalue = $reseller->email;
                 break;
 
             case "gold":
                 $name = "Koin";
+                $currentvalue = $reseller->gold;
                 break;
 
             case "rank_id":
-                $name = "Peringkat ID";
+                $name         = "Peringkat ID";
+                $rankname     = ResellerRank::where('id', '=', $reseller->rank_id)->first();
+                $currentvalue = $rankname->name;
                 break;
             
             default:
@@ -80,9 +88,9 @@ class ResellerController extends Controller
         }
         Log::create([
             'op_id' => Session::get('userId'),
-            'action_id'   => '2',
+            'action_id'   => '31',
             'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit '.$name.' di menu Daftar Agen dengan ID '.$pk.' menjadi '.$value
+            'desc' => 'Edit '.$name.'  ('.$reseller->username.') '.$currentvalue.' => '.$value
         ]);
     }
 //-------- End Update List Reseller --------- //
@@ -94,6 +102,7 @@ class ResellerController extends Controller
         $password = $request->password;
         
         if($password != '') {
+            $reseller = Reseller::where('reseller_id', '=', $pk)->first();
             Reseller::where('reseller_id', '=', $pk)->update([
                 'userpass' => bcrypt($password)
             ]);
@@ -102,12 +111,12 @@ class ResellerController extends Controller
   
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '1',
+                'action_id' => '31',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit kata sandi di menu Daftar Agen dengan AgenId '.$pk.' menjadi '. $password
+                'desc'      => 'Edit kata sandi ('.$reseller->username.')' 
             ]);
 
-            return redirect()->route('List_Reseller')->with('success', alertTranslate("Reset Password Successfully"));
+            return redirect()->route('List_Reseller')->with('success', alertTranslate("L_RESET_PASSWORD_SUCCESS"));
         }
         return redirect()->route('List_Reseller')->with('alert', alertTranslate("Password is Null"));
     }
@@ -119,13 +128,14 @@ class ResellerController extends Controller
         $userid = $request->id;
         if($userid != '')
         {
+            $reseller = Reseller::where('reseller_id', '=', $userid)->first();
             Reseller::where('reseller_id', '=', $userid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '20',
+                'action_id' => '31',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$userid
+                'desc'      => 'Hapus data ('.$reseller->username.')'
             ]);
             return redirect()->route('List_Reseller')->with('success', alertTranslate('Data deleted'));
         }
@@ -290,7 +300,8 @@ class ResellerController extends Controller
                                  'asta_db.store_transaction_hist.status',
                                  'asta_db.store_transaction_hist.datetime',
                                  'asta_db.store_transaction_hist.action_date'
-                             );
+                             )
+                             ->where('asta_db.store_transaction_hist.shop_type', '=', 2);
         $validator = Validator::make($request->all(),[
             'inputMinDate'    => 'required|date',
             'inputMaxDate'    => 'required|date',

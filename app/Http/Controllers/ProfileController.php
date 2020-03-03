@@ -60,7 +60,7 @@ class ProfileController extends Controller
           'datetime'  => Carbon::now('GMT+7'),
           'desc'      => 'Edit kata sandi dengan PenggunaId '.$user.' menjadi '. $password
         ]);
-        return redirect()->route('profile-view')->with('success', alertTranslate('Reset Password Successfully'));
+        return redirect()->route('profile-view')->with('success', alertTranslate('L_RESET_PASSWORD_SUCCESS'));
         }
         return redirect()->route('profile-view')->with('alert', alertTranslate("Password is NULL"));
     }

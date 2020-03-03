@@ -763,9 +763,9 @@ class PlayersController extends Controller
       UserGuest::insert($guestId);
       Log::create([
           'op_id'     => Session::get('userId'),
-          'action_id' => '3',
+          'action_id' => '7',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Menambahkan data pengguna tamu dengan ID  '.$number
+          'desc'      => 'Menambahkan ID guest menjadi ('.$number
       ]);
 
       return back()->with('success', 'Input Data Successfull with '.$number.' Record');
