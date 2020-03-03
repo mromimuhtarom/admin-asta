@@ -343,7 +343,7 @@ class GoldStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '27',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' dengan judul item '.$currentname->name.'. '.$currentvalue.' => '. $value
+            'desc'      => 'Edit '.$name.' ('.$currentname->name.'). '.$currentvalue.' => '. $value
         ]);
     }
 

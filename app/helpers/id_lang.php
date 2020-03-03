@@ -684,6 +684,7 @@ function TranslateReseller($menu){
         'Choose a file'          => 'pilih file',
         'Create new reseller'    => 'buat agen baru',
         'Select All'             => 'Pilih semua',
+        'L_YEARLY'               => 'tahunan',
         'L_WEEKLY'               => 'Mingguan',
         'L_MONTHLY'              => 'Bulanan',
         'Create new'             => 'Buat baru',

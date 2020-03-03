@@ -185,9 +185,9 @@ class ResellerController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '35',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Peringkat Agen dengan Nama Peringkat '. $rankname
+            'desc'      => 'Menambahkan data dengan Nama Peringkat '. $rankname
         ]);
 
         return redirect()->route('Reseller_Rank')->with('success', alertTranslate('Data added'));
@@ -236,9 +236,9 @@ class ResellerController extends Controller
 
         Log::create([
             'op_id' => Session::get('userId'),
-            'action_id'   => '2',
+            'action_id'   => '35',
             'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit '.$name.' di menu Peringkat Agen dengan nama '.$currentstatus->name.' dari '.$currentvalue.' menjadi '.$value
+            'desc' => 'Edit '.$name.' ('.$currentstatus->name.'). '.$currentvalue.' => '.$value
         ]);
     }
 //-------- End Update Reseller Rank ---------//
@@ -247,15 +247,16 @@ class ResellerController extends Controller
     public function destroyRank(Request $request)
     {
         $id = $request->id;
+        $currentstatus = ResellerRank::where('id', '=', $id)->first();
         if($id != '')
         {
             ResellerRank::where('id', '=', $id)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '20',
+                'action_id' => '35',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Peringkat Agen dengan AgenID '.$id
+                'desc'      => 'Hapus peringkat dengan nama '.$currentstatus->name
             ]);
             return redirect()->route('Reseller_Rank')->with('success', alertTranslate('Data deleted'));
         }
@@ -1217,9 +1218,9 @@ public function detailTransaction(Request $request, $month, $year)
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '3',
+            'action_id' => '36',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan di menu Pendaftaran Agen dengan nama pengguna '. $request->username
+            'desc'      => 'Menambahkan pengguna baru '. $request->username
         ]);
   
         return back()->with('success','REGISTER SUCCESSFULL');
@@ -1641,9 +1642,9 @@ public function detailTransaction(Request $request, $month, $year)
         
                 Log::create([
                     'op_id'     => Session::get('userId'),
-                    'action_id' => '3',
+                    'action_id' => '34',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Menambahkan data di menu Toko Agen dengan judul '. $request->title
+                    'desc'      => 'Menambahkan item dengan judul '. $request->title
                 ]);
                 return redirect()->route('Item_Store_Reseller')->with('success', alertTranslate('Data added'));                 
             }
@@ -1738,6 +1739,10 @@ public function detailTransaction(Request $request, $month, $year)
                 $name = "Harga Uang Tunai";
                 $currentvalue = $currentname->price;
                 break;
+            case "bonus_get":
+                $name = "item bonus yang didapat";
+                $currentvalue = $currentname->bonus_get;
+                break;
             case "google_key":
                 $name = "Kunci Google";
                 $currentvalue = $currentname->google_key;
@@ -1774,9 +1779,9 @@ public function detailTransaction(Request $request, $month, $year)
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '34',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Toko Barang dengan nama '.$currentname->name.'. Dari '.$currentvalue.' menjadi '. $value
+            'desc'      => 'Edit '.$name.' ('.$currentname->name.'). '.$currentvalue.' => '. $value
         ]);
     }
 // ------- End Update Item Store Reseller -------- //
@@ -1862,12 +1867,11 @@ public function detailTransaction(Request $request, $month, $year)
 
                 Log::create([
                     'op_id'     => Session::get('userId'),
-                    'action_id' => '2',
+                    'action_id' => '34',
                     'datetime'  => Carbon::now('GMT+7'),
-                    'desc'      => 'Ubah gambar di menu Toko Agen dengan nama '.$currentname->name
+                    'desc'      => 'Ubah gambar dengan nama '.$currentname->name
                 ]);
                 return redirect()->route('Item_Store_Reseller')->with('success','Update Image successfull');
-
             }
             else 
             {
@@ -1914,9 +1918,9 @@ public function detailTransaction(Request $request, $month, $year)
             //RECORD LOG
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '34',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Ubah gambar bonus di menu Toko Item Agen dengan nama '.$currentname->name
+                'desc'      => 'Ubah gambar bonus dengan nama '.$currentname->name
             ]);
             
             return redirect()->route('Item_Store_Reseller')->with('success','Update Image Successfull');
