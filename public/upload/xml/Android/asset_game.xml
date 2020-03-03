@@ -1,18 +1,9 @@
 <?xml version="1.0"?>
 <main_asset>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-<bgt_scenes_all name="bgt_v0.0.1_scenes_all_330f778f033cfbd8f90b9b128f193304.bundle"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link><ver>0.0.1</ver><os>Android</os></bgt_scenes_all></main_asset>
+    <bgt_scenes_all name="bgt_v0.0.1_scenes_all_330f778f033cfbd8f90b9b128f193304.bundle">
+        <type>Scene</type>
+        <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+        <ver>0.0.1</ver>
+        <os>Android</os>
+    </bgt_scenes_all>
+</main_asset>
