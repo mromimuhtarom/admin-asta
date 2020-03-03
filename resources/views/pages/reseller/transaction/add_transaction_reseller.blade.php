@@ -165,7 +165,7 @@
                                         <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
                                     @endforeach
                                 </select><br>
-                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="{{ TranslateReseller('Reason Gold Is Minus') }}"></textarea>
+                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="{{ TranslateReseller('Reason Gold') }}"></textarea>
                             </div>
                         </div>
                     </div>

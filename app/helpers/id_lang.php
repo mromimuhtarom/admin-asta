@@ -687,9 +687,9 @@ function TranslateReseller($menu){
         'L_WEEKLY'               => 'Mingguan',
         'L_MONTHLY'              => 'Bulanan',
         'Create new'             => 'Buat baru',
-        'Username / Reseller ID'  => 'Nama Agent / ID Agen',
+        'Username / Reseller ID' => 'Nama Agent / ID Agen',
         'Gold'                   => 'Koin',
-        'Reason Gold Is Minus'   => 'Alasan Koin dikurangi',
+        'Reason Gold'         => 'Alasan Koin di ubah',
         'Date Created'           => 'Tanggal',
         'Buy Gold'               => 'Beli Koin',
         'Buy Amount'             => 'Jumlah Pembelian',
@@ -719,7 +719,8 @@ function TranslateReseller($menu){
         'L_STATUS_TRANSACTION'   => 'Status Transaksi',
         'L_TIMESTAMP'            => 'TimeStamp',
         'L_ORDER_TRANSACTION'    => 'ID Order / Transaksi',
-        'L_DATE_BUY_SELL'        => 'Tanggal Pembelian / Penjualan'
+        'L_DATE_BUY_SELL'        => 'Tanggal Pembelian / Penjualan',
+        'L_RESELLER_ID'          => 'ID agen'
 
     
     ];

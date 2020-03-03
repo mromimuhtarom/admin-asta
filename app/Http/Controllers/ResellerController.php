@@ -844,13 +844,19 @@ public function detailTransaction(Request $request, $month, $year)
                 ]);
             endif;
 
+            $currentvalue = str_replace('.00', '', $goldreseller->gold);
+            if($type == 6):
+                $typename = 'Gratis';
+            elseif($type == 7):
+                $typename = 'Bonus';
+            endif;
+
             Log::create([
                 'op_id'     =>  Session::get('userId'),
-                'action_id' =>  '2',
+                'action_id' =>  '33',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance koin dengan nama agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, dengan jumlah yang ditambahkan '.$valuecurrency.' menjadi '.$totalbalance.' koin. Dengan alasan: ' .$description
+                'desc'      =>  'Memberikan '.$typename.' ('.$goldreseller->username.') '.$currentvalue.' koin => '.$totalbalance.' koin. Dengan alasan: ' .$description
             ]);
-
 
 
         //---------- untuk type Adjust --------//
@@ -923,11 +929,13 @@ public function detailTransaction(Request $request, $month, $year)
                                 'gold' => $valuecurrency
                                 ]);
 
+            $currentvalue = str_replace('.00', '', $goldreseller->gold);
+
             Log::create([
                 'op_id'     =>  Session::get('userId'),
-                'action_id' =>  '2',
+                'action_id' =>  '33',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance koin dengan nama Agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, jumlah balance '.$opmath.' '.$balancegoldtotal.' koin, hasil penyesuaian menjadi '.$valuecurrency.'. Dengan alasan: ' .$description
+                'desc'      =>  'Menyesuaikan koin ('.$goldreseller->username.') '.$currentvalue.' koin => '.$totalbalance.'. Dengan alasan: ' .$description
             ]);
 
         //---------- untuk type Correction --------//
@@ -941,7 +949,6 @@ public function detailTransaction(Request $request, $month, $year)
                     return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
                 endif;
             endif;
-
 
             //--------------- untuk menambahkan gold reseller ------------------// 
             $totalbalance = $goldreseller->gold + $valuecurrency;
@@ -993,12 +1000,14 @@ public function detailTransaction(Request $request, $month, $year)
                 // ---- untuk keterangan di log admin -----//
                 $opmath = 'dikurangi dengan';
             endif;
+
+            $currentvalue = str_replace('.00', '', $goldreseller->gold);
             
             Log::create([
                 'op_id'     =>  Session::get('userId'),
-                'action_id' =>  '2',
+                'action_id' =>  '33',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Edit balance koin dengan nama Agen ' .$goldreseller->username. ' dari balance '.$goldreseller->gold.' koin, jumlah balance '.$opmath.' '.$valuecurrency.' koin, hasil koreksi menjadi '.$totalbalance.' . Dengan alasan: '.$description
+                'desc'      =>  'Koreksi koin ('.$goldreseller->username.') '.$currentvalue.' koin => '.$totalbalance.' koin. Dengan alasan: '.$description
             ]);
         endif;
 
