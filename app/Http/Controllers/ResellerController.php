@@ -34,7 +34,7 @@ class ResellerController extends Controller
         $menu     = MenuClass::menuName('L_LIST_RESELLER');
         $mainmenu = MenuClass::menuName('L_RESELLER');
         $rank     = ResellerRank::all();
-        $reseller = Reseller::join('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
+        $reseller = Reseller::leftjoin('asta_db.reseller_rank', 'asta_db.reseller_rank.id', '=', 'asta_db.reseller.rank_id')->select('asta_db.reseller_rank.name as rankname', 'asta_db.reseller.reseller_id', 'asta_db.reseller.username', 'asta_db.reseller.phone', 'asta_db.reseller.email', 'asta_db.reseller.gold', 'asta_db.reseller.fullname')->get();
         return view('pages.reseller.listreseller', compact('menu', 'reseller', 'rank', 'mainmenu'));
     }
 //-------- End Index List Reseller ------ //
@@ -42,11 +42,12 @@ class ResellerController extends Controller
 //-------- Update List Reseller ---------//
     public function update(Request $request)
     {
-        $pk = $request->pk;
-        $name = $request->name;
+        $pk    = $request->pk;
+        $name  = $request->name;
         $value = $request->value;
         $currentname = Reseller::where('reseller_id', '=', $pk)->first();
 
+        $reseller = Reseller::where('reseller_id', '=', $pk)->first();
         Reseller::where('reseller_id', '=', $pk)->update([
             $name => $value
         ]);
@@ -54,42 +55,43 @@ class ResellerController extends Controller
         switch($name) {
             case "username":
                 $name = 'Nama Pengguna';
-                $currentvalue = $currentname->username;
+                $currentvalue = $reseller->username;
                 break;
             
             case "name":
                 $name = "Nama";
-                $currentvalue = $currentname->name;
+                $currentvalue = $reseller->fullname;
                 break;
             
             case "phone":
                 $name = "Telepon";
-                $currentvalue = $currentname->phone;
+                $currentvalue = $reseller->phone;
                 break;
             
             case "email":
                 $name = "Email";
-                $currentvalue = $currentname->email;
+                $currentvalue = $reseller->email;
                 break;
 
             case "gold":
                 $name = "Koin";
-                $currentvalue = $currentname->gold;
+                $currentvalue = $reseller->gold;
                 break;
 
             case "rank_id":
-                $name = "Peringkat ID";
-                $currentvalue = $currentname->rank_id;
+                $name         = "Peringkat ID";
+                $rankname     = ResellerRank::where('id', '=', $reseller->rank_id)->first();
+                $currentvalue = $rankname->rankname;
                 break;
             
             default:
                 "";
         }
         Log::create([
-            'op_id' => Session::get('userId'),
-            'action_id'   => '31',
-            'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit '.$name.' dengan nama '.$currentvalue.' => '.$value
+            'op_id'     => Session::get('userId'),
+            'action_id' => '31',
+            'datetime'  => Carbon::now('GMT+7'),
+            'desc'      => 'Edit '.$name.' ('.$reseller->username.') '.$currentvalue.' => '.$value
         ]);
     }
 //-------- End Update List Reseller --------- //
@@ -102,6 +104,7 @@ class ResellerController extends Controller
         $currentname = Reseller::where('reseller_id', '=', $pk)->first();
         
         if($password != '') {
+            $reseller = Reseller::where('reseller_id', '=', $pk)->first();
             Reseller::where('reseller_id', '=', $pk)->update([
                 'userpass' => bcrypt($password)
             ]);
@@ -110,10 +113,10 @@ class ResellerController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '31',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit kata sandi agen ('.$currentname->username.')'
+                'desc'      => 'Edit kata sandi ('.$reseller->username.')' 
             ]);
 
-            return redirect()->route('List_Reseller')->with('success', alertTranslate("L_RESET_PASS_SUCCESSFULLY"));
+            return redirect()->route('List_Reseller')->with('success', alertTranslate("L_RESET_PASSWORD_SUCCESS"));
         }
         return redirect()->route('List_Reseller')->with('alert', alertTranslate("Password is Null"));
     }
@@ -126,13 +129,14 @@ class ResellerController extends Controller
         $currentname = Reseller::where('reseller_id', '=', $userid)->fisrt();
         if($userid != '')
         {
+            $reseller = Reseller::where('reseller_id', '=', $userid)->first();
             Reseller::where('reseller_id', '=', $userid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '31',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Daftar dengan nama agen '.$currentname
+                'desc'      => 'Hapus data ('.$reseller->username.')'
             ]);
             return redirect()->route('List_Reseller')->with('success', alertTranslate('Data deleted'));
         }
@@ -297,7 +301,8 @@ class ResellerController extends Controller
                                  'asta_db.store_transaction_hist.status',
                                  'asta_db.store_transaction_hist.datetime',
                                  'asta_db.store_transaction_hist.action_date'
-                             );
+                             )
+                             ->where('asta_db.store_transaction_hist.shop_type', '=', 2);
         $validator = Validator::make($request->all(),[
             'inputMinDate'    => 'required|date',
             'inputMaxDate'    => 'required|date',
@@ -1318,6 +1323,7 @@ public function detailTransaction(Request $request, $month, $year)
         $reseller_transaction_day = ResellerTransactionDay::where('reseller_id', '=', $reseller_id)
                                     ->whereDate('date', '=', $datenow)
                                     ->first();
+        $resellername             = Reseller::where('reseller_id', '=', $resellerId)->first();
 
         if($reseller_transaction_day)
         {
@@ -1372,9 +1378,9 @@ public function detailTransaction(Request $request, $month, $year)
 
           Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '5',
+            'action_id' => '32',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menerima permintaan transaksi di menu Transaksi Permintaan Agen dengan Agenid'. $reseller_id
+            'desc'      => 'Menerima permintaan transaksi dengan nama Agen ' .$resellername->username
           ]);
 
           return back()->with('success', alertTranslate("Approved Succesful"));
@@ -1396,6 +1402,7 @@ public function detailTransaction(Request $request, $month, $year)
         $datetime       = $request->datetime;
         $shop_type      = $request->shop_type;
         $item_type      = $request->item_type;
+        $resellername   = Reseller::where('reseller_id', '=', $declineOrderId)->first();
 
         StoreTransactionHist::create([
             'user_id'       => $reseller_id,
@@ -1412,9 +1419,9 @@ public function detailTransaction(Request $request, $month, $year)
         StoreTransaction::where('user_id', '=', $reseller_id)->where('shop_type', '=', $shop_type)->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '6',
+            'action_id' => '32',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menolak permintaan transaksi di menu Transaksi Permintaan Agen dengan Agenid'. $reseller_id
+            'desc'      => 'Menolak permintaan transaksi dengan nama agen'. $resellername->username
         ]);
 
         return back()->with('success', alertTranslate("Declined Succesful"));

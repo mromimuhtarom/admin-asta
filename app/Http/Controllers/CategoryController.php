@@ -120,7 +120,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu kategori Asta Poker dengan nama'. $tpk_category->name
+            'desc'      => 'Menambahkan data ('. $tpk_category->name.')'
         ]);
 
         return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('Data Added'));
@@ -159,7 +159,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Kategori Asta Big Two dengan nama '. $bgt_category->name
+            'desc'      => 'Menambahkan data ('. $bgt_category->name.')'
         ]);
  
         return redirect()->route('Category_Big_Two')->with('success', alertTranslate('Data Added'));
@@ -191,7 +191,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Kategori Domino Susun dengan nama'. $dms_category->name
+            'desc'      => 'Menambahkan data ('. $dms_category->name.')'
         ]);
 
         return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('Data Added'));
@@ -225,7 +225,7 @@ class CategoryController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '3',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Menambahkan data di menu Kategori Domino QQ dengan nama '. $dmq_category->name
+            'desc'      => 'Menambahkan data ('. $dmq_category->name.')'
         ]);
 
         return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('Data Added'));
@@ -265,7 +265,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '14',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' dengan nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
+          'desc'      => 'Edit '.$name.' ('.$currentname->name.') '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -302,7 +302,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '17',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' dengan nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
+          'desc'      => 'Edit '.$name.' ('.$currentname->name.') '.$currentvalue.' => '. $value
         ]);
 
         
@@ -340,7 +340,7 @@ class CategoryController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '20',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit '.$name.' dengan nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
+          'desc'      => 'Edit '.$name.' ('.$currentname->name.') '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -375,7 +375,7 @@ class CategoryController extends Controller
           'op_id'       => Session::get('userId'),
           'action_id'   => '23',
           'datetime'    => Carbon::now('GMT+7'),
-          'desc' => 'Edit '.$name.' nama table '.$currentname->name.'. '.$currentvalue.' => '. $value
+          'desc' => 'Edit '.$name.' ('.$currentname->name.') '.$currentvalue.' => '. $value
         ]);
     }
 
@@ -384,13 +384,14 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
+            $tpkroom = TpkRoom::where('room_id', '=', $room_id)->first();
             TpkRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '14',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Kategori Asta Poker dengan RuangID '.$roomid
+                'desc'      => 'Hapus data ('.$tpkroom->name.')'
             ]);
 
             return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('Data deleted'));
@@ -404,13 +405,14 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
+            $bgtroom = BigTwoRoom::where('room_id', '=', $roomid)->first();
             BigTwoRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '17',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Kategori Asta Big Two dengan RuangID '.$roomid
+                'desc'      => 'Hapus data ('.$bgtroom->name.')'
             ]);
             return redirect()->route('Category_Big_Two')->with('success', alertTranslate('Data Deleted'));
         }
@@ -423,13 +425,14 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
+            $dmsroom =  DominoSusunRoom::where('room_id', '=', $roomid)->first();
             DominoSusunRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '20',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Kategory Domino Susun dengan RuangID '.$roomid
+                'desc'      => 'Hapus data ('.$dmsroom->name.')'
             ]);
             return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('Data Deleted'));
         }
@@ -442,13 +445,14 @@ class CategoryController extends Controller
         $roomid = $request->categoryid;
         if($roomid != '')
         {
+            $dmqroom = DominoQRoom::where('room_id', '=', $roomid)->first();
             DominoQRoom::where('room_id', '=', $roomid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
                 'action_id' => '23',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Kategori Domino QQ dengan RuangID '.$roomid
+                'desc'      => 'Hapus data ('.$dmqroom->name.')'
             ]);
             return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('Data Deleted'));
         }

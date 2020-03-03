@@ -769,7 +769,8 @@ Route::middleware('authenticated')->group(function(){
 
             Route::group(['prefix' => 'Store_reseller_report'], function(){
                 Route::middleware('page_denied:L_STORE_RESELLER_REPORT')->group(function(){
-                   Route::get('StoreResellerReport-view', 'StoreResellReportController@index')->name('Store_reseller_report');
+                    Route::get('StoreResellerReport-view', 'StoreResellReportController@index')->name('Store_reseller_report');
+                    Route::get('StoreResellerReport-search', 'StoreResellReportController@searchStoreReseller')->name('StoreResellerReport-search');
                 });
             });
         });

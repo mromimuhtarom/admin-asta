@@ -57,7 +57,7 @@ class GameSettingController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '25',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit Pengaturan Asta Poker dengan nama '.$currentname->name.'. '.$currentname->value.' => '. $value
+            'desc'      => 'Edit Pengaturan Asta Poker ('.$currentname->name.') '.$currentname->value.' => '. $value
         ]);
 
     }
