@@ -1,83 +1,18 @@
 <?xml version="1.0"?>
 <main_asset>
-  <main name="main_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/IOS/</link>
-    <ver>0.0.3</ver>
-  </main>
-  <general name="general_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/General/IOS/</link>
-    <ver>0.0.2</ver>
-  </general>
-  <general name="lobby_general_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/IOS/GLOBAL/</link>
-    <ver>0.0.1</ver>
-  </general>
-  <bgt name="bgt_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/IOS/BGT/</link>
-    <ver>0.0.1</ver>
-  </bgt>
-  <bgt name="bgt_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/IOS/</link>
-    <ver>0.0.10</ver>
-  </bgt>
-  <bgt name="bgt_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/IOS/</link>
-    <ver>0.0.1</ver>
-  </bgt>
-  <dmq name="dmq_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/IOS/DMQ/</link>
-    <ver>0.0.1</ver>
-  </dmq>
-  <dmq name="dmq_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMQ/IOS/</link>
-    <ver>0.0.2</ver>
-  </dmq>
-  <dmq name="dmq_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMQ/IOS/</link>
-    <ver>0.0.1</ver>
-  </dmq>
-  <dms name="dms_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/IOS/DMS/</link>
-    <ver>0.0.1</ver>
-  </dms>
-  <dms name="dms_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMS/IOS/</link>
-    <ver>0.0.1</ver>
-  </dms>
-  <dms name="dms_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMS/IOS/</link>
-    <ver>0.0.1</ver>
-  </dms>
-  <tpk name="tpk_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/IOS/TPK/</link>
-    <ver>0.0.1</ver>
-  </tpk>
-  <tpk name="tpk_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/IOS/</link>
-    <ver>0.0.2</ver>
-  </tpk>
-  <tpk name="tpk_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/IOS/</link>
-    <ver>0.0.2</ver>
-  </tpk>
-  <dmq_scenes_all name="dmq_v0.0.1_scenes_all_035de4638f13c26b29a9ca1a49f7c7ba.bundle">
-    <type>Scene</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/IOS/</link>
-    <ver>0.0.1</ver>
-  </dmq_scenes_all>
-</main_asset>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<bgt_scenes_all name="bgt_v0.0.1_scenes_all_330f778f033cfbd8f90b9b128f193304.bundle"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link><ver>0.0.1</ver><os>Android</os></bgt_scenes_all></main_asset>

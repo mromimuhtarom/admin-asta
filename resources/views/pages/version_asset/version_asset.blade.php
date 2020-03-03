@@ -71,6 +71,7 @@
                                     @endif
                                     <th>{{ TranslateMenuGame('Name')}}</th>
                                     <th>{{ translate_menuTransaction('Type')}}</th>
+                                    <th>Operating System</th>
                                     <th>{{ TranslateReseller('Link')}}</th>
                                     <th>{{ TranslateReseller('Version')}}</th>
                                     @if($menu)
@@ -95,6 +96,7 @@
                                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $ckbox }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
+                                        <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="os" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->os }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->link }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->ver }}</a></td>
                                         <td>
@@ -505,6 +507,13 @@
                             <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
                           </select>
                         <br>
+                          <select name="os" class="form-control">
+                            <option>Operating System</option>
+                            <option value="Android">Android</option>
+                            <option value="Ios">Ios</option>
+                            <option value="Windows">Windows</option>
+                          </select>
+                        <br>
                           <input class="form-control" name="Link" placeholder="Link"><br>
                           <input class="form-control" name="Version" placeholder="Version"><br>
                           <input class="form-control" name="FolderName" placeholder="Folder name"><br>
@@ -673,6 +682,13 @@ $ckbox = str_replace('.','_', $xl['name']);
                       <option @if( $xl->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>
                       <option @if( $xl->type == 'Image' ) selected @endif value="Image">{{ TranslateVersionAsetApk('L_IMAGE') }}</option>
                       <option @if( $xl->type == 'Scene' ) selected @endif value="Scene">{{ TranslateVersionAsetApk('L_SCENE') }}</option>
+                    </select>
+                  <br>
+                    <select disabled name="os" class="form-control">
+                      <option>Operating System</option>
+                      <option @if( $xl->os == 'Android' ) selected @endif value="Android">Android</option>
+                      <option @if( $xl->os == 'Ios' ) selected @endif value="Ios">Ios</option>
+                      <option @if( $xl->os == 'Windows' ) selected @endif  value="Windows">Windows</option>
                     </select>
                   <br>
                   <input readonly value="{{ $xl->link }}" class="form-control" name="Link" placeholder="Link"><br>

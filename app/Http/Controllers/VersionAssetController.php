@@ -61,6 +61,7 @@ class VersionAssetController extends Controller
         $type             = $request->Type;
         $link             = $request->Link;
         $version          = $request->Version;
+        $operating_system = $request->os;
         $tagelement       = $request->FolderName;
         $name             = $request->Name;
         $x                = explode('.', $name);
@@ -75,11 +76,13 @@ class VersionAssetController extends Controller
         $type_xml       = $xml->createElement("type", $type);
         $link_xml       = $xml->createElement("link", $link);
         $version_xml    = $xml->createElement("ver", $version);
+        $os_xml         = $xml->createElement("os", $operating_system);
 
         $infoTag->setAttribute('name', $name);
         $infoTag->appendChild($type_xml);
         $infoTag->appendChild($link_xml);
         $infoTag->appendChild($version_xml);
+        $infoTag->appendChild($os_xml);
         $rootTag->appendChild($infoTag);
 
         $xml->save('../public/upload/xml/Android/asset_game.xml');
@@ -292,6 +295,13 @@ class VersionAssetController extends Controller
                 if($gamew['name'] == $pk)
                 {
                     $gamew['name'] = $value;
+                    break;
+                }
+            } else if($name == 'os')
+            {
+                if($gamew['name'] == $pk)
+                {
+                    $gamew->os = $value;
                     break;
                 }
             }
