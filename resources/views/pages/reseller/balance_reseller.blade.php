@@ -87,7 +87,7 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.reseller_id">{{ TranslateReseller('Reseller ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.reseller_id') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.reseller_id">{{ TranslateReseller('L_RESELLER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.reseller_id') }}"></i></a></th>
                         <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.username">{{ Translate_menuPlayers('Username')}}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.username') }}"></i></a></th>
                         {{-- <th>Description</th> --}}
                         <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.debet">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort"{{ iconsorting('asta_db.reseller_balance.debet') }}"></i></a></th>
