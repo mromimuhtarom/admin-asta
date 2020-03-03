@@ -1228,6 +1228,7 @@ public function detailTransaction(Request $request, $month, $year)
         // dd($bankname);
         $payment      = Payment::where('status', '=', 1)->where('type', '=', 1)->get();
         if($bankname != 'all_bank'):
+            dd('abg');
             $transactions = DB::table('asta_db.store_transaction')
                             ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
                             ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
@@ -1254,10 +1255,11 @@ public function detailTransaction(Request $request, $month, $year)
                             ->orderBy('asta_db.store_transaction.datetime', 'ASC')
                             ->get();
         elseif($bankname == 'all_bank'):
+            
             $transactions = DB::table('asta_db.store_transaction')
-                            ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
-                            ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
-                            ->join('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
+                            ->leftjoin('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
+                            ->leftjoin('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
+                            ->leftjoin('asta_db.payment', 'asta_db.payment.id', '=', 'asta_db.store_transaction.payment_id')
                             ->select(
                                 'asta_db.reseller.reseller_id',
                                 'asta_db.reseller.username',
@@ -1278,6 +1280,7 @@ public function detailTransaction(Request $request, $month, $year)
                             ->where('asta_db.store_transaction.shop_type', '=', 2)
                             ->orderBy('asta_db.store_transaction.datetime', 'ASC')
                             ->get();
+            
         endif;
 
             $item_gold = ItemsGold::select(
