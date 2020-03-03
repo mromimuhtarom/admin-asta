@@ -45,6 +45,7 @@ class ResellerController extends Controller
         $pk = $request->pk;
         $name = $request->name;
         $value = $request->value;
+        $currentname = Reseller::where('reseller_id', '=', $pk)->first();
 
         Reseller::where('reseller_id', '=', $pk)->update([
             $name => $value
@@ -53,26 +54,32 @@ class ResellerController extends Controller
         switch($name) {
             case "username":
                 $name = 'Nama Pengguna';
+                $currentvalue = $currentname->username;
                 break;
             
             case "name":
                 $name = "Nama";
+                $currentvalue = $currentname->name;
                 break;
             
             case "phone":
                 $name = "Telepon";
+                $currentvalue = $currentname->phone;
                 break;
             
             case "email":
                 $name = "Email";
+                $currentvalue = $currentname->email;
                 break;
 
             case "gold":
                 $name = "Koin";
+                $currentvalue = $currentname->gold;
                 break;
 
             case "rank_id":
                 $name = "Peringkat ID";
+                $currentvalue = $currentname->rank_id;
                 break;
             
             default:
@@ -80,9 +87,9 @@ class ResellerController extends Controller
         }
         Log::create([
             'op_id' => Session::get('userId'),
-            'action_id'   => '2',
+            'action_id'   => '31',
             'datetime'        => Carbon::now('GMT+7'),
-            'desc' => 'Edit '.$name.' di menu Daftar Agen dengan ID '.$pk.' menjadi '.$value
+            'desc' => 'Edit '.$name.' dengan nama '.$currentvalue.' => '.$value
         ]);
     }
 //-------- End Update List Reseller --------- //
@@ -92,22 +99,21 @@ class ResellerController extends Controller
     {
         $pk = $request->userid;
         $password = $request->password;
+        $currentname = Reseller::where('reseller_id', '=', $pk)->first();
         
         if($password != '') {
             Reseller::where('reseller_id', '=', $pk)->update([
                 'userpass' => bcrypt($password)
             ]);
-        
-  
-  
+          
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '1',
+                'action_id' => '31',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Edit kata sandi di menu Daftar Agen dengan AgenId '.$pk.' menjadi '. $password
+                'desc'      => 'Edit kata sandi agen ('.$currentname->username.')'
             ]);
 
-            return redirect()->route('List_Reseller')->with('success', alertTranslate("Reset Password Successfully"));
+            return redirect()->route('List_Reseller')->with('success', alertTranslate("L_RESET_PASS_SUCCESSFULLY"));
         }
         return redirect()->route('List_Reseller')->with('alert', alertTranslate("Password is Null"));
     }
@@ -117,15 +123,16 @@ class ResellerController extends Controller
     public function destroy(Request $request)
     {
         $userid = $request->id;
+        $currentname = Reseller::where('reseller_id', '=', $userid)->fisrt();
         if($userid != '')
         {
             Reseller::where('reseller_id', '=', $userid)->delete();
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '20',
+                'action_id' => '31',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus di menu Daftar Agen dengan AgenID '.$userid
+                'desc'      => 'Hapus di menu Daftar dengan nama agen '.$currentname
             ]);
             return redirect()->route('List_Reseller')->with('success', alertTranslate('Data deleted'));
         }

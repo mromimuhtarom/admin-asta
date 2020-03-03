@@ -118,7 +118,7 @@ class GeneralSettingController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Update konten tentang di tabel Pengaturan Info menu pengaturan umum'
             ]);
@@ -140,7 +140,7 @@ class GeneralSettingController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Update konten term of service di tabel CS dan pengaturan legal menu pengaturan umum'
             ]);
@@ -162,7 +162,7 @@ class GeneralSettingController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Update konten Privacy Policy di tabel CS dan pengaturan legal menu pengaturan umum'
             ]);
@@ -183,7 +183,7 @@ class GeneralSettingController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Update konten Info Asta Poker di tabel Pengaturan info menu pengaturan umum'
             ]);
@@ -205,7 +205,7 @@ class GeneralSettingController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Update konten Info Big Two di tabel Pengaturan info menu pengaturan umum'
             ]);
@@ -226,7 +226,7 @@ class GeneralSettingController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Update konten Info Domino QQ di tabel Pengaturan info menu pengaturan umum'
             ]);
@@ -246,7 +246,7 @@ class GeneralSettingController extends Controller
 
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '2',
+                'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Update konten Info Domino Susun di tabel Pengaturan info menu pengaturan umum'
             ]);
@@ -286,7 +286,7 @@ class GeneralSettingController extends Controller
         // $rootpath = '../public/upload/file_policy';
         // $client = Storage::createLocalDriver(['root' => $rootpath]);
         // $client->get('about.txt');
-        $client = file_get_contents(public_path()."/upload/file_policy/about.txt");
+        $client = file_get_content(public_path()."/upload/file_policy/about.txt");
         $b = htmlspecialchars($client);
         return $b;
     }
@@ -305,13 +305,7 @@ class GeneralSettingController extends Controller
         return $b;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
         $pk    = $request->pk; //get data-pk
@@ -392,7 +386,7 @@ class GeneralSettingController extends Controller
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '2',
+            'action_id' => '30',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Edit '.$name.' di menu Pengaturan Umum dari '.$currentvalue.' menjadi '. $value
         ]);
