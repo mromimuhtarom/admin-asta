@@ -1236,7 +1236,6 @@ public function detailTransaction(Request $request, $month, $year)
         // dd($bankname);
         $payment      = Payment::where('status', '=', 1)->where('type', '=', 1)->get();
         if($bankname != 'all_bank'):
-            dd('abg');
             $transactions = DB::table('asta_db.store_transaction')
                             ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
                             ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
