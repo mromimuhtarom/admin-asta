@@ -75,4 +75,9 @@
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/IOS/</link>
         <ver>0.0.2</ver>
     </tpk>
-<image name="campess"><type>Image</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/IOS/</link><ver>0.0.1</ver></image></main_asset>
+    <emoticon_asset_all name="emoticon_v0.0.1_assets_all_e38c3cf41ec6e6e43716f462cfafcc24.bundle">
+        <type>Scene</type>
+        <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/IOS/</link>
+        <ver>0.0.1</ver>
+    </emoticon_asset_all>
+</main_asset>

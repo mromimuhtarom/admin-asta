@@ -1,86 +1,9 @@
 <?xml version="1.0"?>
 <main_asset>
-  <main name="main_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
-    <ver>0.0.4</ver>
-  </main>
-  <general name="general_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/General/Android/</link>
-    <ver>0.0.1</ver>
-  </general>
-  <general name="lobby_general_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/GLOBAL/</link>
-    <ver>0.0.4</ver>
-  </general>
-  <bgt name="bgt_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/BGT/</link>
-    <ver>0.0.3</ver>
-  </bgt>
-  <bgt name="bgt_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Android/</link>
-    <ver>0.0.1</ver>
-  </bgt>
-  <bgt name="bgt_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Android/</link>
-    <ver>0.0.1</ver>
-  </bgt>
-  <dmq name="dmq_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/DMQ/</link>
-    <ver>0.0.3</ver>
-  </dmq>
-  <dmq name="dmq_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMQ/Android/</link>
-    <ver>0.0.2</ver>
-  </dmq>
-  <dmq name="dmq_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMQ/Android/</link>
-    <ver>0.0.1</ver>
-  </dmq>
-  <dms name="dms_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/DMS/</link>
-    <ver>0.0.3</ver>
-  </dms>
-  <dms name="dms_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMS/Android/</link>
-    <ver>0.0.2</ver>
-  </dms>
-  <dms name="dms_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMS/Android/</link>
-    <ver>0.0.1</ver>
-  </dms>
-  <tpk name="tpk_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/TPK/</link>
-    <ver>0.0.3</ver>
-  </tpk>
-  <tpk name="tpk_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/Android/</link>
-    <ver>0.0.2</ver>
-  </tpk>
-  <tpk name="tpk_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/Android/</link>
-    <ver>0.0.2</ver>
-  </tpk>
-  
-  
-  
-  
-  
-  
-  
-  
-<bundle name="bgt_v0.0.1_scenes_all_06707fc6c420cc8ff429888aa1257777"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Scene/Android/</link><ver>0.0.1</ver></bundle><bundle_default name="defaultlocalgroup_unitybuiltinshaders_cfb2aa597671936ae6774c87a075a4e1"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Scene/Android/</link><ver>0.0.1</ver></bundle_default><dmq_scene name="dmq_v0.0.1_scenes_all_a47acb762977601693c55a1f09f66678"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Scene/Android/</link><ver>0.0.1</ver></dmq_scene><dms_bundle name="dms_v0.0.1_scenes_all_03a4a123a2a0a0a49f7123b0297e954a"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Scene/Android/</link><ver>0.0.1</ver></dms_bundle><duplicate_asset_bundle name="duplicateassetisolation_assets_all_3e913086a472f9c4a9f7fdf22e018650"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Scene/Android/</link><ver>0.0.1</ver></duplicate_asset_bundle><lobby_bundle name="lobby_v0.0.1_scenes_all_e7416e5733d07bd7775700a4041f47a7"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Scene/Android/</link><ver>0.0.1</ver></lobby_bundle><tpk_bundle name="tpk_v0.0.1_scenes_all_118af23ddef8e22d7390e5512a6c1aa8"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Scene/Android/</link><ver>0.0.1</ver></tpk_bundle><catalog_hash name="catalog_0.2.hash"><type>Scene</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link><ver>0.0.1</ver></catalog_hash><image name="002-igloo.png"><type>Image</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Android/</link><ver>0.0.2</ver></image></main_asset>
+    <bgt_scenes_all name="bgt_v0.0.1_scenes_all_330f778f033cfbd8f90b9b128f193304.bundle">
+        <type>Scene</type>
+        <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+        <ver>0.0.1</ver>
+        <os>Android</os>
+    </bgt_scenes_all>
+</main_asset>
