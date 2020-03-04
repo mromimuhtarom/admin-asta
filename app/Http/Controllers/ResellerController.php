@@ -1377,7 +1377,7 @@ public function detailTransaction(Request $request, $month, $year)
         //   $checkamount = DB::table('rese')
           ResellerBalance::create([
             'reseller_id' => $reseller_id,
-            'action_id'   => 10,
+            'action_id'   => 16,
             'credit'      => 0,
             'debet'       => $goldAwarded,
             'balance'     => $checkTotalGold->gold,
@@ -1718,7 +1718,7 @@ public function detailTransaction(Request $request, $month, $year)
         $name  = $request->name;
         $value = $request->value;
         $currentname    =   ItemsCash::where('item_id', '=', $pk)->first();
-        //  return response()->json($pk, 2000);
+        //  return response()->json($value, 400);
 
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
@@ -1757,6 +1757,7 @@ public function detailTransaction(Request $request, $month, $year)
             case "bonus_type":
                 $name = "Item Bonus";
                 $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
+                // return response()->json($value, 400);
                 if($value == 1):
                     $value = 'chip';
                 elseif($value == 2):
@@ -1764,8 +1765,9 @@ public function detailTransaction(Request $request, $month, $year)
                 elseif($value == 3):
                     $value = 'Barang';
                 endif;
-
+               
                 break;
+
             case "trans_type":
                 $name = "Jenis Pembayaran";
                 $value = strTypeTransaction($value);

@@ -302,11 +302,11 @@ class GoldStoreController extends Controller
             case "status":
                 $name = "Status";
                 $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
-                if($value == 0):
-                    $value = 'Non Aktif';
-                else:
-                    $value = 'Aktif';
-                endif;
+                    if($value == 0):
+                        $value = 'Non Aktif';
+                    else:
+                        $value = 'Aktif';
+                    endif;
                 break;
             case "trans_type":
                 $name = "Transaksi Pembayaran";
@@ -321,11 +321,11 @@ class GoldStoreController extends Controller
                 $name = "Item Bonus";
                 $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
                 
-                if($value == 1 || $currentname->bonus_type == 1):
+                if($value == 1):
                     $value = 'chip';
-                elseif($value == 2 || $currentname->bonus_type == 2):
+                elseif($value == 2):
                     $value = 'Koin';
-                elseif($value == 3 || $currentname->bonus_type == 3):
+                elseif($value == 3):
                     $value = 'Barang';
                 endif;
                 break;
@@ -335,8 +335,9 @@ class GoldStoreController extends Controller
                 break;
             default:
             "";
-        }
 
+        }
+        
         //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
