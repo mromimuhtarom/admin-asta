@@ -1015,8 +1015,6 @@ public function detailTransaction(Request $request, $month, $year)
         return back()->with('success', alertTranslate('Successful update'));
     }
 // --- End UpdateGold Reseller ----//
-
-
 //****************************************** Add Transaction Reseller ******************************************//
 
 
@@ -1148,7 +1146,7 @@ public function detailTransaction(Request $request, $month, $year)
 
         $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc', 'searchUsername', 'sortingorder'));
-      }else if($searchUsername != NULL) {
+      } else if($searchUsername != NULL) {
 
         if(is_numeric($searchUsername) !== true):
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
@@ -1374,8 +1372,8 @@ public function detailTransaction(Request $request, $month, $year)
                 'action_date'   => Carbon::now('GMT+7')
         ]);
 
-  
-          $checkTotalGold = Reseller::select('gold')->where('reseller_id', '=', $reseller_id)->first();
+        $checkTotalGold = Reseller::select('gold')->where('reseller_id', '=', $reseller_id)->first();
+        
         //   $checkamount = DB::table('rese')
           ResellerBalance::create([
             'reseller_id' => $reseller_id,

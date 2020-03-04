@@ -326,25 +326,21 @@
 
             <div>
                 <div class="widget-body">
-                        <div class="widget-body-toolbar">
-
-                                <div class="row">
-                        
-                                  <!-- Button tambah bot baru -->
-                                  <div class="col-9 col-sm-5 col-md-5 col-lg-5">
-                                    <div class="input-group">
-                                      {{-- @if($menu)
-                                      <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetWindows">
-                                        <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
-                                      </button>
-                                      @endif --}}
-                                    </div>
-                                  </div>
-                                  <!-- End Button tambah bot baru -->
-                        
-                                </div>
-                        
-                              </div>
+                    <div class="widget-body-toolbar">
+                        <div class="row">                        
+                        <!-- Button tambah bot baru -->
+                          <div class="col-9 col-sm-5 col-md-5 col-lg-5">
+                            <div class="input-group">
+                              {{-- @if($menu)
+                              <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetWindows">
+                                <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
+                              </button>
+                              @endif --}}
+                            </div>
+                          </div>
+                          <!-- End Button tambah bot baru -->
+                        </div>
+                    </div>
                     <div class="custom-scroll table-responsive" style="height:420px;">
                         
                         <div class="table-outer">
@@ -382,7 +378,7 @@
 
 <!-- ==================================================================== Modal Upload FIle Language  ======================================================================= -->
 <!-- Modal Upload File Indonesia -->
-<div class="modal fade" id="ModalLanguageIndo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="ModalLanguageIndo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">

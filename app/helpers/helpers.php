@@ -53,6 +53,7 @@ function strItemBonType($val) {
   $config   = DB::table('config_text')->where('id', '=', 5)->first();
   $value    = str_replace(':', ',', $config->value);
   $itemtype = explode(",", $value);
+  
   if($val === $itemtype[0]) {
     return $itemtype[1];
   } else if($val === $itemtype[2]){

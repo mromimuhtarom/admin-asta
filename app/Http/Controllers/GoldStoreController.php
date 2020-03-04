@@ -278,7 +278,6 @@ class GoldStoreController extends Controller
         $value = $request->value;
         $currentname = ItemsCash::where('item_id', '=', $pk)->first();
         
-
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
         ]);
@@ -323,7 +322,7 @@ class GoldStoreController extends Controller
                 $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
                 
                 if($value == 1 || $currentname->bonus_type == 1):
-                    $value = 'Chip';
+                    $value = 'chip';
                 elseif($value == 2 || $currentname->bonus_type == 2):
                     $value = 'Koin';
                 elseif($value == 3 || $currentname->bonus_type == 3):
@@ -343,7 +342,7 @@ class GoldStoreController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '27',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' ('.$currentname->name.'). '.$currentvalue.' => '. $value
+            'desc'      => 'Edit '.$name.' ('.$currentname->name.'). '.$currentvalue.' => '.$value
         ]);
     }
 
