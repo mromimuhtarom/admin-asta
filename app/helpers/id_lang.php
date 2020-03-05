@@ -341,7 +341,7 @@ function Translate_menuPlayers($menu){
         'Create Player'             =>  'Buat pemain',
         'Delete Player'             =>  'Hapus pemain',
         'Edit Player'               =>  'Edit pemain',
-        'Change Password Player'    =>  'Ganti katasandi pemain',
+        'L_CHANGE_PASSWORD_PLAYER'  =>  'Ganti katasandi pemain',
         'Total Record Entries is'   =>  'Total entri catatan adalah',
         'Player ID'                 =>  'ID pemain',
         'Guest ID'                  =>  'ID Guest',
@@ -395,7 +395,7 @@ function Translate_menuPlayers($menu){
         'Register Form'             =>  'Form pendaftaran',
         'IP'                        =>  'Alamat IP',
         'L_PLAYER'                  =>  'Pemain',
-        'L_GUEST'                     =>  'Guest',
+        'L_GUEST'                   =>  'Guest',
         'L_APPROVE'                 =>  'Setuju',
         'L_BANNED'                  =>  'Dilarang',
         'L_PROBLEM'                 =>  'Bermasalah',
@@ -416,6 +416,9 @@ function Translate_menuPlayers($menu){
         'Create new avatar'         =>  'Buat avatar baru',
         'Avatar player'             =>  'Avatar pemain',
         'L_CARD'                    =>  'Kartu',
+        'L_CREATE_PLAYER'           =>  'Buat pemain',
+        'L_DELETE_PLAYER'           =>  'Hapus pemain',
+        'L_EDIT_PLAYER'             =>  'Edit pemain'
              
 
     ];
