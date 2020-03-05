@@ -33,10 +33,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <form method="POST" action=""> 
+                    <form action="" method="post" enctype="multipart/form-data">
                       @foreach($mainmenu as $mnmnu)  
                         @if($mnmnu->name !== 'Version Asset Apk' &&  $mnmnu->role_id !== 11 && $mnmnu->role_id !== 29) 
-                          
                             <tr>
                               <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($mnmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                               <td>
@@ -51,9 +50,9 @@
                                       <tr>
                                         <td>{{ translate_menu($mnmnu->name) }}</td>
                                         <td>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="denied">Tutup</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" data-smth="parent_1" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="denied">Tutup</div>
                                           <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="access" value="access">Akses</div>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="edit">Edit</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="edit">Ubah</div>
                                           {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a> --}}
                                         </td>
                                       </tr>
@@ -76,7 +75,7 @@
                                                     <td>
                                                           <div style="float:left;margin:2%;"><input @if($sbmnu->type == 0) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="denied" value="denied">Tutup</div>
                                                           <div style="float:left;margin:2%;"><input @if($sbmnu->type == 1) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="access" value="access">Akses</div>
-                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 2) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="edit" value="edit">Edit</div>
+                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 2) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="edit" value="edit">Edt</div>
                                                       {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a> --}}
                                                     </td>
                                                   </tr>
@@ -143,9 +142,9 @@
                                             <tr>
                                               <td>{{ translate_menu($sbmnu->name) }}</td>
                                               <td>
-                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 0) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="denied" value="denied">Tutup</div>
+                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 0) checked @endif type="radio" data-parent="parent_1" name="typerole{{ $sbmnu->menu_id }}" id="denied" value="denied">Tutup</div>
                                                 <div style="float:left;margin:2%;"><input @if($sbmnu->type== 1) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="access" value="access">Akses</div>
-                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 2) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="edit" value="edit">Edit</div>
+                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 2) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="edit" value="edit">Ubah</div>
                                                 {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a> --}}
                                               </td>
                                             </tr>
@@ -163,7 +162,7 @@
                                       <tr>
                                         <td>{{ translate_menu($mnmnu->name) }}</td>
                                         <td>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="denied">Tutup</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" data-parent="parent_1" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="denied">Tutup</div>
                                           <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="access" value="access">Akses</div>
                                           <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="edit">Edit</div>
                                           {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a> --}}
@@ -436,7 +435,7 @@
                                           <td>
                                             <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="denied">Tutup</div>
                                             <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="access" value="access">Akses</div>
-                                            <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="edit">Edit</div>
+                                            <div style="float:left;margin:2%;"><inpu @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="edit">Edit</div>
                                             {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a> --}}
                                           </td>
                                         </tr>
@@ -447,9 +446,9 @@
                             </tr>
                         @endif
                       @endforeach
-                  </tbody>
-                </table>
-                <input type="submit" name="submit" id="">
+                    </tbody>
+                  </table>
+                  <input type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data" name="submit" value="submit" id="">
                 </form>
               </div>
             
@@ -487,14 +486,14 @@
           });
               @php
 
-                // submenu satu
-                foreach($mainmenu as $mnu) {
-                  echo'$(".namedetail'.$mnu->menu_id.'").show();';
-                  echo'$(".mainmenu'.$mnu->menu_id.'").on("click", function(e) {';
-                      echo'$(".submenu'.$mnu->menu_id.'").toggle();';
-                      echo'$(".namedetail'.$mnu->menu_id.'").toggle();';
-                      echo'e.preventDefault();';
-                  echo '});';
+                  // submenu satu
+                  foreach($mainmenu as $mnu) {
+                    echo'$(".namedetail'.$mnu->menu_id.'").show();';
+                    echo'$(".mainmenu'.$mnu->menu_id.'").on("click", function(e) {';
+                        echo'$(".submenu'.$mnu->menu_id.'").toggle();';
+                        echo'$(".namedetail'.$mnu->menu_id.'").toggle();';
+                        echo'e.preventDefault();';
+                    echo '});';
 
                   // submenu kedua
                   foreach($mnu['rolemenu'] as $sbmenu) {
@@ -527,6 +526,24 @@
               "searching": false,
             });
           });
+
+          // $(function () {
+          //   $(document).on('click', '[data-smth]', function () {
+          //     $('[data-parent="' + $(this).attr('data-smth') + '"]:first').prop("checked", true);
+          //   })
+
+          //   $(document).on('click', '[data-parent]', function () {
+          //     $('[data-smth="' + $(this).attr('data-parent') + '"]').prop("checked", true);
+          //   })
+          // })
+
+          // $(document).ready(function(){
+          //   $('div').click (function(){
+          //     $('div.selected').removeClass('selected');
+          //     $(this).addClass('selected');
+          //     $(this).children("input[type=radio]").click();
+          //   })
+          // })
 
           table = $('table.table').dataTable({
             "sDom": "t"+"<'dt-toolbar-footer d-flex'>",

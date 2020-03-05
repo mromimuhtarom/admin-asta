@@ -109,7 +109,7 @@ class UserAdminController extends Controller
               $beforevaluecolumn = $user->fullname;
               break;
           case "role_id":
-              $name_column       = translate_MenuContentAdmin("L_ROLETYPE");
+              $name_column       = translate_MenuContentAdmin("L_ROLE_TYPE");
               $role = Role::where('role_id', '=', $user->role_id)->first();
               $beforevaluecolumn = $role->name;
               $role              = Role::where('role_id', '=', $value)->first();

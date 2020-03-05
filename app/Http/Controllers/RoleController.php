@@ -130,11 +130,13 @@ class RoleController extends Controller
         DB::table('asta_db.adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
           $name => $value
         ]);
+
         $menuname = DB::table('adm_menu')->select('name')->where('menu_id', '=', $pk)->first();
 
         $roletype = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
         $valuetyp = str_replace(':', ',', $roletype->value);
         $type     = explode(",", $valuetyp);
+        
         $typerole = [
           $type[0] => $type[1],
           $type[2] => $type[3],
@@ -159,7 +161,7 @@ class RoleController extends Controller
 
         Log::create([
           'op_id'     => Session::get('userId'),
-          'action_id' => '2',
+          'action_id' => '',
           'datetime'  => Carbon::now('GMT+7'),
           'desc'      => 'Edit Tipe Peran Aksses nama peran: '.$role->name.' ('.translate_menu($menuname->name).') '.$currentvalue1.' => '. $value
         ]);
