@@ -79,8 +79,8 @@ class ResellerController extends Controller
                 break;
 
             case "rank_id":
-                $name         = "Peringkat ID";
                 $rankname     = ResellerRank::where('id', '=', $reseller->rank_id)->first();
+                $name         = "Peringkat ID";
                 $currentvalue = $rankname->rankname;
                 break;
             
