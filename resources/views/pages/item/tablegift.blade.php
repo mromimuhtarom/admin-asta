@@ -324,32 +324,31 @@
         }
       </style>
       <script>
-        var tID; //we will use this variable to clear the setInterval()
+        var tID{{ $gf->id }}; //we will use this variable to clear the setInterval()
         function stopAnimate{{ $gf->id }}() {
-        clearInterval(tID);
+        clearInterval(tID{{ $gf->id }});
         } //end of stopAnimate()
-        function animateScript{{ $gf->id }}() {
-        var    position = 320; //start position for the image slicer
-        const  interval = 80; //80 ms of interval for the setInterval()
-        const  diff = 320;     //diff as a variable for position offset
-        tID = setInterval ( () => {
-          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = 
-          `-${position}px 0px`; 
+        // function animateScript{{ $gf->id }}() {
+        var    position{{$gf->id}} = 320; //start position for the image slicer
+        const  interval{{$gf->id}} = 80; //80 ms of interval for the setInterval()
+        const  diff{{$gf->id}} = 320;     //diff as a variable for position offset
+        tID{{ $gf->id }} = setInterval ( () => {
+          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = `-${position<?= $gf->id ?>}px 0px`; 
           //we use the ES6 template literal to insert the variable "position"
-          if (position < 10000)
-          { position = position + diff;}
+          if (position{{$gf->id}} < 100000)
+          { position{{$gf->id}} = position{{$gf->id}} + diff{{$gf->id}};}
           //we increment the position by 320 each time
           else
-          { position = 320; }
+          { position{{$gf->id}} = 320; }
           //reset the position to 320px, once position exceeds 1536px
           }
-        , interval ); //end of setInterval
-        } //end of animateScript()
+        , interval{{$gf->id}} ); //end of setInterval
+        // } //end of animateScript()
       </script>
         
 			<div class="modal-body" align="center">
         <div id="demo">
-          <p id="image{{ $gf->id }}" class="border border-dark"  onmouseover="animateScript{{ $gf->id }}()" onmouseout="stopAnimate{{ $gf->id }}()"> </p>
+          <p id="image{{ $gf->id }}" class="border border-dark"> </p>
         </div>
         {{-- <div id="overlaytdt"><img src="{{ route('imageshowgift', $gf->id) }}?{{ $timenow }}" alt="Be patient..." /></div> --}}
 			</div> 

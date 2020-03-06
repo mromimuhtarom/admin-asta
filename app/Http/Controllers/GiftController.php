@@ -430,32 +430,42 @@ class GiftController extends Controller
               $curerrentvalue = $currentname->price;
               break;
           case "category_id":
-              $name = "Category";
-              $curerrentvalue = $currentname->category_id;
-              if($value == 1 || $curerrentvalue == 1):
-                $value          = 'makanan';
-                $curerrentvalue = 'makanan';
+                $name = "Category";
+                $curerrentvalue = $currentname->category_id;
+                if($value == 1 || $curerrentvalue == 1):
+                    $value          = 'makanan';
                 elseif($value == 2 || $curerrentvalue == 2):
                     $value          = 'minuman';
-                    $curerrentvalue = 'minuman';
                 elseif($value == 3 || $curerrentvalue == 3):
                     $value          = 'item';
-                    $curerrentvalue = 'item';
                 else:
                     $value          = 'aksi';
+                endif;
+                
+                if($curerrentvalue == 1):
+                    $curerrentvalue = 'makanan';
+                elseif($curerrentvalue == 2):
+                    $curerrentvalue = 'minuman';
+                elseif($curerrentvalue == 3):
+                    $curerrentvalue = 'item';
+                else:
                     $curerrentvalue = 'aksi';
                 endif;
+                
               break;
           case "status":
-              $name           = "Status";
-              $curerrentvalue = $currentname->status;
-              if($value == 0 || $curerrentvalue == 0):
-                $value          = 'disabled';
-                $curerrentvalue = 'disabled';
-              else:
-                $value          = 'enabled';
-                $curerrentvalue = 'enabled';
-              endif;
+                $name           = "Status";
+                $curerrentvalue = $currentname->status;
+                if($value == 0):
+                    $value          = 'disabled';
+                else:
+                    $value          = 'enabled';
+                endif;
+                if($curerrentvalue == 0):
+                    $curerrentvalue = 'disabled';
+                else:
+                    $curerrentvalue = 'enabled';
+                endif;
               break;
           default:
             "";

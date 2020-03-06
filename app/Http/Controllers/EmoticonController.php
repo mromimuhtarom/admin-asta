@@ -284,6 +284,12 @@ class EmoticonController extends Controller
                 $value        = 'enabled';
                 $currentvalue = 'enabled';
               endif;
+              
+             if($currentnumber == 0):
+                $currentvalue = 'disabled';
+              else:
+                $currentvalue = 'enabled';
+              endif;
             break;
           default:
             "";
