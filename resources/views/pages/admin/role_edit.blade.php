@@ -51,9 +51,9 @@
                                       <tr>
                                         <td>{{ translate_menu($mnmnu->name) }}</td>
                                         <td>
-                                        <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole1{{ $mnmnu->menu_id }}" id="denied" value="1" onclick="selectAll{{ $mnmnu->menu_id }}(form1)">Tutup</div>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole1{{ $mnmnu->menu_id }}" id="access" value="0" onclick="selectAll{{ $mnmnu->menu_id }}(form1)">Akses</div>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole1{{ $mnmnu->menu_id }}" id="edit" value="2">adfEdit</div>
+                                        <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="1" onclick="selectAll{{ $mnmnu->menu_id }}(form1)">Tutup</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="access" value="0" onclick="selectAll{{ $mnmnu->menu_id }}(form1)">Akses</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="2" onclick="selectAll{{ $mnmnu->menu_id }}(form1)">adfEdit</div>
                                           {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a> --}}
                                         </td>
                                       </tr>
@@ -459,6 +459,55 @@
         
     </div>
 
+    <script type="text/javascript">
+      @php
+        foreach($mainmenu as $mm){
+            //radio button
+        echo'console.log(selectAll(form1))';
+          echo 'function selectAll'.$mm->menu_id.'(form1){';
+            echo 'var check  = document.getElementsByName("typerole'.$mm->menu_id.'");';
+                echo 'radios = document.form1.elements;';
+
+                //if the first radio checked
+                echo 'if(check[0].checked){';
+                  echo 'for(i=0; i < radios.length; i++){';
+                    //and the elements are radios
+                    echo 'if(radios[i].type == "radio"){';
+                      //and the elements are value 1
+                      echo 'if(radios[i].value == 1){';
+                        //check all radio elements with value 1
+                        echo 'radios[i].checked = true;';
+                      echo '}';
+                    echo '}';//if
+                  echo '}';//for
+                //if the second radio checked
+                echo '}'; 
+                echo 'else if(check[1].checked){'; 
+                  echo 'for(i = 0; i < radios.length; i++) {';
+                    //And the elements are radios
+                    echo 'if(radios[i].type == "radio" ) {';
+                      //And the radio elements's value are 0
+                      echo 'if (radios[i].value == 0) {';
+                          //Check all radio elements with value = 0
+                          echo 'radios[i].checked = true;';
+                        echo '}';
+                      echo '}';//if 
+                    echo '}';//for
+                echo '} else {';
+                echo 'for(i = 0; i < radios.length; i++) {';
+                    //And the elements are radios
+                    echo 'if( radios[i].type == "radio" ) {';
+                      //And the radio elements's value are 0
+                      echo 'if (radios[i].value == 2) {';
+                          //Check all radio elements with value = 0
+                          echo 'radios[i].checked = true;';
+                        echo '}';
+                      echo '}';//if 
+                    echo '}';//for
+            echo '}';
+          }
+          @endphp
+    </script>
 
     <script type="text/javascript">
           $.ajaxSetup({
@@ -526,44 +575,6 @@
               "searching": false,
             });
           });
-
-          //radio button
-          function selectAll(form1) {
-            var check  = document.getElementsByName('typerole1'),
-                radios = document.form1.elements;
-
-                //if the first radio checked
-                if(check[0].checked){
-                  for(i=0; i < radios.length; i++){
-                    //and the elements are radios
-                    if(radios[i].type == "radio"){
-                      //and the elements are value 1
-                      if(radiosp[i].value == 1){
-                        //check all radio elements with value 1
-                        radios[i].checked = true;
-                      }
-                    }//if
-                  }//for
-                //if the second radio checked
-                } else {
-                  for( i = 0; i < radios.length; i++ ) {
-			
-                    //And the elements are radios
-                    if( radios[i].type == "radio" ) {
-        
-                      //And the radio elements's value are 0
-                      if (radios[i].value == 0 ) {
-                  
-                          //Check all radio elements with value = 0
-                          radios[i].checked = true;
-          
-                        }
-                        
-                      }//if
-                      
-                    }//for
-                }
-          }
 
           // $(function () {
           //   $(document).on('click', '[data-smth]', function () {
