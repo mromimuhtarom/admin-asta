@@ -25,6 +25,8 @@
             <div class="custom-scroll table-responsive" style="height:800px;">
               
               <div class="table-outer">
+              <form name="form1" action="{{ route('Role-menu-edit', $role) }}" method="POST">
+              {{ csrf_field() }}
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -33,8 +35,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <form name="form1" action="" method="post" enctype="multipart/form-data">
-                      @foreach($mainmenu as $mnmnu)  
+                    @foreach($mainmenu as $mnmnu)  
                         @if($mnmnu->name !== 'Version Asset Apk' &&  $mnmnu->role_id !== 11 && $mnmnu->role_id !== 29) 
                             <tr>
                               <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($mnmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
@@ -73,9 +74,9 @@
                                                   <tr>
                                                     <td>{{ translate_menu($sbmnu->name) }}</td>
                                                     <td>
-                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 0) checked @endif type="radio" name="typerole2{{ $sbmnu->menu_id }}" id="denied" value="1">Tutup</div>
-                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 1) checked @endif type="radio" name="typerole2{{ $sbmnu->menu_id }}" id="access" value="0">Akses</div>
-                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 2) checked @endif type="radio" name="typerole2{{ $sbmnu->menu_id }}" id="edit" value="2">adfasdfEdit</div>
+                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 0) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="denied{{ $sbmnu->menu_id }}" value="0">Tutup</div>
+                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 1) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="access{{ $sbmnu->menu_id }}" value="1">Akses</div>
+                                                          <div style="float:left;margin:2%;"><input @if($sbmnu->type == 2) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="edit{{ $sbmnu->menu_id }}" value="2">Edit</div>
                                                       {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a> --}}
                                                     </td>
                                                   </tr>
@@ -161,9 +162,9 @@
                                       <tr>
                                         <td>{{ translate_menu($mnmnu->name) }}</td>
                                         <td>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="0">Tutup</div>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="access" value="1">Akses</div>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="2">Edit</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="0">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="access" value="1">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="2">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</div>
                                           {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a> --}}
                                         </td>
                                       </tr>
@@ -445,10 +446,10 @@
                             </tr>
                         @endif
                       @endforeach
-                    </tbody>
-                  </table>
-                  <input type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data" name="submit" value="submit" id="">
-                </form>
+                  </tbody>
+                </table>
+                <input type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data" name="submit" value="submit" id="">
+              </form>
               </div>
             
             </div>

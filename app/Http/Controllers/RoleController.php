@@ -86,6 +86,8 @@ class RoleController extends Controller
                     ->where('asta_db.adm_access.role_id', '=', $role)
                     ->where('asta_db.adm_menu.menu_id', '!=', 100)
                     ->get();
+
+        
                     
         $op_id   = Session::get('userId');
         $role_op = User::where('op_id', '=', $op_id)->first();
@@ -115,23 +117,19 @@ class RoleController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '2',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Nama Role '.$currentname->name.' => '. $value
+          'desc'      => 'Edit data '.$currentname->name.' => '. $value
         ]);
     }
 
 
-    public function menuupdate(Request $request, Role $role)
-    {
-        $pk    = $request->pk;
-        $name  = $request->name;
-        $value = $request->value;
+    public function menuupdate(Request $request, $role)
+    {     
+        
+        $menu = DB::table('adm_access')->where('role_id', '=', $role)->get();
 
-        $currentvalue = DB::table('adm_access')->where('menu_id', '=', $pk)->where('role_id', '=', $role->role_id)->first();
-        DB::table('asta_db.adm_access')->where('menu_id', $pk)->where('role_id', '=', $role->role_id)->update([
-          $name => $value
-        ]);
-
-        $menuname = DB::table('adm_menu')->select('name')->where('menu_id', '=', $pk)->first();
+        //------ to get role name -----//
+        $rolename = DB::table('adm_role')->where('role_id', '=', $role)->first();
+        // ----- end to get role name ---//
 
         $roletype = ConfigText::select('name', 'value')->where('id', '=', 6)->first();
         $valuetyp = str_replace(':', ',', $roletype->value);
@@ -143,28 +141,53 @@ class RoleController extends Controller
           $type[4] => $type[5]
         ];
 
-        if($currentvalue->type == '0'):
-          $currentvalue1 = ConfigTextTranslate($type[1]);
-        elseif($currentvalue->type == '1'):
-          $currentvalue1 = ConfigTextTranslate($type[3]);
-        elseif($currentvalue->type == '2'):
-          $currentvalue1 = ConfigTextTranslate($type[5]);
-        endif;
+        $b = 1;
+        $c = count($menu) - 1;
+        for($i=0; $i<$c; $i++):
+          // ---- Sebelum di edit ---- //
+          $before = DB::table('asta_db.adm_access')->where('menu_id', '=', $menu[$i]->menu_id)->where('role_id', '=', $role)->first();
+          // ---- end sebelum di edit ----//
+          DB::table('asta_db.adm_access')->where('menu_id', $menu[$i]->menu_id)->where('role_id', '=', $role)->update([
+            'type' => $_POST["typerole".$menu[$i]->menu_id]
+          ]);
 
-        if($value == 0) :
-          $value        = ConfigTextTranslate($type[1]);
-        elseif($value == 1): 
-          $value        = ConfigTextTranslate($type[3]);
-        elseif($value == 2): 
-          $value        = ConfigTextTranslate($type[5]);
-        endif;      
+          //---- sesudah di edit ----//
+          $after = DB::table('asta_db.adm_access')->where('menu_id', '=', $menu[$i]->menu_id)->where('role_id', '=', $role)->first();
+          // ---- log untuk menu type ----//
+          if($after->type != $before->type):
 
-        Log::create([
-          'op_id'     => Session::get('userId'),
-          'action_id' => '',
-          'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Edit Tipe Peran Aksses nama peran: '.$role->name.' ('.translate_menu($menuname->name).') '.$currentvalue1.' => '. $value
-        ]);
+            $menuname = DB::table('adm_menu')->select('name')->where('menu_id', '=', $menu[$i]->menu_id)->first();
+            if($before->type == '0'):
+              $currentvalue1 = ConfigTextTranslate($type[1]);
+            elseif($before->type == '1'):
+              $currentvalue1 = ConfigTextTranslate($type[3]);
+            elseif($before->type == '2'):
+              $currentvalue1 = ConfigTextTranslate($type[5]);
+            endif;
+
+            if($after->type == 0) :
+              $value        = ConfigTextTranslate($type[1]);
+            elseif($after->type == 1): 
+              $value        = ConfigTextTranslate($type[3]);
+            elseif($after->type == 2): 
+              $value        = ConfigTextTranslate($type[5]);
+            endif;  
+            Log::create([
+              'op_id'     => Session::get('userId'),
+              'action_id' => '2',
+              'datetime'  => Carbon::now('GMT+7'),
+              'desc'      => 'Edit Tipe Peran Aksses nama peran: '.$rolename->name.' ('.translate_menu($menuname->name).') '.$currentvalue1.' => '. $value
+            ]);
+          endif;
+          // ---- end log untuk menu type ----//
+          // ---- end sesudah di edit ----//
+
+          
+        endfor;
+        
+        return back()->with('success', alertTranslate('Data Updated'));
+
+
     }
 
     public function destroy(Request $request)

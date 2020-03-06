@@ -107,6 +107,9 @@
                             </thead>
                             <tbody>
                                 @foreach ($transactions as $transaction)
+                                @php 
+                                $buy = DB::table('store_transaction_hist')->where('')
+                                @endphp
                                 <tr>
                                     <td>{{ $transaction->order_id }}</td>
                                     <td>{{ $transaction->transaction_date }}</td>
