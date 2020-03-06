@@ -16,7 +16,6 @@ class ItemsCash extends Model
         '2' => 'L_GOLD',
         '3' => 'L_GOODS'
     ];
-
     public $shopType = [
         '1' =>  'L_USER',
         '2' =>  'L_RESELLER'

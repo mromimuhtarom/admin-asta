@@ -33,10 +33,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <form method="POST" action=""> 
+                    <form action="" method="post" enctype="multipart/form-data">
                       @foreach($mainmenu as $mnmnu)  
                         @if($mnmnu->name !== 'Version Asset Apk' &&  $mnmnu->role_id !== 11 && $mnmnu->role_id !== 29) 
-                          
                             <tr>
                               <td><a href="#" class="mainmenu{{ $mnmnu->menu_id }}" style="text-decoration:underline;">{{ translate_menu($mnmnu->name) }} <i class="fa fa-hand-o-right"></i></a></td>
                               <td>
@@ -118,7 +117,6 @@
                                                                 @endforeach
                                                               </table> 
                                                               <!-- =================== end sub menu ketiga ================== --> 
-
                                                           </td>
                                                         </tr>
                                                       @else
@@ -447,9 +445,9 @@
                             </tr>
                         @endif
                       @endforeach
-                  </tbody>
-                </table>
-                <input type="submit" name="submit" id="">
+                    </tbody>
+                  </table>
+                  <input type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data" name="submit" value="submit" id="">
                 </form>
               </div>
             
@@ -487,14 +485,14 @@
           });
               @php
 
-                // submenu satu
-                foreach($mainmenu as $mnu) {
-                  echo'$(".namedetail'.$mnu->menu_id.'").show();';
-                  echo'$(".mainmenu'.$mnu->menu_id.'").on("click", function(e) {';
-                      echo'$(".submenu'.$mnu->menu_id.'").toggle();';
-                      echo'$(".namedetail'.$mnu->menu_id.'").toggle();';
-                      echo'e.preventDefault();';
-                  echo '});';
+                  // submenu satu
+                  foreach($mainmenu as $mnu) {
+                    echo'$(".namedetail'.$mnu->menu_id.'").show();';
+                    echo'$(".mainmenu'.$mnu->menu_id.'").on("click", function(e) {';
+                        echo'$(".submenu'.$mnu->menu_id.'").toggle();';
+                        echo'$(".namedetail'.$mnu->menu_id.'").toggle();';
+                        echo'e.preventDefault();';
+                    echo '});';
 
                   // submenu kedua
                   foreach($mnu['rolemenu'] as $sbmenu) {
@@ -527,6 +525,24 @@
               "searching": false,
             });
           });
+
+          // $(function () {
+          //   $(document).on('click', '[data-smth]', function () {
+          //     $('[data-parent="' + $(this).attr('data-smth') + '"]:first').prop("checked", true);
+          //   })
+
+          //   $(document).on('click', '[data-parent]', function () {
+          //     $('[data-smth="' + $(this).attr('data-parent') + '"]').prop("checked", true);
+          //   })
+          // })
+
+          // $(document).ready(function(){
+          //   $('div').click (function(){
+          //     $('div.selected').removeClass('selected');
+          //     $(this).addClass('selected');
+          //     $(this).children("input[type=radio]").click();
+          //   })
+          // })
 
           table = $('table.table').dataTable({
             "sDom": "t"+"<'dt-toolbar-footer d-flex'>",

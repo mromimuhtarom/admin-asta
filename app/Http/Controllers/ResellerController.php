@@ -79,8 +79,8 @@ class ResellerController extends Controller
                 break;
 
             case "rank_id":
-                $name         = "Peringkat ID";
                 $rankname     = ResellerRank::where('id', '=', $reseller->rank_id)->first();
+                $name         = "Peringkat ID";
                 $currentvalue = $rankname->rankname;
                 break;
             
@@ -1015,8 +1015,6 @@ public function detailTransaction(Request $request, $month, $year)
         return back()->with('success', alertTranslate('Successful update'));
     }
 // --- End UpdateGold Reseller ----//
-
-
 //****************************************** Add Transaction Reseller ******************************************//
 
 
@@ -1148,7 +1146,7 @@ public function detailTransaction(Request $request, $month, $year)
 
         $balancedetails->appends($request->all());
         return view('pages.reseller.balance_reseller', compact('balancedetails', 'startDate', 'endDate', 'actblnc', 'searchUsername', 'sortingorder'));
-      }else if($searchUsername != NULL) {
+      } else if($searchUsername != NULL) {
 
         if(is_numeric($searchUsername) !== true):
             $balancedetails = $balanceReseller->WHERE('asta_db.reseller.username', 'LIKE', '%'.$searchUsername.'%')
@@ -1238,7 +1236,6 @@ public function detailTransaction(Request $request, $month, $year)
         // dd($bankname);
         $payment      = Payment::where('status', '=', 1)->where('type', '=', 1)->get();
         if($bankname != 'all_bank'):
-            dd('abg');
             $transactions = DB::table('asta_db.store_transaction')
                             ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
                             ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
@@ -1374,12 +1371,12 @@ public function detailTransaction(Request $request, $month, $year)
                 'action_date'   => Carbon::now('GMT+7')
         ]);
 
-  
-          $checkTotalGold = Reseller::select('gold')->where('reseller_id', '=', $reseller_id)->first();
+        $checkTotalGold = Reseller::select('gold')->where('reseller_id', '=', $reseller_id)->first();
+        
         //   $checkamount = DB::table('rese')
           ResellerBalance::create([
             'reseller_id' => $reseller_id,
-            'action_id'   => 10,
+            'action_id'   => 16,
             'credit'      => 0,
             'debet'       => $goldAwarded,
             'balance'     => $checkTotalGold->gold,
@@ -1720,7 +1717,7 @@ public function detailTransaction(Request $request, $month, $year)
         $name  = $request->name;
         $value = $request->value;
         $currentname    =   ItemsCash::where('item_id', '=', $pk)->first();
-        //  return response()->json($pk, 2000);
+        //  return response()->json($value, 400);
 
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
@@ -1759,6 +1756,7 @@ public function detailTransaction(Request $request, $month, $year)
             case "bonus_type":
                 $name = "Item Bonus";
                 $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
+                // return response()->json($value, 400);
                 if($value == 1):
                     $value = 'chip';
                 elseif($value == 2):
@@ -1766,8 +1764,9 @@ public function detailTransaction(Request $request, $month, $year)
                 elseif($value == 3):
                     $value = 'Barang';
                 endif;
-
+               
                 break;
+
             case "trans_type":
                 $name = "Jenis Pembayaran";
                 $value = strTypeTransaction($value);

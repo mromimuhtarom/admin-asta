@@ -164,7 +164,7 @@
                     </td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('ItemStore-update') }}">{{ $gold->name }}</a></td>
                     <td><a href="#" class="usertext" data-title="Gold Awarded" data-name="item_get" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('ItemStore-update') }}">{{ number_format($gold->item_get, 2) }}</a></td>
-                    <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</a></td>
+                    <td><a href="#" class="bontypeActive" data-name="bonus_type" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="select" data-url="{{ route('ItemStore-update') }}">{{ConfigTextTranslate(strItemBonType($gold->bonus_type)) }}</a></td>
                     <td>
                       <div class="media-container" align="center">
                         <form method="POST" action="{{ route('ItemStoreReseller-updateimageBonus') }}" enctype="multipart/form-data">
@@ -525,7 +525,6 @@ $(".watermark-image").change(function() {
       })
 
       $('.bontypeActive').editable({  
-        value: '',
         mode :'inline',
         validate: function(value) {
           if($.trim(value) == '') {
@@ -533,7 +532,7 @@ $(".watermark-image").change(function() {
           }
         },
 				source: [
-                  {value: '', text: 'choose type bonus'},
+                  {value: '', text: 'pilih tipe bonus'},
                   @php
                       echo '{value:"'.$bontype[0].'", text: "'.ConfigTextTranslate($bontype[1]).'"}, ';
                       echo '{value:"'.$bontype[2].'", text: "'.ConfigTextTranslate($bontype[3]).'"}, ';

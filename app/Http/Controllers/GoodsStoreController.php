@@ -198,8 +198,8 @@ class GoodsStoreController extends Controller
         ]);
 
         switch ($name) {
-            case 'nama':
-                $name = 'Nama';
+            case 'name':
+                $name = 'name';
                 $currentvalue = $currentname->name;
                 break;
             case 'price':

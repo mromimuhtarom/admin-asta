@@ -278,7 +278,6 @@ class GoldStoreController extends Controller
         $value = $request->value;
         $currentname = ItemsCash::where('item_id', '=', $pk)->first();
         
-
         ItemsCash::where('item_id', '=', $pk)->update([
             $name => $value
         ]);
@@ -303,11 +302,11 @@ class GoldStoreController extends Controller
             case "status":
                 $name = "Status";
                 $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
-                if($value == 0):
-                    $value = 'Non Aktif';
-                else:
-                    $value = 'Aktif';
-                endif;
+                    if($value == 0):
+                        $value = 'Non Aktif';
+                    else:
+                        $value = 'Aktif';
+                    endif;
                 break;
             case "trans_type":
                 $name = "Transaksi Pembayaran";
@@ -322,11 +321,11 @@ class GoldStoreController extends Controller
                 $name = "Item Bonus";
                 $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
                 
-                if($value == 1 || $currentname->bonus_type == 1):
-                    $value = 'Chip';
-                elseif($value == 2 || $currentname->bonus_type == 2):
+                if($value == 1):
+                    $value = 'chip';
+                elseif($value == 2):
                     $value = 'Koin';
-                elseif($value == 3 || $currentname->bonus_type == 3):
+                elseif($value == 3):
                     $value = 'Barang';
                 endif;
                 break;
@@ -336,14 +335,15 @@ class GoldStoreController extends Controller
                 break;
             default:
             "";
-        }
 
+        }
+        
         //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '27',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' ('.$currentname->name.'). '.$currentvalue.' => '. $value
+            'desc'      => 'Edit '.$name.' ('.$currentname->name.'). '.$currentvalue.' => '.$value
         ]);
     }
 
