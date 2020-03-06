@@ -45,8 +45,7 @@ class ResellerController extends Controller
         $pk    = $request->pk;
         $name  = $request->name;
         $value = $request->value;
-        $currentname = Reseller::where('reseller_id', '=', $pk)->first();
-
+        
         $reseller = Reseller::where('reseller_id', '=', $pk)->first();
         Reseller::where('reseller_id', '=', $pk)->update([
             $name => $value
@@ -79,9 +78,10 @@ class ResellerController extends Controller
                 break;
 
             case "rank_id":
-                $rankname     = ResellerRank::where('id', '=', $reseller->rank_id)->first();
                 $name         = "Peringkat ID";
-                $currentvalue = $rankname->rankname;
+                $rankname     = ResellerRank::where('id', '=', $reseller->rank_id)->first();
+                $currentvalue = $rankname->name;
+                // return response()->json($rankname->name, 400);
                 break;
             
             default:
@@ -95,6 +95,7 @@ class ResellerController extends Controller
         ]);
     }
 //-------- End Update List Reseller --------- //
+
 
 // ------- Password Update List Reseller ------- //
     public function PasswordUpdate(Request $request)
