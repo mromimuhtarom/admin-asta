@@ -922,7 +922,6 @@ function TranslateTransaksiAgen($menu){
         "ID Order"        =>  "ID Agen",
         "Transaction Type"=>  "Tipe transaksi"
 
-
     ];
     return $array_menuContent[$menu];
 };
@@ -934,9 +933,8 @@ function TranslateVersionAsetApk($menu)
         
         "L_IMAGE"   =>  "Gambar",
         "L_AUDIO"   =>  "Suara",
-        "L_SCENE"   =>  "Scene"   
-
-
+        "L_SCENE"   =>  "Scene"
+           
     ];
     return $array_menuContent[$menu];
 }
