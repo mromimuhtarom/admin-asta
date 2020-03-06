@@ -513,11 +513,11 @@ function TranslateMenuGame($menu){
         'Current turn seat ID' => 'Giliran ID kursi saat ini',
         'Room Name'            => 'Nama room',
         'Name'                 => 'Nama',
-        'Upload File'          => 'Unggah File',
+        'Upload File'          => 'Unduh File',
         'Language'             => 'Bahasa',
         'Indonesia'            => 'Indonesia',
         'English'              => 'Inggris',
-        'Upload File Language' => 'Unggah File Bahasa',
+        'Upload File Language' => 'Unduh File Bahasa',
         'Table Name'           => 'Nama Meja',
         'Play Time'            => 'Waktu Bermain',
         'Seat'                 => 'Kursi',
@@ -687,13 +687,12 @@ function TranslateReseller($menu){
         'Choose a file'          => 'pilih file',
         'Create new reseller'    => 'buat agen baru',
         'Select All'             => 'Pilih semua',
-        'L_YEARLY'               => 'tahunan',
         'L_WEEKLY'               => 'Mingguan',
         'L_MONTHLY'              => 'Bulanan',
         'Create new'             => 'Buat baru',
-        'Username / Reseller ID' => 'Nama Agent / ID Agen',
+        'Username / Reseller ID'  => 'Nama Agent / ID Agen',
         'Gold'                   => 'Koin',
-        'Reason Gold'         => 'Alasan Koin di ubah',
+        'Reason Gold Is Minus'   => 'Alasan Koin dikurangi',
         'Date Created'           => 'Tanggal',
         'Buy Gold'               => 'Beli Koin',
         'Buy Amount'             => 'Jumlah Pembelian',
@@ -723,8 +722,7 @@ function TranslateReseller($menu){
         'L_STATUS_TRANSACTION'   => 'Status Transaksi',
         'L_TIMESTAMP'            => 'TimeStamp',
         'L_ORDER_TRANSACTION'    => 'ID Order / Transaksi',
-        'L_DATE_BUY_SELL'        => 'Tanggal Pembelian / Penjualan',
-        'L_RESELLER_ID'          => 'ID agen'
+        'L_DATE_BUY_SELL'        => 'Tanggal Pembelian / Penjualan'
 
     
     ];
@@ -858,8 +856,7 @@ function alertTranslate($menu){
         "L_PASSWORD_FAILED"                                             =>  "Password tidak cocok silahkan coba lagi",
         "L_LOGOUT_CHANGE_PASSWORD"                                      =>  "Password anda telah di ganti",
         "Update image successfull"                                      =>  "Update gambar berhasil",
-        'L_HEIGHT_IMAGE'                                                =>  "Tinggi gambar tidak boleh kurang atau lebih dari {1}",
-        "L_RESET_PASS_SUCCESSFULLY"                                     =>  "Atur ulang katasandi berhasil"
+        'L_HEIGHT_IMAGE'                                                =>  "Tinggi gambar tidak boleh kurang atau lebih dari {1}"
     ];
     return $array_menuContent[$menu];
 };
