@@ -25,7 +25,7 @@
             <div class="custom-scroll table-responsive" style="height:800px;">
               
               <div class="table-outer">
-              <form action="{{ route('Role-menu-edit', $role) }}" method="POST">
+              <form name="form1" action="{{ route('Role-menu-edit', $role) }}" method="POST">
               {{ csrf_field() }}
                 <table class="table table-bordered">
                   <thead>
@@ -51,9 +51,9 @@
                                       <tr>
                                         <td>{{ translate_menu($mnmnu->name) }}</td>
                                         <td>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="denied" value="0">Tutup</div>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="access" value="1">Akses</div>
-                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole{{ $mnmnu->menu_id }}" id="edit" value="2">Edit</div>
+                                        <div style="float:left;margin:2%;"><input @if($mnmnu->type== 0) checked @endif type="radio" name="typerole1{{ $mnmnu->menu_id }}" id="denied" value="1" onclick="selectAll{{ $mnmnu->menu_id }}(form1)">Tutup</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 1) checked @endif type="radio" name="typerole1{{ $mnmnu->menu_id }}" id="access" value="0" onclick="selectAll{{ $mnmnu->menu_id }}(form1)">Akses</div>
+                                          <div style="float:left;margin:2%;"><input @if($mnmnu->type== 2) checked @endif type="radio" name="typerole1{{ $mnmnu->menu_id }}" id="edit" value="2">adfEdit</div>
                                           {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $mnmnu->type }}" data-pk="{{ $mnmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $mnmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($mnmnu->type)) }}</a> --}}
                                         </td>
                                       </tr>
@@ -124,8 +124,8 @@
                                                         <tr>
                                                           <td>{{ translate_menu($sbt->name) }}</td>
                                                           <td>
-                                                            <div style="float:left;margin:2%;"><input @if($sbt->type== 0) checked @endif type="radio" name="typerole{{ $sbt->menu_id }}" id="denied" value="0">Tutup</div>
-                                                            <div style="float:left;margin:2%;"><input @if($sbt->type== 1) checked @endif type="radio" name="typerole{{ $sbt->menu_id }}" id="access" value="1">Akses</div>
+                                                            <div style="float:left;margin:2%;"><input @if($sbt->type== 0) checked @endif type="radio" name="typerole{{ $sbt->menu_id }}" id="denied" value="1">Tutup</div>
+                                                            <div style="float:left;margin:2%;"><input @if($sbt->type== 1) checked @endif type="radio" name="typerole{{ $sbt->menu_id }}" id="access" value="0">Akses</div>
                                                             <div style="float:left;margin:2%;"><input @if($sbt->type== 2) checked @endif type="radio" name="typerole{{ $sbt->menu_id }}" id="edit" value="2">Edit</div>
                                                             {{-- <a href="#" class="type" id="type" data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbt->type }}" data-pk="{{ $sbt->menu_id }}" data-url="{{ route('Role-menu-edit', $sbt->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbt->type)) }}</a> --}}
                                                           </td>
@@ -142,8 +142,8 @@
                                             <tr>
                                               <td>{{ translate_menu($sbmnu->name) }}</td>
                                               <td>
-                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 0) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="denied" value="0">Tutup</div>
-                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 1) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="access" value="1">Akses</div>
+                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 0) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="denied" value="1">asdTutup</div>
+                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 1) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="access" value="0">Akses</div>
                                                 <div style="float:left;margin:2%;"><input @if($sbmnu->type== 2) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="edit" value="2">Edit</div>
                                                 {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a> --}}
                                               </td>
@@ -526,6 +526,44 @@
               "searching": false,
             });
           });
+
+          //radio button
+          function selectAll(form1) {
+            var check  = document.getElementsByName('typerole1'),
+                radios = document.form1.elements;
+
+                //if the first radio checked
+                if(check[0].checked){
+                  for(i=0; i < radios.length; i++){
+                    //and the elements are radios
+                    if(radios[i].type == "radio"){
+                      //and the elements are value 1
+                      if(radiosp[i].value == 1){
+                        //check all radio elements with value 1
+                        radios[i].checked = true;
+                      }
+                    }//if
+                  }//for
+                //if the second radio checked
+                } else {
+                  for( i = 0; i < radios.length; i++ ) {
+			
+                    //And the elements are radios
+                    if( radios[i].type == "radio" ) {
+        
+                      //And the radio elements's value are 0
+                      if (radios[i].value == 0 ) {
+                  
+                          //Check all radio elements with value = 0
+                          radios[i].checked = true;
+          
+                        }
+                        
+                      }//if
+                      
+                    }//for
+                }
+          }
 
           // $(function () {
           //   $(document).on('click', '[data-smth]', function () {
