@@ -312,27 +312,27 @@
         }
       </style>
       <script>
-        var tID; //we will use this variable to clear the setInterval()
+        var tID{{ $emot->id }}; //we will use this variable to clear the setInterval()
         function stopAnimate{{ $emot->id }}() {
         clearInterval(tID);
         } //end of stopAnimate()
-        function animateScript{{ $emot->id }}() {
-        var    position = 200; //start position for the image slicer
-        const  interval = 80; //80 ms of interval for the setInterval()
-        const  diff = 200;     //diff as a variable for position offset
-        tID = setInterval ( () => {
+        // function animateScript{{ $emot->id }}() {
+        var    position{{ $emot->id }} = 200; //start position for the image slicer
+        const  interval{{ $emot->id }} = 80; //80 ms of interval for the setInterval()
+        const  diff{{ $emot->id }} = 200;     //diff as a variable for position offset
+        tID{{ $emot->id }} = setInterval ( () => {
           document.getElementById("image{{ $emot->id }}").style.backgroundPosition = 
-          `-${position}px 0px`; 
+          `-${position<?= $emot->id ?>}px 0px`; 
           //we use the ES6 template literal to insert the variable "position"
-          if (position < 10000)
-          { position = position + diff;}
+          if (position{{ $emot->id }} < 10000)
+          { position{{ $emot->id }} = position{{ $emot->id }} + diff{{ $emot->id }};}
           //we increment the position by 320 each time
           else
-          { position = 200; }
+          { position{{ $emot->id }} = 200; }
           //reset the position to 320px, once position exceeds 1536px
           }
-        , interval ); //end of setInterval
-        } //end of animateScript()
+        , interval{{ $emot->id }} ); //end of setInterval
+        // } //end of animateScript()
       </script>
         
 			<div class="modal-body" align="center">

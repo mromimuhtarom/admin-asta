@@ -144,15 +144,18 @@ class RoleController extends Controller
         $b = 1;
         $c = count($menu) - 1;
         for($i=0; $i<$c; $i++):
+          
           // ---- Sebelum di edit ---- //
           $before = DB::table('asta_db.adm_access')->where('menu_id', '=', $menu[$i]->menu_id)->where('role_id', '=', $role)->first();
           // ---- end sebelum di edit ----//
+
           DB::table('asta_db.adm_access')->where('menu_id', $menu[$i]->menu_id)->where('role_id', '=', $role)->update([
             'type' => $_POST["typerole".$menu[$i]->menu_id]
           ]);
 
           //---- sesudah di edit ----//
           $after = DB::table('asta_db.adm_access')->where('menu_id', '=', $menu[$i]->menu_id)->where('role_id', '=', $role)->first();
+
           // ---- log untuk menu type ----//
           if($after->type != $before->type):
 
@@ -180,6 +183,7 @@ class RoleController extends Controller
             ]);
           endif;
           // ---- end log untuk menu type ----//
+
           // ---- end sesudah di edit ----//
 
           
