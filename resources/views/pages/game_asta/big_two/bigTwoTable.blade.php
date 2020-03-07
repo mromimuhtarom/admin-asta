@@ -97,7 +97,7 @@
                     <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" id="deletepermission[]" data-pk="{{ $tb->table_id }}" data-username="{{ $tb->name }}" class="deletepermission{{ $tb->table_id }} deleteIdAll"></>
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Room name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->roomname }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
+                    <td><a href="#" class="seatplayer" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->max_player }}</a></td>
                     <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ $tb->turn }}</a></td>
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ number_format($tb->total_bet, 2) }}</a></td>
                     <td><a href="#" class="usertext" data-title="Stake" data-name="stake" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('BigTwoTable-update')}}">{{ number_format($tb->stake, 2) }}</a></td>
@@ -384,6 +384,21 @@
             {value: '', text: "{{ TranslateChoices('L_CHOOSE_TIMER') }}"},
             {value: '7', text: 'Fast'},
             {value: '15', text: 'Normal'},
+          ]
+        });
+
+        $('.seatplayer').editable({
+          value: '',
+          mode :'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          },
+          source: [
+            {value: '', text: "{{ TranslateChoices('L_CHOOSE_SEAT') }}"},
+            {value: '3', text: '3'},
+            {value: '4', text: '4'},
           ]
         });
 

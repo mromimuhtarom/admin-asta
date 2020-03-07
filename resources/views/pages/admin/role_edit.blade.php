@@ -460,53 +460,96 @@
     </div>
 
     <script type="text/javascript">
-      @php
-        foreach($mainmenu as $mm){
-            //radio button
-        echo'console.log(selectAll(form1))';
-          echo 'function selectAll'.$mm->menu_id.'(form1){';
-            echo 'var check  = document.getElementsByName("typerole'.$mm->menu_id.'");';
-                echo 'radios = document.form1.elements;';
+      @foreach($mainmenu as $mm)
+         function selectAll'.$mm->menu_id.'(form1){
+            var check  = document.getElementsByName("typerole{{$mm->menu_id}}");
+            var radios = document.form1.elements;
 
                 //if the first radio checked
-                echo 'if(check[0].checked){';
-                  echo 'for(i=0; i < radios.length; i++){';
+            if(check[0].checked){
+              for(i=0; i < radios.length; i++){
                     //and the elements are radios
-                    echo 'if(radios[i].type == "radio"){';
+                if(radios[i].type == "radio"){
                       //and the elements are value 1
-                      echo 'if(radios[i].value == 1){';
+                  if(radios[i].value == 1){
                         //check all radio elements with value 1
-                        echo 'radios[i].checked = true;';
-                      echo '}';
-                    echo '}';//if
-                  echo '}';//for
-                //if the second radio checked
-                echo '}'; 
-                echo 'else if(check[1].checked){'; 
-                  echo 'for(i = 0; i < radios.length; i++) {';
+                    radios[i].checked = true;
+                  }
+                }
+              }//for
+              //if the second radio checked
+            }
+            else if(check[1].checked){ 
+              for(i = 0; i < radios.length; i++) {
                     //And the elements are radios
-                    echo 'if(radios[i].type == "radio" ) {';
+                if(radios[i].type == "radio" ) {
                       //And the radio elements's value are 0
-                      echo 'if (radios[i].value == 0) {';
+                  if (radios[i].value == 0) {
                           //Check all radio elements with value = 0
-                          echo 'radios[i].checked = true;';
-                        echo '}';
-                      echo '}';//if 
-                    echo '}';//for
-                echo '} else {';
-                echo 'for(i = 0; i < radios.length; i++) {';
+                    radios[i].checked = true;
+                  }
+                }//if 
+              }//for
+            } else {
+              for(i = 0; i < radios.length; i++) {
                     //And the elements are radios
-                    echo 'if( radios[i].type == "radio" ) {';
+                if( radios[i].type == "radio" ) {
                       //And the radio elements's value are 0
-                      echo 'if (radios[i].value == 2) {';
+                  if (radios[i].value == 2) {
                           //Check all radio elements with value = 0
-                          echo 'radios[i].checked = true;';
-                        echo '}';
-                      echo '}';//if 
-                    echo '}';//for
-            echo '}';
-          }
-          @endphp
+                    radios[i].checked = true;;
+                  }
+                }//if 
+              }//for
+            }
+      @endforeach
+      // @php
+      //   foreach($mainmenu as $mm){
+      //       //radio button
+      //   echo'console.log(selectAll(form1))';
+      //     echo 'function selectAll'.$mm->menu_id.'(form1){';
+      //       echo 'var check  = document.getElementsByName("typerole'.$mm->menu_id.'");';
+      //           echo 'radios = document.form1.elements;';
+
+      //           //if the first radio checked
+      //           echo 'if(check[0].checked){';
+      //             echo 'for(i=0; i < radios.length; i++){';
+      //               //and the elements are radios
+      //               echo 'if(radios[i].type == "radio"){';
+      //                 //and the elements are value 1
+      //                 echo 'if(radios[i].value == 1){';
+      //                   //check all radio elements with value 1
+      //                   echo 'radios[i].checked = true;';
+      //                 echo '}';
+      //               echo '}';//if
+      //             echo '}';//for
+      //           //if the second radio checked
+      //           echo '}'; 
+      //           echo 'else if(check[1].checked){'; 
+      //             echo 'for(i = 0; i < radios.length; i++) {';
+      //               //And the elements are radios
+      //               echo 'if(radios[i].type == "radio" ) {';
+      //                 //And the radio elements's value are 0
+      //                 echo 'if (radios[i].value == 0) {';
+      //                     //Check all radio elements with value = 0
+      //                     echo 'radios[i].checked = true;';
+      //                   echo '}';
+      //                 echo '}';//if 
+      //               echo '}';//for
+      //           echo '} else {';
+      //           echo 'for(i = 0; i < radios.length; i++) {';
+      //               //And the elements are radios
+      //               echo 'if( radios[i].type == "radio" ) {';
+      //                 //And the radio elements's value are 0
+      //                 echo 'if (radios[i].value == 2) {';
+      //                     //Check all radio elements with value = 0
+      //                     echo 'radios[i].checked = true;';
+      //                   echo '}';
+      //                 echo '}';//if 
+      //               echo '}';//for
+      //       echo '}';
+      //     }
+      //     @endphp
     </script>
 
     <script type="text/javascript">
