@@ -148,7 +148,6 @@ class RoleController extends Controller
           // ---- Sebelum di edit ---- //
           $before = DB::table('asta_db.adm_access')->where('menu_id', '=', $menu[$i]->menu_id)->where('role_id', '=', $role)->first();
           // ---- end sebelum di edit ----//
-
           DB::table('asta_db.adm_access')->where('menu_id', $menu[$i]->menu_id)->where('role_id', '=', $role)->update([
             'type' => $_POST["typerole".$menu[$i]->menu_id]
           ]);
