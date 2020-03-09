@@ -322,7 +322,7 @@
         const  diff{{ $emot->id }} = 200;     //diff as a variable for position offset
         tID{{ $emot->id }} = setInterval ( () => {
           document.getElementById("image{{ $emot->id }}").style.backgroundPosition = 
-          `-${position<?= $emot->id ?>}px 0px`; 
+          `-${position<?= $emot->id ?>}px 0px`;  
           //we use the ES6 template literal to insert the variable "position"
           if (position{{ $emot->id }} < 10000)
           { position{{ $emot->id }} = position{{ $emot->id }} + diff{{ $emot->id }};}
@@ -337,7 +337,7 @@
         
 			<div class="modal-body" align="center">
         <div id="demo">
-          <p id="image{{ $emot->id }}" class="border border-dark"  onmouseover="animateScript{{ $emot->id }}()" onmouseout="stopAnimate{{ $emot->id }}()"> </p>
+          <p id="image{{ $emot->id }}" class="border border-dark" > </p>
         </div>
         {{-- <div id="overlaytdt"><img src="{{ route('imageshowgift', $emot->id) }}?{{ $timenow }}" alt="Be patient..." /></div> --}}
 			</div> 

@@ -292,73 +292,7 @@
                             </thead>
                             @if($history->gameplay_log)
                             <tbody>
-                                @php 
-                                $arrayjson_decode = array_gameplaylog($history->gameplay_log)
-                                @endphp                   
-                                @foreach($arrayjson_decode as $row)
-                                @if ($row['game_state'] === 'NEW_ROUND')
-                                @foreach ($row['player'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($player['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ number_format($player['chip'], 2) }}</td>
-                                    <td>
-                                        @if($player['card'] !== "")
-                                            @foreach (bgtcard($player['card']) as $bgtcard)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $bgtcard }}.png">
-                                            @endforeach
-                                        @endif
-                                        {{-- {{ cardreadpopup(bgtcard($player['card'])) }} --}}
-                                    </td>
-                                </tr>
-                                @endforeach  
-                                @elseif($row['game_state'] === 'PLAYER_ACTION')
-                                <tr>
-                                    <td>{{ $row['player']['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($row['player']['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $row['action']}}</td>
-                                    <td></td>
-                                    <td>
-                                        @if($row['player']['card'] !== "")
-                                            @foreach (bgtcard($row['player']['card']) as $bgtcard)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $bgtcard }}.png">
-                                            @endforeach
-                                        @endif
-                                        {{-- {{ cardreadpopup(bgtcard($row['player']['card'])) }} --}}
-                                    </td>
-                                </tr>  
-                                @elseif ($row['game_state'] === 'END_ROUND')
-                                @foreach ($row['player'] as $endplayer)
-                                <tr>
-                                    <td>{{ $endplayer['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($endplayer['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $endplayer['status'] }}</td>
-                                    <td>{{ number_format($endplayer['chip'], 2) }}</td>
-                                    <td>
-                                        @if($endplayer['card'] !== "")
-                                            @foreach (bgtcard($endplayer['card']) as $bgtcard)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $bgtcard }}.png">
-                                            @endforeach
-                                        @endif
-                                        {{-- {{ cardreadpopup(bgtcard($endplayer['card'])) }} --}}
-                                    </td>
-                                </tr>
-                                @endforeach     
-                                @endif
-                                @endforeach                 
+                                
                             </tbody>
                             @endif
                         </table>  
@@ -378,110 +312,7 @@
                             {{-- {{ dd(empty($history1->gameplay_log)) }} --}}
                             @if(!empty($history->gameplay_log))
                             <tbody>
-                                @php 
-                                $inputMinDate = "2019-10-18";
-                                $inputMaxDate = "2019-10-18";
-                                // $tbtpk = App\TpkRound::where('tpk_round.round_id', '=', 5120)->first();
-                                $arrayjson_decode = array_gameplaylog($history->gameplay_log);
-                                @endphp                   
-                                @foreach($arrayjson_decode as $row)
-                                @if ($row['game_state'] === 'NEW_ROUND')
-                                @foreach ($row['player'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($player['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{--{{ number_format($player['bet'], 2) }}--}}</td>
-                                    <td>{{ number_format($player['chip'], 2) }}</td>
-                                    {{-- <td>{{ cardreadpopup(tpkcard($player['card'])) }}</td>
-                                    <td>{{ cardreadpopup(tpkcard($row['cardtable'])) }}</td> --}}
-                                    <td>
-                                        {{-- @if($player['card'] !== "")
-                                            @foreach (tpkcard($player['card']) as $tpkimg)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkimg }}.png">    
-                                            @endforeach
-                                        @endif --}}
-                                    </td>
-                                    <td>
-                                        @if($row['cardtable'] !== "")
-                                            @foreach (tpkcard($row['cardtable']) as $tpkcardtable)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
-                                            @endforeach
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach  
-                                @elseif($row['game_state'] === 'TURN_BET')
-                                @foreach ($row['player'] as $action_plyr)
-                                <tr>
-                                    <td>{{ $action_plyr['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($action_plyr['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $action_plyr['action']}}</td>
-                                    <td>{{ number_format($action_plyr['chip'], 2)}}</td>
-                                    <td>{{ number_format($action_plyr['bet'], 2) }}</td>
-                                    <td>
-                                        @if($action_plyr['card'] !== "")
-                                            @foreach (tpkcard($action_plyr['card']) as $tpkimg)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkimg }}.png">    
-                                            @endforeach
-                                        @endif
-                                        {{-- {{ cardreadpopup(tpkcard($action_plyr['card'])) }} --}}
-                                    </td>
-                                    <td>
-                                        @if($row['cardtable'] !== "")
-                                            @foreach (tpkcard($row['cardtable']) as $tpkcardtable)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
-                                            @endforeach
-                                        @endif
-                                        {{-- {{ cardreadpopup(tpkcard($row['cardtable'])) }} --}}
-                                    </td>
-                                </tr> 
-                                @endforeach 
-                                @elseif ($row['game_state'] === 'END_ROUND')
-                                @foreach ($row['player'] as $endplayer)
-                                <tr>
-                                    <td>{{ $endplayer['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($endplayer['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $endplayer['status'] }}</td>
-                                    <td>{{ number_format($endplayer['chip'], 2) }}</td>
-                                    <td>{{ number_format($endplayer['totalbet'], 2) }}</td>
-                                    <td>
-                                        @if($endplayer['card'] !== "")
-                                            @foreach (tpkcard($endplayer['card']) as $tpkimg)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkimg }}.png">    
-                                            @endforeach
-                                        @endif
-                                        {{-- {{ cardreadpopup(tpkcard($endplayer['card'])) }} --}}
-                                    </td>
-                                    <td>
-                                        @if($row['cardtable'] !== "")
-                                            @foreach (tpkcard($row['cardtable']) as $tpkcardtable)
-                                                {{-- @foreach (tpkcard($endplayer['card']) as $tpkimg)
-                                                    @if($tpkcardtable == $tpkimg)
-                                                        <img style="border:2px solid yellow;width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
-                                                    @endif
-                                                @endforeach --}}
-                                                <img style="width:35px;height:auto" src="/assets/img/card_bgt_tpk/{{ $tpkcardtable }}.png">
-                                            @endforeach
-                                        @endif
-                                        {{-- {{ cardreadpopup(tpkcard($row['cardtable'])) }} --}}
-                                    </td>
-                                </tr>
-                                @endforeach     
-                                @endif
-                                @endforeach                 
+                                
                             </tbody>
                             @endif
                         </table>     
@@ -498,186 +329,26 @@
                                 </tr>
                             </thead>
                             @if($history->gameplay_log)
-                            <tbody>
-                                @php 
-                                $inputMinDate = "2019-10-24";
-                                $inputMaxDate = "2019-10-24";
-                                // $tbdmq = App\DmqRound::where('dmq_round.round_id', '=', 5481)->first();
-                                $arrayjson_decode = array_gameplaylog($history->gameplay_log);
-                                @endphp                   
-                                @foreach($arrayjson_decode as $field => $row)
-                                @if ($row['game_state'] === 'NEW_ROUND')
-                                @foreach ($row['players'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($player['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ number_format($player['chip'], 2) }}</td>
-                                    <td>{{ number_format($player['totalBet'], 2) }}</td>
-                                    @if ($player['card'] != '[]')
-                                        <td>{{ $player['card']  }}</td>
-                                    @else 
-                                        <td></td>                                        
-                                    @endif
-                                </tr>
-                                @endforeach  
-                                @elseif($row['game_state'] === 'DRAW')
-                                @foreach ($row['players'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    <td>{{ $player['username'] }}</td>
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ number_format($player['chip'], 2) }}</td>
-                                    <td>{{ number_format($player['totalBet'], 2) }}</td>
-                                    <td>
-                                        @if ($player['card'] != '[]')
-                                            @foreach (dmscard($player['card']) as $carddmq)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddmq }}.png">    
-                                            @endforeach
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @elseif($row['game_state'] === 'PLAYER_ACTION' && $row['action'] !== 'ALL_IN')
-                                <tr>
-                                    <td>{{ $row['player']['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($row['player']['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $row['action']}}</td>
-                                    <td>{{ number_format($row['player']['chip'], 2) }}</td>
-                                    <td>{{ $row['bet'] }}</td>
-                                    <td></td>
-                                </tr>  
-                                @elseif ($row['game_state'] === 'ACTION_DONE')
-                                @foreach ($row['players'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    <td>{{ $player['username'] }}</td>
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ number_format($player['chip'], 2) }}</td>
-                                    <td>{{ number_format($player['totalBet'], 2)}}</td>
-                                    <td>
-                                        @if ($player['card'] != '[]')
-                                            @foreach (dmscard($player['card']) as $carddmq)
-                                                <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddmq }}.png">    
-                                            @endforeach
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @elseif($row['game_state'] === 'PLAYER_WIN')     
-                                <tr>
-                                    <td>{{ $row['winner']['seat_id'] }}</td>
-                                    <td>{{ $row['winner']['username'] }}</td>
-                                    <td>{{ $row['game_state']}}</td>
-                                    <td>{{ number_format($row['winner']['chip'], 2) }}</td>
-                                    <td></td>
-                                </tr>  
-                                @endif
-                                @endforeach                 
+                            <tbody>               
                             </tbody>
                             @endif
                     </table>     
                     @elseif($history->gamename === 'Domino Susun') 
                     <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
-                            <thead>			                
-                                <tr>
-                                    <th>{{ Translate_menuPlayers('Sit') }}</th>
-                                    <th>{{ Translate_menuPlayers('Username') }}</th>
-                                    <th>{{ Translate_menuPlayers('Action') }}</th>
-                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
-                                    <th>{{ Translate_menuPlayers('Domino') }}</th>
-                                </tr>
-                            </thead>
-                            @if($history->gameplay_log)
-                            <tbody>
-                                @php 
-                                $arrayjson_decode = array_gameplaylog($history->gameplay_log);
-                                @endphp                   
-                                @foreach($arrayjson_decode as $row)
-                                @if ($row['game_state'] === 'NEW_ROUND')
-                                @foreach ($row['players'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($player['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
-                                    @if($player['hand'] !== '[]')
-                                    <td>{{ $player['hand'] }}</td>
-                                    @else 
-                                    <td></td>
-                                    @endif
-                                </tr>
-                                @endforeach  
-                                @elseif($row['game_state'] === 'DRAW')
-                                @foreach ($row['players'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    <td>{{ $player['username'] }}</td>
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
-                                    <td>{{ $player['hand'] }}</td>
-                                </tr>
-                                @endforeach
-                                @elseif($row['game_state'] === 'PLAYER_ACTION' && $row['action'] !== 'ALL_IN')
-                                <tr>
-                                    <td>{{ $row['player']['seat_id'] }}</td>
-                                    @foreach ($player_username as $plyr)
-                                    @if ($row['player']['user_id'] === $plyr->user_id)
-                                    <td>{{ $plyr->username }}</td>
-                                    @endif
-                                    @endforeach
-                                    <td>{{ $row['action']}}</td>                                  
-                                    <td></td>
-                                    <!------ card domino susun ----->
-                                    @if ($row['action'] !== 'PASS')
-                                    <td>
-                                        @foreach (dmscardnobrackets($row['domino']) as $carddms)
-                                         <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddms }}.png">    
-                                        @endforeach
-                                    </td>
-                                    @else 
-                                    <td></td>
-                                    @endif  
-                                    <!------ end card domino susun ----->
-                                </tr>  
-                                @elseif ($row['game_state'] === 'ACTION_DONE')
-                                @foreach ($row['players'] as $key => $player) 
-                                <tr>
-                                    <td>{{ $player['seat_id'] }}</td>
-                                    <td>{{ $player['username'] }}</td>
-                                    <td>{{ $row['game_state'] }}</td>
-                                    <td>{{ $player['chip'] }}</td>
-                                    <td>
-                                        @foreach (dmscard($player['hand']) as $carddms)
-                                            <img style="width:35px;height:auto" src="/assets/img/card_dms_dmq/{{ $carddms }}.png"> 
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @elseif($row['game_state'] === 'PLAYER_WIN')     
-                                <tr>
-                                    <td>{{ $row['winner']['seat_id'] }}</td>
-                                    <td>{{ $row['winner']['username'] }}</td>
-                                    <td>{{ $row['game_state']}}</td>
-                                    <td>{{ $row['winner']['chip']}}</td>
-                                    <td></td>
-                                </tr>  
-                                @endif
-                                @endforeach                 
-                            </tbody>
-                            @endif
+                        <thead>			                
+                            <tr>
+                                <th>{{ Translate_menuPlayers('Sit') }}</th>
+                                <th>{{ Translate_menuPlayers('Username') }}</th>
+                                <th>{{ Translate_menuPlayers('Action') }}</th>
+                                <th>{{ Translate_menuPlayers('Chip') }}</th>
+                                <th>{{ Translate_menuPlayers('Domino') }}</th>
+                            </tr>
+                        </thead>
+                        @if($history->gameplay_log)
+                        <tbody>
+            
+                        </tbody>
+                        @endif
                     </table>                              
                     @endif                        
                 </div>

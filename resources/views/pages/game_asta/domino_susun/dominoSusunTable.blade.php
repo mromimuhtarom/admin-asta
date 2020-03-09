@@ -99,7 +99,8 @@
                     <td style="text-align:center;"><input type="checkbox" data-username="{{ $tb->name }}" name="deletepermission[]" id="deletepermission[]" data-pk="{{ $tb->table_id }}" class="deletepermission{{ $tb->table_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('DominoSTable-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Room name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('DominoSTable-update')}}">{{ $tb->roomname }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->max_player }}</a></td>
+                    {{-- <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->max_player }}</a></td> --}}
+                    <td>{{ $tb->max_player }}</td>
                     <td><a href="#" class="usertext" data-title="Game State" data-name="game_state" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->game_state }}</a></td>
                     <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ $tb->turn }}</a></td>
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoSTable-update')}}">{{ number_format($tb->total_bet, 2) }}</a></td>

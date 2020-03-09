@@ -98,7 +98,7 @@
                     <td style="text-align:center;"><input type="checkbox" data-username="{{ $tb->name }}" name="deletepermission[]" id="deletepermission[]" data-pk="{{ $tb->table_id }}" class="deletepermission{{ $tb->table_id }} deleteIdAll"></td>
                     <td><a href="#" class="usertext" data-title="Table Name" data-name="name" data-pk="{{ $tb->table_id }}" data-type="text" data-url="{{ route('DominoQTable-update')}}">{{ $tb->name }}</a></td>
                     <td><a href="#" class="room" data-title="Room name" data-name="room_id" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('DominoQTable-update')}}">{{ $tb->roomname }}</a></td>
-                    <td><a href="#" class="usertext" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ $tb->max_player }}</a></td>
+                    <td><a href="#" class="seatplayer" data-title="Max Player" data-name="max_player" data-pk="{{ $tb->table_id }}" data-type="select" data-url="{{ route('DominoQTable-update')}}">{{ $tb->max_player }}</a></td>
                     <td><a href="#" class="usertext" data-title="Game State" data-name="game_state" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ $tb->game_state }}</a></td>
                     <td><a href="#" class="usertext" data-title="Turn" data-name="turn" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ $tb->turn }}</a></td>
                     <td><a href="#" class="usertext" data-title="Total Bet" data-name="total_bet" data-pk="{{ $tb->table_id }}" data-type="number" data-url="{{ route('DominoQTable-update')}}">{{ number_format($tb->total_bet, 2) }}</a></td>
@@ -364,6 +364,21 @@
             echo '{value:"'.$ct->room_id.'", text: "'.$ct->name.' Min Max Buy '.$ct->min_buy.' - '.$ct->max_buy.'" },';
             }
             @endphp
+          ]
+        });
+
+        $('.seatplayer').editable({
+          value: '',
+          mode :'inline',
+          validate: function(value) {
+            if($.trim(value) == '') {
+              return 'This field is required';
+            }
+          },
+          source: [
+            {value: '', text: "{{ TranslateChoices('L_CHOOSE_SEAT') }}"},
+            {value: '4', text: '4'},
+            {value: '7', text: '7'},
           ]
         });
 

@@ -962,7 +962,7 @@ function TranslateChoices($menu) {
 
         "L_CHOOSE_TIMER"    =>  "Pilih waktu",
         "L_CHOOSE_CATEGORY" =>  "Pilih kategori",
-        ""
+        "L_CHOOSE_SEAT"     =>  "Maksimal Pemain"
     ];
     return $array_menuContent[$menu];
 }
