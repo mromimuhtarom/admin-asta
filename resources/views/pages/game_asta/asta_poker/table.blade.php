@@ -304,7 +304,7 @@
               echo 'if(minbuyValue <= '.$ct->min_buy.') {';
                   echo 'lblErrorminbuy.innerHTML = "input Min buy table kurang dari min buy di kategori.";';
               echo '}else if(minbuyValue >= '.$ct->max_buy.') {';
-                  echo 'lblErrorminbuy.innerHTML = "input min buy table lebih dari max buy di kategori.";';
+                  echo 'lblErrorminbuy.innerHTML = "input Min buy table lebih dari max buy di kategori.";';
               echo '}else{';
                   echo 'lblErrorminbuy.innerHTML = "";';
               echo '}';
