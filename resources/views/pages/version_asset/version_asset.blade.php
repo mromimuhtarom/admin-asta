@@ -470,6 +470,14 @@
 
 <!-- ==================================================================== MODAL CREATE ASSET ======================================================================== -->
 <!-- Modal create new asset android -->
+<script>
+  function MyCustomFunctioncreateandroid(){
+      $(".btn-andro").text("Loading...");
+      $(this).submit('loading').delay(1000).queue(function () {
+          // $(this).button('reset');
+      });
+  }
+</script>
 <div class="modal fade" id="ModalAssetAdr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -518,7 +526,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn sa-btn-primary submit-data" >
+                <button type="submit" class="btn sa-btn-primary submit-data btn-andro" onclick="MyCustomFunctioncreateandroid()">
                   <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
                 </button>
                 <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -640,12 +648,25 @@
 </div>
 
 
+
 <!-- ==================================================================== MODAL EDIT ASSET ======================================================================== -->
 <!-- Modal edit asset android -->
+@php 
+$i = 0;
+@endphp
+
 @foreach ($xml_andro->children() as $xl)
 @php 
 $ckbox = str_replace('.','_', $xl['name']);
 @endphp
+<script>
+  function MyCustomFunctionandro{{ $i }}(){
+      $(".btn-andro").text("Loading...");
+      $(this).submit('loading').delay(1000).queue(function () {
+          // $(this).button('reset');
+      });
+  }
+</script>
 <div class="modal fade" id="ModalAssetAndro{{ $ckbox  }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -694,7 +715,7 @@ $ckbox = str_replace('.','_', $xl['name']);
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data" >
+          <button type="submit" class="btn sa-btn-primary submit-data btn-andro" onclick="MyCustomFunctionandro{{ $i }}()">
             <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -705,7 +726,9 @@ $ckbox = str_replace('.','_', $xl['name']);
     </div>
   </div>
 </div>
+@php $i++ @endphp
 @endforeach
+
 
 
 <!-- Modal edit asset IOS -->
@@ -713,6 +736,16 @@ $ckbox = str_replace('.','_', $xl['name']);
 @php 
 $ckbox = str_replace('.','_', $xl_ios['name']);
 @endphp
+
+<script>
+  function MyCustomFunctiona{{ $i }}(){
+    console.log("tyio");
+      $(".edit-ios").text("Loading...");
+      $(this).submit('loading').delay(1000).queue(function () {
+          // $(this).button('reset');
+      });
+  }
+</script>
 <div class="modal fade" id="ModalAssetIos{{ $ckbox  }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -754,16 +787,18 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary submit-data" id="load3" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}adsae
+          <button type="submit" class="btn btn-primary submit-data edit-ios" id="load1" data-loading-text="Processing Order" onclick="MyCustomFunctiona{{ $i }}()">
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
             <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+          </button>
         </div>
       </form>
     </div>
   </div>
 </div>
+@php $i++; @endphp
 @endforeach
 
 
@@ -1048,14 +1083,14 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
         "ordering": false,
       });
 
-      $('.btn').on('click', function() {
-        var $this = $(this);
-        console.log('abcd');
-          // $this.button('loading');
-          setTimeout(function() {
-          $this.button('reset');
-        }, 15000);
-      });
+      // $('.btn').on('click', function() {
+      //   var $this = $(this);
+      //   console.log('abcd');
+      //     // $this.button('loading');
+      //     setTimeout(function() {
+      //     $this.button('reset');
+      //   }, 15000);
+      // });
       
     
 
