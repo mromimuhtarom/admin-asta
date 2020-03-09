@@ -156,14 +156,14 @@
                                 @if($_GET['inputGame'] === 'Texas Poker')
                                 @elseif($_GET['inputGame'] === 'Big Two')      
                                 @php 
-                                // $a = '{"start":{"stake":4000,"turn":1,"players":[{"uid":240888,"username":"killia1","seat":0,"avatar":"56.jpg","hand":[],"chip":415200},{"uid":371680,"username":"killia9","seat":1,"avatar":null,"hand":[18,37,50,6],"chip":362000}]},"acts":[{"seat":1,"act":5,"type":0,"card":[2],"left":13},{"seat":0,"act":5,"type":0,"card":[42],"left":13},{"seat":1,"act":5,"type":0,"card":[17],"left":12},{"seat":0,"act":5,"type":0,"card":[5],"left":12},{"seat":1,"act":6,"type":0,"card":[],"left":11},{"seat":0,"act":5,"type":0,"card":[27],"left":11},{"seat":1,"act":6,"type":0,"card":[],"left":11},{"seat":0,"act":5,"type":0,"card":[32],"left":10},{"seat":1,"act":5,"type":0,"card":[8],"left":11},{"seat":0,"act":6,"type":0,"card":[],"left":9},{"seat":1,"act":5,"type":0,"card":[28],"left":10},{"seat":0,"act":5,"type":0,"card":[7],"left":9},{"seat":1,"act":6,"type":0,"card":[],"left":9},{"seat":0,"act":5,"type":0,"card":[20],"left":8},{"seat":1,"act":6,"type":0,"card":[],"left":9},{"seat":0,"act":5,"type":0,"card":[33],"left":7},{"seat":1,"act":5,"type":0,"card":[23],"left":9},{"seat":0,"act":5,"type":0,"card":[13],"left":6},{"seat":1,"act":5,"type":0,"card":[52],"left":8},{"seat":0,"act":6,"type":0,"card":[],"left":5},{"seat":1,"act":5,"type":0,"card":[29],"left":7},{"seat":0,"act":5,"type":0,"card":[34],"left":5},{"seat":1,"act":5,"type":0,"card":[49],"left":6},{"seat":0,"act":5,"type":0,"card":[26],"left":4},{"seat":1,"act":6,"type":0,"card":[],"left":5},{"seat":0,"act":5,"type":0,"card":[9],"left":3},{"seat":1,"act":5,"type":0,"card":[24],"left":5},{"seat":0,"act":5,"type":0,"card":[39],"left":2},{"seat":1,"act":6,"type":0,"card":[],"left":4},{"seat":0,"act":5,"type":0,"card":[22],"left":1}],"end":{"players":[{"seat":0,"stat":1,"val":14400,"fee":800,"hand":[],"chip":429600},{"seat":1,"stat":0,"val":16000,"fee":800,"hand":[18,37,50,6],"chip":346000}]}}';
-                                $jsondecode = json_decode($history->gameplaylog);
+                                $a = '{"start":{"stake":4000,"turn":-1,"players":[{"uid":371680,"username":"killia9","seat":0,"avatar":null,"hand":[37],"chip":397200},{"uid":240888,"username":"killia1","seat":1,"avatar":"56.jpg","hand":[18,33,20],"chip":156000}]},"acts":[{"seat":1,"act":5,"type":0,"card":[18],"left":3},{"seat":0,"act":6,"type":0,"card":[],"left":1},{"seat":1,"act":5,"type":0,"card":[20],"left":2},{"seat":0,"act":6,"type":0,"card":[],"left":1},{"seat":1,"act":5,"type":0,"card":[33],"left":1}],"end":{"players":[{"seat":0,"stat":0,"val":4000,"fee":200,"hand":[37],"chip":393200},{"seat":1,"stat":1,"val":3600,"fee":200,"hand":[],"chip":159600}]}}';
+                                $jsondecode = json_decode($a);
                                 @endphp        
                                 @foreach ($jsondecode->start->players as $start)
                                     @if($start->uid == $history->user_id)  
                                         @foreach($jsondecode->end->players as $end)
                                             @if($end->seat == $start->seat)
-                                                {{var_dump($end->hand)}}
+                                                {{count($end->hand)}}
                                             @endif
                                         @endforeach 
                                     @endif                                 
@@ -248,9 +248,15 @@
                                     <th>{{ Translate_menuPlayers('Card') }}</th>
                                 </tr>
                             </thead>
+                            {{ $history->gameplay_log }}
                             @if($history->gameplay_log)
+                            @php 
+                            $bgt_gameplaylog = json_decode($history->gameplay_log);
+                            @endphp
                             <tbody>
-                                
+                                <tr>
+                                    <td></td>
+                                </tr>
                             </tbody>
                             @endif
                         </table>  
@@ -269,8 +275,7 @@
                             </thead>
                             {{-- {{ dd(empty($history1->gameplay_log)) }} --}}
                             @if(!empty($history->gameplay_log))
-                            <tbody>
-                                
+                            <tbody>                                
                             </tbody>
                             @endif
                         </table>     
