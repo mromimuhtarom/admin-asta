@@ -692,7 +692,7 @@ function TranslateReseller($menu){
         'Create new'             => 'Buat baru',
         'Username / Reseller ID'  => 'Nama Agent / ID Agen',
         'Gold'                   => 'Koin',
-        'Reason Gold Is Minus'   => 'Alasan Koin dikurangi',
+        'Reason Gold'   => 'Alasan Koin dikurangi',
         'Date Created'           => 'Tanggal',
         'Buy Gold'               => 'Beli Koin',
         'Buy Amount'             => 'Jumlah Pembelian',
@@ -950,12 +950,11 @@ function TranslatePlaceholdertxt($placeholder) {
         "L_CHOOSE_TYPE"          => "Pilih tipe",
         "L_MONTHLY"              => "Bulanan",
         "L_WEEKLY"               => "Mingguan",
-        
-
-
     ];
     return $array_menuContent[$placeholder];
 }
+
+
 
 function TranslateChoices($menu) {
     $array_menuContent = [

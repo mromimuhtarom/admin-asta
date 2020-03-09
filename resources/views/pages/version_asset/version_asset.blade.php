@@ -606,7 +606,6 @@
       <form action="{{ route('VersionAssetApkwindows-create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
-
           <div class="row">
             <div class="col-12">
               <div class="form-group" align="center"><br>
