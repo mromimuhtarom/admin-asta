@@ -142,7 +142,7 @@
                                             <tr>
                                               <td>{{ translate_menu($sbmnu->name) }}</td>
                                               <td>
-                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 0) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="denied{{ $sbmnu->menu_id }}" value="0">asdTutup</div>
+                                                <div style="float:left;margin:2%;"><input @if($sbmnu->type== 0) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="denied{{ $sbmnu->menu_id }}" value="0">Tutup</div>
                                                 <div style="float:left;margin:2%;"><input @if($sbmnu->type== 1) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="access{{ $sbmnu->menu_id }}" value="1">Akses</div>
                                                 <div style="float:left;margin:2%;"><input @if($sbmnu->type== 2) checked @endif type="radio" name="typerole{{ $sbmnu->menu_id }}" id="edit{{ $sbmnu->menu_id }}" value="2">Edit</div>
                                                 {{-- <a href="#" class="type" id="type"  data-title="Select Role Type" data-name="type" data-type="select" data-value="{{ $sbmnu->type }}" data-pk="{{ $sbmnu->menu_id }}" data-url="{{ route('Role-menu-edit', $sbmnu->role_id) }}">{{ ConfigTextTranslate(strMenuType($sbmnu->type)) }}</a> --}}

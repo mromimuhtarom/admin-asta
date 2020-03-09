@@ -154,64 +154,22 @@
                           <td>
                             @if (isset($_GET['inputGame']))
                                 @if($_GET['inputGame'] === 'Texas Poker')
-                                    @php 
-                                    $arrayjson_decode = array_gameplaylog($history->gameplay_log);
-                                    @endphp
-                                    @foreach($arrayjson_decode as $row)
-                                    @if ($row['game_state'] === 'END_ROUND')
-                                        @foreach ($row['player'] as $endplayer)
-                                            @if($endplayer['user_id'] == $history->user_id)
-                                                {{ str_replace(',', ' ', $endplayer['typecard']) }}
+                                @elseif($_GET['inputGame'] === 'Big Two')      
+                                @php 
+                                // $a = '{"start":{"stake":4000,"turn":1,"players":[{"uid":240888,"username":"killia1","seat":0,"avatar":"56.jpg","hand":[],"chip":415200},{"uid":371680,"username":"killia9","seat":1,"avatar":null,"hand":[18,37,50,6],"chip":362000}]},"acts":[{"seat":1,"act":5,"type":0,"card":[2],"left":13},{"seat":0,"act":5,"type":0,"card":[42],"left":13},{"seat":1,"act":5,"type":0,"card":[17],"left":12},{"seat":0,"act":5,"type":0,"card":[5],"left":12},{"seat":1,"act":6,"type":0,"card":[],"left":11},{"seat":0,"act":5,"type":0,"card":[27],"left":11},{"seat":1,"act":6,"type":0,"card":[],"left":11},{"seat":0,"act":5,"type":0,"card":[32],"left":10},{"seat":1,"act":5,"type":0,"card":[8],"left":11},{"seat":0,"act":6,"type":0,"card":[],"left":9},{"seat":1,"act":5,"type":0,"card":[28],"left":10},{"seat":0,"act":5,"type":0,"card":[7],"left":9},{"seat":1,"act":6,"type":0,"card":[],"left":9},{"seat":0,"act":5,"type":0,"card":[20],"left":8},{"seat":1,"act":6,"type":0,"card":[],"left":9},{"seat":0,"act":5,"type":0,"card":[33],"left":7},{"seat":1,"act":5,"type":0,"card":[23],"left":9},{"seat":0,"act":5,"type":0,"card":[13],"left":6},{"seat":1,"act":5,"type":0,"card":[52],"left":8},{"seat":0,"act":6,"type":0,"card":[],"left":5},{"seat":1,"act":5,"type":0,"card":[29],"left":7},{"seat":0,"act":5,"type":0,"card":[34],"left":5},{"seat":1,"act":5,"type":0,"card":[49],"left":6},{"seat":0,"act":5,"type":0,"card":[26],"left":4},{"seat":1,"act":6,"type":0,"card":[],"left":5},{"seat":0,"act":5,"type":0,"card":[9],"left":3},{"seat":1,"act":5,"type":0,"card":[24],"left":5},{"seat":0,"act":5,"type":0,"card":[39],"left":2},{"seat":1,"act":6,"type":0,"card":[],"left":4},{"seat":0,"act":5,"type":0,"card":[22],"left":1}],"end":{"players":[{"seat":0,"stat":1,"val":14400,"fee":800,"hand":[],"chip":429600},{"seat":1,"stat":0,"val":16000,"fee":800,"hand":[18,37,50,6],"chip":346000}]}}';
+                                $jsondecode = json_decode($history->gameplaylog);
+                                @endphp        
+                                @foreach ($jsondecode->start->players as $start)
+                                    @if($start->uid == $history->user_id)  
+                                        @foreach($jsondecode->end->players as $end)
+                                            @if($end->seat == $start->seat)
+                                                {{var_dump($end->hand)}}
                                             @endif
                                         @endforeach 
-                                    @endif
-                                    @endforeach
-                                    {{-- @foreach (tpkcard($history->hand_card_round) as $card)
-                                        {{ $card }}, 
-                                    @endforeach --}}
-                                @elseif($_GET['inputGame'] === 'Big Two')
-                                    {{-- @foreach (bgtcard($history->hand_card_round) as $item)
-                                        {{ $item }} 
-                                    @endforeach --}}
-                                    @if($history->hand_card_round != '-')
-                                    {{ count(bgtcard($history->hand_card_round))}} {{ Translate_menuPlayers('L_CARD') }} 
-                                    @endif
-                                    
+                                    @endif                                 
+                                @endforeach  
                                 @elseif($_GET['inputGame'] === 'Domino QQ')
-                                    @if($history->hand_card_round != '[]')
-                                        @php
-                                            $arrayjson_decode = array_gameplaylog($history->gameplay_log);
-                                        @endphp
-                                        @foreach($arrayjson_decode as $field => $row)
-                                            @if ($row['game_state'] === 'ACTION_DONE')
-                                                @foreach ($row['players'] as $key => $player) 
-                                                    @if($player['user_id'] == $history->user_id)
-                                                        @if ($player['typecard'] == 'COMMON')
-                                                        {{ $player['typecard'] }} {{ $player['combo'] }} 
-                                                        @else
-                                                        {{ str_replace('_', ' ',$player['typecard']) }} 
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                        {{-- {{ $history->hand_card_round }}  --}}
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
-                                    @if($history->hand_card_round != '[]')
-                                        @php
-                                        $arrayjson_decode = array_gameplaylog($history->gameplay_log);
-                                        @endphp
-                                        @foreach($arrayjson_decode as $field => $row)
-                                            @if ($row['game_state'] === 'ACTION_DONE')
-                                                @foreach ($row['players'] as $key => $player) 
-                                                    @if($player['user_id'] == $history->user_id)
-                                                        {{ count(dmscard($history->hand_card_round)) }} {{ Translate_menuPlayers('L_CARD') }} = {{ $player['handTotal'] }}
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    @endif
                                 @endif
                             @endif
                             
