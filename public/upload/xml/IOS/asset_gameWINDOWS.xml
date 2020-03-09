@@ -75,4 +75,4 @@
         <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/Windows/</link>
         <ver>0.0.1</ver>
     </tpk>
-</main_asset>
+<image name="001-igloo.png"><type>Image</type><link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/BGT/Windows/</link><ver>0.1</ver></image></main_asset>

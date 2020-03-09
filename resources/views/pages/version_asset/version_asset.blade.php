@@ -572,8 +572,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data" >
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+          <button type="submit" class="btn sa-btn-primary submit-data" id="load" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Processing">
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}uyui
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
             <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
@@ -627,7 +627,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data" >
+          <button type="submit" class="btn sa-btn-primary submit-data" id="load1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">
             <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -754,8 +754,8 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data" >
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+          <button type="submit" class="btn btn-primary submit-data" id="load3" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}adsae
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
             <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
@@ -998,7 +998,7 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
 </div>
 
 <script>
-
+  
 // ==================== choose file button Android ======================= //
 (function() {
   
@@ -1019,16 +1019,45 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
 })();
 
 
+// var timeout;
+
+// function loaded(){
+//   $('#loading').html('test loading');
+// }
+
+// function startLoad(){
+//   $('#loading').html('<img src="http://rpg.drivethrustuff.com/shared_images/ajax-loader.gif"/>');
+
+//   clearTimeout(timeout);
+//   timeout = setTimeout(loaded, 1500);
+// }
+
+// //bind click event
+// $('#load3').click('startLoad');
+// startLoad();
+
 
 </script>
 
 
 <script>
+   
     $(document).ready(function() {
       $('table.table').dataTable( {
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
         "ordering": false,
       });
+
+      $('.btn').on('click', function() {
+        var $this = $(this);
+        console.log('abcd');
+          // $this.button('loading');
+          setTimeout(function() {
+          $this.button('reset');
+        }, 15000);
+      });
+      
+    
 
       //=============================== delete check all IOS =====================================//
     //check all IOS
@@ -1184,8 +1213,6 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
           $("#trash").hide();
         }
     });
-
-
 
     });
   

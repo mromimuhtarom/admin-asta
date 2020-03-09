@@ -614,25 +614,25 @@
               "pagingType": "full_numbers",
               "searching": false,
             });
+              
+              // @php
+              // foreach($mainmenu as $mnu){
+              
+              // echo'$(".denied'.$mnu->menu_id.'").click(function(){';
+              //   echo'$("#denied'.$mnu->menu_id.'").prop("checked", true);';
+              // echo'});';
+
+              // echo'$(".access'.$mnu->menu_id.'").click(function(){';
+              //   echo'$("#access'.$mnu->menu_id.'").prop("checked", true);';
+              // echo'});';
+
+              // echo'$(".edit'.$mnu->menu_id.'").click(function(){';
+              //   echo'$("#edit'.$mnu->menu_id.'").prop("checked", true);';
+              // echo'});';
+              // }
+              // @endphp
+
           });
-
-          // $(function () {
-          //   $(document).on('click', '[data-smth]', function () {
-          //     $('[data-parent="' + $(this).attr('data-smth') + '"]:first').prop("checked", true);
-          //   })
-
-          //   $(document).on('click', '[data-parent]', function () {
-          //     $('[data-smth="' + $(this).attr('data-parent') + '"]').prop("checked", true);
-          //   })
-          // })
-
-          // $(document).ready(function(){
-          //   $('div').click (function(){
-          //     $('div.selected').removeClass('selected');
-          //     $(this).addClass('selected');
-          //     $(this).children("input[type=radio]").click();
-          //   })
-          // })
 
           table = $('table.table').dataTable({
             "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
