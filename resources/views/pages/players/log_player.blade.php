@@ -128,7 +128,7 @@
                         <td>{{ $log->username }}</td>
                         <td>{{ Translateaction_id($log->action) }}</td>
                         <td>{{ $log->description }}</td>
-                        <td>{{ $log->datetime }}</td>
+                        <td>{{ date("d-m-Y H:i:s", strtotime($log->datetime)) }}</td>
                     </tr>
                     @endforeach
                 </tbody>

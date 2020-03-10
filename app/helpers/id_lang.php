@@ -902,6 +902,9 @@ function Translateaction_id($menu){
         "L_EDIT_PLAYER"             =>      'Edit pemain',
         'L_LOGIN_PLAYER'            =>      'Pemain login',
         'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
+        'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Akun pemain bermasalah',
+        'L_BANNED_ACCOUNT_PLAYER'   =>      'Akun pemain dilarang',
+
     ];
     return $array_menuContent[$menu];
 };
@@ -926,12 +929,11 @@ function TranslateTransactionHist($menu){
 function TranslateTransaksiAgen($menu){
 
     $array_menuContent = [
-        
+    
         "Purchase Date"   =>  "Tgl & Waktu pembelian",
         "User ID"         =>  "ID Pengguna",
         "ID Order"        =>  "ID Agen",
         "Transaction Type"=>  "Tipe transaksi"
-
     ];
     return $array_menuContent[$menu];
 };
