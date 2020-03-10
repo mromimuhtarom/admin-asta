@@ -65,7 +65,7 @@
           <div class="table-outer" style="padding-right:0;overflow-y:hidden;padding-bottom:0;">
 
             <div class="webgl-content" style="width: 80%; height: 80%;position:absolute">
-                <div id="gameContainer" class="border border-danger" style="width: 100%; height:auto;margin-right:1%;"></div>
+                <div id="gameContainer" class="border border-dark" style="width: 100%; height:auto;margin-right:1%;"></div>
                 <div class="footer">
                     <div class="webgl-logo"></div>
                     <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
