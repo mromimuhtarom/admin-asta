@@ -40,7 +40,7 @@
 <script>
   function MyCustomFunctionCreate(){
     $(".btn-create").text("Loading...");
-    $(this).submit('loading').delay(500).queue(function () {
+    $(this).submit('loading').delay(1000).queue(function () {
     });
   }
 
@@ -82,8 +82,8 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="username" placeholder="nama pengguna" required onkeyup="checkform()"><br>
-                  <input type="text" class="form-control" name="fullname" placeholder="nama lengkap" required onkeyup="checkform()"><br>
+                  <input type="text" class="form-control" name="username" placeholder="nama pengguna" required ><br>
+                  <input type="text" class="form-control" name="fullname" placeholder="nama lengkap" required ><br>
                   <select id="role" name="role" class="form-control required" required>
                     <option selected disabled>{{ translate_MenuContentAdmin('L_CHOOSE_ACTION')}}</option>
                     @foreach($role as $rl)
