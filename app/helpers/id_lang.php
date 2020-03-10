@@ -418,7 +418,13 @@ function Translate_menuPlayers($menu){
         'L_CARD'                    =>  'Kartu',
         'L_CREATE_PLAYER'           =>  'Buat pemain',
         'L_DELETE_PLAYER'           =>  'Hapus pemain',
-        'L_EDIT_PLAYER'             =>  'Edit pemain'
+        'L_EDIT_PLAYER'             =>  'Edit pemain',
+        'L_LOGIN_PLAYER'            =>  'Pemain login',
+        'L_APPROVE_ACCOUNT_PLAYER'  =>  'Akun pemain disetujui',
+        'L_BANNED_ACCOUNT_PLAYER'   =>  'Akun pemain dilarang',
+        'L_PROBLEM_ACCOUNT_PLAYER'  =>  'Akun pemain bermasalah',
+        'L_UPGRADE_ACCOUNT'         =>  'Upgrade akun',
+
              
 
     ];
@@ -513,11 +519,11 @@ function TranslateMenuGame($menu){
         'Current turn seat ID' => 'Giliran ID kursi saat ini',
         'Room Name'            => 'Nama room',
         'Name'                 => 'Nama',
-        'Upload File'          => 'Unduh File',
+        'Upload File'          => 'Unggah File',
         'Language'             => 'Bahasa',
         'Indonesia'            => 'Indonesia',
         'English'              => 'Inggris',
-        'Upload File Language' => 'Unduh File Bahasa',
+        'Upload File Language' => 'Unggah File Bahasa',
         'Table Name'           => 'Nama Meja',
         'Play Time'            => 'Waktu Bermain',
         'Seat'                 => 'Kursi',
@@ -891,7 +897,11 @@ function Translateaction_id($menu){
         "Approve Account Player"    =>      "Akun pemain disetujui",
         "Banned Account Player"     =>      "Akun pemain terlarang",
         "Problem Account Player"    =>      "Akun pemain bermasalah",
-        "Upgrade Account"           =>      "Tingkatkan akun"
+        "Upgrade Account"           =>      "Tingkatkan akun",
+        'L_EDIT_GOODS_STORE'        =>      'Edit Toko Barang',
+        "L_EDIT_PLAYER"             =>      'Edit pemain',
+        'L_LOGIN_PLAYER'            =>      'Pemain login',
+        'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
     ];
     return $array_menuContent[$menu];
 };

@@ -127,7 +127,7 @@
                         <td>{{ $log->user_id}}</td>
                         <td>{{ $log->username }}</td>
                         <td>{{ Translateaction_id($log->action) }}</td>
-                        <td>{{ $log->desc }}</td>
+                        <td>{{ $log->description }}</td>
                         <td>{{ $log->datetime }}</td>
                     </tr>
                     @endforeach

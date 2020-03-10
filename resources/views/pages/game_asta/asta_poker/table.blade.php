@@ -301,19 +301,17 @@
               echo '$("#bb").val(countBb);';
               echo 'var lblErrorminbuy = document.getElementById("lblErrorminbuy");';
 
-              echo 'if(minbuyValue <= '.$ct->min_buy.') {';
-                  echo 'lblErrorminbuy.innerHTML = "input Min buy table kurang dari min buy di kategori.";';
-              echo '}else if(minbuyValue >= '.$ct->max_buy.') {';
-                  echo 'lblErrorminbuy.innerHTML = "input Min buy table lebih dari max buy di kategori.";';
-              echo '}else{';
-                  echo 'lblErrorminbuy.innerHTML = "";';
-              echo '}';
+                echo 'if(minbuyValue <= '.$ct->min_buy.') {';
+                    echo 'lblErrorminbuy.innerHTML = "input Min buy table kurang dari min buy di kategori.";';
+                echo '}else if(minbuyValue >= '.$ct->max_buy.') {';
+                    echo 'lblErrorminbuy.innerHTML = "input Min buy table lebih dari max buy di kategori.";';
+                echo '}else{';
+                    echo 'lblErrorminbuy.innerHTML = "";';
+                echo '}';
           echo '}';
         }
         @endphp
       });
-
-
 
       $("#maxbuy").keyup(function(e) {
         e.preventDefault();

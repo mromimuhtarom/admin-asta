@@ -36,7 +36,29 @@
         
     @endif
     
-  <!-- Modal -->
+  <!-- MODAL CREATE -->
+<script>
+  function MyCustomFunctionCreate(){
+    $(".btn-create").text("Loading...");
+    $(this).submit('loading').delay(500).queue(function () {
+
+    });
+  }
+
+//   function checkform() {
+//     var f = document.forms["theform"].elements;
+//     var cansubmit = true;
+
+//     for (var i = 0; i < f.length; i++) {
+//         if (f[i].value.length == 0)
+//             cansubmit = false;
+//     }
+
+//     document.getElementById('save').disabled = !cansubmit;
+// }
+// window.onload = checkform;
+
+</script>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -46,15 +68,15 @@
             <i class="fa fa-remove"></i>
           </button>
         </div>
-        <form action="{{ route('UserAdmin-create') }}" method="post">
+        <form action="{{ route('UserAdmin-create') }}" method="post" name="theform">
           @csrf
           <div class="modal-body">
     
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="username" placeholder="nama pengguna" required><br>
-                  <input type="text" class="form-control" name="fullname" placeholder="nama lengkap" required><br>
+                  <input type="text" class="form-control" name="username" placeholder="nama pengguna" required onkeyup="checkform()"><br>
+                  <input type="text" class="form-control" name="fullname" placeholder="nama lengkap" required onkeyup="checkform()"><br>
                   <select name="role" class="form-control" required>
                     <option>{{ translate_MenuContentAdmin('L_CHOOSE_ACTION')}}</option>
                     @foreach($role as $rl)
@@ -66,7 +88,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary submit-data">
+            <button type="submit" id="save" class="btn sa-btn-primary submit-data btn-create" onclick="MyCustomFunctionCreate()">
               <i class="fa fa-save"></i> {{ translate_MenuContentAdmin('L_SAVE')}}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
