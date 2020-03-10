@@ -37,6 +37,7 @@
 @endif
 
 <script>
+//DISABLE BUTTON SAVE SEBELUM TERISI FIELD
  function manage(txt) {
         var bt = document.getElementById('submit');
         if (txt.value != '') {
