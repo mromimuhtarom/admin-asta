@@ -216,7 +216,7 @@ function strTypeTransaction($val){
   } else if ($val == 2) {
     return 'Internet Banking';
   } else if ($val == 3) {
-    return 'Cash Digital';
+    return 'E-money';
   } else if ($val == 4) {
     return 'Toko';
   } else if ($val == 5) {

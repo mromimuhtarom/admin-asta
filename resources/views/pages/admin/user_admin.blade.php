@@ -36,7 +36,36 @@
         
     @endif
     
-  <!-- Modal -->
+  <!-- MODAL CREATE -->
+<script>
+  function MyCustomFunctionCreate(){
+    $(".btn-create").text("Loading...");
+    $(this).submit('loading').delay(1000).queue(function () {
+    });
+  }
+
+  $(document).on('change keyup', '.required', function(e){
+   let Disabled = true;
+    $(".required").each(function() {
+      let value = this.value
+      if ((value)&&(value.trim() !=''))
+          {
+            Disabled = false
+          }else{
+            Disabled = true
+            return false
+          }
+    });
+   
+   if(Disabled){
+        $('.toggle-disabled').prop("disabled", true);
+      }else{
+        $('.toggle-disabled').prop("disabled", false);
+      }
+ })
+
+
+</script>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -46,17 +75,17 @@
             <i class="fa fa-remove"></i>
           </button>
         </div>
-        <form action="{{ route('UserAdmin-create') }}" method="post">
+        <form action="{{ route('UserAdmin-create') }}" method="post" name="theform">
           @csrf
           <div class="modal-body">
     
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="username" placeholder="nama pengguna" required><br>
-                  <input type="text" class="form-control" name="fullname" placeholder="nama lengkap" required><br>
-                  <select name="role" class="form-control" required>
-                    <option>{{ translate_MenuContentAdmin('L_CHOOSE_ACTION')}}</option>
+                  <input type="text" class="form-control" name="username" placeholder="nama pengguna" required ><br>
+                  <input type="text" class="form-control" name="fullname" placeholder="nama lengkap" required ><br>
+                  <select id="role" name="role" class="form-control required" required>
+                    <option selected disabled>{{ translate_MenuContentAdmin('L_CHOOSE_ACTION')}}</option>
                     @foreach($role as $rl)
                     <option value="{{ $rl->role_id}}">{{ $rl->name}}</option>
                     @endforeach
@@ -66,7 +95,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary submit-data">
+            <button type="submit" id="save" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="MyCustomFunctionCreate()">
               <i class="fa fa-save"></i> {{ translate_MenuContentAdmin('L_SAVE')}}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -228,7 +257,7 @@
               {{ method_field('delete')}}
               {{ csrf_field() }}
                   <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
-                  <input type="text" name="usernameAll" id="userDeleteAll" value="">
+                  <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
           </div>
           <div class="modal-footer">
             <button type="submit" class="button_example-yes btn sa-btn-success delete_all"><i class="fa fa-check"></i> {{ translate_MenuContentAdmin('L_YES')}}</button>

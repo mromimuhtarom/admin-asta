@@ -127,7 +127,7 @@ class ResellerController extends Controller
     public function destroy(Request $request)
     {
         $userid = $request->id;
-        $currentname = Reseller::where('reseller_id', '=', $userid)->fisrt();
+        $currentname = Reseller::where('reseller_id', '=', $userid)->first();
         if($userid != '')
         {
             $reseller = Reseller::where('reseller_id', '=', $userid)->first();
@@ -1987,7 +1987,7 @@ public function detailTransaction(Request $request, $month, $year)
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus item yang terpilih di menu Daftar Agen dengan nama '.$currentname
         ]);
-        return redirect()->route('Item_Store_Reseller')->with('success', 'Data deleted');
+        return redirect()->route('List_Reseller')->with('success', 'Data deleted');
     }
 
     public function deleteAllSelectedRank(Request $request)

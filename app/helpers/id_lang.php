@@ -438,6 +438,11 @@ function Translate_menuPlayers($menu){
         'L_BIG_BLIND'               =>  'Big Blind',
         'L_SMALL_BLIND'             =>  'Small Blind',
         'L_REMAINING_TYPE'          =>  'Remaining Type',
+        'L_LOGIN_PLAYER'            =>  'Pemain login',
+        'L_APPROVE_ACCOUNT_PLAYER'  =>  'Akun pemain disetujui',
+        'L_BANNED_ACCOUNT_PLAYER'   =>  'Akun pemain dilarang',
+        'L_PROBLEM_ACCOUNT_PLAYER'  =>  'Akun pemain bermasalah',
+        'L_UPGRADE_ACCOUNT'         =>  'Upgrade akun',
         ''                          =>  ''
              
 
@@ -519,11 +524,12 @@ function TranslateMenuGame($menu){
         'Yes'                  => 'Ya',
         'No'                   => 'Tidak',
         'Category'             => 'Kategori',
-        'Asta Poker Table'     => 'Asta Poker Meja',
+        'Asta Poker Table'     => 'Meja Asta Poker',
         'Title'                => 'Judul',
         'Create Category'      => 'Buat kategori',
-        'Asta Big Two Table'   => 'Asta Big Two Meja',
-        'L_ASTA_DOMINO_QQ_TABLE' => 'Asta Domino QQ Meja',
+        'Asta Big Two Table'   => 'Meja Asta Big Two',
+        'L_ASTA_DOMINO_QQ_TABLE' => 'Meja Asta Domino QQ',
+        'L_ASTA_DOMINO_SUSUN_TABLE' =>  'Meja Asta Domino susun',
         'Create New Table'     => 'Buat table baru',
         'Turn'                 => 'Giliran',
         'Total Bet'            => 'Total Taruhan',
@@ -533,11 +539,11 @@ function TranslateMenuGame($menu){
         'Current turn seat ID' => 'Giliran ID kursi saat ini',
         'Room Name'            => 'Nama room',
         'Name'                 => 'Nama',
-        'Upload File'          => 'Unduh File',
+        'Upload File'          => 'Unggah File',
         'Language'             => 'Bahasa',
         'Indonesia'            => 'Indonesia',
         'English'              => 'Inggris',
-        'Upload File Language' => 'Unduh File Bahasa',
+        'Upload File Language' => 'Unggah File Bahasa',
         'Table Name'           => 'Nama Meja',
         'Play Time'            => 'Waktu Bermain',
         'Seat'                 => 'Kursi',
@@ -712,7 +718,7 @@ function TranslateReseller($menu){
         'Create new'             => 'Buat baru',
         'Username / Reseller ID'  => 'Nama Agent / ID Agen',
         'Gold'                   => 'Koin',
-        'Reason Gold Is Minus'   => 'Alasan Koin dikurangi',
+        'Reason Gold'   => 'Alasan Koin dikurangi',
         'Date Created'           => 'Tanggal',
         'Buy Gold'               => 'Beli Koin',
         'Buy Amount'             => 'Jumlah Pembelian',
@@ -912,7 +918,14 @@ function Translateaction_id($menu){
         "Banned Account Player"     =>      "Akun pemain terlarang",
         "Problem Account Player"    =>      "Akun pemain bermasalah",
         "Upgrade Account"           =>      "Tingkatkan akun",
-        "L_EDIT_CHIP_STORE"         =>      "L_EDIT_CHIP_STOR"
+        "L_EDIT_CHIP_STORE"         =>      "L_EDIT_CHIP_STOR",
+        'L_EDIT_GOODS_STORE'        =>      'Edit Toko Barang',
+        "L_EDIT_PLAYER"             =>      'Edit pemain',
+        'L_LOGIN_PLAYER'            =>      'Pemain login',
+        'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
+        'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Akun pemain bermasalah',
+        'L_BANNED_ACCOUNT_PLAYER'   =>      'Akun pemain dilarang',
+
     ];
     return $array_menuContent[$menu];
 };
@@ -937,12 +950,11 @@ function TranslateTransactionHist($menu){
 function TranslateTransaksiAgen($menu){
 
     $array_menuContent = [
-        
+    
         "Purchase Date"   =>  "Tgl & Waktu pembelian",
         "User ID"         =>  "ID Pengguna",
         "ID Order"        =>  "ID Agen",
         "Transaction Type"=>  "Tipe transaksi"
-
     ];
     return $array_menuContent[$menu];
 };
@@ -971,12 +983,11 @@ function TranslatePlaceholdertxt($placeholder) {
         "L_CHOOSE_TYPE"          => "Pilih tipe",
         "L_MONTHLY"              => "Bulanan",
         "L_WEEKLY"               => "Mingguan",
-        
-
-
     ];
     return $array_menuContent[$placeholder];
 }
+
+
 
 function TranslateChoices($menu) {
     $array_menuContent = [

@@ -44,7 +44,7 @@
               </tr>
               <tr>
                   <td width='30%'>{{ Translate_menuPlayers('NumberOfIDsToBeAdded') }}</td>
-                  <td colspan="2"><input type="number" name="inputcount" class="form-control" required>&nbsp;</td>
+                  <td colspan="2"><input type="number" name="inputcount" class="form-control" required min="0">&nbsp;</td>
               </tr>
               <tr>
                   <td width="30%">{{ Translate_menuPlayers('UserType') }}</td>

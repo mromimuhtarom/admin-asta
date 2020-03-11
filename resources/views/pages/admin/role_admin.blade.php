@@ -35,7 +35,20 @@
     </div>
     
 @endif
-<!-- Modal -->
+
+<script>
+//DISABLE BUTTON SAVE SEBELUM TERISI FIELD
+ function manage(txt) {
+        var bt = document.getElementById('submit');
+        if (txt.value != '') {
+            bt.disabled = false;
+        }
+        else {
+            bt.disabled = true;
+        }
+    }
+</script>
+<!-- Modal create -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
@@ -52,13 +65,13 @@
         <div class="row">
           <div class="col-12">
             <div class="form-group">
-              <input type="text" class="form-control" name="rolename" placeholder="Nama Role"><br>
+              <input type="text" class="form-control" name="rolename" placeholder="Nama Role" id="rolename" onkeyup="manage(this)"><br>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn sa-btn-primary submit-data">
+        <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="LoadingFunctionCreate()">
          <i class="fa fa-save"></i>{{ translate_MenuContentAdmin('L_SAVE') }}
         </button>
         <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -242,6 +255,31 @@
 
   });
 
+  function LoadingFunctionCreate(){
+    $('.btn-create').text("Loading...");
+    $(this).submit('loading').delay(1000).queue(function () {
+    });
+  }
+
+  $(document).on('change keyup', '.required', function(e){
+   let Disabled = true;
+    $(".required").each(function() {
+      let value = this.value
+      if ((value)&&(value.trim() !=''))
+          {
+            Disabled = false
+          }else{
+            Disabled = true
+            return false
+          }
+    });
+   
+   if(Disabled){
+        $('.toggle-disabled').prop("disabled", true);
+      }else{
+        $('.toggle-disabled').prop("disabled", false);
+      }
+  })
 
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex'>",
