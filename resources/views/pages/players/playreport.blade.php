@@ -135,7 +135,16 @@
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">{{ Translate_menuPlayers('Playing Game') }} <i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=tablename">{{ Translate_menuPlayers('Table') }}<i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=seat_id">{{ Translate_menuPlayers('Seat') }}<i class="fa fa-sort{{ iconsorting('seat_id') }}"></i></a></th>
-                        <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card_round">{{ Translate_menuPlayers('Hand card') }}<i class="fa fa-sort{{ iconsorting('hand_card_round') }}"></i></a></th>
+                        <th>
+                            <a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card_round">
+                                @if($player_history[0]->gamename === 'Big Two')
+                                {{ Translate_menuPlayers('L_REMAINING_TYPE') }} 
+                                @else
+                                {{ Translate_menuPlayers('Hand card') }} 
+                                @endif
+                                <i class="fa fa-sort{{ iconsorting('hand_card_round') }}"></i>
+                            </a>
+                        </th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=bet">{{ Translate_menuPlayers('Bet') }}<i class="fa fa-sort{{ iconsorting('bet') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=win_lose">{{ Translate_menuPlayers('Win Lose') }}<i class="fa fa-sort{{ iconsorting('win_lose') }}"></i></a></th>
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=status">{{ Translate_menuPlayers('Status') }}<i class="fa fa-sort{{ iconsorting('status') }}"></i></a></th>
@@ -157,7 +166,7 @@
                                 @elseif($_GET['inputGame'] === 'Big Two')      
                                 @php 
                                 $a = '{"start":{"stake":4000,"turn":-1,"players":[{"uid":371680,"username":"killia9","seat":0,"avatar":null,"hand":[37],"chip":397200},{"uid":240888,"username":"killia1","seat":1,"avatar":"56.jpg","hand":[18,33,20],"chip":156000}]},"acts":[{"seat":1,"act":5,"type":0,"card":[18],"left":3},{"seat":0,"act":6,"type":0,"card":[],"left":1},{"seat":1,"act":5,"type":0,"card":[20],"left":2},{"seat":0,"act":6,"type":0,"card":[],"left":1},{"seat":1,"act":5,"type":0,"card":[33],"left":1}],"end":{"players":[{"seat":0,"stat":0,"val":4000,"fee":200,"hand":[37],"chip":393200},{"seat":1,"stat":1,"val":3600,"fee":200,"hand":[],"chip":159600}]}}';
-                                $jsondecode = json_decode($a);
+                                $jsondecode = json_decode($history->gameplay_log);
                                 @endphp        
                                 @foreach ($jsondecode->start->players as $start)
                                     @if($start->uid == $history->user_id)  
@@ -243,21 +252,97 @@
                                 <tr>
                                     <th>{{ Translate_menuPlayers('Sit') }}</th>
                                     <th>{{ Translate_menuPlayers('Username') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CHIP_PLAYERS') }}</th>
                                     <th>{{ Translate_menuPlayers('Action') }}</th>
-                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
-                                    <th>{{ Translate_menuPlayers('Card') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_BET') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_COUNT_CARD') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CARD_HAND') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CARD_OUT') }}</th>
                                 </tr>
                             </thead>
-                            {{ $history->gameplay_log }}
                             @if($history->gameplay_log)
-                            @php 
-                            $bgt_gameplaylog = json_decode($history->gameplay_log);
-                            @endphp
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tbody>
+                                @php 
+                                $bgt_gameplaylog = json_decode($history->gameplay_log);
+                                @endphp
+                                <tbody>
+                                    @foreach($bgt_gameplaylog->start->players as $start)
+                                    <tr>
+                                        <td>{{ $start->seat }}</td>
+                                        <td>{{ $start->username }}</td>
+                                        <td>{{ number_format($start->chip) }}</td>
+                                        <td>{{ Translate_menuPlayers('L_NEW_ROUND') }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    @endforeach
+                                    @foreach($bgt_gameplaylog->start->players as $start)
+                                    <tr>
+                                        <td>{{ $start->seat }}</td>
+                                        <td>{{ $start->username }}</td>
+                                        <td></td>
+                                        <td>{{ Translate_menuPlayers('L_DIVIDED_CARD') }}</td>
+                                        <td></td>
+                                        <td>{{ count($start->hand) }}</td>
+                                        <td>
+                                            @for($a=0; $a<count($start->hand); $a++)
+                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($start->hand)[$a] }}.png" alt="">
+                                            @endfor
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    @endforeach
+                                    @foreach($bgt_gameplaylog->acts as $action)
+                                        <tr>
+                                            <td>{{ $action->seat }}</td>
+                                            <td>
+                                                @foreach($bgt_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)
+                                                        {{ $start->username }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td></td>
+                                            <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
+                                            <td></td>
+                                            <td>{{ $action->left }}</td>
+                                            <td></td>
+                                            <td>
+                                                @for($i=0; $i<count($action->card); $i++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($action->card)[$i] }}.png" alt="">
+                                                @endfor
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    @foreach($bgt_gameplaylog->end->players as $end)
+                                        <tr>
+                                            <td>{{ $end->seat }}</td>
+                                            <td>
+                                                @foreach($bgt_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $end->seat)
+                                                        {{ $start->username }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($end->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
+                                            <td>
+                                                {{ number_format($end->val) }} <br> 
+                                                (fee:{{ number_format($end->fee) }})
+                                            </td>
+                                            <td>{{ count($end->hand) }}</td>
+                                            <td>
+                                                @for($a=0; $a<count($end->hand); $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($end->hand)[$a] }}.png" alt="">
+                                                @endfor
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
                             @endif
                         </table>  
                     @elseif($history->gamename === 'Texas Poker') 

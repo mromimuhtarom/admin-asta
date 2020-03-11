@@ -347,28 +347,6 @@ function tpkcard($array) {
 
 }
 
-function statuscard($typecard, $cardarray) {
-
-  if($typecard == 'One Pair'):
-    $arraycard = explode(',', $cardarray);
-
-    for($a = 0; $a < count($arraycard); $a++):
-      // if():
-      //   return 
-      // endif;
-    endfor;
-  elseif($typecard == 'Two Pair'):
-  elseif($typecard == 'Straight'):
-  elseif($typecard == 'High Card'):
-  elseif($typecard == 'Three Of A Kind'):
-  elseif($typecard == 'Four of a Kind'):
-  elseif($typecard == 'Flush'):
-  elseif($typecard == 'Fullhouse'):
-
-
-  endif;
-}
-
 function cardreadpopup($array) {
   
   $a = json_encode($array);
@@ -382,19 +360,18 @@ function cardreadpopup($array) {
 
 
 function bgtcard($array) {
-  if($array !== '-'):
+  if($array !== ''):
     if(!empty($array)):
-      $arraycard = explode(',', $array);
       $cards = ['FD','3D','4D','5D','6D','7D','8D','9D','10D','JD','QD','KD','AD','2D', //13
                '3C','4C','5C','6C','7C','8C','9C','10C','JC','QC','KC','AC','2C',         //26
                '3H','4H','5H','6H','7H','8H','9H','10H','JH','QH','KH','AH','2H',        //39
                '3S','4S','5S','6S','7S','8S','9S','10S','JS','QS','KS','AS','2S'];
       
-      for ($i = 0; $i < count($arraycard); $i++){
+      for ($i = 0; $i < count($array); $i++){
         
         // resCard[i]=cards[array[i]];
         // $resCard.push($cards[$arraycard[$i]]);
-        $resCard[] = $cards[$arraycard[$i]];
+        $resCard[] = $cards[$array[$i]];
         
       }
     else:
@@ -406,6 +383,39 @@ function bgtcard($array) {
 
   return $resCard;
 
+}
+
+function actiongameplaylog($action)
+{
+  if($action == 1):
+    return 'L_BET_CALL';
+  elseif($action == 2):
+    return 'L_CHECK';
+  elseif($action == 3):
+    return 'L_RAISE';
+  elseif($action == 4):
+    return 'L_FOLD';
+  elseif($action == 5):
+    return 'L_PLAY';
+  elseif($action == 6):
+    return 'L_PASS';
+  elseif($action == 7):
+    return 'L_BIG_BLIND';
+  elseif($action == 8):
+    return 'L_SMALL_BLIND';
+  endif;
+
+}
+
+function statusgameplaylog($status)
+{
+  if($status == 0):
+    return 'L_LOSE';
+  elseif($status == 1):
+    return 'L_WIN';
+  elseif($status == 2):
+    return 'L_DRAW';
+  endif;
 }
 
 
