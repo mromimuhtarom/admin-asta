@@ -37,6 +37,7 @@ class PlayReportController extends Controller
       $namecolumn   = $request->namecolumn;
       $menus1       = MenuClass::menuName('Report');
       $game         = Game::all();
+
       
        $validator = Validator::make($request->all(),[
               'inputMinDate' => 'required|date',
