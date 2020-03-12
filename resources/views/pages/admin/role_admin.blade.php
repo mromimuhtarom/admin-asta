@@ -61,7 +61,7 @@
     <form action="{{ route('Role-create') }}" method="post">
       @csrf
       <div class="modal-body">
-
+        
         <div class="row">
           <div class="col-12">
             <div class="form-group">
@@ -261,25 +261,26 @@
     });
   }
 
-  $(document).on('change keyup', '.required', function(e){
-   let Disabled = true;
-    $(".required").each(function() {
-      let value = this.value
-      if ((value)&&(value.trim() !=''))
-          {
-            Disabled = false
-          }else{
-            Disabled = true
-            return false
-          }
-    });
+// DISABLE BUTTON (GAJADI PAKE)
+  // $(document).on('change keyup', '.required', function(e){
+  //  let Disabled = true;
+  //   $(".required").each(function() {
+  //     let value = this.value
+  //     if ((value)&&(value.trim() !=''))
+  //         {
+  //           Disabled = false
+  //         }else{
+  //           Disabled = true
+  //           return false
+  //         }
+  //   });
    
-   if(Disabled){
-        $('.toggle-disabled').prop("disabled", true);
-      }else{
-        $('.toggle-disabled').prop("disabled", false);
-      }
-  })
+  //  if(Disabled){
+  //       $('.toggle-disabled').prop("disabled", true);
+  //     }else{
+  //       $('.toggle-disabled').prop("disabled", false);
+  //     }
+  // })
 
   table = $('table.table').dataTable({
     "sDom": "t"+"<'dt-toolbar-footer d-flex'>",

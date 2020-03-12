@@ -14,6 +14,7 @@ use Response;
 use Carbon\Carbon;
 use Validator;
 use App\ConfigText;
+use App\ItemsCash;
 
 class GoodsStoreController extends Controller
 {
@@ -386,9 +387,8 @@ class GoodsStoreController extends Controller
     {
         $id    = $request->id;
         $goods = ItemPoint::where('item_id', '=', $id)->first();
-
         $pathS3 = 'unity-asset/store/goods/'.$id.'.png';
-        $currentname = ItemCash::where('item_id', '=', $getId)->first();
+
 
         if($id != '')
         {
@@ -404,7 +404,7 @@ class GoodsStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '28',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar Barang dengan nama '.$currentname->name
+                'desc'      => 'Hapus gambar Barang dengan nama '.$goods->name
             ]);
 
             return redirect()->route('Goods_Store')->with('success', alertTranslate('Data deleted'));

@@ -24,7 +24,7 @@ function translate_menu($menu){
       'L_TRANSACTION'                       => 'Transaksi',
       'L_TRANSACTION_DAY'                   => 'Transaksi Harian',
       'L_USER_BANK_TRANSACTION'             => 'Transaksi Bank Pemain',
-      'L_REWARD_TRANSACTION'                => 'Transaksi Barang',
+      'L_REWARD_TRANSACTION'                => 'Reward Transaksi',
       'L_ADD_TRANSACTION'                   => 'Tambah transaksi',
       'L_TRANSACTION_POINT'                 => 'Transaksi Point',
       'L_PLAYERS'                           => 'Pemain',
