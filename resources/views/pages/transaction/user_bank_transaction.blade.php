@@ -203,7 +203,7 @@
             <form action="{{ route('UserBankTransaction-Approve')}}" method="POST">
             @csrf
 			    <div class="modal-body" align="center">
-						<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
+						<textarea name="description" id="description" cols="30" rows="5" placeholder="Description"></textarea><br>
 						{{ translate_MenuTransaction('Are you sure want to Approve this Transaction?') }}
           <input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
 					<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
@@ -226,7 +226,7 @@
 
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
+				    <button type="submit" id="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
 				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
                 </div>
             </form>
@@ -235,6 +235,22 @@
 </div>
 @endforeach
 <!-- End Modal approve transaction -->
+<script>
+window.onload = function () {
+    document.getElementById("description").onkeyup = checkWordCount;
+    checkWordCount();
+};
+
+function checkWordCount() {
+    if (document.getElementById("bio").value == "") {
+				console.log('aa');
+        document.getElementById("submit").disabled = true;
+    } else {
+			console.log('bb');
+        document.getElementById("submit").disabled = false;
+    }
+}
+</script>
 
 
 <script>
