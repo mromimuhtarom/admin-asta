@@ -205,11 +205,7 @@ $a = 1;
             <form action="{{ route('UserBankTransaction-Approve')}}" method="POST">
             @csrf
 			    <div class="modal-body" align="center">
-<<<<<<< HEAD
-						<textarea name="description" id="description" cols="30" rows="5" placeholder="Description"></textarea><br>
-=======
 					<textarea data-required = "true" name="description" id="desc" cols="30" rows="5" placeholder="Description" class="vcheck" onkeyup="manage{{ $a }}(this)"></textarea><br>
->>>>>>> e85e1fc22e6645d6f6db5e6f5fee257e47554232
 						{{ translate_MenuTransaction('Are you sure want to Approve this Transaction?') }}
           			<input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
 					<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
@@ -232,11 +228,7 @@ $a = 1;
 
 			    </div>
 			    <div class="modal-footer">
-<<<<<<< HEAD
-				    <button type="submit" id="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
-=======
 				    <button type="submit" id="btSubmi{{ $a }}t" class="btn btn-primary btn-create toggle-disabled" onclick="DisableFunctionApprove()"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
->>>>>>> e85e1fc22e6645d6f6db5e6f5fee257e47554232
 				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
                 </div>
             </form>
@@ -249,25 +241,6 @@ $a++
 @endforeach
 <!-- End Modal approve transaction -->
 <script>
-<<<<<<< HEAD
-window.onload = function () {
-    document.getElementById("description").onkeyup = checkWordCount;
-    checkWordCount();
-};
-
-function checkWordCount() {
-    if (document.getElementById("bio").value == "") {
-				console.log('aa');
-        document.getElementById("submit").disabled = true;
-    } else {
-			console.log('bb');
-        document.getElementById("submit").disabled = false;
-    }
-}
-</script>
-
-
-=======
 	function DisableFunctionApprove(){
 		$('.btn-create').text("Loading...");
 		$(this).submit('loading').delay(1000).queue(function () {
@@ -289,7 +262,6 @@ function checkWordCount() {
 	// }
 	// @endfor
 </script>
->>>>>>> e85e1fc22e6645d6f6db5e6f5fee257e47554232
 <script>
   $(document).ready(function() {
     $('table.table').dataTable( {
