@@ -758,7 +758,81 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                @endforeach      
+                                @endforeach    
+                                <!-------- Card divided ------->
+                                @foreach($dms_gameplaylog->start->players as $start)
+                                    <tr>
+                                        <td>{{ $start->seat }}</td>
+                                        <td>{{ $start->username }}</td>
+                                        <td>
+                                            @foreach($dms_gameplaylog->acts as $action)
+                                                @if($action->act == 9 && $action->seat == $start->seat)
+                                                {{ number_format($action->chip) }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ Translate_menuPlayers('L_DIVIDED_CARD') }}</td>
+                                        <td>{{ number_format($dms_gameplaylog->start->stake) }}</td>
+                                        <td>{{ count($start->hand) }}</td>
+                                        <td>
+                                            @for($a=0; $a<count($start->hand); $a++)
+                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$a] }}.png" alt="">
+                                            @endfor
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
+                                <!-------- End Card divided ------->
+                                @foreach($dms_gameplaylog->acts as $action)
+                                    @if($action->act != 9)
+                                        <tr>
+                                            <td>{{ $action->seat }}</td>
+                                            <td>
+                                                @foreach($dms_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)
+                                                        {{ $start->username }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td></td>
+                                            <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
+                                            <td></td>
+                                            <td>{{ $action->left }}</td>
+                                            <td></td>
+                                            <td>
+                                                @for($i=0; $i<count($action->card); $i++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($action->card)[$i] }}.png" alt="">
+                                                @endfor
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+
+                                @foreach($dms_gameplaylog->end->players as $end)
+                                    <tr>
+                                        <td>{{ $end->seat }}</td>
+                                        <td>
+                                            @foreach($dms_gameplaylog->start->players as $start)
+                                                @if($start->seat == $end->seat)
+                                                    {{ $start->username }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ number_format($end->chip) }}</td>
+                                        <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
+                                        <td>
+                                            {{ number_format($end->val) }} <br> 
+                                            (fee:{{ number_format($end->fee) }})
+                                        </td>
+                                        <td>{{ count($end->hand) }}</td>
+                                        <td>
+                                            @for($a=0; $a<count($end->hand); $a++)
+                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($end->hand)[$a] }}.png" alt="">
+                                            @endfor
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
                                       
                             </tbody>
                         @endif
