@@ -194,13 +194,13 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                  <input type="number" name="inputcount" placeholder="Number of inputs filled in Guest ID" class="form-control" required>
+                  <input type="number" name="inputcount" placeholder="Number of inputs filled in Guest ID" class="form-control" required min="0" onkeyup="manage(this)">
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data">
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create" id="submit" disabled onclick="LoadingFunctionCreate()">
             <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -212,7 +212,26 @@
   </div>
 </div>
  
-  
+<script>
+  //DISABLE BUTTON SAVE SEBELUM TERISI FIELD
+  function manage(txt) {
+    var btn = document.getElementById('submit');
+    if (txt.value != '') {
+      btn.disabled = false;
+    }
+    else {
+      btn.disabled = true;
+    }
+  }
+
+  //loading button sesudah submit
+  function LoadingFunctionCreate(){
+    $('.btn-create').text("Loading...");
+    $(this).submit('loading').delay(1000).queue(function() {      
+    });
+  }
+</script>
+
 <!-- End Modal Insert -->
 <script>
     var responsiveHelper_datatable_col_reorder = responsiveHelper_datatable_col_reorder || undefined;

@@ -1953,7 +1953,7 @@ public function detailTransaction(Request $request, $month, $year)
         
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '20',
+                'action_id' => '34',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus item di menu Toko Agen dengan nama '.$currentname->name
             ]);
@@ -1997,7 +1997,7 @@ public function detailTransaction(Request $request, $month, $year)
 
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '20',
+            'action_id' => '34',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Peringkat Agen dengan ID '.$ids
         ]);

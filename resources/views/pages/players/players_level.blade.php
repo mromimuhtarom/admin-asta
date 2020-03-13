@@ -23,7 +23,6 @@
       <div class="alert alert-danger">
         <div>{{Session::get('alert')}}</div>
       </div>
-
 @endif
 
 @if (\Session::has('success'))
@@ -35,7 +34,7 @@
 <div class="settings-table">
   <div>
     <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
-      
+    
       <header>
         <div class="widget-header">	
           <h2><strong>{{ Translate_menuPlayers('Players level') }}</strong></h2>	
@@ -214,7 +213,7 @@
   
 </div>
 
-<!-- Modal -->
+<!-- MODAL CREATE PLAYER LEVEL -->
 <div class="modal fade" id="ModalLevel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -231,14 +230,14 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <input type="text" class="form-control" name="level" placeholder="Level" required=""><br>
-                <input type="text" class="form-control" name="experience" placeholder="Experience" required="">
+                <input type="text" class="form-control required" name="level" placeholder="Level" required=""><br>
+                <input type="text" class="form-control required" name="experience" placeholder="Experience" required="">
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data">
+          <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="LoadingFunctionCreate()">
             <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -252,7 +251,7 @@
 <!-- End Create Modal -->
 
 
-<!-- Modal -->
+<!-- MODAL CREATE PLAYER RANK -->
 <div class="modal fade" id="ModalRank" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -265,18 +264,17 @@
       <form action="{{ route('playersrank_create') }}" method="post">
         @csrf
         <div class="modal-body">
-  
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <input type="text" class="form-control" name="name" placeholder="Name Rank" required=""><br>
-                <input type="text" class="form-control" name="level"  placeholder="Level" requeired="">
+                <input type="text" class="form-control playerrank" name="name" placeholder="Name Rank" required=""><br>
+                <input type="text" class="form-control playerrank" name="level"  placeholder="Level" requeired=""">
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data">
+          <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create btn-disabled" disabled onclick="LoadingFunctionCreate()">
             <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -401,6 +399,57 @@
       </div>
     </div>
 
+<script>
+  //DISABLE BUTTON SAVE SEBELUM TERISI FIELD
+  //MODAL CREATE PLAYER LEVEL
+ $(document).on('change keyup', '.required', function(e){
+   let Disabled = true;
+    $(".required").each(function() {
+      let value = this.value
+      if ((value)&&(value.trim() != ''))
+      {
+        Disabled = false
+      }else{
+        Disabled = true
+        return false
+      }
+    });
+    
+    if(Disabled){
+      $('.toggle-disabled').prop('disabled', true);
+    }else{
+      $('.toggle-disabled').prop('disabled', false);
+    }
+ })
+
+ //MODAL CREATE PLAYER RANK
+ $(document).on('change keyup', '.playerrank', function(e){
+   let Disabled = true;
+    $(".playerrank").each(function() {
+      let value = this.value
+      if ((value)&&(value.trim() != ''))
+      {
+        Disabled = false
+      }else{
+        Disabled = true
+        return false
+      }
+    });
+    
+    if(Disabled){
+      $('.btn-disabled').prop('disabled', true);
+    }else{
+      $('.btn-disabled').prop('disabled', false);
+    }
+ })
+
+ //loading button sesudah submit
+ function LoadingFunctionCreate(){
+   $('.btn-create').text("Loading");
+   $(this).submit('loading').delay(1000).queue(function() {
+   }); 
+ }
+</script>
 
 <script>
 

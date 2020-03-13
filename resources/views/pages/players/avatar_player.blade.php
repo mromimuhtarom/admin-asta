@@ -183,9 +183,9 @@
                             <tr>
                                 <td align="center">
                                 <div style="border-radius:10px;border:1px solid black;width:200px;height:100px;position: relative;display: inline-block;">
-                                    <img id="blah" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
+                                    <img id="blah" class="ava" src="http://placehold.jp/150x50.png" alt="your image" style="display: block;border-radius:10px;" width="auto" height="98px" />
                                 </div><br>
-                                    <input type='file' class="main-image" name="file" onchange="readURL(this);"/>
+                                    <input type='file' class="main-image ava" name="file" onchange="readURL(this);"/>
                                 </td>
                             </tr>
                             </table>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn sa-btn-primary submit-data" >
+                    <button type="submit" class="btn sa-btn-primary submit-data btn-create btn-disabled" disabled onclick="LoadingFunctionCreate()">
                     <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
                     </button>
                     <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -254,7 +254,7 @@
                     <input type="hidden" name="usernameAll" id="userDeleteAll">
                 </div>
                 <div class="modal-footer">
-                <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
+                <button type="submit" id="submit" class="button_example-yes btn sa-btn-success submit-data submit-data btn-create" onclick="LoadingFunctionCreate()"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
                 <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
                 </div>
                 </form>
@@ -264,7 +264,48 @@
 
 </div>
 
+<script>
+    //DISABLE BUTTON SAVE SEBELUM TERISI FIELD
+    // $(document).on('change keyup', '.ava', function(e){
+    //     let Disabled = true;
+    //     $('.ava').each(function() {
+    //         let value = this.value
+    //         if ((value)&&(value.trim() != ''))
+    //         {
+    //             Disabled = false
+    //         }else{
+    //             Disabled = true
+    //             return false
+    //         }
+    //     });
 
+    //     if(Disabled){
+    //         $('.btn-disabled').prop('disabled', true);
+    //     }else{
+    //         $('.btn-disabled').prop('disabled', true);
+    //     }
+    // })
+    $(document).ready(
+    function(){
+        $('#submit').attr('disabled',true);
+        $('input:file').change(
+            function(){
+                if ($(this).val()){
+                    $('#submit').removeAttr('disabled'); 
+                }
+                else {
+                    $('#submit').attr('disabled',true);
+                }
+            });
+    });
+
+    //loading button sesudah submit
+    function LoadingFunctionCreate(){
+        $('.btn-create').text("Loading");
+        $(this).submit('loading').delay(1000).queue(function() {
+        })
+    }
+</script>
   <script type="text/javascript">
 
         $(document).ready(function() {
