@@ -104,7 +104,7 @@ class AvatarPlayerController extends Controller
                     //MENYIMPAN LOG
                     Log::create([
                         'op_id'     =>  Session::get('userId'),
-                        'action_id' =>  '3',
+                        'action_id' =>  '10',
                         'datetime'  =>  Carbon::now('GMT+7'),
                         'desc'      =>  'Membuat insert baru di menu Avatar player dengan nama '. $request->title
                     ]);
@@ -195,7 +195,7 @@ class AvatarPlayerController extends Controller
                             ->first();
 
         $pathS3         =   'avatar/'.$id.'.jpg';
-
+        $currentname    =   AvatarPlayer::where('id', '=', $id)->first();
         if($id != '')
         {
             Storage::disk('s3')->delete($pathS3);
@@ -204,7 +204,7 @@ class AvatarPlayerController extends Controller
                 'op_id'     =>  Session::get('userId'),
                 'action_id' =>  '10',
                 'datetime'  =>  Carbon::now('GMT+7'),
-                'desc'      =>  'Hapus data ('.$avatarPlayer->name.')'
+                'desc'      =>  'Hapus data '.$currentname->name
             ]);
             return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
         }
