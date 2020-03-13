@@ -428,7 +428,7 @@ function Translate_menuPlayers($menu){
         'L_DIVIDED_CARD'            =>  'Kartu Di Bagikan',
         'L_WIN'                     =>  'Menang',
         'L_LOSE'                    =>  'Kalah',
-        'L_DRAW'                    =>  'Seri',
+        'L_DRAW'                    =>  'Draw',
         'L_BET_CALL'                =>  'Bertaruh / Ikut',
         'L_CHECK'                   =>  "Cek",
         'L_RAISE'                   =>  'Tambah',
@@ -443,6 +443,20 @@ function Translate_menuPlayers($menu){
         'L_BANNED_ACCOUNT_PLAYER'   =>  'Akun pemain dilarang',
         'L_PROBLEM_ACCOUNT_PLAYER'  =>  'Akun pemain bermasalah',
         'L_UPGRADE_ACCOUNT'         =>  'Upgrade akun',
+        'L_CARD_TYPE'               =>  'Type Kartu',
+        'L_CARD_TABLE'              =>  'Kartu Meja',
+        'L_DEALER'                  =>  'Dealer',
+        'L_HIGH_CARD'               =>  'High Card',
+        'L_PAIR'                    =>  'Pair',
+        'L_2_PAIR'                  =>  'Two Pair',
+        'L_3_KIND'                  =>  'Three Of Kind',
+        'L_4_KIND'                  =>  'Four Of Kind',
+        'L_FULL_HOUSE'              =>  'Full House',
+        'L_STRAIGHT'                =>  'Straight',
+        'L_FLUSH'                   =>  'Flush',
+        'L_STRAIGHT_FLUSH'          =>  'Straight Flush',
+        'L_ROYAL_FLUSH'             =>  'Royal Flush',
+        'L_CARD_VALUE'              =>  'Nilai Kartu',
         ''                          =>  ''
              
 
@@ -925,6 +939,7 @@ function Translateaction_id($menu){
         'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
         'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Akun pemain bermasalah',
         'L_BANNED_ACCOUNT_PLAYER'   =>      'Akun pemain dilarang',
+        
 
     ];
     return $array_menuContent[$menu];

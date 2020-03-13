@@ -137,10 +137,12 @@
                         <th><a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=seat_id">{{ Translate_menuPlayers('Seat') }}<i class="fa fa-sort{{ iconsorting('seat_id') }}"></i></a></th>
                         <th>
                             <a href="{{ route('PlayReport-search') }}?inputPlayer={{ $getusername }}&inputRoundID={{ $getroundid }}&inputGame={{ $getgame  }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=hand_card_round">
-                                @if($player_history[0]->gamename === 'Big Two')
+                                @if($_GET['inputGame'] === 'Big Two')
                                 {{ Translate_menuPlayers('L_REMAINING_TYPE') }} 
+                                @elseif($_GET['inputGame'] === 'Domino QQ')
+                                {{ Translate_menuPlayers('L_CARD_VALUE') }} 
                                 @else
-                                {{ Translate_menuPlayers('Hand card') }} 
+                                {{ Translate_menuPlayers('L_CARD_TYPE') }} 
                                 @endif
                                 <i class="fa fa-sort{{ iconsorting('hand_card_round') }}"></i>
                             </a>
@@ -163,21 +165,52 @@
                           <td>
                             @if (isset($_GET['inputGame']))
                                 @if($_GET['inputGame'] === 'Texas Poker')
+                                    @php 
+                                        $jsondecode = json_decode($history->gameplay_log);
+                                    @endphp 
+                                    @foreach ($jsondecode->start->players as $start)
+                                        @if($start->uid == $history->user_id)  
+                                            @foreach($jsondecode->end->players as $end)
+                                                @if($end->seat == $start->seat)
+                                                    {{ Translate_menuPlayers(typeCardGamepLayLogBgtTpk($end->type)) }}
+                                                @endif
+                                            @endforeach 
+                                        @endif                                 
+                                    @endforeach 
+
                                 @elseif($_GET['inputGame'] === 'Big Two')      
-                                @php 
-                                $a = '{"start":{"stake":4000,"turn":-1,"players":[{"uid":371680,"username":"killia9","seat":0,"avatar":null,"hand":[37],"chip":397200},{"uid":240888,"username":"killia1","seat":1,"avatar":"56.jpg","hand":[18,33,20],"chip":156000}]},"acts":[{"seat":1,"act":5,"type":0,"card":[18],"left":3},{"seat":0,"act":6,"type":0,"card":[],"left":1},{"seat":1,"act":5,"type":0,"card":[20],"left":2},{"seat":0,"act":6,"type":0,"card":[],"left":1},{"seat":1,"act":5,"type":0,"card":[33],"left":1}],"end":{"players":[{"seat":0,"stat":0,"val":4000,"fee":200,"hand":[37],"chip":393200},{"seat":1,"stat":1,"val":3600,"fee":200,"hand":[],"chip":159600}]}}';
-                                $jsondecode = json_decode($history->gameplay_log);
-                                @endphp        
-                                @foreach ($jsondecode->start->players as $start)
-                                    @if($start->uid == $history->user_id)  
-                                        @foreach($jsondecode->end->players as $end)
-                                            @if($end->seat == $start->seat)
-                                                {{count($end->hand)}}
-                                            @endif
-                                        @endforeach 
-                                    @endif                                 
-                                @endforeach  
+                                    @php 
+                                    $jsondecode = json_decode($history->gameplay_log);
+                                    @endphp        
+                                    @foreach ($jsondecode->start->players as $start)
+                                        @if($start->uid == $history->user_id)  
+                                            @foreach($jsondecode->end->players as $end)
+                                                @if($end->seat == $start->seat)
+                                                    {{count($end->hand)}}
+                                                @endif
+                                            @endforeach 
+                                        @endif                                 
+                                    @endforeach  
                                 @elseif($_GET['inputGame'] === 'Domino QQ')
+                                    @php 
+                                    $jsondecode = json_decode($history->gameplay_log);
+                                    @endphp        
+                                    @foreach ($jsondecode->start->players as $start)
+                                        @if($start->uid == $history->user_id)  
+                                            @foreach($jsondecode->end->players as $end)
+                                                @if($end->seat == $start->seat)
+                                                    @for($i=0; $i<count($end->combo); $i++)
+                                                        @if($i == 0)
+                                                        {{$end->combo[$i]}} :
+                                                        @else
+                                                        {{$end->combo[$i]}}
+                                                        @endif
+                                                        
+                                                    @endfor
+                                                @endif
+                                            @endforeach 
+                                        @endif                                 
+                                    @endforeach 
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
                                 @endif
                             @endif
@@ -351,17 +384,222 @@
                                 <tr>
                                     <th>{{ Translate_menuPlayers('Sit') }}</th>
                                     <th>{{ Translate_menuPlayers('Username') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CHIP_PLAYERS') }}</th>
                                     <th>{{ Translate_menuPlayers('Action') }}</th>
-                                    <th>{{ Translate_menuPlayers('Bet') }}</th>
-                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
-                                    <th>{{ Translate_menuPlayers('Card') }}</th>
-                                    <th>{{ Translate_menuPlayers('Card Table') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_BET') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CARD_TYPE') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CARD_HAND') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CARD_TABLE') }}</th>
                                 </tr>
                             </thead>
                             {{-- {{ dd(empty($history1->gameplay_log)) }} --}}
                             @if(!empty($history->gameplay_log))
-                            <tbody>                                
-                            </tbody>
+                                @php 
+                                $tpk_gameplaylog = json_decode($history->gameplay_log);
+                                @endphp
+                                <tbody> 
+                                    @foreach($tpk_gameplaylog->start->players as $start)
+                                    <tr>
+                                        <td>{{ $start->seat }}</td>
+                                        <td>
+                                            @foreach($player_username as $plyr)
+                                                @if($start->uid == $plyr->user_id)
+                                                    {{ $plyr->username }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ number_format($start->chip) }}</td>
+                                        <td>{{ Translate_menuPlayers('L_NEW_ROUND') }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    @endforeach  
+                                    <!-- untuk dealer  -->
+                                    @foreach($tpk_gameplaylog->start->players as $start)
+                                    @if($start->seat == $tpk_gameplaylog->start->turn)
+                                    <tr>
+                                        <td>{{ $start->seat }}</td>
+                                        <td>
+                                            @foreach($player_username as $plyr)
+                                                @if($start->uid == $plyr->user_id)
+                                                    {{ $plyr->username }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ number_format($start->chip) }}</td>
+                                        <td>{{ Translate_menuPlayers('L_DEALER') }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            @for($a=0; $a<count($start->hand); $a++)
+                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                            @endfor
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    <!-- end untuk dealer -->
+                                    @php 
+                                    $b = 1;
+                                    @endphp
+                                    @foreach($tpk_gameplaylog->acts as $action)
+                                        @if($action->act == 7 || $action->act == 8)
+                                        <tr>
+                                            <td>{{ $action->seat }}</td>
+                                            <td>
+                                                @foreach($tpk_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat )
+                                                        @foreach($player_username as $plyr)
+                                                            @if($start->uid == $plyr->user_id)
+                                                                {{ $plyr->username }}
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($action->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
+                                            <td>{{ number_format($action->bet) }}</td>
+                                            <td></td>
+                                            <td>
+                                                @foreach ($tpk_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)
+                                                        @for($a=0; $a<count($start->hand); $a++)
+                                                            <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                        @endfor
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        @elseif($action->act == 9)
+                                        <tr>
+                                            <td></td>
+                                            <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                @if($b == 1)
+                                                @for($a=0; $a<3; $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                @endfor
+                                                @elseif($b == 2)
+                                                @for($a=0; $a<4; $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                @endfor
+                                                @elseif($b == 3)
+                                                @for($a=0; $a<5; $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                @endfor
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @php 
+                                        $b++
+                                        @endphp
+                                        @else
+                                        <tr>
+                                            <td>{{ $action->seat }}</td>
+                                            <td>
+                                                @foreach($tpk_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat )
+                                                        @foreach($player_username as $plyr)
+                                                            @if($start->uid == $plyr->user_id)
+                                                                {{ $plyr->username }}
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($action->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
+                                            <td>{{ number_format($action->bet) }}</td>
+                                            <td></td>
+                                            <td>
+                                                @if($action->act == 4)
+                                                 <!--  null -->
+                                                @else 
+                                                    @foreach($tpk_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $action->seat)
+                                                            @for($a=0; $a<count($start->hand); $a++)
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                            @endfor
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                            <td></td>
+                                        </tr> 
+                                        @endif
+                                    @endforeach   
+                                    
+                                    @foreach($tpk_gameplaylog->end->players as $end)
+                                        <tr>
+                                            <td>{{ $end->seat }}</td>
+                                            <td>
+                                                @foreach($tpk_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $end->seat )
+                                                        @foreach($player_username as $plyr)
+                                                            @if($start->uid == $plyr->user_id)
+                                                                {{ $plyr->username }}
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($end->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
+                                            <td>
+                                                {{ number_format($end->val) }} <br> 
+                                                (fee:{{ number_format($end->fee) }})
+                                            </td>
+                                            <td>{{ Translate_menuPlayers(typeCardGamepLayLogBgtTpk($end->type)) }}</td>
+                                            <td>
+                                                @if($end->type !== null)
+                                                    <!------- untuk ada status action --------->
+                                                    @foreach($tpk_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $end->seat)
+
+                                                            @for($a=0; $a<count($start->hand); $a++)
+                                                                @if(in_array((int)$start->hand[$a], $end->hand, false))
+                                                                    <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                @else
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                @endif
+                                                            @endfor
+
+                                                        @endif
+                                                    @endforeach
+                                                    <!------- end untuk ada status --------->
+                                                @else
+                                                    <!------- untuk tidak ada status action --------->
+                                                    @foreach($tpk_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $end->seat)
+                                                            @for($a=0; $a<count($start->hand); $a++)
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                            @endfor
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
+                                                    @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
+                                                        <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                    @else
+                                                        <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                    @endif
+                                                @endfor
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             @endif
                         </table>     
                     @elseif($history->gamename === 'Domino QQ') 
@@ -370,15 +608,118 @@
                                 <tr>
                                     <th>{{ Translate_menuPlayers('Sit') }}</th>
                                     <th>{{ Translate_menuPlayers('Username') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CHIP_PLAYERS') }}</th>
                                     <th>{{ Translate_menuPlayers('Action') }}</th>
-                                    <th>{{ Translate_menuPlayers('Chip') }}</th>
-                                    <th>{{ Translate_menuPlayers('Bet') }}</th>
-                                    <th>{{ Translate_menuPlayers('Card') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_BET') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CARD_VALUE') }}</th>
+                                    <th>{{ Translate_menuPlayers('L_CARD_HAND') }}</th>
                                 </tr>
                             </thead>
                             @if($history->gameplay_log)
-                            <tbody>               
-                            </tbody>
+                                @php 
+                                $dmq_gameplaylog = json_decode($history->gameplay_log);
+                                @endphp
+                                <tbody>  
+                                    @foreach($dmq_gameplaylog->start->players as $start)
+                                        <tr>
+                                            <td>{{ $start->seat }}</td>
+                                            <td>
+                                                @foreach($player_username as $plyr)
+                                                    @if($start->uid == $plyr->user_id)
+                                                        {{ $plyr->username }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($start->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers('L_NEW_ROUND') }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach  
+                                    
+                                    <!-------- Card divided ------->
+                                    @foreach($dmq_gameplaylog->start->players as $start)
+                                        <tr>
+                                            <td>{{ $start->seat }}</td>
+                                            <td>{{ $start->username }}</td>
+                                            <td>
+                                                @foreach($dmq_gameplaylog->acts as $action)
+                                                    @if($action->act == 9 && $action->seat == $start->seat)
+                                                    {{ number_format($action->chip) }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ Translate_menuPlayers('L_DIVIDED_CARD') }}</td>
+                                            <td>{{ number_format($dmq_gameplaylog->start->stake) }}</td>
+                                            <td></td>
+                                            <td>
+                                                @for($a=0; $a<count($start->hand); $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$a] }}.png" alt="">
+                                                @endfor
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <!-------- End Card divided ------->
+
+                                    <!-------- Action -------->
+                                    @foreach($dmq_gameplaylog->acts as $action)
+                                        @if($action->act != 9)
+                                        <tr>
+                                            <td>{{ $action->seat }}</td>
+                                            <td>
+                                                @foreach($dmq_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)
+                                                        {{ $start->username }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($action->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
+                                            <td>{{ number_format($action->bet) }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            @endif
+                                        </tr>
+                                    @endforeach                                    
+                                    <!-------- End Action ---------->
+
+                                    @foreach($dmq_gameplaylog->end->players as $end)
+                                        <tr>
+                                            <td>{{ $end->seat }}</td>
+                                            <td>
+                                                @foreach($dmq_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $end->seat)
+                                                        {{ $start->username }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($end->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
+                                            <td>
+                                                {{ number_format($end->val) }} <br> 
+                                                (fee:{{ number_format($end->fee) }})
+                                            </td>
+                                            <td>
+                                                    @for($i=0; $i<count($end->combo); $i++)
+                                                        @if($i == 0)
+                                                        {{$end->combo[$i]}} :
+                                                        @else
+                                                        {{$end->combo[$i]}}
+                                                        @endif
+                                                        
+                                                    @endfor
+                                            </td>
+                                            <td>
+                                                @if($end->hand)
+                                                @for($a=0; $a<count($end->hand); $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($end->hand)[$a] }}.png" alt="">
+                                                @endfor
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             @endif
                     </table>     
                     @elseif($history->gamename === 'Domino Susun') 
@@ -387,15 +728,39 @@
                             <tr>
                                 <th>{{ Translate_menuPlayers('Sit') }}</th>
                                 <th>{{ Translate_menuPlayers('Username') }}</th>
+                                <th>{{ Translate_menuPlayers('L_CHIP_PLAYERS') }}</th>
                                 <th>{{ Translate_menuPlayers('Action') }}</th>
-                                <th>{{ Translate_menuPlayers('Chip') }}</th>
-                                <th>{{ Translate_menuPlayers('Domino') }}</th>
+                                <th>{{ Translate_menuPlayers('L_BET') }}</th>
+                                <th>{{ Translate_menuPlayers('L_COUNT_CARD') }}</th>
+                                <th>{{ Translate_menuPlayers('L_CARD_HAND') }}</th>
+                                <th>{{ Translate_menuPlayers('L_CARD_OUT') }}</th>
                             </tr>
                         </thead>
                         @if($history->gameplay_log)
-                        <tbody>
-            
-                        </tbody>
+                            @php 
+                            $dms_gameplaylog = json_decode($history->gameplay_log);
+                            @endphp
+                            <tbody>
+                                @foreach($dms_gameplaylog->start->players as $start)
+                                    <tr>
+                                        <td>{{ $start->seat }}</td>
+                                        <td>
+                                            @foreach($player_username as $plyr)
+                                                @if($start->uid == $plyr->user_id)
+                                                    {{ $plyr->username }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ number_format($start->chip) }}</td>
+                                        <td>{{ Translate_menuPlayers('L_NEW_ROUND') }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach      
+                                      
+                            </tbody>
                         @endif
                     </table>                              
                     @endif                        

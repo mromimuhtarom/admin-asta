@@ -232,7 +232,7 @@ function strTypeTransaction($val){
 
 
 
-//
+
 function bankTransactionStatus($val){
   if($val == 1){
     return "pending";
@@ -327,16 +327,15 @@ function iconsorting($fieldname)
 function tpkcard($array) {
   
   if(!empty($array)):
-    $arraycard = explode(',', $array);
     $cards = ['','2D','3D','4D','5D','6D','7D','8D','9D','10D','JD','QD','KD','AD', //13
     '2C','3C','4C','5C','6C','7C','8C','9C','10C','JC','QC','KC','AC',         //26
     '2H','3H','4H','5H','6H','7H','8H','9H','10H','JH','QH','KH','AH',         //39
     '2S','3S','4S','5S','6S','7S','8S','9S','10S','JS','QS','KS','AS'];
 
-    for ($i = 0; $i < count($arraycard); $i++){
+    for ($i = 0; $i < count($array); $i++){
       // resCard[i]=cards[array[i]];
       // $resCard.push($cards[$arraycard[$i]]);
-      $resCard[] = $cards[$arraycard[$i]];
+      $resCard[] = $cards[$array[$i]];
       
     }
   else:
@@ -403,8 +402,39 @@ function actiongameplaylog($action)
     return 'L_BIG_BLIND';
   elseif($action == 8):
     return 'L_SMALL_BLIND';
+  elseif($action == 9):
+    return 'L_DRAW';
+  elseif($action == 8):
+    return 'L_SMALL_BLIND';
   endif;
 
+}
+
+function typeCardGamepLayLogBgtTpk($typecard)
+{
+  if($typecard === NULL):
+    return '';
+  elseif($typecard == 0):
+    return 'L_HIGH_CARD';
+  elseif($typecard == 1):
+    return 'L_PAIR';
+  elseif($typecard == 2):
+    return 'L_2_PAIR';
+  elseif($typecard == 3):
+    return 'L_3_KIND';
+  elseif($typecard == 4):
+    return 'L_4_KIND';
+  elseif($typecard == 5):
+    return 'L_FULL_HOUSE';
+  elseif($typecard == 6):
+    return 'L_STRAIGHT';
+  elseif($typecard == 7):
+    return 'L_FLUSH';
+  elseif($typecard == 8):
+    return 'L_STRAIGHT_FLUSH';
+  elseif($typecard == 9):
+    return 'L_ROYAL_FLUSH';
+  endif;
 }
 
 function statusgameplaylog($status)
@@ -421,7 +451,6 @@ function statusgameplaylog($status)
 
 function dmscard($array) {
   if($array !== '[]'):
-    $arraycard = json_decode($array);
     $cards = [
      "0_0", "1_0", "2_0", "3_0", "4_0", "5_0", "6_0",  //0
      "1_1", "1_2", "1_3", "1_4", "1_5", "1_6",         //7
@@ -431,39 +460,15 @@ function dmscard($array) {
      "5_5", "5_6",                                     //25
      "6_6"                                             //27
     ];
-    for ($i = 0; $i < count($arraycard); $i++){
+    for ($i = 0; $i < count($array); $i++){
       // resCard[i]=cards[array[i]];
       // $resCard.push($cards[$arraycard[$i]]);
-      $resCard[] = $cards[$arraycard[$i]];
+      $resCard[] = $cards[$array[$i]];
     }
   else:
     $resCard[]= '';
   endif;
 
-  return $resCard;
-
-}
-function dmscardnobrackets($array) {
-  if($array !== '[]'):
-    $arraycard = explode(',', $array);
-    $cards = [
-     "0_0", "1_0", "2_0", "3_0", "4_0", "5_0", "6_0",  //0
-     "1_1", "1_2", "1_3", "1_4", "1_5", "1_6",         //7
-     "2_2", "2_3", "2_4", "2_5", "2_6",                //13
-     "3_3", "3_4", "3_5", "3_6",                       //18
-     "4_4", "4_5", "4_6",                              //22
-     "5_5", "5_6",                                     //25
-     "6_6"                                             //27
-    ];
-    for ($i = 0; $i < count($arraycard); $i++){
-      // resCard[i]=cards[array[i]];
-      // $resCard.push($cards[$arraycard[$i]]);
-      $resCard[] = $cards[$arraycard[$i]];
-    }
-  else:
-    $resCard[]= '';
-  endif;
-  
   return $resCard;
 
 }
