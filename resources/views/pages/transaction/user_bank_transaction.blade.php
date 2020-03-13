@@ -22,8 +22,7 @@
   </div>
 @endif
 
-	
-	<!-- Table 1 -->
+<!-- Table 1 -->
 	<div>
 		<div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
 		
@@ -144,7 +143,9 @@
 
 {{-- </div> --}}
 
-
+@php 
+$a = 1;
+@endphp
 <!-- Modal decline -->
 @foreach ($transaction as $transaction)
 <div class="modal fade" id="decline{{ $transaction->strtrnsid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -181,7 +182,7 @@
 										@endif
 			    			</div>
 			    			<div class="modal-footer">
-				    			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
+				    			<button type="submit" class="btn btn-primary btn-create" onclick="DisableFunctionApprove()"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
 				    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
           			</div>
           	</form>
@@ -189,6 +190,7 @@
 	</div>
 </div>
 <!-- End Modal decline -->
+
 
 <!-- Modal approve transaction -->
 <div class="modal fade" id="approve{{ $transaction->strtrnsid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -203,9 +205,13 @@
             <form action="{{ route('UserBankTransaction-Approve')}}" method="POST">
             @csrf
 			    <div class="modal-body" align="center">
+<<<<<<< HEAD
 						<textarea name="description" id="description" cols="30" rows="5" placeholder="Description"></textarea><br>
+=======
+					<textarea data-required = "true" name="description" id="desc" cols="30" rows="5" placeholder="Description" class="vcheck" onkeyup="manage{{ $a }}(this)"></textarea><br>
+>>>>>>> e85e1fc22e6645d6f6db5e6f5fee257e47554232
 						{{ translate_MenuTransaction('Are you sure want to Approve this Transaction?') }}
-          <input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
+          			<input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
 					<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
 					<input type="hidden" name="price" value="{{ $transaction->item_price }}">
 					@if($transaction->item_type == 2)
@@ -226,16 +232,24 @@
 
 			    </div>
 			    <div class="modal-footer">
+<<<<<<< HEAD
 				    <button type="submit" id="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
+=======
+				    <button type="submit" id="btSubmi{{ $a }}t" class="btn btn-primary btn-create toggle-disabled" onclick="DisableFunctionApprove()"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
+>>>>>>> e85e1fc22e6645d6f6db5e6f5fee257e47554232
 				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
                 </div>
             </form>
 		</div>
 	</div>
 </div>
+@php 
+$a++
+@endphp
 @endforeach
 <!-- End Modal approve transaction -->
 <script>
+<<<<<<< HEAD
 window.onload = function () {
     document.getElementById("description").onkeyup = checkWordCount;
     checkWordCount();
@@ -253,6 +267,29 @@ function checkWordCount() {
 </script>
 
 
+=======
+	function DisableFunctionApprove(){
+		$('.btn-create').text("Loading...");
+		$(this).submit('loading').delay(1000).queue(function () {
+		});
+	}
+	
+	// @for($i=1; $i<=count($transaction); $i++))
+	// function manage{{ $i }}(txt){
+	// 	var bt = document.getElementById('btSubmit{{ $i }}');
+		
+	// 	if (txt.value != '') {
+	// 		console.log(txt);
+	// 		bt.disabled = false;
+	// 	}
+	// 	else {
+	// 		console.log('abc');
+	// 		bt.disabled = true;
+	// 	}
+	// }
+	// @endfor
+</script>
+>>>>>>> e85e1fc22e6645d6f6db5e6f5fee257e47554232
 <script>
   $(document).ready(function() {
     $('table.table').dataTable( {

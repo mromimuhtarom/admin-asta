@@ -45,13 +45,16 @@
   }
 
   $(document).on('change keyup', '.required', function(e){
-   let Disabled = true;
+    let Disabled = true;
+    
     $(".required").each(function() {
       let value = this.value
       if ((value)&&(value.trim() !=''))
           {
             Disabled = false
+          
           }else{
+            
             Disabled = true
             return false
           }
@@ -63,6 +66,7 @@
         $('.toggle-disabled').prop("disabled", false);
       }
  })
+
 
 
 </script>
@@ -78,7 +82,6 @@
         <form action="{{ route('UserAdmin-create') }}" method="post" name="theform">
           @csrf
           <div class="modal-body">
-    
             <div class="row">
               <div class="col-12">
                 <div class="form-group">

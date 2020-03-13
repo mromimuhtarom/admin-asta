@@ -523,7 +523,7 @@ class GoldStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '27',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar Koin dengan nama '.$currentname->name
+                'desc'      => 'Hapus data Koin dengan nama '.$currentname->name
             ]);
 
             $path = '../public/upload/Gold/'.$getGoldId.'.png';
@@ -540,7 +540,7 @@ class GoldStoreController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '27',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Hapus gambar Koin dengan nama '.$currentname->name
+                'desc'      => 'Hapus data Koin dengan nama '.$currentname->name
             ]);
             return redirect()->route('Gold_Store_Reseller')->with('success', alertTranslate('Data deleted'));
         } else if ($getGoldId == NULL)
@@ -574,7 +574,7 @@ class GoldStoreController extends Controller
             'op_id'     =>  Session::get('userId'),
             'action_id' =>  '27',
             'datetime'  =>  Carbon::now('GMT+7'),
-            'desc'      =>  'Hapus gambar koin yang dipilih dengan nama '.$currentname
+            'desc'      =>  'Hapus data koin yang dipilih dengan nama '.$currentname
         ]);
         return redirect()->route('Gold_Store')->with('success', alertTranslate('Data deleted'));
     }

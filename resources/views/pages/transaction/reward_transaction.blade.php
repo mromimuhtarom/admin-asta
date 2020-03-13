@@ -203,36 +203,36 @@
 				</button>
             </div>
             <form action="{{ route('RewardTransaction-DeliveryProgress')}}" method="POST">
-						@csrf
-								<input type="hidden" name="idstore" value="{{ $transaction->id }}">
-                <div class="modal-body" align="center">
-									<table width="100%">
-										<tr>
-											<td width="20%">{{ translate_MenuTransaction('Date Sent') }}</td>
-											<td width="5%">:</td>
-											<td width="75%"><input type="date" name="date_send" class="form-control" required></td>
-										</tr>
-										<tr>
-											<td width="20%">{{ translate_MenuTransaction('Item Name') }}</td>
-											<td width="5%">:</td>
-											<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
-										</tr>
-										<tr>
-											<td width="20%">{{ translate_MenuTransaction('Type Of Shipment') }}</td>
-											<td width="5%">:</td>
-											<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
-										</tr>
-										<tr>
-											<td width="20%">{{ translate_MenuTransaction('Shipping Code') }}</td>
-											<td width="5%">:</td>
-											<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
-										</tr>
-									</table>
-			    			</div>
-			    			<div class="modal-footer">
-				    			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
-				    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
-          			</div>
+				@csrf
+				<input type="hidden" name="idstore" value="{{ $transaction->id }}">
+					<div class="modal-body" align="center">
+						<table width="100%">
+							<tr>
+								<td width="20%">{{ translate_MenuTransaction('Date Sent') }}</td>
+								<td width="5%">:</td>
+								<td width="75%"><input type="date" name="date_send" class="form-control" required></td>
+							</tr>
+							<tr>
+								<td width="20%">{{ translate_MenuTransaction('Item Name') }}</td>
+								<td width="5%">:</td>
+								<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
+							</tr>
+							<tr>
+								<td width="20%">{{ translate_MenuTransaction('Type Of Shipment') }}</td>
+								<td width="5%">:</td>
+								<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
+							</tr>
+							<tr>
+								<td width="20%">{{ translate_MenuTransaction('Shipping Code') }}</td>
+								<td width="5%">:</td>
+								<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary btn-create toggle-disabled" id="submit" onclick="FunctionBtnLoading()"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
+				</div>
           	</form>
 		</div>
 	</div>
@@ -306,7 +306,7 @@
 						<td>:</td>
 						<td>
 							<input type="text" value="" class="form-control" disabled>
-						</td>
+						</td> 
 					</tr>
 					<tr>
 						<td>{{ translate_MenuTransaction('Postal Code') }}</td>
@@ -323,7 +323,37 @@
 @endforeach
 <!-- End Modal detail info -->
 
+<script>
 
+	function FunctionBtnLoading(){
+		$('.btn-create').text("Loading...");
+		$('this').submit('loading').delay(1000).queue(function () {
+		});
+	}
+
+	// @foreach($transaction as $trns)
+	//  $(document).on('change keyup', '.required', function(e){
+	// 	let Disabled = true;
+
+	// 	$(".required").each(function() {
+	// 	let value = this.value
+	// 		if ((value)&&(value.trim() !='')){
+	// 			console.log('abc');
+	// 			Disabled = false
+	// 		}else{
+	// 			Disabled = true
+	// 			return false
+	// 		}
+	// 	});
+		
+	// 	if(Disabled){
+	// 		$('.toggle-disabled').prop("disabled", true);
+	// 	}else{
+	// 		$('.toggle-disabled').prop("disabled", false);
+	// 	}
+	//  })
+	//  @endforeach
+</script>
 <script>
   $(document).ready(function() {
     $('table.table').dataTable( {
