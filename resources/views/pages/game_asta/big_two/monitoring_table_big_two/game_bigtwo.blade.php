@@ -49,7 +49,7 @@
 
     <div>
 
-            <div class="webgl-content" style="width: 70%; height: 80%">
+            <div class="webgl-content" style="width: 70%; height: 80%;margin-top:5%;">
                 <div id="gameContainer" style="width: 100%; height:auto;margin-right:1%"></div>
                 <div class="footer">
                     <div class="webgl-logo"></div>
