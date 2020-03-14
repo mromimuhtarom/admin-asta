@@ -479,7 +479,7 @@
                                         <tr>
                                             <td></td>
                                             <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
-                                            <td></td>
+                                            <td>{{ $b }}</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -639,7 +639,7 @@
                                     @endforeach  
                                     
                                     <!-------- Card divided ------->
-                                    @foreach($dmq_gameplaylog->start->players as $start)
+                                    {{-- @foreach($dmq_gameplaylog->start->players as $start)
                                         <tr>
                                             <td>{{ $start->seat }}</td>
                                             <td>{{ $start->username }}</td>
@@ -659,12 +659,37 @@
                                                 @endfor
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                     <!-------- End Card divided ------->
 
                                     <!-------- Action -------->
+                                    @php 
+                                    $a = 0;
+                                    @endphp
                                     @foreach($dmq_gameplaylog->acts as $action)
-                                        @if($action->act != 9)
+                                        @if($action->act == 9)
+                                        <tr>
+                                            <td>{{ $action->seat }}</td>
+                                            <td>
+                                                @foreach($dmq_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)
+                                                        {{ $start->username }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ number_format($action->chip) }}</td>
+                                            <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
+                                            <td>{{ number_format($action->bet) }}</td>
+                                            <td></td>
+                                            <td>
+                                                @foreach($dmq_gameplaylog->start->players as $start)
+                                                @if($start->seat == $action->seat)
+                                                {{$a}}
+                                                @endif
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        @else
                                         <tr>
                                             <td>{{ $action->seat }}</td>
                                             <td>
@@ -679,8 +704,11 @@
                                             <td>{{ number_format($action->bet) }}</td>
                                             <td></td>
                                             <td></td>
-                                            @endif
                                         </tr>
+                                        @endif
+                                        @php 
+                                        $a++
+                                        @endphp
                                     @endforeach                                    
                                     <!-------- End Action ---------->
 

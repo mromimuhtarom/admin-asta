@@ -8,17 +8,17 @@
     <script src="/assets/vendors/vendors.bundle.js"></script>
 	<script src="/assets/app/app.bundle.js"></script>
 
-    <style>
-        #gameContainer{
-            float: left;
-        }
-        #main{
-            float: right;
-        }
-        canvas {
-          width: 100%;
-          height: auto;
-        }
+    <style> /*wew*/
+      #gameContainer{
+          float: left;
+      }
+      #main{
+          float: right;
+      }
+      canvas {
+          width: 100% !important;
+          height: auto !important;
+      }
     </style>
   <script>
     var gameInstance = UnityLoader.instantiate("gameContainer", "/game/dms/Build/DMSWeb.json", {
@@ -45,19 +45,15 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong><i class="fa fa-puzzle-piece"></i>{{ TranslateMenuGame('L_ASTA_DOMINO_SUSUN_TABLE') }}</strong></h2>				
+        <h2><strong><i class="fa fa-puzzle-piece"></i>{{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>				
       </div>
     </header>
 
-    <div>
+    <div> 
       
-      <div class="widget-body" style="padding-bottom:0;">     
-        
-        <div class="custom-scroll table-responsive" style="height:800px;">
-          <div class="table-outer" style="padding-right:0;overflow-y:hidden;padding-bottom:0;">
 
-            <div class="webgl-content" style="width: 80%; height: 80%; position:absolute">
-                <div id="gameContainer" class="border border-dark" style="width: 100%; height:auto;margin-right:1%"></div>
+            <div class="webgl-content" style="width: 70%; height: 80%;position:absolute;margin-top:5%;">
+                <div id="gameContainer" class="border border-dark" style="width: 100%; height:auto;margin-right:1%;"></div>
                 <div class="footer">
                     <div class="webgl-logo"></div>
                     <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
@@ -65,11 +61,7 @@
                 </div>
             </div>
                         
-          </div>
-        </div>
-
-      </div>
-
+        
     </div>
 
   </div>
