@@ -246,21 +246,6 @@ $a++
 		$(this).submit('loading').delay(1000).queue(function () {
 		});
 	}
-	
-	// @for($i=1; $i<=count($transaction); $i++))
-	// function manage{{ $i }}(txt){
-	// 	var bt = document.getElementById('btSubmit{{ $i }}');
-		
-	// 	if (txt.value != '') {
-	// 		console.log(txt);
-	// 		bt.disabled = false;
-	// 	}
-	// 	else {
-	// 		console.log('abc');
-	// 		bt.disabled = true;
-	// 	}
-	// }
-	// @endfor
 </script>
 <script>
   $(document).ready(function() {
