@@ -538,6 +538,7 @@ class TableController extends Controller
             case "name":
                 $name = "Table Name";
                 $currentvalue = $currentname->name;
+                
                 break;
             case "room_id":
                 $name = "Nama ruang";
@@ -545,6 +546,10 @@ class TableController extends Controller
                 $currentvalue = $queryroom->name;
                 $tablename = BigTwoRoom::where('room_id', '=', $value)->first();
                 $value = $tablename->name;
+                break;
+            case "max_player":
+                $name = "Pemain maks";
+                $currentvalue = $currentname->max_player;
                 break;
             case "turn":
                 $name = "turn";

@@ -144,7 +144,7 @@
                         </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('TableGift-update') }}">{{ $gf->name }}</a></td>
-                    <td><a href="#" class="usertext" data-name="price" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" data-url="{{ route('TableGift-update') }}">{{ number_format($gf->price, 2) }}</a></td>
+                    <td><a href="#" class="usertext" data-name="price" data-title="Chip Price" data-pk="{{ $gf->id }}" data-type="number" min="0" data-url="{{ route('TableGift-update') }}">{{ number_format($gf->price, 2) }}</a></td>
                     <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate($gf->strCategory()) }}</a></td>
                     <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate(strEnabledDisabled($gf->status)) }}</a></td>
                     <td>
@@ -333,7 +333,7 @@
         const  interval{{$gf->id}} = 80; //80 ms of interval for the setInterval()
         const  diff{{$gf->id}} = 320;     //diff as a variable for position offset
         tID{{ $gf->id }} = setInterval ( () => {
-          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = `-${position<?= $gf->id ?>}px 0px`; 
+          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = `-${position<?= $gf->id ?>}px 0px; 
           //we use the ES6 template literal to insert the variable "position"
           if (position{{$gf->id}} < 100000)
           { position{{$gf->id}} = position{{$gf->id}} + diff{{$gf->id}};}
