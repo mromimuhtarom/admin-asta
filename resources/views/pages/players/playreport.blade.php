@@ -433,9 +433,11 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            @for($a=0; $a<count($start->hand); $a++)
-                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
-                                            @endfor
+                                            @if(!empty($start->hand))
+                                                @for($a=0; $a<count($start->hand); $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                @endfor
+                                            @endif
                                         </td>
                                         <td></td>
                                     </tr>
@@ -467,9 +469,11 @@
                                             <td>
                                                 @foreach ($tpk_gameplaylog->start->players as $start)
                                                     @if($start->seat == $action->seat)
-                                                        @for($a=0; $a<count($start->hand); $a++)
-                                                            <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
-                                                        @endfor
+                                                        @if(!empty($start->hand))
+                                                            @for($a=0; $a<count($start->hand); $a++)
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                            @endfor
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             </td>
@@ -485,18 +489,22 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                @if($b == 1)
-                                                @for($a=0; $a<3; $a++)
-                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                @endfor
-                                                @elseif($b == 2)
-                                                @for($a=0; $a<4; $a++)
-                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                @endfor
-                                                @elseif($b == 3)
-                                                @for($a=0; $a<5; $a++)
-                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                @endfor
+                                                @if(!empty($tpk_gameplaylog->start->table_card))
+                                                    @if($b == 1)
+                                                    @for($a=0; $a<3; $a++)
+                                                        {{-- {{$a}} --}}
+                                                        <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                    @endfor
+                                                    @elseif($b == 2)
+                                                    @for($a=0; $a<4; $a++)
+                                                        {{-- {{$tpk_gameplaylog->start->table_card[$a]}} --}}
+                                                        <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                    @endfor
+                                                    @elseif($b == 3)
+                                                    @for($a=0; $a<5; $a++)
+                                                        <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                    @endfor
+                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>
@@ -527,9 +535,11 @@
                                                 @else 
                                                     @foreach($tpk_gameplaylog->start->players as $start)
                                                         @if($start->seat == $action->seat)
-                                                            @for($a=0; $a<count($start->hand); $a++)
-                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
-                                                            @endfor
+                                                            @if(!empty($start->hand))
+                                                                @for($a=0; $a<count($start->hand); $a++)
+                                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                @endfor
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 @endif
@@ -567,10 +577,12 @@
                                                         @if($start->seat == $end->seat)
 
                                                             @for($a=0; $a<count($start->hand); $a++)
-                                                                @if(in_array((int)$start->hand[$a], $end->hand, false))
-                                                                    <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
-                                                                @else
-                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                @if(!empty($start->hand))
+                                                                    @if(in_array((int)$start->hand[$a], $end->hand, false))
+                                                                        <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                    @else
+                                                                        <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                    @endif
                                                                 @endif
                                                             @endfor
 
@@ -581,19 +593,23 @@
                                                     <!------- untuk tidak ada status action --------->
                                                     @foreach($tpk_gameplaylog->start->players as $start)
                                                         @if($start->seat == $end->seat)
-                                                            @for($a=0; $a<count($start->hand); $a++)
-                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
-                                                            @endfor
+                                                            @if(!empty($start->hand))
+                                                                @for($a=0; $a<count($start->hand); $a++)
+                                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                @endfor
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 @endif
                                             </td>
                                             <td>
                                                 @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
-                                                    @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
-                                                        <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                    @else
-                                                        <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                    @if(!empty($tpk_gameplaylog->start->table_card))
+                                                        @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
+                                                            <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                        @else
+                                                            <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                        @endif
                                                     @endif
                                                 @endfor
                                             </td>

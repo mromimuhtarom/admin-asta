@@ -475,7 +475,7 @@ class PlayReportController extends Controller
                            ->orderby($namecolumn, $sorting)
                            ->paginate(20);
         } else if($inputGame == 'Big Two') {
-        $player_history = $tbbgt->wherebetween('asta_db.bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 13:39:00"])
+        $player_history = $tbbgt->wherebetween('asta_db.bgt_round.date' ,[$inputMinDate." 00:00:00", $inputMaxDate." 23:59:59"])
                           ->orderby($namecolumn, $sorting)
                           ->paginate(20);
         }
