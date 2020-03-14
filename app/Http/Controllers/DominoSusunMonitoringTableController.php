@@ -33,7 +33,7 @@ class DominoSusunMonitoringTableController extends Controller
         $onlinepro          =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
                                 ->where('room_id', '=', 3)
                                 ->get();
-
+        
         $dmsPlayersPro      =   DominoSusunTable::where('room_id', '=', 3)
                                 ->paginate(20);
 
@@ -42,8 +42,6 @@ class DominoSusunMonitoringTableController extends Controller
         //all online
         $onlinedms  =   DominoSPlayer::all();
 
-        //all online
-        $onlinedms  =   DominoSPlayer::all();
 
         return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'dmsPlayersNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
     }

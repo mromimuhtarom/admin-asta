@@ -190,13 +190,13 @@
                             </tr>
                             </table>
                             
-                            <input type="text" class="form-control" name="title" placeholder="Nama"><br>
+                            <input type="text" id="name" class="form-control" name="title" placeholder="Nama"><br>
                         </div>
                     </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn sa-btn-primary submit-data btn-create btn-disabled" disabled onclick="LoadingFunctionCreate()">
+                    <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create btn-disabled" disabled onclick="LoadingFunctionCreate()">
                     <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
                     </button>
                     <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -285,18 +285,15 @@
     //         $('.btn-disabled').prop('disabled', true);
     //     }
     // })
-    $(document).ready(
-    function(){
-        $('#submit').attr('disabled',true);
-        $('input:file').change(
-            function(){
-                if ($(this).val()){
-                    $('#submit').removeAttr('disabled'); 
-                }
-                else {
-                    $('#submit').attr('disabled',true);
-                }
-            });
+    $(document).ready(function () {
+        $('#name').on('input change', function () {
+            if ($(this).val() != '') {
+                $('#submit').prop('disabled', false);
+            }
+            else {
+                $('#submit').prop('disabled', true);
+            }
+        });
     });
 
     //loading button sesudah submit

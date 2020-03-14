@@ -82,6 +82,7 @@ class GiftController extends Controller
     
     public function store(Request $request)
     {
+        $name = $request->title;
         $id = Gift::select('id')
                 ->orderBy('id', 'desc')
                 ->first();
@@ -222,7 +223,7 @@ class GiftController extends Controller
                             'op_id'     => Session::get('userId'),
                             'action_id' => '11',
                             'datetime'  => Carbon::now('GMT+7'),
-                            'desc'      => 'Menambahkan data ('. $gift->subject.')'
+                            'desc'      => 'Menambahkan data '.$name
                         ]);
                         return redirect()->route('Table_Gift')->with('success', alertTranslate("insert data successful"));
                     }
@@ -499,7 +500,7 @@ class GiftController extends Controller
             Storage::disk('s3')->delete($pathS3);
             Log::create([
                 'op_id'     => Session::get('userId'),
-                'action_id' => '4',
+                'action_id' => '11',
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$currentname->name.')'
             ]);
@@ -522,7 +523,7 @@ class GiftController extends Controller
         //RECORD LOG
         Log::create([
             'op_id'     => Session::get('userId'),
-            'action_id' => '4',
+            'action_id' => '11',
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus data ('.$currentname.')'
         ]);
