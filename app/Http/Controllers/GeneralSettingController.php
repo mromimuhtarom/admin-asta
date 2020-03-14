@@ -120,7 +120,7 @@ class GeneralSettingController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Update konten tentang di tabel Pengaturan Info menu pengaturan umum'
+                'desc'      => 'Update konten tentang di tabel Pengaturan Info'
             ]);
 
             return back()->with('success', alertTranslate("Data Updated"));
@@ -164,7 +164,7 @@ class GeneralSettingController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Update konten Privacy Policy di tabel CS dan pengaturan legal menu pengaturan umum'
+                'desc'      => 'Update konten Privacy Policy di tabel CS dan pengaturan legal'
             ]);
 
             return back()->with('success', alertTranslate('Data Updated'));
@@ -185,7 +185,7 @@ class GeneralSettingController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Update konten Info Asta Poker di tabel Pengaturan info menu pengaturan umum'
+                'desc'      => 'Update konten Info Asta Poker di tabel Pengaturan info'
             ]);
 
             return back()->with('success', alertTranslate('Data Updated'));
@@ -207,7 +207,7 @@ class GeneralSettingController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Update konten Info Big Two di tabel Pengaturan info menu pengaturan umum'
+                'desc'      => 'Update konten Info Big Two di tabel Pengaturan info'
             ]);
 
             return back()->with('success', alertTranslate('Data Updated'));
@@ -228,7 +228,7 @@ class GeneralSettingController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Update konten Info Domino QQ di tabel Pengaturan info menu pengaturan umum'
+                'desc'      => 'Update konten Info Domino QQ di tabel Pengaturan info'
             ]);
 
             return back()->with('success', alertTranslate('Data Updated'));
@@ -248,7 +248,7 @@ class GeneralSettingController extends Controller
                 'op_id'     => Session::get('userId'),
                 'action_id' => '30',
                 'datetime'  => Carbon::now('GMT+7'),
-                'desc'      => 'Update konten Info Domino Susun di tabel Pengaturan info menu pengaturan umum'
+                'desc'      => 'Update konten Info Domino Susun di tabel Pengaturan info'
             ]);
 
             return back()->with('success', alertTranslate('Data Updated'));
@@ -328,6 +328,7 @@ class GeneralSettingController extends Controller
                 $name = "Twitter";
                 $currentvalue = $currentname->value;
                 break;
+                
             case "ig_url":
                 $name = "Instagram";
                 $currentvalue = $currentname->value;
@@ -388,7 +389,7 @@ class GeneralSettingController extends Controller
             'op_id'     => Session::get('userId'),
             'action_id' => '30',
             'datetime'  => Carbon::now('GMT+7'),
-            'desc'      => 'Edit '.$name.' di menu Pengaturan Umum dari '.$currentvalue.' menjadi '. $value
+            'desc'      => 'Edit '.$name.'. '.$currentvalue.' => '. $value
         ]);
     }
 }

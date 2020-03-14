@@ -89,6 +89,7 @@ class DominoSusunMonitoringTableController extends Controller
 
         //room Pro
         $onlinepro          =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_table.table_id')
+                                ->where('room_id', '=', 3)
                                 ->paginate(20);
 
         $dmsPlayersPro      =   DominoSusunTable::where('room_id', '=', 3)
