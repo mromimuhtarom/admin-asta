@@ -16,8 +16,8 @@
           float: right;
       }
       canvas {
-          width: 100%;
-          height: auto;
+          width: 100% !important;
+          height: auto !important;
       }
     </style>
     
@@ -59,12 +59,8 @@
 
     <div> 
       
-      <div class="widget-body" style="padding-bottom:0;">     
-        
-        <div class="custom-scroll table-responsive" style="height:800px;">
-          <div class="table-outer" style="padding-right:0;overflow-y:hidden;padding-bottom:0;">
 
-            <div class="webgl-content" style="width: 80%; height: 80%;position:absolute">
+            <div class="webgl-content" style="width: 70%; height: 80%;position:absolute;margin-top:5%;">
                 <div id="gameContainer" class="border border-dark" style="width: 100%; height:auto;margin-right:1%;"></div>
                 <div class="footer">
                     <div class="webgl-logo"></div>
@@ -73,11 +69,7 @@
                 </div>
             </div>
                         
-          </div>
-        </div>
-
-      </div>
-
+         
     </div>
 
   </div>
