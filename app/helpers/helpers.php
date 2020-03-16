@@ -450,7 +450,7 @@ function statusgameplaylog($status)
 
 
 function dmscard($array) {
-  if($array !== '[]'):
+  if(!empty($array)):
     $cards = [
      "0_0", "1_0", "2_0", "3_0", "4_0", "5_0", "6_0",  //0
      "1_1", "1_2", "1_3", "1_4", "1_5", "1_6",         //7
