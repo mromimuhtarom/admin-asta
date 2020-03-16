@@ -64,7 +64,9 @@ class DominoSusunMonitoringTableController extends Controller
         $dmsPlayersintermediate->appends($request->all());
 
         //room Pro
-        $onlinepro              =   DominoSPlayer::all();
+        $onlinepro              =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
+                                    ->where('room_id', '=', 3)
+                                    ->get();
 
         //all online
         $onlinedms              =   DominoSPlayer::all();
@@ -87,10 +89,10 @@ class DominoSusunMonitoringTableController extends Controller
                                                 ->get();
 
         //room Pro
-        $onlinepro          =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_table.table_id')
+        $onlinepro          =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_player.table_id')
                                 ->where('room_id', '=', 3)
-                                ->paginate(20);
-    
+                                ->get();
+
         $dmsPlayersPro      =   DominoSusunTable::where('room_id', '=', 3)
                                 ->paginate(20);
 
