@@ -320,14 +320,13 @@
                                         <td>{{ Translate_menuPlayers('L_DIVIDED_CARD') }}</td>
                                         <td></td>
                                         <td>{{ count($start->hand) }}</td>
-                                        <td>
-                                            @for($a=0; $a<count($start->hand); $a++)
-                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($start->hand)[$a] }}.png" alt="">
-                                            @endfor
-                                        </td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
                                     @endforeach
+                                    @php 
+                                    $arraycardbgt = array();
+                                    @endphp
                                     @foreach($bgt_gameplaylog->acts as $action)
                                         <tr>
                                             <td>{{ $action->seat }}</td>
@@ -342,7 +341,25 @@
                                             <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
                                             <td></td>
                                             <td>{{ $action->left }}</td>
-                                            <td></td>
+                                            <td>
+                                                @foreach($bgt_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)                                                        
+                                                        @for($i=0; $i<count($action->card); $i++)
+                                                        @php
+                                                        $arraycardbgt[] = $action->card[$i];
+                                                        @endphp
+                                                            {{-- <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($action->card)[$i] }}.png" alt=""> --}}
+                                                        @endfor
+
+                                                        @for($a=0; $a<count($start->hand); $a++)
+                                                            @if(!in_array((int)$start->hand[$a], $arraycardbgt))
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($start->hand)[$a] }}.png" alt="">
+                                                            @endif
+                                                        @endfor
+                                                    @endif
+                                                @endforeach
+                                        
+                                            </td>
                                             <td>
                                                 @for($i=0; $i<count($action->card); $i++)
                                                     <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($action->card)[$i] }}.png" alt="">
@@ -963,15 +980,14 @@
                                         <td>{{ Translate_menuPlayers('L_DIVIDED_CARD') }}</td>
                                         <td>{{ number_format($dms_gameplaylog->start->stake) }}</td>
                                         <td>{{ count($start->hand) }}</td>
-                                        <td>
-                                            @for($a=0; $a<count($start->hand); $a++)
-                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$a] }}.png" alt="">
-                                            @endfor
-                                        </td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
                                 @endforeach
                                 <!-------- End Card divided ------->
+                                @php 
+                                    $arraycarddms = array();
+                                @endphp
                                 @foreach($dms_gameplaylog->acts as $action)
                                     @if($action->act != 9)
                                         <tr>
@@ -986,8 +1002,37 @@
                                             <td></td>
                                             <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
                                             <td></td>
-                                            <td>{{ $action->left }}</td>
-                                            <td></td>
+                                            <td>
+                                                @foreach($dms_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)                                                        
+                                                        @for($i=0; $i<count($action->card); $i++)
+                                                        @php
+                                                        $arraycarddms[] = $action->card[$i];
+                                                        @endphp
+                                                            {{-- <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($action->card)[$i] }}.png" alt=""> --}}
+                                                        @endfor
+                                                        {{ count(array_diff($start->hand, $arraycarddms))}}
+                                                        {{-- @for($a=0; $a<count($start->hand); $a++)
+                                                            @if(!in_array((int)$start->hand[$a], $arraycarddms))
+                                                                
+                                                            @endif
+                                                        @endfor --}}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach($dms_gameplaylog->start->players as $start)
+                                                    @if($start->seat == $action->seat)                                                        
+
+
+                                                        @for($a=0; $a<count($start->hand); $a++)
+                                                            @if(!in_array((int)$start->hand[$a], $arraycarddms))
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$a] }}.png" alt="">
+                                                            @endif
+                                                        @endfor
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 @for($i=0; $i<count($action->card); $i++)
                                                     <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($action->card)[$i] }}.png" alt="">
