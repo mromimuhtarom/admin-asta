@@ -238,7 +238,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data" >
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadingBtn()" >
             <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -305,6 +305,14 @@
   </div>
 </div>
 
+
+<script>
+  function FunctionLoadingBtn(){
+    $('.btn-create').text('Loading...');
+    $(this).submit('loading').delay(1000).queue(function() {
+    });
+  }
+</script>
 @foreach ($gifts as $gf)
 <!-- Modal detail info -->
 <div class="modal fade" id="detailinfo{{ $gf->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -333,7 +341,7 @@
         const  interval{{$gf->id}} = 80; //80 ms of interval for the setInterval()
         const  diff{{$gf->id}} = 320;     //diff as a variable for position offset
         tID{{ $gf->id }} = setInterval ( () => {
-          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = `-${position<?= $gf->id ?>}px 0px; 
+          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = `-${position<?= $gf->id ?>}px 0px`; 
           //we use the ES6 template literal to insert the variable "position"
           if (position{{$gf->id}} < 100000)
           { position{{$gf->id}} = position{{$gf->id}} + diff{{$gf->id}};}
@@ -342,7 +350,7 @@
           { position{{$gf->id}} = 320; }
           //reset the position to 320px, once position exceeds 1536px
           }
-        , interval{{$gf->id}} ); //end of setInterval
+         ,interval{{$gf->id}} ); //end of setInterval
         // } //end of animateScript()
       </script>
         

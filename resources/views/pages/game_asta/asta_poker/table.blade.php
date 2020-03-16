@@ -50,15 +50,12 @@
       
       <div class="jarviswidget-editbox">
         <input class="form-control" type="text">
-        <span class="note"><i class="fa fa-check text-success"></i>{{ TranslateMenuGame('Change Title') }}</span>
-        
+        <span class="note"><i class="fa fa-check text-success"></i>{{ TranslateMenuGame('Change Title') }}</span>  
       </div>
       
       <div class="widget-body">
         <div class="widget-body-toolbar">
-          
           <div class="row">
-            
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               <div class="input-group">
                 @if($menu && $mainmenu && $submenu)
@@ -72,9 +69,7 @@
               
               
             </div>
-            
           </div>
-          
         </div>
         
         <div class="custom-scroll table-responsive" style="height:800px; margin-right:1%;">
@@ -165,10 +160,10 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="tableName" placeholder="Table Name" required="">
+                  <input type="text" class="form-control required" name="tableName" placeholder="Table Name" required="">
                 </div>
                 <div class="form-group">
-                  <select class="custom-select" id="category_table" name="category">
+                  <select class="custom-select required" id="category_table" name="category">
                     <option>{{ TranslateMenuGame('Select Category') }}</option>
                     @foreach ($category as $ct)
                     <option value="{{ $ct->room_id }}" data-pk="{{ $ct->min_buy }}">{{ $ct->name }} {{ number_format($ct->min_buy) }} - {{ number_format($ct->max_buy) }}</option>
@@ -176,24 +171,24 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
+                  <input type="text" class="form-control required" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
                   <span id="lblErrorminbuy" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
+                  <input type="text" class="form-control required" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
                   <span id="lblErrormaxbuy" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="sb" name="sb" placeholder="Small Blind" required="">
+                  <input type="text" class="form-control required" id="sb" name="sb" placeholder="Small Blind" required="">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="bb" name="bb" placeholder="Big Blind" required="">
+                  <input type="text" class="form-control required" id="bb" name="bb" placeholder="Big Blind" required="">
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary submit-data">
+            <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled btn-create" disabled onclick="FunctionLoadingBtn()">
               <i class="fa fa-save"></i>{{ TranslateMenuGame('Save') }}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -260,8 +255,38 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function FunctionLoadingBtn(){
+      $(".btn-create").text("Loading...");
+      $(this).submit('loading').delay(1000).queue(function() {
+      });
+    }
+    //Disabled submit before form fullfilled
+    $(document).on('change keyup', '.required', function(e){
+      let Disabled = true;
+      $(".required").each(function() {
+        let value = this.value
+        if ((value)&&(value.trim() !=''))
+          {
+            Disabled = false
+          }else{
+            Disabled = true
+            return false
+          }
+      });
+   
+      if(Disabled){
+          $('.toggle-disabled').prop("disabled", true);
+        }else{
+          $('.toggle-disabled').prop("disabled", false);
+        }
+    })
+
+  </script>
       
     <script type="text/javascript">
+
       $(document).ready(function() {
         $('table.table').dataTable( {
           "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
