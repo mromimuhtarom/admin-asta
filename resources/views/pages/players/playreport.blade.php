@@ -168,15 +168,17 @@
                                     @php 
                                         $jsondecode = json_decode($history->gameplay_log);
                                     @endphp 
-                                    @foreach ($jsondecode->start->players as $start)
-                                        @if($start->uid == $history->user_id)  
-                                            @foreach($jsondecode->end->players as $end)
-                                                @if($end->seat == $start->seat)
-                                                    {{ Translate_menuPlayers(typeCardGamepLayLogBgtTpk($end->type)) }}
-                                                @endif
-                                            @endforeach 
-                                        @endif                                 
-                                    @endforeach 
+                                    @if(!empty($jsondecode))
+                                        @foreach ($jsondecode->start->players as $start)
+                                            @if($start->uid == $history->user_id)  
+                                                @foreach($jsondecode->end->players as $end)
+                                                    @if($end->seat == $start->seat)
+                                                        {{ Translate_menuPlayers(typeCardGamepLayLogBgtTpk($end->type)) }}
+                                                    @endif
+                                                @endforeach 
+                                            @endif                                 
+                                        @endforeach 
+                                    @endif
 
                                 @elseif($_GET['inputGame'] === 'Big Two')      
                                     @php 
@@ -701,6 +703,30 @@
                                             <td></td>
                                             <td>
                                                 @if($draw == 2)
+                                                    @foreach($dmq_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $action->seat)
+                                                            @for($i=0; $i<3; $i++)
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$i] }}.png" alt="">
+                                                            @endfor
+                                                        @endif
+                                                    @endforeach
+                                                @elseif($draw == 3)
+                                                    @foreach($dmq_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $action->seat)
+                                                            @for($i=0; $i<3; $i++)
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$i] }}.png" alt="">
+                                                            @endfor
+                                                        @endif
+                                                    @endforeach
+                                                @elseif($draw == 5)
+                                                    @foreach($dmq_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $action->seat)
+                                                            @for($i=0; $i<3; $i++)
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$i] }}.png" alt="">
+                                                            @endfor
+                                                        @endif
+                                                    @endforeach
+                                                @elseif($draw == 7)
                                                     @foreach($dmq_gameplaylog->start->players as $start)
                                                         @if($start->seat == $action->seat)
                                                             @for($i=0; $i<3; $i++)
