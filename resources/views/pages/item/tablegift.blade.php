@@ -333,7 +333,7 @@
         const  interval{{$gf->id}} = 80; //80 ms of interval for the setInterval()
         const  diff{{$gf->id}} = 320;     //diff as a variable for position offset
         tID{{ $gf->id }} = setInterval ( () => {
-          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = `-${position<?= $gf->id ?>}px 0px; 
+          document.getElementById("image{{ $gf->id }}").style.backgroundPosition = `-${position<?= $gf->id ?>}px 0px`; 
           //we use the ES6 template literal to insert the variable "position"
           if (position{{$gf->id}} < 100000)
           { position{{$gf->id}} = position{{$gf->id}} + diff{{$gf->id}};}
