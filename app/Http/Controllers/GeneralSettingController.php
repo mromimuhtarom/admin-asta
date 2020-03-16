@@ -154,6 +154,7 @@ class GeneralSettingController extends Controller
             $semanticTagclosel  =   str_replace('[/', '</', $semanticTagright);
             $semanticTagcloser  =   str_replace(']', '>', $semanticTagclosel);
 
+            dd($semanticTagcloser);
             $PathS3              = 'unity-asset/text_file/privacy-policy.txt';
             Storage::disk('s3')->put($PathS3, $semanticTagcloser);
             Config::where('id', '=', $idprivacypolicy )->update([
