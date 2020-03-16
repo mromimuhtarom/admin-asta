@@ -138,8 +138,8 @@
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <select class="custom-select" name="transactionType">
-              <option selected>{{ TranslateMenuToko('Transaction type')}}</option>
+            <select class="custom-select required" name="transactionType">
+              <option selected disabled>{{ TranslateMenuToko('Transaction type')}}</option>
               @foreach ($paymenttype as $pt)
                 <option value="{{ $pt->id }}">{{ $pt->name }}</option>    
               @endforeach
@@ -155,7 +155,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data">
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadBtn()">
             <i class="fa fa-save"></i>{{ TranslateMenuGame('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -225,6 +225,34 @@
 
 <!-- script -->
 <script>
+  //Loading Submit Button
+  function FunctionLoadBtn(){
+    $(".btn-create").text("Loading...");
+    $(this).submit('loading').delay(1000).queue(function() {
+    })
+  }
+
+  $(document).on('change keyup', '.required', function(e){
+    let Disabled = true;
+
+    $(".required").each(function() {
+      let value = this.value
+      if ((value)&&(value.trim() !=''))
+      {
+        Disabled = false
+      } else {
+        Disabled = true
+        return false
+      }
+    });
+
+    if(Disabled){
+      $('.toggle-disabled').prop("disabled", true);
+    } else {
+      $('.toggle-disabled').prop("disabled", false);
+    }
+  })
+
   $(document).ready(function() {
     $('table.table').dataTable( {
       "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],
