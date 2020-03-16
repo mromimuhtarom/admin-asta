@@ -287,7 +287,8 @@
     </div>
 
 
-<!-- Modal -->
+<!-- Modal create
+ -->
 <div class="modal fade" id="createChipStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -382,7 +383,7 @@
       
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data">
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadBtn()">
             <i class="fa fa-save"></i>{{ Translate_MenuContentAdmin('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -426,6 +427,13 @@
 
 <!-- Script -->
 <script>
+  //Loading Button Submit
+  function FunctionLoadBtn(){
+    $(".btn-create").text("Loading...");
+    $(this).submit('loading').delay(1000).queue(function() {
+    });
+  }
+  
   $(".watermark-image").change(function() {
   if (this.files && this.files[0]) {
     var reader = new FileReader();
