@@ -38,10 +38,9 @@ class DominoSusunMonitoringTableController extends Controller
                                 ->paginate(20);
 
         $dmsPlayersPro->appends($request->all());
-
+        
         //all online
         $onlinedms  =   DominoSPlayer::all();
-
 
         return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.dominoSusun', compact('checked', 'dmsPlayersNovice', 'onlinenovice', 'onlineintermediate', 'onlinepro', 'onlinedms'));
     }
@@ -91,7 +90,7 @@ class DominoSusunMonitoringTableController extends Controller
         $onlinepro          =   DominoSPlayer::join('dms_table', 'dms_table.table_id', '=', 'dms_table.table_id')
                                 ->where('room_id', '=', 3)
                                 ->paginate(20);
-
+    
         $dmsPlayersPro      =   DominoSusunTable::where('room_id', '=', 3)
                                 ->paginate(20);
 
@@ -114,39 +113,4 @@ class DominoSusunMonitoringTableController extends Controller
         return view('pages.game_asta.domino_susun.monitoring_table_domino_susun.game_dominosusun', compact('idtable', 'username', 'password'));
     }
 
-
-    
-    public function create()
-    {
-        //
-    }
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
-   
-    public function show($id)
-    {
-        //
-    }
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    
-    public function destroy($id)
-    {
-        //
-    }
 }

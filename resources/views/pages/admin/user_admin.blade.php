@@ -29,6 +29,7 @@
         </div>        
     @endif
     
+
     @if (\Session::has('success'))
         <div class="alert alert-success">
             <p>{{\Session::get('success')}}</p>
@@ -66,8 +67,6 @@
         $('.toggle-disabled').prop("disabled", false);
       }
  })
-
-
 
 </script>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -226,7 +226,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data" >
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadingBtn()" >
             <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -292,6 +292,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  function FunctionLoadingBtn(){
+    $('.btn-create').text('Loading...');
+    $(this).submit('loading').delay(1000).queue(function(){
+    });
+  }
+</script>
 
 @foreach ($emoticon as $emot)
 <!-- Modal detail info -->
