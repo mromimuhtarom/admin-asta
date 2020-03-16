@@ -226,7 +226,6 @@
       <form action="{{ route('playerslevel_create') }}" method="post">
         @csrf
         <div class="modal-body">
-  
           <div class="row">
             <div class="col-12">
               <div class="form-group">
