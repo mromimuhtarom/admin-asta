@@ -150,10 +150,10 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="tableName" placeholder="Table Name" required="">
+                  <input type="text" class="form-control required" name="tableName" placeholder="Table Name" required="">
                 </div>
                 <div class="form-group">
-                  <select class="custom-select" id="category_table" name="category">
+                  <select class="custom-select required" id="category_table" name="category">
                     <option selected>{{ TranslateMenuGame('Select Category') }}</option>
                     @foreach ($category as $ct)
                     <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ number_format($ct->min_buy) }} - {{ number_format($ct->max_buy) }}</option>
@@ -161,21 +161,21 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="stake" name="stake" placeholder="Stake" required="">
+                  <input type="text" class="form-control required" id="stake" name="stake" placeholder="Stake" required="">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
+                  <input type="text" class="form-control required" id="minbuy" name="minbuy" placeholder="Min Buy" required="">
                   <span id="lblErrorminbuy" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
+                  <input type="text" class="form-control required" id="maxbuy" name="maxbuy" placeholder="Max Buy" required="">
                   <span id="lblErrormaxbuy" style="color: red"></span>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn sa-btn-primary submit-data">
+            <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadingBtn()">
               <i class="fa fa-save"></i>{{ TranslateMenuGame('Save') }}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -244,6 +244,34 @@
 
   <!-- Script -->
   <script type="text/javascript">
+    //Loading button submit
+    function FunctionLoadingBtn(){
+      $(".btn-create").text("Loading...");
+      $(this).submit('loading').delay(1000).queue(function() {
+      });
+    }
+
+    //Disable submit until all form fullfilled
+    $(document).on('change keyup', '.required', function() {
+      let Disabled = true;
+
+      $(".required").each(function() {
+        let value = this.value
+        if((value)&&(value.trim() !=''))
+        {
+          Disabled = false
+        } else {
+          Disabled = true
+          return false
+        }
+      });
+
+      if(Disabled){
+        $('.toggle-disabled').prop("disabled", true);
+      } else {
+        $('.toggle-disabled').prop("disabled", false);
+      }
+    })
 
     $(document).ready(function() {
         $('table.table').dataTable( {
