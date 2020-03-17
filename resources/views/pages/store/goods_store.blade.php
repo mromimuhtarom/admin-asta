@@ -210,7 +210,7 @@
 </div>
 <!-- end Table -->
 
-<!-- Modal -->
+<!-- MODAL CREATE -->
 <div class="modal fade" id="createGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -242,16 +242,16 @@
               </table>
           </div>
           <div class="form-group">
-              <input type="text" name="order" class="form-control" id="basic-url" placeholder="Order">
+              <input type="text" name="order" class="form-control required" id="basic-url" placeholder="Order">
           </div>
           <div class="form-group">
-            <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
+            <input type="text" name="title" class="form-control required" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="number" name="price" class="form-control" id="basic-url" placeholder="price">
+            <input type="number" name="price" class="form-control required" id="basic-url" min="0" placeholder="price">
           </div>
           <div class="form-group">
-            <input type="number" name="qty" class="form-control" id="basic-url" placeholder="Quantity">
+            <input type="number" name="qty" class="form-control required" id="basic-url" min="0" placeholder="Quantity">
           </div>
         </div>
         <div class="modal-footer">
@@ -331,6 +331,28 @@
     $(this).submit('loading').delay(1000).queue(function() {
     })
   }
+
+  //Disable submit button before form fullfilled
+  $(document).on('change keyup', '.required', function(e){
+    let Disabled = true;
+
+    $(".required").each(function() {
+      let value = this.value
+      if((value)&&(value.trim() != ''))
+      {
+        Disabled = false
+      } else {
+        Disabled = true
+        return false
+      }
+    });
+
+    if(Disabled){
+      $('.toggle-disabled').prop('disabled', true);
+    }else{
+      $('.toggle-disabled').prop('disabled', false);
+    }
+  })
 
   // preview image
 $(".watermark-image").change(function() {
