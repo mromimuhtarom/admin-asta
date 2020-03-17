@@ -188,7 +188,7 @@ class RoleController extends Controller
           
         endfor;
         
-        return back()->with('success', alertTranslate('Data Updated'));
+        return redirect()->route('Role_Admin')->with('success', alertTranslate('Data Updated'));
 
 
     }

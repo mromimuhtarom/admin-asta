@@ -386,7 +386,7 @@
                           CKEDITOR.replace( 'contentastapoker', {
                             extraPlugins:'bbcode',
                             removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
-                            fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                            fontSize_sizes: "8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px",
                             toolbar: [
                               [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
                               [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
@@ -448,7 +448,7 @@
                           CKEDITOR.replace( 'contentbigtwo', {
                             extraPlugins:'bbcode',
                             removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
-                            fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                            fontSize_sizes: "8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px",
                             toolbar: [
                               [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
                               [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
@@ -509,7 +509,7 @@
                           CKEDITOR.replace( 'contentdominoQQ', {
                             extraPlugins:'bbcode',
                             removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
-                            fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                            fontSize_sizes: "8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px",
                             toolbar: [
                               [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
                               [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
@@ -570,7 +570,7 @@
                           CKEDITOR.replace( 'contentdominosusun', {
                             extraPlugins:'bbcode',
                             removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
-                            fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                            fontSize_sizes: "8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px",
                             toolbar: [
                               [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
                               [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
@@ -632,7 +632,7 @@
                           CKEDITOR.replace( 'contentprivacypolicy', {
                             extraPlugins:'bbcode',
                             removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
-                            fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                            fontSize_sizes: "8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px",
                             toolbar: [
                               [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
                               [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
@@ -692,7 +692,7 @@
                           CKEDITOR.replace( 'contenttermofservice', {
                             extraPlugins:'bbcode',
                               removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
-                              fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                              fontSize_sizes: "8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px",
                               toolbar: [
                                 [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
                                 [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
@@ -753,7 +753,7 @@
                       CKEDITOR.replace( 'contentabout', {
                         extraPlugins:'bbcode',
                         removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
-                        fontSize_sizes: "8/50%;9/56.25%;10/62.5%;11/68.75%;12/75%;14/87.5%;16/100%;18/112.5%;20/125%;22/137.5%;24/150%;26/162.5%;28/175%;36/225%;48/300%;72/450%",
+                        fontSize_sizes: "8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px",
                         toolbar: [
                           [ 'Source', '-', 'Save', 'NewPage', '-', 'Undo', 'Redo' ],
                           [ 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat' ],
