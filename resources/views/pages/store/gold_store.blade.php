@@ -107,14 +107,14 @@
                 <th class="th-sm">{{ TranslateMenuToko('L_GOLD_AWARDED')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS_IMAGE') }}</th>
-                <th class="th-sm">Item Bonus yang didapat</th>
-                <th class="th-sm">{{ TranslateMenuToko('Price cash')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Item type')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Pay Transaction')}}</th>
-                <th class="th-sm">Google Key</th>
-                <th class="th-sm">{{ TranslateMenuItem('Status')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS_GET') }}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_PRICE_CASH')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_TYPE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_PAY_TRANSACTION')}}</th>
+                <th class="th-sm">{{ TranslareMenuToko('L_GOOGLE_KEY') }}</th>
+                <th class="th-sm">{{ TranslateMenuItem('L_STATUS')}}</th>
                 @if($menu && $mainmenu)
-                  <th>{{ TranslateMenuGame('Action')}}
+                  <th>{{ TranslateMenuGame('L_ACTION')}}
                     <a href="#" style="color:red;font-weight:bold;"
                         class="delete"
                         id="trash"
@@ -158,7 +158,7 @@
                           <div class="media-control" align="center" style="margin-top:-1%">
                             <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                           </form>
-                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
+                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}</button>
                             <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
                       </div>
                     </td>
@@ -370,10 +370,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadBtn()">
-            <i class="fa fa-save"></i> {{ TranslateMenuGame('Save')}}
+            <i class="fa fa-save"></i> {{ TranslateMenuGame('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ TranslateMenuGame('Cancel')}}
+            <i class="fa fa-remove"></i> {{ TranslateMenuGame('L_CANCEL')}}
           </button>
         </div>
       </form>

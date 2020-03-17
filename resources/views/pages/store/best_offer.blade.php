@@ -153,9 +153,15 @@
           <div class="form-group">
             <select class="custom-select">
               <option selected>{{ TranslateMenuGame('L_SELECT_CATEGORY')}}</option>
+<<<<<<< HEAD
               <option value="gold">{{ Translate_menuPlayers('L_GOLD_COINS')}}</option>
               <option value="chip">{{ Translate_menuPlayers('L_CHIP')}}</option>
               <option value="goods">{{ Translate_menuPlayers('L_GOODS')}}</option>
+=======
+              <option value="gold">{{ Translate_menuPlayers('Gold Coins')}}</option>
+              <option value="chip">{{ Translate_menuPlayers('Chip')}}</option>
+              <option value="goods">{{ Translate_menuPlayers('Goods')}}</option>
+>>>>>>> 0b8e8c190ec5c9fc5144fb74ea1c601423ca337b
             </select>
           </div>
           <div class="form-group">

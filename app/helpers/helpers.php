@@ -188,14 +188,6 @@ function strMenuType ($val) {
     } else if($val == $rolestatus[4]) {
       return $rolestatus[5];
     }
-  
-    // if($val == 0) {
-    //     return 'The Menu Can\'t be Accessed and can\'t be edited';
-    // } else if ($val == 1) {
-    //     return 'The Menu Can be Accessed and can\'t be edited';
-    // } else if ($val == 2) {
-    //     return 'The Menu Can be Accessed and edited';
-    // }
 }
 
 //
@@ -333,8 +325,6 @@ function tpkcard($array) {
     '2S','3S','4S','5S','6S','7S','8S','9S','10S','JS','QS','KS','AS'];
 
     for ($i = 0; $i < count($array); $i++){
-      // resCard[i]=cards[array[i]];
-      // $resCard.push($cards[$arraycard[$i]]);
       $resCard[] = $cards[$array[$i]];
       
     }
@@ -367,9 +357,6 @@ function bgtcard($array) {
                '3S','4S','5S','6S','7S','8S','9S','10S','JS','QS','KS','AS','2S'];
       
       for ($i = 0; $i < count($array); $i++){
-        
-        // resCard[i]=cards[array[i]];
-        // $resCard.push($cards[$arraycard[$i]]);
         $resCard[] = $cards[$array[$i]];
         
       }
@@ -461,8 +448,6 @@ function dmscard($array) {
      "6_6"                                             //27
     ];
     for ($i = 0; $i < count($array); $i++){
-      // resCard[i]=cards[array[i]];
-      // $resCard.push($cards[$arraycard[$i]]);
       $resCard[] = $cards[$array[$i]];
     }
   else:

@@ -143,7 +143,7 @@
                           <div class="media-control" align="center" style="margin-top:-1%">
                             <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                           </form>
-                            <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
+                            <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}</button>
                             <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
                       </div>
                     </td>
@@ -253,26 +253,13 @@
           <div class="form-group">
             <input type="number" name="qty" class="form-control required" id="basic-url" min="0" placeholder="Quantity">
           </div>
-          {{-- <div class="form-group">
-            <select class="custom-select" name="transaction_type">
-              <option value="">Pay Transaction</option>
-              <option value="1">Bank Transfer</option>
-              <option value="2">Internet Banking</option>
-              <option value="3">Cash Digital</option>
-              <option value="4">Toko</option>
-              <option value="5">Akulaku</option>
-              <option value="6">Credit Card</option>
-              <option value="7">Manual Transfer</option>
-              <option value="8">Google Play</option>
-            </select>
-          </div> --}}
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadBtn()">
-            <i class="fa fa-save"></i> {{ TranslateMenuGame('Save')}}
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadBtn()">
+            <i class="fa fa-save"></i> {{ TranslateMenuGame('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ TranslateMenuGame('Cancel')}}
+            <i class="fa fa-remove"></i> {{ TranslateMenuGame('L_CANCEL')}}
           </button>
         </div>
       </form>
@@ -287,7 +274,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('Delete Data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('L_DELETE_DATA')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i> 
         </button>

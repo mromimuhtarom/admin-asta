@@ -84,9 +84,9 @@
                                 @endif
                                 <th>ID</th>
                                 <th style="width:5px;">{{ TranslateMenuItem('Image') }}</th>
-                                <th>{{ TranslateMenuGame('Name') }}</th>
+                                <th>{{ TranslateMenuGame('L_NAME') }}</th>
                                 @if($menu && $mainmenu)
-                                <th>{{ TranslateMenuGame('Action') }} &nbsp; &nbsp;
+                                <th>{{ TranslateMenuGame('L_ACTION') }} &nbsp; &nbsp;
                                     <a href="#" style="color:red;font-weight:bold;"
                                         class="delete"
                                         id="trash"

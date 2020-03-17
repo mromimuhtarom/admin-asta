@@ -3,7 +3,7 @@
 
 @section('page')
   <li class="breadcrumb-item"><a href="{{ route('Category_Asta_Poker') }}">Asta Poker</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Category_Asta_Poker') }}">{{ TranslateMenuGame('Category') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Category_Asta_Poker') }}">{{ TranslateMenuGame('L_CATEGORY') }}</a></li>
 @endsection
 
 
@@ -34,7 +34,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
       <div class="widget-header">	
-        <h2><strong><i class="fa fa-puzzle-piece"></i>{{ TranslateMenuGame('Asta Poker Table') }}</strong></h2>				
+        <h2><strong><i class="fa fa-puzzle-piece"></i>{{ TranslateMenuGame('L_ASTA_POKER_TABLE') }}</strong></h2>				
       </div>
     </header>
 
@@ -65,9 +65,9 @@
                   @if($menu && $mainmenu && $submenu)
                   {{-- <th></th> --}}
                   @endif
-                  <th class="th-sm">{{ TranslateMenuGame('Table') }}</th>
-                  <th class="th-sm">{{ TranslateMenuGame('Min Buy') }}</th>
-                  <th class="th-sm">{{ TranslateMenuGame('Max Buy') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('L_TABLE') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('L_MIN_BUY') }}</th>
+                  <th class="th-sm">{{ TranslateMenuGame('L_MAX_BUY') }}</th>
                   @if($menu && $mainmenu && $submenu)
                   {{-- <th class="th-sm">Action</th> --}}
                   @endif
@@ -106,7 +106,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuGame('Create Category') }}</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuGame('L_CREATE_CATEGORY') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -131,10 +131,10 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn sa-btn-primary submit-data">
-              <i class="fa fa-save"></i>{{ TranslateMenuGame('Save') }}
+              <i class="fa fa-save"></i>{{ TranslateMenuGame('L_SAVE') }}
             </button>
             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-              <i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel') }}
+              <i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL') }}
             </button>
           </div>
         </form>
@@ -148,21 +148,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('Delete Data') }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('L_DELETE_DATA') }}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          {{ TranslateMenuGame('Are you sure') }}
+          {{ TranslateMenuGame('L_ARE_YOU_SURE') }}
           <form action="{{ route('Category-delete') }}" method="post">
             {{ method_field('delete')}}
             @csrf
             <input type="hidden" name="categoryid" id="categoryid" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('Yes') }}</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('No') }}</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('L_YES') }}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_NO') }}</button>
         </div>
           </form>
       </div>

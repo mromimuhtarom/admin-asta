@@ -69,7 +69,7 @@
                                     <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission"></th>
                                     <th>File</th>
                                     @endif
-                                    <th>{{ TranslateMenuGame('Name')}}</th>
+                                    <th>{{ TranslateMenuGame('L_NAME')}}</th>
                                     <th>{{ translate_menuTransaction('Type')}}</th>
                                     <th>Operating System</th>
                                     <th>{{ TranslateReseller('Link')}}</th>
@@ -168,7 +168,7 @@
                                         <td><input id="checkAll2" type="checkbox" name="deletepermission" class="deletepermission"></td>
                                         <td>File</td>
                                         @endif
-                                        <td>{{ TranslateMenuGame('Name')}}</td>
+                                        <td>{{ TranslateMenuGame('L_NAME')}}</td>
                                         <td>{{ translate_menuTransaction('Type')}}</td>
                                         <td>{{ TranslateReseller('Link')}}</td>
                                         <td>{{ TranslateReseller('Version')}}</td>
@@ -266,7 +266,7 @@
                                     <th><input id="checkAll3" type="checkbox" name="deletepermission" class="deletepermission"></th>
                                     <th>File</th>
                                     @endif
-                                    <th>{{ TranslateMenuGame('Name')}}</th>
+                                    <th>{{ TranslateMenuGame('L_NAME')}}</th>
                                     <th>{{ translate_menuTransaction('Type')}}</th>
                                     <th>{{ TranslateReseller('Link')}}</th>
                                     <th>{{ TranslateReseller('Version')}}</th>
@@ -328,7 +328,7 @@
         <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
             <header>
                 <div class="widget-header">
-                  <h2><strong>{{ TranslateMenuGame('Language')}}</strong></h2>
+                  <h2><strong>{{ TranslateMenuGame('L_LANGUAGE')}}</strong></h2>
                 </div>
             </header>
 
@@ -359,18 +359,18 @@
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td>{{ TranslateMenuGame('Indonesia') }}</td>
+                                    <td>{{ TranslateMenuGame('L_INDONESIA') }}</td>
                                     <td>
                                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalLanguageIndo">
-                                        <i class="fa fa-plus"></i> {{ TranslateMenuGame('Upload File Language')}}
+                                        <i class="fa fa-plus"></i> {{ TranslateMenuGame('L_UPLOAD_FILE_LANGUAGE')}}
                                       </button>
                                     </td>
                                   </tr> 
                                   <tr>
-                                    <td>{{ TranslateMenuGame('English') }}</td>
+                                    <td>{{ TranslateMenuGame('L_ENGLISH') }}</td>
                                     <td>
                                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalLanguageEnglish">
-                                        <i class="fa fa-plus"></i> {{ TranslateMenuGame('Upload File Language')}}
+                                        <i class="fa fa-plus"></i> {{ TranslateMenuGame('L_UPLOAD_FILE_LANGUAGE')}}
                                       </button>
                                     </td>
                                   </tr>                        
@@ -390,7 +390,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuGame('Upload File Language')}}</h4>
+              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuGame('L_UPLOAD_FILE_LANGUAGE')}}</h4>
               <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                 <i class="fa fa-remove"></i>
               </button>
@@ -431,7 +431,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuGame('Upload File Language')}}</h4>
+              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuGame('L_UPLOAD_FILE_LANGUAGE')}}</h4>
               <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                 <i class="fa fa-remove"></i>
               </button>

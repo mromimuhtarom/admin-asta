@@ -27,7 +27,7 @@
                 <thead class="th-table">
                   <tr>
                     <th class="th-sm">{{ Translate_menu('L_SETTINGS')}}</th>
-                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th></th>
+                    <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -69,7 +69,7 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                    <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
                     <th class="th-sm">{{ Translate_Menu('L_SETTINGS')}}</th>
                   </tr>
                 </thead>
@@ -113,7 +113,7 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                    <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
                     <th class="th-sm">{{ Translate_Menu('L_SETTINGS')}}</th>
                   </tr>
                 </thead>
@@ -156,7 +156,7 @@
               <table class="table table-bordered">
                 <thead class="th-table">
                   <tr>
-                    <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                    <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
                     <th class="th-sm">{{ Translate_Menu('L_SETTINGS')}}</th>
                   </tr>
                 </thead>

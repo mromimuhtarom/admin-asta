@@ -63,7 +63,7 @@
               <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('Select All')}}</th>
               @endif
               <th class="th-sm">ID</th>
-              <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+              <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
               <th class="th-sm">{{ TranslateReseller('Gold Group')}}</th>
               <th class="th-sm">{{ translate_menuTransaction('Type')}}</th>
               <th class="th-sm">Bonus</th>
