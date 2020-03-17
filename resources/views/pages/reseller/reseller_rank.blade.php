@@ -137,16 +137,16 @@
         <div class="row">
           <div class="col-12">
             <div class="form-group">
-              <input type="text" class="form-control" name="id" placeholder="ID" required>
+              <input type="text" class="form-control" name="id" placeholder="ID" required >
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="rankname" placeholder="Rank Name" required>
+              <input type="text" class="form-control" name="rankname" placeholder="Rank Name" required onkeyup="manage(this)">
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn sa-btn-primary submit-data">
+        <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadBtn()">
           <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
         </button>
         <button type="submit" class="btn btn-danger" data-dismiss="modal">
@@ -214,6 +214,23 @@
 
 
 <script type="text/javascript">
+  //Loading button after submit
+  function FunctionLoadBtn(){
+    $(".btn-create").text("Loading...");
+    $(this).submit('loading').delay(1000).queue(function () {
+    })
+  }
+
+  //Disable submit before form fullfilled
+  function manage(txt) {
+    var bt = document.getElementById('submit');
+    if (txt.value != '') {
+      bt.disabled = false;
+    } else {
+      bt.disabled = true;
+    }
+  }
+
   $(document).ready(function() {
   $('table.table').dataTable( {
     "lengthMenu": [[20, 25, 50, -1], [20, 25, 50, "All"]],

@@ -369,7 +369,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data">
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadBtn()">
             <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -440,6 +440,13 @@
 
 <!-- script -->
 <script>
+//Loading submit btn
+function FunctionLoadBtn(){
+  $(".btn-create").text("Loading...");
+  $(this).submit('loading').delay(1000).queue(function(){
+  })
+}
+
 $(".watermark-image").change(function() {
   if (this.files && this.files[0]) {
     var reader = new FileReader();

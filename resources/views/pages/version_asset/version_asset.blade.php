@@ -477,6 +477,28 @@
           // $(this).button('reset');
       });
   }
+
+  $(document).on('change keyup', '.required', function(e){
+    let Disabled = true;
+
+    $(".required").each(function() {
+      let value = this.value
+      if ((value)&&(value.trim() != ''))
+      {
+        Disabled = false
+      } else {
+        Disabled = true
+        return false
+      }
+    });
+
+    if(Disabled){
+      $('.toggle-disabled').prop("disabled", true);
+    }else{
+      $('.toggle-disabled').prop("disabled", false);
+    }
+  })
+
 </script>
 <div class="modal fade" id="ModalAssetAdr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -500,33 +522,33 @@
                               <i class="icon fa fa-check"></i>
                               <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                             </label>
-                          </div>
+                        </div>
                         <br>
                         <br>
-                        <input class="form-control" name="Name" id="namefileadr" placeholder="Name"><br>
-                          <select name="Type" class="form-control">
-                            <option>{{ translate_menuTransaction('Type')}}</option>
+                          <input class="form-control required" name="Name" id="namefileadr" placeholder="Name"><br>
+                          <select name="Type" class="form-control required">
+                            <option selected disabled>{{ translate_menuTransaction('Type')}}</option>
                             <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
                             <option value="Image">{{ TranslateVersionAsetApk('L_IMAGE')}}</option>
                             <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
                           </select>
                         <br>
-                          <select name="os" class="form-control">
-                            <option>Operating System</option>
+                          <select name="os" class="form-control required">
+                            <option selected disabled>Operating System</option>
                             <option value="Android">Android</option>
                             <option value="Ios">Ios</option>
                             <option value="Windows">Windows</option>
                           </select>
                         <br>
-                          <input class="form-control" name="Link" placeholder="Link"><br>
-                          <input class="form-control" name="Version" placeholder="Version"><br>
-                          <input class="form-control" name="FolderName" placeholder="Folder name"><br>
+                          <input class="form-control required" name="Link" placeholder="Link"><br>
+                          <input class="form-control required" name="Version" placeholder="Version"><br>
+                          <input class="form-control required" name="FolderName" placeholder="Folder name"><br>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn sa-btn-primary submit-data btn-andro" onclick="MyCustomFunctioncreateandroid()">
+                <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-andro toggle-disabled" disabled onclick="MyCustomFunctioncreateandroid()">
                   <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
                 </button>
                 <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -665,6 +687,8 @@ $ckbox = str_replace('.','_', $xl['name']);
           // $(this).button('reset');
       });
   }
+
+  
 </script>
 <div class="modal fade" id="ModalAssetAndro{{ $ckbox  }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -689,10 +713,10 @@ $ckbox = str_replace('.','_', $xl['name']);
                         <i class="icon fa fa-check"></i>
                         <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
                       </label>
-                    </div>
+                  </div>
                   <br>
                   <br>
-                  <input value="{{ $xl['name'] }}" class="form-control" id="nameandro{{ $xl['name'] }}" name="Name" placeholder="Name"><br>
+                    <input value="{{ $xl['name'] }}" class="form-control" id="nameandro{{ $xl['name'] }}" name="Name" placeholder="Name"><br>
                     <select disabled name="Type" class="form-control">
                       <option>Type</option>
                       <option @if( $xl->type == 'Audio' ) selected @endif value="Audio">{{ TranslateVersionAsetApk('L_AUDIO') }} </option>
@@ -707,8 +731,12 @@ $ckbox = str_replace('.','_', $xl['name']);
                       <option @if( $xl->os == 'Windows' ) selected @endif  value="Windows">Windows</option>
                     </select>
                   <br>
-                  <input readonly value="{{ $xl->link }}" class="form-control" name="Link" placeholder="Link"><br>
-                  <input value="{{ $xl->ver }}" class="form-control" name="Version" placeholder="Version"><br>
+                  <div class="field">
+                    <input readonly value="{{ $xl->link }}" class="form-control" name="Link" placeholder="Link"><br>
+                  </div>
+                  <div class="field">
+                    <input value="{{ $xl->ver }}" class="form-control" name="Version" placeholder="Version"><br>
+                  </div>
               </div>
             </div>
           </div>
@@ -744,7 +772,10 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
           // $(this).button('reset');
       });
   }
+
+
 </script>
+
 <div class="modal fade" id="ModalAssetIos{{ $ckbox  }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

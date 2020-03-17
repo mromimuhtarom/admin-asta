@@ -729,6 +729,7 @@ function TranslateReseller($menu){
         'Select All'             => 'Pilih semua',
         'L_WEEKLY'               => 'Mingguan',
         'L_MONTHLY'              => 'Bulanan',
+        'L_YEARLY'               => 'Tahunan',
         'Create new'             => 'Buat baru',
         'Username / Reseller ID'  => 'Nama Agent / ID Agen',
         'Gold'                   => 'Koin',
