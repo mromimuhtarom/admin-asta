@@ -214,6 +214,18 @@
                                         @endif                                 
                                     @endforeach 
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
+                                    @php 
+                                    $jsondecode = json_decode($history->gameplay_log);
+                                    @endphp        
+                                    @foreach ($jsondecode->start->players as $start)
+                                        @if($start->uid == $history->user_id)  
+                                            @foreach($jsondecode->end->players as $end)
+                                                @if($end->seat == $start->seat)
+                                                   {{ count($end->hand) }} {{ Translate_menuPlayers('L_CARD')}} = {{ $end->total }}
+                                                @endif
+                                            @endforeach 
+                                        @endif                                 
+                                    @endforeach 
                                 @endif
                             @endif
                             
