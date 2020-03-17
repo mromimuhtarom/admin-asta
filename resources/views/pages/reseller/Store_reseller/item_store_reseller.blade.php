@@ -158,7 +158,7 @@
                           <div class="media-control" align="center" style="margin-top:-1%">
                             <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                           </form>
-                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
+                            <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}</button>
                             <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
                       </div>
                     </td>

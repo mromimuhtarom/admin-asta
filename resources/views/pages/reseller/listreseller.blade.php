@@ -45,7 +45,7 @@
                 @endif
                 <th class="th-sm">{{ TranslateReseller('L_RESELLER_ID')}}</th>
                 <th class="th-sm">{{ Translate_menuPlayers('Username')}}</th>
-                <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
                 <th class="th-sm">{{ TranslateReseller('Phone')}}</th>
                 <th class="th-sm">Email</th>
                 <th class="th-sm">{{ TranslateReseller('Saldo gold')}}</th>
@@ -148,15 +148,15 @@
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuGame('Are you sure') }}
+        {{ TranslateMenuGame('L_ARE_YOU_SURE') }}
         <form action="{{ route('ListReseller-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="id" id="id" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('Yes') }}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('No') }}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('L_YES') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_NO') }}</button>
       </div>
         </form>
     </div>

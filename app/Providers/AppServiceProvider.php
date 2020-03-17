@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $memory_limit = ini_set('memory_limit','1000M');
         $adm_menu = MenuName::select(
                         'name', 
                         'route', 
@@ -44,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         
         view::share('adm_menu', $adm_menu);
         view::share('menuname', $menuname);
+        view::share('memory_limit', $memory_limit);
         view::share('transaction_report_read', $transaction_report_read);
     }
 }

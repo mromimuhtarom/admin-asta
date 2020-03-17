@@ -103,7 +103,7 @@
                 <th class="th-sm">{{ TranslateMenuToko('Gold Cost')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('Active')}}</th>
                 @if($menu && $mainmenu)
-                  <th>{{ TranslateMenuGame('Action')}}
+                  <th>{{ TranslateMenuGame('L_ACTION')}}
                     <a href="#" style="color:red;font-weight:bold;"
                         class="delete"
                         id="trash"
@@ -146,7 +146,7 @@
                             <div class="media-control" align="center" style="margin-top:-1%">
                               <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
                             </form>
-                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
+                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}</button>
                               <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
                         </div>
                       </td>
@@ -265,21 +265,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('Delete Data')}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('L_DELETE_DATA')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i> 
             </button>
           </div>
           <div class="modal-body">
-            {{ TranslateMenuGame('Are you sure')}}
+            {{ TranslateMenuGame('L_ARE_YOU_SURE')}}
             <form action="{{ route('ChipStore-delete') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
               <input type="hidden" name="id" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('Yes')}}</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('No')}}</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('L_YES')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_NO')}}</button>
           </div>
             </form>
         </div>

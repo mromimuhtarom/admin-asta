@@ -67,7 +67,7 @@
                 @if($menu && $mainmenu)
                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
                 @endif
-                <th class="th-sm">{{ TranslateMenuGame('Name')}}</th>
+                <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
                 <th class="th-sm">{{ translate_menuTransaction('Type')}}e</th>
                 <th class="th-sm">{{ Translate_menuPlayers('Desc')}}</th>
                 <th class="th-sm">{{ Translate_menuPlayers('Status')}}</th>
@@ -143,23 +143,15 @@
               @foreach ($paymenttype as $pt)
                 <option value="{{ $pt->id }}">{{ $pt->name }}</option>    
               @endforeach
-              {{-- <option value="1">{{ TranslateMenuToko('Bank Transfer')}}</option>
-              <option value="2">{{ TranslateMenuToko('Internet Banking')}}</option>
-              <option value="3">{{ TranslateMenuToko('Cash Digital')}}</option>
-              <option value="4">{{ TranslateMenuToko('Shop')}}</option>
-              <option value="5">Akulaku</option>
-              <option value="6">{{ TranslateMenuToko('Credit card')}}</option>
-              <option value="7">{{ TranslateMenuToko('Manual transfer')}}</option>
-              <option value="8">Google Play</option> --}}
             </select>
           </div>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadBtn()">
-            <i class="fa fa-save"></i>{{ TranslateMenuGame('Save')}}
+            <i class="fa fa-save"></i>{{ TranslateMenuGame('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}
+            <i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}
           </button>
         </div>
       </form>
@@ -173,7 +165,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('Delete Data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('L_DELETE_DATA')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i> 
         </button>

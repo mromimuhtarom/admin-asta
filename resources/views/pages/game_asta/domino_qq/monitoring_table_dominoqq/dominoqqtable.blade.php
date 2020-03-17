@@ -29,13 +29,13 @@
                <table border="0">
                 <tr>
                   <td>
-                    <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">{{ TranslateMenuGame('Refresh') }}</a>
+                    <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">{{ TranslateMenuGame('L_REFRESH') }}</a>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <input id="autorefresh"@if($checked == 'checked') checked @endif type="checkbox" name="autorefresh" class="deletepermission">
-                    <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('Auto Refresh')}}</div>
+                    <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('L_AUTO_REFRESH')}}</div>
                   </td>
                 </tr>
                </table>
@@ -46,7 +46,7 @@
                 <table border="0" width="100%" style="">
                   <tr class="border-bottom" style="padding-left:2%;padding-right:2%;">
                     <td class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-view*')) color-fontactive @endif">
-                      <a href="{{ route('Monitoring_Table_DominoQ') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Novice') }}</b></a>
+                      <a href="{{ route('Monitoring_Table_DominoQ') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_NOVICE') }}</b></a>
                     </td>
                   </tr>
                   <tr style="padding-left:2%; padding-right:2%;">
@@ -54,13 +54,13 @@
                       <table>
                         <tr>
                           <td>
-                            <div class="" style="float:left;margin-right:4%;">{{ TranslateMenuGame('Online') }}</div>
+                            <div class="" style="float:left;margin-right:4%;">{{ TranslateMenuGame('L_ONLINE') }}</div>
                           </td>
                           <td>
                             <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:4%;">{{ count($onlinenovice) }}</div>
                           </td>
                           <td>
-                            <div style="float:left;">{{ TranslateMenuGame('Players') }}</div>
+                            <div style="float:left;">{{ TranslateMenuGame('L_PLAYERS') }}</div>
                           </td>
                           <td>
                             <div style="float:right;margin-left:10%;">
@@ -82,7 +82,7 @@
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:5%;padding-right:5%;">
                     <td class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-intermediate*')) color-fontactive @endif">
-                      <a href="{{ route('Monitoring_Table_DominoQ-intermediate') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Intermediate') }}</b></a>
+                      <a href="{{ route('Monitoring_Table_DominoQ-intermediate') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_INTERMEDIATE') }}</b></a>
                     </td>
                   </tr>
                   <tr style="padding-left:5%;padding-right:5%;">
@@ -90,13 +90,13 @@
                       <table>
                         <tr>
                           <td>
-                            <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                            <div style="float:left;">{{ TranslateMenuGame('L_ONLINE') }}</div>
                           </td>
                           <td>
                             <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlineintermediate) }}</div>
                           </td>
                           <td>
-                            <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                            <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('L_PLAYERS') }}</div> 
                           </td>
                           <td>
                             <div style="float:right">
@@ -118,7 +118,7 @@
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:2%; padding-right:2%;">
                     <td  class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-pro*')) color-fontactive @endif">
-                      <a href="{{ route('Monitoring_Table_Asta_Poker-pro') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Pro') }}</b></a>
+                      <a href="{{ route('Monitoring_Table_Asta_Poker-pro') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_PRO') }}</b></a>
                     </td>
                   </tr>
                   <tr style="padding-left:2%;padding-right:2%;">
@@ -126,13 +126,13 @@
                       <table>
                         <tr>
                           <td>
-                            <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                            <div style="float:left;">{{ TranslateMenuGame('L_ONLINE') }}</div>
                           </td>
                           <td>
                             <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlinepro) }}</div> 
                           </td>
                           <td>
-                            <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                            <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('L_PLAYERS') }}</div> 
                           </td>
                           <td>
                             <div style="float:right;">
@@ -166,11 +166,11 @@
             <table class="table table-bordered" id="tablerefreshed1">
               <thead>
                 <tr>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_TABLE_NAME') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_PLAY_TIME') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEAT') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_USERNAME_PLAYER') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEE_DETAIL') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -234,11 +234,11 @@
             <table class="table table-bordered" id="tablerefreshed1">
               <thead>
                 <tr>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }} </th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_TABLE_NAME') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_PLAY_TIME') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEAT') }} </th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_USERNAME_PLAYER') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEE_DETAIL') }}</th>
                 </tr>
               </thead>
             <tbody>
@@ -302,11 +302,11 @@
             <table class="table table-bordered" id="tablerefreshed1">
               <thead>
                 <tr>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }} </th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_TABLE_NAME') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_PLAY_TIME') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEAT') }} </th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_USERNAME_PLAYER') }}</th>
+                  <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEE_DETAIL') }}</th>
                 </tr>
               </thead>
               <tbody>

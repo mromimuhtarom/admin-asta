@@ -152,7 +152,7 @@
           </div>
           <div class="form-group">
             <select class="custom-select">
-              <option selected>{{ TranslateMenuGame('Select Category')}}</option>
+              <option selected>{{ TranslateMenuGame('L_SELECT_CATEGORY')}}</option>
               <option value="gold">{{ Translate_menuPlayers('Gold Coins')}}</option>
               <option value="chip">{{ Translate_menuPlayers('Chip')}}</option>
               <option value="goods">{{ Translate_menuPlayers('Goods')}}</option>
@@ -171,10 +171,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal">
-            {{ TranslateMenuGame('Cancel')}}
+            {{ TranslateMenuGame('L_CANCEL')}}
           </button>
           <button type="submit" class="btn sa-btn-primary">
-            {{ TranslateMenuGame('Save')}}
+            {{ TranslateMenuGame('L_SAVE')}}
           </button>
         </div>
       </form>

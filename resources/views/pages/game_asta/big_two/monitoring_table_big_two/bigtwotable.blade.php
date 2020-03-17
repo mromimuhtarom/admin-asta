@@ -12,7 +12,7 @@
   <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header class="border border-light">
       {{-- <div>	 --}}
-        <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('Asta Big Two Table') }}</strong></h2>
+        <h2><strong><i class="fa fa-gamepad"></i> {{ TranslateMenuGame('L_ASTA_BIG_TWO_TABLE') }}</strong></h2>
         <span style="background-color:#fffffe;margin-right:1%;margin-left:1%;color:black;margin-top:auto;margin-bottom:auto;padding-right:1%;padding-left:1%;">
           <i class="fa fa-user-circle" style="color:#00ff34"></i> {{ count($onlinebgt) }}
         </span>
@@ -32,13 +32,13 @@
                       <table border="0">
                         <tr>
                           <td>
-                            <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">{{ TranslateMenuGame('Refresh') }}</a>
+                            <a href="#" id="refreshtable" class="btn sa-btn-primary btn-xs" style="float:left;">{{ TranslateMenuGame('L_REFRESH') }}</a>
                           </td>
                         </tr>
                         <tr>
                           <td>
                             <input id="autorefresh"@if($checked == 'checked') checked @endif type="checkbox" name="autorefresh" class="deletepermission">
-                            <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('Auto Refresh') }}</div>
+                            <div class="btn sa-btn-primary btn-xs">{{ TranslateMenuGame('L_AUTO_REFRESH') }}</div>
                           </td>
                         </tr>
                       </table>
@@ -48,7 +48,7 @@
                       <table border="0" width="100%" style="">
                         <tr class="border-bottom" style="padding-left:2%;padding-right:2%;">
                           <td class="@if(Request::is('Game/Big-Two/Monitoring_Table_Big_Two/Monitoring_Big_Two-view*')) color-fontactive @endif">
-                            <a href="{{ route('Monitoring_Table_Big_Two') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Novice') }}</b></a>
+                            <a href="{{ route('Monitoring_Table_Big_Two') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_NOVICE') }}</b></a>
                           </td>
                         </tr>
                         <tr style="padding-left:2%;padding-right:2%;">
@@ -56,13 +56,13 @@
                             <table>
                               <tr>
                                 <td>
-                                  <div class="" style="float:left;margin-right:4%;">{{ TranslateMenuGame('Online') }}</div>                            
+                                  <div class="" style="float:left;margin-right:4%;">{{ TranslateMenuGame('L_ONLINE') }}</div>                            
                                 </td>
                                 <td>
                                   <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:4%;">{{ count($onlineinvoice) }}</div>
                                 </td>
                                 <td>
-                                  <div style="float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                                  <div style="float:left;">{{ TranslateMenuGame('L_PLAYERS') }}</div> 
                                 </td>
                                 <td>
                                   <div style="float:right;margin-left:10%;">
@@ -83,7 +83,7 @@
                       <table border="0" width="100%">
                         <tr class="border-bottom" style="padding-left:5%;padding-right:5%;">
                           <td class="@if(Request::is('Game/Big-Two/Monitoring_Table_Big_Two/Monitor_Big_Two-intermediate*')) color-fontactive @endif">
-                            <a href="{{ route('Monitoring_Table_Big_Two-intermediate') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Intermediate') }}</b></a>
+                            <a href="{{ route('Monitoring_Table_Big_Two-intermediate') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_INTERMEDIATE') }}</b></a>
                           </td>
                         </tr>
                         <tr style="padding-left:5%;padding-right:5%;">
@@ -91,13 +91,13 @@
                             <table>
                               <tr>
                                 <td>
-                                  <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                                  <div style="float:left;">{{ TranslateMenuGame('L_ONLINE') }}</div>
                                 </td>
                                 <td>
                                   <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlineintermediate) }}</div> 
                                 </td>
                                 <td>
-                                  <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                                  <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('L_PLAYERS') }}</div> 
                                 </td>
                                 <td>
                                   <div style="float:right">
@@ -119,7 +119,7 @@
                       <table border="0" width="100%">
                         <tr class="border-bottom" style="padding-left:2%;padding-right:2%;">
                           <td  class="@if(Request::is('Game/Big-Two/Monitoring_Table_Big_Two/Monitor_Big_Two-pro*')) color-fontactive @endif">
-                            <a href="{{ route('Monitoring_Table_Big_Two-pro') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('Pro') }}</b></a>
+                            <a href="{{ route('Monitoring_Table_Big_Two-pro') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_PRO') }}</b></a>
                           </td>
                         </tr>
                         <tr style="padding-left:2%;padding-right:2%;">
@@ -127,13 +127,13 @@
                               <table>
                                 <tr>
                                   <td>
-                                    <div style="float:left;">{{ TranslateMenuGame('Online') }}</div>
+                                    <div style="float:left;">{{ TranslateMenuGame('L_ONLINE') }}</div>
                                   </td>
                                   <td>
                                     <div class="border" style="width:min-content;float:left;padding-left:1%;padding-right:1%;float:left;margin-right:1%;">{{ count($onlinepro) }}</div> 
                                   </td>
                                   <td>
-                                    <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('Players') }}</div> 
+                                    <div style="margin-right:2%;float:left;">{{ TranslateMenuGame('L_PLAYERS') }}</div> 
                                   </td>
                                   <td>
                                     <div style="float:right;">
@@ -170,16 +170,11 @@
               <table class="table table-bordered" id="tablerefreshed1">
                 <thead>
                   <tr>
-                    {{-- <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th> --}}
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }} </th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_TABLE_NAME') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_PLAY_TIME') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEAT') }} </th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_USERNAME_PLAYER') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEE_DETAIL') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -241,16 +236,11 @@
               <table class="table table-bordered" id="tablerefreshed1">
                 <thead>
                   <tr>
-                    {{-- <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{ { route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th> --}}
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }} </th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_TABLE_NAME') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_PLAY_TIME') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEAT') }} </th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_USERNAME_PLAYER') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEE_DETAIL') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -312,16 +302,11 @@
               <table class="table table-bordered" id="tablerefreshed1">
                 <thead>
                   <tr>
-                    {{-- <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=tablename">{{ TranslateMenuGame('Table Name') }} <i class="fa fa-sort{{ iconsorting('tablename') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=timer">{{ TranslateMenuGame('Play Time') }} <i class="fa fa-sort{{ iconsorting('timer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;"><a href="{{ route('Monitoring_Table_Asta_Poker')}}?&sorting={{ $sortingorder }}&namecolumn=maxplayer">{{ TranslateMenuGame('Seat') }} <i class="fa fa-sort{{ iconsorting('maxplayer') }}"></i></a></th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th> --}}
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Table Name') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Play Time') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Seat') }} </th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('Username Player') }}</th>
-                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('See Detail') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_TABLE_NAME') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_PLAY_TIME') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEAT') }} </th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_USERNAME_PLAYER') }}</th>
+                    <th class="th-sm" style="background-color:#ffffff;">{{ TranslateMenuGame('L_SEE_DETAIL') }}</th>
                   </tr>
                 </thead>
                 <tbody>
