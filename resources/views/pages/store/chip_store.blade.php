@@ -2,8 +2,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ TranslateMenuToko('Chip store')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Chip_Store') }}">{{ TranslateMenuToko('L_CHIP_STORE')}}</a></li>
 @endsection
 
 
@@ -57,7 +57,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuToko('Chip store')}}</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuToko('L_CHIP_STORE')}}</strong></h2>				
     </div>
   </header>
 
@@ -72,7 +72,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createChipStore">
-                <i class="fa fa-plus"></i>{{ TranslateMenuToko('Create new chip store')}}
+                <i class="fa fa-plus"></i>{{ TranslateMenuToko('L_CREATE_NEW_CHIP_STORE')}}
               </button>
               @endif
             </div>
@@ -90,20 +90,20 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                  <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('Select All') }}</th>
+                  <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('L_SELECT_All') }}</th>
                 @endif
-                <th>{{ TranslateMenuToko('Order')}}</th>
-                <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Category')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Chip Awarded')}}</th>
-                <th class="th-sm">Item Bonus</th>
-                <th class="th-sm">Gambar Item Bonus</th>
-                <th class="th-sm">Item Bonus yang didapat</th>
-                <th class="th-sm">{{ TranslateMenuToko('Gold Cost')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Active')}}</th>
+                <th>{{ TranslateMenuToko('L_ORDER')}}</th>
+                <th style="width:10px;">{{ TranslateMenuToko('L_IMAGE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_TITLE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_CATEGORY')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_CHIP_AWARDED')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS_IMAGE') }}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS_GET') }}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_GOLD_COST')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ACTIVE')}}</th>
                 @if($menu && $mainmenu)
-                  <th>{{ TranslateMenuGame('Action')}}
+                  <th>{{ TranslateMenuGame('L_ACTION')}}
                     <a href="#" style="color:red;font-weight:bold;"
                         class="delete"
                         id="trash"
@@ -129,7 +129,7 @@
                                   <input type="hidden" name="pk" value="{{ $itm->item_id }}">
                                   <input type="file" name="file" id="media-input-wtr" class="upload{{ $itm->item_id }}" accept="image/*">
                                   <i class="fa fa-edit media-icon-wtr"></i>
-                                  <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
+                                  <p class="nav-name">{{ TranslateMenuToko('L_MAIN_IMAGE')}}</p>
                               </span>
                               <span class="media-overlay-wtr1 med-ovlay{{ $itm->item_id }}">
                                   <input type="hidden" name="pk" value="{{ $itm->item_id }}">
@@ -144,10 +144,10 @@
                               </figure>
                             </div>
                             <div class="media-control" align="center" style="margin-top:-1%">
-                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
+                              <button class="save-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('L_SAVE_IMAGE')}}</button>
                             </form>
-                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('Cancel')}}</button>
-                              <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
+                              <button class="cancel-upload{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}</button>
+                              <button class="edit-profile{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('L_EDIT')}}</button>
                         </div>
                       </td>
                       <td><a href="#" class="usertext" data-name="name" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="text" data-url="{{ route('ChipStore-update') }}">{{ $itm->name }}</a></td>
@@ -171,10 +171,10 @@
                            
                           </div>
                           <div class="media-control" align="center" style="margin-top:-1%">
-                            <button class="save-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                            <button class="save-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('L_SAVE') }}</button>
                           </form>
-                            <button class="cancel-ImgBonus{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                            <button class="edit-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                            <button class="cancel-ImgBonus{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}</button>
+                            <button class="edit-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('L_EDIT') }}</button>
                         </div>
                       </td>
                       <td><a href="#" class="usertext" data-name="bonus_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update')}}">{{ $itm->bonus_get }}</a></td>
@@ -265,21 +265,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('Delete Data')}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuGame('L_DELETE_DATA')}}</h5>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <i class="fa fa-remove"></i> 
             </button>
           </div>
           <div class="modal-body">
-            {{ TranslateMenuGame('Are you sure')}}
+            {{ TranslateMenuGame('L_ARE_YOU_SURE')}}
             <form action="{{ route('ChipStore-delete') }}" method="post">
               {{ method_field('delete')}}
               {{ csrf_field() }}
               <input type="hidden" name="id" id="id" value="">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('Yes')}}</button>
-            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('No')}}</button>
+            <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuGame('L_YES')}}</button>
+            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_NO')}}</button>
           </div>
             </form>
         </div>
@@ -293,7 +293,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('Create new chip store')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('L_CREATE_NEW_CHIP_STORE')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -401,13 +401,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure') }}
+        {{ TranslateMenuItem('L_ARE_U_SURE') }}
         <form action="{{ route('ChipStore-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -417,8 +417,8 @@
           <input type="text" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
       </div>
         </form>
     </div>
