@@ -219,14 +219,14 @@
                     </td> --}}
                   </tr>
                 </table>
-                  <input type="text" class="form-control" name="title" placeholder="Nama"><br>
-                  <input type="number" class="form-control" name="price" placeholder="Harga"><br>
+                  <input type="text" class="form-control required" name="title" placeholder="Nama"><br>
+                  <input type="number" class="form-control required" name="price" placeholder="Harga" min="0"><br>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadingBtn()" >
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadingBtn()" >
             <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -294,11 +294,34 @@
 </div>
 
 <script>
+  //Loading submit button
   function FunctionLoadingBtn(){
     $('.btn-create').text('Loading...');
     $(this).submit('loading').delay(1000).queue(function(){
     });
   }
+
+  //Disable button submit before form fullfilled
+  $(document).on('change keyup', '.required', function(e){
+    let Disabled = true;
+
+    $(".required").each(function() {
+      let value = this.value
+      if((value)&&(value.trim() != ''))
+      {
+        Disabled = false
+      } else {
+        Disabled = true
+        return false
+      }
+    });
+
+    if(Disabled){
+      $('.toggle-disabled').prop("disabled", true);
+    }else{
+      $('.toggle-disabled').prop("disabled", false);
+    }
+  })
 </script>
 
 @foreach ($emoticon as $emot)
