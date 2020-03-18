@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Guest') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Guest') }}">{{ Translate_menuPlayers('Guest') }}</a></li>
 @endsection
 
 
@@ -41,7 +41,7 @@
                 <div class="row h-100 w-100 no-gutters">
                   @if (Request::is('Players/Guest/Guest-search*'))
                     <div class="col">
-                      <input type="text" id="username" class="left" name="inputPlayer" placeholder="username" value="{{ $username }}">
+                      <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="username" value="{{ $username }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select id="status" name="inputStatus" class="form-control" required>
@@ -55,7 +55,7 @@
                     </div>
                   @else 
                     <div class="col">
-                        <input type="text" id="username" class="left" name="inputPlayer" placeholder="username">
+                        <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="username">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select id="status" name="inputStatus" class="form-control" required>

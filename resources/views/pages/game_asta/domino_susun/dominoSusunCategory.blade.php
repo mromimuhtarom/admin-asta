@@ -2,8 +2,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Category_Domino_Susun') }}">Domino Susun</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Category_Domino_Susun') }}">{{ TranslateMenuGame('L_CATEGORY') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Category_Domino_Susun') }}">Domino Susun</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Category_Domino_Susun') }}">{{ TranslateMenuGame('L_CATEGORY') }}</a></li>
 @endsection
 
 

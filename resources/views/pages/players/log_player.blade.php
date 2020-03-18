@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('LogPlayers') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('LogPlayers') }}</a></li>
 @endsection
 
 @section('content')
@@ -33,7 +33,7 @@
             <div class="row h-100 w-100">
                 @if (Request::is('Players/Log_Players/LogPlayer'))
                     <div class="col">
-                        <input type="text" name="username" class="left" placeholder="username / Player ID" value="{{ $getusername }}">
+                        <input type="text" name="username" class="form-control" placeholder="username / Player ID" value="{{ $getusername }}">
                     </div>
                     <div class="col">
                         <select name="action" id="" class="form-control">
@@ -43,15 +43,15 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col">
+                    <div class="col date-min">
                         <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
                     </div>
-                    <div class="col">
+                    <div class="col date-max">
                         <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
                     </div>
                 @else
                     <div class="col">
-                        <input type="text" name="username" class="left" placeholder="username / Player ID">
+                        <input type="text" name="username" class="form-control" placeholder="username / Player ID">
                     </div>
                     <div class="col">
                         <select name="action" id="" class="form-control">
@@ -61,10 +61,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col">
+                    <div class="col date-min">
                         <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                     </div>
-                    <div class="col">
+                    <div class="col date-max">
                         <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
                     </div>
                 @endif

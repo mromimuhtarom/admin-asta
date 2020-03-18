@@ -40,11 +40,11 @@
             <div class="row h-100 w-100 no-gutters">
                 @if (Request::is('Reseller/Reseller-Transaction/Add_Transaction_Reseller/AddTransactionReseller-search*'))
                 <div class="col" align="right">
-                    <input type="text" id="username" class="left" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}" value="{{ $getUsername }}">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}" value="{{ $getUsername }}">
                 </div>
                 @else
                 <div class="col" align="right">
-                    <input type="text" id="username" class="left" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}">
                 </div> 
                 @endif;
                 <div class="col" style="padding-left:2%;">

@@ -1237,6 +1237,7 @@ public function detailTransaction(Request $request, $month, $year)
         // dd($bankname);
         $payment      = Payment::where('status', '=', 1)->where('type', '=', 1)->get();
         if($bankname != 'all_bank'):
+            // dd($bankname);
             $transactions = DB::table('asta_db.store_transaction')
                             ->join('item_cash', 'item_cash.item_id', '=', 'asta_db.store_transaction.item_id')
                             ->join('asta_db.reseller', 'asta_db.reseller.reseller_id', '=', 'asta_db.store_transaction.user_id')
@@ -1259,7 +1260,7 @@ public function detailTransaction(Request $request, $month, $year)
                             )
                             ->where('asta_db.store_transaction.status', '=', 0)
                             ->where('asta_db.store_transaction.shop_type', '=', 2)
-                            ->where('asta_db.payment.id', '=', $bankname)
+                            ->where('asta_db.store_transaction.payment_id', '=', $bankname)
                             ->orderBy('asta_db.store_transaction.datetime', 'ASC')
                             ->get();
         elseif($bankname == 'all_bank'):
@@ -1318,7 +1319,6 @@ public function detailTransaction(Request $request, $month, $year)
 //------ Request Transaction Approve -------//
     public function RequestTransactionApprove(Request $request)
     {
-        $resellerId               = $request->resellerId;
         $goldAwarded              = $request->goldbuy;
         $amount                   = $request->price;
         $reseller_id              = $request->reseller_id;
@@ -1334,7 +1334,7 @@ public function detailTransaction(Request $request, $month, $year)
         $reseller_transaction_day = ResellerTransactionDay::where('reseller_id', '=', $reseller_id)
                                     ->whereDate('date', '=', $datenow)
                                     ->first();
-        $resellername             = Reseller::where('reseller_id', '=', $resellerId)->first();
+        $resellername             = Reseller::where('reseller_id', '=', $reseller_id)->first();
 
         if($reseller_transaction_day)
         {

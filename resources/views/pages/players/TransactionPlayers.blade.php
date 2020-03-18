@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-	<li class="breadcrumb-item"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('L_TRANSPLAYER') }}</a></li>
+	<li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('L_TRANSPLAYER') }}</a></li>
 @endsection
 
 @section('content')
@@ -29,8 +29,8 @@
 			<form action="{{ route('TransactionPlayers-search')}}">
             <div class="row h-100 w-100">
 				@if (Request::is('Players/Transaction_Players/Banking-search*'))
-                	<div class="col">
-                    	<select name="choose_time" id="time" class="form-control">
+          <div class="col">
+            <select name="choose_time" id="time" class="form-control">
 							<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
 							<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
 							<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
@@ -45,40 +45,40 @@
 								@endforeach
                     	</select>
 					</div>
-                	<div class="col">
+          <div class="col">
 						<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $minDate }}">
-                	</div>
-                	<div class="col">
+          </div>
+          <div class="col date-min">
 						<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
-                	</div>
-                	<div class="col">
-                    	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+          </div>
+          <div class="col date-max">
+            <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
 					</div>
 				@else
 					<div class="col">
-                    	<select name="choose_time" id="time" class="form-control">
+            <select name="choose_time" id="time" class="form-control">
 							<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
 							<option value="day">{{ translate_MenuTransaction('Day') }}</option>
 							<option value="week">{{ translate_MenuTransaction('Week') }}</option>
 							<option value="month">{{ translate_MenuTransaction('Month') }}</option>
-                    	</select>
+            </select>
 					</div>
 					<div class="col">
-                    	<select name="game_name" id="gamename" class="form-control">
+            <select name="game_name" id="gamename" class="form-control">
 							<option value="">{{ translate_MenuTransaction('All Game') }}</option>
 								@foreach ($gamename as $gm)
 									<option value="{{ $gm->id }}">{{ $gm->desc }}</option>														
 								@endforeach
-                    	</select>
+            </select>
 					</div>
-                	<div class="col">
+          <div class="col date-min">
 						<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $datenow }}">
-                	</div>
-                	<div class="col">
-                		<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
-                	</div>
-                	<div class="col">
-                    	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+          </div>
+          <div class="col date-max">
+          	<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
+          </div>
+          <div class="col">
+            <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
 					</div> 
 				@endif
             </div>

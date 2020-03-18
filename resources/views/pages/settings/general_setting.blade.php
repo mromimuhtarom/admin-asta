@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('L_SETTINGS') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('General_Setting') }}">{{ translate_menu('L_GENERAL_SETTING') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('General_Setting') }}">{{ translate_menu('L_SETTINGS') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('General_Setting') }}">{{ translate_menu('L_GENERAL_SETTING') }}</a></li>
 @endsection
 
 

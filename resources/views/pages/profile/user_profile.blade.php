@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('profile-view') }}">Profile</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('profile-view') }}">My Account</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('profile-view') }}">Profile</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('profile-view') }}">My Account</a></li>
 @endsection
 
 

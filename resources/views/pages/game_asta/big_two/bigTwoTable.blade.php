@@ -2,8 +2,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Table_Big_Two') }}">Big Two</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Table_Big_Two') }}">{{ TranslateMenuGame('L_TABLE') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Big_Two') }}">Big Two</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Big_Two') }}">{{ TranslateMenuGame('L_TABLE') }}</a></li>
 @endsection
 
 

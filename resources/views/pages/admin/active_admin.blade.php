@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ACTIVE_ADMIN') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ACTIVE_ADMIN') }}</a></li>
 @endsection
 
 @section('content') <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-2"

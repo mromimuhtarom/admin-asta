@@ -2,8 +2,8 @@
 
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('Report store')}}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_REPORT_STORE')}}</a></li>
 @endsection
 
 
@@ -69,17 +69,17 @@
                 @endif
 
                 @if(Request::is('Store/Report_Store/ReportStore-search*'))
-                <div class="col">
+                <div class="col date-min">
                     <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
                 </div>
-                <div class="col">
+                <div class="col date-max">
                     <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
                 </div>
                 @else
-                <div class="col">
+                <div class="col date-min">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col">
+                <div class="col date-max">
                     <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
                 </div>
                 @endif

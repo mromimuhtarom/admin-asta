@@ -3,8 +3,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('User_Admin') }}">{{ translate_menu('L_USER_ADMIN')}}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('User_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('User_Admin') }}">{{ translate_menu('L_USER_ADMIN')}}</a></li>
 @endsection
 
 

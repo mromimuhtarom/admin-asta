@@ -2,8 +2,8 @@
 
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Log_Admin') }}">{{ translate_menu('L_LOG_ADMIN') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Log_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Log_Admin') }}">{{ translate_menu('L_LOG_ADMIN') }}</a></li>
 @endsection
 
 @section('content')
@@ -29,8 +29,8 @@
         <form action="{{ route('Log-search') }}">
             <div class="row h-100 w-100">
                 @if(Request::is('Admin/Log_Admin/Log-search*'))
-                    <div class="col">
-                        <input type="text" name="username" class="left" placeholder="username / Admin ID" value="{{ $searchUser }}">
+                    <div class="col username">
+                        <input type="text" name="username" class="form-control" placeholder="username / Admin ID" value="{{ $searchUser }}">
                     </div>
                     <div class="col">
                         <select name="action" id="" class="form-control">
@@ -40,15 +40,15 @@
                             @endforeach
                         </select>
                     </div>                    
-                    <div class="col">
+                    <div class="col date-min">
                         <input type="date" class="form-control" name="dari" value="{{ $minDate }}">
                     </div>
-                    <div class="col">
+                    <div class="col date-max">
                         <input type="date" class="form-control" name="sampai" value="{{ $maxDate }}">
                     </div>
                 @else
-                <div class="col">
-                    <input type="text" name="username" class="left" placeholder="username / Admin ID">
+                <div class="col username">
+                    <input type="text" name="username" class="form-control" placeholder="username / Admin ID">
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
@@ -58,15 +58,15 @@
                         @endforeach
                     </select>
                 </div>   
-                <div class="col">
+                <div class="col date-min">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col">
+                <div class="col date-max">
                     <input type="date" class="form-control" name="sampai" value="{{ $datenow->toDateString() }}">
                 </div>
                 @endif
                 <div class="col">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('L_SEARCH') }}</button>
+                    <button class="myButton" type="submit"><i class="fa fa-search"></i>{{ translate_MenuContentAdmin('L_SEARCH') }}</button>
                 </div>
             </div>
         </form>

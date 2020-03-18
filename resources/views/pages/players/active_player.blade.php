@@ -1,10 +1,10 @@
 @extends('index')
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i
+<li class="menunameheader"><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i
             class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Active Players') }}</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Active Players') }}</a></li>
 @endsection
 
 
@@ -36,9 +36,9 @@
             <div class="row h-100 w-100 no-gutters">
                 @if (Request::is('Players/Active_Players/Active-search*'))
                     <div class="col">
-                        <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID" value="{{ $inputPlayer }}">
+                        <input type="text" class="form-control" name="inputPlayer" placeholder="username/Player ID" value="{{ $inputPlayer }}">
                     </div>
-                    <div class="col">
+                    <div class="col" style="padding-left:3%;">
                         <select name="inputRegisterType" class="form-control">
                             <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
                             <option value="{{ $explodetype[0]}}"@if($registerType == $explodetype[0]) selected @endif;>{{ Translate_menuPlayers($explodetype[1]) }}</option>
@@ -55,9 +55,9 @@
                     </div>
                 @else 
                     <div class="col">
-                        <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
+                        <input type="text" class="form-control" name="inputPlayer" placeholder="username/Player ID">
                     </div>
-                    <div class="col">
+                    <div class="col" style="padding-left:3%;">
                         <select name="inputRegisterType" class="form-control">
                             <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
                             <option value="{{ $explodetype[0]}}">{{ Translate_menuPlayers($explodetype[1]) }}</option>

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Report Abuse Player') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Report Abuse Player') }}</a></li>
 @endsection
 
 @section('content')
@@ -30,23 +30,23 @@
         <form action="{{ route('ReportAbusePlayer-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
-                    <input type="text" name="inputReportPlayer" class="left" placeholder="Player Sender / Player ID">
+                    <input type="text" name="inputReportPlayer" class="form-control" placeholder="Player Sender / Player ID">
                 </div>
                 <div class="col" style="padding-left:1%;"> 
                     <input type="text" name="inputReportedPlayer" class="form-control" placeholder="Reported Player / Player ID">
                 </div>
                 @if(Request::is('FeedBack/Report_Abuse_Player/ReportAbusePlayer-search*'))
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-min" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $mindate }}">
                 </div>
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-max" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $maxdate }}">
                 </div>
                 @else
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-min" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-max" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                 </div>
                 @endif

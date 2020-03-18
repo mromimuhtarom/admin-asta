@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Report Player') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Report Player') }}</a></li>
 @endsection
 
 
@@ -33,8 +33,8 @@
             <form action="{{ route('ReportPlayer-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     @if (Request::is('Players/Report_Players/ReportPlayer-search'))
-                    <div class="col">
-                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID" value="{{ $player }}">
+                    <div class="col username">
+                        <input type="text" name="inputPlayer" class="form-control" placeholder="username/Player ID" value="{{ $player }}">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
@@ -43,15 +43,15 @@
                             <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;>Pemain {{ ConfigTextTranslate($logonlinetype[3])}}</option>
                         </select>
                     </div>
-                    <div class="col" style="padding-left:1%;">
+                    <div class="col date-min" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMinDate"  value="{{ $minDate }}">
                     </div>
-                    <div class="col" style="padding-left:1%;">
+                    <div class="col date-max" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMaxDate"  value="{{ $maxDate }}">
                     </div>
                     @else
-                    <div class="col">
-                        <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
+                    <div class="col username">
+                        <input type="text" name="inputPlayer" class="form-control" placeholder="username/Player ID">
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
@@ -60,10 +60,10 @@
                             <option value="{{ $logonlinetype[2] }}">Pemain {{ ConfigTextTranslate($logonlinetype[3])}}</option>
                         </select>
                     </div> 
-                    <div class="col" style="padding-left:1%;">
+                    <div class="col date-min" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMinDate"  value="{{ $datenow->toDateString() }}">
                     </div>
-                    <div class="col" style="padding-left:1%;">
+                    <div class="col date-max" style="padding-left:1%;">
                         <input type="date" class="form-control" name="inputMaxDate"  value="{{ $datenow->toDateString() }}">
                     </div>                    
                     @endif

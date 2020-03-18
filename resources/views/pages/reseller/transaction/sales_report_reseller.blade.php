@@ -33,10 +33,10 @@
                 <div class="col" style="padding-left:3%;">
                     <input type="text" name="inputUsernamePlayer" class="form-control" placeholder="username Player / Player ID">
                 </div>
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-min" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-max" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                 </div>
                 @else
@@ -46,10 +46,10 @@
                 <div class="col" style="padding-left:3%;">
                     <input type="text" name="inputUsernamePlayer" class="form-control" value="{{ $searchUsernamePlayer }}" placeholder="username Player / Player ID">
                 </div>
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-min" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $startDate }}">
                 </div>
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-max" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $endDate }}">
                 </div>
                 @endif

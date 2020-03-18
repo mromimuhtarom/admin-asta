@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Category_Big_Two') }}">Big Two</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Category_Big_Two') }}">{{ TranslateMenuGame('L_CATEGORY') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Category_Big_Two') }}">Big Two</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Category_Big_Two') }}">{{ TranslateMenuGame('L_CATEGORY') }}</a></li>
 @endsection
 
 @section('content')

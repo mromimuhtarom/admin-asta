@@ -304,8 +304,8 @@ function translate_menuTransaction($menu){
         'Point Expired'         =>  'Poin Kadaluarsa',
         'Transaction Day'       =>  'Transaksi Harian',
         'Detail Information'    =>  'Detail Information',
-        'Are you sure want to Decline this Transaction' => 'aaa' ,
-        'Are you want to Approve this Transaction?'    => 'cc',
+        'Are you sure want to Decline this Transaction' => 'Apakah anda yakin  untuk menolak permintaan ini?' ,
+        'Are you want to Approve this Transaction?'    => 'Apakah anda yakin untuk menerima permintaan ini ?',
         'L_TRANSPLAYER'         =>  'Transaksi pemain'
     ];
     return $array_menuContent[$menu];
@@ -642,7 +642,7 @@ function TranslateMenuToko($menu){
         'L_ITEM_BONUS'        =>  'Bonus item',
         'L_ITEM_BONUS_IMAGE'  =>  'Gambar item bonus',
         'L_ITEM_BONUS_GET'    =>  'Item bonus yang didapat',
-        'L_GOOGLE_KEY'        =>  'Google key'
+        'L_GOOGLE_KEY'        =>  'Google key',
     ];
 
     return $array_menuContent[$menu];

@@ -1,11 +1,5 @@
 @extends('index')
 
-@section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Settings</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Slide Banner</a></li>
-@endsection
-
-
 @section('content')
 
 <p style="text-align: center;"><img height="230px" width="300px" align="center" src="/images/underconstruction.png"/></p>

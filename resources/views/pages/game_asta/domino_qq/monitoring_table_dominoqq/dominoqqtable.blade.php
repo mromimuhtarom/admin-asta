@@ -1,9 +1,9 @@
 @extends('index')
 
 @section('page')
-<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_DominoQ') }}">Games > Domino QQ</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_DominoQ') }}">Monitoring Table</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_DominoQ') }}">Novice</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Monitoring_Table_DominoQ') }}">Games > Domino QQ</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Monitoring_Table_DominoQ') }}">Monitoring Table</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Monitoring_Table_DominoQ') }}">Novice</a></li>
 @endsection
 
 @section('content')

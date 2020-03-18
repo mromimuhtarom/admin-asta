@@ -19,7 +19,7 @@
   <script src="/assets/vendors/vendors.bundle.js"></script>
 	<script src="/assets/app/app.bundle.js"></script>
 	<script src="/js/sceditor/minified/sceditor.min.js"></script>
-<link rel="stylesheet" href="/js/sceditor/minified/themes/default.min.css" />
+	<link rel="stylesheet" href="/js/sceditor/minified/themes/default.min.css" />
 	
    <!-- bootstrap -->
 

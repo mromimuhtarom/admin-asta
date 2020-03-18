@@ -3,8 +3,8 @@
 
 
 @section('page')
-<li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Season_Reward_Big_Two') }}">Games > Big Two</a></li>
+<li class="menunameheader"><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Season_Reward_Big_Two') }}">Games > Big Two</a></li>
         <li class="breadcrumb-item"><a href="{{ route('Season_Reward_Big_Two') }}">Season Reward</a></li>
 @endsection
 

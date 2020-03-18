@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Report_Admin') }}">{{ translate_menu('L_REPORT_ADMIN') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Admin') }}">{{ translate_menu('L_REPORT_ADMIN') }}</a></li>
 @endsection
 
 @section('content')
@@ -28,8 +28,8 @@
             <form action="{{ route('ReportAdmin-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     @if(Request::is('Admin/Report_Admin/ReportAdmin-search*'))
-                        <div class="col">
-                            <input type="text" name="inputPlayer" class="left" placeholder="username" value="{{ $player }}">
+                        <div class="col username">
+                            <input type="text" name="inputPlayer" class="form-control" placeholder="username" value="{{ $player }}">
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <select name="logType" class="form-control">
@@ -45,8 +45,8 @@
                             <input type="date" class="form-control" name="inputMaxDate" value="{{ $maxDate }}">
                         </div>
                     @else 
-                        <div class="col">
-                            <input type="text" name="inputPlayer" class="left" placeholder="username">
+                        <div class="col username">
+                            <input type="text" name="inputPlayer" class="form-control" placeholder="username">
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <select name="logType" class="form-control">
@@ -55,10 +55,10 @@
                                 <option value="{{ $logonlinetype[2] }}">{{ ConfigTextTranslate($logonlinetype[3]) }} {{ translate_MenuContentAdmin('L_ADMIN') }}</option>
                             </select>
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-min" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-max" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                         </div>
                     @endif
