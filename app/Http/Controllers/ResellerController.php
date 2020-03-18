@@ -57,7 +57,7 @@ class ResellerController extends Controller
                 $currentvalue = $reseller->username;
                 break;
             
-            case "name":
+            case "fullname":
                 $name = "Nama";
                 $currentvalue = $reseller->fullname;
                 break;
@@ -81,6 +81,8 @@ class ResellerController extends Controller
                 $name         = "Peringkat ID";
                 $rankname     = ResellerRank::where('id', '=', $reseller->rank_id)->first();
                 $currentvalue = $rankname->name;
+                $valuerankname = ResellerRank::where('id', '=', $value)->first();
+                $value = $valuerankname->name;
                 // return response()->json($rankname->name, 400);
                 break;
             
