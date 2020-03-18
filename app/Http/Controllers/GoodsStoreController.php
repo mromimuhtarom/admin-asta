@@ -215,9 +215,9 @@ class GoodsStoreController extends Controller
                 $name = 'Status';
                 $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
                 if($value == 0):
-                    $value = 'Disabled';
+                    $value = 'Non Aktif';
                 else:
-                    $value = 'enabled';
+                    $value = 'Aktif';
                 endif;
                 break;
             case 'order':
