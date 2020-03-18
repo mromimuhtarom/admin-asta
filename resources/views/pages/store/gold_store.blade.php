@@ -81,7 +81,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoldStore">
-                <i class="fa fa-plus"></i>{{ TranslateMenuToko('Create new gold store')}}
+                <i class="fa fa-plus"></i>{{ TranslateMenuToko('L_CREATE_NEW_GOLD_STORE')}}
               </button>
               @endif
             </div>
@@ -99,20 +99,20 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                  <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
+                  <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('L_SELECT_ALL') }}</th>
                 @endif
-                <th>{{ TranslateMenuToko('Order')}}</th>
-                <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Gold Awarded')}}</th>
-                <th class="th-sm">Item Bonus</th>
-                <th class="th-sm">Gambar Item Bonus</th>
-                <th class="th-sm">Item Bonus yang didapat</th>
-                <th class="th-sm">{{ TranslateMenuToko('Price cash')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Item type')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Pay Transaction')}}</th>
-                <th class="th-sm">Google Key</th>
-                <th class="th-sm">{{ TranslateMenuItem('Status')}}</th>
+                <th>{{ TranslateMenuToko('L_ORDER')}}</th>
+                <th style="width:10px;">{{ TranslateMenuToko('L_IMAGE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_TITLE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_GOLD_AWARDED')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS_IMAGE') }}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_BONUS_GET') }}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_PRICE_CASH')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_ITEM_TYPE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_PAY_TRANSACTION')}}</th>
+                <th class="th-sm">{{ TranslareMenuToko('L_GOOGLE_KEY') }}</th>
+                <th class="th-sm">{{ TranslateMenuItem('L_STATUS')}}</th>
                 @if($menu && $mainmenu)
                   <th>{{ TranslateMenuGame('L_ACTION')}}
                     <a href="#" style="color:red;font-weight:bold;"
