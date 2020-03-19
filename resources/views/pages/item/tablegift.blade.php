@@ -2,8 +2,13 @@
 
 
 @section('page')
+<<<<<<< HEAD
+  <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('L_ITEM') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('L_TABLE_GIFT') }}</a></li>
+=======
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Item') }}</a></li>
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Table Gift') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -53,7 +58,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">
-      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuItem('Table Gift') }}</strong></h2>
+      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuItem('L_TABLE_GIFT') }}</strong></h2>
     </div>
   </header>
 
@@ -68,7 +73,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-plus"></i>{{ TranslateMenuItem('Create New Gift') }}
+                <i class="fa fa-plus"></i>{{ TranslateMenuItem('L_CREATE_NEW_GIFT') }}
               </button>
               @endif
             </div>
@@ -85,7 +90,7 @@
           <div class="row">
               <!-- Button tambah bot baru -->
               <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                  {{ Translate_menuPlayers('Total Record Entries is') }} {{ $gifts->total() }}
+                  {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $gifts->total() }}
               </div>
                           <!-- End Button tambah bot baru -->
           </div> 
@@ -93,15 +98,15 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
+                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('L_SELECT_ALL') }}</th>
                 @endif
-                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.id">{{ TranslateMenuItem('Gift ID') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.id') }}"></i></a></th>
-                <th style="width:10px;">{{ TranslateMenuItem('Image') }}</th>
-                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.name">{{ TranslateMenuItem('Title') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.name') }}"></i></a></th>
-                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.price">{{ TranslateMenuItem('Price') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.price') }}"></i></a></th>
-                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.category_id">{{ TranslateMenuItem('Category') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.category_id') }}"></i></a></th>
-                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.status">{{ TranslateMenuItem('Status') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.status') }}"></i></a></th>
-                <th class="th-sm">{{ TranslateMenuItem('See Detail Image') }}</th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.id">{{ TranslateMenuItem('L_GIFT_ID') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.id') }}"></i></a></th>
+                <th style="width:10px;">{{ TranslateMenuItem('L_IMAGE') }}</th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.name">{{ TranslateMenuItem('L_TITLE') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.name') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.price">{{ TranslateMenuItem('L_PRICE') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.price') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.category_id">{{ TranslateMenuItem('L_CATEGORY') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.category_id') }}"></i></a></th>
+                <th class="th-sm"><a href="{{ route('Table_Gift') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.gift.status">{{ TranslateMenuItem('L_STATUS') }} <i class="fa fa-sort{{ iconsorting('asta_db.gift.status') }}"></i></a></th>
+                <th class="th-sm">{{ TranslateMenuItem('L_SEE_DETAIL_IMAGE') }}</th>
                 @if($menu && $mainmenu)
                 <th align="center" style="width:10px;">
                   <a  href="#" style="color:red;font-weight:bold;" 
@@ -137,10 +142,10 @@
                            
                           </div>
                           <div class="media-control" align="center" style="margin-top:-1%">
-                            <button class="save-ImgBonus{{ $gf->id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                            <button class="save-ImgBonus{{ $gf->id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE') }}</button>
                           </form>
-                            <button class="cancel-ImgBonus{{ $gf->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                            <button class="edit-ImgBonus{{ $gf->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                            <button class="cancel-ImgBonus{{ $gf->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}</button>
+                            <button class="edit-ImgBonus{{ $gf->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('L_EDIT') }}</button>
                         </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $gf->id }}" data-type="text" data-url="{{ route('TableGift-update') }}">{{ $gf->name }}</a></td>
@@ -148,7 +153,7 @@
                     <td><a href="#" class="category" data-name="category_id" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->category_id }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate($gf->strCategory()) }}</a></td>
                     <td><a href="#" class="status" data-name="status" data-pk="{{ $gf->id }}" data-type="select" data-value="{{ $gf->status }}" data-url="{{ route('TableGift-update') }}" data-title="Select type">{{ ConfigTextTranslate(strEnabledDisabled($gf->status)) }}</a></td>
                     <td>
-                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $gf->id }}">{{ TranslateMenuItem('Detail Info') }}</button>
+                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $gf->id }}">{{ TranslateMenuItem('L_DETAIL_INFO') }}</button>
                     </td>
                     <td>
                         <a href="#" style="color:red;" class="delete{{ $gf->id }}" 
@@ -194,7 +199,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuItem('Create gift store') }}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuItem('L_CREATE_GIFT_STORE') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -227,7 +232,7 @@
                   <input type="text" class="form-control required name="title" placeholder="Nama"><br>
                   <input type="number" class="form-control required" name="price" placeholder="Harga" min="0"><br>
                   <select name="category" class="form-control required">
-                    <option selected disabled>{{ TranslateMenuItem('Category') }}</option>
+                    <option selected disabled>{{ TranslateMenuItem('L_CATEGORY') }}</option>
                     <option value="1">Makanan</option>
                     <option value="2">Minuman</option>
                     <option value="3">Item</option>
@@ -239,10 +244,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadingBtn()" >
-            <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
+            <i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
+            <i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}
           </button>
         </div>
       </form>
@@ -256,21 +261,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash">{{ TranslateMenuItem('DeleteData') }}</i></h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash">{{ TranslateMenuItem('L_DELETE_DATA') }}</i></h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          {{ TranslateMenuItem('Are you sure want to delete it') }}
+          {{ TranslateMenuItem('L_QUESTION_DELETE_IT') }}
           <form action="{{ route('TableGift-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
             <input type="hidden" name="id" id="id" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
         </div>
           </form>
       </div>
@@ -282,13 +287,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure') }}
+        {{ TranslateMenuItem('L_ARE_U_SURE') }}
         <form action="{{ route('TableGift-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -297,8 +302,8 @@
           <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
       </div>
         </form>
     </div>
@@ -319,7 +324,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ TranslateMenuItem('Detail Image') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ TranslateMenuItem('L_DETAIL_IMAGE') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>

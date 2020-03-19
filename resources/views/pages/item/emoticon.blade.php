@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
+  <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('L_ITEM') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('L_EMOTICON') }}</a></li>
+=======
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Item') }}</a></li>
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Emoticon') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -53,7 +58,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
   <header>
     <div class="widget-header">
-      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuItem('Emoticon') }}</strong></h2>
+      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuItem('L_EMOTICON') }}</strong></h2>
     </div>
   </header>
     <div>
@@ -67,7 +72,7 @@
               <div class="input-group">
                 @if($menu && $mainmenu)
                 <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                  <i class="fa fa-plus"></i>{{ TranslateMenuItem('Create New Emoticon') }}
+                  <i class="fa fa-plus"></i>{{ TranslateMenuItem('L_CREATE_NEW_EMOTICON') }}
                 </button>
                 @endif
               </div>
@@ -84,7 +89,7 @@
             <div class="row">
                 <!-- Button tambah bot baru -->
                 <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                    {{ Translate_menuPlayers('Total Record Entries is') }} {{ $emoticon->total() }}
+                    {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $emoticon->total() }}
                 </div>
                             <!-- End Button tambah bot baru -->
             </div> 
@@ -92,15 +97,15 @@
               <thead>
                 <tr>
                   @if($menu && $mainmenu)
-                    <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
+                    <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('L_SELECT_ALL') }}</th>
                   @endif
-                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.id">{{ TranslateMenuItem('Emoticon ID') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.id') }}"></i></a></th>
-                    <th style="width:10px;">{{ TranslateMenuItem('Image') }}</th>
-                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.name">{{ TranslateMenuItem('Title') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.name') }}"></i></a></th>
-                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.price">{{ TranslateMenuItem('Price') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.price') }}"></i></a></th>
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.id">{{ TranslateMenuItem('L_EMOTICON_ID') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.id') }}"></i></a></th>
+                    <th style="width:10px;">{{ TranslateMenuItem('L_IMAGE') }}</th>
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.name">{{ TranslateMenuItem('L_TITLE') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.name') }}"></i></a></th>
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.price">{{ TranslateMenuItem('L_PRICE') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.price') }}"></i></a></th>
                     {{-- <th class="th-sm">Category</th> --}}
-                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.status">{{ TranslateMenuItem('Status') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.status') }}"></i></a></th>
-                    <th class="th-sm"{{ TranslateMenuItem('See Detail Image') }}></th>
+                    <th class="th-sm"><a href="{{ route('Emoticon') }}?sorting={{ $sortingorder }}&namecolumn=asta_db.emoticon.status">{{ TranslateMenuItem('L_STATUS') }} <i class="fa fa-sort{{ iconsorting('asta_db.emoticon.status') }}"></i></a></th>
+                    <th class="th-sm"{{ TranslateMenuItem('L_SEE_DETAIL_IMAGE') }}></th>
                     @if($menu && $mainmenu)
                     <th align="center" style="width:10px;">
                       <a  href="#" style="color:red;font-weight:bold;" 
@@ -136,17 +141,17 @@
                            
                           </div>
                           <div class="media-control" align="center" style="margin-top:-1%">
-                            <button class="save-ImgBonus{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                            <button class="save-ImgBonus{{ $emot->id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE') }}</button>
                           </form>
-                            <button class="cancel-ImgBonus{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                            <button class="edit-ImgBonus{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                            <button class="cancel-ImgBonus{{ $emot->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}</button>
+                            <button class="edit-ImgBonus{{ $emot->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuItem('L_EDIT') }}</button>
                         </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-title="Title Gift" data-pk="{{ $emot->id }}" data-type="text" data-url="{{ route('Emoticon-update') }}">{{ $emot->name }}</a></td>
                     <td><a href="#" class="usertext" data-name="price" data-title="price" data-pk="{{ $emot->id }}" data-type="number" data-url="{{ route('Emoticon-update') }}">{{ $emot->price }}</a></td>
                     <td><a href="#" class="status" data-name="status" data-pk="{{ $emot->id }}" data-type="select" data-value="{{ $emot->status }}" data-url="{{ route('Emoticon-update') }}" data-title="Select type">{{ ConfigTextTranslate(strEnabledDisabled($emot->status)) }}</a></td>
                     <td>
-                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $emot->id }}">{{ TranslateMenuItem('Detail Info') }}</button>
+                      <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $emot->id }}">{{ TranslateMenuItem('L_DETAIL_INFO') }}</button>
                     </td>
                     <td>
                         <a href="#" style="color:red;" class="delete{{ $emot->id }}" 
@@ -191,7 +196,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuItem('Create Emoticon') }}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuItem('L_CREATE_EMOTICON') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -227,10 +232,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadingBtn()" >
-            <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
+            <i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
+            <i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}
           </button>
         </div>
       </form>
@@ -244,21 +249,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('DeleteData') }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_DATA') }}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          {{ TranslateMenuItem('Are you sure want to delete it') }}
+          {{ TranslateMenuItem('L_QUESTION_DELETE_IT') }}
           <form action="{{ route('Emoticon-delete') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
             <input type="hidden" name="id" id="id" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
         </div>
           </form>
       </div>
@@ -270,13 +275,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are you sure want to delete it') }}
+        {{ TranslateMenuItem('L_QUESTION_DELETE_IT') }}
         <form action="{{ route('Emoticon-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -285,8 +290,8 @@
           <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
       </div>
         </form>
     </div>
@@ -330,7 +335,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ TranslateMenuItem('Detail Image') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ TranslateMenuItem('L_DETAIL_IMAGE') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>

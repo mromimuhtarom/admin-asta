@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
+  <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('High_Roller') }}">High Roller</a></li>
+=======
   <li class="breadcrumb-item menunameheader"><a href="{{ route('High_Roller') }}">{{ Translate_menuPlayers('Players') }}</a></li>
   <li class="breadcrumb-item menunameheader"><a href="{{ route('High_Roller') }}">High Roller</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -35,10 +40,10 @@
           <table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
             <thead>
               <tr>
-                <th data-hide="phone">{{ Translate_menuPlayers('Bank Account') }}</th>
-                <th data-hide="phone,tablet">{{ Translate_menuPlayers('Players') }}</th>
+                <th data-hide="phone">{{ Translate_menuPlayers('L_BANK_ACCOUNT') }}</th>
+                <th data-hide="phone,tablet">{{ Translate_menuPlayers('L_PLAYERS') }}</th>
                 {{-- <th data-hide="phone,tablet">{{ Translate_menuPlayers('Country') }}</th> --}}
-                <th data-hide="phone,tablet">{{ Translate_menuPlayers('Gold Coins') }}</th>
+                <th data-hide="phone,tablet">{{ Translate_menuPlayers('L_GOLD_COINS') }}</th>
               </tr>
             </thead>
             <tbody>

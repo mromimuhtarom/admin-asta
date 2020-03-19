@@ -2,8 +2,13 @@
 
 
 @section('page')
+<<<<<<< HEAD
+    <li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Gold_Players') }}">{{ Translate_menuPlayers('L_GOLD_PLAYERS') }}</a></li>
+=======
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Gold_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Gold_Players') }}">{{ Translate_menuPlayers('Gold Players') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -71,7 +76,7 @@
         <header>
             <div class="widget-header">	
                 <span class="widget-icon"> <i class="fa fa-cubes"></i> </span>
-                <h2>{{ Translate_menuPlayers('Gold Players') }}</h2>
+                <h2>{{ Translate_menuPlayers('L_GOLD_PLAYERS') }}</h2>
             </div>
         
             <div class="widget-toolbar">
@@ -92,7 +97,7 @@
                     <div class="row">
                         <!-- Button tambah bot baru -->
                         <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                            {{ Translate_menuPlayers('Total Record Entries is') }} {{ $balancedetails->total() }}
+                            {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $balancedetails->total() }}
                         </div>
                                 <!-- End Button tambah bot baru -->
                     </div>
@@ -101,23 +106,23 @@
                     <thead>		
                         @if (Request::is('Players/Gold_Players/Gold-search*'))
                             <tr>
-                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.user_id') }}"></i></a></th>
-                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.action_id') }}"></i></a></th>
-                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.debit">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.debit') }}"></i></a></th>
-                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.credit') }}"></i></a></th>
-                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.balance">{{ Translate_menuPlayers('Total') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.balance') }}"></i></a></th>
-                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.datetime') }}"></i></a></th>
+                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.user_id">{{ Translate_menuPlayers('L_PLAYER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.user_id') }}"></i></a></th>
+                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.action_id">{{ Translate_menuPlayers('L_ACTION') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.action_id') }}"></i></a></th>
+                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.debit">{{ Translate_menuPlayers('L_DEBIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.debit') }}"></i></a></th>
+                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.credit">{{ Translate_menuPlayers('L_CREDIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.credit') }}"></i></a></th>
+                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.balance">{{ Translate_menuPlayers('L_TOTAL') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.balance') }}"></i></a></th>
+                                <th><a href="{{ route('Gold-search') }}?inputPlayer={{ $getusername }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.datetime">{{ Translate_menuPlayers('L_TIMESTAMP') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.datetime') }}"></i></a></th>
                             </tr>
                         @else 
                             <tr>
-                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.user_id') }}"></i></a></th>
-                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.action_id') }}"></i></a></th>
-                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.debit">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.debit') }}"></i></a></th>
-                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.credit') }}"></i></a></th>
-                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.balance">{{ Translate_menuPlayers('Total') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.balance') }}"></i></a></th>
-                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.datetime') }}"></i></a></th>
+                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.user_id">{{ Translate_menuPlayers('L_PLAYER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.user_id') }}"></i></a></th>
+                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.action_id">{{ Translate_menuPlayers('L_ACTION') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.action_id') }}"></i></a></th>
+                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.debit">{{ Translate_menuPlayers('L_DEBIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.debit') }}"></i></a></th>
+                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.credit">{{ Translate_menuPlayers('L_CREDIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.credit') }}"></i></a></th>
+                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.balance">{{ Translate_menuPlayers('L_TOTAL') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.balance') }}"></i></a></th>
+                                <th><a href="{{ route('gold_detail') }}?inputPlayer={{ $getusername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_gold.datetime">{{ Translate_menuPlayers('L_TIMESTAMP') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_gold.datetime') }}"></i></a></th>
                             </tr>
                         @endif	                
                     </thead>

@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
+<li class="breadcrumb-item"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('L_BANKING_TRANS') }}</a></li>
+=======
 <li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
 <li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('Banking Transaction') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -47,7 +52,7 @@
                 </div> 
                 @endif;
                 <div class="col" style="padding-left:2%;">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuTransaction('L_SEARCH') }}</button>
                 </div>
             </div>
         </form>
@@ -62,7 +67,7 @@
 
     <header>
         <div class="widget-header">
-            <h2><strong> Add Transaction </strong></h2>
+            <h2><strong>{{ translate_MenuTransaction('L_ADD_TRANSC') }}</strong></h2>
         </div>
     </header>
 
@@ -75,11 +80,11 @@
                         width="100%">
                         <thead>
                             <tr>
-                                <th><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.user_id') }}"></i></a></th>
-                                <th><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip">{{ Translate_menuPlayers('Chip') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
-                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point">{{ Translate_menuPlayers('Point') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.point') }}"></i></a></th>
-                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.gold">{{ Translate_menuPlayers('Gold Coins') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.gold') }}"></i></a></th>
+                                <th><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.user_id">{{ Translate_menuPlayers('L_PLAYER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.user_id') }}"></i></a></th>
+                                <th><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip">{{ Translate_menuPlayers('L_CHIP') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
+                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point">{{ Translate_menuPlayers('L_POINT') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.point') }}"></i></a></th>
+                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.gold">{{ Translate_menuPlayers('L_GOLD_COINS') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.gold') }}"></i></a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,7 +155,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel"><i
-                                class="fa fa-plus-square"></i>{{ alertTranslate("Transaction Chip") }}</h4>
+                                class="fa fa-plus-square"></i>{{ translate_MenuTransaction('L_TRANSC_CHIP') }}</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -164,17 +169,17 @@
                                         <div style="height:64px;overflow:auto;margin-bottom:20px;">
                                             <table width="100%" style="border:1px solid #dee2e6;">
                                                 <tr>
-                                                    <td width="20%">{{ alertTranslate("User ID") }}</td>
+                                                    <td width="20%">{{ translate_MenuTransaction('L_USER_ID') }}</td>
                                                     <td width="5%">:</td>
                                                     <td width="75%">{{ $transaction->user_id }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ Translate_menuPlayers("Username") }}</td>
+                                                    <td>{{ Translate_menuPlayers("L_USERNAME") }}</td>
                                                     <td>:</td>
                                                     <td>{{ $transaction->username }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ alertTranslate("Balance Chip") }}</td>
+                                                    <td>{{ translate_MenuTransaction('L_BALANCE_CHIP') }}</td>
                                                     <td>:</td>
                                                     <td>{{ number_format($transaction->chip, 2) }}</td>
                                                 </tr>
@@ -197,10 +202,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn sa-btn-primary submit-data">
-                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
                             </button>
                             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
                             </button>
                         </div>
                     </form>
@@ -215,7 +220,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel"><i
-                                class="fa fa-plus-square"></i>Kurang Transaction Chip</h4>
+                                class="fa fa-plus-square"></i>{{ translate_MenuTransaction('L_MIN_TRANSC_CHIP') }}</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -238,10 +243,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn sa-btn-primary submit-data">
-                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
                             </button>
                             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
                             </button>
                         </div>
                     </form>
@@ -256,7 +261,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ alertTranslate("Transaction Point") }}</h4>
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ translate_MenuTransaction('L_TRANSC_POINT') }}</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -271,17 +276,17 @@
                                         <div style="height:64px;overflow:auto;margin-bottom:20px;">
                                             <table width="100%" style="border:1px solid #dee2e6;">
                                                 <tr>
-                                                    <td width="20%">{{ alertTranslate("User ID") }}</td>
+                                                    <td width="20%">{{ translate_MenuTransaction('L_USER_ID') }}</td>
                                                     <td width="5%">:</td>
                                                     <td width="75%">{{ $transaction->user_id }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ Translate_menuPlayers("Username") }}</td>
+                                                    <td>{{ Translate_menuPlayers("L_USERNAME") }}</td>
                                                     <td>:</td>
                                                     <td>{{ $transaction->username }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ alertTranslate("Balance Point") }}</td>
+                                                    <td>{{ translate_MenuTransaction('L_BALANCE_POINT') }}</td>
                                                     <td>:</td>
                                                     <td>{{ number_format($transaction->point, 2) }}</td>
                                                 </tr>
@@ -304,10 +309,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn sa-btn-primary submit-data">
-                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
                             </button>
                             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
                             </button>
                         </div>
                     </form>
@@ -320,7 +325,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Transaction Point</h4>
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ translate_MenuTransaction('L_TRANSC_POINT') }}</h4>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -343,10 +348,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn sa-btn-primary submit-data">
-                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                                <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
                             </button>
                             <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                                <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
                             </button>
                         </div>
                     </form>
@@ -362,7 +367,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><i
-                        class="fa fa-plus-square"></i>{{ alertTranslate("Transaction Gold") }}</h4>
+                        class="fa fa-plus-square"></i>{{ translate_MenuTransaction('L_TRANSC_GOLD') }}</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
@@ -377,17 +382,17 @@
                                 <div style="height:64px;overflow:auto;margin-bottom:20px;">
                                     <table width="100%" style="border:1px solid #dee2e6;">
                                         <tr>
-                                            <td width="20%">{{ alertTranslate("User ID") }}</td>
+                                            <td width="20%">{{ translate_MenuTransaction('L_USER_ID') }}</td>
                                             <td width="5%">:</td>
                                             <td width="75%">{{ $transaction->user_id }}</td>
                                         </tr>
                                         <tr>
-                                            <td>{{ Translate_menuPlayers("Username") }}</td>
+                                            <td>{{ Translate_menuPlayers("L_USERNAME") }}</td>
                                             <td>:</td>
                                             <td>{{ $transaction->username }}</td>
                                         </tr>
                                         <tr>
-                                            <td>balance Gold</td>
+                                            <td>{{ translate_MenuTransaction('L_BALANCE_GOLD') }}</td>
                                             <td>:</td>
                                             <td>{{ number_format($transaction->gold, 2) }}</td>
                                         </tr>
@@ -411,10 +416,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn sa-btn-primary submit-data">
-                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
                     </button>
                     <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
                     </button>
                 </div>
             </form>
@@ -428,7 +433,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><i
-                        class="fa fa-plus-square"></i>Kurang Transaction Gold</h4>
+                        class="fa fa-plus-square"></i>{{ translate_MenuTransaction('L_MIN_TRANSC_GOLD') }}</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
@@ -452,10 +457,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn sa-btn-primary submit-data">
-                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
                     </button>
                     <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
                     </button>
                 </div>
             </form>

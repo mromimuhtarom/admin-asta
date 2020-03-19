@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
+  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_REGISTERED_PLAYER') }}</a></li>
+=======
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Registered_Players') }}">Players</a></li>
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Registered_Players') }}">Registered Player</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -20,10 +25,10 @@
 
                 <div id="carouselExampleControls" class="carousel slide profile-carousel" data-ride="carousel" style="height:100%; margin-bottom:-50%;">
                     <div class="air air-bottom-right padding-10">
-                        <a href="javascript:void(0);" class="btn text-white bg-teal btn-sm"><i class="fa fa-check"></i> Profile</a>&nbsp; 
+                        <a href="javascript:void(0);" class="btn text-white bg-teal btn-sm"><i class="fa fa-check"></i>{{ Translate_menuPlayers('L_PROFILE') }}</a>&nbsp; 
                     </div>
                     <div class="air air-top-left padding-10">
-                        <h4 class="text-white font-md">Register In {{ date("d-m-Y H:i:s", strtotime($profile->join_date)) }}</h4>
+                        <h4 class="text-white font-md">{{ Translate_menuPlayers('L_REGISTER_IN') }} {{ date("d-m-Y H:i:s", strtotime($profile->join_date)) }}</h4>
                     </div>
 
 
@@ -67,7 +72,7 @@
                             <ul class="list-unstyled">
                                 <li>
                                     <p class="text-muted">
-                                        Player ID <i class="fa fa-user"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $profile->user_id }}</a>
+                                      {{ Translate_menuPlayers('L_PLAYER_ID') }} <i class="fa fa-user"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ $profile->user_id }}</a>
                                     </p>
                                 </li>
                                 <li>
@@ -75,27 +80,27 @@
 
                                   @endphp  
                                     <p class="text-muted">
-                                        Email <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ decryptaes256($profile->email) }}</a>
+                                      {{ Translate_menuPlayers('L_EMAIL') }} <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:simmons@smartadmin">{{ decryptaes256($profile->email) }}</a>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Country <i class="fa fa-flag-o"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->name }}</span>
+                                      {{ Translate_menuPlayers('L_COUNTRY') }} <i class="fa fa-flag-o"></i>&nbsp;&nbsp;<span class="text-darken">{{ $profile->name }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Gold <i class="fa fa-cubes"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->gold) }}</span>
+                                      {{ Translate_menuPlayers('L_GOLD') }} <i class="fa fa-cubes"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->gold) }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Chip <i class="fa fa-database"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->chip) }}</span>
+                                      {{ Translate_menuPlayers('L_CHIP') }} <i class="fa fa-database"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->chip) }}</span>
                                     </p>
                                 </li>
                                 <li>
                                     <p class="text-muted">
-                                        Point <i class="fa fa-tags"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->point) }}</span>
+                                      {{ Translate_menuPlayers('L_POINT') }} <i class="fa fa-tags"></i>&nbsp;&nbsp;<span class="text-darken">{{ number_format($profile->point) }}</span>
                                     </p>
                                 </li>
                             </ul>
@@ -128,7 +133,7 @@
     <header>
       <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-        <h2>Device {{ $profile->username}} </h2>
+        <h2>{{ Translate_menuPlayers('L_DEVICE_ID') }} {{ $profile->username}} </h2>
       </div>
 
       <div class="widget-toolbar">
@@ -152,9 +157,9 @@
         <table id="registered-players" class="table table-striped table-bordered table-hover" width="100%">
           <thead>
             <tr>
-              <th class="th-sm">Device ID</th>
-              <th class="th-sm">Device Name</th>
-              <th class="th-sm">Date In</th>
+              <th class="th-sm">{{ Translate_menuPlayers('L_DEVICE_ID') }}</th>
+              <th class="th-sm">{{ Translate_menuPlayers('L_DEVICE_NAME') }}</th>
+              <th class="th-sm">{{ Translate_menuPlayers('L_DATE_IN') }}</th>
             </tr>
           </thead>
           <tbody>

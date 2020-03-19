@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
+    <li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</a></li>
+=======
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('Players level') }}</a></li>
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('Players level') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -37,7 +42,7 @@
     
       <header>
         <div class="widget-header">	
-          <h2><strong>{{ Translate_menuPlayers('Players level') }}</strong></h2>	
+          <h2><strong>{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</strong></h2>	
         </div>
       </header>
     
@@ -55,7 +60,7 @@
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalLevel">
-                          <i class="fa fa-plus"></i> {{ Translate_menuPlayers('Create player level') }}
+                          <i class="fa fa-plus"></i> {{ Translate_menuPlayers('L_CREATE_PLAYER_LEVEL') }}
                         </button>
                       </div>
                     </div>
@@ -69,8 +74,8 @@
                 <thead>
                   <tr>
                     <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
-                    <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
-                    <th class="th-sm">{{ Translate_menuPlayers('Experience') }} (Xp)</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('L_EXPERIENCE') }} (Xp)</th>
                     <th align="center">
                       <a  href="#" style="color:red;font-weight:bold;" 
                         class="delete" 
@@ -124,7 +129,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>{{ Translate_menuPlayers('Player Rank') }}</strong></h2>				
+          <h2><strong>{{ Translate_menuPlayers('L_PLAYER_RANK') }}</strong></h2>				
         </div>
       </header>
     
@@ -141,7 +146,7 @@
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
                       <div class="input-group">
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalRank">
-                          <i class="fa fa-plus"></i> {{ Translate_menuPlayers('Create Rank Player') }}
+                          <i class="fa fa-plus"></i> {{ Translate_menuPlayers('L_CREATE_RANK_PLAYER') }}
                         </button>
                       </div>
                     </div>
@@ -158,8 +163,8 @@
                       <th><input id="checkAllrank" type="checkbox" name="deletepermissionrank" class="deletepermissionrank">&nbsp; &nbsp;{{ translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
                     @endif
                     <th class="th-sm">ID</th>
-                    <th class="th-sm">{{ Translate_menuPlayers('Players level') }}</th>
-                    <th class="th-sm">{{ Translate_menuPlayers('Level') }}</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</th>
+                    <th class="th-sm">{{ Translate_menuPlayers('L_LEVEL') }}</th>
                     @if($menu && $mainmenu)
                       <th>
                         <a  href="#" style="color:red;font-weight:bold;" 
@@ -218,7 +223,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('Create player level') }}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('L_CREATE_PLAYER_LEVEL') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -237,10 +242,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="LoadingFunctionCreate()">
-            <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+            <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
           </button>
         </div>
       </form>
@@ -255,7 +260,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('Create Rank Player') }}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('L_CREATE_RANK_PLAYER') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -274,10 +279,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create btn-disabled" disabled onclick="LoadingFunctionCreate()">
-            <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+            <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
           </button>
         </div>
       </form>

@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
+    <li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('L_REPORT_PLAYER') }}</a></li>
+=======
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Players') }}">{{ Translate_menuPlayers('Report Player') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -38,7 +43,7 @@
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Log Type') }}</option>
+                            <option value="">{{ Translate_menuPlayers('L_CHOOSE_LOG_TYPE') }}</option>
                             <option value="{{ $logonlinetype[0] }}" @if($logtype == $logonlinetype[0]) selected @endif;>Pemain {{ ConfigTextTranslate($logonlinetype[1])}}</option>
                             <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;>Pemain {{ ConfigTextTranslate($logonlinetype[3])}}</option>
                         </select>
@@ -55,7 +60,7 @@
                     </div>
                     <div class="col" style="padding-left:1%;">
                         <select name="logType" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Log Type') }}</option>
+                            <option value="">{{ Translate_menuPlayers('L_CHOOSE_LOG_TYPE') }}</option>
                             <option value="{{ $logonlinetype[0] }}">Pemain {{ ConfigTextTranslate($logonlinetype[1])}}</option>
                             <option value="{{ $logonlinetype[2] }}">Pemain {{ ConfigTextTranslate($logonlinetype[3])}}</option>
                         </select>
@@ -83,7 +88,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2>{{ Translate_menuPlayers('Report Player') }} </h2>
+            <h2>{{ Translate_menuPlayers('L_REPORT_PLAYER') }} </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -105,7 +110,7 @@
                         <div class="row">
                           
                           <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                            {{ Translate_menuPlayers('Total Record Entries is') }} {{ $log_login->total() }}                         </div>
+                            {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $log_login->total() }}</div>
                 
                         </div>
                 
@@ -114,11 +119,11 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ Translate_menuPlayers('Player ID') }}</th>
-                        <th>{{ Translate_menuPlayers('Username') }}</th>
-                        <th>{{ Translate_menuPlayers('Status') }}</th>
-                        <th>{{ Translate_menuPlayers('Timestamp') }}</th>
-                        <th>{{ Translate_menuPlayers('IP') }}</th>
+                        <th>{{ Translate_menuPlayers('L_PLAYER_ID') }}</th>
+                        <th>{{ Translate_menuPlayers('L_USERNAME') }}</th>
+                        <th>{{ Translate_menuPlayers('L_STATUS') }}</th>
+                        <th>{{ Translate_menuPlayers('L_TIMESTAMP') }}</th>
+                        <th>{{ Translate_menuPlayers('L_IP') }}</th>
                     </tr>
                 </thead>
                 <tbody>

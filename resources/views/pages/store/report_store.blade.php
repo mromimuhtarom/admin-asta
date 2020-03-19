@@ -2,8 +2,13 @@
 
 
 @section('page')
+<<<<<<< HEAD
+    <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_REPORT_STORE')}}</a></li>
+=======
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_REPORT_STORE')}}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -122,6 +127,10 @@
                         <th>{{ TranslateMenuToko('L_DATE_REQUEST')}}</th>
                         <th>{{ TranslateMenuToko('L_PLAYER_ID')}}</th>
                         <th>{{ TranslateMenuToko('L_USERNAME')}}</th>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7903845cc1e846d91a6ded4eb5e0be49865d822e
                         <th>{{ TranslateMenuToko('L_ITEM')}}</th>
                         <th>{{ TranslateMenuToko('L_QUANTITY')}}</th>
                         <th>{{ TranslateMenuToko('L_DESCRIPTION')}}</th>
@@ -129,6 +138,18 @@
                         <th>{{ TranslateMenuToko('L_CONFIRMATION') }}</th>
                         <th>{{ TranslateMenuToko('L_STATUS_INFORMATION') }}</th>
                         <th>{{ TranslateMenuToko('L_STATUS')}}</th>
+<<<<<<< HEAD
+=======
+=======
+                        <th>{{ TranslateMenuToko('Item')}}</th>
+                        <th>{{ TranslateMenuToko('Quantity')}}</th>
+                        <th>{{ TranslateMenuToko('Description')}}</th>
+                        <th>{{ TranslateMenuToko('Price')}}</th>
+                        <th>{{ TranslateMenuToko('Confirmation') }}</th>
+                        <th>{{ TranslateMenuToko('Status Information') }}</th>
+                        <th>{{ TranslateMenuToko('Status')}}</th>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
+>>>>>>> 7903845cc1e846d91a6ded4eb5e0be49865d822e
                     </tr>
                 </thead>
                 <tbody>
@@ -159,14 +180,14 @@
                                 @endif
                             @elseif($tr->item_type == 3)
                                 @if($tr->status == 1)
-                                    <span style="color:green">{{ TranslateMenuToko('Received And Sent') }}</span>
+                                    <span style="color:green">{{ TranslateMenuToko('L_RECEIVED_AND_SENT') }}</span>
                                 @elseif($tr->status == 2)
                                     <span style="color:red">{{ TranslateMenuToko('L_DECLINE') }}</span>
                                 @endif
                             @endif
                         </td> 
                         <td>
-                            <button type="button" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
+                            <button type="button" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->id }}">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</button>
                         </td>
                         <td>{{ TranslateTransactionHist(strStatusApdec($tr->status)) }}</td>
                     </tr>
@@ -190,7 +211,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Detail Info') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
@@ -198,56 +219,56 @@
 			<div class="modal-body">
                 @if($tr->item_type == 3)
                     <label for="tgl_pembelian">
-                        {{ TranslateMenuToko('Date Request') }}
+                        {{ TranslateMenuToko('L_DATE_REQUEST') }}
                     </label>
                     <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" disabled>
                     <label for="tgl_disetujui">
-                        {{ TranslateMenuToko('Date approve and Decline')}}
+                        {{ TranslateMenuToko('L_DATEAPPROVE_DECLINE')}}
                     </label>
                     <input type="text" name="" id="tgl_disetujui" class="form-control" value="{{ $tr->action_date }}" disabled>
                     <label for="tgl_dikirim">
-                        {{ TranslateMenuToko('Date Sent')}}
+                        {{ TranslateMenuToko('L_DATE_SENT')}}
                     </label>
                     <input type="text" name="" id="tgl_dikirim" class="form-control">
                     <label for="tgl_diterima">
-                        {{ TranslateMenuToko('The Date The Item Was Received')}}
+                        {{ TranslateMenuToko('L_THE_DATE_THE_ITEM_WAS_RECEIVED')}}
                     </label>
                     <input type="text" name="" id="tgl_diterima" class="form-control">
                     <label for="jenis_pengiriman">
-                        {{ TranslateMenuToko('Type Of Delivery')}}
+                        {{ TranslateMenuToko('L_TYPE_OF_DELIVERY')}}
                     </label>
                     <input type="text" name="" id="jenis_pengiriman" class="form-control">
                     <label for="kode_pengiriman">
-                        {{ TranslateMenuToko('Code Receipt')}}
+                        {{ TranslateMenuToko('L_CODE_RECEIPT')}}
                     </label>
                     <input type="text" name="" id="kode_pengiriman" class="form-control">
                 @elseif($tr->item_type == 2)
                     @if($tr->payment_id == 23)
                         <label for="tgl_pembelian">
-                            {{ TranslateMenuToko('Date Request') }}
+                            {{ TranslateMenuToko('L_DATE_REQUEST') }}
                         </label>
                         <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" disabled>
                         <label for="tipe_pembayaran">
-                            {{ TranslateMenuToko('Payment Type')}}
+                            {{ TranslateMenuToko('L_PAYMENT_TYPE')}}
                         </label>
                         <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $tr->paymentname }}" disabled>
                     @else 
                         <label for="tgl_pembelian">
-                            {{ TranslateMenuToko('Date Request') }}
+                            {{ TranslateMenuToko('L_DATE_REQUEST') }}
                         </label>
                         <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" disabled>
                         <label for="tgl_disetujui">
-                            {{ TranslateMenuToko('Date approve and Decline')}}
+                            {{ TranslateMenuToko('L_DATEAPROVE_DECLINE')}}
                         </label>
                         <input type="text" name="" id="tgl_disetujui" class="form-control" value="{{ $tr->action_date }}" disabled>
                         <label for="tipe_pembayaran">
-                            {{ TranslateMenuToko('Payment Type')}}
+                            {{ TranslateMenuToko('L_PAYMENT_TYPE')}}
                         </label>
                         <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $tr->paymentname }}" disabled>
                     @endif
                 @elseif($tr->item_type == 1)
                         <label for="tgl_pembelian">
-                            {{ TranslateMenuToko('Date Request') }}
+                            {{ TranslateMenuToko('L_DATE_REQUEST') }}
                         </label>
                         <input type="text" class="form-control" name="" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" id="tgl_pembelian" disabled>
                 @endif

@@ -111,8 +111,8 @@
                 <th class="th-sm">{{ TranslateMenuToko('L_PRICE_CASH')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('L_ITEM_TYPE')}}</th>
                 <th class="th-sm">{{ TranslateMenuToko('L_PAY_TRANSACTION')}}</th>
-                <th class="th-sm">{{ TranslareMenuToko('L_GOOGLE_KEY') }}</th>
-                <th class="th-sm">{{ TranslateMenuItem('L_STATUS')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_GOOGLE_KEY') }}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_STATUS')}}</th>
                 @if($menu && $mainmenu)
                   <th>{{ TranslateMenuGame('L_ACTION')}}
                     <a href="#" style="color:red;font-weight:bold;"
@@ -140,7 +140,7 @@
                                 <input type="hidden" name="pk" value="{{ $gold->item_id }}">
                                 <input type="file" name="file" id="media-input-wtr" class="upload{{ $gold->item_id }}" accept="image/*">
                                 <i class="fa fa-edit media-icon-wtr"></i>
-                                <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
+                                <p class="nav-name">{{ TranslateMenuToko('L_MAIN_IMAGE')}}</p>
                             </span>
                             <span class="media-overlay-wtr1 med-ovlay{{ $gold->item_id }}">
                                 <input type="hidden" name="pk" value="{{ $gold->item_id }}">
@@ -156,10 +156,10 @@
                             </figure>
                           </div>
                           <div class="media-control" align="center" style="margin-top:-1%">
-                            <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
+                            <button class="save-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('L_SAVE_IMAGE')}}</button>
                           </form>
                             <button class="cancel-upload{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}</button>
-                            <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
+                            <button class="edit-profile{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('L_EDIT')}}</button>
                       </div>
                     </td>
                     <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $gold->item_id }}" data-type="text" data-url="{{ route('GoldStore-update') }}">{{ $gold->name }}</a></td>
@@ -182,10 +182,10 @@
                          
                         </div>
                         <div class="media-control" align="center" style="margin-top:-1%">
-                          <button class="save-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save') }}</button>
+                          <button class="save-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('L_SAVE_IMAGE') }}</button>
                         </form>
-                          <button class="cancel-ImgBonus{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                          <button class="edit-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit') }}</button>
+                          <button class="cancel-ImgBonus{{ $gold->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}</button>
+                          <button class="edit-ImgBonus{{ $gold->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('L_EDIT') }}</button>
                       </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="bonus_get" data-title="title gold" data-pk="{{ $gold->item_id }}" data-type="number" data-url="{{ route('GoldStore-update') }}">{{ $gold->bonus_get }}</a></td>
@@ -279,7 +279,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('Create new gold store')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('L_CREATE_NEW_GOLD_STORE')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -393,15 +393,15 @@
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure')}}
+        {{ TranslateMenuItem('L_ARE_U_SURE')}}
         <form action="{{ route('GoldStore-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userid" id="userid" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ Translate_menuTransaction('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ Translate_menuTransaction('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ Translate_menuTransaction('L_YES')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ Translate_menuTransaction('L_NO')}}</button>
       </div>
         </form>
     </div>
@@ -414,13 +414,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure') }}
+        {{ TranslateMenuItem('L_ARE_U_SURE') }}
         <form action="{{ route('GoldStore-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -430,8 +430,8 @@
           <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
       </div>
         </form>
     </div>

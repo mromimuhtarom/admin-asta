@@ -2,8 +2,13 @@
 
 
 @section('page')
+<<<<<<< HEAD
+    <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_POINT_PLAYERS') }}</a></li>
+=======
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
     <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Point Players') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -40,7 +45,7 @@
                         <div class="col" >
                             <select name="inputGame" class="form-control">
                                 <option value=""@if($getGame == NULL) selected @endif>{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
-                                <option value="0" @if($getGame == '0') selected @endif>{{ Translate_menuPlayers('Main') }}</option>
+                                <option value="0" @if($getGame == '0') selected @endif>{{ Translate_menuPlayers('L_MAIN') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}" @if($getGame == $gm->id) selected @endif>{{ $gm->desc }}</option>
                                 @endforeach
@@ -59,7 +64,7 @@
                         <div class="col" >
                             <select name="inputGame" class="form-control">
                                 <option value="">{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
-                                <option value="0">Utama</option>
+                                <option value="0">{{ Translate_menuPlayers('L_MAIN') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                                 @endforeach
@@ -73,7 +78,7 @@
                         </div>
                     @endif
                     <div class="col" style="padding-left:1%;">
-                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ Translate_menuPlayers('L_SEARCH') }}</button>
                     </div>
                 </div>
             </form>
@@ -88,7 +93,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-database"></i> </span>
-            <h2>{{ Translate_menuPlayers('Point Players') }}</h2>
+            <h2>{{ Translate_menuPlayers('L_POINT_PLAYERS') }}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -118,34 +123,34 @@
                 <thead>			           
                     @if (Request::is('Players/Point_Players/Point-search*'))
                         <tr>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.user_id') }}"></i></a></th>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id">{{ Translate_menuPlayers('L_PLAYER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.user_id') }}"></i></a></th>
+                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
                             <th>
                                 <a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">
                                     @if($getGame == '0')
-                                        {{ Translate_menuPlayers('Main') }}
+                                        {{ Translate_menuPlayers('L_MAIN') }}
                                     @else
-                                        {{ Translate_menuPlayers('Game') }}
+                                        {{ Translate_menuPlayers('L_GAME') }}
                                     @endif
                                     <i class="fa fa-sort{{ iconsorting('gamename') }}"></i>
                                 </a>
                             </th>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.action_id') }}"></i></a></th>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.debit') }}"></i></a></th>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.credit') }}"></i></a></th>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.balance">{{ Translate_menuPlayers('Total') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.balance') }}"></i></a></th>
-                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.datetime') }}"></i></a></th>
+                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id">{{ Translate_menuPlayers('L_ACTION') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.action_id') }}"></i></a></th>
+                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit">{{ Translate_menuPlayers('L_DEBIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.debit') }}"></i></a></th>
+                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit">{{ Translate_menuPlayers('L_CREDIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.credit') }}"></i></a></th>
+                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.balance">{{ Translate_menuPlayers('L_TOTAL') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.balance') }}"></i></a></th>
+                            <th><a href="{{ route('Point-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.datetime">{{ Translate_menuPlayers('L_TIMESTAMP') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.datetime') }}"></i></a></th>
                         </tr>
                     @else 
                         <tr>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.user_id') }}"></i></a></th>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=gamename">{{ Translate_menuPlayers('Game') }}<i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.action_id') }}"></i></a></th>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.debit') }}"></i></a></th>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.credit') }}"></i></a></th>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.balance">{{ Translate_menuPlayers('Total') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.balance') }}"></i></a></th>
-                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.datetime') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.user_id">{{ Translate_menuPlayers('L_PLAYER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.user_id') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=gamename">{{ Translate_menuPlayers('L_GAME') }}<i class="fa fa-sort{{ iconsorting('gamename') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.action_id">{{ Translate_menuPlayers('L_ACTION') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.action_id') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.debit">{{ Translate_menuPlayers('L_DEBIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.debit') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.credit">{{ Translate_menuPlayers('L_CREDIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.credit') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.balance">{{ Translate_menuPlayers('L_TOTAL') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.balance') }}"></i></a></th>
+                            <th><a href="{{ route('point_detail') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_point.datetime">{{ Translate_menuPlayers('L_TIMESTAMP') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_point.datetime') }}"></i></a></th>
                         </tr>
                     @endif     
 
@@ -157,7 +162,7 @@
                         if($bd->gamename != NULL):
                             $gamename = $bd->gamename;
                         else:
-                            $gamename = Translate_menuPlayers('Lobby');
+                            $gamename = Translate_menuPlayers('L_LOBBY');
                         endif;
                     @endphp
                     <tr class="gradeX">

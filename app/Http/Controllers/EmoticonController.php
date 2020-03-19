@@ -277,18 +277,18 @@ class EmoticonController extends Controller
           case "status":
               $name          = "Status";
               $currentnumber = $currentname->status;
-              if($value == 0 || $currentnumber == 0):
-                $value        = 'disabled';
-                $currentvalue = 'disabled';
+              if($value == 0):
+                $value        = 'non aktif';
+                // $currentvalue = 'non aktif';
               else:
-                $value        = 'enabled';
-                $currentvalue = 'enabled';
+                $value        = 'aktif';
+                // $currentvalue = 'aktif';
               endif;
               
              if($currentnumber == 0):
-                $currentvalue = 'disabled';
+                $currentvalue = 'non aktif';
               else:
-                $currentvalue = 'enabled';
+                $currentvalue = 'aktif';
               endif;
             break;
           default:

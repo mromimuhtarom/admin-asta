@@ -2,8 +2,13 @@
 
 
 @section('page')
+<<<<<<< HEAD
+  <li class="breadcrumb-item"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('L_PAYMENT_STORE')}}</a></li>
+=======
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
   <li class="breadcrumb-item menunameheader"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('Payment Store')}}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -32,7 +37,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuToko('Payment Store')}}</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i>{{ TranslateMenuToko('L_PAYMENT_STORE')}}</strong></h2>				
     </div>
   </header>
 
@@ -47,7 +52,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createPaymentStore">
-                <i class="fa fa-plus"></i> {{ TranslateMenuToko('Create new payment store')}}
+                <i class="fa fa-plus"></i> {{ TranslateMenuToko('L_CREATE_NEW_PAYMENT_STORE')}}
               </button>
               @endif
             </div>
@@ -68,9 +73,9 @@
                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ translate_MenuContentAdmin('L_SELECT_ALL')}}</th>
                 @endif
                 <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
-                <th class="th-sm">{{ translate_menuTransaction('Type')}}e</th>
-                <th class="th-sm">{{ Translate_menuPlayers('Desc')}}</th>
-                <th class="th-sm">{{ Translate_menuPlayers('Status')}}</th>
+                <th class="th-sm">{{ translate_menuTransaction('L_TYPE')}}e</th>
+                <th class="th-sm">{{ Translate_menuPlayers('L_DESC')}}</th>
+                <th class="th-sm">{{ Translate_menuPlayers('L_STATUS')}}</th>
                 @if($menu && $mainmenu)
                 <th align="center" style="width: 10px;">
                   <a href="#" style="color:red;font-weight:bold;" 
@@ -126,7 +131,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('Create new payment store')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('L_CREATE_NEW_PAYMENT_STORE')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -139,7 +144,7 @@
           </div>
           <div class="form-group">
             <select class="custom-select required" name="transactionType">
-              <option selected disabled>{{ TranslateMenuToko('Transaction type')}}</option>
+              <option selected disabled>{{ TranslateMenuToko('L_TRANSACTION_TYPE')}}</option>
               @foreach ($paymenttype as $pt)
                 <option value="{{ $pt->id }}">{{ $pt->name }}</option>    
               @endforeach
@@ -171,15 +176,15 @@
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure')}}
+        {{ TranslateMenuItem('L_ARE_U_SURE')}}
         <form action="{{ route('PaymentStore-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="userid" id="userid" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
       </div>
         </form>
     </div>
@@ -192,7 +197,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
@@ -206,8 +211,8 @@
           <input type="hidden" name="usernameAll" id="userDeleteAll" valie="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
       </div>
         </form>
     </div>
