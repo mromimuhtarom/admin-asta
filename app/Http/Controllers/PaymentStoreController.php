@@ -109,9 +109,9 @@ class PaymentStoreController extends Controller
                 $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
                 
                 if($value == 0):
-                    $value = 'Disabled';
+                    $value = 'Non Aktif';
                 else: 
-                    $value = 'Enabled';
+                    $value = 'Aktif';
                 endif;
                 
                 break;

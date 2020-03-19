@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }} Game</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }} Game</a></li>
 @endsection
 
 @section('content')

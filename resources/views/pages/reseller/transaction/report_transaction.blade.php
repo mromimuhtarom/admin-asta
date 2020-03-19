@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">{{ translate_menu('L_RESELLER')}}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Report_Transaction') }}">{{ translate_menu('L_RESELLER_TRANSACTION')}}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Transaction') }}">{{ translate_menu('L_RESELLER')}}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Transaction') }}">{{ translate_menu('L_RESELLER_TRANSACTION')}}</a></li>
 @endsection
 
 @section('content')
@@ -32,27 +32,27 @@
         <form action="{{ route('ResellerTransaction-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 <div class="col">
-                    <input type="text" name="inputUsername" class="left" placeholder="username / Reseller ID">
+                    <input type="text" name="inputUsername" class="form-control" placeholder="username / Reseller ID">
                 </div>
                 <div class="col" style="padding-left:3%;">
                     <select name="choosedate" id="" class="form-control" required>
-                        <option value="">{{ TranslateMenuToko('Choose type date')}}</option>
-                        <option value="approvedecline">{{ TranslateMenuToko('Date approve and Decline')}}</option>
-                        <option value="request">{{ TranslateMenuToko('Date Request')}}</option>
+                        <option value="">{{ TranslateMenuToko('L_CHOOSE_TYPE_DATE')}}</option>
+                        <option value="approvedecline">{{ TranslateMenuToko('L_DATE_AND_APPROVE')}}</option>
+                        <option value="request">{{ TranslateMenuToko('L_DATE_REQUEST')}}</option>
                     </select>
                 </div>
                 @if (Request::is('Reseller/Reseller-Transaction/Report_Transaction/ReportTransaction-view'))
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-min" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-max" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                 </div>
                 @else
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-min" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMinDate" value="{{ $startDate }}">
                 </div>
-                <div class="col" style="padding-left:3%;">
+                <div class="col date-max" style="padding-left:3%;">
                     <input type="date" class="form-control" name="inputMaxDate" value="{{ $endDate }}">
                 </div>
                 @endif

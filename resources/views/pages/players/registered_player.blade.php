@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
   <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_REGISTERED_PLAYER') }}</a></li>
+=======
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Registered Player') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -42,8 +47,8 @@
         <form action="{{ route('RegisteredPlayer-search')}}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
                 @if (Request::is('Players/Registered_Players/RegisteredPlayer-search*'))
-                  <div cl ass="col" style="padding-left:1%;">
-                    <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID" value="{{ $getUsername }}">
+                  <div class="col username" style="padding-left:1%;">
+                    <input type="text" name="inputPlayer" class="form-control" placeholder="username/Player ID" value="{{ $getUsername }}">
                   </div>
                   <div class="col" style="padding-left:1%;">
                     <select name="status" class="form-control">
@@ -60,15 +65,15 @@
                         <option value="{{ $plyr_type[2] }}" @if($getTypeUser == $plyr_type[2]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
                       </select>
                   </div>
-                  <div class="col" style="padding-left:1%;">
+                  <div class="col date-min" style="padding-left:1%;">
                     <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
                   </div>
-                  <div class="col" style="padding-left:1%;">
+                  <div class="col date-max" style="padding-left:1%;">
                     <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
                   </div>
                 @else 
-                  <div cl ass="col" style="padding-left:1%;">
-                      <input type="text" name="inputPlayer" class="left" placeholder="username/Player ID">
+                  <div class="col username" style="padding-left:1%;">
+                      <input type="text" name="inputPlayer" class="form-control" placeholder="username/Player ID">
                   </div>
                   <div class="col" style="padding-left:1%;">
                     <select name="status" class="form-control">
@@ -85,10 +90,10 @@
                         <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
                       </select>
                   </div>
-                  <div class="col" style="padding-left:1%;">
+                  <div class="col date-min" style="padding-left:1%;">
                       <input type="date" name="inputMinDate" class="form-control">
                   </div>
-                  <div class="col" style="padding-left:1%;">
+                  <div class="col date-max" style="padding-left:1%;">
                       <input type="date" name="inputMaxDate" class="form-control">
                   </div>
                 @endif

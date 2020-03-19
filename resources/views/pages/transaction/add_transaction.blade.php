@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
 <li class="breadcrumb-item"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
 <li class="breadcrumb-item"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('L_BANKING_TRANS') }}</a></li>
+=======
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('Banking Transaction') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -39,11 +44,11 @@
             <div class="row h-100 w-100 no-gutters">
                 @if (Request::is('Transaction/Add_Transaction/AddTrasanction-search*'))
                 <div class="col" align="right">
-                    <input type="text" id="username" class="left" name="inputPlayer" placeholder="username / Player ID" value="{{ $getUsername }}">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="username / Player ID" value="{{ $getUsername }}">
                 </div>
                 @else
                 <div class="col" align="right">
-                    <input type="text" id="username" class="left" name="inputPlayer" placeholder="username / Player ID">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="username / Player ID">
                 </div> 
                 @endif;
                 <div class="col" style="padding-left:2%;">

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Push_Notification') }}">Notification</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Push_Notification') }}">Push Notification</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Push_Notification') }}">Notification</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Push_Notification') }}">Push Notification</a></li>
 @endsection
 
 

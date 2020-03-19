@@ -1,9 +1,9 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Add_Transaction_Reseller') }}">{{ translate_menu('L_RESELLER') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Add_Transaction_Reseller') }}">{{ translate_menu('L_RESELLER_TRANSACTION') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Add_Transaction_Reseller') }}">{{ translate_menu('L_ADD_TRANSACTION_RESELLER') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction_Reseller') }}">{{ translate_menu('L_RESELLER') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction_Reseller') }}">{{ translate_menu('L_RESELLER_TRANSACTION') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction_Reseller') }}">{{ translate_menu('L_ADD_TRANSACTION_RESELLER') }}</a></li>
 @endsection
 
 @section('content')
@@ -40,11 +40,11 @@
             <div class="row h-100 w-100 no-gutters">
                 @if (Request::is('Reseller/Reseller-Transaction/Add_Transaction_Reseller/AddTransactionReseller-search*'))
                 <div class="col" align="right">
-                    <input type="text" id="username" class="left" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}" value="{{ $getUsername }}">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}" value="{{ $getUsername }}">
                 </div>
                 @else
                 <div class="col" align="right">
-                    <input type="text" id="username" class="left" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}">
                 </div> 
                 @endif;
                 <div class="col" style="padding-left:2%;">
@@ -89,21 +89,6 @@
                                 <td>{{ $transaction->username }}</td>
                                 <td>
                                     <a href="#"data-toggle="modal" data-target="#modalChip{{ $transaction->reseller_id }}">{{ number_format($transaction->gold, 2) }}</a>
-                                    {{-- <div class="row">
-                                        <div class="col"> </div>
-                                        @if($menu && $mainmenu)
-                                        <div class="col" align="right">
-                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalChip{{ $transaction->reseller_id }}">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalChipMinus{{ $transaction->reseller_id }}">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        @endif
-                                    </div> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -224,8 +209,4 @@
 
 </script>
 @endif
-
-<script>
-
-</script>
 @endsection

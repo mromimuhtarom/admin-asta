@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
   <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_REGISTERED_PLAYER') }}</a></li>
+=======
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Registered_Players') }}">Players</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Registered_Players') }}">Registered Player</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')

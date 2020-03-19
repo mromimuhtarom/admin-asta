@@ -2,8 +2,8 @@
 
 
 @section('page')
-	<li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('L_RESELLER') }}</a></li>
-  	<li class="breadcrumb-item"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('L_REQUEST_TRANSACTION') }}</a></li>
+	<li class="breadcrumb-item menunameheader"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('L_RESELLER') }}</a></li>
+  	<li class="breadcrumb-item menunameheader"><a href="{{ route('Request_Transaction') }}">{{ translate_menu('L_REQUEST_TRANSACTION') }}</a></li>
 @endsection
 
 

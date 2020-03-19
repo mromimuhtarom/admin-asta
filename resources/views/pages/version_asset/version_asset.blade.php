@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('pages')
-  <li class="breadcrumb-item"><a href="{{ route('Version_Asset_Apk') }}">{{ translate_menu('L_VERSION_ASSET_APK')}}</a></li> 
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Version_Asset_Apk') }}">{{ translate_menu('L_VERSION_ASSET_APK')}}</a></li> 
 @endsection
 
 @if (count($errors) > 0)

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Abuse_Transaction_Report') }}">{{ TranslateMenuFeedback('Abuse Transaction Report') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Abuse_Transaction_Report') }}">{{ TranslateMenuFeedback('Abuse Transaction Report') }}</a></li>
 @endsection
 
 @section('content')
@@ -30,31 +30,28 @@
     <div class="table-header w-100 h-100">
         <form action="{{ route('AbuseTransactionReport-search') }}" method="get" role="search">
             <div class="row h-100 w-100 no-gutters">
-                <div class="col">
-                    <input type="text" name="inputPlayer" class="left" placeholder="username">
+                <div class="col usernameabuse">
+                    <input type="text" name="inputPlayer" class="form-control" placeholder="username">
                 </div>
                 <div class="col" style="padding-left:1%;">
-                    <select style="width: 200px" name="TransactionType" class="form-control">
-                        <option value="">{{ TranslateMenuToko('Transaction type') }}</option>
-                        {{-- @foreach ($action as $act)
-                        <option value="{{ $act->id }}">{{ $act->action }}</option>                                
-                        @endforeach --}}
+                    <select name="TransactionType" id="" class="form-control">
+                        <option value="">{{ TranslateMenuToko('L_TRANSACTION_TYPE') }}</option>
                         <option value="{{ $AbusetrnsType[0] }}">{{ translate_menu($AbusetrnsType[1]) }} Pemain</option>
                         <option value="{{ $AbusetrnsType[2] }}">{{ translate_menu($AbusetrnsType[3]) }} Pemain</option>
                     </select>
                 </div>
                 @if (Request::is('FeedBack/Abuse_Transaction_Report/AbuseTransactionReport-search'))
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-min" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMinDate"  value="{{ $minDate }}">
                 </div>
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-max" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMaxDate"  value="{{ $maxDate }}">
                 </div>
                 @else
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-min" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMinDate"  value="{{ $datenow->toDateString() }}">
                 </div>
-                <div class="col" style="padding-left:1%;">
+                <div class="col date-max" style="padding-left:1%;">
                     <input type="date" class="form-control" name="inputMaxDate"  value="{{ $datenow->toDateString() }}">
                 </div>
                 @endif

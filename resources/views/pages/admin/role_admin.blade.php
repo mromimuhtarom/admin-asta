@@ -2,8 +2,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ROLE_ADMIN') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ADMIN') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Role_Admin') }}">{{ translate_menu('L_ROLE_ADMIN') }}</a></li>
 @endsection
 
 @section('content')

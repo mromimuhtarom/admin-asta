@@ -450,6 +450,7 @@ function Translate_menuPlayers($menu){
         'L_PASS'                    =>  'Lewat',
         'L_BIG_BLIND'               =>  'Big Blind',
         'L_SMALL_BLIND'             =>  'Small Blind',
+        'L_ALL_IN'                  =>  'All In',
         'L_REMAINING_TYPE'          =>  'Remaining Type',
         'L_LOGIN_PLAYER'            =>  'Pemain login',
         'L_APPROVE_ACCOUNT_PLAYER'  =>  'Akun pemain disetujui',
@@ -674,7 +675,10 @@ function TranslateMenuToko($menu){
         'L_ITEM_BONUS_IMAGE'  =>  'Gambar item bonus',
         'L_ITEM_BONUS_GET'    =>  'Item bonus yang didapat',
         'L_GOOGLE_KEY'        =>  'Google key',
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
     ];
 
     return $array_menuContent[$menu];

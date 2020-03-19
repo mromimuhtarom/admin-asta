@@ -2,8 +2,13 @@
 
 
 @section('page')
+<<<<<<< HEAD
     <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_POINT_PLAYERS') }}</a></li>
+=======
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Point Players') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -35,7 +40,7 @@
                 <div class="row h-100 w-100 no-gutters">
                      @if (Request::is('Players/Point_Players/Point-search*') || Request::is('Players/Point_Players/Point-all*'))
                         <div class="col" style="padding-right:-10%">
-                        <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID" value="{{ $getUsername }}">
+                        <input type="text" name="inputPlayer" style="width:95%;" class="form-control" placeholder="username / Player ID" value="{{ $getUsername }}">
                         </div>
                         <div class="col" >
                             <select name="inputGame" class="form-control">
@@ -46,15 +51,15 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-min" style="padding-left:1%;">
                             <input type="date" name="inputMinDate" class="form-control" value="{{ $minDate }}">
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-max" style="padding-left:1%;">
                             <input type="date" name="inputMaxDate" class="form-control" value="{{ $maxDate }}">
                         </div>
                     @else
                         <div class="col" style="padding-right:-10%">
-                            <input type="text" name="inputPlayer" style="width:95%;" class="left" placeholder="username / Player ID">
+                            <input type="text" name="inputPlayer" style="width:95%;" class="form-control" placeholder="username / Player ID">
                         </div>
                         <div class="col" >
                             <select name="inputGame" class="form-control">
@@ -65,10 +70,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-min" style="padding-left:1%;">
                             <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-max" style="padding-left:1%;">
                             <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
                         </div>
                     @endif

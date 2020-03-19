@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
     <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('L_AVATAR_PLAYER') }}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('L_AVATAR_PLAYER') }}</a></li>
+=======
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('Avatar player') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('Avatar player') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -265,26 +270,6 @@
 </div>
 
 <script>
-    //DISABLE BUTTON SAVE SEBELUM TERISI FIELD
-    // $(document).on('change keyup', '.ava', function(e){
-    //     let Disabled = true;
-    //     $('.ava').each(function() {
-    //         let value = this.value
-    //         if ((value)&&(value.trim() != ''))
-    //         {
-    //             Disabled = false
-    //         }else{
-    //             Disabled = true
-    //             return false
-    //         }
-    //     });
-
-    //     if(Disabled){
-    //         $('.btn-disabled').prop('disabled', true);
-    //     }else{
-    //         $('.btn-disabled').prop('disabled', true);
-    //     }
-    // })
     $(document).ready(function () {
         $('#name').on('input change', function () {
             if ($(this).val() != '') {
@@ -350,23 +335,6 @@
                         }
                         }
                     });
-
-                    // $('.status').editable({
-                    //     mode :'inline',
-                    //     value: '',
-                    //     validate: function(value) {
-                    //         if($.trim(value) == '') {
-                    //             return 'This field is required';
-                    //         }
-                    //     },
-                    //     source: [
-                    //         {value: '', text: 'Choose for activation'},
-                    //         @php
-                    //         echo '{value:"'.$endis[0].'", text: "'.$endis[1].'"}, ';
-                    //         echo '{value:"'.$endis[2].'", text: "'.$endis[3].'"}, ';
-                    //         @endphp
-                    //     ]
-                    // });
 
                     @php
                             foreach($avatarPlayer as $ap) {

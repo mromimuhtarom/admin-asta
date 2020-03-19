@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
 	<li class="breadcrumb-item"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('L_BANKING_TRANS') }}</a></li>
+=======
+	<li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('Banking Transaction') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -39,10 +44,10 @@
 												<option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('L_MONTH') }}</option>
 										</select>
 									</div>
-									<div class="col">
+									<div class="col date-min">
 										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $minDate }}">
 									</div>
-									<div class="col">
+									<div class="col date-max">
 											<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
 									</div>
 									<div class="col">
@@ -57,10 +62,10 @@
 											<option value="Month">{{ translate_MenuTransaction('L_MONTH') }}</option>
 										</select>
 									</div>
-									<div class="col">
+									<div class="col date-min">
 										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $datenow }}">
 									</div>
-									<div class="col">
+									<div class="col date-max">
 											<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
 									</div>
 									<div class="col">

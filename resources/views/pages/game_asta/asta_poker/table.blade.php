@@ -1,8 +1,8 @@
  @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Table_Asta_Poker') }}">Asta Poker</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Table_Asta_Poker') }}">{{ TranslateMenuGame('L_TABLE') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Asta_Poker') }}">Asta Poker</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Asta_Poker') }}">{{ TranslateMenuGame('L_TABLE') }}</a></li>
 @endsection
 
 

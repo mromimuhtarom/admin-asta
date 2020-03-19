@@ -21,16 +21,20 @@
             <div class="col" valign="middle">
                 <div class="row h-100 w-100">
                     <div class="col-6" id="svg"> 
-                        <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="40" stroke="#007d2a" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="200"/>{{--ygdipakai--}}
-                            <circle cx="50" cy="50" r="30" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="50"/>{{--ygdipakai--}}
-                            <circle cx="50" cy="50" r="20" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="280"/>{{--ygdipakai--}}
-                            <circle cx="50" cy="50" r="10" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="150"/>{{--ygdipakai--}}
-                        </svg>
+                        <svg width="250px" height="250px" class="border border-dark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
+                            <circle cx="50" cy="50" r="40" stroke="#007d2a" stroke-width="3" fill="#ffffff" stroke-dasharray="50, 100"/>{{--ygdipakai--}} <!-- untuk yang chip -->
+                            <circle cx="50" cy="50" r="30" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
+                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="60, 100"/>{{--ygdipakai--}}  <!-- untuk yang gold -->
+                            <circle cx="50" cy="50" r="20" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
+                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="70, 100"/>{{--ygdipakai--}} <!-- untuk yang goods -->
+                            <circle cx="50" cy="50" r="10" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
+                            {{--<circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray= "10"/> ygdipakai--}} <!-- untuk yang best offer -->
+                            <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff"         stroke-dasharray="50, 100"
+        d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"/> 
+                        </svg> 
                     </div>
                     {{-- <div class="col-1 d-flex flex-column" id="svg-description">
                         <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -79,13 +83,13 @@
                     <div class="col-6" id="svg">
                         <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="40" stroke="#000000" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="200"/>{{--ygdipakai--}}
+                            <circle cx="50" cy="50" r="40" stroke="#000000" stroke-width="3" fill="#ffffff" stroke-dasharray="20, 100" stroke-dashoffset="200"/>{{--ygdipakai--}}
                             <circle cx="50" cy="50" r="30" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="50"/>{{--ygdipakai--}}
+                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="30, 100" stroke-dashoffset="50"/>{{--ygdipakai--}}
                             <circle cx="50" cy="50" r="20" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="280"/>{{--ygdipakai--}}
+                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="40, 100" stroke-dashoffset="280"/>{{--ygdipakai--}}
                             <circle cx="50" cy="50" r="10" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="100" stroke-dashoffset="150"/>{{--ygdipakai--}}
+                            <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="50, 100" stroke-dashoffset="150"/>{{--ygdipakai--}}
                         </svg>
                     </div>
                     {{-- <div class="col-1 d-flex flex-column" id="svg-description">

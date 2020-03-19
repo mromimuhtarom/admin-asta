@@ -1,8 +1,13 @@
 @extends('index')
 
 @section('page')
+<<<<<<< HEAD
     <li class="breadcrumb-item"><a href="{{ route('Play_Report') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('Play_Report') }}">{{ Translate_menuPlayers('L_PLAY_REPORT') }}</a></li>
+=======
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Play_Report') }}">{{ Translate_menuPlayers('Players') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Play_Report') }}">{{ Translate_menuPlayers('Play report') }}</a></li>
+>>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -38,8 +43,8 @@
             <form action="{{ route('PlayReport-search') }}" method="get" role="search">
                 <div class="row h-100 w-100 no-gutters">
                     @if (Request::is('Players/Play_Report/PlayReport-search*'))
-                        <div class="col">
-                            <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID" value="{{ $getusername }}">
+                        <div class="col username">
+                            <input type="text" class="form-control" name="inputPlayer" placeholder="username/Player ID" value="{{ $getusername }}">
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <input type="text" class="form-control" name="inputRoundID" placeholder="Round ID" value="{{ $getroundid }}">
@@ -51,15 +56,15 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-min" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMinDate" value="{{ $inputMinDate  }}">
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-max" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMaxDate" value="{{ $inputMaxDate }}">
                         </div>
                     @else 
-                        <div class="col">
-                            <input type="text" class="left" name="inputPlayer" placeholder="username/Player ID">
+                        <div class="col username">
+                            <input type="text" class="form-control" name="inputPlayer" placeholder="username/Player ID">
                         </div>
                         <div class="col" style="padding-left:1%;">
                             <input type="text" class="form-control" name="inputRoundID" placeholder="Round ID">
@@ -71,10 +76,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-min" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMinDate" value="{{ $datenow->toDateString() }}">
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-max" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMaxDate" value="{{ $datenow->toDateString() }}">
                         </div>
                     @endif
@@ -156,7 +161,7 @@
                 <tbody>
                         @foreach ($player_history as $history)
                         <tr>
-                          <td><a href="" class="delete{{ $history->round_id }}" id="roundid_detail" data-pk="{{ $history->round_id }}" data-toggle="modal"data-target="#roundid-modal{{ $history->round_id }}">{{ $history->round_id }}</a></td>
+                          <td><a href="#" class="delete{{ $history->round_id }}" id="roundid_detail" data-pk="{{ $history->round_id }}" data-toggle="modal"data-target="#roundid-modal{{ $history->round_id }}">{{ $history->round_id }}</a></td>
                           <td>{{ $history->user_id }}</td>
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
@@ -1123,6 +1128,7 @@
         "order": [[ 9, "desc" ]],
         "paging": false,
         "bLengthChange": false,
+        'processing': true,
         "bInfo" : false,
 		"oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'

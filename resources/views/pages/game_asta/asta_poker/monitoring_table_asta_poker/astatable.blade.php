@@ -2,9 +2,9 @@
 
 
 @section('page')
-<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Games > Asta Poker</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Monitoring Table</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Novice</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Games > Asta Poker</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Monitoring Table</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Monitoring_Table_Asta_Poker') }}">Novice</a></li>
 @endsection
 
 

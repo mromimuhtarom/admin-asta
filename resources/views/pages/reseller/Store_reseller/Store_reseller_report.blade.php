@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Store_reseller_report') }}">{{ translate_menu('L_STORE_RESELLER') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Store_reseller_report') }}">{{ translate_menu('L_STORE_RESELLER_REPORT') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Store_reseller_report') }}">{{ translate_menu('L_STORE_RESELLER') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Store_reseller_report') }}">{{ translate_menu('L_STORE_RESELLER_REPORT') }}</a></li>
 @endsection
 
 
