@@ -89,21 +89,6 @@
                                 <td>{{ $transaction->username }}</td>
                                 <td>
                                     <a href="#"data-toggle="modal" data-target="#modalChip{{ $transaction->reseller_id }}">{{ number_format($transaction->gold, 2) }}</a>
-                                    {{-- <div class="row">
-                                        <div class="col"> </div>
-                                        @if($menu && $mainmenu)
-                                        <div class="col" align="right">
-                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalChip{{ $transaction->reseller_id }}">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                            <button class="btn sa-btn-primary rounded-circle btn-xs" data-toggle="modal"
-                                                data-target="#modalChipMinus{{ $transaction->reseller_id }}">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        @endif
-                                    </div> --}}
                                 </td>
                             </tr>
                             @endforeach
