@@ -122,13 +122,13 @@
                         <th>{{ TranslateMenuToko('L_DATE_REQUEST')}}</th>
                         <th>{{ TranslateMenuToko('L_PLAYER_ID')}}</th>
                         <th>{{ TranslateMenuToko('L_USERNAME')}}</th>
-                        <th>{{ TranslateMenuToko('Item')}}</th>
-                        <th>{{ TranslateMenuToko('Quantity')}}</th>
-                        <th>{{ TranslateMenuToko('Description')}}</th>
-                        <th>{{ TranslateMenuToko('Price')}}</th>
-                        <th>{{ TranslateMenuToko('Confirmation') }}</th>
-                        <th>{{ TranslateMenuToko('Status Information') }}</th>
-                        <th>{{ TranslateMenuToko('Status')}}</th>
+                        <th>{{ TranslateMenuToko('L_ITEM')}}</th>
+                        <th>{{ TranslateMenuToko('L_QUANTITY')}}</th>
+                        <th>{{ TranslateMenuToko('L_DESCRIPTION')}}</th>
+                        <th>{{ TranslateMenuToko('L_PRICE')}}</th>
+                        <th>{{ TranslateMenuToko('L_CONFIRMATION') }}</th>
+                        <th>{{ TranslateMenuToko('L_STATUS_INFORMATION') }}</th>
+                        <th>{{ TranslateMenuToko('L_STATUS')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,18 +150,18 @@
                         {{-- <td></td> --}}
                         <td>
                             @if($tr->item_type == 1)
-                                <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
+                                <span style="color:green">{{ TranslateMenuToko('L_SUCCESS') }}</span>
                             @elseif($tr->item_type == 2)
                                 @if($tr->status == 1)
-                                    <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
+                                    <span style="color:green">{{ TranslateMenuToko('L_SUCCESS') }}</span>
                                 @elseif($tr->status == 2)
-                                    <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
+                                    <span style="color:red">{{ TranslateMenuToko('L_DECLINE') }}</span>
                                 @endif
                             @elseif($tr->item_type == 3)
                                 @if($tr->status == 1)
                                     <span style="color:green">{{ TranslateMenuToko('Received And Sent') }}</span>
                                 @elseif($tr->status == 2)
-                                    <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
+                                    <span style="color:red">{{ TranslateMenuToko('L_DECLINE') }}</span>
                                 @endif
                             @endif
                         </td> 
