@@ -156,7 +156,7 @@
                 <tbody>
                         @foreach ($player_history as $history)
                         <tr>
-                          <td><a href="" class="delete{{ $history->round_id }}" id="roundid_detail" data-pk="{{ $history->round_id }}" data-toggle="modal"data-target="#roundid-modal{{ $history->round_id }}">{{ $history->round_id }}</a></td>
+                          <td><a href="#" class="delete{{ $history->round_id }}" id="roundid_detail" data-pk="{{ $history->round_id }}" data-toggle="modal"data-target="#roundid-modal{{ $history->round_id }}">{{ $history->round_id }}</a></td>
                           <td>{{ $history->user_id }}</td>
                           <td>{{ $history->username }}</td>
                           <td>{{ $history->gamename }}</td>
@@ -1123,6 +1123,7 @@
         "order": [[ 9, "desc" ]],
         "paging": false,
         "bLengthChange": false,
+        'processing': true,
         "bInfo" : false,
 		"oLanguage": {
 			    "sSearch": '<span class="input-group-addon"><i class="fa fa-search"></i></span>'

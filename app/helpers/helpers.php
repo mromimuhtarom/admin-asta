@@ -391,8 +391,8 @@ function actiongameplaylog($action)
     return 'L_SMALL_BLIND';
   elseif($action == 9):
     return 'L_DRAW';
-  elseif($action == 8):
-    return 'L_SMALL_BLIND';
+  elseif($action == 10):
+    return 'L_ALL_IN';
   endif;
 
 }

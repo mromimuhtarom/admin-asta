@@ -3,7 +3,7 @@
 @section('page')
 <li class="menunameheader"><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
 <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Item') }}</a></li>
-        <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Report Gift') }}</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Report Gift') }}</a></li>
 @endsection
 
 

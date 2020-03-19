@@ -2,8 +2,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Settings</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Slide_Banner') }}">Slide Banner</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Slide_Banner') }}">Settings</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Slide_Banner') }}">Slide Banner</a></li>
 @endsection
 
 

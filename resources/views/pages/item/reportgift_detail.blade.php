@@ -4,7 +4,7 @@
 @section('page')
 <li class="menunameheader"><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
 <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Item') }}</a></li>
-        <li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Report Gift') }}</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Report Gift') }}</a></li>
 @endsection
 
 
@@ -25,14 +25,6 @@
                         @endforeach
                     </select>
                 </div>
-                {{-- <div class="col">
-                    <select name="action" id="" class="form-control">
-                        <option value="">Choose Category</option>
-                        @foreach($category as $ct)
-                        <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
-                        @endforeach
-                    </select>
-                </div> --}}
                 <div class="col">
                     <input type="date" class="form-control" name="dari" value="{{ $datenow->toDateString() }}">
                 </div>

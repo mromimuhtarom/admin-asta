@@ -437,6 +437,7 @@ function Translate_menuPlayers($menu){
         'L_PASS'                    =>  'Lewat',
         'L_BIG_BLIND'               =>  'Big Blind',
         'L_SMALL_BLIND'             =>  'Small Blind',
+        'L_ALL_IN'                  =>  'All In',
         'L_REMAINING_TYPE'          =>  'Remaining Type',
         'L_LOGIN_PLAYER'            =>  'Pemain login',
         'L_APPROVE_ACCOUNT_PLAYER'  =>  'Akun pemain disetujui',
