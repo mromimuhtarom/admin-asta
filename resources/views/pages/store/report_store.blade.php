@@ -98,7 +98,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>{{ TranslateMenuToko('Report store')}}</h2>
+            <h2>{{ TranslateMenuToko('L_REPORT_STORE')}}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -119,9 +119,9 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ TranslateMenuToko('Date Request')}}</th>
-                        <th>{{ TranslateMenuToko('Player ID')}}</th>
-                        <th>{{ TranslateMenuToko('Username')}}</th>
+                        <th>{{ TranslateMenuToko('L_DATE_REQUEST')}}</th>
+                        <th>{{ TranslateMenuToko('L_PLAYER_ID')}}</th>
+                        <th>{{ TranslateMenuToko('L_USERNAME')}}</th>
                         <th>{{ TranslateMenuToko('Item')}}</th>
                         <th>{{ TranslateMenuToko('Quantity')}}</th>
                         <th>{{ TranslateMenuToko('Description')}}</th>

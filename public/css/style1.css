@@ -243,3 +243,41 @@ input[type=file]:before {
 .modal-transaction-user-detail-bottom div:not(:last-child) {
     margin-right: 20px;
 }
+
+/* ---- untuk keterangan di dashboard ----- */
+.circle-chip {
+    background: #007d2a;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-gold {
+    background: #FFAA01;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-goods {
+    background: #0019FF;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-bestoffers {
+    background: #ff6600;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+.circle-players{
+    background: #000000;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;  
+}
+/* ---- end untuk keterangan di dashboard ----- */
