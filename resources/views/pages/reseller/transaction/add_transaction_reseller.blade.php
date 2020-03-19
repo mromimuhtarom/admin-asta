@@ -209,8 +209,4 @@
 
 </script>
 @endif
-
-<script>
-
-</script>
 @endsection
