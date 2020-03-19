@@ -20,6 +20,8 @@
 	<script src="/assets/app/app.bundle.js"></script>
 	<script src="/js/sceditor/minified/sceditor.min.js"></script>
 	<link rel="stylesheet" href="/js/sceditor/minified/themes/default.min.css" />
+	<link rel="stylesheet" href="/css/loader.css">
+
 	
    <!-- bootstrap -->
 
@@ -101,15 +103,25 @@
 						<div>
 							@yield('namepages')				
             </div>
-        	</div>
-        	<div>
+					</div>
+					<div class="reloadpage">
+							<div class="loaderpagecontent"></div>
+					</div>
+        	<div class="contentreload">
 						@yield('content')
 						<script>
 						  $('form').submit(function() {
     						$(this).find(".submit-data").prop('disabled',true);
-  						});
+							});
 						</script>
-        	</div>
+					</div>
+					<script>
+							$(function() {
+								$(".reloadpage").fadeOut(2000, function() {
+									$(".contentreload").fadeIn(1000);
+								});
+							});
+					</script>
         </div>
 
 
