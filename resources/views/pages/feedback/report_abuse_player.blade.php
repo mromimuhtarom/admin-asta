@@ -78,7 +78,7 @@
                     <th>{{ TranslateMenuFeedback('Reported User ID') }}</th>
                     <th>{{ TranslateMenuFeedback('Reported User') }}</th>
                     <th>{{ TranslateMenuFeedback('Reason') }}</th>
-                    <th>{{ TranslateMenuItem('Date') }}</th>
+                    <th>{{ TranslateMenuItem('L_DATE') }}</th>
                 </tr>
             </thead>
             <tbody>

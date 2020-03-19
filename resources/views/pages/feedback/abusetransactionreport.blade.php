@@ -79,11 +79,11 @@
                 <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                     <thead>			                
                         <tr>
-                            <th>{{ Translate_menuPlayers('Player ID') }}</th>
-                            <th>{{ Translate_menuPlayers('Username') }}</th>
+                            <th>{{ Translate_menuPlayers('L_PLAYER_ID') }}</th>
+                            <th>{{ Translate_menuPlayers('L_USERNAME') }}</th>
                             <th>{{ TranslateMenuFeedback('Image Proof') }}</th>
-                            <th>{{ TranslateMenuItem('Description') }}</th>
-                            <th>{{ Translate_menuTransaction('Date') }}</th>
+                            <th>{{ TranslateMenuItem('L_DESCRIPTION') }}</th>
+                            <th>{{ Translate_menuTransaction('L_DATE') }}</th>
                             <th>Print PDF <a href="{{ route('AbuseTransactionReport-PDFall') }}"><i class="fa fa-file-pdf-o"></i></a></th>
                         </tr>
                     </thead>
@@ -97,7 +97,7 @@
                                     <a href="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg"><img src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg" class="border border-dark" alt="" width="100" height="100"></a>
                                 </td>
                                 <td><b>{{ $fdgame->message }}</b></td>
-                                <td><b>{{ $fdgame->date }}</b></td>
+                                <td><b>{{ date("d-m-Y H:i:s", strtotime($fdgame->date)) }}</b></td>
                                 <td><a href="{{ route('AbuseTransactionReport-PDFpersonal', $fdgame->id) }}"><i class="fa fa-file-pdf-o"></i></a></td>
                             </tr>
                             @elseif($fdgame->isread === 1)
@@ -108,7 +108,7 @@
                                     <a href="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg"><img src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/upload/report/{{ $fdgame->id }}.jpg" class="border border-dark" alt="" width="100" height="100"></a>
                                 </td>
                                 <td>{{ $fdgame->message }}</td>
-                                <td>{{ $fdgame->date }}</td>
+                                <td>{{ date("d-m-Y H:i:s", strtotime($fdgame->date)) }}</td>
                                 <td><a href="{{ route('AbuseTransactionReport-PDFpersonal', $fdgame->id) }}"><i class="fa fa-file-pdf-o"></i></a></td>
                             </tr>
                             @endif

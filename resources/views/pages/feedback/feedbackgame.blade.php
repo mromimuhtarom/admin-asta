@@ -38,11 +38,11 @@
         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
             <thead>			                
                 <tr>
-                    <th>{{ Translate_menuPlayers('Player ID') }}</th>
-                    <th>{{ Translate_menuPlayers('Username') }}</th>
+                    <th>{{ Translate_menuPlayers('L_PLAYER_ID') }}</th>
+                    <th>{{ Translate_menuPlayers('L_USERNAME') }}</th>
                     <th>{{ TranslateMenuFeedback('Rating') }}</th>
                     <th>{{ TranslateMenuFeedback('Message') }}</th>
-                    <th>{{ Translate_menuTransaction('Date') }}</th>
+                    <th>{{ Translate_menuTransaction('L_DATE') }}</th>
                     <th>Print PDF <a href="{{ route('FeedbackGame-PDFall') }}"><i class="fa fa-file-pdf-o"></i></a></th>
                 </tr>
             </thead>
@@ -53,7 +53,7 @@
                      <td>{{ $fdgame->username }}</td>
                      <td>{{ $fdgame->strRating() }}</td>
                      <td>{{ $fdgame->msg }}</td>
-                     <td>{{ $fdgame->date }}</td>
+                     <td>{{ date("d-m-Y H:i:s", strtotime($fdgame->date)) }}</td>
                      <td><a href="{{ route('FeedbackGame-PDFpersonal', $fdgame->id)}}"><i class="fa fa-file-pdf-o"></i></a></td>
                     </tr>
                     @endforeach
