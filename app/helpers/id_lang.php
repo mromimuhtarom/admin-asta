@@ -675,10 +675,6 @@ function TranslateMenuToko($menu){
         'L_ITEM_BONUS_IMAGE'  =>  'Gambar item bonus',
         'L_ITEM_BONUS_GET'    =>  'Item bonus yang didapat',
         'L_GOOGLE_KEY'        =>  'Google key',
-<<<<<<< HEAD
-
-=======
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
     ];
 
     return $array_menuContent[$menu];
