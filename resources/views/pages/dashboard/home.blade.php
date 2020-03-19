@@ -27,13 +27,10 @@
                             <circle cx="50" cy="50" r="30" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
                             <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="60, 100"/>{{--ygdipakai--}}  <!-- untuk yang gold -->
                             <circle cx="50" cy="50" r="20" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="70, 100"/>{{--ygdipakai--}} <!-- untuk yang goods -->
+                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="180" stroke-dashoffset="100"/>{{--dikalikan 2--}} <!-- untuk yang goods -->
                             <circle cx="50" cy="50" r="10" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
                             {{--<circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray= "10"/> ygdipakai--}} <!-- untuk yang best offer -->
-                            <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff"         stroke-dasharray="50, 100"
-        d="M18 2.0845
-          a 15.9155 15.9155 0 0 1 0 31.831
-          a 15.9155 15.9155 0 0 1 0 -31.831"/> 
+                            <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="50, 100"  stroke-dashoffset="30"/>  {{-- tanpa dikali --}}
                         </svg> 
                     </div>
                     {{-- <div class="col-1 d-flex flex-column" id="svg-description">
