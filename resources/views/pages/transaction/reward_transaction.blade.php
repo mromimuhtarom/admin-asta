@@ -1,13 +1,8 @@
 @extends('index')
 
 @section('page')
-<<<<<<< HEAD
 	<li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('L_REWARD_TRANSACTION') }}</a></li>
-=======
-	<li class="breadcrumb-item menunameheader"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
-  <li class="breadcrumb-item menunameheader"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('Reward Transaction') }}</a></li>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 

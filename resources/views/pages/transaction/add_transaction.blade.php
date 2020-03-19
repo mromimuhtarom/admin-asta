@@ -1,13 +1,8 @@
 @extends('index')
 
 @section('page')
-<<<<<<< HEAD
 <li class="breadcrumb-item"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
 <li class="breadcrumb-item"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('L_BANKING_TRANS') }}</a></li>
-=======
-<li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
-<li class="breadcrumb-item menunameheader"><a href="{{ route('Add_Transaction') }}">{{ translate_MenuTransaction('Banking Transaction') }}</a></li>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')

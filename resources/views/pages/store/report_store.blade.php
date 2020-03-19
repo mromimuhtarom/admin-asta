@@ -2,13 +2,8 @@
 
 
 @section('page')
-<<<<<<< HEAD
     <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_REPORT_STORE')}}</a></li>
-=======
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Store') }}">{{ TranslateMenuToko('L_REPORT_STORE')}}</a></li>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 
@@ -127,7 +122,6 @@
                         <th>{{ TranslateMenuToko('L_DATE_REQUEST')}}</th>
                         <th>{{ TranslateMenuToko('L_PLAYER_ID')}}</th>
                         <th>{{ TranslateMenuToko('L_USERNAME')}}</th>
-<<<<<<< HEAD
                         <th>{{ TranslateMenuToko('L_ITEM')}}</th>
                         <th>{{ TranslateMenuToko('L_QUANTITY')}}</th>
                         <th>{{ TranslateMenuToko('L_DESCRIPTION')}}</th>
@@ -135,15 +129,6 @@
                         <th>{{ TranslateMenuToko('L_CONFIRMATION') }}</th>
                         <th>{{ TranslateMenuToko('L_STATUS_INFORMATION') }}</th>
                         <th>{{ TranslateMenuToko('L_STATUS')}}</th>
-=======
-                        <th>{{ TranslateMenuToko('Item')}}</th>
-                        <th>{{ TranslateMenuToko('Quantity')}}</th>
-                        <th>{{ TranslateMenuToko('Description')}}</th>
-                        <th>{{ TranslateMenuToko('Price')}}</th>
-                        <th>{{ TranslateMenuToko('Confirmation') }}</th>
-                        <th>{{ TranslateMenuToko('Status Information') }}</th>
-                        <th>{{ TranslateMenuToko('Status')}}</th>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
                     </tr>
                 </thead>
                 <tbody>
