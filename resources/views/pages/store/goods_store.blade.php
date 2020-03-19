@@ -2,8 +2,8 @@
 
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Goods_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Goods_Store') }}">{{ TranslateMenuToko('Goods Store')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Goods_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Goods_Store') }}">{{ TranslateMenuToko('L_GOODS_STORE')}}</a></li>
 @endsection
 
 
@@ -56,7 +56,7 @@
 
   <header>
     <div class="widget-header">	
-      <h2><strong><i class="fa fa-columns"></i> {{ TranslateMenuToko('Goods Store')}}</strong></h2>				
+      <h2><strong><i class="fa fa-columns"></i> {{ TranslateMenuToko('L_GOODS_STORE')}}</strong></h2>				
     </div>
   </header>
 
@@ -71,7 +71,7 @@
             <div class="input-group">
               @if($menu && $mainmenu)
               <button class="btn sa-btn-primary" data-toggle="modal" data-target="#createGoods">
-                <i class="fa fa-plus"></i>{{ TranslateMenuToko('Create new goods store')}}
+                <i class="fa fa-plus"></i>{{ TranslateMenuToko('L_CREATE_NEW_GOODS_STORE')}}
               </button>
               @endif
             </div>
@@ -89,17 +89,17 @@
             <thead>
               <tr>
                 @if ($menu && $mainmenu)
-                <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('Select All') }}</th>
+                <th><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateMenuItem('L_SELECT_ALL') }}</th>
                 @endif
-                <th>{{ TranslateMenuToko('Order')}}</th>
-                <th style="width:10px;">{{ TranslateMenuToko('Image')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Title')}}</th>
-                <th class="th-sm">{{ TranslateMenuToko('Price Point')}}</th>
-                <th class="th-sm">{{ translate_menuTransaction('Quantity')}}</th>
+                <th>{{ TranslateMenuToko('L_ORDER')}}</th>
+                <th style="width:10px;">{{ TranslateMenuToko('L_IMAGE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_TITLE')}}</th>
+                <th class="th-sm">{{ TranslateMenuToko('L_PRICE_POINT')}}</th>
+                <th class="th-sm">{{ translate_menuTransaction('L_QUANTITY')}}</th>
                 {{-- <th class="th-sm">Pay Transaction</th> --}}
-                <th class="th-sm">{{ TranslateMenuItem('Status')}}</th>
+                <th class="th-sm">{{ TranslateMenuItem('L_STATUS')}}</th>
                 @if ($menu && $mainmenu)
-                  <th class="th-sm">{{ Translate_menuPlayers('Action')}}
+                  <th class="th-sm">{{ Translate_menuPlayers('L_ACTION')}}
                     <a href="#" style="color:red;font-weight:bold;"
                         class="delete"
                         id="trash"
@@ -125,7 +125,7 @@
                                 <input type="hidden" name="pk" value="{{ $goods->item_id }}">
                                 <input type="file" name="file" id="media-input-wtr" class="upload{{ $goods->item_id }}" accept="image/*">
                                 <i class="fa fa-edit media-icon-wtr"></i>
-                                <p class="nav-name">{{ TranslateMenuToko('Main Image')}}</p>
+                                <p class="nav-name">{{ TranslateMenuToko('L_MAIN_IMAGE')}}</p>
                             </span>
                             <span class="media-overlay-wtr1 med-ovlay{{ $goods->item_id }}">
                                 <input type="hidden" name="pk" value="{{ $goods->item_id }}">
@@ -141,10 +141,10 @@
                             </figure>
                           </div>
                           <div class="media-control" align="center" style="margin-top:-1%">
-                            <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('Save Image')}}</button>
+                            <button class="save-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('L_SAVE_IMAGE')}}</button>
                           </form>
                             <button class="cancel-upload{{ $goods->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuGame('L_CANCEL')}}</button>
-                            <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('Edit')}}</button>
+                            <button class="edit-profile{{ $goods->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('L_EDIT')}}</button>
                       </div>
                     </td>
                     <td><a href="#" class="usertext" data-name="name" data-pk="{{ $goods->item_id }}" data-type="text" data-url="{{ route('GoodsStore-update') }}">{{ $goods->name }}</a></td>
@@ -215,7 +215,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('Create new goods store')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateMenuToko('L_CREATE_NEW_GOODS_STORE')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i> 
         </button>
@@ -280,15 +280,15 @@
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure')}}
+        {{ TranslateMenuItem('L_ARE_U_SURE')}}
         <form action="{{ route('GoodsStore-delete') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="hidden" name="id" id="id" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
       </div>
         </form>
     </div>
@@ -300,13 +300,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA') }}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure') }}
+        {{ TranslateMenuItem('L_ARE_U_SURE') }}
         <form action="{{ route('GoodsStore-deleteAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -315,8 +315,8 @@
           <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
       </div>
         </form>
     </div>

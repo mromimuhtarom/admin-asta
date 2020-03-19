@@ -199,7 +199,7 @@
                           <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}" target="_blank">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
-                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('L_SEE') }}</button>
                           </form>  
                         </td>
                       </tr>
@@ -217,7 +217,7 @@
                           <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
-                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('L_SEE') }}</button>
                           </form>  
                         </td>
                       </tr>
@@ -267,7 +267,7 @@
                           <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}" target="_blank">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
-                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('L_SEE') }}</button>
                           </form>  
                         </td>
                       </tr>
@@ -285,7 +285,7 @@
                           <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
-                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('L_SEE') }}</button>
                           </form>  
                         </td>
                       </tr>
@@ -335,7 +335,7 @@
                           <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}" target="_blank">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
-                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('L_SEE') }}</button>
                           </form>  
                         </td>
                       </tr>
@@ -353,7 +353,7 @@
                           <form action="{{ route('Monitoring_Table_Asta_Poker-game')}}">
                             <input type="hidden" name="id_table" value="{{ $tb->table_id }}">
                             <input type="hidden" name="name_table" value="{{ $tb->name }}">
-                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('See') }}</button>
+                            <button type="submit" class="btn bg-blue-light text-white">{{ TranslateMenuGame('L_SEE') }}</button>
                           </form>  
                         </td>
                       </tr>

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('Registered Player') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Registered_Players') }}">{{ Translate_menuPlayers('L_REGISTERED_PLAYER') }}</a></li>
 @endsection
 
 @section('content')
@@ -47,7 +47,7 @@
                   </div>
                   <div class="col" style="padding-left:1%;">
                     <select name="status" class="form-control">
-                      <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                      <option value="">{{ Translate_menuPlayers('L_CHOOSE_STATUS') }}</option>
                       <option value="{{ $plyr_status[0] }}" @if($getStatus == $plyr_status[0]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
                       <option value="{{ $plyr_status[2] }}" @if($getStatus == $plyr_status[2]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
                       <option value="{{ $plyr_status[4] }}" @if($getStatus == $plyr_status[4]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
@@ -55,7 +55,7 @@
                   </div>
                   <div class="col" style="padding-left:1%;">
                       <select name="type_user" class="form-control">
-                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                        <option value="">{{ Translate_menuPlayers('L_CHOOSE_REGISTER_TYPE') }}</option>
                         <option value="{{ $plyr_type[0] }}" @if($getTypeUser == $plyr_type[0]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
                         <option value="{{ $plyr_type[2] }}" @if($getTypeUser == $plyr_type[2]) selected @endif;>{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
                       </select>
@@ -72,7 +72,7 @@
                   </div>
                   <div class="col" style="padding-left:1%;">
                     <select name="status" class="form-control">
-                      <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                      <option value="">{{ Translate_menuPlayers('L_CHOOSE_STATUS') }}</option>
                       <option value="{{ $plyr_status[0] }}">{{ Translate_menuPlayers(ucwords($plyr_status[1])) }}</option>
                       <option value="{{ $plyr_status[2] }}">{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
                       <option value="{{ $plyr_status[4] }}">{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
@@ -80,7 +80,7 @@
                   </div>
                   <div class="col" style="padding-left:1%;">
                       <select name="type_user" class="form-control">
-                        <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                        <option value="">{{ Translate_menuPlayers('L_CHOOSE_REGISTER_TYPE') }}</option>
                         <option value="{{ $plyr_type[0] }}">{{ Translate_menuPlayers(ucwords($plyr_type[1])) }}</option>
                         <option value="{{ $plyr_type[2] }}">{{ Translate_menuPlayers(ucwords($plyr_type[3])) }}</option>
                       </select>
@@ -107,7 +107,7 @@
     <header>
       <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-user"></i> </span>
-        <h2>{{ Translate_menuPlayers('Registered Player') }}</h2>
+        <h2>{{ Translate_menuPlayers('L_REGISTERED_PLAYER') }}</h2>
       </div>
 
       <div class="widget-toolbar">
@@ -132,7 +132,7 @@
               <div class="row">
                 
                 <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                  {{ Translate_menuPlayers('Total Record Entries is') }}{{ $registerPlayer->total() }}
+                  {{ Translate_menuPlayers('L_TOTAL_RECORD') }}{{ $registerPlayer->total() }}
                 </div>
       
               </div>
@@ -142,15 +142,15 @@
         <table id="registered-players" class="table table-striped table-bordered table-hover" width="100%">
           <thead>
             <tr>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_level.level">{{ Translate_menuPlayers('Level') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_level.level') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip">{{ Translate_menuPlayers('Chip') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point">{{ Translate_menuPlayers('Point') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.point') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.gold">{{ Translate_menuPlayers('Gold Coins') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.gold') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.status">{{ Translate_menuPlayers('Status') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.status') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.join_date">{{ Translate_menuPlayers('Date Created') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.join_date') }}"></i></a></th>
-              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_type">{{ Translate_menuPlayers('Register Form') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_type') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_id">{{ Translate_menuPlayers('L_PLAYER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_id') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_level.level">{{ Translate_menuPlayers('L_LEVEL') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_level.level') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.chip">{{ Translate_menuPlayers('L_CHIP') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.point">{{ Translate_menuPlayers('L_POINT') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.point') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user_stat.gold">{{ Translate_menuPlayers('L_GOLD_COINS') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.gold') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.status">{{ Translate_menuPlayers('L_STATUS') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.status') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.join_date">{{ Translate_menuPlayers('L_DATE_CREATED') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.join_date') }}"></i></a></th>
+              <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.user_type">{{ Translate_menuPlayers('L_REGISTER_FORM') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.user_type') }}"></i></a></th>
               {{-- <th class="th-sm">Device</th> --}}
               {{-- <th><a href="{{ route('RegisteredPlayer-search') }}?inputPlayer={{ $getUsername }}&status={{ $getStatus }}&type_user={{ $getTypeUser }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.country.name">{{ Translate_menuPlayers('Country') }}<i class="fa fa-sort{{ iconsorting('asta_db.country.name') }}"></i></a></th> --}}
             </tr>
@@ -215,7 +215,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>Change Player Status</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('L_CHANGE_PLAYER_STATUS') }}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -230,11 +230,11 @@
                 <div style="height:100px;overflow:auto;margin-bottom:20px;" class="border border-dark">
                   <table width="100%" style="border:1px solid #dee2e6;">
                     <tr style="background-color:#f5f5f5;">
-                      <td>User ID</td>
-                      <td>Username</td>
-                      <td>Status</td>
-                      <td>Date Time</td>
-                      <td>Description</td>
+                      <td>{{ Translate_menuPlayers('L_USER_ID') }}</td>
+                      <td>{{ Translate_menuPlayers('L_USERNAME') }}</td>
+                      <td>{{ Translate_menuPlayers('L_STATUS')}}</td>
+                      <td>{{ Translate_menuPlayers('L_DATE_TIME') }}</td>
+                      <td>{{ Translate_menuPlayers('L_DESC') }}</td>
                     </tr>
                     @php 
                       $loguser = App\LogUser::where('user_id', '=', $regis->user_id)->wherebetween('action_id', [25, 27])->get();
@@ -255,7 +255,7 @@
                   <textarea name="description" class="form-control" onkeyup="myDesc{{ $regis->user_id }}()" id="descriptionallow{{ $regis->user_id }}" cols="30" rows="10" placeholder="Alasan Ganti status"></textarea><br>
                   <span id="lblErrorDesc{{ $regis->user_id }}" style="color: red"></span> 
                   <select name="status_player" class="form-control" onclick="myFunction{{ $regis->user_id }}()" class="status_player">
-                    <option value="">{{ Translate_menuPlayers('Choose status') }}</option>
+                    <option value="">{{ Translate_menuPlayers('L_CHOOSE_STATUS') }}</option>
                     @if ($regis->status == 1)
                     <option value="{{ $plyr_status[2] }}" @if($regis->status == $plyr_status[2]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[3])) }}</option>
                     <option value="{{ $plyr_status[4] }}" @if($regis->status == $plyr_status[4]) selected @endif>{{ Translate_menuPlayers(ucwords($plyr_status[5])) }}</option>
@@ -273,10 +273,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data">
-            <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+            <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+            <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
           </button>
         </div>
       </form>

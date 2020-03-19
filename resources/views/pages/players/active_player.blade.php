@@ -3,8 +3,8 @@
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i
             class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('Active Players') }}</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('L_ACTIVE_PLAYERS') }}</a></li>
 @endsection
 
 
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col">
                         <select name="inputRegisterType" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                            <option value="">{{ Translate_menuPlayers('L_CHOOSE_REGISTER_TYPE') }}</option>
                             <option value="{{ $explodetype[0]}}"@if($registerType == $explodetype[0]) selected @endif;>{{ Translate_menuPlayers($explodetype[1]) }}</option>
                             <option value="{{ $explodetype[2]}}"@if($registerType == $explodetype[2]) selected @endif;>{{ Translate_menuPlayers($explodetype[3]) }}</option>
                         </select>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col">
                         <select name="inputRegisterType" class="form-control">
-                            <option value="">{{ Translate_menuPlayers('Choose Register Type') }}</option>
+                            <option value="">{{ Translate_menuPlayers('L_CHOOSE_REGISTER_PLAYER') }}</option>
                             <option value="{{ $explodetype[0]}}">{{ Translate_menuPlayers($explodetype[1]) }}</option>
                             <option value="{{ $explodetype[2]}}">{{ Translate_menuPlayers($explodetype[3]) }}</option>
                         </select>
@@ -89,7 +89,7 @@
     <header>
         <div class="widget-header">
             <span class="widget-icon"> <i class="fa fa-group"></i> </span>
-            <h2></i>{{ Translate_menuPlayers('Players Online') }}</h2>
+            <h2></i>{{ Translate_menuPlayers('L_PLAYERS_ONLINE') }}</h2>
         </div>
 
         <div class="widget-toolbar">
@@ -115,15 +115,15 @@
                     <table id="online-players" class="table table-striped table-bordered table-hover" width="100%">
                         <thead>
                             <tr>
-                                <th>{{ Translate_menuPlayers('Player ID') }}</th>
-                                <th>{{ Translate_menuPlayers('Playername') }}</th>
-                                <th>{{ Translate_menuPlayers('Level') }}</th>
-                                <th>{{ Translate_menuPlayers('Chip') }}</th>
-                                <th>{{ Translate_menuPlayers('Gold Coins') }}</th>
-                                <th>{{ Translate_menuPlayers('From') }}</th>
-                                <th>{{ Translate_menuPlayers('Playing Games') }}</th>
-                                <th>{{ Translate_menuPlayers('Table Name') }}</th>
-                                <th>{{ Translate_menuPlayers('Timestamp') }}</th>
+                                <th>{{ Translate_menuPlayers('L_PLAYER_ID') }}</th>
+                                <th>{{ Translate_menuPlayers('L_PLAYERNAME') }}</th>
+                                <th>{{ Translate_menuPlayers('L_LEVEL') }}</th>
+                                <th>{{ Translate_menuPlayers('L_CHIP') }}</th>
+                                <th>{{ Translate_menuPlayers('L_GOLD_COINS') }}</th>
+                                <th>{{ Translate_menuPlayers('L_FROM') }}</th>
+                                <th>{{ Translate_menuPlayers('L_PLAYING_GAMES') }}</th>
+                                <th>{{ Translate_menuPlayers('L_TABLE_NAME') }}</th>
+                                <th>{{ Translate_menuPlayers('L_TIMESTAMP') }}</th>
                             </tr>
                         </thead>
                         <tbody>

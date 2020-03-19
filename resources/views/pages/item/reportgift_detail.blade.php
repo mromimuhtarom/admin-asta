@@ -3,8 +3,8 @@
 
 @section('page')
 <li><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Item') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('Report Gift') }}</a></li>
+<li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('L_ITEM') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('Table_Gift') }}">{{ TranslateMenuItem('L_REPORT_GIFT') }}</a></li>
 @endsection
 
 
@@ -19,7 +19,7 @@
                 </div>
                 <div class="col">
                     <select name="action" id="" class="form-control">
-                        <option value="">{{ TranslateMenuItem('Choose Game') }}</option>
+                        <option value="">{{ TranslateMenuItem('L_CHOOSE_GAME') }}</option>
                         @foreach($game as $gm)
                         <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                         @endforeach
@@ -54,7 +54,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-            <h2> {{ TranslateMenuItem('Report Gift') }} </h2>
+            <h2> {{ TranslateMenuItem('L_REPORT_GIFT') }} </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -75,10 +75,10 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ TranslateMenuItem('Username') }}</th>
-                        <th>{{ TranslateMenuItem('Action Game') }}</th>
-                        <th>{{ TranslateMenuItem('Date') }}</th>
-                        <th>{{ TranslateMenuItem('Description') }}</th>
+                        <th>{{ TranslateMenuItem('L_USERNAME') }}</th>
+                        <th>{{ TranslateMenuItem('L_ACTION_GAME') }}</th>
+                        <th>{{ TranslateMenuItem('L_DATE') }}</th>
+                        <th>{{ TranslateMenuItem('L_DESCRIPTION') }}</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Chip_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Chip_Players') }}">{{ Translate_menuPlayers('Chip Players') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Chip_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('Chip_Players') }}">{{ Translate_menuPlayers('L_CHIP_PLAYERS') }}</a></li>
 @endsection
 
 
@@ -40,7 +40,7 @@
                         <div class="col" >
                             <select name="inputGame" class="form-control">
                                 <option value="" @if($getGame == NULL) selected @endif>{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
-                                <option value="0" @if($getGame == '0') selected @endif>Utama</option>
+                                <option value="0" @if($getGame == '0') selected @endif>{{ Translate_menuPlayers('L_MAIN') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}" @if($getGame == $gm->id) selected @endif>{{ $gm->desc }}</option>
                                 @endforeach
@@ -59,7 +59,7 @@
                         <div class="col" >
                             <select name="inputGame" class="form-control">
                                 <option value="">{{ Translate_menuPlayers('L_ALLGAMES') }}</option>
-                                <option value="0">{{ Translate_menuPlayers('Main') }}</option>
+                                <option value="0">{{ Translate_menuPlayers('L_MAIN') }}</option>
                                 @foreach ($game as $gm)
                                 <option value="{{ $gm->id }}">{{ $gm->desc }}</option>
                                 @endforeach
@@ -73,7 +73,7 @@
                         </div>
                     @endif
                     <div class="col" style="padding-left:1%;">
-                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ Translate_menuPlayers('L_SEARCH') }}</button>
                     </div>
                 </div>
             </form>
@@ -89,7 +89,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-database"></i> </span>
-            <h2>{{ Translate_menuPlayers('Chip Players') }}</h2>
+            <h2>{{ Translate_menuPlayers('L_CHIP_PLAYERS') }}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -110,7 +110,7 @@
                 <div class="row">
                     <!-- Button tambah bot baru -->
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                        {{ Translate_menuPlayers('Total Record Entries is') }} {{ $balancedetails->total() }}
+                        {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $balancedetails->total() }}
                     </div>
                     <!-- End Button tambah bot baru -->
                 </div>
@@ -118,23 +118,23 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.user_id">{{ Translate_menuPlayers('Player ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.user_id') }}"></i></a></th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.user_id">{{ Translate_menuPlayers('L_PLAYER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.user_id') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
                         <th>
                             <a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=gamename">
                                 @if($getGame == '0')
-                                {{ Translate_menuPlayers('Main') }}
+                                {{ Translate_menuPlayers('L_MAIN') }}
                                 @else
-                                {{ Translate_menuPlayers('Game') }}
+                                {{ Translate_menuPlayers('L_GAME') }}
                                 @endif
                                 <i class="fa fa-sort{{ iconsorting('gamename') }}"></i>
                             </a>
                         </th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.action_id">{{ Translate_menuPlayers('Action') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.action_id') }}"></i></a></th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.debit">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.debit') }}"></i></a></th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.credit') }}"></i></a></th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.balance">{{ Translate_menuPlayers('Total') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.balance') }}"></i></a></th>
-                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.datetime') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.action_id">{{ Translate_menuPlayers('L_ACTION') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.action_id') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.debit">{{ Translate_menuPlayers('L_DEBIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.debit') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.credit">{{ Translate_menuPlayers('L_CREDIT') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.credit') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.balance">{{ Translate_menuPlayers('L_TOTAL') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.balance') }}"></i></a></th>
+                        <th><a href="{{ route('Chip-search') }}?inputPlayer={{ $getUsername }}&inputGame={{ $getGame }}&inputMinDate={{ $getMindate }}&inputMaxDate={{ $getMaxdate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.balance_chip.datetime">{{ Translate_menuPlayers('L_TIMESTAMP') }}<i class="fa fa-sort{{ iconsorting('asta_db.balance_chip.datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,7 +143,7 @@
                         if($bd->gamename != NULL):
                             $gamename = $bd->gamename;
                         else:
-                            $gamename = Translate_menuPlayers('Lobby');
+                            $gamename = Translate_menuPlayers('L_LOBBY');
                         endif;
                     @endphp
                     <tr class="gradeX">

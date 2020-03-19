@@ -90,7 +90,7 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                  <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('L_SELECT_All') }}</th>
+                  <th class="th-sm"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('L_SELECT_ALL') }}</th>
                 @endif
                 <th>{{ TranslateMenuToko('L_ORDER')}}</th>
                 <th style="width:10px;">{{ TranslateMenuToko('L_IMAGE')}}</th>
@@ -171,10 +171,10 @@
                            
                           </div>
                           <div class="media-control" align="center" style="margin-top:-1%">
-                            <button class="save-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('L_SAVE') }}</button>
+                            <button class="save-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-save"></i>{{ TranslateMenuToko('L_SAVE_IMAGE') }}</button>
                           </form>
                             <button class="cancel-ImgBonus{{ $itm->item_id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}</button>
-                            <button class="edit-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('L_EDIT') }}</button>
+                            <button class="edit-ImgBonus{{ $itm->item_id }} btn btn-primary"><i class="fa fa-edit"></i>{{ TranslateMenuToko('L_EDIT') }}</button>
                         </div>
                       </td>
                       <td><a href="#" class="usertext" data-name="bonus_get" data-title="Title Chip" data-pk="{{ $itm->item_id }}" data-type="number" data-url="{{ route('ChipStore-update')}}">{{ $itm->bonus_get }}</a></td>

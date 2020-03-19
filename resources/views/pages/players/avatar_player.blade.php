@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('Avatar player') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('Avatar player') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('L_AVATAR_PLAYER') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('avatar_player') }}">{{ Translate_menuPlayers('L_AVATAR_PLAYER') }}</a></li>
 @endsection
 
 @section('content')
@@ -50,7 +50,7 @@
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
     <header>
         <div class="widget-header">
-            <h2><strong><i class="fa fa-columns"></i>{{ Translate_menuPlayers('Avatar player') }}</strong></h2>
+            <h2><strong><i class="fa fa-columns"></i>{{ Translate_menuPlayers('L_AVATAR_PLAYER') }}</strong></h2>
         </div>
     </header>
 
@@ -64,7 +64,7 @@
                         <div class="input-group">
                             @if($menu && $mainmenu)
                             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-plus"></i>{{ Translate_menuPlayers('Create new avatar') }}
+                                <i class="fa fa-plus"></i>{{ Translate_menuPlayers('L_CREATE_NEW_AVATAR') }}
                             </button>
                             @endif
                         </div>
@@ -80,10 +80,10 @@
                         <thead>
                             <tr>
                                 @if($menu && $mainmenu)
-                                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('Select All') }}</th>
+                                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp; {{ TranslateMenuItem('L_SELECT_ALL') }}</th>
                                 @endif
                                 <th>ID</th>
-                                <th style="width:5px;">{{ TranslateMenuItem('Image') }}</th>
+                                <th style="width:5px;">{{ TranslateMenuItem('L_IMAGE') }}</th>
                                 <th>{{ TranslateMenuGame('L_NAME') }}</th>
                                 @if($menu && $mainmenu)
                                 <th>{{ TranslateMenuGame('L_ACTION') }} &nbsp; &nbsp;
@@ -112,7 +112,7 @@
                                             <input type="hidden" name="pk" value="{{ $ap->id }}">
                                             <input type="file" name="file" id="media-input-wtr" class="upload{{ $ap->id }}" accept="image/*">
                                             <i class="fa fa-edit media-icon-wtr"></i>   
-                                            <p class="nav-name">{{ TranslateMenuItem('Main Image') }}</p>
+                                            <p class="nav-name">{{ TranslateMenuItem('L_MAIN_IMAGE') }}</p>
                                           </span>
                                           <figure class="media-object">
                                             <img class="img-object-wtr imgupload{{ $ap->id }}" src="https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/avatar/{{ $ap->id }}.jpg?{{ $timenow }}" style="margin-left: auto; margin-right: auto;">
@@ -121,10 +121,10 @@
                                          
                                         </div>
                                         <div class="media-control" align="center" style="margin-top:-1%">
-                                          <button class="save-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('Save Avatar') }}</button>
+                                          <button class="save-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-save"></i>{{ Translate_menuPlayers('L_SAVE_AVATAR') }}</button>
                                         </form>
-                                          <button class="cancel-upload{{ $ap->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}</button>
-                                          <button class="edit-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('Edit Avatar') }}</button>
+                                          <button class="cancel-upload{{ $ap->id }} btn sa-btn-danger"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}</button>
+                                          <button class="edit-profile{{ $ap->id }} btn btn-primary"><i class="fa fa-edit"></i>{{ Translate_menuPlayers('L_EDIT_AVATAR') }}</button>
                                         </div>
                                 </td>
                                 <td><a href="#" class="usertext" data-name="name" data-title="Title Avatar" data-type="text" data-pk="{{ $ap->id }}" data-url="{{ route('avatar_playerUpdate') }}">{{ $ap->name }}</a></td>
@@ -166,7 +166,7 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('Create new avatar') }}</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ Translate_menuPlayers('L_CREATE_NEW_AVATAR') }}</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
@@ -197,10 +197,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create btn-disabled" disabled onclick="LoadingFunctionCreate()">
-                    <i class="fa fa-save"></i>{{ TranslateMenuItem('Save') }}
+                    <i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE') }}
                     </button>
                     <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                    <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel') }}
+                    <i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL') }}
                     </button>
                 </div>
                 </form>
@@ -213,21 +213,21 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash">{{ TranslateMenuItem('DeleteData') }}</i></h5>
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash">{{ TranslateMenuItem('L_DELETE_DATA') }}</i></h5>
                         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <i class="fa fa-remove"></i>
                         </button>
                     </div>
                 <div class="modal-body">
-                    {{ TranslateMenuItem('Are you sure want to delete it') }}
+                    {{ TranslateMenuItem('L_QUESTION_DELETE_IT') }}
                     <form action="{{ route('avatar_playerDelete') }}" method="post">
                         {{ method_field('delete')}}
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="id" value="">
                 </div>
                         <div class="modal-footer">
-                            <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-                            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+                            <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+                            <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
                         </div>
                     </form>
                 </div>
@@ -239,13 +239,13 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data') }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA') }}</h5>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-remove"></i>
                 </button>
                 </div>
                 <div class="modal-body">
-                    {{ TranslateMenuItem('Are U Sure') }}
+                    {{ TranslateMenuItem('L_ARE_U_SURE') }}
                     <form action="{{ route('avatar_playerDelete-DeleteAllSelected') }}" method="post">
                         {{ method_field('delete')}}
                         {{ csrf_field() }}
@@ -254,8 +254,8 @@
                     <input type="hidden" name="usernameAll" id="userDeleteAll">
                 </div>
                 <div class="modal-footer">
-                <button type="submit" id="submit" class="button_example-yes btn sa-btn-success submit-data submit-data btn-create" onclick="LoadingFunctionCreate()"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes') }}</button>
-                <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No') }}</button>
+                <button type="submit" id="submit" class="button_example-yes btn sa-btn-success submit-data submit-data btn-create" onclick="LoadingFunctionCreate()"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
+                <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO') }}</button>
                 </div>
                 </form>
             </div>

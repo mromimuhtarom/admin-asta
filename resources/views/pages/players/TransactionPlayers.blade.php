@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('page')
-	<li class="breadcrumb-item"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
+	<li class="breadcrumb-item"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('L_TRANSPLAYER') }}</a></li>
 @endsection
 
@@ -31,15 +31,15 @@
 				@if (Request::is('Players/Transaction_Players/Banking-search*'))
                 	<div class="col">
                     	<select name="choose_time" id="time" class="form-control">
-							<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
-							<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
-							<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
-							<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
+							<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
+							<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('L_DAY') }}</option>
+							<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('L_WEEK') }}</option>
+							<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('L_MONTH') }}</option>
 						</select>
 					</div>
 					<div class="col">
                     	<select name="game_name" id="gamename" class="form-control">
-							<option value="">{{ translate_MenuTransaction('All Game') }}</option>
+							<option value="">{{ translate_MenuTransaction('L_ALL_GAME') }}</option>
 								@foreach ($gamename as $gm)
 									<option value="{{ $gm->id }}" @if($game == $gm->id) selected @endif>{{ $gm->desc }}</option>														
 								@endforeach
@@ -52,20 +52,20 @@
 						<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
                 	</div>
                 	<div class="col">
-                    	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> {{ translate_MenuTransaction('L_SEARCH') }}</button>
 					</div>
 				@else
 					<div class="col">
                     	<select name="choose_time" id="time" class="form-control">
-							<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
-							<option value="day">{{ translate_MenuTransaction('Day') }}</option>
-							<option value="week">{{ translate_MenuTransaction('Week') }}</option>
-							<option value="month">{{ translate_MenuTransaction('Month') }}</option>
+							<option value="all time">{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
+							<option value="day">{{ translate_MenuTransaction('L_DAY') }}</option>
+							<option value="week">{{ translate_MenuTransaction('L_WEEK') }}</option>
+							<option value="month">{{ translate_MenuTransaction('L_MONTH') }}</option>
                     	</select>
 					</div>
 					<div class="col">
                     	<select name="game_name" id="gamename" class="form-control">
-							<option value="">{{ translate_MenuTransaction('All Game') }}</option>
+							<option value="">{{ translate_MenuTransaction('L_ALL_GAME') }}</option>
 								@foreach ($gamename as $gm)
 									<option value="{{ $gm->id }}">{{ $gm->desc }}</option>														
 								@endforeach
@@ -78,7 +78,7 @@
                 		<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
                 	</div>
                 	<div class="col">
-                    	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuTransaction('L_SEARCH') }}</button>
 					</div> 
 				@endif
             </div>
@@ -92,7 +92,7 @@
 			
 	<header>
 		<div class="widget-header">	
-			<h2><strong>{{ translate_MenuTransaction('Bank Transaction') }} {{ ucwords($lang_id) }}</strong></h2>				
+			<h2><strong>{{ translate_MenuTransaction('L_BANK_TRANSACTION') }} {{ ucwords($lang_id) }}</strong></h2>				
 		</div>
 	</header>
 
@@ -103,43 +103,43 @@
 				<div class="table-outer">
 						<div class="row">
 							<div class="col" style="font-style:italic;color:#969696;font-weight:bold;">
-								{{ Translate_menuPlayers('Total Record Entries is') }} {{ $history->total() }}
+								{{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $history->total() }}
 							</div>
 						</div>	
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>
 							<tr>
 								@if ($time == "all time")
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>	
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('L_USERNAME') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('L_GAME') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>	
 								@elseif($time == 'detail')
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('Username') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>		
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.user.username">{{ translate_MenuTransaction('L_USERNAME') }} <i class="fa fa-sort{{ iconsorting('asta_db.user.username') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('L_GAME') }} <i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>		
 								@elseif($time == 'day' || $time == "week" || $time == "month")
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('L_DATE') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 										@if($game != NULL)								
-											<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('Game') }}<i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>
+											<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.game.desc">{{ translate_MenuTransaction('L_GAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.game.desc') }}"></i></a></th>
 										@endif
 								@endif
 								@if($time != 'detail')
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('Win') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('Lose') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('Turn Over') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('Fee') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('L_WIN') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('L_LOSE') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('L_TURN_OVER') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('L_FEE') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('L_JACKPOT') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}@if($time == "today" || $time == "all time")&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}@endif&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('L_WIN_LOSE') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
 								@else
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('Win') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('Lose') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('Turn Over') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></a></th>
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('Fee') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('Jackpot') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('Win Lose') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=wintransaction">{{ translate_MenuTransaction('L_WIN') }} <i class="fa fa-sort{{ iconsorting('wintransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=losetransaction">{{ translate_MenuTransaction('L_LOSE') }} <i class="fa fa-sort{{ iconsorting('losetransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=turnovertransaction">{{ translate_MenuTransaction('L_TURN_OVER') }} <i class="fa fa-sort{{ iconsorting('turnovertransaction') }}"></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=feetransaction">{{ translate_MenuTransaction('L_FEE') }} <i class="fa fa-sort{{ iconsorting('feetransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=prizetransaction">{{ translate_MenuTransaction('L_JACKPOT') }} <i class="fa fa-sort{{ iconsorting('prizetransaction') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=totalWinLose">{{ translate_MenuTransaction('L_WIN_LOSE') }} <i class="fa fa-sort{{ iconsorting('totalWinLose') }}"></i></a></th>
 								@endif
 								@if($time == "all time")
-									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&game_name={{ $game }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('TransactionPlayers-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&game_name={{ $game }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('L_DATE') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@elseif($time == 'detail')
-									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('Date') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
+									<th class="th-sm"><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $minDate }}&maxDate={{ $maxDate }}&game_name={{ $game }}&sorting={{ $sortingorder }}&namecolumn=asta_db.transaction_day.date_created">{{ translate_MenuTransaction('L_DATE') }}<i class="fa fa-sort{{ iconsorting('asta_db.transaction_day.date_created') }}"></i></a></th>
 								@endif
 							</tr>
 						</thead>

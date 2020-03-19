@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-	<li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('Reward Transaction') }}</a></li>
+	<li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
+  <li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('L_REWARD_TRANSACTION') }}</a></li>
 @endsection
 
 
@@ -33,7 +33,7 @@
 		
 			<header>
 				<div class="widget-header">	
-					<h2><strong>{{ translate_MenuTransaction('Reward Transaction') }}</strong></h2>				
+					<h2><strong>{{ translate_MenuTransaction('L_REWARD_TRANSACTION') }}</strong></h2>				
 				</div>
 			</header>
 		
@@ -45,15 +45,15 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th class="th-sm">{{ translate_MenuTransaction('Time Stamp') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Username') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Item') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Quantity') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Price') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Confirm request') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Delivery Confirmation') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Delivery Status') }}</th>
-										<th class="th-sm">{{ translate_MenuTransaction('Item Status') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_TIME_STAMP') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_USERNAME') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_ITEM') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_QUANTITY') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_PRICE') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_CONFIRM_REQUEST') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_DELIVERY_CONFIRM') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_DELIVERY_STATUS') }}</th>
+										<th class="th-sm">{{ translate_MenuTransaction('L_ITEM_STATUS') }}</th>
 										@if ($menu && $mainmenu)
 										<th class="th-sm"></th>
 										@endif
@@ -69,23 +69,23 @@
 											<td>{{ number_format($trns->item_price, 2) }}</td>
 											<td>
 												@if($trns->description == 'pending')
-													{{ translate_MenuTransaction('Request') }}
-												@elseif($trns->description == 'On Process')
-													<Span style="color:#739e73">{{ translate_MenuTransaction('Approve') }}</Span>
+													{{ translate_MenuTransaction('L_REQUEST') }}
+												@elseif($trns->description == 'on process')
+													<Span style="color:#739e73">{{ translate_MenuTransaction('L_APPROVE') }}</Span>
 												@elseif($trns->description == 'sent')
-													<Span style="color:#739e73">{{ translate_MenuTransaction('Approve') }}</Span>
+													<Span style="color:#739e73">{{ translate_MenuTransaction('L_APPROVE') }}</Span>
 												@endif
 											</td>
 											<td>
-												<button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $trns->strtrnsid }}">{{ translate_MenuTransaction('Detail Info') }}</button>
+												<button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $trns->strtrnsid }}">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</button>
 											</td>
 											<td>
 												@if($trns->description == 'pending')
-													{{ translate_MenuTransaction('Pending') }}
-												@elseif($trns->description == 'On Process')
-													<Span style="color:blue">{{ translate_MenuTransaction('On Process') }}</Span>
+													{{ translate_MenuTransaction('L_PENDING') }}
+												@elseif($trns->description == 'on process')
+													<Span style="color:blue">{{ translate_MenuTransaction('L_ON_PROCESS') }}</Span>
 												@elseif($trns->description == 'Sent')
-													<Span style="color:#739e73">{{ translate_MenuTransaction('Approve') }}</Span>
+													<Span style="color:#739e73">{{ translate_MenuTransaction('L_APPROVE') }}</Span>
 												@endif
 											</td>
 											@if ($menu && $mainmenu)
@@ -95,12 +95,12 @@
 											<td>
 												<div>
 													@if($trns->description == 'pending')
-														<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $trns->strtrnsid }}"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('Decline') }}</button>
-														<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->strtrnsid }}"><i class="fa fa-check"></i> {{ translate_MenuTransaction('Approve') }}</button>
-													@elseif($trns->description == 'On Process')
-															<button type="button" class="btn btn-xs text-white" style="background-color:blue;" data-toggle="modal" data-target="#process{{ $trns->strtrnsid }}">{{ translate_MenuTransaction('On Process') }}</button>		
+														<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $trns->strtrnsid }}"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('L_DECLINE') }}</button>
+														<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->strtrnsid }}"><i class="fa fa-check"></i> {{ translate_MenuTransaction('L_APPROVE') }}</button>
+													@elseif($trns->description == 'on process')
+															<button type="button" class="btn btn-xs text-white" style="background-color:blue;" data-toggle="modal" data-target="#process{{ $trns->strtrnsid }}">{{ translate_MenuTransaction('L_ON_PROCESS') }}</button>		
 													@elseif($trns->description == 'Sent')	
-														<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->strtrnsid }}"><i class="fa fa-check"></i> {{ translate_MenuTransaction('Completed') }}</button>											
+														<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $trns->strtrnsid }}"><i class="fa fa-check"></i> {{ translate_MenuTransaction('L_COMPLETED') }}</button>											
 													@endif
 												</div>
 											</td>
@@ -128,7 +128,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Approve Transaction') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('L_APPROVE_TRANS') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
@@ -136,13 +136,13 @@
             <form action="{{ route('RewardTransaction-Approve')}}" method="POST">
             @csrf
 			    <div class="modal-body" align="center">
-						{{ translate_MenuTransaction('Are you sure want to Approve this Transaction?') }}
+						{{ translate_MenuTransaction('L_QUESTION_APPROVE_TRANS') }}
 						<input type="hidden" name="description" value="On Process">
           				<input type="hidden" name="approveId" value="{{ $transaction->strtrnsid }}">
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
+				    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('L_YES') }}</button>
+				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('L_NO') }}</button>
                 </div>
             </form>
 		</div>
@@ -156,7 +156,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Decline Transaction') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('L_DECLINE_TRANS') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
@@ -165,7 +165,7 @@
             @csrf
                 <div class="modal-body" align="center">
 										<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
-										{{ translate_MenuTransaction('Are you sure want to Decline this Transaction?') }}
+										{{ translate_MenuTransaction('L_QUESTION_DECLINE_TRANS') }}
 													<input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
 													<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
 													<input type="hidden" name="price" value="{{ $transaction->item_price }}">	
@@ -178,8 +178,8 @@
 													<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    			</div>
 			    			<div class="modal-footer">
-				    			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
-				    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
+				    			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('L_YES') }}</button>
+				    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('L_NO') }}</button>
           			</div>
           	</form>
 		</div>
@@ -195,8 +195,8 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="modal-title" id="exampleModalLabel">
-					<h5>{{ translate_MenuTransaction('Required Delivery Status') }}</h5>
-					{{ translate_MenuTransaction('If The Item Has Been Sent') }}
+					<h5>{{ translate_MenuTransaction('L_REQ_DELIVERY_STS') }}</h5>
+					{{ translate_MenuTransaction('L_IF_THE_ITEM_HAS_BEEN_SENT') }}
 				</div>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
@@ -208,30 +208,30 @@
 					<div class="modal-body" align="center">
 						<table width="100%">
 							<tr>
-								<td width="20%">{{ translate_MenuTransaction('Date Sent') }}</td>
+								<td width="20%">{{ translate_MenuTransaction('L_DATE_SENT') }}</td>
 								<td width="5%">:</td>
 								<td width="75%"><input type="date" name="date_send" class="form-control" required></td>
 							</tr>
 							<tr>
-								<td width="20%">{{ translate_MenuTransaction('Item Name') }}</td>
+								<td width="20%">{{ translate_MenuTransaction('L_ITEM_NAME') }}</td>
 								<td width="5%">:</td>
 								<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
 							</tr>
 							<tr>
-								<td width="20%">{{ translate_MenuTransaction('Type Of Shipment') }}</td>
+								<td width="20%">{{ translate_MenuTransaction('L_TYPE_OF_SHIPMENT') }}</td>
 								<td width="5%">:</td>
 								<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
 							</tr>
 							<tr>
-								<td width="20%">{{ translate_MenuTransaction('Shipping Code') }}</td>
+								<td width="20%">{{ translate_MenuTransaction('L_SHIPPING_CODE') }}</td>
 								<td width="5%">:</td>
 								<td width="75%"><input type="text" name="item_name" class="form-control" required></td>
 							</tr>
 						</table>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary btn-create toggle-disabled" id="submit" onclick="FunctionBtnLoading()"><i class="fa fa-check"></i>{{ translate_MenuTransaction('Yes') }}</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('No') }}</button>
+						<button type="submit" class="btn btn-primary btn-create toggle-disabled" id="submit" onclick="FunctionBtnLoading()"><i class="fa fa-check"></i>{{ translate_MenuTransaction('L_YES') }}</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('L_NO') }}</button>
 				</div>
           	</form>
 		</div>
@@ -245,7 +245,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Detail Info') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
@@ -267,49 +267,49 @@
 			<div class="modal-body" align="center">
 				<table width="100%"">
 					<tr>
-						<td width="30%">{{ translate_MenuTransaction('Full Name') }}</td>
+						<td width="30%">{{ translate_MenuTransaction('L_FULL_NAME') }}</td>
 						<td width="10%">:</td>
 						<td width="60%">
 								<input type="text" value="{{ $transaction->username }}" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
-						<td>{{ translate_MenuTransaction('Email') }}</td>
+						<td>{{ translate_MenuTransaction('L_EMAIL') }}</td>
 						<td>:</td>
 						<td>
 								<input type="text" value="{{ decryptaes256($transaction->email) }}" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
-						<td>{{ translate_MenuTransaction('Phone') }}</td>
+						<td>{{ translate_MenuTransaction('L_PHONE') }}</td>
 						<td>:</td>
 						<td>
 							<input type="text" value="{{-- decryptaes256($user_info->phone) --}}{{ $transaction->phone }}" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
-						<td valign="top">{{ translate_MenuTransaction('Address') }}</td>
+						<td valign="top">{{ translate_MenuTransaction('L_ADDRESS') }}</td>
 						<td valign="top">:</td>
 						<td>
 							<textarea class="form-control" disabled>{{ $transaction->address }}</textarea>
 						</td>
 					</tr>
 					<tr>
-						<td>{{ translate_MenuTransaction('Province') }}</td>
+						<td>{{ translate_MenuTransaction('L_PROVINCE') }}</td>
 						<td>:</td>
 						<td>
 							<input type="text" value="" class="form-control" disabled>
 						</td>
 					</tr>
 					<tr>
-						<td>{{ translate_MenuTransaction('City') }}</td>
+						<td>{{ translate_MenuTransaction('L_CITY') }}</td>
 						<td>:</td>
 						<td>
 							<input type="text" value="" class="form-control" disabled>
 						</td> 
 					</tr>
 					<tr>
-						<td>{{ translate_MenuTransaction('Postal Code') }}</td>
+						<td>{{ translate_MenuTransaction('L_POSTAL_CODE') }}</td>
 						<td>:</td>
 						<td>
 							<input type="text" value="{{ $transaction->zip_code }}" class="form-control" disabled>

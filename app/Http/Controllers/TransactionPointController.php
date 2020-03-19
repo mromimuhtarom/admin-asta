@@ -85,7 +85,7 @@ class TransactionPointController extends Controller
         else if($time == "Week"){
 
 
-            $Transaction = SUserPoint::select(
+            $Transaction = UserPoint::select(
 				                'asta_db.user_point.date as date_created',
                                 DB::raw('sum(asta_db.user_point.point) As point'),
                                 DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
