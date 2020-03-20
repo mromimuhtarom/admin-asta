@@ -488,7 +488,8 @@ function Translate_menuPlayers($menu){
         'L_USED'                    =>  'Terpakai',
         'L_NON_USED'                =>  'Tidak terpakai',
         'L_EXIT'                    =>  'Keluar',
-        'L_USERNAME'                =>  'Nama pengguna'
+        'L_USERNAME'                =>  'Nama pengguna',
+        ''                          =>  ''
 
 
     ];
