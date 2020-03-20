@@ -1060,6 +1060,7 @@ public function detailTransaction(Request $request, $month, $year)
                     ->first();
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
+        
         $actblnc = [
             $actionbalance[0]  => $actionbalance[1],
             $actionbalance[2]  => $actionbalance[3],
@@ -1073,7 +1074,11 @@ public function detailTransaction(Request $request, $month, $year)
             $actionbalance[18] => $actionbalance[19],
             $actionbalance[20] => $actionbalance[21],
             $actionbalance[22] => $actionbalance[23],
+        
         ];
+        
+        
+        
 
         if(Input::get('sorting') === 'asc'):
             $sortingorder = 'desc';
@@ -1396,7 +1401,7 @@ public function detailTransaction(Request $request, $month, $year)
             'desc'      => 'Menerima permintaan transaksi dengan nama Agen ' .$resellername->username
           ]);
 
-          return back()->with('success', alertTranslate("Approved Succesful"));
+          return back()->with('success', alertTranslate("L_APPROVED_SUCCESSFULL"));
     }
 //------ End Request Transaction Approve -------//
 
@@ -1437,7 +1442,7 @@ public function detailTransaction(Request $request, $month, $year)
             'desc'      => 'Menolak permintaan transaksi dengan nama agen'. $resellername->username
         ]);
 
-        return back()->with('success', alertTranslate("Declined Succesful"));
+        return back()->with('success', alertTranslate("L_DECLINED_SUCCESSFULL"));
     }
 //------ End Request Transaction Decline -------//
 //****************************************** End Menu Request Transaction ******************************************//

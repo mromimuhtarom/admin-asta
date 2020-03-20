@@ -233,11 +233,11 @@ function translate_MenuTransaction($menu){
 
         
         //PILIH AKSI
-        'L_SEARCH'              =>  'Cari',
-        'Choose Time'           =>  'Pilih waktu',
-        'Choose Game'           =>  'Pilih Game',
+        'L_SEARCH'                =>  'Cari',
+        'Choose Time'             =>  'Pilih waktu',
+        'Choose Game'             =>  'Pilih Game',
         'L_ALL_GAME'              =>  'Semua Game',
-        'Today'                 =>  'Hari ini',
+        'Today'                   =>  'Hari ini',
         'L_DAY'                   =>  'Harian',
         'L_WEEK'                  =>  'Mingguan',
         'L_MONTH'                 =>  'Bulanan',
@@ -245,7 +245,7 @@ function translate_MenuTransaction($menu){
         'L_GAME'                  =>  'Permainan',
         'L_TIME_STAMP'            =>  'Waktu',
         'L_BANK_TRANSACTION'      =>  'Transaksi Bank',
-        'Bank Manual Transfer'  =>  'Transaksi bank manual',
+        'L_BANK_MANUAL_TRANSFER'  =>  'Transaksi bank manual',
         'L_ID_PLAYER'             =>  'ID pemain',
         'L_ITEM'                  =>  'Item',
         'L_QUANTITY'              =>  'Jumlah',
@@ -274,7 +274,7 @@ function translate_MenuTransaction($menu){
         'L_FEE'                   =>  'Biaya',
         'L_YES'                   =>  'Ya',
         'L_NO'                    =>  'Tidak',
-        'pending'               =>  'Tunda',
+        'L_PENDING'               =>  'Tunda',
         'L_DELIVERY_CONFIRM' =>  'Informasi Pengiriman',
         'L_DELIVERY_STATUS'       =>  'Status Pengiriman',
         'L_DETAIL_INFO'           =>  'Detail Info',
@@ -315,11 +315,11 @@ function translate_MenuTransaction($menu){
         'L_POINT_EXPIRED'         =>  'Poin Kadaluarsa',
         'L_TRANSC_DAY'       =>  'Transaksi Harian',
         'Detail Information'    =>  'Detail Information',
-        'Are you sure want to Decline this Transaction' => 'aaa' ,
-        'Are you want to Approve this Transaction?'    => 'cc',
+        'L_QUESTION_DECLINE_TRANS' => 'Apakah anda yakin menolak transaksi ini?' ,
+        'L_QUESTION_APPROVE_TRANS'    => 'Apakah anda ingin menyetujui transaksi ini?',
         'L_TRANSPLAYER'         =>  'Transaksi pemain',
         'L_TOTAL_RECORD'        =>  'Total entri adalah',
-        'L_TRANSC_CHIP'         =>  'Transaksi chip'
+        'L_TRANSC_CHIP'         =>  'Transaksi chip',
     ];
     return $array_menuContent[$menu];
 }
@@ -676,6 +676,8 @@ function TranslateMenuToko($menu){
         'L_ITEM_BONUS_IMAGE'  =>  'Gambar item bonus',
         'L_ITEM_BONUS_GET'    =>  'Item bonus yang didapat',
         'L_GOOGLE_KEY'        =>  'Google key',
+        'L_TRANSACTION'       =>  'Transaksi',
+        'L_SEARCH'            =>  'Cari'
     ];
 
     return $array_menuContent[$menu];
@@ -742,15 +744,15 @@ function TranslateReseller($menu){
         'L_RESELLER_ID'          => 'ID agen',
         'L_PHONE'                => 'Telefon',
         'L_BALANCE_GOLD'         => 'Saldo koin',
-        'Report Transaction'     => 'Laporan transaksi',
+        'L_REPORT_TRANSACTION'     => 'Laporan transaksi',
         'Bonus Item'             => 'Bonus item',
         'L_BALANCE'              => 'Saldo',
         'Gold Group'             => 'Grup koin',
         'Create Reseller Rank'   => 'Buat peringkat agen',
-        'Password'               => 'Katasandi',
-        'Identity Card'          => 'Kartu identitas',
-        'Access denied'          => 'Akses ditolak',
-        'You cant access'        => 'Anda tidak dapat mengakses',
+        'L_PASSWORD'               => 'Katasandi',
+        'L_IDENTITY_CARD'          => 'Kartu identitas',
+        'L_ACCESS_DENIED'          => 'Akses ditolak',
+        'L_UCANT_ACCESS'        => 'Anda tidak dapat mengakses',
         'Create new asset'       => 'Buat asset baru',
         'Link'                   => 'Link',
         'Version'                => 'Versi',
@@ -762,18 +764,18 @@ function TranslateReseller($menu){
         'L_MONTHLY'              => 'Bulanan',
         'L_YEARLY'               => 'Tahunan',
         'Create new'             => 'Buat baru',
-        'Username / Reseller ID' => 'Nama Agent / ID Agen',
-        'Gold'                   => 'Koin',
-        'Reason Gold'            => 'Alasan Koin dikurangi',
-        'Date Created'           => 'Tanggal',
-        'Buy Gold'               => 'Beli Koin',
-        'Buy Amount'             => 'Jumlah Pembelian',
-        'Sell Gold'              => 'Jual Koin',
-        'Reward Gold'            => 'Reward Koin',
-        'Correction Gold'        => 'Koreksi Koin',
+        'L_USERNAME_/_RESELLER_ID' => 'Nama Agent / ID Agen',
+        'L_GOLD'                   => 'Koin',
+        'L_REASON_GOLD'            => 'Alasan Koin dikurangi',
+        'L_DATE_CREATED'           => 'Tanggal',
+        'L_BUY_GOLD'               => 'Beli Koin',
+        'L_BUY_AMOUNT'             => 'Jumlah Pembelian',
+        'L_SELL_GOLD'              => 'Jual Koin',
+        'L_REWARD_GOLD'            => 'Reward Koin',
+        'L_CORRECTION_GOLD'        => 'Koreksi Koin',
         'L_USERNAME_RESELLER'    => 'Nama Reseller',
         'L_RESELLER_ID'          => 'ID Agen',
-        'Add Transaction Gold'   => 'Tambah Transaksi Koin',
+        'L_ADD_TRANS_GOLD'       => 'Tambah Transaksi Koin',
         'L_ORDER_ID'             => 'Order ID',
         'L_DATE_APPROVE'         => 'Tgl & waktu di setujui',
         'L_ITEM_NAME'            => 'Nama Item',
@@ -795,7 +797,16 @@ function TranslateReseller($menu){
         'L_TIMESTAMP'            => 'TimeStamp',
         'L_ORDER_TRANSACTION'    => 'ID Order / Transaksi',
         'L_DATE_BUY_SELL'        => 'Tanggal Pembelian / Penjualan',
-        'L_SEARCH'               => 'Cari'
+        'L_SEARCH'               => 'Cari',
+        'L_MAKE_NEW'             => 'Buat baru',
+        'L_ITEM_BONUS'           => 'Item bonus',
+        'L_ITEM_BONUS_IMAGE'     => 'Gambar item bonus',
+        'L_ITEM_BONUS_GET'       => 'Item bonus yang didapat',
+        'L_SEARCH'               => 'Cari',
+        'L_ALL_BANK'             => 'Semua bank'
+
+
+
 
     
     ];
@@ -890,8 +901,8 @@ function alertTranslate($menu){
         "L_RESET_PASSWORD_SUCCESS"                                   =>  "Setel ulang password berhasil",
         "L_PASSWORD_NULL"                                              =>  "Katasandi NULL",
         "REGISTER SUCCESSFULL"                                          =>  "Pendaftaran sukses",
-        "Approved Successful"                                           =>  "BERHASIL DISETUJUI",
-        "Declined Successful"                                           =>  "DITOLAK BERHASIL",
+        "L_APPROVED_SUCCESSFULL"                                           =>  "BERHASIL DISETUJUI",
+        "L_DECLINED_SUCCESSFULL"                                           =>  "DITOLAK BERHASIL",
         "File size too large"                                           =>  "Ukuran file terlalu besar",
         "Receiving request Transaction has been successful"             =>  "Menerima permintaan transaksi telah berhasil",
         "Reject request Transaction has been successful"                =>  "Menolak permintaan transaksi telah berhasil",
@@ -999,10 +1010,10 @@ function TranslateTransaksiAgen($menu){
 
     $array_menuContent = [
     
-        "Purchase Date"   =>  "Tgl & Waktu pembelian",
-        "User ID"         =>  "ID Pengguna",
-        "ID Order"        =>  "ID Agen",
-        "Transaction Type"=>  "Tipe transaksi"
+        "L_PURCHASE_DATE"   =>  "Tgl & Waktu pembelian",
+        "L_USER_ID"         =>  "ID Pengguna",
+        "L_ID_ORDER"        =>  "ID Agen",
+        "L_TRANSACTION_TYPE"=>  "Tipe transaksi"
     ];
     return $array_menuContent[$menu];
 };
