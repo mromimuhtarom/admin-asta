@@ -595,7 +595,7 @@
                                                 @endforeach
                                             </td>
                                             <td>{{ number_format($end->chip) }}</td>
-                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
+                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}a45</td>
                                             <td>
                                                 {{ number_format($end->val) }} <br> 
                                                 (fee:{{ number_format($end->fee) }})
