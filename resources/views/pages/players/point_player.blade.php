@@ -2,13 +2,8 @@
 
 
 @section('page')
-<<<<<<< HEAD
     <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_POINT_PLAYERS') }}</a></li>
-=======
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Players') }}</a></li>
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('Point Players') }}</a></li>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 

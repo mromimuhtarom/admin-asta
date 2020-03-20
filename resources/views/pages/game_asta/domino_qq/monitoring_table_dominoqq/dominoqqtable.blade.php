@@ -160,7 +160,7 @@
           <div class="table-outer">
             <div class="row">
               <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                {{ Translate_menuPlayers('Total Record Entries is') }} {{ $dmqPlayersNovice->total() }}
+                {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $dmqPlayersNovice->total() }}
             </div>
             </div>
             <table class="table table-bordered" id="tablerefreshed1">
@@ -227,7 +227,7 @@
           <div class="table-outer">
             <div class="row">
               <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                {{ Translate_menuPlayers('Total Record Entries is') }} {{ $dmqPlayersintermediate->total() }}
+                {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $dmqPlayersintermediate->total() }}
               </div>
             </div>
       
@@ -295,7 +295,7 @@
             <div class="row">
               <!-- Button tambah bot baru -->
               <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                  {{ Translate_menuPlayers('Total Record Entries is') }} {{ $dmqPlayersPro->total() }}
+                  {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $dmqPlayersPro->total() }}
               </div>
                           <!-- End Button tambah bot baru -->
             </div>

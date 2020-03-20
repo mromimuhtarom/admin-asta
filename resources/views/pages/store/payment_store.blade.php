@@ -2,13 +2,8 @@
 
 
 @section('page')
-<<<<<<< HEAD
   <li class="breadcrumb-item"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('L_STORE')}}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('L_PAYMENT_STORE')}}</a></li>
-=======
-  <li class="breadcrumb-item menunameheader"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('Store')}}</a></li>
-  <li class="breadcrumb-item menunameheader"><a href="{{ route('Payment_Store') }}">{{ TranslateMenuToko('Payment Store')}}</a></li>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 

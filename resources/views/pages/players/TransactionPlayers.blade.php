@@ -1,13 +1,8 @@
 @extends('index')
 
 @section('page')
-<<<<<<< HEAD
 	<li class="breadcrumb-item"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
   <li class="breadcrumb-item"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('L_TRANSPLAYER') }}</a></li>
-=======
-	<li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('Transaction') }}</a></li>
-  <li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Players') }}">{{ translate_MenuTransaction('L_TRANSPLAYER') }}</a></li>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 @endsection
 
 @section('content')
@@ -34,21 +29,12 @@
 			<form action="{{ route('TransactionPlayers-search')}}">
             <div class="row h-100 w-100">
 				@if (Request::is('Players/Transaction_Players/Banking-search*'))
-<<<<<<< HEAD
                 	<div class="col">
                     	<select name="choose_time" id="time" class="form-control">
 							<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
 							<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('L_DAY') }}</option>
 							<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('L_WEEK') }}</option>
 							<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('L_MONTH') }}</option>
-=======
-          <div class="col">
-            <select name="choose_time" id="time" class="form-control">
-							<option value="all time" @if($time == 'all time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
-							<option value="day" @if($time == 'day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
-							<option value="week" @if($time == 'week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
-							<option value="month" @if($time == 'month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 						</select>
 					</div>
 					<div class="col">
@@ -64,7 +50,6 @@
           </div>
           <div class="col date-min">
 						<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
-<<<<<<< HEAD
                 	</div>
                 	<div class="col">
                     	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> {{ translate_MenuTransaction('L_SEARCH') }}</button>
@@ -81,24 +66,6 @@
 					<div class="col">
                     	<select name="game_name" id="gamename" class="form-control">
 							<option value="">{{ translate_MenuTransaction('L_ALL_GAME') }}</option>
-=======
-          </div>
-          <div class="col date-max">
-            <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
-					</div>
-				@else
-					<div class="col">
-            <select name="choose_time" id="time" class="form-control">
-							<option value="all time">{{ translate_MenuTransaction('All time') }}</option>
-							<option value="day">{{ translate_MenuTransaction('Day') }}</option>
-							<option value="week">{{ translate_MenuTransaction('Week') }}</option>
-							<option value="month">{{ translate_MenuTransaction('Month') }}</option>
-            </select>
-					</div>
-					<div class="col">
-            <select name="game_name" id="gamename" class="form-control">
-							<option value="">{{ translate_MenuTransaction('All Game') }}</option>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 								@foreach ($gamename as $gm)
 									<option value="{{ $gm->id }}">{{ $gm->desc }}</option>														
 								@endforeach
@@ -106,21 +73,12 @@
 					</div>
           <div class="col date-min">
 						<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $datenow }}">
-<<<<<<< HEAD
                 	</div>
                 	<div class="col">
                 		<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
                 	</div>
                 	<div class="col">
                     	<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuTransaction('L_SEARCH') }}</button>
-=======
-          </div>
-          <div class="col date-max">
-          	<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
-          </div>
-          <div class="col">
-            <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
 					</div> 
 				@endif
             </div>
