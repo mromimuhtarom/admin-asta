@@ -634,15 +634,17 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
-                                                    @if(!empty($tpk_gameplaylog->start->table_card))
-                                                        @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
-                                                            <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                        @else
-                                                            <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                @if($end->hand)
+                                                    @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
+                                                        @if(!empty($tpk_gameplaylog->start->table_card))
+                                                            @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
+                                                                <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                            @else
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                @endfor
+                                                    @endfor
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
