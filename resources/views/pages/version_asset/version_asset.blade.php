@@ -70,7 +70,7 @@
                                     <th>File</th>
                                     @endif
                                     <th>{{ TranslateMenuGame('L_NAME')}}</th>
-                                    <th>{{ translate_menuTransaction('Type')}}</th>
+                                    <th>{{ translate_menuTransaction('L_TYPE')}}</th>
                                     <th>Operating System</th>
                                     <th>{{ TranslateReseller('Link')}}</th>
                                     <th>{{ TranslateReseller('Version')}}</th>
@@ -169,7 +169,7 @@
                                         <td>File</td>
                                         @endif
                                         <td>{{ TranslateMenuGame('L_NAME')}}</td>
-                                        <td>{{ translate_menuTransaction('Type')}}</td>
+                                        <td>{{ translate_menuTransaction('L_TYPE')}}</td>
                                         <td>{{ TranslateReseller('Link')}}</td>
                                         <td>{{ TranslateReseller('Version')}}</td>
                                         @if($menu)
@@ -267,7 +267,7 @@
                                     <th>File</th>
                                     @endif
                                     <th>{{ TranslateMenuGame('L_NAME')}}</th>
-                                    <th>{{ translate_menuTransaction('Type')}}</th>
+                                    <th>{{ translate_menuTransaction('L_TYPE')}}</th>
                                     <th>{{ TranslateReseller('Link')}}</th>
                                     <th>{{ TranslateReseller('Version')}}</th>
                                     @if($menu)
@@ -354,8 +354,8 @@
                         <div class="table-outer">
                             <table class="table table-bordered">
                                 <thead>
-                                    <th>{{ TranslateMenuGame("Language") }}</th>
-                                    <th>{{ TranslateMenuGame("Upload File") }}</th>
+                                    <th>{{ TranslateMenuGame("L_LANGUAGE") }}</th>
+                                    <th>{{ TranslateMenuGame("L_UPLOAD_FILE_LANGUAGE") }}</th>
                                 </thead>
                                 <tbody>
                                   <tr>
@@ -415,10 +415,10 @@
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn sa-btn-primary submit-data" >
-                  <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
+                  <i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE')}}
                 </button>
                 <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                  <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}
+                  <i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL')}}
               </div>
             </form>
           </div>
@@ -456,10 +456,10 @@
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn sa-btn-primary submit-data" >
-                  <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
+                  <i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE')}}
                 </button>
                 <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                  <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}
+                  <i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL')}}
               </div>
             </form>
           </div>
@@ -527,7 +527,7 @@
                         <br>
                           <input class="form-control required" name="Name" id="namefileadr" placeholder="Name"><br>
                           <select name="Type" class="form-control required">
-                            <option selected disabled>{{ translate_menuTransaction('Type')}}</option>
+                            <option selected disabled>{{ translate_menuTransaction('L_TYPE')}}</option>
                             <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
                             <option value="Image">{{ TranslateVersionAsetApk('L_IMAGE')}}</option>
                             <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
@@ -549,10 +549,10 @@
               </div>
               <div class="modal-footer">
                 <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-andro toggle-disabled" disabled onclick="MyCustomFunctioncreateandroid()">
-                  <i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}
+                  <i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE')}}
                 </button>
                 <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                  <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}
+                  <i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL')}}
               </div>
             </form>
           </div>
@@ -603,10 +603,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" id="load" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Processing">
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}uyui
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}uyui
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('L_CANCEL')}}
           </button>
         </div>
       </form>
@@ -642,7 +642,7 @@
                   <br>
                   <input class="form-control" name="Name" id="namefilewindows" placeholder="Name"><br>
                     <select name="Type" class="form-control">
-                      <option>{{ translate_menuTransaction('Type')}}</option>
+                      <option>{{ translate_menuTransaction('L_TYPE')}}</option>
                       <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
                       <option value="Image">{{ TranslateVersionAsetApk('L_IMAGE')}}</option>
                       <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
@@ -657,10 +657,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" id="load1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('L_CANCEL')}}
           </button>
         </div>
       </form>
@@ -743,10 +743,10 @@ $ckbox = str_replace('.','_', $xl['name']);
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data btn-andro" onclick="MyCustomFunctionandro{{ $i }}()">
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('L_CANCEL')}}
           </button>
         </div>
       </form>
@@ -818,10 +818,10 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary submit-data edit-ios" id="load1" data-loading-text="Processing Order" onclick="MyCustomFunctiona{{ $i }}()">
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('L_CANCEL')}}
           </button>
         </div>
       </form>
@@ -877,10 +877,10 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" >
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-            <i class="fa fa-remove"></i> {{ TranslateMenuItem('Cancel')}}
+            <i class="fa fa-remove"></i> {{ TranslateMenuItem('L_CANCEL')}}
         </div>
       </form>
     </div>
@@ -896,13 +896,13 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('DeleteData')}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_DATA')}}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          {{ TranslateMenuItem('Are you sure want to delete it')}}
+          {{ TranslateMenuItem('L_QUESTION_DELETE_IT')}}
           <form action="{{ route('VersionAssetApkAndroid-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
@@ -911,8 +911,8 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
             <input type="hidden" name="Link" id="Link" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
         </div>
           </form>
       </div>
@@ -924,13 +924,13 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure')}}
+        {{ TranslateMenuItem('L_ARE_U_SURE')}}
         <form action="{{ route('VersionAssetApkAndroid-deleteAssetAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -939,8 +939,8 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
           <input type="hidden" name="LinksAll" id="LinksAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
       </div>
         </form>
     </div>
@@ -953,13 +953,13 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ TranslateMenuItem('DeleteData')}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ TranslateMenuItem('L_DELETE_DATA')}}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          {{ TranslateMenuItem('Are you sure want to delete it')}}
+          {{ TranslateMenuItem('L_QUESTION_DELETE_IT')}}
           <form action="{{ route('VersionAssetApkIOS-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
@@ -968,8 +968,8 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
             <input type="text" name="link" id="link1" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
         </div>
           </form>
       </div>
@@ -981,13 +981,13 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure')}}
+        {{ TranslateMenuItem('L_ARE_U_SURE')}}
         <form action="{{ route('VersionAssetApkIOS-deleteAssetAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
@@ -1011,13 +1011,13 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ TranslateMenuItem('DeleteData')}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i> {{ TranslateMenuItem('L_DELETE_DATA')}}</h5>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="fa fa-remove"></i>
           </button>
         </div>
         <div class="modal-body">
-          {{ TranslateMenuItem('Are you sure want to delete it')}}
+          {{ TranslateMenuItem('L_QUESTION_DELETE_IT')}}
           <form action="{{ route('VersionAssetApkWindows-deleteAsset') }}" method="post">
             {{ method_field('delete')}}
             {{ csrf_field() }}
@@ -1026,8 +1026,8 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
             <input type="hidden" name="link" id="link3" value="">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+          <button type="submit" class="button_example-yes btn sa-btn-success"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+          <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
         </div>
           </form>
       </div>
@@ -1039,13 +1039,13 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are U Sure')}}
+        {{ TranslateMenuItem('L_ARE_U_SURE')}}
         <form action="{{ route('VersionAssetApkWindows-deleteAssetAllSelected') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}

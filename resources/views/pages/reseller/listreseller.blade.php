@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+<link rel="stylesh  eet" href="/css/admin.css">
 @if (count($errors) > 0)
   <div class="error-val">
     <div class="alert alert-danger">
