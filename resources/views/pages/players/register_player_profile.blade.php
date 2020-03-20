@@ -41,22 +41,7 @@
                 <div class="row">
 
                     <div class="col-sm-2 col-2 profile-pic">
-                            @php
-                                // belum tau kedepannya
-                                // if (is_numeric($profile->avatar)) {
-                                //     $avatar = "https://graph.facebook.com/".$profile->avatar."/picture?type=large";
-                                // } else {
-                                  // $avatar = route('image-profile', $profile->avatar_id);
-                                  // } else
-                                  // {
-                                  //   $avatar= "/images/profile/empty_profile.png";
-                                  // }
-                                  
-                                    
-                                // }
-                            @endphp
-                            {{-- {{ $avatar }} --}}
-                                  <img src="{{ route('image-profile', $profile->avatar_id) }}" class="border border-dark rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
+                      <img src="{{ route('image-profile', $profile->avatar_id) }}" class="border border-dark rounded-circle" alt="demo user" style="margin-left:2%; margin-top:-30%;">
                          
                         </div>
                         <div class="col-sm-6 col-8">
