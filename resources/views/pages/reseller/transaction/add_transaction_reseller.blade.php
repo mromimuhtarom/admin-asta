@@ -40,15 +40,15 @@
             <div class="row h-100 w-100 no-gutters">
                 @if (Request::is('Reseller/Reseller-Transaction/Add_Transaction_Reseller/AddTransactionReseller-search*'))
                 <div class="col" align="right">
-                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}" value="{{ $getUsername }}">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('L_USERNAME_/_RESELLER_ID') }}" value="{{ $getUsername }}">
                 </div>
                 @else
                 <div class="col" align="right">
-                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('Username / Reseller ID') }}">
+                    <input type="text" id="username" class="form-control" name="inputPlayer" placeholder="{{ TranslateReseller('L_USERNAME_/_RESELLER_ID') }}">
                 </div> 
                 @endif;
                 <div class="col" style="padding-left:2%;">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ TranslateReseller('L_SEARCH')}}</button>
                 </div>
             </div>
         </form>
@@ -63,7 +63,7 @@
 
     <header>
         <div class="widget-header">
-            <h2><strong> Add Transaction </strong></h2>
+            <h2><strong>{{ TranslateMenuToko('L_ITEM_AWARDED')}}</strong></h2>
         </div>
     </header>
 
@@ -77,8 +77,8 @@
                         <thead>
                             <tr>
                                 <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.reseller_id">{{ TranslateReseller('L_RESELLER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.reseller_id') }}"></i></a></th>
-                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.username">{{ Translate_menuPlayers('Username') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.username') }}"></i></a></th>
-                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.gold">{{ TranslateReseller('Gold') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
+                                <th><a href="{{ route('Add_Transaction_Reseller-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.username">{{ Translate_menuPlayers('L_USERNAME') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller.username') }}"></i></a></th>
+                                <th width="20%"><a href="{{ route('AddTransaction-search') }}?inputPlayer={{ $getUsername }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller.gold">{{ TranslateReseller('L_GOLD') }}<i class="fa fa-sort{{ iconsorting('asta_db.user_stat.chip') }}"></i></a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,7 +112,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><i
-                    class="fa fa-plus-square"></i>{{ TranslateReseller('Add Transaction Gold') }}</h4>
+                    class="fa fa-plus-square"></i>{{ TranslateReseller('L_ADD_TRANS_GOLD') }}</h4>
                 <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-remove"></i>
                 </button>
@@ -132,7 +132,7 @@
                             <td>{{ $transaction->username }}</td>
                         </tr>
                         <tr>
-                            <td>{{ TranslateReseller('Gold') }}</td>
+                            <td>{{ TranslateReseller('L_GOLD') }}</td>
                             <td>:</td>
                             <td>{{ $transaction->gold }}</td>
                         </tr>
@@ -144,23 +144,23 @@
                                 <input type="hidden" name="operator_aritmatika" value="+">
                                 <input type="hidden" name="agen_id" value="{{ $transaction->reseller_id }}">
                                 <input type="hidden" name="columnname" value="chip">
-                                <input type="number" name="currency" placeholder="{{ TranslateReseller('Gold') }}" class="form-control" required><br>
+                                <input type="number" name="currency" placeholder="{{ TranslateReseller('L_GOLD') }}" class="form-control" required><br>
                                 <select name="type" class="form-control" id="">
                                     @foreach ($actblnc as $key => $act)
                                         <option value="{{ $key }}">{{ ConfigTextTranslate($act) }}</option>
                                     @endforeach
                                 </select><br>
-                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="{{ TranslateReseller('Reason Gold') }}"></textarea>
+                                <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="{{ TranslateReseller('L_REASON_GOLD') }}"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn sa-btn-primary submit-data">
-                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('Save') }}
+                        <i class="fa fa-save"></i> {{ Translate_menuPlayers('L_SAVE') }}
                     </button>
                     <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
-                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('Cancel') }}
+                        <i class="fa fa-remove"></i> {{ Translate_menuPlayers('L_CANCEL') }}
                     </button>
                 </div>
             </form>

@@ -54,7 +54,7 @@
                 </div>
                 @endif
                 <div class="col" style="padding-left:3%;">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ TranslateReseller('L_SEARCH') }}</button>
                 </div>
             </div>
         </form>
@@ -89,7 +89,7 @@
             <div class="row">
                 <!-- Button tambah bot baru -->
                 <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
-                    {{ Translate_menuPlayers('Total Record Entries is') }} {{ $transaction->total() }}
+                    {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $transaction->total() }}
                 </div>
                             <!-- End Button tambah bot baru -->
             </div>

@@ -65,7 +65,7 @@
               <th class="th-sm">ID</th>
               <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
               <th class="th-sm">{{ TranslateReseller('Gold Group')}}</th>
-              <th class="th-sm">{{ translate_menuTransaction('Type')}}</th>
+              <th class="th-sm">{{ translate_menuTransaction('L_TYPE')}}</th>
               <th class="th-sm">Bonus</th>
               @if($menu && $mainmenu)
               <th class="th-sm">
@@ -147,10 +147,10 @@
       </div>
       <div class="modal-footer">
         <button type="submit" id="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadBtn()">
-          <i class="fa fa-save"></i> {{ TranslateMenuItem('Save')}}
+          <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}
         </button>
         <button type="submit" class="btn btn-danger" data-dismiss="modal">
-          <i class="fa fa-remove"></i>{{ TranslateMenuItem('Cancel')}}
+          <i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL')}}
         </button>
       </div>
     </form>
@@ -164,21 +164,21 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('DeleteData')}}</h5>
+      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_DATA')}}</h5>
       <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
         <i class="fa fa-remove"></i>
       </button>
     </div>
     <div class="modal-body">
-      {{ TranslateMenuItem('Are U Sure')}}
+      {{ TranslateMenuItem('L_ARE_U_SURE')}}
       <form action="{{ route('ResellerRank-delete') }}" method="post">
         {{ method_field('delete')}}
         {{ csrf_field() }}
         <input type="hidden" name="id" id="id" value="">
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+      <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
     </div>
       </form>
   </div>
@@ -190,21 +190,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('Delete all selected data')}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash"></i>{{ TranslateMenuItem('L_DELETE_ALL_SELECTED_DATA')}}</h5>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-remove"></i>
         </button>
       </div>
       <div class="modal-body">
-        {{ TranslateMenuItem('Are you sure want to delete it')}}
+        {{ TranslateMenuItem('L_QUESTION_DELETE_IT')}}
         <form action="{{ route('ResellerRank-deleteAllSelectedRank') }}" method="post">
           {{ method_field('delete')}}
           {{ csrf_field() }}
           <input type="text" name="userIdAll" id="idDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_CANCEL')}}</button>
       </div>
         </form>
     </div>

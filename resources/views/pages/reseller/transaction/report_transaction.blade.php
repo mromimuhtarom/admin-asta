@@ -37,7 +37,7 @@
                 <div class="col" style="padding-left:3%;">
                     <select name="choosedate" id="" class="form-control" required>
                         <option value="">{{ TranslateMenuToko('L_CHOOSE_TYPE_DATE')}}</option>
-                        <option value="approvedecline">{{ TranslateMenuToko('L_DATE_AND_APPROVE')}}</option>
+                        <option value="approvedecline">{{ TranslateMenuToko('L_DATEAPPROVE_DECLINE')}}</option>
                         <option value="request">{{ TranslateMenuToko('L_DATE_REQUEST')}}</option>
                     </select>
                 </div>
@@ -57,7 +57,7 @@
                 </div>
                 @endif
                 <div class="col" style="padding-left:3%;">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ TranslateReseller('L_SEARCH')}}</button>
                 </div>
             </div>
         </form>
@@ -72,7 +72,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>{{ TranslateReseller('Report Transaction')}} </h2>
+            <h2>{{ TranslateReseller('L_REPORT_TRANSACTION')}} </h2>
         </div>
     
         <div class="widget-toolbar">
@@ -93,8 +93,8 @@
             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>			                
                     <tr>
-                        <th>{{ translate_menuTransaction('Date')}}</th>
-                        <th>{{ Translate_menuPlayers('Gold Coins')}}</th>
+                        <th>{{ translate_menuTransaction('L_DATE')}}</th>
+                        <th>{{ Translate_menuPlayers('L_GOLD_COINS')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,7 +148,7 @@
     <header>
         <div class="widget-header">	
             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-            <h2>{{ TranslateReseller('Report Transaction')}}</h2>
+            <h2>{{ TranslateReseller('L_REPORT_TRANSACTION')}}</h2>
         </div>
     
         <div class="widget-toolbar">
@@ -193,15 +193,15 @@
                         <td></td>
                         <td>
                             @if($tr->status == 2)
-                                <span style="color:green">{{ TranslateMenuToko('Success') }}</span>
+                                <span style="color:green">{{ TranslateMenuToko('L_SUCCESS') }}</span>
                             @elseif($tr->status == 0)
-                                <span style="color:red">{{ TranslateMenuToko('Decline') }}</span>
+                                <span style="color:red">{{ TranslateMenuToko('L_DECLINE') }}</span>
                             @endif
                         </td>
                         <td>{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}</td>
                         <td>{{ date("d-m-Y H:i:s", strtotime($tr->action_date)) }}</td>
                         <td>
-                            <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->id }}">{{ translate_MenuTransaction('Detail Info') }}</button>
+                            <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->id }}">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</button>
                         </td>
                     </tr>
                     @endforeach
@@ -225,7 +225,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('Detail Info') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
@@ -233,24 +233,24 @@
 			<div class="modal-body">
                     @if($transaction->payment_id == 23)
                         <label for="tgl_pembelian">
-                            {{ TranslateMenuToko('Date Request') }}
+                            {{ TranslateMenuToko('L_DATE_REQUEST') }}
                         </label>
                         <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $transaction->datetime }}" disabled>
                         <label for="tipe_pembayaran">
-                            {{ TranslateMenuToko('Payment Type')}}
+                            {{ TranslateMenuToko('L_PAYMENT_TYPE')}}
                         </label>
                         <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $transaction->paymentname }}" disabled>
                     @else 
                         <label for="tgl_pembelian">
-                            {{ TranslateMenuToko('Date Request') }}
+                            {{ TranslateMenuToko('L_DATE_REQUEST') }}
                         </label>
                         <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ $transaction->datetime }}" disabled>
                         <label for="tgl_disetujui">
-                            {{ TranslateMenuToko('Date approve and Decline')}}
+                            {{ TranslateMenuToko('L_DATEAPPROVE_DECLINE')}}
                         </label>
                         <input type="text" name="" id="tgl_disetujui" class="form-control" value="{{ $transaction->action_date }}" disabled>
                         <label for="tipe_pembayaran">
-                            {{ TranslateMenuToko('Payment Type')}}
+                            {{ TranslateMenuToko('L_PAYMENT_TYPE')}}
                         </label>
                         <input type="text" name="" id="tipe_pembayaran" class="form-control" value="{{ $transaction->paymentname }}" disabled>
                     @endif

@@ -48,14 +48,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>{{ TranslateReseller('Password')}}<p>&nbsp;</p></td>
+                            <td>{{ TranslateReseller('L_PASSWORD')}}<p>&nbsp;</p></td>
                             <td colspan="3">
                                     <input type="text" name="password" class="form-control" value="{{ generateID(6) }}" readonly>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td>{{ TranslateReseller('Phone')}}<p>&nbsp;</p></td>
+                            <td>{{ TranslateReseller('L_PHONE')}}<p>&nbsp;</p></td>
                             <td colspan="3">
                                     <input type="number" min="0" name="phone" class="form-control" value="{{ old('phone') }}" required>
                                     <p>&nbsp;</p>
@@ -69,14 +69,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>{{ TranslateReseller('Identity Card')}} <p>&nbsp;</p></td>
+                            <td>{{ TranslateReseller('L_IDENTITY_CARD')}} <p>&nbsp;</p></td>
                             <td colspan="3">
                                     <input type="text" name="idcard" class="form-control"value="{{ old('identify') }}" required>
                                     <p>&nbsp;</p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center"><button class="myButton submit-data" type="submit" style="font-family:Century Gothic; font-weight:bold;"><i class="fa fa-save"></i>{{ TranslateMenuItem('Save')}}</button></td>
+                            <td colspan="4" align="center"><button class="myButton submit-data" type="submit" style="font-family:Century Gothic; font-weight:bold;"><i class="fa fa-save"></i>{{ TranslateMenuItem('L_SAVE')}}</button></td>
                         </tr>
                     </table>
                 </form>
@@ -89,8 +89,8 @@
 @else 
 <div class="alert-danger alert-block" style="padding-left:2%;">
         <a class="close" data-dismiss="alert" href="#">×</a>
-        <h4 class="alert-heading">{{ TranslateReseller('Access denied')}}!</h4>
-        {{ TranslateReseller('You cant access')}}
+        <h4 class="alert-heading">{{ TranslateReseller('L_ACCES_DENIED')}}!</h4>
+        {{ TranslateReseller('L_UCANT_ACCESS')}}
         <p class="text-align-left">
             <br>
         </p>

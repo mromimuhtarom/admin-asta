@@ -38,10 +38,10 @@
                     @if (Request::is('Reseller/Reseller-Transaction/Transaction_Day_Reseller/TransactionDayReseller-search*'))
                         <div class="col">
                             <select name="choose_time" id="time" class="form-control">
-                                    <option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('All time') }}</option>
-                                    <option value="Day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('Day') }}</option>
-                                    <option value="Week" @if($time == 'Week') selected @endif>{{ translate_MenuTransaction('Week') }}</option>
-                                    <option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('Month') }}</option>
+                                    <option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
+                                    <option value="Day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('L_DAY') }}</option>
+                                    <option value="Week" @if($time == 'Week') selected @endif>{{ translate_MenuTransaction('L_WEEK') }}</option>
+                                    <option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('L_MONTH') }}</option>
                             </select>
                         </div>
                         <div class="col date-min">
@@ -51,15 +51,15 @@
                                 <input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
                         </div>
                         <div class="col">
-                                <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                                <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ TranslateMenuToko('L_SEARCH')}}</button>
                         </div>
                     @else 
                         <div class="col">
                             <select name="choose_time" id="time" class="form-control">
-                                <option value="All time">{{ translate_MenuTransaction('All time') }}</option>
-                                <option value="Day">{{ translate_MenuTransaction('Day') }}</option>
-                                <option value="Week">{{ translate_MenuTransaction('Week') }}</option>
-                                <option value="Month">{{ translate_MenuTransaction('Month') }}</option>
+                                <option value="All time">{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
+                                <option value="Day">{{ translate_MenuTransaction('L_DAY') }}</option>
+                                <option value="Week">{{ translate_MenuTransaction('L_WEEK') }}</option>
+                                <option value="Month">{{ translate_MenuTransaction('L_MONTH') }}</option>
                             </select>
                         </div>
                         <div class="col date-min">
@@ -69,7 +69,7 @@
                                 <input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
                         </div>
                         <div class="col">
-                                <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                                <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ TranslateMenuToko('L_SEARCH')}}</button>
                         </div>										
                     @endif
             </div>
@@ -83,7 +83,7 @@
 			
 	<header>
 		<div class="widget-header">	
-			<h2><strong>{{ translate_MenuTransaction('Transaction Day') }}</strong></h2>				
+			<h2><strong>{{ translate_MenuTransaction('L_TRANSC_DAY') }}</strong></h2>				
 		</div>
 	</header>
 
@@ -94,34 +94,34 @@
 				<div class="table-outer">
 					<div class="row">
 						<div class="col" style="font-style:italic;color:#969696;font-weight:bold;">
-							{{ Translate_menuPlayers('Total Record Entries is') }} {{ $history->total() }}
+							{{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $history->total() }}
 						</div>
 					</div>
 					<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover" width="100%">
 						<thead>
 							<tr>
                                 @if($time == "Day" || $time == "Week" || $time == "Month" || $time == "All time")
-                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction_day.date_created">{{ TranslateReseller('Date Created') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction_day.date_created') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction_day.date_created">{{ TranslateReseller('L_DATE_CREATED') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction_day.date_created') }}"></i></a></td>
                                 @endif
                                 @if($time == "All time" )
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction_day.reseller_id">{{ TranslateReseller('L_RESELLER_ID') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction_day.reseller_id') }}"></i></a></td>
                                 <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller.username">{{ TranslateReseller('L_USERNAME') }} <i class="fa fa-sort{{ iconsorting('reseller.username') }}"></i></a></td>
                                 @endif
                                 @if($time == "Day" || $time == "Week" || $time == "Month" || $time == "All time")
-                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_gold">{{ TranslateReseller('Buy Gold') }} <i class="fa fa-sort{{ iconsorting('buy_gold') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_amount">{{ TranslateReseller('Buy Amount') }} <i class="fa fa-sort{{ iconsorting('buy_amount') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=sell_gold">{{ TranslateReseller('Sell Gold') }} <i class="fa fa-sort{{ iconsorting('sell_gold') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reward_gold">{{ TranslateReseller('Reward Gold') }} <i class="fa fa-sort{{ iconsorting('reward_gold') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=correction_gold">{{ TranslateReseller('Correction Gold') }} <i class="fa fa-sort{{ iconsorting('correction_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_gold">{{ TranslateReseller('L_BUY_GOLD') }} <i class="fa fa-sort{{ iconsorting('buy_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_amount">{{ TranslateReseller('L_BUY_AMOUNT') }} <i class="fa fa-sort{{ iconsorting('buy_amount') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=sell_gold">{{ TranslateReseller('L_SELL_GOLD') }} <i class="fa fa-sort{{ iconsorting('sell_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reward_gold">{{ TranslateReseller('L_REWARD_GOLD') }} <i class="fa fa-sort{{ iconsorting('reward_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-search') }}?choose_time={{ $time }}&inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=correction_gold">{{ TranslateReseller('L_CORRECTION_GOLD') }} <i class="fa fa-sort{{ iconsorting('correction_gold') }}"></i></a></td>
                                 @elseif($time == "Detail")
-                                 <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_transaction_day.date_created">{{ TranslateReseller('Date Created') }} <i class="fa fa-sort{{ iconsorting('asta_db.reseller_transaction_day.date_created') }}"></i></a></td>
+                                 <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_transaction_day.date_created">{{ TranslateReseller('L_DATE_CREATED') }} <i class="fa fa-sort{{ iconsorting('asta_db.reseller_transaction_day.date_created') }}"></i></a></td>
                                 <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller_transaction_day.reseller_id">{{ TranslateReseller('L_RESELLER_ID') }} <i class="fa fa-sort{{ iconsorting('reseller_transaction_day.reseller_id') }}"></i></a></td>
                                 <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reseller.username">{{ TranslateReseller('L_USERNAME') }} <i class="fa fa-sort{{ iconsorting('reseller.username') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_gold">{{ TranslateReseller('Buy Gold') }} <i class="fa fa-sort{{ iconsorting('buy_gold') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_amount">{{ TranslateReseller('Buy Amount') }} <i class="fa fa-sort{{ iconsorting('buy_amount') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=sell_gold">{{ TranslateReseller('Sell Gold') }} <i class="fa fa-sort{{ iconsorting('sell_gold') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reward_gold">{{ TranslateReseller('Reward Gold') }} <i class="fa fa-sort{{ iconsorting('reward_gold') }}"></i></a></td>
-                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=correction_gold">{{ TranslateReseller('Correction Gold') }} <i class="fa fa-sort{{ iconsorting('correction_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_gold">{{ TranslateReseller('L_BUY') }} <i class="fa fa-sort{{ iconsorting('buy_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=buy_amount">{{ TranslateReseller('L_BUY_AMOUNT') }} <i class="fa fa-sort{{ iconsorting('buy_amount') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=sell_gold">{{ TranslateReseller('L_SELL_GOLD') }} <i class="fa fa-sort{{ iconsorting('sell_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=reward_gold">{{ TranslateReseller('L_REWARD_GOLD') }} <i class="fa fa-sort{{ iconsorting('reward_gold') }}"></i></a></td>
+                                <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $minDate }}&inputMaxDate={{ $maxDate }}&sorting={{ $sortingorder }}&namecolumn=correction_gold">{{ TranslateReseller('L_CORRECTION_GOLD') }} <i class="fa fa-sort{{ iconsorting('correction_gold') }}"></i></a></td>
                                 @endif
 							</tr>
 						</thead>

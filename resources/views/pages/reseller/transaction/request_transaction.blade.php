@@ -63,7 +63,7 @@
 													<table>
 														<tr>
 															<td><input class="bankname" type="checkbox" @if($chk === 'chhckall_bank')checked @endif value="all_bank" name="all_bank" id="all_bank" style="float:left;" onclick="cbChange(this)"></td>
-															<td><b style="float:left;">ALL Bank</b></td>
+															<td><b style="float:left;">{{ TranslateReseller('L_ALL_BANK')}}</b></td>
 														</tr>
 													</table>
 												</td>
@@ -176,16 +176,16 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th class="th-sm">{{ TranslateTransaksiAgen('ID Order') }}</th>
-										<th class="th-sm">{{ TranslateTransaksiAgen('Purchase Date') }}</th>
-										<th class="th-sm">{{ TranslateTransaksiAgen('User ID') }}</th>
-										<th class="th-sm">{{ Translate_menuPlayers('Username') }}</th>
-										<th class="th-sm">{{ translate_menuTransaction('Item') }}</th>
-										<th class="th-sm">{{ translate_menuTransaction('Quantity') }}</th>
-										<th class="th-sm">{{ translate_menuTransaction('Price') }}</th>
-										<th class="th-sm">{{ TranslateTransaksiAgen('Transaction Type') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('L_ID_ORDER') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('L_PURCHASE_DATE') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('L_USER_ID') }}</th>
+										<th class="th-sm">{{ Translate_menuPlayers('L_USERNAME') }}</th>
+										<th class="th-sm">{{ translate_menuTransaction('L_ITEM') }}</th>
+										<th class="th-sm">{{ translate_menuTransaction('L_QUANTITY') }}</th>
+										<th class="th-sm">{{ translate_menuTransaction('L_PRICE') }}</th>
+										<th class="th-sm">{{ TranslateTransaksiAgen('L_TRANSACTION_TYPE') }}</th>
 										@if ($menu && $mainmenu && $submenu)
-										<th class="th-sm">{{ translate_menuTransaction('Confirm request') }}</th>
+										<th class="th-sm">{{ translate_menuTransaction('L_CONFIRM_REQUEST') }}</th>
 										@endif
 									</tr>
 								</thead>
@@ -219,13 +219,13 @@
 										@endif
 										<td>{{ $transaction->quantity }}</td>
 										<td>{{ $transaction->item_price }}</td>
-										<td>{{ $transaction->bankname }}{{ translate_menuTransaction('Bank Manual Transfer') }}</td>
+										<td>{{ $transaction->bankname }}{{ translate_menuTransaction('L_BANK_MANUAL_TRANSFER') }}</td>
 										<td>
 											<div>
-												<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $transaction->id }}"><i class="fa fa-remove"></i>{{ translate_menuTransaction('Decline') }}</button>
+												<button type="button" value="Decline" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#decline{{ $transaction->id }}"><i class="fa fa-remove"></i>{{ translate_menuTransaction('L_DECLINE') }}</button>
 										  {{-- </div>
 											<div> --}}
-												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $transaction->id }}"><i class="fa fa-check"></i>{{ translate_menuTransaction('Approve') }}</button>
+												<button type="button" value="Approve" class="btn btn-xs btn-success" data-toggle="modal" data-target="#approve{{ $transaction->id }}"><i class="fa fa-check"></i>{{ translate_menuTransaction('L_APPROVE') }}</button>
 											</div>
 										</td>
 										@else
@@ -254,8 +254,8 @@
 										@endif
 										<td>{{ $transaction->quantity }}</td>
 										<td>{{ $transaction->item_price }}</td>
-										<td>{{ $transaction->bankname }} {{ translate_menuTransaction('Bank Manual Transfer') }}</td>
-										<td>{{ translate_menuTransaction('Pending') }}</td>
+										<td>{{ $transaction->bankname }} {{ translate_menuTransaction('L_BANK_MANUAL_TRANSFER') }}</td>
+										<td>{{ translate_menuTransaction('L_PENDING') }}</td>
 										@endif
 									</tr>
 									@endforeach
@@ -282,7 +282,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_menuTransaction('Decline Transaction') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_menuTransaction('L_DECLINE_TRANS') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
@@ -291,7 +291,7 @@
             @csrf
                 <div class="modal-body" align="center">
 										<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
-                    {{ translate_menuTransaction('Are you sure want to Decline this Transaction') }}
+                    {{ translate_menuTransaction('L_QUESTION_DECLINE_TRANS') }}
                     <input type="hidden" name="declineId" value="{{ $transaction->id }}">
 										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
 										<input type="hidden" name="price" value="{{ $transaction->item_price }}">
@@ -322,8 +322,8 @@
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i> {{ translate_menuTransaction('Yes') }}</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_menuTransaction('No') }}</button>
+				    <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i> {{ translate_menuTransaction('L_YES') }}</button>
+				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_menuTransaction('L_NO') }}</button>
                 </div>
             </form>
 		</div>
@@ -338,7 +338,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">{{ translate_menuTransaction('Approve') }}</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ translate_menuTransaction('L_APPROVE') }}</h5>
 				<button type="button" style="color:red;" class="close" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-remove"></i>
 				</button>
@@ -347,7 +347,7 @@
             @csrf
 			    <div class="modal-body" align="center">
 							<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
-							{{ translate_menuTransaction('Are you want to Approve this Transaction?') }}
+							{{ translate_menuTransaction('L_QUESTION_APPROVE_TRANS') }}
 
 										<input type="hidden" name="reseller_id" value="{{ $transaction->reseller_id }}">
 										<input type="hidden" name="goldbuy" value="190">
@@ -378,8 +378,8 @@
 										<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
 			    </div>
 			    <div class="modal-footer">
-				    <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i> {{ translate_menuTransaction('Yes') }}</button>
-				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_menuTransaction('No') }}</button>
+				    <button type="submit" class="btn btn-primary submit-data"><i class="fa fa-check"></i> {{ translate_menuTransaction('L_YES') }}</button>
+				    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_menuTransaction('L_NO') }}</button>
                 </div>
             </form>
 		</div>
