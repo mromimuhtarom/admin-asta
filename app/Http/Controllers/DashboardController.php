@@ -97,8 +97,7 @@ class DashboardController extends Controller
         'percentagegolddraw', 'percentagepointdraw', 'counttotalchip', 'counttotalgold', 
         'counttotalpoint', 'percentagechipdraw_request', 'percentagegolddraw_request', 
         'percentagepointdraw_request', 'counttotalchip_request', 'counttotalgold_request', 
-        'counttotalpoint_request', 'countregistered', 'countguest', 'countonline',
-        'countoffline'));
+        'counttotalpoint_request', 'countregistered', 'countguest', 'countonline'));
     }
 
     public function create()
