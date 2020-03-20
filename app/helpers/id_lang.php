@@ -738,12 +738,12 @@ function TranslateReseller($menu){
 
     $array_menuContent = [
 
-        'L_RESELLER_ID'            => 'ID agen',
-        'Phone'                  => 'Telefon',
-        'Saldo gold'             => 'Saldo koin',
+        'L_RESELLER_ID'          => 'ID agen',
+        'L_PHONE'                => 'Telefon',
+        'L_BALANCE_GOLD'         => 'Saldo koin',
         'Report Transaction'     => 'Laporan transaksi',
         'Bonus Item'             => 'Bonus item',
-        'Balance'                => 'Saldo',
+        'L_BALANCE'              => 'Saldo',
         'Gold Group'             => 'Grup koin',
         'Create Reseller Rank'   => 'Buat peringkat agen',
         'Password'               => 'Katasandi',
@@ -763,7 +763,7 @@ function TranslateReseller($menu){
         'Create new'             => 'Buat baru',
         'Username / Reseller ID' => 'Nama Agent / ID Agen',
         'Gold'                   => 'Koin',
-        'Reason Gold'   => 'Alasan Koin dikurangi',
+        'Reason Gold'            => 'Alasan Koin dikurangi',
         'Date Created'           => 'Tanggal',
         'Buy Gold'               => 'Beli Koin',
         'Buy Amount'             => 'Jumlah Pembelian',
@@ -771,7 +771,7 @@ function TranslateReseller($menu){
         'Reward Gold'            => 'Reward Koin',
         'Correction Gold'        => 'Koreksi Koin',
         'L_USERNAME_RESELLER'    => 'Nama Reseller',
-        'L_RESELLER_ID'            => 'ID Agen',
+        'L_RESELLER_ID'          => 'ID Agen',
         'Add Transaction Gold'   => 'Tambah Transaksi Koin',
         'L_ORDER_ID'             => 'Order ID',
         'L_DATE_APPROVE'         => 'Tgl & waktu di setujui',
@@ -793,7 +793,8 @@ function TranslateReseller($menu){
         'L_STATUS_TRANSACTION'   => 'Status Transaksi',
         'L_TIMESTAMP'            => 'TimeStamp',
         'L_ORDER_TRANSACTION'    => 'ID Order / Transaksi',
-        'L_DATE_BUY_SELL'        => 'Tanggal Pembelian / Penjualan'
+        'L_DATE_BUY_SELL'        => 'Tanggal Pembelian / Penjualan',
+        'L_SEARCH'               => 'Cari'
 
     
     ];
