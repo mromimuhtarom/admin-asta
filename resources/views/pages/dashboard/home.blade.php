@@ -21,13 +21,13 @@
             <div class="col" valign="middle">
                 <div class="row h-100 w-100">
                     <div class="col-6" id="svg"> 
-                        <svg width="250px" height="250px" class="border border-dark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="40" stroke="#007d2a" stroke-width="3" fill="#ffffff" stroke-dasharray="50, 100"/>{{--ygdipakai--}} <!-- untuk yang chip -->
+                            <circle cx="50" cy="50" r="40" stroke="#007d2a" stroke-width="3" fill="#ffffff" stroke-dasharray="{{ $percentagechipdraw }} 999"/>{{--ygdipakai--}} <!-- untuk yang chip -->
                             <circle cx="50" cy="50" r="30" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="60, 100"/>{{--ygdipakai--}}  <!-- untuk yang gold -->
+                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="{{ $percentagegolddraw }} 999"/>{{--ygdipakai--}}  <!-- untuk yang gold -->
                             <circle cx="50" cy="50" r="20" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="180" stroke-dashoffset="100"/>{{--dikalikan 2--}} <!-- untuk yang goods -->
+                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="{{ $percentagepointdraw }} 999"/>{{--dikalikan 2--}} <!-- untuk yang goods -->
                             <circle cx="50" cy="50" r="10" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
                             {{--<circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray= "10"/> ygdipakai--}} <!-- untuk yang best offer -->
                             <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="50, 100"  stroke-dashoffset="30"/>  {{-- tanpa dikali --}}
@@ -52,25 +52,56 @@
                         <div class="text-description">Gold</div>
                         <div class="text-description">Goods</div>
                         <div class="text-description">Best Offer</div> --}}
-                        <div class="row" style="margin-bottom:2%; width:100%; height:70%;">
-                            <div class="col"><div class="circle-chip rounded-circle"></div></div>
-                            <div class="col">Chip</div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="circle-chip rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Chip {{ $counttotalchip }} Transaksi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="circle-gold rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Gold {{$counttotalgold}} Transaksi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="circle-goods rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Point {{$counttotalpoint}} Transaksi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="circle-bestoffers rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Best Offer
+                                </td>
+                            </tr>
+                        </table>
+                        {{-- <div class="row" style="margin-bottom:2%; width:100%; height:70%;">
+                            <div class="col border border-dark"><div class="circle-chip rounded-circle"></div></div>
+                            <div class="col">Chip {{ $counttotalchip }} Transaksi</div>
                             <div class="w-100"></div>
-                        {{-- </div>
-                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+
                             <div class="col"><div class="circle-gold rounded-circle"></div></div>
                             <div class="col">Gold</div>
                             <div class="w-100"></div>
-                        {{-- </div>
-                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+
                             <div class="col"><div class="circle-goods rounded-circle"></div></div>
                             <div class="col">Goods</div>
                             <div class="w-100"></div>
-                        {{-- </div>
-                        <div class="row border border-dark" style="margin-bottom:2%;"> --}}
+
                             <div class="col"><div class="circle-bestoffers rounded-circle"></div></div>
                             <div class="col">Best Offers</div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -79,13 +110,13 @@
                 <div class="row h-100 w-100">
                     <div class="col-6" id="svg">
                         <svg width="250px" height="250px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="40" stroke="#000000" stroke-width="3" fill="#ffffff" stroke-dasharray="20, 100" stroke-dashoffset="200"/>{{--ygdipakai--}}
-                            <circle cx="50" cy="50" r="30" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="30, 100" stroke-dashoffset="50"/>{{--ygdipakai--}}
-                            <circle cx="50" cy="50" r="20" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
-                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="40, 100" stroke-dashoffset="280"/>{{--ygdipakai--}}
-                            <circle cx="50" cy="50" r="10" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="251.3" stroke-dashoffset="50"/>
+                            <circle cx="50" cy="50" r="40" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
+                            <circle cx="50" cy="50" r="40" stroke="#007d2a" stroke-width="3" fill="#ffffff" stroke-dasharray="{{ $percentagechipdraw_request }} 999"/>{{--ygdipakai--}}
+                            <circle cx="50" cy="50" r="30" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
+                            <circle cx="50" cy="50" r="30" stroke="#ffaa01" stroke-width="3" fill="#ffffff" stroke-dasharray="{{ $percentagegolddraw_request }} 999"/>{{--ygdipakai--}}
+                            <circle cx="50" cy="50" r="20" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
+                            <circle cx="50" cy="50" r="20" stroke="#0019ff" stroke-width="3" fill="#ffffff" stroke-dasharray="{{ $percentagepointdraw_request }} 999"/>{{--ygdipakai--}}
+                            <circle cx="50" cy="50" r="10" stroke="#e6e6e6" stroke-width="3" fill="#ffffff" stroke-dasharray="460" stroke-dashoffset="50"/>
                             <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="50, 100" stroke-dashoffset="150"/>{{--ygdipakai--}}
                         </svg>
                     </div>
@@ -108,25 +139,58 @@
                         <div class="text-description">Gold</div>
                         <div class="text-description">Goods</div>
                         <div class="text-description">Best Offer</div> --}}
-                        <div class="row" style="margin-bottom:2%; width:100%; height:70%;">
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="circle-chip rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Chip {{ $counttotalchip_request }} Transaksi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="circle-gold rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Gold {{$counttotalgold_request}} Transaksi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="circle-goods rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Point {{$counttotalpoint_request}} Transaksi
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="circle-bestoffers rounded-circle"></div><br>
+                                </td>
+                                <td valign="top">
+                                    Best Offer
+                                </td>
+                            </tr>
+                        </table>
+
+                        {{-- <div class="row" style="margin-bottom:2%; width:100%; height:70%;">
                             <div class="col"><div class="circle-players rounded-circle"></div></div>
                             <div class="col">Players</div>
                             <div class="w-100"></div>
-                        {{-- </div>
-                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+
                             <div class="col"><div class="circle-gold rounded-circle"></div></div>
                             <div class="col">Gold</div>
                             <div class="w-100"></div>
-                        {{-- </div>
-                        <div class="row border border-dark" tyle="margin-bottom:2%; width:100%;"> --}}
+
                             <div class="col"><div class="circle-goods rounded-circle"></div></div>
                             <div class="col">Goods</div>
                             <div class="w-100"></div>
-                        {{-- </div>
-                        <div class="row border border-dark" style="margin-bottom:2%;"> --}}
+
                             <div class="col"><div class="circle-bestoffers rounded-circle"></div></div>
                             <div class="col">Best Offers</div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -161,26 +225,26 @@
 
                         </div>
                         <div class="explanation">
-                            <table width="100%" >
+                            <table width="100%" border="0" style="margin-left:3%;margin-right:3%;margin-top:3%;">
                                 <tr>
                                     <td width="5%"><span class="dot1"></span></td>
                                     <td width="10%">Terdaftar</td>
-                                    <td width="20%">123</td>
+                                    <td width="20%">{{ $countregistered }}</td>
                                 </tr>
                                 <tr>
                                     <td width="5%"><span class="dot2"></span></td>
                                     <td width="10%">Guest</td>
-                                    <td width="20%">123</td>
+                                    <td width="20%">{{ $countguest }}</td>
                                 </tr>
                                 <tr>
                                     <td width="5%"><span class="dot3"></span></td>
                                     <td width="10%">Online</td>
-                                    <td width="20%">123</td>
+                                    <td width="20%">{{ $countonline }}</td>
                                 </tr>
                                 <tr>
                                     <td width="5%"><span class="dot4"></span></td>
                                     <td width="10%">Ofline</td>
-                                    <td width="20%">123</td>
+                                    <td width="20%">red</td>
                                 </tr>
                             </table>                            
                         </div>
