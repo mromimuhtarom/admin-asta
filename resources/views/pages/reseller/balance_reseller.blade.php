@@ -50,7 +50,7 @@
                 </div>
                 @endif
                 <div class="col" style="padding-left:3%;">
-                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ TranslateReseller('L_SEARCH') }}</button>
                 </div>
             </div>
         </form>
@@ -88,13 +88,13 @@
                 <thead>			                
                     <tr>
                         <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.reseller_id">{{ TranslateReseller('L_RESELLER_ID') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.reseller_id') }}"></i></a></th>
-                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.username">{{ Translate_menuPlayers('Username')}}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.username') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.username">{{ Translate_menuPlayers('L_USERNAME')}}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.username') }}"></i></a></th>
                         {{-- <th>Description</th> --}}
-                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.debet">{{ Translate_menuPlayers('Debit') }}<i class="fa fa-sort"{{ iconsorting('asta_db.reseller_balance.debet') }}"></i></a></th>
-                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.credit">{{ Translate_menuPlayers('Credit') }}<i class="fa fa-sort"{{ iconsorting('asta_db.reseller_balance.credit') }}"></i></a></th>
-                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.balance">{{ TranslateReseller('Balance') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.balance') }}"></i></a></th>
-                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.action_id">{{ TranslateMenuItem('Category') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.action_id') }}"></i></a></th>
-                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.datetime">{{ Translate_menuPlayers('Timestamp') }}<i class=" fa fa-sort{{ iconsorting('asta_db.reseller_balance.datetime') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.debet">{{ Translate_menuPlayers('L_DEBIT') }}<i class="fa fa-sort"{{ iconsorting('asta_db.reseller_balance.debet') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.credit">{{ Translate_menuPlayers('L_CREDIT') }}<i class="fa fa-sort"{{ iconsorting('asta_db.reseller_balance.credit') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.balance">{{ TranslateReseller('L_BALANCE') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.balance') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.action_id">{{ TranslateMenuItem('L_CATEGORY') }}<i class="fa fa-sort{{ iconsorting('asta_db.reseller_balance.action_id') }}"></i></a></th>
+                        <th><a href="{{ route('BalanceReseller-search') }}?inputPlayer={{ $searchUsername }}&inputMinDate={{ $startDate }}&inputMaxDate={{ $endDate }}&sorting={{ $sortingorder }}&namecolumn=asta_db.reseller_balance.datetime">{{ Translate_menuPlayers('L_TIMESTAMP') }}<i class=" fa fa-sort{{ iconsorting('asta_db.reseller_balance.datetime') }}"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>

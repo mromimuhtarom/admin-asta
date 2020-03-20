@@ -5,7 +5,6 @@
   <li class="breadcrumb-item"><a href="{{ route('Reward_Transaction') }}">{{ translate_MenuTransaction('L_REWARD_TRANSACTION') }}</a></li>
 @endsection
 
-
 @section('content')
 <link rel="stylesheet" href="/css/admin.css">
 @if (count($errors) > 0)

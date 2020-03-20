@@ -44,12 +44,12 @@
                 <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('Select All')}}</th></th>
                 @endif
                 <th class="th-sm">{{ TranslateReseller('L_RESELLER_ID')}}</th>
-                <th class="th-sm">{{ Translate_menuPlayers('Username')}}</th>
+                <th class="th-sm">{{ Translate_menuPlayers('L_USERNAME')}}</th>
                 <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
-                <th class="th-sm">{{ TranslateReseller('Phone')}}</th>
+                <th class="th-sm">{{ TranslateReseller('L_PHONE')}}</th>
                 <th class="th-sm">Email</th>
-                <th class="th-sm">{{ TranslateReseller('Saldo gold')}}</th>
-                <th class="th-sm">{{ Translate_menuPlayers('Rank')}}</th>
+                <th class="th-sm">{{ TranslateReseller('L_BALANCE_GOLD')}}</th>
+                <th class="th-sm">{{ Translate_menuPlayers('L_RANK')}}</th>
                 @if($menu && $mainmenu)
                 <th class="th-sm">{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</th>
                 <th class="th-sm" style="width:90px;">
@@ -126,7 +126,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes submit-data">{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</button>
-        <button type="button" class="button_example-no" data-dismiss="modal">{{ TranslateMenuItem('No')}}</button>
+        <button type="button" class="button_example-no" data-dismiss="modal">{{ TranslateMenuItem('L_NO')}}</button>
       </div>
         </form>
     </div>
@@ -182,8 +182,8 @@
           <input type="text" name="userIdAll" id="idDeleteAll" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('Yes')}}</button>
-        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('No')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ TranslateMenuItem('L_NO')}}</button>
       </div>
         </form>
     </div>
