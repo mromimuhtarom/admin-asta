@@ -327,10 +327,10 @@
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="number" name="chipawarded" class="form-control" id="basic-url" placeholder="chip awarded">
+            <input type="number" name="chipawarded" class="form-control" id="basic-url" placeholder="chip awarded" min="0">
           </div>
           <div class="form-group">
-            <input type="number" name="goldcost" class="form-control" id="basic-url" placeholder="gold cost">
+            <input type="number" name="goldcost" class="form-control" id="basic-url" placeholder="gold cost" min="0">
           </div>
           
           <div class="form-group">

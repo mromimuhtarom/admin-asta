@@ -1099,6 +1099,18 @@ function TranslateGameSetting($menu)
 
 }
 
+function TranslateTranstype($menu)
+{
+    $array_menuContent = [
+        "L_BANK_TRANSFER"   =>  "Bank transfer",
+        "L_INTERNET_BANKING"=>  "Internet banking",
+        "L_E_MONEY"         =>  "E money",
+        "L_MERCHANT"        =>  "Merchant",
+        "L_CREDIT_CARD"     =>  "Kartu kredit"
+    ];
+    return $array_menuContent[$menu];
+}
+
 
 
 ?>

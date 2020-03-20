@@ -1073,13 +1073,11 @@ public function detailTransaction(Request $request, $month, $year)
             $actionbalance[16] => $actionbalance[17],
             $actionbalance[18] => $actionbalance[19],
             $actionbalance[20] => $actionbalance[21],
-            $actionbalance[22] => $actionbalance[23],
-        
+            $actionbalance[22] => $actionbalance[23]
+
         ];
         
-        
-        
-
+    
         if(Input::get('sorting') === 'asc'):
             $sortingorder = 'desc';
         else:

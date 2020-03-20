@@ -248,10 +248,10 @@
             <input type="text" name="title" class="form-control required" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="number" name="price" class="form-control required" id="basic-url" min="0" placeholder="price">
+            <input type="number" name="price" class="form-control required" id="basic-url" min="0" placeholder="price" min="0">
           </div>
           <div class="form-group">
-            <input type="number" name="qty" class="form-control required" id="basic-url" min="0" placeholder="Quantity">
+            <input type="number" name="qty" class="form-control required" id="basic-url" min="0" placeholder="Quantity" min="0">
           </div>
         </div>
         <div class="modal-footer">

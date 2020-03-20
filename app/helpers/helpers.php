@@ -210,14 +210,12 @@ function strTypeTransaction($val){
   } else if ($val == 3) {
     return 'E-money';
   } else if ($val == 4) {
-    return 'Toko';
+    return 'Merchant';
   } else if ($val == 5) {
-    return 'Akulaku';
-  } else if ($val == 6) {
     return 'Credit Card';
-  } else if($val == 7) {
+  } else if ($val == 6) {
     return 'Manual Transfer';
-  } else if($val == 8) {
+  } else if($val == 7) {
     return 'Google Play';
   }
 }
