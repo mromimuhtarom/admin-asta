@@ -122,13 +122,6 @@
                         <th>{{ TranslateMenuToko('L_DATE_REQUEST')}}</th>
                         <th>{{ TranslateMenuToko('L_PLAYER_ID')}}</th>
                         <th>{{ TranslateMenuToko('L_USERNAME')}}</th>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 7903845cc1e846d91a6ded4eb5e0be49865d822e
->>>>>>> 944276fa83b4179e0258c2c02f304af6df524042
                         <th>{{ TranslateMenuToko('L_ITEM')}}</th>
                         <th>{{ TranslateMenuToko('L_QUANTITY')}}</th>
                         <th>{{ TranslateMenuToko('L_DESCRIPTION')}}</th>
@@ -136,21 +129,6 @@
                         <th>{{ TranslateMenuToko('L_CONFIRMATION') }}</th>
                         <th>{{ TranslateMenuToko('L_STATUS_INFORMATION') }}</th>
                         <th>{{ TranslateMenuToko('L_STATUS')}}</th>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-                        <th>{{ TranslateMenuToko('Item')}}</th>
-                        <th>{{ TranslateMenuToko('Quantity')}}</th>
-                        <th>{{ TranslateMenuToko('Description')}}</th>
-                        <th>{{ TranslateMenuToko('Price')}}</th>
-                        <th>{{ TranslateMenuToko('Confirmation') }}</th>
-                        <th>{{ TranslateMenuToko('Status Information') }}</th>
-                        <th>{{ TranslateMenuToko('Status')}}</th>
->>>>>>> 4063a539c261fe0fc5b5c7d24fff752000a50249
->>>>>>> 7903845cc1e846d91a6ded4eb5e0be49865d822e
->>>>>>> 944276fa83b4179e0258c2c02f304af6df524042
                     </tr>
                 </thead>
                 <tbody>

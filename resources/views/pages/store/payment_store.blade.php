@@ -87,7 +87,7 @@
               <tr>
                 <td style="text-align:center;"><input type="checkbox" name="deletepermission[]" data-pk="{{ $payment->id }}" data-username="{{ $payment->PaymentName }}" class="deletepermission{{ $payment->id }} deleteIdAll"></td>
                 <td><a href="#" class="usertext" data-title="Name" data-name="name" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->PaymentName }}</td>
-                <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-value="{{ $payment->IdType }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ ucwords(str_replace('_', ' ',$payment->PaymentType)) }}</td>
+                <td><a href="#" class="payment_type" data-title="Type" data-name="type" data-pk="{{ $payment->id }}" data-value="{{ $payment->IdType }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ TranslateTranstype($payment->PaymentType) }}</td>
                 <td><a href="#" class="usertext" data-title="desc" data-name="desc" data-pk="{{ $payment->id }}" data-type="text" data-url="{{ route('PaymentStore-update') }}">{{ $payment->desc }}</td>
                 <td><a href="#" class="stractive" data-title="status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ ConfigTextTranslate(strEnabledDisabled($payment->status)) }}</td>
                 {{-- <td><a href="#" class="stractive" data-title="Status" data-name="status" data-pk="{{ $payment->id }}" data-type="select" data-url="{{ route('PaymentStore-update') }}">{{ strEnabledDisabled($payment->status) }}</td> --}}
@@ -104,7 +104,7 @@
               @else 
               <tr>
                 <td>{{ $payment->name }}</td>
-                <td>{{ strTypeTransaction($payment->type) }}</td>
+                <td>{{ TranslateTranstype($payment->type) }}</td>
                 <td>{{ $payment->desc }}</td>
                 <td>{{ ConfigTextTranslate(strEnabledDisabled($payment->status)) }}</td>
               </tr>
@@ -141,7 +141,7 @@
             <select class="custom-select required" name="transactionType">
               <option selected disabled>{{ TranslateMenuToko('L_TRANSACTION_TYPE')}}</option>
               @foreach ($paymenttype as $pt)
-                <option value="{{ $pt->id }}">{{ $pt->name }}</option>    
+                <option value="{{ $pt->id }}">{{ TranslateTranstype($pt->name) }}</option>    
               @endforeach
             </select>
           </div>
@@ -305,7 +305,7 @@
         source: [
           {value: '', text:'Pilih tipe pembayaran'},
           @foreach($paymenttype as $pty)
-          {value: '{{ $pty->id }}', text:'{{ ucwords(str_replace("_", " ",$pty->name)) }}'},
+          {value: '{{ $pty->id }}', text:'{{ TranslateTranstype($pty->name) }}'},
           @endforeach
         ]
       });
@@ -319,7 +319,7 @@
           }
         },
 				source: [
-                  {value: '', text: 'choose for activation'},
+                  {value: '', text:'pilih untuk aktivasi'},
 				          // {value: '1', text: 'Enabled'},
 					        // {value: '0', text: 'Disabled'},
                   @php
