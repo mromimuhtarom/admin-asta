@@ -67,21 +67,6 @@ class RewardTransactionController extends Controller
             'description'   =>  $description
         ]);
 
-        // StoreTransactionHist::create([
-        //     'user_id'     => $user_id,
-        //     'item_name'   => $item_name,
-        //     'status'      => 1,
-        //     'description' => $description,
-        //     'quantity'    => $quantity,
-        //     'payment_id'  => $payment_id,
-        //     'datetime'    => $datetime,
-        //     'shop_type'   => $shop_type,
-        //     'item_type'   => 3,
-        //     'item_price'  => $price,
-        //     'action_date' => Carbon::now('GMT+7')
-        // ]);
-
-        // StoreTransaction::where('user_id', '=', $user_id)->where('id', '=', $approveid)->delete();
         Log::create([
             'op_id'     => Session::get('userId'),
             'action_id' => '4',
