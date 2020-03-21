@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+<link rel="stylesh  eet" href="/css/admin.css">
 @if (count($errors) > 0)
   <div class="error-val">
     <div class="alert alert-danger">
@@ -125,8 +126,8 @@
           <input type="password" class="form-control" name="password" placeholder="Password" value="" required/>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="button_example-yes submit-data">{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</button>
-        <button type="button" class="button_example-no" data-dismiss="modal">{{ TranslateMenuItem('L_NO')}}</button>
+        <button type="submit" class="button_example-yes btn sa-btn-primary submit-data"><i class="fa fa-key"></i>{{ translate_MenuContentAdmin('L_RESET_PASSWORD')}}</button>
+        <button type="button" class="button_example-no btn sa-btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuContentAdmin('L_NO')}}</button>
       </div>
         </form>
     </div>

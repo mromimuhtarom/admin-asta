@@ -595,7 +595,7 @@
                                                 @endforeach
                                             </td>
                                             <td>{{ number_format($end->chip) }}</td>
-                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
+                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}a45</td>
                                             <td>
                                                 {{ number_format($end->val) }} <br> 
                                                 (fee:{{ number_format($end->fee) }})
@@ -634,7 +634,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($end->hand)
+                                                @if($end->stat)
                                                     @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
                                                         @if(!empty($tpk_gameplaylog->start->table_card))
                                                             @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
