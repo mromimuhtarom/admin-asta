@@ -522,10 +522,10 @@
                                             <td>
                                                 @if(!empty($tpk_gameplaylog->start->table_card))
                                                     @if($b == 1)
-                                                    @for($a=0; $a<3; $a++)
+                                                        @for($a=0; $a<3; $a++)
                                                         {{-- {{$a}} --}}
                                                         <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                    @endfor
+                                                        @endfor
                                                     @elseif($b == 2)
                                                     @for($a=0; $a<4; $a++)
                                                         {{-- {{$tpk_gameplaylog->start->table_card[$a]}} --}}
@@ -713,8 +713,8 @@
 
                                     <!-------- Action -------->
                                     @php 
-                                    $a = 0;
-                                    $draw = array_count_values(array_column($dmq_gameplaylog->acts, 'act'))[9];
+                                        $a = 0;
+                                        $draw = array_count_values(array_column($dmq_gameplaylog->acts, 'act'))[9];
                                     @endphp
                                     @foreach($dmq_gameplaylog->acts as $action)
                                         @if($action->act == 9)

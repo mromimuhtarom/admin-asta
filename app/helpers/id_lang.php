@@ -977,13 +977,14 @@ function Translateaction_id($menu){
         "Banned Account Player"     =>      "Akun pemain terlarang",
         "Problem Account Player"    =>      "Akun pemain bermasalah",
         "Upgrade Account"           =>      "Tingkatkan akun",
-        "L_EDIT_CHIP_STORE"         =>      "L_EDIT_CHIP_STOR",
+        "L_EDIT_CHIP_STORE"         =>      "Edit Toko chip",
         'L_EDIT_GOODS_STORE'        =>      'Edit Toko Barang',
         "L_EDIT_PLAYER"             =>      'Edit pemain',
         'L_LOGIN_PLAYER'            =>      'Pemain login',
         'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
         'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Akun pemain bermasalah',
         'L_BANNED_ACCOUNT_PLAYER'   =>      'Akun pemain dilarang',
+       
         
 
     ];
