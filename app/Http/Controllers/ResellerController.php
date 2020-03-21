@@ -1382,7 +1382,7 @@ public function detailTransaction(Request $request, $month, $year)
         //   $checkamount = DB::table('rese')
           ResellerBalance::create([
             'reseller_id' => $reseller_id,
-            'action_id'   => 16,
+            'action_id'   => 10,
             'credit'      => 0,
             'debet'       => $goldAwarded,
             'balance'     => $checkTotalGold->gold,
@@ -1421,7 +1421,7 @@ public function detailTransaction(Request $request, $month, $year)
         $resellername   = Reseller::where('reseller_id', '=', $declineOrderId)->first();
 
         StoreTransactionHist::create([
-            'user_id'       => $reseller_id,
+            'user_id'       =>  $reseller_id,
             'item_name'     =>  'nanti',
             'status'        =>  0,
             'description'   =>  $desc,

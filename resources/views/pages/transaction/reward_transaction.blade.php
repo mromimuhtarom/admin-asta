@@ -116,8 +116,6 @@
 		</div>
 	</div>
 	<!-- End Table 1 -->
-
-
 	{{-- yg hilang --}}
 {{-- </div> --}}
 

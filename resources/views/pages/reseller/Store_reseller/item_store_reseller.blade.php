@@ -313,10 +313,10 @@
             <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="number" name="goldAwarded" class="form-control" id="basic-url" placeholder="Item awarded">
+            <input type="number" name="goldAwarded" class="form-control" id="basic-url" placeholder="Item awarded" min="0">
           </div>
           <div class="form-group">
-            <input type="number" name="priceCash" class="form-control" id="basic-url" placeholder="price cash">
+            <input type="number" name="priceCash" class="form-control" id="basic-url" placeholder="price cash" min="0">
           </div>
           <div class="form-group">
             <input type="text" name="googleKey" class="form-control" id="basic-url" placeholder="google key">

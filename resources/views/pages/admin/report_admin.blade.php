@@ -110,7 +110,7 @@
                           <td>{{ $login->user_id }}</td>
                           <td>{{ $login->username }}</td>
                           <td>{{ translate_MenuContentAdmin('L_ADMIN') }} {{ ConfigTextTranslate($action_report_admin[$login->action_id]) }}</td>
-                          <td>{{ $login->datetime }}</td>
+                          <td>{{ date('d-m-Y H:i:s', strtotime($login->datetime)) }}</td>
                           <td>{{ $login->ip }}</td>
                         </tr>
                         @endforeach
