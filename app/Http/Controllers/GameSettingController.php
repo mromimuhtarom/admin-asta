@@ -22,7 +22,7 @@ class GameSettingController extends Controller
     public function index()
     {
         // ****Asta Poker ***//
-        $tpk   = TpkConfig::all();
+        $tpk     = TpkConfig::all(); 
         // ****End Asta Poker ****//
 
         // ****Big Two ****//

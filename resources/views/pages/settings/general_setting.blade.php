@@ -42,7 +42,7 @@
                     <th class="th-sm">{{ TranslateMenuGame('L_NAME') }}</th>
                     <th class="th-sm">{{ translate_menu('L_SETTINGS') }}</th>
                   </tr>
-                </thead>
+                </thead>  
                 <tbody>
                   <tr>
                     <td>{{ TranslateGeneralSettings('Maintenance') }}</td>

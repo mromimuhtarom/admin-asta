@@ -148,7 +148,7 @@
                 </div>
                 <div class="form-group">
                   <select class="custom-select required" id="category_table" name="category">
-                    <option selected>{{ TranslateMenuGame('L_SELECT_CATEGORY') }}</option>
+                    <option disabled selected>{{ TranslateMenuGame('L_SELECT_CATEGORY') }}</option>
                     @foreach ($category as $ct)
                     <option value="{{ $ct->room_id }}">{{ $ct->name }} {{ number_format($ct->min_buy) }} - {{ number_format($ct->max_buy) }}</option>
                     @endforeach
