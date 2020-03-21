@@ -95,9 +95,6 @@
                       @if($abpplayers->user_id === $pplayer->reported_user)
                         <td>{{ $abpplayers->user_id }}</td>
                         <td>{{ $abpplayers->username }}</td>
-                      @elseif($abpplayers->user_id !== $pplayer->reported_user)
-                        <td></td>
-                        <td></td>
                       @endif
 			
              @endforeach

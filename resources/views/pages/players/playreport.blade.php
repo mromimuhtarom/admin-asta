@@ -229,7 +229,7 @@
                                 @endif
                             @endif
                             
-                            {{-- {{ $history->hand_card_round }} --}}
+
                           </td>                          
                           <td>{{ number_format($history->bet, 2) }}</td>
                           <td>{{ number_format($history->win_lose,2 ) }}</td>
@@ -244,7 +244,7 @@
                           @endphp
                           <td>{{ $status }}</td>
                           <td>{{ date("d-m-Y H:i:s", strtotime($history->datetimeround)) }}</td>
-                          {{-- <td>{{ $history->countryname }}</td> --}}
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -360,7 +360,7 @@
                                                         @php
                                                         $arraycardbgt[] = $action->card[$i];
                                                         @endphp
-                                                            {{-- <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($action->card)[$i] }}.png" alt=""> --}}
+
                                                         @endfor
 
                                                         @for($a=0; $a<count($start->hand); $a++)
@@ -423,7 +423,7 @@
                                     <th>{{ Translate_menuPlayers('L_CARD_TABLE') }}</th>
                                 </tr>
                             </thead>
-                            {{-- {{ dd(empty($history1->gameplay_log)) }} --}}
+
                             @if(!empty($history->gameplay_log))
                                 @php 
                                 $tpk_gameplaylog = json_decode($history->gameplay_log);
@@ -716,7 +716,6 @@
                                     $a = 0;
                                     $draw = array_count_values(array_column($dmq_gameplaylog->acts, 'act'))[9];
                                     @endphp
-                                    
                                     @foreach($dmq_gameplaylog->acts as $action)
                                         @if($action->act == 9)
                                         <tr>
@@ -873,12 +872,7 @@
                                                             @endif
                                                         @endforeach
                                                     @endif
-                                                @endif                                            
-                                                {{-- @foreach($dmq_gameplaylog->start->players as $start)
-                                                @if($start->seat == $action->seat)
-                                                {{$a}}
-                                                @endif
-                                                @endforeach --}}
+                                                @endif                              
                                             </td>
                                         </tr>
                                         @else
@@ -903,7 +897,6 @@
                                         @endphp
                                     @endforeach                                    
                                     <!-------- End Action ---------->
-
                                     @foreach($dmq_gameplaylog->end->players as $end)
                                         <tr>
                                             <td>{{ $end->seat }}</td>
@@ -1020,25 +1013,17 @@
                                                 @foreach($dms_gameplaylog->start->players as $start)
                                                     @if($start->seat == $action->seat)                                                        
                                                         @for($i=0; $i<count($action->card); $i++)
-                                                        @php
-                                                        $arraycarddms[] = $action->card[$i];
-                                                        @endphp
-                                                            {{-- <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($action->card)[$i] }}.png" alt=""> --}}
+                                                            @php
+                                                            $arraycarddms[] = $action->card[$i];
+                                                            @endphp
                                                         @endfor
                                                         {{ count(array_diff($start->hand, $arraycarddms))}}
-                                                        {{-- @for($a=0; $a<count($start->hand); $a++)
-                                                            @if(!in_array((int)$start->hand[$a], $arraycarddms))
-                                                                
-                                                            @endif
-                                                        @endfor --}}
                                                     @endif
                                                 @endforeach
                                             </td>
                                             <td>
                                                 @foreach($dms_gameplaylog->start->players as $start)
-                                                    @if($start->seat == $action->seat)                                                        
-
-
+                                                    @if($start->seat == $action->seat)   
                                                         @for($a=0; $a<count($start->hand); $a++)
                                                             @if(!in_array((int)$start->hand[$a], $arraycarddms))
                                                                 <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$a] }}.png" alt="">
