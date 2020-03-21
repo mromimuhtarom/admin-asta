@@ -56,7 +56,7 @@ class AbuseTransactionReportController extends Controller
         {
             $id = 0 + 1;
         } else {
-            $id          = $id_problem->id + 1;
+            $id      = $id_problem->id + 1;
         }
 
         ReportProblem::create([
@@ -70,8 +70,6 @@ class AbuseTransactionReportController extends Controller
         $image = $request->base64Image;
 
         $image_decode = base64_decode($image);
-        // $imageName    = $id.'.'.'jpg';
-        // $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
         $f = finfo_open();  
 
         $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
@@ -96,14 +94,14 @@ class AbuseTransactionReportController extends Controller
     public function alldataabusetransaction()
     {
         $feedbacktransaction = ReportProblem::join('asta_db.user', 'asta_db.user.user_id', 'asta_db.report_problem.user_id')
-                        ->select(
-                            'asta_db.report_problem.id',
-                            'asta_db.user.username',
-                            'asta_db.report_problem.user_id',
-                            'asta_db.report_problem.message',
-                            'asta_db.report_problem.date'
-                        )
-                        ->get();
+                               ->select(
+                                'asta_db.report_problem.id',
+                                'asta_db.user.username',
+                                'asta_db.report_problem.user_id',
+                                'asta_db.report_problem.message',
+                                'asta_db.report_problem.date'
+                               )
+                               ->get();
         return $feedbacktransaction;
     }
 

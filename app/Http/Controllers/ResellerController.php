@@ -1382,7 +1382,7 @@ public function detailTransaction(Request $request, $month, $year)
         //   $checkamount = DB::table('rese')
           ResellerBalance::create([
             'reseller_id' => $reseller_id,
-            'action_id'   => 16,
+            'action_id'   => 10,
             'credit'      => 0,
             'debet'       => $goldAwarded,
             'balance'     => $checkTotalGold->gold,

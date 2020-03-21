@@ -634,7 +634,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($end->stat)
+                                                @if(!empty($end->hand) and $end->stat !== '')
                                                     @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
                                                         @if(!empty($tpk_gameplaylog->start->table_card))
                                                             @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))

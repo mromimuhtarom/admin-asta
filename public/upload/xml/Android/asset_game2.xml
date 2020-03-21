@@ -1,60 +1,124 @@
 <?xml version="1.0"?>
 <main_asset>
-  
-  
-  
-  
-  
-  
-  <dmq name="dmq_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/DMQ/</link>
-    <ver>0.0.3</ver>
-  </dmq>
-  <dmq name="dmq_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMQ/Android/</link>
-    <ver>0.0.2</ver>
-  </dmq>
-  <dmq name="dmq_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMQ/Android/</link>
-    <ver>0.0.1</ver>
-  </dmq>
-  <dms name="dms_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/DMS/</link>
-    <ver>0.0.3</ver>
-  </dms>
-  <dms name="dms_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMS/Android/</link>
-    <ver>0.0.2</ver>
-  </dms>
-  <dms name="dms_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/DMS/Android/</link>
-    <ver>0.0.1</ver>
-  </dms>
-  <tpk name="tpk_lobby_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Lobby/Android/TPK/</link>
-    <ver>0.0.3</ver>
-  </tpk>
-  <tpk name="tpk_game_img">
-    <type>Image</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/Android/</link>
-    <ver>0.0.1</ver>
-  </tpk>
-  <tpk name="tpk_game_audio">
-    <type>Audio</type>
-    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/TPK/Android/</link>
-    <ver>0.0.1</ver>
-  </tpk>
-  
-  
-  
 
-
-
+  <bgt_scenes_all name="bgt_v0.0.1_scenes_all_fd0e10c7aa4719d3e24cbd15f0dbed31.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </bgt_scenes_all>
+  <catalog_hash name="catalog_0.3.hash">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </catalog_hash>
+  <catalog_json name="catalog_0.3.json">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </catalog_json>
+  <dmq_scenes_all name="dmq_v0.0.1_scenes_all_a6693fd2f31146e1cbdf888d34033aee.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </dmq_scenes_all>
+  <dms_scenes_all name="dms_v0.0.1_scenes_all_f67e84ae91790f4176ebce47d4343d6d.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </dms_scenes_all>
+  <duplicate_assets_all name="duplicateassetisolation_assets_all_3e7559ce66fdb32e02d98c2860c16cc2.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </duplicate_assets_all>
+  <emoticon_asset_all name="emoticon_v0.0.1_assets_all_e38c3cf41ec6e6e43716f462cfafcc24.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </emoticon_asset_all>
+  <gift_asset_all name="gift_v0.0.1_assets_all_279e5bbcc8e6d9859e0d033d5253b243.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </gift_asset_all>
+  <lobby_scenes_all name="lobby_v0.0.1_scenes_all_7b235284e5ad6291a9368876a67156e0.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </lobby_scenes_all>
+  <tpk_scenes_all name="tpk_v0.0.1_scenes_all_b322e3c83f8d17f962f9be0531232d3d.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
+    <ver>0.0.1</ver>
+    <os>Android</os>
+  </tpk_scenes_all>
+  <bgt_scene_ios name="bgt_v0.0.1_scenes_all_d40921407dea1befccd0493b53afcf9c.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </bgt_scene_ios>
+  <dmq_scene_ios name="dmq_v0.0.1_scenes_all_53925cdadc89123ea465bce18ed93122.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </dmq_scene_ios>
+  <dms_scene_ios name="dms_v0.0.1_scenes_all_76e4adf2c15bd8f6fa7bff5d56933dad.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </dms_scene_ios>
+  <emoticon_ios name="emoticon_v0.0.1_assets_all_d2bbc996f54e1464443ecccbb2205538.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </emoticon_ios>
+  <duplicate_asset_issolation_ios name="duplicateassetisolation_assets_all_956a2b63adcfca2765762151b5f1eb12.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </duplicate_asset_issolation_ios>
+  <gift_ios name="gift_v0.0.1_assets_all_62d4922acef9b2cacf531ec2bc163c41.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </gift_ios>
+  <lobby_scene_ios name="lobby_v0.0.1_scenes_all_6db84a7e12c4257783cef63bd1111161.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </lobby_scene_ios>
+  <catalog_json_ios name="catalog_0.3.json">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </catalog_json_ios>
+  <catalog_hash_ios name="catalog_0.3.hash">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </catalog_hash_ios>
+  <tpk_scene_ios name="tpk_v0.0.1_scenes_all_dd16a6536701a11e7f64be23af38517c.bundle">
+    <type>Scene</type>
+    <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/iOS/</link>
+    <ver>0.0.1</ver>
+    <os>Ios</os>
+  </tpk_scene_ios>
 </main_asset>

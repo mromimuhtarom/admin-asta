@@ -93,13 +93,16 @@
 		     @foreach($abuseplayer as $abpplayers)
 			
                       @if($abpplayers->user_id === $pplayer->reported_user)
-                      <td>{{ $abpplayers->user_id }}</td>
-                      <td>{{ $abpplayers->username }}</td>
+                        <td>{{ $abpplayers->user_id }}</td>
+                        <td>{{ $abpplayers->username }}</td>
+                      @elseif($abpplayers->user_id !== $pplayer->reported_user)
+                        <td></td>
+                        <td></td>
                       @endif
 			
-		     @endforeach
+             @endforeach
                     <td>{{ $pplayer->reason }}</td>
-                      <td>{{ date("d-m-Y H:i:s", strtotime($pplayer->date)) }}</td>
+                    <td>{{ date("d-m-Y H:i:s", strtotime($pplayer->date)) }}</td>
                     </tr>
                     @endforeach
             </tbody>
