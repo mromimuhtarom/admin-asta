@@ -53,7 +53,6 @@ class RewardTransactionController extends Controller
 
     public function approve(Request $request)
     {
-
         $user_id     = $request->user_id;
         $item_name   = $request->item_name;
         $description = $request->description;

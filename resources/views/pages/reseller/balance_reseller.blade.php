@@ -58,7 +58,6 @@
 </div>    
 <!--- End Content Search --->
 
-
 <!--- Show After Search --->
 @if (Request::is('Reseller/Balance_Reseller/BalanceReseller-search*'))
 <div class="jarviswidget jarviswidget-color-darken no-padding" id="wid-id-0" data-widget-editbutton="false">
@@ -106,7 +105,7 @@
                         <td>{{ number_format($bd->debet, 2) }}</td>
                         <td>{{ number_format($bd->credit, 2) }}</td>
                         <td>{{ number_format($bd->balance, 2) }}</td>
-                        <td>{{ ConfigTextTranslate($bd->action_id) }}</td> 
+                        <td>{{ ConfigTextTranslate($actblnc[($bd->action_id)]) }}</td> 
                         <td>{{ $bd->datetime }}</td>
                     </tr>
                     @endforeach

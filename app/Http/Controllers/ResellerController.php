@@ -1421,7 +1421,7 @@ public function detailTransaction(Request $request, $month, $year)
         $resellername   = Reseller::where('reseller_id', '=', $declineOrderId)->first();
 
         StoreTransactionHist::create([
-            'user_id'       => $reseller_id,
+            'user_id'       =>  $reseller_id,
             'item_name'     =>  'nanti',
             'status'        =>  0,
             'description'   =>  $desc,

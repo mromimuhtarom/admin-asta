@@ -286,6 +286,7 @@ function translate_MenuTransaction($menu){
         'L_CITY'                  =>  'Kota',
         'L_POSTAL_CODE'           =>  'Kode Pos',
         'L_ON_PROCESS'            =>  'Di Proses',
+        'On Process'              =>  'Di proses',
         'L_REQUEST'               =>  'Permintaan',
         'Pending'               =>  'Tertunda',
         'L_REQ_DELIVERY_STS'  =>  'Wajib diisi status pengiriman',

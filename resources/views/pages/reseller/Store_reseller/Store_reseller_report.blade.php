@@ -105,6 +105,7 @@
                                     <th class="th-sm">{{ TranslateReseller('L_INFORMATION_DETAIL') }}</th>
                                 </tr>
                             </thead>
+                          
                             <tbody>
                                 @foreach ($transactions as $transaction)
                                 @php 
@@ -112,13 +113,13 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $transaction->order_id }}</td>
-                                    <td>{{ $transaction->transaction_date }}</td>
+                                    <td>{{ date('d-m-Y H:i:s', strtotime($transaction->transaction_date)) }}</td>
                                     <td>{{ $transaction->reseller_id }}</td>
                                     <td>{{ $transaction->reseller_username}}</td>
                                     <td></td>
                                     <td>{{ $transaction->quantity }}</td>
                                     <td>{{ $transaction->transaction_status }}</td>
-                                    <td><button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo nanti">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</button></td>
+                                    <td><button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfonanti">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</button></td>
                                 </tr>
                                 @endforeach
                             </tbody>
