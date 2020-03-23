@@ -29,8 +29,7 @@
   @if (\Session::has('success'))
       <div class="alert alert-success">
           <p>{{\Session::get('success')}}</p>
-      </div>
-      
+      </div>      
   @endif
   <!-- End Response Status -->
 
@@ -50,7 +49,7 @@
             <!-- Button tambah data baru -->
             <div class="col-9 col-sm-5 col-md-5 col-lg-5">
               @if($menu && $mainmenu && $submenu)
-              {{-- <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
+              {{-- <button class="btn sa-b tn-primary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"><span> Create New Category</span></i>
               </button> --}}
               @endif

@@ -73,9 +73,7 @@ class AbuseTransactionReportController extends Controller
         $f = finfo_open();  
 
         $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
-        // $a = File::mimeType($image_decode);
         $rootpath   = 'unity-asset/upload/report/' .$id.'.jpg';
-        // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
         if(function_exists('exif_imagetype')) {
             // open with EXIF
          } 

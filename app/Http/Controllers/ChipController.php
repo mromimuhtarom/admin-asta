@@ -119,11 +119,6 @@ class ChipController extends Controller
         $value               = str_replace(':', ',', $action->value);
         $actionbalance       = explode(",", $value);
         
-        // $validator = Validator::make($request->all(),[
-        //   'inputMinDate'    => 'required|date',
-        //   'inputMaxDate'    => 'required|date',
-        // ]);
-
         $actblnc = [
           $actionbalance[0]  => $actionbalance[1],
           $actionbalance[2]  => $actionbalance[3],
@@ -138,10 +133,6 @@ class ChipController extends Controller
           $actionbalance[20] => $actionbalance[21],
           $actionbalance[22] => $actionbalance[23]
         ];
-    
-        // if ($validator->fails()) {
-        //   return back()->withErrors($validator->errors());
-        // }
 
         if($maxDate < $minDate){
           return back()->with('alert', alertTranslate("end date can't be less than start date"));

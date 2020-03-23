@@ -40,8 +40,6 @@ class PlayersController extends Controller
       $game        = Game::select('id', 'desc')->get();
 
 
-  
-        // $online = DB::select('select * from user_active join user on user.user_id = user_active.user_id join game on game.id = user_active.game_id join user_stat on user_stat.user_id = user_active.user_id where user.user_type != 3 and user_active.table_id != 0');
 
         return view('pages.players.active_player', compact('explodetype', 'game'));
     }

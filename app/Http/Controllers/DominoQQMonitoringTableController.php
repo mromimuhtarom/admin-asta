@@ -16,7 +16,6 @@ class DominoQQMonitoringTableController extends Controller
     {
         $checked                =   $request->checkauto;
 
-        // $table                  = DominoQTable::where('room_id', '=', 1)->get();
         //room Novice / Pemula
         $onlinenovice    = DominoQPlayer::join('dmq_table', 'dmq_table.table_id', '=', 'dmq_player.table_id')
                                     ->where('room_id', '=', 1)

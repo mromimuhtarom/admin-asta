@@ -474,7 +474,6 @@ class Add_TransactionController extends Controller
             
 
             //selisih gold yang dimiliki reseller dengan yang adjust//
-            // $usergold = $stat->gold - $valuecurrency;
             $usergold = $valuecurrency - $stat->gold;
             $resultdiff = $usergold;
 
