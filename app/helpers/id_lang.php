@@ -113,7 +113,8 @@ function translate_menu($menu){
       'L_MONITORING_TABLE_DOMINO_QQ'        => 'Monitoring Meja',
       'L_MONITORING_TABLE_BIG_TWO'          => 'Monitor Meja',
       'L_STORE_RESELLER'                    => 'Toko Agen',
-      'L_STORE_RESELLER_REPORT'             => 'Laporan Toko Agen'
+      'L_STORE_RESELLER_REPORT'             => 'Laporan Toko Agen',
+      'L_GAME'                              => 'Permainan'
     ];
 
     return $array_menu[$menu];
