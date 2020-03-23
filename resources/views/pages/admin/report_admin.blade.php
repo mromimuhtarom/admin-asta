@@ -38,10 +38,10 @@
                                 <option value="{{ $logonlinetype[2] }}" @if($logtype == $logonlinetype[2]) selected @endif;> {{ translate_MenuContentAdmin('L_ADMIN') }} {{ ConfigTextTranslate($logonlinetype[3]) }}</option>
                             </select>
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-min" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMinDate" value="{{ $minDate }}">
                         </div>
-                        <div class="col" style="padding-left:1%;">
+                        <div class="col date-max" style="padding-left:1%;">
                             <input type="date" class="form-control" name="inputMaxDate" value="{{ $maxDate }}">
                         </div>
                     @else 

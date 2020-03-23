@@ -2,8 +2,8 @@
 
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_POINT_PLAYERS') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Point_Players') }}">{{ Translate_menuPlayers('L_POINT_PLAYERS') }}</a></li>
 @endsection
 
 

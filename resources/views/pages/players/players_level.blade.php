@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Players_Level') }}">{{ Translate_menuPlayers('L_PLAYERS_LEVEL') }}</a></li>
 @endsection
 
 @section('content')
