@@ -984,9 +984,7 @@ function Translateaction_id($menu){
         'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
         'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Akun pemain bermasalah',
         'L_BANNED_ACCOUNT_PLAYER'   =>      'Akun pemain dilarang',
-       
-        
-
+        'L_EDIT_GAME_SETTING'       =>      'Edit Pengaturan Game'
     ];
     return $array_menuContent[$menu];
 };

@@ -106,7 +106,7 @@
                         <td>{{ number_format($bd->credit, 2) }}</td>
                         <td>{{ number_format($bd->balance, 2) }}</td>
                         <td>{{ ConfigTextTranslate($actblnc[($bd->action_id)]) }}</td> 
-                        <td>{{ $bd->datetime }}</td>
+                        <td>{{ date('d-m-Y H:i:s',  ($bd->datetime)) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
