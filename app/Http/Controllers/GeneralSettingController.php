@@ -51,7 +51,6 @@ class GeneralSettingController extends Controller
         
         $rootpath = '../public/upload/file_policy';
         $client = Storage::disk('s3');
-        // $client = Storage::createLocalDriver(['root' => $rootpath]);
 
 
         $onoff = ConfigText::select(
@@ -62,7 +61,6 @@ class GeneralSettingController extends Controller
                  ->first();
         $converttocomma = str_replace(':', ',', $onoff->value);
         $maintenaceonoff = explode(',', $converttocomma);
-        // dd($client->get('term-of-service.txt'));
         
 
         return view('pages.settings.general_setting', compact('getMaintenance', 'getPointExpired', 'getFb', 
@@ -263,9 +261,6 @@ class GeneralSettingController extends Controller
 
     public function AboutGame()
     {
-        // $rootpath = '../public/upload/file_policy';
-        // $client = Storage::createLocalDriver(['root' => $rootpath]);
-        // $client->get('about.txt');
         $client = file_get_contents(public_path()."/upload/file_policy/about.txt");
         return $client;
     }
@@ -284,9 +279,6 @@ class GeneralSettingController extends Controller
 
     public function AboutGamehtml()
     {
-        // $rootpath = '../public/upload/file_policy';
-        // $client = Storage::createLocalDriver(['root' => $rootpath]);
-        // $client->get('about.txt');
         $client = file_get_content(public_path()."/upload/file_policy/about.txt");
         $b = htmlspecialchars($client);
         return $b;

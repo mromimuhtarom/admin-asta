@@ -158,13 +158,10 @@ class ChipStoreController extends Controller
                             File::delete($path);
                             $path1 = '../public/upload/Chip/image2/'.$nama_file_unik;
                             File::delete($path1);
-                            // imagepng($source, $thumbnail);
-                            // imagedestroy($source);
                         // end watermark image
                   } else {
                       
                     $rootpath   = 'unity-asset/store/chip/' .$nama_file_unik;
-                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                   }
 
@@ -177,7 +174,6 @@ class ChipStoreController extends Controller
                   } else {
 
                     $rootpath   = 'unity-asset/store/chip/' .$nama_file_unik;
-                    // $image_main = Storage::createLocalDriver(['root' => $rootpath]);
                     $image_main = Storage::disk('s3')->put($rootpath, file_get_contents($file));
                   }
                   
@@ -364,7 +360,6 @@ class ChipStoreController extends Controller
                     File::delete($path);
                     $path1 = '../public/upload/Chip/image2/'.$pk.'.png';
                     File::delete($path1);
-                    // return redirect()->route('Chip_Store')->with('alert','Upload Image Failed');
                 }
 
                 Log::create([
@@ -484,7 +479,6 @@ class ChipStoreController extends Controller
 
         if($id != '')
         {
-            // ItemsGold::where('item_id', '=', $id)->delete(); 
             ItemsGold::where('item_id', '=', $id)->update([
                 'status' => 2
             ]);
