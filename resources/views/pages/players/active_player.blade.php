@@ -3,8 +3,8 @@
 @section('page')
 <li class="menunameheader"><span id="refresh" class="btn sa-ribbon-btn sa-theme-btn" data-action="resetWidgets"><i
             class="fa fa-refresh"></i></span></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
-<li class="breadcrumb-item"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('L_ACTIVE_PLAYERS') }}</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('L_PLAYERS') }}</a></li>
+<li class="breadcrumb-item menunameheader"><a href="{{ route('Active_Players') }}">{{ Translate_menuPlayers('L_ACTIVE_PLAYERS') }}</a></li>
 @endsection
 
 

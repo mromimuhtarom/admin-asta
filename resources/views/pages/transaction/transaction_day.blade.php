@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-	<li class="breadcrumb-item"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
-  <li class="breadcrumb-item"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('L_BANKING_TRANS') }}</a></li>
+	<li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('L_TRANSACTION') }}</a></li>
+  <li class="breadcrumb-item menunameheader"><a href="{{ route('Transaction_Day') }}">{{ translate_MenuTransaction('L_BANKING_TRANS') }}</a></li>
 @endsection
 
 @section('content')

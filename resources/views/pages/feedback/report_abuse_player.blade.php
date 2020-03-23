@@ -84,25 +84,20 @@
             <tbody>
                     @foreach ($problemplayer as $pplayer)
                     <tr>
-                      @foreach($abuseplayer as $abplyr)	
-                      @if ($abplyr->user_id === $pplayer->user_sender)
-                      <td>{{ $abplyr->user_id }}</td>
-                      <td>{{ $abplyr->username }}</td>
-                      @endif
-                      @endforeach
-		     @foreach($abuseplayer as $abpplayers)
-			
-                      @if($abpplayers->user_id === $pplayer->reported_user)
-                        <td>{{ $abpplayers->user_id }}</td>
-                        <td>{{ $abpplayers->username }}</td>
-                      @elseif($abpplayers->user_id !== $pplayer->reported_user)
-                        <td></td>
-                        <td></td>
-                      @endif
-			
-             @endforeach
-                    <td>{{ $pplayer->reason }}</td>
-                    <td>{{ date("d-m-Y H:i:s", strtotime($pplayer->date)) }}</td>
+                        @foreach($abuseplayer as $abplyr)	
+                            @if ($abplyr->user_id === $pplayer->user_sender)
+                                <td>{{ $abplyr->user_id }}</td>
+                                <td>{{ $abplyr->username }}</td>
+                            @endif
+                        @endforeach
+                        @foreach($abuseplayer as $abpplayers)
+                            @if($abpplayers->user_id === $pplayer->reported_user)
+                                <td>{{ $abpplayers->user_id }}</td>
+                                <td>{{ $abpplayers->username }}</td>
+                            @endif
+                        @endforeach
+                        <td>{{ $pplayer->reason }}</td>
+                        <td>{{ date("d-m-Y H:i:s", strtotime($pplayer->date)) }}</td>
                     </tr>
                     @endforeach
             </tbody>
