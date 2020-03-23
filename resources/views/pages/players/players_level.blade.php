@@ -47,9 +47,7 @@
             
             <div class="table-outer">
                 <div class="widget-body-toolbar">
-        
                   <div class="row">
-                    
                     <!-- Button tambah bot baru -->
                     @if($menu && $mainmenu)
                     <div class="col-9 col-sm-5 col-md-5 col-lg-5">
