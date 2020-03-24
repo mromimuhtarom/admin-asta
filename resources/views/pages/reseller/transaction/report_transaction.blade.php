@@ -181,6 +181,7 @@
                         <th>{{ TranslateReseller('L_INFORMATION_DETAIL') }}</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     @foreach($transactions as $tr)
                     <tr>
@@ -201,7 +202,7 @@
                         <td>{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}</td>
                         <td>{{ date("d-m-Y H:i:s", strtotime($tr->action_date)) }}</td>
                         <td>
-                            <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->id }}">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</button>
+                            <button type="button" value="Decline" class="btn btn-xs bg-blue-light text-white" data-toggle="modal" data-target="#detailinfo{{ $tr->user_id }}">{{ translate_MenuTransaction('L_DETAIL_INFO') }}</button>
                         </td>
                     </tr>
                     @endforeach
@@ -221,7 +222,7 @@
 
 <!-- Modal detail info -->
 @foreach ($transactions as $transaction)
-<div class="modal fade" id="detailinfo{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailinfo{{ $transaction->user_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
