@@ -332,7 +332,11 @@
                                         <td>{{ Translate_menuPlayers('L_DIVIDED_CARD') }}</td>
                                         <td></td>
                                         <td>{{ count($start->hand) }}</td>
-                                        <td></td>
+                                        <td>
+                                            @for($a=0; $a<count($start->hand); $a++)
+                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ bgtcard($start->hand)[$a] }}.png" alt="">
+                                            @endfor
+                                        </td>
                                         <td></td>
                                     </tr>
                                     @endforeach
