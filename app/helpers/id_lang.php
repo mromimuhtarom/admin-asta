@@ -1031,7 +1031,6 @@ function TranslateVersionAsetApk($menu)
     return $array_menuContent[$menu];
 }
 
-
 function TranslatePlaceholdertxt($placeholder) {
     $array_menuContent = [
         
