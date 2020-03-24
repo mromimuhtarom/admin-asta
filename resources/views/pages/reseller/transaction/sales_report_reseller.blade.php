@@ -110,7 +110,7 @@
                     <tr>
                         <td>{{ $tr->reseller_id}}</td>
                         <td>{{ $tr->resellerUsername }}</td>
-                        <td>{{ $tr->datetime }}</td>
+                        <td>{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}</td>
                         <td>{{ $tr->user_id }}</td>
                         <td>{{ $tr->playerUsername }}</td>
                         <td>{{ $tr->amount }}</td>
