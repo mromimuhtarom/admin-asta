@@ -277,7 +277,9 @@ class ResellerController extends Controller
     {
         $transactions = DB::select('SELECT year(date_created) as year, month(date_created) as monthnumber,monthname(date_created) as monthname, sum(buy_gold) as totalgold FROM asta_db.reseller_transaction_day GROUP BY year,monthname');
         // $transactions = DB::select('SELECT year(timestamp) as year, month(timestamp) as monthnumber,monthname(timestamp) as monthname, sum(gold) as totalgold FROM reseller_history GROUP BY year,monthname');
+        
         $datenow = Carbon::now('GMT+7');
+
         return view('pages.reseller.transaction.report_transaction', compact('transactions', 'datenow'));
     }
 //------ End Report Transaction -------//
@@ -336,6 +338,7 @@ class ResellerController extends Controller
                                       ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                       ->get();
                 endif;
+                
               //   $transactions->appends($request->all());
                 return view('pages.reseller.transaction.report_transaction', compact('transactions', 'startDate', 'endDate'));
             }else if ($searchUsername != NULL && $startDate != NULL) {
@@ -368,6 +371,7 @@ class ResellerController extends Controller
                                       ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                       ->get();
                 endif;
+                
         
               //   $transactions->appends($request->all());
                 return view('pages.reseller.transaction.report_transaction', compact('transactions', 'startDate', 'endDate'));
@@ -382,6 +386,7 @@ class ResellerController extends Controller
                                     ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                     ->get();
                 endif;
+                
         
                 //   $transactions->appends($request->all());
                 return view('pages.reseller.transaction.report_transaction', compact('transactions', 'startDate', 'endDate'));
@@ -389,6 +394,7 @@ class ResellerController extends Controller
                     $transactions =   $reportTransaction->wherebetween('asta_db.store_transaction_hist.action_date', [$startDate." 00:00:00", $endDate." 23:59:59"])
                                       ->orderBy('asta_db.store_transaction_hist.action_date', 'desc')
                                       ->get();
+        // dd($transactions);
 
                     return view('pages.reseller.transaction.report_transaction', compact('transactions', 'startDate', 'endDate'));
             }
