@@ -44,7 +44,7 @@
               </tr>
               <tr>
                   <td width='30%'>{{ Translate_menuPlayers('L_DATA_TOBE_ADDED') }}</td>
-                  <td colspan="2"><input type="number" name="inputcount" class="form-control" required min="0">&nbsp;</td>
+                  <td colspan="2"><input type="number" name="inputcount" class="form-control" required min="0" max="999999999">&nbsp;</td>
               </tr>
               <tr>
                   <td width="30%">{{ Translate_menuPlayers('L_USERTYPE') }}</td>

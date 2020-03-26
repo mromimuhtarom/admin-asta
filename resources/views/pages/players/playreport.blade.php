@@ -196,20 +196,26 @@
                                 @elseif($_GET['inputGame'] === 'Domino QQ')
                                     @php 
                                     $jsondecode = json_decode($history->gameplay_log);
+                                    $a = 0;
                                     @endphp        
                                     @foreach ($jsondecode->start->players as $start)
-                                        @if($start->uid == $history->user_id)  
-                                            @foreach($jsondecode->end->players as $end)
-                                                @if($end->seat == $start->seat)
-                                                    @for($i=0; $i<count($end->combo); $i++)
-                                                        @if($i == 0)
-                                                        {{$end->combo[$i]}} :
-                                                        @else
-                                                        {{$end->combo[$i]}}
-                                                        @endif
-                                                        
-                                                    @endfor
-                                                @endif
+                                        @if($start->uid == $history->user_id) 
+                                            @foreach($jsondecode->end->players as $end)                                                
+                                                    @if($end->seat === $start->seat)
+                                                        @for($i=0; $i<count($end->combo); $i++)
+                                                            @if($a == 0)
+                                                                @if($i == 0)
+                                                                {{$end->combo[$i]}} :
+                                                                @elseif($i == 1)
+                                                                {{$end->combo[$i]}}
+                                                                @endif
+                                                            @endif
+                                                            
+                                                        @endfor
+                                                        @php 
+                                                        $a++;
+                                                        @endphp
+                                                    @endif
                                             @endforeach 
                                         @endif                                 
                                     @endforeach 
@@ -566,7 +572,15 @@
                                             <td></td>
                                             <td>
                                                 @if($action->act == 4)
-                                                 <!--  null -->
+                                                    @foreach($tpk_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $action->seat)
+                                                            @if(!empty($start->hand))
+                                                                @for($a=0; $a<count($start->hand); $a++)
+                                                                    <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($start->hand)[$a] }}.png" alt="">
+                                                                @endfor
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
                                                 @else 
                                                     @foreach($tpk_gameplaylog->start->players as $start)
                                                         @if($start->seat == $action->seat)
@@ -579,7 +593,9 @@
                                                     @endforeach
                                                 @endif
                                             </td>
-                                            <td></td>
+                                            <td>
+
+                                            </td>
                                         </tr> 
                                         @endif
                                     @endforeach   
@@ -599,10 +615,12 @@
                                                 @endforeach
                                             </td>
                                             <td>{{ number_format($end->chip) }}</td>
-                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}a45</td>
+                                            <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
                                             <td>
                                                 {{ number_format($end->val) }} <br> 
+                                                @if($end->stat !== 0)
                                                 (fee:{{ number_format($end->fee) }})
+                                                @endif
                                             </td>
                                             <td>{{ Translate_menuPlayers(typeCardGamepLayLogBgtTpk($end->type)) }}</td>
                                             <td>
@@ -638,17 +656,15 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if(!empty($end->hand) and $end->stat !== '')
-                                                    @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
-                                                        @if(!empty($tpk_gameplaylog->start->table_card))
-                                                            @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
-                                                                <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                            @else
-                                                                <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
-                                                            @endif
+                                                @for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++)
+                                                    @if(!empty($tpk_gameplaylog->start->table_card))
+                                                        @if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false))
+                                                            <img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
+                                                        @else
+                                                            <img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/{{ tpkcard($tpk_gameplaylog->start->table_card)[$a] }}.png" alt="">
                                                         @endif
-                                                    @endfor
-                                                @endif
+                                                    @endif
+                                                @endfor
                                             </td>
                                         </tr>
                                     @endforeach
@@ -685,42 +701,18 @@
                                             </td>
                                             <td>{{ number_format($start->chip) }}</td>
                                             <td>{{ Translate_menuPlayers('L_NEW_ROUND') }}</td>
-                                            <td></td>
+                                            <td>{{ number_format($dmq_gameplaylog->start->stake) }}</td>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                     @endforeach  
-                                    
-                                    <!-------- Card divided ------->
-                                    @foreach($dmq_gameplaylog->start->players as $start)
-                                        <tr>
-                                            <td>{{ $start->seat }}</td>
-                                            <td>{{ $start->username }}</td>
-                                            <td>
-                                                @foreach($dmq_gameplaylog->acts as $action)
-                                                    @if($action->act == 9 && $action->seat == $start->seat)
-                                                    {{ number_format($action->chip) }}
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                            <td>{{ Translate_menuPlayers('L_DIVIDED_CARD') }}</td>
-                                            <td>{{ number_format($dmq_gameplaylog->start->stake) }}</td>
-                                            <td></td>
-                                            <td>
-                                                @for($a=0; $a<3; $a++)
-                                                    <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$a] }}.png" alt="">
-                                                @endfor
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    <!-------- End Card divided ------->
 
                                     <!-------- Action -------->
                                     @php 
                                         $a = 0;
                                         $draw = array_count_values(array_column($dmq_gameplaylog->acts, 'act'))[9];
                                     @endphp
-                                    @foreach($dmq_gameplaylog->acts as $action)
+                                    @foreach($dmq_gameplaylog->acts as $key => $action)
                                         @if($action->act == 9)
                                         <tr>
                                             <td>{{ $action->seat }}</td>
@@ -736,7 +728,13 @@
                                             <td>{{ number_format($action->bet) }}</td>
                                             <td></td>
                                             <td>
-                                                @if($draw == 2)
+                                                @if(!empty($action->card))
+                                                    @for($i=0; $i<count($action->card); $i++)
+                                                        <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($action->card)[$i] }}.png" alt="">
+                                                    @endfor 
+                                                @endif                                              
+                                                {{-- {{$action->card}} --}}
+                                                {{-- @if($draw == 2)
                                                     @foreach($dmq_gameplaylog->start->players as $start)
                                                         @if($start->seat == $action->seat)
                                                             @for($i=0; $i<3; $i++)
@@ -876,7 +874,7 @@
                                                             @endif
                                                         @endforeach
                                                     @endif
-                                                @endif                              
+                                                @endif                               --}}                                                
                                             </td>
                                         </tr>
                                         @else
@@ -893,7 +891,17 @@
                                             <td>{{ Translate_menuPlayers(actiongameplaylog($action->act)) }}</td>
                                             <td>{{ number_format($action->bet) }}</td>
                                             <td></td>
-                                            <td></td>
+                                            <td>
+                                                @if($action->act === 4)
+                                                    @foreach($dmq_gameplaylog->start->players as $start)
+                                                        @if($start->seat == $action->seat)
+                                                            @for($i=0; $i<count($start->hand); $i++)
+                                                                <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($start->hand)[$i] }}.png" alt="">
+                                                            @endfor
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endif
                                         @php 
@@ -914,8 +922,10 @@
                                             <td>{{ number_format($end->chip) }}</td>
                                             <td>{{ Translate_menuPlayers(statusgameplaylog($end->stat)) }}</td>
                                             <td>
-                                                {{ number_format($end->val) }} <br> 
-                                                (fee:{{ number_format($end->fee) }})
+                                                {{ number_format($end->val) }} <br>
+                                                @if($end->stat !== 0) 
+                                                    (fee:{{ number_format($end->fee) }})
+                                                @endif
                                             </td>
                                             <td>
                                                     @for($i=0; $i<count($end->combo); $i++)
@@ -929,9 +939,9 @@
                                             </td>
                                             <td>
                                                 @if($end->hand)
-                                                @for($a=0; $a<count($end->hand); $a++)
-                                                    <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($end->hand)[$a] }}.png" alt="">
-                                                @endfor
+                                                    @for($a=0; $a<count($end->hand); $a++)
+                                                        <img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/{{ dmscard($end->hand)[$a] }}.png" alt="">
+                                                    @endfor
                                                 @endif
                                             </td>
                                         </tr>

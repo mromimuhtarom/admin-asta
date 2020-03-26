@@ -237,7 +237,7 @@
                         </label>
                         <input type="text" class="form-control" name="" id="tgl_pembelian" value="{{ date("d-m-Y H:i:s", strtotime($tr->datetime)) }}" disabled>
                         <label for="tgl_disetujui">
-                            {{ TranslateMenuToko('L_DATEAPROVE_DECLINE')}}
+                            {{ TranslateMenuToko('L_DATEAPPROVE_DECLINE')}}
                         </label>
                         <input type="text" name="" id="tgl_disetujui" class="form-control" value="{{ $tr->action_date }}" disabled>
                         <label for="tipe_pembayaran">

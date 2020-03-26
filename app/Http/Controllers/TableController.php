@@ -798,6 +798,10 @@ class TableController extends Controller
                 $name = "Turn";
                 $currentvalue = $currentname->turn;
                 break;
+            case "stake":
+                $name = "Stake";
+                $currentvalue = $currentname->stake;
+                break;
             case "total_bet":
                 $name = "Total Bet";
                 $currentvalue = $currentname->total_bet;
