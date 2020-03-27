@@ -161,7 +161,7 @@ class PlayersController extends Controller
     {
         $avgBank = 0;
         $player1 = Player::join('asta_db.user_stat', 'asta_db.user.user_id', '=', 'asta_db.user_stat.user_id')
-                  ->join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
+                  ->leftJoin('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                   ->select(
                      DB::raw("sum(chip) / count(*) As avgBank"),
                      'asta_db.user_stat.chip',
@@ -184,7 +184,7 @@ class PlayersController extends Controller
 
         $avgBank = 0;
         $player  = Player::join('asta_db.user_stat', 'asta_db.user_stat.user_id', '=', 'asta_db.user.user_id')
-                   ->join('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
+                   ->leftJoin('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')
                    ->select(
                     'asta_db.user_stat.chip',
                     'asta_db.user.username',
@@ -763,7 +763,7 @@ class PlayersController extends Controller
           'op_id'     => Session::get('userId'),
           'action_id' => '7',
           'datetime'  => Carbon::now('GMT+7'),
-          'desc'      => 'Menambahkan ID guest menjadi ('.$number
+          'desc'      => 'Menambahkan ID guest menjadi ('.$number.')'
       ]);
 
       return back()->with('success', 'Input Data Successfull with '.$number.' Record');

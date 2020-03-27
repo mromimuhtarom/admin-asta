@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <main_asset>
 
-  <bgt_scenes_all name="bgt_v0.0.1_scenes_all_95e0a83a0680822406c4b3fc38225a2e.bundle">
+  <bgt_scenes_all name="bgt_v0.0.1_scenes_all_eb24532ef0b6fd04d1fbbeb0eaf73d0a.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
