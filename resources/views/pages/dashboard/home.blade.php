@@ -120,25 +120,7 @@
                             <circle cx="50" cy="50" r="10" stroke="#ff6600" stroke-width="3" fill="#ffffff" stroke-dasharray="50, 100" stroke-dashoffset="150"/>{{--ygdipakai--}}
                         </svg>
                     </div>
-                    {{-- <div class="col-1 d-flex flex-column" id="svg-description">
-                        <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#000000" />  
-                        </svg> 
-                        <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#ffaa01" />  
-                        </svg> 
-                        <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#0019ff" />  
-                        </svg> 
-                        <svg class="color-description" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="50" stroke="#ffffff" stroke-width="1" fill="#ff6600" />  
-                        </svg> 
-                    </div> --}}
                     <div class="col" align="left" id="svg-description-text">
-                        {{-- <div class="text-description">Player</div>
-                        <div class="text-description">Gold</div>
-                        <div class="text-description">Goods</div>
-                        <div class="text-description">Best Offer</div> --}}
 
                         <table>
                             <tr>

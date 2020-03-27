@@ -12,7 +12,7 @@
 <!--------- Warning Alert ------->
 @if (\Session::has('alert'))
 <div class="alert alert-danger">
-  <p>{{\Session::get('alert')}}</p>
+    <p>{{\Session::get('alert')}}</p>
 </div>
 @endif
 @if (count($errors) > 0)
@@ -30,36 +30,36 @@
 
 <!--------- Content Search ------->
     <div class="search bg-blue-dark" style="margin-bottom: 3%;">
-            <div class="table-header w-100 h-100" style="padding-right:2%;">
-                <form action="{{ route('Gold-search') }}" method="get" role="search">
-                    <div class="row h-100 w-100 no-gutters">
-                        @if (Request::is('Players/Gold_Players/Gold-search*') || Request::is('Players/Gold_Players/Gold-all*'))
-                        <div class="col" align="left">
-                            <input type="text" name="inputPlayer" style="width:95%;" class="form-control" placeholder="username / Player ID" value=" {{ $getusername }}">
-                        </div>
-                        <div class="col date-min" align="left" style="padding-left:1%;">
-                            <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
-                        </div>
-                        <div class="col date-max" align="left" style="padding-left:1%;">
-                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
-                        </div>
-                        @else 
-                        <div class="col" align="left">
-                            <input type="text" name="inputPlayer" style="width:95%;" class="form-control" placeholder="username / Player ID">
-                        </div>
-                        <div class="col date-min" align="left" style="padding-left:1%;">
-                            <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
-                        </div>
-                        <div class="col date-max" align="left" style="padding-left:1%;">
-                            <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
-                        </div>
-                        @endif
-                        <div class="col" align="left" style="padding-left:1%;">
-                            <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
-                        </div>
+        <div class="table-header w-100 h-100" style="padding-right:2%;">
+            <form action="{{ route('Gold-search') }}" method="get" role="search">
+                <div class="row h-100 w-100 no-gutters">
+                    @if (Request::is('Players/Gold_Players/Gold-search*') || Request::is('Players/Gold_Players/Gold-all*'))
+                    <div class="col" align="left">
+                        <input type="text" name="inputPlayer" style="width:95%;" class="form-control" placeholder="username / Player ID" value=" {{ $getusername }}">
                     </div>
-                </form>
-            </div>
+                    <div class="col date-min" align="left" style="padding-left:1%;">
+                        <input type="date" name="inputMinDate" class="form-control" value="{{ $getMindate }}">
+                    </div>
+                    <div class="col date-max" align="left" style="padding-left:1%;">
+                        <input type="date" name="inputMaxDate" class="form-control" value="{{ $getMaxdate }}">
+                    </div>
+                    @else 
+                    <div class="col" align="left">
+                        <input type="text" name="inputPlayer" style="width:95%;" class="form-control" placeholder="username / Player ID">
+                    </div>
+                    <div class="col date-min" align="left" style="padding-left:1%;">
+                        <input type="date" name="inputMinDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                    </div>
+                    <div class="col date-max" align="left" style="padding-left:1%;">
+                        <input type="date" name="inputMaxDate" class="form-control" value="{{ $datenow->toDateString() }}">
+                    </div>
+                    @endif
+                    <div class="col" align="left" style="padding-left:1%;">
+                        <button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i> Cari</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div> 
 <!--------- End Content Search -------> 
 
@@ -94,7 +94,7 @@
                         <div class="col-9 col-sm-5 col-md-5 col-lg-5" style="font-style:italic;color:#969696;font-weight:bold;">
                             {{ Translate_menuPlayers('L_TOTAL_RECORD') }} {{ $balancedetails->total() }}
                         </div>
-                                <!-- End Button tambah bot baru -->
+                        <!-- End Button tambah bot baru -->
                     </div>
                 </div>                          
                 <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">

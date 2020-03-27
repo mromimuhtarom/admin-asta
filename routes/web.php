@@ -183,6 +183,7 @@ Route::middleware('authenticated')->group(function(){
             Route::middleware('page_denied:L_PLAY_REPORT')->group(function(){
                 Route::get('PlayReport-view', 'PlayReportController@index')->name('Play_Report');
                 Route::get('PlayReport-search', 'PlayReportController@search')->name('PlayReport-search');
+                Route::get('modal-playreport', 'PlayReportController@modalplayreport')->name('playreport-modal');
             });
         });
 

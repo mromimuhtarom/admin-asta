@@ -25,6 +25,135 @@ class PlayReportController extends Controller
         return view('pages.players.playreport', compact('game', 'datenow'));
     }
 
+    public function modalplayreport(Request $request)
+    {
+       if ($request->ajax()) {
+              if($request->game === 'Big Two'):
+                     $history = DB::table('bgt_round')->where('round_id', '=', $request->roundid)->first();
+                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                   <thead>			                
+                                   <tr>
+                                          <th>'.Translate_menuPlayers("L_SIT").'</th>
+                                          <th>'.Translate_menuPlayers("L_USERNAME").'</th>
+                                          <th>'.Translate_menuPlayers("L_CHIP_PLAYERS").'</th>
+                                          <th>'.Translate_menuPlayers("L_ACTION").'</th>
+                                          <th>'.Translate_menuPlayers("L_BET").'</th>
+                                          <th>'.Translate_menuPlayers("L_COUNT_CARD").'</th>
+                                          <th>'.Translate_menuPlayers("L_CARD_HAND").'</th>
+                                          <th>'.Translate_menuPlayers("L_CARD_OUT").'</th>
+                                   </tr>
+                                   </thead>';
+                     if($history->gameplay_log):
+                     $bgt_gameplaylog = json_decode($history->gameplay_log);
+                     $response .= '<tbody>';
+                      foreach($bgt_gameplaylog->start->players as $start):
+                      $response .=        '<tr>
+                                                 <td>'.$start->seat.'</td>
+                                                 <td>'.$start->username.'</td>
+                                                 <td>'.number_format($start->chip).'</td>
+                                                 <td>'.Translate_menuPlayers("L_NEW_ROUND").'</td>
+                                                 <td></td>
+                                                 <td></td>
+                                                 <td></td>
+                                                 <td></td>
+                                          </tr>';
+                     endforeach;
+                     foreach($bgt_gameplaylog->start->players as $start):
+                     $response .=         '<tr>
+                                                 <td>'.$start->seat.'</td>
+                                                 <td>'.$start->username.'</td>
+                                                 <td></td>
+                                                 <td>'.Translate_menuPlayers("L_DIVIDED_CARD").'</td>
+                                                 <td></td>
+                                                 <td>'.count($start->hand).'</td>
+                                                 <td>';
+                                                        for($a=0; $a<count($start->hand); $a++):
+                                                               $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($start->hand)[$a] .'.png" alt="">';
+                                                        endfor;
+                     $response .=          '     </td>
+                                                 <td></td>
+                                          </tr>';
+                     endforeach;
+                     $arraycardbgt = array();
+                     foreach($bgt_gameplaylog->acts as $action):
+                     $response .=         '<tr>
+                                                 <td>'. $action->seat .'</td>
+                                                 <td>';
+                                                 foreach($bgt_gameplaylog->start->players as $start):
+                                                        if($start->seat == $action->seat):
+                                                              $response .=  $start->username ;
+                                                        endif;
+                                                 endforeach;
+                     $response .=                  '</td>
+                                                 <td></td>
+                                                 <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                 <td></td>
+                                                 <td>'. $action->left .'</td>
+                                                 <td>';
+                                                 foreach($bgt_gameplaylog->start->players as $start):
+                                                        if($start->seat == $action->seat):                                                       
+                                                               for($i=0; $i<count($action->card); $i++):
+                                                               $arraycardbgt[] = $action->card[$i];
+
+                                                               endfor;
+
+                                                               for($a=0; $a<count($start->hand); $a++):
+                                                               if(!in_array((int)$start->hand[$a], $arraycardbgt)):
+                                                                   $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($start->hand)[$a] .'.png" alt="">';
+                                                               endif;
+                                                               endfor;
+                                                        endif;
+                                                 endforeach;
+                                          
+                     $response .=                   '</td>
+                                                 <td>';
+                                                 for($i=0; $i<count($action->card); $i++):
+                                                       $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($action->card)[$i] .'.png" alt="">';
+                                                 endfor;
+                     $response .=                 '</td>
+                                          </tr>';
+                     foreach($bgt_gameplaylog->end->players as $end):
+                     $response .=         '<tr>
+                                                 <td>'. $end->seat .'</td>
+                                                 <td>';
+                                                        foreach($bgt_gameplaylog->start->players as $start):
+                                                               if($start->seat == $end->seat):
+                                                                      $response .= $start->username;
+                                                               endif;
+                                                        endforeach;
+                     $response .=                '</td>
+                                                 <td>'. number_format($end->chip) .'</td>
+                                                 <td>'. Translate_menuPlayers(statusgameplaylog($end->stat)) .'</td>
+                                                 <td>
+                                                 '. number_format($end->val) .' <br> 
+                                                 (fee:'. number_format($end->fee) .')
+                                                 </td>
+                                                 <td>'. count($end->hand) .'</td>
+                                                 <td>';
+                                                 for($a=0; $a<count($end->hand); $a++):
+                                                        $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($end->hand)[$a] .'.png" alt="">';
+                                                 endfor;
+                     $reponse .=                 '</td>
+                                                 <td></td>
+                                          </tr>';
+                     endforeach;
+
+                     endforeach;
+
+
+
+                     $response .=  '</tbody>
+                     </table>   ';
+                     endif;
+              endif;
+                     return json_encode([
+                            "status"  => $request->roundid,
+                            "message" => $response
+                     ]);
+
+      }
+    }
+
     public function search(Request $request)
     {
 
