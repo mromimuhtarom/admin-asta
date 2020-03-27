@@ -117,8 +117,8 @@
 					</div>
 					<script>
 							$(function() {
-								$(".reloadpage").fadeOut(1000, function() {
-									$(".contentreload").fadeIn(700);
+								$(".reloadpage").fadeOut(500, function() {
+									$(".contentreload").fadeIn(200);
 								});
 							});
 					</script>

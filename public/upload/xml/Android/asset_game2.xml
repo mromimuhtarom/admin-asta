@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <main_asset>
 
-  <bgt_scenes_all name="bgt_v0.0.1_scenes_all_eb24532ef0b6fd04d1fbbeb0eaf73d0a.bundle">
+  <bgt_scenes_all name="bgt_v0.0.1_scenes_all_df91093c97abacfb7cff217eee17f713.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
@@ -19,19 +19,19 @@
     <ver>0.0.1</ver>
     <os>Android</os>
   </catalog_json>
-  <dmq_scenes_all name="dmq_v0.0.1_scenes_all_03b31d363f824ae128f6f97036997fe9.bundle">
+  <dmq_scenes_all name="dmq_v0.0.1_scenes_all_1dc9aeea027afbfdbf48b9fe4b1196a2.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
     <os>Android</os>
   </dmq_scenes_all>
-  <dms_scenes_all name="dms_v0.0.1_scenes_all_6501cb86468782b5ad29321696db9d84.bundle">
+  <dms_scenes_all name="dms_v0.0.1_scenes_all_854eba21e52d7a97ff77890ca2a0e764.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
     <os>Android</os>
   </dms_scenes_all>
-  <duplicate_assets_all name="duplicateassetisolation_assets_all_edffbb02097635ca8c97599fe86a53f8.bundle">
+  <duplicate_assets_all name="duplicateassetisolation_assets_all_f1573d56af3369aa8328f4d0bbb5ade3.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
@@ -49,13 +49,13 @@
     <ver>0.0.1</ver>
     <os>Android</os>
   </gift_asset_all>
-  <lobby_scenes_all name="lobby_v0.0.1_scenes_all_98f3e01c6609f4e0bf5f411e87176482.bundle">
+  <lobby_scenes_all name="lobby_v0.0.1_scenes_all_00ae5f0b49f8830c32cc329eb7c3f740.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
     <os>Android</os>
   </lobby_scenes_all>
-  <tpk_scenes_all name="tpk_v0.0.1_scenes_all_eada6da0ba60a7bc4741bc69717ef30d.bundle">
+  <tpk_scenes_all name="tpk_v0.0.1_scenes_all_c7260aba389dc1ad73dac9de541867a2.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>

@@ -37,7 +37,7 @@ class PushNotificationController extends Controller
                          ->get();
                 
         $datenow       = Carbon::now('GMT+7')->toDateString();
-        return view('pages.notification.push_notification', compact('notifications','mainmenu', 'table', 'game', 'menu', 'datenow'));
+        return view('pages.notification.push_notification', compact('notifications','mainmenu', 'game', 'menu', 'datenow'));
     }
 
     /**

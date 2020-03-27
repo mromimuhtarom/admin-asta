@@ -84,15 +84,14 @@ class TransactionPointController extends Controller
         }
         else if($time == "Week"){
 
-
-            $Transaction = UserPoint::select('asta_db.user_point.date as date_created',
+            $Transaction = UserPoint::select(
+				                'asta_db.user_point.date as date_created',
                                 DB::raw('sum(asta_db.user_point.point) As point'),
                                 DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
                                 DB::raw('sum(asta_db.user_point.point_expired) As expired'),
                                 DB::raw('max(date(asta_db.user_point.date)) As maxDate'),
                                 DB::raw('min(date(asta_db.user_point.date)) As minDate'),
                                 DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek')
-
                                 );
            
 
