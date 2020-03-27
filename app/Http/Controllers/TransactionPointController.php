@@ -85,8 +85,7 @@ class TransactionPointController extends Controller
         else if($time == "Week"){
 
 
-            $Transaction = UserPoint::select(
-				                'asta_db.user_point.date as date_created',
+            $Transaction = UserPoint::select('asta_db.user_point.date as date_created',
                                 DB::raw('sum(asta_db.user_point.point) As point'),
                                 DB::raw('sum(asta_db.user_point.point_spend) As point_spend'),
                                 DB::raw('sum(asta_db.user_point.point_expired) As expired'),
@@ -95,10 +94,11 @@ class TransactionPointController extends Controller
                                 DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek')
 
                                 );
+           
 
             if($minDate != NULL && $maxDate != NULL):
 
-                $history = $Transaction->wherebetween('asta_db.user_point.date ', [$minDate, $maxDate])
+                $history = $Transaction->wherebetween('asta_db.user_point.date', [$minDate, $maxDate])
                             ->orderBy($namecolumn, $sortingorder)
                             ->groupBy(DB::raw('YEARWEEK(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"))
                             ->paginate(20);

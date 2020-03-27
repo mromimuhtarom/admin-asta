@@ -690,9 +690,9 @@ function TranslateMenuFeedback($menu){
 
     $array_menuContent = [
 
-        'Feedback'                  =>  'Feedback',
-        'Abuse Transaction Report'  =>  'Abuse Transaction Report',
-        'Report Abuse Player'       =>  'Report Abuse Player',
+        'L_FEEDBACK'                  =>  'Feedback',
+        'L_ABUSE_TRANS_REPORT'  =>  'Abuse Transaction Report',
+        'L_REPORT_ABUSE_PLAYER'       =>  'Report Abuse Player',
         'Image Proof'               =>  'Image Proof',
         'Rating'                    =>  'Rating',
         'Message'                   =>  'Message',
@@ -701,8 +701,6 @@ function TranslateMenuFeedback($menu){
         'Reported User ID'          =>  'Report user ID',
         'Reported User'             =>  'Reported User',
         'Reason'                    =>  'Reason',
-
-
     
     ];
     return $array_menuContent[$menu];
@@ -733,7 +731,7 @@ function TranslateGeneralSettings($menu){
         'Edit Big Two'              =>  'Edit Big two',
         'Edit Domino QQ'            =>  'Edit Domino QQ',
         'Edit Domino Susun'         =>  'Edit Domino susun',
-        
+
     ];
     return $array_menuContent[$menu];
 }
@@ -848,7 +846,7 @@ function ConfigTextTranslate($menu){
         "L_ACTION"       => "Action",
         "L_CORRECTION"   => "Correction",
         "L_ADJUST"       => "Adjust",
-        "Lose"           => "Loh",
+        "Lose"           => "Lose",
         "Win"            => "Win",
         // "1"                                                 =>  "1",
         "" => ""
