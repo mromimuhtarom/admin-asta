@@ -42,7 +42,7 @@
                 @foreach($active as $ol)
                 <tr>
                     <td>{{ $ol->username }}</td>
-                    <td>{{ $ol->date_login }}</td>
+                    <td>{{ date('d-m-Y H:i:s', strtotime($ol->date_login)) }}</td>
                     <td>{{ $ol->ip }}</td>
                 </tr>
                 @endforeach

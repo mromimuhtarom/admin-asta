@@ -679,7 +679,7 @@ function TranslateMenuToko($menu){
         'L_ITEM_BONUS_GET'    =>  'Item bonus yang didapat',
         'L_GOOGLE_KEY'        =>  'Google key',
         'L_TRANSACTION'       =>  'Transaksi',
-        'L_SEARCH'            =>  'Cari',
+        'L_SEARCH'            =>  'Cari'
     ];
 
     return $array_menuContent[$menu];

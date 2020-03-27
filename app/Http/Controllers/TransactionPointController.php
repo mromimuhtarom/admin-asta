@@ -93,13 +93,14 @@ class TransactionPointController extends Controller
                                 DB::raw('min(date(asta_db.user_point.date)) As minDate'),
                                 DB::raw(' YEARWEEK(asta_db.user_point.date) As yearperweek')
                                 );
+           
 
             if($minDate != NULL && $maxDate != NULL):
 
                 $history = $Transaction->wherebetween('asta_db.user_point.date', [$minDate, $maxDate])
-                           ->groupBy(DB::raw('YEARWEEK(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"))            
-                           ->orderBy($namecolumn, $sortingorder)
-                           ->paginate(20);
+                            ->orderBy($namecolumn, $sortingorder)
+                            ->groupBy(DB::raw('YEARWEEK(asta_db.user_point.date)'), DB::raw("WEEK('asta_db.user_point.date')"))
+                            ->paginate(20);
 
             elseif($minDate != NULL):
 
