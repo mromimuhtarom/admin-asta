@@ -68,7 +68,7 @@ class TransactionDayController extends Controller
                     $history = $Transaction->wherebetween('asta_db.store_transaction_day.date', [$minDate, $maxDate])
 				                        ->groupBy(DB::raw('DATE(asta_db.store_transaction_day.date_created)'))
 				                        ->orderBy($namecolumn, $sortingorder)
-                                ->paginate(20);
+                                        ->paginate(20);
               
             elseif($minDate != NULL):
 
@@ -235,10 +235,11 @@ class TransactionDayController extends Controller
             
             $lang_id = '';
             if($minDate != NULL && $maxDate != NULL){
-                
+            
                 $history = $transactionDay->wherebetween('asta_db.store_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                             ->orderBy($namecolumn, $sortingorder)
                             ->paginate(20);
+                            
 
                 $history->appends($request->all());
                 return view('pages.transaction.transaction_day', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate', 'namecolumn', 'sortingorder'));
@@ -249,7 +250,7 @@ class TransactionDayController extends Controller
                 $history = $transactionDay->where('asta_db.store_transaction_day.date_created', '>=', $minDate." 00:00:00")
                             ->orderBy($namecolumn, $sortingorder)
                             ->paginate(20);
-
+            
                 $history->appends($request->all());
                 return view('pages.transaction.transaction_day', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate', 'namecolumn', 'sortingorder'));
             }
@@ -275,7 +276,7 @@ class TransactionDayController extends Controller
         } else{
         
             $validator = Validator::make($request->all(),[
-                'choose_time'           => 'required'
+                'choose_time' => 'required'
             ]);
 
             if ($validator->fails()) {

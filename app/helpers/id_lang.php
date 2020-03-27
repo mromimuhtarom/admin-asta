@@ -746,26 +746,25 @@ function TranslateReseller($menu){
         'L_RESELLER_ID'          => 'ID agen',
         'L_PHONE'                => 'Telefon',
         'L_BALANCE_GOLD'         => 'Saldo koin',
-        'L_REPORT_TRANSACTION'     => 'Laporan transaksi',
-        'Bonus Item'             => 'Bonus item',
+        'L_REPORT_TRANSACTION'   => 'Laporan transaksi',
         'L_BALANCE'              => 'Saldo',
-        'Gold Group'             => 'Grup koin',
-        'Create Reseller Rank'   => 'Buat peringkat agen',
-        'L_PASSWORD'               => 'Katasandi',
-        'L_IDENTITY_CARD'          => 'Kartu identitas',
-        'L_ACCESS_DENIED'          => 'Akses ditolak',
-        'L_UCANT_ACCESS'        => 'Anda tidak dapat mengakses',
+        'L_GOLD_GROUP'           => 'Grup koin',
+        'L_CREATE_RESELLER_RANK' => 'Buat peringkat agen',
+        'L_PASSWORD'             => 'Katasandi',
+        'L_IDENTITY_CARD'        => 'Kartu identitas',
+        'L_ACCESS_DENIED'        => 'Akses ditolak',
+        'L_UCANT_ACCESS'         => 'Anda tidak dapat mengakses',
         'Create new asset'       => 'Buat asset baru',
         'Link'                   => 'Link',
         'Version'                => 'Versi',
         'Edit Asset'             => 'Edit asset',
         'Choose a file'          => 'pilih file',
-        'Create new reseller'    => 'buat agen baru',
-        'Select All'             => 'Pilih semua',
+        'L_CREATE_NEW_RESELLER'  => 'buat agen baru',
+        'L_SELECT_ALL'             => 'Pilih semua',
         'L_WEEKLY'               => 'Mingguan',
         'L_MONTHLY'              => 'Bulanan',
         'L_YEARLY'               => 'Tahunan',
-        'Create new'             => 'Buat baru',
+        'L_CREATE_NEW'           => 'Buat baru',
         'L_USERNAME_/_RESELLER_ID' => 'Nama Agent / ID Agen',
         'L_GOLD'                   => 'Koin',
         'L_REASON_GOLD'            => 'Alasan Koin dikurangi',
@@ -806,10 +805,6 @@ function TranslateReseller($menu){
         'L_ITEM_BONUS_GET'       => 'Item bonus yang didapat',
         'L_SEARCH'               => 'Cari',
         'L_ALL_BANK'             => 'Semua bank'
-
-
-
-
     
     ];
     return $array_menuContent[$menu];

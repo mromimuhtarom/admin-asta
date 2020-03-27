@@ -142,7 +142,7 @@
 							@elseif($time == "Day" || $time == "Week" || $time == "Month")
 								@foreach($history as $trns_day)
 								<tr>
-                                    <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $trns_day->minDate }}&inputMaxDate={{ $trns_day->maxDate }}">{{ $trns_day->minDate }} - {{ $trns_day->maxDate }}</a></td>
+                                    <td><a href="{{ route('Transaction_Day_Reseller-detail') }}?inputMinDate={{ $trns_day->minDate }}&inputMaxDate={{ $trns_day->maxDate }}">{{ date("d-m-Y", strtotime($trns_day->minDate)) }} - {{ date("d-m-Y", strtotime($trns_day->maxDate)) }}</a></td>
                                     <td>{{ number_format($trns_day->buy_gold, 2) }}</td>
                                     <td>{{ number_format($trns_day->buy_amount, 2) }}</td>
                                     <td>{{ number_format($trns_day->sell_gold, 2) }}</td>

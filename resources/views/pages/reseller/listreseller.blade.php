@@ -42,7 +42,7 @@
             <thead>
               <tr>
                 @if($menu && $mainmenu)
-                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('Select All')}}</th></th>
+                <th style="width:100px;"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('L_SELECT_ALL')}}</th></th>
                 @endif
                 <th class="th-sm">{{ TranslateReseller('L_RESELLER_ID')}}</th>
                 <th class="th-sm">{{ Translate_menuPlayers('L_USERNAME')}}</th>

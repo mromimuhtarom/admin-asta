@@ -657,22 +657,29 @@ public function detailTransaction(Request $request, $month, $year)
                                   'reseller_transaction_day.correction_gold as correction_gold',
                                   'reseller_transaction_day.date_created'
                               );
+                              
             if($minDate != NULL && $maxDate != NULL):
                 $history =  $transactionday->whereBetween('reseller_transaction_day.date_created', [$minDate.' 00:00:00', $maxDate.' 23:59:59'])
                             ->orderBy($namecolumn, $sortingorder)
                             ->paginate(20);
+                            
+
             elseif($minDate != NULL):
                 $history =  $transactionday->where('reseller_transaction_day.date_created', '>=', $minDate)
                             ->orderBy($namecolumn, $sortingorder)
                             ->paginate(20);
+                            
             elseif($maxDate != NULL):
                 $history =  $transactionday->where('reseller_transaction_day.date_created', '<=', $maxDate)
                             ->orderBy($namecolumn, $sortingorder)
                             ->paginate(20);
             else:
+                
                 $history =  $transactionday->orderBy($namecolumn, $sortingorder)
                             ->paginate(20);
             endif;
+            $history->appends($request->all());
+
              return view('pages.reseller.transaction.transaction_day_reseller', compact('history', 'time', 'minDate', 'maxDate', 'sortingorder', 'namecolumn'));
         endif;
     }
