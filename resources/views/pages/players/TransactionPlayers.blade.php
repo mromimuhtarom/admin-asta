@@ -188,10 +188,10 @@
 								@foreach($history as $hst)
 								<tr>
 									@if($game != NULL)
-									<td><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}&game_name={{ $hst->game_id }}">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
+									<td><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}&game_name={{ $hst->game_id }}">{{ date("d-m-Y", strtotime($hst->minDate)) }} - {{ date("d-m-Y", strtotime($hst->maxDate)) }}</a></td>
 									<td>{{ $hst->desc }}</td>
 									@else
-									<td><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}&game_name=">{{ $hst->minDate }} - {{ $hst->maxDate }}</a></td>
+									<td><a href="{{ route('detailTransactionPlayers') }}?minDate={{ $hst->minDate }}&maxDate={{ $hst->maxDate }}&game_name=">{{ date("d-m-Y", strtotime($hst->minDate)) }} - {{ date("d-m-Y", strtotime($hst->maxDate)) }}</a></td>
 									@endif
 								  <td>{{ number_format($hst->wintransaction, 2) }} {{ $hst->totalWin }}</td>
 									<td>{{ number_format($hst->losetransaction, 2) }}</td>

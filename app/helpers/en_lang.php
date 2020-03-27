@@ -693,14 +693,14 @@ function TranslateMenuFeedback($menu){
         'L_FEEDBACK'                  =>  'Feedback',
         'L_ABUSE_TRANS_REPORT'  =>  'Abuse Transaction Report',
         'L_REPORT_ABUSE_PLAYER'       =>  'Report Abuse Player',
-        'Image Proof'               =>  'Image Proof',
-        'Rating'                    =>  'Rating',
-        'Message'                   =>  'Message',
-        'User ID sender'            =>  'ID Sender',
-        'Username sender'           =>  'Username Sender',
-        'Reported User ID'          =>  'Report user ID',
-        'Reported User'             =>  'Reported User',
-        'Reason'                    =>  'Reason',
+        'L_IMAGE_PROOF'               =>  'Image Proof',
+        'L_RATING'                    =>  'Rating',
+        'L_MESSAGE'                   =>  'Message',
+        'L_USER_ID_sender'            =>  'ID Sender',
+        'L_USERNAME_SENDER'           =>  'Username Sender',
+        'L_REPOSRTED_USER_ID'          >  'Report user ID',
+        'L_REPOTED_USE'               =>  'Reported User',
+        'L_REASON'                    =>  'Reason',
     
     ];
     return $array_menuContent[$menu];
@@ -710,13 +710,13 @@ function TranslateGeneralSettings($menu){
 
     $array_menuContent = [
 
-        'System settings'           =>  'System Settings',
-        'Maintenance'               =>  'Maintenance',
-        'Point expired'             =>  'Point expired',
-        'Award Signup'              =>  'Sign Up Award',
-        'Award Signup Guest'        =>  'Sign Up Guest Award',
-        'Award Daily Chips'         =>  'Daily chip Award',
-        'Award Daily Chips Guest'   =>  'Daily chip guest Award',
+        'L_SYSTEM_SETTING'           =>  'System Settings',
+        'L_MAINTENANCE'               =>  'Maintenance',
+        'L_POINT_EXPIRED'             =>  'Point expired',
+        'L_AWARD_SIGNUP'              =>  'Sign Up Award',
+        'L_AWARD_SIGNUP_GUEST'        =>  'Sign Up Guest Award',
+        'L_AWARD_DAILY_CHIPS'         =>  'Daily chip Award',
+        'L_AWARD_DAILY_CHIPS_GUEST'   =>  'Daily chip guest Award',
         'Award Daily Days'          =>  'Daily award',
         'Award Daily Multiply'      =>  'Daily multiply award',
         'Bank Settings'             =>  'Bank Settings',
