@@ -28,6 +28,9 @@ class PlayReportController extends Controller
     public function modalplayreport(Request $request)
     {
        if ($request->ajax()) {
+              $player_username = Player::select('user_id', 'username')->get();
+
+
               if($request->game === 'Big Two'):
                      $history = DB::table('bgt_round')->where('round_id', '=', $request->roundid)->first();
                      $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
@@ -84,34 +87,34 @@ class PlayReportController extends Controller
                                                               $response .=  $start->username ;
                                                         endif;
                                                  endforeach;
-                     $response .=                  '</td>
+                     $response .=                '</td>
                                                  <td></td>
                                                  <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
                                                  <td></td>
                                                  <td>'. $action->left .'</td>
                                                  <td>';
-                                                 foreach($bgt_gameplaylog->start->players as $start):
-                                                        if($start->seat == $action->seat):                                                       
-                                                               for($i=0; $i<count($action->card); $i++):
-                                                               $arraycardbgt[] = $action->card[$i];
+                                                        foreach($bgt_gameplaylog->start->players as $start):
+                                                               if($start->seat == $action->seat):                                                       
+                                                                      for($i=0; $i<count($action->card); $i++):
+                                                                             $arraycardbgt[] = $action->card[$i];
+                                                                      endfor;
 
-                                                               endfor;
-
-                                                               for($a=0; $a<count($start->hand); $a++):
-                                                               if(!in_array((int)$start->hand[$a], $arraycardbgt)):
-                                                                   $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($start->hand)[$a] .'.png" alt="">';
+                                                                      for($a=0; $a<count($start->hand); $a++):
+                                                                             if(!in_array((int)$start->hand[$a], $arraycardbgt)):
+                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($start->hand)[$a] .'.png" alt="">';
+                                                                             endif;
+                                                                      endfor;
                                                                endif;
-                                                               endfor;
-                                                        endif;
-                                                 endforeach;
+                                                        endforeach;
                                           
-                     $response .=                   '</td>
+                     $response .=                '</td>
                                                  <td>';
                                                  for($i=0; $i<count($action->card); $i++):
                                                        $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($action->card)[$i] .'.png" alt="">';
                                                  endfor;
                      $response .=                 '</td>
                                           </tr>';
+                     endforeach;
                      foreach($bgt_gameplaylog->end->players as $end):
                      $response .=         '<tr>
                                                  <td>'. $end->seat .'</td>
@@ -133,18 +136,519 @@ class PlayReportController extends Controller
                                                  for($a=0; $a<count($end->hand); $a++):
                                                         $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. bgtcard($end->hand)[$a] .'.png" alt="">';
                                                  endfor;
-                     $reponse .=                 '</td>
+                     $response .=                 '</td>
                                                  <td></td>
                                           </tr>';
                      endforeach;
 
-                     endforeach;
-
-
-
                      $response .=  '</tbody>
                      </table>   ';
                      endif;
+              elseif($request->game === 'Texas Poker'):
+                     $history = DB::table('tpk_round')->where('round_id', '=', $request->roundid)->first();
+                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>			                
+                                <tr>
+                                    <th>'. Translate_menuPlayers("L_SIT") .'</th>
+                                    <th>'. Translate_menuPlayers("L_USERNAME") .'</th>
+                                    <th>'. Translate_menuPlayers("L_CHIP_PLAYERS") .'</th>
+                                    <th>'. Translate_menuPlayers("L_ACTION") .'</th>
+                                    <th>'. Translate_menuPlayers("L_BET") .'</th>
+                                    <th>'. Translate_menuPlayers("L_CARD_TYPE") .'</th>
+                                    <th>'. Translate_menuPlayers("L_CARD_HAND") .'</th>
+                                    <th>'. Translate_menuPlayers("L_CARD_TABLE") .'</th>
+                                </tr>
+                            </thead>';
+
+                            if(!empty($history->gameplay_log)):
+                                $tpk_gameplaylog = json_decode($history->gameplay_log);
+                     $response .=  '<tbody> ';
+                                          foreach($tpk_gameplaylog->start->players as $start):
+                     $response .=                '<tr>
+                                                        <td>'. $start->seat .'</td>
+                                                        <td>';
+                                                               foreach($player_username as $plyr):
+                                                                      if($start->uid == $plyr->user_id):
+                                                                             $response .= $plyr->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($start->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers("L_NEW_ROUND") .'</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                 </tr>';
+                                          endforeach;  
+                                          foreach($tpk_gameplaylog->start->players as $start):
+                                          if($start->seat == $tpk_gameplaylog->start->turn):
+                     $response .=               '<tr>
+                                                        <td>'. $start->seat .'</td>
+                                                        <td>';
+                                                               foreach($player_username as $plyr):
+                                                                      if($start->uid == $plyr->user_id):
+                                                                             $response .= $plyr->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($start->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers('L_DEALER') .'</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>';
+                                                               if(!empty($start->hand)):
+                                                                      for($a=0; $a<count($start->hand); $a++):
+                                                                             $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($start->hand)[$a] .'.png" alt="">';
+                                                                      endfor;
+                                                               endif;
+                     $response .=                       '</td>
+                                                        <td></td>
+                                                 </tr>';
+                                          endif;
+                                          endforeach;
+
+                                          $b = 1;
+                                          foreach($tpk_gameplaylog->acts as $action):
+                                          if($action->act == 7 || $action->act == 8):
+                     $response .=                '<tr>
+                                                        <td>'. $action->seat .'</td>
+                                                        <td>';
+                                                               foreach($tpk_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat ):
+                                                                             foreach($player_username as $plyr):
+                                                                                    if($start->uid == $plyr->user_id):
+                                                                                           $response .= $plyr->username;
+                                                                                    endif;
+                                                                             endforeach;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($action->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                        <td>'. number_format($action->bet) .'</td>
+                                                        <td></td>
+                                                        <td>';
+                                                               foreach ($tpk_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat):
+                                                                             if(!empty($start->hand)):
+                                                                                    for($a=0; $a<count($start->hand); $a++):
+                                                                                           $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($start->hand)[$a] .'.png" alt="">';
+                                                                                    endfor;
+                                                                             endif;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td></td>
+                                                 </tr>';
+                                        elseif($action->act == 9):
+                     $response .=                '<tr>
+                                                        <td></td>
+                                                        <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>';
+                                                               if(!empty($tpk_gameplaylog->start->table_card)):
+                                                                      if($b == 1):
+                                                                             for($a=0; $a<3; $a++):
+                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($tpk_gameplaylog->start->table_card)[$a] .'.png" alt="">';
+                                                                             endfor;
+                                                                      elseif($b == 2):
+                                                                             for($a=0; $a<4; $a++):
+                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($tpk_gameplaylog->start->table_card)[$a] .'.png" alt="">';
+                                                                             endfor;
+                                                                      elseif($b == 3):
+                                                                             for($a=0; $a<5; $a++):
+                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($tpk_gameplaylog->start->table_card)[$a] .'.png" alt="">';
+                                                                             endfor;
+                                                                      endif;
+                                                               endif;
+                     $response .=                        '</td>
+                                                 </tr>';
+                                          $b++;
+                                          else:
+                      $response .=               '<tr>
+                                                        <td>'. $action->seat .'</td>
+                                                        <td>';
+                                                               foreach($tpk_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat ):
+                                                                             foreach($player_username as $plyr):
+                                                                                    if($start->uid == $plyr->user_id):
+                                                                                           $response .= $plyr->username;
+                                                                                    endif;
+                                                                             endforeach;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($action->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                        <td>'. number_format($action->bet) .'</td>
+                                                        <td></td>
+                                                        <td>';
+                                                               if($action->act == 4):
+                                                                      foreach($tpk_gameplaylog->start->players as $start):
+                                                                             if($start->seat == $action->seat):
+                                                                                    if(!empty($start->hand)):
+                                                                                           for($a=0; $a<count($start->hand); $a++):
+                                                                                                  $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($start->hand)[$a] .'.png" alt="">';
+                                                                                           endfor;
+                                                                                    endif;
+                                                                             endif;
+                                                                      endforeach;
+                                                               else: 
+                                                                      foreach($tpk_gameplaylog->start->players as $start):
+                                                                             if($start->seat == $action->seat):
+                                                                                    if(!empty($start->hand)):
+                                                                                           for($a=0; $a<count($start->hand); $a++):
+                                                                                           $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($start->hand)[$a] .'.png" alt="">';
+                                                                                           endfor;
+                                                                                    endif;
+                                                                             endif;
+                                                                      endforeach;
+                                                               endif;
+                     $response .=                       '</td>
+                                                        <td>
+
+                                                        </td>
+                                                 </tr>'; 
+                                          endif;
+                                          endforeach;  
+                                    
+                                          foreach($tpk_gameplaylog->end->players as $end):
+                     $response .=                '<tr>
+                                                        <td>'. $end->seat .'</td>
+                                                        <td>';
+                                                               foreach($tpk_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $end->seat ):
+                                                                             foreach($player_username as $plyr):
+                                                                                    if($start->uid == $plyr->user_id):
+                                                                                           $response .= $plyr->username;
+                                                                                    endif;
+                                                                             endforeach;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($end->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers(statusgameplaylog($end->stat)) .'</td>
+                                                        <td>
+                                                               '. number_format($end->val) .' <br> ';
+                                                               if($end->stat !== 0):
+                                                                      $response .= '(fee:'. number_format($end->fee) .')';
+                                                               endif;
+                     $response .=                       '</td>
+                                                        <td>'. Translate_menuPlayers(typeCardGamepLayLogBgtTpk($end->type)) .'</td>
+                                                        <td>';
+                                                               if($end->type !== null):
+                                                                      foreach($tpk_gameplaylog->start->players as $start):
+                                                                             if($start->seat == $end->seat):
+
+                                                                                    for($a=0; $a<count($start->hand); $a++):
+                                                                                           if(!empty($start->hand)):
+                                                                                                  if(in_array((int)$start->hand[$a], $end->hand, false)):
+                                                                                                         $response .= '<img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/'. tpkcard($start->hand)[$a] .'.png" alt="">';
+                                                                                                  else:
+                                                                                                         $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($start->hand)[$a] .'.png" alt="">';
+                                                                                                  endif;
+                                                                                           endif;
+                                                                                    endfor;
+
+                                                                             endif;
+                                                                      endforeach;
+                                                               else:
+                                                                      foreach($tpk_gameplaylog->start->players as $start):
+                                                                             if($start->seat == $end->seat):
+                                                                                    if(!empty($start->hand)):
+                                                                                           for($a=0; $a<count($start->hand); $a++):
+                                                                                                  $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($start->hand)[$a] .'.png" alt="">';
+                                                                                           endfor;
+                                                                                    endif;
+                                                                             endif;
+                                                                      endforeach;
+                                                               endif;
+                     $response .=                       '</td>
+                                                        <td>';
+                                                               for($a=0; $a<count($tpk_gameplaylog->start->table_card); $a++):
+                                                                      if(!empty($tpk_gameplaylog->start->table_card)):
+                                                                             if(in_array((int)$tpk_gameplaylog->start->table_card[$a], $end->hand, false)):
+                                                                                    $response .= '<img style="width:38px;height:auto;border:3px solid yellow;" src="/assets/img/card_bgt_tpk/'. tpkcard($tpk_gameplaylog->start->table_card)[$a] .'.png" alt="">';
+                                                                             else:
+                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_bgt_tpk/'. tpkcard($tpk_gameplaylog->start->table_card)[$a] .'.png" alt="">';
+                                                                             endif;
+                                                                      endif;
+                                                               endfor;
+                     $response .=                       '</td>
+                                                 </tr>';
+                                          endforeach;
+                     $response .= '</tbody>';
+                            endif;
+                    $response .= '</table>';  
+              
+              elseif($request->game === 'Domino Susun'):
+                     $history = DB::table('dms_round')->where('round_id', '=', $request->roundid)->first();
+                    $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>			                
+                            <tr>
+                                <th>'. Translate_menuPlayers("L_SIT") .'</th>
+                                <th>'. Translate_menuPlayers("L_USERNAME") .'</th>
+                                <th>'. Translate_menuPlayers("L_CHIP_PLAYERS") .'</th>
+                                <th>'. Translate_menuPlayers("L_ACTION") .'</th>
+                                <th>'. Translate_menuPlayers("L_BET") .'</th>
+                                <th>'. Translate_menuPlayers("L_COUNT_CARD") .'</th>
+                                <th>'. Translate_menuPlayers("L_CARD_HAND") .'</th>
+                                <th>'. Translate_menuPlayers("L_CARD_OUT") .'</th>
+                            </tr>
+                        </thead>';
+                        if($history->gameplay_log): 
+                            $dms_gameplaylog = json_decode($history->gameplay_log);
+                     $response .= '<tbody>';
+                                          foreach($dms_gameplaylog->start->players as $start):
+                     $response .=               '<tr>
+                                                        <td>'. $start->seat .'</td>
+                                                        <td>';
+                                                               foreach($player_username as $plyr):
+                                                                      if($start->uid == $plyr->user_id):
+                                                                             $response .= $plyr->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($start->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers("L_NEW_ROUND") .'</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                 </tr>';
+                                          endforeach;    
+
+
+                                          foreach($dms_gameplaylog->start->players as $start):
+                     $response .=                '<tr>
+                                                        <td>'. $start->seat .'</td>
+                                                        <td>'. $start->username .'</td>
+                                                        <td>';
+                                                               foreach($dms_gameplaylog->acts as $action):
+                                                                      if($action->act == 9 && $action->seat == $start->seat):
+                                                                             $response .= number_format($action->chip);
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. Translate_menuPlayers("L_DIVIDED_CARD") .'</td>
+                                                        <td>'. number_format($dms_gameplaylog->start->stake) .'</td>
+                                                        <td>'. count($start->hand) .'</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                 </tr>';
+                                          endforeach;
+
+                                          $arraycarddms = array();
+                                          foreach($dms_gameplaylog->acts as $action):
+                                          if($action->act != 9):
+                     $response .=                '<tr>
+                                                        <td>'. $action->seat .'</td>
+                                                        <td>';
+                                                               foreach($dms_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat):
+                                                                             $response .= $start->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                        '</td>
+                                                        <td></td>
+                                                        <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                        <td></td>
+                                                        <td>';
+                                                        foreach($dms_gameplaylog->start->players as $start):
+                                                               if($start->seat == $action->seat):                                                        
+                                                                      for($i=0; $i<count($action->card); $i++):
+                                                                             $arraycarddms[] = $action->card[$i];
+                                                                      endfor;
+                                                                      $response .= count(array_diff($start->hand, $arraycarddms));
+                                                               endif;
+                                                        endforeach;
+                     $response .=                       '</td>
+                                                        <td>';
+                                                               foreach($dms_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat):   
+                                                                             for($a=0; $a<count($start->hand); $a++):
+                                                                                    if(!in_array((int)$start->hand[$a], $arraycarddms)):
+                                                                                           $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($start->hand)[$a] .'.png" alt="">';
+                                                                                    endif;
+                                                                             endfor;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>';
+                                                               for($i=0; $i<count($action->card); $i++):
+                                                                      $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($action->card)[$i] .'.png" alt="">';
+                                                               endfor;
+                     $response .=                       '</td>
+                                                 </tr>';
+                                          endif;
+                                          endforeach;
+
+                                          foreach($dms_gameplaylog->end->players as $end):
+                     $response .=                '<tr>
+                                                        <td>'. $end->seat .'</td>
+                                                        <td>';
+                                                               foreach($dms_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $end->seat):
+                                                                             $response .= $start->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($end->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers(statusgameplaylog($end->stat)) .'</td>
+                                                        <td>
+                                                               '. number_format($end->val) .' <br> 
+                                                               (fee:'. number_format($end->fee) .')
+                                                        </td>
+                                                        <td>'. count($end->hand) .'</td>
+                                                        <td>';
+                                                               for($a=0; $a<count($end->hand); $a++):
+                                                                      $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
+                                                               endfor;
+                     $response .=                       '</td>
+                                                        <td></td>
+                                                 </tr>';
+                                          endforeach;
+                                      
+                     $response .= '</tbody>';
+                        endif;
+                    $response .= '</table>';        
+              elseif($request->game === 'Domino QQ'):
+                     $history = DB::table('dmq_round')->where('round_id', '=', $request->roundid)->first();
+                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>			                
+                                <tr>
+                                    <th>'. Translate_menuPlayers("L_SIT") .'</th>
+                                    <th>'. Translate_menuPlayers("L_USERNAME") .'</th>
+                                    <th>'. Translate_menuPlayers("L_CHIP_PLAYERS") .'</th>
+                                    <th>'. Translate_menuPlayers("L_ACTION") .'</th>
+                                    <th>'. Translate_menuPlayers("L_BET") .'</th>
+                                    <th>'. Translate_menuPlayers("L_CARD_VALUE") .'</th>
+                                    <th>'. Translate_menuPlayers("L_CARD_HAND") .'</th>
+                                </tr>
+                            </thead>';
+                            if($history->gameplay_log): 
+                                $dmq_gameplaylog = json_decode($history->gameplay_log);
+                     $response .=  '<tbody>';  
+                                          foreach($dmq_gameplaylog->start->players as $start):
+                     $response .=                '<tr>
+                                                        <td>'. $start->seat .'</td>
+                                                        <td>';
+                                                               foreach($player_username as $plyr):
+                                                                      if($start->uid == $plyr->user_id):
+                                                                             $response .= $plyr->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($start->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers('L_NEW_ROUND') .'</td>
+                                                        <td>'. number_format($dmq_gameplaylog->start->stake) .'</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                 </tr>';
+                                          endforeach;  
+
+                                          $a = 0;
+                                          $draw = array_count_values(array_column($dmq_gameplaylog->acts, 'act'))[9];
+                                          foreach($dmq_gameplaylog->acts as $key => $action):
+                                          if($action->act == 9):
+                     $response .=                '<tr>
+                                                        <td>'. $action->seat .'</td>
+                                                        <td>';
+                                                               foreach($dmq_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat):
+                                                                             $response .= $start->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($action->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                        <td>'. number_format($action->bet) .'</td>
+                                                        <td></td>
+                                                        <td>';
+                                                               if(!empty($action->card)):
+                                                                      for($i=0; $i<count($action->card); $i++):
+                                                                             $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($action->card)[$i] .'.png" alt="">';
+                                                                      endfor; 
+                                                               endif;                                                                                           
+                     $response .=                       '</td>
+                                                 </tr>';
+                                          else:
+                     $response .=                '<tr>
+                                                        <td>'. $action->seat .'</td>
+                                                        <td>';
+                                                               foreach($dmq_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat):
+                                                                             $response .=$start->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($action->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                        <td>'. number_format($action->bet) .'</td>
+                                                        <td></td>
+                                                        <td>';
+                                                               if($action->act === 4):
+                                                                      foreach($dmq_gameplaylog->start->players as $start):
+                                                                             if($start->seat == $action->seat):
+                                                                                    for($i=0; $i<count($start->hand); $i++):
+                                                                                           $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($start->hand)[$i] .'.png" alt="">';
+                                                                                    endfor;
+                                                                             endif;
+                                                                      endforeach;
+                                                               endif;
+                     $response .=                       '</td>
+                                                 </tr>';
+                                          endif; 
+                                          $a++;
+                                          endforeach;                  
+
+
+                                          foreach($dmq_gameplaylog->end->players as $end):
+                     $response .=                '<tr>
+                                                        <td>'. $end->seat .'</td>
+                                                        <td>';
+                                                               foreach($dmq_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $end->seat):
+                                                                             $response .= $start->username;
+                                                                      endif;
+                                                               endforeach;
+                     $response .=                       '</td>
+                                                        <td>'. number_format($end->chip) .'</td>
+                                                        <td>'. Translate_menuPlayers(statusgameplaylog($end->stat)) .'</td>
+                                                        <td>
+                                                        '. number_format($end->val) .' <br>';
+                                                               if($end->stat !== 0):
+                                                                      $response .= '(fee:'. number_format($end->fee) .')';
+                                                               endif;
+                     $response .=                       '</td>
+                                                        <td>';
+                                                               for($i=0; $i<count($end->combo); $i++):
+                                                                      if($i == 0):
+                                                                             $response .= $end->combo[$i].' :';
+                                                                      else:
+                                                                             $response .= $end->combo[$i];
+                                                                      endif;
+                                                                      
+                                                               endfor;
+                     $response .=                       '</td>
+                                                        <td>';
+                                                               if($end->hand):
+                                                                      for($a=0; $a<count($end->hand); $a++):
+                                                                             $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
+                                                                      endfor;
+                                                               endif;
+                     $response .=                       '</td>
+                                                 </tr>';
+                                          endforeach;
+                     $response .= '</tbody>';
+                            endif;
+                    $response .= '</table>';
+
               endif;
                      return json_encode([
                             "status"  => $request->roundid,
