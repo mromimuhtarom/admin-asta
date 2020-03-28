@@ -637,11 +637,18 @@ class PlayReportController extends Controller
                                                                endfor;
                      $response .=                       '</td>
                                                         <td>';
-                                                               if($end->hand):
-                                                                      for($a=0; $a<count($end->hand); $a++):
-                                                                             $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
-                                                                      endfor;
-                                                               endif;
+                                                               foreach($dmq_gameplaylog->start->players as $start):
+                                                                      if($end->seat == $start->seat):
+                                                                             for($a=0; $a<count($start->hand); $a++):
+                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($start->hand)[$a] .'.png" alt="">';
+                                                                             endfor;
+                                                                      endif;
+                                                               endforeach;
+                                                               // if($end->hand):
+                                                               //        for($a=0; $a<count($end->hand); $a++):
+                                                               //               $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
+                                                               //        endfor;
+                                                               // endif;
                      $response .=                       '</td>
                                                  </tr>';
                                           endforeach;

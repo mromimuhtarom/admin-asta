@@ -673,17 +673,17 @@ class PlayersController extends Controller
         
         switch($sts_plyr):
           case '1':
-            $sts_plyr = 25;
+            $sts_plyr = 55;
             $sts_user = "setuju";
             $currentvalue = statusRegisteredPlayers($currentname->status);
             break;
           case '2':
-            $sts_plyr = 26;
+            $sts_plyr = 56;
             $sts_user = "dilarang";
             $currentvalue = statusRegisteredPlayers($currentname->status);
             break;
           case '3':
-            $sts_plyr = 27;
+            $sts_plyr = 57;
             $sts_user = "bermasalah";
             $currentvalue = statusRegisteredPlayers($currentname->status);
             break;
