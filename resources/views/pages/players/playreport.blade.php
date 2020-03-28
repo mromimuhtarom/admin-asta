@@ -298,8 +298,19 @@
                             
                 <!-- widget content -->
                 <div class="widget-body p-0 table-playreport">
-
+                    <!------- Isinya ada di controller ------>
                 </div>
+                	<div class="reloadpage1">
+							<div class="loaderpagecontent"></div>
+					</div>
+
+                    <script>
+							$(function() {
+								$(".reloadpage1").fadeOut(5000, function() {
+									$(".table-playreport").fadeIn(20000);
+								});
+							});
+					</script>
                 <!-- end widget content -->
                             
             </div>
@@ -318,7 +329,6 @@
  $('.playreport').click(function(){
    
    var roundid = $(this).data('pk');
-   console.log(roundid);
 
    // AJAX request
    $.ajax({
