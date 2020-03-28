@@ -161,22 +161,22 @@
             <form action="{{ route('RewardTransaction-Decline')}}" method="POST">
             @csrf
                 <div class="modal-body" align="center">
-										<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
-										{{ translate_MenuTransaction('L_QUESTION_DECLINE_TRANS') }}
-													<input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
-													<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
-													<input type="hidden" name="price" value="{{ $transaction->item_price }}">	
-													<input type="hidden" name="item_name" value="{{ $transaction->item_name }}">
-													<input type="hidden" name="desc" value="{{ $transaction->description }}">
-													<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
-													<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
-													<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
-													<input type="hidden" name="shop_type" value="{{ $transaction->shop_type }}">
-													<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
-			    			</div>
-			    			<div class="modal-footer">
-				    			<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('L_YES') }}</button>
-				    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('L_NO') }}</button>
+					<textarea name="description" id="" cols="30" rows="5" placeholder="Description"></textarea><br>
+					{{ translate_MenuTransaction('L_QUESTION_DECLINE_TRANS') }}
+					<input type="hidden" name="declineId" value="{{ $transaction->strtrnsid }}">
+					<input type="hidden" name="user_id" value="{{ $transaction->user_id }}">
+					<input type="hidden" name="price" value="{{ $transaction->item_price }}">	
+					<input type="hidden" name="item_name" value="{{ $transaction->item_name }}">
+					<input type="hidden" name="desc" value="{{ $transaction->description }}">
+					<input type="hidden" name="quantity" value="{{ $transaction->quantity }}">
+					<input type="hidden" name="payment_id" value="{{ $transaction->payment_id }}">
+					<input type="hidden" name="datetime" value="{{ $transaction->datetime }}">
+					<input type="hidden" name="shop_type" value="{{ $transaction->shop_type }}">
+					<input type="hidden" name="item_type" value="{{ $transaction->item_type }}">
+			    </div>
+			    	<div class="modal-footer">
+						<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>{{ translate_MenuTransaction('L_YES') }}</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i>{{ translate_MenuTransaction('L_NO') }}</button>
           			</div>
           	</form>
 		</div>

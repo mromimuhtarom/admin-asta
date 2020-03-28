@@ -42,7 +42,7 @@
           <div class="input-group">
             @if($menu && $mainmenu)
             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-              <i class="fa fa-plus"></i>{{ TranslateReseller('L_CREATE_NEW_RESELLER')}}
+              <i class="fa fa-plus"></i>{{ TranslateReseller('L_CREATE_RESELLER_RANK')}}
             </button>
             @endif
           </div>

@@ -690,17 +690,17 @@ function TranslateMenuFeedback($menu){
 
     $array_menuContent = [
 
-        'Feedback'                  =>  'Umpan balik',
-        'Abuse Transaction Report'  =>  'Laporan penyalahgunaan Transaksi',
-        'Report Abuse Player'       =>  'Laporan penyalahgunaan pemain',
-        'Image Proof'               =>  'Bukti gambar',
-        'Rating'                    =>  'Penilaian',
-        'Message'                   =>  'Pesan',
-        'User ID sender'            =>  'ID pengirim',
-        'Username sender'           =>  'Nama pengirim',
-        'Reported User ID'          =>  'ID pengguna yang dilaporkan',
-        'Reported User'             =>  'Pengguna yang dilaporkan',
-        'Reason'                    =>  'Alasan',
+        'L_FEEDBACK'                =>  'Umpan balik',
+        'L_ABUSE_TRANS_REP'         =>  'Laporan penyalahgunaan Transaksi',
+        'L_REP_ABUSE_PLAYER'        =>  'Laporan penyalahgunaan pemain',
+        'L_IMAGE_PROOF'             =>  'Bukti gambar',
+        'L_RATING'                  =>  'Penilaian',
+        'L_MESSAGE'                 =>  'Pesan',
+        'L_USER_ID_SENDER'            =>  'ID pengirim',
+        'L_USERNAME_SENDER'           =>  'Nama pengirim',
+        'L_REPORTED_USER_ID'          =>  'ID pengguna yang dilaporkan',
+        'L_REPORTED_USER'             =>  'Pengguna yang dilaporkan',
+        'L_REASON'                    =>  'Alasan',
 
 
     
@@ -712,27 +712,27 @@ function TranslateGeneralSettings($menu){
 
     $array_menuContent = [
 
-        'System settings'           =>  'Pengaturan setting',
-        'Maintenance'               =>  'Pemeliharaan',
-        'Point expired'             =>  'Masa aktif pemain',
-        'Award Signup'              =>  'Hadiah sign up',
-        'Award Signup Guest'        =>  'Hadiah sign up sebagai guest',
-        'Award Daily Chips'         =>  'Hadiah chip harian',
-        'Award Daily Chips Guest'   =>  'Hadiah chip harian guest',
-        'Award Daily Days'          =>  'Hadiah harian',
-        'Award Daily Multiply'      =>  'Hadiah berlipat harian',
-        'Bank Settings'             =>  'Pengaturan Bank',
-        'Info Settings'             =>  'Pengaturan info',
-        'About'                     =>  'Tentang',
-        'Edit About'                =>  'Edit Tentang',
-        'CS & Legal Settings'       =>  'CS dan pengaturan legal',
-        'Edit privacy & policy'     =>  'Ubah Kebijakan dan privasi',
-        'Edit Term of Service'      =>  'Ubah Ketentuan pelayanan',
-        'days'                      =>  'Hari',
-        'Edit Asta Poker'           =>  'Ubah Asta Poker',
-        'Edit Big Two'              =>  'Ubah Big two',
-        'Edit Domino QQ'            =>  'Ubah Domino QQ',
-        'Edit Domino Susun'         =>  'Ubah Domino susun',
+        'L_SYSTEM_SETTINGS'           =>  'Pengaturan setting',
+        'L_MAINTENANCE'               =>  'Pemeliharaan',
+        'L_POINT_EXPIRED'             =>  'Masa aktif pemain',
+        'L_AWARD_SIGNUP'              =>  'Hadiah sign up',
+        'L_AWARD_SIGNUP_GUEST'        =>  'Hadiah sign up sebagai guest',
+        'L_AWARD_DAILY_CHIPS'         =>  'Hadiah chip harian',
+        'L_AWARD_DAILY_CHIPS_GUEST'   =>  'Hadiah chip harian guest',
+        'L_AWARD_DAILY_DAYS'          =>  'Hadiah harian',
+        'L_AWARD_DAILY_MULTIPLY'      =>  'Hadiah berlipat harian',
+        'L_BANK_SETTINGS'             =>  'Pengaturan Bank',
+        'L_INFO_SETTINGS'             =>  'Pengaturan info',
+        'L_ABOUT'                     =>  'Tentang',
+        'L_EDIT_ABOUT'                =>  'Edit Tentang',
+        'L_CS_LEGAL'                  =>  'CS dan pengaturan legal',
+        'L_EDIT_PRIVACY_POL'          =>  'Ubah Kebijakan dan privasi',
+        'L_EDIT_TOS'                  =>  'Ubah Ketentuan pelayanan',
+        'L_DAYS'                      =>  'Hari',
+        'L_EDIT_ASTA_POKER'           =>  'Ubah Asta Poker',
+        'L_EDIT_BIG_TWO'              =>  'Ubah Big two',
+        'L_EDIT_DOMINO_QQ'            =>  'Ubah Domino QQ',
+        'L_EDIT_DOMINO_SUSUN'         =>  'Ubah Domino susun',
         
 
     ];
@@ -754,13 +754,13 @@ function TranslateReseller($menu){
         'L_IDENTITY_CARD'        => 'Kartu identitas',
         'L_ACCESS_DENIED'        => 'Akses ditolak',
         'L_UCANT_ACCESS'         => 'Anda tidak dapat mengakses',
-        'Create new asset'       => 'Buat asset baru',
-        'Link'                   => 'Link',
-        'Version'                => 'Versi',
-        'Edit Asset'             => 'Edit asset',
-        'Choose a file'          => 'pilih file',
+        'L_CREATE_NEW_ASSET'     => 'Buat asset baru',
+        'L_LINK'                 => 'Link',
+        'L_VERSION'              => 'Versi',
+        'L_EDIT_ASSET'           => 'Edit asset',
+        'L_CHOOSE_FILE'          => 'pilih file',
         'L_CREATE_NEW_RESELLER'  => 'buat agen baru',
-        'L_SELECT_ALL'             => 'Pilih semua',
+        'L_SELECT_ALL'           => 'Pilih semua',
         'L_WEEKLY'               => 'Mingguan',
         'L_MONTHLY'              => 'Bulanan',
         'L_YEARLY'               => 'Tahunan',
@@ -804,7 +804,8 @@ function TranslateReseller($menu){
         'L_ITEM_BONUS_IMAGE'     => 'Gambar item bonus',
         'L_ITEM_BONUS_GET'       => 'Item bonus yang didapat',
         'L_SEARCH'               => 'Cari',
-        'L_ALL_BANK'             => 'Semua bank'
+        'L_ALL_BANK'             => 'Semua bank',
+        ''                       => ''
     
     ];
     return $array_menuContent[$menu];

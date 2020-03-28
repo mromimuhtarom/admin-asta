@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }} Game</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('L_FEEDBACK') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('L_FEEDBACK') }} Game</a></li>
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
 <header>
     <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-        <h2>{{ TranslateMenuFeedback('Feedback') }} Game</h2>
+        <h2>{{ TranslateMenuFeedback('L_FEEDBACK') }} Game</h2>
     </div>
 </header>
 <div>           
@@ -40,8 +40,8 @@
                 <tr>
                     <th>{{ Translate_menuPlayers('L_PLAYER_ID') }}</th>
                     <th>{{ Translate_menuPlayers('L_USERNAME') }}</th>
-                    <th>{{ TranslateMenuFeedback('Rating') }}</th>
-                    <th>{{ TranslateMenuFeedback('Message') }}</th>
+                    <th>{{ TranslateMenuFeedback('L_RATING') }}</th>
+                    <th>{{ TranslateMenuFeedback('L_MESSAGE') }}</th>
                     <th>{{ Translate_menuTransaction('L_DATE') }}</th>
                     <th>Print PDF <a href="{{ route('FeedbackGame-PDFall') }}"><i class="fa fa-file-pdf-o"></i></a></th>
                 </tr>

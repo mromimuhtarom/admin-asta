@@ -27,7 +27,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>{{ TranslateGeneralSettings('System settings') }}</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('L_SYSTEM_SETTINGS') }}</strong></h2>				
         </div>
       </header>
     
@@ -45,7 +45,7 @@
                 </thead>  
                 <tbody>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Maintenance') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_MAINTENANCE') }}</td>
                     @if($menu && $mainmenu)
                     <td><a href="#" class="popUpSetting" data-title="Maintenance" data-name="value" data-value="{{ $getMaintenance->value }}" data-pk="{{ $getMaintenance->id }}" data-type="select" data-url="{{ route('GeneralSetting-update') }}">{{ $getMaintenance->strmaintenance() }}</a></td>
                     @else 
@@ -53,17 +53,17 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Point expired') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_POINT_EXPIRED') }}</td>
                     @if($menu && $mainmenu)
                     <td>
-                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span>({{ TranslateGeneralSettings('days')}})</span>
+                      <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $getPointExpired->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ $getPointExpired->value }}</a><span>({{ TranslateGeneralSettings('L_DAYS')}})</span>
                     </td>
                     @else
-                    <td>{{ $getPointExpired->value }} ({{ TranslateGeneralSettings('days')}})</td>
+                    <td>{{ $getPointExpired->value }} ({{ TranslateGeneralSettings('L_DAYS')}})</td>
                     @endif
                   </tr>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Award Signup') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_AWARD_SIGNUP') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_signup->value, 2) }}</a>
@@ -73,7 +73,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Award Signup Guest') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_AWARD_SIGNUP_GUEST') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_signup_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_signup_guest->value, 2) }}</a>
@@ -83,7 +83,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Award Daily Chips') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_AWARD_DAILY_CHIPS') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_chips->value, 2) }}</a>
@@ -93,7 +93,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Award Daily Chips Guest') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_AWARD_DAILY_CHIPS_GUEST') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_chips_guest->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_chips_guest->value, 2) }}</a>
@@ -103,7 +103,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Award Daily Days') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_AWARD_DAILY_DAYS') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_days->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_days->value, 2) }}</a>
@@ -113,7 +113,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('Award Daily Multiply') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_AWARD_DAILY_MULTIPLY') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <a href="#" class="inlineSetting" data-title="Point Expired" data-name="value" data-pk="{{ $award_daily_multiply->id }}" data-type="number" data-url="{{ route('GeneralSetting-update')}}">{{ number_format($award_daily_multiply->value, 2) }}</a>
@@ -138,7 +138,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>{{ TranslateGeneralSettings('Bank Settings') }}</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('L_BANK_SETTINGS') }}</strong></h2>				
         </div>
       </header>
     
@@ -181,7 +181,7 @@
       
       <header>
         <div class="widget-header">	
-          <h2><strong>{{ TranslateGeneralSettings('Info Settings') }}</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('L_INFO_SETTINGS') }}</strong></h2>				
         </div>
       </header>
     
@@ -199,11 +199,11 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{{ TranslateGeneralSettings('About') }}</td>
+                    <td>{{ TranslateGeneralSettings('L_ABOUT') }}</td>
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_ABOUT') }}
                       </button>
                     </td>
                     @else 
@@ -223,7 +223,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalAstaPoker">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Asta Poker') }}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_ASTA_POKER') }}
                       </button>
                     </td>
                     @else 
@@ -235,7 +235,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalBigTwo">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Big Two') }}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_BIG_TWO') }}
                       </button>
                     </td>
                     @else 
@@ -247,7 +247,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalQQ">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino QQ') }}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_DOMINO_QQ') }}
                       </button>
                     </td>
                     @else 
@@ -259,7 +259,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalSusun">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino Susun') }}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_DOMINO_SUSUN') }}
                       </button>
                     </td>
                     @else 
@@ -281,7 +281,7 @@
     <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
       <header>
         <div class="widget-header">	
-          <h2><strong>{{ TranslateGeneralSettings('CS & Legal Settings') }}</strong></h2>				
+          <h2><strong>{{ TranslateGeneralSettings('L_CS_LEGAL') }}</strong></h2>				
         </div>
       </header>
     
@@ -327,7 +327,7 @@
                     @if($menu && $mainmenu)
                     <td>
                         <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalPrivacyPolicy">
-                          <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit privacy & policy')}}
+                          <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_PRIVACY_POL')}}
                         </button>
                     </td>
                     @else 
@@ -339,7 +339,7 @@
                     @if($menu && $mainmenu)
                     <td>
                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModalTermOfSevice">
-                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Term of Service')}}
+                        <i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_TOS')}}
                     </button>
                     </td>
                     @else 
@@ -365,7 +365,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Asta Poker') }}</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_ASTA_POKER') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -427,7 +427,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Big Two') }}</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_BIG_TWO') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -488,7 +488,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino QQ') }}</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_DOMINO_QQ') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -549,7 +549,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Domino Susun') }}</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_DOMINO_SUSUN') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -611,7 +611,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit privacy & policy') }}</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_PRIVACY_POL') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>
@@ -671,7 +671,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit Term of Service') }}</h4>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_TOS') }}</h4>
             <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
               <i class="fa fa-remove"></i>
             </button>
@@ -733,7 +733,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('Edit About') }}</h4>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-edit"></i>{{ TranslateGeneralSettings('L_EDIT_ABOUT') }}</h4>
           <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <i class="fa fa-remove"></i>
           </button>

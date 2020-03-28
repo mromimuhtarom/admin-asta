@@ -50,7 +50,7 @@
                                     <div class="input-group">
                                       @if($menu)
                                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetAdr">
-                                        <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
+                                        <i class="fa fa-plus"></i> {{ TranslateReseller('L_CREATE_NEW_ASSET')}}
                                       </button>
                                       @endif
                                     </div>
@@ -72,8 +72,8 @@
                                     <th>{{ TranslateMenuGame('L_NAME')}}</th>
                                     <th>{{ translate_menuTransaction('L_TYPE')}}</th>
                                     <th>Operating System</th>
-                                    <th>{{ TranslateReseller('Link')}}</th>
-                                    <th>{{ TranslateReseller('Version')}}</th>
+                                    <th>{{ TranslateReseller('L_LINK')}}</th>
+                                    <th>{{ TranslateReseller('L_VERSION')}}</th>
                                     @if($menu)
                                       <th style="width:10px;">
                                         <a  href="#" style="color:red;font-weight:bold;" 
@@ -93,7 +93,7 @@
                                     @endphp
                                     <tr>
                                         <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $ckbox.'1' }} deleteIdAll"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $ckbox }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetAndro{{ $ckbox }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('L_EDIT_ASSET')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="os" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApk-update')}}">{{ $xl->os }}</a></td>
@@ -149,7 +149,7 @@
                                     <div class="input-group">
                                       @if($menu)
                                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetIos">
-                                        <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
+                                        <i class="fa fa-plus"></i> {{ TranslateReseller('L_CREATE_NEW_ASSET')}}
                                       </button>
                                       @endif
                                     </div>
@@ -170,8 +170,8 @@
                                         @endif
                                         <td>{{ TranslateMenuGame('L_NAME')}}</td>
                                         <td>{{ translate_menuTransaction('L_TYPE')}}</td>
-                                        <td>{{ TranslateReseller('Link')}}</td>
-                                        <td>{{ TranslateReseller('Version')}}</td>
+                                        <td>{{ TranslateReseller('L_LINK')}}</td>
+                                        <td>{{ TranslateReseller('L_VERSION')}}</td>
                                         @if($menu)
                                           <td align="center" style="width:10px;">
                                             <a  href="#" style="color:red;font-weight:bold;" 
@@ -192,7 +192,7 @@
                                     @if ($menu)
                                     <tr>
                                         <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl_ios['name'] }}" data-link="{{ $xl_ios->link }}" data-name="{{ $key }}" class="deletepermission{{ $ckbox.'2'}} deleteIdAll2"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $ckbox }}"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetIos{{ $ckbox }}"><i class="fa fa-edit"></i>{{ TranslateReseller('L_EDIT_ASSET')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl_ios['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkIos-update')}}">{{ $xl_ios->link }}</a></td>
@@ -247,7 +247,7 @@
                                     <div class="input-group">
                                       @if($menu)
                                       <button class="btn sa-btn-primary" data-toggle="modal" data-target="#ModalAssetWindows">
-                                        <i class="fa fa-plus"></i> {{ TranslateReseller('Create new asset')}}
+                                        <i class="fa fa-plus"></i> {{ TranslateReseller('L_CREATE_NEW_ASSET')}}
                                       </button>
                                       @endif
                                     </div>
@@ -268,8 +268,8 @@
                                     @endif
                                     <th>{{ TranslateMenuGame('L_NAME')}}</th>
                                     <th>{{ translate_menuTransaction('L_TYPE')}}</th>
-                                    <th>{{ TranslateReseller('Link')}}</th>
-                                    <th>{{ TranslateReseller('Version')}}</th>
+                                    <th>{{ TranslateReseller('L_LINK')}}</th>
+                                    <th>{{ TranslateReseller('L_VERSION')}}</th>
                                     @if($menu)
                                       <th style="width:10px;">
                                         <a  href="#" style="color:red;font-weight:bold;" 
@@ -289,7 +289,7 @@
                                     @if ($menu)
                                     <tr>
                                         <td align="center"><input type="checkbox" name="deletepermission[]" data-pk="{{ $xl['name'] }}" data-link="{{ $xl->link }}" data-name="{{ $key }}" class="deletepermission{{ $ckbox }}3 deleteIdAll3"></td>
-                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetWindows{{ $ckbox }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('Edit Asset')}}</button></td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ModalAssetWindows{{ $ckbox }}" style="width: 100%"><i class="fa fa-edit"></i>{{ TranslateReseller('L_EDIT_ASSET')}}</button></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="name" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl['name'] }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="type_ver" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->type }}</a></td>
                                         <td><a href="#" class="inlineSetting" data-title="Twitter" data-name="link" data-pk="{{ $xl['name'] }}" data-type="text" data-url="{{ route('VersionAssetApkWindows-update')}}">{{ $xl->link }}</a></td>
@@ -406,7 +406,7 @@
                             <input type="file" name="fileLanguageId" id="file9" class="input-file">
                             <label for="file9" class="btn btn-tertiary js-labelFile">
                               <i class="icon fa fa-check"></i>
-                              <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                              <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                             </label>
                         </div>
                     </div>
@@ -447,7 +447,7 @@
                         <input type="file" name="fileLanguageEn" id="file6" class="input-file">
                         <label for="file6" class="btn btn-tertiary js-labelFile">
                           <i class="icon fa fa-check"></i>
-                          <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                          <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                         </label>
                       </div>
                     </div>
@@ -504,7 +504,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new asset')}}</h4>
+              <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('L_CREATE_NEW_ASSET')}}</h4>
               <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                 <i class="fa fa-remove"></i>
               </button>
@@ -520,7 +520,7 @@
                             <input type="file" name="fileAdr" id="file" onchange="document.getElementById('namefileadr').value = this.value.split('\\').pop().split('/').pop()" class="input-file">
                             <label for="file" class="btn btn-tertiary js-labelFile">
                               <i class="icon fa fa-check"></i>
-                              <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                              <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                             </label>
                         </div>
                         <br>
@@ -565,7 +565,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new asset')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('L_CREATE_NEW_ASSET')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -581,7 +581,7 @@
                       <input type="file" name="fileIOS" id="file2" onchange="document.getElementById('namefileios').value = this.value.split('\\').pop().split('/').pop()" class="input-file">
                       <label for="file2" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
-                        <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                        <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                       </label>
                     </div>
                   <br>
@@ -603,7 +603,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn sa-btn-primary submit-data" id="load" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Processing">
-            <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}uyui
+            <i class="fa fa-save"></i> {{ TranslateMenuItem('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
             <i class="fa fa-remove"></i> {{ TranslateMenuItem('L_CANCEL')}}
@@ -620,7 +620,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new asset')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('L_CREATE_NEW_ASSET')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -635,7 +635,7 @@
                       <input type="file" name="fileWindows" onchange="document.getElementById('namefilewindows').value = this.value.split('\\').pop().split('/').pop()" id="file10" class="input-file">
                       <label for="file10" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
-                        <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                        <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                       </label>
                     </div>
                   <br>
@@ -694,7 +694,7 @@ $ckbox = str_replace('.','_', $xl['name']);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('Edit Asset')}} andorid</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('L_EDIT_ASSET')}} andorid</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -711,7 +711,7 @@ $ckbox = str_replace('.','_', $xl['name']);
                       <input type="file" name="fileEditADR" onchange="document.getElementById('nameandro{{ $xl['name'] }}').value = this.value.split('\\').pop().split('/').pop()" id="file3{{ $xl['name'] }}" class="input-file">
                       <label for="file3{{ $xl['name'] }}" class="btn btn-tertiary js-labelFile">
                         <i class="icon fa fa-check"></i>
-                        <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                        <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                       </label>
                   </div>
                   <br>
@@ -780,7 +780,7 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('Edit Asset')}} IOS</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('L_EDIT_ASSET')}} IOS</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -797,7 +797,7 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
                     <input type="file" name="fileEditIOS" id="file4{{ $xl_ios['name'] }}" onchange="document.getElementById('nameios{{ $xl_ios['name'] }}').value = this.value.split('\\').pop().split('/').pop()" id="file3{{ $xl['name'] }}" id="file4{{ $xl_ios['name'] }}" class="input-file">
                     <label for="file4{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
                       <i class="icon fa fa-check"></i>
-                      <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                      <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                     </label>
                   </div>
                   <br>
@@ -839,7 +839,7 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('Edit Asset')}} IOS</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {{ TranslateReseller('L_EDIT_ASSET')}} IOS</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
@@ -856,7 +856,7 @@ $ckbox = str_replace('.','_', $xl_ios['name']);
                     <input type="file" name="fileEditIOS" id="file7{{ $xl_ios['name'] }}" onchange="document.getElementById('namewindows{{ $xl_ios['name'] }}').value = this.value.split('\\').pop().split('/').pop()" id="file3{{ $xl['name'] }}" id="file4{{ $xl_ios['name'] }}" class="input-file">
                     <label for="file7{{ $xl_ios['name'] }}" class="btn btn-tertiary js-labelFile">
                       <i class="icon fa fa-check"></i>
-                      <span class="js-fileName">{{ TranslateReseller('Choose a file')}}</span>
+                      <span class="js-fileName">{{ TranslateReseller('L_CHOOSE_FILE')}}</span>
                     </label>
                   </div>
                   <br>

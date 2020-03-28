@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Abuse_Transaction_Report') }}">{{ TranslateMenuFeedback('Abuse Transaction Report') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Feedback_Game') }}">{{ TranslateMenuFeedback('L_FEEDBACK') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Abuse_Transaction_Report') }}">{{ TranslateMenuFeedback('L_ABUSE_TRANS_REP') }}</a></li>
 @endsection
 
 @section('content')
@@ -69,7 +69,7 @@
         <header>
             <div class="widget-header">	
                 <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-                <h2>{{ TranslateMenuFeedback('Feedback') }} Game</h2>
+                <h2>{{ TranslateMenuFeedback('L_FEEDBACK') }} Game</h2>
             </div>
         </header>
         <div>           
@@ -81,7 +81,7 @@
                         <tr>
                             <th>{{ Translate_menuPlayers('L_PLAYER_ID') }}</th>
                             <th>{{ Translate_menuPlayers('L_USERNAME') }}</th>
-                            <th>{{ TranslateMenuFeedback('Image Proof') }}</th>
+                            <th>{{ TranslateMenuFeedback('L_IMAGE_PROOF') }}</th>
                             <th>{{ TranslateMenuItem('L_DESCRIPTION') }}</th>
                             <th>{{ Translate_menuTransaction('L_DATE') }}</th>
                             <th>Print PDF <a href="{{ route('AbuseTransactionReport-PDFall') }}"><i class="fa fa-file-pdf-o"></i></a></th>
