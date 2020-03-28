@@ -297,20 +297,13 @@
                 <!-- end widget edit box -->
                             
                 <!-- widget content -->
-                <div class="widget-body p-0 table-playreport">
+                <div class="table-playreport widget-body p-0">
                     <!------- Isinya ada di controller ------>
                 </div>
-                	<div class="reloadpage1">
+                	<div class="reloadpage1" style="margin-left:50%;margin-right:50%;margin-bottom:50%;">
 							<div class="loaderpagecontent"></div>
 					</div>
 
-                    <script>
-							$(function() {
-								$(".reloadpage1").fadeOut(5000, function() {
-									$(".table-playreport").fadeIn(20000);
-								});
-							});
-					</script>
                 <!-- end widget content -->
                             
             </div>
@@ -335,6 +328,16 @@
     url: '{{ route("playreport-modal") }}',
     type: 'GET',
     data: {roundid: roundid, game: '{{ $_GET['inputGame'] }}'},
+    beforeSend: function() {
+        $(".reloadpage1").show();
+        $(".table-playreport-content").hide();
+
+    },
+    complete: function(){
+        $(".reloadpage1").fadeOut(1000, function() {
+            $(".table-playreport-content").fadeIn(700);
+        });
+    },
     success: function(response){ 
       // Add response in Modal body
       var obj = JSON.parse(response);

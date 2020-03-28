@@ -33,7 +33,7 @@ class PlayReportController extends Controller
 
               if($request->game === 'Big Two'):
                      $history = DB::table('bgt_round')->where('round_id', '=', $request->roundid)->first();
-                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                     $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                                    <thead>			                
                                    <tr>
                                           <th>'.Translate_menuPlayers("L_SIT").'</th>
@@ -146,7 +146,7 @@ class PlayReportController extends Controller
                      endif;
               elseif($request->game === 'Texas Poker'):
                      $history = DB::table('tpk_round')->where('round_id', '=', $request->roundid)->first();
-                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                     $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
                                     <th>'. Translate_menuPlayers("L_SIT") .'</th>
@@ -388,7 +388,7 @@ class PlayReportController extends Controller
               
               elseif($request->game === 'Domino Susun'):
                      $history = DB::table('dms_round')->where('round_id', '=', $request->roundid)->first();
-                    $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                    $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                         <thead>			                
                             <tr>
                                 <th>'. Translate_menuPlayers("L_SIT") .'</th>
@@ -519,7 +519,7 @@ class PlayReportController extends Controller
                     $response .= '</table>';        
               elseif($request->game === 'Domino QQ'):
                      $history = DB::table('dmq_round')->where('round_id', '=', $request->roundid)->first();
-                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                     $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
                                     <th>'. Translate_menuPlayers("L_SIT") .'</th>
@@ -637,11 +637,18 @@ class PlayReportController extends Controller
                                                                endfor;
                      $response .=                       '</td>
                                                         <td>';
-                                                               if($end->hand):
-                                                                      for($a=0; $a<count($end->hand); $a++):
-                                                                             $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
-                                                                      endfor;
-                                                               endif;
+                                                               foreach($dmq_gameplaylog->start->players as $start):
+                                                                      if($end->seat == $start->seat):
+                                                                             for($a=0; $a<count($start->hand); $a++):
+                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($start->hand)[$a] .'.png" alt="">';
+                                                                             endfor;
+                                                                      endif;
+                                                               endforeach;
+                                                               // if($end->hand):
+                                                               //        for($a=0; $a<count($end->hand); $a++):
+                                                               //               $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
+                                                               //        endfor;
+                                                               // endif;
                      $response .=                       '</td>
                                                  </tr>';
                                           endforeach;
