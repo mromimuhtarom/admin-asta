@@ -42,7 +42,7 @@
           <div class="input-group">
             @if($menu && $mainmenu)
             <button class="btn sa-btn-primary" data-toggle="modal" data-target="#myModal">
-              <i class="fa fa-plus"></i>{{ TranslateReseller('Create new reseller')}}
+              <i class="fa fa-plus"></i>{{ TranslateReseller('L_CREATE_NEW_RESELLER')}}
             </button>
             @endif
           </div>
@@ -60,11 +60,11 @@
           <thead>
             <tr>
               @if($menu && $mainmenu)
-              <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('Select All')}}</th>
+              <th style="width:100px"><input id="checkAll" type="checkbox" name="deletepermission" class="deletepermission">&nbsp; &nbsp;{{ TranslateReseller('L_SELECT_ALL')}}</th>
               @endif
               <th class="th-sm">ID</th>
               <th class="th-sm">{{ TranslateMenuGame('L_NAME')}}</th>
-              <th class="th-sm">{{ TranslateReseller('Gold Group')}}</th>
+              <th class="th-sm">{{ TranslateReseller('L_GOLD_GROUP')}}</th>
               <th class="th-sm">{{ translate_menuTransaction('L_TYPE')}}</th>
               <th class="th-sm">Bonus</th>
               @if($menu && $mainmenu)
@@ -125,7 +125,7 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create Reseller Rank')}}</h4>
+      <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('L_CREATE_RESELLER_RANK')}}</h4>
       <button type="button" style="color:red;" class="close" data-dismiss="modal" aria-hidden="true">
         <i class="fa fa-remove"></i>
       </button>

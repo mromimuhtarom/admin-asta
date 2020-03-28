@@ -281,7 +281,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('Create new')}} {{ translate_menu('L_ITEM_STORE_RESELLER')}}</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>{{ TranslateReseller('L_CREATE_NEW')}} {{ translate_menu('L_ITEM_STORE_RESELLER')}}</h4>
         <button style="color:red;" type="button" class="close" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-remove"></i>
         </button>
