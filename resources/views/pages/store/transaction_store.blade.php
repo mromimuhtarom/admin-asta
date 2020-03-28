@@ -14,7 +14,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="margin-top:5%;">
-          <h5 class="modal-title" id="exampleModalLabel">Create Transaction Store</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{ translate_MenuTransaction('L_CREATE_TRANSC_STORE') }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -25,8 +25,8 @@
           <input type="text" name="title" placeholder="Title" required><br>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ translate_MenuTransaction('L_CLOSE') }}</button>
+          <button type="submit" class="btn btn-primary">{{ translate_MenuTransaction('L_SAVE_CHANGES') }}</button>
         </div>
         </form>
       </div>
@@ -54,7 +54,7 @@
     <div class="table-aii">
         <div class="footer-table">
                                   <button type="button" class="btn btn-primary add-btn" data-toggle="modal" data-target="#basicExampleModal">
-                                    <i class="fas fa-plus-circle"></i>Create Transaction Store 
+                                    <i class="fas fa-plus-circle"></i>{{ translate_MenuTransaction('L_CREATE_TRANSC_STORE') }} 
                                   </button>
         </div>
          <table id="dt-material-checkbox" class="table table-striped" style="margin-left:1px;margin-top:-5%;" cellspacing="0" width="100%">
