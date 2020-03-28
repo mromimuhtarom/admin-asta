@@ -341,8 +341,8 @@
     success: function(response){ 
       // Add response in Modal body
       var obj = JSON.parse(response);
-      $('.table-playreport').html(obj.message);
-      $('.round_id').html(obj.status);
+      $('.table-playreport').html(obj.tablecontent);
+      $('.round_id').html(obj.roundid);
 
     }
   });

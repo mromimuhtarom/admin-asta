@@ -118,7 +118,7 @@
                 <table border="0" width="100%">
                   <tr class="border-bottom" style="padding-left:2%; padding-right:2%;">
                     <td  class="@if(Request::is('Game/Domino-QQ/Monitoring_Table_DominoQ/Monitoring_Domino_QQ-pro*')) color-fontactive @endif">
-                      <a href="{{ route('Monitoring_Table_Asta_Poker-pro') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_PRO') }}</b></a>
+                      <a href="{{ route('Monitoring_Table_DominoQ-pro') }}?checkauto={{ $checked }}"><b>{{ TranslateMenuGame('L_PRO') }}</b></a>
                     </td>
                   </tr>
                   <tr style="padding-left:2%;padding-right:2%;">
