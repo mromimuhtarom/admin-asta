@@ -30,43 +30,43 @@
 			<form action="{{ route('TransactionDay-search')}}">
             <div class="row h-100 w-100">
 
-								@if (Request::is('Transaction/Transaction_Day/Transaction_Day-search*'))
-									<div class="col">
-										<select name="choose_time" id="time" class="form-control">
-												<option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
-												<option value="Day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('L_DAY') }}</option>
-												<option value="Week" @if($time == 'Week') selected @endif>{{ translate_MenuTransaction('L_WEEK') }}</option>
-												<option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('L_MONTH') }}</option>
-										</select>
-									</div>
-									<div class="col date-min">
-										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $minDate }}">
-									</div>
-									<div class="col date-max">
-											<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
-									</div>
-									<div class="col">
-											<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuTransaction('L_SEARCH') }}</button>
-									</div>
-								@else 
-									<div class="col">
-										<select name="choose_time" id="time" class="form-control">
-											<option value="All time">{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
-											<option value="Day">{{ translate_MenuTransaction('L_DAY') }}</option>
-											<option value="Week">{{ translate_MenuTransaction('L_WEEK') }}</option>
-											<option value="Month">{{ translate_MenuTransaction('L_MONTH') }}</option>
-										</select>
-									</div>
-									<div class="col date-min">
-										<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $datenow }}">
-									</div>
-									<div class="col date-max">
-											<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
-									</div>
-									<div class="col">
-											<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuTransaction('L_SEARCH') }}</button>
-									</div>										
-								@endif
+				@if (Request::is('Transaction/Transaction_Day/Transaction_Day-search*'))
+					<div class="col">
+						<select name="choose_time" id="time" class="form-control">
+								<option value="All time" @if($time == 'All time') selected @endif>{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
+								<option value="Day" @if($time == 'Day') selected @endif>{{ translate_MenuTransaction('L_DAY') }}</option>
+								<option value="Week" @if($time == 'Week') selected @endif>{{ translate_MenuTransaction('L_WEEK') }}</option>
+								<option value="Month" @if($time == 'Month') selected @endif>{{ translate_MenuTransaction('L_MONTH') }}</option>
+						</select>
+					</div>
+					<div class="col date-min">
+						<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $minDate }}">
+					</div>
+					<div class="col date-max">
+							<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $maxDate }}">
+					</div>
+					<div class="col">
+							<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuTransaction('L_SEARCH') }}</button>
+					</div>
+				@else 
+					<div class="col">
+						<select name="choose_time" id="time" class="form-control">
+							<option value="All time">{{ translate_MenuTransaction('L_ALL_TIME') }}</option>
+							<option value="Day">{{ translate_MenuTransaction('L_DAY') }}</option>
+							<option value="Week">{{ translate_MenuTransaction('L_WEEK') }}</option>
+							<option value="Month">{{ translate_MenuTransaction('L_MONTH') }}</option>
+						</select>
+					</div>
+					<div class="col date-min">
+						<input type="date" class="form-control" id="minDate" name="inputMinDate" value="{{ $datenow }}">
+					</div>
+					<div class="col date-max">
+							<input type="date" class="form-control" id="maxDate" name="inputMaxDate" value="{{ $datenow }}">
+					</div>
+					<div class="col">
+							<button class="myButton searchbtn" type="submit"><i class="fa fa-search"></i>{{ translate_MenuTransaction('L_SEARCH') }}</button>
+					</div>										
+				@endif
             </div>
         </form>
     </div>

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('page')
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Feedback') }}</a></li>
-    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('Report Abuse Player') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('L_FEEDBACK') }}</a></li>
+    <li class="breadcrumb-item menunameheader"><a href="{{ route('Report_Abuse_Player') }}">{{ TranslateMenuFeedback('L_REP_ABUSE_PLAYER') }}</a></li>
 @endsection
 
 @section('content')
@@ -63,7 +63,7 @@
 <header>
     <div class="widget-header">	
         <span class="widget-icon"> <i class="fa fa-history"></i> </span>
-        <h2>{{ TranslateMenuFeedback('Report Abuse Player') }}</h2>
+        <h2>{{ TranslateMenuFeedback('L_REP_ABUSE_PLAYER') }}</h2>
     </div>
 </header>
 <div>           
@@ -73,11 +73,11 @@
         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
             <thead>			                
                 <tr>
-                    <th>{{ TranslateMenuFeedback('User ID sender') }}</th>
-                    <th>{{ TranslateMenuFeedback('Username sender') }}</th>
-                    <th>{{ TranslateMenuFeedback('Reported User ID') }}</th>
-                    <th>{{ TranslateMenuFeedback('Reported User') }}</th>
-                    <th>{{ TranslateMenuFeedback('Reason') }}</th>
+                    <th>{{ TranslateMenuFeedback('L_USER_ID_SENDER') }}</th>
+                    <th>{{ TranslateMenuFeedback('L_USERNAME_SENDER') }}</th>
+                    <th>{{ TranslateMenuFeedback('L_REPORTED_USER_ID') }}</th>
+                    <th>{{ TranslateMenuFeedback('L_REPORTED_USER') }}</th>
+                    <th>{{ TranslateMenuFeedback('L_REASON') }}</th>
                     <th>{{ TranslateMenuItem('L_DATE') }}</th>
                 </tr>
             </thead>
