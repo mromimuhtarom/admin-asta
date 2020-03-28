@@ -33,7 +33,7 @@ class PlayReportController extends Controller
 
               if($request->game === 'Big Two'):
                      $history = DB::table('bgt_round')->where('round_id', '=', $request->roundid)->first();
-                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                     $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                                    <thead>			                
                                    <tr>
                                           <th>'.Translate_menuPlayers("L_SIT").'</th>
@@ -146,7 +146,7 @@ class PlayReportController extends Controller
                      endif;
               elseif($request->game === 'Texas Poker'):
                      $history = DB::table('tpk_round')->where('round_id', '=', $request->roundid)->first();
-                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                     $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
                                     <th>'. Translate_menuPlayers("L_SIT") .'</th>
@@ -388,7 +388,7 @@ class PlayReportController extends Controller
               
               elseif($request->game === 'Domino Susun'):
                      $history = DB::table('dms_round')->where('round_id', '=', $request->roundid)->first();
-                    $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                    $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                         <thead>			                
                             <tr>
                                 <th>'. Translate_menuPlayers("L_SIT") .'</th>
@@ -519,7 +519,7 @@ class PlayReportController extends Controller
                     $response .= '</table>';        
               elseif($request->game === 'Domino QQ'):
                      $history = DB::table('dmq_round')->where('round_id', '=', $request->roundid)->first();
-                     $response = '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                     $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
                             <thead>			                
                                 <tr>
                                     <th>'. Translate_menuPlayers("L_SIT") .'</th>
