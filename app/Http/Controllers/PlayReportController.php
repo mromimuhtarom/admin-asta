@@ -658,8 +658,8 @@ class PlayReportController extends Controller
 
               endif;
                      return json_encode([
-                            "status"  => $request->roundid,
-                            "message" => $response
+                            "roundid"  => $request->roundid,
+                            "tablecontent" => $response
                      ]);
 
       }
