@@ -171,7 +171,7 @@ class GoodsStoreController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Menambahkan data di menu Toko Barang dengan nama '. $goods->name
                 ]);
-                return redirect()->route('Goods_Store')->with('success', alertTranslate('insert data successful'));
+                return redirect()->route('Goods_Store')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));
             }
             else
             {       

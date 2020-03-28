@@ -77,7 +77,7 @@ class EmailNotificationController extends Controller
                       'datetime'  => Carbon::now('GMT+7'),
                       'desc'      => 'Create new in menu Email Notification with title '. $notification->subject
                     ]);
-                    return redirect()->route('Email_Notification')->with('success', alertTranslate('insert data successfull'));
+                    return redirect()->route('Email_Notification')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));
             
                 }
                 else

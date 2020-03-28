@@ -320,7 +320,7 @@ class PlayersController extends Controller
         if($minDate != NULL && $maxDate != NULL)
         {
           if($maxDate < $minDate){
-            return back()->with('alert', alertTranlsate("end date can't be less than start date"));
+            return back()->with('alert', alertTranlsate("L_CANT_LESS_THAN"));
           }
         }
         $register = Player::leftjoin('asta_db.country', 'asta_db.user.country_code', '=', 'asta_db.country.code')

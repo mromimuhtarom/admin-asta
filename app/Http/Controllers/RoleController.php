@@ -62,7 +62,7 @@ class RoleController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Menambahkan data ('.$role.')'
               ]);
-              return redirect()->route('Role_Admin')->with('success', alertTranslate('insert data successful'));  
+              return redirect()->route('Role_Admin')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));  
         }
         return redirect()->route('Role_Admin')->with('alert', alertTranslate('Role Name is Null'));
     }

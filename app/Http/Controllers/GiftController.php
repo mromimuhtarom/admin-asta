@@ -225,7 +225,7 @@ class GiftController extends Controller
                             'datetime'  => Carbon::now('GMT+7'),
                             'desc'      => 'Menambahkan data '.$name
                         ]);
-                        return redirect()->route('Table_Gift')->with('success', alertTranslate("insert data successful"));
+                        return redirect()->route('Table_Gift')->with('success', alertTranslate("L_INSERT_DATA_SUCCESS"));
                     }
                 else:
                     $translatealertimage = str_replace('{1}', '320 px', alertTranslate("L_HEIGHT_IMAGE"));
