@@ -87,7 +87,7 @@ class LoginController extends Controller
   
          } else {
             $username = $request->username;
-            return redirect('/')->with('alert', alertTranslate("Username or Password are wrong!!"))->with('data', $username);
+            return redirect('/')->with('alert', alertTranslate("L_USERNAME_PASS_WRONG"))->with('data', $username);
         }
   
     }
@@ -127,6 +127,6 @@ class LoginController extends Controller
         }
         Session::flush();
         Cache::flush();
-        return redirect('/')->with('alert', alertTranslate("You are already Log Out"));
+        return redirect('/')->with('alert', alertTranslate("L_UR_ALLREADY_LOGOUT"));
     }
 }

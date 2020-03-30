@@ -252,7 +252,7 @@ class TransactionPlayersController extends Controller
                 return view('pages.players.TransactionPlayers', compact('history', 'datenow', 'time', 'lang_id', 'minDate', 'maxDate', 'namecolumn', 'sortingorder', 'gamename', 'game'));
             } else if($minDate == NULL && $maxDate == NULL)
             {
-                return back()->with('alert', alertTranlsate("Min Date And Max Date Must be Filled In"));
+                return back()->with('alert', alertTranlsate("L_MINMAX_DATE_MUST_FILLED"));
             }
             $lang_id='Sepanjang waktu';
         } else {

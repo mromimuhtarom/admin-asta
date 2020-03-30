@@ -212,12 +212,12 @@ class GoldStoreController extends Controller
                     'desc'      => 'Menambahkan data baru dengan judul '. $gold->name
                   ]);
         
-                return redirect()->route('Gold_Store')->with('success', alertTranslate("Data Added"));
+                return redirect()->route('Gold_Store')->with('success', alertTranslate("L_DATA_ADDED"));
               } else {
-                return redirect()->route('Gold_Store')->with('alert', alertTranslate("Size Image it's too Big"));
+                return redirect()->route('Gold_Store')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
               }
           } else {
-            return redirect()->route('Gold_Store')->with('alert', alertTranslate('Image must be in png'));
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('L_IMG_MUST_PNG'));
           }
     }
 
@@ -445,12 +445,12 @@ class GoldStoreController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Update gambar Koin dengan judul '.$currentname->name
                 ]);
-                return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));
+                return redirect()->route('Gold_Store')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
             } else  {
-                return redirect()->route('Gold_Store')->with('alert', alertTranslate("Size Image it's too Big"));
+                return redirect()->route('Gold_Store')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
             }
         } else  {
-            return redirect()->route('Gold_Store')->with('alert', alertTranslate('Image must be in png'));
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('L_IMG_MUST_PNG'));
         }
     }
 
@@ -491,9 +491,9 @@ class GoldStoreController extends Controller
                 'desc'      => 'Edit gambar bonus koin dengan nama '.$currentname->name.' => '.$finalname
             ]);
             
-            return redirect()->route('Gold_Store')->with('success', alertTranslate('Update Image Successfull'));
+            return redirect()->route('Gold_Store')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
         } else {
-            return redirect()->route('Gold_Store')->with('alert', alertTranslate('Image must be in png'));
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('L_IMG_MUST_PNG'));
         }
 
 
@@ -530,7 +530,7 @@ class GoldStoreController extends Controller
             File::delete($path);
             
             
-            return redirect()->route('Gold_Store')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Gold_Store')->with('success', alertTranslate('L_DATA_DELETED'));
         } else if($goldreseller != '') 
         {
             ItemsCash::where('item_id', '=', $goldreseller)->update([
@@ -542,13 +542,13 @@ class GoldStoreController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data Koin dengan nama '.$currentname->name
             ]);
-            return redirect()->route('Gold_Store_Reseller')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Gold_Store_Reseller')->with('success', alertTranslate('L_DATA_DELETED'));
         } else if ($getGoldId == NULL)
         {
-            return redirect()->route('Gold_Store')->with('alert', alertTranslate('ID must be fill'));  
+            return redirect()->route('Gold_Store')->with('alert', alertTranslate('L_ID_MUSTBE_FILL'));  
         } else if($goldreseller == NULL )
         {
-            return redirect()->route('Gold_Store_Reseller')->with('alert', alertTranslate('ID must be fill')); 
+            return redirect()->route('Gold_Store_Reseller')->with('alert', alertTranslate('L_ID_MUSTBE_FILL')); 
         }
         
     }
@@ -576,6 +576,6 @@ class GoldStoreController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus data koin yang dipilih dengan nama '.$currentname
         ]);
-        return redirect()->route('Gold_Store')->with('success', alertTranslate('Data deleted'));
+        return redirect()->route('Gold_Store')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 }

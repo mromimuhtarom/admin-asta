@@ -194,7 +194,7 @@ class UserAdminController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Hapus data ('.$operator->username.')'
                 ]);
-                return redirect()->route('User_Admin')->with('success','Data Deleted');
+                return redirect()->route('User_Admin')->with('success', alertTranslate('L_DATA_DELETED'));
             }
             return redirect()->route('User_Admin')->with('success', alertTranslate('Somethong wrong'));
         }
@@ -213,6 +213,6 @@ class UserAdminController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus data ('.$username.')'
         ]);
-        return redirect()->route('User_Admin')->with('success', alertTranslate("Data deleted"));
+        return redirect()->route('User_Admin')->with('success', alertTranslate("L_DATA_DELETED"));
     }
 }

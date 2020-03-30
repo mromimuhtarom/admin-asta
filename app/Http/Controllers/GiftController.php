@@ -125,11 +125,11 @@ class GiftController extends Controller
             {
                 if($height == 320):
                     if($request->title == NULL){
-                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("Name can't be NULL"));
+                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("L_NAME_CANT_NULL"));
                     } else if($request->price == NULL) {
-                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("Price can't be NULL"));
+                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("L_PRICE_CANT_NULL"));
                     } else if($request->category == NULL) {
-                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("Category can't be NULL"));
+                        return redirect()->route('Table_Gift')->with('alert', alertTranslate("L_CATEGORY_CANT_NULL"));
                     } else {
 
                         $validator = Validator::make($request->all(),[
@@ -234,13 +234,13 @@ class GiftController extends Controller
             }
             else
             {
-                return redirect()->route('Table_Gift')->with('alert', alertTranslate("Size Image it's too Big"));
+                return redirect()->route('Table_Gift')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {
-            return redirect()->route('Table_Gift')->with('alert', alertTranslate('File extensions are not allowed'));
+            return redirect()->route('Table_Gift')->with('alert', alertTranslate('L_FILE_MUST_JPG'));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -387,11 +387,11 @@ class GiftController extends Controller
                             'datetime'  => Carbon::now('GMT+7'),
                             'desc'      => 'Edit gambar ('.$currentname->name.')'
                         ]);
-                        return redirect()->route('Table_Gift')->with('success', alertTranslate('Update image successfull'));
+                        return redirect()->route('Table_Gift')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
                 }
                 else
                 {
-                    return redirect()->route('Table_Gift')->with('alert', alertTranslate("Your image source size height is more than 319 px and width is more than 384"));
+                    return redirect()->route('Table_Gift')->with('alert', alertTranslate("L_IMG_HIGHT_MORETHAN_319PX_WIDTH_MORETHAN_384PX"));
                     // echo 'Ukuran file terlalu besar';
                 }
             else:
@@ -401,7 +401,7 @@ class GiftController extends Controller
         }
         else
         {
-            return redirect()->route('Table_Gift')->with('alert', alertTranslate("format must be png and pictorial"));
+            return redirect()->route('Table_Gift')->with('alert', alertTranslate("L_MUST_PNG_PICT"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -504,9 +504,9 @@ class GiftController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$currentname->name.')'
             ]);
-            return redirect()->route('Table_Gift')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Table_Gift')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Table_Gift')->with('alert', alertTranslate('Something wrong'));
+        return redirect()->route('Table_Gift')->with('alert', alertTranslate('L_SOMETHING_WRONG'));
     }
 
 
@@ -527,7 +527,7 @@ class GiftController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus data ('.$currentname.')'
         ]);
-        return redirect()->route('Table_Gift')->with('succes', alertTranslate('Data deleted'));
+        return redirect()->route('Table_Gift')->with('succes', alertTranslate('L_DATA_DELETED'));
     }
 }
 

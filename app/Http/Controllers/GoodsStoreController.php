@@ -175,13 +175,13 @@ class GoodsStoreController extends Controller
             }
             else
             {       
-                return redirect()->route('Goods_Store')->with('alert', alertTranslate("Size Image it's too Big"));
+                return redirect()->route('Goods_Store')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {       
-            return redirect()->route('Goods_Store')->with('alert', alertTranslate("Image must be in png"));
+            return redirect()->route('Goods_Store')->with('alert', alertTranslate("L_IMG_MUST_PNG"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -342,17 +342,17 @@ class GoodsStoreController extends Controller
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Update gambar Barang dengan nama '.$currentname->name
                 ]);
-                return redirect()->route('Goods_Store')->with('success', alertTranslate('Update image successfull'));
+                return redirect()->route('Goods_Store')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
 
             }
             else 
             {
-                return redirect()->route('Goods_Store')->with('alert', alertTranslate("Size Image it's too Big"));
+                return redirect()->route('Goods_Store')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
             }
         }
         else 
         {
-            return redirect()->route('Goods_Store')->with('alert', alertTranslate('Image must be png format'));
+            return redirect()->route('Goods_Store')->with('alert', alertTranslate('L_IMG_MUST_PNG'));
         }
 
     }
@@ -407,9 +407,9 @@ class GoodsStoreController extends Controller
                 'desc'      => 'Hapus gambar Barang dengan nama '.$goods->name
             ]);
 
-            return redirect()->route('Goods_Store')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Goods_Store')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Goods_Store')->with('alert', alertTranslate('Something wrong'));  
+        return redirect()->route('Goods_Store')->with('alert', alertTranslate('L_SOMETHING_WRONG'));  
     }
 
     public function deleteAllSelected(Request $request)
@@ -433,6 +433,6 @@ class GoodsStoreController extends Controller
             'desc'      =>  'Hapus gambar barang yang dipilih dengan nama '.$currentname
         ]);
         
-        return redirect()->route('Goods_Store')->with('success', alertTranslate('Data deleted'));
+        return redirect()->route('Goods_Store')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 }

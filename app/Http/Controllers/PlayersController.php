@@ -704,7 +704,7 @@ class PlayersController extends Controller
           'desc'      => 'Edit Status ('.$currentname->username.') '.$currentvalue.' => '.$sts_user. ' dengan alasan: '.$description
         ]);
 
-        return back()->with('success', alertTranslate('Update status successfull'));
+        return back()->with('success', alertTranslate('L_UPDATE_STATS_SUCCESS'));
     }
   // ----------- End Update Registered Player ----------- //
 //****************************************** End Menu Registered Player ******************************************//
@@ -766,9 +766,9 @@ class PlayersController extends Controller
           'desc'      => 'Menambahkan ID guest menjadi ('.$number.')'
       ]);
 
-      return back()->with('success', 'Input Data Successfull with '.$number.' Record');
+      return back()->with('success', alertTranslate('L_INPUT_SUCCESS_WITH') .$number.' Record');
     }
-    return back()->with('alert', alertTranslate("Number of inputs filled in Player ID can't be NULL"));
+    return back()->with('alert', alertTranslate("L_NUMBER_PID_CANT_NULL"));
   }
   // -----------End Insert Guest ---------------//
 
@@ -826,7 +826,7 @@ class PlayersController extends Controller
         return view('pages.players.guest', compact('guests', 'status', 'datenow', 'menu', 'mainmenu', 'username'));
     } else if($minDate == NULL || $maxDate == NULL || $minDate == NULL && $maxDate == NULL)
     {
-      return self::indexGuest()->with('alert', alertTranslate("You must to Choose Status"));
+      return self::indexGuest()->with('alert', alertTranslate("L_MUST_CHOOSE_STATS"));
     }
 
 
@@ -948,7 +948,7 @@ class PlayersController extends Controller
           'desc'      => 'Menambahkan data di menu Bot dengan username '. $username
         ]);
 
-        return redirect()->route('Bots')->with('success', alertTranslate('Data added'));
+        return redirect()->route('Bots')->with('success', alertTranslate('L_DATA_ADDED'));
     }
   // ----------- End Insert Bots ----------- //
 
@@ -999,9 +999,9 @@ class PlayersController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Delete in menu Bots with ID '.$userid
           ]);
-          return redirect()->route('Bots')->with('success', alertTranslate('Data deleted'));
+          return redirect()->route('Bots')->with('success', alertTranslate('L_DATA_DELETED'));
       }
-      return redirect()->route('Bots')->with('alert', alertTranslate('Something wrong'));   
+      return redirect()->route('Bots')->with('alert', alertTranslate('L_SOMETHING_WRONG'));   
     }
   // ----------- End Delete Bots ----------- //
 //****************************************** End Menu Bots ******************************************//  

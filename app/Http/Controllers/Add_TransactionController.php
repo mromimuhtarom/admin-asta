@@ -314,7 +314,7 @@ class Add_TransactionController extends Controller
           
           if($valuecurrency < 0):
             if($stat->chip < $angka):
-              return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+              return back()->with('alert', alertTranslate('L_BALANCE_CANT_REDUCE_PLEASE'));
             endif;
           endif;
 
@@ -547,7 +547,7 @@ class Add_TransactionController extends Controller
           
           if($valuecurrency < 0):
             if($stat->gold < $angka):
-              return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+              return back()->with('alert', alertTranslate('L_BALANCE_CANT_REDUCE_PLEASE'));
             endif;
           endif;
 
@@ -778,7 +778,7 @@ class Add_TransactionController extends Controller
           
           if($valuecurrency < 0):
             if($stat->point < $angka):
-              return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+              return back()->with('alert', alertTranslate('L_BALANCE_CANT_REDUCED_PLEASE'));
             endif;
           endif;
 
@@ -847,7 +847,7 @@ class Add_TransactionController extends Controller
       endif;
 
 
-      return back()->with('success', alertTranslate('Successful update'));
+      return back()->with('success', alertTranslate('L_SUCCESS_UPDATE'));
 
     }
 }

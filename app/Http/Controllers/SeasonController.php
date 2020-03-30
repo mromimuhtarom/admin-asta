@@ -61,7 +61,7 @@ class SeasonController extends Controller
             'startTime'     => strtotime($startTime),
             'finishTime'    => strtotime($finishTime),
         ]);
-        return redirect()->route('Season_Asta_Poker')->with('success','Data Added');
+        return redirect()->route('Season_Asta_Poker')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
     /**
@@ -116,8 +116,8 @@ class SeasonController extends Controller
         if($seasonId != '')
         {
             DB::table('seasons')->where('seasonId', '=', $seasonId)->delete();
-            return redirect()->route('Season_Asta_Poker')->with('success','Data Deleted');
+            return redirect()->route('Season_Asta_Poker')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Season_Asta_Poker')->with('success','Something wrong');  
+        return redirect()->route('Season_Asta_Poker')->with('success', alertTranslate('L_SOMETHING_WRONG'));  
     }
 }

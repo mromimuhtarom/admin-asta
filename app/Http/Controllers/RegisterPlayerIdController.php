@@ -103,9 +103,9 @@ class RegisterPlayerIdController extends Controller
                 'desc'      => 'Menambahkan data sebanyak '.$number.' input untuk '.$usertype.' ID'
             ]);
 
-            return back()->with('success', alertTranslate("Input Data successfull with ").$number.' Record');
+            return back()->with('success', alertTranslate("L_INPUT_SUCCESS_WITH") .$number.' Record');
         }
-        return back()->with('alert', alertTranslate("Number of inputs filled in player ID can't be NULL"));
+        return back()->with('alert', alertTranslate("L_NUMBER_PID_CANT_NULL"));
     }
 
     

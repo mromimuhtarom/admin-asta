@@ -121,7 +121,7 @@ class GeneralSettingController extends Controller
                 'desc'      => 'Update konten tentang di tabel Pengaturan Info'
             ]);
 
-            return back()->with('success', alertTranslate("Data Updated"));
+            return back()->with('success', alertTranslate("L_DATA_UPDATED"));
 
         } else if ($contenttermofservice)
         {   
@@ -143,7 +143,7 @@ class GeneralSettingController extends Controller
                 'desc'      => 'Update konten term of service di tabel CS dan pengaturan legal menu pengaturan umum'
             ]);
 
-            return back()->with('success', alertTranslate("Data Updated"));
+            return back()->with('success', alertTranslate("L_DATA_UPDATED"));
 
         } else if ($contentprivacypolicy)
         {
@@ -166,7 +166,7 @@ class GeneralSettingController extends Controller
                 'desc'      => 'Update konten Privacy Policy di tabel CS dan pengaturan legal'
             ]);
 
-            return back()->with('success', alertTranslate('Data Updated'));
+            return back()->with('success', alertTranslate('L_DATA_UPDATED'));
 
         } else if($contentastapoker) {
             $semanticTagleft    =   str_replace('[', '<', $contentastapoker);
@@ -187,7 +187,7 @@ class GeneralSettingController extends Controller
                 'desc'      => 'Update konten Info Asta Poker di tabel Pengaturan info'
             ]);
 
-            return back()->with('success', alertTranslate('Data Updated'));
+            return back()->with('success', alertTranslate('L_DATA_UPDATED'));
 
         } else if($contentbigtwo) {
             $semanticTagleft    =   str_replace('[', '<', $contentbigtwo);
@@ -209,7 +209,7 @@ class GeneralSettingController extends Controller
                 'desc'      => 'Update konten Info Big Two di tabel Pengaturan info'
             ]);
 
-            return back()->with('success', alertTranslate('Data Updated'));
+            return back()->with('success', alertTranslate('L_DATA_UPDATED'));
         
         } else if($contentdominoQQ) {
             $semanticTagleft    =   str_replace('[', '<', $contentdominoQQ);
@@ -230,7 +230,7 @@ class GeneralSettingController extends Controller
                 'desc'      => 'Update konten Info Domino QQ di tabel Pengaturan info'
             ]);
 
-            return back()->with('success', alertTranslate('Data Updated'));
+            return back()->with('success', alertTranslate('L_DATA_UPDATED'));
         } else if($contentdominosusun) {
             $semanticTagleft    =   str_replace('[', '<', $contentdominosusun);
             $semanticTagright   =   str_replace(']', '>', $semanticTagleft);
@@ -250,11 +250,11 @@ class GeneralSettingController extends Controller
                 'desc'      => 'Update konten Info Domino Susun di tabel Pengaturan info'
             ]);
 
-            return back()->with('success', alertTranslate('Data Updated'));
+            return back()->with('success', alertTranslate('L_DATA_UPDATED'));
             
         } else
         {
-            return back()->with('alert', alertTranslate("Update can't be process"));
+            return back()->with('alert', alertTranslate("L_UPDATE_CANT_PROCCED"));
         }
         
     }
