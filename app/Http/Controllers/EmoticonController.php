@@ -130,7 +130,7 @@ class EmoticonController extends Controller
                                 'datetime'  => Carbon::now('GMT+7'),
                                 'desc'      => 'Menambahkan data ('.$emoticon->name.')'
                             ]);
-                            return redirect()->route('Emoticon')->with('success', alertTranslate('insert data successful'));
+                            return redirect()->route('Emoticon')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));
                         }
                 
                 }

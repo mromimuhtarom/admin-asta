@@ -318,7 +318,7 @@ class ResellerController extends Controller
         }
   
         if($endDate < $startDate){
-          return back()->with('alert', alertTranslation("end date can't be more than start date"));
+          return back()->with('alert', alertTranslation("L_CANT_LESS_THAN"));
         }
 
         if($choosedate == 'approvedecline')
@@ -1106,7 +1106,7 @@ public function detailTransaction(Request $request, $month, $year)
         endif;
 
       if($endDateComparison < $startDateComparison){
-        return back()->with('alert', alertTranslate("end date can't be less than start date"));
+        return back()->with('alert', alertTranslate("L_CANT_LESS_THAN"));
       }
 
       if ($searchUsername != NULL && $startDate != NULL && $endDate != NULL){

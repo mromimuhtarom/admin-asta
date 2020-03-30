@@ -110,7 +110,7 @@ class SlideBannerController extends Controller
                             'date'        => Carbon::now('GMT+7'),
                             'description' => 'Create new Slide Banner with caption '. $slide_banner->caption
                         ]);
-                        return redirect()->route('Slide_Banner')->with('success','Insert Data successfull');
+                        return redirect()->route('Slide_Banner')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));
                     }
                 }
                 else

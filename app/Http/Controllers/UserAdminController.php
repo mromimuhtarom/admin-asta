@@ -88,7 +88,7 @@ class UserAdminController extends Controller
               'datetime'  => Carbon::now('GMT+7'),
               'desc'      => 'Menambahkan data ('.$user->username.')'
           ]);
-          return redirect()->route('User_Admin')->with('success', alertTranslate('insert data successful'));
+          return redirect()->route('User_Admin')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));
     }
     
     public function update(Request $request)

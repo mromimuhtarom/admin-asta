@@ -80,12 +80,12 @@ class AbuseTransactionReportController extends Controller
         $image_main = Storage::disk('s3');
         if($image_main->put($rootpath, $image_decode ))
         {
-          echo alertTranslate('Successful image');
+          echo alertTranslate('L_SUCCESSFUL_IMAGE');
         } else {
-          echo alertTranslate('Failed');
+          echo alertTranslate('L_FAILED');
         }
 
-        return alertTranslate('insert data successful');
+        return alertTranslate('L_INSERT_DATA_SUCCESS');
     }
 
 
@@ -227,7 +227,7 @@ class AbuseTransactionReportController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $translateAlert = alertTranslate("end date can't be less than start date");
+        $translateAlert = alertTranslate("L_CANT_LESS_THAN");
         if($maxDate < $minDate){
             return back()->with('alert', $translateAlert);
         }
