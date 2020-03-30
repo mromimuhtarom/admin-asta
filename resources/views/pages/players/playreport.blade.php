@@ -203,12 +203,16 @@
                                             @foreach($jsondecode->end->players as $end)                                                
                                                     @if($end->seat === $start->seat)
                                                         @for($i=0; $i<count($end->combo); $i++)
-                                                            @if($a == 0)
-                                                                @if($i == 0)
-                                                                {{$end->combo[$i]}} :
-                                                                @elseif($i == 1)
-                                                                {{$end->combo[$i]}}
+                                                            @if($end->type === 0)
+                                                                @if($a == 0)
+                                                                    @if($i == 0)
+                                                                    {{$end->combo[$i]}} :
+                                                                    @elseif($i == 1)
+                                                                    {{$end->combo[$i]}}
+                                                                    @endif
                                                                 @endif
+                                                            @else 
+                                                                {{ Translate_menuPlayers(typecarddmq($end->type)) }}
                                                             @endif
                                                             
                                                         @endfor
@@ -217,7 +221,8 @@
                                                         @endphp
                                                     @endif
                                             @endforeach 
-                                        @endif                                 
+                                        @endif                                
+                                         
                                     @endforeach 
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
                                     @php 
@@ -227,7 +232,11 @@
                                         @if($start->uid == $history->user_id)  
                                             @foreach($jsondecode->end->players as $end)
                                                 @if($end->seat == $start->seat)
+                                                    @if($end->type === 0)
                                                    {{ count($end->hand) }} {{ Translate_menuPlayers('L_CARD')}} = {{ $end->total }}
+                                                   @else
+                                                   {{ Translate_menuPlayers(typecarddms($end->type)) }}
+                                                   @endif
                                                 @endif
                                             @endforeach 
                                         @endif                                 

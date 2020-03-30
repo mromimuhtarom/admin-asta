@@ -128,9 +128,12 @@ class PlayReportController extends Controller
                                                  <td>'. number_format($end->chip) .'</td>
                                                  <td>'. Translate_menuPlayers(statusgameplaylog($end->stat)) .'</td>
                                                  <td>
-                                                 '. number_format($end->val) .' <br> 
-                                                 (fee:'. number_format($end->fee) .')
-                                                 </td>
+                                                 '. number_format($end->val) .' <br>';
+                                                 if($end->stat !== 0):
+                     $response .=                '(fee:'. number_format($end->fee) .')';
+                                                 endif;
+
+                     $response .=                '</td>
                                                  <td>'. count($end->hand) .'</td>
                                                  <td>';
                                                  for($a=0; $a<count($end->hand); $a++):
@@ -336,7 +339,7 @@ class PlayReportController extends Controller
                                                         <td>
                                                                '. number_format($end->val) .' <br> ';
                                                                if($end->stat !== 0):
-                                                                      $response .= '(fee:'. number_format($end->fee) .')';
+                                                                      $response .= '(fee:'. number_format($end->fee) .') <br>';
                                                                endif;
                      $response .=                       '</td>
                                                         <td>'. Translate_menuPlayers(typeCardGamepLayLogBgtTpk($end->type)) .'</td>
@@ -499,11 +502,18 @@ class PlayReportController extends Controller
                                                                endforeach;
                      $response .=                       '</td>
                                                         <td>'. number_format($end->chip) .'</td>
-                                                        <td>'. Translate_menuPlayers(statusgameplaylog($end->stat)) .'</td>
+                                                        <td>'. 
+                                                               Translate_menuPlayers(statusgameplaylog($end->stat)) .'<br>';
+                                                               if($end->type !== 0):
+                                                                      $response .= Translate_menuPlayers(typecarddms($end->type));
+                                                               endif;
+                     $response .=                       '</td>
                                                         <td>
-                                                               '. number_format($end->val) .' <br> 
-                                                               (fee:'. number_format($end->fee) .')
-                                                        </td>
+                                                               '. number_format($end->val) .' <br> ';
+                                                               if($end->stat !== 0):
+                     $response .=                              '(fee:'. number_format($end->fee) .')<br>';
+                                                               endif;
+                     $response .=                       '</td>
                                                         <td>'. count($end->hand) .'</td>
                                                         <td>';
                                                                for($a=0; $a<count($end->hand); $a++):
@@ -546,7 +556,7 @@ class PlayReportController extends Controller
                      $response .=                       '</td>
                                                         <td>'. number_format($start->chip) .'</td>
                                                         <td>'. Translate_menuPlayers('L_NEW_ROUND') .'</td>
-                                                        <td>'. number_format($dmq_gameplaylog->start->stake) .'</td>
+                                                        <td></td>
                                                         <td></td>
                                                         <td></td>
                                                  </tr>';
@@ -628,10 +638,14 @@ class PlayReportController extends Controller
                      $response .=                       '</td>
                                                         <td>';
                                                                for($i=0; $i<count($end->combo); $i++):
+                                                                      if($end->type === 0):
                                                                       if($i == 0):
                                                                              $response .= $end->combo[$i].' :';
                                                                       else:
                                                                              $response .= $end->combo[$i];
+                                                                      endif;
+                                                                      else:
+                                                                             $response .= typecarddmq($end->type);
                                                                       endif;
                                                                       
                                                                endfor;
