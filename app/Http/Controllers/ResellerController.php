@@ -1738,19 +1738,19 @@ public function detailTransaction(Request $request, $month, $year)
 
         switch ($name) {
             case "name":
-                $name = "Nama";
+                $name = TranslateMenuToko('L_TITLE');
                 $currentvalue = $currentname->name;
                 break;
             case "item_get":
-                $name = "Koin didapatkan";
+                $name = TranslateMenuToko('L_ITEM_AWARDED');
                 $currentvalue = $currentname->item_get;
                 break;
             case "price":
-                $name = "Harga Uang Tunai";
+                $name = TranslateMenuToko('L_PRICE_CASH');
                 $currentvalue = $currentname->price;
                 break;
             case "bonus_get":
-                $name = "item bonus yang didapat";
+                $name = TranslateReseller('L_ITEM_BONUS_GET');
                 $currentvalue = $currentname->bonus_get;
                 break;
             case "google_key":
@@ -1758,7 +1758,7 @@ public function detailTransaction(Request $request, $month, $year)
                 $currentvalue = $currentname->google_key;
                 break;
             case "status":
-                $name = "Status";
+                $name = TranslateMenuItem('L_STATUS');
                 $currentvalue = ConfigTextTranslate(strEnabledDisabled($currentname->status));
                 if($value == 0):
                     $value = 'Non Aktif';
@@ -1767,7 +1767,7 @@ public function detailTransaction(Request $request, $month, $year)
                 endif;
                 break;
             case "bonus_type":
-                $name = "Item Bonus";
+                $name = TranslateReseller('L_ITEM_BONUS');
                 $currentvalue = ConfigTextTranslate(strItemBonType($currentname->bonus_type));
                 // return response()->json($value, 400);
                 if($value == 1):
@@ -1781,10 +1781,13 @@ public function detailTransaction(Request $request, $month, $year)
                 break;
 
             case "trans_type":
-                $name = "Jenis Pembayaran";
+                $name = TranslateMenuToko('L_TRANSACTION');
                 $value = strTypeTransaction($value);
                 $currentvalue   =   strTypeTransaction($currentname->bonus_type);
                 break;
+            case "order":
+                $name         = TranslateMenuToko('L_ORDER');
+                $currentvalue = $currentname->order;
             default:
             "";
         }

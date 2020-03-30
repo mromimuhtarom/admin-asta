@@ -422,6 +422,38 @@ function typeCardGamepLayLogBgtTpk($typecard)
   endif;
 }
 
+function typecarddms($type)
+{
+  if($type === 1):
+    return 'L_SINGLE';
+  elseif($type === 2):
+    return 'L_DOUBLE';
+  elseif($type === 3):
+    return 'L_TRIPLE';
+  elseif($type === 4):
+    return 'L_QUARTET';
+  elseif($type === 5):
+    return 'L_QUINTET';
+  endif;
+}
+
+function typecarddmq($type)
+{
+  if($type === 0):
+    return 'L_NORMAL';
+  elseif($type === 1):
+    return 'L_DOUBLE_CARD';
+  elseif($type === 2):
+    return 'L_BIG_CARD';
+  elseif($type === 3):
+    return 'L_SMALL_CARD';
+  elseif($type === 4):
+    return 'L_TWIN_CARD';
+  elseif($type === 5):
+    return 'L_SIX_DEVIL';
+  endif;
+}
+
 function statusgameplaylog($status)
 {
   if($status == 0):
