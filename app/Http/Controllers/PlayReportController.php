@@ -441,7 +441,11 @@ class PlayReportController extends Controller
                                                         <td>'. Translate_menuPlayers("L_DIVIDED_CARD") .'</td>
                                                         <td>'. number_format($dms_gameplaylog->start->stake) .'</td>
                                                         <td>'. count($start->hand) .'</td>
-                                                        <td></td>
+                                                        <td>';
+                                                               for($a = 0; $a < count($start->hand); $a++):
+                                                                      $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($start->hand)[$a] .'.png" alt="">';
+                                                               endfor;
+                     $response .=                       '</td>
                                                         <td></td>
                                                  </tr>';
                                           endforeach;
@@ -645,7 +649,7 @@ class PlayReportController extends Controller
                                                                              $response .= $end->combo[$i];
                                                                       endif;
                                                                       else:
-                                                                             if($a == 0):
+                                                                             if($i == 0):
                                                                                     $response .= Translate_menuPlayers(typecarddmq($end->type));
                                                                              endif;
                                                                       endif;

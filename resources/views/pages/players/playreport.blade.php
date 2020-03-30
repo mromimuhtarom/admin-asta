@@ -203,7 +203,7 @@
                                             @foreach($jsondecode->end->players as $end)                                                
                                                     @if($end->seat === $start->seat)
                                                         @for($i=0; $i<count($end->combo); $i++)
-                                                            @if($end->type === 0)
+                                                            @if($end->type === 0 || $end->type === NULL)
                                                                 @if($a == 0)
                                                                     @if($i == 0)
                                                                     {{$end->combo[$i]}} :
@@ -212,7 +212,7 @@
                                                                     @endif
                                                                 @endif
                                                             @else 
-                                                                @if($a == 0)
+                                                                @if($i == 0)
                                                                     {{ Translate_menuPlayers(typecarddmq($end->type)) }}
                                                                 @endif
                                                             @endif
