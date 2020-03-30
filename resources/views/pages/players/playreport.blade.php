@@ -212,7 +212,9 @@
                                                                     @endif
                                                                 @endif
                                                             @else 
-                                                                {{ Translate_menuPlayers(typecarddmq($end->type)) }}
+                                                                @if($a == 0)
+                                                                    {{ Translate_menuPlayers(typecarddmq($end->type)) }}
+                                                                @endif
                                                             @endif
                                                             
                                                         @endfor

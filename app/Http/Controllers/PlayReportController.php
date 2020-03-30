@@ -645,7 +645,9 @@ class PlayReportController extends Controller
                                                                              $response .= $end->combo[$i];
                                                                       endif;
                                                                       else:
-                                                                             $response .= typecarddmq($end->type);
+                                                                             if($a == 0):
+                                                                                    $response .= Translate_menuPlayers(typecarddmq($end->type));
+                                                                             endif;
                                                                       endif;
                                                                       
                                                                endfor;
