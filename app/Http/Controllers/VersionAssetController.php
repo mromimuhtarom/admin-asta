@@ -106,7 +106,7 @@ class VersionAssetController extends Controller
             'desc'      => 'Menambahkan data untuk android dengan Nama '. $name
         ]);
         
-        return back()->with('success', alertTranslate("Data saved"));
+        return back()->with('success', alertTranslate("L_DATA_SAVED"));
 
     }
 
@@ -178,7 +178,7 @@ class VersionAssetController extends Controller
             'desc'      => 'Menambahkan data untuk IOS dengan Nama '. $name
         ]);
         
-        return back()->with('success', alertTranslate("Data saved"));
+        return back()->with('success', alertTranslate("L_DATA_SAVED"));
 
     }
 
@@ -252,7 +252,7 @@ class VersionAssetController extends Controller
             'desc'      => 'Menambahkan data untuk Windows dengan Nama '. $name
         ]);
         
-        return back()->with('success', alertTranslate("Data saved"));
+        return back()->with('success', alertTranslate("L_DATA_SAVED"));
 
     }
 

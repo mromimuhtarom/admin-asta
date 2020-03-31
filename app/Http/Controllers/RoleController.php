@@ -215,7 +215,7 @@ class RoleController extends Controller
           }
           return redirect()->route('Role_Admin')->with('alert', alertTranslate('L_SOMETHING_WRONG')); 
         }
-        return back()->with('alert', alertTranslate('Operator Still use this role, wait until role didnott use'));
+        return back()->with('alert', alertTranslate('L_OP_USE_WAIT_DIDNT_USE'));
     }
 
     //DELETE ALL SELECTED 

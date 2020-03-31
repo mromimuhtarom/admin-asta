@@ -215,10 +215,10 @@ class TableController extends Controller
             return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"));
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', alertTranslate("Min buy can't be under max buy").$room->min_buy.'');
+            return back()->with('alert', alertTranslate("L_MINBUY_CANT_UNDER_MAXBUY").$room->min_buy.'');
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be up to max buy room"));
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UPTO_MAXBUYR"));
         }
 
         BigTwoTable::create([
@@ -266,10 +266,10 @@ class TableController extends Controller
         $lastrecord       = DominoSusunTable::orderby('table_id', 'desc')->first();
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under Stake multiplied by 10 or under").$minbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_STAKEX10" ).$minbuyvalidation);
         }  else if($maxbuy < $maxbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under Min buy multiplied by 4 or under ").$maxbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUYX4 ").$maxbuyvalidation);
         } else if($minbuy > $maxbuy)
         {
             return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"));
@@ -329,10 +329,10 @@ class TableController extends Controller
 
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$minbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MINBUY_CANT_UNDER_STAKEX10 ").$minbuyvalidation);
         }  else if($maxbuy < $maxbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under Min Buy multiplied by 2 or under").$maxbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUYX2").$maxbuyvalidation);
         } else if($minbuy > $maxbuy)
         {
             return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"));
@@ -384,7 +384,7 @@ class TableController extends Controller
         {
             if($value < $bbvalidation)
             {
-                return response()->json(alertTranslate("your Small Blind can't be under Big Blind divided 2 or under ").$bbvalidation." ", 400);
+                return response()->json(alertTranslate("L_SB_CANT_UNDER_BB_DIV2 ").$bbvalidation." ", 400);
             } else 
             {
                 TpkTable::where('table_id', '=', $pk)->update([
@@ -396,7 +396,7 @@ class TableController extends Controller
 
             if($value < $sbvalidation)
             {
-                return response()->json(alertTranslate("your Small Blind can't be under Big Blind divided 2 or under ").$findcategory->min_buy." ", 400);
+                return response()->json(alertTranslate("L_SB_CANT_UNDER_BB_DIV2 ").$findcategory->min_buy." ", 400);
             } else 
             {
                 TpkTable::where('table_id', '=', $pk)->update([
@@ -502,7 +502,7 @@ class TableController extends Controller
                 return response()->json(alertTranslate("L_MINBUY_CANT_UNDER_STAKE_X3X13_ORUNDER ").$count." ", 400);
             } else if($value > $validasiminbuy->max_buy)
             {
-                return response()->json(alertTranslate("Max buy can't be up to max buy room "), 400);
+                return response()->json(alertTranslate("L_MAXBUY_CANT_UPTO_MAXBUYR "), 400);
             } else if($value < $room->min_buy)
             {
                 return response()->json(alertTranslation("Min buy table can't be under to min buy room "), 400);
@@ -605,13 +605,13 @@ class TableController extends Controller
         {
             if($value < $countminbuy)
             {
-                return response()->json(alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$countminbuy." ", 400);
+                return response()->json(alertTranslate("L_MINBUY_CANT_UNDER_STAKEX10 ").$countminbuy." ", 400);
             } else if($value > $dmsroom->max_buy)
             {
                 return response()->json(alertTranslate("Min buy can't be up to max buy "), 400);
             } else if($value< $room->min_buy)
             {
-                return response()->json(alertTranslate("Min Buy can't be under to min buy room "), 400);
+                return response()->json(alertTranslate("L_MINBUY_CANT_UNDER_MINBUYROOM "), 400);
             } else 
             {
                 DominoSusunTable::where('table_id', '=', $pk)->update([
@@ -622,7 +622,7 @@ class TableController extends Controller
         {
             if($value < $countmaxbuy)
             {
-                return response()->json( alertTranslate("Max buy can't be under Stake multiplied by 4 or under ").$countmaxbuy." ", 400);
+                return response()->json( alertTranslate("L_MAXBUY_CANT_UNDER_STAKEX4 ").$countmaxbuy." ", 400);
             } else if($value < $dmsroom->min_buy)
             {
                 return response()->json( alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"), 400);
@@ -727,7 +727,7 @@ class TableController extends Controller
         {
             if($value < $countminbuy)
             {
-                return response()->json( alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$countminbuy." ", 400);
+                return response()->json( alertTranslate("L_MINBUY_CANT_UNDER_STAKEX10 ").$countminbuy." ", 400);
             } else 
             if($value > $dmqroom->max_buy)
             {
@@ -745,7 +745,7 @@ class TableController extends Controller
         {
             if($value < $countmaxbuy)
             {
-                return response()->json( alertTranslate("Max buy can't be under Stake multiplied by 2 or under ").$countmaxbuy." ", 400);
+                return response()->json( alertTranslate("L_MAXBUY_CANT_UNDER_STAKEX2 ").$countmaxbuy." ", 400);
             } else 
             if($value < $dmqroom->min_buy)
             {

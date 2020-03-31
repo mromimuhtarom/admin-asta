@@ -152,7 +152,7 @@ class Add_TransactionController extends Controller
 
           //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
           if($valuecurrency < 0):
-            return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
+            return back()->with('alert', alertTranslate('L_BONUS_FREE_PROHIBITED_MIN'));
           endif;
 
           $totalbalance = $stat->chip + $valuecurrency;
@@ -390,7 +390,7 @@ class Add_TransactionController extends Controller
 
           //validasi jika angka input lebih besar dari current balance gold di database untuk pengurangan //
           if($valuecurrency < 0):
-            return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
+            return back()->with('alert', alertTranslate('L_BONUS_FREE_PROHIBIT_MIN'));
           endif;
 
           $totalbalance = $stat->gold + $valuecurrency;
@@ -444,7 +444,7 @@ class Add_TransactionController extends Controller
         elseif($type == 12):
           //validasi untuk angka tidak dapat diperbolehkan negatif //
           if($valuecurrency < 0 ):
-            return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
+            return back()->with('alert', alertTranslate('L_TYPE_ADJUST_DIDNT_MINUS'));
           endif;
 
           $totalbalance = $valuecurrency;
@@ -620,7 +620,7 @@ class Add_TransactionController extends Controller
 
           //validasi jika angka input lebih besar dari current balance point di database untuk pengurangan //
           if($valuecurrency < 0):
-            return back()->with('alert', alertTranslate('For type Bonus or Free number not allowed negative number'));
+            return back()->with('alert', alertTranslate('L_BONUS_FREE_PROHIBIT_MIN'));
           endif;
 
           $totalbalance = $stat->point + $valuecurrency;
@@ -673,7 +673,7 @@ class Add_TransactionController extends Controller
         elseif($type == 12):
           //validasi untuk angka tidak dapat diperbolehkan negatif //
           if($valuecurrency < 0 ):
-            return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
+            return back()->with('alert', alertTranslate('L_TYPE_ADJUST_DIDNT_MINUS'));
           endif;
         
           $totalbalance = $valuecurrency;

@@ -925,23 +925,23 @@ function alertTranslate($menu){
         "L_MAXBUYT_CANT_UP_MAXBUYR"                                     =>  "Table max buy tidak bisa sampai dengan room max buy",
         "L_MINBUY_CANT_UNDER_STAKE_X3X13_ORUNDER "                      =>  "Min Buy tidak bisa di bawah stake yang dikalikan dengan 3 kali 13 atau di bawah",
         "Max buy can't be under min buy"                                =>  "Max buy tidak bisa dibawah min buy",
-        "Min buy can't be under max buy"                                =>  "Min buy tidak bisa dibawah max buy",
-        "Max buy can't be up to max buy room"                           =>  "Max buy tidak bisa sampai room max buy",
-        "Max buy can't be under Stake multiplied by 10 or under "       =>  "Max buy tidak bisa dibawah stake dikalikan 10 atau dibawahnya",
-        "Max buy can't be under Min buy multiplied by 4 or under "      =>  "Max buy tidak bisa dibawah Min buy dikalikan 4 atau dibawahnya",
-        "Min buy can't be under stake multiplied by 10 or under"        =>  "Min buy tidak bisa dibawah stake dikalikan 10 atau dibawahnya",
-        "Max buy can't be under Min Buy multiplied by 2 or under"       =>  "Max buy tidak bisa dibawah Min buy dikalikan 2 atau dibawahnya",
-        "your Small Blind can't be under Big Blind divided 2 or under"  =>  "Small blind mu tidak bisa dibawah Big blind dibagi 2 atau dibawahnya",
-        "Max buy can't be under Stake multiplied by 2 or under"         =>  "Max buy tidak bisa dibawah Stake dikalikan 2 atau dibawahnya",
-        "Min buy can't be under to min buy room "                       =>  "Min buy tidak bisa dibawah room min buy",
-        "Max Buy can't be under Stake multiplied by 4 or under "        =>  "Max buy tidak bisa dibawah stake dikali 4 atau dibawahnya",
+        "L_MINBUY_CANT_UNDER_MAXBUY"                                    =>  "Min buy tidak bisa dibawah max buy",
+        "L_MAXBUY_CANT_UPTO_MAXBUYR "                                   =>  "Max buy tidak bisa sampai room max buy",
+        "L_MAXBUY_CANT_UNDER_STAKEX10 "                                 =>  "Max buy tidak bisa dibawah stake dikalikan 10 atau dibawahnya",
+        "L_MAXBUY_CANT_UNDER_MINBUYX4 "                                 =>  "Max buy tidak bisa dibawah Min buy dikalikan 4 atau dibawahnya",
+        "L_MINBUY_CANT_UNDER_STAKEX10"                                  =>  "Min buy tidak bisa dibawah stake dikalikan 10 atau dibawahnya",
+        "L_MAXBUY_CANT_UNDER_MINBUYX2"                                  =>  "Max buy tidak bisa dibawah Min buy dikalikan 2 atau dibawahnya",
+        "L_SB_CANT_UNDER_BB_DIV2"                                       =>  "Small blind mu tidak bisa dibawah Big blind dibagi 2 atau dibawahnya",
+        "L_MAXBUY_CANT_UNDER_STAKEX2 "                                  =>  "Max buy tidak bisa dibawah Stake dikalikan 2 atau dibawahnya",
+        "L_MINBUY_CANT_UNDER_MINBUYROOM "                               =>  "Min buy tidak bisa dibawah room min buy",
+        "L_MAXBUY_CANT_UNDER_STAKEX4 "                                  =>  "Max buy tidak bisa dibawah stake dikali 4 atau dibawahnya",
         "Max Buy table can't be Up to Max Buy room"                     =>  "table max buy tidak bisa diatas room max buy",
-        "You didn't allow to delete your account"                       =>  "Kamu tidak diperbolehkan menghapus akunmu",
-        "Data saved"                                                    =>  "Data tersimpan!",
+        "L_PROHIBIT_DELETE_ACC"                                         =>  "Kamu tidak diperbolehkan menghapus akunmu",
+        "L_DATA_SAVED"                                                  =>  "Data tersimpan!",
         "Data added"                                                    =>  "Data berhasil di tambahkan",
-        "Operator Still use this role, wait until role didnott use"     =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
-        "For Type Adjust number didnot allowed negative"                =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
-        "For type Bonus or Free number not allowed negative number"     =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif",
+        "L_OP_USE_WAIT_DIDNT_USE"                                       =>  "Operator masih menggunakan peran ini, tunggu peran ini tidak dipakai",
+        "L_TYPE_ADJUST_DIDNT_MINUS"                                     =>  "Untuk tipe penyesuaian nomor tidak boleh negatif",
+        "L_BONUS_FREE_PROHIBIT_MIN"                                     =>  "Untuk tipe Bonus atau Gratis nomornya tidak diperbolehkan negatif",
         "User ID"                                                       =>  "ID Pengguna",
         "Balance Chip"                                                  =>  "Saldo chip",
         "Balance Point"                                                 =>  "Saldo Point",
@@ -957,48 +957,54 @@ function alertTranslate($menu){
     return $array_menuContent[$menu];
 };
 
-function Translateaction_id($menu){
 
-    $array_menuContent  =   [
+// //======INI GA KEPAKE SEPERTINYA, UDAH KU CARI SETIAP VARIABLE TAPI GA KETEMU DI FILE MANAPUN======//
+// function Translateaction_id($menu){
+
+//     $array_menuContent  =   [
         
-        "Change Password Admin"     =>      "Ubah password admin",
-        "Edit Admin"                =>      "Ubah admin",
-        "Create Admin"              =>      "Buat admin",
-        "Delete Admin"              =>      "Hapus admin",
-        "Approve Admin"             =>      "Setujui admin",
-        "Decline Admin"             =>      "Tolak admin",
-        "Log In Admin"              =>      "Admin login",
-        "Log Out Admin"             =>      "Admin logout",
-        "Buy chip with gold"        =>      "Beli chip dengan koin",
-        "Daily Award"               =>      "Hadiah harian",
-        "Bot Join Table"            =>      "Bot join Table",
-        "Join Game"                 =>      "Bergabung dengan game",
-        "Sitout Game"               =>      "Sitout Game",
-        "Register User"             =>      "Daftar Pengguna",
-        "Give Gold"                 =>      "Beri Koin",
-        "Buy Gold"                  =>      "Beli Koin",
-        "Skilled Bonus Gold"        =>      "Bonus Koin Ahli",
-        "Newbie Bonus Gold"         =>      "Bonus Koin Pemula",
-        "Create Player"             =>      "Buat Pemain",
-        "Delete Player"             =>      "Hapus Pemain",
-        "Edit Player"               =>      "Ubah Pemain",
-        "Change Password Player"    =>      "Ubah Password Pemain",
-        "Login Player"              =>      "Pemain login",
-        "Approve Account Player"    =>      "Akun pemain disetujui",
-        "Banned Account Player"     =>      "Akun pemain terlarang",
-        "Problem Account Player"    =>      "Akun pemain bermasalah",
-        "Upgrade Account"           =>      "Tingkatkan akun",
-        "L_EDIT_CHIP_STORE"         =>      "Edit Toko chip",
-        'L_EDIT_GOODS_STORE'        =>      'Edit Toko Barang',
-        "L_EDIT_PLAYER"             =>      'Edit pemain',
-        'L_LOGIN_PLAYER'            =>      'Pemain login',
-        'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
-        'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Akun pemain bermasalah',
-        'L_BANNED_ACCOUNT_PLAYER'   =>      'Akun pemain dilarang',
-        'L_EDIT_GAME_SETTING'       =>      'Edit Pengaturan Game'
-    ];
-    return $array_menuContent[$menu];
-};
+//         "Change Password Admin"     =>      "Ubah password admin",
+//         "Edit Admin"                =>      "Ubah admin",
+//         "Create Admin"              =>      "Buat admin",
+//         "Delete Admin"              =>      "Hapus admin",
+//         "Approve Admin"             =>      "Setujui admin",
+//         "Decline Admin"             =>      "Tolak admin",
+//         "Log In Admin"              =>      "Admin login",
+//         "Log Out Admin"             =>      "Admin logout",
+//         "Buy chip with gold"        =>      "Beli chip dengan koin",
+//         "Daily Award"               =>      "Hadiah harian",
+//         "Bot Join Table"            =>      "Bot join Table",
+//         "Join Game"                 =>      "Bergabung dengan game",
+//         "Sitout Game"               =>      "Sitout Game",
+//         "Register User"             =>      "Daftar Pengguna",
+//         "Give Gold"                 =>      "Beri Koin",
+//         "Buy Gold"                  =>      "Beli Koin",
+//         "Skilled Bonus Gold"        =>      "Bonus Koin Ahli",
+//         "Newbie Bonus Gold"         =>      "Bonus Koin Pemula",
+//         "Create Player"             =>      "Buat Pemain",
+//         "Delete Player"             =>      "Hapus Pemain",
+//         "Edit Player"               =>      "Ubah Pemain",
+//         "Change Password Player"    =>      "Ubah Password Pemain",
+//         "Login Player"              =>      "Pemain login",
+//         "Approve Account Player"    =>      "Akun pemain disetujui",
+//         "Banned Account Player"     =>      "Akun pemain terlarang",
+//         "Problem Account Player"    =>      "Akun pemain bermasalah",
+//         "Upgrade Account"           =>      "Tingkatkan akun",
+//         "L_EDIT_CHIP_STORE"         =>      "Edit Toko chip",
+//         'L_EDIT_GOODS_STORE'        =>      'Edit Toko Barang',
+//         "L_EDIT_PLAYER"             =>      'Edit pemain',
+//         'L_LOGIN_PLAYER'            =>      'Pemain login',
+//         'L_UPGRADE_ACCOUNT'         =>      'Upgrade akun',
+//         'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Akun pemain bermasalah',
+//         'L_BANNED_ACCOUNT_PLAYER'   =>      'Akun pemain dilarang',
+//         'L_EDIT_GAME_SETTING'       =>      'Edit Pengaturan Game'
+//     ];
+//     return $array_menuContent[$menu];
+// };
+// //===========ASLI GAKEPAKE NI SATU FUNCTION DIATAS=====================//
+
+
+
 
 function TranslateTransactionHist($menu){
 
@@ -1011,7 +1017,6 @@ function TranslateTransactionHist($menu){
         "GPA.3355-0553-1720-23050"  =>  "GPA.3355-0553-1720-23050",
         "nothing"                   =>  "tidak ada",
         "tidak jelas"               =>  "tidak jelas",
-    
 
     ];
     return $array_menuContent[$menu];

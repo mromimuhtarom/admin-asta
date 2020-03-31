@@ -875,7 +875,7 @@ public function detailTransaction(Request $request, $month, $year)
 
             // ---- Validasi untuk angka tidak diperbolehkan negatif -----//
             if($valuecurrency < 0):
-                return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
+                return back()->with('alert', alertTranslate('L_TYPE_ADJUST_DIDNT_MINUS'));
             endif;
             $totalbalance = $valuecurrency;
             $resellertransactionday = ResellerTransactionDay::where('reseller_id', '=', $agen_id)

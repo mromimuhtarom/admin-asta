@@ -198,7 +198,7 @@ class UserAdminController extends Controller
             }
             return redirect()->route('User_Admin')->with('success', alertTranslate('Somethong wrong'));
         }
-        return back()->with('alert', alertTranslate("You didn't allow to delete your account"));
+        return back()->with('alert', alertTranslate("L_PROHIBIT_DELETE_ACC"));
                         
     }
 
