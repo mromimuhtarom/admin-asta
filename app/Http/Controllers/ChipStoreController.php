@@ -197,7 +197,7 @@ class ChipStoreController extends Controller
                     'desc'      => 'Menambahkan data di menu Toko Chip dengan title '. $chip->name
                 ]);
 
-                return redirect()->route('Chip_Store')->with('success', alertTranslate('L_INSER_DATA_SUCCESS'));
+                return redirect()->route('Chip_Store')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));
 
               } else {
                 return redirect()->route('Chip_Store')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
