@@ -320,7 +320,7 @@
            
           </div>
           <div class="form-group">
-              <input type="number" name="order" class="form-control require" id="order" placeholder="Order" min="0">
+              <input type="number" name="order" class="form-control require valid" id="order" placeholder="Order" min="0">
               <span id="lblErrorOrder" style="color: red"></span>
           </div>
           <div class="form-group">
@@ -445,14 +445,33 @@
         } else {
           Disabled = true
           return false
-        } 
-    });
+        }
 
     if(Disabled){
       $('.toggle-disabled').prop("disabled", true);
     }else{
       $('.toggle-disabled').prop("disabled", false);
     }
+  })
+
+  $(document).on('change keyup', '.valid', function(e){
+    let Disabled = true;
+    $(".valid").each(function() {
+      let value = this.value
+      if(value > 200)
+        {
+          Disabled = false
+        } else {
+          Disabled = true
+          return false
+        }
+
+    if(Disabled){
+      $('.toggle-disabled').prop("disabled", true);
+    }else{
+      $('.toggle-disabled').prop("disabled", false);
+    }
+    })
   })
   
   $(".watermark-image").change(function() {
@@ -502,7 +521,7 @@
     @php
     $a = "order";
 
-    echo 'if(order >= 200) {';
+    echo 'if(order > 200) {';
       echo 'lblErrorOrder.innerHTML = "input Order tidak boleh lebih dari 200.";';
     echo '} else if(order <= 0) {';
       echo 'lblErrorOrder.innerHTML = "input Order tidak boleh minus atau 0";';
