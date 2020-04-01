@@ -287,8 +287,7 @@
     </div>
 
 
-<!-- Modal create
- -->
+<!-- Modal create -->
 <div class="modal fade" id="createChipStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -321,16 +320,17 @@
            
           </div>
           <div class="form-group">
-              <input type="text" name="order" class="form-control" id="basic-url" placeholder="Order">
+              <input type="number" name="order" class="form-control require" id="order" placeholder="Order" min="0">
+              <span id="lblErrorOrder" style="color: red"></span>
           </div>
           <div class="form-group">
-            <input type="text" name="title" class="form-control" id="basic-url" placeholder="title">
+            <input type="text" name="title" class="form-control require" id="basic-url" placeholder="title">
           </div>
           <div class="form-group">
-            <input type="number" name="chipawarded" class="form-control" id="basic-url" placeholder="chip awarded" min="0">
+            <input type="number" name="chipawarded" class="form-control require" id="basic-url" placeholder="chip awarded" min="0">
           </div>
           <div class="form-group">
-            <input type="number" name="goldcost" class="form-control" id="basic-url" placeholder="gold cost" min="0">
+            <input type="number" name="goldcost" class="form-control require" id="basic-url" placeholder="gold cost" min="0">
           </div>
           
           <div class="form-group">
@@ -343,8 +343,8 @@
           
             <div class="form-collaps" id="collapseExample">
                 <div class="sub-form">
-                    <select name="BonusType" class="form-control" id="">
-                        <option value="">Pilih tipe</option>
+                    <select name="BonusType" class="form-control required" id="">
+                        <option value="" disabled selected>Pilih tipe</option>
                         <option value="{{ $bontype[0] }}">{{ ConfigTextTranslate($bontype[1]) }}</option>
                         <option value="{{ $bontype[2] }}">{{ ConfigTextTranslate($bontype[3]) }}</option>
                         <option value="{{ $bontype[4] }}">{{ ConfigTextTranslate($bontype[5]) }}</option>
@@ -367,23 +367,23 @@
                 </div>
                       
                 <div class="form-group sub-form">              
-                  <input type="text" name="itemAwarded" class="form-control" id="basic-url" placeholder="item awarded">
+                  <input type="number" name="itemAwarded" class="form-control required" id="basic-url" placeholder="item awarded" min="0">
                 </div>
         
             </div>
         </div>
 
           <div class="form-group">
-            <select name="status_item" class="form-control" id="">
-              <option value="">Pilih status</option>
+            <select name="status_item" class="form-control required" id="">
+              <option value="" disabled selected>Pilih status</option>
                 <option value="{{ $endis[0]}}">{{ ConfigTextTranslate($endis[1]) }}</option>
-            <option value="{{ $endis[2]}}">{{ ConfigTextTranslate($endis[3]) }}</option>
+              <option value="{{ $endis[2]}}">{{ ConfigTextTranslate($endis[3]) }}</option>
             </select>
           </div>
       
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadBtn()">
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadBtn()">
             <i class="fa fa-save"></i>{{ Translate_MenuContentAdmin('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">
@@ -414,7 +414,7 @@
           <input type="hidden" name="userIdAll" id="idDeleteAll" value="">
           <input type="hidden" name="imageid" id="idDeleteAllimage" value="">
           <input type="hidden" name="imageidBonus" id="idDeleteAllBonus" value="">
-          <input type="text" name="usernameAll" id="userDeleteAll" value="">
+          <input type="hidden" name="usernameAll" id="userDeleteAll" value="">
       </div>
       <div class="modal-footer">
         <button type="submit" class="button_example-yes btn sa-btn-success submit-data submit-data"><i class="fa fa-check"></i>{{ TranslateMenuItem('L_YES') }}</button>
@@ -433,6 +433,27 @@
     $(this).submit('loading').delay(1000).queue(function() {
     });
   }
+
+  //Disabled submit before form fullfilled
+  $(document).on('change keyup', '.required', function(e){
+    let Disabled = true;
+    $(".required").each(function() {
+      let value = this.value
+      if((value)&&(value.trim() != ''))
+        {
+          Disabled = false
+        } else {
+          Disabled = true
+          return false
+        } 
+    });
+
+    if(Disabled){
+      $('.toggle-disabled').prop("disabled", true);
+    }else{
+      $('.toggle-disabled').prop("disabled", false);
+    }
+  })
   
   $(".watermark-image").change(function() {
   if (this.files && this.files[0]) {
@@ -472,6 +493,23 @@
         $("#trash").hide();
       }
     });
+  });
+
+  $("#order").keyup(function(e) {
+    e.preventDefault();
+    var order         = $(this).val();
+    var lblErrorOrder = document.getElementById("lblErrorOrder"); 
+    @php
+    $a = "order";
+
+    echo 'if(order >= 200) {';
+      echo 'lblErrorOrder.innerHTML = "input Order tidak boleh lebih dari 200.";';
+    echo '} else if(order <= 0) {';
+      echo 'lblErrorOrder.innerHTML = "input Order tidak boleh minus atau 0";';
+    echo '} else {';
+      echo 'lblErrorOrder.innerHTML = "";';
+    echo '}';
+    @endphp
   });
 
   table = $('table.table').dataTable({

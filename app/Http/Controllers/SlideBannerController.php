@@ -229,7 +229,7 @@ class SlideBannerController extends Controller
                         'datetime'  => Carbon::now('GMT+7'),
                         'desc'      => 'Edit image in menu Slide Banner with ID '.$pk.' to '. $nama_file_unik
                     ]);
-                    return redirect()->route('Slide_Banner')->with('success','Update Image successfull');
+                    return redirect()->route('Slide_Banner')->with('success', alert('L_UPDATE_IMG_SUCCESS'));
             
                 }
                 else
@@ -274,8 +274,8 @@ class SlideBannerController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Delete in menu Slide Banner with ID'.$id
             ]);
-            return redirect()->route('Slide_Banner')->with('success','Data Deleted');
+            return redirect()->route('Slide_Banner')->with('success', alertTranslate('L_DATA_DELETE'));
         }
-        return redirect()->route('Slide_Banner')->with('success','Something wrong');
+        return redirect()->route('Slide_Banner')->with('success', alertTranslate('L_SOMETHING_WRONG'));
     }
 }

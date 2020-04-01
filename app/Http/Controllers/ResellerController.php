@@ -141,7 +141,7 @@ class ResellerController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$reseller->username.')'
             ]);
-            return redirect()->route('List_Reseller')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('List_Reseller')->with('success', alertTranslate('L_DATA_DELETED'));
         }
         return redirect()->route('List_Reseller')->with('success', alertTranslate('Somethong wrong'));                
     }
@@ -193,7 +193,7 @@ class ResellerController extends Controller
             'desc'      => 'Menambahkan data dengan Nama Peringkat '. $rankname
         ]);
 
-        return redirect()->route('Reseller_Rank')->with('success', alertTranslate('Data added'));
+        return redirect()->route('Reseller_Rank')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 // ------ End Insert Reseller Rank ------ //
 
@@ -261,7 +261,7 @@ class ResellerController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus peringkat dengan nama '.$currentstatus->name
             ]);
-            return redirect()->route('Reseller_Rank')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Reseller_Rank')->with('success', alertTranslate('L_DATA_DELETED'));
         }
         return redirect()->route('Reseller_Rank')->with('alert', alertTranslate('Somethong wrong'));  
     }
@@ -875,7 +875,7 @@ public function detailTransaction(Request $request, $month, $year)
 
             // ---- Validasi untuk angka tidak diperbolehkan negatif -----//
             if($valuecurrency < 0):
-                return back()->with('alert', alertTranslate('For Type Adjust number didnot allowed negative'));
+                return back()->with('alert', alertTranslate('L_TYPE_ADJUST_DIDNT_MINUS'));
             endif;
             $totalbalance = $valuecurrency;
             $resellertransactionday = ResellerTransactionDay::where('reseller_id', '=', $agen_id)
@@ -957,7 +957,7 @@ public function detailTransaction(Request $request, $month, $year)
             // dd($angka);
             if($valuecurrency < 0):
                 if($goldreseller->gold < $angka):
-                    return back()->with('alert', alertTranslate('balance cannot be reduced, please enter the appropriate amount'));
+                    return back()->with('alert', alertTranslate('L_BALANCE_CANT_REDUCE_PLEASE'));
                 endif;
             endif;
 
@@ -1022,7 +1022,7 @@ public function detailTransaction(Request $request, $month, $year)
             ]);
         endif;
 
-        return back()->with('success', alertTranslate('Successful update'));
+        return back()->with('success', alertTranslate('L_SUCCESS_UPDATE'));
     }
 // --- End UpdateGold Reseller ----//
 //****************************************** Add Transaction Reseller ******************************************//
@@ -1234,7 +1234,7 @@ public function detailTransaction(Request $request, $month, $year)
             'desc'      => 'Menambahkan pengguna baru '. $request->username
         ]);
   
-        return back()->with('success','REGISTER SUCCESSFULL');
+        return back()->with('success', alertTranslate('L_REGISTER_SUCCESSFULL'));
     }
 //------ End Insert Register Reseller ------//
 //****************************************** End Menu Register Reseller ******************************************//
@@ -1656,17 +1656,17 @@ public function detailTransaction(Request $request, $month, $year)
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Menambahkan item dengan judul '. $request->title
                 ]);
-                return redirect()->route('Item_Store_Reseller')->with('success', alertTranslate('Data added'));                 
+                return redirect()->route('Item_Store_Reseller')->with('success', alertTranslate('L_DATA_ADDED'));                 
             }
             else
             {
-                return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate('File size too large'));
+                return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate('L_SIZE_TOO_LARGE'));
                 // echo 'Ukuran file terlalu besar';
             }
         }
         else
         {
-            return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate("File extensions are not allowed"));
+            return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate("L_FILE_MUST_JPG"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -1886,7 +1886,7 @@ public function detailTransaction(Request $request, $month, $year)
                     'datetime'  => Carbon::now('GMT+7'),
                     'desc'      => 'Ubah gambar dengan nama '.$currentname->name
                 ]);
-                return redirect()->route('Item_Store_Reseller')->with('success','Update Image successfull');
+                return redirect()->route('Item_Store_Reseller')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
             }
             else 
             {
@@ -1895,7 +1895,7 @@ public function detailTransaction(Request $request, $month, $year)
         }
         else 
         {
-            return redirect()->route('Item_Store_Reseller')->with('alert', 'Image Must Be png Format');
+            return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate('L_IMG_MUST_PNG'));
         }
     }
 // ------- End Update Image Item Store Reseller -------//
@@ -1938,9 +1938,9 @@ public function detailTransaction(Request $request, $month, $year)
                 'desc'      => 'Ubah gambar bonus dengan nama '.$currentname->name
             ]);
             
-            return redirect()->route('Item_Store_Reseller')->with('success','Update Image Successfull');
+            return redirect()->route('Item_Store_Reseller')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
         } else {
-            return redirect()->route('Item_Store_Reseller')->with('alert','Image must be in png format');
+            return redirect()->route('Item_Store_Reseller')->with('alert', alertTranslate('L_IMG_MUST_PNG'));
         }
 
 
@@ -1972,10 +1972,10 @@ public function detailTransaction(Request $request, $month, $year)
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus item di menu Toko Agen dengan nama '.$currentname->name
             ]);
-            return redirect()->route('Item_Store_Reseller')->with('success','Data Deleted');
+            return redirect()->route('Item_Store_Reseller')->with('success', alertTranslate('L_DATA_DELETED'));
         } else if($getItemId  == NULL )
         {
-            return redirect()->route('Item_Store_Reseller')->with('alert','ID must be Fill'); 
+            return redirect()->route('Item_Store_Reseller')->with('alert','L_ID_MUSTBE_FILL'); 
         }
         
     }
@@ -2002,7 +2002,7 @@ public function detailTransaction(Request $request, $month, $year)
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus item yang terpilih di menu Daftar Agen dengan nama '.$currentname
         ]);
-        return redirect()->route('List_Reseller')->with('success', 'Data deleted');
+        return redirect()->route('List_Reseller')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
     public function deleteAllSelectedRank(Request $request)
@@ -2016,7 +2016,7 @@ public function detailTransaction(Request $request, $month, $year)
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu Peringkat Agen dengan ID '.$ids
         ]);
-        return redirect()->route('Reseller_Rank')->with('success', 'Data deleted');
+        return redirect()->route('Reseller_Rank')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 // ------- End Delete Item Store Reseller --------//
 //****************************************** Menu Item Store Reseller******************************************//

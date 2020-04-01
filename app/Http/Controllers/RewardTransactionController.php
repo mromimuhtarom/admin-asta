@@ -74,7 +74,7 @@ class RewardTransactionController extends Controller
             'desc'      => 'Menerima permintaan ('. $user_id.')'
         ]);
 
-        return back()->with('success', alertTranslate("Receiving request Transaction has been successful"));
+        return back()->with('success', alertTranslate("L_RECEIVE_REQTRANSC_SUCCESS"));
     }
 
     public function decline(Request $request)
@@ -131,7 +131,7 @@ class RewardTransactionController extends Controller
             'desc'      => 'Menolak permintaan ('. $user_id.')'
         ]);
 
-        return back()->with('success', alertTranslate('Reject request Transaction has been successful'));
+        return back()->with('success', alertTranslate('L_REJECT_REQTRANSC_SUCCESS'));
     }
 
     public function DeliveryProgress(Request $request)

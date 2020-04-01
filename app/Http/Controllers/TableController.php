@@ -152,16 +152,16 @@ class TableController extends Controller
         $sbvalidation = $bbvalidation / 2;
         if($bb < $bbvalidation)
         {
-            return back()->with('alert', alertTranslate("your Big blind can't be under Minbuy divided 10 ").$bbvalidation.' ');
+            return back()->with('alert', alertTranslate("L_BIGBLIND_CANT_UNDER_MINBUY_DIVIDE10").$bbvalidation.' ');
         } else if($sb < $sbvalidation)
         {
-            return back()->with('alert', alertTranslate("your Small Blind can't be under Big Blind divided 2 ").$sbvalidation.' ');
+            return back()->with('alert', alertTranslate("L_SMALLBLIND_CANT_UNDER_BIGBLIND_DIVIDE2").$sbvalidation.' ');
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', alertTranslate("Min buy table can't be under Min Buy room"));
+            return back()->with('alert', alertTranslate("L_MINBUYTAB_CANT_UNDER_MINBUY_ROOM"));
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', alertTranslate("Max buy table can't be up to max buy room"));
+            return back()->with('alert', alertTranslate("L_MAXBUYT_CANT_UP_MAXBUYR"));
         }
 
         TpkTable::create([
@@ -183,7 +183,7 @@ class TableController extends Controller
         'desc'      => 'Menambahkan data ('.$request->tableName.')'
         ]);
 
-        return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('Data Added'));
+        return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('L_DATA_ADDED'));
     }
 
 
@@ -209,16 +209,16 @@ class TableController extends Controller
         $room             = BigTwoRoom::where('room_id', '=', $category)->first();
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Min Buy can't be under Stake multiplied by 3 multiplied 13 or under ").$minbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MINBUY_CANT_UNDER_STAKE_X3X13_ORUNDER ").$minbuyvalidation);
         }  else if($minbuy > $maxbuy)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under min buy"));
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"));
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', alertTranslate("Min buy can't be under max buy").$room->min_buy.'');
+            return back()->with('alert', alertTranslate("L_MINBUY_CANT_UNDER_MAXBUY").$room->min_buy.'');
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be up to max buy room"));
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UPTO_MAXBUYR"));
         }
 
         BigTwoTable::create([
@@ -240,7 +240,7 @@ class TableController extends Controller
             'desc'      => 'Menambahkan data ('.$request->tableName.')'
         ]);
  
-        return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data Added'));
+        return redirect()->route('Table_Big_Two')->with('success', alertTranslate('L_DATA_ADDED'));
      }
 
     public function DominoSusunstore(Request $request)
@@ -266,19 +266,19 @@ class TableController extends Controller
         $lastrecord       = DominoSusunTable::orderby('table_id', 'desc')->first();
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under Stake multiplied by 10 or under").$minbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_STAKEX10" ).$minbuyvalidation);
         }  else if($maxbuy < $maxbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under Min buy multiplied by 4 or under ").$maxbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUYX4 ").$maxbuyvalidation);
         } else if($minbuy > $maxbuy)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under min buy"));
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"));
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', alertTranslate("Min buy table can't be under Min Buy room"));
+            return back()->with('alert', alertTranslate("L_MINBUYTAB_CANT_UNDER_MINBUY_ROOM"));
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', alertTranslate("Max buy table can't be up to max buy room"));
+            return back()->with('alert', alertTranslate("L_MAXBUYT_CANT_UP_MAXBUYR"));
         }
 
         DominoSusunTable::create([
@@ -301,7 +301,7 @@ class TableController extends Controller
             'desc'      => 'Menambahkan data ('.$request->tableName.')'
           ]);
 
-       return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data Added'));
+       return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
     public function DominoQstore(Request $request)
@@ -329,19 +329,19 @@ class TableController extends Controller
 
         if($minbuy < $minbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$minbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MINBUY_CANT_UNDER_STAKEX10 ").$minbuyvalidation);
         }  else if($maxbuy < $maxbuyvalidation)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under Min Buy multiplied by 2 or under").$maxbuyvalidation);
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUYX2").$maxbuyvalidation);
         } else if($minbuy > $maxbuy)
         {
-            return back()->with('alert', alertTranslate("Max buy can't be under min buy"));
+            return back()->with('alert', alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"));
         } else if($minbuy < $room->min_buy)
         {
-            return back()->with('alert', alertTranslate("Min buy table can't be under Min Buy room"));
+            return back()->with('alert', alertTranslate("L_MINBUYTAB_CANT_UNDER_MINBUY_ROOM"));
         } else if($maxbuy > $room->max_buy)
         {
-            return back()->with('alert', alertTranslate("Max buy table can't be up to max buy room"));
+            return back()->with('alert', alertTranslate("L_MAXBUYT_CANT_UP_MAXBUYR"));
         } 
 
         DominoQTable::create([
@@ -364,7 +364,7 @@ class TableController extends Controller
             'desc'      => 'Menambahkan data ('.$request->tableName.')'
           ]);
 
-       return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data Added'));
+       return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
 
@@ -384,7 +384,7 @@ class TableController extends Controller
         {
             if($value < $bbvalidation)
             {
-                return response()->json(alertTranslate("your Small Blind can't be under Big Blind divided 2 or under ").$bbvalidation." ", 400);
+                return response()->json(alertTranslate("L_SB_CANT_UNDER_BB_DIV2 ").$bbvalidation." ", 400);
             } else 
             {
                 TpkTable::where('table_id', '=', $pk)->update([
@@ -396,7 +396,7 @@ class TableController extends Controller
 
             if($value < $sbvalidation)
             {
-                return response()->json(alertTranslate("your Small Blind can't be under Big Blind divided 2 or under ").$findcategory->min_buy." ", 400);
+                return response()->json(alertTranslate("L_SB_CANT_UNDER_BB_DIV2 ").$findcategory->min_buy." ", 400);
             } else 
             {
                 TpkTable::where('table_id', '=', $pk)->update([
@@ -407,7 +407,7 @@ class TableController extends Controller
         {
             if($value < $room->min_buy)
             {
-                return response()->json(alertTranslate("Min buy table can't be under Min Buy room"), 400);
+                return response()->json(alertTranslate("L_MINBUYTAB_CANT_UNDER_MINBUY_ROOM"), 400);
             } 
             TpkTable::where('table_id', '=', $pk)->update([
                 $name => $value
@@ -417,7 +417,7 @@ class TableController extends Controller
         {
             if($value > $room->max_buy)
             {
-                return response()->json(alertTranslate("Max buy table can't be up to max buy room"), 400);
+                return response()->json(alertTranslate("L_MAXBUYT_CANT_UP_TO_MAXBUYR"), 400);
             }
             TpkTable::where('table_id', '=', $pk)->update([
                 $name => $value
@@ -499,10 +499,10 @@ class TableController extends Controller
             $count          = $validasiminbuy->stake * 3 * 13;
             if($count > $value)
             {
-                return response()->json(alertTranslate("Min Buy can't be under Stake multiplied by 3 multiplied 13 or under ").$count." ", 400);
+                return response()->json(alertTranslate("L_MINBUY_CANT_UNDER_STAKE_X3X13_ORUNDER ").$count." ", 400);
             } else if($value > $validasiminbuy->max_buy)
             {
-                return response()->json(alertTranslate("Max buy can't be up to max buy room "), 400);
+                return response()->json(alertTranslate("L_MAXBUY_CANT_UPTO_MAXBUYR "), 400);
             } else if($value < $room->min_buy)
             {
                 return response()->json(alertTranslation("Min buy table can't be under to min buy room "), 400);
@@ -515,10 +515,10 @@ class TableController extends Controller
             $validasimaxbuy =BigTwoTable::where('table_id', '=', $pk)->first();
             if($value < $validasimaxbuy->min_buy)
             {
-                return response()->json(alertTranslate("Max buy can't be under min buy"), 400);
+                return response()->json(alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"), 400);
             } else if($value > $room->max_buy)
             {
-                return response()->json(alertTranslate("Max buy table can't be up to max buy room"), 400);
+                return response()->json(alertTranslate("L_MAXBUYT_CANT_UP_MAXBUYR"), 400);
             }
             BigTwoTable::where('table_id', '=', $pk)->update([
                 'max_buy'   => $value
@@ -605,13 +605,13 @@ class TableController extends Controller
         {
             if($value < $countminbuy)
             {
-                return response()->json(alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$countminbuy." ", 400);
+                return response()->json(alertTranslate("L_MINBUY_CANT_UNDER_STAKEX10 ").$countminbuy." ", 400);
             } else if($value > $dmsroom->max_buy)
             {
                 return response()->json(alertTranslate("Min buy can't be up to max buy "), 400);
             } else if($value< $room->min_buy)
             {
-                return response()->json(alertTranslate("Min Buy can't be under to min buy room "), 400);
+                return response()->json(alertTranslate("L_MINBUY_CANT_UNDER_MINBUYROOM "), 400);
             } else 
             {
                 DominoSusunTable::where('table_id', '=', $pk)->update([
@@ -622,13 +622,13 @@ class TableController extends Controller
         {
             if($value < $countmaxbuy)
             {
-                return response()->json( alertTranslate("Max buy can't be under Stake multiplied by 4 or under ").$countmaxbuy." ", 400);
+                return response()->json( alertTranslate("L_MAXBUY_CANT_UNDER_STAKEX4 ").$countmaxbuy." ", 400);
             } else if($value < $dmsroom->min_buy)
             {
-                return response()->json( alertTranslate("Max buy can't be under min buy"), 400);
+                return response()->json( alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"), 400);
             } else if($value > $room->max_buy) 
             {
-                return response()->json( alertTranslate("Max buy table can't be up to max buy room"), 400);
+                return response()->json( alertTranslate("L_MAXBUYT_CANT_UP_MAXBUYR"), 400);
             } else 
             {
                 DominoSusunTable::where('table_id', '=', $pk)->update([
@@ -727,14 +727,14 @@ class TableController extends Controller
         {
             if($value < $countminbuy)
             {
-                return response()->json( alertTranslate("Min buy can't be under stake multiplied by 10 or under ").$countminbuy." ", 400);
+                return response()->json( alertTranslate("L_MINBUY_CANT_UNDER_STAKEX10 ").$countminbuy." ", 400);
             } else 
             if($value > $dmqroom->max_buy)
             {
                 return response()->json( alertTranslate("Min buy can't be up to max buy ").$countminbuy." ", 400);
             } else if($value < $room->min_buy)
             {
-                return response()->json( alertTranslate("Min buy table can't be under Min Buy room"), 400);
+                return response()->json( alertTranslate("L_MINBUYTAB_CANT_UNDER_MINBUY_ROOM"), 400);
             } else 
             {
                 DominoQTable::where('table_id', '=', $pk)->update([
@@ -745,14 +745,14 @@ class TableController extends Controller
         {
             if($value < $countmaxbuy)
             {
-                return response()->json( alertTranslate("Max buy can't be under Stake multiplied by 2 or under ").$countmaxbuy." ", 400);
+                return response()->json( alertTranslate("L_MAXBUY_CANT_UNDER_STAKEX2 ").$countmaxbuy." ", 400);
             } else 
             if($value < $dmqroom->min_buy)
             {
-                return response()->json( alertTranslate("Max buy can't be under min buy "), 400);
+                return response()->json( alertTranslate("L_MAXBUY_CANT_UNDER_MINBUY"), 400);
             } else if($value > $room->max_buy)
             {
-                return response()->json( alertTranslate("Max Buy table can't be Up to Max Buy room "), 400);
+                return response()->json( alertTranslate("L_MAXBUYT_CANT_UP_MAXBUYR"), 400);
             }else 
             {
                 DominoQTable::where('table_id', '=', $pk)->update([
@@ -839,9 +839,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus di menu Meja Asta Poker dengan nama meja '.$tpk_table->name
             ]);
-            return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Table_Asta_Poker')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Table_Asta_Poker')->with('alert', alertTranslate('Something wrong'));                
+        return redirect()->route('Table_Asta_Poker')->with('alert', alertTranslate('L_SOMETHING_WRONG'));                
     }
 
     public function deleteAllSelectedTpk(Request $request)
@@ -856,7 +856,7 @@ class TableController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
-        return redirect()->route('Table_Asta_Poker')->with('succes', alertTranslate('Data deleted'));
+        return redirect()->route('Table_Asta_Poker')->with('succes', alertTranslate('L_DATA_DELETED'));
     }
 
 
@@ -875,9 +875,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$bgt_table->name.')'
             ]);
-            return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Table_Big_Two')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Table_Big_Two')->with('alert', alertTranslate('Something wrong'));                
+        return redirect()->route('Table_Big_Two')->with('alert', alertTranslate('L_SOMETHING_WRONG'));                
     }
 
     public function BigTwoDeleteAll(Request $request)
@@ -892,7 +892,7 @@ class TableController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus di menu table Big two dengan nama' .$currentname
         ]);
-        return redirect()->route('Table_Big_Two')->with('success', alertTranslate('Data deleted'));
+        return redirect()->route('Table_Big_Two')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
 
@@ -909,9 +909,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$dms_table->name.')'
             ]);
-            return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Table_Domino_Susun')->with('alert', alertTranslate('Something wrong'));                
+        return redirect()->route('Table_Domino_Susun')->with('alert', alertTranslate('L_SOMETHING_WRONG'));                
     }
 
     public function DominoSDeleteAll(Request $request)
@@ -926,7 +926,7 @@ class TableController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
-        return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('Data deleted'));
+        return redirect()->route('Table_Domino_Susun')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
 
@@ -943,9 +943,9 @@ class TableController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$dmq_table->name.')'
             ]);
-            return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Table_Domino_QQ')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Table_Domino_QQ')->with('alert', alertTranslate('Something wrong'));                
+        return redirect()->route('Table_Domino_QQ')->with('alert', alertTranslate('L_SOMETHING_WRONG'));                
     }
 
     public function DominoQDeleteAll(Request $request)
@@ -960,7 +960,7 @@ class TableController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
-        return redirect()->route('Table_Domino_QQ')->with('succes', alertTranslate('Data deleted'));
+        return redirect()->route('Table_Domino_QQ')->with('succes', alertTranslate('L_DATA_DELETED'));
     
     }
 

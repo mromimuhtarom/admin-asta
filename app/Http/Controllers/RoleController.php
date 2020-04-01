@@ -64,7 +64,7 @@ class RoleController extends Controller
               ]);
               return redirect()->route('Role_Admin')->with('success', alertTranslate('L_INSERT_DATA_SUCCESS'));  
         }
-        return redirect()->route('Role_Admin')->with('alert', alertTranslate('Role Name is Null'));
+        return redirect()->route('Role_Admin')->with('alert', alertTranslate('L_ROLE_NAME_NULL'));
     }
 
     public function menu($role)
@@ -188,7 +188,7 @@ class RoleController extends Controller
           
         endfor;
         
-        return redirect()->route('Role_Admin')->with('success', alertTranslate('Data Updated'));
+        return redirect()->route('Role_Admin')->with('success', alertTranslate('L_DATA_UPDATED'));
 
 
     }
@@ -211,11 +211,11 @@ class RoleController extends Controller
                   'datetime'  => Carbon::now('GMT+7'),
                   'desc'      => 'Hapus data Nama Peran '.$rolename->name
               ]);
-              return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
+              return redirect()->route('Role_Admin')->with('success', alertTranslate('L_DATA_DELETED'));
           }
-          return redirect()->route('Role_Admin')->with('alert', alertTranslate('Something wrong')); 
+          return redirect()->route('Role_Admin')->with('alert', alertTranslate('L_SOMETHING_WRONG')); 
         }
-        return back()->with('alert', alertTranslate('Operator Still use this role, wait until role didnott use'));
+        return back()->with('alert', alertTranslate('L_OP_USE_WAIT_DIDNT_USE'));
     }
 
     //DELETE ALL SELECTED 
@@ -234,7 +234,7 @@ class RoleController extends Controller
         'desc'      => 'Hapus data ('.$rolenameall.')'
       ]);
 
-      return redirect()->route('Role_Admin')->with('success', alertTranslate('Data deleted'));
+      return redirect()->route('Role_Admin')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
 }

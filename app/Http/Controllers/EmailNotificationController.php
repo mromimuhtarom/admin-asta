@@ -148,7 +148,7 @@ class EmailNotificationController extends Controller
                         'datetime'  => Carbon::now('GMT+7'),
                         'desc'      => 'Edit imageUrl in menu Email Notification with ID '.$pk.' to '. $nama_file_unik
                     ]);
-                    return redirect()->route('Email_Notification')->with('success', alertTranslate('Update Image successfull'));
+                    return redirect()->route('Email_Notification')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
             
                 }
                 else
@@ -232,9 +232,9 @@ class EmailNotificationController extends Controller
                 'desc'      => 'Delete in menu Email Notification with ID '.$id
             ]);
 
-            return redirect()->route('Email_Notification')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Email_Notification')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Email_Notification')->with('success', alertTranslate('Something wrong'));   
+        return redirect()->route('Email_Notification')->with('success', alertTranslate('L_SOMETHING_WRONG'));   
     }
     
 }

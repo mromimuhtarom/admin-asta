@@ -108,7 +108,7 @@ class BestOfferController extends Controller
                         'datetime'  => Carbon::now('GMT+7'),
                         'desc'      => 'Edit image in menu Gift Store with ID '.$pk.' to '. $nama_file_unik
                     ]);
-                    return redirect()->route('Table_Gift')->with('success','Update Image successfull');
+                    return redirect()->route('Table_Gift')->with('success','L_UPDATE_IMG_SUCCESS');
 
                 }
                 else

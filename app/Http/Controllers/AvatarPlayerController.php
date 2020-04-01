@@ -80,7 +80,7 @@ class AvatarPlayerController extends Controller
         {
                 if($request->title == NULL)
                 {
-                    return redirect()->route('avatar_player')->with('alert', alertTranslate("Name can't be NULL"));
+                    return redirect()->route('avatar_player')->with('alert', alertTranslate("L_NAME_CANT_NULL"));
                 } else {
                     $validator = Validator::make($request->all(),[
                         'title' =>  'required'
@@ -111,7 +111,7 @@ class AvatarPlayerController extends Controller
                     return redirect()->route('avatar_player')->with('success', alertTranslate('L_INSERT_SUCCESSFULL'));
                 }
         } else {
-            return redirect()->route('avatar_player')->with('alert', alertTranslate('File extensions are not allowed, you must use .jpg'));
+            return redirect()->route('avatar_player')->with('alert', alertTranslate('L_FILE_MUST_JPG'));
         }
     }
         
@@ -149,10 +149,10 @@ class AvatarPlayerController extends Controller
                 'datetime'  =>  Carbon::now('GMT+7'),
                 'desc'      =>  'Edit gambar di menu avatar ('.$id->name.')'
             ]);
-            return redirect()->route('avatar_player')->with('success', alertTranslate('Update image successfull'));
+            return redirect()->route('avatar_player')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
         }
         else {
-            return redirect()->route('avatar_player')->with('alert', alertTranslate('format must be jpg and pictorial'));
+            return redirect()->route('avatar_player')->with('alert', alertTranslate('L_MUST_JPG_PICT'));
         }
     }
 
@@ -206,9 +206,9 @@ class AvatarPlayerController extends Controller
                 'datetime'  =>  Carbon::now('GMT+7'),
                 'desc'      =>  'Hapus data '.$currentname->name
             ]);
-            return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('avatar_player')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('avatar_player')->with('alert', alertTranslate('Something wrong'));
+        return redirect()->route('avatar_player')->with('alert', alertTranslate('L_SOMETHING_WRONG'));
     }
 
     public function deleteAll(Request $request)
@@ -228,6 +228,6 @@ class AvatarPlayerController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus data (' .$currentname.')'
         ]);
-        return redirect()->route('avatar_player')->with('success', alertTranslate('Data deleted'));
+        return redirect()->route('avatar_player')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 }

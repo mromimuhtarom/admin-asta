@@ -123,7 +123,7 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data ('. $tpk_category->name.')'
         ]);
 
-        return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('Data Added'));
+        return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('L_DATA_ADDED'));
 
     }
 
@@ -162,7 +162,7 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data ('. $bgt_category->name.')'
         ]);
  
-        return redirect()->route('Category_Big_Two')->with('success', alertTranslate('Data Added'));
+        return redirect()->route('Category_Big_Two')->with('success', alertTranslate('L_DATA_ADDED'));
     }
 
     public function DominoSusunstore(Request $request)
@@ -194,7 +194,7 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data ('. $dms_category->name.')'
         ]);
 
-        return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('Data Added'));
+        return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('L_DATA_ADDED'));
 
     }
 
@@ -228,7 +228,7 @@ class CategoryController extends Controller
             'desc'      => 'Menambahkan data ('. $dmq_category->name.')'
         ]);
 
-        return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('Data Added'));
+        return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('L_DATA_ADDED'));
 
     }
 
@@ -394,9 +394,9 @@ class CategoryController extends Controller
                 'desc'      => 'Hapus data ('.$tpkroom->name.')'
             ]);
 
-            return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Category_Asta_Poker')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Category_Asta_Poker')->with('alert', alertTranslate('Something wrong'));      
+        return redirect()->route('Category_Asta_Poker')->with('alert', alertTranslate('L_SOMETHING_WRONG'));      
     }
 
 
@@ -414,9 +414,9 @@ class CategoryController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$bgtroom->name.')'
             ]);
-            return redirect()->route('Category_Big_Two')->with('success', alertTranslate('Data Deleted'));
+            return redirect()->route('Category_Big_Two')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-     return redirect()->route('Category_Big_Two')->with('alert', alertTranslate('Something wrong'));      
+     return redirect()->route('Category_Big_Two')->with('alert', alertTranslate('L_SOMETHING_WRONG'));      
     }
 
     
@@ -434,9 +434,9 @@ class CategoryController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$dmsroom->name.')'
             ]);
-            return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('Data Deleted'));
+            return redirect()->route('Category_Domino_Susun')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Category_Domino_Susun')->with('alert', alertTranslate('Something wrong'));      
+        return redirect()->route('Category_Domino_Susun')->with('alert', alertTranslate('L_SOMETHING_WRONG'));      
     }
 
     
@@ -454,9 +454,9 @@ class CategoryController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus data ('.$dmqroom->name.')'
             ]);
-            return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('Data Deleted'));
+            return redirect()->route('Category_Domino_QQ')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Category_Domino_QQ')->with('alert', alertTranslate('Something wrong'));      
+        return redirect()->route('Category_Domino_QQ')->with('alert', alertTranslate('L_SOMETHING_WRONG'));      
     }
 }
  

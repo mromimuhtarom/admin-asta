@@ -104,9 +104,9 @@ class EmoticonController extends Controller
                 {
                     
                         if($request->title == NULL){
-                            return redirect()->route('Emoticon')->with('alert', alertTranslate("Name can't be NULL") );
+                            return redirect()->route('Emoticon')->with('alert', alertTranslate("L_NAME_CANT_NULL") );
                         } else if($request->price == NULL) {
-                            return redirect()->route('Emoticon')->with('alert', alertTranslate("Price can't be NULL"));
+                            return redirect()->route('Emoticon')->with('alert', alertTranslate("L_PRICE_CANT_NULL"));
                         } 
                     
                         else {
@@ -136,7 +136,7 @@ class EmoticonController extends Controller
                 }
                 else
                 {
-                    return redirect()->route('Emoticon')->with('alert', alertTranslate("Size Image it's too Big"));
+                    return redirect()->route('Emoticon')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
                     // echo 'Ukuran file terlalu besar';
                 }
             else:
@@ -146,7 +146,7 @@ class EmoticonController extends Controller
         }
         else
         {
-            return redirect()->route('Emoticon')->with('alert', alertTranslate("File extensions are not allowed"));
+            return redirect()->route('Emoticon')->with('alert', alertTranslate("L_MUST_JPG"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -206,7 +206,7 @@ class EmoticonController extends Controller
                             'datetime'  => Carbon::now('GMT+7'),
                             'desc'      => 'Edit gambar ('.$emoticon->name.')'
                         ]);
-                        return redirect()->route('Emoticon')->with('success', alertTranslate('Update image successfull'));
+                        return redirect()->route('Emoticon')->with('success', alertTranslate('L_UPDATE_IMG_SUCCESS'));
 
                     // }
                     // else
@@ -217,7 +217,7 @@ class EmoticonController extends Controller
                 }
                 else
                 {
-                    return redirect()->route('Emoticon')->with('alert', alertTranslate("Size Image it's too Big"));
+                    return redirect()->route('Emoticon')->with('alert', alertTranslate("L_SIZE_IMG_TOOBIG"));
                     // echo 'Ukuran file terlalu besar';
                 }
             else:
@@ -227,7 +227,7 @@ class EmoticonController extends Controller
         }
         else
         {
-            return redirect()->route('Emoticon')->with('alert', alertTranslate("File extensions are not allowed"));
+            return redirect()->route('Emoticon')->with('alert', alertTranslate("L_FILE_MUST_JPG"));
             // echo 'Ekstensi file tidak di perbolehkan';
         }
     }
@@ -334,9 +334,9 @@ class EmoticonController extends Controller
                 'desc'      => 'Hapus data ('.$currentname->name.')'
             ]);
 
-            return redirect()->route('Emoticon')->with('success', alertTranslate('Data deleted'));
+            return redirect()->route('Emoticon')->with('success', alertTranslate('L_DATA_DELETED'));
         }
-        return redirect()->route('Emoticon')->with('alert', alertTranslate('Something wrong'));
+        return redirect()->route('Emoticon')->with('alert', alertTranslate('L_SOMETHING_WRONG'));
     }
 
     public function deleteAllSelected(Request $request)
@@ -355,6 +355,6 @@ class EmoticonController extends Controller
             'datetime'  =>  Carbon::now('GMT+7'),
             'desc'      =>  'Hapus data ('.$currentname.')'
         ]);
-        return redirect()->route('Emoticon')->with('success', alertTranslate('Data deleted'));
+        return redirect()->route('Emoticon')->with('success', alertTranslate('L_DATA_DELETED'));
     }
 }

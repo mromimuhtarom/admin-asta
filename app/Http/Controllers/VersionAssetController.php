@@ -106,7 +106,7 @@ class VersionAssetController extends Controller
             'desc'      => 'Menambahkan data untuk android dengan Nama '. $name
         ]);
         
-        return back()->with('success', alertTranslate("Data saved"));
+        return back()->with('success', alertTranslate("L_DATA_SAVED"));
 
     }
 
@@ -178,7 +178,7 @@ class VersionAssetController extends Controller
             'desc'      => 'Menambahkan data untuk IOS dengan Nama '. $name
         ]);
         
-        return back()->with('success', alertTranslate("Data saved"));
+        return back()->with('success', alertTranslate("L_DATA_SAVED"));
 
     }
 
@@ -252,7 +252,7 @@ class VersionAssetController extends Controller
             'desc'      => 'Menambahkan data untuk Windows dengan Nama '. $name
         ]);
         
-        return back()->with('success', alertTranslate("Data saved"));
+        return back()->with('success', alertTranslate("L_DATA_SAVED"));
 
     }
 
@@ -475,7 +475,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE aset untuk Android dengan nama '.$pk
           ]);
-        return back()->with('success', alertTranslate('Data input successfull'));
+        return back()->with('success', alertTranslate('L_INPUT_DATA_SUCCESSFULL'));
     }
 
 
@@ -517,7 +517,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE asset untuk IOS dengan nama '.$pk
           ]);
-        return back()->with('success', alertTranslate('Data input successfull'));
+        return back()->with('success', alertTranslate('L_DATA_INPUT_SUCCESSFULL'));
     }
 
 
@@ -556,7 +556,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE aset untuk Windows dengan nama '.$pk
           ]);
-        return back()->with('success', alertTranslate('Data input successfull'));
+        return back()->with('success', alertTranslate('L_DATA_INPUT_SUCCESSFULL'));
     }
 
 
@@ -575,7 +575,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE Bahasa untuk bahasa Indonesia'
           ]);
-        return back()->with('success', alertTranslate('Data input successfull'));
+        return back()->with('success', alertTranslate('L_DATA_INPUT_SUCCESSFULL'));
     }
 
     //FUNCTION UPDATE File Language English
@@ -593,7 +593,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE Bahasa APK untuk bahasa Indonesia'
           ]);
-        return back()->with('success', alertTranslate('Data input successfull'));
+        return back()->with('success', alertTranslate('L_DATA_INPUT_SUCCESSFULL'));
     }
 
  
@@ -636,7 +636,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus Versi Aset untuk Android dengan nama '.$id
         ]);
-        return back()->with('success', alertTranslate('Data deleted'));
+        return back()->with('success', alertTranslate('L_DATA_DELETED'));
 
     }
 
@@ -714,7 +714,7 @@ class VersionAssetController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus asset untuk IOS dengan nama '.$id
             ]);
-            return back()->with('success', alertTranslate('Data deleted'));
+            return back()->with('success', alertTranslate('L_DATA_DELETED'));
 
     }
 
@@ -757,7 +757,7 @@ class VersionAssetController extends Controller
                 'datetime'  => Carbon::now('GMT+7'),
                 'desc'      => 'Hapus Versi Aset untuk Windows dengan nama '.$id
             ]);
-            return back()->with('success', alertTranslate('Data deleted'));
+            return back()->with('success', alertTranslate('L_DATA_DELETED'));
 
     }
 
@@ -810,7 +810,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus asset untuk Android dengan nama '.$id
         ]);
-        return back()->with('success', alertTranslate('Data deleted'));
+        return back()->with('success', alertTranslate('L_DATA_DELETED'));
 
     }
 
@@ -864,7 +864,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus asset yang dipilih untuk IOS dengan nama '.$id
         ]);
-        return back()->with('success', alertTranslate('Data deleted'));
+        return back()->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
 
@@ -918,7 +918,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Hapus Versi Aset APK untuk IOS dengan nama '.$id
         ]);
-        return back()->with('success', alertTranslate('Data deleted'));
+        return back()->with('success', alertTranslate('L_DATA_DELETED'));
     }
 
 
