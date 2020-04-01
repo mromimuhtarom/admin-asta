@@ -467,7 +467,7 @@ function statusgameplaylog($status)
 
 
 function dmscard($array) {
-  if(!empty($array)):
+  if(!empty($array) || $array === ''):
     $cards = [
      "0_0", "1_0", "2_0", "3_0", "4_0", "5_0", "6_0",  //0
      "1_1", "1_2", "1_3", "1_4", "1_5", "1_6",         //7
@@ -487,6 +487,124 @@ function dmscard($array) {
   return $resCard;
 
 }
+
+function dmscardcombo($array) {
+  if(!empty($array)):
+    $cards = [
+     [0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0],  //0
+     [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6],         //7
+     [2, 2], [2, 3], [2, 4], [2, 5], [2, 6],                //13
+     [3, 3], [3, 4], [3, 5], [3, 6],                       //18
+     [4, 4], [4, 5], [4, 6],                              //22
+     [5, 5], [5, 6],                                     //25
+     [6, 6]                                             //27
+    ];
+    if(is_array($array)):
+      for ($i = 0; $i < count($array); $i++){
+        $resCard[] = $cards[$array[$i]];
+      }
+    else:
+      $resCard[]= '';
+    endif;
+  else:
+    $resCard[]= '';
+  endif;
+
+  return $resCard;
+
+}
+
+function totalvaluecard($array)
+{
+  if(!empty($array)):
+    for($a=0; $a < count(explode(',', $array)); $a++):
+      $total[] = array_sum(dmscardcombo(explode(',', $array))[$a]);
+    endfor;
+    $total = array_sum($total);
+  else:
+    $total = 0;
+  endif;
+  return $total;
+}
+
+function HandTotal($hand)
+{
+  if(!empty($hand)):
+    if(count(explode(',', $hand)) == 4):
+      for($a=0; $a<count(explode(',', $hand)); $a++ ):
+          $card[] = array_sum(dmscardcombo(explode(',', $hand))[$a]);
+      endfor;
+      $total = array_sum($card); 
+    else:
+      for($a=0; $a<count(explode(',', $hand)); $a++ ):
+        for($y=0; $y<2; $y++):
+          $total = dmscardcombo(explode(',', $hand));
+        endfor;
+      endfor;
+    endif;
+    $return = $total;
+  else:
+  endif;
+  
+}
+
+function comboconvert($handcard)
+{
+  $maxVal = -1;
+  $maxValIndex = [];
+
+  for($x=0; $x < count(explode(',', $handcard)) - 1; $x++):
+    for($y= $x + 1; $y < count(explode(',', $handcard)); $y++):
+        if((array_sum(dmscardcombo(explode(',', $handcard))[$x]) + array_sum(dmscardcombo(explode(',', $handcard))[$y])) % 10 > $maxVal):
+            $maxVal      = (array_sum(dmscardcombo(explode(',', $handcard))[$x])  + array_sum(dmscardcombo(explode(',', $handcard))[$y])) % 10;
+            $maxValIndex = [$x, $y];
+        endif;
+    endfor;
+  endfor;
+
+
+
+  $handValue = [$maxVal, 0];
+  for($x = 0; $x < count(dmscardcombo(explode(',', $handcard))); $x++):
+    if($x !== $maxValIndex[0] && $x !== $maxValIndex[1]):
+        $handValue[1] += array_sum(dmscardcombo(explode(',', $handcard))[$x]);
+        $handValue[1] = $handValue[1] % 10;
+    endif;
+  endfor;
+  $statusdevil  = false;
+  $statustwincard = false;
+  
+  for($a=0; $a < count(explode(',', $handcard)); $a++):
+    // var_dump(dmscardcombo(explode(',', $handcard))[$a]);
+    $total = array_sum(dmscardcombo(explode(',', $handcard))[$a]);
+    
+    var_dump('total:'.$total);
+  endfor;
+      if(array_sum(dmscardcombo(explode(',', $handcard))[$a]) === 6):
+      $statusdevil = true;
+    elseif(dmscardcombo(explode(',', $handcard))[$a][0] == dmscardcombo(explode(',', $handcard))[$a][1]):
+      $statustwincard = true;
+    endif;
+  
+  if ($statusdevil == true && count(explode(',', $handcard)) == 4):
+    $cardLevel = Translate_menuPlayers('L_SIX_DEVIL');
+  elseif($statustwincard == true && count(explode(',', $handcard)) == 4):
+    $cardLevel = Translate_menuPlayers('L_TWIN_CARD');
+  elseif(count(explode(',', $handcard)) == 4 && HandTotal($handcard) < 10):
+    $cardLevel = Translate_menuPlayers('L_SMALL_CARD');
+  elseif(count(explode(',', $handcard)) == 4 && HandTotal($handcard) > 37 ):
+    $cardLevel = Translate_menuPlayers('L_BIG_CARD');
+  elseif($handValue == [9, 9]):
+    $cardLevel = Translate_menuPlayers('L_DOUBLE_CARD');
+  else:
+    $cardLevel = str_replace(',', ':', (implode(',', $handValue)));
+  endif;
+
+
+  return $cardLevel;
+}
+
+
 
 function tagsEnabler($txt)
 { 
