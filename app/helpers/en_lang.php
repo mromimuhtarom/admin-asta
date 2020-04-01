@@ -923,7 +923,7 @@ function alertTranslate($menu){
         "L_MAXBUY_CANT_UNDER_STAKEX4 "                                  =>  "Max Buy can't be under Stake multiplied by 4 or under",
         "Max Buy table can't be Up to Max Buy room"                     =>  "Max Buy table can't be Up to Max Buy room",
         "L_PROHIBIT_DELETE_ACC"                                         =>  "You didn't allow to delete your account",
-        "L_DATA_SAVED"                                                    =>  "Data saved!",
+        "L_DATA_SAVED"                                                  =>  "Data saved!",
         "Data added"                                                    =>  "Data added",
         "Operator Still use this role, wait until role didnott use"     =>  "Operator Still use this role, wait until role didnott use",
         "For Type Adjust number didnot allowed negative"                =>  "For Type Adjust number didnot allowed negative",
@@ -938,7 +938,8 @@ function alertTranslate($menu){
         "L_PASSWORD_FAILED"                                             =>  "Passwords do not match, please try again",
         "L_LOGOUT_CHANGE_PASSWORD"                                      =>  "Your password has been changed",
         "Update image successfull"                                      =>  "Update image succesfull",
-        'L_HEIGHT_IMAGE'                                                =>  "Image height cannot be less or more than {1}"
+        'L_HEIGHT_IMAGE'                                                =>  "Image height cannot be less or more than {1}",
+        "L_CAUTION"                                                     =>  "Order ID cant more than 200"
     ];
     return $array_menuContent[$menu];
 };
