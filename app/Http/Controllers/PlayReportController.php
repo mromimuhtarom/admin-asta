@@ -466,14 +466,14 @@ class PlayReportController extends Controller
                                                         <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
                                                         <td></td>
                                                         <td>';
-                                                        foreach($dms_gameplaylog->start->players as $start):
-                                                               if($start->seat == $action->seat):                                                        
-                                                                      for($i=0; $i<count($action->card); $i++):
-                                                                             $arraycarddms[] = $action->card[$i];
-                                                                      endfor;
-                                                                      $response .= count(array_diff($start->hand, $arraycarddms));
-                                                               endif;
-                                                        endforeach;
+                                                               foreach($dms_gameplaylog->start->players as $start):
+                                                                      if($start->seat == $action->seat):                                                        
+                                                                             for($i=0; $i<count($action->card); $i++):
+                                                                                    $arraycarddms[] = $action->card[$i];
+                                                                             endfor;
+                                                                             $response .= count(array_diff($start->hand, $arraycarddms));
+                                                                      endif;
+                                                               endforeach;
                      $response .=                       '</td>
                                                         <td>';
                                                                foreach($dms_gameplaylog->start->players as $start):
@@ -581,7 +581,9 @@ class PlayReportController extends Controller
                      $response .=                       '</td>
                                                         <td>'. number_format($action->chip) .'</td>
                                                         <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
-                                                        <td>'. number_format($action->bet) .'</td>
+                                                        <td>'. 
+                                                               number_format($action->bet)
+                                                        .'</td>
                                                         <td></td>
                                                         <td>';
                                                                if(!empty($action->card)):
@@ -643,11 +645,11 @@ class PlayReportController extends Controller
                                                         <td>';
                                                                for($i=0; $i<count($end->combo); $i++):
                                                                       if($end->type === 0):
-                                                                      if($i == 0):
-                                                                             $response .= $end->combo[$i].' :';
-                                                                      else:
-                                                                             $response .= $end->combo[$i];
-                                                                      endif;
+                                                                             if($i == 0):
+                                                                                    $response .= $end->combo[$i].' : ';
+                                                                             else:
+                                                                                    $response .= $end->combo[$i];
+                                                                             endif;
                                                                       else:
                                                                              if($i == 0):
                                                                                     $response .= Translate_menuPlayers(typecarddmq($end->type));
@@ -657,13 +659,9 @@ class PlayReportController extends Controller
                                                                endfor;
                      $response .=                       '</td>
                                                         <td>';
-                                                               foreach($dmq_gameplaylog->start->players as $start):
-                                                                      if($end->seat == $start->seat):
-                                                                             for($a=0; $a<count($start->hand); $a++):
-                                                                                    $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($start->hand)[$a] .'.png" alt="">';
-                                                                             endfor;
-                                                                      endif;
-                                                               endforeach;
+                                                               for($a=0; $a<count($end->hand); $a++):
+                                                                      $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
+                                                               endfor;
                                                                // if($end->hand):
                                                                //        for($a=0; $a<count($end->hand); $a++):
                                                                //               $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';

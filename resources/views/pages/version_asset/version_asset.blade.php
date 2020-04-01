@@ -531,6 +531,7 @@
                             <option value="Audio">{{ TranslateVersionAsetApk('L_AUDIO')}}</option>
                             <option value="Image">{{ TranslateVersionAsetApk('L_IMAGE')}}</option>
                             <option value="Scene">{{ TranslateVersionAsetApk('L_SCENE')}}</option>
+                            <option value="File">{{ TranslateVersionAsetApk('L_FILE')}}</option>
                           </select>
                         <br>
                           <select name="os" class="form-control required">

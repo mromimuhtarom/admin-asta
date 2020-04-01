@@ -1036,8 +1036,8 @@ function TranslateVersionAsetApk($menu)
         
         "L_IMAGE"   =>  "Gambar",
         "L_AUDIO"   =>  "Suara",
-        "L_SCENE"   =>  "Scene"
-           
+        "L_SCENE"   =>  "Scene",
+        "L_FILE"    =>  "File"           
     ];
     return $array_menuContent[$menu];
 }

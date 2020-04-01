@@ -194,55 +194,18 @@
                                         @endif                                 
                                     @endforeach  
                                 @elseif($_GET['inputGame'] === 'Domino QQ')
-                                    @php 
-                                    $jsondecode = json_decode($history->gameplay_log);
-                                    $a = 0;
-                                    @endphp        
-                                    @foreach ($jsondecode->start->players as $start)
-                                        @if($start->uid == $history->user_id) 
-                                            @foreach($jsondecode->end->players as $end)                                                
-                                                    @if($end->seat === $start->seat)
-                                                        @for($i=0; $i<count($end->combo); $i++)
-                                                            @if($end->type === 0 || $end->type === NULL)
-                                                                @if($a == 0)
-                                                                    @if($i == 0)
-                                                                    {{$end->combo[$i]}} :
-                                                                    @elseif($i == 1)
-                                                                    {{$end->combo[$i]}}
-                                                                    @endif
-                                                                @endif
-                                                            @else 
-                                                                @if($i == 0)
-                                                                    {{ Translate_menuPlayers(typecarddmq($end->type)) }}
-                                                                @endif
-                                                            @endif
-                                                            
-                                                        @endfor
-                                                        @php 
-                                                        $a++;
-                                                        @endphp
-                                                    @endif
-                                            @endforeach 
-                                        @endif                                
-                                         
-                                    @endforeach 
+                                    @if($history->hand_card_round !== '')
+                                        {{comboconvert($history->hand_card_round)}}
+                                    @else 
+                                        0:0
+                                    @endif
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
-                                    @php 
-                                    $jsondecode = json_decode($history->gameplay_log);
-                                    @endphp        
-                                    @foreach ($jsondecode->start->players as $start)
-                                        @if($start->uid == $history->user_id)  
-                                            @foreach($jsondecode->end->players as $end)
-                                                @if($end->seat == $start->seat)
-                                                    @if($end->type === 0)
-                                                   {{ count($end->hand) }} {{ Translate_menuPlayers('L_CARD')}} = {{ $end->total }}
-                                                   @else
-                                                   {{ Translate_menuPlayers(typecarddms($end->type)) }}
-                                                   @endif
-                                                @endif
-                                            @endforeach 
-                                        @endif                                 
-                                    @endforeach 
+                                    @if(!empty($history->hand_card_round))
+                                        {{count(explode(',', $history->hand_card_round))}}
+                                    @else 
+                                        0
+                                    @endif
+                                     {{ Translate_menuPlayers('L_CARD')}} = {{ totalvaluecard($history->hand_card_round) }}
                                 @endif
                             @endif
                             
