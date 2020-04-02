@@ -44,6 +44,7 @@ class GoldStoreController extends Controller
                     ->where('status', '!=', 2)
                     ->orderBy('order', 'asc')
                     ->get();
+
         $active   = ConfigText::select(
                         'name', 
                         'value'
@@ -82,6 +83,11 @@ class GoldStoreController extends Controller
             'order'       => 'required|integer|unique:item_cash,order',
             'file'        => 'required',
         ]);
+
+        $order = $request->order;
+        if($order > 200){
+            return back()->with('alert', alertTranslate('L_CAUTION'));
+        }
     
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());

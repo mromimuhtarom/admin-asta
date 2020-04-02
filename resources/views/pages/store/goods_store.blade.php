@@ -242,7 +242,7 @@
               </table>
           </div>
           <div class="form-group">
-              <input type="text" name="order" class="form-control required" id="basic-url" placeholder="Order">
+              <input type="number" name="order" class="form-control required" id="order" placeholder="Order" min="0">
           </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control required" id="basic-url" placeholder="title">
@@ -255,7 +255,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn sa-btn-primary submit-data btn-create" onclick="FunctionLoadBtn()">
+          <button type="submit" class="btn sa-btn-primary submit-data btn-create toggle-disabled" disabled onclick="FunctionLoadBtn()">
             <i class="fa fa-save"></i> {{ TranslateMenuGame('L_SAVE')}}
           </button>
           <button type="submit" class="btn sa-btn-danger" data-dismiss="modal">

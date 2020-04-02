@@ -72,6 +72,11 @@ class ChipStoreController extends Controller
             'order'       => 'required|integer|unique:item_gold,order',
             'file'        => 'required',
           ]);
+
+          $order =  $request->order;
+          if($order > 200){
+            return back()->with('alert', alertTranslate('L_CAUTION'));
+          }
     
           if ($validator->fails()) {
             return back()->withErrors($validator->errors());

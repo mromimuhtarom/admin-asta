@@ -52,6 +52,12 @@
   </div>
 @endif
 
+@if (\Session::has('alert'))
+  <div class="alert alert-danger">
+    <p>{{\Session::get('alert')}}</p>
+  </div>
+@endif
+
 <!-- Table -->
 <div class="jarviswidget jarviswidget-color-blue-dark no-padding" id="wid-id-18" data-widget-colorbutton="false" data-widget-editbutton="false">
 
@@ -445,7 +451,7 @@
         } else {
           Disabled = true
           return false
-        } 
+        }
     });
 
     if(Disabled){
@@ -497,12 +503,12 @@
 
   $("#order").keyup(function(e) {
     e.preventDefault();
-    var order         = $(this).val();
-    var lblErrorOrder = document.getElementById("lblErrorOrder"); 
+      var order         = $(this).val();
+      var lblErrorOrder = document.getElementById("lblErrorOrder"); 
     @php
     $a = "order";
 
-    echo 'if(order >= 200) {';
+    echo 'if(order > 200) {';
       echo 'lblErrorOrder.innerHTML = "input Order tidak boleh lebih dari 200.";';
     echo '} else if(order <= 0) {';
       echo 'lblErrorOrder.innerHTML = "input Order tidak boleh minus atau 0";';
