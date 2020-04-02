@@ -475,7 +475,7 @@ class VersionAssetController extends Controller
             'datetime'  => Carbon::now('GMT+7'),
             'desc'      => 'Update FILE aset untuk Android dengan nama '.$pk
           ]);
-        return back()->with('success', alertTranslate('L_INPUT_DATA_SUCCESSFULL'));
+        return back()->with('success', alertTranslate('L_DATA_INPUT_SUCCESFULL'));
     }
 
 
