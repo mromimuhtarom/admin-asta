@@ -925,9 +925,9 @@ function alertTranslate($menu){
         "L_PROHIBIT_DELETE_ACC"                                         =>  "You didn't allow to delete your account",
         "L_DATA_SAVED"                                                  =>  "Data saved!",
         "Data added"                                                    =>  "Data added",
-        "Operator Still use this role, wait until role didnott use"     =>  "Operator Still use this role, wait until role didnott use",
-        "For Type Adjust number didnot allowed negative"                =>  "For Type Adjust number didnot allowed negative",
-        "For type Bonus or Free number not allowed negative number"     =>  "For type Bonus or Free number not allowed negative number",
+        "L_OP_USE_WAIT_DIDNT_USE"                                       =>  "Operator Still use this role, wait until role didnott use",
+        "L_TYPE_ADJUST_DIDNT_MINUS"                                     =>  "For Type Adjust number didnot allowed negative",
+        "L_BONUS_FREE_PROHIBIT_MIN"                                     =>  "For type Bonus or Free number not allowed negative number",
         "User ID"                                                       =>  "User ID",
         "Balance Chip"                                                  =>  "Chip balance",
         "Balance Point"                                                 =>  "Point Balance",
@@ -944,48 +944,48 @@ function alertTranslate($menu){
     return $array_menuContent[$menu];
 };
 
-function Translateaction_id($menu){
+// function Translateaction_id($menu){
 
-    $array_menuContent  =   [
+//     $array_menuContent  =   [
         
-        "Change Password Admin"     =>      "Change password admin",
-        "Edit Admin"                =>      "Edit admin",
-        "Create Admin"              =>      "Creat admin",
-        "Delete Admin"              =>      "Delete admin",
-        "Approve Admin"             =>      "Approve admin",
-        "Decline Admin"             =>      "Decline admin",
-        "Log In Admin"              =>      "login Admin",
-        "Log Out Admin"             =>      "logout Admin",
-        "Buy chip with gold"        =>      "Buy chip with gold",
-        "Daily Award"               =>      "Daily award",
-        "Bot Join Table"            =>      "Bot join Table",
-        "Join Game"                 =>      "Join the game",
-        "Sitout Game"               =>      "Sitout Game",
-        "Register User"             =>      "User Register",
-        "Give Gold"                 =>      "Give Gold",
-        "Buy Gold"                  =>      "Buy Gold",
-        "Skilled Bonus Gold"        =>      "Skilled Gold Bonus",
-        "Newbie Bonus Gold"         =>      "Newbie Gold Bonus",
-        "Create Player"             =>      "Create Player",
-        "Delete Player"             =>      "Delete Player",
-        "Edit Player"               =>      "Edit Player",
-        "Change Password Player"    =>      "Change Password Player",
-        "Login Player"              =>      "Login Player",
-        "Approve Account Player"    =>      "Approved player account",
-        "Banned Account Player"     =>      "Banned player account",
-        "Problem Account Player"    =>      "Proble player account",
-        "Upgrade Account"           =>      "Upgrade account",
-        "L_EDIT_CHIP_STORE"         =>      "Edit Chip Store",
-        'L_EDIT_GOODS_STORE'        =>      'Edit Goods Store',
-        "L_EDIT_PLAYER"             =>      'Edit Player',
-        'L_LOGIN_PLAYER'            =>      'Login Player',
-        'L_UPGRADE_ACCOUNT'         =>      'Upgrade account',
-        'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Problem player account',
-        'L_BANNED_ACCOUNT_PLAYER'   =>      'Banned player account',
-        'L_EDIT_GAME_SETTING'       =>      'Edit Game setting'
-    ];
-    return $array_menuContent[$menu];
-};
+//         "Change Password Admin"     =>      "Change password admin",
+//         "Edit Admin"                =>      "Edit admin",
+//         "Create Admin"              =>      "Creat admin",
+//         "Delete Admin"              =>      "Delete admin",
+//         "Approve Admin"             =>      "Approve admin",
+//         "Decline Admin"             =>      "Decline admin",
+//         "Log In Admin"              =>      "login Admin",
+//         "Log Out Admin"             =>      "logout Admin",
+//         "Buy chip with gold"        =>      "Buy chip with gold",
+//         "Daily Award"               =>      "Daily award",
+//         "Bot Join Table"            =>      "Bot join Table",
+//         "Join Game"                 =>      "Join the game",
+//         "Sitout Game"               =>      "Sitout Game",
+//         "Register User"             =>      "User Register",
+//         "Give Gold"                 =>      "Give Gold",
+//         "Buy Gold"                  =>      "Buy Gold",
+//         "Skilled Bonus Gold"        =>      "Skilled Gold Bonus",
+//         "Newbie Bonus Gold"         =>      "Newbie Gold Bonus",
+//         "Create Player"             =>      "Create Player",
+//         "Delete Player"             =>      "Delete Player",
+//         "Edit Player"               =>      "Edit Player",
+//         "Change Password Player"    =>      "Change Password Player",
+//         "Login Player"              =>      "Login Player",
+//         "Approve Account Player"    =>      "Approved player account",
+//         "Banned Account Player"     =>      "Banned player account",
+//         "Problem Account Player"    =>      "Proble player account",
+//         "Upgrade Account"           =>      "Upgrade account",
+//         "L_EDIT_CHIP_STORE"         =>      "Edit Chip Store",
+//         'L_EDIT_GOODS_STORE'        =>      'Edit Goods Store',
+//         "L_EDIT_PLAYER"             =>      'Edit Player',
+//         'L_LOGIN_PLAYER'            =>      'Login Player',
+//         'L_UPGRADE_ACCOUNT'         =>      'Upgrade account',
+//         'L_PROBLEM_ACCOUNT_PLAYER'  =>      'Problem player account',
+//         'L_BANNED_ACCOUNT_PLAYER'   =>      'Banned player account',
+//         'L_EDIT_GAME_SETTING'       =>      'Edit Game setting'
+//     ];
+//     return $array_menuContent[$menu];
+// };
 
 function TranslateTransactionHist($menu){
 
