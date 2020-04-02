@@ -14,7 +14,6 @@ use Validator;
 use File;
 use Response;
 use Storage;
-require_once 'vendor/autoload.php';
 
 class ChipStoreController extends Controller
 {
