@@ -73,7 +73,6 @@ class ChipStoreController extends Controller
             'file'        => 'required',
           ]);
 
-
           $order =  $request->order;
           if($order > 200){
             return back()->with('alert', alertTranslate('L_CAUTION'));
