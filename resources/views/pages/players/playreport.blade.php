@@ -200,12 +200,19 @@
                                         0:0
                                     @endif
                                 @elseif($_GET['inputGame'] === 'Domino Susun')
+                                    @php 
+                                    $a = str_replace(':', ',', $history->hand_card_round);
+                                    $b = explode(',', $a);
+                                    $output = array_slice($b, 2); 
+                                    @endphp
+
+                                    
                                     @if(!empty($history->hand_card_round))
-                                        {{count(explode(',', $history->hand_card_round))}}
+                                        {{count($output)}}
                                     @else 
                                         0
                                     @endif
-                                     {{ Translate_menuPlayers('L_CARD')}} = {{ totalvaluecard($history->hand_card_round) }}
+                                     {{ Translate_menuPlayers('L_CARD')}} = {{ totalvaluecard($output) }}
                                 @endif
                             @endif
                             

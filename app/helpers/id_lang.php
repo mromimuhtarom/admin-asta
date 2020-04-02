@@ -445,6 +445,7 @@ function Translate_menuPlayers($menu){
         'L_NEW_ROUND'               =>  'Ronde Baru',
         'L_DIVIDED_CARD'            =>  'Kartu Di Bagikan',
         'L_WIN'                     =>  'Menang',
+        'L_WIN_JACKPOT'             =>  'Win Jackpot',
         'L_LOSE'                    =>  'Kalah',
         'L_DRAW'                    =>  'Draw',
         'L_BET_CALL'                =>  'Bertaruh / Ikut',
@@ -505,7 +506,11 @@ function Translate_menuPlayers($menu){
         'L_NON_USED'                =>  'Tidak terpakai',
         'L_EXIT'                    =>  'Keluar',
         'L_USERNAME'                =>  'Nama pengguna',
-        ''                          =>  ''
+        ''                          =>  '',
+        'L_1:1'                     =>  '1X Denda lewat : 1x Total dapat hadiah lewat',
+        'L_2:3'                     =>  '2X Denda lewat : 3x Total dapat hadiah lewat',
+        'L_KET'                     =>  'Ket:',
+        'L_CAPT_FEE'                =>  '(*yang medapatkan hadiah lewat di potong fee)'
 
 
     ];
