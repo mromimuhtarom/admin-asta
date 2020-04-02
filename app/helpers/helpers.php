@@ -334,15 +334,13 @@ function tpkcard($array) {
 
 }
 
-function cardreadpopup($array) {
-  
+function cardreadpopup($array) {  
   $a = json_encode($array);
   $b = str_replace("[", "", $a);
   $c = str_replace("]", "", $b);
   $d = str_replace('"', " ", $c);
 
   return $d;
-
 }
 
 
@@ -394,6 +392,7 @@ function actiongameplaylog($action)
   endif;
 
 }
+
 
 function typeCardGamepLayLogBgtTpk($typecard)
 {
@@ -462,6 +461,8 @@ function statusgameplaylog($status)
     return 'L_WIN';
   elseif($status == 2):
     return 'L_DRAW';
+  elseif($status == 3):
+    return 'L_WIN_JACKPOT';
   endif;
 }
 
@@ -517,10 +518,17 @@ function dmscardcombo($array) {
 function totalvaluecard($array)
 {
   if(!empty($array)):
-    for($a=0; $a < count(explode(',', $array)); $a++):
-      $total[] = array_sum(dmscardcombo(explode(',', $array))[$a]);
-    endfor;
-    $total = array_sum($total);
+    if(is_array($array)):
+      for($a=0; $a < count($array); $a++):
+        $total[] = array_sum(dmscardcombo($array)[$a]);
+      endfor;
+      $total = array_sum($total);
+    else:
+      for($a=0; $a < count(explode(',', $array)); $a++):
+        $total[] = array_sum(dmscardcombo(explode(',', $array))[$a]);
+      endfor;
+      $total = array_sum($total);
+    endif;
   else:
     $total = 0;
   endif;
@@ -534,6 +542,7 @@ function HandTotal($hand)
       for($a=0; $a<count(explode(',', $hand)); $a++ ):
           $card[] = array_sum(dmscardcombo(explode(',', $hand))[$a]);
       endfor;
+      
       $total = array_sum($card); 
     else:
       for($a=0; $a<count(explode(',', $hand)); $a++ ):
@@ -576,25 +585,39 @@ function comboconvert($handcard)
   
   for($a=0; $a < count(explode(',', $handcard)); $a++):
     // var_dump(dmscardcombo(explode(',', $handcard))[$a]);
-    $total = array_sum(dmscardcombo(explode(',', $handcard))[$a]);
-    
-    var_dump('total:'.$total);
+    $total[] = array_sum(dmscardcombo(explode(',', $handcard))[$a]);
+    for($b=0; $b<2; $b++):
+      // if(dmscardcombo(explode(',', $handcard))[$a][0] == dmscardcombo(explode(',', $handcard))[$a][1]):
+      if(in_array('false', dmscardcombo(explode(',', $handcard))[$a], true)):
+        $statustwincard = true;
+        $cardtwin[] = dmscardcombo(explode(',', $handcard))[$a];
+      endif;
+
+    endfor; 
+    // if(dmscardcombo(explode(',', $handcard))[$a][0] == dmscardcombo(explode(',', $handcard))[$a][1]):
+    //   $statustwincard = true;
+    // endif;
+    // var_dump($total);
   endfor;
-      if(array_sum(dmscardcombo(explode(',', $handcard))[$a]) === 6):
-      $statusdevil = true;
-    elseif(dmscardcombo(explode(',', $handcard))[$a][0] == dmscardcombo(explode(',', $handcard))[$a][1]):
-      $statustwincard = true;
+  $arraysixdevil = array(6,6,6,6);
+  $statussixdevil = array_diff($total,$arraysixdevil);
+
+  $twin = false;
+  if($statustwincard === true):
+    if(count($cardtwin) === 4):
+      $twin = true;
     endif;
-  
-  if ($statusdevil == true && count(explode(',', $handcard)) == 4):
+  endif;
+
+  if (empty($statussixdevil) && count(explode(',', $handcard)) == 4):
     $cardLevel = Translate_menuPlayers('L_SIX_DEVIL');
-  elseif($statustwincard == true && count(explode(',', $handcard)) == 4):
+  elseif($twin == true && count(explode(',', $handcard)) == 4):
     $cardLevel = Translate_menuPlayers('L_TWIN_CARD');
-  elseif(count(explode(',', $handcard)) == 4 && HandTotal($handcard) < 10):
+  elseif(!empty(HandTotal($handcard)) && HandTotal($handcard) < 10 && count(explode(',', $handcard)) === 4):
     $cardLevel = Translate_menuPlayers('L_SMALL_CARD');
   elseif(count(explode(',', $handcard)) == 4 && HandTotal($handcard) > 37 ):
     $cardLevel = Translate_menuPlayers('L_BIG_CARD');
-  elseif($handValue == [9, 9]):
+  elseif(empty(array_diff($handValue,[9,9]))):
     $cardLevel = Translate_menuPlayers('L_DOUBLE_CARD');
   else:
     $cardLevel = str_replace(',', ':', (implode(',', $handValue)));

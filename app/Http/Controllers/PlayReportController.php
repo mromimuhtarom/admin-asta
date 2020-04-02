@@ -426,6 +426,7 @@ class PlayReportController extends Controller
                                                  </tr>';
                                           endforeach;    
 
+                     $arrayseat = array();
 
                                           foreach($dms_gameplaylog->start->players as $start):
                      $response .=                '<tr>
@@ -463,7 +464,12 @@ class PlayReportController extends Controller
                                                                endforeach;
                      $response .=                        '</td>
                                                         <td></td>
-                                                        <td>'. Translate_menuPlayers(actiongameplaylog($action->act)) .'</td>
+                                                        <td>';
+                     $response.=                               Translate_menuPlayers(actiongameplaylog($action->act));
+                                                               if($action->act == 6):
+                                                                      $arrayseat[] = $action->seat;
+                                                               endif;
+                     $response .=                       '</td>
                                                         <td></td>
                                                         <td>';
                                                                foreach($dms_gameplaylog->start->players as $start):
@@ -530,7 +536,13 @@ class PlayReportController extends Controller
                                       
                      $response .= '</tbody>';
                         endif;
-                    $response .= '</table>';        
+                     $response .= '</table><br><br><br>';  
+                     
+                     $response .= '<b>'.Translate_menuPlayers("L_KET").'</b><br><br>';
+                     $response .= '(1:1) = '.Translate_menuPlayers("L_1:1"). '<br><br>';
+                     $response .= '(2:3) = '.Translate_menuPlayers("L_2:3"). '<br><br>';
+                     $response .= Translate_menuPlayers("L_CAPT_FEE").'<br><br>';
+
               elseif($request->game === 'Domino QQ'):
                      $history = DB::table('dmq_round')->where('round_id', '=', $request->roundid)->first();
                      $response = '<table id="dt_basic" class="table-playreport-content table table-striped table-bordered table-hover" width="100%">
@@ -635,7 +647,14 @@ class PlayReportController extends Controller
                                                                endforeach;
                      $response .=                       '</td>
                                                         <td>'. number_format($end->chip) .'</td>
-                                                        <td>'. Translate_menuPlayers(statusgameplaylog($end->stat)) .'</td>
+                                                        <td>'; 
+                                                               if($end->jp <= 0):
+                                                                      Translate_menuPlayers(statusgameplaylog($end->stat));
+                                                               else:
+                                                                      Translate_menuPlayers('L_WIN_JACKPOT');
+                                                               endif;
+
+                     $response .=                       '</td>
                                                         <td>
                                                         '. number_format($end->val) .' <br>';
                                                                if($end->stat !== 0):
@@ -662,11 +681,6 @@ class PlayReportController extends Controller
                                                                for($a=0; $a<count($end->hand); $a++):
                                                                       $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
                                                                endfor;
-                                                               // if($end->hand):
-                                                               //        for($a=0; $a<count($end->hand); $a++):
-                                                               //               $response .= '<img style="width:34px;height:auto;" src="/assets/img/card_dms_dmq/'. dmscard($end->hand)[$a] .'.png" alt="">';
-                                                               //        endfor;
-                                                               // endif;
                      $response .=                       '</td>
                                                  </tr>';
                                           endforeach;
