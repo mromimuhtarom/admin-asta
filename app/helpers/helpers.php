@@ -386,7 +386,7 @@ function actiongameplaylog($action)
   elseif($action == 8):
     return 'L_SMALL_BLIND';
   elseif($action == 9):
-    return 'L_DRAW';
+    return 'L_DIVIDED_CARD';
   elseif($action == 10):
     return 'L_ALL_IN';
   endif;
@@ -538,16 +538,16 @@ function totalvaluecard($array)
 function HandTotal($hand)
 {
   if(!empty($hand)):
-    if(count(explode(',', $hand)) == 4):
-      for($a=0; $a<count(explode(',', $hand)); $a++ ):
-          $card[] = array_sum(dmscardcombo(explode(',', $hand))[$a]);
+    if(count($hand) == 4):
+      for($a=0; $a<count($hand); $a++ ):
+          $card[] = array_sum(dmscardcombo($hand)[$a]);
       endfor;
       
       $total = array_sum($card); 
     else:
-      for($a=0; $a<count(explode(',', $hand)); $a++ ):
+      for($a=0; $a<count($hand); $a++ ):
         for($y=0; $y<2; $y++):
-          $total = dmscardcombo(explode(',', $hand));
+          $total = dmscardcombo($hand);
         endfor;
       endfor;
     endif;
@@ -562,10 +562,10 @@ function comboconvert($handcard)
   $maxVal = -1;
   $maxValIndex = [];
 
-  for($x=0; $x < count(explode(',', $handcard)) - 1; $x++):
-    for($y= $x + 1; $y < count(explode(',', $handcard)); $y++):
-        if((array_sum(dmscardcombo(explode(',', $handcard))[$x]) + array_sum(dmscardcombo(explode(',', $handcard))[$y])) % 10 > $maxVal):
-            $maxVal      = (array_sum(dmscardcombo(explode(',', $handcard))[$x])  + array_sum(dmscardcombo(explode(',', $handcard))[$y])) % 10;
+  for($x=0; $x < count($handcard) - 1; $x++):
+    for($y= $x + 1; $y < count($handcard); $y++):
+        if((array_sum(dmscardcombo($handcard)[$x]) + array_sum(dmscardcombo($handcard)[$y])) % 10 > $maxVal):
+            $maxVal      = (array_sum(dmscardcombo($handcard)[$x])  + array_sum(dmscardcombo($handcard)[$y])) % 10;
             $maxValIndex = [$x, $y];
         endif;
     endfor;
@@ -574,23 +574,23 @@ function comboconvert($handcard)
 
 
   $handValue = [$maxVal, 0];
-  for($x = 0; $x < count(dmscardcombo(explode(',', $handcard))); $x++):
+  for($x = 0; $x < count(dmscardcombo($handcard)); $x++):
     if($x !== $maxValIndex[0] && $x !== $maxValIndex[1]):
-        $handValue[1] += array_sum(dmscardcombo(explode(',', $handcard))[$x]);
+        $handValue[1] += array_sum(dmscardcombo($handcard)[$x]);
         $handValue[1] = $handValue[1] % 10;
     endif;
   endfor;
   $statusdevil  = false;
   $statustwincard = false;
   
-  for($a=0; $a < count(explode(',', $handcard)); $a++):
+  for($a=0; $a < count($handcard); $a++):
     // var_dump(dmscardcombo(explode(',', $handcard))[$a]);
-    $total[] = array_sum(dmscardcombo(explode(',', $handcard))[$a]);
+    $total[] = array_sum(dmscardcombo($handcard)[$a]);
     for($b=0; $b<2; $b++):
       // if(dmscardcombo(explode(',', $handcard))[$a][0] == dmscardcombo(explode(',', $handcard))[$a][1]):
-      if(in_array('false', dmscardcombo(explode(',', $handcard))[$a], true)):
+      if(in_array('false', dmscardcombo($handcard)[$a], true)):
         $statustwincard = true;
-        $cardtwin[] = dmscardcombo(explode(',', $handcard))[$a];
+        $cardtwin[] = dmscardcombo($handcard)[$a];
       endif;
 
     endfor; 
@@ -609,13 +609,13 @@ function comboconvert($handcard)
     endif;
   endif;
 
-  if (empty($statussixdevil) && count(explode(',', $handcard)) == 4):
+  if (empty($statussixdevil) && count($handcard) == 4):
     $cardLevel = Translate_menuPlayers('L_SIX_DEVIL');
-  elseif($twin == true && count(explode(',', $handcard)) == 4):
+  elseif($twin == true && count($handcard) == 4):
     $cardLevel = Translate_menuPlayers('L_TWIN_CARD');
-  elseif(!empty(HandTotal($handcard)) && HandTotal($handcard) < 10 && count(explode(',', $handcard)) === 4):
+  elseif(!empty(HandTotal($handcard)) && HandTotal($handcard) < 10 && count($handcard) === 4):
     $cardLevel = Translate_menuPlayers('L_SMALL_CARD');
-  elseif(count(explode(',', $handcard)) == 4 && HandTotal($handcard) > 37 ):
+  elseif(count($handcard) == 4 && HandTotal($handcard) > 37 ):
     $cardLevel = Translate_menuPlayers('L_BIG_CARD');
   elseif(empty(array_diff($handValue,[9,9]))):
     $cardLevel = Translate_menuPlayers('L_DOUBLE_CARD');

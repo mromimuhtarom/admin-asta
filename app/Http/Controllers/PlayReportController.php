@@ -426,7 +426,8 @@ class PlayReportController extends Controller
                                                  </tr>';
                                           endforeach;    
 
-                     $arrayseat = array();
+                     $arrayseat   = array();
+                     $arraypassto = array();
 
                                           foreach($dms_gameplaylog->start->players as $start):
                      $response .=                '<tr>
@@ -467,7 +468,8 @@ class PlayReportController extends Controller
                                                         <td>';
                      $response.=                               Translate_menuPlayers(actiongameplaylog($action->act));
                                                                if($action->act == 6):
-                                                                      $arrayseat[] = $action->seat;
+                                                                      $arrayseat['seat'] = $action->seat;
+                                                                      $arraypassto['passto']= $action->passTo;
                                                                endif;
                      $response .=                       '</td>
                                                         <td></td>
@@ -542,6 +544,16 @@ class PlayReportController extends Controller
                      $response .= '(1:1) = '.Translate_menuPlayers("L_1:1"). '<br><br>';
                      $response .= '(2:3) = '.Translate_menuPlayers("L_2:3"). '<br><br>';
                      $response .= Translate_menuPlayers("L_CAPT_FEE").'<br><br>';
+                     
+                     $count = array_count_values($arrayseat);
+                     $arraymerge = array_merge($arrayseat, $arraypassto);
+                     foreach($dms_gameplaylog->start->players as $start):
+                            if(!empty($count[$start->seat])):
+                                   $response .= $start->username.' '. $count[$start->seat]. ' : ';
+                            else:
+                                   $response .= $start->username.' 0 : ';
+                            endif;
+                     endforeach;
 
               elseif($request->game === 'Domino QQ'):
                      $history = DB::table('dmq_round')->where('round_id', '=', $request->roundid)->first();
@@ -596,7 +608,11 @@ class PlayReportController extends Controller
                                                         <td>'. 
                                                                number_format($action->bet)
                                                         .'</td>
-                                                        <td></td>
+                                                        <td>';
+                                                               if(!empty($action->card)):
+                     $response .=                                     comboconvert($action->card);               
+                                                               endif;                                                                             
+                     $response .=                      '</td>
                                                         <td>';
                                                                if(!empty($action->card)):
                                                                       for($i=0; $i<count($action->card); $i++):
@@ -649,9 +665,9 @@ class PlayReportController extends Controller
                                                         <td>'. number_format($end->chip) .'</td>
                                                         <td>'; 
                                                                if($end->jp <= 0):
-                                                                      Translate_menuPlayers(statusgameplaylog($end->stat));
+                     $response .=                                     Translate_menuPlayers(statusgameplaylog($end->stat));
                                                                else:
-                                                                      Translate_menuPlayers('L_WIN_JACKPOT');
+                     $response .=                                     Translate_menuPlayers('L_WIN_JACKPOT');
                                                                endif;
 
                      $response .=                       '</td>

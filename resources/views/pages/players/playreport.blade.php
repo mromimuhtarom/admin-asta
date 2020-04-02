@@ -195,7 +195,7 @@
                                     @endforeach  
                                 @elseif($_GET['inputGame'] === 'Domino QQ')
                                     @if($history->hand_card_round !== '')
-                                        {{comboconvert($history->hand_card_round)}}
+                                        {{comboconvert(explode(',', $history->hand_card_round))}}
                                     @else 
                                         0:0
                                     @endif

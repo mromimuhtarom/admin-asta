@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <main_asset>
 
-  <bgt_scenes_all name="bgt_v0.0.1_scenes_all_36529cc5ae630c7c0c7d12d213d6aea0.bundle">
+  <bgt_scenes_all name="bgt_v0.0.1_scenes_all_87882b43dd329544922611b5c099cd94.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
@@ -49,13 +49,13 @@
     <ver>0.0.1</ver>
     <os>Android</os>
   </gift_asset_all>
-  <lobby_scenes_all name="lobby_v0.0.1_scenes_all_89870a59a840549ddfc4a69e724a8da6.bundle">
+  <lobby_scenes_all name="lobby_v0.0.1_scenes_all_0100d18489894fbcf8dea3228ce6da38.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
     <os>Android</os>
   </lobby_scenes_all>
-  <tpk_scenes_all name="tpk_v0.0.1_scenes_all_94daa85ff1ecb4e08a2794c0f188e18a.bundle">
+  <tpk_scenes_all name="tpk_v0.0.1_scenes_all_03e5859c80ae88e614598f06de784835.bundle">
     <type>Scene</type>
     <link>https://aws-asta-s3-01.s3-ap-southeast-1.amazonaws.com/unity-asset/Main/Android/</link>
     <ver>0.0.1</ver>
