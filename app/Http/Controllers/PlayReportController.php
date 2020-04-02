@@ -545,8 +545,8 @@ class PlayReportController extends Controller
                      $response .= '(2:3) = '.Translate_menuPlayers("L_2:3"). '<br><br>';
                      $response .= Translate_menuPlayers("L_CAPT_FEE").'<br><br>';
                      
-                     $count = array_count_values($arrayseat);
-                     $arraymerge = array_merge($arrayseat, $arraypassto);
+                     $count      = array_count_values($arrayseat);
+                     $arraymerge = array_merge($arrayseat, $arraypassto);                     
                      foreach($dms_gameplaylog->start->players as $start):
                             if(!empty($count[$start->seat])):
                                    $response .= $start->username.' '. $count[$start->seat]. ' : ';
