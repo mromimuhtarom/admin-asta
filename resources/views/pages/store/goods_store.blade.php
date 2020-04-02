@@ -243,6 +243,7 @@
           </div>
           <div class="form-group">
               <input type="number" name="order" class="form-control required" id="order" placeholder="Order" min="0">
+              <span id="lblErrorOrder" style="color: red"></span>
           </div>
           <div class="form-group">
             <input type="text" name="title" class="form-control required" id="basic-url" placeholder="title">
@@ -367,6 +368,23 @@ $(".watermark-image").change(function() {
   }
 });
   // end preview image
+
+  $("#order").keyup(function(e) {
+    e.preventDefault();
+      var order = $(this).val();
+      var lblErrorOrder = document.getElementById("lblErrorOrder");
+
+      @php
+      $a = "order";
+        echo 'if(order > 200) {';
+          echo 'lblErrorOrder.innerHTML = "input Order tidak boleh lebih dari 200.";';
+        echo '} else if(order <= 0) {';
+          echo 'lblErrorOrder.innerHTML = "input Order tidak boleh minus atau 0";';
+        echo '} else {';
+          echo 'lblErrorOrder.innerHTML = "";';
+        echo '}';
+      @endphp
+  });
 
   $(document).ready(function() {
     $('table.table').dataTable( {

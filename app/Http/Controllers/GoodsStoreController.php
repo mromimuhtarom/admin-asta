@@ -62,6 +62,11 @@ class GoodsStoreController extends Controller
             'order'            => 'required|integer|unique:item_point,order',
             'file'             => 'required',
         ]);
+
+        $order = $request->order;
+        if($order > 200){
+            return back()->with('alert', alertTranslate('L_CAUTION'));
+        }
         
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
